@@ -1,0 +1,161 @@
+/*%FSM<COMPILE "Z:\Programme\Steam\SteamApps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, ais_marker">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"start",0,250,-252.023544,-271.488312,-208.177261,-241.555161,0.000000,"start"};
+item1[] = {"show___hide",4,4314,-273.913025,-184.949829,-185.919754,-134.949829,1.000000,"show / hide"};
+item2[] = {"exit",1,250,-250.501648,-85.953194,-209.331085,-54.682304,0.000000,"exit"};
+item3[] = {"_",8,218,-124.749207,-267.892914,-92.943192,-245.317688,0.000000,""};
+item4[] = {"create_Marker",2,250,22.408033,-272.575195,74.280960,-239.966568,0.000000,"create" \n "Marker"};
+item5[] = {"unit_healed___di",4,218,6.354519,-109.364563,93.010071,-34.615402,1.000000,"unit" \n "healed" \n "/ died"};
+item6[] = {"setPos_marker",2,250,25.083622,-178.260880,76.287674,-140.301010,0.000000,"setPos" \n "marker"};
+item7[] = {"sleep_5",4,218,153.511703,-182.274261,226.789291,-130.267578,0.000000,"sleep 5"};
+item8[] = {"_",8,218,36.454853,-215.719070,60.903004,-199.832779,0.000000,""};
+link0[] = {0,1};
+link1[] = {0,3};
+link2[] = {1,2};
+link3[] = {3,4};
+link4[] = {4,8};
+link5[] = {5,2};
+link6[] = {6,5};
+link7[] = {6,7};
+link8[] = {7,6};
+link9[] = {8,6};
+globals[] = {0.000000,0,0,0,0,640,480,1,10,6316128,1,-323.255829,276.744171,302.325623,-297.674377,1212,884,1};
+window[] = {2,-1,-1,-1,-1,893,156,1416,156,3,1230};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "ais_marker";
+        class States
+        {
+                /*%FSM<STATE "start">*/
+                class start
+                {
+                        name = "start";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "show___hide">*/
+                                class show___hide
+                                {
+                                        itemno = 1;
+                                        priority = 1.000000;
+                                        to="exit";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!tcb_ais_show_injury_marker"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="create_Marker";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "exit">*/
+                class exit
+                {
+                        name = "exit";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"if (!isNil ""_ais_marker"") then {" \n
+                         "	deleteMarker _ais_marker;" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "create_Marker">*/
+                class create_Marker
+                {
+                        name = "create_Marker";
+                        itemno = 4;
+                        init = /*%FSM<STATEINIT""">*/"private [""_ais_marker""];" \n
+                         "" \n
+                         "_unit = _this select 0;" \n
+                         "_isplayer = isPlayer _unit;" \n
+                         "" \n
+                         "if (!surfaceIsWater (position _unit)) then {" \n
+                         "	_ais_marker = createMarkerLocal [format [""%1"",name _unit], position _unit];" \n
+                         "	_ais_marker setMarkerTypeLocal ""loc_Hospital"";" \n
+                         "	_ais_marker setMarkerSizeLocal [0.7,0.7];" \n
+                         "	_ais_marker setMarkerTextLocal format ["" %1 down"", name _unit];" \n
+                         "	_ais_marker setMarkerColorLocal ""Color1_FD_F"";" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="setPos_marker";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "setPos_marker">*/
+                class setPos_marker
+                {
+                        name = "setPos_marker";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/"if (!isNil ""_ais_marker"") then {" \n
+                         "	_ais_marker setMarkerPosLocal getPos _unit;" \n
+                         "};" \n
+                         "" \n
+                         "_timenow = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "unit_healed___di">*/
+                                class unit_healed___di
+                                {
+                                        itemno = 5;
+                                        priority = 1.000000;
+                                        to="exit";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"isNull _unit ||" \n
+                                         "{!alive _unit} ||" \n
+                                         "{!(_unit getVariable ""tcb_ais_agony"")} ||" \n
+                                         "{(_isplayer && !isPlayer _unit)}"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "sleep_5">*/
+                                class sleep_5
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="setPos_marker";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time - _timenow > 5"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="start";
+        finalStates[] =
+        {
+                "exit",
+        };
+};
+/*%FSM</COMPILE>*/
