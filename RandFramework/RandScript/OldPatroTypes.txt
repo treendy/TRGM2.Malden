@@ -1,0 +1,117 @@
+if (_PatrolType == "CROSS") then {
+			_wayX = (getMarkerPos _sAreaMarkerName select 0) + (selectRandom [15,-15]);
+			_wayY = (getMarkerPos _sAreaMarkerName select 1) + (selectRandom [15,-15]);
+			
+			
+			_PatrolDist = 100 + (floor random 100);
+			_wayX = getMarkerPos "Hidden_mrksecondLocation" select 0;
+			_wayY = getMarkerPos "Hidden_mrksecondLocation" select 1;
+			
+			_wp1Pos = [ _wayX + _PatrolDist, _wayY + _PatrolDist, 0];
+			_wp2Pos = [ _wayX + _PatrolDist, _wayY, 0];
+			_wp3Pos = [ _wayX, _wayY, 0];						
+			_wp4Pos = [ _wayX, _wayY + _PatrolDist, 0];						
+			_wp5Pos = [ _wayX, _wayY, 0];							
+			_wp6Pos = [ _wayX - _PatrolDist, _wayY, 0];							
+			_wp7Pos = [ _wayX, _wayY, 0];							
+			_wp8Pos = [ _wayX, _wayY - _PatrolDist, 0];							
+			_wp9Pos = [ _wayX, _wayY, 0];
+				
+			
+			if (!(surfaceIsWater _wp1Pos) && !(surfaceIsWater _wp2Pos) && !(surfaceIsWater _wp3Pos) && !(surfaceIsWater _wp4Pos) &&   !(surfaceIsWater _wp6Pos) && !(surfaceIsWater _wp8Pos)) then {
+				//1 in (_maxGroups*2) chance of having an AA/AT guy
+				if ((floor random (_maxGroups*2)) == 0) then {
+					if (selectRandom [true,false,false,false,false]) then {
+						sAAMan createUnit [[_wayX, _wayY], _group];
+						_iHasAA = 1;
+					}
+					else {	
+						if (selectRandom [true,false,false,false,false]) then {
+							sATMan createUnit [[_wayX, _wayY], _group];		
+							_iHasAT = 1;
+						}
+						else {
+								sMachineGunMan createUnit [[_wayX, _wayY], _group];		
+							
+						};
+					};
+				}
+				else {
+					sRifleman createUnit [[_wayX, _wayY], _group];
+				};
+				sRifleman createUnit [[_wayX, _wayY], _group];
+				if (selectRandom [true,false]) then {
+					sRifleman createUnit [[_wayX, _wayY], _group];	
+				};
+				
+				
+			_wp1 = _group addWaypoint [_wp1Pos, 0];
+			_wp2 = _group addWaypoint [_wp2Pos, 0];
+			_wp3 = _group addWaypoint [_wp3Pos, 0];
+			_wp4 = _group addWaypoint [_wp4Pos, 0];
+			_wp5 = _group addWaypoint [_wp5Pos, 0];
+			_wp6 = _group addWaypoint [_wp6Pos, 0];
+			_wp7 = _group addWaypoint [_wp7Pos, 0];
+			_wp8 = _group addWaypoint [_wp8Pos, 0];
+			_wp9 = _group addWaypoint [_wp9Pos, 0];
+			
+				[_group, 0] setWaypointSpeed "LIMITED";
+			[_group, 0] setWaypointBehaviour "SAFE";
+			[_group, 1] setWaypointSpeed "LIMITED";
+			[_group, 1] setWaypointBehaviour "SAFE";
+			[_group, 8] setWaypointType "CYCLE";
+			_group setBehaviour "SAFE";
+			};
+		};
+		if (_PatrolType == "OUTER") then {
+			_wayX = (selectRandom [300,-300]) + (getMarkerPos _sAreaMarkerName select 0) + (selectRandom [50,-50]);
+			_wayY = (selectRandom [300,-300]) + (getMarkerPos _sAreaMarkerName select 1) + (selectRandom [50,-50]);
+			
+			
+			_PatrolDist = 250 + (floor random 70);
+			_wayX = getMarkerPos _sAreaMarkerName select 0;
+			_wayY = getMarkerPos _sAreaMarkerName select 1;
+			_wp1Pos = [ _wayX + _PatrolDist, _wayY + _PatrolDist, 0];
+			_wp2Pos = [ _wayX + _PatrolDist, _wayY - _PatrolDist, 0];
+			_wp3Pos = [ _wayX - _PatrolDist, _wayY - _PatrolDist, 0];
+			_wp4Pos = [ _wayX - _PatrolDist, _wayY + _PatrolDist, 0];
+			_wp5Pos = [ _wayX + _PatrolDist, _wayY + _PatrolDist, 0];
+			
+			if (!(surfaceIsWater _wp1Pos) && !(surfaceIsWater _wp2Pos) && !(surfaceIsWater _wp3Pos) && !(surfaceIsWater _wp4Pos))   then {
+				//1 in (_maxGroups*2) chance of having an AA/AT guy
+				if ((floor random (_maxGroups*2)) == 0) then {
+					if (selectRandom [true,false,false,false,false]) then {
+						sAAMan createUnit [[_wayX, _wayY], _group];
+						_iHasAA = 1;
+					}
+					else {	
+						if (selectRandom [true,false,false,false,false]) then {
+							sATMan createUnit [[_wayX, _wayY], _group];		
+							_iHasAT = 1;
+						}
+						else {
+								sMachineGunMan createUnit [[_wayX, _wayY], _group];		
+							
+						};
+					};
+				}
+				else {
+					sRifleman createUnit [[_wayX, _wayY], _group];
+				};
+				sRifleman createUnit [[_wayX, _wayY], _group];
+				if (selectRandom [true,false]) then {
+					sRifleman createUnit [[_wayX, _wayY], _group];	
+				};
+				_wp1 = _group addWaypoint [_wp1Pos, 0];
+				_wp2 = _group addWaypoint [_wp2Pos, 0];
+				_wp3 = _group addWaypoint [_wp3Pos, 0];
+				_wp4 = _group addWaypoint [_wp4Pos, 0];
+				_wp5 = _group addWaypoint [_wp5Pos, 0];
+				[_group, 0] setWaypointSpeed "LIMITED";
+				[_group, 0] setWaypointBehaviour "SAFE";
+				[_group, 1] setWaypointSpeed "LIMITED";
+				[_group, 1] setWaypointBehaviour "SAFE";
+				[_group, 4] setWaypointType "CYCLE";
+				_group setBehaviour "SAFE";
+			};
+		};

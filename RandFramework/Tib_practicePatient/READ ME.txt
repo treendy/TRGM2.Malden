@@ -1,0 +1,24 @@
+author: Tiberius
+Version: V001
+2017
+
+This script will spawn a civilian unit with ACE wounds as a practice patient.
+Use the following commandline to exec the script:
+
+null = [POSITION, DISTANCE, MODE] execVM "Tib_practicePatient\Tib_medical.sqf";
+
+POSITION: 	the position of an object. It will be the spawn position. 
+		Use PLAYER for player. Do not use markers.  
+
+DISTANCEL:	The Distance between the spawnposition and the patient 
+		to trigger the despawn of patient. 
+
+MODE:		1, 2 or 3;
+		Mode 1 is minor injured patient. 
+		Mode 2 is severe injured patient. 
+		Mode 3 is patient with cardiac arrest. 
+
+Example: null = [spawnPos, 10, 1] execVM "Tib_practicePatient\Tib_medical.sqf";
+
+You can use this script freely as long as you give credits. 
+Good luck with it and I hope it will help.   
