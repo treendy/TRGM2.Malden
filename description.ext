@@ -314,13 +314,11 @@ class CfgRadio
 
 };
 
-//--------------------------------------------------------------
-//------------------------AIS INJURY----------------------------
-//--------------------------------------------------------------
 class RscTitles {
 	#include "ais_injury\dialogs\rscTitlesAIS.hpp"
 };
+
 class CfgFunctions {
 	#include "ais_injury\cfgFunctionsAIS.hpp"
+	#include "RandFramework\functions.hpp"
 };
-//---------
