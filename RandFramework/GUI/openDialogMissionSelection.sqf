@@ -1,8 +1,8 @@
 #include "..\..\setUnitGlobalVars.sqf";
+disableSerialization;
 
 hint "opening 2dialogA";
 
-disableSerialization;
 createDialog "Trend_DialogTest";
 waitUntil {!isNull (findDisplay 5000);};
 hint "opening 2dialogB";
