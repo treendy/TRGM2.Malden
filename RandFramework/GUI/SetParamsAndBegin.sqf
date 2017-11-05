@@ -1,4 +1,5 @@
 #include "..\..\setUnitGlobalVars.sqf";
+disableSerialization;
 
 
 _ctrlItem = (findDisplay 5000) displayCtrl 5500;

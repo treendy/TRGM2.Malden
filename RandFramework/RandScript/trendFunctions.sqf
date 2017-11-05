@@ -806,7 +806,7 @@ TREND_fnc_OccupyHouses = {
 			_allBuildings = nearestObjects [_sidePos, ["house"], _distFromCent];
 			_randBuilding = selectRandom _allBuildings;
 			
-			sRiflemanToUse createUnit [position _randBuilding, createGroup _InsurgentSide, "[getPosATL this, units group this, -1, false, false] execVM ""RandFramework\Zen_OccupyHouse.sqf"";}]"];
+			sRiflemanToUse createUnit [position _randBuilding, createGroup _InsurgentSide, "[getPosATL this, units group this, -1, false, false] execVM ""RandFramework\Zen_OccupyHouse.sqf"";"];
 					
 			_iCount = _iCount + 1;
 		};
