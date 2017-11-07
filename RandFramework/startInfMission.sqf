@@ -586,17 +586,6 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 				InfTaskCount = InfTaskCount + 1;
 			
 			//};
-			//fnc for spawning in paatrosl etc...
-
-		
-
-			//HERE HERE HERE
-			// - set other side missions (get back our stolen tank, recover something else, etc.... (things that will help the mission) (tank only if tank option activated)
-			// - officer with intel, nice car outside, he will run to it if anyone spots blufor and drive off to the AO
-			//		chance of chopper or car, or both... but if its possible to see if no road connects to ao and location, then just chopper
-			// may be a chance we have no idea where the objective is, so one of these intel will show the main location (intel could be within the AO)
-			// need to allow chopper to be used more often
-			//===================================================================
 
 	};
 };

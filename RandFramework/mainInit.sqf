@@ -147,41 +147,23 @@ if (isNil "iUseRevive") then {
 	publicVariable "iUseRevive";	
 };
 
-
-
-
-
 _trgRatingAdjust = createTrigger ["EmptyDetector", [0,0]];
 _trgRatingAdjust setTriggerArea [0, 0, 0, false];	
 _trgRatingAdjust setTriggerStatements ["((rating player) < 0)", "player addRating -(rating player)", ""];
 
-
-
-	
-
-
+if (isServer) then {
+	box1 allowDamage false;
+	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+		[box1,InitialBoxItemsWithAce] call bis_fnc_initAmmoBox;
+	}
+	else {
+		[box1,InitialBoxItems] call bis_fnc_initAmmoBox;
+	};
+};
 
 
 waitUntil {bAndSoItBegins};
 
-if (isServer) then {
-
-	SpottedActiveFinished = true;
-	publicVariable "SpottedActiveFinished";
-
-	bBaseHasChopper = false;
-	publicVariable "_baseHeliPad";
-
-	ParaDropped = false;
-	publicVariable "ParaDropped";
-	
-	
-	if (isNil "MaxBadPoints") then {
-		MaxBadPoints = 10;
-		publicVariable "MaxBadPoints";	
-	};
-
-};
 
 if (isServer) then {
 	call compile preprocessFileLineNumbers  "RandFramework\SetTimeAndWeather.sqf";
@@ -241,5 +223,5 @@ if (isServer) then {
 	waitUntil {player == player}; 
 	waitUntil {time > 10}; 
 	[[],"RandFramework\animateAnimals.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
-	hint "PING";
+	//hint "PING";
  };
