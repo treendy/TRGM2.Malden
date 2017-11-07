@@ -1,6 +1,4 @@
-
-_killed = _this select 0;
-_killer = _this select 1;
+params  ["_killed","_killer"];
 
 //hint format ["killed: %1 - Killer: %2 - str1: %3 - str2: %4", str(side _killed), str(side _killer),str(_killed),str(_killer)];
 //sleep 3;

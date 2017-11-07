@@ -8,6 +8,5 @@ _markerstrLeader setMarkerType "hd_dot";
 _markerstrLeader setMarkerText "";
 _markerstrLeader setMarkerColor "ColorRed";
 			
-			
-[[HQMan,"LocationFound"],"sideRadio",true,true] call BIS_fnc_MP;
+[HQMan,"LocationFound"] remoteExec ["sideRadio",2,true];
 

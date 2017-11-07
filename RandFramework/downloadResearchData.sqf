@@ -1,8 +1,5 @@
-_thisLaptop = _this select 0;
-_params = _this select 3;
-
-_iSelected = _params select 0;
-_bCreateTask = _params select 1;
+params ["_thisLaptop" , "_caller", "_ID", "_arguments"];
+_arguments params ["_iSelected","_bCreateTask"];
 
 //removeAllActions _thisLaptop;
 [_thisLaptop] remoteExec ["removeAllActions", 0, true];
@@ -10,11 +7,8 @@ _bCreateTask = _params select 1;
 if (_bCreateTask) then {
 	sName = format["InfSide%1",_iSelected];
 	[sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0];
-
 } else {
-	
-		MaxBadPoints = MaxBadPoints + 1; 
-		publicVariable "MaxBadPoints";
-		["Data secured, reputation increased","hint",true,false] call BIS_fnc_MP;
-	
+	MaxBadPoints = MaxBadPoints + 1; 
+	publicVariable "MaxBadPoints";
+	"Data secured, reputation increased" remoteExecCall	["hint",side _caller];
 };

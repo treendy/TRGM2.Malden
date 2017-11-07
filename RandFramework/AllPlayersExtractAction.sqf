@@ -1,13 +1,9 @@
 if (isMultiplayer) then {
-
 	if (isServer) then {
 		{
-			//_x addAction ["Call for Extraction", "RandFramework\CallExtract.sqf"];
-			[[_x , ["Call for Extraction","RandFramework\CallExtract.sqf"]],"addAction",true,true] call BIS_fnc_MP;
-			//[[player , [""Call for Extraction"",""RandFramework\CallExtract.sqf""]],""addAction"",true,true] call BIS_fnc_MP;
+			[_x,["Call for Extraction","RandFramework\CallExtract.sqf"]] remoteExec ["addAction",_x,true];
 		} forEach playableUnits;
 	};
-}
-else {
+} else {
  player addAction ["Call for Extraction","RandFramework\CallExtract.sqf"]
 };

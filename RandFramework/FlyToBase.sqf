@@ -1,5 +1,3 @@
-
-
 chopper1Landing2 = false; 
 publicVariable "chopper1Landing2";
 
@@ -20,7 +18,7 @@ _flyToLZ2 setWaypointStatements ["true", "(vehicle this) LAND 'LAND'; chopper1La
 waitUntil {chopper1 distance2D heliPad1 < 300;};
 
 if (((bPOW1InGroup || bPOW2InGroup) && (bObj1Completed || bObj2Completed)) || (bObj1Completed && bObj2Completed)) then {
-	[[HQMan,"land"],"sideRadio",true,true] call BIS_fnc_MP;
+	[HQMan,"land"] remoteExec ["sideRadio",0,true];
 	setWind [0,0,true]
 };
 
@@ -31,7 +29,7 @@ while {(count (waypoints group chopper1D)) > 0} do {
 };
 
 if (((bPOW1InGroup || bPOW2InGroup) && (bObj1Completed || bObj2Completed)) || (bObj1Completed && bObj2Completed)) then {
-	["end","playMusic",true,true] call BIS_fnc_MP;
+	"end" call remoteExec ["playMusic",0,false];
 };
 
 

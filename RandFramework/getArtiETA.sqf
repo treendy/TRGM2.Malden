@@ -1,5 +1,5 @@
 
-
+params ["_targetX","_targetY","_Ammo"];
 _targetX = _this select 0;
 _targetY = _this select 1;
 _Ammo = _this select 2;

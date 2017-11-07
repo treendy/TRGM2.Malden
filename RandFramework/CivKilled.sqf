@@ -1,12 +1,9 @@
-
-_killed = _this select 0;
-_killer = _this select 1;
+params ["_killed","_killer"];
 
 if (isNil "CivDeathCount") then {
-			CivDeathCount = 0;
-			publicVariable "CivDeathCount";
+	CivDeathCount = 0;
+	publicVariable "CivDeathCount";
 };
-
 
 if (side _killer == west && str(_killed) != str(_killer)) then {
 	bCivKilled = true;
