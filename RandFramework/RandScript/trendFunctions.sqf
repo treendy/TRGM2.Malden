@@ -457,7 +457,7 @@ TREND_fnc_PopulateSideMission = {
 				_thisPosAreaOfCheckpoint = _flatPos;
 				_thisRoadOnly = true;
 				_thisSide = west; 
-				_thisUnitTypes = ["UK3CB_BAF_Rifleman_MTP"];
+				_thisUnitTypes = FriendlyCheckpointUnits;
 				_thisAllowBarakade = true;
 				_thisIsDirectionAwayFromAO = false;
 				[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,FriendlyScoutVehicles,500] execVM "RandFramework\setCheckpoint.sqf";
