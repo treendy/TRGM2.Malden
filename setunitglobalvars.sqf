@@ -97,7 +97,7 @@ sMachineGunManFriendInsurg = "O_G_Soldier_AR_F";
 EnemyBaseChoppers = ["O_T_VTOL_02_infantry_F"];
 
 
-
+FriendlyCheckpointUnits = ["B_Soldier_F"];
 
 
 

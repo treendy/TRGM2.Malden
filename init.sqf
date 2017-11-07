@@ -23,7 +23,7 @@ publicVariable "tf_no_auto_long_range_radio";
 
 [     
 		west,        
-		["Altis Regain Engine", sAltisRegainEngine],
+		["TRGM2 Engine", sAltisRegainEngine],
 		{true},  
 		["Mission", sBreifing],        		        
 		["Credits", "Scripts used", sScriptsUsed]
@@ -48,14 +48,3 @@ if (bUseRevive) then {
 
 execVM "RandFramework\mainInit.sqf";
 
-
-
-if (!isServer) then {
-	waitUntil {!isNull player};
-	waitUntil {player == player};
-	
-	
-
-};
-
-//test
