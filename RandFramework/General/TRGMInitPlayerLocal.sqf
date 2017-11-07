@@ -1,3 +1,5 @@
+#include "..\..\setUnitGlobalVars.sqf";
+
 if (isNil "bAndSoItBegins") then {
 	bAndSoItBegins = false;
 	publicVariable "bAndSoItBegins";	
@@ -12,12 +14,64 @@ if (str player == "sl" && !bAndSoItBegins) then {
 	[] execVM "RandFramework\GUI\openDialogMissionSelection.sqf";
 };
 
+
+TREND_fnc_BasicInit = {
+	
+	enableEngineArtillery false; 
+						   
+	if (iAllowNVG == 2) then {
+		[] execVM "RandFramework\NVscript.sqf";
+	};
+
+	
+	if (iMissionParamRepOption == 1) then {
+		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+			myaction = ['ShowRepReport','Show reputation report','',{_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint format["Current cost per life: %1\n\nBad reputation points: %2 out of %3\n\nREASONS SO FAR: \n%4",_iPointsToAdd,BadPoints, MaxBadPoints, BadPointsReason]},{true}] call ace_interact_menu_fnc_createAction;
+			[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
+		}
+		else {
+			player addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint format["Current cost per life: %1\n\nBad reputation points: %2 out of %3\n\nREASONS SO FAR: \n%4",_iPointsToAdd,BadPoints, MaxBadPoints, BadPointsReason]}];
+		};
+	};
+
+	if (str player == "sl" || str player == "k1_1" || str player == "k1_5" || str player == "d1_1" || str player == "d2_1" || str player == "pg1_1" || str player == "pg1_2" || str player == "pg1_3") then {
+		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+			myaction = ['RequestArti','Request Arti','',{_handle=createdialog "DialogArtiRequest";},{true}] call ace_interact_menu_fnc_createAction;
+			[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
+		}
+		else {
+			player addaction ["Request Arti", {_handle=createdialog "DialogArtiRequest";}];
+		};
+	};
+	if (isMultiplayer) then {
+		execVM "RandFramework\NoVoice.sqf";
+	};
+
+	al_flare_intensity = 20;
+	publicvariable "al_flare_intensity";
+	// flare range, replace 500 with desired value
+	al_flare_range = 300;
+	publicvariable "al_flare_range";
+	// If you want to use FLARE FIX do not edit or remove lines bellow
+	player addEventHandler ["Fired",{private ["_al_flare"]; _al_flare = _this select 6;[[[_al_flare],"\RandFramework\AL_flare_fix\al_flare_enhance.sqf"],"BIS_fnc_execVM",true,true] spawn BIS_fnc_MP;}];
+	// ^^^^^^^^^^ END FLARE fix ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+	iAllowGPS = ("OUT_par_AllowGPS" call BIS_fnc_getParamValue);
+	if (iAllowGPS == 0) then {
+		showGPS false;
+	};
+
+};
+[] spawn TREND_fnc_BasicInit;
+player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInit; }];
+
+
 waitUntil {bAndSoItBegins};
 
 
 
 
-#include "..\..\setUnitGlobalVars.sqf";
+
 
 
 
@@ -43,68 +97,27 @@ if (iMissionSetup == 12 || iMissionSetup == 20) then {
 	//training
 	[player, 100] call BIS_fnc_respawnTickets;
 	
-	myaction = ['TraceBulletAction','Trace Bullets','',{},{true}] call ace_interact_menu_fnc_createAction;
-	[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
-	
-	myaction = ['TraceBulletEnable','Enable','',{[player, 5] spawn BIS_fnc_traceBullets;},{true}] call ace_interact_menu_fnc_createAction;
-	[player, 1, ["ACE_SelfActions", "TraceBulletAction"], myaction] call ace_interact_menu_fnc_addActionToObject;
+	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+		myaction = ['TraceBulletAction','Trace Bullets','',{},{true}] call ace_interact_menu_fnc_createAction;
+		[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
+		
+		myaction = ['TraceBulletEnable','Enable','',{[player, 5] spawn BIS_fnc_traceBullets;},{true}] call ace_interact_menu_fnc_createAction;
+		[player, 1, ["ACE_SelfActions", "TraceBulletAction"], myaction] call ace_interact_menu_fnc_addActionToObject;
 
-	myaction = ['TraceBulletDisable','Disable','',{[player, 0] spawn BIS_fnc_traceBullets;},{true}] call ace_interact_menu_fnc_createAction;
-	[player, 1, ["ACE_SelfActions", "TraceBulletAction"], myaction] call ace_interact_menu_fnc_addActionToObject;
+		myaction = ['TraceBulletDisable','Disable','',{[player, 0] spawn BIS_fnc_traceBullets;},{true}] call ace_interact_menu_fnc_createAction;
+		[player, 1, ["ACE_SelfActions", "TraceBulletAction"], myaction] call ace_interact_menu_fnc_addActionToObject;
+	};
+	
 }
 else {
 	[player, 1] call BIS_fnc_respawnTickets;
 };
 
 
-TREND_fnc_BasicInit = {
-
-	//[] execVM "RandFramework\minedetector.sqf";
-	//player execVM "RandFramework\simpleEP.sqf";
+TREND_fnc_GetAnimalsMoving = {	
 	[] execVM "RandFramework\animateAnimals.sqf";
-	//iAllowNVG = ("OUT_par_AllowNVG" call BIS_fnc_getParamValue);
-	enableEngineArtillery false; 
-						   
-	if (iAllowNVG == 2) then {
-		[] execVM "RandFramework\NVscript.sqf";
-	};
-
-		
-
-	//[format["Points have been marked against your team. Current points: %1 out of %2\n\nREASONS SO FAR: \n%3",BadPoints, MaxBadPoints, BadPointsReason]] remoteExec ["Hint", 0, true];
-	//player addaction ["Show reputation report", ];
-
-	if (iMissionParamRepOption == 1) then {
-		myaction = ['ShowRepReport','Show reputation report','',{_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint format["Current cost per life: %1\n\nBad reputation points: %2 out of %3\n\nREASONS SO FAR: \n%4",_iPointsToAdd,BadPoints, MaxBadPoints, BadPointsReason]},{true}] call ace_interact_menu_fnc_createAction;
-		[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
-	};
-
-	if (str player == "sl" || str player == "k1_1" || str player == "k1_5" || str player == "d1_1" || str player == "d2_1" || str player == "pg1_1" || str player == "pg1_2" || str player == "pg1_3") then {
-		//player addaction ["Request Arti", {_handle=createdialog "DialogArtiRequest";}];
-		myaction = ['RequestArti','Request Arti','',{_handle=createdialog "DialogArtiRequest";},{true}] call ace_interact_menu_fnc_createAction;
-		[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
-
-	};
-	if (isMultiplayer) then {
-		execVM "RandFramework\NoVoice.sqf";
-	};
-
-	al_flare_intensity = 20;
-	publicvariable "al_flare_intensity";
-	// flare range, replace 500 with desired value
-	al_flare_range = 300;
-	publicvariable "al_flare_range";
-	// If you want to use FLARE FIX do not edit or remove lines bellow
-	player addEventHandler ["Fired",{private ["_al_flare"]; _al_flare = _this select 6;[[[_al_flare],"\RandFramework\AL_flare_fix\al_flare_enhance.sqf"],"BIS_fnc_execVM",true,true] spawn BIS_fnc_MP;}];
-	// ^^^^^^^^^^ END FLARE fix ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-	iAllowGPS = ("OUT_par_AllowGPS" call BIS_fnc_getParamValue);
-	if (iAllowGPS == 0) then {
-		showGPS false;
-	};
-
 };
-[] spawn TREND_fnc_BasicInit;
+[] spawn TREND_fnc_GetAnimalsMoving;
 player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInit; }];
 
 
@@ -131,42 +144,14 @@ TREND_fnc_InSafeZone = {
 			publicVariable "PlayersHaveLeftStartingArea";
 	};
 	
-	//if (!PlayersHaveLeftStartingArea) then {
-		////Attach variable to player of time plus PunishmentTimer
-		//player setVariable ["myTimer", (time + PunishmentTimer), false];
-	//}
-	//else {
-		//player setVariable ["myTimer", (time), false];
-	//};
-	//_iVarTime = player getVariable "myTimer";
-	//_iEndPunishmentTime = time + PunishmentTimer;
-
 	while {true} do {
-		//_iTickingVarTime = _iVarTime + time;
-		//_iTimeLeft = floor(_iEndPunishmentTime - _iTickingVarTime);
 		if (getMarkerPos "mrkHQ" distance player < PunishmentRadius) then {
 			if (!bDebugMode) then { player allowDamage false}; 
-			//if (PlayersHaveLeftStartingArea && _iTickingVarTime < _iEndPunishmentTime) then { //so if players have started the mission and this player is within the HQ area and hasnt been in for long enough
-			//	_minsLeft = floor(_iTimeLeft/60);
-			//	if (_minsLeft < 1) then {
-			//		hintSilent format["Punishment time left: %1 seconds",_iTimeLeft];	
-			//	}
-			//	else {
-			//		hintSilent format["Punishment time left: %1 mins",_minsLeft];	
-			//	};
-				
-			//};			
 		}
 		else {
 			if (!bDebugMode) then { player allowDamage true;};
 			PlayersHaveLeftStartingArea = true;
 			publicVariable "PlayersHaveLeftStartingArea";
-
-			//If (PlayersHaveLeftStartingArea && _iTickingVarTime < _iEndPunishmentTime) then {
-			//	Hint "Teleporting back to base...";
-			//	sleep 2;
-			//	player setPos (getMarkerPos "respawn_west");
-			//};
 		};
 		sleep 1;
 	};
