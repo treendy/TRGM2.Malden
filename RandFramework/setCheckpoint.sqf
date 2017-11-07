@@ -1,20 +1,22 @@
 #include "../setUnitGlobalVars.sqf";
 
-_thisAOPos = _this select 0;
-_thisPosAreaOfCheckpoint = _this select 1;
-_thisAreaRange = _this select 2;
-_thisRoadOnly = _this select 3;
-_thisSide = _this select 4; 
-_thisUnitTypes = _this select 5;
-_thisAllowBarakade = _this select 6;
-_thisIsDirectionAwayFromAO = _this select 7;
-_thisIsCheckPoint = _this select 8; // only used to store possitions in our checkpointareas and sentryareas arrays
-_thisScoutVehicles = _this select 9;
-_thisAreaAroundCheckpointSpacing = _this select 10;
+params [
+	"_thisAOPos",
+	"_thisPosAreaOfCheckpoint",
+	"_thisAreaRange",
+	"_thisRoadOnly",
+	"_thisSide",
+	"_thisUnitTypes",
+	"_thisAllowBarakade",
+	"_thisIsDirectionAwayFromAO",
+	"_thisIsCheckPoint", // only used to store possitions in our checkpointareas and sentryareas arrays
+	"_thisScoutVehicles",
+	"_thisAreaAroundCheckpointSpacing"
+];
 
 fnc_AddToDirection = {
-	_origDirection = _this select 0;
-	_addToDirection = _this select 1;
+	params ["_origDirection","_addToDirection"];
+
 	_iResult = _origDirection + _addToDirection;
 	//hint format["result:%1",_iResult];
 	//sleep 2;

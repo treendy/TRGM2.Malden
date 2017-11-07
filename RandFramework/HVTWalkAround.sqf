@@ -1,8 +1,4 @@
-
-_objManName = _this select 0;
-_thisInitPos = _this select 1;
-_objMan = _this select 2;
-_walkRadius = _this select 3;
+params ["_objManName","_thisInitPos","_objMan","_walkRadius"];
 
 _currentManPos = getPos _objMan;
 

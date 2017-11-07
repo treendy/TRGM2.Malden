@@ -1,8 +1,11 @@
 titleText["Select Map Position outside the AO areas", "PLAIN"];
-onMapSingleClick "[_pos] execVM ""RandFramework\FlyToLZ.sqf""; onMapSingleClick '';true;";
-//onMapSingleClick "vehicle player setPos _pos; onMapSingleClick '';true;";
 
 
+onMapSingleClick {
+	[_pos] execVM "RandFramework\FlyToLZ.sqf"; 
+	onMapSingleClick '';
+	true;
+}
 _color = "ColorRed";
 
 _mrkPos = createMarker ["mrkTempAO1", getMarkerPos "mrkFirstLocation"]; 

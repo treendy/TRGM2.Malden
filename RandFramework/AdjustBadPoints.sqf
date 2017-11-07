@@ -7,14 +7,12 @@ sleep random [1,2.5,5]; //to increase the chance of not fireing at same time! (n
 waitUntil {!(TRGM_Logic getVariable "PointsUpdating")};
 TRGM_Logic setVariable ["PointsUpdating", true, true];
 
-_PointsToAdd = _this select 0;
-_Message = _this select 1;
+params ["_pointsToAdd","_message"];
 
-badPoints = badPoints + _PointsToAdd; 
+badPoints = badPoints + _pointsToAdd; 
 publicVariable "badPoints";
 
-BadPointsReason = BadPointsReason + format["\n%1 (%2)",_Message,_PointsToAdd]; 
+BadPointsReason = BadPointsReason + format["\n%1 (%2)",_message,_pointsToAdd]; 
 publicVariable "BadPointsReason";
-
 
 TRGM_Logic setVariable ["PointsUpdating", false, true];
