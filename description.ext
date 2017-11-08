@@ -31,91 +31,92 @@ class Header
 class Params
 {
         
-		class TREND_par_MissionType // 4
-        {
-			title = "Mission Type:";
-			values[] = {15,11,14,1,13,12,20,0,2,3,4,5,16,17,18,19,7,8,9,10};
-			default = 15;
-			texts[] = {
-				"Main Mission: Random Objective, 2 Optional sides", //15
-				"Main Mission: Random Objective, intel required for main AO", //11
-				"Main Mission: Random objective, no intel needed", //14
-				"Single random side mission", //1
-				"Double side: Random", //13
-				"Training", //12
-				"Sniper/Pilot Training", //20
-				"==========================================================", //0
-				"single side: Hack Data", //2 
-				"Single side: Speak with Informant", //3
-				"Single side: Interrogate Officer", //4
-				"Single side: Bug Radio",  //5
-				"Single side: Eliminate Officer",  //16
-				"Single side: Assasinate weapon dealer",  //17
-				"Single side: Destroy AAA vehicles",  //18
-				"Single side: Destroy Artillery vehicles",  //19
-				"Gather Intel(random) for Main location : Random", //7
-				"Gather Intel(random) for Main location : Interrogate Officer", //8
-				"Gather Intel(random) for Main location : Nuke (coming soon)", //9
-				"Gather Intel(Radio) for Main location : Interrogate Officer" //10
-				
-			};
-		};
+		//class TREND_par_MissionType // 4
+        //{
+		//	title = "Mission Type:";
+		//	values[] = {15,11,14,1,13,12,20,0,2,3,4,5,16,17,18,19,7,8,9,10};
+		//	default = 15;
+		//	texts[] = {
+		//		"Main Mission: Random Objective, 2 Optional sides", //15
+		//		"Main Mission: Random Objective, intel required for main AO", //11
+		//		"Main Mission: Random objective, no intel needed", //14
+		//		"Single random side mission", //1
+		//		"Double side: Random", //13
+		//		"Training", //12
+		//		"Sniper/Pilot Training", //20
+		//		"==========================================================", //0
+		//		"single side: Hack Data", //2 
+		//		"Single side: Speak with Informant", //3
+		//		"Single side: Interrogate Officer", //4
+		//		"Single side: Bug Radio",  //5
+		//		"Single side: Eliminate Officer",  //16
+		//		"Single side: Assasinate weapon dealer",  //17
+		//		"Single side: Destroy AAA vehicles",  //18
+		//		"Single side: Destroy Artillery vehicles",  //19
+		//		"Gather Intel(random) for Main location : Random", //7
+		//		"Gather Intel(random) for Main location : Interrogate Officer", //8
+		//		"Gather Intel(random) for Main location : Nuke (coming soon)", //9
+		//		"Gather Intel(Radio) for Main location : Interrogate Officer" //10
+		//		
+		//	};
+		//};
 
-		class TREND_par_CirclesOfDeath // 4
-        {
-			title = "Activate Circles of Death:";
-			values[] = {1, 0};
-			default = 0;
-			texts[] = {"If a player dies, a large red circle will show at the possition of death.  This player will not be allowed to enter this zone", "False"};
-		};
+		//class TREND_par_CirclesOfDeath // 4
+        //{
+		//	title = "Activate Circles of Death:";
+		//	values[] = {1, 0};
+		//	default = 0;
+		//	texts[] = {"If a player dies, a large red circle will show at the possition of death.  This player will not be allowed to enter this zone", "False"};
+		//};
 
-        class OUT_par_AllowLargePatrols // 4
-        {
-			title = "Maximum Enemies:";
-			values[] = {1, 2, 3};
-			default = 2;
-			texts[] = {"True (WARNING ! this will mean some patrols will have around 9 units", "False", "Random"};
-		};
+        //class OUT_par_AllowLargePatrols // 4
+        //{
+		//	title = "Maximum Enemies:";
+		//	values[] = {1, 2, 3};
+		//	default = 2;
+		//	texts[] = {"True (WARNING ! this will mean some patrols will have around 9 units", "False", "Random"};
+		//};
        
-        class OUT_par_WeatherAndTimeConditions // 10
-        {
-			title = "Weather and Time:";
-			values[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
-			default = 1;
-			texts[] = {"Random", "Sunny Clear", "Daytime Heavy Overcast", "Day average Overcast", "Dark Night Clear", "Dark Night Heavy Overcast", "Dark Night Average overcast", "Early Morning", "Moon Night Clear", "Moon Night slight overcast", "Moon Night heavy overcast"};
-		};
+        //class OUT_par_WeatherAndTimeConditions // 10
+        //{
+		//	title = "Weather and Time:";
+		//	values[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+		//	default = 1;
+		//	texts[] = {"Random", "Sunny Clear", "Daytime Heavy Overcast", "Day average Overcast", "Dark Night Clear", "Dark Night Heavy Overcast", "Dark Night Average overcast", "Early Morning", "Moon Night Clear", "Moon Night slight overcast", "Moon Night heavy overcast"};
+		//};
 
 
-        class OUT_par_AllowGPS // 10
-        {
-			title = "Allow GPS:";
-			values[] = {1, 0};
-			default = 1;
-			texts[] = {"True", "False"};
-		};
-        class OUT_par_AllowNVG // 10
-        {
-			title = "NVG:";
-			values[] = {1, 0, 2};
-			default = 2;
-			texts[] = {"Allowed", "No NVG", "NVG with poor visibility"};
-		};
+        //class OUT_par_AllowGPS // 10
+        //{
+		//	title = "Allow GPS:";
+		//	values[] = {1, 0};
+		//	default = 1;
+		//	texts[] = {"True", "False"};
+		//};
 
-        class OUT_par_UseRevive // 10
-        {
-			title = "Revive options:";
-			values[] = {0, 1, 2, 3};
-			default = 0;
-			texts[] = {"No revive", "Guarantee revive", "Realistic revive (critical hits will kill you instantly)", "Realistic revive (only medics can revive with a medkit)"};
-		};
+        //class OUT_par_AllowNVG // 10
+        //{
+		//	title = "NVG:";
+		//	values[] = {1, 0, 2};
+		//	default = 2;
+		//	texts[] = {"Allowed", "No NVG", "NVG with poor visibility"};
+		//};
 
-        class OUT_par_AllowAIInsExtr // 10
-        {
-			title = "Allow AI insertion and extraction:";
-			values[] = {1, 0};
-			default = 1;
-			texts[] = {"True", "False"};
-		};
+        //class OUT_par_UseRevive // 10
+        //{
+		//	title = "Revive options:";
+		//	values[] = {0, 1, 2, 3};
+		//	default = 0;
+		//	texts[] = {"No revive", "Guarantee revive", "Realistic revive (critical hits will kill you instantly)", "Realistic revive (only medics can revive with a medkit)"};
+		//};
+
+        //class OUT_par_AllowAIInsExtr // 10
+        //{
+		//	title = "Allow AI insertion and extraction:";
+		//	values[] = {1, 0};
+		//	default = 1;
+		//	texts[] = {"True", "False"};
+		//};
 
 
 };
