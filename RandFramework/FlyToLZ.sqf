@@ -1,15 +1,19 @@
 //_possitionParam = (_this select 3) select 0;
 _possitionParam = _this select 0;
 
-_distance1 = getMarkerPos "mrkFirstLocation" distance _possitionParam;
-_distance2 = getMarkerPos "mrkSecondLocation" distance _possitionParam;
+_bDistanceOK = true;
+{
+	_distance1 = _x distance _possitionParam;
+	if (_distance1 < 900) then {_bDistanceOK = false};
+} forEach ObjectivePossitions;
+
 
 _flatPos = nil;
 _flatPos = [_possitionParam , 0, 200, 4, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 //_hPad = createVehicle ["Land_HelipadEmpty_F", _flatPos, [], 0, "NONE"];
 
 
-if (_distance1 < 900 || _distance2 < 900) then {
+if (!_bDistanceOK) then {
 	hint "Please choose another location, you have selected a location too close to the AO";
 }
 else {
@@ -29,9 +33,9 @@ else {
 			publicVariable "FirstTakeOffHappend";
 		};
 
-		//remove the two temp shapes;
-		deleteMarker "mrkTempAO1";
-		deleteMarker "mrkTempAO2";
+		{
+			deleteMarker format["mrkTempA%1",str(_forEachIndex)];
+		} forEach ObjectivePossitions;
 		deleteMarker "customLZ1";
 
 		_mrkcustomLZ1 = createMarker ["customLZ1", _flatPos]; 
