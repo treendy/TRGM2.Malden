@@ -1,11 +1,10 @@
 titleText["Select Map Position outside the AO areas", "PLAIN"];
-
-
 onMapSingleClick {
-	[_pos] execVM "RandFramework\FlyToLZ.sqf"; 
-	onMapSingleClick '';
+	[_pos,chopper1] execVM "RandFramework\FlyToLZ.sqf"; 
+	onMapSingleClick "";
 	true;
 }
+
 _color = "ColorRed";
 
 _mrkPos = createMarker ["mrkTempAO1", getMarkerPos "mrkFirstLocation"]; 
@@ -19,3 +18,5 @@ _mrkPos2 setMarkerShape "ELLIPSE";
 _mrkPos2 setMarkerSize [900,900];
 _mrkPos2 setMarkerColor _color;
 _mrkPos2 setMarkerAlpha 0.5;
+
+openMap true;

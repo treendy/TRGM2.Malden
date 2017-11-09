@@ -1,3 +1,4 @@
+params ["_vehicle"];
 chopper1Landing2 = false; 
 publicVariable "chopper1Landing2";
 
@@ -15,14 +16,14 @@ _flyToLZ2 setWaypointCombatMode "BLUE";
 _flyToLZ2 setWaypointStatements ["true", "(vehicle this) LAND 'LAND'; chopper1Landing2 = true; publicVariable ""chopper1Landing2"""];
 
 //hint "Returning to base";
-waitUntil {chopper1 distance2D heliPad1 < 300;};
+waitUntil {_vehicle distance2D heliPad1 < 300;};
 
 if (((bPOW1InGroup || bPOW2InGroup) && (bObj1Completed || bObj2Completed)) || (bObj1Completed && bObj2Completed)) then {
 	[HQMan,"land"] remoteExec ["sideRadio",0,true];
 	setWind [0,0,true]
 };
 
-waitUntil {chopper1Landing2 && (isTouchingGround chopper1 || {!canMove chopper1})};
+waitUntil {chopper1Landing2 && (isTouchingGround chopper_vehicle1 || {!canMove _vehicle})};
 
 while {(count (waypoints group chopper1D)) > 0} do {
 	deleteWaypoint ((waypoints group chopper1D) select 0);
