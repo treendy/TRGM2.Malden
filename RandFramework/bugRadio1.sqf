@@ -1,5 +1,8 @@
-params ["_radio","_caller","_params"];
+params ["_radio","_caller","_id","_params"];
 _params params ["_iSelected","_bCreateTask"];
+
+_iSelected = _params select 0;
+_bCreateTask = _params select 1;
 
 [_radio] remoteExec ["removeAllActions", 0, true];
 
