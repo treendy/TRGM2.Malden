@@ -1,39 +1,44 @@
+_fnc_requestLanding = {
+	params ["_group","_vehicle"];
+	_text = format ["%1 requesting landing.", groupId _group];
+	[_vehicle,_text] remoteExecCall ["sideChat",driver _vehicle,false];
+};
+
+_fnc_landingConfirm = {
+	params ["_group","_vehicle"];
+	_text = format ["%1 you are cleared for landing.", groupId _group];
+	[HQMan,_text] remoteExecCall ["sideChat",HQMan,false];
+};
+
+
 params ["_vehicle"];
-chopper1Landing2 = false; 
-publicVariable "chopper1Landing2";
 
 //hint (format ["triger thisList: %1", count thisList]);
 
-while {(count (waypoints group chopper1D)) > 0} do {
-	deleteWaypoint ((waypoints group chopper1D) select 0);
-};
+{
+	deleteWaypoint _x
+} foreach waypoints group driver _vehicle;
 
-_flyToLZ2 = group chopper1D addWaypoint [getPos heliPad1,0,0];
+_baseLZPos = _vehicle getVariable "baseLZ";
+
+_flyToLZ2 = (group driver _vehicle) addWaypoint [_baseLZPos,0,0];
 _flyToLZ2 setWaypointType "MOVE";
 _flyToLZ2 setWaypointSpeed "FULL";
 _flyToLZ2 setWaypointBehaviour "CARELESS";
 _flyToLZ2 setWaypointCombatMode "BLUE";
-_flyToLZ2 setWaypointStatements ["true", "(vehicle this) LAND 'LAND'; chopper1Landing2 = true; publicVariable ""chopper1Landing2"""];
+_flyToLZ2 setWaypointStatements ["true", "(vehicle this) LAND 'LAND';"];
 
 //hint "Returning to base";
 waitUntil {_vehicle distance2D heliPad1 < 300;};
 
-if (((bPOW1InGroup || bPOW2InGroup) && (bObj1Completed || bObj2Completed)) || (bObj1Completed && bObj2Completed)) then {
-	[HQMan,"land"] remoteExec ["sideRadio",0,true];
-	setWind [0,0,true]
-};
+[group driver _vehicle, _vehicle] call _fnc_requestLanding;
+sleep 1.5;
+[group driver _vehicle, _vehicle] call _fnc_landingConfirm;
 
-waitUntil {chopper1Landing2 && (isTouchingGround chopper_vehicle1 || {!canMove _vehicle})};
+setWind [0,0,true]; // prevent stuck helicopter during duststorm 
 
-while {(count (waypoints group chopper1D)) > 0} do {
-	deleteWaypoint ((waypoints group chopper1D) select 0);
-};
+waitUntil {isTouchingGround _vehicle || {!canMove _vehicle}};
 
-if (((bPOW1InGroup || bPOW2InGroup) && (bObj1Completed || bObj2Completed)) || (bObj1Completed && bObj2Completed)) then {
-	"end" call remoteExec ["playMusic",0,false];
-};
-
-
-
-//play 3d sound, welcome home
-
+{
+	deleteWaypoint _x
+} foreach waypoints group driver _vehicle;

@@ -125,7 +125,7 @@ if (_distance1 < 900 || _distance2 < 900) then {
 
 		{
 			deleteWaypoint _x
-		} foreach waypoints _driver;
+		} foreach waypoints group _driver;
 
 		_flyToLZ = group _driver addWaypoint [_safeLandingZonePosition,0,0];
 		_flyToLZ setWaypointType "MOVE";
