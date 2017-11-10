@@ -223,7 +223,7 @@ class CfgSounds
 class CfgRadio
 {
 	sounds[] =
-	{chopperspotted, FastMoverSpotted, EnemyCommsDown, EnemyBaseIntel, takeoff};
+	{chopperspotted, FastMoverSpotted, EnemyCommsDown, EnemyBaseIntel};
 
 	class chopperspotted
 	{
@@ -254,19 +254,6 @@ class CfgRadio
 		name = "LocationFound";
 		sound[] = {"\RandFramework\Sounds\LocationFound.ogg", db+0,1.0};
 		title = "This is HQ.  We have just had intel of the exact location of one of the objectives, check your map for the red marker near the suspected location.  Out.";
-	};
-
-	class takeoff
-	{
-		name = "takeoff";
-		sound[] = {"\Sound\takeoff.ogg", db+0,1.0};
-		title = "Pegasus 2-1 you are clear to take off.";
-	};
-	class land
-	{
-		name = "land";
-		sound[] = {"\Sound\land.ogg", db+0,1.0};
-		title = "Pegasus 2-1 landing.";
 	};
 
 
