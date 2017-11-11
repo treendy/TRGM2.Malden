@@ -9,9 +9,9 @@ _fnc_landingConfirm = {
 	_text = format ["%1 you are cleared for landing.", groupId _group];
 	[HQMan,_text] remoteExecCall ["sideChat",HQMan,false];
 };
+params ["_vehicle","_thisMissionNr","_fnc_isMissionCurrent"];
+scopeName "FlyToBase";
 
-
-params ["_vehicle"];
 
 //hint (format ["triger thisList: %1", count thisList]);
 
@@ -31,16 +31,22 @@ _flyToWaypoint setWaypointCombatMode "BLUE";
 _flyToWaypoint setWaypointCompletionRadius 100;
 _flyToWaypoint setWaypointStatements ["true", "(vehicle this) land 'LAND';"];
 
-//hint "Returning to base";
-waitUntil {_vehicle distance2D _baseLZPos < 300;};
+hint str(_thisMissionNr);
+waitUntil {((_vehicle distance2D _baseLZPos) < 300) || !(_thisMissionNr call _fnc_isMissionCurrent)};
+if ( !(_thisMissionNr call _fnc_isMissionCurrent)) then {
+	deleteVehicle _heliPad;
+	breakOut "FlyToBase";
+};
 
 [group driver _vehicle, _vehicle] call _fnc_requestLanding;
 sleep 1.5;
 [group driver _vehicle, _vehicle] call _fnc_landingConfirm;
 setWind [0,0,true]; // prevent stuck helicopter during duststorm 
 
-
-waitUntil {isTouchingGround _vehicle || {!canMove _vehicle}};
+waitUntil {isTouchingGround _vehicle || {!canMove _vehicle} || !(_thisMissionNr call _fnc_isMissionCurrent)};
+if ( !(_thisMissionNr call _fnc_isMissionCurrent)) then {
+	breakOut "FlyToBase";
+};
 
 deleteVehicle _heliPad;
 

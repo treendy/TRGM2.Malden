@@ -67,98 +67,151 @@ _fnc_callOutTakeoff = {
 	[HQMan,_text] remoteExecCall ["sideChat",HQMan,false];
 };
 
+_fnc_isMissionCurrent = {
+	params ["_vehicle","_checkToMissionNumber"];
+	(_checkToMissionNumber == (_vehicle getVariable ["missionNr",-1]));
+};
+
+_fnc_isOnlyBoardCrew = {
+	params ["_vehicle"];
+	_boardCrew = group driver _vehicle;
+	{ 
+		alive _x && group _x != _boardCrew;
+	} count (crew _vehicle) == 0;
+};
+
+
 /* 	Script starting here  */
-params ["_destinationPosition","_vehicle"];
+scopeName "FlyTo";
 
-/* Find a save landing Position */
+params [
+	"_destinationPosition",
+	["_vehicle", objNull]
+];
 
-_safeLandingZonePosition = nil;
-_safeLandingZonePosition = [_destinationPosition , 0, 100, 4, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+if (!alive _vehicle) then {
+	breakOut "FlyTo";
+};
 
-if (_safeLandingZonePosition select 0 == 0) then {
-	hint "Couldnt find a good LZ near your point, please select another.  Try to choose somewhere that is less built up";
-} else {
-	
-	// set base LZ for the way back.
-	if (isNull (_vehicle getVariable ["baseLZ", objNull])) then { 
-		// initial setup
-		_flyHeight = 20;
-		_vehicle flyInHeight _flyHeight;
-		_vehicle FlyinheightASL [_flyHeight,_flyHeight,_flyHeight];
+// set base LZ for the way back.
+if (objNull isEqualTo (_vehicle getVariable ["baseLZ", objNull])) then { 
+	// initial setup
+	_flyHeight = 20;
+	_vehicle flyInHeight _flyHeight;
+	_vehicle FlyinheightASL [_flyHeight,_flyHeight,_flyHeight];
+	_vehicle enableCopilot true;
 
-		_vehicle enableCopilot true;
+	_vehicle setVariable ["baseLZ", position _vehicle, true];
+};
 
-		_vehicle setVariable ["baseLZ", position _vehicle, true];
-	};
+//cleanup possible prevoius prevoious
+deleteVehicle (_vehicle getVariable ["targetPad", objNull]);
+deleteMarker (_vehicle getVariable ["lzMarker",""]);
 
-	_driver = driver _vehicle;
 
-	/* Set landing zone map marker */
 
-	_markerName = str(cursorObject) + "LZ";
-	deleteMarker _markerName; // delete existing just to be sure
+/** New Tranport Mission starts here **/
 
-	_mrkcustomLZ1 = createMarker [_markerName, _safeLandingZonePosition]; 
-	_mrkcustomLZ1 setMarkerShape "ICON";
-	_mrkcustomLZ1 setMarkerSize [1,1];
-	_mrkcustomLZ1 setMarkerColor "colorBLUFOR";
-	_mrkcustomLZ1 setMarkerType "hd_pickup";
-	_mrkcustomLZ1 setMarkerText ("LZ " + (groupId group _driver));
+// set mission number -> invalidates old instances of this script running.
+_thisMissionNr = (_vehicle getVariable ["missionNr",0]) + 1;
+_vehicle setVariable ["missionNr", _thisMissionNr, true];
 
-	_heliPad = "Land_HelipadEmpty_F" createVehicle _safeLandingZonePosition; // invisible landingpad to specify exact landing position
+_thisMission = [_vehicle,_thisMissionNr];
 
-	{
-		deleteWaypoint _x
-	} foreach waypoints group _driver;
-	_vehicle setVariable ["commingInForLanding",false,true];
+_vehicle setVariable ["targetPos",_destinationPosition,true];
+_driver = driver _vehicle;
 
-	/* Set Waypoint,Takeoff */
+/* Set landing zone map marker */
 
-	_flyToLZ = group _driver addWaypoint [_safeLandingZonePosition,0,0];
-	_flyToLZ setWaypointType "MOVE";
-	_flyToLZ setWaypointSpeed "FULL";
-	_flyToLZ setWaypointBehaviour "CARELESS";
-	_flyToLZ setWaypointCombatMode "BLUE";
-	_flyToLZ setWaypointCompletionRadius 100;
-	_flyToLZ setWaypointStatements ["true", "(vehicle this) land 'GET IN'; (vehicle this) setVariable [""commingInForLanding"",true,true]"];
+_markerName = str(cursorObject) + "LZ" + str(_thisMissionNr);
 
+_mrkcustomLZ1 = createMarker [_markerName, _destinationPosition]; 
+_mrkcustomLZ1 setMarkerShape "ICON";
+_mrkcustomLZ1 setMarkerSize [1,1];
+_mrkcustomLZ1 setMarkerColor "colorBLUFOR";
+_mrkcustomLZ1 setMarkerType "hd_pickup";
+_mrkcustomLZ1 setMarkerText ("LZ " + (groupId group _driver));
+_vehicle setVariable ["lzMarker",_mrkcustomLZ1,true];
+
+_heliPad = "Land_HelipadEmpty_F" createVehicle _destinationPosition; // invisible landingpad to specify exact landing position
+_vehicle setVariable ["targetPad",_heliPad,true];
+
+{
+	deleteWaypoint _x
+} foreach waypoints group _driver;
+_vehicle setVariable ["landingInProgress",false,true];
+
+/* Set Waypoint,Takeoff */
+
+_flyToLZ = group _driver addWaypoint [_destinationPosition,0,0];
+_flyToLZ setWaypointType "MOVE";
+_flyToLZ setWaypointSpeed "FULL";
+_flyToLZ setWaypointBehaviour "CARELESS";
+_flyToLZ setWaypointCombatMode "BLUE";
+_flyToLZ setWaypointCompletionRadius 100;
+_flyToLZ setWaypointStatements ["true", "(vehicle this) land 'GET IN'; (vehicle this) setVariable [""landingInProgress"",true,true]"];
+
+if (isTouchingGround _vehicle) then {
 	[group _driver, _vehicle] call _fnc_callOutTakeoff; // use spaw once function is global
+};
 
-	waitUntil {isEngineOn _vehicle};
-
-	sleep 3;
+if (isTouchingGround _vehicle) then {
+	waitUntil {!isTouchingGround _vehicle || !(_thisMission call _fnc_isMissionCurrent)};
+	if (!(_thisMission call _fnc_isMissionCurrent)) then {
+		breakOut "FlyTo";
+	};
+	sleep 2;
 
 	[_vehicle,"Off we go."] remoteExec ["vehicleChat",driver _vehicle,false];
-
-	waitUntil {_vehicle getVariable ["commingInForLanding",false]};
-	waitUntil {(isTouchingGround _vehicle || {!canMove _vehicle})};
-
-	/* Post landing,cleanup */
-	{
-		deleteWaypoint _x
-	} foreach waypoints _driver;
-
-	deleteMarker _markerName;
-	deleteVehicle _heliPad;
-
-	sleep 1;
-
-	[_vehicle,"We reached our destination. Good Luck out there!"] remoteExecCall ["vehicleChat",driver _vehicle,false];
-	
-	sleep 5;
-
-	if (!isMultiplayer) then {
-		savegame;
-	};
-
-	/* wait for empty helicopter */
-
-	waitUntil { { alive _x && group _x != group _driver; } count (crew _vehicle) == 0; }; // helicopter empty except pilot + crew
-	
-	sleep 4;
-
-	[group _driver, _vehicle] call _fnc_callOutLiftoffAtLZ; // use spaw once function is global
-
-	/* RTB */
-	[_vehicle] execVM "RandFramework\FlyToBase.sqf"
+} else {
+	[_vehicle,"Diverting."] remoteExec ["vehicleChat",driver _vehicle,false];
 };
+
+/* Landing done **/
+
+waitUntil { ((_vehicle getVariable ["landingInProgress",false]) || !(_thisMission call _fnc_isMissionCurrent)); };
+if (!(_thisMission call _fnc_isMissionCurrent)) then {
+	_vehicle land "NONE";
+	breakOut "FlyTo";
+};
+
+waitUntil { (isTouchingGround _vehicle || {!canMove _vehicle} || !(_thisMission call _fnc_isMissionCurrent)); };
+if (!(_thisMission call _fnc_isMissionCurrent)) then {
+	_vehicle land "NONE";
+	breakOut "FlyTo";
+};
+
+sleep 2;
+
+/* Post landing,cleanup */
+{
+	deleteWaypoint _x
+} foreach waypoints _driver;
+
+[_vehicle,"We reached our destination. Good Luck out there!"] remoteExecCall ["vehicleChat",driver _vehicle,false];
+
+sleep 5;
+
+if (!isMultiplayer) then {
+	savegame;
+};
+
+/* wait for empty helicopter */
+
+waitUntil { ([_vehicle] call _fnc_isOnlyBoardCrew) || !(_thisMission call _fnc_isMissionCurrent) }; // helicopter empty except pilot + crew
+if (!(_thisMission call _fnc_isMissionCurrent)) then {
+	_vehicle land "NONE";
+	breakOut "FlyTo";
+};
+
+deleteMarker _mrkcustomLZ1;
+if (!isMultiplayer) then {
+	savegame;
+};			
+
+sleep 4;
+
+[group _driver, _vehicle] call _fnc_callOutLiftoffAtLZ; // use spaw once function is global
+
+/* RTB */
+[_vehicle,_thisMission,_fnc_isMissionCurrent] execVM "RandFramework\FlyToBase.sqf"
