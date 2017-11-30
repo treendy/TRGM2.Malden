@@ -16,3 +16,4 @@ BadPointsReason = BadPointsReason + format["\n%1 (%2)",_message,_pointsToAdd];
 publicVariable "BadPointsReason";
 
 TRGM_Logic setVariable ["PointsUpdating", false, true];
+//test malden
