@@ -27,6 +27,9 @@ _ctrlRevive = (findDisplay 5000) displayCtrl 5103;
 iUseRevive = MissionParamReviveOptionsValues select lbCurSel _ctrlRevive;
 publicVariable "iUseRevive";
 
+_ctrlLocation = (findDisplay 5000) displayCtrl 2105;
+iStartLocation = MissionParamLocationOptionsValues select lbCurSel _ctrlLocation;
+publicVariable "iStartLocation";
 
 
 bAndSoItBegins = true; 
