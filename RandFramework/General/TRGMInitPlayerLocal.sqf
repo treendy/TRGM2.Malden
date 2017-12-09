@@ -1,5 +1,7 @@
 #include "..\..\setUnitGlobalVars.sqf";
 
+_actChooseMission = -1;
+
 if (isNil "bAndSoItBegins") then {
 	bAndSoItBegins = false;
 	publicVariable "bAndSoItBegins";	
@@ -10,14 +12,16 @@ if (isNil "bAndSoItBegins") then {
 	waitUntil {player == player};
 
 	sleep 4;
+
 if (str player == "sl" && !bAndSoItBegins) then {
 	[] execVM "RandFramework\GUI\openDialogMissionSelection.sqf";
+	_actChooseMission = endMissionBoard addaction ["Select Mission Params", "RandFramework\GUI\openDialogMissionSelection.sqf"];
 };
 
 
 TREND_fnc_BasicInit = {
 	
-	enableEngineArtillery false; 
+	//enableEngineArtillery false; 
 						   
 	if (iAllowNVG == 2) then {
 		[] execVM "RandFramework\NVscript.sqf";
@@ -26,21 +30,23 @@ TREND_fnc_BasicInit = {
 	
 	if (iMissionParamRepOption == 1) then {
 		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-			myaction = ['ShowRepReport','Show reputation report','',{_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint format["Current cost per life: %1\n\nBad reputation points: %2 out of %3\n\nREASONS SO FAR: \n%4",_iPointsToAdd,BadPoints, MaxBadPoints, BadPointsReason]},{true}] call ace_interact_menu_fnc_createAction;
-			[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
+			//myaction = ['ShowRepReport','Show reputation report','',{_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint format["Current cost per life: %1\n\nBad reputation points: %2 out of %3\n\nTOTAL REP: %4 \n\nREASONS SO FAR: \n%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints ,BadPointsReason]},{true}] call ace_interact_menu_fnc_createAction;
+			//[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
+			endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint format["Current cost per life: %1\n\nBad reputation points: %2 out of %3\n\nTOTAL REP: %4 \n\nREASONS SO FAR: \n%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
 		}
 		else {
-			player addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint format["Current cost per life: %1\n\nBad reputation points: %2 out of %3\n\nREASONS SO FAR: \n%4",_iPointsToAdd,BadPoints, MaxBadPoints, BadPointsReason]}];
+			//player addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint format["Current cost per life: %1\n\nBad reputation points: %2 out of %3\n\nTOTAL REP: %4 \n\nREASONS SO FAR: \n%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
+			endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint format["Current cost per life: %1\n\nBad reputation points: %2 out of %3\n\nTOTAL REP: %4 \n\nREASONS SO FAR: \n%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
 		};
 	};
 
 	if (str player == "sl" || str player == "k1_1" || str player == "k1_5" || str player == "d1_1" || str player == "d2_1" || str player == "pg1_1" || str player == "pg1_2" || str player == "pg1_3") then {
 		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-			myaction = ['RequestArti','Request Arti','',{_handle=createdialog "DialogArtiRequest";},{true}] call ace_interact_menu_fnc_createAction;
-			[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
+			//myaction = ['RequestArti','Request Arti','',{_handle=createdialog "DialogArtiRequest";},{true}] call ace_interact_menu_fnc_createAction;
+			//[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
 		}
 		else {
-			player addaction ["Request Arti", {_handle=createdialog "DialogArtiRequest";}];
+			//player addaction ["Request Arti", {_handle=createdialog "DialogArtiRequest";}];
 		};
 	};
 	if (isMultiplayer) then {
@@ -68,7 +74,7 @@ player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInit; }];
 
 waitUntil {bAndSoItBegins};
 
-
+endMissionBoard removeAction _actChooseMission;
 
 
 
@@ -110,7 +116,12 @@ if (iMissionSetup == 12 || iMissionSetup == 20) then {
 	
 }
 else {
-	[player, 1] call BIS_fnc_respawnTickets;
+	if (iMissionSetup == 5) then {
+		[player, 999] call BIS_fnc_respawnTickets;
+	}
+	else {
+		[player, 1] call BIS_fnc_respawnTickets;
+	};
 };
 
 
@@ -146,10 +157,10 @@ TREND_fnc_InSafeZone = {
 	
 	while {true} do {
 		if (getMarkerPos "mrkHQ" distance player < PunishmentRadius) then {
-			if (!bDebugMode) then { player allowDamage false}; 
+			//if (!bDebugMode) then { player allowDamage false}; 
 		}
 		else {
-			if (!bDebugMode) then { player allowDamage true;};
+			//if (!bDebugMode) then { player allowDamage true;};
 			PlayersHaveLeftStartingArea = true;
 			publicVariable "PlayersHaveLeftStartingArea";
 		};
@@ -301,6 +312,6 @@ cutText ["","BLACK IN",3];
 
 
 if (sArmaGroup == "TCF" && isMultiplayer) then {
-	_handle=createdialog "DialogMessAround";
+	//_handle=createdialog "DialogMessAround";
 	//titleText ["!!!WARNING!!!\n\nPoint system in place\n\nDO NOT mess around at base\n\nONLY fly if you know AFM, or are being trained.\n\nDestroying vehicles will mark points and ruin the experience for others!!!", "PLAIN"];
 };
