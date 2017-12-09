@@ -9,7 +9,9 @@ _bCreateTask = _params select 1;
 
 if (_bCreateTask) then {
 	sName = format["InfSide%1",_iSelected];
-	[sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0];
+	if (!([sName] call FHQ_TT_areTasksCompleted)) then {
+		[sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0];
+	};
 
 } else {
 	

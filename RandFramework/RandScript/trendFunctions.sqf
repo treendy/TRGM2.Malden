@@ -77,6 +77,7 @@ TREND_fnc_PopulateSideMission = {
 	if ((_sideType == 7 || _sideType == 5) && _bFriendlyInsurgents) then { //if mission is kill officer or kill officer and in fridnldy area then make him prisoner
 		sOfficerName = format["objInformant%1",_iSideIndex];
 		_officerObject = missionNamespace getVariable [sOfficerName , objNull];
+		_officerObject disableAI "anim";
 		_officerObject switchMove "Acts_ExecutionVictim_Loop"; 
 		_officerObject disableAI "anim";
 		_officerObject setCaptive true;
@@ -599,10 +600,15 @@ TREND_fnc_PopulateSideMission = {
 
 	}
 	else {
+
 		[_sidePos,200,true] spawn TREND_fnc_SpawnCivs; //3rd param of true says these are rebels and function will set rebels instead of civs
+
+		_lapPos = _sidePos getPos [50, 180];
+		_markerFriendlyRebs = createMarker [format["mrkFriendlyRebs%1",_iSideIndex], _lapPos];
+		_markerFriendlyRebs setMarkerShape "ICON";
+		_markerFriendlyRebs setMarkerType "hd_dot";
+		_markerFriendlyRebs setMarkerText "Occupied by friendly rebels";
 	};
-
-
 
 
 
@@ -743,7 +749,25 @@ TREND_fnc_SpawnCivs = {
 			//sRiflemanToUse createUnit [selectRandom _allBuildingPos, _sideCivGroup, _sInitString];
 			_wayPosInit = selectRandom _allBuildingPos;
 			if (!isNil "_wayPosInit") then {
-				sRiflemanToUse createUnit [_wayPosInit, _sideCivGroup, _sInitString];
+				//sRiflemanToUse createUnit [_wayPosInit, _sideCivGroup, _sInitString];
+				_SpawnedRifleman = (_sideCivGroup createUnit [sRiflemanToUse, _wayPosInit, [], 10, "NONE"]);
+				if (!_bRebelLeaderPicked) then {
+					_SpawnedRifleman addaction ["Talk to leader","RandFramework\TalkRebLead.sqf"];
+					_SpawnedRifleman addEventHandler ["killed", {_this execVM "RandFramework\InsKilled.sqf";}];
+					_SpawnedRifleman forceAddUniform _sCivUniform; 
+					removeHeadgear _SpawnedRifleman;
+					_bRebelLeaderPicked = true;
+				}
+				else {
+					_sInitString = format["this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
+					_SpawnedRifleman addEventHandler ["killed", {_this execVM "RandFramework\InsKilled.sqf";}];
+					_SpawnedRifleman forceAddUniform _sCivUniform; 
+					Removevest _SpawnedRifleman;
+					removeHeadgear _SpawnedRifleman;
+					_SpawnedRifleman setVariable ["IsRebel", true, true];
+					_bRebelLeaderPicked = true;
+				};
+				
 			};
 		}
 		else {

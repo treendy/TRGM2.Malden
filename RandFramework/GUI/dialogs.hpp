@@ -530,16 +530,16 @@ class Trend_DialogTest
 			idc = 5100;
 			text = "Weather"; //--- ToDo: Localize;
 			x = 0.381406 * safezoneW + safezoneX;
-			y = 0.61221 * safezoneH + safezoneY;
+			y = 0.59681 * safezoneH + safezoneY;
 			w = 0.154713 * safezoneW;
-			h = 0.0219952 * safezoneH;
+			h = 0.0219952 * safezoneH;	
 		};
 		class RscText_1004: RscText
 		{
 			idc = 5004;
 			text = "Reputation System"; //--- ToDo: Localize;
 			x = 0.302 * safezoneW + safezoneX;
-			y = 0.610007 * safezoneH + safezoneY;
+			y = 0.596807 * safezoneH + safezoneY;
 			w = 0.0773437 * safezoneW;
 			h = 0.022 * safezoneH;
 			colorText[] = {0,1,0,1};
@@ -549,7 +549,7 @@ class Trend_DialogTest
 			idc = 5005;
 			text = "Weather"; //--- ToDo: Localize;
 			x = 0.302 * safezoneW + safezoneX;
-			y = 0.643006 * safezoneH + safezoneY;
+			y = 0.627606 * safezoneH + safezoneY;
 			w = 0.0773437 * safezoneW;
 			h = 0.022 * safezoneH;
 			colorText[] = {0,1,0,1};
@@ -559,7 +559,7 @@ class Trend_DialogTest
 			idc = 5101;
 			text = "Weather"; //--- ToDo: Localize;
 			x = 0.381406 * safezoneW + safezoneX;
-			y = 0.64521 * safezoneH + safezoneY;
+			y = 0.62981 * safezoneH + safezoneY;
 			w = 0.154713 * safezoneW;
 			h = 0.0219952 * safezoneH;
 		};
@@ -568,16 +568,16 @@ class Trend_DialogTest
 			idc = 5102;
 			text = "Weather"; //--- ToDo: Localize;
 			x = 0.381406 * safezoneW + safezoneX;
-			y = 0.678203 * safezoneH + safezoneY;
+			y = 0.662803 * safezoneH + safezoneY;
 			w = 0.154713 * safezoneW;
-			h = 0.0219952 * safezoneH;
+			h = 0.0219952 * safezoneH;		
 		};
 		class RscText_1006: RscText
 		{
 			idc = 5006;
 			text = "NVG"; //--- ToDo: Localize;
 			x = 0.302 * safezoneW + safezoneX;
-			y = 0.676003 * safezoneH + safezoneY;
+			y = 0.660603 * safezoneH + safezoneY;
 			w = 0.0773437 * safezoneW;
 			h = 0.022 * safezoneH;
 			colorText[] = {0,1,0,1};
@@ -587,7 +587,7 @@ class Trend_DialogTest
 			idc = 5007;
 			text = "Revive"; //--- ToDo: Localize;
 			x = 0.303031 * safezoneW + safezoneX;
-			y = 0.709006 * safezoneH + safezoneY;
+			y = 0.693606 * safezoneH + safezoneY;
 			w = 0.0773437 * safezoneW;
 			h = 0.022 * safezoneH;
 			colorText[] = {0,1,0,1};
@@ -597,7 +597,7 @@ class Trend_DialogTest
 			idc = 5103;
 			text = "Weather"; //--- ToDo: Localize;
 			x = 0.381406 * safezoneW + safezoneX;
-			y = 0.71121 * safezoneH + safezoneY;
+			y = 0.69581 * safezoneH + safezoneY;
 			w = 0.154713 * safezoneW;
 			h = 0.0219952 * safezoneH;
 		};
@@ -609,7 +609,7 @@ class Trend_DialogTest
 			y = 0.642969 * safezoneH + safezoneY;
 			w = 0.103142 * safezoneW;
 			h = 0.0989783 * safezoneH;
-			colorBackground[] = {0,0.5,0,1};
+			colorBackground[] = {0,1,0,1};
 			colorActive[] = {0,1,0,1};
 			action = "[_this] execVM 'RandFramework\GUI\SetParamsAndBegin.sqf'; false";
 		};
@@ -637,7 +637,7 @@ class Trend_DialogTest
 			idc = 5002;
 			text = "Objective"; //--- ToDo: Localize;
 			x = 0.301968 * safezoneW + safezoneX;
-			y = 0.576983 * safezoneH + safezoneY;
+			y = 0.561583 * safezoneH + safezoneY;
 			w = 0.0773437 * safezoneW;
 			h = 0.022 * safezoneH;
 			colorText[] = {0,1,0,1};
@@ -647,7 +647,7 @@ class Trend_DialogTest
 			idc = 5104;
 			text = "Weather"; //--- ToDo: Localize;
 			x = 0.381387 * safezoneW + safezoneX;
-			y = 0.576983 * safezoneH + safezoneY;
+			y = 0.561583 * safezoneH + safezoneY;
 			w = 0.154713 * safezoneW;
 			h = 0.0219952 * safezoneH;
 		};
@@ -656,7 +656,7 @@ class Trend_DialogTest
 			idc = 5003;
 			text = ""; //--- ToDo: Localize;
 			x = 0.538171 * safezoneW + safezoneX;
-			y = 0.577 * safezoneH + safezoneY;
+			y = 0.5616 * safezoneH + safezoneY;
 			w = 0.0154751 * safezoneW;
 			h = 0.022 * safezoneH;
 			colorText[] = {1,1,1,1};
@@ -666,7 +666,7 @@ class Trend_DialogTest
 			idc = 5008;
 			text = "[?]"; //--- ToDo: Localize;
 			x = 0.538171 * safezoneW + safezoneX;
-			y = 0.61 * safezoneH + safezoneY;
+			y = 0.5946 * safezoneH + safezoneY;
 			w = 0.0154751 * safezoneW;
 			h = 0.022 * safezoneH;
 			colorText[] = {1,1,1,1};
@@ -677,7 +677,7 @@ class Trend_DialogTest
 			idc = 5009;
 			text = ""; //--- ToDo: Localize;
 			x = 0.538171 * safezoneW + safezoneX;
-			y = 0.643 * safezoneH + safezoneY;
+			y = 0.6276 * safezoneH + safezoneY;
 			w = 0.0154751 * safezoneW;
 			h = 0.022 * safezoneH;
 			colorText[] = {1,1,1,1};
@@ -687,7 +687,7 @@ class Trend_DialogTest
 			idc = 5010;
 			text = ""; //--- ToDo: Localize;
 			x = 0.538171 * safezoneW + safezoneX;
-			y = 0.676 * safezoneH + safezoneY;
+			y = 0.6606 * safezoneH + safezoneY;
 			w = 0.0154751 * safezoneW;
 			h = 0.022 * safezoneH;
 			colorText[] = {1,1,1,1};
@@ -697,7 +697,7 @@ class Trend_DialogTest
 			idc = 5011;
 			text = ""; //--- ToDo: Localize;
 			x = 0.538171 * safezoneW + safezoneX;
-			y = 0.709 * safezoneH + safezoneY;
+			y = 0.6936 * safezoneH + safezoneY;
 			w = 0.0154751 * safezoneW;
 			h = 0.022 * safezoneH;
 			colorText[] = {1,1,1,1};
@@ -711,6 +711,39 @@ class Trend_DialogTest
 			w = 0.165067 * safezoneW;
 			h = 0.242 * safezoneH;
 		};
+
+		class RscText_1012: RscText
+		{
+			idc = 1012;
+			text = "Start Location"; //--- ToDo: Localize;
+			x = 0.304062 * safezoneW + safezoneX;
+			y = 0.7266 * safezoneH + safezoneY;
+			w = 0.0773437 * safezoneW;
+			h = 0.022 * safezoneH;
+			colorText[] = {0,1,0,1};
+		};
+		class RscCombo_2105: RscCombo
+		{
+			idc = 2105;
+			text = "Weather"; //--- ToDo: Localize;
+			x = 0.381406 * safezoneW + safezoneX;
+			y = 0.7288 * safezoneH + safezoneY;
+			w = 0.154713 * safezoneW;
+			h = 0.0219952 * safezoneH;
+		};
+		class RscText_1013: RscText
+		{
+			idc = 1013;
+			text = "[?]"; //--- ToDo: Localize;
+			x = 0.538156 * safezoneW + safezoneX;
+			y = 0.7288 * safezoneH + safezoneY;
+			w = 0.0154751 * safezoneW;
+			h = 0.022 * safezoneH;
+			colorText[] = {1,1,1,1};
+			tooltip = "If you select to start Near AO, this you will start near the AO as a fast response team,\nno need for transport.\n\nYou will be allocated a drivable vehicle. Otherwise will start at the main base\nwith transport chopper to fly you to a choosen LZ"; //--- ToDo: Localize;
+		};
+
+
 		////////////////////////////////////////////////////////
 		// GUI EDITOR OUTPUT END
 		////////////////////////////////////////////////////////

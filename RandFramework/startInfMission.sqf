@@ -7,12 +7,16 @@ TRGM_Logic setVariable ["DeathRunning", false, true];
 TRGM_Logic setVariable ["PointsUpdating", false, true];
 
 
+debugMessages = "";
+publicVariable "debugMessages";
 
 
 _ThisTaskTypes = nil;
 _IsMainObjs = nil;
 _MarkerTypes = nil;
 _CreateTasks = nil;
+_bIsCampaign = false;
+_bIsCampaignFinalMission = false;
 
 _MainMissionTasksToUse = MainMissionTasks;
 _SideMissionTasksToUse = SideMissionTasks;
@@ -57,26 +61,46 @@ if (iMissionSetup == 4) then {
 	_CreateTasks = [true,true,true];
 	MaxBadPoints = 4;
 };
-
+if (iMissionSetup == 5) then {
+	if (MaxBadPoints >= 10) then {
+		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom MissionsThatHaveIntel];
+		_IsMainObjs = [true,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+		_MarkerTypes = ["empty","hd_dot"];
+		_CreateTasks = [true,false];
+		_bIsCampaignFinalMission = true;
+	}
+	else {
+		_ThisTaskTypes = [selectRandom _SideMissionTasksToUse];
+		_IsMainObjs = [false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+		_MarkerTypes = ["mil_objective"];
+		_CreateTasks = [true];
+	};
+	_bIsCampaign = true;
+};
 
 
 publicVariable "MaxBadPoints";
 
 
-_trgComplete = createTrigger ["EmptyDetector", [0,0]];
-_trgComplete setTriggerArea [0, 0, 0, false];
-_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "[FriendlySide, [""DeBrief"", ""Return to HQ to debrief"", ""Debrief"", """"]] call FHQ_TT_addTasks; ", ""];			
 
 
-while {InfTaskCount < count _ThisTaskTypes} do {
+while {(InfTaskCount < count _ThisTaskTypes)} do {
+	_iTaskIndex = 0;
+	if (_bIsCampaign) then {
+		_iTaskIndex = (iCampaignDay-1) + InfTaskCount;
+	}
+	else {
+		_iTaskIndex = InfTaskCount;
+	};
 
 	_iThisTaskType = nil;
-	if (InfTaskCount == 0) then {
+	if (_bIsCampaign) then {
 		_iThisTaskType = _ThisTaskTypes select InfTaskCount;
 	}
 	else {
 		_iThisTaskType = _ThisTaskTypes select InfTaskCount;
 	};
+	
 	
 	_bIsMainObjective = _IsMainObjs select InfTaskCount;  //more chance of bad things, and set middle area stuff around (comms, base etc...)
 	_MarkerType = _MarkerTypes select InfTaskCount; //"Empty" or other
@@ -156,20 +180,20 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 								//###################################### Hack Data ###################
 								if (_iThisTaskType == 1) then { 
 									_allpositionsLaptop1 = _infBuilding buildingPos -1;
-									_sLaptop1Name = format["objLaptop%1",InfTaskCount];
+									_sLaptop1Name = format["objLaptop%1",_iTaskIndex];
 									_objLaptop1 = "Land_Laptop_device_F" createVehicle [0,0,500];
 									_objLaptop1 setVariable [_sLaptop1Name, _objLaptop1, true];
 									missionNamespace setVariable [_sLaptop1Name, _objLaptop1];
 									_objLaptop1 setPosATL (selectRandom _allpositionsLaptop1);
 
 									if (selectRandom[true,false]) then {
-										_sIED1Name = format["objIED%1",InfTaskCount];
+										_sIED1Name = format["objIED%1",_iTaskIndex];
 										_objIED1 = selectRandom IEDClassNames createVehicle [0,0,500];
 										_objIED1 setVariable [_sIED1Name, _objIED1, true];
 										missionNamespace setVariable [_sIED1Name, _objIED1];
 										_objIED1 setPosATL (selectRandom _allpositionsLaptop1);
 									};
-									[[_objLaptop1, ["Hack intel","RandFramework\hackIntel1.sqf",[InfTaskCount,_bCreateTask]]],"addAction",true,true] call BIS_fnc_MP;
+									[[_objLaptop1, ["Hack intel","RandFramework\hackIntel1.sqf",[_iTaskIndex,_bCreateTask]]],"addAction",true,true] call BIS_fnc_MP;
 								};
 								//###################################### Steal data from research vehicle ###################
 								if (_iThisTaskType == 2) then { 
@@ -180,7 +204,7 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 									_roadConnectedTo = roadsConnectedTo _nearestRoad;
 									_objVehicle = selectRandom sideResarchTruck createVehicle [0,0,500];
 									_objVehicle setPosATL getPosATL _nearestRoad;
-									[[_objVehicle, ["Download research data","RandFramework\downloadResearchData.sqf",[InfTaskCount,_bCreateTask]]],"addAction",true,true] call BIS_fnc_MP;
+									[[_objVehicle, ["Download research data","RandFramework\downloadResearchData.sqf",[_iTaskIndex,_bCreateTask]]],"addAction",true,true] call BIS_fnc_MP;
 									if (count _roadConnectedTo > 0) then {
 										_connectedRoad = _roadConnectedTo select 0;
 										_direction = [_nearestRoad, _connectedRoad] call BIS_fnc_DirTo;
@@ -195,8 +219,8 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 									_nearestRoad = selectRandom _nearestRoads;
 									_roadConnectedTo = nil;
 									_roadConnectedTo = roadsConnectedTo _nearestRoad;
-									_sTargetName = format["objInformant%1",InfTaskCount];
-									_sTargetName2 = format["objInformant2_%1",InfTaskCount];
+									_sTargetName = format["objInformant%1",_iTaskIndex];
+									_sTargetName2 = format["objInformant2_%1",_iTaskIndex];
 
 									_objVehicle = nil;
 									_truckType = selectRandom sideAmmoTruck ;
@@ -237,8 +261,9 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 										_triggerAmmoTruckClear setTriggerStatements [format["!alive(%1) && !alive(%2)",_sTargetName,_sTargetName2], " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""You have destroyed enemy ammo trucks, reputation increased""; ", ""];			
 									}
 									else {
-										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0];",InfTaskCount];
-										_triggerAmmoTruckClear setTriggerStatements [format["!alive(%1) && !alive(%2)",_sTargetName,_sTargetName2], _sKillOfficerTaskComplete, ""];	
+										//!([InfSide%3] call FHQ_TT_areTasksCompleted)
+										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0];",_iTaskIndex];
+										_triggerAmmoTruckClear setTriggerStatements [format["!alive(%1) && !alive(%2) && !([""InfSide%3""] call FHQ_TT_areTasksCompleted)",_sTargetName,_sTargetName2,_iTaskIndex], _sKillOfficerTaskComplete, ""];	
 									};
 								};
 								//###################################### Destroy AAA ###################
@@ -246,11 +271,11 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 									_allowFriendlyIns = false;
 									if (_MarkerType != "empty") then { _MarkerType = "hd_unknown"; };
 									
-									_sTargetName = format["objInformant%1",InfTaskCount];
-									_sTargetName2 = format["objInformant2_%1",InfTaskCount];
-									_sTargetName3 = format["objInformant3_%1",InfTaskCount];
+									_sTargetName = format["objInformant%1",_iTaskIndex];
+									_sTargetName2 = format["objInformant2_%1",_iTaskIndex];
+									_sTargetName3 = format["objInformant3_%1",_iTaskIndex];
 									_truckType = sAAAVeh ;
-									sAliveCheck = format["!alive(%1) && !alive(%2)",_sTargetName,_sTargetName2];
+									sAliveCheck = format["!alive(%1) && !alive(%2) && !([""InfSide%3""] call FHQ_TT_areTasksCompleted)",_sTargetName,_sTargetName2,_iTaskIndex];
 
 									_flatPos = nil;
 									_flatPos = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
@@ -276,7 +301,7 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 									_flatPos2 = nil;
 									_flatPos2 = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[[_flatPos,100]],[[_inf1X,_inf1Y,0],[_inf1X,_inf1Y,0]]] call BIS_fnc_findSafePos;
 									if (str(_flatPos2) == "[0,0,0]") then {
-										sAliveCheck = format["!alive(%1)",_sTargetName];
+										sAliveCheck = format["!alive(%1) && !([""InfSide%2""] call FHQ_TT_areTasksCompleted)",_sTargetName,_iTaskIndex];
 									}
 									else {
 										_objVehicle2 = nil;
@@ -304,7 +329,7 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""You have destroyed enemy ammo trucks, reputation increased""; ", ""];			
 									}
 									else {
-										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0];",InfTaskCount];
+										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0];",_iTaskIndex];
 										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, _sKillOfficerTaskComplete, ""];	
 									};
 
@@ -314,10 +339,10 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 									_allowFriendlyIns = false;
 									if (_MarkerType != "empty") then { _MarkerType = "hd_unknown"; };
 									
-									_sTargetName = format["objInformant%1",InfTaskCount];
-									_sTargetName2 = format["objInformant2_%1",InfTaskCount];
+									_sTargetName = format["objInformant%1",_iTaskIndex];
+									_sTargetName2 = format["objInformant2_%1",_iTaskIndex];
 									_truckType = sArtilleryVeh ;
-									sAliveCheck = format["!alive(%1) && !alive(%2)",_sTargetName,_sTargetName2];
+									sAliveCheck = format["!alive(%1) && !alive(%2) && !([""InfSide%3""] call FHQ_TT_areTasksCompleted)",_sTargetName,_sTargetName2,_iTaskIndex];
 
 									_flatPos = nil;
 									_flatPos = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
@@ -345,7 +370,7 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 									_flatPos2 = nil;
 									_flatPos2 = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[[_flatPos,100]],[[_inf1X,_inf1Y,0],[_inf1X,_inf1Y,0]]] call BIS_fnc_findSafePos;
 									if (str(_flatPos2) == "[0,0,0]") then {
-										sAliveCheck = format["!alive(%1)",_sTargetName];
+										sAliveCheck = format["!alive(%1) && !([""InfSide%2""] call FHQ_TT_areTasksCompleted)",_sTargetName,_iTaskIndex];
 									}
 									else {
 										_objVehicle2 = nil;
@@ -375,7 +400,7 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""You have destroyed enemy ammo trucks, reputation increased""; ", ""];			
 									}
 									else {
-										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0];",InfTaskCount];
+										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0];",_iTaskIndex];
 										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, _sKillOfficerTaskComplete, ""];	
 									};
 
@@ -385,7 +410,7 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 								if (_iThisTaskType == 4 || _iThisTaskType == 5 || _iThisTaskType == 7 || _iThisTaskType == 8) then { //if informant,intorigate officer, weapon dealer or kill officer
 									_allpositionsLaptop1 = _infBuilding buildingPos -1;
 									
-									_sInformant1Name = format["objInformant%1",InfTaskCount];
+									_sInformant1Name = format["objInformant%1",_iTaskIndex];
 									_infClassToUse = "";
 									_sideToUse = EnemySide;
 
@@ -415,34 +440,63 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 									else {
 										_objInformant setPos (_flatPosInform);
 									};
-									
+									//_objInformant setPos (getPos player);
+
 									//_objInformant setPosATL (_initPos);
 									_objInformant allowDamage false;
+									_objInformant setVariable ["TaskType",_iThisTaskType,true];
 
 									[[_objInformant, ["HitPart",
 										{
 											_thisInformant = ((_this select 0) select 0);
 											_thisShooter =((_this select 0) select 1);
+											//_hitLocation = str(((_this select 0) select 5) select 0);
 											_hitLocation = ((_this select 0) select 5) select 0;
 											if (bDebugMode) then {hint format["ARHH2:%1",_hitLocation];};
-												if (side (_thisShooter) == West && alive(_thisInformant)) then {
-													_thisInformant allowDamage true;
-													_bDone = false;
-													group _thisInformant setBehaviour "ALERT";
-													_thisInformant switchMove "";
+											if (side (_thisShooter) == West && alive(_thisInformant)) then {
+												_thisInformant allowDamage true;
+												_bDone = false;
+												group _thisInformant setBehaviour "ALERT";
+												_thisInformant switchMove "";
+												_ThisTaskType = _thisInformant getVariable ["TaskType",0];
+												if (!isPlayer _thisShooter && _ThisTaskType == 5) then {
+													_thisInformant disableAI "anim";
+													_thisInformant switchMove "Acts_CivilInjuredLegs_1"; 
+													_thisInformant disableAI "anim";
+													_thisInformant setHit ['legs',1];
+												}
+												else {
 													if (_hitLocation == "head" || _hitLocation == "neck" || _hitLocation == "spine1" || _hitLocation == "spine2" || _hitLocation == "spine3" || _hitLocation == "body" ) then {
 														_thisInformant setDamage 1;
 														_bDone = true;
 													};
-													if (_hitLocation == "leftleg" || _hitLocation == "rightleg") then {
-														//_thisInformant setDamage 1;
-														_thisInformant setHit ['legs',1];
+													if (_hitLocation == "leftleg" || _hitLocation == "rightleg" || _hitLocation == "rightupleg" || _hitLocation == "leftupleg") then {
+														_ThisTaskType = _thisInformant getVariable ["TaskType",0];
+														//debugMessages = debugMessages + "\nhit leg 4 - " + str(_ThisTaskType);
+														if (_ThisTaskType == 5) then {
+															//debugMessages = debugMessages + "\nhit leg 5 - " + _hitLocation;
+															_thisInformant disableAI "anim";
+															_thisInformant switchMove "Acts_CivilInjuredLegs_1"; 
+															_thisInformant disableAI "anim";
+															_thisInformant setHit ['legs',1];
+														}
+														else {
+															//debugMessages = debugMessages + "\nhit leg 6 - " + _hitLocation;
+															_thisInformant setHit ['legs',1];
+															//hint "hmmm2";
+															//debugMessages = debugMessages + "\nOfficerShotInLeg 2";
+														};			
+														//debugMessages = debugMessages + "\nhit leg 7 - " + _hitLocation;											
 														_bDone = true;
 													};
+													
+													//debugMessages = debugMessages + "\nOfficerShot 3 - " + str(_hitLocation);
+
 													if (!_bDone) then {
 														_thisInformant setDamage 0.8;
 													};
 												};
+											};
 
 											//if (alive(_thisInformant)) then {
 											//	if (side (_thisShooter) != West) then {
@@ -455,7 +509,20 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 										}
 									]],"addEventHandler",true,true] call BIS_fnc_MP;
 
-									
+									if (_bIsMainObjective && (_iThisTaskType == 5 || _iThisTaskType == 8 || _iThisTaskType == 7)) then {
+										//if interrogate officer or kill weapon dealer or eleminate officer and main objective, then complete task when searched
+										//its only the main objectie that we require the player to get to the body... otherwise, can kill him from a distance
+										[[_objInformant, ["Search for ID","RandFramework\IdentifyHVT.sqf",[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
+									}
+									else {
+										if (!(_iThisTaskType == 5)) then {
+											//pass in false so we know to just hint if this was our guy or not (just in case player wants to be sure before moving to next objective)
+											//only need to search if its a kill objective... if for example its "interogate officer", there will already be an action to get intel
+											[[_objInformant, ["Search for ID","RandFramework\IdentifyHVT.sqf",[_iTaskIndex,false],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;	
+										};
+									};
+
+
 									if (_iThisTaskType == 5 || _iThisTaskType == 8 || _iThisTaskType == 7) then { //if interrogate officer or kill weapon dealer or eleminate officer
 										if (_iThisTaskType == 5 || _iThisTaskType == 7) then {  //only give weapon if officer (not weapon dealer)
 											_grpName = createGroup EnemySide;
@@ -465,7 +532,7 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 											_objInformant addWeapon "SMG_02_F";
 										};
 										if (_iThisTaskType == 5) then {
-											[[_objInformant, ["Get Intel","RandFramework\interrogateOfficer.sqf",[InfTaskCount,_bCreateTask],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
+											[[_objInformant, ["Get Intel","RandFramework\interrogateOfficer.sqf",[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
 										};
 										if (_iThisTaskType == 5 || _iThisTaskType == 8 || _iThisTaskType == 7) then {
 											
@@ -489,40 +556,43 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 											[_sInformant1Name,_initPos] spawn TREND_fnc_WalkingGuyLoop;
 
 											if (_bIsMainObjective) then {
-												[[_objInformant, ["Search for ID","RandFramework\IdentifyHVT.sqf",[InfTaskCount,_bCreateTask],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
+												//[[_objInformant, ["Search for ID","RandFramework\IdentifyHVT.sqf",[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
 											}
 											else {
-												_trgKillOfficer = nil;
-												_trgKillOfficer = createTrigger ["EmptyDetector", [0,0]];
-												_trgKillOfficer setTriggerArea [0, 0, 0, false];
-												//_trgKillOfficer setTriggerStatements [format["!alive(%1)",_sInformant1Name], " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""A HVT has been eliminated, reputation increased""; ", ""];			
-												if (!_bCreateTask) then {
-													_trgKillOfficer setTriggerStatements [format["!alive(%1)",_sInformant1Name], " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""A HVT has been eliminated, reputation increased""; ", ""];			
-												}
-												else {
-													_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0];",InfTaskCount];
-													//sleep 2;
-													//hint _sKillOfficerTaskComplete;
-													//sleep 2;
-													_trgKillOfficer setTriggerStatements [format["!alive(%1)",_sInformant1Name], _sKillOfficerTaskComplete, ""];	
+												if (_iThisTaskType != 5) then {
+													_trgKillOfficer = nil;
+													_trgKillOfficer = createTrigger ["EmptyDetector", [0,0]];
+													_trgKillOfficer setTriggerArea [0, 0, 0, false];
+													//_trgKillOfficer setTriggerStatements [format["!alive(%1)",_sInformant1Name], " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""A HVT has been eliminated, reputation increased""; ", ""];			
+													if (!_bCreateTask) then {
+														_trgKillOfficer setTriggerStatements [format["!alive(%1)",_sInformant1Name], " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""A HVT has been eliminated, reputation increased""; ", ""];			
+													}
+													else {
+														_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0];",_iTaskIndex];
+														//sleep 2;
+														//hint _sKillOfficerTaskComplete;
+														//sleep 2;
+														_trgKillOfficer setTriggerStatements [format["!alive(%1) && !([""InfSide%2""] call FHQ_TT_areTasksCompleted)",_sInformant1Name,_iTaskIndex], _sKillOfficerTaskComplete, ""];	
+													};
 												};
 											};
 											
 										};
 									}
 									else {
-										[[_objInformant, ["Get Intel","RandFramework\SpeakInformant.sqf",[InfTaskCount,_bCreateTask],1,false,true,"","_this distance _target < 2"]],"addAction",true,true] call BIS_fnc_MP;
+										[[_objInformant, ["Get Intel","RandFramework\SpeakInformant.sqf",[_iTaskIndex,_bCreateTask],1,false,true,"","_this distance _target < 2"]],"addAction",true,true] call BIS_fnc_MP;
 									};
 								};
+								//####################BUG RADIO##########################
 								if (_iThisTaskType == 6) then {
 									_allpositionsRadio1 = _infBuilding buildingPos -1;
-									_sRadio1Name = format["objRadio%1",InfTaskCount];
+									_sRadio1Name = format["objRadio%1",_iTaskIndex];
 									_objRadio1 = selectRandom SideRadioClassNames createVehicle [0,0,500];
 									_objRadio1 setVariable [_sRadio1Name, _objRadio1, true];
 									missionNamespace setVariable [_sRadio1Name, _objRadio1];
 									_objRadio1 setPosATL (selectRandom _allpositionsRadio1);
 
-									[[_objRadio1, ["Send transmission to HQ","RandFramework\bugRadio1.sqf",[InfTaskCount,_bCreateTask]]],"addAction",true,true] call BIS_fnc_MP;
+									[[_objRadio1, ["Send transmission to HQ","RandFramework\bugRadio1.sqf",[_iTaskIndex,_bCreateTask]]],"addAction",true,true] call BIS_fnc_MP;
 								
 									TREND_fnc_RadioLoop = {		
 										_radioName = _this select 0;
@@ -537,12 +607,16 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 									[_sRadio1Name] spawn TREND_fnc_RadioLoop;
 
 								};
+								//##############################################
+								debugMessages = debugMessages + format["\n_bIsMainObjective: %1",_bIsMainObjective];
+								debugMessages = debugMessages + format["\n_iTaskIndex: %1",_iTaskIndex];
+								debugMessages = debugMessages + format["\n_MissionTitle: %1",_MissionTitle];
 
 								if (_bIsMainObjective) then {
-									_markerInformant1 = createMarker [format["mrkMainObjective%1",InfTaskCount], [_inf1X,_inf1Y]];
+									_markerInformant1 = createMarker [format["mrkMainObjective%1",_iTaskIndex], [_inf1X,_inf1Y]];
 								}
 								else {
-									_markerInformant1 = createMarker [format["Informant%1",InfTaskCount], [_inf1X,_inf1Y]];
+									_markerInformant1 = createMarker [format["Informant%1",_iTaskIndex], [_inf1X,_inf1Y]];
 
 								};
 
@@ -553,21 +627,29 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 									_markerInformant1 setMarkerText format["(Main) %1 ",_MissionTitle];
 								}
 								else {
-									_markerInformant1 setMarkerText format["(Optional) %1 ",_MissionTitle];
+									if (_bCreateTask) then {
+										_markerInformant1 setMarkerText format["%1 ",_MissionTitle];
+									}
+									else {
+										_markerInformant1 setMarkerText format["(Optional) %1 ",_MissionTitle];
+									};
 								};
-								
 
-
-								[[_inf1X,_inf1Y],_iThisTaskType,_infBuilding,_bIsMainObjective, InfTaskCount, _allowFriendlyIns] spawn TREND_fnc_PopulateSideMission;
+								[[_inf1X,_inf1Y],_iThisTaskType,_infBuilding,_bIsMainObjective, _iTaskIndex, _allowFriendlyIns] spawn TREND_fnc_PopulateSideMission;
 	
 
 								
 								if (_bCreateTask) then {
-									
-									[FriendlySide,[format["InfSide%1",InfTaskCount], "", format["%1 : %2",InfTaskCount+1,_MissionTitle],"Description Here"]] call FHQ_TT_addTasks;
-									ActiveTasks pushBack format["InfSide%1",InfTaskCount]; 
-									publicVariable "ActiveTasks";	
-									
+									if (_bIsCampaign) then {
+										[FriendlySide,[format["InfSide%1",_iTaskIndex], "", format["Day: %1 : %2",_iTaskIndex+1,_MissionTitle],"Description Here"]] call FHQ_TT_addTasks;
+										ActiveTasks pushBack format["InfSide%1",_iTaskIndex]; 
+										publicVariable "ActiveTasks";	
+									}
+									else {
+										[FriendlySide,[format["InfSide%1",_iTaskIndex], "", format["%1 : %2",_iTaskIndex+1,_MissionTitle],"Description Here"]] call FHQ_TT_addTasks;
+										ActiveTasks pushBack format["InfSide%1",_iTaskIndex]; 
+										publicVariable "ActiveTasks";	
+									};
 								};
 
 								//_triggerSidePassClear = createTrigger ["EmptyDetector", [_inf1X,_inf1Y]];
@@ -583,23 +665,122 @@ while {InfTaskCount < count _ThisTaskTypes} do {
 
 					};
 				};
+				if (InfTaskCount == 0) then {
+					CurrentZeroMissionTitle = _MissionTitle; //curently only used for campaign
+					publicVariable "CurrentZeroMissionTitle";
+
+				};
 				InfTaskCount = InfTaskCount + 1;
-			
 			//};
 
 	};
 };
 
 
+_trgComplete = createTrigger ["EmptyDetector", [0,0]];
+_trgComplete setTriggerArea [0, 0, 0, false];
+if (iMissionParamType == 5) then {
+	//MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""
+	if (MaxBadPoints >= 10) then {
+		_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "[FriendlySide, [""DeBrief"", ""Return to HQ to debrief"", ""Debrief"", """"]] call FHQ_TT_addTasks;  [[""CAMPAIGN_END""],""RandFramework\Campaign\SetMissionBoardOptions.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];}; deletevehicle thisTrigger", ""];
+	}
+	else {
+		_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "hint ""return to base for next assignment!""; [[""MISSION_COMPLETE""],""RandFramework\Campaign\SetMissionBoardOptions.sqf""] remoteExec [""BIS_fnc_execVM"",0,true]; if (ActiveTasks call FHQ_TT_areTasksSuccessful) then {MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""}; deletevehicle thisTrigger", ""];
+	}
+}
+else {
+	_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "", ""];			
+};
+
+
+_bMoveToAO = false;
+if (iStartLocation == 2) then {
+	_bMoveToAO = selectRandom [true,false];
+};
+if (iStartLocation == 1) then {
+	_bMoveToAO = true;
+};
+if (_bMoveToAO) then {
+	_mainAOPos = ObjectivePossitions select 0;
+	_flatPos = nil;
+	_flatPos = [_mainAOPos , 1300, 1700, 8, 0, 0.3, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+	if (str(_flatPos) == "[0,0,0]") then {_flatPos = [_mainAOPos , 1300, 2000, 8, 0, 0.4, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;};
+	//"Marker1" setMarkerPos _flatPos;
+	sl setPos _flatPos;
+	k1_2 setPos _flatPos;
+	k1_3 setPos _flatPos;
+	k1_4 setPos _flatPos;
+	k1_5 setPos _flatPos;
+	{
+		if (_x getVariable ["IsFRT",false]) then {
+			_x setPos _flatPos;
+			//if (isPlayer _x) then {
+			//	_x addaction ["inflate dingy",""];
+			//};
+		};
+	} forEach allUnits;
+
+	_markerFastResponseStart = createMarker ["mrkFastResponseStart", _flatPos];	
+	_markerFastResponseStart setMarkerShape "ICON";
+	_markerFastResponseStart setMarkerType "hd_dot";
+	_markerFastResponseStart setMarkerText "Kilo 1 - Camp";
+	//k1Car1 setPos _flatPos;
+	//k1Car2 setPos _flatPos;
+
+	_behindBlockPos = _flatPos;
+	_flatPosTent1 = nil;
+	_flatPosTent1 = [_behindBlockPos , 0, 15, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+	_Tent1 = "Land_TentA_F" createVehicle _flatPosTent1;
+	_Tent1 setDir (floor(random 360));
+
+	_flatPos2 = nil;
+	_flatPos2 = [getPos _Tent1 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+	_Tent2 = "Land_TentA_F" createVehicle _flatPos2;
+	_Tent2 setDir (floor(random 360));
+
+	_flatPos3 = nil;
+	_flatPos3 = [getPos _Tent1 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+	_Tent3 = "Campfire_burning_F" createVehicle _flatPos3;
+	_Tent3 setDir (floor(random 360));
+
+	_flatPos4 = nil;
+	_flatPos4 = [getPos _Tent1 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+	_Tent4 = "Land_WoodPile_F" createVehicle _flatPos4;
+	_Tent4 setDir (floor(random 360));
+
+	_flatPos5 = nil;
+	_flatPos5 = [getPos _Tent1 , 25, 30, 30, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+	_car1 = selectRandom FriendlyFastResponseVehicles createVehicle _flatPos5;
+	_car1 allowDamage false;
+	_car1 setDir (floor(random 360));
+
+	_flatPos6 = nil;
+	_flatPos6 = [getPos _Tent1 , 25, 30, 30, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+	_car2 = selectRandom FriendlyFastResponseVehicles createVehicle _flatPos5;
+	_car2 allowDamage false;
+	_car2 setDir (floor(random 360));
+	sleep 1;
+	_car1 allowDamage true;
+	_car2 allowDamage true;
+
+	[_car1, ["Unload Dingy","RandFramework\UnloadDingy.sqf"]] remoteExec ["addAction", 0];
+	[_car2, ["Unload Dingy","RandFramework\UnloadDingy.sqf"]] remoteExec ["addAction", 0];
+	[_car1,FastResponseCarItems] call bis_fnc_initAmmoBox;
+	[_car2,FastResponseCarItems] call bis_fnc_initAmmoBox;
+};
+
+
+
+
 //now we have all our location positinos, we can set other area stuff
 [] execVM "RandFramework\RandScript\TREND_fnc_setOtherAreaStuff.sqf";
 
 
-hint "Almost loaded...";
-sleep 20;
+sl doFollow sl; 
 
-[[],"RandFramework\animateAnimals.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
-
-
+publicVariable "debugMessages";
 
 hint "And so it begins!";
+
+
+[[],"RandFramework\animateAnimals.sqf"] remoteExec ["BIS_fnc_execVM",0,true];

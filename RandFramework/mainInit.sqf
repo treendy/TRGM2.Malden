@@ -146,6 +146,15 @@ if (isNil "iUseRevive") then {
 	iUseRevive = 0;
 	publicVariable "iUseRevive";	
 };
+if (isNil "iCampaignDay") then {
+	iCampaignDay = 0;
+	publicVariable "iCampaignDay";	
+};
+if (isNil "CurrentZeroMissionTitle") then {
+	CurrentZeroMissionTitle = "";
+	publicVariable "CurrentZeroMissionTitle";	
+};
+
 
 _trgRatingAdjust = createTrigger ["EmptyDetector", [0,0]];
 _trgRatingAdjust setTriggerArea [0, 0, 0, false];	
@@ -161,15 +170,31 @@ if (isServer) then {
 	};
 };
 
+//this setVariable ["MP_ONLY", true, true];
+if (!isMultiplayer) then {
+	{
+		if (_x getVariable ["MP_ONLY",false]) then {
+			deleteVehicle _x;
+		};
+	} forEach allUnits;
+};
+
+[[chopper1, ["Custom LZ","RandFramework\SelectLZ.sqf"]],"addAction",true,true] call BIS_fnc_MP;
+
 
 waitUntil {bAndSoItBegins};
 
-
-if (isServer) then {
-	call compile preprocessFileLineNumbers  "RandFramework\SetTimeAndWeather.sqf";
-	call compile preprocessFileLineNumbers  "RandFramework\startInfMission.sqf";
+if (iMissionParamType == 5) then {
+	if (isServer) then {
+		call compile preprocessFileLineNumbers  "RandFramework\Campaign\initCampaign.sqf";
+	};
+}
+else {
+	if (isServer) then {
+		call compile preprocessFileLineNumbers  "RandFramework\SetTimeAndWeather.sqf";
+		call compile preprocessFileLineNumbers  "RandFramework\startInfMission.sqf";
+	};
 };
-	
 
 TREND_fnc_CheckBadPoints = {
 	if (isNil "BadPoints") then {

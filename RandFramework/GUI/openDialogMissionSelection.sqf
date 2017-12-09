@@ -44,9 +44,16 @@ _optionRevive = MissionParamReviveOptions;
 	_ctrlRevive lbAdd _x;
 } forEach _optionRevive;
 
+_ctrlLocation = (findDisplay 5000) displayCtrl 2105;
+_optionLocation = MissionParamLocationOptions;
+{
+	_ctrlLocation lbAdd _x;
+} forEach _optionLocation;
+
 _ctrlItem lbSetCurSel 0;
 _ctrlTypes lbSetCurSel 0;
 _ctrlRep lbSetCurSel 0;
 _ctrlWeather lbSetCurSel 0;
 _ctrlNVG lbSetCurSel 0;
 _ctrlRevive lbSetCurSel 0;
+_ctrlLocation lbSetCurSel 0;
