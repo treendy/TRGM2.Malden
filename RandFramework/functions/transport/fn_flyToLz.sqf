@@ -112,7 +112,7 @@ sleep 2;
 sleep 5;
 
 if (!isMultiplayer) then {
-	savegame;
+	//savegame;
 };
 
 /* wait for empty helicopter */
@@ -125,7 +125,7 @@ if (!(_thisMission call TRGM_fnc_checkMissionIdActive)) then {
 
 deleteMarker _mrkcustomLZ1;
 if (!isMultiplayer) then {
-	savegame;
+	//savegame;
 };			
 
 sleep 4;
