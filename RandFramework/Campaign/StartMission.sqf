@@ -111,68 +111,8 @@ if ((bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) || !_isCampaign) t
 	};
 
 	sleep 2;
-	_fnc_dirToText = {
-		params [
-				["_direction",-1,[0]],  // direction 0 to 360
-				["_words",false,[false]] // use word style instead of acronyms
-			];
-
-		if (_direction < 0 ||_direction > 360) then {
-			"";
-		};
 		
-		_val = round(_direction/45);
-		if (_words) then {
-			switch(_val) do {
-				case 8;
-				case 0: {"North"};
-				case 1: {"North East"};
-				case 2: {"East"};
-				case 3: {"South East"};
-				case 4: {"South"};
-				case 5: {"South West"};
-				case 6: {"West"};
-				case 7: {"North West"};
-			};
-		} else {
-			switch(_val) do {
-				case 8;
-				case 0: {"N"};
-				case 1: {"NE"};
-				case 2: {"E"};
-				case 3: {"SE"};
-				case 4: {"S"};
-				case 5: {"SW"};
-				case 6: {"W"};
-				case 7: {"NW"};
-			};
-		};
-	};
-
-	
-
-
-	_fnc_getLocationName = {
-		params["_position"];
-
-		_location = (nearestLocations [ _position, [ "NameVillage", "NameCity","NameCityCapital","NameMarine","Hill"],5000,_position]) select 0; 
-		_locationName =  text (_location);
-		_locationPosition = position _location;
-
-		_text = "";
-		if (_position distance2D _locationPosition > 300) then {
-			_relDir = _locationPosition getDir _position;
-			_text = format ["%1 of %2",[_relDir,true] call _fnc_dirToText,_locationName];
-		} else {
-			_text = format ["%1",_locationName];
-		};
-		_text;
-	};
-	
-	//fade in
-	
-
-	_locationText = [ObjectivePossitions select 0] call _fnc_getLocationName;
+	_locationText = [ObjectivePossitions select 0] call TRGM_fnc_getLocationName;
 	_hour = floor daytime;
 	_minute = floor ((daytime - _hour) * 60);
 

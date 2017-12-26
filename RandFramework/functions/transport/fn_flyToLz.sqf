@@ -70,7 +70,7 @@ _flyToLZ setWaypointStatements ["true", "(vehicle this) land 'GET IN'; (vehicle 
 
 if (isTouchingGround _vehicle) then {
 	_locationText = [position _vehicle] call TRGM_fnc_getLocationName;
-	_text = format ["%1, you are cleared for takeoff %2.", groupId group _driver,_locationText];
+	_text = format ["%1, you are cleared for takeoff at %2.", groupId group _driver,_locationText];
 	[_text] call TRGM_fnc_commsHQ;
 };
 
@@ -133,7 +133,7 @@ sleep 4;
 
 // RADIO :  We're RTB.
 _locationText = [position _vehicle] call TRGM_fnc_getLocationName;
-_text = format ["%1 is entering airspace %2 - We're RTB.", groupId group driver _vehicle, _locationText];
+_text = format ["%1 is entering airspace at %2 - We're RTB.", groupId group driver _vehicle, _locationText];
 [driver _vehicle,_text] call TRGM_fnc_commsSide;
 
 /* RTB */

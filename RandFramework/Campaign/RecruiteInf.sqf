@@ -6,9 +6,9 @@ _params params ["_unitClass"];
 
 //CampaignRecruitUnitRifleman createUnit [getPos player, group player];
 
-YEAH_fnc_whatever = compile preprocessFile "RandFramework\functions\common\fn_CountSpentPoints.sqf";
-_currentSpentPoints = [] call YEAH_fnc_whatever;
-//_currentSpentPoints = [] call TRGM_fnc_CountSpentPoints;
+//YEAH_fnc_whatever = compile preprocessFile "RandFramework\functions\common\fn_CountSpentPoints.sqf";
+//_currentSpentPoints = [] call YEAH_fnc_whatever;
+_currentSpentPoints = [] call TRGM_fnc_CountSpentPoints;
 
 //plus 1 is an initial allowance
 if (_currentSpentPoints < (MaxBadPoints - BadPoints + 1)) then {
