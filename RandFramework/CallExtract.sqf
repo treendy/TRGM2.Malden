@@ -67,5 +67,5 @@ _mrkExtractLZ setMarkerText "Extraction LZ";
 hint "GET IN!";
 
 
-chopper1 addAction ["Return to Base", "RandFramework\FlyToBase.sqf"]
+chopper1 addAction ["Return to Base", {	[choppe1,-1] spawn TRGM_fnc_flyToBase; }]
 
