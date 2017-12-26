@@ -179,8 +179,7 @@ if (!isMultiplayer) then {
 	} forEach allUnits;
 };
 
-[[chopper1, ["Custom LZ","RandFramework\SelectLZ.sqf"]],"addAction",true,true] call BIS_fnc_MP;
-
+[chopper1] call TRGM_fnc_addTransportAction;
 
 waitUntil {bAndSoItBegins};
 

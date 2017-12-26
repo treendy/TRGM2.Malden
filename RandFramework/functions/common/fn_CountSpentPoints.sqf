@@ -1,17 +1,3 @@
-_SpentCount = 0;
-{
-   if ((side _x) == West) then
-   {
-   		//_SpawnedUnit setVariable ["RepCost", 1]; 	
-   		_var = _x getVariable "RepCost";
-   		if (!(isNil "_var")) then {
-   			_SpentCount = _SpentCount + 1;
-   		};   		
-   };
-} forEach allUnits;
+_spentCount = {(side _x) == West && !(isNil {_x getVariable "RepCost"})} count allUnits;
 
-
-
-//hint "IT WORKS3!!!!";
-
-_SpentCount
+_spentCount;
