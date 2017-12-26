@@ -257,6 +257,7 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									};
 									_triggerAmmoTruckClear = nil;
 									_triggerAmmoTruckClear = createTrigger ["EmptyDetector", [0,0]];
+									_triggerAmmoTruckClear setVariable ["DelMeOnNewCampaignDay",true];
 									if (!_bCreateTask) then {
 										_triggerAmmoTruckClear setTriggerStatements [format["!alive(%1) && !alive(%2)",_sTargetName,_sTargetName2], " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""You have destroyed enemy ammo trucks, reputation increased""; ", ""];			
 									}
@@ -325,6 +326,7 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									
 									_triggerAmmoTruckClear = nil;
 									_triggerAmmoTruckClear = createTrigger ["EmptyDetector", [0,0]];
+									_triggerAmmoTruckClear setVariable ["DelMeOnNewCampaignDay",true];
 									if (!_bCreateTask) then {
 										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""You have destroyed enemy ammo trucks, reputation increased""; ", ""];			
 									}
@@ -396,6 +398,7 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									
 									_triggerAmmoTruckClear = nil;
 									_triggerAmmoTruckClear = createTrigger ["EmptyDetector", [0,0]];
+									_triggerAmmoTruckClear setVariable ["DelMeOnNewCampaignDay",true];
 									if (!_bCreateTask) then {
 										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""You have destroyed enemy ammo trucks, reputation increased""; ", ""];			
 									}
@@ -464,6 +467,7 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 													_thisInformant switchMove "Acts_CivilInjuredLegs_1"; 
 													_thisInformant disableAI "anim";
 													_thisInformant setHit ['legs',1];
+													_thisInformant setCaptive true;
 												}
 												else {
 													if (_hitLocation == "head" || _hitLocation == "neck" || _hitLocation == "spine1" || _hitLocation == "spine2" || _hitLocation == "spine3" || _hitLocation == "body" ) then {
@@ -479,6 +483,8 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 															_thisInformant switchMove "Acts_CivilInjuredLegs_1"; 
 															_thisInformant disableAI "anim";
 															_thisInformant setHit ['legs',1];
+															_thisInformant setVariable ["StopWalkScript", true, true];
+															_thisInformant setCaptive true;
 														}
 														else {
 															//debugMessages = debugMessages + "\nhit leg 6 - " + _hitLocation;
@@ -543,9 +549,11 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 												
 												group _objMan setSpeedMode "LIMITED";
 												group _objMan setBehaviour "SAFE";
+												sleep 5; //allow five seconds for any scripts to be run on officer before he moves e.g. if set as hostage when friendly rebels)
 
 												while {true && alive(_objMan)} do {
-													if (behaviour _objMan != "COMBAT") then {
+													_bIsShot = _objMan getVariable ["StopWalkScript", false];
+													if (behaviour _objMan != "COMBAT" && !_bIsShot) then {
 														[_objManName,_thisInitPos,_objMan,75] execVM "RandFramework\HVTWalkAround.sqf";
 														sleep 2;
 														waitUntil {sleep 1; speed _objMan < 0.5};
@@ -563,6 +571,7 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 													_trgKillOfficer = nil;
 													_trgKillOfficer = createTrigger ["EmptyDetector", [0,0]];
 													_trgKillOfficer setTriggerArea [0, 0, 0, false];
+													_trgKillOfficer setVariable ["DelMeOnNewCampaignDay",true];
 													//_trgKillOfficer setTriggerStatements [format["!alive(%1)",_sInformant1Name], " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""A HVT has been eliminated, reputation increased""; ", ""];			
 													if (!_bCreateTask) then {
 														_trgKillOfficer setTriggerStatements [format["!alive(%1)",_sInformant1Name], " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""A HVT has been eliminated, reputation increased""; ", ""];			
@@ -678,6 +687,7 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 
 
 _trgComplete = createTrigger ["EmptyDetector", [0,0]];
+_trgComplete setVariable ["DelMeOnNewCampaignDay",true];
 _trgComplete setTriggerArea [0, 0, 0, false];
 if (iMissionParamType == 5) then {
 	//MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""
@@ -706,19 +716,23 @@ if (_bMoveToAO) then {
 	_flatPos = [_mainAOPos , 1300, 1700, 8, 0, 0.3, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 	if (str(_flatPos) == "[0,0,0]") then {_flatPos = [_mainAOPos , 1300, 2000, 8, 0, 0.4, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;};
 	//"Marker1" setMarkerPos _flatPos;
-	sl setPos _flatPos;
-	k1_2 setPos _flatPos;
-	k1_3 setPos _flatPos;
-	k1_4 setPos _flatPos;
-	k1_5 setPos _flatPos;
-	{
-		if (_x getVariable ["IsFRT",false]) then {
-			_x setPos _flatPos;
-			//if (isPlayer _x) then {
-			//	_x addaction ["inflate dingy",""];
-			//};
-		};
-	} forEach allUnits;
+
+	 	
+	_nearestAOStartRoads = _flatPos nearRoads 100;
+	_bAOStartRoadFound = false;
+	if (count _nearestAOStartRoads > 0) then {
+		_bAOStartRoadFound = true;
+
+		_thisPosAreaOfCheckpoint = _flatPos;
+		_thisRoadOnly = true;
+		_thisSide = west; 
+		_thisUnitTypes = FriendlyCheckpointUnits;
+		_thisAllowBarakade = true;
+		_thisIsDirectionAwayFromAO = false;
+		[_flatPos,_flatPos,50,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,FriendlyScoutVehicles,500] execVM "RandFramework\setCheckpoint.sqf";
+	};
+
+
 
 	_markerFastResponseStart = createMarker ["mrkFastResponseStart", _flatPos];	
 	_markerFastResponseStart setMarkerShape "ICON";
@@ -728,35 +742,38 @@ if (_bMoveToAO) then {
 	//k1Car2 setPos _flatPos;
 
 	_behindBlockPos = _flatPos;
-	_flatPosTent1 = nil;
-	_flatPosTent1 = [_behindBlockPos , 0, 15, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
-	_Tent1 = "Land_TentA_F" createVehicle _flatPosTent1;
-	_Tent1 setDir (floor(random 360));
 
-	_flatPos2 = nil;
-	_flatPos2 = [getPos _Tent1 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
-	_Tent2 = "Land_TentA_F" createVehicle _flatPos2;
-	_Tent2 setDir (floor(random 360));
+	_flatPosCampFire = _behindBlockPos;
+	_campFire = "Campfire_burning_F" createVehicle _flatPosCampFire;
+	_campFire setDir (floor(random 360));
 
-	_flatPos3 = nil;
-	_flatPos3 = [getPos _Tent1 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
-	_Tent3 = "Campfire_burning_F" createVehicle _flatPos3;
-	_Tent3 setDir (floor(random 360));
 
+	if (!_bAOStartRoadFound) then {
+		_flatPosTent1 = nil;
+		_flatPosTent1 = [_flatPosCampFire , 5, 10, 5, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+		_Tent1 = "Land_TentA_F" createVehicle _flatPosTent1;
+		_Tent1 setDir (floor(random 360));
+
+		_flatPos2 = nil;
+		_flatPos2 = [_flatPosCampFire , 5, 10, 5, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+		_Tent2 = "Land_TentA_F" createVehicle _flatPos2;
+		_Tent2 setDir (floor(random 360));
+	};
+	
 	_flatPos4 = nil;
-	_flatPos4 = [getPos _Tent1 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+	_flatPos4 = [_flatPosCampFire , 5, 10, 5, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
 	_Tent4 = "Land_WoodPile_F" createVehicle _flatPos4;
 	_Tent4 setDir (floor(random 360));
 
 	_flatPos5 = nil;
-	_flatPos5 = [getPos _Tent1 , 25, 30, 30, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+	_flatPos5 = [_flatPosCampFire, 12, 30, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 	_car1 = selectRandom FriendlyFastResponseVehicles createVehicle _flatPos5;
 	_car1 allowDamage false;
 	_car1 setDir (floor(random 360));
 
 	_flatPos6 = nil;
-	_flatPos6 = [getPos _Tent1 , 25, 30, 30, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
-	_car2 = selectRandom FriendlyFastResponseVehicles createVehicle _flatPos5;
+	_flatPos6 = [_flatPosCampFire, 12, 30, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+	_car2 = selectRandom FriendlyFastResponseVehicles createVehicle _flatPos6;
 	_car2 allowDamage false;
 	_car2 setDir (floor(random 360));
 	sleep 1;
@@ -767,6 +784,35 @@ if (_bMoveToAO) then {
 	[_car2, ["Unload Dingy","RandFramework\UnloadDingy.sqf"]] remoteExec ["addAction", 0];
 	[_car1,FastResponseCarItems] call bis_fnc_initAmmoBox;
 	[_car2,FastResponseCarItems] call bis_fnc_initAmmoBox;
+
+	_flatPos7 = nil;
+	_flatPos7 = [_flatPosCampFire, 5, 12, 5, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+	_AmmoBox1 = "C_T_supplyCrate_F" createVehicle _flatPos7;
+	_AmmoBox1 allowDamage false;
+	_AmmoBox1 setDir (floor(random 360));
+	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+		[_AmmoBox1,InitialBoxItemsWithAce] call bis_fnc_initAmmoBox;
+	}
+	else {
+		[_AmmoBox1,InitialBoxItems] call bis_fnc_initAmmoBox;
+	};
+
+	_flatPosUnits = [_flatPosCampFire, 8, 17, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+	if (!isnil "sl") then {sl setPos _flatPosUnits};
+	if (!isnil "k1_2") then {k1_2 setPos _flatPosUnits};
+	if (!isnil "k1_3") then {k1_3  setPos _flatPosUnits};
+	if (!isnil "k1_4") then {k1_4  setPos _flatPosUnits};
+	if (!isnil "k1_5") then {k1_5  setPos _flatPosUnits};
+	_bGroupFound = false;
+	{
+		if (_x getVariable ["IsFRT",false] && !_bGroupFound) then {
+			{
+				_bGroupFound = true;
+				_x setPos _flatPosUnits;
+			} forEach units group _x;			
+		};
+	} forEach allUnits;
+
 };
 
 
@@ -776,7 +822,7 @@ if (_bMoveToAO) then {
 [] execVM "RandFramework\RandScript\TREND_fnc_setOtherAreaStuff.sqf";
 
 
-sl doFollow sl; 
+
 
 publicVariable "debugMessages";
 

@@ -81,6 +81,10 @@ TREND_fnc_PopulateSideMission = {
 		_officerObject switchMove "Acts_ExecutionVictim_Loop"; 
 		_officerObject disableAI "anim";
 		_officerObject setCaptive true;
+		_officerObject setVariable ["StopWalkScript", true];
+		//_sideMainBuilding
+		_allpositionsMainBuiding = _sideMainBuilding buildingPos -1;
+		_officerObject setPosATL (selectRandom _allpositionsMainBuiding);
 		removeAllWeapons _officerObject;
 	};
 
@@ -136,6 +140,7 @@ TREND_fnc_PopulateSideMission = {
 
 	_trgCustomAIScript = nil;
 	_trgCustomAIScript = createTrigger ["EmptyDetector", _sidePos];
+	_trgCustomAIScript setVariable ["DelMeOnNewCampaignDay",true];
 	_trgCustomAIScript setTriggerArea [1250, 1250, 0, false];
 	_trgCustomAIScript setTriggerActivation [FriendlySideString, format["%1 D", EnemySideString], true];
 	_trgCustomAIScript setTriggerStatements ["this && SpottedActiveFinished", format["nul = [this, thisList, %1, %2, %3] execVM ""RandFramework\RandScript\TREND_fnc_CallNearbyPatrol.sqf"";",str(_sidePos),_iSideIndex, _bIsMainObjective], ""];
@@ -714,7 +719,7 @@ TREND_fnc_SpawnCivs = {
 		_sInitString = "";
 		_sCivUniform = selectRandom civUniformClasses;
 		
-		if (selectRandom[true,false,false,false,false,false]) then {
+		if (selectRandom[true,false,false,false,false]) then {
 			if (_bIsRebels) then {				
 					_sInitString = format["this execVM ""RandFramework\BadReb.sqf""; this forceAddUniform ""%1""; removeHeadgear this; Removevest this;",_sCivUniform];		
 			}
@@ -738,7 +743,7 @@ TREND_fnc_SpawnCivs = {
 		};
 		_sideCivGroup = nil;
 		if (_bIsRebels) then {
-			_sideCivGroup = createGroup west;
+			_sideCivGroup = createGroup Civilian; //was west, but was causing issues (they were all shooting each other??)
 		}
 		else {
 			_sideCivGroup = createGroup Civilian;

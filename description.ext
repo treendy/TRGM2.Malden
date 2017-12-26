@@ -53,6 +53,15 @@ class CfgDebriefing
 		picture = "b_inf";
 		pictureColor[] = {0.6,0.1,0.2,1};
 	};
+	class End3
+	{
+		title = "Fail";
+		subtitle = "";
+		description = "Everyone was killed! maybe try to avoid that next time?";
+		pictureBackground = "";
+		picture = "b_inf";
+		pictureColor[] = {0.6,0.1,0.2,1};
+	};	
 };
 
 

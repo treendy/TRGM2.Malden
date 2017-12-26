@@ -15,15 +15,21 @@
 //	- player short 5 second intro sound
 //	- AddAction to board: End mission <<< if not a success will lower rep, clear current mission and load next mission... (show message warning player)
 
+_isCampaign = (iMissionParamType == 5);
 
 
-if (bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) then {
 
-	titleText ["", "BLACK FADED", 5];
+
+if ((bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) || !_isCampaign) then {
+	player allowdamage false;
+
+
+	titleText ["Loading mission...", "BLACK FADED", 5];
 	//sleep 3;
 	
-	[["NEW_MISSION"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
-
+	if (_isCampaign) then {
+		[["NEW_MISSION"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
+	};
 
 	//"Marker1" setMarkerPos getMarkerPos "mrkHQ";
 
@@ -31,7 +37,7 @@ if (bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) then {
 
 	
 
-	if (isServer) then {
+	if (isServer && _isCampaign) then {
 
 		{	
 			_y = _x;
@@ -51,6 +57,12 @@ if (bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) then {
 				deleteMarker _x;
 			};
 		} forEach allMapMarkers;
+			
+		{
+			if (_x getVariable ["DelMeOnNewCampaignDay",false]) then {
+				deleteVehicle _x;
+			};
+		} forEach allMissionObjects "EmptyDetector";
 
 		InfTaskCount = 0; 
 		publicVariable "InfTaskCount";
@@ -89,10 +101,15 @@ if (bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) then {
 		iCampaignDay = iCampaignDay + 1;
 		publicVariable "iCampaignDay";	
 
+		
+	};
+
+	if (isServer) then {
 		[] execVM "RandFramework\SetTimeAndWeather.sqf";
 	
 		[] execVM "RandFramework\startInfMission.sqf";
 	};
+
 	sleep 2;
 	_fnc_dirToText = {
 		params [
@@ -171,16 +188,84 @@ if (bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) then {
 	};
 	_time24 = text format ["%1:%2",_strHour,_strMinute];
 
+	if (!isDedicated) then {
+	sleep 5;
+	};
+
+
+	_LineOne = "Day " + str(iCampaignDay);
+	_LineTwo = "Mission: " + CurrentZeroMissionTitle;
+	_LineThree = _locationText;
+	_LineFour = "Time: " + str(_time24);
+
+	if (!_isCampaign) then {
+		_LineOne = "TRGM 2"
+	};
+
 	if (MaxBadPoints >= 10) then {
-		//hint format["Day %1 - %2\nFinal Objective: %3\nLocation: %4",iCampaignDay,_time24,CurrentZeroMissionTitle,_locationText];
-		titleText [format["Day %1 - %2\nFinal Objective: %3\nLocation: %4",iCampaignDay,_time24,CurrentZeroMissionTitle,_locationText], "BLACK IN", 5];
+		titleText ["", "BLACK IN", 5];
+		_LineTwo = "Final Objective: " + CurrentZeroMissionTitle;
+		//titleText [format["Day %1 - %2\nFinal Objective: %3\nLocation: %4",iCampaignDay,_time24,CurrentZeroMissionTitle,_locationText], "BLACK IN", 5];
 	}
 	else {
-		//hint format["Day %1 - %2.\nObjective: %3\nLocation: %4",iCampaignDay,_time24,CurrentZeroMissionTitle,_locationText];
-		titleText [format["Day %1 - %2.\nObjective: %3\nLocation: %4",iCampaignDay,_time24,CurrentZeroMissionTitle,_locationText], "BLACK IN", 5];
+		titleText ["", "BLACK IN", 5];
+		//titleText [format["Day %1 - %2.\nObjective: %3\nLocation: %4",iCampaignDay,_time24,CurrentZeroMissionTitle,_locationText], "BLACK IN", 5];
 	};
+
+
+	txt1Layer = "txt1" call BIS_fnc_rscLayer;
+	txt2Layer = "txt2" call BIS_fnc_rscLayer;
+
+
+    _texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.6' color='#ffffff'>" + _LineTwo +"</t>"; 
+    [_texta,/* poz x */ 0,/* poz y */ 0.220,/*durata*/ 7,/* fade in?*/ 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
+
+
+	txt5Layer = "txt5" call BIS_fnc_rscLayer;
+	txt6Layer = "txt6" call BIS_fnc_rscLayer;
+
+
+    _texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + _LineOne +"</t>"; 
+    [_texta,/* poz x */ -0,/* poz y */ 0.150,/*durata*/ 7,/* fade in?*/ 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+
+	showcinemaborder true; 	
+
+	_pos1 = (player getPos [(floor(random 100))+50, (floor(random 360))]);
+	_pos2 = (player getPos [(floor(random 100))+50, (floor(random 360))]);
+	_pos1 = [_pos1 select 0,_pos1 select 1,selectRandom[10,20]];
+	_pos2 = [_pos2 select 0,_pos2 select 1,selectRandom[10,20]];
+
+	_camera = "camera" camCreate _pos1;
+	_camera cameraEffect ["internal","back"];
+	
+	_camera camPreparePos _pos2;
+	_camera camPrepareTarget player;
+	_camera camPrepareFOV 0.4;
+	_camera camCommitPrepared 46;
+
+	sleep 3;
+	 any= [_LineThree,_LineFour]spawn BIS_fnc_infotext;
+
+	sleep 3;
+	titleCut ["", "BLACK out", 5];
+	sleep 5;
+
+
+	titleCut ["", "BLACK in", 5];
+	_camera cameraEffect ["Terminate","back"];
+	sleep 10;
+
+	player allowdamage true;
 }
 else {
 
 	{hint "All players need to be at base, and current task needs to be completed or failed";} remoteExec ["bis_fnc_call", 0];
 };
+
+player doFollow player; 
+
+sleep 3;
+saveGame;
+sleep 1;
+
+player doFollow player; 

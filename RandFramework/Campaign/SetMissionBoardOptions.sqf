@@ -17,9 +17,9 @@ switch (_option) do {
 		[endMissionBoard, ["Recruit Rifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitRifleman]]] remoteExec ["addAction", 0];
 		[endMissionBoard, ["Recruit AT Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAT]]] remoteExec ["addAction", 0];
 		[endMissionBoard, ["Recruit AA Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAA]]] remoteExec ["addAction", 0];
-		[endMissionBoard, ["Recruit Engineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist]]] remoteExec ["addAction", 0];
-		[endMissionBoard, ["Recruit Explosive Specialist","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic]]] remoteExec ["addAction", 0];
-		[endMissionBoard, ["Recruit Medic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer]]] remoteExec ["addAction", 0];	
+		[endMissionBoard, ["Recruit Engineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer]]] remoteExec ["addAction", 0];
+		[endMissionBoard, ["Recruit Explosive Specialist","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist]]] remoteExec ["addAction", 0];
+		[endMissionBoard, ["Recruit Medic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic]]] remoteExec ["addAction", 0];	
 	};
     case "NEW_MISSION": {
     	endMissionBoard remoteExec ["removeAllActions"];
@@ -28,9 +28,9 @@ switch (_option) do {
 		[endMissionBoard, ["Recruit Rifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitRifleman]]] remoteExec ["addAction", 0];
 		[endMissionBoard, ["Recruit AT Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAT]]] remoteExec ["addAction", 0];
 		[endMissionBoard, ["Recruit AA Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAA]]] remoteExec ["addAction", 0];
-		[endMissionBoard, ["Recruit Engineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist]]] remoteExec ["addAction", 0];
-		[endMissionBoard, ["Recruit Explosive Specialist","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic]]] remoteExec ["addAction", 0];
-		[endMissionBoard, ["Recruit Medic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer]]] remoteExec ["addAction", 0];
+		[endMissionBoard, ["Recruit Engineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer]]] remoteExec ["addAction", 0];
+		[endMissionBoard, ["Recruit Explosive Specialist","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist]]] remoteExec ["addAction", 0];
+		[endMissionBoard, ["Recruit Medic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic]]] remoteExec ["addAction", 0];	
 		if (MaxBadPoints == 3) then {
 			[endMissionBoard, ["**Recruit Automatic Rifleman**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto]]] remoteExec ["addAction", 0];
 		};
@@ -65,13 +65,27 @@ switch (_option) do {
 		[endMissionBoard, ["Recruit Rifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitRifleman]]] remoteExec ["addAction", 0];
 		[endMissionBoard, ["Recruit AT Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAT]]] remoteExec ["addAction", 0];
 		[endMissionBoard, ["Recruit AA Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAA]]] remoteExec ["addAction", 0];
-		[endMissionBoard, ["Recruit Engineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist]]] remoteExec ["addAction", 0];
-		[endMissionBoard, ["Recruit Explosive Specialist","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic]]] remoteExec ["addAction", 0];
-		[endMissionBoard, ["Recruit Medic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer]]] remoteExec ["addAction", 0];
+		[endMissionBoard, ["Recruit Engineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer]]] remoteExec ["addAction", 0];
+		[endMissionBoard, ["Recruit Explosive Specialist","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist]]] remoteExec ["addAction", 0];
+		[endMissionBoard, ["Recruit Medic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic]]] remoteExec ["addAction", 0];	
 		if (MaxBadPoints == 3) then {
-			[endMissionBoard, ["**Recruit UAV Operator**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV]]] remoteExec ["addAction", 0];
+			[endMissionBoard, ["**Recruit Automatic Rifleman**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto]]] remoteExec ["addAction", 0];
 		};
 		if (MaxBadPoints > 3) then {
+			[endMissionBoard, ["Recruit Automatic Rifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto]]] remoteExec ["addAction", 0];
+		};	
+		if (MaxBadPoints == 5) then {
+			[endMissionBoard, ["**Recruit Sniper**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper]]] remoteExec ["addAction", 0];
+			[endMissionBoard, ["**Recruit Spotter**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper]]] remoteExec ["addAction", 0];
+		};
+		if (MaxBadPoints > 5) then {
+			[endMissionBoard, ["Recruit Sniper","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper]]] remoteExec ["addAction", 0];
+			[endMissionBoard, ["Recruit Spotter","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper]]] remoteExec ["addAction", 0];
+		};	
+		if (MaxBadPoints == 7) then {
+			[endMissionBoard, ["**Recruit UAV Operator**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV]]] remoteExec ["addAction", 0];
+		};
+		if (MaxBadPoints > 7) then {
 			[endMissionBoard, ["Recruit UAV Operator","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV]]] remoteExec ["addAction", 0];
 		};		
 		

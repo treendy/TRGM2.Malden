@@ -13,10 +13,50 @@ if (isNil "bAndSoItBegins") then {
 
 	sleep 4;
 
-if (str player == "sl" && !bAndSoItBegins) then {
-	[] execVM "RandFramework\GUI\openDialogMissionSelection.sqf";
-	_actChooseMission = endMissionBoard addaction ["Select Mission Params", "RandFramework\GUI\openDialogMissionSelection.sqf"];
-};
+
+
+	TREND_fnc_MissionSelectLoop = {
+		while {!bAndSoItBegins} do {
+			if (str player == "sl") then {
+				if  (!dialog) then {
+					sleep 1;
+					if  (!dialog) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
+						[] execVM "RandFramework\GUI\openDialogMissionSelection.sqf";
+						//_actChooseMission = endMissionBoard addaction ["Select Mission Params", "RandFramework\GUI\openDialogMissionSelection.sqf"];
+					};
+				};
+				sleep 0.5;				
+			}
+			else {
+
+				if (isNil "sl") then {
+					txt5Layer = "txt5" call BIS_fnc_rscLayer;
+			    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TOP SLOT NEEDS TO BE FILLED</t>"; 
+			    	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+				}
+				else {
+					if (!isPlayer sl) then {
+					txt5Layer = "txt5" call BIS_fnc_rscLayer;
+			    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TOP SLOT NEEDS TO BE A PLAYER</t>"; 
+			    	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+					}
+					else {
+						txt1Layer = "txt1" call BIS_fnc_rscLayer;
+				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.6' color='#ffffff'>" + name sl +" is choosing the mission</t>"; 
+				    	[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
+
+						txt5Layer = "txt5" call BIS_fnc_rscLayer;
+				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>Please Wait</t>"; 
+				    	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+				    };
+			    };
+			    sleep 5;
+			};
+
+		};
+	};
+	[] spawn TREND_fnc_MissionSelectLoop;	
+
 
 
 TREND_fnc_BasicInit = {
@@ -27,16 +67,20 @@ TREND_fnc_BasicInit = {
 		[] execVM "RandFramework\NVscript.sqf";
 	};
 
-	
+	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+		myaction = ['CallTransportChopper','Call Transport Chopper','',{execVM "RandFramework\SelectLZ.sqf";},{true}] call ace_interact_menu_fnc_createAction;
+		[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
+	}
+	else {
+		player addAction ["Custom LZ","RandFramework\SelectLZ.sqf"];		
+	};
+
 	if (iMissionParamRepOption == 1) then {
 		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-			//myaction = ['ShowRepReport','Show reputation report','',{_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint format["Current cost per life: %1\n\nBad reputation points: %2 out of %3\n\nTOTAL REP: %4 \n\nREASONS SO FAR: \n%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints ,BadPointsReason]},{true}] call ace_interact_menu_fnc_createAction;
-			//[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
-			endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint format["Current cost per life: %1\n\nBad reputation points: %2 out of %3\n\nTOTAL REP: %4 \n\nREASONS SO FAR: \n%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
+			endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format["Current cost per life: %1<br /><br />Bad reputation points: %2 out of %3<br /><br />TOTAL REP: %4 <br /><br />REASONS SO FAR: <br />%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
 		}
 		else {
-			//player addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint format["Current cost per life: %1\n\nBad reputation points: %2 out of %3\n\nTOTAL REP: %4 \n\nREASONS SO FAR: \n%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
-			endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint format["Current cost per life: %1\n\nBad reputation points: %2 out of %3\n\nTOTAL REP: %4 \n\nREASONS SO FAR: \n%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
+			endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format["Current cost per life: %1<br /><br />Bad reputation points: %2 out of %3<br /><br />TOTAL REP: %4 <br /><br />REASONS SO FAR: <br />%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
 		};
 	};
 
@@ -53,13 +97,13 @@ TREND_fnc_BasicInit = {
 		execVM "RandFramework\NoVoice.sqf";
 	};
 
-	al_flare_intensity = 20;
-	publicvariable "al_flare_intensity";
+	//al_flare_intensity = 20;
+	//publicvariable "al_flare_intensity";
 	// flare range, replace 500 with desired value
-	al_flare_range = 300;
-	publicvariable "al_flare_range";
+	//al_flare_range = 300;
+	//publicvariable "al_flare_range";
 	// If you want to use FLARE FIX do not edit or remove lines bellow
-	player addEventHandler ["Fired",{private ["_al_flare"]; _al_flare = _this select 6;[[[_al_flare],"\RandFramework\AL_flare_fix\al_flare_enhance.sqf"],"BIS_fnc_execVM",true,true] spawn BIS_fnc_MP;}];
+	//player addEventHandler ["Fired",{private ["_al_flare"]; _al_flare = _this select 6;[[[_al_flare],"\RandFramework\AL_flare_fix\al_flare_enhance.sqf"],"BIS_fnc_execVM",true,true] spawn BIS_fnc_MP;}];
 	// ^^^^^^^^^^ END FLARE fix ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 	iAllowGPS = ("OUT_par_AllowGPS" call BIS_fnc_getParamValue);
@@ -118,6 +162,7 @@ if (iMissionSetup == 12 || iMissionSetup == 20) then {
 else {
 	if (iMissionSetup == 5) then {
 		[player, 999] call BIS_fnc_respawnTickets;
+		debugMessages = debugMessages + "\n" + "999 respawn tickets"
 	}
 	else {
 		[player, 1] call BIS_fnc_respawnTickets;
@@ -132,9 +177,34 @@ TREND_fnc_GetAnimalsMoving = {
 player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInit; }];
 
 
+TREND_fnc_GeneralPlayerLoop = {
+	while {true} do {
+		//hint "TREND_fnc_GeneralPlayerLoop";
+		//{
+			if (leader (group (vehicle player)) == player) then {
+				//hint "hmm";
+				_dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
+				if (_dCurrentRep >= 3) then {
+					//hint "hmm2";
+					[player, supReq] call BIS_fnc_addSupportLink;
+				};
+				if (_dCurrentRep >= 7) then {
+					//hint "hmm3";
+					[player, supReqAir] call BIS_fnc_addSupportLink;
+				};
+			};
+		//} forEach group player;
+		//player doFollow player; 
+		sleep 3;
+	};
+};
+[] spawn TREND_fnc_GeneralPlayerLoop;
+player addEventHandler ["Respawn", { [] spawn TREND_fnc_GeneralPlayerLoop; }];
+
+
 
 TREND_fnc_OnlyAllowDirectMapDraw = {
-	while {true} do {
+	while {true && isMultiplayer} do {
 		{
 			//WaitUntil {count allMapMarkers > 0};
 	   		_sTest = _x splitString "/";

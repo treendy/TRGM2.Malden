@@ -9,12 +9,17 @@ TRGM_Logic setVariable ["PointsUpdating", true, true];
 
 params ["_pointsToAdd","_message"];
 
-badPoints = badPoints + _pointsToAdd; 
-publicVariable "badPoints";
+_totalRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
 
-BadPointsReason = BadPointsReason + format["\n%1 (%2)",_message,_pointsToAdd]; 
-publicVariable "BadPointsReason";
+if (_totalRep > 0) then {
+	badPoints = badPoints + _pointsToAdd; 
+	if (BadPoints > MaxBadPoints) then {
+		badPoints = MaxBadPoints; 
+	};
+	publicVariable "badPoints";
+
+	BadPointsReason = BadPointsReason + format["<br />%1 (%2)",_message,_pointsToAdd]; 
+	publicVariable "BadPointsReason";
+};
 
 TRGM_Logic setVariable ["PointsUpdating", false, true];
-//test malden
-//test 2

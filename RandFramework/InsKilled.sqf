@@ -3,7 +3,9 @@ params  ["_killed","_killer"];
 //hint format ["killed: %1 - Killer: %2 - str1: %3 - str2: %4", str(side _killed), str(side _killer),str(_killed),str(_killer)];
 //sleep 3;
 
-hint format ["InsKilledTest: KilledSide: %1 - KillerSide: %2 - KilledString: %3 - KillerString: %4",side _killed,side _killer,str(_killed),str(_killer)];
+debugMessages = debugMessages + "\n" + format ["InsKilledTest: KilledSide: %1 - KillerSide: %2 - KilledString: %3 - KillerString: %4",side _killed,side _killer,str(_killed),str(_killer)];
+publicVariable "debugMessages";
+
 sleep 3;
 
 if (side _killer == west && str(_killed) != str(_killer)) then {
@@ -26,5 +28,5 @@ if (side _killer == west && str(_killed) != str(_killer)) then {
 
 }
 else {
-	hint "IN ELSE";
+	//hint "IN ELSE";
 };

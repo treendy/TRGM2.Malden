@@ -33,6 +33,15 @@ if (alive _thisCheckpointUnit) then {
 	else {
 		hint "We havent any intel of any checkpoints in the area";
 	};
+	if (bHasCommsTower) then {
+		sleep 3;
+		hint "also, take a look at your map, this is the possition of a comms tower being used by the enemy";
+		_test = nil;
+		_test = createMarker ["CommsIntelAAA1", CommsTowerPos];  
+		_test setMarkerShape "ICON";  
+		_test setMarkerType "mil_destroy";  
+		_test setMarkerText "Comms Tower"; 		
+	};
 
 }
 else {

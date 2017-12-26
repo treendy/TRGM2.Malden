@@ -277,7 +277,7 @@ if (isServer && count _thisThisList > 0) then {
 				
 				//mortar script
 				if  ((_SpottedUnitCount > 0) && _bAllowNextMortarRounds && !bMortarFiring) then {
-					hint format["eee:%1",str(_currentAODetail)];
+					//hint format["eee:%1",str(_currentAODetail)];
 					_bFiredMortar = false;
 					_currentAODetail set [6,1];  //commence counting now fired... when reach zero again, we will wait until round fired again
 					_nearestMortars = nearestObjects [_SpottedUnitPos,sMortar + sMortarFriendInsurg,_maxPatrolSearch];

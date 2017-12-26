@@ -62,20 +62,26 @@ if (count _nearMen > 1) then {
 			//TALK
 			if (alive(_objMan)) then {[_objMan,"STAND","ASIS"] call BIS_fnc_ambientAnimCombat;};
 			sleep selectRandom [30,60,120];
-			_objMan call BIS_fnc_ambientAnim__terminate
+			if (!(_objMan getVariable ["StopWalkScript", false])) then {
+				_objMan call BIS_fnc_ambientAnim__terminate
+			};
 
 	};
 	if (_animType == 3) then { //talk
 			//TALK
 			if (alive(_objMan)) then {[_objMan,"WATCH","ASIS"] call BIS_fnc_ambientAnimCombat;};
 			sleep selectRandom [30,60,120];
-			_objMan call BIS_fnc_ambientAnim__terminate
+			if (!(_objMan getVariable ["StopWalkScript", false])) then {
+				_objMan call BIS_fnc_ambientAnim__terminate
+			};
 	};
 	if (_animType == 4) then { //talk
 			//TALK
 			if (alive(_objMan)) then {[_objMan,"STAND","ASIS"] call BIS_fnc_ambientAnimCombat;};
 			sleep selectRandom [30,60,120];
-			_objMan call BIS_fnc_ambientAnim__terminate
+			if (!(_objMan getVariable ["StopWalkScript", false])) then {
+				_objMan call BIS_fnc_ambientAnim__terminate
+			};
 	};
 }
 else {
@@ -85,9 +91,13 @@ else {
 	if (_animType == 1) then { //stretch
 		if (alive(_objMan)) then {[_objMan,"STAND","ASIS"] call BIS_fnc_ambientAnimCombat;};
 		sleep selectRandom [30,60,120];
-		_objMan call BIS_fnc_ambientAnim__terminate
+		if (!(_objMan getVariable ["StopWalkScript", false])) then {
+			_objMan call BIS_fnc_ambientAnim__terminate
+		};
 	};
 	if (_animType == 1) then { //Radio
-		_objMan switchMove "AinvPercMstpSnonWnonDnon_G01";
+		if (!(_objMan getVariable ["StopWalkScript", false])) then {
+			_objMan switchMove "AinvPercMstpSnonWnonDnon_G01";
+		};
 	};
 };

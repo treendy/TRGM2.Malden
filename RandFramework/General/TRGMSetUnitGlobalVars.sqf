@@ -71,7 +71,7 @@ MainMissionTasks = [1,2,6,7,8];
 MissionsThatHaveIntel = [1,4,5,6];
 
 
-ChanceOfOccurance = [true,false];  //camp, downed chopper
+ChanceOfOccurance = [true,false,false,false,false,false];  //camp, downed chopper
 
 //[year.month,day,hour,min]
 Sunny = [2035, 1, 14, 12, 0];

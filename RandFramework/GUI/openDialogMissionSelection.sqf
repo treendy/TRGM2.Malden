@@ -1,11 +1,11 @@
 #include "..\..\setUnitGlobalVars.sqf";
 disableSerialization;
 
-hint "opening 2dialogA";
+//hint "opening 2dialogA";
 
 createDialog "Trend_DialogTest";
 waitUntil {!isNull (findDisplay 5000);};
-hint "opening 2dialogB";
+//hint "opening 2dialogB";
 
 
 _ctrlItem = (findDisplay 5000) displayCtrl 5500;
@@ -50,7 +50,7 @@ _optionLocation = MissionParamLocationOptions;
 	_ctrlLocation lbAdd _x;
 } forEach _optionLocation;
 
-_ctrlItem lbSetCurSel 0;
+_ctrlItem lbSetCurSel 3;
 _ctrlTypes lbSetCurSel 0;
 _ctrlRep lbSetCurSel 0;
 _ctrlWeather lbSetCurSel 0;

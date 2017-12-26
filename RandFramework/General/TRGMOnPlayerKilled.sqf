@@ -20,10 +20,14 @@ if (player distance getMarkerPos "MrkHQ" > SaveZoneRadius) then {
 		publicVariable "KilledPlayers";
 		publicVariable "KilledPositions";
 		
-		_justPlayers = allPlayers - entities "HeadlessClient_F";
-		_iPlayerCount = count _justPlayers;
-		_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);
-		_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;			
+		_iPointsToAdd = 0.2;
+		if (iMissionParamType != 5) then { //if not campaign, then work out how many rep points team gain when a player is killed
+			_justPlayers = allPlayers - entities "HeadlessClient_F";
+			_iPlayerCount = count _justPlayers;
+			_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);
+			_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;	
+		};
+				
 		[_iPointsToAdd,format["%1 was killed", name player]] execVM "RandFramework\AdjustBadPoints.sqf";
 		//[_iPointsToAdd,format["Player was killed", name player]] execVM "RandFramework\AdjustBadPoints.sqf";
 		//badPoints = badPoints + 0.2; publicVariable "badPoints"
@@ -33,7 +37,7 @@ if (player distance getMarkerPos "MrkHQ" > SaveZoneRadius) then {
 		_tombStone setVariable ["Message", format["KIA: %1",name player],true]; 	
 		//_tombStone addAction ["Read",{hint format["%1",(_this select 0) getVariable "Message"]}];
 		[[_tombStone, ["Read","hint format['%1',(_this select 0) getVariable 'Message']"]],"addAction",true,true] call BIS_fnc_MP;
-		[0.2, format["KIA: %1",name (_this select 0)]] execVM "RandFramework\AdjustBadPoints.sqf";
+		//[0.2, format["KIA: %1",name (_this select 0)]] execVM "RandFramework\AdjustBadPoints.sqf";
 	};
 
 	TRGM_Logic setVariable ["DeathRunning", false, true];

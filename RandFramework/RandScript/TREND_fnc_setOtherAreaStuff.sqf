@@ -85,6 +85,7 @@ _mainObjPos = ObjectivePossitions select 0;
 				if (selectRandom [true,true,true]) then {
 					
 					_trg = createTrigger ["EmptyDetector", position TowerBuild];
+					_trg setVariable ["DelMeOnNewCampaignDay",true];
 					_trg setTriggerArea [100, 100, 0, false];
 					_sSTringPos = format["%1,%2", position TowerBuild select 0, position TowerBuild select 1];
 					_sTriggerString = "!alive(nearestObject [[" + _sSTringPos + "], '" + TowerClassName + "'])";
