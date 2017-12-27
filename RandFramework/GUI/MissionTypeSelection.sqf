@@ -30,4 +30,13 @@ else {
 	_ctrlRep ctrlEnable true;
 	_ctrlWeather = (findDisplay 5000) displayCtrl 5101;
 	_ctrlWeather ctrlEnable true;
-}
+};
+
+if (!isMultiplayer) then {
+	_ctrlLoadLocal = (findDisplay 5000) displayCtrl 1601;
+	_ctrlLoadGlobal = (findDisplay 5000) displayCtrl 1602;
+	_ctrlLoadLocal  ctrlShow false;
+	_ctrlLoadGlobal  ctrlShow false;
+	//ctrlDelete _ctrlLoadLocal;
+	//ctrlDelete _ctrlLoadGlobal;
+};

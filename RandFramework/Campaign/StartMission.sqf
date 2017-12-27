@@ -38,7 +38,7 @@ if ((bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) || !_isCampaign) t
 	
 
 	if (isServer && _isCampaign) then {
-
+		
 		{	
 			_y = _x;
 			{
@@ -101,6 +101,9 @@ if ((bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) || !_isCampaign) t
 		iCampaignDay = iCampaignDay + 1;
 		publicVariable "iCampaignDay";	
 
+		if (SaveType != 0) then {
+				[SaveType,false] execVM "RandFramework\Campaign\ServerSave.sqf";
+		};
 		
 	};
 

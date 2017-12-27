@@ -743,6 +743,32 @@ class Trend_DialogTest
 			tooltip = "If you select to start Near AO, this you will start near the AO as a fast response team,\nno need for transport.\n\nYou will be allocated a drivable vehicle. Otherwise will start at the main base\nwith transport chopper to fly you to a choosen LZ"; //--- ToDo: Localize;
 		};
 
+		class btnLoadLocalSave: RscButton
+		{
+			idc = 1601;
+			text = "Load Local Campaign"; //--- ToDo: Localize;
+			x = 0.5825 * safezoneW + safezoneX;
+			y = 0.566 * safezoneH + safezoneY;
+			w = 0.103125 * safezoneW;
+			h = 0.022 * safezoneH;
+			colorBackground[] = {0,1,0,1};
+			colorActive[] = {0,1,0,1};
+			tooltip = "Will load the last campaign save data for the current map (that was saved by you only... i.e. the current person selecting mission parameters)"; //--- ToDo: Localize;
+			action = "[_this,1] execVM 'RandFramework\GUI\SetParamsAndBegin.sqf'; false";
+		};
+		class btnLoadglobalSave: RscButton
+		{
+			idc = 1602;
+			text = "Load Global Campaign"; //--- ToDo: Localize;
+			x = 0.5825 * safezoneW + safezoneX;
+			y = 0.599 * safezoneH + safezoneY;
+			w = 0.103125 * safezoneW;
+			h = 0.022 * safezoneH;
+			colorBackground[] = {0,1,0,1};
+			colorActive[] = {0,1,0,1};
+			tooltip = "Will load any previous campaign global saves for any map running TRGM2 (that was saved by you only... i.e. the current person selecting mission parameters"; //--- ToDo: Localize;
+			action = "[_this,2] execVM 'RandFramework\GUI\SetParamsAndBegin.sqf'; false";
+		};
 
 		////////////////////////////////////////////////////////
 		// GUI EDITOR OUTPUT END

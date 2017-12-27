@@ -160,6 +160,11 @@ if (isNil "debugMessages") then {
 	publicVariable "debugMessages";	
 };
 
+if (isNil "SaveType") then {
+			SaveType = 0;
+			publicVariable "SaveType";
+};
+
 
 
 showcinemaborder true; 	
@@ -353,6 +358,9 @@ TREND_fnc_CheckBadPoints = {
 		if (_dCurrentRep < 1) then {_CurrentRank = 0;};	
 		
 		if (_lastBadPoints != BadPoints) then {
+			if (SaveType != 0) then {
+				[SaveType,false] execVM "RandFramework\Campaign\ServerSave.sqf";
+			};
 			_bRepWorse = false;
 			if (BadPoints > _lastBadPoints) then {_bRepWorse = true};
 			_lastBadPoints = BadPoints;

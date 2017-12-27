@@ -48,7 +48,7 @@ if (iAllowMineField == 1) then {AllowMineField = True;};
 if (iAllowMineField == 0) then {AllowMineField = False;};
 
 iBuildingCountToAllowCivsAndFriendlyInformants = 10;
-bFriendlyInsurgents = [false,true,false];
+bFriendlyInsurgents = [false,true,false,false];
 bCivsOnly = [true,false,false,false,false,false];
 
 PunishmentTimer = 1200;

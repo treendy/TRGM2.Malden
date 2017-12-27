@@ -84,6 +84,8 @@ TREND_fnc_BasicInit = {
 		};
 	};
 
+
+
 	if (str player == "sl" || str player == "k1_1" || str player == "k1_5" || str player == "d1_1" || str player == "d2_1" || str player == "pg1_1" || str player == "pg1_2" || str player == "pg1_3") then {
 		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
 			//myaction = ['RequestArti','Request Arti','',{_handle=createdialog "DialogArtiRequest";},{true}] call ace_interact_menu_fnc_createAction;
@@ -135,6 +137,27 @@ if (isNil "KilledPositions") then {
 };
 
 
+TREND_fnc_InitPostStarted = {	
+	if (iMissionSetup == 5 && isMultiplayer) then {
+			if (SaveType == 0) then {
+				laptop1 addaction ["Save Local",{[1,true] execVM "RandFramework\Campaign\ServerSave.sqf";}];
+				laptop1 addaction ["Save Global",{[2,true] execVM "RandFramework\Campaign\ServerSave.sqf";}];
+			};
+			if (SaveType == 1) then {
+				hint "This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save is only available to the current map";
+				laptop1 addAction ["Campaign saves as Local",{hint "This mission will save only on the current map.\n\nEach time your reputation adjusts, the data will save automatically."}];	
+			};
+			if (SaveType == 2) then {
+				hint "This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save will be available on any map running TRGM2";
+				laptop1 addAction ["Campaign saves as Global",{hint "This mission will save and can be loaded from any map.\n\nEach time your reputation adjusts, the data will save automatically."}];	
+			};
+	};
+};
+[] spawn TREND_fnc_InitPostStarted;
+player addEventHandler ["Respawn", { [] spawn TREND_fnc_InitPostStarted; }];
+
+
+
 
 bCirclesOfDeath = false;
 iCirclesOfDeath = 0; //("TREND_par_CirclesOfDeath" call BIS_fnc_getParamValue);
@@ -179,22 +202,21 @@ player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInit; }];
 
 TREND_fnc_GeneralPlayerLoop = {
 	while {true} do {
-		//hint "TREND_fnc_GeneralPlayerLoop";
-		//{
-			if (leader (group (vehicle player)) == player) then {
-				//hint "hmm";
-				_dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
-				if (_dCurrentRep >= 3) then {
-					//hint "hmm2";
-					[player, supReq] call BIS_fnc_addSupportLink;
-				};
-				if (_dCurrentRep >= 7) then {
-					//hint "hmm3";
-					[player, supReqAir] call BIS_fnc_addSupportLink;
-				};
+			
+		
+
+		if (leader (group (vehicle player)) == player) then {
+			_dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
+			if (_dCurrentRep >= 3) then {
+				//hint "hmm2";
+				[player, supReq] call BIS_fnc_addSupportLink;
 			};
-		//} forEach group player;
-		//player doFollow player; 
+			if (_dCurrentRep >= 7) then {
+				//hint "hmm3";
+				[player, supReqAir] call BIS_fnc_addSupportLink;
+			};
+		};
+
 		sleep 3;
 	};
 };

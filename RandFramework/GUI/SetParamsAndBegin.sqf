@@ -1,37 +1,110 @@
+params["_thisBeginControl","_SaveType"]; //_SaveType optional, default 0  (1 is local load, 2 is global load)
+if (isNil "_SaveType") then {_SaveType = 0};
+
 #include "..\..\setUnitGlobalVars.sqf";
 disableSerialization;
 
 
-_ctrlItem = (findDisplay 5000) displayCtrl 5500;
-iMissionParamType = MissionParamTypesValues select lbCurSel _ctrlItem;
-publicVariable "iMissionParamType";
+if (_SaveType == 0) then {
 
-_ctrlTypes = (findDisplay 5000) displayCtrl 5104;
-iMissionParamObjective = MissionParamObjectivesValues select lbCurSel _ctrlTypes;
-publicVariable "iMissionParamObjective";
+	_ctrlItem = (findDisplay 5000) displayCtrl 5500;
+	iMissionParamType = MissionParamTypesValues select lbCurSel _ctrlItem;
+	publicVariable "iMissionParamType";
 
-_ctrlNVG = (findDisplay 5000) displayCtrl 5102;
-iAllowNVG = MissionParamNVGOptionsValues select lbCurSel _ctrlNVG;
-publicVariable "iAllowNVG";
+	_ctrlTypes = (findDisplay 5000) displayCtrl 5104;
+	iMissionParamObjective = MissionParamObjectivesValues select lbCurSel _ctrlTypes;
+	publicVariable "iMissionParamObjective";
 
-_ctrlRep = (findDisplay 5000) displayCtrl 5100;
-iMissionParamRepOption = MissionParamRepOptionsValues select lbCurSel _ctrlRep;
-publicVariable "iMissionParamRepOption";
+	_ctrlNVG = (findDisplay 5000) displayCtrl 5102;
+	iAllowNVG = MissionParamNVGOptionsValues select lbCurSel _ctrlNVG;
+	publicVariable "iAllowNVG";
 
-
-_ctrlWeather = (findDisplay 5000) displayCtrl 5101;
-iWeather = MissionParamWeatherOptionsValues select lbCurSel _ctrlWeather;
-publicVariable "iWeather";
-
-_ctrlRevive = (findDisplay 5000) displayCtrl 5103;
-iUseRevive = MissionParamReviveOptionsValues select lbCurSel _ctrlRevive;
-publicVariable "iUseRevive";
-
-_ctrlLocation = (findDisplay 5000) displayCtrl 2105;
-iStartLocation = MissionParamLocationOptionsValues select lbCurSel _ctrlLocation;
-publicVariable "iStartLocation";
+	_ctrlRep = (findDisplay 5000) displayCtrl 5100;
+	iMissionParamRepOption = MissionParamRepOptionsValues select lbCurSel _ctrlRep;
+	publicVariable "iMissionParamRepOption";
 
 
-bAndSoItBegins = true; 
-publicVariable 'bAndSoItBegins'; 
-closedialog 0;
+	_ctrlWeather = (findDisplay 5000) displayCtrl 5101;
+	iWeather = MissionParamWeatherOptionsValues select lbCurSel _ctrlWeather;
+	publicVariable "iWeather";
+
+	_ctrlRevive = (findDisplay 5000) displayCtrl 5103;
+	iUseRevive = MissionParamReviveOptionsValues select lbCurSel _ctrlRevive;
+	publicVariable "iUseRevive";
+
+	_ctrlLocation = (findDisplay 5000) displayCtrl 2105;
+	iStartLocation = MissionParamLocationOptionsValues select lbCurSel _ctrlLocation;
+	publicVariable "iStartLocation";
+
+	bAndSoItBegins = true; 
+	publicVariable 'bAndSoItBegins'; 
+	closedialog 0;
+
+};
+
+sInitialSLPlayerID = getPlayerUID player; //store the uid of the player picking the params at the start of a campaign, so when we save, we know the uid to save against even if he is killed!
+publicVariable "sInitialSLPlayerID";	
+sleep 0.1;
+
+_LoadVersion = "";
+if (_SaveType == 1) then {
+	_LoadVersion = "LOCAL";
+};
+if (_SaveType == 2) then {
+	_LoadVersion = "GLOBAL";
+};
+
+//_ctrl = (findDisplay 5000) displayCtrl 5001;
+//_ctrl ctrlSetText "test: " + sInitialSLPlayerID + ":" + _LoadVersion;
+
+
+if (_LoadVersion != "") then {
+	SaveTypeString = _LoadVersion;
+	publicVariable "SaveTypeString";
+	sleep 0.1;
+	{
+		SavedData = profileNamespace getVariable [sInitialSLPlayerID + ":" + SaveTypeString,[]]; //Get this from server only, but use player ID!!!
+		publicVariable "SavedData";
+		//_ctrl ctrlSetText "SavedData: " + SavedData;
+	} remoteExec ["bis_fnc_call", 2]; //Save this to server only
+	sleep 0.1;
+
+	if (count SavedData == 0) then {
+		_ctrl = (findDisplay 5000) displayCtrl 5001;
+		_ctrl ctrlSetText "No data found! make sure you are using the same profile that you saved the last mission with";
+	}
+	else {
+
+		iMissionParamType = SavedData select 0;
+		publicVariable "iMissionParamType";
+		iMissionParamObjective = SavedData select 1;
+		publicVariable "iMissionParamObjective";		
+		iAllowNVG = SavedData select 2;
+		publicVariable "iAllowNVG";	
+		iMissionParamRepOption =  SavedData select 3;
+		publicVariable "iMissionParamRepOption";
+		iWeather = SavedData select 4;
+		publicVariable "iWeather";
+		iUseRevive = SavedData select 5;
+		publicVariable "iUseRevive";
+		iStartLocation = SavedData select 6;
+		publicVariable "iStartLocation";
+
+		BadPoints = SavedData select 7;
+		MaxBadPoints = SavedData select 8;
+		BadPointsReason = SavedData select 9; 
+		iCampaignDay = SavedData select 10; 
+		publicVariable "BadPoints";
+		publicVariable "MaxBadPoints";
+		publicVariable "BadPointsReason";
+		publicVariable "iCampaignDay";
+
+		SaveType = _SaveType;
+		publicVariable "SaveType";
+
+		bAndSoItBegins = true; 
+		publicVariable 'bAndSoItBegins'; 
+		closedialog 0;
+	};
+};
+

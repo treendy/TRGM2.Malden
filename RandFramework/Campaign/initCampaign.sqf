@@ -14,10 +14,17 @@
 
 
 
-MaxBadPoints = 1;
-publicVariable "MaxBadPoints";
 
-[["INIT"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
+
+if (SaveType == 0) then {
+	[["INIT"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
+	MaxBadPoints = 1;
+	publicVariable "MaxBadPoints";
+}
+else {
+	[["MISSION_COMPLETE"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
+};
+
 
 if (!isnil "k1_2") then {if (!isPlayer k1_2) then {deleteVehicle k1_2;}};
 if (!isnil "k1_3") then {if (!isPlayer k1_3) then {deleteVehicle k1_3;}};
@@ -25,7 +32,7 @@ if (!isnil "k1_4") then {if (!isPlayer k1_4) then {deleteVehicle k1_4;}};
 if (!isnil "k1_5") then {if (!isPlayer k1_5) then {deleteVehicle k1_5;}};	
 
 
-hint "go to the board to get started"
+//hint "go to the board to get started"
 
 
 
