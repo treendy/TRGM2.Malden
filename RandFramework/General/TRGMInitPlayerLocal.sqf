@@ -72,7 +72,7 @@ TREND_fnc_BasicInit = {
 		[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
 	}
 	else {
-		player addAction ["Custom LZ","RandFramework\SelectLZ.sqf"];		
+		player addAction ["Call for transport chopper",TRGM_fnc_selectLZ];		
 	};
 
 	if (iMissionParamRepOption == 1) then {

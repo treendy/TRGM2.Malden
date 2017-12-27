@@ -18,7 +18,7 @@ if (!(objNull isEqualTo _vehiclePositon) && (_vehiclePositon distance2D _pos < _
 
 if ((!(objNull isEqualTo _baseLZPos)) && ((_baseLZPos distance2D _pos) < _minimumDistance)) then {
 	_bDistanceOK = false;
-	hint "This is to close to the Base.";	
+	hint "This is too close to the Base.";	
 };
 
 if (_bDistanceOK) then {

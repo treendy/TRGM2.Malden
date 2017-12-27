@@ -1,7 +1,7 @@
 params[
 	"_position",
-	["_useAtLocation",false,false],
-	["_distanceConsideredInArea",-1,400]
+	["_useAtLocation",false],
+	["_distanceConsideredInArea",400]
 
 ];
 

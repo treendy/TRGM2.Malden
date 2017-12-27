@@ -1,6 +1,6 @@
 params ["_target", "_caller", "_ID", "_arguments"];
 
-_vehicle = _target;
+_vehicle = chopper1;//_target;
 _redZonePositions = ObjectivePossitions;
 _radius = 900;
 _minimumDistance = 300;
