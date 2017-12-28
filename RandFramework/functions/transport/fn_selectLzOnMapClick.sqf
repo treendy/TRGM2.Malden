@@ -10,7 +10,7 @@ _resetMapState = {
 if (_baseReturnAllowed && _pos distance2D _baseLZPos <= _baseRadius) then {
 	// click on base area
 	[_vehicle,"Copy that, RTB."] spawn TRGM_fnc_commsPilotToVehicle;
-	[_vehicle] spawn TRGM_fnc_flyToBase;´
+	[_vehicle] spawn TRGM_fnc_flyToBase;
 	call _resetMapState;
 } else {
 	if (!_baseReturnAllowed && _pos distance2D _baseLZPos <= _baseRadius) then {
