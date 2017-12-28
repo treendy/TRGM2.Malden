@@ -1,8 +1,16 @@
-params ["_vehicle","_thisMissionNr"];
+params [
+	"_vehicle",
+	["_thisMission", nil,[],2]
+];
 scopeName "FlyToBase";
 
+// if not part of a flying mission create a new one
+if (isNil "_thisMission") then {
+	_thisMissionNr = (_vehicle getVariable ["missionNr",0]) + 1;
+	_vehicle setVariable ["missionNr", _thisMissionNr, true];
 
-//hint (format ["triger thisList: %1", count thisList]);
+	_thisMission = [_vehicle,_thisMissionNr];
+};
 
 {
 	deleteWaypoint _x
@@ -20,28 +28,33 @@ _flyToWaypoint setWaypointCombatMode "BLUE";
 _flyToWaypoint setWaypointCompletionRadius 100;
 _flyToWaypoint setWaypointStatements ["true", "(vehicle this) land 'LAND';"];
 
-//hint str(_thisMissionNr);
-waitUntil {((_vehicle distance2D _baseLZPos) < 300) || !(_thisMissionNr call TRGM_fnc_checkMissionIdActive)};
-if ( !(_thisMissionNr call TRGM_fnc_checkMissionIdActive)) then {
+//hint str(_thisMission);
+waitUntil {((_vehicle distance2D _baseLZPos) < 300) || !(_thisMission call TRGM_fnc_checkMissionIdActive)};
+if ( !(_thisMission call TRGM_fnc_checkMissionIdActive)) then {
 	deleteVehicle _heliPad;
 	breakOut "FlyToBase";
 };
 
 
 // Landing Comms
-_groupID = groupId group driver _vehicle;
-_text = format ["%1 requesting landing.", _groupID];
-[driver _vehicle,_text] call TRGM_fnc_commsSide;
-sleep 1.5;
-_text = format ["%1 you are cleared for landing.", _groupID];
-[_text] call TRGM_fnc_commsHQ;
+if ([_vehicle] call TRGM_fnc_helicopterIsFlying) then  {
+	_groupID = groupId group driver _vehicle;
+	_text = format ["%1 requesting landing.", _groupID];
+	[driver _vehicle,_text] call TRGM_fnc_commsSide;
+	sleep 1.5;
+	_text = format ["%1 you are cleared for landing.", _groupID];
+	[_text] call TRGM_fnc_commsHQ;
+};
 
 setWind [0,0,true]; // prevent stuck helicopter during duststorm 
 
-waitUntil {isTouchingGround _vehicle || {!canMove _vehicle} || !(_thisMissionNr call TRGM_fnc_checkMissionIdActive)};
-if ( !(_thisMissionNr call TRGM_fnc_checkMissionIdActive)) then {
+waitUntil {(!([_vehicle] call TRGM_fnc_helicopterIsFlying)) || {!canMove _vehicle} || !(_thisMission call TRGM_fnc_checkMissionIdActive)};
+if ( !(_thisMission call TRGM_fnc_checkMissionIdActive)) then {
 	breakOut "FlyToBase";
 };
+
+[_vehicle,"Back home. Not that I've missed it..."] call TRGM_fnc_commsPilotToVehicle;
+
 
 deleteVehicle _heliPad;
 

@@ -1,28 +1,33 @@
 params ["_vehicle"];
 
+_actionAdapter = {
+	params ["_target", "_caller", "_ID", "_arguments"];
+	[_target] spawn TRGM_fnc_selectLZ;
+};
+
 _actions = [
 	[
 		"Custom LZ",
-		TRGM_fnc_selectLZ,
+		_actionAdapter,
 		nil,
 		-20, //priority
 		false,
 		true,
 		"",
-		"_this in (crew _target) && (isTouchingGround _target)",
+		"_this in (crew _target) && !([_target] call TRGM_fnc_helicopterIsFlying)",
 		-1,
 		false,
 		""
 	],
 	[
 		"Divert to different LZ",
-		TRGM_fnc_selectLZ,
+		_actionAdapter,
 		nil,
 		-20, //priority
 		false,
 		true,
 		"",
-		"_this in (crew _target) && !(isTouchingGround _target)",
+		"_this in (crew _target) && ([_target] call TRGM_fnc_helicopterIsFlying)",
 		-1,
 		false,
 		""
@@ -32,8 +37,10 @@ _actions = [
 
 _target = [0, -2] select isMultiplayer;
 {
-	if (isServer) then {
-		[_vehicle, _x] remoteExec ["addAction",_target,true];
+	if (isMultiplayer) then {
+		if (isServer) then {
+			[_vehicle, _x] remoteExec ["addAction",_target,true];
+		};
 	} else {
 		_vehicle addAction _x;
 	}
