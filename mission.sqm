@@ -12,10 +12,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={843.83124,118.79243,12157.622};
-		dir[]={-0.60018468,-0.79003876,-0.12567861};
-		up[]={-0.77329463,0.61299217,-0.16192856};
-		aside[]={-0.20497091,3.4938057e-007,0.97884947};
+		pos[]={903.06732,225.62717,12144.287};
+		dir[]={-0.5826329,-0.81262821,0.018891409};
+		up[]={-0.81222159,0.58272249,0.026334912};
+		aside[]={0.032409731,3.5304402e-007,0.99955565};
 	};
 };
 binarizationWanted=0;
@@ -28,6 +28,7 @@ addons[]=
 	"A3_Characters_F",
 	"A3_Air_F_Beta_Heli_Transport_01",
 	"A3_Air_F_Beta_Heli_Attack_01",
+	"ace_realisticnames",
 	"A3_Supplies_F_Exp_Ammoboxes",
 	"A3_Air_F_Jets_Plane_Fighter_01",
 	"A3_Soft_F_Exp_LSV_01",
@@ -36,6 +37,8 @@ addons[]=
 	"A3_Armor_F_Beta_APC_Wheeled_01",
 	"A3_Modules_F",
 	"A3_Soft_F_Gamma_Truck_01",
+	"ace_cargo",
+	"ace_repair",
 	"A3_Structures_F_Ind_CarService",
 	"A3_Structures_F_Mil_Cargo",
 	"A3_Characters_F_Common",
@@ -50,20 +53,33 @@ addons[]=
 	"A3_Air_F_EPC_Plane_CAS_01",
 	"A3_Structures_F_EPC_Items_Electronics",
 	"A3_Weapons_F_Rifles_MX",
+	"ace_scopes",
+	"ace_ballistics",
 	"A3_Weapons_F_Acc",
+	"ace_laserpointer",
 	"A3_Weapons_F",
+	"ace_smallarms",
 	"A3_Weapons_F_Pistols_P07",
+	"ace_optics",
+	"ace_goggles",
+	"ace_nightvision",
+	"ace_attach",
+	"ace_chemlights",
 	"A3_Weapons_F_Items",
+	"ace_medical",
 	"A3_Characters_F_Mark",
+	"ace_explosives",
 	"A3_Drones_F_Weapons_F_Gamma_Items",
 	"A3_Characters_F_Heads",
+	"ace_gforces",
+	"ace_parachute",
 	"A3_Data_F_Exp_A_Virtual"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=24;
+		items=38;
 		class Item0
 		{
 			className="A3_Ui_F";
@@ -157,75 +173,173 @@ class AddonsMetaData
 		};
 		class Item13
 		{
+			className="ace_cargo";
+			name="ACE3 - Cargo";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item14
+		{
+			className="ace_repair";
+			name="ACE3 - Repair";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item15
+		{
 			className="A3_Structures_F_Ind";
 			name="Arma 3 - Industrial Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item14
+		class Item16
 		{
 			className="A3_Drones_F";
 			name="Arma 3 Beta - Drones";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item15
+		class Item17
 		{
 			className="A3_Soft_F";
 			name="Arma 3 Alpha - Unarmored Land Vehicles";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item16
+		class Item18
 		{
 			className="A3_Props_F_Orange";
 			name="Arma 3 Orange - Decorative and Mission Objects";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item17
+		class Item19
 		{
 			className="A3_Armor_F_Gamma";
 			name="Arma 3 - Armored Land Vehicles";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item18
+		class Item20
 		{
 			className="A3_Air_F";
 			name="Arma 3 Alpha - Aircraft";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item19
+		class Item21
 		{
 			className="A3_Air_F_Exp";
 			name="Arma 3 Apex - Aircraft";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item20
+		class Item22
 		{
 			className="A3_Air_F_EPC";
 			name="Arma 3 Win Episode - Aircraft";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item21
+		class Item23
 		{
 			className="A3_Weapons_F";
 			name="Arma 3 Alpha - Weapons and Accessories";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item22
+		class Item24
+		{
+			className="ace_scopes";
+			name="ACE3 - Scopes";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item25
+		{
+			className="ace_ballistics";
+			name="ACE3 - Ballistics";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item26
+		{
+			className="ace_laserpointer";
+			name="ACE3 - Laser Pointer";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item27
+		{
+			className="ace_smallarms";
+			name="ACE3 - Small Arms";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item28
+		{
+			className="ace_optics";
+			name="ACE3 - Optics";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item29
+		{
+			className="ace_goggles";
+			name="ACE3 - Goggles";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item30
+		{
+			className="ace_nightvision";
+			name="ACE3 - Night Vision";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item31
+		{
+			className="ace_attach";
+			name="ACE3 - Attach";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item32
+		{
+			className="ace_chemlights";
+			name="ace_chemlights";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item33
+		{
+			className="ace_medical";
+			name="ACE3 - Medical";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item34
 		{
 			className="A3_Characters_F_Mark";
 			name="Arma 3 Marksmen - Characters and Clothing";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item23
+		class Item35
+		{
+			className="ace_explosives";
+			name="ACE3 - Explosives";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item36
+		{
+			className="ace_parachute";
+			name="ACE3 - Parachute";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
+		class Item37
 		{
 			className="A3_Data_F_Exp_A";
 			name="Arma 3 Nexus Update - Main Configuration";
@@ -276,12 +390,12 @@ class Mission
 		class Item1
 		{
 			dataType="Marker";
-			position[]={532.09961,0.27414656,12145.52};
+			position[]={532.09998,0.27399999,12145.52};
 			name="transportChopper";
 			text="Transport Chopper";
 			type="b_air";
 			id=1;
-			atlOffset=-2.6407754;
+			atlOffset=-2.6409855;
 		};
 		class Item2
 		{
@@ -378,7 +492,7 @@ class Mission
 				class Attribute0
 				{
 					property="groupID";
-					expression="_this setGroupID [_value];";
+					expression="[_this, _value] call CBA_fnc_setCallsign";
 					class Value
 					{
 						class data
@@ -544,7 +658,7 @@ class Mission
 				class Attribute0
 				{
 					property="groupID";
-					expression="_this setGroupID [_value];";
+					expression="[_this, _value] call CBA_fnc_setCallsign";
 					class Value
 					{
 						class data
@@ -716,7 +830,7 @@ class Mission
 				class Attribute0
 				{
 					property="groupID";
-					expression="_this setGroupID [_value];";
+					expression="[_this, _value] call CBA_fnc_setCallsign";
 					class Value
 					{
 						class data

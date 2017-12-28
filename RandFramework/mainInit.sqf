@@ -356,11 +356,15 @@ TREND_fnc_CheckBadPoints = {
 		if (_dCurrentRep < 5) then {_CurrentRank = 2;};
 		if (_dCurrentRep < 3) then {_CurrentRank = 1;};	
 		if (_dCurrentRep < 1) then {_CurrentRank = 0;};	
-		
-		if (_lastBadPoints != BadPoints) then {
+		if (_dCurrentRep != _lastRepPoints) then {
 			if (SaveType != 0) then {
 				[SaveType,false] execVM "RandFramework\Campaign\ServerSave.sqf";
+				_lastRepPoints = _dCurrentRep;
 			};
+		};
+
+		if (_lastBadPoints != BadPoints) then {
+			
 			_bRepWorse = false;
 			if (BadPoints > _lastBadPoints) then {_bRepWorse = true};
 			_lastBadPoints = BadPoints;
@@ -404,6 +408,7 @@ TREND_fnc_CheckBadPoints = {
 		};
 
 		//show "Current Reputation is X, Goal is X"
+		"transportChopper" setMarkerPos getPos chopper1;
 		sleep 1;
 	};
 };
