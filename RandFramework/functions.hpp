@@ -35,5 +35,7 @@ class TRGM   { // TAG
 
         class flyToLz{};
         class flyToBase{};
+        
+        class helicopterIsFlying{};
     };
 };  

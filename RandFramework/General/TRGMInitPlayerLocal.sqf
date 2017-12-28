@@ -67,12 +67,16 @@ TREND_fnc_BasicInit = {
 		[] execVM "RandFramework\NVscript.sqf";
 	};
 
+	_action = {
+		[chopper1] spawn TRGM_fnc_selectLZ;
+	};
+
 	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-		myaction = ['CallTransportChopper','Call Transport Chopper','',{execVM "RandFramework\SelectLZ.sqf";},{true}] call ace_interact_menu_fnc_createAction;
+		myaction = ['CallTransportChopper','Call Transport Chopper','',_action,{true}] call ace_interact_menu_fnc_createAction;
 		[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
 	}
 	else {
-		player addAction ["Call for transport chopper",TRGM_fnc_selectLZ];		
+		player addAction ["Call for transport chopper",_action];		
 	};
 
 	if (iMissionParamRepOption == 1) then {
