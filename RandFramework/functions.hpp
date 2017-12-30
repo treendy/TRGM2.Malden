@@ -38,4 +38,17 @@ class TRGM   { // TAG
         
         class helicopterIsFlying{};
     };
+
+    
+    class civillians { // CATEGORY
+        file = "RandFramework\functions\civillians";
+
+        class badCivInitialize{};
+        class badCivApplyAssingnedArmament{};
+        class badCivSearch{};
+        class badCivTurnHostile{};
+        class badCivLoop{};
+        class badCivAddSearchAction{};
+        class badCivRemoveSearchAction{};
+    };
 };  
