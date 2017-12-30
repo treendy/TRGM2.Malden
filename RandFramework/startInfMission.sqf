@@ -63,10 +63,10 @@ if (iMissionSetup == 4) then {
 };
 if (iMissionSetup == 5) then {
 	if (MaxBadPoints >= 10) then {
-		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom MissionsThatHaveIntel];
-		_IsMainObjs = [true,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-		_MarkerTypes = ["empty","hd_dot"];
-		_CreateTasks = [true,false];
+		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom MissionsThatHaveIntel,selectRandom MissionsThatHaveIntel];
+		_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+		_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
+		_CreateTasks = [true,false,false];
 		_bIsCampaignFinalMission = true;
 	}
 	else {

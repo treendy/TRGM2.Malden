@@ -751,11 +751,9 @@ TREND_fnc_SpawnCivs = {
 		_allBuildingPos = _randBuilding buildingPos -1;
 
 		if (_bIsRebels) then {
-			//sRiflemanToUse createUnit [selectRandom _allBuildingPos, _sideCivGroup, _sInitString];
 			_wayPosInit = selectRandom _allBuildingPos;
 			if (!isNil "_wayPosInit") then {
-				//sRiflemanToUse createUnit [_wayPosInit, _sideCivGroup, _sInitString];
-				_SpawnedRifleman = (_sideCivGroup createUnit [sRiflemanToUse, _wayPosInit, [], 10, "NONE"]);
+				_SpawnedRifleman = (_sideCivGroup createUnit [sCivilian, _wayPosInit, [], 10, "NONE"]);
 				if (!_bRebelLeaderPicked) then {
 					_SpawnedRifleman addaction ["Talk to leader","RandFramework\TalkRebLead.sqf"];
 					_SpawnedRifleman addEventHandler ["killed", {_this execVM "RandFramework\InsKilled.sqf";}];
@@ -776,7 +774,6 @@ TREND_fnc_SpawnCivs = {
 			};
 		}
 		else {
-			//sCivilian createUnit [selectRandom _allBuildingPos, _sideCivGroup, _sInitString];
 			_wayPosInit = selectRandom _allBuildingPos;
 			if (!isNil "_wayPosInit") then {
 				sCivilian createUnit [_wayPosInit, _sideCivGroup, _sInitString];
