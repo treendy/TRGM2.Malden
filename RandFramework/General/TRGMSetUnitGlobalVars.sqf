@@ -1,5 +1,10 @@
 bDebugMode = false;
 
+ADVSET_VIRTUAL_ARSENAL_IDX = 0;
+AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex
+	[6001, "Virtual Arsenal","RscCombo",["Enabled","Disabled"],[1,0],1] 
+];
+
 //0 = no, 1 = guarantee revive, 2 = realistic revive, 3 = realistic revive (only medics can revive)
 
 //iUseRevive = ("OUT_par_UseRevive" call BIS_fnc_getParamValue);	
@@ -79,7 +84,7 @@ DarkNight = [2035, 1, 15, 0, 0];
 MoonNight = [2035, 11, 09, 23, 0];
 EarlyMorning = [2035, 1, 14, 8, 15];
 
-IntelShownType = [1,2,3];  //1=Mortar  2=AAA   3=commsTower
+IntelShownType = [1,2,3,4];  //1=Mortar  2=AAA   3=commsTower	4=checkpoints
 TowerRadius = 3500;
 
 GridXOffSet = 0;  //to work this out, get vector21, mark pos at [0,0], the number for the X or Y is the offset, as it should be zero, so if not, we need to use this as an offset
@@ -117,3 +122,5 @@ MissionParamLocationOptions = ["Random", "Near AO", "Main HQ"];
 MissionParamLocationOptionsValues = [2,1,0];
 
 FastResponseCarItems=[[[["arifle_SDAR_F"],[10]],[["20Rnd_556x45_UW_mag"],[20]],[["G_B_Diving","V_RebreatherB","U_B_Wetsuit"],[10,10,10]],[[],[]]],false];
+
+ThemeAndIntroMusic=["LeadTrack01_F","LeadTrack01_F_EPA","LeadTrack02_F","LeadTrack01_F_EPB","LeadTrack02_F_Bootcamp","LeadTrack02_F_EPB","LeadTrack03_F","LeadTrack03_F_EPA","LeadTrack03_F_EPB","LeadTrack03_F_EPC","LeadTrack04_F","LeadTrack04_F_EPB","LeadTrack04_F_EPC","LeadTrack05_F","LeadTrack05_F_EPC","LeadTrack06_F","LeadTrack06_F_EPC","Track02_SolarPower","Track03_OnTheRoad","Track04_Underwater1","Track06_CarnHeli","BackgroundTrack01_F_EPB","BackgroundTrack01_F_EPC","BackgroundTrack02_F_EPC","BackgroundTrack03_F_EPC","BackgroundTrack04_F_EPC"];

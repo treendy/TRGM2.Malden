@@ -1,6 +1,8 @@
 params ["_thisLaptop" , "_caller", "_ID", "_arguments"];
 _arguments params ["_iSelected","_bCreateTask"];
 
+ClearedPositions pushBack (ObjectivePossitions select _iSelected);
+
 //removeAllActions _thisLaptop;
 [_thisLaptop] remoteExec ["removeAllActions", 0, true];
 

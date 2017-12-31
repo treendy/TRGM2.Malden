@@ -121,7 +121,7 @@ if (isNil "bAndSoItBegins") then {
 };
 
 if (isNil "iMissionParamType") then {
-	iMissionParamType = 0;
+	iMissionParamType = 3;
 	publicVariable "iMissionParamType";	
 };
 if (isNil "iMissionParamObjective") then {
@@ -164,7 +164,30 @@ if (isNil "SaveType") then {
 			SaveType = 0;
 			publicVariable "SaveType";
 };
+if (isNil "IntelFound") then {
+			IntelFound = [];
+			publicVariable "IntelFound";
+};
+if (isNil "iStartLocation") then {
+			iStartLocation = 2;
+			publicVariable "iStartLocation";
+};
+if (isNil "AdvancedSettings") then {
+			AdvancedSettings = [];
+			//Set default advanced settings
+			{	
+				_defaultIndex = _x select 5;
+				_value = (_x select 4) select _defaultIndex;
+				AdvancedSettings pushBack _value; 
+				publicVariable "AdvancedSettings";
+			} forEach AdvControls;
+			publicVariable "AdvancedSettings";
 
+};
+if (isNil "ClearedPositions") then {
+			ClearedPositions = [];
+			publicVariable "ClearedPositions";
+};
 
 
 showcinemaborder true; 	
@@ -368,15 +391,17 @@ TREND_fnc_CheckBadPoints = {
 			_bRepWorse = false;
 			if (BadPoints > _lastBadPoints) then {_bRepWorse = true};
 			_lastBadPoints = BadPoints;
-			if (BadPoints >= MaxBadPoints && iMissionParamRepOption == 1) then {
-				iCurrentTaskCount = 0;
-				while {iCurrentTaskCount < count ActiveTasks} do {
-					if (!(ActiveTasks call FHQ_TT_areTasksCompleted)) then {
-						[ActiveTasks select iCurrentTaskCount, "failed"] call FHQ_TT_setTaskState;
-						iCurrentTaskCount = iCurrentTaskCount + 1;
+			if (iMissionParamType != 5) then {
+				if (BadPoints >= MaxBadPoints && iMissionParamRepOption == 1) then {
+					iCurrentTaskCount = 0;
+					while {iCurrentTaskCount < count ActiveTasks} do {
+						if (!(ActiveTasks call FHQ_TT_areTasksCompleted)) then {
+							[ActiveTasks select iCurrentTaskCount, "failed"] call FHQ_TT_setTaskState;
+							iCurrentTaskCount = iCurrentTaskCount + 1;
+						};
 					};
+						
 				};
-					
 			};
 		};
 		if (_LastRank != _CurrentRank) then {
@@ -478,3 +503,26 @@ if (isServer) then {
 	[[],"RandFramework\animateAnimals.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
 	//hint "PING";
  };
+
+
+
+ 
+if (bUseRevive) then {
+
+		//by psycho
+	["%1 --- Executing TcB AIS init.sqf",diag_ticktime] call BIS_fnc_logFormat;
+	enableSaving [false,false];
+	enableTeamswitch false;
+
+	
+	// TcB AIS Wounding System --------------------------------------------------------------------------
+	if (!isDedicated) then {
+		TCB_AIS_PATH = "ais_injury\";
+		{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});		// execute for every playable unit
+		
+		//{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (units group player);													// only own group - you cant help strange group members
+		
+		//{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach [p1,p2,p3,p4,p5];														// only some defined units
+	};
+	// --------------------------------------------------------------------------------------------------------------
+};

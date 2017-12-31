@@ -21,6 +21,8 @@ _isCampaign = (iMissionParamType == 5);
 
 
 if ((bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) || !_isCampaign) then {
+	
+
 	player allowdamage false;
 
 
@@ -100,6 +102,11 @@ if ((bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) || !_isCampaign) t
 		publicVariable "bMortarFiring";	
 		iCampaignDay = iCampaignDay + 1;
 		publicVariable "iCampaignDay";	
+		IntelFound = [];
+		publicVariable "IntelFound";
+		ClearedPositions = [];
+		publicVariable "ClearedPositions";
+
 
 		if (SaveType != 0) then {
 				[SaveType,false] execVM "RandFramework\Campaign\ServerSave.sqf";
@@ -156,6 +163,11 @@ if ((bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) || !_isCampaign) t
 	};
 
 
+	playMusic "";
+	0 fadeMusic 1;
+	playMusic selectRandom ThemeAndIntroMusic;
+
+
 	txt1Layer = "txt1" call BIS_fnc_rscLayer;
 	txt2Layer = "txt2" call BIS_fnc_rscLayer;
 
@@ -191,14 +203,18 @@ if ((bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) || !_isCampaign) t
 
 	sleep 3;
 	titleCut ["", "BLACK out", 5];
+
+	8 fadeMusic 0;
 	sleep 5;
 
-
+	
 	titleCut ["", "BLACK in", 5];
 	_camera cameraEffect ["Terminate","back"];
 	sleep 10;
 
 	player allowdamage true;
+
+	
 }
 else {
 

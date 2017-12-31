@@ -1,6 +1,8 @@
 params ["_thisCiv","_thisPlayer","_id","_params"];
 _params params ["_iSelected","_bCreateTask"];
 
+ClearedPositions pushBack (ObjectivePossitions select _iSelected);
+
 //removeAllActions _thisCiv;
 [_thisCiv] remoteExec ["removeAllActions", 0, true];
 
@@ -39,16 +41,16 @@ else {
 
 	if (getMarkerType format["mrkMainObjective%1",0] == "empty") then {
 			format["mrkMainObjective%1",0] setMarkerType "mil_unknown"; //NOTE: hard coded zero as only one main task will exict (currently!)
-			hint "Map updated with intel found";
+			hint "Map updated with main AO location";
 		}
 		else {
 			if (alive _thisCiv) then {
-				[selectRandom IntelShownType,"HackData"] execVM "RandFramework\showIntel.sqf";
-				[selectRandom IntelShownType,"HackData"] execVM "RandFramework\showIntel.sqf";
-				[selectRandom IntelShownType,"HackData"] execVM "RandFramework\showIntel.sqf";
+				[IntelShownType,"IntOfficer"] execVM "RandFramework\showIntel.sqf";
+				sleep 2;
+				[IntelShownType,"IntOfficer"] execVM "RandFramework\showIntel.sqf";
 			}
 			else {
-				hint "he is dead you muppet!!!"
+				hint "Not quite sure why, but for some reason this dead guy isnt speaking!!!"
 			};
 		};
 };

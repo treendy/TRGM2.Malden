@@ -28,6 +28,20 @@ _flyToWaypoint setWaypointCombatMode "BLUE";
 _flyToWaypoint setWaypointCompletionRadius 100;
 _flyToWaypoint setWaypointStatements ["true", "(vehicle this) land 'LAND';"];
 
+if (!isTouchingGround chopper2) then {
+	_escortPilot = driver chopper2;
+	{
+		deleteWaypoint _x
+	} foreach waypoints group _escortPilot;
+	_escortFlyToWaypoint = (group driver chopper2) addWaypoint [getPos airSupportHeliPad,0,0];
+	_escortFlyToWaypoint setWaypointType "MOVE";
+	_escortFlyToWaypoint setWaypointSpeed "FULL";
+	_escortFlyToWaypoint setWaypointBehaviour "CARELESS";
+	_escortFlyToWaypoint setWaypointCombatMode "RED";
+	_escortFlyToWaypoint setWaypointCompletionRadius 100;
+	_escortFlyToWaypoint setWaypointStatements ["true", "(vehicle this) land 'LAND';"];
+};
+
 //hint str(_thisMission);
 waitUntil {((_vehicle distance2D _baseLZPos) < 300) || !(_thisMission call TRGM_fnc_checkMissionIdActive)};
 if ( !(_thisMission call TRGM_fnc_checkMissionIdActive)) then {

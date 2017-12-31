@@ -16,7 +16,10 @@ if (isNil "bAndSoItBegins") then {
 
 
 	TREND_fnc_MissionSelectLoop = {
+
+		if (!bAndSoItBegins) then {playMusic selectRandom ThemeAndIntroMusic;};
 		while {!bAndSoItBegins} do {
+			
 			if (str player == "sl") then {
 				if  (!dialog) then {
 					sleep 1;
@@ -62,10 +65,6 @@ if (isNil "bAndSoItBegins") then {
 TREND_fnc_BasicInit = {
 	
 	//enableEngineArtillery false; 
-						   
-	if (iAllowNVG == 2) then {
-		[] execVM "RandFramework\NVscript.sqf";
-	};
 
 	_action = {
 		[chopper1] spawn TRGM_fnc_selectLZ;
@@ -79,17 +78,7 @@ TREND_fnc_BasicInit = {
 		player addAction ["Call for transport chopper",_action];		
 	};
 
-	if (iMissionParamRepOption == 1) then {
-		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-			endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format["Current cost per life: %1<br /><br />Bad reputation points: %2 out of %3<br /><br />TOTAL REP: %4 <br /><br />REASONS SO FAR: <br />%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
-		}
-		else {
-			endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format["Current cost per life: %1<br /><br />Bad reputation points: %2 out of %3<br /><br />TOTAL REP: %4 <br /><br />REASONS SO FAR: <br />%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
-		};
-	};
-
-
-
+	
 	if (str player == "sl" || str player == "k1_1" || str player == "k1_5" || str player == "d1_1" || str player == "d2_1" || str player == "pg1_1" || str player == "pg1_2" || str player == "pg1_3") then {
 		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
 			//myaction = ['RequestArti','Request Arti','',{_handle=createdialog "DialogArtiRequest";},{true}] call ace_interact_menu_fnc_createAction;
@@ -127,7 +116,7 @@ waitUntil {bAndSoItBegins};
 endMissionBoard removeAction _actChooseMission;
 
 
-
+5 fadeMusic 0;
 
 
 
@@ -155,6 +144,21 @@ TREND_fnc_InitPostStarted = {
 				hint "This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save will be available on any map running TRGM2";
 				laptop1 addAction ["Campaign saves as Global",{hint "This mission will save and can be loaded from any map.\n\nEach time your reputation adjusts, the data will save automatically."}];	
 			};
+	};
+	if (iAllowNVG == 2) then {
+		[] execVM "RandFramework\NVscript.sqf";
+	};
+
+	if (AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
+		box1 addAction ["<t color='#ff1111'>Virtual Arsenal</t>", {["Open",true] spawn BIS_fnc_arsenal}];
+	};
+	if (iMissionParamRepOption == 1) then {
+		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+			endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format["Current cost per life: %1<br /><br />Bad reputation points: %2 out of %3<br /><br />TOTAL REP: %4 <br /><br />REASONS SO FAR: <br />%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
+		}
+		else {
+			endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format["Current cost per life: %1<br /><br />Bad reputation points: %2 out of %3<br /><br />TOTAL REP: %4 <br /><br />REASONS SO FAR: <br />%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
+		};
 	};
 };
 [] spawn TREND_fnc_InitPostStarted;

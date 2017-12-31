@@ -62,6 +62,15 @@ class CfgDebriefing
 		picture = "b_inf";
 		pictureColor[] = {0.6,0.1,0.2,1};
 	};	
+	class End4
+	{
+		title = "To be continued";
+		subtitle = "";
+		description = "To be continued another day...";
+		pictureBackground = "";
+		picture = "b_inf";
+		pictureColor[] = {0.6,0.1,0.2,1};
+	};	
 };
 
 

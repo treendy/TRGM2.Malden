@@ -8,14 +8,14 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=275;
+		nextID=288;
 	};
 	class Camera
 	{
-		pos[]={781.79486,33.815086,12133.226};
-		dir[]={-0.21751656,-0.58986747,-0.77778131};
-		up[]={-0.15889303,0.80740482,-0.56816304};
-		aside[]={-0.96313357,1.0159274e-006,0.26935259};
+		pos[]={784.65839,147.71593,12320.321};
+		dir[]={0.11731087,-0.7533142,-0.64729106};
+		up[]={0.13434848,0.65756327,-0.74128175};
+		aside[]={-0.9840731,1.5631231e-006,-0.1783464};
 	};
 };
 binarizationWanted=0;
@@ -264,7 +264,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=83;
+		items=85;
 		class Item0
 		{
 			dataType="Marker";
@@ -824,14 +824,13 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={697.8999,31.415051,12155.099};
-				angles[]={0,0.033564631,0};
+				position[]={697.90002,31.415051,12155.099};
+				angles[]={0,0.033562683,0};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this enableCopilot false;" \n "this lockDriver true;" \n "this addaction [""Open pin entry"", {" \n "player setVariable [""currentVeh"",airSup1];" \n "_handle=createdialog ""MyFirstDialog"";" \n "}];}";
 				name="airSup1";
 			};
 			id=20;
@@ -905,14 +904,13 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={787.47131,32.281586,12201.894};
+				position[]={787.47101,32.281586,12201.894};
 				angles[]={0,5.7361641,0};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="call{this enableCopilot false;" \n "this lockDriver true;" \n "this addaction [""Open pin entry"", {" \n "player setVariable [""currentVeh"",chin1];" \n "_handle=createdialog ""MyFirstDialog"";" \n "}];" \n "" \n "this enableAutoTrimRTD true;}";
 				name="chin1";
 			};
 			id=22;
@@ -935,7 +933,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="[[[[""FirstAidKit"",""Medikit""],[10,1]],[[],[]],[[""ToolKit""],[1]],[[""B_Parachute""],[20]]],false]";
+							value="[[[[],[]],[[],[]],[[""FirstAidKit"",""Medikit"",""ToolKit""],[10,1,1]],[[""B_Parachute""],[20]]],false]";
 						};
 					};
 				};
@@ -1123,7 +1121,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="[[[[],[]],[[],[]],[[],[]],[[],[]]],false]";
+							value="[[[[],[]],[[],[]],[[],[]],[[],[]]],true]";
 						};
 					};
 				};
@@ -1300,8 +1298,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={748.4245,28.92,12159.109};
-				angles[]={0,4.7662306,0};
+				position[]={748.42401,28.92,12159.11};
+				angles[]={0,4.766232,0};
 			};
 			side="Empty";
 			flags=4;
@@ -2711,8 +2709,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={662.76257,31.267391,12171.871};
-				angles[]={0,1.5488206,0};
+				position[]={662.763,31.267454,12171.871};
+				angles[]={0,1.5488225,0};
 			};
 			side="Empty";
 			flags=4;
@@ -2721,7 +2719,30 @@ class Mission
 			};
 			id=233;
 			type="B_Plane_CAS_01_dynamicLoadout_F";
-			atlOffset=-0.033063889;
+			atlOffset=-0.033000946;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ammoBox";
+					expression="[_this,_value] call bis_fnc_initAmmoBox;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="[[[[],[]],[[],[]],[[],[]],[[],[]]],true]";
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item64
 		{
@@ -5561,6 +5582,37 @@ class Mission
 			};
 			id=274;
 			type="Box_NATO_Grenades_F";
+		};
+		class Item83
+		{
+			dataType="Trigger";
+			position[]={683.35797,28.92,12215.614};
+			class Attributes
+			{
+				onActivation="LeadTrack04aF";
+				sizeA=0;
+				sizeB=0;
+				effectMusic="LeadTrack02_F_EXP";
+			};
+			id=286;
+			type="EmptyDetector";
+		};
+		class Item84
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={835.81598,28.93,12243.541};
+				angles[]={-0,5.5867462,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				name="airSupportHeliPad";
+			};
+			id=287;
+			type="Land_HelipadCircle_F";
 		};
 	};
 	class Connections

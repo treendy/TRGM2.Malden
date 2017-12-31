@@ -172,7 +172,7 @@ if (_PosFound) then {
 		if (count _allRoadsNear == 0 && _nearestHouseCount == 0) then {_NoRoadsOrBuildingsNear = true;};
 	};
 
-	if (_thisIsCheckPoint) then {
+	if (_thisIsCheckPoint && _thisSide == east) then {
 		//CheckPointAreas
 		CheckPointAreas = CheckPointAreas + [[_roadBlockPos,_thisAreaAroundCheckpointSpacing]]; //the ,_thisAreaAroundCheckpointSpacing is for when we use BIS_fnc_findSafePos to make sure no other road block is within 100 meters
 	}
@@ -353,6 +353,13 @@ if (_PosFound) then {
 	missionNamespace setVariable [_sCheckpointGuyName, _guardUnit5];
 	if (_thisSide == west) then {
 		[[_guardUnit5, ["Ask about the AO","RandFramework\SpeakToFriendlyCheckpoint.sqf",[_pos5]]],"addAction",true,true] call BIS_fnc_MP;
+		if (selectRandom [true,true,false]) then {
+			_test = nil;
+			_test = createMarker [format["MrkFriendCheckpoint%1%2",_roadBlockPos select 0, _roadBlockPos select 1], _roadBlockPos];  
+			_test setMarkerShape "ICON";  
+			_test setMarkerType "b_inf";  
+			_test setMarkerText "Checkpoint";
+		};
 	};
 	TREND_fnc_WalkingGuyLoop = {		
 		_objManName = _this select 0;

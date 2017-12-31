@@ -6,7 +6,13 @@ params [
 	["_vehicle", objNull]
 ];
 
-
+_radius = 900;
+_airEscort = false;
+{
+		if ((_x distance2D _destinationPosition) < _radius) then {
+			_airEscort = true;
+		};
+} forEach ClearedPositions;
 
 if (!alive _vehicle) then {
 	breakOut "FlyTo";
@@ -67,6 +73,20 @@ _flyToLZ setWaypointBehaviour "CARELESS";
 _flyToLZ setWaypointCombatMode "BLUE";
 _flyToLZ setWaypointCompletionRadius 100;
 _flyToLZ setWaypointStatements ["true", "(vehicle this) land 'GET IN'; (vehicle this) setVariable [""landingInProgress"",true,true]"];
+
+if (_airEscort) then {
+	_escortPilot = driver chopper2;
+	{
+		deleteWaypoint _x
+	} foreach waypoints group _escortPilot;
+	_escortFlyToLZ = group _escortPilot addWaypoint [_destinationPosition,0,0];
+	_escortFlyToLZ setWaypointBehaviour "AWARE";
+	_escortFlyToLZ setWaypointCombatMode "RED";
+	_escortFlyToLZ setWaypointType "LOITER";
+	_escortFlyToLZ setWaypointLoiterType "CIRCLE";
+	_escortFlyToLZ setWaypointSpeed "FULL";
+};
+
 
 if (!([_vehicle] call TRGM_fnc_helicopterIsFlying)) then {
 	_locationText = [position _vehicle,true] call TRGM_fnc_getLocationName;

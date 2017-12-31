@@ -11,17 +11,15 @@ if (alive _thisCiv) then {
 	_thisCiv setDir _azimuth;
 	_thisCiv switchMove "Acts_StandingSpeakingUnarmed";
 	sleep 3;
-	[selectRandom IntelShownType,"HackData"] execVM "RandFramework\showIntel.sqf";
+	[IntelShownType,"TalkRebLead"] execVM "RandFramework\showIntel.sqf";
 	sleep 2;
-	[selectRandom IntelShownType,"HackData"] execVM "RandFramework\showIntel.sqf";
-	sleep 2;
-	[selectRandom IntelShownType,"HackData"] execVM "RandFramework\showIntel.sqf";
+	[IntelShownType,"TalkRebLead"] execVM "RandFramework\showIntel.sqf";
 	sleep 10;
 	_thisCiv switchMove "";
 	
 }
 else {
-	hint "he is dead you muppet!!!"
+	hint "This guy doesnt seem to want to speak much in his current state!!!"
 };
 
 

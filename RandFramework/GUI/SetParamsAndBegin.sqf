@@ -51,7 +51,7 @@ if (_SaveType == 1) then {
 	_LoadVersion = "LOCAL";
 };
 if (_SaveType == 2) then {
-	_LoadVersion = "GLOBAL";
+	_LoadVersion = worldName;
 };
 
 //_ctrl = (findDisplay 5000) displayCtrl 5001;
@@ -99,6 +99,11 @@ if (_LoadVersion != "") then {
 		publicVariable "BadPointsReason";
 		publicVariable "iCampaignDay";
 
+		if (count SavedData > 11) then { //12 values, 11 indexes (savedData 11 is the 12th value)
+			AdvancedSettings = SavedData select 11; 
+			publicVariable "AdvancedSettings";
+		};
+
 		SaveType = _SaveType;
 		publicVariable "SaveType";
 
@@ -107,4 +112,3 @@ if (_LoadVersion != "") then {
 		closedialog 0;
 	};
 };
-

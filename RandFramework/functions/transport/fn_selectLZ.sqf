@@ -1,6 +1,6 @@
 params ["_vehicle"];
 
-_redZonePositions = ObjectivePossitions;
+_redZonePositions = ObjectivePossitions-ClearedPositions;
 _radius = 900;
 _minimumDistance = 300;
 _markers = [];

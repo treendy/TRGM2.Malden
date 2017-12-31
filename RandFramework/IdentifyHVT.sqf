@@ -1,6 +1,8 @@
 params ["_thisCiv","_thisPlayer","_unused","_params"];
 _params params ["_iSelected","_bCreateTask"];
 
+ClearedPositions pushBack (ObjectivePossitions select _iSelected);
+
 //removeAllActions _thisCiv;
 
 
