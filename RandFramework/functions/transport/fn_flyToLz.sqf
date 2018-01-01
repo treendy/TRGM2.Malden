@@ -64,9 +64,41 @@ _vehicle setVariable ["targetPad",_heliPad,true];
 
 _vehicle setVariable ["landingInProgress",false,true];
 
-/* Set Waypoint,Takeoff */
 
-_flyToLZ = group _driver addWaypoint [_destinationPosition,0,0];
+_waypointIndex = 0;
+/* Set Waypoint,Takeoff */
+if (!_airEscort) then {
+	_iSaftyCount = 500;
+	_bHalfWayWaypoint = false;
+	_DirAtoB = [getPos _vehicle, _destinationPosition] call BIS_fnc_DirTo;
+	_AvoidZonePos = ObjectivePossitions select 0;
+	_stepPos = getPos _vehicle;
+	_stepDistLeft = _vehicle distance _destinationPosition;
+	_bEndSteps = false;
+	while {!_bEndSteps && _iSaftyCount > 0} do {
+		_iSaftyCount = _iSaftyCount - 1;
+		_stepPos = _stepPos getPos [100,_DirAtoB];
+		_stepDistToAO = _stepPos distance _AvoidZonePos;
+		_stepDistLeft = _stepPos distance _destinationPosition;
+		if (_stepDistToAO < 1500) then {
+			_bEndSteps = true;
+			_divertDirection = ([_DirAtoB,80] call TRGM_fnc_AddToDirection);
+			_newPos = _AvoidZonePos getPos [2000,_divertDirection];
+			_waypointIndex = _waypointIndex + 1;
+			_flyToLZMid = group _driver addWaypoint [_newPos,0,0];
+			_flyToLZMid setWaypointType "MOVE";
+			_flyToLZMid setWaypointSpeed "FULL";
+			_flyToLZMid setWaypointBehaviour "CARELESS";
+			_flyToLZMid setWaypointCombatMode "BLUE";
+			_flyToLZMid setWaypointCompletionRadius 1000;
+		};
+		if (_stepDistToAO < 200) then {
+			_bEndSteps = true;
+		};
+	};
+};
+
+_flyToLZ = group _driver addWaypoint [_destinationPosition,0,_waypointIndex];
 _flyToLZ setWaypointType "MOVE";
 _flyToLZ setWaypointSpeed "FULL";
 _flyToLZ setWaypointBehaviour "CARELESS";
