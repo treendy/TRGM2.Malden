@@ -40,17 +40,21 @@ sMedicUrban = "O_T_Medic_F";
 sEnemyHeliPilot = "O_helipilot_F";
 sWarloadSideMission = "O_G_officer_F";
 
-sTeamleaderFriendInsurg = "O_G_Soldier_TL_F";
-sRiflemanFriendInsurg = "O_G_Soldier_F";
-sTank1ArmedCarFriendInsurg = "O_G_Offroad_01_armed_F";
-sTank2APCFriendInsurg = "O_G_Offroad_01_armed_F";
-sTank3TankFriendInsurg = "O_G_Offroad_01_armed_F";
-sAAAVehFriendInsurg = "";
-sAmmobearerFriendInsurg = "O_G_Soldier_A_F";
-sGrenadierFriendInsurg = "O_G_Soldier_GL_F";
-sMedicFriendInsurg = "O_G_medic_F";
-sAAManFriendInsurg = "O_G_Soldier_LAT_F";
-sATManFriendInsurg = "O_G_Soldier_LAT_F";
+sTeamleaderMilitia = "O_G_Soldier_TL_F";
+sRiflemanMilitia = "O_G_Soldier_F";
+sTank1ArmedCarMilitia = "O_G_Offroad_01_armed_F";
+sTank2APCMilitia = "O_G_Offroad_01_armed_F";
+sTank3TankMilitia = "O_G_Offroad_01_armed_F";
+sAAAVehMilitia = "";
+sAmmobearerMilitia = "O_G_Soldier_A_F";
+sGrenadierMilitia = "O_G_Soldier_GL_F";
+sMedicMilitia = "O_G_medic_F";
+sAAManMilitia = "O_G_Soldier_LAT_F";
+sATManMilitia = "O_G_Soldier_LAT_F";
+sMortarMilitia = ["O_G_Mortar_01_F"];
+sMachineGunManMilitia = "O_G_Soldier_AR_F";
+
+sRiflemanFriendInsurg = "B_G_Soldier_F";
 
 
 InformantClasses = ["C_Orestes","C_Nikos"];
@@ -84,7 +88,7 @@ EnemyAirToAirSupports = ["O_Plane_Fighter_02_F"];
 EnemyAirToGroundSupports = ["O_Plane_CAS_02_dynamicLoadout_F","O_Plane_CAS_02_F","O_T_VTOL_02_infantry_F","O_Heli_Attack_02_dynamicLoadout_F"]; //This would normally be a chopper
 EnemyAirScout = ["O_UAV_02_dynamicLoadout_F"];
 sMortar = ["O_Mortar_01_F"];
-sMortarFriendInsurg = ["O_G_Mortar_01_F"];
+
 
 
 
@@ -93,7 +97,7 @@ sMortarFriendInsurg = ["O_G_Mortar_01_F"];
 
 UnarmedScoutVehicles = ["O_MRAP_02_F","O_G_Offroad_01_F","O_G_Van_01_transport_F","O_G_Van_02_vehicle_F"];
 FriendlyScoutVehicles = ["B_T_MRAP_01_F","B_T_LSV_01_unarmed_F"];
-sMachineGunManFriendInsurg = "O_G_Soldier_AR_F";
+
 EnemyBaseChoppers = ["O_T_VTOL_02_infantry_F"];
 
 

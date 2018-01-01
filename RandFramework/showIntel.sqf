@@ -23,7 +23,7 @@ else {
 };
 
 if (_IntelToShow == 1) then { //Mortor team location
-	_iCount = count nearestObjects [ObjectivePossitions select 0,sMortar + sMortarFriendInsurg,3000];
+	_iCount = count nearestObjects [ObjectivePossitions select 0,sMortar + sMortarMilitia,3000];
 	if (_iCount > 0) then {
 		{
 			_test = nil;
@@ -31,7 +31,7 @@ if (_IntelToShow == 1) then { //Mortor team location
 			_test setMarkerShape "ICON";  
 			_test setMarkerType "o_art";  
 			_test setMarkerText "Mortar"; 
-		} forEach nearestObjects [ObjectivePossitions select 0,sMortar + sMortarFriendInsurg,3000];
+		} forEach nearestObjects [ObjectivePossitions select 0,sMortar + sMortarMilitia,3000];
 		Hint "Map updated with enemy mortar possitions (if any 3k within main AO)";
 	}
 	else {
@@ -39,7 +39,7 @@ if (_IntelToShow == 1) then { //Mortor team location
 	};
 };
 if (_IntelToShow == 2) then { //AAA team location
-	_iCount = count nearestObjects [ObjectivePossitions select 0,[sAAAVeh] + [sAAAVehFriendInsurg],3000];
+	_iCount = count nearestObjects [ObjectivePossitions select 0,[sAAAVeh] + [sAAAVehMilitia],3000];
 	if (_iCount > 0) then {
 		{
 			_test = nil;
@@ -47,7 +47,7 @@ if (_IntelToShow == 2) then { //AAA team location
 			_test setMarkerShape "ICON";  
 			_test setMarkerType "o_art";  
 			_test setMarkerText "AAA"; 
-		} forEach nearestObjects [ObjectivePossitions select 0,[sAAAVeh] + [sAAAVehFriendInsurg],3000];
+		} forEach nearestObjects [ObjectivePossitions select 0,[sAAAVeh] + [sAAAVehMilitia],3000];
 		Hint "Map updated with any enemy AAA possitions (if any 3k within main AO)";
 	}
 	else {

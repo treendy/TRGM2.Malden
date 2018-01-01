@@ -188,6 +188,10 @@ if (isNil "ClearedPositions") then {
 			ClearedPositions = [];
 			publicVariable "ClearedPositions";
 };
+if (isNil "AllowUAVLocateHelp") then {
+			AllowUAVLocateHelp = false;
+			publicVariable "AllowUAVLocateHelp";
+};
 
 
 showcinemaborder true; 	

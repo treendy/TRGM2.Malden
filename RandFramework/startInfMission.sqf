@@ -432,6 +432,9 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 								 //###################################### informant,intorigate officer, weapon dealer or kill officer #########################################
 								if (_iThisTaskType == 4 || _iThisTaskType == 5 || _iThisTaskType == 7 || _iThisTaskType == 8) then { //if informant,intorigate officer, weapon dealer or kill officer
 									_allpositionsLaptop1 = _infBuilding buildingPos -1;
+
+									AllowUAVLocateHelp = true;
+									publicVariable "AllowUAVLocateHelp";
 									
 									_sInformant1Name = format["objInformant%1",_iTaskIndex];
 									_infClassToUse = "";

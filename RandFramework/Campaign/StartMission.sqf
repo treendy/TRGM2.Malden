@@ -106,7 +106,8 @@ if ((bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) || !_isCampaign) t
 		publicVariable "IntelFound";
 		ClearedPositions = [];
 		publicVariable "ClearedPositions";
-
+		AllowUAVLocateHelp = false;
+		publicVariable "AllowUAVLocateHelp";
 
 		if (SaveType != 0) then {
 				[SaveType,false] execVM "RandFramework\Campaign\ServerSave.sqf";

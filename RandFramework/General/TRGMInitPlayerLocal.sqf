@@ -39,9 +39,9 @@ if (isNil "bAndSoItBegins") then {
 				}
 				else {
 					if (!isPlayer sl) then {
-					txt5Layer = "txt5" call BIS_fnc_rscLayer;
-			    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TOP SLOT NEEDS TO BE A PLAYER</t>"; 
-			    	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+						txt5Layer = "txt5" call BIS_fnc_rscLayer;
+				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TOP SLOT NEEDS TO BE A PLAYER</t>"; 
+				    	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
 					}
 					else {
 						txt1Layer = "txt1" call BIS_fnc_rscLayer;
@@ -131,7 +131,7 @@ if (isNil "KilledPositions") then {
 
 
 TREND_fnc_InitPostStarted = {	
-	if (iMissionSetup == 5 && isMultiplayer) then {
+	if (iMissionSetup == 5 && isMultiplayer && str player == "sl") then {
 			if (SaveType == 0) then {
 				laptop1 addaction ["Save Local",{[1,true] execVM "RandFramework\Campaign\ServerSave.sqf";}];
 				laptop1 addaction ["Save Global",{[2,true] execVM "RandFramework\Campaign\ServerSave.sqf";}];
@@ -210,8 +210,20 @@ player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInit; }];
 
 TREND_fnc_GeneralPlayerLoop = {
 	while {true} do {
-			
-		
+		if (count ObjectivePossitions > 0 && AllowUAVLocateHelp) then {
+			if ((Player distance (ObjectivePossitions select 0)) < 25 && (Player getVariable ["calUAVActionID", -1]) == -1) then {
+				hint "UAV available";
+				_actionID = player addAction ["Call UAV to locate target","RandFramework\callUAVFindObjective.sqf"];
+				player setVariable ["calUAVActionID",_actionID];
+			}
+			else {
+				if ((Player getVariable ["calUAVActionID", -1]) != -1) then {
+					player removeAction (Player getVariable ["calUAVActionID", -1]);
+					player setVariable ["calUAVActionID", nil];
+					hint "UAV no longer available";
+				};
+			};
+		};
 
 		if (leader (group (vehicle player)) == player) then {
 			_dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;

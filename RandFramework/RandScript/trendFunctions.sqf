@@ -65,7 +65,6 @@ TREND_fnc_PopulateSideMission = {
 		_bFriendlyInsurgents = false;
 	};
 
-
 	if (_bIsMainObjective) then {bThisMissionCivsOnly = false};
 
 	if (_ForceCivsOnly) then {bThisMissionCivsOnly = true};
@@ -131,20 +130,20 @@ TREND_fnc_PopulateSideMission = {
 	};
 
 	//if main var to set friendly insurg and also, if our random selction above plus 50/50 chance is true, then the units will be dressed as insurgents (player will not know if friendly of enemy)
-	if ((bThisMissionCivsOnly || _bFriendlyInsurgents || (!_bIsMainObjective && selectRandom[true,false]))) then {
-		sTeamleaderToUse = sTeamleaderFriendInsurg;
-		sRiflemanToUse = sRiflemanFriendInsurg;
-		sTank1ArmedCarToUse = sTank1ArmedCarFriendInsurg;
-		sTank2APCToUse = sTank2APCFriendInsurg;
-		sTank3TankToUse = sTank3TankFriendInsurg;
-		sAAAVehToUse = sAAAVehFriendInsurg;
-		sAmmobearerToUse = sAmmobearerFriendInsurg;
-		sGrenadierToUse = sGrenadierFriendInsurg;
-		sMedicToUse = sMedicFriendInsurg;
-		sAAManToUse = sAAManFriendInsurg;
-		sATManToUse = sATManFriendInsurg;
-		sMortarToUse = sMortarFriendInsurg;
-		sMachineGunManToUse = sMachineGunManFriendInsurg;
+	if ((bThisMissionCivsOnly || (!_bIsMainObjective && selectRandom[true,false]))) then {
+		sTeamleaderToUse = sTeamleaderMilitia;
+		sRiflemanToUse = sRiflemanMilitia;
+		sTank1ArmedCarToUse = sTank1ArmedCarMilitia;
+		sTank2APCToUse = sTank2APCMilitia;
+		sTank3TankToUse = sTank3TankMilitia;
+		sAAAVehToUse = sAAAVehMilitia;
+		sAmmobearerToUse = sAmmobearerMilitia;
+		sGrenadierToUse = sGrenadierMilitia;
+		sMedicToUse = sMedicMilitia;
+		sAAManToUse = sAAManMilitia;
+		sATManToUse = sATManMilitia;
+		sMortarToUse = sMortarMilitia;
+		sMachineGunManToUse = sMachineGunManMilitia;
 	};
 
 	sideAllBuildingPos = _sideMainBuilding buildingPos -1;
@@ -331,7 +330,7 @@ TREND_fnc_PopulateSideMission = {
 
 			//Spawn nasty surprise (AAA, IEDs, wider patrol)
 			if ((_bIsMainObjective && selectRandom [true,false]) || (!_bIsMainObjective && selectRandom [true,false,false,false])) then {
-				if (sAAAVehFriendInsurg != "") then {
+				if (sAAAVehMilitia != "") then {
 					_flatPos = nil;
 					_flatPos = [_sidePos , 10, 200, 4, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 					_AAAGroup = createGroup _InsurgentSide;
@@ -799,7 +798,7 @@ TREND_fnc_SpawnCivs = {
 		};
 		_sideCivGroup = nil;
 		if (_bIsRebels) then {
-			_sideCivGroup = createGroup Civilian; //was west, but was causing issues (they were all shooting each other??)
+			_sideCivGroup = createGroup west; 
 		}
 		else {
 			_sideCivGroup = createGroup Civilian;
@@ -809,7 +808,7 @@ TREND_fnc_SpawnCivs = {
 		if (_bIsRebels) then {
 			_wayPosInit = selectRandom _allBuildingPos;
 			if (!isNil "_wayPosInit") then {
-				_SpawnedRifleman = (_sideCivGroup createUnit [sCivilian, _wayPosInit, [], 10, "NONE"]);
+				_SpawnedRifleman = (_sideCivGroup createUnit [sRiflemanFriendInsurg, _wayPosInit, [], 10, "NONE"]);
 				if (!_bRebelLeaderPicked) then {
 					_SpawnedRifleman addaction ["Talk to leader","RandFramework\TalkRebLead.sqf"];
 					_SpawnedRifleman addEventHandler ["killed", {_this execVM "RandFramework\InsKilled.sqf";}];

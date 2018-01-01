@@ -229,7 +229,7 @@ if (isServer && count _thisThisList > 0) then {
 				//==============Now the generic spotted action to send a patrol to investigate of they have spotted inf ================================================
 				if ((vehicle _SpottedUnit isKindOf "Car") && _bAllowPatrolChange) then {
 					if  ((_SpottedUnitCount > 0)) then {
-						_nearestATs = nearestObjects [_SpottedUnitPos, [sATMan, sATManUrban,sATManFriendInsurg], _maxPatrolSearch];
+						_nearestATs = nearestObjects [_SpottedUnitPos, [sATMan, sATManUrban,sATManMilitia], _maxPatrolSearch];
 						if (bDebugMode) then {hint format["AT pre count check: %1",count _nearestATs]; sleep 2;};
 						if (count _nearestATs > 0) then {
 				
@@ -280,7 +280,7 @@ if (isServer && count _thisThisList > 0) then {
 					//hint format["eee:%1",str(_currentAODetail)];
 					_bFiredMortar = false;
 					_currentAODetail set [6,1];  //commence counting now fired... when reach zero again, we will wait until round fired again
-					_nearestMortars = nearestObjects [_SpottedUnitPos,sMortar + sMortarFriendInsurg,_maxPatrolSearch];
+					_nearestMortars = nearestObjects [_SpottedUnitPos,sMortar + sMortarMilitia,_maxPatrolSearch];
 					_ChancesOfFireMortar = [true,true,false];
 					_iRoundsToFire = 1;
 					
@@ -406,7 +406,7 @@ if (isServer && count _thisThisList > 0) then {
 
 						
 						//if (bDebugMode) then {sleep 2};
-						_nearestTLs = nearestObjects [_SpottedUnitPos, [sTeamleader, sTeamleaderUrban,sTeamleaderFriendInsurg], _maxPatrolSearch];
+						_nearestTLs = nearestObjects [_SpottedUnitPos, [sTeamleader, sTeamleaderUrban,sTeamleaderMilitia], _maxPatrolSearch];
 						//if (bDebugMode) then {hint format["pre count check: %1",count _nearestTLs]; sleep 2;};
 						if (count _nearestTLs > 0) then {
 				
@@ -437,7 +437,7 @@ if (isServer && count _thisThisList > 0) then {
 
 						if (selectRandom[true,false]) then {
 				
-							_nearestTanks = nearestObjects [_SpottedUnitPos, [sTank1ArmedCar,sTank2APC,sTank3Tank,sTank1ArmedCarFriendInsurg,sTank2APCFriendInsurg,sTank3TankFriendInsurg], 3000];
+							_nearestTanks = nearestObjects [_SpottedUnitPos, [sTank1ArmedCar,sTank2APC,sTank3Tank,sTank1ArmedCarMilitia,sTank2APCMilitia,sTank3TankMilitia], 3000];
 							if (count _nearestTanks > 0) then {
 								_nearestTank = selectRandom _nearestTanks;
 								_nearestTLTankwPosArray = waypoints group _nearestTank;
@@ -456,7 +456,7 @@ if (isServer && count _thisThisList > 0) then {
 
 				
 
-					_anyTLsCheckAlive = nearestObjects [_SpottedUnitPos, [sTeamleader, sTeamleaderUrban,sTeamleaderFriendInsurg], 3000];
+					_anyTLsCheckAlive = nearestObjects [_SpottedUnitPos, [sTeamleader, sTeamleaderUrban,sTeamleaderMilitia], 3000];
 					{
 						if (!(alive _x)) then {
 							deleteVehicle _x;
