@@ -3,7 +3,8 @@ scopeName "FlyTo";
 
 params [
 	"_destinationPosition",
-	["_vehicle", objNull]
+	["_vehicle", objNull],
+	["_isPickup", false]
 ];
 
 _radius = 900;
@@ -80,10 +81,33 @@ if (!_airEscort) then {
 		_stepPos = _stepPos getPos [100,_DirAtoB];
 		_stepDistToAO = _stepPos distance _AvoidZonePos;
 		_stepDistLeft = _stepPos distance _destinationPosition;
-		if (_stepDistToAO < 1500) then {
+
+		if (false) then {
+			_markerNameSteps = str(_vehicle) + "Step_" + str(500 - _iSaftyCount);
+			_mrkcustomSteps = createMarker [_markerNameSteps, _stepPos]; 
+			_mrkcustomSteps setMarkerShape "ICON";
+			_mrkcustomSteps setMarkerSize [1,1];
+			_mrkcustomSteps setMarkerType "hd_dot";
+			_mrkcustomSteps setMarkerText ("Step " + str(_stepDistLeft));
+			sleep 0.1;
+			hint str(_iSaftyCount);
+		};
+		
+		if (_stepDistToAO < 1000) then {
 			_bEndSteps = true;
-			_divertDirection = ([_DirAtoB,80] call TRGM_fnc_AddToDirection);
-			_newPos = _AvoidZonePos getPos [2000,_divertDirection];
+			_divertDirectionA = ([_DirAtoB,80] call TRGM_fnc_AddToDirection);
+			_newPosA = _AvoidZonePos getPos [2000,_divertDirectionA];
+			_divertDirectionB = ([_DirAtoB,-80] call TRGM_fnc_AddToDirection);
+			_newPosB = _AvoidZonePos getPos [2000,_divertDirectionB];
+			_totalDistA = (_vehicle distance _newPosA) + (_newPosA distance _destinationPosition);
+			_totalDistB = (_vehicle distance _newPosB) + (_newPosB distance _destinationPosition);
+			_newPos = nil;
+			if (_totalDistA < _totalDistB) then {
+				_newPos = _newPosA;
+			}
+			else {
+				_newPos = _newPosB;
+			};
 			_waypointIndex = _waypointIndex + 1;
 			_flyToLZMid = group _driver addWaypoint [_newPos,0,0];
 			_flyToLZMid setWaypointType "MOVE";
@@ -92,7 +116,7 @@ if (!_airEscort) then {
 			_flyToLZMid setWaypointCombatMode "BLUE";
 			_flyToLZMid setWaypointCompletionRadius 1000;
 		};
-		if (_stepDistToAO < 200) then {
+		if (_stepDistLeft < 300) then {
 			_bEndSteps = true;
 		};
 	};
@@ -163,29 +187,54 @@ sleep 2;
 	deleteWaypoint _x
 } foreach waypoints _driver;
 
-[_vehicle, "We reached our destination. Good Luck out there!"] call TRGM_fnc_commsPilotToVehicle;
+if (!_isPickup) then {
+	[_vehicle, "We reached our destination. Good Luck out there!"] call TRGM_fnc_commsPilotToVehicle;
+}
+else {
+	[driver _vehicle,"We have landed at LZ, get in!"] call TRGM_fnc_commsSide;
+};
+
 
 sleep 5;
 
 /* wait for empty helicopter */
 
-waitUntil { ([_vehicle] call TRGM_fnc_isOnlyBoardCrewOnboard) || !(_thisMission call TRGM_fnc_checkMissionIdActive) }; // helicopter empty except pilot + crew
-if (!(_thisMission call TRGM_fnc_checkMissionIdActive)) then {
-	_vehicle land "NONE";
-	[_thisMission] call _cleanupMission;
-	breakOut "FlyTo";
+if (!_isPickup) then {
+	waitUntil { ([_vehicle] call TRGM_fnc_isOnlyBoardCrewOnboard) || !(_thisMission call TRGM_fnc_checkMissionIdActive) }; // helicopter empty except pilot + crew
+
+	if (!(_thisMission call TRGM_fnc_checkMissionIdActive)) then {
+		_vehicle land "NONE";
+		[_thisMission] call _cleanupMission;
+		breakOut "FlyTo";
+	};
+	// RADIO :  We're RTB.
+	_locationText = [position _vehicle,true] call TRGM_fnc_getLocationName;
+	_text = format ["%1 is entering airspace %2 - We're RTB.", groupId group driver _vehicle, _locationText];
+	[driver _vehicle,_text] call TRGM_fnc_commsSide;
+	
+	/* RTB */
+	[_vehicle,_thisMission] spawn TRGM_fnc_flyToBase;
+}
+else {
+	waitUntil { !([_vehicle] call TRGM_fnc_isOnlyBoardCrewOnboard) || !(_thisMission call TRGM_fnc_checkMissionIdActive) }; // helicopter has passengers (not just pilot + crew)
+	if (!(_thisMission call TRGM_fnc_checkMissionIdActive)) then {
+		_vehicle land "NONE";
+		[_thisMission] call _cleanupMission;
+		breakOut "FlyTo";
+	};
+	if (!(_thisMission call TRGM_fnc_checkMissionIdActive)) then {
+		_locationText = [position _vehicle,true] call TRGM_fnc_getLocationName;
+		_text = format ["%1 is entering airspace %2 - We're RTB.", groupId group driver _vehicle, _locationText];
+		[driver _vehicle,_text] call TRGM_fnc_commsSide;
+		
+		/* RTB */
+		[_vehicle,_thisMission] spawn TRGM_fnc_flyToBase;
+	}
+	else { 
+		[_vehicle, "Welcome aboard, Let us know your destination!"] call TRGM_fnc_commsPilotToVehicle;
+	};
 };
 
-
 sleep 4;
-
-// RADIO :  We're RTB.
-_locationText = [position _vehicle,true] call TRGM_fnc_getLocationName;
-_text = format ["%1 is entering airspace %2 - We're RTB.", groupId group driver _vehicle, _locationText];
-[driver _vehicle,_text] call TRGM_fnc_commsSide;
-
-/* RTB */
-[_vehicle,_thisMission] spawn TRGM_fnc_flyToBase;
-
 
 [_thisMission] call _cleanupMission;

@@ -4,11 +4,12 @@
 
 
 author = "Treendy";
-OnLoadName = "TRGM 2.0 Tanoa";
-OnLoadmission = "Synergy";
+OnLoadName = "TRGM 2.0 Malden";
+OnLoadmission = "TRGM 2";
 OnLoadIntro = "Mission by Treendy";
-loadScreen = "SynergyAR32.jpg";
-overviewText = "";
+loadScreen = "TRGM2OverviewPic2.jpg";
+overviewText = "Treendy's Randomly Generated Missions.  Each play through will be different in many ways.  Also option to play in campaign mode and customise some of the mission settings";
+overviewPicture = "TRGM2OverviewPic2.jpg";
 
 disabledAI=0;
 joinUnassigned = 1;
@@ -124,72 +125,7 @@ class CfgSounds
 		sound[] = {"\sound\uragan_1.ogg", db+10, 1};
 		titles[] = {1, ""};
 	};
-	class uragan_end
-	{
-		name = "uragan_end";
-		sound[] = {"\sound\uragan_end.ogg", db+10, 1};
-		titles[] = {1, ""};
-	};
-	class bcg_wind
-	{
-		name = "bcg_wind";
-		sound[] = {"\sound\bcg_wind.ogg", db+5, 1};
-		titles[] = {1, ""};
-	};	
-	class rafala_1
-	{
-		name = "rafala_1";
-		sound[] = {"\sound\rafala_1.ogg", db+10, 1};
-		titles[] = {1, ""};
-	};	
-	class rafala_2
-	{
-		name = "rafala_2";
-		sound[] = {"\sound\rafala_2.ogg", db+5, 1};
-		titles[] = {1, ""};
-	};	
-	class rafala_4_dr
-	{
-		name = "rafala_4_dr";
-		sound[] = {"\sound\rafala_4_dr.ogg", db+10, 1};
-		titles[] = {1, ""};
-	};	
-	class rafala_5_st
-	{
-		name = "rafala_5_st";
-		sound[] = {"\sound\rafala_5_st.ogg", db+10, 1};
-		titles[] = {1, ""};
-	};
-	class rafala_6
-	{
-		name = "rafala_6";
-		sound[] = {"\sound\rafala_6.ogg", db+15, 1};
-		titles[] = {1, ""};
-	};	
-	class rafala_7
-	{
-		name = "rafala_7";
-		sound[] = {"\sound\rafala_7.ogg", db+10, 1};
-		titles[] = {1, ""};
-	};	
-	class rafala_8
-	{
-		name = "rafala_8";
-		sound[] = {"\sound\rafala_8.ogg", db+15, 1};
-		titles[] = {1, ""};
-	};	
-	class rafala_9
-	{
-		name = "rafala_9";
-		sound[] = {"\sound\rafala_9.ogg", db+10, 1};
-		titles[] = {1, ""};
-	};
-	class sandstorm
-	{
-		name = "sandstorm";
-		sound[] = {"\sound\sandstorm.ogg", db+10, 1};
-		titles[] = {1, ""};
-	};		
+		
 };
 
 

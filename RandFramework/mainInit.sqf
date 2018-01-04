@@ -193,6 +193,10 @@ if (isNil "AllowUAVLocateHelp") then {
 			publicVariable "AllowUAVLocateHelp";
 };
 
+if (isServer) then { //adjust weather here so intro animation is different everytime
+		[true] execVM "RandFramework\SetTimeAndWeather.sqf";	
+};
+
 
 showcinemaborder true; 	
 _centerPos = getArray (configfile >> "CfgWorlds" >> worldName >> "centerPosition");
@@ -496,6 +500,15 @@ if (isServer) then {
 	   
 		} forEach allUnits;
 	};
+
+	TREND_fnc_CheckAnyPlayableUnitsAlive = {
+		while {true} do {
+			playSound3D ["A3\Sounds_F\sfx\radio\" + selectRandom FriendlyRadioSounds + ".wss",baseRadio,false,getPosASL baseRadio,0.5,1,0];
+			sleep selectRandom [10,15,20,30];
+			sleep 3;
+		};
+	};
+	[] spawn TREND_fnc_CheckAnyPlayableUnitsAlive;
 };
 
 

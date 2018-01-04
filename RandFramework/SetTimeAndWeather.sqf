@@ -1,5 +1,8 @@
 #include "..\setUnitGlobalVars.sqf";
 
+params["_isIntro"];
+if (isNil "_isIntro") then {_isIntro = false};
+
 if (isServer) then {
 	    _year = 2035;
 	    _month = 1;
@@ -8,6 +11,7 @@ if (isServer) then {
 	    _min = 0;
 	    
 	    _WeatherOption = selectRandom WeatherOptions;
+	    if (_isIntro) then {_WeatherOption = selectRandom [2,8,9,10,11]};
 	    
 	    if (_WeatherOption == 1) then { //Sunny Clear
 			0 setOvercast 0;

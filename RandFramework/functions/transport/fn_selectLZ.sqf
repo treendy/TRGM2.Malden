@@ -1,4 +1,4 @@
-params ["_vehicle"];
+params ["_vehicle",["_isPickup", false]];
 
 _redZonePositions = ObjectivePossitions-ClearedPositions;
 _radius = 900;
@@ -50,7 +50,7 @@ if (!([_vehicle] call TRGM_fnc_helicopterIsFlying)) then {
 
 
 
-[_vehicle, _redZonePositions, _vehiclePositon,_baseLZPos, _radius,_minimumDistance, _markers,_baseRadius,_baseReturnAllowed] onMapSingleClick TRGM_fnc_selectLZOnMapClick;
+[_vehicle, _redZonePositions, _vehiclePositon,_baseLZPos, _radius,_minimumDistance, _markers,_baseRadius,_baseReturnAllowed,_isPickup] onMapSingleClick TRGM_fnc_selectLZOnMapClick;
 
 openMap true;
 titleText["Select Map Position outside the AO areas", "PLAIN"];

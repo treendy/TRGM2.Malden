@@ -1,4 +1,4 @@
-params["_vehicle","_redZonePositions","_vehiclePositon","_baseLZPos","_radius","_minimumDistance","_markers","_baseRadius","_baseReturnAllowed"];
+params["_vehicle","_redZonePositions","_vehiclePositon","_baseLZPos","_radius","_minimumDistance","_markers","_baseRadius","_baseReturnAllowed","_isPickup"];
 scopeName "onMapClickedHandler";
 
 _resetMapState = {
@@ -39,7 +39,7 @@ if (_baseReturnAllowed && _pos distance2D _baseLZPos <= _baseRadius) then {
 		hint "Couldnt find a good LZ near your point, please select another.  Try to choose somewhere that is less built up";
 	} else {
 		call _resetMapState;
-		[_safeLandingZonePosition, _vehicle, true] spawn TRGM_fnc_flyToLZ;
+		[_safeLandingZonePosition, _vehicle, _isPickup] spawn TRGM_fnc_flyToLZ;
 		//openMap false; //better leave it open ?
 	};
 

@@ -7,6 +7,11 @@ if (isNil "bAndSoItBegins") then {
 	publicVariable "bAndSoItBegins";	
 };
 
+if (isNil "IntroMusic") then {
+	IntroMusic = selectRandom ThemeAndIntroMusic;
+	publicVariable "IntroMusic";	
+};
+
 
 	waitUntil {!isNull player};
 	waitUntil {player == player};
@@ -16,8 +21,8 @@ if (isNil "bAndSoItBegins") then {
 
 
 	TREND_fnc_MissionSelectLoop = {
-
-		if (!bAndSoItBegins) then {playMusic selectRandom ThemeAndIntroMusic;};
+		sleep 3;
+		if (!bAndSoItBegins) then {playMusic IntroMusic;};
 		while {!bAndSoItBegins} do {
 			
 			if (str player == "sl") then {
@@ -45,12 +50,13 @@ if (isNil "bAndSoItBegins") then {
 					}
 					else {
 						txt1Layer = "txt1" call BIS_fnc_rscLayer;
-				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.6' color='#ffffff'>" + name sl +" is choosing the mission</t>"; 
+				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>Please wait, " + name sl +" is choosing the mission settings</t>"; 
 				    	[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
 
 						txt5Layer = "txt5" call BIS_fnc_rscLayer;
-				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>Please Wait</t>"; 
+				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>Tactical Cannon Fodder</t>"; 
 				    	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+						
 				    };
 			    };
 			    sleep 5;
@@ -67,7 +73,7 @@ TREND_fnc_BasicInit = {
 	//enableEngineArtillery false; 
 
 	_action = {
-		[chopper1] spawn TRGM_fnc_selectLZ;
+		[chopper1,true] spawn TRGM_fnc_selectLZ;
 	};
 
 	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
@@ -427,3 +433,68 @@ if (sArmaGroup == "TCF" && isMultiplayer) then {
 	//_handle=createdialog "DialogMessAround";
 	//titleText ["!!!WARNING!!!\n\nPoint system in place\n\nDO NOT mess around at base\n\nONLY fly if you know AFM, or are being trained.\n\nDestroying vehicles will mark points and ruin the experience for others!!!", "PLAIN"];
 };
+
+
+TREND_fnc_MissionOverAnimation = {
+	_bEnd = false;
+	while {!_bEnd} do {
+		_bMissionEndedAndPlayersOutOfAO = false;
+		_bMissionEnded = false;
+		_bAnyPlayersInAOAndAlive = false;
+
+		if (iMissionSetup == 5) then {
+			_dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
+			if (ActiveTasks call FHQ_TT_areTasksCompleted && _dCurrentRep >= 10) then {_bMissionEnded = true};
+		}
+		else {
+			if (ActiveTasks call FHQ_TT_areTasksCompleted) then {_bMissionEnded = true};
+		};
+
+		_justPlayers = allPlayers - entities "HeadlessClient_F";
+		{
+			_currentPlayer = _x;
+			{
+				if (alive(_currentPlayer) && _currentPlayer distance _x < 2000) then {
+					_bAnyPlayersInAOAndAlive = true;
+				};
+			} forEach ObjectivePossitions;
+		} forEach _justPlayers;
+		if (_bMissionEnded && !_bAnyPlayersInAOAndAlive) then {_bMissionEndedAndPlayersOutOfAO = true};
+		if (_bMissionEndedAndPlayersOutOfAO) then {
+			_bEnd = true;
+			2 fadeSound 0.1;	
+			playMusic "";
+			0 fadeMusic 1;
+			playMusic selectRandom ThemeAndIntroMusic;
+			sleep 8;
+			["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>TRGM 2</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'>Treendys Randomly Generated Missions</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText; 
+			sleep 10;
+			["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>Tactical Cannon Fodder</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'><br />RTB to debreif</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText; 
+			sleep 10;
+			_stars = "";
+			_iCount = 0;
+			{
+				_iCount = _iCount + 1;
+				if (_iCount == count allPlayers) then {
+					_stars = _stars + name _x; // format [_stars,name _x, "|%2"];
+				}
+				else {
+					_stars = _stars + name _x + " | "; // format [_stars,name _x, "|%2"];
+				};	
+			} forEach allPlayers;
+			[format ["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>Starring</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'><br />%1</t>",_stars],-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText; 
+
+			sleep 10;
+			8 fadeMusic 0;
+			8 fadeSound 1;
+		};
+		sleep 5;
+	};
+};
+[] spawn TREND_fnc_MissionOverAnimation;
+player addEventHandler ["Respawn", { [] spawn TREND_fnc_MissionOverAnimation; }];
+
+
+
+
+

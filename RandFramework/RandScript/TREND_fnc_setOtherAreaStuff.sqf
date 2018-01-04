@@ -27,15 +27,6 @@ _mainObjPos = ObjectivePossitions select 0;
 				CommsTowerPos = [_TowerX, _TowerY];
 				publicVariable "bHasCommsTower";	
 				publicVariable "CommsTowerPos";	
-				//TREND_fnc_CommsTowerRadioLoop1 = {		
-				//	_pos = _this select 0;
-				//	while {true} do {
-				//		_missiondir = call { private "_arr"; _arr = toArray str missionConfigFile; _arr resize (count _arr - 15); toString _arr };
-				//		playSound3D [_missiondir + "sound\enemyChatter.ogg","",false,_pos,0.2,1,0];
-				//		sleep 558;
-				//	};
-				//};
-				//[CommsTowerPos] spawn TREND_fnc_CommsTowerRadioLoop1;
 				if (selectRandom[true]) then {
 					_PatrolDist = 70;
 					_wayX = _TowerX;

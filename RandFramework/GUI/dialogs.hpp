@@ -10,15 +10,15 @@ class Trend_DialogSetupParams
 		// GUI EDITOR OUTPUT START (by treendy, v1.063, #Nazety)
 		////////////////////////////////////////////////////////
 
-		class RscPicture_1201: RscPicture
-		{
-			idc = 1201;
-			text = "RandFramework\Media\table1.paa";
-			x = 0.226718 * safezoneW + safezoneX;
-			y = 0.0446 * safezoneH + safezoneY;
-			w = 0.531094 * safezoneW;
-			h = 0.935 * safezoneH;
-		};
+		//class RscPicture_1201: RscPicture
+		//{
+		//	idc = 1201;
+		//	text = "RandFramework\Media\table1.paa";
+		//	x = 0.226718 * safezoneW + safezoneX;
+		//	y = 0.0446 * safezoneH + safezoneY;
+		//	w = 0.531094 * safezoneW;
+		//	h = 0.935 * safezoneH;
+		//};
 
 		//class IGUIBack_2200: IGUIBack
 		//{
@@ -28,6 +28,26 @@ class Trend_DialogSetupParams
 		//	w = 0.4125 * safezoneW;
 		//	h = 0.55 * safezoneH;
 		//};
+
+		class RscListbox_1500: RscListbox
+		{
+			idc = 5500;
+			x = 0.298873 * safezoneW + safezoneX;
+			y = 0.315236 * safezoneH + safezoneY;
+			w = 0.180498 * safezoneW;
+			h = 0.219952 * safezoneH;
+			onLBSelChanged = "[_this] execVM 'RandFramework\GUI\MissionTypeSelection.sqf'; false; ";
+		};
+		
+		class RscCombo_2100: RscCombo
+		{
+			idc = 5100;
+			text = "Weather"; //--- ToDo: Localize;
+			x = 0.381406 * safezoneW + safezoneX;
+			y = 0.59681 * safezoneH + safezoneY;
+			w = 0.154713 * safezoneW;
+			h = 0.0219952 * safezoneH;	
+		};
 		class RscText_1001: RscText
 		{
 			idc = 5001;
@@ -39,15 +59,6 @@ class Trend_DialogSetupParams
 			w = 0.211441 * safezoneW;
 			h = 0.241947 * safezoneH;
 		};
-		class RscCombo_2100: RscCombo
-		{
-			idc = 5100;
-			text = "Weather"; //--- ToDo: Localize;
-			x = 0.381406 * safezoneW + safezoneX;
-			y = 0.59681 * safezoneH + safezoneY;
-			w = 0.154713 * safezoneW;
-			h = 0.0219952 * safezoneH;	
-		};
 		class RscText_1004: RscText
 		{
 			idc = 5004;
@@ -56,7 +67,7 @@ class Trend_DialogSetupParams
 			y = 0.596807 * safezoneH + safezoneY;
 			w = 0.0773437 * safezoneW;
 			h = 0.022 * safezoneH;
-			colorText[] = {0,1,0,1};
+			colorText[] = {0.85,0.4,0,1};
 		};
 		class RscText_1005: RscText
 		{
@@ -66,7 +77,7 @@ class Trend_DialogSetupParams
 			y = 0.627606 * safezoneH + safezoneY;
 			w = 0.0773437 * safezoneW;
 			h = 0.022 * safezoneH;
-			colorText[] = {0,1,0,1};
+			colorText[] = {0.85,0.4,0,1};
 		};
 		class RscCombo_2101: RscCombo
 		{
@@ -94,7 +105,7 @@ class Trend_DialogSetupParams
 			y = 0.660603 * safezoneH + safezoneY;
 			w = 0.0773437 * safezoneW;
 			h = 0.022 * safezoneH;
-			colorText[] = {0,1,0,1};
+			colorText[] = {0.85,0.4,0,1};
 		};
 		class RscText_1007: RscText
 		{
@@ -104,7 +115,7 @@ class Trend_DialogSetupParams
 			y = 0.693606 * safezoneH + safezoneY;
 			w = 0.0773437 * safezoneW;
 			h = 0.022 * safezoneH;
-			colorText[] = {0,1,0,1};
+			colorText[] = {0.85,0.4,0,1};
 		};
 		class RscCombo_2103: RscCombo
 		{
@@ -123,29 +134,35 @@ class Trend_DialogSetupParams
 			y = 0.642969 * safezoneH + safezoneY;
 			w = 0.103142 * safezoneW;
 			h = 0.0989783 * safezoneH;
-			colorBackground[] = {0,1,0,1};
-			colorActive[] = {0,1,0,1};
+			colorBackground[] = {0.85,0.4,0,1};
+			colorActive[] = {0.85,0.4,0,1};
 			action = "[_this] execVM 'RandFramework\GUI\SetParamsAndBegin.sqf'; false";
 		};
-		class RscListbox_1500: RscListbox
+
+		class btnAdvanced: RscButton
 		{
-			idc = 5500;
-			x = 0.298873 * safezoneW + safezoneX;
-			y = 0.315236 * safezoneH + safezoneY;
-			w = 0.180498 * safezoneW;
-			h = 0.219952 * safezoneH;
-			onLBSelChanged = "[_this] execVM 'RandFramework\GUI\MissionTypeSelection.sqf'; false; ";
+			idc = 1603;
+			text = "Advanced Options"; //--- ToDo: Localize;
+			x = 0.582514 * safezoneW + safezoneX;
+			y = 0.7442 * safezoneH + safezoneY;
+			w = 0.103142 * safezoneW;
+			h = 0.022 * safezoneH;
+			colorBackground[] = {0.85,0.4,0,1};
+			colorActive[] = {0.85,0.4,0,1};
+			action = "[] execVM 'RandFramework\GUI\openDialogAdvancedMissionSettings.sqf'; false";
 		};
-		class RscText_1000: RscText
-		{
-			idc = 5033;
-			text = "Select your options"; //--- ToDo: Localize;
-			x = 0.298824 * safezoneW + safezoneX;
-			y = 0.236 * safezoneH + safezoneY;
-			w = 0.175341 * safezoneW;
-			h = 0.0659856 * safezoneH;
-			colorText[] = {0,1,0,1};
-		};
+
+		
+		//class RscText_1000: RscText
+		//{
+		//	idc = 5033;
+		//	text = "Select your options"; //--- ToDo: Localize;
+		//	x = 0.298824 * safezoneW + safezoneX;
+		//	y = 0.236 * safezoneH + safezoneY;
+		//	w = 0.175341 * safezoneW;
+		//	h = 0.0659856 * safezoneH;
+		//	colorText[] = {0.85,0.4,0,1};
+		//};
 		class RscText_1002: RscText
 		{
 			idc = 5002;
@@ -154,7 +171,7 @@ class Trend_DialogSetupParams
 			y = 0.561583 * safezoneH + safezoneY;
 			w = 0.0773437 * safezoneW;
 			h = 0.022 * safezoneH;
-			colorText[] = {0,1,0,1};
+			colorText[] = {0.85,0.4,0,1};
 		};
 		class RscCombo_2104: RscCombo
 		{
@@ -234,7 +251,7 @@ class Trend_DialogSetupParams
 			y = 0.7266 * safezoneH + safezoneY;
 			w = 0.0773437 * safezoneW;
 			h = 0.022 * safezoneH;
-			colorText[] = {0,1,0,1};
+			colorText[] = {0.85,0.4,0,1};
 		};
 		class RscCombo_2105: RscCombo
 		{
@@ -265,8 +282,8 @@ class Trend_DialogSetupParams
 			y = 0.566 * safezoneH + safezoneY;
 			w = 0.103125 * safezoneW;
 			h = 0.022 * safezoneH;
-			colorBackground[] = {0,1,0,1};
-			colorActive[] = {0,1,0,1};
+			colorBackground[] = {0.85,0.4,0,1};
+			colorActive[] = {0.85,0.4,0,1};
 			tooltip = "Will load the last campaign save data for the current map (that was saved by you only... i.e. the current person selecting mission parameters)"; //--- ToDo: Localize;
 			action = "[_this,1] execVM 'RandFramework\GUI\SetParamsAndBegin.sqf'; false";
 		};
@@ -278,24 +295,13 @@ class Trend_DialogSetupParams
 			y = 0.599 * safezoneH + safezoneY;
 			w = 0.103125 * safezoneW;
 			h = 0.022 * safezoneH;
-			colorBackground[] = {0,1,0,1};
-			colorActive[] = {0,1,0,1};
+			colorBackground[] = {0.85,0.4,0,1};
+			colorActive[] = {0.85,0.4,0,1};
 			tooltip = "Will load any previous campaign global saves for any map running TRGM2 (that was saved by you only... i.e. the current person selecting mission parameters"; //--- ToDo: Localize;
 			action = "[_this,2] execVM 'RandFramework\GUI\SetParamsAndBegin.sqf'; false";
 		};
 
-		class btnAdvanced: RscButton
-		{
-			idc = 1603;
-			text = "Advanced Options"; //--- ToDo: Localize;
-			x = 0.608281 * safezoneW + safezoneX;
-			y = 0.7442 * safezoneH + safezoneY;
-			w = 0.0773437 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorBackground[] = {0,1,0,1};
-			colorActive[] = {0,1,0,1};
-			action = "[] execVM 'RandFramework\GUI\openDialogAdvancedMissionSettings.sqf'; false";
-		};
+		
 
 
 		////////////////////////////////////////////////////////

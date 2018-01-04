@@ -310,11 +310,11 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									_objVehicle disableAI "MOVE";
 									TREND_fnc_AAARadioLoop1 = {		
 										_radioName = _this select 0;
-										while {true} do {
-											//hint format["radio: %1",_radioName];
-											_missiondir = call { private "_arr"; _arr = toArray str missionConfigFile; _arr resize (count _arr - 15); toString _arr };
-											playSound3D [_missiondir + "sound\enemyChatter.ogg",call compile _radioName,false,getPosASL call compile _radioName,0.4,1,0];
-											sleep 558;
+										_bPlay = true;
+										while {_bPlay && !isnil(_radioName)} do {
+											if (!alive(call compile _radioName)) then {_bPlay = false};
+											playSound3D ["A3\Sounds_F\sfx\radio\" + selectRandom EnemyRadioSounds + ".wss",call compile _radioName,false,getPosASL call compile _radioName,0.5,1,0];
+											sleep selectRandom [10,15,20,30];
 										};
 									};
 									[_sTargetName] spawn TREND_fnc_AAARadioLoop1;
@@ -334,11 +334,12 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 										_objVehicle2 disableAI "MOVE";
 										TREND_fnc_AAARadioLoop2 = {		
 											_radioName = _this select 0;
-											while {true} do {
+											_bPlay = true;
+											while {_bPlay && !isnil(_radioName)} do {
+												if (!alive(call compile _radioName)) then {_bPlay = false};
 												//hint format["radio: %1",_radioName];
-												_missiondir = call { private "_arr"; _arr = toArray str missionConfigFile; _arr resize (count _arr - 15); toString _arr };
-												playSound3D [_missiondir + "sound\enemyChatter.ogg",call compile _radioName,false,getPosASL call compile _radioName,0.4,1,0];
-												sleep 558;
+												playSound3D ["A3\Sounds_F\sfx\radio\" + selectRandom EnemyRadioSounds + ".wss",call compile _radioName,false,getPosASL call compile _radioName,0.5,1,0];
+											sleep selectRandom [10,15,20,30];
 											};
 										};
 										[_sTargetName2] spawn TREND_fnc_AAARadioLoop2;
@@ -432,9 +433,10 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 								 //###################################### informant,intorigate officer, weapon dealer or kill officer #########################################
 								if (_iThisTaskType == 4 || _iThisTaskType == 5 || _iThisTaskType == 7 || _iThisTaskType == 8) then { //if informant,intorigate officer, weapon dealer or kill officer
 									_allpositionsLaptop1 = _infBuilding buildingPos -1;
-
-									AllowUAVLocateHelp = true;
-									publicVariable "AllowUAVLocateHelp";
+									if (InfTaskCount == 0) then {
+										AllowUAVLocateHelp = true;
+										publicVariable "AllowUAVLocateHelp";	
+									};								
 									
 									_sInformant1Name = format["objInformant%1",_iTaskIndex];
 									_infClassToUse = "";
@@ -628,12 +630,12 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 								
 									TREND_fnc_RadioLoop = {		
 										_radioName = _this select 0;
-										while {true} do {
+										_bPlay = true;
+										while {_bPlay && !isnil(_radioName)} do {
+											if (!alive(call compile _radioName)) then {_bPlay = false};
 											//hint format["radio: %1",_radioName];
-											_missiondir = call { private "_arr"; _arr = toArray str missionConfigFile; _arr resize (count _arr - 15); toString _arr };
-											playSound3D [_missiondir + "sound\enemyChatter.ogg",call compile _radioName,false,getPosASL call compile _radioName,0.5,1,0];
-											_radName = "objRadio2";
-											sleep 558;
+											playSound3D ["A3\Sounds_F\sfx\radio\" + selectRandom EnemyRadioSounds + ".wss",call compile _radioName,false,getPosASL call compile _radioName,0.5,1,0];
+											sleep selectRandom [10,15,20,30];
 										};
 									};
 									[_sRadio1Name] spawn TREND_fnc_RadioLoop;
@@ -669,6 +671,7 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 
 								if (_bSideMissionsCivOnly && !_bCreateTask) then {
 									ClearedPositions pushBack [_inf1X,_inf1Y];
+									publicVariable "ClearedPositions";
 									_markerInformant1 setMarkerText "An informat is located here.  No enemy reported at this location";
 									[[_inf1X,_inf1Y],_iThisTaskType,_infBuilding,_bIsMainObjective, _iTaskIndex, _allowFriendlyIns,true] spawn TREND_fnc_PopulateSideMission;
 								}

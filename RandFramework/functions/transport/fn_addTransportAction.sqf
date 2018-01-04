@@ -7,7 +7,7 @@ _actionAdapter = {
 
 _actions = [
 	[
-		"Custom LZ",
+		"Select Destination",
 		_actionAdapter,
 		nil,
 		-20, //priority

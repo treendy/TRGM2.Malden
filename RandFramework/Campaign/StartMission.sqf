@@ -109,6 +109,10 @@ if ((bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) || !_isCampaign) t
 		AllowUAVLocateHelp = false;
 		publicVariable "AllowUAVLocateHelp";
 
+		NewMissionMusic = nil;
+		publicVariable "NewMissionMusic";	
+	
+
 		if (SaveType != 0) then {
 				[SaveType,false] execVM "RandFramework\Campaign\ServerSave.sqf";
 		};
@@ -161,6 +165,12 @@ if ((bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) || !_isCampaign) t
 	else {
 		titleText ["", "BLACK IN", 5];
 		//titleText [format["Day %1 - %2.\nObjective: %3\nLocation: %4",iCampaignDay,_time24,CurrentZeroMissionTitle,_locationText], "BLACK IN", 5];
+	};
+
+
+	if (isNil "NewMissionMusic") then {
+		NewMissionMusic = selectRandom ThemeAndIntroMusic;
+		publicVariable "NewMissionMusic";	
 	};
 
 
