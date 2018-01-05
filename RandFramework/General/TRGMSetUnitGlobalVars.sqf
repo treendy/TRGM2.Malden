@@ -100,7 +100,7 @@ MissionTypeDescriptions =
 "You will start with 2 reputation, your aim is to work hard and become a highly reputable unit.  The higher your reputation the better equipment high command will allow you to use, however, losing these in battle will lower your reputation, also killing civs, losing units and other assets, killing friendly rebels and any other mistake will lower your reputation.\n\nIf you manage to get a high enough reputation(10 points), high command will assign a final heavy objective!"
 ];
 
-MissionParamTypes = ["Main Mission (with two optional sides)","Main Mission (Intel required for AO Location)","Main Mission Only","Single Mini Mission", "Three Mini Missions", "Campaign"];
+MissionParamTypes = ["Heavy Mission (with two optional sides)","Heavy Mission (Intel required for AO Location)","Heavy Mission Only","Single Mission", "Three Missions", "Campaign"];
 MissionParamTypesValues = [0,1,2,3,4,5];
 
 MissionParamObjectives = ["Random","Hack Data","Steal data from research vehicle","Destroy Ammo Trucks","Speak with informant","interrogate officer","Transmit Enemy Comms to HQ","Eliminate Officer","Assasinate weapon dealer","Destroy AAA vehicles","Destroy Artillery vehicles"];

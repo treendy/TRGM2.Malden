@@ -54,7 +54,7 @@ if (isNil "IntroMusic") then {
 				    	[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
 
 						txt5Layer = "txt5" call BIS_fnc_rscLayer;
-				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>Tactical Cannon Fodder</t>"; 
+				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>"; 
 				    	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
 						
 				    };

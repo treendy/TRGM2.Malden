@@ -215,6 +215,7 @@ if ((bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) || !_isCampaign) t
 	sleep 3;
 	titleCut ["", "BLACK out", 5];
 
+	
 	8 fadeMusic 0;
 	sleep 5;
 

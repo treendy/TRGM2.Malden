@@ -198,6 +198,10 @@ if (isServer) then { //adjust weather here so intro animation is different every
 };
 
 
+ace_hearing_disableVolumeUpdate = true; 
+
+
+
 showcinemaborder true; 	
 _centerPos = getArray (configfile >> "CfgWorlds" >> worldName >> "centerPosition");
 _pos1 = (_centerPos getPos [(floor(random 5000))+50, (floor(random 360))]);
