@@ -48,6 +48,8 @@ _display ctrlCreate ["RscText", 6999];
 _lblctrlTitle = _display displayCtrl 6999;
 _lblctrlTitle ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.25 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
 ctrlSetText [6999,  "Advanced Options (more options soon!)"];
+//colorText[] = {0,1,0,1};
+
 _lblctrlTitle ctrlCommit 0;
 
 {
@@ -69,10 +71,16 @@ _lblctrlTitle ctrlCommit 0;
 	_display ctrlCreate [_lnpCtrlType, _InpCtrlID];
 	_inpctrl = _display displayCtrl _InpCtrlID;
 	_inpctrl ctrlSetPosition [0.4 * safezoneW + safezoneX, (0.27 + _currentLinePos) * safezoneH + safezoneY,0.08 * safezoneW,0.02 * safezoneH];
-	{
-		_inpctrl lbAdd _x;
-	} forEach _Options;
-	_inpctrl lbSetCurSel (_Values find (AdvancedSettings select _forEachIndex));
+
+	if (_lnpCtrlType == "RscCombo") then {
+		{
+			_inpctrl lbAdd _x;
+		} forEach _Options;
+		_inpctrl lbSetCurSel (_Values find (AdvancedSettings select _forEachIndex));
+	};
+	if (_lnpCtrlType == "RscEdit") then {
+		_inpctrl ctrlSetText (AdvancedSettings select _forEachIndex);
+	};
 	_inpctrl ctrlCommit 0;
 
 } forEach AdvControls;

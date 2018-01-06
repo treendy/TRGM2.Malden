@@ -62,7 +62,7 @@ class Trend_DialogSetupParams
 		class RscText_1004: RscText
 		{
 			idc = 5004;
-			text = "Reputation System"; //--- ToDo: Localize;
+			text = "Hardcore Reputation"; //--- ToDo: Localize;
 			x = 0.302 * safezoneW + safezoneX;
 			y = 0.596807 * safezoneH + safezoneY;
 			w = 0.0773437 * safezoneW;
@@ -201,7 +201,7 @@ class Trend_DialogSetupParams
 			w = 0.0154751 * safezoneW;
 			h = 0.022 * safezoneH;
 			colorText[] = {1,1,1,1};
-			tooltip = "If this is enabled, you will have to keep your Reputation up with high command.\nKilling civs, losing main assets and units, killing friendly rebels or any other mistakes will lower your Reputation.\nIf your Reputation is too low, your mission will be unassigned and you will have to return to base!\n(I introduced this point system to make mistakes more costly, to make you think carefully about your actions\nand to feel any vehicle assets you use are not expendable!"; //--- ToDo: Localize;
+			tooltip = "You will have to keep your teams Reputation up.\nKilling civs, losing main assets and units, killing friendly rebels or any other mistakes will lower your Reputation.\nIf your Reputation is too low, and this option is enabled, your mission will be unassigned and you will have to return to base! (If this option is disabled, then you will just fail a task of keeping your rep above average)\n(I introduced this point system to make mistakes more costly, to make you think carefully about your actions\nand to feel any vehicle assets you use are not expendable!"; //--- ToDo: Localize;
 		};
 		class RscText_1009: RscText
 		{
@@ -336,16 +336,16 @@ class Trend_DialogSetupParamsAdvanced
 			h = 0.935 * safezoneH;
 		};
 
-			class RscText_6933: RscText
-		{
-			idc = 6933;
-			text = "Advanced Options"; //--- ToDo: Localize;
-			x = 0.298 * safezoneW + safezoneX;
-			y = 0.236 * safezoneH + safezoneY;
-			w = 0.175341 * safezoneW;
-			h = 0.0659856 * safezoneH;
-			colorText[] = {0,1,0,1};
-		};
+		//class RscText_6933: RscText
+		//{
+		//	idc = 6933;
+		//	text = "Advanced Options"; //--- ToDo: Localize;
+		//	x = 0.298 * safezoneW + safezoneX;
+		//	y = 0.236 * safezoneH + safezoneY;
+		//	w = 0.175341 * safezoneW;
+		//	h = 0.0659856 * safezoneH;
+		//	colorText[] = {0,1,0,1};
+		//};
 
 				
 		class btnAdvanced: RscButton

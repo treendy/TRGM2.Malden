@@ -56,6 +56,11 @@ if (isNil "IntroMusic") then {
 						txt5Layer = "txt5" call BIS_fnc_rscLayer;
 				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>"; 
 				    	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+
+
+				    	txt51Layer = "txt51" call BIS_fnc_rscLayer;
+				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>... if you cant hear music, turn up your music volume</t>"; 
+				    	[_texta, 0, 0.280, 7, 1,0,txt51Layer] spawn BIS_fnc_dynamicText;
 						
 				    };
 			    };
@@ -158,13 +163,11 @@ TREND_fnc_InitPostStarted = {
 	if (AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
 		box1 addAction ["<t color='#ff1111'>Virtual Arsenal</t>", {["Open",true] spawn BIS_fnc_arsenal}];
 	};
-	if (iMissionParamRepOption == 1) then {
-		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-			endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format["Current cost per life: %1<br /><br />Bad reputation points: %2 out of %3<br /><br />TOTAL REP: %4 <br /><br />REASONS SO FAR: <br />%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
-		}
-		else {
-			endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format["Current cost per life: %1<br /><br />Bad reputation points: %2 out of %3<br /><br />TOTAL REP: %4 <br /><br />REASONS SO FAR: <br />%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
-		};
+	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+		endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format["Current cost per life: %1<br /><br />Bad reputation points: %2 out of %3<br /><br />TOTAL REP: %4 <br /><br />REASONS SO FAR: <br />%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
+	}
+	else {
+		endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format["Current cost per life: %1<br /><br />Bad reputation points: %2 out of %3<br /><br />TOTAL REP: %4 <br /><br />REASONS SO FAR: <br />%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
 	};
 };
 [] spawn TREND_fnc_InitPostStarted;
@@ -197,7 +200,7 @@ if (iMissionSetup == 12 || iMissionSetup == 20) then {
 	
 }
 else {
-	if (iMissionSetup == 5) then {
+	if (iMissionSetup == 5 && !isMultiplayer) then {
 		[player, 999] call BIS_fnc_respawnTickets;
 		debugMessages = debugMessages + "\n" + "999 respawn tickets"
 	}
@@ -436,6 +439,7 @@ if (sArmaGroup == "TCF" && isMultiplayer) then {
 
 
 TREND_fnc_MissionOverAnimation = {
+	sleep 10;
 	_bEnd = false;
 	while {!_bEnd} do {
 		_bMissionEndedAndPlayersOutOfAO = false;
@@ -469,7 +473,7 @@ TREND_fnc_MissionOverAnimation = {
 			sleep 8;
 			["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>TRGM 2</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'>Treendys Randomly Generated Missions</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText; 
 			sleep 10;
-			["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>Tactical Cannon Fodder</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'><br />RTB to debreif</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText; 
+			["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>" + (AdvancedSettings select 1) + "</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'><br />RTB to debreif</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText; 
 			sleep 10;
 			_stars = "";
 			_iCount = 0;

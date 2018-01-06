@@ -77,24 +77,13 @@ if (isNil "ParaDropped") then {
 	ParaDropped = false;
 	publicVariable "ParaDropped";	
 };
-if (isNil "CampPos") then {
-	bHasCamp = false;
-	CampPos = [0,0];
-	publicVariable "bHasCamp";	
-	publicVariable "CampPos";	
-};
+
 if (isNil "CommsTowerPos") then {
 	bHasCommsTower = false;
 	CommsTowerPos = [0,0];
 	publicVariable "bHasCommsTower";	
 	publicVariable "CommsTowerPos";	
 };
-if (isNil "DownedChopperPos") then {
-	bHasDownedChopper = false;
-	DownedChopperPos = [0,0];
-	publicVariable "bHasDownedChopper";	
-	publicVariable "DownedChopperPos";	
-};	
 if (isNil "AODetails") then {
 	//AODetails = [[AOIndex,InfSpottedCount,VehSpottedCount,AirSpottedCount,bScoutCalled,patrolMoveCounter]]
 	//example AODetails [[1,0,0,0,False,0],[2,0,0,0,True,0]]
@@ -135,7 +124,7 @@ if (isNil "iAllowNVG") then {
 };
 
 if (isNil "iMissionParamRepOption") then {
-	iMissionParamRepOption = 1;
+	iMissionParamRepOption = 0;
 	publicVariable "iMissionParamRepOption";	
 };
 if (isNil "iWeather") then {
@@ -173,14 +162,7 @@ if (isNil "iStartLocation") then {
 			publicVariable "iStartLocation";
 };
 if (isNil "AdvancedSettings") then {
-			AdvancedSettings = [];
-			//Set default advanced settings
-			{	
-				_defaultIndex = _x select 5;
-				_value = (_x select 4) select _defaultIndex;
-				AdvancedSettings pushBack _value; 
-				publicVariable "AdvancedSettings";
-			} forEach AdvControls;
+			AdvancedSettings = DefaultAdvancedSettings;
 			publicVariable "AdvancedSettings";
 
 };
@@ -192,6 +174,8 @@ if (isNil "AllowUAVLocateHelp") then {
 			AllowUAVLocateHelp = false;
 			publicVariable "AllowUAVLocateHelp";
 };
+
+
 
 if (isServer) then { //adjust weather here so intro animation is different everytime
 		[true] execVM "RandFramework\SetTimeAndWeather.sqf";	
@@ -332,7 +316,7 @@ if (!isMultiplayer) then {
 
 waitUntil {bAndSoItBegins};
 
-
+titleText ["Loading mission...", "BLACK FADED"];
 _camera cameraEffect ["Terminate","back"];
 
 player doFollow player; 
@@ -404,16 +388,24 @@ TREND_fnc_CheckBadPoints = {
 			if (BadPoints > _lastBadPoints) then {_bRepWorse = true};
 			_lastBadPoints = BadPoints;
 			if (iMissionParamType != 5) then {
-				if (BadPoints >= MaxBadPoints && iMissionParamRepOption == 1) then {
+				if (BadPoints > MaxBadPoints && iMissionParamRepOption == 1) then {
 					iCurrentTaskCount = 0;
+					["tskKeepAboveAverage", "failed"] call FHQ_TT_setTaskState;		
 					while {iCurrentTaskCount < count ActiveTasks} do {
 						if (!(ActiveTasks call FHQ_TT_areTasksCompleted)) then {
 							[ActiveTasks select iCurrentTaskCount, "failed"] call FHQ_TT_setTaskState;
 							iCurrentTaskCount = iCurrentTaskCount + 1;
 						};
-					};
-						
-				};
+					};						
+					sleep 2;
+					[FriendlySide, ["DeBrief", "Return to HQ to debrief", "Debrief", ""]] call FHQ_TT_addTasks;
+				};	
+				if (BadPoints > MaxBadPoints && iMissionParamRepOption == 0) then { //note... when gaining rep, we increase the MaxBadPoints, and when lower, we incrase BadPoints (rep is calulated by the difference)
+					["tskKeepAboveAverage", "failed"] call FHQ_TT_setTaskState;
+				};				
+				if (BadPoints <= MaxBadPoints && iMissionParamRepOption == 0) then {
+					["tskKeepAboveAverage", "succeeded"] call FHQ_TT_setTaskState;					
+				};				
 			};
 		};
 		if (_LastRank != _CurrentRank) then {
@@ -479,19 +471,7 @@ if (isServer) then {
 		};
 		[] spawn TREND_fnc_CheckAnyPlayersAlive;
  	};
- 	//if (!isMultiplayer && !(iMissionParamType == 5)) then {
-	//	TREND_fnc_CheckAnyPlayableUnitsAlive = {
-	//		while {true} do {
-	//			if (count switchableUnits == 0) then {
-	//				//END MISSION!!!
-	//				["end3", true, 5] remoteExec ["BIS_fnc_endMission"]
-	//			};
-	//			sleep 3;
-	//		};
-	//	};
-	//	[] spawn TREND_fnc_CheckAnyPlayableUnitsAlive;
- 	//};
-	//_tfarCreate = "TF_NATO_Radio_Crate" createVehicle getPos endMissionBoard;
+ 
 
 	if (iAllowNVG == 0) then {
 		{
@@ -505,14 +485,14 @@ if (isServer) then {
 		} forEach allUnits;
 	};
 
-	TREND_fnc_CheckAnyPlayableUnitsAlive = {
+	TREND_fnc_PlayBaseRadioEffect = {
 		while {true} do {
 			playSound3D ["A3\Sounds_F\sfx\radio\" + selectRandom FriendlyRadioSounds + ".wss",baseRadio,false,getPosASL baseRadio,0.5,1,0];
 			sleep selectRandom [10,15,20,30];
 			sleep 3;
 		};
 	};
-	[] spawn TREND_fnc_CheckAnyPlayableUnitsAlive;
+	[] spawn TREND_fnc_PlayBaseRadioEffect;
 };
 
 

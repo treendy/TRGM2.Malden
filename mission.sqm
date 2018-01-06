@@ -8,14 +8,14 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=302;
+		nextID=320;
 	};
 	class Camera
 	{
-		pos[]={739.47852,46.031731,12123.305};
-		dir[]={0.76107132,-0.59133089,-0.26707017};
-		up[]={0.55808544,0.80626994,-0.19583428};
-		aside[]={-0.33115619,2.6027919e-006,-0.94369596};
+		pos[]={5352.0186,386.54044,6865.3003};
+		dir[]={0.84526581,-0.4299005,-0.31751913};
+		up[]={0.40247339,0.90285766,-0.15118651};
+		aside[]={-0.35167274,-8.4104249e-007,-0.93618351};
 	};
 };
 binarizationWanted=0;
@@ -57,14 +57,13 @@ addons[]=
 	"A3_Data_F_Exp_A_Virtual",
 	"A3_Weapons_F_Ammoboxes",
 	"A3_Structures_F_Mil_BagBunker",
-	"A3_Props_F_Exp_Military_Camps",
-	"A3_Characters_F_Exp_Civil"
+	"A3_Props_F_Exp_Military_Camps"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=25;
+		items=24;
 		class Item0
 		{
 			className="A3_Ui_F";
@@ -233,13 +232,6 @@ class AddonsMetaData
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item24
-		{
-			className="A3_Characters_F_Exp";
-			name="Arma 3 Apex - Characters and Clothing";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
 	};
 };
 randomSeed=7838675;
@@ -271,7 +263,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=90;
+		items=89;
 		class Item0
 		{
 			dataType="Marker";
@@ -2708,8 +2700,8 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={765.06793,28.921438,12127.206};
-						angles[]={0,1.7662493,0};
+						position[]={777.85809,28.921438,12132.376};
+						angles[]={0,3.2214544,0};
 					};
 					side="West";
 					flags=7;
@@ -3158,14 +3150,15 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={725.78833,28.921438,12159.859};
-						angles[]={0,1.6466746,0};
+						position[]={725.78802,28.921438,12159.859};
+						angles[]={0,1.6466832,0};
 					};
 					side="West";
 					flags=7;
 					class Attributes
 					{
 						init="this setVariable [""MP_ONLY"", true, true];";
+						name="k2_1";
 						isPlayable=1;
 					};
 					id=242;
@@ -5687,78 +5680,6 @@ class Mission
 			};
 			id=298;
 			type="Land_PortableGenerator_01_F";
-		};
-		class Item89
-		{
-			dataType="Group";
-			side="Civilian";
-			class Entities
-			{
-				items=1;
-				class Item0
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={765.82397,28.921438,12100.115};
-					};
-					side="Civilian";
-					flags=7;
-					class Attributes
-					{
-						init="call{this execVM ""RandFramework\BadCiv.sqf""; this addaction [""Search Civ"",""RandFramework\SearchCiv.sqf"", nil,1.5,true,true,"""",""true"",5]}";
-						name="civTest";
-					};
-					id=301;
-					type="C_man_1";
-					class CustomAttributes
-					{
-						class Attribute0
-						{
-							property="speaker";
-							expression="_this setspeaker _value;";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
-									value="Male05GRE";
-								};
-							};
-						};
-						class Attribute1
-						{
-							property="pitch";
-							expression="_this setpitch _value;";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"SCALAR"
-										};
-									};
-									value=0.99000001;
-								};
-							};
-						};
-						nAttributes=2;
-					};
-				};
-			};
-			class Attributes
-			{
-			};
-			id=300;
 		};
 	};
 	class Connections

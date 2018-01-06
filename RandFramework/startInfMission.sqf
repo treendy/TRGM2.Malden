@@ -197,6 +197,8 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 							if (_bInfor1Found) then {
 								ObjectivePossitions pushBack [_inf1X,_inf1Y]; 
 								publicVariable "ObjectivePossitions";	
+
+								_sTaskDescription = "";
 								//###################################### Hack Data ###################
 								if (_iThisTaskType == 1) then { 
 									_allpositionsLaptop1 = _infBuilding buildingPos -1;
@@ -214,6 +216,9 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 										_objIED1 setPosATL (selectRandom _allpositionsLaptop1);
 									};
 									[[_objLaptop1, ["Hack intel","RandFramework\hackIntel1.sqf",[_iTaskIndex,_bCreateTask]]],"addAction",true,true] call BIS_fnc_MP;
+									_sTaskDescription = selectRandom[
+										"Somewhere in the building marked is a laptop, it contains details of the latest enemy attack jet. We need you to hack the data and send the details back to us.",
+										"We have discovered the location of an enemy laptop which we know contains a vast amount of data on enemy plans and movement, locate it and hack it! this could be a major step towards our victory"];
 								};
 								//###################################### Steal data from research vehicle ###################
 								if (_iThisTaskType == 2) then { 
@@ -230,6 +235,8 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 										_direction = [_nearestRoad, _connectedRoad] call BIS_fnc_DirTo;
 										_objVehicle setDir (_direction);
 									};
+									_sTaskDescription = selectRandom[
+										"We have seen the enemy have parked a research vehicle near the position marked.  We know they have been working on a new weapon, and belive the details of this research is located in this vehicle! locate and get the intel from it!"];
 								};
 								//###################################### Destroy Ammo Trucks ###################
 								if (_iThisTaskType == 3) then { 
@@ -286,7 +293,10 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack (ObjectivePossitions select %1);",_iTaskIndex];
 										_triggerAmmoTruckClear setTriggerStatements [format["!alive(%1) && !alive(%2) && !([""InfSide%3""] call FHQ_TT_areTasksCompleted)",_sTargetName,_sTargetName2,_iTaskIndex], _sKillOfficerTaskComplete, ""];	
 									};
+									_sTaskDescription = selectRandom[
+										"Two ammo truck have been located, they are getting ready to convoy these to reinforce an area in preperation of an attack.  Locate and destroy these vehicles."];
 								};
+								
 								//###################################### Destroy AAA ###################
 								if (_iThisTaskType == 9) then { 
 									_allowFriendlyIns = false;
@@ -355,6 +365,8 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack (ObjectivePossitions select %1);",_iTaskIndex];
 										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, _sKillOfficerTaskComplete, ""];	
 									};
+									_sTaskDescription = selectRandom[
+										"Two Anti Air vehicles have been causing havoc near the position marked.  Locate and destroy these ASAP!"];
 
 								};
 								//###################################### Destroy Arti ###################
@@ -429,6 +441,8 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									};
 
 									//ATTACH RADIO COMMS SOUND! (but quite)... but will need to stop sound when destroyied
+									_sTaskDescription = selectRandom[
+										"Two artillery vehicles have been firing rounds at and around our HQ, we need them destroyed as soon as possible!"];
 								};
 								 //###################################### informant,intorigate officer, weapon dealer or kill officer #########################################
 								if (_iThisTaskType == 4 || _iThisTaskType == 5 || _iThisTaskType == 7 || _iThisTaskType == 8) then { //if informant,intorigate officer, weapon dealer or kill officer
@@ -529,14 +543,6 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 												};
 											};
 
-											//if (alive(_thisInformant)) then {
-											//	if (side (_thisShooter) != West) then {
-											//		_thisInformant setDamage 0;
-											//	}
-											//	else {
-											//		_thisInformant switchMove "";
-											//	}
-											//}
 										}
 									]],"addEventHandler",true,true] call BIS_fnc_MP;
 
@@ -616,6 +622,24 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									else {
 										[[_objInformant, ["Get Intel","RandFramework\SpeakInformant.sqf",[_iTaskIndex,_bCreateTask],1,false,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
 									};
+									//4=Speak with informant || 5=interrogate officer || 7=Eliminate Officer || 8=Assasinate weapon dealer
+									if (_iThisTaskType == 4) then {
+										_sTaskDescription = selectRandom[
+										"We have a guy that holds valuable intel on enemy plans, he is walking around the area marked, unfortunately this area is occupied, but we need this intel regardless! move in, find him and talk to him.<br />We are not exactly which of the following two is our guy, so look out for them both!<br />" + InformantImage];
+									};
+									if (_iThisTaskType == 5) then {
+										_sTaskDescription = selectRandom[
+										"We have located an enemy officer who is a lead role in a current operation, we need you to get as much intel from this guy as possible!<br /><br />Shoot him in the leg to incapacitate him, then approch to tie up and interrogate him!<br /><br />" + OfficerImage];
+									};
+									if (_iThisTaskType == 7) then {
+										_sTaskDescription = selectRandom[
+										"HVT located, we need him dead! his death will cause major destruction to current enemy plans<br />" + OfficerImage];
+									};
+									if (_iThisTaskType == 8) then {
+										_sTaskDescription = selectRandom[
+										"A weapons dealer is getting ready to meet up with an enemy general, he is about to sell weapons that have been stolen from us!  locate him and assainate him. We have intel of two dealers, here they both are, it will be one of these who you need to locate, we are unsure which one!  <br />" + WeaponDealerImage];
+									};
+
 								};
 								//####################BUG RADIO##########################
 								if (_iThisTaskType == 6) then {
@@ -639,7 +663,8 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 										};
 									};
 									[_sRadio1Name] spawn TREND_fnc_RadioLoop;
-
+									_sTaskDescription = selectRandom[
+										"We need you to locate an enemy radio, we know its being used for comms of a planned attack, we need you to send the transmission to us so our team can listen in until the plans have been identified!"];
 								};
 								//##############################################
 								debugMessages = debugMessages + format["\n_bIsMainObjective: %1",_bIsMainObjective];
@@ -679,15 +704,15 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									[[_inf1X,_inf1Y],_iThisTaskType,_infBuilding,_bIsMainObjective, _iTaskIndex, _allowFriendlyIns] spawn TREND_fnc_PopulateSideMission;
 								};
 
-								
+								//hint _sTaskDescription;
 								if (_bCreateTask) then {
 									if (_bIsCampaign) then {
-										[FriendlySide,[format["InfSide%1",_iTaskIndex], "", format["Day: %1 : %2",_iTaskIndex+1,_MissionTitle],"Description Here"]] call FHQ_TT_addTasks;
+										[FriendlySide,[format["InfSide%1",_iTaskIndex], _sTaskDescription, format["Day: %1 : %2",_iTaskIndex+1,_MissionTitle],""]] call FHQ_TT_addTasks;
 										ActiveTasks pushBack format["InfSide%1",_iTaskIndex]; 
 										publicVariable "ActiveTasks";	
 									}
 									else {
-										[FriendlySide,[format["InfSide%1",_iTaskIndex], "", format["%1 : %2",_iTaskIndex+1,_MissionTitle],"Description Here"]] call FHQ_TT_addTasks;
+										[FriendlySide,[format["InfSide%1",_iTaskIndex], _sTaskDescription, format["%1 : %2",_iTaskIndex+1,_MissionTitle],""]] call FHQ_TT_addTasks;
 										ActiveTasks pushBack format["InfSide%1",_iTaskIndex]; 
 										publicVariable "ActiveTasks";	
 									};
@@ -731,7 +756,18 @@ if (iMissionParamType == 5) then {
 	}
 }
 else {
-	_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "", ""];			
+	//_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "", ""]; //not sure why this is here... commented out on 5th Jan 2018... delete of no issues sinse
+
+	//If not campaign and rep is disabled, then we will not fail the mission if rep low, but will be a task to keep rep above average
+	if (iMissionParamRepOption == 0) then {
+		//CREATE TASK HERE... we fail it in mainInit.sqf when checking rep points
+		[FriendlySide, ["tskKeepAboveAverage","Make too many mistakes, kill civs, lose too many units, your reputation will lower.  Try not to make too many errors","(optional) Uphold reputation",""]] call FHQ_TT_addTasks;
+	};
+	if (iMissionParamRepOption == 1) then {
+		//CREATE TASK HERE... we fail it in mainInit.sqf when checking rep points
+		[FriendlySide, ["tskKeepAboveAverage","Make too many mistakes, kill civs, lose too many units, your reputation will lower.  Try not to make too many errors","!!Must uphold reputation!!",""]] call FHQ_TT_addTasks;
+	};
+	
 };
 
 
@@ -790,6 +826,9 @@ if (_bMoveToAO) then {
 		_flatPos2 = [_flatPosCampFire , 5, 10, 5, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
 		_Tent2 = "Land_TentA_F" createVehicle _flatPos2;
 		_Tent2 setDir (floor(random 360));
+
+		_Tent1 addAction ["Remove small vehicle from tent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}]; 
+		_Tent2 addAction ["Remove small vehicle from tent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}]; 
 	};
 	
 	_flatPos4 = nil;

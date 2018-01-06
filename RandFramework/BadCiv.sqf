@@ -34,7 +34,6 @@ if (isServer) then { // only do once -> on the serer
 
 		// continiously watch for players and decide to engage or not
 		while {alive _thisCiv && !_bFired} do {
-			hint "A";
 			{
 				if ((_x in playableUnits) || _x in switchableUnits) then {
 					if (selectRandom[true,false,false]) then {

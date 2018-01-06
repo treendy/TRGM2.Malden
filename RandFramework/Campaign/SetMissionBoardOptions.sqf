@@ -94,7 +94,7 @@ switch (_option) do {
 	case "CAMPAIGN_END": {
 		endMissionBoard remoteExec ["removeAllActions"];
 		[endMissionBoard, ["Show Rep Report","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
-		[endMissionBoard, ["End Mission","RandFramework\endMission.sqf"]] remoteExec ["addAction", 0];
+		[endMissionBoard, ["End Mission","RandFramework\attemptEndMission.sqf"]] remoteExec ["addAction", 0];
 	};
 };
 

@@ -168,48 +168,60 @@ TREND_fnc_PopulateSideMission = {
 			//Spawn patrol
 			//if main need a couple of these and always have 2 or 3
 
-			if (_bIsMainObjective || (selectRandom [true,true,false] && !bThisMissionCivsOnly)) then {
-					if (_bIsMainObjective) then {
+			_bHasPatrols = false;
+			if (_bIsMainObjective) then {_bHasPatrols = true};
 
-						[_sidePos,15 + (floor random 150),[2,3],false,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						if (bAllowLargerPatrols && _bIsMainObjective) then {
-							[_sidePos,15 + (floor random 150),[2,3],false,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						};
-					};
-					if (selectRandom [true,false]) then {
-						//not adding a teamleader to small patrol as we need long dist to have teamleader for CallNearbyPatrols (3rd param for RadiusPatrol is false)
-						[_sidePos,15 + (floor random 50),[2,3],false,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-					};
-					
+			if (_bIsMainObjective) then {
+
+				[_sidePos,15 + (floor random 150),[2,3],false,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+				if (bAllowLargerPatrols && _bIsMainObjective) then {
+					[_sidePos,15 + (floor random 150),[2,3],false,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+				};
 			};
+			if (selectRandom [true,false]) then {
+				//not adding a teamleader to small patrol as we need long dist to have teamleader for CallNearbyPatrols (3rd param for RadiusPatrol is false)
+				[_sidePos,15 + (floor random 50),[2,3],false,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+				_bHasPatrols = true
+			};
+					
+
 			//Spawn wide patrol
 			//if main, need a couple of these and always have 2 or 3
-			if (_bIsMainObjective ||(selectRandom [true,false] && !bThisMissionCivsOnly)) then {
-				[_sidePos,500 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-				if (_bIsMainObjective && selectRandom [true,true,false]) then {
-					//[_sidePos,500 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-					if (bAllowLargerPatrols && _bIsMainObjective) then {
-						//[_sidePos,700 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos,900 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-					};
+			if (_bIsMainObjective) then {
+				[_sidePos,500 + (floor random 250),[7,8,9],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+			}
+			else {
+				if (selectRandom [true,false]) then {
+					[_sidePos,500 + (floor random 250),[4,5,6],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+					_bHasPatrols = true
 				};
-							
 			};
+			
+			if (_bIsMainObjective && selectRandom [true,true,false]) then {
+				//[_sidePos,500 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+				if (bAllowLargerPatrols && _bIsMainObjective) then {
+					//[_sidePos,700 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+					[_sidePos,900 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+				};
+			};
+				
 
 			
 			//Spawn patrol to move from building to building
-			if (_bIsMainObjective || (selectRandom [true,false] && !bThisMissionCivsOnly)) then {
+			if (_bIsMainObjective || (selectRandom [true,false])) then {
 				[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 1200] spawn TREND_fnc_BuildingPatrol;
+				_bHasPatrols = true
 			};
-			if (_bIsMainObjective && bAllowLargerPatrols && !bThisMissionCivsOnly) then {
+			if (_bIsMainObjective && bAllowLargerPatrols) then {
 				[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 1200] spawn TREND_fnc_BuildingPatrol;
 			};
 
 			//Spawn distant patrol ready to move in (will need to spawn trigger)
-			if (_bIsMainObjective || (selectRandom [true,false] && !bThisMissionCivsOnly)) then {
-				[_sidePos,1000 + (floor random 500),[5,6,7],true,_InsurgentSide] spawn TREND_fnc_BackForthPatrol;
+			if (_bIsMainObjective || (selectRandom [true,false])) then {
+				[_sidePos,1000 + (floor random 500),[5,6],true,_InsurgentSide] spawn TREND_fnc_BackForthPatrol;
+				_bHasPatrols = true
 			};
-			if (_bIsMainObjective && bAllowLargerPatrols && !bThisMissionCivsOnly) then {
+			if (_bIsMainObjective && bAllowLargerPatrols) then {
 				[_sidePos,1000 + (floor random 500),[5,6,7],true,_InsurgentSide] spawn TREND_fnc_BackForthPatrol;
 			};
 
@@ -315,19 +327,21 @@ TREND_fnc_PopulateSideMission = {
 			};
 
 			//if main then 100% occupie houses, and increase number and range
-			if (_bIsMainObjective || (selectRandom [true,false] && !bThisMissionCivsOnly)) then {
-				if (_bIsMainObjective) then {
-					[_sidePos,200,[5,6,7],_InsurgentSide] spawn TREND_fnc_OccupyHouses;
-					[_sidePos,500,[10,12,14],_InsurgentSide] spawn TREND_fnc_OccupyHouses;
-					if (bAllowLargerPatrols && _bIsMainObjective) then {
-						[_sidePos,1000,[20,25,30],_InsurgentSide] spawn TREND_fnc_OccupyHouses;
-					};
-				}
-				else {
-					[_sidePos,500,[10,12,14],_InsurgentSide] spawn TREND_fnc_OccupyHouses;
+			if selectRandom [true] then {[_sidePos,10,[1],_InsurgentSide] spawn TREND_fnc_OccupyHouses;};
+				//sleep 120;
+			if (_bIsMainObjective) then {
+				[_sidePos,200,[1,2,3],_InsurgentSide] spawn TREND_fnc_OccupyHouses;
+				[_sidePos,500,[4,5,6],_InsurgentSide] spawn TREND_fnc_OccupyHouses;
+				if (bAllowLargerPatrols && _bIsMainObjective) then {
+					[_sidePos,1000,[4,5,6],_InsurgentSide] spawn TREND_fnc_OccupyHouses;
 				};
-			};
+			}
+			else {
 
+				if selectRandom [true,false] then {[_sidePos,100,[1,2],_InsurgentSide] spawn TREND_fnc_OccupyHouses;};
+				if selectRandom [true,false] then {[_sidePos,1000,[3,4],_InsurgentSide] spawn TREND_fnc_OccupyHouses;};
+			};
+			
 			//Spawn nasty surprise (AAA, IEDs, wider patrol)
 			if ((_bIsMainObjective && selectRandom [true,false]) || (!_bIsMainObjective && selectRandom [true,false,false,false])) then {
 				if (sAAAVehMilitia != "") then {
@@ -377,6 +391,7 @@ TREND_fnc_PopulateSideMission = {
 			//spawn inner checkpoints
 			_iCount = 1;
 			if (!_bIsMainObjective) then {_iCount = selectRandom [0,1,1];};
+			if (!_bIsMainObjective && !_bHasPatrols) then {_iCount = selectRandom [1,1,2];};
 			if (_iCount > 0) then {_dAngleAdustPerLoop = 360 / _iCount;};
 			while {_iCount > 0} do {
 				_thisAreaRange = 50;
@@ -398,6 +413,7 @@ TREND_fnc_PopulateSideMission = {
 			//spawn outer but close surrunding checkpoints
 			_iCount = 2;
 			if (!_bIsMainObjective) then {_iCount = selectRandom [0,1];};
+			if (!_bIsMainObjective && !_bHasPatrols) then {_iCount = selectRandom [0,1,2];};
 			if (_iCount > 0) then {_dAngleAdustPerLoop = 360 / _iCount;};
 			while {_iCount > 0} do {
 				_thisAreaRange = 75;
@@ -420,6 +436,7 @@ TREND_fnc_PopulateSideMission = {
 			//spawn outer far checkpoints
 			_iCount = 2;
 			if (!_bIsMainObjective) then {_iCount = selectRandom [0,1];};
+			if (!_bIsMainObjective && !_bHasPatrols) then {_iCount = selectRandom [1,2];};
 			if (_iCount > 0) then {_dAngleAdustPerLoop = 360 / _iCount;};
 			while {_iCount > 0} do {
 				_thisAreaRange = 250;
@@ -442,6 +459,7 @@ TREND_fnc_PopulateSideMission = {
 			//spawn outer far sentrys
 			_iCount = 1;
 			if (!_bIsMainObjective) then {_iCount = selectRandom [0,1];};
+			if (!_bIsMainObjective && !_bHasPatrols) then {_iCount = selectRandom [1,2];};
 			if (_iCount > 0) then {_dAngleAdustPerLoop = 360 / _iCount;};
 			while {_iCount > 0} do {
 				_thisAreaRange = 250;
@@ -883,8 +901,37 @@ TREND_fnc_OccupyHouses = {
 			_allBuildings = nearestObjects [_sidePos, ["house"], _distFromCent];
 			_randBuilding = selectRandom _allBuildings;
 			
-			sRiflemanToUse createUnit [position _randBuilding, createGroup _InsurgentSide, "[getPosATL this, units group this, -1, false, false] execVM ""RandFramework\Zen_OccupyHouse.sqf"";"];
+			_thisGroup = nil;
+			_thisGroup = createGroup _InsurgentSide;
+			sRiflemanToUse createUnit [position _randBuilding, _thisGroup];
+			sRiflemanToUse createUnit [position _randBuilding, _thisGroup, "[getPosATL this, units group this, -1, false, false] execVM ""RandFramework\Zen_OccupyHouse.sqf"";"];
 					
+			_iCountNoOfCPs = selectRandom[0,0,0,0,1];
+			if ((_sidePos distance _randBuilding) > 400) then {_iCountNoOfCPs = selectRandom[0,0,1];};
+			//spawn inner random sentrys
+			//if (!_bIsMainObjective) then {_iCountNoOfCPs = selectRandom [0,1];};
+			if (_iCountNoOfCPs > 0) then {_dAngleAdustPerLoop = 360 / _iCountNoOfCPs;};
+			while {_iCountNoOfCPs > 0} do {
+				_thisAreaRange = 50;
+				_checkPointGuidePos = _sidePos;
+				_iCountNoOfCPs = _iCountNoOfCPs - 1;
+				_flatPos = nil;
+				_flatPos = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,CheckPointAreas + SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+		
+
+				if (_flatPos select 0 > 0) then {
+					_thisPosAreaOfCheckpoint = _flatPos;
+					_thisRoadOnly = false;
+					_thisSide = east; 
+					_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
+					_thisAllowBarakade = selectRandom [false];
+					_thisIsDirectionAwayFromAO = true;
+					[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,50,false] execVM "RandFramework\setCheckpoint.sqf";
+				}
+			};
+
+
+
 			_iCount = _iCount + 1;
 		};
 	};

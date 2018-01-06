@@ -11,7 +11,8 @@ params [
 	"_thisIsDirectionAwayFromAO",
 	"_thisIsCheckPoint", // only used to store possitions in our checkpointareas and sentryareas arrays
 	"_thisScoutVehicles",
-	"_thisAreaAroundCheckpointSpacing"
+	"_thisAreaAroundCheckpointSpacing",
+	["_AllowAnimation", true]
 ];
 
 fnc_AddToDirection = {
@@ -232,6 +233,20 @@ if (_PosFound) then {
 		
 	};
 
+	if (_iBarricadeType != "NONE" && selectRandom [true,false]) then {
+		[_initItem,_thisSide] spawn {
+			_initItem = _this select 0;
+			_thisSide = _this select 1;
+			while {alive(_initItem)} do {
+				_soundToPlay = selectRandom EnemyRadioSounds;
+				if (_thisSide == west) then {_soundToPlay = selectRandom FriendlyRadioSounds};
+				playSound3D ["A3\Sounds_F\sfx\radio\" + _soundToPlay + ".wss",_initItem,false,getPosASL _initItem,0.5,1,0];
+				sleep selectRandom [10,15,20,30];
+			};
+		};		
+	};
+	
+
 	_bHasParkedCar = false;
 	_ParkedCar = nil;
 	if (selectRandom [true,true,true,false] || _thisSide == west) then {
@@ -289,7 +304,7 @@ if (_PosFound) then {
 	_guardUnit1 = _group createUnit [_sUnitType,_pos1,[],0,"NONE"];
 	doStop [_guardUnit1];
 	_guardUnit1 setDir (_direction);
-	[_guardUnit1,"WATCH","ASIS"] call BIS_fnc_ambientAnimCombat;
+ 	if (_AllowAnimation) then {[_guardUnit1,"WATCH","ASIS"] call BIS_fnc_ambientAnimCombat;};
 	//hint "HMM2";
 	if (selectRandom [true,true,false]) then {
 		_sUnitType = selectRandom _thisUnitTypes;
@@ -324,22 +339,23 @@ if (_PosFound) then {
 	
 		//[_guardUnit3,"STAND","ASIS"] call BIS_fnc_ambientAnimCombat;
 
-		if (!_bHasParkedCar) then {
-			[_guardUnit4,"STAND_IA","ASIS"] call BIS_fnc_ambientAnimCombat;
-		}
-		else {
-			_LeanDir = ([direction _ParkedCar,45] call fnc_AddToDirection);
-			_group3 setFormDir _LeanDir;
-			doStop [_guardUnit4];
-			_guardUnit4 setDir (_LeanDir);
-			sleep 0.1;
-			_LeanPos = _ParkedCar getPos [1,_LeanDir];
-			sleep 0.1;
-			_guardUnit4 setPos _LeanPos;
-			sleep 0.1;
-			[_guardUnit4,"LEAN","ASIS"] call BIS_fnc_ambientAnimCombat;
+		if (_AllowAnimation) then {
+			if (!_bHasParkedCar) then {
+				[_guardUnit4,"STAND_IA","ASIS"] call BIS_fnc_ambientAnimCombat;
+			}
+			else {
+				_LeanDir = ([direction _ParkedCar,45] call fnc_AddToDirection);
+				_group3 setFormDir _LeanDir;
+				doStop [_guardUnit4];
+				_guardUnit4 setDir (_LeanDir);
+				sleep 0.1;
+				_LeanPos = _ParkedCar getPos [1,_LeanDir];
+				sleep 0.1;
+				_guardUnit4 setPos _LeanPos;
+				sleep 0.1;
+				[_guardUnit4,"LEAN","ASIS"] call BIS_fnc_ambientAnimCombat;
+			};
 		};
-
 	};
 
 	_group4 = createGroup _thisSide;
