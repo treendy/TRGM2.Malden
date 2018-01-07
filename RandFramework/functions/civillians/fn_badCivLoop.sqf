@@ -19,7 +19,7 @@ while {alive _badCiv && !_bFired} do {
                 };
                 _cansee = [objNull, "VIEW"] checkVisibility [eyePos _badCiv, eyePos _x];
                 if (_cansee > 0.2) then {
-                    _badCiv reveal [_player, 2];
+                    _badCiv reveal [_x, 2];
                     [_badCiv,_x] call TRGM_fnc_badCivAttackTargetPlayer;
                     _bFired = true;
                 };
