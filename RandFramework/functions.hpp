@@ -46,6 +46,7 @@ class TRGM   { // TAG
 
         class badCivInitialize{};
         class badCivApplyAssignedArmament{};
+        class badCivAttackTargetPlayer{};
         class badCivSearch{};
         class badCivTurnHostile{};
         class badCivLoop{};

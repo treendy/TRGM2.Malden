@@ -19,20 +19,8 @@ while {alive _badCiv && !_bFired} do {
                 };
                 _cansee = [objNull, "VIEW"] checkVisibility [eyePos _badCiv, eyePos _x];
                 if (_cansee > 0.2) then {
-                    _badCiv selectWeapon _gun;
-    
-                    _badCiv doTarget _x;
-                    _badCiv commandFire _x; //LOCAL - ?
-                    
-                    sleep 3;
-
-                    _fireSettings = [ weaponState _badCiv select 1, weaponState _badCiv select 2];
-
-                    _badCiv forceWeaponFire _fireSettings; 
-                    sleep 1;
-                    _badCiv forceWeaponFire _fireSettings; 
-                    sleep 1;
-                    _badCiv forceWeaponFire _fireSettings; 
+                    _badCiv reveal [_player, 2];
+                    [_badCiv,_x] call TRGM_fnc_badCivAttackTargetPlayer;
                     _bFired = true;
                 };
 
