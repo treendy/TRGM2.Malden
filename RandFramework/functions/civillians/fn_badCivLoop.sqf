@@ -14,24 +14,25 @@ while {alive _badCiv && !_bFired} do {
 
                 if (!_bActivated) then {
                     _bActivated = true;
-                    _grpName = createGroup east;
-                    [_badCiv] joinSilent _grpName;
-
-                    [_badCiv] call TRGM_fnc_applyAssingnedArmament;
-
-                    _badCiv allowFleeing 0;
+                    
+                    [_badCiv] call TRGM_fnc_badCivTurnHostile;
                 };
                 _cansee = [objNull, "VIEW"] checkVisibility [eyePos _badCiv, eyePos _x];
                 if (_cansee > 0.2) then {
+                    _badCiv selectWeapon _gun;
+    
                     _badCiv doTarget _x;
                     _badCiv commandFire _x; //LOCAL - ?
                     
                     sleep 3;
-                    _badCiv fire _gun;
+
+                    _fireSettings = [ weaponState _badCiv select 1, weaponState _badCiv select 2];
+
+                    _badCiv forceWeaponFire _fireSettings; 
                     sleep 1;
-                    _badCiv fire _gun;
+                    _badCiv forceWeaponFire _fireSettings; 
                     sleep 1;
-                    _badCiv fire _gun;			
+                    _badCiv forceWeaponFire _fireSettings; 
                     _bFired = true;
                 };
 
