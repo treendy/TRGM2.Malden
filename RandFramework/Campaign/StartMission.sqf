@@ -4,33 +4,33 @@ _isCampaign = (iMissionParamType == 5);
 
 
 
-
+//Need to move the below to function that fires for player who called addAction, then inside that function can call StartMission for all
+//Also... in this extra file, we can set a publicVariable for "IntroPlayed=false", then after played set IntroPlayed=true... so will only play when mission starts or next mission picked
 _bAllowStart = true;
-
-if (_isCampaign && isMultiplayer) then {
-	_bSLAlive = false;
-	_bK1_1Alive = false;
-	if (!isnil "sl") then {
-		_bSLAlive = alive sl;
-	};
-	if (!isnil "k2_1") then {
-		_bK1_1Alive = alive k2_1;
-	};
-
-	if (_bSLAlive && str(player) != "sl") then {
-		hint "The Kilo-1 teamleader needs to select this";
-		_bAllowStart = false;
-	};
-
-	if (!_bSLAlive && _bK1_1Alive && str(player) != "k2_1") then {
-		hint "The Kilo-2 teamleader needs to select this";
-		_bAllowStart = false;
-	};
-	if (!_bSLAlive && !_bK1_1Alive && (leader (group player))!=player) then {
-			hint "The assigned Kilo-1 teamleader needs to select this";
-			_bAllowStart = false;
-	};
-};
+//if (_isCampaign && isMultiplayer) then {
+//	_bSLAlive = false;
+//	_bK1_1Alive = false;
+//	if (!isnil "sl") then {
+//		_bSLAlive = alive sl;
+//	};
+//	if (!isnil "k2_1") then {
+//		_bK1_1Alive = alive k2_1;
+//	};
+//
+//	if (_bSLAlive && str(player) != "sl") then {
+//		hint "The Kilo-1 teamleader needs to select this";
+//		_bAllowStart = false;
+//	};
+//
+//	if (!_bSLAlive && _bK1_1Alive && str(player) != "k2_1") then {
+//		hint "The Kilo-2 teamleader needs to select this";
+//		_bAllowStart = false;
+//	};
+//	if (!_bSLAlive && !_bK1_1Alive && (leader (group player))!=player) then {
+//			hint "The assigned Kilo-1 teamleader needs to select this";
+//			_bAllowStart = false;
+//	};
+//};
 
 
 if (_bAllowStart) then {
