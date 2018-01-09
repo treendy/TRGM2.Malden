@@ -88,7 +88,7 @@ switch (_option) do {
 		if (MaxBadPoints > 7) then {
 			[endMissionBoard, ["Recruit UAV Operator","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV]]] remoteExec ["addAction", 0];
 		};		
-		[endMissionBoard, ["!EXIT MISSON (will save if save active)!","RandFramework\exitCampaign.sqf"]] remoteExec ["addAction", 0];
+		[endMissionBoard, ["!EXIT MISSON (will save if save active)!","RandFramework\Campaign\exitCampaign.sqf"]] remoteExec ["addAction", 0];
 		
 	};
 	case "CAMPAIGN_END": {

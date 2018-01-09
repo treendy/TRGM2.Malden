@@ -867,6 +867,9 @@ if (_bMoveToAO) then {
 	else {
 		[_AmmoBox1,InitialBoxItems] call bis_fnc_initAmmoBox;
 	};
+	if (AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
+		_AmmoBox1 addAction ["<t color='#ff1111'>Virtual Arsenal</t>", {["Open",true] spawn BIS_fnc_arsenal}];
+	};
 
 	_flatPosUnits = [_flatPosCampFire, 8, 17, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
 	if (!isnil "sl") then {sl setPos _flatPosUnits};

@@ -14,7 +14,7 @@ overviewPicture = "TRGM2OverviewPic2.jpg";
 disabledAI=0;
 joinUnassigned = 1;
 enableDebugConsole = 1;
-forceRotorLibSimulation = 1;
+//forceRotorLibSimulation = 1;
 
 respawn = 3;
 respawnDelay = 5;

@@ -489,7 +489,6 @@ if (isServer) then {
 		while {true} do {
 			playSound3D ["A3\Sounds_F\sfx\radio\" + selectRandom FriendlyRadioSounds + ".wss",baseRadio,false,getPosASL baseRadio,0.5,1,0];
 			sleep selectRandom [10,15,20,30];
-			sleep 3;
 		};
 	};
 	[] spawn TREND_fnc_PlayBaseRadioEffect;
