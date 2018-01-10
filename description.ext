@@ -18,7 +18,7 @@ enableDebugConsole = 1;
 
 respawn = 3;
 respawnDelay = 5;
-respawnDialog = 0;
+respawnDialog = 1;
 respawnTemplates[] = {"Tickets","Spectator"};
 
 class Header

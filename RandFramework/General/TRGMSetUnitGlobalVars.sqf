@@ -1,19 +1,25 @@
 bDebugMode = false;
 
+//example: AdvancedSettings select ADVSET_SUPPORT_OPTION_IDX
 ADVSET_VIRTUAL_ARSENAL_IDX = 0;
+ADVSET_GROUP_NAME_IDX = 1;
+ADVSET_SUPPORT_OPTION_IDX = 2;
+ADVSET_RESPAWN_TICKET_COUNT_IDX = 3;
 //NOTE the id's must go up in twos!
-AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex
+AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex(zero based index)
 	[6001, "Virtual Arsenal","RscCombo",["Enabled","Disabled"],[1,0],1],
-	[6003, "Group Name","RscEdit",[""],"",1] 
+	[6003, "Group Name","RscEdit",[""],"",1], 
+	[6005, "Support options","RscCombo",["Enabled","Disabled"],[1,0],0],
+	[6007, "Respawn Tickets","RscCombo",["1","2","3","4","5","1000"],[1,2,3,4,5,1000],0]
 ];
-DefaultAdvancedSettings = [0,"Tactical Cannon Fodder"];
+DefaultAdvancedSettings = [0,"Tactical Cannon Fodder",1,1,1];
 
 //0 = no, 1 = guarantee revive, 2 = realistic revive, 3 = realistic revive (only medics can revive)
 
 //iUseRevive = ("OUT_par_UseRevive" call BIS_fnc_getParamValue);	
 if (isNil "iUseRevive") then {
 	iUseRevive = 0;
-	publicVariable "iUseRevive";	
+	publicVariable "iUseRevive";
 };
 if (iUseRevive == 0) then {
 	bUseRevive = false;

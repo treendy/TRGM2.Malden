@@ -1,3 +1,4 @@
+
 if (bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) then {
 	["DeBrief", "succeeded"] call FHQ_TT_setTaskState;  	
 

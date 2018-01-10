@@ -5,7 +5,8 @@
 // v v v v v v v v v v v v  --- Main Settings --- v v v v v v v v v v v v
 //0 = no, 1 = guarantee revive, 2 = realistic revive, 3 = realistic revive (only medics can revive)
 
-_iUseRevive = ("OUT_par_UseRevive" call BIS_fnc_getParamValue);	
+//if (isNil "iUseRevive") then {
+_iUseRevive = iUseRevive;	
 
 if (_iUseRevive == 1) then {
 	tcb_ais_realistic_mode 			= 	false; 			// If set to true, units may die immediately if they get seriously wounded. If set to false, you are guaranteed a 100% chance to revive.

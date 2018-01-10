@@ -623,6 +623,9 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 										[[_objInformant, ["Get Intel","RandFramework\SpeakInformant.sqf",[_iTaskIndex,_bCreateTask],1,false,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
 									};
 									//4=Speak with informant || 5=interrogate officer || 7=Eliminate Officer || 8=Assasinate weapon dealer
+
+									_bodyIDRequiredText = "";
+									if (_bIsMainObjective && (_iThisTaskType == 7 || _iThisTaskType == 8)) then {_bodyIDRequiredText = "<br /><br />You must search the body to identify this target!<br /><br />"};
 									if (_iThisTaskType == 4) then {
 										_sTaskDescription = selectRandom[
 										"We have a guy that holds valuable intel on enemy plans, he is walking around the area marked, unfortunately this area is occupied, but we need this intel regardless! move in, find him and talk to him.<br />We are not exactly which of the following two is our guy, so look out for them both!<br />" + InformantImage];
@@ -633,11 +636,11 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									};
 									if (_iThisTaskType == 7) then {
 										_sTaskDescription = selectRandom[
-										"HVT located, we need him dead! his death will cause major destruction to current enemy plans<br />" + OfficerImage];
+										"HVT located, we need him dead! his death will cause major destruction to current enemy plans" + _bodyIDRequiredText + OfficerImage];
 									};
 									if (_iThisTaskType == 8) then {
 										_sTaskDescription = selectRandom[
-										"A weapons dealer is getting ready to meet up with an enemy general, he is about to sell weapons that have been stolen from us!  locate him and assainate him. We have intel of two dealers, here they both are, it will be one of these who you need to locate, we are unsure which one!  <br />" + WeaponDealerImage];
+										"A weapons dealer is getting ready to meet up with an enemy general, he is about to sell weapons that have been stolen from us!  locate him and assainate him. We have intel of two dealers, here they both are, it will be one of these who you need to locate, we are unsure which one!" + _bodyIDRequiredText + WeaponDealerImage];
 									};
 
 								};
@@ -762,10 +765,12 @@ else {
 	if (iMissionParamRepOption == 0) then {
 		//CREATE TASK HERE... we fail it in mainInit.sqf when checking rep points
 		[FriendlySide, ["tskKeepAboveAverage","Make too many mistakes, kill civs, lose too many units, your reputation will lower.  Try not to make too many errors","(optional) Uphold reputation",""]] call FHQ_TT_addTasks;
+		["tskKeepAboveAverage", "succeeded"] call FHQ_TT_setTaskState;
 	};
 	if (iMissionParamRepOption == 1) then {
 		//CREATE TASK HERE... we fail it in mainInit.sqf when checking rep points
 		[FriendlySide, ["tskKeepAboveAverage","Make too many mistakes, kill civs, lose too many units, your reputation will lower.  Try not to make too many errors","!!Must uphold reputation!!",""]] call FHQ_TT_addTasks;
+		["tskKeepAboveAverage", "succeeded"] call FHQ_TT_setTaskState;
 	};
 	
 };
@@ -835,6 +840,15 @@ if (_bMoveToAO) then {
 	_flatPos4 = [_flatPosCampFire , 5, 10, 5, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
 	_Tent4 = "Land_WoodPile_F" createVehicle _flatPos4;
 	_Tent4 setDir (floor(random 360));
+
+	if (iMissionParamType == 5) then {
+		_flatPos4b = nil;
+		_flatPos4b = [_flatPosCampFire , 5, 10, 3, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+		endMissionBoard2 setPos _flatPos4b;
+		_boardDirection = [_campFire, endMissionBoard2] call BIS_fnc_DirTo;
+		endMissionBoard2 setDir _boardDirection;
+
+	};
 
 	_flatPos5 = nil;
 	_flatPos5 = [_flatPosCampFire, 12, 30, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;

@@ -1,5 +1,6 @@
 _bAllowEnd = true;
 
+
 if (isMultiplayer) then {
 
 	_bSLAlive = false;
@@ -26,8 +27,9 @@ if (isMultiplayer) then {
 	};
 
 
-	if (_bAllowEnd) then {
-			hint "Mission Ending..."; 
-			execVM "RandFramework\endMission.sqf";
-	};
+};
+
+if (_bAllowEnd) then {
+	hint "Mission Ending..."; 
+	execVM "RandFramework\endMission.sqf";
 };

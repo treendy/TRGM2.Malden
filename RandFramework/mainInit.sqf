@@ -1,5 +1,6 @@
 #include "..\setUnitGlobalVars.sqf";
 
+
 civilian setFriend [east, 1];
 
 if (isNil "bBreifingPrepped") then {
@@ -316,6 +317,16 @@ if (!isMultiplayer) then {
 
 waitUntil {bAndSoItBegins};
 
+ if (bUseRevive) then {
+
+	//by psycho
+	["%1 --- Executing TcB AIS init.sqf",diag_ticktime] call BIS_fnc_logFormat;
+	enableSaving [false,false];
+	enableTeamswitch false;
+};
+
+
+
 titleText ["Loading mission...", "BLACK FADED"];
 _camera cameraEffect ["Terminate","back"];
 
@@ -455,7 +466,9 @@ if (isServer) then {
 				_bAnyAlive = false;
 				{	
 	   				if (isPlayer _x) then {
-	   					if (alive _x) then {
+	   					_iRespawnTicketsLeft = [_x,nil,true] call BIS_fnc_respawnTickets;
+	   					//hint "check:" + str(_iRespawnTicketsLeft);
+	   					if (alive _x || _iRespawnTicketsLeft > 0) then {
 	   						_bAnyAlive = true;
 	   					};
 	   				};
@@ -505,14 +518,10 @@ if (isServer) then {
  };
 
 
-
  
 if (bUseRevive) then {
 
-		//by psycho
-	["%1 --- Executing TcB AIS init.sqf",diag_ticktime] call BIS_fnc_logFormat;
-	enableSaving [false,false];
-	enableTeamswitch false;
+
 
 	
 	// TcB AIS Wounding System --------------------------------------------------------------------------

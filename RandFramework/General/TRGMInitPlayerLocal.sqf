@@ -200,13 +200,15 @@ if (iMissionSetup == 12 || iMissionSetup == 20) then {
 	
 }
 else {
-	if (iMissionSetup == 5 && !isMultiplayer) then {
-		[player, 999] call BIS_fnc_respawnTickets;
-		debugMessages = debugMessages + "\n" + "999 respawn tickets"
-	}
-	else {
-		[player, 1] call BIS_fnc_respawnTickets;
-	};
+	_iTicketCount = AdvancedSettings select ADVSET_RESPAWN_TICKET_COUNT_IDX;
+	[player, _iTicketCount] call BIS_fnc_respawnTickets;
+	//if (iMissionSetup == 5 && !isMultiplayer) then {
+	//	[player, 999] call BIS_fnc_respawnTickets;
+	//	debugMessages = debugMessages + "\n" + "999 respawn tickets"
+	//}
+	//else {
+	//	[player, 1] call BIS_fnc_respawnTickets;
+	//};
 };
 
 
@@ -234,16 +236,27 @@ TREND_fnc_GeneralPlayerLoop = {
 			};
 		};
 
-		if (leader (group (vehicle player)) == player) then {
-			_dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
-			if (_dCurrentRep >= 3) then {
-				//hint "hmm2";
+		if (leader (group (vehicle player)) == player && AdvancedSettings select ADVSET_SUPPORT_OPTION_IDX == 1) then {
+			if (iMissionSetup == 5) then {
+				_dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
+				if (_dCurrentRep >= 1) then {
+					//hint "hmm2";
+					[player, supReqSupply] call BIS_fnc_addSupportLink;
+				};
+				if (_dCurrentRep >= 3) then {
+					//hint "hmm2";
+					[player, supReq] call BIS_fnc_addSupportLink;
+				};
+				if (_dCurrentRep >= 7) then {
+					//hint "hmm3";
+					[player, supReqAir] call BIS_fnc_addSupportLink;
+				};
+			}
+			else {
+				[player, supReqSupply] call BIS_fnc_addSupportLink;
 				[player, supReq] call BIS_fnc_addSupportLink;
-			};
-			if (_dCurrentRep >= 7) then {
-				//hint "hmm3";
 				[player, supReqAir] call BIS_fnc_addSupportLink;
-			};
+			}
 		};
 
 		sleep 3;
@@ -473,7 +486,7 @@ TREND_fnc_MissionOverAnimation = {
 			sleep 8;
 			["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>TRGM 2</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'>Treendys Randomly Generated Missions</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText; 
 			sleep 10;
-			["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>" + (AdvancedSettings select 1) + "</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'><br />RTB to debreif</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText; 
+			["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>" + (AdvancedSettings select ADVSET_GROUP_NAME_IDX) + "</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'><br />RTB to debreif</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText; 
 			sleep 10;
 			_stars = "";
 			_iCount = 0;

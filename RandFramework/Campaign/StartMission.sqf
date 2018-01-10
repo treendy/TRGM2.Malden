@@ -201,7 +201,7 @@ if (_bAllowStart) then {
 	    _texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + _LineOne +"</t>"; 
 	    [_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
 
-	    _texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + (AdvancedSettings select 1) + "</t>"; 
+	    _texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + (AdvancedSettings select ADVSET_GROUP_NAME_IDX) + "</t>"; 
 	    [_texta, -0, 0.350, 7, 1,0,txt6Layer] spawn BIS_fnc_dynamicText;
 
 		showcinemaborder true; 	
