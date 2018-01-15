@@ -9,11 +9,19 @@ params [
 
 _radius = 900;
 _airEscort = false;
-{
-		if ((_x distance2D _destinationPosition) < _radius) then {
-			_airEscort = true;
-		};
-} forEach ClearedPositions;
+//{
+//		if ((_x distance2D _destinationPosition) < _radius) then {
+//			_airEscort = true;
+//		};
+//} forEach ClearedPositions;
+
+_mainAOPos = ObjectivePossitions select 0;
+if (_mainAOPos in ClearedPositions  && (_mainAOPos distance2D _destinationPosition) < _radius) then {
+	_airEscort = true;
+};
+
+
+//ObjectivePossitions
 
 if (!alive _vehicle) then {
 	breakOut "FlyTo";

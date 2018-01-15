@@ -305,7 +305,7 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									_sTargetName = format["objInformant%1",_iTaskIndex];
 									_sTargetName2 = format["objInformant2_%1",_iTaskIndex];
 									_sTargetName3 = format["objInformant3_%1",_iTaskIndex];
-									_truckType = sAAAVeh ;
+									_truckType = selectRandom DestroyAAAVeh;
 									sAliveCheck = format["!alive(%1) && !alive(%2) && !([""InfSide%3""] call FHQ_TT_areTasksCompleted)",_sTargetName,_sTargetName2,_iTaskIndex];
 
 									_flatPos = nil;
@@ -628,7 +628,7 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									if (_bIsMainObjective && (_iThisTaskType == 7 || _iThisTaskType == 8)) then {_bodyIDRequiredText = "<br /><br />You must search the body to identify this target!<br /><br />"};
 									if (_iThisTaskType == 4) then {
 										_sTaskDescription = selectRandom[
-										"We have a guy that holds valuable intel on enemy plans, he is walking around the area marked, unfortunately this area is occupied, but we need this intel regardless! move in, find him and talk to him.<br />We are not exactly which of the following two is our guy, so look out for them both!<br />" + InformantImage];
+										"We have a guy that holds valuable intel on enemy plans, he is walking around the area marked, unfortunately this area is occupied, but we need this intel regardless! move in, find him and talk to him.<br />We are not exactly sure which of the following two is our guy, so look out for them both!<br />" + InformantImage];
 									};
 									if (_iThisTaskType == 5) then {
 										_sTaskDescription = selectRandom[

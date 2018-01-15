@@ -36,6 +36,13 @@ if (_SaveType == 0) then {
 	iStartLocation = MissionParamLocationOptionsValues select lbCurSel _ctrlLocation;
 	publicVariable "iStartLocation";
 
+	publicVariable "AdvancedSettings";
+	publicVariable "EnemyFactionData";
+
+	_savePreviousSettings = [iMissionParamType,iMissionParamObjective,iAllowNVG,iMissionParamRepOption,iWeather,iUseRevive,iStartLocation,AdvancedSettings,EnemyFactionData];
+	profileNamespace setVariable [worldname + ":PreviousSettings",_savePreviousSettings]; 
+	saveProfileNamespace;
+
 	bAndSoItBegins = true; 
 	publicVariable 'bAndSoItBegins'; 
 	closedialog 0;
@@ -103,6 +110,11 @@ if (_LoadVersion != "") then {
 			AdvancedSettings = SavedData select 11; 
 			publicVariable "AdvancedSettings";
 		};
+		if (count SavedData > 12) then { 
+			EnemyFactionData = SavedData select 12; 
+			publicVariable "EnemyFactionData";
+		};
+
 
 		SaveType = _SaveType;
 		publicVariable "SaveType";

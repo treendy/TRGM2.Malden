@@ -27,10 +27,12 @@ if (isNil "IntroMusic") then {
 			
 			if (str player == "sl") then {
 				if  (!dialog) then {
-					sleep 1;
-					if  (!dialog) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
-						[] execVM "RandFramework\GUI\openDialogMissionSelection.sqf";
-						//_actChooseMission = endMissionBoard addaction ["Select Mission Params", "RandFramework\GUI\openDialogMissionSelection.sqf"];
+					[] spawn {
+						sleep 1.5;
+						if  (!dialog) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
+							[] execVM "RandFramework\GUI\openDialogMissionSelection.sqf";
+							//_actChooseMission = endMissionBoard addaction ["Select Mission Params", "RandFramework\GUI\openDialogMissionSelection.sqf"];
+						};
 					};
 				};
 				sleep 0.5;				
@@ -141,6 +143,17 @@ if (isNil "KilledPositions") then {
 };
 
 
+if (bUseRevive) then {
+	
+	// TcB AIS Wounding System --------------------------------------------------------------------------
+	if (!isDedicated) then {
+		TCB_AIS_PATH = "ais_injury\";
+		{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});		// execute for every playable unit
+	};
+	// --------------------------------------------------------------------------------------------------------------
+};
+
+
 TREND_fnc_InitPostStarted = {	
 	if (iMissionSetup == 5 && isMultiplayer && str player == "sl") then {
 			if (SaveType == 0) then {
@@ -202,6 +215,10 @@ if (iMissionSetup == 12 || iMissionSetup == 20) then {
 else {
 	_iTicketCount = AdvancedSettings select ADVSET_RESPAWN_TICKET_COUNT_IDX;
 	[player, _iTicketCount] call BIS_fnc_respawnTickets;
+
+	_iRespawnTimer = AdvancedSettings select ADVSET_RESPAWN_TIMER_IDX;
+	setPlayerRespawnTime _iRespawnTimer;
+	
 	//if (iMissionSetup == 5 && !isMultiplayer) then {
 	//	[player, 999] call BIS_fnc_respawnTickets;
 	//	debugMessages = debugMessages + "\n" + "999 respawn tickets"
@@ -268,7 +285,7 @@ player addEventHandler ["Respawn", { [] spawn TREND_fnc_GeneralPlayerLoop; }];
 
 
 TREND_fnc_OnlyAllowDirectMapDraw = {
-	while {true && isMultiplayer} do {
+	while {isMultiplayer && (AdvancedSettings select ADVSET_MAP_DRAW_DIRECT_ONLY_IDX == 1)} do {
 		{
 			//WaitUntil {count allMapMarkers > 0};
 	   		_sTest = _x splitString "/";

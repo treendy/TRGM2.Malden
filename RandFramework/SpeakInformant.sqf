@@ -25,7 +25,7 @@ if (_bCreateTask) then {
 else {
 
 	_ballowSearch = true;
-	hint "Map updated with intel found";
+	hint "You start to talk to the informant...";
 	if (alive _thisCiv) then {
 		//increased chance of results
 		_searchChance = [true,false];
@@ -54,6 +54,8 @@ else {
 			hint "Map updated with main AO Location";
 		}
 		else {
+			[IntelShownType,"SpeakInform"] execVM "RandFramework\showIntel.sqf";
+			sleep 5;
 			[IntelShownType,"SpeakInform"] execVM "RandFramework\showIntel.sqf";
 		};
 		

@@ -374,3 +374,63 @@ class Trend_DialogSetupParamsAdvanced
 };
 
 
+
+class Trend_DialogSetupEnemyFaction
+	{
+	idd = 7000;
+	movingEnabled = false;
+
+	class controls {
+
+		////////////////////////////////////////////////////////
+		// GUI EDITOR OUTPUT START (by treendy, v1.063, #Nazety)
+		////////////////////////////////////////////////////////
+
+		class RscPicture_7901: RscPicture
+		{
+			idc = 7901;
+			text = "RandFramework\Media\table1.paa";
+			x = 0.226718 * safezoneW + safezoneX;
+			y = 0.0446 * safezoneH + safezoneY;
+			w = 0.531094 * safezoneW;
+			h = 0.935 * safezoneH;
+		};
+
+		//class RscText_6933: RscText
+		//{
+		//	idc = 6933;
+		//	text = "Advanced Options"; //--- ToDo: Localize;
+		//	x = 0.298 * safezoneW + safezoneX;
+		//	y = 0.236 * safezoneH + safezoneY;
+		//	w = 0.175341 * safezoneW;
+		//	h = 0.0659856 * safezoneH;
+		//	colorText[] = {0,1,0,1};
+		//};
+
+				
+		class btnAdvanced: RscButton
+		{
+			idc = 7903;
+			text = "Cancel"; //--- ToDo: Localize;
+			x = 0.608281 * safezoneW + safezoneX;
+			y = 0.7442 * safezoneH + safezoneY;
+			w = 0.0773437 * safezoneW;
+			h = 0.022 * safezoneH;
+			colorBackground[] = {1,0,0,1};
+			colorActive[] = {1,0,0,1};
+			action = "[] execVM 'RandFramework\GUI\openDialogAdvancedMissionSettings.sqf'; false";
+		};
+
+
+
+
+		////////////////////////////////////////////////////////
+		// GUI EDITOR OUTPUT END
+		////////////////////////////////////////////////////////
+
+
+
+	};
+};
+
+

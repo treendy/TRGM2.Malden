@@ -154,9 +154,10 @@ switch (_option) do {
 			[endMissionBoard, ["Recruit UAV Operator","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV]]] remoteExec ["addAction", 0];
 			[endMissionBoard2, ["Recruit UAV Operator","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV]]] remoteExec ["addAction", 0];
 		};		
-		[endMissionBoard, ["!EXIT MISSON (will save if save active)!","RandFramework\Campaign\exitCampaign.sqf"]] remoteExec ["addAction", 0];
-		//[endMissionBoard2, ["!EXIT MISSON (will save if save active)!","RandFramework\Campaign\exitCampaign.sqf"]] remoteExec ["addAction", 0];
-		
+		if (isMultiplayer) then {
+			[endMissionBoard, ["End Mission","RandFramework\attemptEndMission.sqf"]] remoteExec ["addAction", 0];
+			//[endMissionBoard2, ["End Mission","RandFramework\attemptEndMission.sqf"]] remoteExec ["addAction", 0];
+		};
 	};
 	case "CAMPAIGN_END": {
 		endMissionBoard remoteExec ["removeAllActions"];
@@ -165,7 +166,13 @@ switch (_option) do {
 		[endMissionBoard, ["Show Rep Report","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
 		[endMissionBoard2, ["Show Rep Report","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["End Mission","RandFramework\attemptEndMission.sqf"]] remoteExec ["addAction", 0];
-		//[endMissionBoard2, ["End Mission","RandFramework\attemptEndMission.sqf"]] remoteExec ["addAction", 0];
+		if (isMultiplayer) then {
+			[endMissionBoard, ["End Mission","RandFramework\attemptEndMission.sqf"]] remoteExec ["addAction", 0];
+			//[endMissionBoard2, ["End Mission","RandFramework\attemptEndMission.sqf"]] remoteExec ["addAction", 0];
+		};
 	};
+};
+if (!isMultiplayer) then {
+	endMissionBoard addAction ["Save", {saveGame}];
+	endMissionBoard2 addAction ["Save", {saveGame}];
 };

@@ -31,25 +31,53 @@ if (_currentSpentPoints < (MaxBadPoints - BadPoints + 1)) then {
 	hint format["Unit Added: %1\n\nSpent %2 out of %3", name _SpawnedUnit,_currentSpentPoints+0.5,MaxBadPoints - BadPoints + 1];
 
 	if (bUseRevive) then {
-	{
-		//by psycho
-		["%1 --- Executing TcB AIS init.sqf",diag_ticktime] call BIS_fnc_logFormat;
-		enableSaving [false,false];
-		enableTeamswitch false;
+				[_SpawnedUnit] call AIS_System_fnc_loadAIS;
 
-		
-		// TcB AIS Wounding System --------------------------------------------------------------------------
-		if (!isDedicated) then {
-			TCB_AIS_PATH = "ais_injury\";
-			{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});		// execute for every playable unit
+				//[_SpawnedUnit] call AIS_Core_fnc_aisInitHost;
+				//_SpawnedUnit removeAllEventHandlers "HandleHeal";
+				//_SpawnedUnit addEventHandler ["HandleHeal", {_this call AIS_System_fnc_handleHeal}];
 			
-			//{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (units group player);													// only own group - you cant help strange group members
+				//if (_SpawnedUnit getVariable ["ais_unconscious", false]) then {
+				//	if (!isNull(_SpawnedUnit getVariable ["ais_DragDrop_Player", objNull])) then {
+				//		_SpawnedUnit switchMove "AinjPpneMrunSnonWnonDb";
+				//	} else {
+				//		_SpawnedUnit playActionNow "agonyStart";
+				//	};
+				//};
+				
+
+		{
+			//{
+			//	_x removeAllEventHandlers "HandleHeal";
+			//	_x addEventHandler ["HandleHeal", {_this call AIS_System_fnc_handleHeal}];
+			//
+			//	if (_x getVariable ["ais_unconscious", false]) then {
+			//		if (!isNull(_x getVariable ["ais_DragDrop_Player", objNull])) then {
+			//			_x switchMove "AinjPpneMrunSnonWnonDb";
+			//		} else {
+			//			_x playActionNow "agonyStart";
+			//		};
+			//	};
+			//} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
+
+			//by psycho
+			//["%1 --- Executing TcB AIS init.sqf",diag_ticktime] call BIS_fnc_logFormat;
+			//enableSaving true;
+			//enableTeamswitch false;
+
 			
-			//{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach [p1,p2,p3,p4,p5];														// only some defined units
-		};
-		// --------------------------------------------------------------------------------------------------------------
-		
-	} remoteExec ["bis_fnc_call", 0];
+			// TcB AIS Wounding System --------------------------------------------------------------------------
+			//if (!isDedicated) then {
+			//	TCB_AIS_PATH = "ais_injury\";
+			//	{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});		// execute for every playable unit
+				
+				//{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (units group player);													// only own group - you cant help strange group members
+				
+				//{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach [p1,p2,p3,p4,p5];														// only some defined units
+			//};
+			// --------------------------------------------------------------------------------------------------------------
+			
+		} remoteExec ["bis_fnc_call", 0];
 	};
 }
 else {

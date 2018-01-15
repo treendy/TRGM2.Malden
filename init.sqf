@@ -26,6 +26,5 @@ publicVariable "tf_no_auto_long_range_radio";
 ] call FHQ_TT_addBriefing;
 
 
-
 execVM "RandFramework\mainInit.sqf";
-
+//call compile preprocessFileLineNumbers "RandFramework\mainInit.sqf";

@@ -8,14 +8,14 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=323;
+		nextID=403;
 	};
 	class Camera
 	{
-		pos[]={733.96271,231.65334,12322.228};
-		dir[]={-0.063177608,-0.83312994,-0.54959917};
-		up[]={-0.095145524,0.5530358,-0.82770085};
-		aside[]={-0.99353373,-2.7412898e-007,0.1142093};
+		pos[]={828.67462,80.735229,12169.603};
+		dir[]={-0.56091958,-0.75722551,-0.33498511};
+		up[]={-0.65016228,0.65305042,-0.38828325};
+		aside[]={-0.51278722,6.7607471e-007,0.85863745};
 	};
 };
 binarizationWanted=0;
@@ -1165,6 +1165,7 @@ class Mission
 			class Attributes
 			{
 				init="this setVariable [""ace_medical_medicClass"",1,true];";
+				name="medTruck";
 			};
 			id=60;
 			type="B_Truck_01_medical_F";
@@ -1283,7 +1284,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="[[[[""arifle_MXC_F"",""FirstAidKit"",""Medikit""],[2,8,1]],[[""SmokeShell"",""SmokeShellBlue"",""30Rnd_65x39_caseless_mag""],[2,2,4]],[[""ToolKit"",""ItemGPS""],[1,1]],[[""B_Parachute""],[8]]],false]";
+							value="[[[[""arifle_MXC_F""],[2]],[[""SmokeShell"",""SmokeShellBlue"",""30Rnd_65x39_caseless_mag""],[2,2,4]],[[""FirstAidKit"",""Medikit"",""ToolKit"",""ItemGPS""],[8,1,1,1]],[[""B_Parachute""],[8]]],false]";
 						};
 					};
 				};
@@ -1334,6 +1335,7 @@ class Mission
 			class Attributes
 			{
 				init="this setVariable [""ace_medical_isMedicalFacility"",true,true]";
+				name="medBuilding";
 			};
 			id=81;
 			type="Land_Medevac_house_V1_F";

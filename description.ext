@@ -181,11 +181,9 @@ class CfgRadio
 
 };
 
-class RscTitles {
-	#include "ais_injury\dialogs\rscTitlesAIS.hpp"
-};
 
 class CfgFunctions {
-	#include "ais_injury\cfgFunctionsAIS.hpp"
+	#include "AIS\cfgFunctions.hpp"
 	#include "RandFramework\functions.hpp"
 };
+#include "AIS\Effects\BarDlg.hpp"

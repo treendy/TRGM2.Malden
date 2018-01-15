@@ -74,8 +74,12 @@ TREND_fnc_PopulateSideMission = {
 			//insert warlord
 			_flatPos = nil;
 			_flatPos = [_sidePos , 10, 40, 4, 0, 0.5, 0,[],[_sidePos,[0,0,0]]] call BIS_fnc_findSafePos;
-			sWarloadSideMission createUnit [_flatPos, createGroup east, " this switchMove ""Acts_listeningToRadio_loop"" "];
+			//sWarloadSideMission createUnit [_flatPos, createGroup east, " this switchMove ""Acts_listeningToRadio_loop"" "];
 		};
+	}
+	else {
+		ClearedPositions pushBack [_sidePos];
+  		publicVariable "ClearedPositions";
 	};
 
 	if ((_sideType == 7 || _sideType == 5) && _bFriendlyInsurgents) then { //if mission is kill officer or kill officer and in fridnldy area then make him prisoner

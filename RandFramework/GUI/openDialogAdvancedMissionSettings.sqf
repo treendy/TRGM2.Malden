@@ -1,7 +1,7 @@
 #include "..\..\setUnitGlobalVars.sqf";
 disableSerialization;
 
-
+if (!isNull (findDisplay 5000)) then {
 	_ctrlItem = (findDisplay 5000) displayCtrl 5500;
 	iMissionParamType = MissionParamTypesValues select lbCurSel _ctrlItem;
 	publicVariable "iMissionParamType";
@@ -30,7 +30,7 @@ disableSerialization;
 	_ctrlLocation = (findDisplay 5000) displayCtrl 2105;
 	iStartLocation = MissionParamLocationOptionsValues select lbCurSel _ctrlLocation;
 	publicVariable "iStartLocation";
-
+};
 
 //hint "opening 2dialogA";
 
@@ -48,6 +48,16 @@ _display ctrlCreate ["RscText", 6999];
 _lblctrlTitle = _display displayCtrl 6999;
 _lblctrlTitle ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.25 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
 ctrlSetText [6999,  "Advanced Options (more options soon!)"];
+
+_display ctrlCreate ["RscButton", 6998];
+_btnSetEnemyFaction = _display displayCtrl 6998;
+_btnSetEnemyFaction ctrlSetPosition [0.6 * safezoneW + safezoneX, (0.25 + 0) * safezoneH + safezoneY,0.1 * safezoneW,0.02 * safezoneH];
+_btnSetEnemyFaction ctrlCommit 0;
+ctrlSetText [6998,  "Custom Enemy Classnames"];
+_btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {[] execVM 'RandFramework\GUI\openDialogEnemyFaction.sqf'; false}];
+//action = ";
+
+
 //colorText[] = {0,1,0,1};
 
 _lblctrlTitle ctrlCommit 0;

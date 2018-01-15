@@ -1,7 +1,21 @@
+
 #include "..\setUnitGlobalVars.sqf";
 
 
+if (isServer) then {
+	//LOADENEMYFACTION
+	//TEST... this will be in a globaVars file (not our usual one anymore!!! may be within if statment for selectedFaction, defaultFaction etc... need to default to faction relevant to map, unles mod not loaded, then vanilla units)
+	sRifleman = "O_T_Soldier_F"; 
+	sATMan = "O_T_Soldier_LAT_F"; 
+};
+
+
 civilian setFriend [east, 1];
+
+if (isNil("EnemyFactionData")) then {
+	EnemyFactionData = "";
+	publicVariable "EnemyFactionData";
+};
 
 if (isNil "bBreifingPrepped") then {
 			bBreifingPrepped = false;
@@ -175,7 +189,10 @@ if (isNil "AllowUAVLocateHelp") then {
 			AllowUAVLocateHelp = false;
 			publicVariable "AllowUAVLocateHelp";
 };
-
+if (isNil "EnemyID") then {
+			EnemyID = 1;
+			publicVariable "EnemyID";
+};
 
 
 if (isServer) then { //adjust weather here so intro animation is different everytime
@@ -317,18 +334,70 @@ if (!isMultiplayer) then {
 
 waitUntil {bAndSoItBegins};
 
- if (bUseRevive) then {
-
-	//by psycho
-	["%1 --- Executing TcB AIS init.sqf",diag_ticktime] call BIS_fnc_logFormat;
-	enableSaving [false,false];
-	enableTeamswitch false;
+if (iUseRevive > 0) then {
+	[] call AIS_Core_fnc_preInit;
+	[] call AIS_Core_fnc_postInit;
+	[] call AIS_System_fnc_postInit;
 };
 
+//#include "RandFramework\General\TRGMSetEnemyUnitGlobalVars.sqf";
+call compile preprocessFileLineNumbers  "RandFramework\General\TRGMSetEnemyUnitGlobalVars.sqf";
+//call compile preprocessFileLineNumbers "RandFramework\General\TRGMsetEnemyUnitGlobalVars.sqf";
 
+if (!isDedicated) then {
+	titleText ["Loading mission...", "BLACK FADED"];
+	_camera cameraEffect ["Terminate","back"];
+};
 
-titleText ["Loading mission...", "BLACK FADED"];
-_camera cameraEffect ["Terminate","back"];
+if (isServer) then {
+	if (EnemyFactionData != "") then {
+		_errorMessage = "";
+		_ObjectPairs = EnemyFactionData splitString ";";
+		{
+			_fullObj = _x;
+			_pair = _x splitString "=";
+			_title = str(((_pair select 0) splitString " ") select 0);
+			_class = (_pair select 1 splitString """");
+
+			if (!isNil("_class") && !isNil("_title")) then {
+				if (count _class > 1) then {
+ 				 	_class = _class select 1;
+				}
+				else {
+ 			 		_class = _class select 0;
+				};
+				_classArray = [];
+				if (typeName _class == "ARRAY") then {
+					_classArray = _class;
+				}
+				else {
+					_classArray = [_class];
+				};
+
+				{
+					_className = _x;
+					if (str(_className) != "") then {
+						if (isClass (configFile >> "CfgVehicles" >> _className)) then {							
+							call compile _fullObj;
+						}
+						else {
+							_errorMessage = _errorMessage + format["\nClass doesnt exist: %1 - class: %2 ",_fullObj,_x];
+						};
+					}
+					else {
+						_errorMessage = _errorMessage + format["\nClass is empty: %1 - class: %2 ",_fullObj,_x];
+					};
+					
+				} forEach _classArray;
+			};
+		} forEach _ObjectPairs;
+		if (_errorMessage != "") then {
+			hint _errorMessage;
+			sleep 3;
+		};
+	};
+};
+
 
 player doFollow player; 
 
@@ -461,20 +530,25 @@ player addEventHandler ["Respawn", { [] spawn TREND_fnc_CheckBadPoints; }];
 if (isServer) then {
 	if (isMultiplayer && !(iMissionParamType == 5)) then {
 		TREND_fnc_CheckAnyPlayersAlive = {
+			sleep 3;
 			_bEnded = false;
 			while {true && !_bEnded} do {
 				_bAnyAlive = false;
 				{	
 	   				if (isPlayer _x) then {
 	   					_iRespawnTicketsLeft = [_x,nil,true] call BIS_fnc_respawnTickets;
-	   					//hint "check:" + str(_iRespawnTicketsLeft);
+	   					//hint format["check:%1",str(_iRespawnTicketsLeft)];
 	   					if (alive _x || _iRespawnTicketsLeft > 0) then {
 	   						_bAnyAlive = true;
+	   						//sleep 1;
+	   						//hint "Alive!";
 	   					};
 	   				};
-				} forEach allUnits;
+				} forEach allPlayers - entities "HeadlessClient_F";
 				if (!_bAnyAlive) then {
 					//END MISSION!!!
+					//hint "ENDING!!!!";
+					//sleep 3;
 					["end3", true, 5] remoteExec ["BIS_fnc_endMission"];
 					_bEnded = true;
 					sleep 5;
@@ -519,19 +593,3 @@ if (isServer) then {
 
 
  
-if (bUseRevive) then {
-
-
-
-	
-	// TcB AIS Wounding System --------------------------------------------------------------------------
-	if (!isDedicated) then {
-		TCB_AIS_PATH = "ais_injury\";
-		{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});		// execute for every playable unit
-		
-		//{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (units group player);													// only own group - you cant help strange group members
-		
-		//{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach [p1,p2,p3,p4,p5];														// only some defined units
-	};
-	// --------------------------------------------------------------------------------------------------------------
-};
