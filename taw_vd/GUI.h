@@ -1,6 +1,6 @@
 #include "defines.h"
 
-class RscEdit {
+class RscEditTAW {
 	type = 2;
 	style = 0x00 + 0x40;
 	font = "PuristaMedium";
@@ -16,7 +16,7 @@ class RscEdit {
 	canModify = 1;
 };
 
-class RscListBox {
+class RscListBoxTAW {
 	style = 16;
 	idc = -1;
 	type = 5;
@@ -71,7 +71,7 @@ class RscListBox {
 	}
 };
 
-class RscCheckBox {
+class RscCheckBoxTAW {
 	access = 0; // Control access (0 - ReadAndWrite, 1 - ReadAndCreate, 2 - ReadOnly, 3 - ReadOnlyVerified)
 	idc = -1; // Control identification (without it, the control won't be displayed)
 	type = 77; // Type
@@ -145,7 +145,7 @@ class RscXSliderH {
 	thumb = "\A3\ui_f\data\gui\cfg\slider\thumb_ca.paa";
 };
 
-class RscText {
+class RscTextTAW {
 	x = 0;
 	y = 0;
 	h = 0.037;
@@ -162,14 +162,14 @@ class RscText {
 	linespacing = 1;
 };
 
-class RscTitle:RscText {
+class RscTitle:RscTextTAW {
 	style = 0;
 	shadow = 0;
 	sizeEx = "(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
 	colorText[] = {0.95, 0.95, 0.95, 1};
 };
 
-class RscShortcutButton {
+class RscShortcutButtonTAW {
 	idc = -1;
 	style = 0;
 	default = 0;
@@ -237,7 +237,7 @@ class RscShortcutButton {
 	};	
 };
 
-class RscControlsGroup {
+class RscControlsGroupTAW {
 	type = 15;
 	idc = -1;
 	x = 0;
@@ -279,7 +279,7 @@ class RscControlsGroup {
 	class Controls {};
 };
 
-class RscControlsGroupNoScrollbars : RscControlsGroup {
+class RscControlsGroupTAWNoScrollbars : RscControlsGroupTAW {
 	class VScrollbar : VScrollbar {
 		width = 0;
 	};
@@ -289,7 +289,7 @@ class RscControlsGroupNoScrollbars : RscControlsGroup {
 	};
 };
 
-class RscButtonMenu:RscShortcutButton {
+class RscButtonMenuTAW:RscShortcutButtonTAW {
 	idc = -1;
 	type = 16;
 	style = "0x02 + 0xC0";
@@ -358,7 +358,7 @@ class TAW_VDMenu {
 	onLoad = "((_this select 0) displayCtrl 2999) ctrlSetFade 1; ((_this select 0) displayCtrl 2999) ctrlCommit 0;";
 
 	class controlsBackground {
-		class TitleBackground : RscText {
+		class TitleBackground : RscTextTAW {
 			colorBackground[] = { "(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", "(profilenamespace getvariable ['GUI_BCG_RGB_A',0.7])" };
 			idc = -1;
 			x = .3;
@@ -367,7 +367,7 @@ class TAW_VDMenu {
 			h = (1 / 25);
 		};
 
-		class MainBackground : RscText {
+		class MainBackground : RscTextTAW {
 			colorBackground[] = { 0, 0, 0, .7 };
 			idc = -1;
 			x = .3;
@@ -386,7 +386,7 @@ class TAW_VDMenu {
 			h = (1 / 25);
 		};
 
-		class OnFootText : RscText {
+		class OnFootText : RscTextTAW {
 			idc = -1;
 			text = "Infantry:";
 			x = .32;
@@ -426,7 +426,7 @@ class TAW_VDMenu {
 			y = .55;
 		};
 
-		class ButtonClose : RscButtonMenu {
+		class ButtonClose : RscButtonMenuTAW {
 			idc = -1;
 			text = "Close";
 			onButtonClick = "closeDialog 0;";
@@ -485,8 +485,8 @@ class TAW_VDMenu {
 			y = .45 - (1 / 25);
 		}
 
-		//Values (RscEdit Butons)
-		class VD_onFoot_Edit : RscEdit {
+		//Values (RscEditTAW Butons)
+		class VD_onFoot_Edit : RscEditTAW {
 			idc = INFANTRY_EDIT;
 			text = "";
 			onKeyUp = "[_this select 0, _this select 1, 'ground',true] call TAWVD_fnc_onChar;";
@@ -563,7 +563,7 @@ class TAW_VDMenu {
 			x = .67;
 		};
 
-		class ObjectSyncCheckbox : RscCheckbox
+		class ObjectSyncCheckbox : RscCheckBoxTAW
 		{
 			idc = 2931;
 			x = .32; y = .6;
@@ -573,20 +573,20 @@ class TAW_VDMenu {
 			h = 1 * GUI_GRID_CENTER_H; 
 		};
 
-		class ObjectSynctext : RscText {
+		class ObjectSynctext : RscTextTAW {
 			idc = -1;
 			text = "Sync with view";
 			x = .345; y = .596;
 			w = .35; h = .04;
 		};
 		
-		class Manager:RscControlsGroup {
+		class Manager:RscControlsGroupTAW {
 			idc = MANAGER_GROUP;
 			
 			x = -0.21; y = .2;
 			w = .5; h = 3;
 			class Controls {
-				class SaveLoadGroup:RscControlsGroupNoScrollbars {
+				class SaveLoadGroup:RscControlsGroupTAWNoScrollbars {
 					idc = SAVELOAD_GROUP;
 					
 					x = 0;
@@ -595,7 +595,7 @@ class TAW_VDMenu {
 					h = 3;
 					
 					class Controls {
-						class MyTitleBackground:RscText {
+						class MyTitleBackground:RscTextTAW {
 							colorBackground[] = { "(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", "(profilenamespace getvariable ['GUI_BCG_RGB_A',0.7])" };
 							idc = -1;
 							x = 0;
@@ -614,7 +614,7 @@ class TAW_VDMenu {
 							h = (1 / 25);
 						};
 						
-						class MainBackground:RscText {
+						class MainBackground:RscTextTAW {
 							colorBackground[] = { 0, 0, 0, .7 };
 							idc = -1;
 							x = 0;
@@ -623,7 +623,7 @@ class TAW_VDMenu {
 							h = .57 - (22 / 250);
 						};
 						
-						class SaveList:RscListBox {
+						class SaveList:RscListBoxTAW {
 							idc = SAVES_LIST;
 							sizeEx = 0.04;
 							colorBackground[] = {0.1,0.1,0.1,0.9};
@@ -643,7 +643,7 @@ class TAW_VDMenu {
 							w = .45;
 						};
 						
-						class SaveButton:RscButtonMenu {
+						class SaveButton:RscButtonMenuTAW {
 							text = "Save";
 							onButtonClick = "[] call TAWVD_fnc_onSavePressed;";
 							x = 0;
@@ -652,7 +652,7 @@ class TAW_VDMenu {
 							h = (1 / 25);
 						};
 						
-						class HideButton:RscButtonMenu {
+						class HideButton:RscButtonMenuTAW {
 							text = "Hide";
 							onButtonClick = "((findDisplay 2900) displayCtrl 2999) ctrlSetFade 1; ((findDisplay 2900) displayCtrl 2999) ctrlCommit 0.3;";
 							x = .16;
