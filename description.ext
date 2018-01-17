@@ -1,7 +1,7 @@
 
 #include "RandFramework\GUI\defines.hpp"
 #include "RandFramework\GUI\dialogs.hpp"
-
+#include "taw_vd\GUI.h"
 
 author = "Treendy";
 OnLoadName = "TRGM 2.0 Malden";
@@ -185,5 +185,6 @@ class CfgRadio
 class CfgFunctions {
 	#include "AIS\cfgFunctions.hpp"
 	#include "RandFramework\functions.hpp"
+    #include "taw_vd\CfgFunctions.hpp"
 };
 #include "AIS\Effects\BarDlg.hpp"
