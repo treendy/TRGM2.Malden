@@ -903,6 +903,9 @@ if (_bMoveToAO) then {
 
 };
 
+MissionLoaded = true;
+publicVariable "MissionLoaded";
+
 
 
 

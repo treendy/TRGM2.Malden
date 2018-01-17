@@ -29,7 +29,7 @@ if (isNil "IntroMusic") then {
 				if  (!dialog) then {
 					[] spawn {
 						sleep 1.5;
-						if  (!dialog) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
+						if  (!dialog && !bAndSoItBegins) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
 							[] execVM "RandFramework\GUI\openDialogMissionSelection.sqf";
 							//_actChooseMission = endMissionBoard addaction ["Select Mission Params", "RandFramework\GUI\openDialogMissionSelection.sqf"];
 						};

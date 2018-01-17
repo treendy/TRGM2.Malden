@@ -73,7 +73,7 @@ bFriendlyInsurgents = [false,true,false,false];
 bCivsOnly = [false,false,false,false,false,false]; //all false at the moment... may never use this, but keep incase have idea!
 
 PunishmentTimer = 1200;
-PunishmentRadius = 3000; //if 0 will be no safezone
+PunishmentRadius = 1000; //if 0 will be no safezone
 
 
 iAllowLargePat = 2; //("OUT_par_AllowLargePatrols" call BIS_fnc_getParamValue);

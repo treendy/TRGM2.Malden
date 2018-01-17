@@ -20,15 +20,37 @@ if (isNil "InitialLoadedPreviousSettings") then {
 		publicVariable "iUseRevive";
 		iStartLocation = InitialLoadedPreviousSettings select 6;
 		publicVariable "iStartLocation";
+		
 		AdvancedSettings = InitialLoadedPreviousSettings select 7; 
+		if isNil("AdvancedSettings") then {AdvancedSettings = DefaultAdvancedSettings};
 		publicVariable "AdvancedSettings";
+		
 		EnemyFactionData = InitialLoadedPreviousSettings select 8; 
+		if isNil("EnemyFactionData") then {EnemyFactionData = ""};
 		publicVariable "EnemyFactionData";
 
+		if (count AdvancedSettings < 6) then {
+			AdvancedSettings pushBack 10;
+		};
+		if (count AdvancedSettings < 7) then {
+			AdvancedSettings pushBack (DefaultEnemyFactionArray select DefaultEnemyFactionIndex);
+		};
+
 		if (!((isClass(configFile >> "CfgPatches" >> "rhs_main")) && (isClass(configFile >> "CfgPatches" >> "rhsusf_main")) && (isClass(configFile >> "CfgPatches" >> "rhsgref_main")))) then {
-			_selctedPrevFaction = (InitialLoadedPreviousSettings select 7) select 6;
-			if (_selctedPrevFaction == 4) then { //RHS not active, and have picked previously RHS enemy faction, then reset it to default
-				AdvancedSettings set [6,DefaultEnemyFactionIndex];
+			if (count AdvancedSettings > 5) then {
+				_selctedPrevFaction = AdvancedSettings select 6;
+				if (!isNil("_selctedPrevFaction")) then {
+					if (_selctedPrevFaction == 4) then { //RHS not active, and have picked previously RHS enemy faction, then reset it to default
+						AdvancedSettings set [6,DefaultEnemyFactionIndex];
+						publicVariable "AdvancedSettings";
+					};
+				};
+			};
+		};
+		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+			if (iUseRevive != 0) then { //Ace is active, so need to make sure "no revive" is selected
+				iUseRevive = 0;
+				publicVariable "iUseRevive";
 			};
 		};
 	};	
@@ -123,4 +145,7 @@ _ctrlRep lbSetCurSel (MissionParamRepOptionsValues find iMissionParamRepOption);
 _ctrlWeather lbSetCurSel (MissionParamWeatherOptionsValues find iWeather);
 _ctrlNVG lbSetCurSel (MissionParamNVGOptionsValues find iAllowNVG);
 _ctrlRevive lbSetCurSel (MissionParamReviveOptionsValues find iUseRevive);
+if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+	_ctrlRevive ctrlEnable false;
+};
 _ctrlLocation lbSetCurSel (MissionParamLocationOptionsValues find iStartLocation);

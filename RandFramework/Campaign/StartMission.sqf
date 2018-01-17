@@ -126,13 +126,17 @@ if (_bAllowStart) then {
 			
 		};
 
+		MissionLoaded = false;
+		publicVariable "MissionLoaded";
 		if (isServer) then {
 			[] execVM "RandFramework\SetTimeAndWeather.sqf";
 		
 			[] execVM "RandFramework\startInfMission.sqf";
 		};
+		waituntil {MissionLoaded};
+		publicVariable "MissionLoaded";
 
-		sleep 4;
+		sleep 2;
 			
 		_locationText = [ObjectivePossitions select 0] call TRGM_fnc_getLocationName;
 		_hour = floor daytime;
