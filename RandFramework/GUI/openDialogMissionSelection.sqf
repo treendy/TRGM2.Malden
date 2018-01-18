@@ -8,8 +8,8 @@ if (isNil "InitialLoadedPreviousSettings") then {
 	if (count InitialLoadedPreviousSettings > 0) then {
 		iMissionParamType = InitialLoadedPreviousSettings select 0;
 		publicVariable "iMissionParamType";
-		iMissionParamObjective = InitialLoadedPreviousSettings select 1;
-		publicVariable "iMissionParamObjective";		
+		//iMissionParamObjective = InitialLoadedPreviousSettings select 1;
+		//publicVariable "iMissionParamObjective";		
 		iAllowNVG = InitialLoadedPreviousSettings select 2;
 		publicVariable "iAllowNVG";	
 		iMissionParamRepOption =  InitialLoadedPreviousSettings select 3;
@@ -35,13 +35,16 @@ if (isNil "InitialLoadedPreviousSettings") then {
 		if (count AdvancedSettings < 7) then {
 			AdvancedSettings pushBack (DefaultEnemyFactionArray select DefaultEnemyFactionIndex);
 		};
+		if (AdvancedSettings select 6 == 0) then { //we had an issue with some being set to zero (due to a bad published version, this makes sure any zeros are adjusted to correct id)
+			AdvancedSettings set [6,DefaultEnemyFactionArray select DefaultEnemyFactionIndex];
+		};
 
 		if (!((isClass(configFile >> "CfgPatches" >> "rhs_main")) && (isClass(configFile >> "CfgPatches" >> "rhsusf_main")) && (isClass(configFile >> "CfgPatches" >> "rhsgref_main")))) then {
 			if (count AdvancedSettings > 5) then {
 				_selctedPrevFaction = AdvancedSettings select 6;
 				if (!isNil("_selctedPrevFaction")) then {
 					if (_selctedPrevFaction == 4) then { //RHS not active, and have picked previously RHS enemy faction, then reset it to default
-						AdvancedSettings set [6,DefaultEnemyFactionIndex];
+						AdvancedSettings set [6,DefaultEnemyFactionArray select DefaultEnemyFactionIndex];
 						publicVariable "AdvancedSettings";
 					};
 				};

@@ -13,6 +13,7 @@ if (isNil "IntroMusic") then {
 };
 
 
+
 	waitUntil {!isNull player};
 	waitUntil {player == player};
 
@@ -75,20 +76,23 @@ if (isNil "IntroMusic") then {
 
 
 
+
+
 TREND_fnc_BasicInit = {
 	
 	//enableEngineArtillery false; 
 
-	_action = {
+	_transportSelectAction = {
 		[chopper1,true] spawn TRGM_fnc_selectLZ;
 	};
 
 	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-		myaction = ['CallTransportChopper','Call Transport Chopper','',_action,{true}] call ace_interact_menu_fnc_createAction;
+		myaction = ['CallTransportChopper','Call Transport Chopper','',_transportSelectAction,{true}] call ace_interact_menu_fnc_createAction;
 		[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
 	}
 	else {
-		player addAction ["Call for transport chopper",_action];		
+		_transportChopperActionID = player addAction ["Call for transport chopper",_transportSelectAction];	
+		player setVariable ["callTransportChopperID", _transportChopperActionID];	
 	};
 
 	
@@ -146,10 +150,10 @@ if (isNil "KilledPositions") then {
 if (bUseRevive) then {
 	
 	// TcB AIS Wounding System --------------------------------------------------------------------------
-	if (!isDedicated) then {
-		TCB_AIS_PATH = "ais_injury\";
-		{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});		// execute for every playable unit
-	};
+	//if (!isDedicated) then {
+	//	TCB_AIS_PATH = "ais_injury\";
+	//	{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});		// execute for every playable unit
+	//};
 	// --------------------------------------------------------------------------------------------------------------
 };
 
@@ -239,10 +243,12 @@ player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInit; }];
 TREND_fnc_GeneralPlayerLoop = {
 	while {true} do {
 		if (count ObjectivePossitions > 0 && AllowUAVLocateHelp) then {
-			if ((Player distance (ObjectivePossitions select 0)) < 25 && (Player getVariable ["calUAVActionID", -1]) == -1) then {
-				hint "UAV available";
-				_actionID = player addAction ["Call UAV to locate target","RandFramework\callUAVFindObjective.sqf"];
-				player setVariable ["calUAVActionID",_actionID];
+			if ((Player distance (ObjectivePossitions select 0)) < 25) then {
+				if ((Player getVariable ["calUAVActionID", -1]) == -1) then {
+					hint "UAV available";
+					_actionID = player addAction ["Call UAV to locate target","RandFramework\callUAVFindObjective.sqf"];
+					player setVariable ["calUAVActionID",_actionID];
+				};
 			}
 			else {
 				if ((Player getVariable ["calUAVActionID", -1]) != -1) then {
@@ -251,6 +257,13 @@ TREND_fnc_GeneralPlayerLoop = {
 					hint "UAV no longer available";
 				};
 			};
+		};
+		if ((Player getVariable ["callTransportChopperID", -1]) == -1) then {
+			_transportSelectAction = {
+				[chopper1,true] spawn TRGM_fnc_selectLZ;
+			};
+			_transportChopperActionID = player addAction ["Call for transport chopper",_transportSelectAction];	
+			player setVariable ["callTransportChopperID", _transportChopperActionID];
 		};
 
 		if (leader (group (vehicle player)) == player && AdvancedSettings select ADVSET_SUPPORT_OPTION_IDX == 1) then {
