@@ -192,7 +192,7 @@ if (isServer) then { //adjust weather here so intro animation is different every
 };
 
 
-ace_hearing_disableVolumeUpdate = true; 
+ace_hearing_disableVolumeUpdate = false; 
 
 
 
