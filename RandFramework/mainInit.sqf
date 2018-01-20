@@ -2,14 +2,6 @@
 #include "..\setUnitGlobalVars.sqf";
 
 
-if (isServer) then {
-	//LOADENEMYFACTION
-	//TEST... this will be in a globaVars file (not our usual one anymore!!! may be within if statment for selectedFaction, defaultFaction etc... need to default to faction relevant to map, unles mod not loaded, then vanilla units)
-	sRifleman = "O_T_Soldier_F"; 
-	sATMan = "O_T_Soldier_LAT_F"; 
-};
-
-
 civilian setFriend [east, 1];
 
 if (isNil("EnemyFactionData")) then {
@@ -517,7 +509,9 @@ TREND_fnc_CheckBadPoints = {
 		};
 
 		//show "Current Reputation is X, Goal is X"
-		"transportChopper" setMarkerPos getPos chopper1;
+		if (isServer) then {
+			"transportChopper" setMarkerPos getPos chopper1;
+		};
 		sleep 1;
 	};
 };

@@ -126,13 +126,19 @@ if (_bAllowStart) then {
 			
 		};
 
-		MissionLoaded = false;
-		publicVariable "MissionLoaded";
-		if (isServer) then {
-			[] execVM "RandFramework\SetTimeAndWeather.sqf";
 		
+		if (isServer) then {
+			MissionLoaded = false;
+			publicVariable "MissionLoaded";
+			[] execVM "RandFramework\SetTimeAndWeather.sqf";		
 			[] execVM "RandFramework\startInfMission.sqf";
 		};
+
+		if isNil("MissionLoaded") then {
+			MissionLoaded = false;
+			publicVariable "MissionLoaded";
+		};
+
 		waituntil {MissionLoaded};
 		publicVariable "MissionLoaded";
 
