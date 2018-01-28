@@ -796,8 +796,8 @@ TREND_fnc_SpawnCivs = {
 					_sInitString = format["this execVM ""RandFramework\BadReb.sqf""; this forceAddUniform ""%1""; removeHeadgear this; Removevest this;",_sCivUniform];		
 			}
 			else {
-				//_sInitString = format["[this] spawn TRGM_fnc_badCivInitialize; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
-				_sInitString = format["this execVM ""RandFramework\BadCiv.sqf""; this addaction [""Search Civ"",""RandFramework\SearchCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
+				_sInitString = format["[this] spawn TRGM_fnc_badCivInitialize; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
+				//_sInitString = format["this execVM ""RandFramework\BadCiv.sqf""; this addaction [""Search Civ"",""RandFramework\SearchCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
 			};
 		}
 		else {

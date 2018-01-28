@@ -3,7 +3,7 @@ params ["_badCiv"];
 _grpName = createGroup east;
 [_badCiv] joinSilent _grpName;
 
-[_badCiv] call TRGM_fnc_badCivApplyAssingnedArmament;
+[_badCiv] call TRGM_fnc_badCivApplyAssignedArmament;
 
 _badCiv allowFleeing 0;
 

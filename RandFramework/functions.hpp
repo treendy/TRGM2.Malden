@@ -45,7 +45,8 @@ class TRGM   { // TAG
         file = "RandFramework\functions\civillians";
 
         class badCivInitialize{};
-        class badCivApplyAssingnedArmament{};
+        class badCivApplyAssignedArmament{};
+        class badCivAttackTargetPlayer{};
         class badCivSearch{};
         class badCivTurnHostile{};
         class badCivLoop{};

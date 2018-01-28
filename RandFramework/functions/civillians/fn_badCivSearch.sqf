@@ -12,14 +12,5 @@ _badCiv enableAI "MOVE";
 // make hostile - this could trigger a spot & target callout by friendly AI
 [_badCiv] call TRGM_fnc_badCivTurnHostile;
 
-_badCiv doTarget _player;
-_badCiv commandFire _player;
-
-_gun = primaryWeapon _badCiv;
-
-sleep 3;
-_badCiv fire _gun;
-sleep 1;
-_badCiv fire _gun;
-sleep 1;
-_badCiv fire _gun;
+_badCiv reveal [_player, 4];
+[_badCiv,_player] call TRGM_fnc_badCivAttackTargetPlayer;
