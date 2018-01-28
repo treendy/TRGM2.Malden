@@ -55,7 +55,16 @@ _btnSetEnemyFaction ctrlSetPosition [0.6 * safezoneW + safezoneX, (0.25 + 0) * s
 _btnSetEnemyFaction ctrlCommit 0;
 ctrlSetText [6998,  "Custom Enemy Classnames"];
 _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {[] execVM 'RandFramework\GUI\openDialogEnemyFaction.sqf'; false}];
-//action = ";
+
+
+_display ctrlCreate ["RscButton", 6997];
+_btnSetEnemyFaction = _display displayCtrl 6997;
+_btnSetEnemyFaction ctrlSetPosition [0.6 * safezoneW + safezoneX, (0.25 * 1.1) * safezoneH + safezoneY,0.1 * safezoneW,0.02 * safezoneH];
+_btnSetEnemyFaction ctrlCommit 0;
+ctrlSetText [6997,  "Custom Team Loadouts"];
+_btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {[] execVM 'RandFramework\GUI\openDialogTeamLoadouts.sqf'; false}];
+
+
 
 
 //colorText[] = {0,1,0,1};
@@ -95,6 +104,22 @@ _lblctrlTitle ctrlCommit 0;
 
 } forEach AdvControls;
 
+if (EnemyFactionData != "") then {
+	_display ctrlCreate ["RscText", 6996];
+	_lblctrlWarn1 = _display displayCtrl 6996;
+	_lblctrlWarn1 ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.70 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
+	_lblctrlWarn1 ctrlSetTextColor [1, 0, 0, 1];
+	ctrlSetText [6996,  "You have friendly class names active, this will overright friendly faction settings you have selected above"];
+	_lblctrlWarn1 ctrlCommit 0;
+};
+if (LoadoutData != "") then {
+	_display ctrlCreate ["RscText", 6995];
+	_lblctrlWarn2 = _display displayCtrl 6995;
+	_lblctrlWarn2 ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.72 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
+	_lblctrlWarn2 ctrlSetTextColor [1, 0, 0, 1];
+	ctrlSetText [6995,  "You have enemy class names active, this will overright enemy faction settings you have selected above"];
+	_lblctrlWarn2 ctrlCommit 0;
+};
 
 
 

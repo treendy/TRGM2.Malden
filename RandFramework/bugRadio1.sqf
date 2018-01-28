@@ -16,13 +16,13 @@ if (_bCreateTask) then {
 else {	
 	hint "HQ are listening in, stand by...";
 	sleep 10;
-	[HQMan,"EnemyBaseIntel"] remoteExec ["sideRadio",0,false];
+	//[HQMan,"EnemyBaseIntel"] remoteExec ["sideRadio",0,false];
 	//"mrkFirstLocation" setMarkerType "mil_unknown";
 	if (getMarkerType format["mrkMainObjective%1",0] == "empty") then {
-			format["mrkMainObjective%1",0] setMarkerType "mil_unknown"; //NOTE: hard coded zero as only one main task will exict (currently!)
-			hint "Map updated with main AO location";
-		}
-		else {
-			[IntelShownType,"BugRadio"] execVM "RandFramework\showIntel.sqf";
-		};
+		format["mrkMainObjective%1",0] setMarkerType "mil_unknown"; //NOTE: hard coded zero as only one main task will exict (currently!)
+		hint "Map updated with main AO location";
+	}
+	else {
+		[IntelShownType,"BugRadio"] execVM "RandFramework\showIntel.sqf";
+	};
 };

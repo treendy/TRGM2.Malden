@@ -57,8 +57,6 @@ if (isServer) then {
 		_EnemyBaseChopperWP1 setWaypointStatements ["true", "(vehicle this) LAND 'LAND';"];
 	};
 	
-	//_SpottedUnitCount = count _thisThisList;
-	//_SpottedUnitCount = FriendlySide countSide nearestObjects [_SpottedUnitPos, [sTeamleader, sTeamleaderUrban], 250];
 	_SpottedUnitCount = {_x distance _SpottedUnit < 200} count units group _SpottedUnit;
 	_AlivePlayerCount = {alive _x} count allplayers;
 	if (_SpottedUnitCount > 2 || _AlivePlayerCount < 8) then {
@@ -81,7 +79,7 @@ if (isServer) then {
 
 		if  ((_SpottedUnitCount > 3 && _SpottedUnitCount < 5 && _AlivePlayerCount > 7) || bSinglePatrolInvestigate) then {
 		//hint "SpottedUnits more than 2";
-			_nearestTLs = nearestObjects [_SpottedUnitPos, [sTeamleader, sTeamleaderUrban], _maxPatrolSearch];
+			_nearestTLs = nearestObjects [_SpottedUnitPos, [sTeamleader], _maxPatrolSearch];
 			if (count _nearestTLs > 0) then {
 				_nearestTL = _nearestTLs select 0;
 				while {(count (waypoints group _nearestTL)) > 0} do {
@@ -129,7 +127,7 @@ if (isServer) then {
 
 		if ((_SpottedUnitCount > 3 || _AlivePlayerCount < 8) && !bSinglePatrolInvestigate) then {
 		//hint "SpottedUnits more than 4";
-			_nearestTLs = nearestObjects [_SpottedUnitPos, [sTeamleader, sTeamleaderUrban], _maxPatrolSearch];
+			_nearestTLs = nearestObjects [_SpottedUnitPos, [sTeamleader], _maxPatrolSearch];
 
 			if (count _nearestTLs > 0) then {
 				_nearestTL1 = _nearestTLs select 0;
@@ -260,7 +258,7 @@ if (isServer) then {
 
 		};
 
-		_anyTLsCheckAlive = nearestObjects [_SpottedUnitPos, [sTeamleader, sTeamleaderUrban], 3000];
+		_anyTLsCheckAlive = nearestObjects [_SpottedUnitPos, [sTeamleader], 3000];
 		{
 			if (!(alive _x)) then {
 				deleteVehicle _x;

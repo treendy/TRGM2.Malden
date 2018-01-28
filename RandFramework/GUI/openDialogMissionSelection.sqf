@@ -29,6 +29,10 @@ if (isNil "InitialLoadedPreviousSettings") then {
 		if isNil("EnemyFactionData") then {EnemyFactionData = ""};
 		publicVariable "EnemyFactionData";
 
+		LoadoutData = InitialLoadedPreviousSettings select 9; 
+		if isNil("LoadoutData") then {LoadoutData = ""};
+		publicVariable "LoadoutData";
+
 		if (count AdvancedSettings < 6) then {
 			AdvancedSettings pushBack 10;
 		};
@@ -37,6 +41,10 @@ if (isNil "InitialLoadedPreviousSettings") then {
 		};
 		if (AdvancedSettings select 6 == 0) then { //we had an issue with some being set to zero (due to a bad published version, this makes sure any zeros are adjusted to correct id)
 			AdvancedSettings set [6,DefaultEnemyFactionArray select DefaultEnemyFactionIndex];
+		};
+
+		if (count AdvancedSettings < 8) then {
+			AdvancedSettings pushBack (DefaultFriendlyFactionArray select DefaultFriendlyFactionIndex);
 		};
 
 		if (!((isClass(configFile >> "CfgPatches" >> "rhs_main")) && (isClass(configFile >> "CfgPatches" >> "rhsusf_main")) && (isClass(configFile >> "CfgPatches" >> "rhsgref_main")))) then {
@@ -73,7 +81,7 @@ if (!isNull (findDisplay 6000)) then {
 		publicVariable "debugMessages";
 		_value = nil;
 		if (_lnpCtrlType == "RscCombo") then {
-			debugMessages = debugMessages + "\n\nHERE:" + str(lbCurSel _ctrlItem);
+			debugMessages = debugMessages + "\n\nHERE80:" + str(lbCurSel _ctrlItem);
 			_value = _ThisControlOptions select (lbCurSel _ctrlItem);
 		};
 		if (_lnpCtrlType == "RscEdit") then {

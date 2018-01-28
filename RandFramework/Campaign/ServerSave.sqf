@@ -18,7 +18,7 @@ if (_SaveVersion != "") then {
 	publicVariable "SaveTypeString";
 	sleep 0.1;
 	{
-		_saveData = [iMissionParamType,iMissionParamObjective,iAllowNVG,iMissionParamRepOption,iWeather,iUseRevive,iStartLocation,BadPoints,MaxBadPoints,BadPointsReason,iCampaignDay,AdvancedSettings,EnemyFactionData];
+		_saveData = [iMissionParamType,iMissionParamObjective,iAllowNVG,iMissionParamRepOption,iWeather,iUseRevive,iStartLocation,BadPoints,MaxBadPoints,BadPointsReason,iCampaignDay,AdvancedSettings,EnemyFactionData,LoadoutData];
 		profileNamespace setVariable [sInitialSLPlayerID + ":" + SaveTypeString,_saveData]; 
 		saveProfileNamespace;
 	} remoteExec ["bis_fnc_call", 2]; //Save this to server only

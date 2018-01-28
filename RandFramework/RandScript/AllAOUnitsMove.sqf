@@ -27,7 +27,7 @@ if (isServer) then {
 		_iMaxNearest = 4;
 	};
 	_iMaxNearestCount = 0;
-	_nearestUnits = nearestObjects [_FirstPos, [sRifleman, sRiflemanUrban, sTeamleader, sTeamleaderUrban], 1100];
+	_nearestUnits = nearestObjects [_FirstPos, [sRifleman, sTeamleader], 1100];
 	{
 		
 		_iMaxNearestCount = _iMaxNearestCount + 1;

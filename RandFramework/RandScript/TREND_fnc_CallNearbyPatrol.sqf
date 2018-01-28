@@ -47,7 +47,7 @@ if (isServer && count _thisThisList > 0) then {
 		
 	
 		//_SpottedUnitCount = count _thisThisList;
-		//_SpottedUnitCount = FriendlySide countSide nearestObjects [_SpottedUnitPos, [sTeamleader, sTeamleaderUrban], 250];
+		//_SpottedUnitCount = FriendlySide countSide nearestObjects [_SpottedUnitPos, [sTeamleader], 250];
 		_SpottedUnitCount = {_x distance _SpottedUnit < 200} count units group _SpottedUnit;
 		//if (bDebugMode) then {hint format["pre first spotted count check: %1",_SpottedUnitCount];};
 		_AlivePlayerCount = {alive _x} count allplayers;
@@ -229,7 +229,7 @@ if (isServer && count _thisThisList > 0) then {
 				//==============Now the generic spotted action to send a patrol to investigate of they have spotted inf ================================================
 				if ((vehicle _SpottedUnit isKindOf "Car") && _bAllowPatrolChange) then {
 					if  ((_SpottedUnitCount > 0)) then {
-						_nearestATs = nearestObjects [_SpottedUnitPos, [sATMan, sATManUrban,sATManMilitia], _maxPatrolSearch];
+						_nearestATs = nearestObjects [_SpottedUnitPos, [sATMan,sATManMilitia], _maxPatrolSearch];
 						if (bDebugMode) then {hint format["AT pre count check: %1",count _nearestATs]; sleep 2;};
 						if (count _nearestATs > 0) then {
 				
@@ -406,7 +406,7 @@ if (isServer && count _thisThisList > 0) then {
 
 						
 						//if (bDebugMode) then {sleep 2};
-						_nearestTLs = nearestObjects [_SpottedUnitPos, [sTeamleader, sTeamleaderUrban,sTeamleaderMilitia], _maxPatrolSearch];
+						_nearestTLs = nearestObjects [_SpottedUnitPos, [sTeamleader,sTeamleaderMilitia], _maxPatrolSearch];
 						//if (bDebugMode) then {hint format["pre count check: %1",count _nearestTLs]; sleep 2;};
 						if (count _nearestTLs > 0) then {
 				
@@ -456,7 +456,7 @@ if (isServer && count _thisThisList > 0) then {
 
 				
 
-					_anyTLsCheckAlive = nearestObjects [_SpottedUnitPos, [sTeamleader, sTeamleaderUrban,sTeamleaderMilitia], 3000];
+					_anyTLsCheckAlive = nearestObjects [_SpottedUnitPos, [sTeamleader,sTeamleaderMilitia], 3000];
 					{
 						if (!(alive _x)) then {
 							deleteVehicle _x;

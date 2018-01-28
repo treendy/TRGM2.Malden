@@ -1,7 +1,7 @@
 #include "..\..\setUnitGlobalVars.sqf";
 
 params ["_object","_caller","_id","_params"];
-_params params ["_unitClass"];
+_params params ["_unitClass","_unitRole"];
 
 
 //CampaignRecruitUnitRifleman createUnit [getPos player, group player];
@@ -18,6 +18,20 @@ if (_currentSpentPoints < (MaxBadPoints - BadPoints + 1)) then {
 	player doFollow player; //seemed because player has no units to start, when you add one, the player has "Stop" under his name and no units follow him
 	_SpawnedUnit setVariable ["RepCost", 0.5, true]; 	
 	_SpawnedUnit setVariable ["IsFRT", true, true]; 	
+	_SpawnedUnit setVariable ["UnitRole",_unitRole];
+	[_SpawnedUnit] execVM "RandFramework\setLoadout.sqf";
+	//script_handler = [_SpawnedUnit] execVM "RandFramework\setLoadout.sqf";
+	//waitUntil { scriptDone script_handler };
+	sleep 0.5;
+	
+	{
+		box1 addMagazineCargoGlobal [_x, 3];
+	} forEach magazines _SpawnedUnit + primaryWeaponMagazine _SpawnedUnit + secondaryWeaponMagazine _SpawnedUnit;
+	{ 
+		box1 addItemCargoGlobal  [_x, 1]; 
+	} forEach items _SpawnedUnit; 
+	box1 addBackpackCargoGlobal [typeof(unitBackpack _SpawnedUnit), 1];
+
 	_SpawnedUnit addEventHandler ["killed", 
 		{
 			//hint format["TEST: %1", CampaignRecruitUnitRifleman];

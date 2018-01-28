@@ -751,12 +751,14 @@ _trgComplete setVariable ["DelMeOnNewCampaignDay",true];
 _trgComplete setTriggerArea [0, 0, 0, false];
 if (iMissionParamType == 5) then {
 	//MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""
-	if (MaxBadPoints >= 10) then {
+	_totalRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
+	if (_totalRep >= 10) then {
 		_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "[FriendlySide, [""DeBrief"", ""Return to HQ to debrief"", ""Debrief"", """"]] call FHQ_TT_addTasks;  [[""CAMPAIGN_END""],""RandFramework\Campaign\SetMissionBoardOptions.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];}; deletevehicle thisTrigger", ""];
 	}
 	else {
-		_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "hint ""return to base for next assignment!""; [[""MISSION_COMPLETE""],""RandFramework\Campaign\SetMissionBoardOptions.sqf""] remoteExec [""BIS_fnc_execVM"",0,true]; if (ActiveTasks call FHQ_TT_areTasksSuccessful) then {MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""}; deletevehicle thisTrigger", ""];
-	}
+		_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "hint ""return to base for next assignment!!""; [[""MISSION_COMPLETE""],""RandFramework\Campaign\SetMissionBoardOptions.sqf""] remoteExec [""BIS_fnc_execVM"",0,true]; if (ActiveTasks call FHQ_TT_areTasksSuccessful) then {[1, 'Day " + str(iCampaignDay) + " task completed'] execVM 'RandFramework\AdjustMaxBadPoints.sqf'}; deletevehicle thisTrigger", ""];
+	};
+	//TESTTEST = triggerStatements _trgComplete;
 }
 else {
 	//_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "", ""]; //not sure why this is here... commented out on 5th Jan 2018... delete of no issues sinse
@@ -875,12 +877,22 @@ if (_bMoveToAO) then {
 	_AmmoBox1 = "C_T_supplyCrate_F" createVehicle _flatPos7;
 	_AmmoBox1 allowDamage false;
 	_AmmoBox1 setDir (floor(random 360));
+
 	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
 		[_AmmoBox1,InitialBoxItemsWithAce] call bis_fnc_initAmmoBox;
 	}
 	else {
 		[_AmmoBox1,InitialBoxItems] call bis_fnc_initAmmoBox;
 	};
+	{
+		{
+			_AmmoBox1 addMagazineCargoGlobal [_x, 3];
+		} forEach magazines _x + primaryWeaponMagazine _x + secondaryWeaponMagazine _x;
+		{ 
+	   		_AmmoBox1 addItemCargoGlobal  [_x, 1]; 
+		} forEach items _x; 
+		_AmmoBox1 addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
+	}  forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 	if (AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
 		_AmmoBox1 addAction ["<t color='#ff1111'>Virtual Arsenal</t>", {["Open",true] spawn BIS_fnc_arsenal}];
 	};

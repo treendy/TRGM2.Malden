@@ -190,7 +190,8 @@ if (_bAllowStart) then {
 			publicVariable "NewMissionMusic";	
 		};
 
-
+		ace_hearing_disableVolumeUpdate = true; 
+		
 		playMusic "";
 		0 fadeMusic 1;
 		playMusic selectRandom ThemeAndIntroMusic;
@@ -235,11 +236,15 @@ if (_bAllowStart) then {
 		sleep 3;
 		titleCut ["", "BLACK out", 5];
 
-		
 		8 fadeMusic 0;
+		[] spawn {
+			sleep 8;
+			ace_hearing_disableVolumeUpdate = false; 
+			playMusic "";
+		};
 		sleep 5;
 
-		
+
 		titleCut ["", "BLACK in", 5];
 		_camera cameraEffect ["Terminate","back"];
 		sleep 10;

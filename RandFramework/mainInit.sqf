@@ -4,9 +4,22 @@
 
 civilian setFriend [east, 1];
 
+if (isNil("CustomObjectsSet")) then {
+	CustomObjectsSet = false;
+	publicVariable "CustomObjectsSet";
+};
+
 if (isNil("EnemyFactionData")) then {
 	EnemyFactionData = "";
 	publicVariable "EnemyFactionData";
+};
+if (isNil("LoadoutData")) then {
+	LoadoutData = "";
+	publicVariable "LoadoutData";
+};
+if (isNil("LoadoutDataDefault")) then {
+	LoadoutDataDefault = "";
+	publicVariable "LoadoutDataDefault";
 };
 
 if (isNil "bBreifingPrepped") then {
@@ -192,10 +205,6 @@ if (isServer) then { //adjust weather here so intro animation is different every
 };
 
 
-ace_hearing_disableVolumeUpdate = true; 
-
-
-
 showcinemaborder true; 	
 _centerPos = getArray (configfile >> "CfgWorlds" >> worldName >> "centerPosition");
 _pos1 = (_centerPos getPos [(floor(random 5000))+50, (floor(random 360))]);
@@ -214,31 +223,6 @@ _camera camCommitPrepared 600;
 _trgRatingAdjust = createTrigger ["EmptyDetector", [0,0]];
 _trgRatingAdjust setTriggerArea [0, 0, 0, false];	
 _trgRatingAdjust setTriggerStatements ["((rating player) < 0)", "player addRating -(rating player)", ""];
-
-if (isServer) then {
-	box1 allowDamage false;
-	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-		[box1,InitialBoxItemsWithAce] call bis_fnc_initAmmoBox;
-	}
-	else {
-		[box1,InitialBoxItems] call bis_fnc_initAmmoBox;
-	};
-};
-
-//this setVariable ["MP_ONLY", true, true];
-if (!isMultiplayer) then {
-	{
-		if (_x getVariable ["MP_ONLY",false]) then {
-			deleteVehicle _x;
-		};
-	} forEach allUnits;
-};
-
-[chopper1] call TRGM_fnc_addTransportAction;
-
-
-
-
 
 
 if (! isDedicated) then {
@@ -326,22 +310,28 @@ if (!isMultiplayer) then {
 
 waitUntil {bAndSoItBegins};
 
-if (iUseRevive > 0) then {
-	[] call AIS_Core_fnc_preInit;
-	[] call AIS_Core_fnc_postInit;
-	[] call AIS_System_fnc_postInit;
-};
-
-//#include "RandFramework\General\TRGMSetEnemyUnitGlobalVars.sqf";
-call compile preprocessFileLineNumbers  "RandFramework\General\TRGMSetEnemyUnitGlobalVars.sqf";
-//call compile preprocessFileLineNumbers "RandFramework\General\TRGMsetEnemyUnitGlobalVars.sqf";
-
 if (!isDedicated) then {
 	titleText ["Loading mission...", "BLACK FADED"];
 	_camera cameraEffect ["Terminate","back"];
 };
 
+
+
+
+
+//#include "RandFramework\General\TRGMSetEnemyUnitGlobalVars.sqf";
+
+
 if (isServer) then {
+	call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetDefaultUnitGlobalVars.sqf";
+	call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetEnemyUnitGlobalVars.sqf";
+	call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetFriendlyLoutoutsGlobalVars.sqf";
+	CustomObjectsSet = true;
+	publicVariable "CustomObjectsSet";
+	call compile preprocessFileLineNumbers "RandFramework\setFriendlyObjects.sqf";
+
+	[chopper1] call TRGM_fnc_addTransportAction;
+
 	if (EnemyFactionData != "") then {
 		_errorMessage = "";
 		_ObjectPairs = EnemyFactionData splitString ";";
@@ -388,6 +378,50 @@ if (isServer) then {
 			sleep 3;
 		};
 	};
+
+
+	if (LoadoutData != "" || LoadoutDataDefault != "") then {
+		{
+			[_x] execVM "RandFramework\setLoadout.sqf";
+		} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
+	};
+	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+		[box1,InitialBoxItemsWithAce] call bis_fnc_initAmmoBox;
+	}
+	else {
+		[box1,InitialBoxItems] call bis_fnc_initAmmoBox;
+	};
+	
+	box1 allowDamage false;
+	{
+		{
+			box1 addMagazineCargoGlobal [_x, 2];
+		} forEach magazines _x + primaryWeaponMagazine _x + secondaryWeaponMagazine _x;
+		{ 
+	   		box1 addItemCargoGlobal  [_x, 1];
+		} forEach items _x; 
+		box1 addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
+	}  forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
+
+
+};
+
+waitUntil {CustomObjectsSet};
+
+if (iUseRevive > 0) then {
+	[] call AIS_Core_fnc_preInit;
+	[] call AIS_Core_fnc_postInit;
+	[] call AIS_System_fnc_postInit;
+};
+
+
+//this setVariable ["MP_ONLY", true, true];
+if (!isMultiplayer) then {
+	{
+		if (_x getVariable ["MP_ONLY",false]) then {
+			deleteVehicle _x;
+		};
+	} forEach allUnits;
 };
 
 
@@ -396,16 +430,6 @@ player doFollow player;
 
 
 if (iMissionParamType == 5) then {
-	//_dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
-	//_sRankIcon = "";
-	//if (_dCurrentRep >= 10) then {_sRankIcon = "<img image='RandFramework\Media\Rank5.jpg' size='3.5' />";};
-	//if (_dCurrentRep <= 7) then {_sRankIcon = "<img image='RandFramework\Media\Rank4.jpg' size='3.5' />";};
-	//if (_dCurrentRep <= 5) then {_sRankIcon = "<img image='RandFramework\Media\Rank3.jpg' size='3.5' />";};
-	//if (_dCurrentRep <= 3) then {_sRankIcon = "<img image='RandFramework\Media\Rank2.jpg' size='3.5' />";};
-	//if (_dCurrentRep <= 1) then {_sRankIcon = "<img image='RandFramework\Media\Rank1b.jpg' size='3.5' />";};
-	//if (_dCurrentRep <= 0) then {_sRankIcon = "<img image='RandFramework\Media\Rank0.jpg' size='3.5' />";};	
-	//_sRankMessage = "<t color='#00ff00'>Your current team rank is: </t><br /><br />" + _sRankIcon + "<br /><br />Get to rank 5 for final objective! Check the notice board at base for your report";
-	//[parseText _sRankMessage] remoteExec ["Hint", 0, true];
 	if (isServer) then {
 		call compile preprocessFileLineNumbers  "RandFramework\Campaign\initCampaign.sqf";
 	};
@@ -494,7 +518,7 @@ TREND_fnc_CheckBadPoints = {
 				if (_dCurrentRep < 7) then {_sRankIcon = "<img image='RandFramework\Media\Rank3.jpg' size='3.5' />";};
 				if (_dCurrentRep < 5) then {_sRankIcon = "<img image='RandFramework\Media\Rank2.jpg' size='3.5' />";};
 				if (_dCurrentRep < 3) then {_sRankIcon = "<img image='RandFramework\Media\Rank1b.jpg' size='3.5' />";};
-				if (_dCurrentRep < 1) then {_sRankIcon = "<img image='RandFramework\Media\Rank0.jpg' size='3.5' />";};					
+				if (_dCurrentRep <= 0) then {_sRankIcon = "<img image='RandFramework\Media\Rank0.jpg' size='3.5' />";};					
 				if (_bRepWorse) then {
 					_sRankMessage = "<t color='#ff0000'>Your reputation has dropped.  Team rank now: </t><br /><br />" + _sRankIcon + "<br /><br />Check the notice board at base for your report";
 				}
@@ -526,23 +550,22 @@ if (isServer) then {
 		TREND_fnc_CheckAnyPlayersAlive = {
 			sleep 3;
 			_bEnded = false;
-			while {true && !_bEnded} do {
+			while {!_bEnded} do {
 				_bAnyAlive = false;
 				{	
 	   				if (isPlayer _x) then {
 	   					_iRespawnTicketsLeft = [_x,nil,true] call BIS_fnc_respawnTickets;
-	   					//hint format["check:%1",str(_iRespawnTicketsLeft)];
 	   					if (alive _x || _iRespawnTicketsLeft > 0) then {
 	   						_bAnyAlive = true;
-	   						//sleep 1;
-	   						//hint "Alive!";
+	   					};
+	   				}
+	   				else {
+	   					if (alive _x) then {
+	   						_bAnyAlive = true;
 	   					};
 	   				};
-				} forEach allPlayers - entities "HeadlessClient_F";
+				} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 				if (!_bAnyAlive) then {
-					//END MISSION!!!
-					//hint "ENDING!!!!";
-					//sleep 3;
 					["end3", true, 5] remoteExec ["BIS_fnc_endMission"];
 					_bEnded = true;
 					sleep 5;
