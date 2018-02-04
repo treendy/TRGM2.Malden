@@ -5,7 +5,7 @@ _unit = _this select 0;
 
 _unitVarType = _unit getVariable ["UnitRole",""];
 
-_tempMergedLoadoutData = LoadoutData + "#" + LoadoutDataDefault;
+_tempMergedLoadoutData = LoadoutDataDefault + "#" + LoadoutData;
 
 
 

@@ -125,6 +125,29 @@ class CfgSounds
 		sound[] = {"\sound\uragan_1.ogg", db+10, 1};
 		titles[] = {1, ""};
 	};
+	class sswindloop {
+		name="sswindloop";
+		sound[]={\RandFramework\Sounds\sswindloop.ogg, 5,1};
+		titles[] = {};
+	};
+	
+	class sswindintro {
+		name="sswindintro";
+		sound[]={\RandFramework\Sounds\sswindintro.ogg, 5,1};
+		titles[] = {};
+	};
+
+	class sswindoutro {
+		name="sswindoutro";
+		sound[]={\RandFramework\Sounds\sswindoutro.ogg, 5,1};
+		titles[] = {};
+	};
+	
+	class sswarning {
+		name="sswarning";
+		sound[]={\RandFramework\Sounds\sswarning.ogg, 5,1};
+		titles[] = {};
+	};	
 		
 };
 
@@ -174,9 +197,10 @@ class CfgRadio
 	class land
 	{
 		name = "land";
-		sound[] = {"\Sound\land.ogg", db+0,1.0};
+		sound[] = {"\RandFramework\Sounds\land.ogg", db+0,1.0};
 		title = "Pegasus 2-1 landing.";
 	};
+
 
 
 };

@@ -12,7 +12,9 @@ publicVariable "DefaultFriendlyFactionArray";
 publicVariable "DefaultFriendlyFactionArrayText";
 
 
-if ((isClass(configFile >> "CfgPatches" >> "rhs_main")) && (isClass(configFile >> "CfgPatches" >> "rhsusf_main")) && (isClass(configFile >> "CfgPatches" >> "rhsgref_main"))) then {
+if ((isClass(configFile >> "CfgPatches" >> "rhs_main")) && 
+		isClass(configFile >> "CfgPatches" >> "rhsusf_main") && 
+		isClass(configFile >> "CfgPatches" >> "rhsgref_main")) then {
 	//IF RHSAFRF, RHSUSAF, RHSGREF are active
 	DefaultEnemyFactionArray = DefaultEnemyFactionArray + [4];
 	DefaultEnemyFactionArrayText = DefaultEnemyFactionArrayText + ["RHS - Russia MSV"];
@@ -22,6 +24,27 @@ if (isClass(configFile >> "CfgPatches" >> "rhsusf_main")) then {
 	DefaultFriendlyFactionArray = DefaultFriendlyFactionArray + [3];
 	DefaultFriendlyFactionArrayText = DefaultFriendlyFactionArrayText + ["RHS USMC-F"];
 };
+if (isClass(configFile >> "CfgPatches" >> "CUP_Creatures_People_Core") &&
+		isClass(configFile >> "CfgPatches" >> "CUP_AirVehicles_Core") &&
+		isClass(configFile >> "CfgPatches" >> "CUP_Weapons_WeaponsCore") && 
+		isClass(configFile >> "CfgPatches" >> "CUP_TrackedVehicles_Core") && 
+		isClass(configFile >> "CfgPatches" >> "CUP_WaterVehicles_Core") && 
+		isClass(configFile >> "CfgPatches" >> "CUP_WheeledVehicles_Core")) then {
+	DefaultEnemyFactionArray = DefaultEnemyFactionArray + [5];
+	DefaultEnemyFactionArrayText = DefaultEnemyFactionArrayText + ["CUP - Takistan Army/Milita"];
+
+	DefaultEnemyFactionArray = DefaultEnemyFactionArray + [6];
+	DefaultEnemyFactionArrayText = DefaultEnemyFactionArrayText + ["CUP - Takistan Army Only"];
+
+	DefaultEnemyFactionArray = DefaultEnemyFactionArray + [7];
+	DefaultEnemyFactionArrayText = DefaultEnemyFactionArrayText + ["CUP - Takistan Milita Only"];
+
+	DefaultFriendlyFactionArray = DefaultFriendlyFactionArray + [4];
+	DefaultFriendlyFactionArrayText = DefaultFriendlyFactionArrayText + ["CUP UK MTP"];
+	DefaultFriendlyFactionArray = DefaultFriendlyFactionArray + [5];
+	DefaultFriendlyFactionArrayText = DefaultFriendlyFactionArrayText + ["CUP UK DDPM"];
+};
+
 
 //example: AdvancedSettings select ADVSET_ENEMY_FACTIONS_IDX
 ADVSET_VIRTUAL_ARSENAL_IDX = 0;
@@ -32,6 +55,7 @@ ADVSET_MAP_DRAW_DIRECT_ONLY_IDX = 4;
 ADVSET_RESPAWN_TIMER_IDX = 5;
 ADVSET_ENEMY_FACTIONS_IDX = 6;
 ADVSET_FRIENDLY_LOADOUT_IDX = 7;
+ADVSET_SANDSTORM_IDX = 8;
 
 //NOTE the id's must go up in twos!
 AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex(zero based index)
@@ -41,10 +65,11 @@ AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex(zero ba
 	[6007, "Respawn Tickets","RscCombo",["1","2","3","4","5","6","7","8","9","10","Unlimited"],[1,2,3,4,5,6,7,8,9,10,99999],0],
 	[6009, "Mapdraw in direct only","RscCombo",["Enabled","Disabled"],[1,0],0],
 	[6011, "Respawn Timer","RscCombo",["0 seconds","10 seconds","30 seconds","1 min","5 mins","10 mins","20 mins"],[0,10,30,60,300,600,1200],1],
-	[6013, "Enemy Factions","RscCombo",DefaultEnemyFactionArrayText,DefaultEnemyFactionArray,DefaultEnemyFactionIndex],
-	[6015, "Friendly Factions","RscCombo",DefaultFriendlyFactionArrayText,DefaultFriendlyFactionArray,DefaultFriendlyFactionIndex]
+	[6013, "Enemy Factions","RscCombo",DefaultEnemyFactionArrayText,DefaultEnemyFactionArray,DefaultEnemyFactionValue select 0],
+	[6015, "Friendly Factions","RscCombo",DefaultFriendlyFactionArrayText,DefaultFriendlyFactionArray,DefaultFriendlyFactionValue select 0],
+	[6017, "Sand Storm","RscCombo",["Random","Always (at a random point)","Never","5 hours non stop"],[0,1,2,3],DefaultSandStormOption]
 ];
-DefaultAdvancedSettings = [0,"Tactical Cannon Fodder",1,1,1,10,DefaultEnemyFactionArray select DefaultEnemyFactionIndex,DefaultFriendlyFactionArray select DefaultFriendlyFactionIndex];
+DefaultAdvancedSettings = [0,"Tactical Cannon Fodder",1,1,1,10,DefaultEnemyFactionValue select 0,DefaultFriendlyFactionValue select 0,DefaultSandStormOption];
 
 
 //0 = no, 1 = guarantee revive, 2 = realistic revive, 3 = realistic revive (only medics can revive)
@@ -73,7 +98,7 @@ TowerBuildings = ["Land_TTowerBig_2_F","Land_TTowerBig_1_F (towertest)","land_Ob
 
 sBreifing = "";
 sAltisRegainEngine = "";
-sScriptsUsed = "";
+sScriptsUsed = "RickOShay's Dust Storm Script<br />Phsyco Revive Script";
 
 
 //iWeather = ("OUT_par_WeatherAndTimeConditions" call BIS_fnc_getParamValue);

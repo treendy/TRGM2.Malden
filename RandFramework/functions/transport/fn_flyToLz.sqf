@@ -27,6 +27,7 @@ if (!alive _vehicle) then {
 	breakOut "FlyTo";
 };
 
+_vehicle setFuel 1;
 
 //cleanup possible prevoius prevoious
 deleteVehicle (_vehicle getVariable ["targetPad", objNull]);

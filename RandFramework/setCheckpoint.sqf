@@ -176,6 +176,7 @@ if (_PosFound) then {
 	if (_thisIsCheckPoint && _thisSide == east) then {
 		//CheckPointAreas
 		CheckPointAreas = CheckPointAreas + [[_roadBlockPos,_thisAreaAroundCheckpointSpacing]]; //the ,_thisAreaAroundCheckpointSpacing is for when we use BIS_fnc_findSafePos to make sure no other road block is within 100 meters
+		publicVariable "CheckPointAreas";
 	}
 	else {
 		//SentryAreas

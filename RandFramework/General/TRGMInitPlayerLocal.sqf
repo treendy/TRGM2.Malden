@@ -84,8 +84,6 @@ if (isNil "IntroMusic") then {
 
 TREND_fnc_BasicInit = {
 	
-	//enableEngineArtillery false; 
-
 	_transportSelectAction = {
 		[chopper1,true] spawn TRGM_fnc_selectLZ;
 	};
@@ -98,29 +96,17 @@ TREND_fnc_BasicInit = {
 		_transportChopperActionID = player addAction ["Call for transport chopper",_transportSelectAction,0,0];	
 		player setVariable ["callTransportChopperID", _transportChopperActionID];	
 	};
-
 	
-	if (str player == "sl" || str player == "k1_1" || str player == "k1_5" || str player == "d1_1" || str player == "d2_1" || str player == "pg1_1" || str player == "pg1_2" || str player == "pg1_3") then {
-		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-			//myaction = ['RequestArti','Request Arti','',{_handle=createdialog "DialogArtiRequest";},{true}] call ace_interact_menu_fnc_createAction;
-			//[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
-		}
-		else {
-			//player addaction ["Request Arti", {_handle=createdialog "DialogArtiRequest";}];
-		};
-	};
+};
+[] spawn TREND_fnc_BasicInit;
+//player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInit; }];
+
+
+TREND_fnc_BasicInitAndRespawn = {
+	
 	if (isMultiplayer) then {
 		execVM "RandFramework\NoVoice.sqf";
 	};
-
-	//al_flare_intensity = 20;
-	//publicvariable "al_flare_intensity";
-	// flare range, replace 500 with desired value
-	//al_flare_range = 300;
-	//publicvariable "al_flare_range";
-	// If you want to use FLARE FIX do not edit or remove lines bellow
-	//player addEventHandler ["Fired",{private ["_al_flare"]; _al_flare = _this select 6;[[[_al_flare],"\RandFramework\AL_flare_fix\al_flare_enhance.sqf"],"BIS_fnc_execVM",true,true] spawn BIS_fnc_MP;}];
-	// ^^^^^^^^^^ END FLARE fix ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 	iAllowGPS = ("OUT_par_AllowGPS" call BIS_fnc_getParamValue);
 	if (iAllowGPS == 0) then {
@@ -128,15 +114,15 @@ TREND_fnc_BasicInit = {
 	};
 
 };
-[] spawn TREND_fnc_BasicInit;
-player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInit; }];
-
+[] spawn TREND_fnc_BasicInitAndRespawn;
+player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInitAndRespawn; }];
 
 waitUntil {bAndSoItBegins && CustomObjectsSet};
 
 endMissionBoard removeAction _actChooseMission;
 
 [player] execVM "RandFramework\setLoadout.sqf";
+player addEventHandler ["Respawn", { [player] execVM "RandFramework\setLoadout.sqf"; }];
 
 
 5 fadeMusic 0;
@@ -187,18 +173,20 @@ TREND_fnc_InitPostStarted = {
 		[] execVM "RandFramework\NVscript.sqf";
 	};
 
-	if (AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
-		box1 addAction ["<t color='#ff1111'>Virtual Arsenal</t>", {["Open",true] spawn BIS_fnc_arsenal}];
-	};
-	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-		endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format["Current cost per life: %1<br /><br />Bad reputation points: %2 out of %3<br /><br />TOTAL REP: %4 <br /><br />REASONS SO FAR: <br />%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
-	}
-	else {
-		endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format["Current cost per life: %1<br /><br />Bad reputation points: %2 out of %3<br /><br />TOTAL REP: %4 <br /><br />REASONS SO FAR: <br />%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
+	endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format["Current cost per life: %1<br /><br />Bad reputation points: %2 out of %3<br /><br />TOTAL REP: %4 <br /><br />REASONS SO FAR: <br />%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
+	
+	_iSandStormOption = AdvancedSettings select ADVSET_SANDSTORM_IDX;
+	if (_iSandStormOption == 3) then { //5 hours non stop
+		nul = 18030 execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";
 	};
 };
 [] spawn TREND_fnc_InitPostStarted;
 player addEventHandler ["Respawn", { [] spawn TREND_fnc_InitPostStarted; }];
+
+
+if (AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
+	box1 addAction ["<t color='#ff1111'>Virtual Arsenal</t>", {["Open",true] spawn BIS_fnc_arsenal}];
+};
 
 
 

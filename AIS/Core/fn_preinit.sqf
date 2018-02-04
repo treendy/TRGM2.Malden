@@ -10,7 +10,10 @@ if (isServer) then {
 };
 
 removeAllMissionEventHandlers "Draw3D";
-removeAllMissionEventHandlers "EachFrame";
+//removeAllMissionEventHandlers "EachFrame";
+if (!isNil "AIS_Core_eachFrameHandlerId") then {
+	removeMissionEventHandler ["EachFrame",AIS_Core_eachFrameHandlerId];
+};
 
 call AIS_Core_fnc_initEvents;
 AIS_Core_Interaction_Actions = [];

@@ -16,7 +16,7 @@ sTank3Tank = "O_T_MBT_02_cannon_ghex_F";
 sAAAVeh = "O_T_APC_Tracked_02_AA_ghex_F";
 sMortar = ["O_Mortar_01_F"];
 sSniper = "O_T_Sniper_F";
-sCivilian = "C_man_polo_1_F";
+sCivilian = ["C_man_polo_1_F"];
 sArtilleryVeh = "O_T_MBT_02_arty_ghex_F";
 sBoatUnit = "O_T_Boat_Armed_01_hmg_F";		
 sExpSpec = "O_T_Soldier_Exp_F"; 		
@@ -70,7 +70,7 @@ sEnemyHeliPilot = "O_helipilot_F";
 		sAAAVeh = "O_T_APC_Tracked_02_AA_ghex_F";
 		sMortar = ["O_Mortar_01_F"];
 		sSniper = "O_T_Sniper_F";
-		sCivilian = "C_man_polo_1_F";
+		sCivilian = ["C_man_polo_1_F"];
 		sArtilleryVeh = "O_T_MBT_02_arty_ghex_F";
 		sBoatUnit = "O_T_Boat_Armed_01_hmg_F";		
 		sExpSpec = "O_T_Soldier_Exp_F"; 		
@@ -121,11 +121,11 @@ sEnemyHeliPilot = "O_helipilot_F";
 		sTank1ArmedCar = "O_G_Offroad_01_armed_F";
 		sTank2APC = "O_G_Offroad_01_armed_F";
 		sTank3Tank = "O_G_Offroad_01_armed_F";
-		sAAAVeh = "O_G_Offroad_01_armed_F";
+		sAAAVeh = "";
 		sMortar = ["O_G_Mortar_01_F"];
 		sSniper = "O_G_Soldier_F";
-		sCivilian = "C_man_polo_1_F";
-		sArtilleryVeh = "O_G_Offroad_01_armed_F";
+		sCivilian = ["C_man_polo_1_F"];
+		sArtilleryVeh = "O_T_MBT_02_arty_ghex_F";
 		sBoatUnit = "Land_HelipadEmpty_F";		
 		sExpSpec = "O_G_Soldier_F"; 		
 
@@ -140,7 +140,7 @@ sEnemyHeliPilot = "O_helipilot_F";
 		sTank1ArmedCarMilitia = "O_G_Offroad_01_armed_F";
 		sTank2APCMilitia = "O_G_Offroad_01_armed_F";
 		sTank3TankMilitia = "O_G_Offroad_01_armed_F";
-		sAAAVehMilitia = "O_G_Offroad_01_armed_F";
+		sAAAVehMilitia = "";
 		sMortarMilitia = ["O_G_Mortar_01_F"];
 		
 		InformantClasses = ["C_Orestes","C_Nikos"];
@@ -178,7 +178,7 @@ sTank3Tank = "rhs_t72ba_tv";
 sAAAVeh = "rhs_zsu234_aa";    
 sMortar = ["rhs_2b14_82mm_msv"];
 sSniper = "rhs_mvd_izlom_marksman";
-sCivilian = "C_man_polo_1_F";
+sCivilian = ["C_man_polo_1_F"];
 sArtilleryVeh = "RHS_BM21_MSV_01";
 sBoatUnit = "Land_HelipadEmpty_F";		
 sExpSpec = "rhs_msv_emr_engineer"; 		
@@ -217,5 +217,178 @@ UnarmedScoutVehicles = ["rhs_tigr_msv","rhs_uaz_open_MSV_01","RHS_UAZ_MSV_01"];
 EnemyBaseChoppers = ["RHS_Ka52_vvs"];
 sEnemyHeliPilot = "rhs_pilot_combat_heli";
 	};	
+
+case 5 : {
+
+sTeamleader = "CUP_O_TK_Soldier_SL";
+sRifleman = "CUP_O_TK_Soldier";
+sATMan = "CUP_O_TK_Soldier_HAT";
+sAAMan = "CUP_O_TK_Soldier_AA";
+sAmmobearer = "CUP_O_TK_Soldier_GL";
+sGrenadier = "CUP_O_TK_Soldier_GL";
+sMedic = "CUP_O_TK_Medic";
+sMachineGunMan = "CUP_O_TK_Soldier_MG";
+sTank1ArmedCar = "CUP_O_T34_TKA";
+sTank2APC = "CUP_O_T72_TKA";
+sTank3Tank = "CUP_O_BTR40_MG_TKA";
+sAAAVeh = "CUP_O_ZSU23_TK";    
+sMortar = ["CUP_O_2b14_82mm_TK"];
+sSniper = "CUP_O_TK_Sniper";
+sCivilian = ["CUP_C_TK_Man_04","CUP_C_TK_Man_04_Jack","CUP_C_TK_Man_04_Waist","CUP_C_TK_Man_07","CUP_C_TK_Man_07_Coat","CUP_C_TK_Man_07_Waist","CUP_C_TK_Man_08","CUP_C_TK_Man_08_Jack","CUP_C_TK_Man_08_Waist","CUP_C_TK_Man_05_Coat","CUP_C_TK_Man_05_Jack","CUP_C_TK_Man_05_Waist","CUP_C_TK_Man_06_Coat","CUP_C_TK_Man_06_Jack","CUP_C_TK_Man_06_Waist","CUP_C_TK_Man_02","CUP_C_TK_Man_02_Jack","CUP_C_TK_Man_02_Waist","CUP_C_TK_Man_01_Waist","CUP_C_TK_Man_01_Coat","CUP_C_TK_Man_01_Jack","CUP_C_TK_Man_03_Coat","CUP_C_TK_Man_03_Jack","CUP_C_TK_Man_03_Waist"];
+
+sArtilleryVeh = "CUP_O_BM21_TKA";
+sBoatUnit = "Land_HelipadEmpty_F";		
+sExpSpec = "CUP_O_TK_Soldier_GL"; 		
+
+sTeamleaderMilitia = "CUP_O_TK_INS_Soldier_TL";
+sRiflemanMilitia = "CUP_O_TK_INS_Soldier";
+sATManMilitia = "CUP_O_TK_INS_Soldier_AT";
+sAAManMilitia = "CUP_O_TK_INS_Soldier_AA";	
+sAmmobearerMilitia = "CUP_O_TK_INS_Bomber";
+sGrenadierMilitia = "CUP_O_TK_INS_Soldier_GL";
+sMedicMilitia = "CUP_O_TK_INS_Guerilla_Medic";
+sMachineGunManMilitia = "CUP_O_TK_INS_Soldier_MG";
+sTank1ArmedCarMilitia = "CUP_O_LR_MG_TKM";
+sTank2APCMilitia = "CUP_O_BTR40_MG_TKM";
+sTank3TankMilitia = "CUP_O_LR_SPG9_TKM";
+sAAAVehMilitia = "CUP_O_Ural_ZU23_TKA";
+sMortarMilitia = ["CUP_O_2b14_82mm_TK_INS"];
+
+InformantClasses = ["C_Orestes","C_Nikos"];
+InterogateOfficerClasses = ["O_T_Officer_F"];
+WeaponDealerClasses = ["C_Nikos_aged","C_man_hunter_1_F"];
+sideResarchTruck = ["CUP_O_Ural_Repair_TKA"];
+SideRadioClassNames = ["Vysilacka"];
+sideAmmoTruck = ["CUP_O_Ural_Reammo_TKA"];
+DestroyAAAVeh = ["CUP_O_Ural_ZU23_TKA"];
+
+sRiflemanFriendInsurg = "CUP_O_TK_INS_Soldier";
+
+ReinforceVehicle = "CUP_O_UH1H_slick_TKA";
+EnemyAirToAirSupports = ["CUP_O_L39_TK"];
+EnemyAirToGroundSupports = ["CUP_O_Su25_Dyn_TKA","CUP_O_Mi24_D_Dynamic_TK"]; //This would normally be a chopper
+EnemyAirScout = ["CUP_O_AN2_TK"];
+
+UnarmedScoutVehicles = ["CUP_O_LR_Transport_TKM","CUP_O_V3S_Open_TKM"];
+
+EnemyBaseChoppers = ["CUP_O_Mi24_D_Dynamic_TK"];
+sEnemyHeliPilot = "CUP_O_TK_Pilot";
+	};	
+
+
+case 6 : {
+
+sTeamleader = "CUP_O_TK_Soldier_SL";
+sRifleman = "CUP_O_TK_Soldier";
+sATMan = "CUP_O_TK_Soldier_HAT";
+sAAMan = "CUP_O_TK_Soldier_AA";
+sAmmobearer = "CUP_O_TK_Soldier_GL";
+sGrenadier = "CUP_O_TK_Soldier_GL";
+sMedic = "CUP_O_TK_Medic";
+sMachineGunMan = "CUP_O_TK_Soldier_MG";
+sTank1ArmedCar = "CUP_O_T34_TKA";
+sTank2APC = "CUP_O_T72_TKA";
+sTank3Tank = "CUP_O_BTR40_MG_TKA";
+sAAAVeh = "CUP_O_ZSU23_TK";    
+sMortar = ["CUP_O_2b14_82mm_TK"];
+sSniper = "CUP_O_TK_Sniper";
+sCivilian = ["CUP_C_TK_Man_04","CUP_C_TK_Man_04_Jack","CUP_C_TK_Man_04_Waist","CUP_C_TK_Man_07","CUP_C_TK_Man_07_Coat","CUP_C_TK_Man_07_Waist","CUP_C_TK_Man_08","CUP_C_TK_Man_08_Jack","CUP_C_TK_Man_08_Waist","CUP_C_TK_Man_05_Coat","CUP_C_TK_Man_05_Jack","CUP_C_TK_Man_05_Waist","CUP_C_TK_Man_06_Coat","CUP_C_TK_Man_06_Jack","CUP_C_TK_Man_06_Waist","CUP_C_TK_Man_02","CUP_C_TK_Man_02_Jack","CUP_C_TK_Man_02_Waist","CUP_C_TK_Man_01_Waist","CUP_C_TK_Man_01_Coat","CUP_C_TK_Man_01_Jack","CUP_C_TK_Man_03_Coat","CUP_C_TK_Man_03_Jack","CUP_C_TK_Man_03_Waist"];
+sArtilleryVeh = "CUP_O_BM21_TKA";
+sBoatUnit = "Land_HelipadEmpty_F";		
+sExpSpec = "CUP_O_TK_Soldier_GL"; 		
+
+sTeamleaderMilitia = "CUP_O_TK_Soldier_SL";
+sRiflemanMilitia = "CUP_O_TK_Soldier";
+sATManMilitia = "CUP_O_TK_Soldier_HAT";
+sAAManMilitia = "CUP_O_TK_Soldier_AA";	
+sAmmobearerMilitia = "CUP_O_TK_Soldier_GL";
+sGrenadierMilitia = "CUP_O_TK_Soldier_GL";
+sMedicMilitia = "CUP_O_TK_Medic";
+sMachineGunManMilitia = "CUP_O_TK_Soldier_MG";
+sTank1ArmedCarMilitia = "CUP_O_T34_TKA";
+sTank2APCMilitia = "CUP_O_T72_TKA";
+sTank3TankMilitia = "CUP_O_BTR40_MG_TKA";
+sAAAVehMilitia = "CUP_O_ZSU23_TK";
+sMortarMilitia = ["CUP_O_2b14_82mm_TK"];
+
+InformantClasses = ["C_Orestes","C_Nikos"];
+InterogateOfficerClasses = ["O_T_Officer_F"];
+WeaponDealerClasses = ["C_Nikos_aged","C_man_hunter_1_F"];
+sideResarchTruck = ["CUP_O_Ural_Repair_TKA"];
+SideRadioClassNames = ["Vysilacka"];
+sideAmmoTruck = ["CUP_O_Ural_Reammo_TKA"];
+DestroyAAAVeh = ["CUP_O_Ural_ZU23_TKA"];
+
+sRiflemanFriendInsurg = "CUP_O_TK_INS_Soldier";
+
+ReinforceVehicle = "CUP_O_UH1H_slick_TKA";
+EnemyAirToAirSupports = ["CUP_O_L39_TK"];
+EnemyAirToGroundSupports = ["CUP_O_Su25_Dyn_TKA","CUP_O_Mi24_D_Dynamic_TK"]; //This would normally be a chopper
+EnemyAirScout = ["CUP_O_AN2_TK"];
+
+UnarmedScoutVehicles = ["CUP_O_LR_Transport_TKM","CUP_O_V3S_Open_TKM"];
+
+EnemyBaseChoppers = ["CUP_O_Mi24_D_Dynamic_TK"];
+sEnemyHeliPilot = "CUP_O_TK_Pilot";
+	};	
+
+
+case 7 : {
+
+sTeamleader = "CUP_O_TK_INS_Soldier_TL";
+sRifleman = "CUP_O_TK_INS_Soldier";
+sATMan = "CUP_O_TK_INS_Soldier_AT";
+sAAMan = "CUP_O_TK_INS_Soldier_AA";
+sAmmobearer = "CUP_O_TK_INS_Bomber";
+sGrenadier = "CUP_O_TK_INS_Soldier_GL";
+sMedic = "CUP_O_TK_INS_Guerilla_Medic";
+sMachineGunMan = "CUP_O_TK_INS_Soldier_MG";
+sTank1ArmedCar = "CUP_O_LR_MG_TKM";
+sTank2APC = "CUP_O_BTR40_MG_TKM";
+sTank3Tank = "CUP_O_LR_SPG9_TKM";
+sAAAVeh = "CUP_O_Ural_ZU23_TKA";    
+sMortar = ["CUP_O_2b14_82mm_TK_INS"];
+sSniper = "CUP_O_TK_INS_Soldier";
+sCivilian = ["CUP_C_TK_Man_04","CUP_C_TK_Man_04_Jack","CUP_C_TK_Man_04_Waist","CUP_C_TK_Man_07","CUP_C_TK_Man_07_Coat","CUP_C_TK_Man_07_Waist","CUP_C_TK_Man_08","CUP_C_TK_Man_08_Jack","CUP_C_TK_Man_08_Waist","CUP_C_TK_Man_05_Coat","CUP_C_TK_Man_05_Jack","CUP_C_TK_Man_05_Waist","CUP_C_TK_Man_06_Coat","CUP_C_TK_Man_06_Jack","CUP_C_TK_Man_06_Waist","CUP_C_TK_Man_02","CUP_C_TK_Man_02_Jack","CUP_C_TK_Man_02_Waist","CUP_C_TK_Man_01_Waist","CUP_C_TK_Man_01_Coat","CUP_C_TK_Man_01_Jack","CUP_C_TK_Man_03_Coat","CUP_C_TK_Man_03_Jack","CUP_C_TK_Man_03_Waist"];
+sArtilleryVeh = "CUP_O_BM21_TKA";
+sBoatUnit = "Land_HelipadEmpty_F";		
+sExpSpec = "CUP_O_TK_INS_Soldier"; 		
+
+sTeamleaderMilitia = "CUP_O_TK_INS_Soldier_TL";
+sRiflemanMilitia = "CUP_O_TK_INS_Soldier";
+sATManMilitia = "CUP_O_TK_INS_Soldier_AT";
+sAAManMilitia = "CUP_O_TK_INS_Soldier_AA";	
+sAmmobearerMilitia = "CUP_O_TK_INS_Bomber";
+sGrenadierMilitia = "CUP_O_TK_INS_Soldier_GL";
+sMedicMilitia = "CUP_O_TK_INS_Guerilla_Medic";
+sMachineGunManMilitia = "CUP_O_TK_INS_Soldier_MG";
+sTank1ArmedCarMilitia = "CUP_O_LR_MG_TKM";
+sTank2APCMilitia = "CUP_O_BTR40_MG_TKM";
+sTank3TankMilitia = "CUP_O_LR_SPG9_TKM";
+sAAAVehMilitia = "CUP_O_Ural_ZU23_TKA";
+sMortarMilitia = ["CUP_O_2b14_82mm_TK_INS"];
+
+InformantClasses = ["C_Orestes","C_Nikos"];
+InterogateOfficerClasses = ["O_T_Officer_F"];
+WeaponDealerClasses = ["C_Nikos_aged","C_man_hunter_1_F"];
+sideResarchTruck = ["CUP_O_Ural_Repair_TKA"];
+SideRadioClassNames = ["Vysilacka"];
+sideAmmoTruck = ["CUP_O_Ural_Reammo_TKA"];
+DestroyAAAVeh = ["CUP_O_Ural_ZU23_TKA"];
+
+sRiflemanFriendInsurg = "CUP_O_TK_INS_Soldier";
+
+ReinforceVehicle = "CUP_O_LR_Transport_TKM";
+EnemyAirToAirSupports = ["Land_HelipadEmpty_F"];
+EnemyAirToGroundSupports = ["Land_HelipadEmpty_F"]; //This would normally be a chopper
+EnemyAirScout = ["CUP_O_AN2_TK"];
+
+UnarmedScoutVehicles = ["CUP_O_LR_Transport_TKM","CUP_O_V3S_Open_TKM"];
+
+EnemyBaseChoppers = ["Land_HelipadEmpty_F"];
+sEnemyHeliPilot = "CUP_O_TK_Pilot";
+	};	
+
+
 };
 

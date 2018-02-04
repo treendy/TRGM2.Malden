@@ -40,19 +40,19 @@ else {
 	removeAllActions _thisCiv;
 
 	if (getMarkerType format["mrkMainObjective%1",0] == "empty") then {
-			format["mrkMainObjective%1",0] setMarkerType "mil_unknown"; //NOTE: hard coded zero as only one main task will exict (currently!)
-			hint "Map updated with main AO location";
+		format["mrkMainObjective%1",0] setMarkerType "mil_unknown"; //NOTE: hard coded zero as only one main task will exict (currently!)
+		hint "Map updated with main AO location";
+	}
+	else {
+		if (alive _thisCiv) then {
+			[IntelShownType,"IntOfficer"] execVM "RandFramework\showIntel.sqf";
+			sleep 2;
+			[IntelShownType,"IntOfficer"] execVM "RandFramework\showIntel.sqf";
 		}
 		else {
-			if (alive _thisCiv) then {
-				[IntelShownType,"IntOfficer"] execVM "RandFramework\showIntel.sqf";
-				sleep 2;
-				[IntelShownType,"IntOfficer"] execVM "RandFramework\showIntel.sqf";
-			}
-			else {
-				hint "Not quite sure why, but for some reason this dead guy isnt speaking!!!"
-			};
+			hint "Not quite sure why, but for some reason this dead guy isnt speaking!!!"
 		};
+	};
 };
 
 	

@@ -206,7 +206,12 @@ if (isServer) then { //adjust weather here so intro animation is different every
 
 
 showcinemaborder true; 	
+
 _centerPos = getArray (configfile >> "CfgWorlds" >> worldName >> "centerPosition");
+if !(isNil "CustomCenterPos") then {
+	_centerPos = CustomCenterPos;
+};
+
 _pos1 = (_centerPos getPos [(floor(random 5000))+50, (floor(random 360))]);
 _pos2 = (_centerPos getPos [(floor(random 5000))+50, (floor(random 360))]);
 _pos1 = [_pos1 select 0,_pos1 select 1,selectRandom[200,300]];
@@ -383,6 +388,7 @@ if (isServer) then {
 	if (LoadoutData != "" || LoadoutDataDefault != "") then {
 		{
 			[_x] execVM "RandFramework\setLoadout.sqf";
+			_x addEventHandler ["Respawn", { [_x] execVM "RandFramework\setLoadout.sqf"; }];
 		} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 	};
 	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
@@ -546,6 +552,10 @@ player addEventHandler ["Respawn", { [] spawn TREND_fnc_CheckBadPoints; }];
 
 
 if (isServer) then {
+	{
+		_x setVariable ["DontDelete",true];
+	} forEach nearestObjects [getMarkerPos "mrkHQ", ["all"], 2000];
+
 	if (isMultiplayer && !(iMissionParamType == 5)) then {
 		TREND_fnc_CheckAnyPlayersAlive = {
 			sleep 3;
@@ -596,6 +606,96 @@ if (isServer) then {
 		};
 	};
 	[] spawn TREND_fnc_PlayBaseRadioEffect;
+
+	TREND_fnc_SandStormEffect = {
+		_iSandStormOption = AdvancedSettings select ADVSET_SANDSTORM_IDX;
+
+		if (_iSandStormOption == 0 && selectRandom[true,false,false,false]) then { //Random
+			StartWhen = selectRandom [990,1290,1710];
+			sleep StartWhen;
+			//work out how to deal with JIP if sandstorm already playing
+			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
+			SandStormTimer = selectRandom [150,390,630];
+			publicVariable SandStormTimer;
+			{nul = [SandStormTimer] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			//Set enemy skill
+			{
+				if (Side _x == East) then {
+					_x setskill ["aimingAccuracy",0.1];
+					_x setskill ["aimingShake",0.1];
+					_x setskill ["aimingSpeed",0.4];
+					_x setskill ["spotDistance",0.3];
+				};
+			} forEach allUnits;
+			sleep SandStormTimer;
+			//reset enemy skill
+			{
+				if (Side _x == East) then {
+					_x setskill ["aimingAccuracy",0.5];
+					_x setskill ["aimingShake",0.5];
+					_x setskill ["aimingSpeed",0.5];
+					_x setskill ["spotDistance",0.5];
+				};
+			} forEach allUnits;
+		};
+		if (_iSandStormOption == 1) then { //Always
+			StartWhen = selectRandom [990,1290,1710];
+			sleep StartWhen;
+			//work out how to deal with JIP if sandstorm already playing
+			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
+			SandStormTimer = selectRandom [150,390,630];
+			publicVariable "SandStormTimer";
+			{nul = [SandStormTimer] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			//Set enemy skill
+			{
+				if (Side _x == East) then {
+					_x setskill ["aimingAccuracy",0.1];
+					_x setskill ["aimingShake",0.1];
+					_x setskill ["aimingSpeed",0.4];
+					_x setskill ["spotDistance",0.3];
+				};
+			} forEach allUnits;
+			sleep SandStormTimer;
+			//reset enemy skill
+			{
+				if (Side _x == East) then {
+					_x setskill ["aimingAccuracy",0.5];
+					_x setskill ["aimingShake",0.5];
+					_x setskill ["aimingSpeed",0.5];
+					_x setskill ["spotDistance",0.5];
+				};
+			} forEach allUnits;
+		};
+		if (_iSandStormOption == 3) then { //5 hours non stop
+			//ok, if something is true, then in here we will start the sand storm and all clients!
+			//work out how to deal with JIP if sandstorm already playing
+			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
+			{nul = 18030 execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			//Set enemy skill
+			{
+				if (Side _x == East) then {
+					_x setskill ["aimingAccuracy",0.1];
+					_x setskill ["aimingShake",0.1];
+					_x setskill ["aimingSpeed",0.4];
+					_x setskill ["spotDistance",0.3];
+				};
+			} forEach allUnits;
+			sleep 18030;
+			//reset enemy skill
+			{
+				if (Side _x == East) then {
+					_x setskill ["aimingAccuracy",0.5];
+					_x setskill ["aimingShake",0.5];
+					_x setskill ["aimingSpeed",0.5];
+					_x setskill ["spotDistance",0.5];
+				};
+			} forEach allUnits;
+			//reset enemy skill
+		};
+		
+	};
+	[] spawn TREND_fnc_SandStormEffect;
+	
 };
 
 

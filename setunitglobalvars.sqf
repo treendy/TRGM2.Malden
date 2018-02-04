@@ -1,8 +1,10 @@
 
-DefaultEnemyFactionIndex = 0;
-DefaultFriendlyFactionIndex = 0;
+DefaultEnemyFactionValue = [1];
+DefaultFriendlyFactionValue = [1];
+DefaultSandStormOption = 2;
 publicVariable "DefaultEnemyFactionIndex";
 publicVariable "DefaultFriendlyFactionIndex";
+publicVariable "DefaultSandStormOption";
 
 
 call compile preprocessFileLineNumbers  "RandFramework\General\TRGMSetUnitGlobalVars.sqf";

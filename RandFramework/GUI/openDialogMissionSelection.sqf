@@ -37,27 +37,40 @@ if (isNil "InitialLoadedPreviousSettings") then {
 			AdvancedSettings pushBack 10;
 		};
 		if (count AdvancedSettings < 7) then {
-			AdvancedSettings pushBack (DefaultEnemyFactionArray select DefaultEnemyFactionIndex);
+			AdvancedSettings pushBack (DefaultEnemyFactionValue select 0);
 		};
 		if (AdvancedSettings select 6 == 0) then { //we had an issue with some being set to zero (due to a bad published version, this makes sure any zeros are adjusted to correct id)
-			AdvancedSettings set [6,DefaultEnemyFactionArray select DefaultEnemyFactionIndex];
+			AdvancedSettings set [6,DefaultEnemyFactionValue select 0];
 		};
 
 		if (count AdvancedSettings < 8) then {
-			AdvancedSettings pushBack (DefaultFriendlyFactionArray select DefaultFriendlyFactionIndex);
+			AdvancedSettings pushBack (DefaultFriendlyFactionValue select 0);
 		};
 
-		if (!((isClass(configFile >> "CfgPatches" >> "rhs_main")) && (isClass(configFile >> "CfgPatches" >> "rhsusf_main")) && (isClass(configFile >> "CfgPatches" >> "rhsgref_main")))) then {
-			if (count AdvancedSettings > 5) then {
-				_selctedPrevFaction = AdvancedSettings select 6;
-				if (!isNil("_selctedPrevFaction")) then {
-					if (_selctedPrevFaction == 4) then { //RHS not active, and have picked previously RHS enemy faction, then reset it to default
-						AdvancedSettings set [6,DefaultEnemyFactionArray select DefaultEnemyFactionIndex];
-						publicVariable "AdvancedSettings";
-					};
+		if !(AdvancedSettings select 6 in DefaultEnemyFactionArray) then {
+			_bFound = false;
+			{
+				if (!_bFound && _x in DefaultEnemyFactionArray) then {
+					_bFound = true;
+					AdvancedSettings set [6,_x];
 				};
-			};
+			} forEach DefaultEnemyFactionValue;
 		};
+		if !(AdvancedSettings select 7 in DefaultFriendlyFactionArray) then {
+			_bFound = false;
+			{
+				if (!_bFound && _x in DefaultFriendlyFactionArray) then {
+					_bFound = true;
+					AdvancedSettings set [7,_x];
+				};
+			} forEach DefaultFriendlyFactionValue;
+		};
+
+		if (count AdvancedSettings < 9) then {
+			AdvancedSettings pushBack DefaultAdvancedSettings select 8;
+		};
+
+
 		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
 			if (iUseRevive != 0) then { //Ace is active, so need to make sure "no revive" is selected
 				iUseRevive = 0;

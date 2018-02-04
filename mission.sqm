@@ -8,14 +8,14 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=711;
+		nextID=1033;
 	};
 	class Camera
 	{
-		pos[]={744.41138,92.112152,12273.494};
-		dir[]={0.11925703,-0.59824097,-0.79253185};
-		up[]={0.089021929,0.80123615,-0.59164131};
-		aside[]={-0.98897856,-1.8424034e-006,-0.14881876};
+		pos[]={725.56116,107.89206,12325.402};
+		dir[]={0.27742577,-0.61204314,-0.74058086};
+		up[]={0.21470591,0.79082066,-0.5731535};
+		aside[]={-0.93646228,6.321352e-008,-0.35080212};
 	};
 };
 binarizationWanted=0;
@@ -1848,12 +1848,12 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={-475.263,102.29198,11741.61};
+				position[]={-475.263,109.98106,11741.61};
 			};
 			name="supReqSupDrop";
 			id=215;
 			type="SupportProvider_Virtual_Drop";
-			atlOffset=180.45499;
+			atlOffset=188.14407;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -2107,13 +2107,13 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={-549.729,123.78194,11866.213};
+				position[]={-503.79663,117.41833,11855.255};
 				angles[]={0,2.1025283,0};
 			};
 			name="supReqAirSup";
 			id=223;
 			type="SupportProvider_Virtual_CAS_Bombing";
-			atlOffset=202.789;
+			atlOffset=196.94861;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -6321,7 +6321,7 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={757.04877,28.92,12208.553};
+				position[]={908.19586,28.93,12229.817};
 			};
 			name="SupProArti";
 			id=680;

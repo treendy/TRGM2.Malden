@@ -60,7 +60,7 @@ if (_bAllowStart) then {
 				_y = _x;
 				{
 					//if (_y distance getPos _x > PunishmentRadius) then {
-					if (!(_x getVariable ["IsFRT",false])) then {
+					if (!(_x getVariable ["IsFRT",false]) && !(_x getVariable ["DontDelete",false])) then {
 						deleteVehicle _x;
 					};
 					//};

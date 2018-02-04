@@ -789,29 +789,34 @@ TREND_fnc_SpawnCivs = {
 		//spanwn civ in random building pos
 		_randBuilding = selectRandom _allBuildings;
 		_sInitString = "";
-		_sCivUniform = selectRandom civUniformClasses;
+		//_sCivUniform = selectRandom civUniformClasses;
 		
 		if (selectRandom[true,false,false,false,false]) then {
 			if (_bIsRebels) then {				
-					_sInitString = format["this execVM ""RandFramework\BadReb.sqf""; this forceAddUniform ""%1""; removeHeadgear this; Removevest this;",_sCivUniform];		
+					//_sInitString = format["this execVM ""RandFramework\BadReb.sqf""; this forceAddUniform ""%1""; removeHeadgear this; Removevest this;",_sCivUniform];		
+					_sInitString = "this execVM ""RandFramework\BadReb.sqf""; removeHeadgear this; Removevest this;";		
 			}
 			else {
 				//_sInitString = format["[this] spawn TRGM_fnc_badCivInitialize; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
-				_sInitString = format["this execVM ""RandFramework\BadCiv.sqf""; this addaction [""Search Civ"",""RandFramework\SearchCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
+				//_sInitString = format["this execVM ""RandFramework\BadCiv.sqf""; this addaction [""Search Civ"",""RandFramework\SearchCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
+				_sInitString = "this execVM ""RandFramework\BadCiv.sqf""; this addaction [""Search Civ"",""RandFramework\SearchCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; removeHeadgear this;Removevest this;";
 			};
 		}
 		else {
 			if (_bIsRebels) then {
 				if (!_bRebelLeaderPicked) then {
-					_sInitString = format["this addaction [""Talk to leader"",""RandFramework\TalkRebLead.sqf"", nil,1.5,true,true,"""",""true"",5]; this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; this forceAddUniform ""%1""; removeHeadgear this;",_sCivUniform];
+					//_sInitString = format["this addaction [""Talk to leader"",""RandFramework\TalkRebLead.sqf"", nil,1.5,true,true,"""",""true"",5]; this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; this forceAddUniform ""%1""; removeHeadgear this;",_sCivUniform];
+					_sInitString = "this addaction [""Talk to leader"",""RandFramework\TalkRebLead.sqf"", nil,1.5,true,true,"""",""true"",5]; this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; removeHeadgear this;";
 					_bRebelLeaderPicked = true;
 				}
 				else {
-					_sInitString = format["this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
+					//_sInitString = format["this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
+					_sInitString = "this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; removeHeadgear this;Removevest this;";
 				};
 			}
 			else {
-				_sInitString = format["this addEventHandler [""killed"", {_this execVM ""RandFramework\CivKilled.sqf"";}]; this addaction [""Search Civ"",""RandFramework\SearchGoodCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
+				//_sInitString = format["this addEventHandler [""killed"", {_this execVM ""RandFramework\CivKilled.sqf"";}]; this addaction [""Search Civ"",""RandFramework\SearchGoodCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
+				_sInitString = "this addEventHandler [""killed"", {_this execVM ""RandFramework\CivKilled.sqf"";}]; this addaction [""Search Civ"",""RandFramework\SearchGoodCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; removeHeadgear this;Removevest this;";
 			};
 		};
 		_sideCivGroup = nil;
@@ -830,14 +835,15 @@ TREND_fnc_SpawnCivs = {
 				if (!_bRebelLeaderPicked) then {
 					_SpawnedRifleman addaction ["Talk to leader","RandFramework\TalkRebLead.sqf"];
 					_SpawnedRifleman addEventHandler ["killed", {_this execVM "RandFramework\InsKilled.sqf";}];
-					_SpawnedRifleman forceAddUniform _sCivUniform; 
+					//_SpawnedRifleman forceAddUniform _sCivUniform; 
 					removeHeadgear _SpawnedRifleman;
 					_bRebelLeaderPicked = true;
 				}
 				else {
-					_sInitString = format["this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
+					//_sInitString = format["this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
+					_sInitString = "this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; removeHeadgear this;Removevest this;";
 					_SpawnedRifleman addEventHandler ["killed", {_this execVM "RandFramework\InsKilled.sqf";}];
-					_SpawnedRifleman forceAddUniform _sCivUniform; 
+					//_SpawnedRifleman forceAddUniform _sCivUniform; 
 					Removevest _SpawnedRifleman;
 					removeHeadgear _SpawnedRifleman;
 					_SpawnedRifleman setVariable ["IsRebel", true, true];
@@ -849,7 +855,11 @@ TREND_fnc_SpawnCivs = {
 		else {
 			_wayPosInit = selectRandom _allBuildingPos;
 			if (!isNil "_wayPosInit") then {
-				sCivilian createUnit [_wayPosInit, _sideCivGroup, _sInitString];
+				_sCivClass = sCivilian;
+				if (typeName _sCivClass == "ARRAY") then {
+					_sCivClass = selectRandom sCivilian;
+				};
+				_sCivClass createUnit [_wayPosInit, _sideCivGroup, _sInitString];
 			};
 		};
 

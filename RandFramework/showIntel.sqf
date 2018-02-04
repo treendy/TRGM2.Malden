@@ -11,6 +11,10 @@ while {_IntelToShow == 0 && _iAttemptCount < 100} do {
 };
 
 
+TempIntelShowPos = "";
+publicVariable "TempIntelShowPos";
+
+
 if (_FoundViaType == "HackData") then {
 	//so here, can set a sleep timer, while sound plays (example, dialup sound when hacking data... or keyboard typeing sound)
 };
@@ -23,7 +27,12 @@ else {
 };
 
 if (_IntelToShow == 1) then { //Mortor team location
-	_iCount = count nearestObjects [ObjectivePossitions select 0,sMortar + sMortarMilitia,3000];
+	{
+		TempIntelShowPos = nearestObjects [ObjectivePossitions select 0,sMortar + sMortarMilitia,3000];
+		publicVariable "TempIntelShowPos";
+	} remoteExec ["bis_fnc_call", 2];
+	waitUntil {typeName TempIntelShowPos == "ARRAY"};
+	_iCount = count TempIntelShowPos;
 	if (_iCount > 0) then {
 		{
 			_test = nil;
@@ -31,7 +40,7 @@ if (_IntelToShow == 1) then { //Mortor team location
 			_test setMarkerShape "ICON";  
 			_test setMarkerType "o_art";  
 			_test setMarkerText "Mortar"; 
-		} forEach nearestObjects [ObjectivePossitions select 0,sMortar + sMortarMilitia,3000];
+		} forEach TempIntelShowPos;
 		Hint "Map updated with enemy mortar possitions (if any 3k within main AO)";
 	}
 	else {
@@ -39,7 +48,13 @@ if (_IntelToShow == 1) then { //Mortor team location
 	};
 };
 if (_IntelToShow == 2) then { //AAA team location
-	_iCount = count nearestObjects [ObjectivePossitions select 0,[sAAAVeh] + [sAAAVehMilitia] + DestroyAAAVeh,3000];
+	{
+		TempIntelShowPos = nearestObjects [ObjectivePossitions select 0,[sAAAVeh] + [sAAAVehMilitia] + DestroyAAAVeh,3000];
+		publicVariable "TempIntelShowPos";
+	} remoteExec ["bis_fnc_call", 2];
+	waitUntil {typeName TempIntelShowPos == "ARRAY"};
+	_iCount = count TempIntelShowPos;
+	_iStep = 0;
 	if (_iCount > 0) then {
 		{
 			_test = nil;
@@ -47,7 +62,8 @@ if (_IntelToShow == 2) then { //AAA team location
 			_test setMarkerShape "ICON";  
 			_test setMarkerType "o_art";  
 			_test setMarkerText "AAA"; 
-		} forEach nearestObjects [ObjectivePossitions select 0,[sAAAVeh] + [sAAAVehMilitia] + DestroyAAAVeh,3000];
+			_iStep = _iStep + 1;
+		} forEach TempIntelShowPos;
 		Hint "Map updated with any enemy AAA possitions (if any 3k within main AO)";
 	}
 	else {
@@ -68,8 +84,6 @@ if (_IntelToShow == 3) then { //Comms tower location
 	};
 };
 if (_IntelToShow == 4) then { //All checkpoints
-	_nearestLocation = [];
-	_nearestDistance = 0;
 	_bFoundcheckpoints = false;
 	{	
 		_distanceToCheckPoint = (_x select 0) distance (ObjectivePossitions select 0);
