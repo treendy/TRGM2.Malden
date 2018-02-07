@@ -6,9 +6,9 @@
 author = "Treendy";
 OnLoadName = "TRGM 2.0 Malden";
 OnLoadmission = "TRGM 2";
-OnLoadIntro = "Mission by Treendy";
+OnLoadIntro = $STR_TRGM2_Description_OnLoadIntro;
 loadScreen = "TRGM2OverviewPic2.jpg";
-overviewText = "Treendy's Randomly Generated Missions.  Each play through will be different in many ways.  Also option to play in campaign mode and customise some of the mission settings";
+overviewText = $STR_TRGM2_Description_overviewText;
 overviewPicture = "TRGM2OverviewPic2.jpg";
 
 disabledAI=0;
@@ -23,55 +23,55 @@ respawnTemplates[] = {"Tickets","Spectator"};
 
 class Header
 {
-	gameType = Coop;	
+	gameType = Coop;
 	minPlayers = 5;
-	MaxPlayers = 35;	
+	MaxPlayers = 35;
 };
 
 
 class Params
 {
-   
+
 };
 
 class CfgDebriefing
-{  
+{
 	class End1
 	{
-		title = "Success";
+		title = $STR_TRGM2_Description_Debriefing_End_Success;
 		subtitle = "";
-		description = "Well done, Mission success!";
+		description = $STR_TRGM2_Description_Debriefing_End1_Description;
 		pictureBackground = "";
 		picture = "b_inf";
 		pictureColor[] = {0.0,0.3,0.6,1};
 	};
 	class End2
 	{
-		title = "Fail";
+		title = $STR_TRGM2_Description_Debriefing_End_Fail;
 		subtitle = "";
-		description = "Your team killed too many civilians.  The officer in charge of this mission and the units who killed any civilians will need to attend a court hearing regarding these deaths!.";
+		description = $STR_TRGM2_Description_Debriefing_End2_Description;
 		pictureBackground = "";
 		picture = "b_inf";
 		pictureColor[] = {0.6,0.1,0.2,1};
 	};
 	class End3
 	{
-		title = "Fail";
+		title = $STR_TRGM2_Description_Debriefing_End_Fail;
 		subtitle = "";
-		description = "Everyone was killed! maybe try to avoid that next time?";
+		description = $STR_TRGM2_Description_Debriefing_End3_Description;
 		pictureBackground = "";
 		picture = "b_inf";
 		pictureColor[] = {0.6,0.1,0.2,1};
-	};	
+	};
 	class End4
 	{
-		title = "To be continued";
+		title = $STR_TRGM2_Description_Debriefing_End_ToBeContinued;
 		subtitle = "";
-		description = "To be continued another day...";
+		description = $STR_TRGM2_Description_Debriefing_End4_Description;
 		pictureBackground = "";
 		picture = "b_inf";
 		pictureColor[] = {0.6,0.1,0.2,1};
-	};	
+	};
 };
 
 
@@ -96,7 +96,7 @@ class CfgMusic
   	{
       		spotted, takiIntro, end
   	};
- 
+
 	class spotted
   	{
       		name = "spotted";
@@ -130,7 +130,7 @@ class CfgSounds
 		sound[]={\RandFramework\Sounds\sswindloop.ogg, 5,1};
 		titles[] = {};
 	};
-	
+
 	class sswindintro {
 		name="sswindintro";
 		sound[]={\RandFramework\Sounds\sswindintro.ogg, 5,1};
@@ -142,13 +142,13 @@ class CfgSounds
 		sound[]={\RandFramework\Sounds\sswindoutro.ogg, 5,1};
 		titles[] = {};
 	};
-	
+
 	class sswarning {
 		name="sswarning";
 		sound[]={\RandFramework\Sounds\sswarning.ogg, 5,1};
 		titles[] = {};
-	};	
-		
+	};
+
 };
 
 
@@ -161,44 +161,44 @@ class CfgRadio
 	{
 		name = "chopperspotted";
 		sound[] = {"\RandFramework\Sounds\chopperspotted.ogg", db+0,1.0};
-		title = "All teams, this is HQ, We are seeing something moveing into your location, possible enemy chopper. out.";
+		title = $STR_TRGM2_Description_RadioSubtitle_chopperspotted;
 	};
 	class FastMoverSpotted
 	{
 		name = "FastMoverSpotted";
 		sound[] = {"\RandFramework\Sounds\FastMoverSpotted.ogg", db+0,1.0};
-		title = "All teams, this is HQ, We have picked up a fast mover on our radar, moving into the area. out.";
+		title = $STR_TRGM2_Description_RadioSubtitle_FastMoverSpotted;
 	};
 	class EnemyCommsDown
 	{
 		name = "EnemyCommsDown";
 		sound[] = {"\RandFramework\Sounds\EnemyCommsDown.ogg", db+0,1.0};
-		title = "All team.  This is HQ, good work taking down the enemy comms tower.  We have intel confirming the enemy are trying to figure out how to fix this issue! Out.";
+		title = $STR_TRGM2_Description_RadioSubtitle_EnemyCommsDown;
 	};
 	class EnemyBaseIntel
 	{
 		name = "EnemyBaseIntel";
 		sound[] = {"\RandFramework\Sounds\EnemyBaseIntel.ogg", db+0,1.0};
-		title = "This is HQ.  We have gathered the intel found at the enemy base and have managed to locate the exact position of your targets.  Check your map for the red dots for the target locations.";
+		title = $STR_TRGM2_Description_RadioSubtitle_EnemyBaseIntel;
 	};
 	class LocationFound
 	{
 		name = "LocationFound";
 		sound[] = {"\RandFramework\Sounds\LocationFound.ogg", db+0,1.0};
-		title = "This is HQ.  We have just had intel of the exact location of one of the objectives, check your map for the red marker near the suspected location.  Out.";
+		title = $STR_TRGM2_Description_RadioSubtitle_LocationFound;
 	};
 
 	class takeoff
 	{
 		name = "takeoff";
 		sound[] = {"\Sound\takeoff.ogg", db+0,1.0};
-		title = "Pegasus 2-1 you are clear to take off.";
+		title = $STR_TRGM2_Description_RadioSubtitle_takeoff;
 	};
 	class land
 	{
 		name = "land";
 		sound[] = {"\RandFramework\Sounds\land.ogg", db+0,1.0};
-		title = "Pegasus 2-1 landing.";
+		title = $STR_TRGM2_Description_RadioSubtitle_land;
 	};
 
 

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project name="TRGM2">
+	<Package name="TRGM2_Language">
+		<Container name="Description">
+			<Key ID="STR_TRGM2_Description_OnLoadIntro">
+				<Original>Mission by Treendy</Original>
+				<English>Mission by Treendy</English>
+                <Chinese>任務由Treendy製作</Chinese>
+                <Chinesesimp>任务由Treendy制作</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_overviewText">
+				<Original>Treendy's Randomly Generated Missions.  Each play through will be different in many ways.  Also option to play in campaign mode and customise some of the mission settings.</Original>
+				<English>Treendy's Randomly Generated Missions.  Each play through will be different in many ways.  Also option to play in campaign mode and customise some of the mission settings.</English>
+                <Chinese>Treendy的隨機生成任務。每次遊玩都將獲得不一樣的體驗。可以使用戰役模式遊玩，任務也可給使用者自訂各種難易度。</Chinese>
+                <Chinesesimp>Treendy的随机生成任务。每次游玩都将获得不一样的体验。可以使用战役模式游玩，任务也可给使用者自订各种难易度。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_Debriefing_End_Success">
+				<Original>Success</Original>
+				<English>Success</English>
+                <Chinese>成功</Chinese>
+                <Chinesesimp>成功</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_Debriefing_End_Fail">
+				<Original>Fail</Original>
+				<English>Fail</English>
+                <Chinese>失敗</Chinese>
+                <Chinesesimp>失败</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_Debriefing_End_ToBeContinued">
+				<Original>To be continued</Original>
+				<English>To be continued</English>
+                <Chinese>下集待續</Chinese>
+                <Chinesesimp>下集待续</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_Debriefing_End1_Description">
+				<Original>Well done, Mission success!</Original>
+				<English>Well done, Mission success!</English>
+                <Chinese>幹的好，任務順利達成!</Chinese>
+                <Chinesesimp>干的好，任务顺利达成!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_Debriefing_End2_Description">
+				<Original>Your team killed too many civilians.  The officer in charge of this mission and the units who killed any civilians will need to attend a court hearing regarding these deaths!.</Original>
+				<English>Your team killed too many civilians.  The officer in charge of this mission and the units who killed any civilians will need to attend a court hearing regarding these deaths!.</English>
+                <Chinese>你的小隊擊殺了過多的平民。負責此次行動的帶隊官與擊殺平民的隊員將面臨軍事法庭的審判!</Chinese>
+                <Chinesesimp>你的小队击杀了过多的平民。负责此次行动的带队官与击杀平民的队员将面临军事法庭的审判!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_Debriefing_End3_Description">
+				<Original>Everyone was killed! maybe try to avoid that next time?</Original>
+				<English>Everyone was killed! maybe try to avoid that next time?</English>
+                <Chinese>所有人皆已陣亡!下次試著換個方法看看?</Chinese>
+                <Chinesesimp>所有人皆已阵亡!下次试着换个方法看看?</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_Debriefing_End4_Description">
+				<Original>To be continued another day...</Original>
+				<English>To be continued another day...</English>
+                <Chinese>欲知詳情，下回分曉...</Chinese>
+                <Chinesesimp>欲知详情，下回分晓...</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_RadioSubtitle_chopperspotted">
+				<Original>All teams, this is HQ, We are seeing something moveing into your location, possible enemy chopper. out.</Original>
+				<English>All teams, this is HQ, We are seeing something moveing into your location, possible enemy chopper. out.</English>
+                <Chinese>通告所有小隊，這裡是總部，我們發現到有物體正在靠近你們的位置中，推測應為敵人的直升機。完畢。</Chinese>
+                <Chinesesimp>通告所有小队，这里是总部，我们发现到有物体正在靠近你们的位置中，推测应为敌人的直升机。完毕。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_RadioSubtitle_FastMoverSpotted">
+				<Original>All teams, this is HQ, We have picked up a fast mover on our radar, moving into the area. out.</Original>
+				<English>All teams, this is HQ, We have picked up a fast mover on our radar, moving into the area. out.</English>
+                <Chinese>通告所有小隊，這裡是總部，我們在雷達上發現一台飛機正在靠近任務區域。完畢。</Chinese>
+                <Chinesesimp>通告所有小队，这里是总部，我们在雷达上发现一台飞机正在靠近任务区域。完毕。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_RadioSubtitle_EnemyCommsDown">
+				<Original>All team.  This is HQ, good work taking down the enemy comms tower.  We have intel confirming the enemy are trying to figure out how to fix this issue! Out.</Original>
+				<English>All team.  This is HQ, good work taking down the enemy comms tower.  We have intel confirming the enemy are trying to figure out how to fix this issue! Out.</English>
+                <Chinese>通告所有小隊，這裡是總部，恭喜你們拿下敵人的通訊塔。根據我們的情報顯示，敵人現在正為了這個問題大傷腦筋!完畢。</Chinese>
+                <Chinesesimp>通告所有小队，这里是总部，恭喜你们拿下敌人的通讯塔。根据我们的情报显示，敌人现在正为了这个问题大伤脑筋!完毕。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_RadioSubtitle_EnemyBaseIntel">
+				<Original>This is HQ.  We have gathered the intel found at the enemy base and have managed to locate the exact position of your targets.  Check your map for the red dots for the target locations.</Original>
+				<English>This is HQ.  We have gathered the intel found at the enemy base and have managed to locate the exact position of your targets.  Check your map for the red dots for the target locations.</English>
+                <Chinese>這裡是總部。我們從敵方基地裡的情報整理出你們目標的確切位置。已經在你們的地圖上使用紅色點標記出目標點，請查閱。</Chinese>
+                <Chinesesimp>这里是总部。我们从敌方基地里的情报整理出你们目标的确切位置。已经在你们的地图上使用红色点标记出目标点，请查阅。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_RadioSubtitle_LocationFound">
+				<Original>This is HQ.  We have just had intel of the exact location of one of the objectives, check your map for the red marker near the suspected location.  Out.</Original>
+				<English>This is HQ.  We have just had intel of the exact location of one of the objectives, check your map for the red marker near the suspected location.  Out.</English>
+                <Chinese>這裡是總部。我們剛剛掌握到其中一個目標的確切位置，已經在你們的地圖上使用紅色的標記畫出推定的區域。完畢。</Chinese>
+                <Chinesesimp>这里是总部。我们刚刚掌握到其中一个目标的确切位置，已经在你们的地图上使用红色的标记画出推定的区域。完毕。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_RadioSubtitle_takeoff">
+				<Original>Pegasus 2-1 you are clear to take off.</Original>
+				<English>Pegasus 2-1 you are clear to take off.</English>
+                <Chinese>飛馬2-1，你們可以起飛了。</Chinese>
+                <Chinesesimp>飞马2-1，你们可以起飞了。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_RadioSubtitle_land">
+				<Original>Pegasus 2-1 landing.</Original>
+				<English>Pegasus 2-1 landing.</English>
+                <Chinese>飛馬2-1正在降落。</Chinese>
+                <Chinesesimp>飞马2-1正在降落。</Chinesesimp>
+			</Key>
+		</Container>
+	</Package>
+</Project>
