@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project name="TRGM2">
-	<Package name="TRGM2_Language">
+<Project name="TRGM2_Language">
+	<Package name="RootFolder">
 		<Container name="Description">
 			<Key ID="STR_TRGM2_Description_OnLoadIntro">
 				<Original>Mission by Treendy</Original>
@@ -99,5 +99,47 @@
                 <Chinesesimp>飞马2-1正在降落。</Chinesesimp>
 			</Key>
 		</Container>
+		<Container name="Init">
+			<Key ID="STR_TRGM2_Init_TRGM2Engine">
+				<Original>TRGM2 Engine</Original>
+				<English>TRGM2 Engine</English>
+                <Chinese>TRGM2引擎</Chinese>
+                <Chinesesimp>TRGM2引擎</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Init_Mission">
+				<Original>Mission</Original>
+				<English>Mission</English>
+                <Chinese>任務</Chinese>
+                <Chinesesimp>任务</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Init_Credits">
+				<Original>Credits</Original>
+				<English>Credits</English>
+                <Chinese>工作人員名單</Chinese>
+                <Chinesesimp>工作人员名单</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Init_ScriptsUsed">
+				<Original>Scripts used</Original>
+				<English>Scripts used</English>
+                <Chinese>使用的腳本</Chinese>
+                <Chinesesimp>使用的脚本</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Init_MarkerText_HQ">
+				<Original>Head Quarters</Original>
+				<English>Head Quarters</English>
+                <Chinese>司令部</Chinese>
+                <Chinesesimp>司令部</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Init_MarkerText_TransportChopper">
+				<Original>Transport Chopper</Original>
+				<English>Transport Chopper</English>
+                <Chinese>運輸直升機</Chinese>
+                <Chinesesimp>运输直升机</Chinesesimp>
+			</Key>
+		</Container>
+	</Package>
+	<Package name="RandFrameworkFolder">
+	</Package>
+	<Package name="AISFolder">
 	</Package>
 </Project>
