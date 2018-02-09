@@ -1,14 +1,14 @@
 ﻿/*
  * Author: Psycho
- 
+
  * Create a local marker for unconcious units
- 
+
  * Arguments:
 	0: Unit (Object)
- 
+
  * Return value:
 	the marker itself
-	
+
 * Exapmle:
 	player call AIS_Effects_fnc_injuredMarker
  */
@@ -23,7 +23,7 @@ if (!isNil {_unit getVariable ["ais_unitMarker", Nil]}) then {
 	_unit call AIS_Effects_fnc_removeInjuredMarker;
 };
 
-_mark = [_marker, position _unit, "ICON", "Color1_FD_F", [0.7, 0.7], format ["%1 down", _str], 0, "loc_Hospital"] call AIS_Core_fnc_createLocalMarker;
+_mark = [_marker, position _unit, "ICON", "Color1_FD_F", [0.7, 0.7], format ["%1%2", _str, localize "STR_TRGM2_fninjuredMarker_Down"], 0, "loc_Hospital"] call AIS_Core_fnc_createLocalMarker;
 _unit setVariable ["ais_unitMarker", _marker];
 
 _acc_time = diag_tickTime + 5;

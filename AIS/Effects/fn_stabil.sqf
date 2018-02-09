@@ -1,12 +1,12 @@
 ﻿/*
  * Author: Psycho
- 
+
  * Visual bleeding effects and counter for revive time. Will self-run in a loop till unit get revived/stabilized or died.
- 
+
  * Arguments:
 	0: Unit (Object)
 	1: Revive Time (Number)
- 
+
  * Return value:
 	-
 */
@@ -19,7 +19,7 @@ if (!alive _unit || {!(_unit getVariable ["ais_unconscious", false])}) exitWith 
 	_unit setFatigue 0.6;
 	resetCamShake;
 	titleText ["", "PLAIN DOWN", 1];
-	
+
 	{_x ppEffectEnable false; true} count ais_ppEff;
 	ppEffectDestroy ais_ppEff;
 };
@@ -29,14 +29,14 @@ if (!(_unit getVariable ["ais_stabilized", false])) exitWith {
 	_unit setBleedingRemaining 10;
 	_unit setFatigue 1;
 	addCamShake [15, 999, 0.7];
-	
+
 	// Function use disableSerialisation and can corrupt some other functions in the same frame. So it need a delay till next frame.
 	[{call AIS_Effects_fnc_bloodSplatterScreen}] call AIS_Core_fnc_onNextFrame;
-	
+
 	// get the revive time
 	_revive_time = [_unit] call AIS_System_fnc_calculateLifeTime;
 	_unit setBleedingRemaining _revive_time;
-	
+
 	// loop
 	private _acc_time = diag_tickTime + 1;
 	[{diag_tickTime >= (_this select 2)}, {_this call AIS_Effects_fnc_bleeding}, [_unit, _revive_time, _acc_time]] call AIS_Core_fnc_waitUntilAndExecute;
@@ -44,7 +44,7 @@ if (!(_unit getVariable ["ais_stabilized", false])) exitWith {
 
 
 
-titleText ["You are stabilized.", "PLAIN DOWN", 1.5];
+titleText [localize "STR_TRGM2_fnbleeding_Stabilized", "PLAIN DOWN", 1.5];
 _unit setFatigue 0.6;
 
 // init pp effects

@@ -1,9 +1,9 @@
 ﻿/*
  * Author: NetFusion
  * modified/changed by Psycho
- 
+
  * Generate progress bar dialog and pass trough the code what's to do after finish or abort the progress.
- 
+
  * Arguments:
 	0: Title (String)
 	1: duration in sec (Integer)
@@ -11,7 +11,7 @@
 	3: arguments for callback (Object or Array)
 	4: onAbort (optional) (Code)
 	5: doAbort (optional) (Bool)
- 
+
  * Return value:
 	nothing
 */
@@ -30,7 +30,7 @@ _affectingObject = if (typeName _arguments == "ARRAY") then {_arguments select 0
 
 if (typeName _affectingObject == "OBJECT") then {
     if (_affectingObject getVariable ["AIS_Core_Progress_inUse", false]) exitWith {
-		["Object in use" call XOrangeText] call AIS_Core_fnc_dynamicText;
+		[(localize "STR_TRGM2_fnprogressShowBar_ObjectInUse") call XOrangeText] call AIS_Core_fnc_dynamicText;
     };
 
     _affectingObject setVariable ["AIS_Core_Progress_inUse", true, true];
@@ -65,7 +65,7 @@ player setVariable ["AIS_Core_displayText", _texts, true];
 if (time > _endTime) then {
     _arguments spawn _callback;
 } else {
-    ["Abbort..."] call AIS_Core_fnc_dynamicText;
+    [localize "STR_TRGM2_fnprogressShowBar_Abbort"] call AIS_Core_fnc_dynamicText;
     _arguments spawn _onAbort;
 };
 

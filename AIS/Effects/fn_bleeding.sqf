@@ -1,12 +1,12 @@
 ﻿/*
  * Author: Psycho
- 
+
  * Visual bleeding effects and counter for revive time. Will self-run in a loop till unit get revived/stabilized or died.
- 
+
  * Arguments:
 	0: Unit (Object)
 	1: Revive Time (Number)
- 
+
  * Return value:
 	-
 */
@@ -19,7 +19,7 @@ if (!alive _unit || {!(_unit getVariable ["ais_unconscious", false])}) exitWith 
 	_unit setFatigue 0.6;
 	resetCamShake;
 	titleText ["", "PLAIN DOWN", 1];
-	
+
 	{_x ppEffectEnable false; true} count ais_ppEff;
 	ppEffectDestroy ais_ppEff;
 };
@@ -29,8 +29,8 @@ if (_unit getVariable ["ais_stabilized", false]) exitWith {
 	_unit setBleedingRemaining 10;
 	_unit setFatigue 0.7;
 	addCamShake [12, 999, 0.9];
-	titleText ["You are stabilized.", "PLAIN DOWN", 1];
-	
+	titleText [localize "STR_TRGM2_fnbleeding_Stabilized", "PLAIN DOWN", 1];
+
 	// loop
 	private _acc_time = diag_tickTime + 1.5;
 	[{diag_tickTime >= (_this select 1)}, {_this call AIS_Effects_fnc_stabil}, [_unit, _acc_time]] call AIS_Core_fnc_waitUntilAndExecute;
@@ -48,15 +48,15 @@ if (_timeleft <= 0) exitWith {
 	_unit setBleedingRemaining 5;
 	resetCamShake;
 	titleText ["", "PLAIN DOWN", 1];
-	
+
 	{_x ppEffectEnable false; true} count ais_ppEff;
 	ppEffectDestroy ais_ppEff;
-	
+
 	[_unit] call AIS_Damage_fnc_goToDead;
 };
 
 if (AIS_SHOW_COUNTDOWN) then {
-	[titleText ["It's to late for you.","PLAIN DOWN",1], titleText [format ["Bleedout in %1 Seconds", floor _timeleft],"PLAIN DOWN",0.2]] select (_timeleft > 3);
+	[titleText [localize "STR_TRGM2_fnbleeding_TooLate","PLAIN DOWN",1], titleText [format [localize "STR_TRGM2_fnbleeding_BleedoutSec", floor _timeleft],"PLAIN DOWN",0.2]] select (_timeleft > 3);
 };
 
 _unit setFatigue 1;

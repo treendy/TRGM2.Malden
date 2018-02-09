@@ -141,5 +141,197 @@
 	<Package name="RandFrameworkFolder">
 	</Package>
 	<Package name="AISFolder">
+		<Container name="Core">
+			<Key ID="STR_TRGM2_fnprogressShowBar_ObjectInUse">
+				<Original>Object in use</Original>
+				<English>Object in use</English>
+                <Chinese>物件正被使用中</Chinese>
+                <Chinesesimp>物件正被使用中</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnprogressShowBar_Abbort">
+				<Original>Abbort...</Original>
+				<English>Abbort...</English>
+                <Chinese>取消中...</Chinese>
+                <Chinesesimp>取消中...</Chinesesimp>
+			</Key>
+		</Container>
+		<Container name="Effects">
+			<Key ID="STR_TRGM2_fninjuredMarker_Down">
+				<Original> down</Original>
+				<English> down</English>
+                <Chinese>倒下</Chinese>
+                <Chinesesimp>倒下</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnbleeding_Stabilized">
+				<Original>You are stabilized.</Original>
+				<English>You are stabilized.</English>
+                <Chinese>你已經穩定了。</Chinese>
+                <Chinesesimp>你已经稳定了。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnbleeding_TooLate">
+				<Original>It's to late for you.</Original>
+				<English>It's to late for you.</English>
+                <Chinese>你已經太遲了。</Chinese>
+                <Chinesesimp>你已经太迟了。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnbleeding_BleedoutSec">
+				<Original>Bleedout in %1 Seconds</Original>
+				<English>Bleedout in %1 Seconds</English>
+                <Chinese>%1秒後將失血致死</Chinese>
+                <Chinesesimp>%1秒后将失血致死</Chinesesimp>
+			</Key>
+		</Container>
+		<Container name="System">
+			<Key ID="STR_TRGM2_fndiary_EDUCATION0">
+				<Original>Everyone can revive</Original>
+				<English>Everyone can revive</English>
+                <Chinese>所有人都可復甦</Chinese>
+                <Chinesesimp>所有人都可复苏</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_EDUCATION1">
+				<Original>Everybody with a First Aid Kit or Medkit</Original>
+				<English>Everybody with a First Aid Kit or Medkit</English>
+                <Chinese>有急救包或醫療包的人可以復甦</Chinese>
+                <Chinesesimp>有急救包或医疗包的人可以复苏</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_EDUCATION2">
+				<Original>Only medics can revive</Original>
+				<English>Only medics can revive</English>
+                <Chinese>只有醫護兵能進行復甦</Chinese>
+                <Chinesesimp>只有医护兵能进行复苏</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_InstantDeath">
+				<Original>Heavy damage can end in insta-death</Original>
+				<English>Heavy damage can end in insta-death</English>
+                <Chinese>重傷會導致直接死亡</Chinese>
+                <Chinesesimp>重伤会导致直接死亡</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_NoInstantDeath">
+				<Original>You are protected from insta-death</Original>
+				<English>You are protected from insta-death</English>
+                <Chinese>玩家並不會直接死亡</Chinese>
+                <Chinesesimp>玩家并不会直接死亡</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_TotalHeal">
+				<Original>completely healed</Original>
+				<English>completely healed</English>
+                <Chinese>完全醫療</Chinese>
+                <Chinesesimp>完全医疗</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_SepHeal">
+				<Original>separately healing action needed</Original>
+				<English>separately healing action needed</English>
+                <Chinese>傷口需分開治療</Chinese>
+                <Chinesesimp>伤口需分开治疗</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_AISSettings">
+				<Original>AIS Settings</Original>
+				<English>AIS Settings</English>
+                <Chinese>AIS設定</Chinese>
+                <Chinesesimp>AIS设定</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_MedicalEducation">
+				<Original>Medical Education</Original>
+				<English>Medical Education</English>
+                <Chinese>醫療能力</Chinese>
+                <Chinesesimp>医疗能力</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_WhoCanRevive">
+				<Original>Who can revive:</Original>
+				<English>Who can revive:</English>
+                <Chinese>可以復甦的單位:</Chinese>
+                <Chinesesimp>可以复苏的单位:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_HeavyDamageHandling">
+				<Original>Heavy Damage Handling</Original>
+				<English>Heavy Damage Handling</English>
+                <Chinese>重傷狀況設定</Chinese>
+                <Chinesesimp>重伤状况设定:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_ReviveChance">
+				<Original>Revive Chance:</Original>
+				<English>Revive Chance:</English>
+                <Chinese>復甦機會:</Chinese>
+                <Chinesesimp>复苏机会:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_BleedoutTime">
+				<Original>Bleedout Time</Original>
+				<English>Bleedout Time</English>
+                <Chinese>失血限時</Chinese>
+                <Chinesesimp>失血限时</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_BleedoutTime">
+				<Original>Average Bleedout Time:</Original>
+				<English>Average Bleedout Time:</English>
+                <Chinese>平均失血致死時間:</Chinese>
+                <Chinesesimp>平均失血致死时间:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_HealingStatus">
+				<Original>Healing Status</Original>
+				<English>Healing Status</English>
+                <Chinese>醫療狀況</Chinese>
+                <Chinesesimp>医疗状况</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_AfterDamage">
+				<Original>Damage status after revive:</Original>
+				<English>Damage status after revive:</English>
+                <Chinese>復甦後的醫療狀況:</Chinese>
+                <Chinesesimp>复苏后的医疗状况:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_FirstAidSystem">
+				<Original>First Aid System</Original>
+				<English>First Aid System</English>
+                <Chinese>急救系統</Chinese>
+                <Chinesesimp>急救系统</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_AboutAndCredits">
+				<Original>About and Credits</Original>
+				<English>About and Credits</English>
+                <Chinese>關於作者</Chinese>
+                <Chinesesimp>关于作者</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_AboutAndCreditsDesc">
+				<Original><font face='PuristaMedium' size=18 color='#ffffff'>Made by: </font><font face='PuristaMedium' size=25 color='#8E8E8E'>Psychobastard</font><br/><font face='PuristaMedium' size=18 color='#ffffff'>Version: </font><font face='PuristaMedium' size=20 color='#ffffff'>21022016</font><br/><br/><font face='PuristaMedium' size=30 color='#014EE3'>Credits</font><br/>- <font face='PuristaMedium' size=18 color='#8E8E8E'>BonInf*</font> for the first multiplayer compatible version (Arma 2)<br/>- <font face='PuristaMedium' size=18 color='#8E8E8E'>BI</font> for the design idea (Wounding module Arma 2)<br/>- <font face='PuristaMedium' size=18 color='#8E8E8E'>Alwarren</font> for his feedback and fixes<br/>- <font face='PuristaMedium' size=18 color='#8E8E8E'>Lukio</font> for his text revisions and better translations<br/>- <font face='PuristaMedium' size=18 color='#8E8E8E'>NetFusion</font> for the way of handling interactions<br/>- <font face='PuristaMedium' size=18 color='#8E8E8E'>ACE3 Team</font> for damage handling of droping units<br/>- <font face='PuristaMedium' size=18 color='#8E8E8E'>CBA Team</font> for some functions</Original>
+				<English><font face='PuristaMedium' size=18 color='#ffffff'>Made by: </font><font face='PuristaMedium' size=25 color='#8E8E8E'>Psychobastard</font><br/><font face='PuristaMedium' size=18 color='#ffffff'>Version: </font><font face='PuristaMedium' size=20 color='#ffffff'>21022016</font><br/><br/><font face='PuristaMedium' size=30 color='#014EE3'>Credits</font><br/>- <font face='PuristaMedium' size=18 color='#8E8E8E'>BonInf*</font> for the first multiplayer compatible version (Arma 2)<br/>- <font face='PuristaMedium' size=18 color='#8E8E8E'>BI</font> for the design idea (Wounding module Arma 2)<br/>- <font face='PuristaMedium' size=18 color='#8E8E8E'>Alwarren</font> for his feedback and fixes<br/>- <font face='PuristaMedium' size=18 color='#8E8E8E'>Lukio</font> for his text revisions and better translations<br/>- <font face='PuristaMedium' size=18 color='#8E8E8E'>NetFusion</font> for the way of handling interactions<br/>- <font face='PuristaMedium' size=18 color='#8E8E8E'>ACE3 Team</font> for damage handling of droping units<br/>- <font face='PuristaMedium' size=18 color='#8E8E8E'>CBA Team</font> for some functions</English>
+                <Chinese></Chinese>
+                <Chinesesimp></Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_Instructions">
+				<Original>Instructions</Original>
+				<English>Instructions</English>
+                <Chinese>說明</Chinese>
+                <Chinesesimp说明></Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_InstructionsDesc">
+				<Original><font face='PuristaMedium' size=22 color='#014EE3'>If you are unconscious:</font><br/>- <font face='PuristaMedium' size=15 color='#8E8E8E'>Press 'FORWARD'</font> to go prone and fire your current weapon.<br/><br/>- You can <font face='PuristaMedium' size=15 color='#8E8E8E'>CRAWL</font> to a safe position.<br/><br/>- <font face='PuristaMedium' size=15 color='#8E8E8E'>Press 'H'</font> key to call friendly AI for help.<br/><br/><br/><br/><font face='PuristaMedium' size=22 color='#014EE3'>How to give first aid:</font><br/>- Move close to an unconscious unit and select <font face='PuristaMedium' size=15 color='#8E8E8E'>'Stabilize'</font> to stop heavy bleeding. This will prevent the injured unit from bleedout. (death)<br/><br/>- Move close to an unconscious unit and select <font face='PuristaMedium' size=15 color='#8E8E8E'>'First Aid'</font> to revive the unit.<br/><br/>- If it is needed and you want to <font face='PuristaMedium' size=15 color='#8E8E8E'>'Abbort'</font> a revive process, simply press 'ESC' Button.<br/><br/>- Move close to an unconscious unit and select <font face='PuristaMedium' size=15 color='#8E8E8E'>'Drag'</font> to drag the body out of the line of fire (Mousewheel menu).<br/><br/>- While you are dragging a unit, you can select <font face='PuristaMedium' size=15 color='#8E8E8E'>'Carry'</font> to carry the unit on your shoulders (better to cover long distances).<br/><br/>- In some cases you need medical equipment (First Aid Kit or Medkit) or must be a medic to start the 'First aid' action.</Original>
+				<English><font face='PuristaMedium' size=22 color='#014EE3'>If you are unconscious:</font><br/>- <font face='PuristaMedium' size=15 color='#8E8E8E'>Press 'FORWARD'</font> to go prone and fire your current weapon.<br/><br/>- You can <font face='PuristaMedium' size=15 color='#8E8E8E'>CRAWL</font> to a safe position.<br/><br/>- <font face='PuristaMedium' size=15 color='#8E8E8E'>Press 'H'</font> key to call friendly AI for help.<br/><br/><br/><br/><font face='PuristaMedium' size=22 color='#014EE3'>How to give first aid:</font><br/>- Move close to an unconscious unit and select <font face='PuristaMedium' size=15 color='#8E8E8E'>'Stabilize'</font> to stop heavy bleeding. This will prevent the injured unit from bleedout. (death)<br/><br/>- Move close to an unconscious unit and select <font face='PuristaMedium' size=15 color='#8E8E8E'>'First Aid'</font> to revive the unit.<br/><br/>- If it is needed and you want to <font face='PuristaMedium' size=15 color='#8E8E8E'>'Abbort'</font> a revive process, simply press 'ESC' Button.<br/><br/>- Move close to an unconscious unit and select <font face='PuristaMedium' size=15 color='#8E8E8E'>'Drag'</font> to drag the body out of the line of fire (Mousewheel menu).<br/><br/>- While you are dragging a unit, you can select <font face='PuristaMedium' size=15 color='#8E8E8E'>'Carry'</font> to carry the unit on your shoulders (better to cover long distances).<br/><br/>- In some cases you need medical equipment (First Aid Kit or Medkit) or must be a medic to start the 'First aid' action.</English>
+                <Chinese></Chinese>
+                <Chinesesimp></Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_AboutWoundingDeath">
+				<Original>About wounding / death:</Original>
+				<English>About wounding / death:</English>
+                <Chinese>關於受傷/死亡:</Chinese>
+                <Chinesesimp关于受伤/死亡:></Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_AboutWoundingDeathDesc">
+				<Original>If a unit receives too much damage, the unit goes unconscious. This means that the unit starts to bleed out and needs help from other units.<br/><br/>If someone comes to help, he can stop the bleeding to prevent the injured from bleeding out and die. After the unit is stabilized you can start the first aid process to revive the unit. After a unit is revived maybe they need a regular healing process too.<br/><br/>If nobody comes to help the unit eventually bleeds out. The time depends on the amount of damage the unit received. Everyone can stabilize unconscious units. The ability to start the first aid process can depend on the medical education. (medic or not, medical equipment)<br/><br/>It is possible to load/unload wounded units in vehicles to bring them out of a dangerous area or evacuate them to a field hospital.</Original>
+				<English>If a unit receives too much damage, the unit goes unconscious. This means that the unit starts to bleed out and needs help from other units.<br/><br/>If someone comes to help, he can stop the bleeding to prevent the injured from bleeding out and die. After the unit is stabilized you can start the first aid process to revive the unit. After a unit is revived maybe they need a regular healing process too.<br/><br/>If nobody comes to help the unit eventually bleeds out. The time depends on the amount of damage the unit received. Everyone can stabilize unconscious units. The ability to start the first aid process can depend on the medical education. (medic or not, medical equipment)<br/><br/>It is possible to load/unload wounded units in vehicles to bring them out of a dangerous area or evacuate them to a field hospital.</English>
+                <Chinese></Chinese>
+                <Chinesesimp></Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_Description">
+				<Original>Description</Original>
+				<English>Description</English>
+                <Chinese>描述</Chinese>
+                <Chinesesimp>描述</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_DescriptionDesc">
+				<Original><font face='PuristaMedium' size=30 color='#014EE3'>Psycho's Wounding System</font><br/><br/>This First Aid System (AIS = Alternative Injury System) is an alternative system to all the current normal revive scripts.<br/><br/>The main difference to a standard revive system is that the unit does not die before going into a state of agony. If critical damage level is reached, the unit goes unconscious and does not immediately die like in most other systems. The advantage: You can use it in missions without a revive option as well!<br/><br/>Another advantage of the system is that if a unit is gravely wounded and waiting for others to help, the wounded unit is not completely defenseless. A wounded unit can go prone, crawl and use a weapon as last stand (until the magazine is empty).AIS also supports AI. AI soldiers can be unconscious or give first aid as well.</Original>
+				<English><font face='PuristaMedium' size=30 color='#014EE3'>Psycho's Wounding System</font><br/><br/>This First Aid System (AIS = Alternative Injury System) is an alternative system to all the current normal revive scripts.<br/><br/>The main difference to a standard revive system is that the unit does not die before going into a state of agony. If critical damage level is reached, the unit goes unconscious and does not immediately die like in most other systems. The advantage: You can use it in missions without a revive option as well!<br/><br/>Another advantage of the system is that if a unit is gravely wounded and waiting for others to help, the wounded unit is not completely defenseless. A wounded unit can go prone, crawl and use a weapon as last stand (until the magazine is empty).AIS also supports AI. AI soldiers can be unconscious or give first aid as well.</English>
+                <Chinese></Chinese>
+                <Chinesesimp></Chinesesimp>
+			</Key>
+		</Container>
 	</Package>
 </Project>
