@@ -32,21 +32,21 @@ if (iMissionSetup == 0) then {
 	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 	_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
 	_CreateTasks = [true,false,false];
-	MaxBadPoints = 3;
+	MaxBadPoints = 2;
 };
 if (iMissionSetup == 1) then {
 	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom SideMissionTasks,selectRandom SideMissionTasks];
 	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 	_MarkerTypes = ["empty","hd_dot","hd_dot"];
 	_CreateTasks = [true,false,false];
-	MaxBadPoints = 4;
+	MaxBadPoints = 2;
 };
 if (iMissionSetup == 2) then {
 	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse];
 	_IsMainObjs = [true]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 	_MarkerTypes = ["mil_objective"];
 	_CreateTasks = [true];
-	MaxBadPoints = 3;
+	MaxBadPoints = 2;
 };
 if (iMissionSetup == 3) then {
 	if (selectRandom [true,false,false]) then {
@@ -54,7 +54,7 @@ if (iMissionSetup == 3) then {
 		_IsMainObjs = [false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 		_MarkerTypes = ["mil_objective","hd_dot"];
 		_CreateTasks = [true,false];
-		MaxBadPoints = 2;
+		MaxBadPoints = 1;
 		_bSideMissionsCivOnly = true;
 	}
 	else {
@@ -62,7 +62,7 @@ if (iMissionSetup == 3) then {
 		_IsMainObjs = [false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 		_MarkerTypes = ["mil_objective"];
 		_CreateTasks = [true];
-		MaxBadPoints = 2;
+		MaxBadPoints = 1;
 	};
 };
 if (iMissionSetup == 4) then {
@@ -70,7 +70,7 @@ if (iMissionSetup == 4) then {
 	_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 	_MarkerTypes = ["mil_objective","mil_objective","mil_objective"];
 	_CreateTasks = [true,true,true];
-	MaxBadPoints = 4;
+	MaxBadPoints = 2;
 };
 if (iMissionSetup == 5) then {
 	if (MaxBadPoints >= 10) then {

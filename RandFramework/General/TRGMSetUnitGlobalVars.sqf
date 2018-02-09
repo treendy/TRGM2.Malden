@@ -240,7 +240,7 @@ FriendlyRadioSounds = ["ambient_radio3","ambient_radio4","ambient_radio5","ambie
 	ReinforceStartPos1 = [200,200,0];
 	ReinforceStartPos2 = [100,100,0];
 
-	SideMissionMinDistFromBase = 3000;
+	SideMissionMinDistFromBase = 3000; //for min distached to have AO from base... BaseAreaRange is more for patrols and events (thees need to be seperate variables, because if we had main HQ on an island and an AO spawned on the small island away from main land... hen will cause issues spawning in everything else)
 	KilledZoneRadius = 1500;
 	KilledZoneInnerRadius = 1450;
 	SaveZoneRadius = 1000; //if 0 will be no safezone
@@ -276,7 +276,7 @@ FriendlyRadioSounds = ["ambient_radio3","ambient_radio4","ambient_radio5","ambie
 	SmallTransportVehicle = ["B_Quadbike_01_F"]; //used for AO camp, just incase no vehicles near, or too built up in jungle for cars
 	FriendlyFastResponseDingy = ["B_Boat_Transport_01_F"];
 
-
+	BaseAreaRange = 1500; //used to make sure enemy events, patrols etc... doesnt spawn too close to base
 /*=================================================================================================================================================================*/
 /*=================================================================================================================================================================*/
 /*=================================================================================================================================================================*/

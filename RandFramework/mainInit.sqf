@@ -387,8 +387,9 @@ if (isServer) then {
 
 	if (LoadoutData != "" || LoadoutDataDefault != "") then {
 		{
+			//_x setVariable ["UnitRole",_unitRole];
 			[_x] execVM "RandFramework\setLoadout.sqf";
-			_x addEventHandler ["Respawn", { [_x] execVM "RandFramework\setLoadout.sqf"; }];
+			_x addEventHandler ["Respawn", { [_this select 0] execVM "RandFramework\setLoadout.sqf"; }];
 		} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 	};
 	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
@@ -670,7 +671,7 @@ if (isServer) then {
 			//ok, if something is true, then in here we will start the sand storm and all clients!
 			//work out how to deal with JIP if sandstorm already playing
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
-			{nul = 18030 execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			{nul = [18030] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
 			//Set enemy skill
 			{
 				if (Side _x == East) then {

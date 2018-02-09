@@ -177,7 +177,7 @@ TREND_fnc_InitPostStarted = {
 	
 	_iSandStormOption = AdvancedSettings select ADVSET_SANDSTORM_IDX;
 	if (_iSandStormOption == 3) then { //5 hours non stop
-		nul = 18030 execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";
+		nul = [18030] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";
 	};
 };
 [] spawn TREND_fnc_InitPostStarted;

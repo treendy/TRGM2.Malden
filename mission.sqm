@@ -12,10 +12,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={725.56116,107.89206,12325.402};
-		dir[]={0.27742577,-0.61204314,-0.74058086};
-		up[]={0.21470591,0.79082066,-0.5731535};
-		aside[]={-0.93646228,6.321352e-008,-0.35080212};
+		pos[]={836.21143,96.792809,12294.544};
+		dir[]={-0.24116467,-0.55535126,-0.79594898};
+		up[]={-0.16104515,0.83157945,-0.53151774};
+		aside[]={-0.95708442,3.309251e-007,0.28999257};
 	};
 };
 binarizationWanted=0;
@@ -2113,7 +2113,7 @@ class Mission
 			name="supReqAirSup";
 			id=223;
 			type="SupportProvider_Virtual_CAS_Bombing";
-			atlOffset=196.94861;
+			atlOffset=196.94859;
 			class CustomAttributes
 			{
 				class Attribute0
