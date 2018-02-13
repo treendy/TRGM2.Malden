@@ -1,12 +1,12 @@
 ﻿/*
  * Author: Psycho
- 
+
  * Stabilize a unit. A stabilized unit stop to bleed and cant die trough the revive timer.
- 
+
  * Arguments:
 	0: Unit Helper (Object)
 	1: Unit wounded (Object)
- 
+
  * Return value:
 	-
 */
@@ -27,7 +27,7 @@ if (primaryWeapon _healer != "") then {
 
 _healer playAction "medicStart";
 
-// full heal anim only with primary weapon possible. 
+// full heal anim only with primary weapon possible.
 ais_animChangeEVH = _healer addEventhandler ["AnimChanged", {
 	params ["_healer","_anim"];
 	if (primaryWeapon _healer isEqualTo "") then {
@@ -50,13 +50,13 @@ private _duration = [_healer, _injured] call AIS_System_fnc_calculateStabilizeTi
 
 
 [
-    "Stabilize the Injured", 
+    localize "STR_TRGM2_fnstabilize_Stabilizeing",
     _duration,
     {
 		params ["_injured", "_healer"];
 
 		_injured setVariable ["ais_stabilized", true, true];
-		
+
 		_healer removeEventHandler ["AnimChanged", ais_animChangeEVH];
 		detach _healer;
 		detach _injured;
@@ -71,17 +71,17 @@ private _duration = [_healer, _injured] call AIS_System_fnc_calculateStabilizeTi
 		params ["_injured", "_healer"];
 
 		_injured setVariable ["ais_hasHelper", ObjNull, true];
-		
+
 		_healer removeEventHandler ["AnimChanged", ais_animChangeEVH];
 		detach _healer;
 		detach _injured;
-		
+
 		call AIS_Effects_fnc_garbage;
-		
+
 		if (alive _healer) then {
 			_healer playActionNow "medicStop";
 		};
-		if (!alive _injured) then {["He is not with us anymore."] call AIS_Core_fnc_dynamicText};
+		if (!alive _injured) then {[localize "STR_TRGM2_fnRevive_IsDead"] call AIS_Core_fnc_dynamicText};
 	},
 	(!alive _injured || _healer getVariable ["ais_unconscious", false])
 ] call AIS_Core_fnc_Progress_ShowBar;

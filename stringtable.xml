@@ -424,6 +424,120 @@
                 <Chinese>&lt;font face='PuristaMedium' size=30 color='#014EE3'&gt;Psycho的受傷系統&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;這個急救系統是用來取代原本的復甦腳本系統。&lt;br/&gt;&lt;br/&gt;最大的差別在於玩家並不會直接死亡，而是在當受到一定程度的致命傷後開始進入昏厥模式。&lt;br/&gt;&lt;br/&gt;使用本系統的優勢在於受傷倒地的單位並不是完全不能自衛，他們可以趴、爬行並使用武器(不能切換武器或重新裝填子彈)。此系統也支援AI，AI也會進入昏厥模式待援或使用急救包救治玩家。</Chinese>
                 <Chinesesimp>&lt;font face='PuristaMedium' size=30 color='#014EE3'&gt;Psycho的受伤系统&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;这个急救系统是用来取代原本的复苏脚本系统。&lt;br/&gt;&lt;br/&gt;最大的差别在于玩家并不会直接死亡，而是在当受到一定程度的致命伤后开始进入昏厥模式。&lt;br/&gt;&lt;br/&gt;使用本系统的优势在于受伤倒地的单位并不是完全不能自卫，他们可以趴、爬行并使用武器(不能切换武器或重新装填子弹)。此系统也支援AI，AI也会进入昏厥模式待援或使用急救包救治玩家。</Chinesesimp>
 			</Key>
+			<Key ID="STR_TRGM2_fncallHelp_calledHelp">
+				<Original>You already have called for help!</Original>
+				<English>You already have called for help!</English>
+                <Chinese>你已經呼叫過救援了!</Chinese>
+                <Chinesesimp>你已经呼叫过救援了!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fncarry_CantCarry1">
+				<Original>This action is only with a primary Weapon possible.</Original>
+				<English>This action is only with a primary Weapon possible.</English>
+                <Chinese>這個動作只能在拿著主武器時使用。</Chinese>
+                <Chinesesimp>这个动作只能在拿着主武器时使用。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fncarry_CantCarry2">
+				<Original>You are not able to carry anyone else while carrying a launcher on your back.</Original>
+				<English>You are not able to carry anyone else while carrying a launcher on your back.</English>
+                <Chinese>當你背上有發射器時，你就不能背負任何人在你的背上。</Chinese>
+                <Chinesesimp>当你背上有发射器时，你就不能背负任何人在你的背上。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndisableRespawnButton_RespawnDisable">
+				<Original>Respawn Disabled (%1 sec)</Original>
+				<English>Respawn Disabled (%1 sec)</English>
+                <Chinese>已關閉重生(%1秒)</Chinese>
+                <Chinesesimp>已关闭重生(%1秒)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndisableRespawnButton_Respawn">
+				<Original>Respawn</Original>
+				<English>Respawn</English>
+                <Chinese>重生</Chinese>
+                <Chinesesimp>重生</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnhandleHeal_FirstRevive">
+				<Original>First you have to Revive the injured.</Original>
+				<English>First you have to Revive the injured.</English>
+                <Chinese>你必需先復甦該傷患。</Chinese>
+                <Chinesesimp>你必需先复苏该伤患。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnhandleHeal_FirstStabilize">
+				<Original>First you have to Stabilize the injured.</Original>
+				<English>First you have to Stabilize the injured.</English>
+                <Chinese>你必需先穩定該傷患的傷勢。</Chinese>
+                <Chinesesimp>你必需先稳定该伤患的伤势。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnkeyHandler_ChatDisabled">
+				<Original>Chat disabled.</Original>
+				<English>Chat disabled.</English>
+                <Chinese>已關閉聊天。</Chinese>
+                <Chinesesimp>已关闭聊天。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnpostinit_FirstAid">
+				<Original>First Aid</Original>
+				<English>First Aid</English>
+                <Chinese>急救</Chinese>
+                <Chinesesimp>急救</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnpostinit_Stabilize">
+				<Original>Stabilize</Original>
+				<English>Stabilize</English>
+                <Chinese>穩定傷勢</Chinese>
+                <Chinesesimp>稳定伤势</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnpostinit_Drag">
+				<Original>Drag</Original>
+				<English>Drag</English>
+                <Chinese>拖行</Chinese>
+                <Chinesesimp>拖行</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnpostinit_Carry">
+				<Original>Carry</Original>
+				<English>Carry</English>
+                <Chinese>背負</Chinese>
+                <Chinesesimp>背负</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnpostinit_Release">
+				<Original>Release</Original>
+				<English>Release</English>
+                <Chinese>放下</Chinese>
+                <Chinesesimp>放下</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnpostinit_UnloadInjured">
+				<Original>Unload Injured</Original>
+				<English>Unload Injured</English>
+                <Chinese>卸載傷患</Chinese>
+                <Chinesesimp>卸载伤患</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnpostinit_LoadInjured">
+				<Original>Load Injured</Original>
+				<English>Load Injured</English>
+                <Chinese>裝載傷患</Chinese>
+                <Chinesesimp>装载伤患</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnRevive_ApplyingFirstAid">
+				<Original>Applying First Aid</Original>
+				<English>Applying First Aid</English>
+                <Chinese>急救中</Chinese>
+                <Chinesesimp>急救中</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnRevive_IsDead">
+				<Original>He is not with us anymore.</Original>
+				<English>He is not with us anymore.</English>
+                <Chinese>他已經去另一個更好的世界了。</Chinese>
+                <Chinesesimp>他已经去另一个更好的世界了。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnstabilize_Stabilizeing">
+				<Original>Stabilize the Injured</Original>
+				<English>Stabilize the Injured</English>
+                <Chinese>穩定傷勢中</Chinese>
+                <Chinesesimp>穩定傷勢中</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnunconcsiousRemote_SomeoneDown">
+				<Original>%1 is down and needs help at %2!</Original>
+				<English>%1 is down and needs help at %2!</English>
+                <Chinese>%1需要救援，他倒在%2!</Chinese>
+                <Chinesesimp>%1需要救援，他倒在%2!</Chinesesimp>
+			</Key>
 		</Container>
 	</Package>
 </Project>
