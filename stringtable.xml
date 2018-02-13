@@ -139,6 +139,464 @@
 		</Container>
 	</Package>
 	<Package name="RandFrameworkFolder">
+		<Container name="Root">
+			<Key ID="STR_TRGM2_AirSupportRequested_Text">
+				<Original>Air support requested</Original>
+				<English>Air support requested</English>
+                <Chinese>已請求空中支援</Chinese>
+                <Chinesesimp>已请求空中支援</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_attemptendmission_Kilo1">
+				<Original>The Kilo-1 teamleader needs to select this</Original>
+				<English>The Kilo-1 teamleader needs to select this</English>
+                <Chinese>Kilo-1的隊長必需選擇這個</Chinese>
+                <Chinesesimp>Kilo-1的队长必需选择这个</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_attemptendmission_Kilo2">
+				<Original>The Kilo-2 teamleader needs to select this</Original>
+				<English>The Kilo-2 teamleader needs to select this</English>
+                <Chinese>Kilo-2的隊長必需選擇這個</Chinese>
+                <Chinesesimp>Kilo-2的队长必需选择这个</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_attemptendmission_Ending">
+				<Original>Mission Ending...</Original>
+				<English>Mission Ending...</English>
+                <Chinese>任務結束中...</Chinese>
+                <Chinesesimp>任务结束中...</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_Attached">
+				<Original>There is still something attached</Original>
+				<English>There is still something attached</English>
+                <Chinese>仍有些東西被掛載中</Chinese>
+                <Chinesesimp>仍有些东西被挂载中</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_NoNear">
+				<Original>no near vehicles</Original>
+				<English>no near vehicles</English>
+                <Chinese>沒有靠近的載具</Chinese>
+                <Chinesesimp>没有靠近的载具</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_NoValid">
+				<Original>no valid sling targets</Original>
+				<English>no valid sling targets</English>
+                <Chinese>沒有可用的吊掛目標</Chinese>
+                <Chinesesimp>没有可用的吊挂目标</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_CantCarry">
+				<Original>can't carry dead objects</Original>
+				<English>can't carry dead objects</English>
+                <Chinese>無法攜帶已經陣亡的目標</Chinese>
+                <Chinesesimp>无法携带已经阵亡的目标</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_SlingLoad">
+				<Original>&lt;t color='#FF0000'&gt;Sling Load %1&lt;/t&gt;</Original>
+				<English>&lt;t color='#FF0000'&gt;Sling Load %1&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#FF0000'&gt;吊掛%1&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#FF0000'&gt;吊挂%1&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_UnableToSling">
+				<Original>&lt;t color='#FF0000'&gt;Unable to Sling&lt;/t&gt;</Original>
+				<English>&lt;t color='#FF0000'&gt;Unable to Sling&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#FF0000'&gt;無法吊掛&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#FF0000'&gt;无法吊挂&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_Detach">
+				<Original>&lt;t color='#FF0000'&gt;Detach %1&lt;/t&gt;</Original>
+				<English>&lt;t color='#FF0000'&gt;Detach %1&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#FF0000'&gt;卸載%1&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#FF0000'&gt;卸载%1&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_DetachLoad">
+				<Original>&lt;t color='#FF0000'&gt;Detach Load&lt;/t&gt;</Original>
+				<English>&lt;t color='#FF0000'&gt;Detach Load&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#FF0000'&gt;卸載貨物&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#FF0000'&gt;卸载货物&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_Init">
+				<Original>Auxiliary Sling Loading: Initialized</Original>
+				<English>Auxiliary Sling Loading: Initialized</English>
+                <Chinese>輔助吊掛系統: 初始化完成</Chinese>
+                <Chinesesimp>辅助吊挂系统: 初始化完成</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_bugRadio1_HQLisen">
+				<Original>HQ are listening in, stand by...</Original>
+				<English>HQ are listening in, stand by...</English>
+                <Chinese>總部正在收聽，請稍待...</Chinese>
+                <Chinesesimp>总部正在收听，请稍待...</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_bugRadio1_MapUpdated">
+				<Original>Map updated with main AO location</Original>
+				<English>Map updated with main AO location</English>
+                <Chinese>地圖標記已更新，請查閱行動區域</Chinese>
+                <Chinesesimp>地图标记已更新，请查阅行动区域</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_callUAVFindObjective_UAVInbound">
+				<Original>UAV inbound, eta 10 seconds</Original>
+				<English>UAV inbound, eta 10 seconds</English>
+                <Chinese>UAV進場中，10秒後抵達</Chinese>
+                <Chinesesimp>UAV进场中，10秒后抵达</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_callUAVFindObjective_UAVScanned">
+				<Original>UAV has scanned area, target location marked, UAV is RTB</Original>
+				<English>UAV has scanned area, target location marked, UAV is RTB</English>
+                <Chinese>UAV掃描完畢，已確認目標位置，UAV開始返航</Chinese>
+                <Chinesesimp>UAV扫描完毕，已确认目标位置，UAV开始返航</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_callUAVFindObjective_HVTLocation">
+				<Original>HVT Location</Original>
+				<English>HVT Location</English>
+                <Chinese>高價值目標位置</Chinese>
+                <Chinesesimp>高价值目标位置</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_checkForComms_GotEnemySignal">
+				<Original>You are picking up enemy comms from this tower!</Original>
+				<English>You are picking up enemy comms from this tower!</English>
+                <Chinese>你正在從這個塔台接收敵人的通訊信號!</Chinese>
+                <Chinesesimp>你正在从这个塔台接收敌人的通讯信号!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_checkForComms_NoEnemySignal">
+				<Original>Nothing of interest from this tower</Original>
+				<English>Nothing of interest from this tower</English>
+                <Chinese>這個塔台並沒有些有趣的信號</Chinese>
+                <Chinesesimp>这个塔台并没有些有趣的信号</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_CivKilled_Text">
+				<Original>Civ Killed by %1</Original>
+				<English>Civ Killed by %1</English>
+                <Chinese>平民已被%1擊殺</Chinese>
+                <Chinesesimp>平民已被%1击杀</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_downloadResearchData_DataSecured">
+				<Original>Data secured, reputation increased</Original>
+				<English>Data secured, reputation increased</English>
+                <Chinese>資料確保完成，已提高聲譽</Chinese>
+                <Chinesesimp>资料确保完成，已提高声誉</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fireArti_InvalidGrid">
+				<Original>Invalid grid ref, enter 3,4 or 5 digits in each box</Original>
+				<English>Invalid grid ref, enter 3,4 or 5 digits in each box</English>
+                <Chinese>座標格式錯誤，請輸入3、4或5碼的座標格式在欄位中</Chinese>
+                <Chinesesimp>座标格式错误，请输入3、4或5码的座标格式在栏位中</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fireArti_ArtiRequested">
+				<Original>Arti requested\ntarget: %1,%2, \nETA: %3 once round confirmed\nplease stand by</Original>
+				<English>Arti requested\ntarget: %1,%2, \nETA: %3 once round confirmed\nplease stand by</English>
+                <Chinese>已收到火力任務\n目標: %1 %2，\n預計彈著時間: 首發擊發後%3秒\n請稍待</Chinese>
+                <Chinesesimp>已收到火力任务\n目标: %1 %2，\n预计弹着时间: 首发击发后%3秒\n请稍待</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_getArtiETA_ETA">
+				<Original>Arti ETA: %1</Original>
+				<English>Arti ETA: %1</English>
+                <Chinese>預計彈著時間: %1</Chinese>
+                <Chinesesimp>预计弹着时间: %1</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_IdentifyHVT_Confirmed">
+				<Original>ID confirmed, this is our target!</Original>
+				<English>ID confirmed, this is our target!</English>
+                <Chinese>已確認身分，這就是我們的目標!</Chinese>
+                <Chinesesimp>已确认身分，这就是我们的目标!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_InsKilled_RebelKilled">
+				<Original>Friendly Rebel Killed by %1</Original>
+				<English>Friendly Rebel Killed by %1</English>
+                <Chinese>友方反抗軍已被%1擊殺</Chinese>
+                <Chinesesimp>友方反抗军已被%1击杀</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_interrogateOfficer_Muppet">
+				<Original>He is dead you muppet!</Original>
+				<English>He is dead you muppet!</English>
+                <Chinese>他已經死了，你這個白癡!</Chinese>
+                <Chinesesimp>他已经死了，你这个白痴!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_interrogateOfficer_MapIntel">
+				<Original>Map updated with intel found</Original>
+				<English>Map updated with intel found</English>
+                <Chinese>地圖已由被找到的情報所更新</Chinese>
+                <Chinesesimp>地图已由被找到的情报所更新</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_interrogateOfficer_DeadGuy">
+				<Original>Not quite sure why, but for some reason this dead guy isnt speaking!!!</Original>
+				<English>Not quite sure why, but for some reason this dead guy isnt speaking!!!</English>
+                <Chinese>不大確定是為什麼，但這個死人並不會說話!</Chinese>
+                <Chinesesimp>不大确定是为什么，但这个死人并不会说话!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_mainInit_Loading">
+				<Original>Loading mission...</Original>
+				<English>Loading mission...</English>
+                <Chinese>載入任務中...</Chinese>
+                <Chinesesimp>载入任务中...</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_mainInit_ErrorClassExist">
+				<Original>\nClass doesnt exist: %1 - class: %2 </Original>
+				<English>\nClass doesnt exist: %1 - class: %2 </English>
+                <Chinese>\n類別並不存在: %1 - 類別: %2 </Chinese>
+                <Chinesesimp>\n类别并不存在: %1 - 类别: %2 </Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_mainInit_ErrorClassEmpty">
+				<Original>\nClass is empty: %1 - class: %2 </Original>
+				<English>\nClass is empty: %1 - class: %2 </English>
+                <Chinese>\n類別為空: %1 - 類別: %2 </Chinese>
+                <Chinesesimp>\n类别为空: %1 - 类别: %2 </Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_mainInit_Debrief">
+				<Original>Return to HQ to debrief</Original>
+				<English>Return to HQ to debrief</English>
+                <Chinese>返回總部進行匯報</Chinese>
+                <Chinesesimp>返回总部进行汇报</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_mainInit_ReputationDropped">
+				<Original>Your reputation has dropped.  Team rank now: </Original>
+				<English>Your reputation has dropped.  Team rank now: </English>
+                <Chinese>你們的聲譽已下降。隊伍當前的聲譽:</Chinese>
+                <Chinesesimp>你们的声誉已下降。队伍当前的声誉:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_mainInit_ReputationIncreased">
+				<Original>Your reputation has increased.  Team rank now: </Original>
+				<English>Your reputation has increased.  Team rank now: </English>
+                <Chinese>你們的聲譽已提高。隊伍當前的聲譽:</Chinese>
+                <Chinesesimp>你们的声誉已提高。队伍当前的声誉:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_mainInit_ReputationText">
+				<Original>Check the notice board at base for your report</Original>
+				<English>Check the notice board at base for your report</English>
+                <Chinese>在基地的公告版可獲得更詳細的報告</Chinese>
+                <Chinesesimp>在基地的公告版可获得更详细的报告</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_minedetector_MineReportFormat">
+				<Original>Mine = %4\nDistance = %1\nTime Until Next Beep =  %2\nPitch = %3</Original>
+				<English>Mine = %4\nDistance = %1\nTime Until Next Beep =  %2\nPitch = %3</English>
+                <Chinese>地雷 = %4\n距離 = %1\n下個逼逼聲時間 =  %2\n音調 = %3</Chinese>
+                <Chinesesimp>地雷 = %4\n距离 = %1\n下个逼逼声时间 =  %2\n音调 = %3</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_minedetector_StopMineDetector">
+				<Original>&lt;t color='#FF0000'&gt;Stop MineDetector&lt;/t&gt;</Original>
+				<English>&lt;t color='#FF0000'&gt;Stop MineDetector&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#FF0000'&gt;停用掃雷器&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#FF0000'&gt;停用扫雷器&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_minedetector_UseMineDetector">
+				<Original>&lt;t color='#FF0000'&gt;Use MineDetector&lt;/t&gt;</Original>
+				<English>&lt;t color='#FF0000'&gt;Use MineDetector&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#FF0000'&gt;啟動掃雷器&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#FF0000'&gt;启动扫雷器&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_PushObject_PushEmpty">
+				<Original>Vehicle needs to be empty to push</Original>
+				<English>Vehicle needs to be empty to push</English>
+                <Chinese>在推動前必需先清空該載具</Chinese>
+                <Chinesesimp>在推动前必需先清空该载具</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SearchGoodCiv_Result1">
+				<Original>This civilian is ok.</Original>
+				<English>This civilian is ok.</English>
+                <Chinese>這個平民沒問題。</Chinese>
+                <Chinesesimp>这个平民没问题。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SearchGoodCiv_Result2">
+				<Original>This civilian is not a threat.</Original>
+				<English>This civilian is not a threat.</English>
+                <Chinese>這個平民不是個威脅。</Chinese>
+                <Chinesesimp>这个平民不是个威胁。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SearchGoodCiv_Result3">
+				<Original>You do not find anything.</Original>
+				<English>You do not find anything.</English>
+                <Chinese>你並沒有找到任何東西。</Chinese>
+                <Chinesesimp>你并没有找到任何东西。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_setCheckpoint_Ask">
+				<Original>Ask about the AO</Original>
+				<English>Ask about the AO</English>
+                <Chinese>詢問任務區內狀況</Chinese>
+                <Chinesesimp>询问任务区内状况</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_setCheckpoint_MarkerText">
+				<Original>Checkpoint</Original>
+				<English>Checkpoint</English>
+                <Chinese>檢查哨</Chinese>
+                <Chinesesimp>检查哨</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_NoIntel">
+				<Original>No intel to report</Original>
+				<English>No intel to report</English>
+                <Chinese>沒有要回報的情報</Chinese>
+                <Chinesesimp>没有要回报的情报</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_MortarMarker">
+				<Original>Mortar</Original>
+				<English>Mortar</English>
+                <Chinese>迫擊炮</Chinese>
+                <Chinesesimp>迫击炮</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_MortarMapUpdated">
+				<Original>Map updated with enemy mortar possitions (if any 3k within main AO)</Original>
+				<English>Map updated with enemy mortar possitions (if any 3k within main AO)</English>
+                <Chinese>已在地圖上標記出敵方的迫擊炮位置(任務區域附近3公里之內)</Chinese>
+                <Chinesesimp>已在地图上标记出敌方的迫击炮位置(任务区域附近3公里之内)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_MortarMapNoUpdate">
+				<Original>Intel confirms no mortar threat within 3k of main AO</Original>
+				<English>Intel confirms no mortar threat within 3k of main AO</English>
+                <Chinese>情報指出在任務區附近3公里的範圍內並無迫擊炮的威脅</Chinese>
+                <Chinesesimp>情报指出在任务区附近3公里的范围内并无迫击炮的威胁</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_AAAMarker">
+				<Original>AAA</Original>
+				<English>AAA</English>
+                <Chinese>高射炮</Chinese>
+                <Chinesesimp>高射炮</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_AAAMapUpdated">
+				<Original>Map updated with any enemy AAA possitions (if any 3k within main AO)</Original>
+				<English>Map updated with any enemy AAA possitions (if any 3k within main AO)</English>
+                <Chinese>已在地圖上標記出敵方的高射炮位置(任務區域附近3公里之內)</Chinese>
+                <Chinesesimp>已在地图上标记出敌方的高射炮位置(任务区域附近3公里之内)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_AAAMapNoUpdate">
+				<Original>Intel confirms no AAA threat within 3k of main AO</Original>
+				<English>Intel confirms no AAA threat within 3k of main AO</English>
+                <Chinese>情報指出在任務區附近3公里的範圍內並無高射炮的威脅</Chinese>
+                <Chinesesimp>情报指出在任务区附近3公里的范围内并无高射炮的威胁</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_CommsTowerMarker">
+				<Original>Comms Tower</Original>
+				<English>Comms Tower</English>
+                <Chinese>通訊塔</Chinese>
+                <Chinesesimp>通讯塔</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_CommsTowerMapUpdated">
+				<Original>Map updated with any enemy comms tower possitions (if any 3k within main AO)</Original>
+				<English>Map updated with any enemy comms tower possitions (if any 3k within main AO)</English>
+                <Chinese>已在地圖上標記出敵方的通訊塔位置(任務區域附近3公里之內)</Chinese>
+                <Chinesesimp>已在地图上标记出敌方的通讯塔位置(任务区域附近3公里之内)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_CommsTowerMapNoUpdate">
+				<Original>Enemy are not using any nearby comms towers!</Original>
+				<English>Enemy are not using any nearby comms towers!</English>
+                <Chinese>敵人並沒有在附近使用通訊塔!</Chinese>
+                <Chinesesimp>敌人并没有在附近使用通讯塔!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_CheckpointMapUpdated">
+				<Original>Take a look at your map.  location of enemy checkpoints that are within one click of the main AO have been marked</Original>
+				<English>Take a look at your map.  location of enemy checkpoints that are within one click of the main AO have been marked</English>
+                <Chinese>檢查下你的地圖。已標記出一個距離任務區域1公里遠的敵方檢查哨</Chinese>
+                <Chinesesimp>检查下你的地图。已标记出一个距离任务区域1公里远的敌方检查哨</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_CheckpointMapNoUpdate">
+				<Original>We havent any intel of any checkpoints within a click of the main AO</Original>
+				<English>We havent any intel of any checkpoints within a click of the main AO</English>
+                <Chinese>我們並沒有任何情報指出在任務區1公里之內有敵方的檢查哨</Chinese>
+                <Chinesesimp>我们并没有任何情报指出在任务区1公里之内有敌方的检查哨</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_simpleEP_PutOn">
+				<Original>&lt;t color='#ffff33'&gt;Put on ear plugs&lt;/t&gt;</Original>
+				<English>&lt;t color='#ffff33'&gt;Put on ear plugs&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#ffff33'&gt;戴上耳塞&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#ffff33'&gt;戴上耳塞&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_simpleEP_TakeOff">
+				<Original>&lt;t color='#ffff33'&gt;Take off ear plugs&lt;/t&gt;</Original>
+				<English>&lt;t color='#ffff33'&gt;Take off ear plugs&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#ffff33'&gt;拿下耳塞&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#ffff33'&gt;拿下耳塞&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SpeakInformant_StartSpeak">
+				<Original>You start to talk to the informant...</Original>
+				<English>You start to talk to the informant...</English>
+                <Chinese>你開始跟線人交談...</Chinese>
+                <Chinesesimp>你开始跟线人交谈...</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SpeakToFriendlyCheckpoint_DontTell">
+				<Original>He doesnt seem to be saying much at this time</Original>
+				<English>He doesnt seem to be saying much at this time</English>
+                <Chinese>目前他似乎沒有要說些什麼</Chinese>
+                <Chinesesimp>目前他似乎没有要说些什么</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle1">
+				<Original>Hack Data</Original>
+				<English>Hack Data</English>
+                <Chinese>駭取資料</Chinese>
+                <Chinesesimp>骇取资料</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle1_Desc1">
+				<Original>Somewhere in the building marked is a laptop, it contains details of the latest enemy attack jet. We need you to hack the data and send the details back to us.</Original>
+				<English>Somewhere in the building marked is a laptop, it contains details of the latest enemy attack jet. We need you to hack the data and send the details back to us.</English>
+                <Chinese>在被標記的建築物裡有個筆電，內涵敵方最新型攻擊機的資料。我們需要你們過去駭取資料並把它傳回給我們。</Chinese>
+                <Chinesesimp>在被标记的建筑物里有个笔电，内涵敌方最新型攻击机的资料。我们需要你们过去骇取资料并把它传回给我们。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle1_Desc2">
+				<Original>We have discovered the location of an enemy laptop which we know contains a vast amount of data on enemy plans and movement, locate it and hack it! this could be a major step towards our victory</Original>
+				<English>We have discovered the location of an enemy laptop which we know contains a vast amount of data on enemy plans and movement, locate it and hack it! this could be a major step towards our victory</English>
+                <Chinese>我們得到一台裝有敵人作戰計畫的筆電位置，找到並駭取其中的資料!這可能可以讓我們向勝利踏出一大步。</Chinese>
+                <Chinesesimp>我们得到一台装有敌人作战计划的笔电位置，找到并骇取其中的资料!这可能可以让我们向胜利踏出一大步。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle2">
+				<Original>Steal data from research vehicle</Original>
+				<English>Steal data from research vehicle</English>
+                <Chinese>從研究載具上偷取資料</Chinese>
+                <Chinesesimp>从研究载具上偷取资料</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle2_Button">
+				<Original>Download research data</Original>
+				<English>Download research data</English>
+                <Chinese>下載研究資料</Chinese>
+                <Chinesesimp>下载研究资料</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle2_Desc">
+				<Original>We have seen the enemy have parked a research vehicle near the position marked.  We know they have been working on a new weapon, and belive the details of this research is located in this vehicle! locate and get the intel from it!</Original>
+				<English>We have seen the enemy have parked a research vehicle near the position marked.  We know they have been working on a new weapon, and belive the details of this research is located in this vehicle! locate and get the intel from it!</English>
+                <Chinese>我們在標記的位置上發現到一台敵方停在那邊的研究載具。我們知道他們正在著手開發新的武器，而我們相信這些情報就裝在這台載具中!找到並從中獲取我們要的情報!</Chinese>
+                <Chinesesimp>我们在标记的位置上发现到一台敌方停在那边的研究载具。我们知道他们正在着手开发新的武器，而我们相信这些情报就装在这台载具中!找到并从中获取我们要的情报!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle3">
+				<Original>Destroy Ammo Trucks</Original>
+				<English>Destroy Ammo Trucks</English>
+                <Chinese>摧毀彈藥卡車</Chinese>
+                <Chinesesimp>摧毁弹药卡车</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle4">
+				<Original>Speak with informant</Original>
+				<English>Speak with informant</English>
+                <Chinese>與線人交談</Chinese>
+                <Chinesesimp>与线人交谈</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle5">
+				<Original>interrogate officer</Original>
+				<English>interrogate officer</English>
+                <Chinese>審問軍官</Chinese>
+                <Chinesesimp>审问军官</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle6">
+				<Original>Transmit Enemy Comms to HQ</Original>
+				<English>Transmit Enemy Comms to HQ</English>
+                <Chinese>轉送敵方通訊信號到總部</Chinese>
+                <Chinesesimp>转送敌方通讯信号到总部</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle7">
+				<Original>Eliminate Officer</Original>
+				<English>Eliminate Officer</English>
+                <Chinese>殲滅軍官</Chinese>
+                <Chinesesimp>歼灭军官</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle8">
+				<Original>Assasinate weapon dealer</Original>
+				<English>Assasinate weapon dealer</English>
+                <Chinese>刺殺軍火商</Chinese>
+                <Chinesesimp>刺杀军火商</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle9">
+				<Original>Destroy AAA vehicles</Original>
+				<English>Destroy AAA vehicles</English>
+                <Chinese>摧毀高射炮載具</Chinese>
+                <Chinesesimp>摧毁高射炮载具</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle10">
+				<Original>Destroy Artillery vehicles</Original>
+				<English>Destroy Artillery vehicles</English>
+                <Chinese>摧毀火炮載具</Chinese>
+                <Chinesesimp>摧毁火炮载具</Chinesesimp>
+			</Key>
+		</Container>
 	</Package>
 	<Package name="AISFolder">
 		<Container name="Core">

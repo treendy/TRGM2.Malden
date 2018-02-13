@@ -48,7 +48,7 @@ if (isNil "KilledPositions") then {
 
 if (isNil "bBaseHasChopper") then {
 	bBaseHasChopper = false;
-	publicVariable "bBaseHasChopper";	
+	publicVariable "bBaseHasChopper";
 };
 
 if (isNil "BadPointsReason") then {
@@ -67,48 +67,48 @@ if (isNil "InfTaskCount") then {
 
 if (isNil "ActiveTasks") then {
 	ActiveTasks = [];
-	publicVariable "ActiveTasks";	
+	publicVariable "ActiveTasks";
 };
 
 if (isNil "MaxBadPoints") then {
 	MaxBadPoints = 11;
-	publicVariable "MaxBadPoints";	
+	publicVariable "MaxBadPoints";
 };
 
 
 if (isNil "ObjectivePossitions") then {
 	ObjectivePossitions = [];
-	publicVariable "ObjectivePossitions";	
+	publicVariable "ObjectivePossitions";
 };
 
 if (isNil "SpottedActiveFinished") then {
 	SpottedActiveFinished = true;
-	publicVariable "SpottedActiveFinished";	
+	publicVariable "SpottedActiveFinished";
 };
 if (isNil "bCommsBlocked") then {
 	bCommsBlocked = false;
-	publicVariable "bCommsBlocked";	
+	publicVariable "bCommsBlocked";
 };
 if (isNil "bBaseHasChopper") then {
 	bBaseHasChopper = false;
-	publicVariable "bBaseHasChopper";	
+	publicVariable "bBaseHasChopper";
 };
 if (isNil "ParaDropped") then {
 	ParaDropped = false;
-	publicVariable "ParaDropped";	
+	publicVariable "ParaDropped";
 };
 
 if (isNil "CommsTowerPos") then {
 	bHasCommsTower = false;
 	CommsTowerPos = [0,0];
-	publicVariable "bHasCommsTower";	
-	publicVariable "CommsTowerPos";	
+	publicVariable "bHasCommsTower";
+	publicVariable "CommsTowerPos";
 };
 if (isNil "AODetails") then {
 	//AODetails = [[AOIndex,InfSpottedCount,VehSpottedCount,AirSpottedCount,bScoutCalled,patrolMoveCounter]]
 	//example AODetails [[1,0,0,0,False,0],[2,0,0,0,True,0]]
 	AODetails = [];
-	publicVariable "AODetails";	
+	publicVariable "AODetails";
 };
 
 if (isNil "CheckPointAreas") then {
@@ -121,52 +121,52 @@ if (isNil "SentryAreas") then {
 };
 if (isNil "bMortarFiring") then {
 	bMortarFiring = false;
-	publicVariable "bMortarFiring";	
+	publicVariable "bMortarFiring";
 };
 
 if (isNil "bAndSoItBegins") then {
 	bAndSoItBegins = false;
-	publicVariable "bAndSoItBegins";	
+	publicVariable "bAndSoItBegins";
 };
 
 if (isNil "iMissionParamType") then {
 	iMissionParamType = 3;
-	publicVariable "iMissionParamType";	
+	publicVariable "iMissionParamType";
 };
 if (isNil "iMissionParamObjective") then {
 	iMissionParamObjective = 0;
-	publicVariable "iMissionParamObjective";	
+	publicVariable "iMissionParamObjective";
 };
 
 if (isNil "iAllowNVG") then {
 	iAllowNVG = 2;
-	publicVariable "iAllowNVG";	
+	publicVariable "iAllowNVG";
 };
 
 if (isNil "iMissionParamRepOption") then {
 	iMissionParamRepOption = 0;
-	publicVariable "iMissionParamRepOption";	
+	publicVariable "iMissionParamRepOption";
 };
 if (isNil "iWeather") then {
 	iWeather = 1;
-	publicVariable "iWeather";	
+	publicVariable "iWeather";
 };
 if (isNil "iUseRevive") then {
 	iUseRevive = 0;
-	publicVariable "iUseRevive";	
+	publicVariable "iUseRevive";
 };
 if (isNil "iCampaignDay") then {
 	iCampaignDay = 0;
-	publicVariable "iCampaignDay";	
+	publicVariable "iCampaignDay";
 };
 if (isNil "CurrentZeroMissionTitle") then {
 	CurrentZeroMissionTitle = "";
-	publicVariable "CurrentZeroMissionTitle";	
+	publicVariable "CurrentZeroMissionTitle";
 };
 
 if (isNil "debugMessages") then {
 	debugMessages = "";
-	publicVariable "debugMessages";	
+	publicVariable "debugMessages";
 };
 
 if (isNil "SaveType") then {
@@ -201,11 +201,11 @@ if (isNil "EnemyID") then {
 
 
 if (isServer) then { //adjust weather here so intro animation is different everytime
-		[true] execVM "RandFramework\SetTimeAndWeather.sqf";	
+		[true] execVM "RandFramework\SetTimeAndWeather.sqf";
 };
 
 
-showcinemaborder true; 	
+showcinemaborder true;
 
 _centerPos = getArray (configfile >> "CfgWorlds" >> worldName >> "centerPosition");
 if !(isNil "CustomCenterPos") then {
@@ -226,7 +226,7 @@ _camera camCommitPrepared 600;
 
 
 _trgRatingAdjust = createTrigger ["EmptyDetector", [0,0]];
-_trgRatingAdjust setTriggerArea [0, 0, 0, false];	
+_trgRatingAdjust setTriggerArea [0, 0, 0, false];
 _trgRatingAdjust setTriggerStatements ["((rating player) < 0)", "player addRating -(rating player)", ""];
 
 
@@ -316,7 +316,7 @@ if (!isMultiplayer) then {
 waitUntil {bAndSoItBegins};
 
 if (!isDedicated) then {
-	titleText ["Loading mission...", "BLACK FADED"];
+	titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED"];
 	_camera cameraEffect ["Terminate","back"];
 };
 
@@ -364,17 +364,17 @@ if (isServer) then {
 				{
 					_className = _x;
 					if (str(_className) != "") then {
-						if (isClass (configFile >> "CfgVehicles" >> _className)) then {							
+						if (isClass (configFile >> "CfgVehicles" >> _className)) then {
 							call compile _fullObj;
 						}
 						else {
-							_errorMessage = _errorMessage + format["\nClass doesnt exist: %1 - class: %2 ",_fullObj,_x];
+							_errorMessage = _errorMessage + format[localize "STR_TRGM2_mainInit_ErrorClassExist",_fullObj,_x];
 						};
 					}
 					else {
-						_errorMessage = _errorMessage + format["\nClass is empty: %1 - class: %2 ",_fullObj,_x];
+						_errorMessage = _errorMessage + format[localize "STR_TRGM2_mainInit_ErrorClassEmpty",_fullObj,_x];
 					};
-					
+
 				} forEach _classArray;
 			};
 		} forEach _ObjectPairs;
@@ -397,15 +397,15 @@ if (isServer) then {
 	else {
 		[box1,InitialBoxItems] call bis_fnc_initAmmoBox;
 	};
-	
+
 	box1 allowDamage false;
 	{
 		{
 			box1 addMagazineCargoGlobal [_x, 2];
 		} forEach magazines _x + primaryWeaponMagazine _x + secondaryWeaponMagazine _x;
-		{ 
+		{
 	   		box1 addItemCargoGlobal  [_x, 1];
-		} forEach items _x; 
+		} forEach items _x;
 		box1 addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
 	}  forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 
@@ -431,7 +431,7 @@ if (!isMultiplayer) then {
 };
 
 
-player doFollow player; 
+player doFollow player;
 
 
 
@@ -441,9 +441,9 @@ if (iMissionParamType == 5) then {
 	};
 }
 else {
-	
+
 	//[] execVM "RandFramework\StartMission.sqf";
-	
+
 	call compile preprocessFileLineNumbers  "RandFramework\Campaign\StartMission.sqf";
 	//HERE HERE HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!It calls the script above, but doesnt start the actual mission?????????????????????
 
@@ -466,8 +466,8 @@ TREND_fnc_CheckBadPoints = {
 	if (_lastRepPoints < 10) then {_LastRank = 4;};
 	if (_lastRepPoints < 7) then {_LastRank = 3;};
 	if (_lastRepPoints < 5) then {_LastRank = 2;};
-	if (_lastRepPoints < 3) then {_LastRank = 1;};	
-	if (_lastRepPoints < 1) then {_LastRank = 0;};	
+	if (_lastRepPoints < 3) then {_LastRank = 1;};
+	if (_lastRepPoints < 1) then {_LastRank = 0;};
 	while {true} do {
 		_dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
 		_CurrentRank = _LastRank;
@@ -475,8 +475,8 @@ TREND_fnc_CheckBadPoints = {
 		if (_dCurrentRep < 10) then {_CurrentRank = 4;};
 		if (_dCurrentRep < 7) then {_CurrentRank = 3;};
 		if (_dCurrentRep < 5) then {_CurrentRank = 2;};
-		if (_dCurrentRep < 3) then {_CurrentRank = 1;};	
-		if (_dCurrentRep < 1) then {_CurrentRank = 0;};	
+		if (_dCurrentRep < 3) then {_CurrentRank = 1;};
+		if (_dCurrentRep < 1) then {_CurrentRank = 0;};
 		if (_dCurrentRep != _lastRepPoints) then {
 			if (SaveType != 0) then {
 				[SaveType,false] execVM "RandFramework\Campaign\ServerSave.sqf";
@@ -485,29 +485,29 @@ TREND_fnc_CheckBadPoints = {
 		};
 
 		if (_lastBadPoints != BadPoints) then {
-			
+
 			_bRepWorse = false;
 			if (BadPoints > _lastBadPoints) then {_bRepWorse = true};
 			_lastBadPoints = BadPoints;
 			if (iMissionParamType != 5) then {
 				if (BadPoints > MaxBadPoints && iMissionParamRepOption == 1) then {
 					iCurrentTaskCount = 0;
-					["tskKeepAboveAverage", "failed"] call FHQ_TT_setTaskState;		
+					["tskKeepAboveAverage", "failed"] call FHQ_TT_setTaskState;
 					while {iCurrentTaskCount < count ActiveTasks} do {
 						if (!(ActiveTasks call FHQ_TT_areTasksCompleted)) then {
 							[ActiveTasks select iCurrentTaskCount, "failed"] call FHQ_TT_setTaskState;
 							iCurrentTaskCount = iCurrentTaskCount + 1;
 						};
-					};						
+					};
 					sleep 2;
-					[FriendlySide, ["DeBrief", "Return to HQ to debrief", "Debrief", ""]] call FHQ_TT_addTasks;
-				};	
+					[FriendlySide, ["DeBrief", localize "STR_TRGM2_mainInit_Debrief", "Debrief", ""]] call FHQ_TT_addTasks;
+				};
 				if (BadPoints > MaxBadPoints && iMissionParamRepOption == 0) then { //note... when gaining rep, we increase the MaxBadPoints, and when lower, we incrase BadPoints (rep is calulated by the difference)
 					["tskKeepAboveAverage", "failed"] call FHQ_TT_setTaskState;
-				};				
+				};
 				if (BadPoints <= MaxBadPoints && iMissionParamRepOption == 0) then {
-					["tskKeepAboveAverage", "succeeded"] call FHQ_TT_setTaskState;					
-				};				
+					["tskKeepAboveAverage", "succeeded"] call FHQ_TT_setTaskState;
+				};
 			};
 		};
 		if (_LastRank != _CurrentRank) then {
@@ -524,12 +524,12 @@ TREND_fnc_CheckBadPoints = {
 				if (_dCurrentRep < 7) then {_sRankIcon = "<img image='RandFramework\Media\Rank3.jpg' size='3.5' />";};
 				if (_dCurrentRep < 5) then {_sRankIcon = "<img image='RandFramework\Media\Rank2.jpg' size='3.5' />";};
 				if (_dCurrentRep < 3) then {_sRankIcon = "<img image='RandFramework\Media\Rank1b.jpg' size='3.5' />";};
-				if (_dCurrentRep <= 0) then {_sRankIcon = "<img image='RandFramework\Media\Rank0.jpg' size='3.5' />";};					
+				if (_dCurrentRep <= 0) then {_sRankIcon = "<img image='RandFramework\Media\Rank0.jpg' size='3.5' />";};
 				if (_bRepWorse) then {
-					_sRankMessage = "<t color='#ff0000'>Your reputation has dropped.  Team rank now: </t><br /><br />" + _sRankIcon + "<br /><br />Check the notice board at base for your report";
+					_sRankMessage = "<t color='#ff0000'>" + localize "STR_TRGM2_mainInit_ReputationDropped" + "</t><br /><br />" + _sRankIcon + "<br /><br />" + localize "STR_TRGM2_mainInit_ReputationText";
 				}
 				else {
-					_sRankMessage = "<t color='#00ff00'>Your reputation has increased.  Team rank now: </t><br /><br />" + _sRankIcon + "<br /><br />Check the notice board at base for your report";
+					_sRankMessage = "<t color='#00ff00'>" + localize "STR_TRGM2_mainInit_ReputationIncreased" + "</t><br /><br />" + _sRankIcon + "<br /><br />" + localize "STR_TRGM2_mainInit_ReputationText";
 				};
 				//hint parseText _sRankMessage;
 				[parseText _sRankMessage] remoteExec ["Hint", 0, true];
@@ -562,7 +562,7 @@ if (isServer) then {
 			_bEnded = false;
 			while {!_bEnded} do {
 				_bAnyAlive = false;
-				{	
+				{
 	   				if (isPlayer _x) then {
 	   					_iRespawnTicketsLeft = [_x,nil,true] call BIS_fnc_respawnTickets;
 	   					if (alive _x || _iRespawnTicketsLeft > 0) then {
@@ -585,17 +585,17 @@ if (isServer) then {
 		};
 		[] spawn TREND_fnc_CheckAnyPlayersAlive;
  	};
- 
+
 
 	if (iAllowNVG == 0) then {
 		{
-			 _x addPrimaryWeaponItem "acc_flashlight"; 
+			 _x addPrimaryWeaponItem "acc_flashlight";
 			 _x enableGunLights "forceOn";
-			 _x unassignItem sFriendlyNVClassName; 
-			 _x removeItem sFriendlyNVClassName; 
-    		_x unassignItem sEnemyNVClassName; 
-			_x removeItem sEnemyNVClassName; 
-	   
+			 _x unassignItem sFriendlyNVClassName;
+			 _x removeItem sFriendlyNVClassName;
+    		_x unassignItem sEnemyNVClassName;
+			_x removeItem sEnemyNVClassName;
+
 		} forEach allUnits;
 	};
 
@@ -692,21 +692,21 @@ if (isServer) then {
 			} forEach allUnits;
 			//reset enemy skill
 		};
-		
+
 	};
 	[] spawn TREND_fnc_SandStormEffect;
-	
+
 };
 
 
 [[],"RandFramework\animateAnimals.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
 
  if (!isDedicated && (player != player)) then {
-	waitUntil {player == player}; 
-	waitUntil {time > 10}; 
+	waitUntil {player == player};
+	waitUntil {time > 10};
 	[[],"RandFramework\animateAnimals.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
 	//hint "PING";
  };
 
 
- 
+

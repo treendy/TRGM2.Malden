@@ -17,15 +17,15 @@ if (_bCreateTask) then {
 		[sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0];
 	}
 	else {
-		hint "He is dead you muppet!";
+		hint (localize "STR_TRGM2_interrogateOfficer_Muppet");
 		sName = format["InfSide%1",_iSelected];
-		[sName, "failed"] remoteExec ["FHQ_TT_setTaskState", 0];	
+		[sName, "failed"] remoteExec ["FHQ_TT_setTaskState", 0];
 	};
 }
 else {
 
 	_ballowSearch = true;
-	hint "You start to talk to the informant...";
+	hint (localize "STR_TRGM2_SpeakInformant_StartSpeak");
 	if (alive _thisCiv) then {
 		//increased chance of results
 		_searchChance = [true,false];
@@ -44,20 +44,20 @@ else {
 		_ballowSearch = true;
 	}
 	else {
-		hint "He is dead you muppet!";
+		hint (localize "STR_TRGM2_interrogateOfficer_Muppet");
 		_ballowSearch = false;
 	};
 
 	if (_ballowSearch) then {
 		if (getMarkerType format["mrkMainObjective%1",0] == "empty") then {
 			format["mrkMainObjective%1",0] setMarkerType "mil_unknown"; //NOTE: hard coded zero as only one main task will exict (currently!)
-			hint "Map updated with main AO Location";
+			hint (localize "STR_TRGM2_bugRadio1_MapUpdated");
 		}
 		else {
 			[IntelShownType,"SpeakInform"] execVM "RandFramework\showIntel.sqf";
 			sleep 5;
 			[IntelShownType,"SpeakInform"] execVM "RandFramework\showIntel.sqf";
 		};
-		
+
 	};
 };

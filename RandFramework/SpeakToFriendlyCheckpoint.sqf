@@ -11,7 +11,7 @@ if (alive _thisCheckpointUnit) then {
 
 }
 else {
-	hint "He doesnt seem to be saying much at this time";
+	hint (localize "STR_TRGM2_SpeakToFriendlyCheckpoint_DontTell");
 };
 
 

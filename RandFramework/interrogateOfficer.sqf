@@ -9,24 +9,24 @@ ClearedPositions pushBack (ObjectivePossitions select _iSelected);
 if (_bCreateTask) then {
 	if (alive _thisCiv) then {
 		sName = format["InfSide%1",_iSelected];
-		[sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0];	
-		_thisCiv switchMove "Acts_ExecutionVictim_Loop"; 
+		[sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0];
+		_thisCiv switchMove "Acts_ExecutionVictim_Loop";
 		//_thisCiv disableAI "anim";
 	}
 	else {
 		//fail task
-		hint "He is dead you muppet!";
+		hint (localize "STR_TRGM2_interrogateOfficer_Muppet");
 		//badPoints = badPoints + 10;
 		//publicVariable "badPoints";
 		//[format["InfSide%1",_iSelected], "failed"] call FHQ_TT_setTaskState;
 		sName = format["InfSide%1",_iSelected];
-		[sName, "failed"] remoteExec ["FHQ_TT_setTaskState", 0];	
+		[sName, "failed"] remoteExec ["FHQ_TT_setTaskState", 0];
 	};
 }
 else {
 	_searchChance = [true,false,false,false];
 
-	hint "Map updated with intel found";
+	hint (localize "STR_TRGM2_interrogateOfficer_MapIntel");
 
 	if (alive _thisCiv) then {
 		//increased chance of results
@@ -41,7 +41,7 @@ else {
 
 	if (getMarkerType format["mrkMainObjective%1",0] == "empty") then {
 		format["mrkMainObjective%1",0] setMarkerType "mil_unknown"; //NOTE: hard coded zero as only one main task will exict (currently!)
-		hint "Map updated with main AO location";
+		hint (localize "STR_TRGM2_bugRadio1_MapUpdated");
 	}
 	else {
 		if (alive _thisCiv) then {
@@ -50,9 +50,8 @@ else {
 			[IntelShownType,"IntOfficer"] execVM "RandFramework\showIntel.sqf";
 		}
 		else {
-			hint "Not quite sure why, but for some reason this dead guy isnt speaking!!!"
+			hint (localize "STR_TRGM2_interrogateOfficer_DeadGuy")
 		};
 	};
 };
 
-	

@@ -9,8 +9,8 @@ ClearedPositions pushBack (ObjectivePossitions select _iSelected);
 if (_bCreateTask) then {
 	[_thisCiv] remoteExec ["removeAllActions", 0, true];
 	sName = format["InfSide%1",_iSelected];
-	[sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0];	
+	[sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0];
 }
 else {
-	hint "ID confirmed, this is our target!";
+	hint (localize "STR_TRGM2_IdentifyHVT_Confirmed");
 };

@@ -12,8 +12,8 @@ if (side _killer == west && str(_killed) != str(_killer)) then {
 //if (false) then {
 	//hint "IN IF";
 
-	[0.2,format["Friendly Rebel Killed by %1", name _killer]] execVM "RandFramework\AdjustBadPoints.sqf";
-	
+	[0.2,format[localize "STR_TRGM2_InsKilled_RebelKilled", name _killer]] execVM "RandFramework\AdjustBadPoints.sqf";
+
 	_nearestunits = nearestObjects [getPos _killed,["Man","Car","Tank"],2000];
 	_grpName = createGroup east;
 	{
@@ -23,7 +23,7 @@ if (side _killer == west && str(_killed) != str(_killer)) then {
 		};
 	} forEach _nearestunits;
 
-	
+
 	//{[_x] joinSilent _grpName;} forEach units group _killed;
 
 }

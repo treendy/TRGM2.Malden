@@ -16,12 +16,12 @@ if (_bCreateTask) then {
 	};
 
 } else {
-	
+
 		if (getMarkerType format["mrkMainObjective%1",0] == "empty") then {
 			format["mrkMainObjective%1",0] setMarkerType "mil_unknown"; //NOTE: hard coded zero as only one main task will exict (currently!)
-			hint "Map updated with main AO location";
+			hint (localize "STR_TRGM2_bugRadio1_MapUpdated");
 		}
 		else {
 			[IntelShownType,"HackData"] execVM "RandFramework\showIntel.sqf";
-		};	
+		};
 };

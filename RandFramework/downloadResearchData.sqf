@@ -12,7 +12,7 @@ if (_bCreateTask) then {
 		[sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0];
 	};
 } else {
-	MaxBadPoints = MaxBadPoints + 1; 
+	MaxBadPoints = MaxBadPoints + 1;
 	publicVariable "MaxBadPoints";
-	"Data secured, reputation increased" remoteExecCall	["hint",side _caller];
+	(localize "STR_TRGM2_downloadResearchData_DataSecured") remoteExecCall	["hint",side _caller];
 };

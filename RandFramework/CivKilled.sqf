@@ -8,9 +8,9 @@ if (isNil "CivDeathCount") then {
 if (side _killer == west && str(_killed) != str(_killer)) then {
 	bCivKilled = true;
 	publicVariable "bCivKilled";
-	
+
 	CivDeathCount = CivDeathCount + 1;
 	publicVariable "CivDeathCount";
 
-	[0.1,format["Civ Killed by %1", name _killer]] execVM "RandFramework\AdjustBadPoints.sqf";
+	[0.1,format[localize "STR_TRGM2_CivKilled_Text", name _killer]] execVM "RandFramework\AdjustBadPoints.sqf";
 };
