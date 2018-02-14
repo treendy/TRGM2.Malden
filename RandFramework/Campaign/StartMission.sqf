@@ -36,14 +36,14 @@ _bAllowStart = true;
 if (_bAllowStart) then {
 
 	if ((bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) || !_isCampaign) then {
-		
+
 
 		player allowdamage false;
 
 
-		titleText ["Loading mission...", "BLACK FADED", 5];
+		titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED", 5];
 		//sleep 3;
-		
+
 		if (_isCampaign) then {
 			[["NEW_MISSION"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
 		};
@@ -52,11 +52,11 @@ if (_bAllowStart) then {
 
 
 
-		
+
 
 		if (isServer && _isCampaign) then {
-			
-			{	
+
+			{
 				_y = _x;
 				{
 					//if (_y distance getPos _x > PunishmentRadius) then {
@@ -65,7 +65,7 @@ if (_bAllowStart) then {
 					};
 					//};
 				} forEach nearestObjects [_y, ["all"], 4000];
-			} forEach ObjectivePossitions;						
+			} forEach ObjectivePossitions;
 
 			{
 				_mrkPos = getMarkerPos _x;
@@ -74,41 +74,41 @@ if (_bAllowStart) then {
 					deleteMarker _x;
 				};
 			} forEach allMapMarkers;
-				
+
 			{
 				if (_x getVariable ["DelMeOnNewCampaignDay",false]) then {
 					deleteVehicle _x;
 				};
 			} forEach allMissionObjects "EmptyDetector";
 
-			InfTaskCount = 0; 
+			InfTaskCount = 0;
 			publicVariable "InfTaskCount";
 			ActiveTasks = [];
-			publicVariable "ActiveTasks";	
+			publicVariable "ActiveTasks";
 			ObjectivePossitions = [];
-			publicVariable "ObjectivePossitions";	
+			publicVariable "ObjectivePossitions";
 			SpottedActiveFinished = true;
-			publicVariable "SpottedActiveFinished";	
+			publicVariable "SpottedActiveFinished";
 			bCommsBlocked = false;
-			publicVariable "bCommsBlocked";	
+			publicVariable "bCommsBlocked";
 			bBaseHasChopper = false;
 			publicVariable "bBaseHasChopper";
 			ParaDropped = false;
-			publicVariable "ParaDropped";	
+			publicVariable "ParaDropped";
 			bHasCommsTower = false;
 			CommsTowerPos = [0,0];
-			publicVariable "bHasCommsTower";	
-			publicVariable "CommsTowerPos";	
+			publicVariable "bHasCommsTower";
+			publicVariable "CommsTowerPos";
 			AODetails = [];
-			publicVariable "AODetails";	
+			publicVariable "AODetails";
 			CheckPointAreas = [];
-			publicVariable "CheckPointAreas";	
+			publicVariable "CheckPointAreas";
 			SentryAreas = [];
-			publicVariable "SentryAreas";		
+			publicVariable "SentryAreas";
 			bMortarFiring = false;
-			publicVariable "bMortarFiring";	
+			publicVariable "bMortarFiring";
 			iCampaignDay = iCampaignDay + 1;
-			publicVariable "iCampaignDay";	
+			publicVariable "iCampaignDay";
 			IntelFound = [];
 			publicVariable "IntelFound";
 			ClearedPositions = [];
@@ -117,20 +117,20 @@ if (_bAllowStart) then {
 			publicVariable "AllowUAVLocateHelp";
 
 			NewMissionMusic = nil;
-			publicVariable "NewMissionMusic";	
-		
+			publicVariable "NewMissionMusic";
+
 
 			if (SaveType != 0) then {
 					[SaveType,false] execVM "RandFramework\Campaign\ServerSave.sqf";
 			};
-			
+
 		};
 
-		
+
 		if (isServer) then {
 			MissionLoaded = false;
 			publicVariable "MissionLoaded";
-			[] execVM "RandFramework\SetTimeAndWeather.sqf";		
+			[] execVM "RandFramework\SetTimeAndWeather.sqf";
 			[] execVM "RandFramework\startInfMission.sqf";
 		};
 
@@ -143,13 +143,13 @@ if (_bAllowStart) then {
 		publicVariable "MissionLoaded";
 
 		sleep 2;
-			
+
 		_locationText = [ObjectivePossitions select 0] call TRGM_fnc_getLocationName;
 		_hour = floor daytime;
 		_minute = floor ((daytime - _hour) * 60);
 
-		_strHour = str(_hour); 
-		_strMinute = str(_minute); 
+		_strHour = str(_hour);
+		_strMinute = str(_minute);
 		_lenHour = count (_strHour);
 		_lenMin = count (_strMinute);
 		if (_lenHour == 1) then {
@@ -165,10 +165,10 @@ if (_bAllowStart) then {
 		};
 
 
-		_LineOne = "Day " + str(iCampaignDay);
-		_LineTwo = "Mission: " + CurrentZeroMissionTitle;
+		_LineOne = format [localize "STR_TRGM2_StartMission_Day",str(iCampaignDay)];
+		_LineTwo = (localize "STR_TRGM2_StartMission_Mission") + CurrentZeroMissionTitle;
 		_LineThree = _locationText;
-		_LineFour = "Time: " + str(_time24);
+		_LineFour = (localize "STR_TRGM2_StartMission_Time") + str(_time24);
 
 		if (!_isCampaign) then {
 			_LineOne = "TRGM 2"
@@ -176,7 +176,7 @@ if (_bAllowStart) then {
 
 		if (MaxBadPoints >= 10) then {
 			titleText ["", "BLACK IN", 5];
-			_LineTwo = "Final Objective: " + CurrentZeroMissionTitle;
+			_LineTwo = (localize "STR_TRGM2_StartMission_Final") + CurrentZeroMissionTitle;
 			//titleText [format["Day %1 - %2\nFinal Objective: %3\nLocation: %4",iCampaignDay,_time24,CurrentZeroMissionTitle,_locationText], "BLACK IN", 5];
 		}
 		else {
@@ -187,11 +187,11 @@ if (_bAllowStart) then {
 
 		if (isNil "NewMissionMusic") then {
 			NewMissionMusic = selectRandom ThemeAndIntroMusic;
-			publicVariable "NewMissionMusic";	
+			publicVariable "NewMissionMusic";
 		};
 
-		ace_hearing_disableVolumeUpdate = true; 
-		
+		ace_hearing_disableVolumeUpdate = true;
+
 		playMusic "";
 		0 fadeMusic 1;
 		playMusic selectRandom ThemeAndIntroMusic;
@@ -201,7 +201,7 @@ if (_bAllowStart) then {
 		txt2Layer = "txt2" call BIS_fnc_rscLayer;
 
 
-	    _texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.6' color='#ffffff'>" + _LineTwo +"</t>"; 
+	    _texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.6' color='#ffffff'>" + _LineTwo +"</t>";
 	    [_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
 
 
@@ -209,13 +209,13 @@ if (_bAllowStart) then {
 		txt6Layer = "txt6" call BIS_fnc_rscLayer;
 
 
-	    _texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + _LineOne +"</t>"; 
+	    _texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + _LineOne +"</t>";
 	    [_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
 
-	    _texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + (AdvancedSettings select ADVSET_GROUP_NAME_IDX) + "</t>"; 
+	    _texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + (AdvancedSettings select ADVSET_GROUP_NAME_IDX) + "</t>";
 	    [_texta, -0, 0.350, 7, 1,0,txt6Layer] spawn BIS_fnc_dynamicText;
 
-		showcinemaborder true; 	
+		showcinemaborder true;
 
 		_pos1 = (player getPos [(floor(random 100))+50, (floor(random 360))]);
 		_pos2 = (player getPos [(floor(random 100))+50, (floor(random 360))]);
@@ -224,7 +224,7 @@ if (_bAllowStart) then {
 
 		_camera = "camera" camCreate _pos1;
 		_camera cameraEffect ["internal","back"];
-		
+
 		_camera camPreparePos _pos2;
 		_camera camPrepareTarget player;
 		_camera camPrepareFOV 0.4;
@@ -239,7 +239,7 @@ if (_bAllowStart) then {
 		8 fadeMusic 0;
 		[] spawn {
 			sleep 8;
-			ace_hearing_disableVolumeUpdate = false; 
+			ace_hearing_disableVolumeUpdate = false;
 			playMusic "";
 		};
 		sleep 5;
@@ -251,18 +251,18 @@ if (_bAllowStart) then {
 
 		player allowdamage true;
 
-		
+
 	}
 	else {
 
-		{hint "All players need to be at base, and current task needs to be completed or failed";} remoteExec ["bis_fnc_call", 0];
+		{hint (localize "STR_TRGM2_StartMission_Hint");} remoteExec ["bis_fnc_call", 0];
 	};
 
-	player doFollow player; 
+	player doFollow player;
 
 	sleep 3;
 	saveGame;
 	sleep 1;
 
-	player doFollow player; 
+	player doFollow player;
 };

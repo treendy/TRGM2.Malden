@@ -819,6 +819,248 @@
                 <Chinesesimp>推</Chinesesimp>
 			</Key>
 		</Container>
+		<Container name="Campaign">
+			<Key ID="STR_TRGM2_RecruiteInf_Read">
+				<Original>Read</Original>
+				<English>Read</English>
+                <Chinese>閱讀</Chinese>
+                <Chinesesimp>阅读</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_RecruiteInf_KIA">
+				<Original>KIA: %1</Original>
+				<English>KIA: %1</English>
+                <Chinese>行動中陣亡: %1</Chinese>
+                <Chinesesimp>行动中阵亡: %1</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_RecruiteInf_UnitAdd">
+				<Original>Unit Added: %1\n\nSpent %2 out of %3</Original>
+				<English>Unit Added: %1\n\nSpent %2 out of %3</English>
+                <Chinese>已增加單位: %1\n\n花費掉%3中的%2</Chinese>
+                <Chinesesimp>已增加单位: %1\n\n花费掉%3中的%2</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_RecruiteInf_MoreReputation">
+				<Original>Your reputation needs to be higher to recruit more units</Original>
+				<English>Your reputation needs to be higher to recruit more units</English>
+                <Chinese>你需要更多的聲譽才能招募更多的單位</Chinese>
+                <Chinesesimp>你需要更多的声誉才能招募更多的单位</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ServerSave_Save1">
+				<Original>This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save is only available to the current map</Original>
+				<English>This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save is only available to the current map</English>
+                <Chinese>這個戰役將在每次聲譽改變時自動儲存一次。\n\n只有你才能讀取這個存檔!\n\n這個存檔僅能使用在當前的地圖上</Chinese>
+                <Chinesesimp>这个战役将在每次声誉改变时自动储存一次。\n\n只有你才能读取这个存档!\n\n这个存档仅能使用在当前的地图上</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ServerSave_Save2">
+				<Original>This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save will be available on any map running TRGM2</Original>
+				<English>This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save will be available on any map running TRGM2</English>
+                <Chinese>這個戰役將在每次聲譽改變時自動儲存一次。\n\n只有你才能讀取這個存檔!\n\n這個存檔能使用於任何執行TRGM2的地圖上</Chinese>
+                <Chinesesimp>这个战役将在每次声誉改变时自动储存一次。\n\n只有你才能读取这个存档!\n\n这个存档能使用于任何执行TRGM2的地图上</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ServerSave_SaveLocal">
+				<Original>Campaign saves as Local</Original>
+				<English>Campaign saves as Local</English>
+                <Chinese>戰役儲存成本地</Chinese>
+                <Chinesesimp>战役储存成本地</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ServerSave_SaveGlobal">
+				<Original>Campaign saves as Global</Original>
+				<English>Campaign saves as Global</English>
+                <Chinese>戰役儲存成全域</Chinese>
+                <Chinesesimp>战役储存成全域</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ServerSave_SaveHint">
+				<Original>This mission will save only on the current map.\n\nEach time your reputation adjusts, the data will save automatically.</Original>
+				<English>This mission will save only on the current map.\n\nEach time your reputation adjusts, the data will save automatically.</English>
+                <Chinese>這個任務將儲存在當前的地圖中。\n\n這個戰役將在每次聲譽改變時自動儲存一次。</Chinese>
+                <Chinesesimp>这个任务将储存在当前的地图中。\n\n这个战役将在每次声誉改变时自动储存一次。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ServerSave_SaveError">
+				<Original>Problem saving... local or global save not set</Original>
+				<English>Problem saving... local or global save not set</English>
+                <Chinese>存檔時發生錯誤...沒有為存檔定義為本地或全域</Chinese>
+                <Chinesesimp>存档时发生错误...没有为存档定义为本地或全域</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_ShowRep">
+				<Original>Show Rep Report</Original>
+				<English>Show Rep Report</English>
+                <Chinese>顯示聲譽報告</Chinese>
+                <Chinesesimp>显示声誉报告</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_StartMission">
+				<Original>!!Start Mission!!</Original>
+				<English>!!Start Mission!!</English>
+                <Chinese>!!開始任務!!</Chinese>
+                <Chinesesimp>!!开始任务!!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitRifleman">
+				<Original>Recruit Rifleman</Original>
+				<English>Recruit Rifleman</English>
+                <Chinese>招募步槍兵</Chinese>
+                <Chinesesimp>招募步枪兵</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitAT">
+				<Original>Recruit AT Unit</Original>
+				<English>Recruit AT Unit</English>
+                <Chinese>招募反裝甲兵</Chinese>
+                <Chinesesimp>招募反装甲兵</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitAA">
+				<Original>Recruit AA Unit</Original>
+				<English>Recruit AA Unit</English>
+                <Chinese>招募防空兵</Chinese>
+                <Chinesesimp>招募防空兵</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitEngineer">
+				<Original>Recruit Engineer</Original>
+				<English>Recruit Engineer</English>
+                <Chinese>招募工兵</Chinese>
+                <Chinesesimp>招募工兵</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitExplosive">
+				<Original>Recruit Explosive Specialist</Original>
+				<English>Recruit Explosive Specialist</English>
+                <Chinese>招募爆破兵</Chinese>
+                <Chinesesimp>招募爆破兵</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitMedic">
+				<Original>Recruit Medic</Original>
+				<English>Recruit Medic</English>
+                <Chinese>招募醫護兵</Chinese>
+                <Chinesesimp>招募医护兵</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitAutomaticRiflemanS">
+				<Original>**Recruit Automatic Rifleman**</Original>
+				<English>**Recruit Automatic Rifleman**</English>
+                <Chinese>**招募自動步槍兵**</Chinese>
+                <Chinesesimp>**招募自动步枪兵**</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitAutomaticRifleman">
+				<Original>Recruit Automatic Rifleman</Original>
+				<English>Recruit Automatic Rifleman</English>
+                <Chinese>招募自動步槍兵</Chinese>
+                <Chinesesimp>招募自动步枪兵</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitSniperS">
+				<Original>**Recruit Sniper**</Original>
+				<English>**Recruit Sniper**</English>
+                <Chinese>**招募狙擊手**</Chinese>
+                <Chinesesimp>**招募狙击手**</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitSpotterS">
+				<Original>**Recruit Spotter**</Original>
+				<English>**Recruit Spotter**</English>
+                <Chinese>**招募觀察手**</Chinese>
+                <Chinesesimp>**招募观察手**</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitSniper">
+				<Original>Recruit Sniper</Original>
+				<English>Recruit Sniper</English>
+                <Chinese>招募狙擊手</Chinese>
+                <Chinesesimp>招募狙击手</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitSpotter">
+				<Original>Recruit Spotter</Original>
+				<English>Recruit Spotter</English>
+                <Chinese>招募觀察手</Chinese>
+                <Chinesesimp>招募观察手</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitUAVS">
+				<Original>**Recruit UAV Operator**</Original>
+				<English>**Recruit UAV Operator**</English>
+                <Chinese>**招募UAV操作員**</Chinese>
+                <Chinesesimp>**招募UAV操作员**</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitUAV">
+				<Original>Recruit UAV Operator</Original>
+				<English>Recruit UAV Operator</English>
+                <Chinese>招募UAV操作員</Chinese>
+                <Chinesesimp>招募UAV操作员</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RequestFinal">
+				<Original>!!Request Final Assignment!!</Original>
+				<English>!!Request Final Assignment!!</English>
+                <Chinese>!!請求最終的指派!!</Chinese>
+                <Chinesesimp>!!请求最终的指派!!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RequestNext">
+				<Original>!!Request Next Mission!!</Original>
+				<English>!!Request Next Mission!!</English>
+                <Chinese>!!請求下一個任務!!</Chinese>
+                <Chinesesimp>!!请求下一个任务!!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_EndMission">
+				<Original>End Mission</Original>
+				<English>End Mission</English>
+                <Chinese>任務結束</Chinese>
+                <Chinesesimp>任务结束</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_Save">
+				<Original>Save</Original>
+				<English>Save</English>
+                <Chinese>存檔</Chinese>
+                <Chinesesimp>存档</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_StartMission_Day">
+				<Original>Day %1</Original>
+				<English>Day %1</English>
+                <Chinese>第%1天</Chinese>
+                <Chinesesimp>第%1天</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_StartMission_Mission">
+				<Original>Mission: </Original>
+				<English>Mission: </English>
+                <Chinese>任務: </Chinese>
+                <Chinesesimp>任务: </Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_StartMission_Time">
+				<Original>Time: </Original>
+				<English>Time: </English>
+                <Chinese>時間: </Chinese>
+                <Chinesesimp>时间: </Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_StartMission_Final">
+				<Original>Final Objective: </Original>
+				<English>Final Objective: </English>
+                <Chinese>最終目標: </Chinese>
+                <Chinesesimp>最终目标: </Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_StartMission_Hint">
+				<Original>All players need to be at base, and current task needs to be completed or failed</Original>
+				<English>All players need to be at base, and current task needs to be completed or failed</English>
+                <Chinese>所有玩家必需返回到基地，並且當前的任務目標必需被完成或失敗</Chinese>
+                <Chinesesimp>所有玩家必需返回到基地，并且当前的任务目标必需被完成或失败</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ShowRepReport_Message1">
+				<Original>Your current team rank is:</Original>
+				<English>Your current team rank is:</English>
+                <Chinese>你的隊伍當前的階級:</Chinese>
+                <Chinesesimp>你的队伍当前的阶级:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ShowRepReport_Message2">
+				<Original>Get to rank 5 for final objective!</Original>
+				<English>Get to rank 5 for final objective!</English>
+                <Chinese>升到階級5來接受最終任務目標!</Chinese>
+                <Chinesesimp>升到阶级5来接受最终任务目标!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ShowRepReport_TotalMessage">
+				<Original>TOTAL REP: %1 &lt;br/&gt;&lt;br/&gt;REASONS SO FAR: &lt;br/&gt;%2</Original>
+				<English>TOTAL REP: %1 &lt;br/&gt;&lt;br/&gt;REASONS SO FAR: &lt;br/&gt;%2</English>
+                <Chinese>總評價: %1 &lt;br/&gt;&lt;br/&gt;最大的原因: &lt;br/&gt;%2</Chinese>
+                <Chinesesimp>总评价: %1 &lt;br/&gt;&lt;br/&gt;最大的原因: &lt;br/&gt;%2</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_exitCampaign_RepSaaved">
+				<Original>Your rep and status has been saved.  Current day is ending</Original>
+				<English>Your rep and status has been saved.  Current day is ending</English>
+                <Chinese>你的聲譽與狀態皆已儲存。當前任務即將結束</Chinese>
+                <Chinesesimp>你的声誉与状态皆已储存。当前任务即将结束</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_exitCampaign_CampaignSaaved">
+				<Original>Campaign details saved, however cant end mission, as all players need to be at base!</Original>
+				<English>Campaign details saved, however cant end mission, as all players need to be at base!</English>
+                <Chinese>戰役已存檔，然而還不能結束任務，因為有玩家還沒回到基地裡!</Chinese>
+                <Chinesesimp>战役已存档，然而还不能结束任务，因为有玩家还没回到基地里!</Chinesesimp>
+			</Key>
+		</Container>
 	</Package>
 	<Package name="AISFolder">
 		<Container name="Core">
