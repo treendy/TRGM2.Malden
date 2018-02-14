@@ -1,5 +1,5 @@
 
 
-[0.1,"Supply drop requested"] execVM "RandFramework\AdjustBadPoints.sqf";
+[0.1,localize "STR_TRGM2_SupplyDropVehInit_Hint"] execVM "RandFramework\AdjustBadPoints.sqf";
 
 

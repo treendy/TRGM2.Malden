@@ -5,19 +5,19 @@ _flatPos = [getPos _car , 5, 10, 5, 2, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc
 if (str(_flatPos) == "[0,0,0]") then {
 	_flatPos = [getPos _car , 5, 8, 5, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 	if (str(_flatPos) == "[0,0,0]") then {
-		hint "Not enough room near vehicle to unload!";
+		hint (localize "STR_TRGM2_UnloadDingy_NoArea");
 	}
 	else {
 		_dingy = selectRandom FriendlyFastResponseDingy createVehicle _flatPos;
-		_dingy addAction ["push","RandFramework\PushObject.sqf"];
-		hint "Dingy unloaded!";
+		_dingy addAction [localize "STR_TRGM2_UnloadDingy_push","RandFramework\PushObject.sqf"];
+		hint (localize "STR_TRGM2_UnloadDingy_DingyUnloaded");
 	};
-	
+
 }
 else {
 	_dingy = selectRandom FriendlyFastResponseDingy createVehicle _flatPos;
-	_dingy addAction ["push","RandFramework\PushObject.sqf"];
-	hint "Dingy unloaded to nearest water!";
+	_dingy addAction [localize "STR_TRGM2_UnloadDingy_push","RandFramework\PushObject.sqf"];
+	hint (localize "STR_TRGM2_UnloadDingy_DingyUnloadedWater");
 };
 
 //hint str(_flatPos);

@@ -554,11 +554,29 @@
                 <Chinese>摧毀彈藥卡車</Chinese>
                 <Chinesesimp>摧毁弹药卡车</Chinesesimp>
 			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle3_Destory">
+				<Original>You have destroyed enemy ammo trucks, reputation increased</Original>
+				<English>You have destroyed enemy ammo trucks, reputation increased</English>
+                <Chinese>成功摧毀了敵人的彈藥卡車，你們的聲譽已提高</Chinese>
+                <Chinesesimp>成功摧毁了敌人的弹药卡车，你们的声誉已提高</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle3_Desc">
+				<Original>Two ammo truck have been located, they are getting ready to convoy these to reinforce an area in preperation of an attack.  Locate and destroy these vehicles.</Original>
+				<English>Two ammo truck have been located, they are getting ready to convoy these to reinforce an area in preperation of an attack.  Locate and destroy these vehicles.</English>
+                <Chinese>我們已定位到兩台彈藥卡車的位置，他們已經滿載彈藥並準備支援即將發起的攻勢。找到並摧毀掉這些載具。</Chinese>
+                <Chinesesimp>我们已定位到两台弹药卡车的位置，他们已经满载弹药并准备支援即将发起的攻势。找到并摧毁掉这些载具。</Chinesesimp>
+			</Key>
 			<Key ID="STR_TRGM2_startInfMission_MissionTitle4">
 				<Original>Speak with informant</Original>
 				<English>Speak with informant</English>
                 <Chinese>與線人交談</Chinese>
                 <Chinesesimp>与线人交谈</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle4_Desc">
+				<Original>We have a guy that holds valuable intel on enemy plans, he is walking around the area marked, unfortunately this area is occupied, but we need this intel regardless! move in, find him and talk to him.&lt;br/&gt;We are not exactly sure which of the following two is our guy, so look out for them both!&lt;br/&gt;</Original>
+				<English>We have a guy that holds valuable intel on enemy plans, he is walking around the area marked, unfortunately this area is occupied, but we need this intel regardless! move in, find him and talk to him.&lt;br/&gt;We are not exactly sure which of the following two is our guy, so look out for them both!&lt;br/&gt;</English>
+                <Chinese>我們的其中一位線人掌握了敵人的作戰計劃，他正漫步在標記的區域中，不幸的是這裡已被敵人給佔據，但我們非常需要這份情報的幫助!進入該區，找到並與他交談。&lt;br/&gt;我們不大確定照片中的這兩位哪個才是我們要的線人，所以建議你們找到他們兩個!&lt;br/&gt;</Chinese>
+                <Chinesesimp>我们的其中一位线人掌握了敌人的作战计划，他正漫步在标记的区域中，不幸的是这里已被敌人给占据，但我们非常需要这份情报的帮助!进入该区，找到并与他交谈。&lt;br/&gt;我们不大确定照片中的这两位哪个才是我们要的线人，所以建议你们找到他们两个!&lt;br/&gt;</Chinesesimp>
 			</Key>
 			<Key ID="STR_TRGM2_startInfMission_MissionTitle5">
 				<Original>interrogate officer</Original>
@@ -566,11 +584,29 @@
                 <Chinese>審問軍官</Chinese>
                 <Chinesesimp>审问军官</Chinesesimp>
 			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle5_Desc">
+				<Original>We have located an enemy officer who is a lead role in a current operation, we need you to get as much intel from this guy as possible!&lt;br/&gt;&lt;br/&gt;Shoot him in the leg to incapacitate him, then approch to tie up and interrogate him!&lt;br/&gt;&lt;br/&gt;</Original>
+				<English>We have located an enemy officer who is a lead role in a current operation, we need you to get as much intel from this guy as possible!&lt;br/&gt;&lt;br/&gt;Shoot him in the leg to incapacitate him, then approch to tie up and interrogate him!&lt;br/&gt;&lt;br/&gt;</English>
+                <Chinese>我們已定位到敵人在這場行動中的重要負責人，我們需要你們盡可能從他身上搾取情報!&lt;br/&gt;&lt;br/&gt;對他的腿部射擊可以讓他失去行動能力，再來就綑綁住並開始審問!&lt;br/&gt;&lt;br/&gt;</Chinese>
+                <Chinesesimp>我们已定位到敌人在这场行动中的重要负责人，我们需要你们尽可能从他身上榨取情报!&lt;br/&gt;&lt;br/&gt;对他的腿部射击可以让他失去行动能力，再来就捆绑住并开始审问!&lt;br/&gt;&lt;br/&gt;</Chinesesimp>
+			</Key>
 			<Key ID="STR_TRGM2_startInfMission_MissionTitle6">
 				<Original>Transmit Enemy Comms to HQ</Original>
 				<English>Transmit Enemy Comms to HQ</English>
                 <Chinese>轉送敵方通訊信號到總部</Chinese>
                 <Chinesesimp>转送敌方通讯信号到总部</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle6_Button">
+				<Original>Send transmission to HQ</Original>
+				<English>Send transmission to HQ</English>
+                <Chinese>轉送訊號到總部</Chinese>
+                <Chinesesimp>转送讯号到总部</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle6_Desc">
+				<Original>We need you to locate an enemy radio, we know its being used for comms of a planned attack, we need you to send the transmission to us so our team can listen in until the plans have been identified!</Original>
+				<English>We need you to locate an enemy radio, we know its being used for comms of a planned attack, we need you to send the transmission to us so our team can listen in until the plans have been identified!</English>
+                <Chinese>我們需要你們去找到敵人的一座通訊塔，我們知道它是被敵人用來協調攻擊用的重要通訊設施，我們需要你們去轉送他們的通訊信號到我們這邊，好讓我們的研究小隊能夠分析敵人的計劃!</Chinese>
+                <Chinesesimp>我们需要你们去找到敌人的一座通讯塔，我们知道它是被敌人用来协调攻击用的重要通讯设施，我们需要你们去转送他们的通讯信号到我们这边，好让我们的研究小队能够分析敌人的计划!</Chinesesimp>
 			</Key>
 			<Key ID="STR_TRGM2_startInfMission_MissionTitle7">
 				<Original>Eliminate Officer</Original>
@@ -578,11 +614,47 @@
                 <Chinese>殲滅軍官</Chinese>
                 <Chinesesimp>歼灭军官</Chinesesimp>
 			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle7_Desc">
+				<Original>HVT located, we need him dead! his death will cause major destruction to current enemy plans</Original>
+				<English>HVT located, we need him dead! his death will cause major destruction to current enemy plans</English>
+                <Chinese>已確認到高價值目標的位置，我們需要幹掉他!他的死將對敵方當前作戰計劃產生很大的影響。</Chinese>
+                <Chinesesimp>已确认到高价值目标的位置，我们需要干掉他!他的死将对敌方当前作战计划产生很大的影响。</Chinesesimp>
+			</Key>
 			<Key ID="STR_TRGM2_startInfMission_MissionTitle8">
 				<Original>Assasinate weapon dealer</Original>
 				<English>Assasinate weapon dealer</English>
                 <Chinese>刺殺軍火商</Chinese>
                 <Chinesesimp>刺杀军火商</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle8_Desc">
+				<Original>A weapons dealer is getting ready to meet up with an enemy general, he is about to sell weapons that have been stolen from us!  locate him and assainate him. We have intel of two dealers, here they both are, it will be one of these who you need to locate, we are unsure which one!</Original>
+				<English>A weapons dealer is getting ready to meet up with an enemy general, he is about to sell weapons that have been stolen from us!  locate him and assainate him. We have intel of two dealers, here they both are, it will be one of these who you need to locate, we are unsure which one!</English>
+                <Chinese>一位軍火商正準備接見敵方的將軍，他將對他們販售從我們這邊竊取到的武器!找到並幹掉他。我們的情報提供了兩個軍火商的照片，其中一位就是我們的目標，但我們不確定到底是哪位!</Chinese>
+                <Chinesesimp>一位军火商正准备接见敌方的将军，他将对他们贩售从我们这边窃取到的武器!找到并干掉他。我们的情报提供了两个军火商的照片，其中一位就是我们的目标，但我们不确定到底是哪位!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle8_Button">
+				<Original>Search for ID</Original>
+				<English>Search for ID</English>
+                <Chinese>搜索身份</Chinese>
+                <Chinesesimp>搜索身份</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle8_Button2">
+				<Original>Get Intel</Original>
+				<English>Get Intel</English>
+                <Chinese>取得情報</Chinese>
+                <Chinesesimp>取得情报</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle8_Eliminated">
+				<Original>A HVT has been eliminated, reputation increased</Original>
+				<English>A HVT has been eliminated, reputation increased</English>
+                <Chinese>成功殲滅重要目標，聲譽已提高</Chinese>
+                <Chinesesimp>成功歼灭重要目标，声誉已提高</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle8_MustSearch">
+				<Original>&lt;br/&gt;&lt;br/&gt;You must search the body to identify this target!&lt;br/&gt;&lt;br/&gt;</Original>
+				<English>&lt;br/&gt;&lt;br/&gt;You must search the body to identify this target!&lt;br/&gt;&lt;br/&gt;</English>
+                <Chinese>&lt;br/&gt;&lt;br/&gt;你必需搜索屍體來確認身分!&lt;br/&gt;&lt;br/&gt;</Chinese>
+                <Chinesesimp>&lt;br/&gt;&lt;br/&gt;你必需搜索尸体来确认身分!&lt;br/&gt;&lt;br/&gt;</Chinesesimp>
 			</Key>
 			<Key ID="STR_TRGM2_startInfMission_MissionTitle9">
 				<Original>Destroy AAA vehicles</Original>
@@ -590,11 +662,161 @@
                 <Chinese>摧毀高射炮載具</Chinese>
                 <Chinesesimp>摧毁高射炮载具</Chinesesimp>
 			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle9_Desc">
+				<Original>Two Anti Air vehicles have been causing havoc near the position marked.  Locate and destroy these ASAP!</Original>
+				<English>Two Anti Air vehicles have been causing havoc near the position marked.  Locate and destroy these ASAP!</English>
+                <Chinese>有兩台已被標記在地圖上的防空載具已造成我們很大的損失。請立即找到並摧毀掉他們!</Chinese>
+                <Chinesesimp>有两台已被标记在地图上的防空载具已造成我们很大的损失。请立即找到并摧毁掉他们!</Chinesesimp>
+			</Key>
 			<Key ID="STR_TRGM2_startInfMission_MissionTitle10">
 				<Original>Destroy Artillery vehicles</Original>
 				<English>Destroy Artillery vehicles</English>
                 <Chinese>摧毀火炮載具</Chinese>
                 <Chinesesimp>摧毁火炮载具</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle10_Desc">
+				<Original>Two artillery vehicles have been firing rounds at and around our HQ, we need them destroyed as soon as possible!</Original>
+				<English>Two artillery vehicles have been firing rounds at and around our HQ, we need them destroyed as soon as possible!</English>
+                <Chinese>有兩台火炮一直在對我們總部週遭進行火力打擊，我們需要你們盡快找到並摧毀他們!</Chinese>
+                <Chinesesimp>有两台火炮一直在对我们总部周遭进行火力打击，我们需要你们尽快找到并摧毁他们!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MainMission">
+				<Original>Main</Original>
+				<English>Main</English>
+                <Chinese>主線</Chinese>
+                <Chinesesimp>主线</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_OptionalMission">
+				<Original>Optional</Original>
+				<English>Optional</English>
+                <Chinese>支線</Chinese>
+                <Chinesesimp>支线</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_markerInformant">
+				<Original>An informat is located here.  No enemy reported at this location</Original>
+				<English>An informat is located here.  No enemy reported at this location</English>
+                <Chinese>一位線人位在這邊。該區域沒有回報說有出現過敵人</Chinese>
+                <Chinesesimp>一位线人位在这边。该区域没有回报说有出现过敌人</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionDayTitle">
+				<Original>Day: %1 : %2</Original>
+				<English>Day: %1 : %2</English>
+                <Chinese>第%1天 : %2</Chinese>
+                <Chinesesimp>第%1天 : %2</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_RTBNextMission">
+				<Original>return to base for next assignment!!</Original>
+				<English>return to base for next assignment!!</English>
+                <Chinese>返回基地等待新的指派!!</Chinese>
+                <Chinesesimp>返回基地等待新的指派!!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_DayComplete">
+				<Original>Day %1 task completed</Original>
+				<English>Day %1 task completed</English>
+                <Chinese>第%1天任務結束</Chinese>
+                <Chinesesimp>第%1天任务结束</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_HoldReputation_Desc">
+				<Original>Make too many mistakes, kill civs, lose too many units, your reputation will lower.  Try not to make too many errors</Original>
+				<English>Make too many mistakes, kill civs, lose too many units, your reputation will lower.  Try not to make too many errors</English>
+                <Chinese>失誤太多次，濫殺平民，損失過多的單位都會造成你們的聲譽下降。請試著不要犯太多的錯誤</Chinese>
+                <Chinesesimp>失误太多次，滥杀平民，损失过多的单位都会造成你们的声誉下降。请试着不要犯太多的错误</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_HoldReputation_Title">
+				<Original>(optional) Uphold reputation</Original>
+				<English>(optional) Uphold reputation</English>
+                <Chinese>(支線) 維持住聲譽</Chinese>
+                <Chinesesimp>(支线) 维持住声誉</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_HoldReputation_Title2">
+				<Original>!!Must uphold reputation!!</Original>
+				<English>!!Must uphold reputation!!</English>
+                <Chinese>!!必需維持住聲譽!!</Chinese>
+                <Chinesesimp>!!必需维持住声誉!!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_KiloCamp">
+				<Original>Kilo 1 - Camp</Original>
+				<English>Kilo 1 - Camp</English>
+                <Chinese>Kilo 1 - 營地</Chinese>
+                <Chinesesimp>Kilo 1 - 营地</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_RemoveVehicleFromTent">
+				<Original>Remove small vehicle from tent</Original>
+				<English>Remove small vehicle from tent</English>
+                <Chinese>從帳篷中取出小型載具</Chinese>
+                <Chinesesimp>从帐篷中取出小型载具</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_UnloadDingy">
+				<Original>Unload Dingy</Original>
+				<English>Unload Dingy</English>
+                <Chinese>卸載橡皮艇</Chinese>
+                <Chinesesimp>卸载橡皮艇</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_VirtualArsenal">
+				<Original>&lt;t color='#ff1111'&gt;Virtual Arsenal&lt;/t&gt;</Original>
+				<English>&lt;t color='#ff1111'&gt;Virtual Arsenal&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#ff1111'&gt;虛擬軍火庫&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#ff1111'&gt;虚拟军火库&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_SoItBegin">
+				<Original>And so it begins!</Original>
+				<English>And so it begins!</English>
+                <Chinese>就這麼開始了!</Chinese>
+                <Chinesesimp>就这么开始了!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SupplyDropVehInit_Hint">
+				<Original>Supply drop requested</Original>
+				<English>Supply drop requested</English>
+                <Chinese>已呼叫空投補給</Chinese>
+                <Chinesesimp>已呼叫空投补给</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SupportArtiRequested_Hint">
+				<Original>Arti round fired</Original>
+				<English>Arti round fired</English>
+                <Chinese>火炮已發射</Chinese>
+                <Chinesesimp>火炮已发射</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TalkRebLead_Hint">
+				<Original>This guy doesnt seem to want to speak much in his current state!!!</Original>
+				<English>This guy doesnt seem to want to speak much in his current state!!!</English>
+                <Chinese>在當前的狀況下這個傢伙似乎並不想多說些什麼!!!</Chinese>
+                <Chinesesimp>在当前的状况下这个家伙似乎并不想多说些什么!!!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_tele_SelectPosition">
+				<Original>Select Map Position</Original>
+				<English>Select Map Position</English>
+                <Chinese>在地圖上選擇一處位置</Chinese>
+                <Chinesesimp>在地图上选择一处位置</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_telePara_SelectPosition">
+				<Original>Select Paradrop position</Original>
+				<English>Select Paradrop position</English>
+                <Chinese>在地圖上選擇一處要跳傘的位置</Chinese>
+                <Chinesesimp>在地图上选择一处要跳伞的位置</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_UnloadDingy_NoArea">
+				<Original>Not enough room near vehicle to unload!</Original>
+				<English>Not enough room near vehicle to unload!</English>
+                <Chinese>載具附近沒有足夠的空間可以進行卸載!</Chinese>
+                <Chinesesimp>载具附近没有足够的空间可以进行卸载!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_UnloadDingy_DingyUnloaded">
+				<Original>Dingy unloaded!</Original>
+				<English>Dingy unloaded!</English>
+                <Chinese>已卸載橡皮艇!</Chinese>
+                <Chinesesimp>已卸载橡皮艇!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_UnloadDingy_DingyUnloadedWater">
+				<Original>Dingy unloaded to nearest water!</Original>
+				<English>Dingy unloaded to nearest water!</English>
+                <Chinese>已卸載橡皮艇到附近的水面上!</Chinese>
+                <Chinesesimp>已卸载橡皮艇到附近的水面上!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_UnloadDingy_push">
+				<Original>push</Original>
+				<English>push</English>
+                <Chinese>推</Chinese>
+                <Chinesesimp>推</Chinesesimp>
 			</Key>
 		</Container>
 	</Package>

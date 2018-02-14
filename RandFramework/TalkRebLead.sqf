@@ -16,10 +16,10 @@ if (alive _thisCiv) then {
 	[IntelShownType,"TalkRebLead"] execVM "RandFramework\showIntel.sqf";
 	sleep 10;
 	_thisCiv switchMove "";
-	
+
 }
 else {
-	hint "This guy doesnt seem to want to speak much in his current state!!!"
+	hint (localize "STR_TRGM2_TalkRebLead_Hint")
 };
 
 
