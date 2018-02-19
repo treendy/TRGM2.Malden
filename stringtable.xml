@@ -1061,6 +1061,248 @@
                 <Chinesesimp>战役已存档，然而还不能结束任务，因为有玩家还没回到基地里!</Chinesesimp>
 			</Key>
 		</Container>
+		<Container name="Functions">
+			<Key ID="STR_TRGM2_civillians_fnbadCivAddSearchAction_Button">
+				<Original>Search Civ</Original>
+				<English>Search Civ</English>
+                <Chinese>對平民搜身</Chinese>
+                <Chinesesimp>对平民搜身</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_civillians_fnbadCivSearch_IsArmed1">
+				<Original>This civilian is carrying a gun.</Original>
+				<English>This civilian is carrying a gun.</English>
+                <Chinese>這個平民有帶著槍枝。</Chinese>
+                <Chinesesimp>这个平民有带着枪枝。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_civillians_fnbadCivSearch_IsArmed2">
+				<Original>The civilian is armed.</Original>
+				<English>The civilian is armed.</English>
+                <Chinese>這個平民有武裝。</Chinese>
+                <Chinesesimp>这个平民有武装。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_civillians_fnbadCivSearch_IsArmed3">
+				<Original>You spot a firearm under his clothes.</Original>
+				<English>You spot a firearm under his clothes.</English>
+                <Chinese>你在他的衣服底下發現到了一把槍。</Chinese>
+                <Chinesesimp>你在他的衣服底下发现到了一把枪。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fngetLocationName_DirOfName">
+				<Original>%1 of %2</Original>
+				<English>%1 of %2</English>
+                <Chinese>%2的%1方</Chinese>
+                <Chinesesimp>%2的%1方</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fngetLocationName_At">
+				<Original>at %1</Original>
+				<English>at %1</English>
+                <Chinese>在%1</Chinese>
+                <Chinesesimp>在%1</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_N_Word">
+				<Original>North</Original>
+				<English>North</English>
+                <Chinese>北</Chinese>
+                <Chinesesimp>北</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_NE_Word">
+				<Original>North East</Original>
+				<English>North East</English>
+                <Chinese>東北</Chinese>
+                <Chinesesimp>东北</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_E_Word">
+				<Original>East</Original>
+				<English>East</English>
+                <Chinese>東</Chinese>
+                <Chinesesimp>东</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_SE_Word">
+				<Original>South East</Original>
+				<English>South East</English>
+                <Chinese>東南</Chinese>
+                <Chinesesimp>东南</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_S_Word">
+				<Original>South</Original>
+				<English>South</English>
+                <Chinese>南</Chinese>
+                <Chinesesimp>南</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_SW_Word">
+				<Original>South West</Original>
+				<English>South West</English>
+                <Chinese>西南</Chinese>
+                <Chinesesimp>西南</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_W_Word">
+				<Original>West</Original>
+				<English>West</English>
+                <Chinese>西</Chinese>
+                <Chinesesimp>西</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_NW_Word">
+				<Original>North West</Original>
+				<English>North West</English>
+                <Chinese>西北</Chinese>
+                <Chinesesimp>西北</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_N">
+				<Original>N</Original>
+				<English>N</English>
+                <Chinese>北</Chinese>
+                <Chinesesimp>北</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_NE">
+				<Original>NE</Original>
+				<English>NE</English>
+                <Chinese>東北</Chinese>
+                <Chinesesimp>东北</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_E">
+				<Original>E</Original>
+				<English>E</English>
+                <Chinese>東</Chinese>
+                <Chinesesimp>东</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_SE">
+				<Original>SE</Original>
+				<English>SE</English>
+                <Chinese>東南</Chinese>
+                <Chinesesimp>东南</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_S">
+				<Original>S</Original>
+				<English>S</English>
+                <Chinese>南</Chinese>
+                <Chinesesimp>南</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_SW">
+				<Original>SW</Original>
+				<English>SW</English>
+                <Chinese>西南</Chinese>
+                <Chinesesimp>西南</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_W">
+				<Original>W</Original>
+				<English>W</English>
+                <Chinese>西</Chinese>
+                <Chinesesimp>西</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_NW">
+				<Original>NW</Original>
+				<English>NW</English>
+                <Chinese>西北</Chinese>
+                <Chinesesimp>西北</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnaddTransportAction_SelectDest">
+				<Original>Select Destination</Original>
+				<English>Select Destination</English>
+                <Chinese>選擇目的地</Chinese>
+                <Chinesesimp>选择目的地</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnaddTransportAction_DivertLZ">
+				<Original>Divert to different LZ</Original>
+				<English>Divert to different LZ</English>
+                <Chinese>變更到別的降落點</Chinese>
+                <Chinesesimp>变更到别的降落点</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnselectLzOnMapClick_RTB">
+				<Original>Copy that, RTB.</Original>
+				<English>Copy that, RTB.</English>
+                <Chinese>收到，開始返回基地。</Chinese>
+                <Chinesesimp>收到，开始返回基地。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnselectLzOnMapClick_TooCloseBase">
+				<Original>Please choose another location, you have selected a location too close to the Base\n\nTo abort press ESC</Original>
+				<English>Please choose another location, you have selected a location too close to the Base\n\nTo abort press ESC</English>
+                <Chinese>請選擇一個別的地點，你選的位置太靠近基地了\n\n按下ESC鍵即可取消動作</Chinese>
+                <Chinesesimp>请选择一个别的地点，你选的位置太靠近基地了\n\n按下ESC键即可取消动作</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnselectLzOnMapClick_TooCloseAO">
+				<Original>Please choose another location, you have selected a location too close to the AO\n\nTo abort press ESC</Original>
+				<English>Please choose another location, you have selected a location too close to the AO\n\nTo abort press ESC</English>
+                <Chinese>請選擇一個別的地點，你選的位置太靠近任務區域了\n\n按下ESC鍵即可取消動作</Chinese>
+                <Chinesesimp>请选择一个别的地点，你选的位置太靠近任务区域了\n\n按下ESC键即可取消动作</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnselectLzOnMapClick_TooCloseWalk">
+				<Original>You can walk that far soldier!</Original>
+				<English>You can walk that far soldier!</English>
+                <Chinese>你自己就可以走到了，大兵!</Chinese>
+                <Chinesesimp>你自己就可以走到了，大兵!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnselectLzOnMapClick_LessBuildUp">
+				<Original>Couldnt find a good LZ near your point, please select another.  Try to choose somewhere that is less built up</Original>
+				<English>Couldnt find a good LZ near your point, please select another.  Try to choose somewhere that is less built up</English>
+                <Chinese>無法在你指定的地點附近找到有效的降落點，請重新選擇一個地點。請試著找尋較少障礙物的地點</Chinese>
+                <Chinesesimp>无法在你指定的地点附近找到有效的降落点，请重新选择一个地点。请试着找寻较少障碍物的地点</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnselectLZ_SelectOutsideAO">
+				<Original>Select Map Position outside the AO areas</Original>
+				<English>Select Map Position outside the AO areas</English>
+                <Chinese>請選擇一個在任務區域外的降落點</Chinese>
+                <Chinesesimp>请选择一个在任务区域外的降落点</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToBase_RequestingLanding">
+				<Original>%1 requesting landing.</Original>
+				<English>%1 requesting landing.</English>
+                <Chinese>%1請求降落許可。</Chinese>
+                <Chinesesimp>%1请求降落许可。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToBase_ClearLand">
+				<Original>%1 you are cleared for landing.</Original>
+				<English>%1 you are cleared for landing.</English>
+                <Chinese>%1你可以降落了。</Chinese>
+                <Chinesesimp>%1你可以降落了。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToBase_BackHome">
+				<Original>Back home. Not that I've missed it...</Original>
+				<English>Back home. Not that I've missed it...</English>
+                <Chinese>到家了。甜蜜的家...</Chinese>
+                <Chinesesimp>到家了。甜蜜的家...</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToLz_ClearTakeoff">
+				<Original>%1, you are cleared for takeoff %2.</Original>
+				<English>%1, you are cleared for takeoff %2.</English>
+                <Chinese>%1，你們可以起飛前往%2了。</Chinese>
+                <Chinesesimp>%1，你们可以起飞前往%2了。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToLz_OffWeGo">
+				<Original>Off we go.</Original>
+				<English>Off we go.</English>
+                <Chinese>我們走吧。</Chinese>
+                <Chinesesimp>我们走吧。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToLz_Diverting">
+				<Original>Diverting.</Original>
+				<English>Diverting.</English>
+                <Chinese>轉移中。</Chinese>
+                <Chinesesimp>转移中。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToLz_ReachLZ_Out">
+				<Original>We reached our destination. Good Luck out there!</Original>
+				<English>We reached our destination. Good Luck out there!</English>
+                <Chinese>已抵達目的地。祝你們好運!</Chinese>
+                <Chinesesimp>已抵达目的地。祝你们好运!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToLz_ReachLZ_In">
+				<Original>We have landed at LZ, get in!</Original>
+				<English>We have landed at LZ, get in!</English>
+                <Chinese>我們已抵達降落點，快進來!</Chinese>
+                <Chinesesimp>我们已抵达降落点，快进来!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToLz_EnterAirspace">
+				<Original>%1 is entering airspace %2 - We're RTB.</Original>
+				<English>%1 is entering airspace %2 - We're RTB.</English>
+                <Chinese>%1正在進入%2的空域 - 我們正在返航。</Chinese>
+                <Chinesesimp>%1正在进入%2的空域 - 我们正在返航。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToLz_WelcomeAboard">
+				<Original>Welcome aboard, Let us know your destination!</Original>
+				<English>Welcome aboard, Let us know your destination!</English>
+                <Chinese>歡迎登機，讓我們知道你們的目的地!</Chinese>
+                <Chinesesimp>欢迎登机，让我们知道你们的目的地!</Chinesesimp>
+			</Key>
+		</Container>
 	</Package>
 	<Package name="AISFolder">
 		<Container name="Core">

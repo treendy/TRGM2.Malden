@@ -2,7 +2,7 @@ params ["_badCiv","_player"];
 
 _badCiv disableAI "MOVE"; // disable movement during search
 
-_hintText = selectRandom ["This civilian is carrying a gun.","The civilian is armed.","You spot a firearm under his clothes."];
+_hintText = selectRandom [localize "STR_TRGM2_civillians_fnbadCivSearch_IsArmed1",localize "STR_TRGM2_civillians_fnbadCivSearch_IsArmed2",localize "STR_TRGM2_civillians_fnbadCivSearch_IsArmed3"];
 hint _hintText;
 
 sleep 3; // wait a few seconds to allow the player to react

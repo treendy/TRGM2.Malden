@@ -53,21 +53,21 @@ if ( !(_thisMission call TRGM_fnc_checkMissionIdActive)) then {
 // Landing Comms
 if ([_vehicle] call TRGM_fnc_helicopterIsFlying) then  {
 	_groupID = groupId group driver _vehicle;
-	_text = format ["%1 requesting landing.", _groupID];
+	_text = format [localize "STR_TRGM2_transport_fnflyToBase_RequestingLanding", _groupID];
 	[driver _vehicle,_text] call TRGM_fnc_commsSide;
 	sleep 1.5;
-	_text = format ["%1 you are cleared for landing.", _groupID];
+	_text = format [localize "STR_TRGM2_transport_fnflyToBase_ClearLand", _groupID];
 	[_text] call TRGM_fnc_commsHQ;
 };
 
-setWind [0,0,true]; // prevent stuck helicopter during duststorm 
+setWind [0,0,true]; // prevent stuck helicopter during duststorm
 
 waitUntil {(!([_vehicle] call TRGM_fnc_helicopterIsFlying)) || {!canMove _vehicle} || !(_thisMission call TRGM_fnc_checkMissionIdActive)};
 if ( !(_thisMission call TRGM_fnc_checkMissionIdActive)) then {
 	breakOut "FlyToBase";
 };
 
-[_vehicle,"Back home. Not that I've missed it..."] call TRGM_fnc_commsPilotToVehicle;
+[_vehicle,localize "STR_TRGM2_transport_fnflyToBase_BackHome"] call TRGM_fnc_commsPilotToVehicle;
 
 
 deleteVehicle _heliPad;

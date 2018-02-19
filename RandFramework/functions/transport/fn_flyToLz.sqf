@@ -57,7 +57,7 @@ _driver = driver _vehicle;
 
 _markerName = str(_vehicle) + "LZ" + str(_thisMissionNr);
 
-_mrkcustomLZ1 = createMarker [_markerName, _destinationPosition]; 
+_mrkcustomLZ1 = createMarker [_markerName, _destinationPosition];
 _mrkcustomLZ1 setMarkerShape "ICON";
 _mrkcustomLZ1 setMarkerSize [1,1];
 _mrkcustomLZ1 setMarkerColor "colorBLUFOR";
@@ -93,7 +93,7 @@ if (!_airEscort) then {
 
 		if (false) then {
 			_markerNameSteps = str(_vehicle) + "Step_" + str(500 - _iSaftyCount);
-			_mrkcustomSteps = createMarker [_markerNameSteps, _stepPos]; 
+			_mrkcustomSteps = createMarker [_markerNameSteps, _stepPos];
 			_mrkcustomSteps setMarkerShape "ICON";
 			_mrkcustomSteps setMarkerSize [1,1];
 			_mrkcustomSteps setMarkerType "hd_dot";
@@ -101,7 +101,7 @@ if (!_airEscort) then {
 			sleep 0.1;
 			hint str(_iSaftyCount);
 		};
-		
+
 		if (_stepDistToAO < 1000) then {
 			_bEndSteps = true;
 			_divertDirectionA = ([_DirAtoB,80] call TRGM_fnc_AddToDirection);
@@ -155,7 +155,7 @@ if (_airEscort) then {
 
 if (!([_vehicle] call TRGM_fnc_helicopterIsFlying)) then {
 	_locationText = [position _vehicle,true] call TRGM_fnc_getLocationName;
-	_text = format ["%1, you are cleared for takeoff %2.", groupId group _driver,_locationText];
+	_text = format [localize "STR_TRGM2_transport_fnflyToLz_ClearTakeoff", groupId group _driver,_locationText];
 	[_text] call TRGM_fnc_commsHQ;
 };
 
@@ -167,9 +167,9 @@ if (!([_vehicle] call TRGM_fnc_helicopterIsFlying)) then {
 	};
 	sleep 2;
 
-	[_vehicle,"Off we go."] call TRGM_fnc_commsPilotToVehicle;
+	[_vehicle,localize "STR_TRGM2_transport_fnflyToLz_OffWeGo"] call TRGM_fnc_commsPilotToVehicle;
 } else {
-	[_vehicle,"Diverting."]call TRGM_fnc_commsPilotToVehicle;
+	[_vehicle,localize "STR_TRGM2_transport_fnflyToLz_Diverting"]call TRGM_fnc_commsPilotToVehicle;
 };
 
 /* Landing done **/
@@ -197,10 +197,10 @@ sleep 2;
 } foreach waypoints _driver;
 
 if (!_isPickup) then {
-	[_vehicle, "We reached our destination. Good Luck out there!"] call TRGM_fnc_commsPilotToVehicle;
+	[_vehicle, localize "STR_TRGM2_transport_fnflyToLz_ReachLZ_Out"] call TRGM_fnc_commsPilotToVehicle;
 }
 else {
-	[driver _vehicle,"We have landed at LZ, get in!"] call TRGM_fnc_commsSide;
+	[driver _vehicle,localize "STR_TRGM2_transport_fnflyToLz_ReachLZ_In"] call TRGM_fnc_commsSide;
 };
 
 
@@ -218,9 +218,9 @@ if (!_isPickup) then {
 	};
 	// RADIO :  We're RTB.
 	_locationText = [position _vehicle,true] call TRGM_fnc_getLocationName;
-	_text = format ["%1 is entering airspace %2 - We're RTB.", groupId group driver _vehicle, _locationText];
+	_text = format [localize "STR_TRGM2_transport_fnflyToLz_EnterAirspace", groupId group driver _vehicle, _locationText];
 	[driver _vehicle,_text] call TRGM_fnc_commsSide;
-	
+
 	/* RTB */
 	[_vehicle,_thisMission] spawn TRGM_fnc_flyToBase;
 }
@@ -233,14 +233,14 @@ else {
 	};
 	if (!(_thisMission call TRGM_fnc_checkMissionIdActive)) then {
 		_locationText = [position _vehicle,true] call TRGM_fnc_getLocationName;
-		_text = format ["%1 is entering airspace %2 - We're RTB.", groupId group driver _vehicle, _locationText];
+		_text = format [localize "STR_TRGM2_transport_fnflyToLz_EnterAirspace", groupId group driver _vehicle, _locationText];
 		[driver _vehicle,_text] call TRGM_fnc_commsSide;
-		
+
 		/* RTB */
 		[_vehicle,_thisMission] spawn TRGM_fnc_flyToBase;
 	}
-	else { 
-		[_vehicle, "Welcome aboard, Let us know your destination!"] call TRGM_fnc_commsPilotToVehicle;
+	else {
+		[_vehicle, localize "STR_TRGM2_transport_fnflyToLz_WelcomeAboard"] call TRGM_fnc_commsPilotToVehicle;
 	};
 };
 

@@ -11,7 +11,7 @@ _baseRadius = 500;
 
 //vehicle setUnitPos
 // set base LZ for the way back.
-if (objNull isEqualTo (_vehicle getVariable ["baseLZ", objNull])) then { 
+if (objNull isEqualTo (_vehicle getVariable ["baseLZ", objNull])) then {
 	// initial setup
 	_flyHeight = 20;
 	_vehicle flyInHeight _flyHeight;
@@ -53,7 +53,7 @@ if (!([_vehicle] call TRGM_fnc_helicopterIsFlying)) then {
 [_vehicle, _redZonePositions, _vehiclePositon,_baseLZPos, _radius,_minimumDistance, _markers,_baseRadius,_baseReturnAllowed,_isPickup] onMapSingleClick TRGM_fnc_selectLZOnMapClick;
 
 openMap true;
-titleText["Select Map Position outside the AO areas", "PLAIN"];
+titleText[localize "STR_TRGM2_transport_fnselectLZ_SelectOutsideAO", "PLAIN"];
 
 waitUntil {!visibleMap || !alive player};
 onMapSingleClick "";

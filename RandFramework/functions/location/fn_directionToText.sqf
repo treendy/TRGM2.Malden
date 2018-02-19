@@ -11,25 +11,25 @@ _val = round(_direction/45);
 if (_words) then {
 	switch(_val) do {
 		case 8;
-		case 0: {"North"};
-		case 1: {"North East"};
-		case 2: {"East"};
-		case 3: {"South East"};
-		case 4: {"South"};
-		case 5: {"South West"};
-		case 6: {"West"};
-		case 7: {"North West"};
+		case 0: {localize "STR_TRGM2_civillians_fndirectionToText_N_Word"};
+		case 1: {localize "STR_TRGM2_civillians_fndirectionToText_NE_Word"};
+		case 2: {localize "STR_TRGM2_civillians_fndirectionToText_E_Word"};
+		case 3: {localize "STR_TRGM2_civillians_fndirectionToText_SE_Word"};
+		case 4: {localize "STR_TRGM2_civillians_fndirectionToText_S_Word"};
+		case 5: {localize "STR_TRGM2_civillians_fndirectionToText_SW_Word"};
+		case 6: {localize "STR_TRGM2_civillians_fndirectionToText_W_Word"};
+		case 7: {localize "STR_TRGM2_civillians_fndirectionToText_NW_Word"};
 	};
 } else {
 	switch(_val) do {
 		case 8;
-		case 0: {"N"};
-		case 1: {"NE"};
-		case 2: {"E"};
-		case 3: {"SE"};
-		case 4: {"S"};
-		case 5: {"SW"};
-		case 6: {"W"};
-		case 7: {"NW"};
+		case 0: {localize "STR_TRGM2_civillians_fndirectionToText_N"};
+		case 1: {localize "STR_TRGM2_civillians_fndirectionToText_NE"};
+		case 2: {localize "STR_TRGM2_civillians_fndirectionToText_E"};
+		case 3: {localize "STR_TRGM2_civillians_fndirectionToText_SE"};
+		case 4: {localize "STR_TRGM2_civillians_fndirectionToText_S"};
+		case 5: {localize "STR_TRGM2_civillians_fndirectionToText_SW"};
+		case 6: {localize "STR_TRGM2_civillians_fndirectionToText_W"};
+		case 7: {localize "STR_TRGM2_civillians_fndirectionToText_NW"};
 	};
 };

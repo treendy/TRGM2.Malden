@@ -7,7 +7,7 @@ _actionAdapter = {
 
 _actions = [
 	[
-		"Select Destination",
+		localize "STR_TRGM2_transport_fnaddTransportAction_SelectDest",
 		_actionAdapter,
 		nil,
 		-20, //priority
@@ -20,7 +20,7 @@ _actions = [
 		""
 	],
 	[
-		"Divert to different LZ",
+		localize "STR_TRGM2_transport_fnaddTransportAction_DivertLZ",
 		_actionAdapter,
 		nil,
 		-20, //priority
