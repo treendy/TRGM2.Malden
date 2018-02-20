@@ -4,17 +4,17 @@ _actChooseMission = -1;
 
 if (isNil "bAndSoItBegins") then {
 	bAndSoItBegins = false;
-	publicVariable "bAndSoItBegins";	
+	publicVariable "bAndSoItBegins";
 };
 
 if (isNil "CustomObjectsSet") then {
 	CustomObjectsSet = false;
-	publicVariable "CustomObjectsSet";	
+	publicVariable "CustomObjectsSet";
 };
 
 if (isNil "IntroMusic") then {
 	IntroMusic = selectRandom ThemeAndIntroMusic;
-	publicVariable "IntroMusic";	
+	publicVariable "IntroMusic";
 };
 
 
@@ -29,7 +29,7 @@ if (isNil "IntroMusic") then {
 		sleep 3;
 		if (!bAndSoItBegins) then {playMusic IntroMusic;};
 		while {!bAndSoItBegins} do {
-			
+
 			if (str player == "sl") then {
 				if  (!dialog) then {
 					[] spawn {
@@ -40,35 +40,35 @@ if (isNil "IntroMusic") then {
 						};
 					};
 				};
-				sleep 0.5;				
+				sleep 0.5;
 			}
 			else {
 
 				if (isNil "sl") then {
 					txt5Layer = "txt5" call BIS_fnc_rscLayer;
-			    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TOP SLOT NEEDS TO BE FILLED</t>"; 
+			    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustFilled" + "</t>";
 			    	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
 				}
 				else {
 					if (!isPlayer sl) then {
 						txt5Layer = "txt5" call BIS_fnc_rscLayer;
-				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TOP SLOT NEEDS TO BE A PLAYER</t>"; 
+				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustPlayer" + "</t>";
 				    	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
 					}
 					else {
 						txt1Layer = "txt1" call BIS_fnc_rscLayer;
-				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>Please wait, " + name sl +" is choosing the mission settings</t>"; 
+				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + name sl + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
 				    	[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
 
 						txt5Layer = "txt5" call BIS_fnc_rscLayer;
-				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>"; 
+				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>";
 				    	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
 
 
 				    	txt51Layer = "txt51" call BIS_fnc_rscLayer;
-				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>... if you cant hear music, turn up your music volume</t>"; 
+				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic" + "</t>";
 				    	[_texta, 0, 0.280, 7, 1,0,txt51Layer] spawn BIS_fnc_dynamicText;
-						
+
 				    };
 			    };
 			    sleep 5;
@@ -76,34 +76,34 @@ if (isNil "IntroMusic") then {
 
 		};
 	};
-	[] spawn TREND_fnc_MissionSelectLoop;	
+	[] spawn TREND_fnc_MissionSelectLoop;
 
 
 
 
 
 TREND_fnc_BasicInit = {
-	
+
 	_transportSelectAction = {
 		[chopper1,true] spawn TRGM_fnc_selectLZ;
 	};
 
 	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-		myaction = ['CallTransportChopper','Call Transport Chopper','',_transportSelectAction,{true}] call ace_interact_menu_fnc_createAction;
+		myaction = ['CallTransportChopper',localize 'STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport','',_transportSelectAction,{true}] call ace_interact_menu_fnc_createAction;
 		[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
 	}
 	else {
-		_transportChopperActionID = player addAction ["Call for transport chopper",_transportSelectAction,0,0];	
-		player setVariable ["callTransportChopperID", _transportChopperActionID];	
+		_transportChopperActionID = player addAction [localize "STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport",_transportSelectAction,0,0];
+		player setVariable ["callTransportChopperID", _transportChopperActionID];
 	};
-	
+
 };
 [] spawn TREND_fnc_BasicInit;
 //player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInit; }];
 
 
 TREND_fnc_BasicInitAndRespawn = {
-	
+
 	if (isMultiplayer) then {
 		execVM "RandFramework\NoVoice.sqf";
 	};
@@ -128,7 +128,7 @@ player addEventHandler ["Respawn", { [player] execVM "RandFramework\setLoadout.s
 5 fadeMusic 0;
 [] spawn {
 	sleep 5;
-	ace_hearing_disableVolumeUpdate = false; 
+	ace_hearing_disableVolumeUpdate = false;
 	playMusic "";
 };
 
@@ -144,7 +144,7 @@ if (isNil "KilledPositions") then {
 
 
 if (bUseRevive) then {
-	
+
 	// TcB AIS Wounding System --------------------------------------------------------------------------
 	//if (!isDedicated) then {
 	//	TCB_AIS_PATH = "ais_injury\";
@@ -154,27 +154,27 @@ if (bUseRevive) then {
 };
 
 
-TREND_fnc_InitPostStarted = {	
+TREND_fnc_InitPostStarted = {
 	if (iMissionSetup == 5 && isMultiplayer && str player == "sl") then {
 			if (SaveType == 0) then {
-				laptop1 addaction ["Save Local",{[1,true] execVM "RandFramework\Campaign\ServerSave.sqf";}];
-				laptop1 addaction ["Save Global",{[2,true] execVM "RandFramework\Campaign\ServerSave.sqf";}];
+				laptop1 addaction [localize "STR_TRGM2_TRGMInitPlayerLocal_SaveLocal",{[1,true] execVM "RandFramework\Campaign\ServerSave.sqf";}];
+				laptop1 addaction [localize "STR_TRGM2_TRGMInitPlayerLocal_SaveGlobal",{[2,true] execVM "RandFramework\Campaign\ServerSave.sqf";}];
 			};
 			if (SaveType == 1) then {
-				hint "This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save is only available to the current map";
-				laptop1 addAction ["Campaign saves as Local",{hint "This mission will save only on the current map.\n\nEach time your reputation adjusts, the data will save automatically."}];	
+				hint (localize "STR_TRGM2_ServerSave_Save1");
+				laptop1 addAction [localize "STR_TRGM2_ServerSave_SaveLocal",{hint (localize "STR_TRGM2_ServerSave_SaveHint")}];
 			};
 			if (SaveType == 2) then {
-				hint "This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save will be available on any map running TRGM2";
-				laptop1 addAction ["Campaign saves as Global",{hint "This mission will save and can be loaded from any map.\n\nEach time your reputation adjusts, the data will save automatically."}];	
+				hint (localize "STR_TRGM2_ServerSave_Save2");
+				laptop1 addAction [localize "STR_TRGM2_ServerSave_SaveGlobal",{hint (localize "STR_TRGM2_ServerSave_SaveHint2")}];
 			};
 	};
 	if (iAllowNVG == 2) then {
 		[] execVM "RandFramework\NVscript.sqf";
 	};
 
-	endMissionBoard addaction ["Show reputation report", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format["Current cost per life: %1<br /><br />Bad reputation points: %2 out of %3<br /><br />TOTAL REP: %4 <br /><br />REASONS SO FAR: <br />%5",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
-	
+	endMissionBoard addaction [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format[localize "STR_TRGM2_TRGMInitPlayerLocal_FullReputationReport",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
+
 	_iSandStormOption = AdvancedSettings select ADVSET_SANDSTORM_IDX;
 	if (_iSandStormOption == 3) then { //5 hours non stop
 		nul = 18030 execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";
@@ -185,7 +185,7 @@ player addEventHandler ["Respawn", { [] spawn TREND_fnc_InitPostStarted; }];
 
 
 if (AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
-	box1 addAction ["<t color='#ff1111'>Virtual Arsenal</t>", {["Open",true] spawn BIS_fnc_arsenal}];
+	box1 addAction [localize "STR_TRGM2_startInfMission_VirtualArsenal", {["Open",true] spawn BIS_fnc_arsenal}];
 };
 
 
@@ -201,18 +201,18 @@ iMissionSetup = iMissionParamType;
 if (iMissionSetup == 12 || iMissionSetup == 20) then {
 	//training
 	[player, 100] call BIS_fnc_respawnTickets;
-	
+
 	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-		myaction = ['TraceBulletAction','Trace Bullets','',{},{true}] call ace_interact_menu_fnc_createAction;
+		myaction = ['TraceBulletAction',localize 'STR_TRGM2_TRGMInitPlayerLocal_TraceBullets','',{},{true}] call ace_interact_menu_fnc_createAction;
 		[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
-		
-		myaction = ['TraceBulletEnable','Enable','',{[player, 5] spawn BIS_fnc_traceBullets;},{true}] call ace_interact_menu_fnc_createAction;
+
+		myaction = ['TraceBulletEnable',localize 'STR_TRGM2_TRGMInitPlayerLocal_Enable','',{[player, 5] spawn BIS_fnc_traceBullets;},{true}] call ace_interact_menu_fnc_createAction;
 		[player, 1, ["ACE_SelfActions", "TraceBulletAction"], myaction] call ace_interact_menu_fnc_addActionToObject;
 
-		myaction = ['TraceBulletDisable','Disable','',{[player, 0] spawn BIS_fnc_traceBullets;},{true}] call ace_interact_menu_fnc_createAction;
+		myaction = ['TraceBulletDisable',localize 'STR_TRGM2_TRGMInitPlayerLocal_Disable','',{[player, 0] spawn BIS_fnc_traceBullets;},{true}] call ace_interact_menu_fnc_createAction;
 		[player, 1, ["ACE_SelfActions", "TraceBulletAction"], myaction] call ace_interact_menu_fnc_addActionToObject;
 	};
-	
+
 }
 else {
 	_iTicketCount = AdvancedSettings select ADVSET_RESPAWN_TICKET_COUNT_IDX;
@@ -220,7 +220,7 @@ else {
 
 	_iRespawnTimer = AdvancedSettings select ADVSET_RESPAWN_TIMER_IDX;
 	setPlayerRespawnTime _iRespawnTimer;
-	
+
 	//if (iMissionSetup == 5 && !isMultiplayer) then {
 	//	[player, 999] call BIS_fnc_respawnTickets;
 	//	debugMessages = debugMessages + "\n" + "999 respawn tickets"
@@ -231,7 +231,7 @@ else {
 };
 
 
-TREND_fnc_GetAnimalsMoving = {	
+TREND_fnc_GetAnimalsMoving = {
 	[] execVM "RandFramework\animateAnimals.sqf";
 };
 [] spawn TREND_fnc_GetAnimalsMoving;
@@ -243,8 +243,8 @@ TREND_fnc_GeneralPlayerLoop = {
 		if (count ObjectivePossitions > 0 && AllowUAVLocateHelp) then {
 			if ((Player distance (ObjectivePossitions select 0)) < 25) then {
 				if ((Player getVariable ["calUAVActionID", -1]) == -1) then {
-					hint "UAV available";
-					_actionID = player addAction ["Call UAV to locate target","RandFramework\callUAVFindObjective.sqf"];
+					hint (localize "STR_TRGM2_TRGMInitPlayerLocal_UAVAvailable");
+					_actionID = player addAction [localize "STR_TRGM2_TRGMInitPlayerLocal_CallUAV","RandFramework\callUAVFindObjective.sqf"];
 					player setVariable ["calUAVActionID",_actionID];
 				};
 			}
@@ -252,7 +252,7 @@ TREND_fnc_GeneralPlayerLoop = {
 				if ((Player getVariable ["calUAVActionID", -1]) != -1) then {
 					player removeAction (Player getVariable ["calUAVActionID", -1]);
 					player setVariable ["calUAVActionID", nil];
-					hint "UAV no longer available";
+					hint (localize "STR_TRGM2_TRGMInitPlayerLocal_UAVNoAvailable");
 				};
 			};
 		};
@@ -261,7 +261,7 @@ TREND_fnc_GeneralPlayerLoop = {
 			_transportSelectAction = {
 				[chopper1,true] spawn TRGM_fnc_selectLZ;
 			};
-			_transportChopperActionID = player addAction ["Call for transport chopper",_transportSelectAction,0,0];	
+			_transportChopperActionID = player addAction [localize "STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport",_transportSelectAction,0,0];
 			player setVariable ["callTransportChopperID", _transportChopperActionID];
 		};
 
@@ -303,7 +303,7 @@ TREND_fnc_OnlyAllowDirectMapDraw = {
 	   		_sTest = _x splitString "/";
 			if (count _sTest > 2) then {
 		 		if (str(_sTest select 2) != str("5")) then {
-					deleteMarker _x; 
+					deleteMarker _x;
 				};
 			};
 		} forEach allMapMarkers;
@@ -317,10 +317,10 @@ TREND_fnc_InSafeZone = {
 			PlayersHaveLeftStartingArea = false;
 			publicVariable "PlayersHaveLeftStartingArea";
 	};
-	
+
 	while {true} do {
 		if (getMarkerPos "mrkHQ" distance player < PunishmentRadius) then {
-			//if (!bDebugMode) then { player allowDamage false}; 
+			//if (!bDebugMode) then { player allowDamage false};
 		}
 		else {
 			//if (!bDebugMode) then { player allowDamage true;};
@@ -336,10 +336,10 @@ player addEventHandler ["Respawn", { [] spawn TREND_fnc_InSafeZone; }];
 
 TREND_fnc_setNVG = {
 	if (iAllowNVG == 0) then {
-			 player addPrimaryWeaponItem "acc_flashlight"; 
+			 player addPrimaryWeaponItem "acc_flashlight";
 			 player enableGunLights "forceOn";
-			 player unassignItem sFriendlyNVClassName; 
-			 player removeItem sFriendlyNVClassName;     		
+			 player unassignItem sFriendlyNVClassName;
+			 player removeItem sFriendlyNVClassName;
 	};
 };
 [] spawn TREND_fnc_setNVG;
@@ -367,9 +367,9 @@ if (bCirclesOfDeath) then {
 					if (getPlayerUID player == _x select 0) then {
 						//_forEachIndex
 						if (player distance (_x select 1) < KilledZoneRadius) then {
-							hint "!!!!!WARNING!!!!! YOU ARE NOT PERMITTED TO ENTER THIS ZONE... TURN AROUND NOW!";
+							hint (localize "STR_TRGM2_TRGMInitPlayerLocal_WarningArea");
 							if (player distance (_x select 1) < KilledZoneInnerRadius) then {
-								cutText ["Transfering... ","BLACK FADED", 0];
+								cutText [localize "STR_TRGM2_TRGMInitPlayerLocal_Transfering","BLACK FADED", 0];
 								sleep 1;
 								player setPos (getMarkerPos "respawn_west");
 							};
@@ -391,13 +391,13 @@ if (bCirclesOfDeath) then {
 				if (getPlayerUID player == KilledPlayers select _forEachIndex) then {
 					//draw marker at KilledPositions select _forEachIndex
 					_color = "ColorBlack";
-					_mrkPos = createMarkerLocal [format["mrkNoGoA%1",_forEachIndex], _x select 1]; 
+					_mrkPos = createMarkerLocal [format["mrkNoGoA%1",_forEachIndex], _x select 1];
 					_mrkPos setMarkerShapeLocal "ELLIPSE";
 					_mrkPos setMarkerSizeLocal [KilledZoneRadius,KilledZoneRadius];
 					_mrkPos setMarkerColorLocal "ColorRed";
 					_mrkPos setMarkerAlphaLocal 0.5;
 
-					_mrkPos2 = createMarkerLocal [format["mrkNoGoB%1",_forEachIndex], _x select 1]; 
+					_mrkPos2 = createMarkerLocal [format["mrkNoGoB%1",_forEachIndex], _x select 1];
 					_mrkPos2 setMarkerShapeLocal "ELLIPSE";
 					_mrkPos2 setMarkerSizeLocal [KilledZoneInnerRadius,KilledZoneInnerRadius];
 					_mrkPos2 setMarkerColorLocal _color;
@@ -425,7 +425,7 @@ if (bCirclesOfDeath) then {
 
 
 
- 
+
 
 
 TOUR_fnc_startingMove = {
@@ -508,15 +508,15 @@ TREND_fnc_MissionOverAnimation = {
 		if (_bMissionEnded && !_bAnyPlayersInAOAndAlive) then {_bMissionEndedAndPlayersOutOfAO = true};
 		if (_bMissionEndedAndPlayersOutOfAO) then {
 			_bEnd = true;
-			ace_hearing_disableVolumeUpdate = true; 
-			2 fadeSound 0.1;	
+			ace_hearing_disableVolumeUpdate = true;
+			2 fadeSound 0.1;
 			playMusic "";
 			0 fadeMusic 1;
 			playMusic selectRandom ThemeAndIntroMusic;
 			sleep 8;
-			["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>TRGM 2</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'>Treendys Randomly Generated Missions</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText; 
+			["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>TRGM 2</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TRGM2Title" + "</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText;
 			sleep 10;
-			["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>" + (AdvancedSettings select ADVSET_GROUP_NAME_IDX) + "</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'><br />RTB to debreif</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText; 
+			["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>" + (AdvancedSettings select ADVSET_GROUP_NAME_IDX) + "</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'><br />" + localize "STR_TRGM2_TRGMInitPlayerLocal_RTBDebreif" + "</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText;
 			sleep 10;
 			_stars = "";
 			_iCount = 0;
@@ -527,16 +527,16 @@ TREND_fnc_MissionOverAnimation = {
 				}
 				else {
 					_stars = _stars + name _x + " | "; // format [_stars,name _x, "|%2"];
-				};	
+				};
 			} forEach allPlayers;
-			[format ["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>Starring</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'><br />%1</t>",_stars],-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText; 
+			[format ["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>Starring</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'><br />%1</t>",_stars],-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText;
 
 			sleep 10;
 			8 fadeMusic 0;
 			8 fadeSound 1;
 			[] spawn {
 				sleep 8;
-				ace_hearing_disableVolumeUpdate = false; 
+				ace_hearing_disableVolumeUpdate = false;
 				playMusic "";
 			};
 		};

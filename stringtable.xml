@@ -874,6 +874,12 @@
                 <Chinese>這個任務將儲存在當前的地圖中。\n\n這個戰役將在每次聲譽改變時自動儲存一次。</Chinese>
                 <Chinesesimp>这个任务将储存在当前的地图中。\n\n这个战役将在每次声誉改变时自动储存一次。</Chinesesimp>
 			</Key>
+			<Key ID="STR_TRGM2_ServerSave_SaveHint2">
+				<Original>This mission will save and can be loaded from any map.\n\nEach time your reputation adjusts, the data will save automatically.</Original>
+				<English>This mission will save and can be loaded from any map.\n\nEach time your reputation adjusts, the data will save automatically.</English>
+                <Chinese>這個任務存檔將能用在任何地圖上。\n\n這個戰役將在每次聲譽改變時自動儲存一次。</Chinese>
+                <Chinesesimp>这个任务存档将能用在任何地图上。\n\n这个战役将在每次声誉改变时自动储存一次。</Chinesesimp>
+			</Key>
 			<Key ID="STR_TRGM2_ServerSave_SaveError">
 				<Original>Problem saving... local or global save not set</Original>
 				<English>Problem saving... local or global save not set</English>
@@ -883,6 +889,12 @@
 			<Key ID="STR_TRGM2_SetMissionBoardOptions_ShowRep">
 				<Original>Show Rep Report</Original>
 				<English>Show Rep Report</English>
+                <Chinese>顯示聲譽報告</Chinese>
+                <Chinesesimp>显示声誉报告</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_ShowRepLong">
+				<Original>Show reputation report</Original>
+				<English>Show reputation report</English>
                 <Chinese>顯示聲譽報告</Chinese>
                 <Chinesesimp>显示声誉报告</Chinesesimp>
 			</Key>
@@ -1301,6 +1313,458 @@
 				<English>Welcome aboard, Let us know your destination!</English>
                 <Chinese>歡迎登機，讓我們知道你們的目的地!</Chinese>
                 <Chinesesimp>欢迎登机，让我们知道你们的目的地!</Chinesesimp>
+			</Key>
+		</Container>
+		<Container name="General">
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustFilled">
+				<Original>TOP SLOT NEEDS TO BE FILLED</Original>
+				<English>TOP SLOT NEEDS TO BE FILLED</English>
+                <Chinese>第一個角色位置不能為空</Chinese>
+                <Chinesesimp>第一个角色位置不能为空</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustPlayer">
+				<Original>TOP SLOT NEEDS TO BE A PLAYER</Original>
+				<English>TOP SLOT NEEDS TO BE A PLAYER</English>
+                <Chinese>第一個角色位置必需由玩家擔任</Chinese>
+                <Chinesesimp>第一个角色位置必需由玩家担任</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1">
+				<Original>Please wait, </Original>
+				<English>Please wait, </English>
+                <Chinese>請稍等，</Chinese>
+                <Chinesesimp>请稍等，</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2">
+				<Original> is choosing the mission settings</Original>
+				<English> is choosing the mission settings</English>
+                <Chinese>正在選擇任務設定</Chinese>
+                <Chinesesimp>正在选择任务设定</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic">
+				<Original>... if you cant hear music, turn up your music volume</Original>
+				<English>... if you cant hear music, turn up your music volume</English>
+                <Chinese>... 假如你聽不到音樂，請去設定中把音樂的音量調大</Chinese>
+                <Chinesesimp>... 假如你听不到音乐，请去设定中把音乐的音量调大</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport">
+				<Original>Call Transport Chopper</Original>
+				<English>Call Transport Chopper</English>
+                <Chinese>呼叫運輸直升機</Chinese>
+                <Chinesesimp>呼叫运输直升机</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_SaveLocal">
+				<Original>Save Local</Original>
+				<English>Save Local</English>
+                <Chinese>儲存為本地</Chinese>
+                <Chinesesimp>储存为本地</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_SaveGlobal">
+				<Original>Save Global</Original>
+				<English>Save Global</English>
+                <Chinese>儲存為全域</Chinese>
+                <Chinesesimp>储存为全域</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_FullReputationReport">
+				<Original>Current cost per life: %1&lt;br/&gt;&lt;br/&gt;Bad reputation points: %2 out of %3&lt;br/&gt;&lt;br/&gt;TOTAL REP: %4 &lt;br/&gt;&lt;br/&gt;REASONS SO FAR: &lt;br/&gt;%5</Original>
+				<English>Current cost per life: %1&lt;br/&gt;&lt;br/&gt;Bad reputation points: %2 out of %3&lt;br/&gt;&lt;br/&gt;TOTAL REP: %4 &lt;br/&gt;&lt;br/&gt;REASONS SO FAR: &lt;br/&gt;%5</English>
+                <Chinese>當前每條命需付出: %1&lt;br/&gt;&lt;br/&gt;壞評價點數: %3中的%2&lt;br/&gt;&lt;br/&gt;總評價: %4 &lt;br/&gt;&lt;br/&gt;最大的原因: &lt;br/&gt;%5</Chinese>
+                <Chinesesimp>当前每条命需付出: %1&lt;br/&gt;&lt;br/&gt;坏评价点数: %3中的%2&lt;br/&gt;&lt;br/&gt;总评价: %4 &lt;br/&gt;&lt;br/&gt;最大的原因: &lt;br/&gt;%5</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_TraceBullets">
+				<Original>Trace Bullets</Original>
+				<English>Trace Bullets</English>
+                <Chinese>曳光彈</Chinese>
+                <Chinesesimp>曳光弹</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_Enable">
+				<Original>Enable</Original>
+				<English>Enable</English>
+                <Chinese>啟用</Chinese>
+                <Chinesesimp>启用</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_Disable">
+				<Original>Disable</Original>
+				<English>Disable</English>
+                <Chinese>停用</Chinese>
+                <Chinesesimp>停用</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_CallUAV">
+				<Original>Call UAV to locate target</Original>
+				<English>Call UAV to locate target</English>
+                <Chinese>呼叫UAV搜尋目標</Chinese>
+                <Chinesesimp>呼叫UAV搜寻目标</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_UAVAvailable">
+				<Original>UAV available</Original>
+				<English>UAV available</English>
+                <Chinese>可呼叫UAV</Chinese>
+                <Chinesesimp>可呼叫UAV</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_UAVNoAvailable">
+				<Original>UAV no longer available</Original>
+				<English>UAV no longer available</English>
+                <Chinese>已不能再呼叫UAV</Chinese>
+                <Chinesesimp>已不能再呼叫UAV</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_WarningArea">
+				<Original>!!!!!WARNING!!!!! YOU ARE NOT PERMITTED TO ENTER THIS ZONE... TURN AROUND NOW!</Original>
+				<English>!!!!!WARNING!!!!! YOU ARE NOT PERMITTED TO ENTER THIS ZONE... TURN AROUND NOW!</English>
+                <Chinese>!!!!!警告!!!!! 你並不被允許進入此區域... 請立即掉頭!</Chinese>
+                <Chinesesimp>!!!!!警告!!!!! 你并不被允许进入此区域... 请立即掉头!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_Transfering">
+				<Original>Transfering... </Original>
+				<English>Transfering... </English>
+                <Chinese>轉移中... </Chinese>
+                <Chinesesimp>转移中... </Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_TRGM2Title">
+				<Original>Treendy's Randomly Generated Missions</Original>
+				<English>Treendy's Randomly Generated Missions</English>
+                <Chinese>Treendy的隨機生成任務</Chinese>
+                <Chinesesimp>Treendy的随机生成任务</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_RTBDebreif">
+				<Original>RTB to debreif</Original>
+				<English>RTB to debreif</English>
+                <Chinese>返回基地進行匯報</Chinese>
+                <Chinesesimp>返回基地进行汇报</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMOnPlayerKilled_Killed">
+				<Original>%1 was killed</Original>
+				<English>%1 was killed</English>
+                <Chinese>%1被殺害了</Chinese>
+                <Chinesesimp>%1被杀害了</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Enemy1">
+				<Original>CSAT and FIA as militia</Original>
+				<English>CSAT and FIA as militia</English>
+                <Chinese>廣協同盟與自由陣線為敵人</Chinese>
+                <Chinesesimp>广协同盟与自由阵线为敌人</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Enemy2">
+				<Original>CSAT only</Original>
+				<English>CSAT only</English>
+                <Chinese>廣協同盟為敵人</Chinese>
+                <Chinesesimp>广协同盟为敌人</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Enemy3">
+				<Original>FIA only</Original>
+				<English>FIA only</English>
+                <Chinese>自由陣線為敵人</Chinese>
+                <Chinesesimp>自由阵线为敌人</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Friend1">
+				<Original>NATO</Original>
+				<English>NATO</English>
+                <Chinese>北約</Chinese>
+                <Chinesesimp>北约</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Friend2">
+				<Original>FIA</Original>
+				<English>FIA</English>
+                <Chinese>自由陣線</Chinese>
+                <Chinesesimp>自由阵线</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_VirtualArsenal">
+				<Original>Virtual Arsenal</Original>
+				<English>Virtual Arsenal</English>
+                <Chinese>虛擬軍火庫</Chinese>
+                <Chinesesimp>虚拟军火库</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_GroupName">
+				<Original>Group Name</Original>
+				<English>Group Name</English>
+                <Chinese>小隊名稱</Chinese>
+                <Chinesesimp>小队名称</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_SupportOptions">
+				<Original>Support options</Original>
+				<English>Support options</English>
+                <Chinese>支援選項</Chinese>
+                <Chinesesimp>支援选项</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTickets">
+				<Original>Respawn Tickets</Original>
+				<English>Respawn Tickets</English>
+                <Chinese>重生次數</Chinese>
+                <Chinesesimp>重生次数</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Unlimited">
+				<Original>Unlimited</Original>
+				<English>Unlimited</English>
+                <Chinese>無限</Chinese>
+                <Chinesesimp>无限</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Mapdraw">
+				<Original>Mapdraw in direct only</Original>
+				<English>Mapdraw in direct only</English>
+                <Chinese>僅隊長能在地圖上繪製</Chinese>
+                <Chinesesimp>仅队长能在地图上绘制</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTimer">
+				<Original>Respawn Timer</Original>
+				<English>Respawn Timer</English>
+                <Chinese>重生秒數</Chinese>
+                <Chinesesimp>重生秒数</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Sec">
+				<Original>seconds</Original>
+				<English>seconds</English>
+                <Chinese>秒</Chinese>
+                <Chinesesimp>秒</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Min">
+				<Original>mins</Original>
+				<English>mins</English>
+                <Chinese>分鐘</Chinese>
+                <Chinesesimp>分钟</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFactions">
+				<Original>Enemy Factions</Original>
+				<English>Enemy Factions</English>
+                <Chinese>敵方派別</Chinese>
+                <Chinesesimp>敌方派别</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_FriendlyFactions">
+				<Original>Friendly Factions</Original>
+				<English>Friendly Factions</English>
+                <Chinese>友方派別</Chinese>
+                <Chinesesimp>友方派别</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm">
+				<Original>Sand Storm</Original>
+				<English>Sand Storm</English>
+                <Chinese>沙塵暴</Chinese>
+                <Chinesesimp>沙尘暴</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Random">
+				<Original>Random</Original>
+				<English>Random</English>
+                <Chinese>隨機</Chinese>
+                <Chinesesimp>随机</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Never">
+				<Original>Never</Original>
+				<English>Never</English>
+                <Chinese>關閉</Chinese>
+                <Chinesesimp>关闭</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_Always">
+				<Original>Always (at a random point)</Original>
+				<English>Always (at a random point)</English>
+                <Chinese>開啟 (在隨機地點)</Chinese>
+                <Chinesesimp>开启 (在随机地点)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_5Hours">
+				<Original>5 hours non stop</Original>
+				<English>5 hours non stop</English>
+                <Chinese>5小時內不間斷</Chinese>
+                <Chinesesimp>5小时内不间断</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_ScriptsUsed">
+				<Original>RickOShay's Dust Storm Script&lt;br/&gt;Phsyco Revive Script</Original>
+				<English>RickOShay's Dust Storm Script&lt;br/&gt;Phsyco Revive Script</English>
+                <Chinese>RickOShay的沙塵暴腳本&lt;br/&gt;Phsyco的復甦腳本</Chinese>
+                <Chinesesimp>RickOShay的沙尘暴脚本&lt;br/&gt;Phsyco的复苏脚本</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions1">
+				<Original>This is the default mission type.  There will be one main objective that is occupied by a heavy enemy army.\n\nYou will also have two optional mini missions, these mini missions will either give you intel on the main AO, or will help increase your reputation depending on the mission type.</Original>
+				<English>This is the default mission type.  There will be one main objective that is occupied by a heavy enemy army.\n\nYou will also have two optional mini missions, these mini missions will either give you intel on the main AO, or will help increase your reputation depending on the mission type.</English>
+                <Chinese>這是預設的任務形式。將會有一個主要目標被敵人嚴密的保護著。\n\n你將會收到兩個支線任務，完成這些任務將能讓你取得主要目標任務區內的一些情報，或者也可能是增加你的聲譽，是任務性質決定獎勵是什麼。</Chinese>
+                <Chinesesimp>这是预设的任务形式。将会有一个主要目标被敌人严密的保护着。\n\n你将会收到两个支线任务，完成这些任务将能让你取得主要目标任务区内的一些情报，或者也可能是增加你的声誉，是任务性质决定奖励是什么。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions2">
+				<Original>One main objective that is occupied by a heavy enemy army\n\nThere will be two mini missions, one will give you intel on the main location of the AO, be careful, as there is always a possiblity that the objective could be in the middle of the main AO!.\n\nThe other mini mission could be intel or may increase your reputation.</Original>
+				<English>One main objective that is occupied by a heavy enemy army\n\nThere will be two mini missions, one will give you intel on the main location of the AO, be careful, as there is always a possiblity that the objective could be in the middle of the main AO!.\n\nThe other mini mission could be intel or may increase your reputation.</English>
+                <Chinese>將會有一個主要目標被敵人嚴密的保護著。\n\n你將會收到兩個支線任務，其中一個任務將會為你提供主要任務區域的精確位置，但請小心，你也可能在前往執行支線任務的半路上誤入到主要任務區域!\n\n另一個任務可能會提供情報或是提高你的聲譽。</Chinese>
+                <Chinesesimp>将会有一个主要目标被敌人严密的保护着。\n\n你将会收到两个支线任务，其中一个任务将会为你提供主要任务区域的精确位置，但请小心，你也可能在前往执行支线任务的半路上误入到主要任务区域!\n\n另一个任务可能会提供情报或是提高你的声誉。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions3">
+				<Original>One main objective that is occupied by a heavy enemy army, no mini missions or intel required</Original>
+				<English>One main objective that is occupied by a heavy enemy army, no mini missions or intel required</English>
+                <Chinese>將會有一個主要目標被敵人嚴密的保護著，並沒有提供任何的支線任務。</Chinese>
+                <Chinesesimp>将会有一个主要目标被敌人严密的保护着，并没有提供任何的支线任务。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions4">
+				<Original>A single mini mission.\n\nThese mini missions could be very low enemy, high enemy, be aware that the area may be occupied by friendly rebels! or just a large civilian population (watch out though, some civs may be enemy undercover, or a friendly rebel may also be an enemy undercover!).</Original>
+				<English>A single mini mission.\n\nThese mini missions could be very low enemy, high enemy, be aware that the area may be occupied by friendly rebels! or just a large civilian population (watch out though, some civs may be enemy undercover, or a friendly rebel may also be an enemy undercover!).</English>
+                <Chinese>單一個迷你任務。\n\n在這種型態的任務中，敵人的數量可多可少，任務區域內也有可能出現友方的反抗軍! 也可能會是大量平民的集散地。(請小心，有些平民可能是敵人的臥底，有時也有友方的反抗軍在敵方陣營內執行臥底的任務!)</Chinese>
+                <Chinesesimp>单一个迷你任务。\n\n在这种型态的任务中，敌人的数量可多可少，任务区域内也有可能出现友方的反抗军! 也可能会是大量平民的集散地。(请小心，有些平民可能是敌人的卧底，有时也有友方的反抗军在敌方阵营内执行卧底的任务!)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions5">
+				<Original>Three mini missions.\n\nIf you select the type of mission below, all three will be the same, could be ideal for practicing the mini mission types, or you may want to have three HVTs to takeout.\n\nThese mini missions could be very low enemy, high enemy, be aware that the area may be occupied by friendly rebels! or jsut a large civilian population (watch out though, some civs may be enemy undercover, or a friendly rebel may also be an enemy undercover!).</Original>
+				<English>Three mini missions.\n\nIf you select the type of mission below, all three will be the same, could be ideal for practicing the mini mission types, or you may want to have three HVTs to takeout.\n\nThese mini missions could be very low enemy, high enemy, be aware that the area may be occupied by friendly rebels! or jsut a large civilian population (watch out though, some civs may be enemy undercover, or a friendly rebel may also be an enemy undercover!).</English>
+                <Chinese>三個迷你任務。\n\n假如你在下面選擇了任務類型，三個任務都將會是一樣的類型，這可以幫助你練習特定的任務類型，或者你想幹掉三個高價值目標也可以。\n\n在這些任務中，敵人的數量可多可少，任務區域內也有可能出現友方的反抗軍! 也可能會是大量平民的集散地。(請小心，有些平民可能是敵人的臥底，有時也有友方的反抗軍在敵方陣營內執行臥底的任務!)</Chinese>
+                <Chinesesimp>三个迷你任务。\n\n假如你在下面选择了任务类型，三个任务都将会是一样的类型，这可以帮助你练习特定的任务类型，或者你想干掉三个高价值目标也可以。\n\n在这些任务中，敌人的数量可多可少，任务区域内也有可能出现友方的反抗军! 也可能会是大量平民的集散地。(请小心，有些平民可能是敌人的卧底，有时也有友方的反抗军在敌方阵营内执行卧底的任务!)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions6">
+				<Original>You will start with 2 reputation, your aim is to work hard and become a highly reputable unit.  The higher your reputation the better equipment high command will allow you to use, however, losing these in battle will lower your reputation, also killing civs, losing units and other assets, killing friendly rebels and any other mistake will lower your reputation.\n\nIf you manage to get a high enough reputation(10 points), high command will assign a final heavy objective!</Original>
+				<English>You will start with 2 reputation, your aim is to work hard and become a highly reputable unit.  The higher your reputation the better equipment high command will allow you to use, however, losing these in battle will lower your reputation, also killing civs, losing units and other assets, killing friendly rebels and any other mistake will lower your reputation.\n\nIf you manage to get a high enough reputation(10 points), high command will assign a final heavy objective!</English>
+                <Chinese>你將會從2聲譽開始任務，你的目標將是盡可能的提高你的聲譽。擁有越多的聲譽值能讓你取得越好的裝備，然而如果你在任務中失去這些高聲譽的裝備後，你的聲譽將會降低，同樣如果不小心擊殺了平民、損失單位或者任何軍需品、殺死友方反抗軍等行為都會降低你的聲譽。\n\n假如你成功取得夠高的聲譽值(10點)，指揮部將會指派最終任務目標給你!</Chinese>
+                <Chinesesimp>你将会从2声誉开始任务，你的目标将是尽可能的提高你的声誉。拥有越多的声誉值能让你取得越好的装备，然而如果你在任务中失去这些高声誉的装备后，你的声誉将会降低，同样如果不小心击杀了平民、损失单位或者任何军需品、杀死友方反抗军等行为都会降低你的声誉。\n\n假如你成功取得够高的声誉值(10点)，指挥部将会指派最终任务目标给你!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName1">
+				<Original>Heavy Mission (with two optional sides)</Original>
+				<English>Heavy Mission (with two optional sides)</English>
+                <Chinese>重型任務 (有2個支線任務)</Chinese>
+                <Chinesesimp>重型任务 (有2个支线任务)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName2">
+				<Original>Heavy Mission (Intel required for AO Location)</Original>
+				<English>Heavy Mission (Intel required for AO Location)</English>
+                <Chinese>重型任務 (需要情報指明主任務區域的位置)</Chinese>
+                <Chinesesimp>重型任务 (需要情报指明主任务区域的位置)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName3">
+				<Original>Heavy Mission Only</Original>
+				<English>Heavy Mission Only</English>
+                <Chinese>僅有重型任務</Chinese>
+                <Chinesesimp>仅有重型任务</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName4">
+				<Original>Single Mission</Original>
+				<English>Single Mission</English>
+                <Chinese>單個任務</Chinese>
+                <Chinesesimp>单个任务</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName5">
+				<Original>Three Missions</Original>
+				<English>Three Missions</English>
+                <Chinese>三個任務</Chinese>
+                <Chinesesimp>三个任务</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName6">
+				<Original>Campaign</Original>
+				<English>Campaign</English>
+                <Chinese>戰役</Chinese>
+                <Chinesesimp>战役</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Sunny">
+				<Original>Sunny Clear</Original>
+				<English>Sunny Clear</English>
+                <Chinese>日間無雲</Chinese>
+                <Chinesesimp>日间无云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_DaytimeHeavyOvercast">
+				<Original>Daytime Heavy Overcast</Original>
+				<English>Daytime Heavy Overcast</English>
+                <Chinese>日間多雲</Chinese>
+                <Chinesesimp>日间多云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_DaytimeAverageOvercast">
+				<Original>Day average Overcast</Original>
+				<English>Day average Overcast</English>
+                <Chinese>日間少雲</Chinese>
+                <Chinesesimp>日间少云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_DarkNightClear">
+				<Original>Dark Night Clear</Original>
+				<English>Dark Night Clear</English>
+                <Chinese>夜間無雲</Chinese>
+                <Chinesesimp>夜间无云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_DarkNightHeavyOvercast">
+				<Original>Dark Night Heavy Overcast</Original>
+				<English>Dark Night Heavy Overcast</English>
+                <Chinese>夜間多雲</Chinese>
+                <Chinesesimp>夜间多云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_DarkNightAverageOvercast">
+				<Original>Dark Night Average overcast</Original>
+				<English>Dark Night Average overcast</English>
+                <Chinese>夜間少雲</Chinese>
+                <Chinesesimp>夜间少云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_EarlyMorning">
+				<Original>Early Morning</Original>
+				<English>Early Morning</English>
+                <Chinese>清晨</Chinese>
+                <Chinesesimp>清晨</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MoonNightClear">
+				<Original>Moon Night Clear</Original>
+				<English>Moon Night Clear</English>
+                <Chinese>月光無雲</Chinese>
+                <Chinesesimp>月光无云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MoonNightAverageOvercast">
+				<Original>Moon Night slight overcast</Original>
+				<English>Moon Night slight overcast</English>
+                <Chinese>月光少雲</Chinese>
+                <Chinesesimp>月光少云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MoonNightHeavyOvercast">
+				<Original>Moon Night heavy overcast</Original>
+				<English>Moon Night heavy overcast</English>
+                <Chinese>月光多雲</Chinese>
+                <Chinesesimp>月光多云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_NVG_Real">
+				<Original>Realistic NVG</Original>
+				<English>Realistic NVG</English>
+                <Chinese>真實夜視鏡</Chinese>
+                <Chinesesimp>真实夜视镜</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_NVG_Allow">
+				<Original>Allowed</Original>
+				<English>Allowed</English>
+                <Chinese>允許使用夜視鏡</Chinese>
+                <Chinesesimp>允许使用夜视镜</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_NVG_NoAllow">
+				<Original>No NVG</Original>
+				<English>No NVG</English>
+                <Chinese>不允許使用夜視鏡</Chinese>
+                <Chinesesimp>不允许使用夜视镜</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Revive_No">
+				<Original>No revive</Original>
+				<English>No revive</English>
+                <Chinese>關閉復甦</Chinese>
+                <Chinesesimp>关闭复苏</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Revive_Guarantee">
+				<Original>Guarantee revive</Original>
+				<English>Guarantee revive</English>
+                <Chinese>一定可復甦</Chinese>
+                <Chinesesimp>一定可复苏</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Revive_Real1">
+				<Original>Realistic revive (critical hits will kill you instantly)</Original>
+				<English>Realistic revive (critical hits will kill you instantly)</English>
+                <Chinese>真實復甦 (重傷可導致單位直接死亡)</Chinese>
+                <Chinesesimp>真实复苏 (重伤可导致单位直接死亡)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Revive_Real2">
+				<Original>Realistic revive (only medics can revive with a medkit)</Original>
+				<English>Realistic revive (only medics can revive with a medkit)</English>
+                <Chinese>真實復甦 (只有醫護兵能使用醫療包進行復甦)</Chinese>
+                <Chinesesimp>真实复苏 (只有医护兵能使用医疗包进行复苏)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Revive_Real3">
+				<Original>Realistic, only medics, only near transport chopper, medi chopper, medi vehicle or medi facility at HQ</Original>
+				<English>Realistic, only medics, only near transport chopper, medi chopper, medi vehicle or medi facility at HQ</English>
+                <Chinese>真實復甦 (只有醫護兵帶著傷患靠近運輸/醫療直升機、基地內的醫療載具或是醫療設施時才能進行復甦)</Chinese>
+                <Chinesesimp>真实复苏 (只有医护兵带着伤患靠近运输/医疗直升机、基地内的医疗载具或是医疗设施时才能进行复苏)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Revive_Real4">
+				<Original>Realistic, only medics, only at HQ</Original>
+				<English>Realistic, only medics, only at HQ</English>
+                <Chinese>真實復甦 (只有醫護兵帶著傷患在基地內時才能進行復甦)</Chinese>
+                <Chinesesimp>真实复苏 (只有医护兵带着伤患在基地内时才能进行复苏)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_NearAO">
+				<Original>Near AO</Original>
+				<English>Near AO</English>
+                <Chinese>靠近任務區域</Chinese>
+                <Chinesesimp>靠近任务区域</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MainHQ">
+				<Original>Main HQ</Original>
+				<English>Main HQ</English>
+                <Chinese>在基地內</Chinese>
+                <Chinesesimp>在基地内</Chinesesimp>
 			</Key>
 		</Container>
 	</Package>
