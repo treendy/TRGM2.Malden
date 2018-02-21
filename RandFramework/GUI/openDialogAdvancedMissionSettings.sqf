@@ -47,13 +47,13 @@ _lineHeight = 0.03;
 _display ctrlCreate ["RscText", 6999];
 _lblctrlTitle = _display displayCtrl 6999;
 _lblctrlTitle ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.25 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
-ctrlSetText [6999,  "Advanced Options (more options soon!)"];
+ctrlSetText [6999,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_AdvOpt"];
 
 _display ctrlCreate ["RscButton", 6998];
 _btnSetEnemyFaction = _display displayCtrl 6998;
 _btnSetEnemyFaction ctrlSetPosition [0.6 * safezoneW + safezoneX, (0.25 + 0) * safezoneH + safezoneY,0.1 * safezoneW,0.02 * safezoneH];
 _btnSetEnemyFaction ctrlCommit 0;
-ctrlSetText [6998,  "Custom Enemy Classnames"];
+ctrlSetText [6998,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomEnemy"];
 _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {[] execVM 'RandFramework\GUI\openDialogEnemyFaction.sqf'; false}];
 
 
@@ -61,7 +61,7 @@ _display ctrlCreate ["RscButton", 6997];
 _btnSetEnemyFaction = _display displayCtrl 6997;
 _btnSetEnemyFaction ctrlSetPosition [0.6 * safezoneW + safezoneX, (0.25 * 1.1) * safezoneH + safezoneY,0.1 * safezoneW,0.02 * safezoneH];
 _btnSetEnemyFaction ctrlCommit 0;
-ctrlSetText [6997,  "Custom Team Loadouts"];
+ctrlSetText [6997,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomLoadouts"];
 _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {[] execVM 'RandFramework\GUI\openDialogTeamLoadouts.sqf'; false}];
 
 
@@ -109,7 +109,7 @@ if (EnemyFactionData != "") then {
 	_lblctrlWarn1 = _display displayCtrl 6996;
 	_lblctrlWarn1 ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.70 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
 	_lblctrlWarn1 ctrlSetTextColor [1, 0, 0, 1];
-	ctrlSetText [6996,  "You have friendly class names active, this will overright friendly faction settings you have selected above"];
+	ctrlSetText [6996,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomFriend_Hint"];
 	_lblctrlWarn1 ctrlCommit 0;
 };
 if (LoadoutData != "") then {
@@ -117,7 +117,7 @@ if (LoadoutData != "") then {
 	_lblctrlWarn2 = _display displayCtrl 6995;
 	_lblctrlWarn2 ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.72 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
 	_lblctrlWarn2 ctrlSetTextColor [1, 0, 0, 1];
-	ctrlSetText [6995,  "You have enemy class names active, this will overright enemy faction settings you have selected above"];
+	ctrlSetText [6995,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomEnemy_Hint"];
 	_lblctrlWarn2 ctrlCommit 0;
 };
 

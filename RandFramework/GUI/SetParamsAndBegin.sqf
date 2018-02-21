@@ -40,20 +40,20 @@ if (_SaveType == 0) then {
 	publicVariable "EnemyFactionData";
 	publicVariable "LoadoutData";
 	publicVariable "LoadoutDataDefault";
-	
+
 
 	_savePreviousSettings = [iMissionParamType,iMissionParamObjective,iAllowNVG,iMissionParamRepOption,iWeather,iUseRevive,iStartLocation,AdvancedSettings,EnemyFactionData,LoadoutData];
-	profileNamespace setVariable [worldname + ":PreviousSettings",_savePreviousSettings]; 
+	profileNamespace setVariable [worldname + ":PreviousSettings",_savePreviousSettings];
 	saveProfileNamespace;
 
-	bAndSoItBegins = true; 
-	publicVariable 'bAndSoItBegins'; 
+	bAndSoItBegins = true;
+	publicVariable 'bAndSoItBegins';
 	closedialog 0;
 
 };
 
 sInitialSLPlayerID = getPlayerUID player; //store the uid of the player picking the params at the start of a campaign, so when we save, we know the uid to save against even if he is killed!
-publicVariable "sInitialSLPlayerID";	
+publicVariable "sInitialSLPlayerID";
 sleep 0.1;
 
 _LoadVersion = "";
@@ -81,16 +81,16 @@ if (_LoadVersion != "") then {
 
 	if (count SavedData == 0) then {
 		_ctrl = (findDisplay 5000) displayCtrl 5001;
-		_ctrl ctrlSetText "No data found! make sure you are using the same profile that you saved the last mission with";
+		_ctrl ctrlSetText (localize "STR_TRGM2_SetParamsAndBegin_ErrorMsg_NoData");
 	}
 	else {
 
 		iMissionParamType = SavedData select 0;
 		publicVariable "iMissionParamType";
 		iMissionParamObjective = SavedData select 1;
-		publicVariable "iMissionParamObjective";		
+		publicVariable "iMissionParamObjective";
 		iAllowNVG = SavedData select 2;
-		publicVariable "iAllowNVG";	
+		publicVariable "iAllowNVG";
 		iMissionParamRepOption =  SavedData select 3;
 		publicVariable "iMissionParamRepOption";
 		iWeather = SavedData select 4;
@@ -102,23 +102,23 @@ if (_LoadVersion != "") then {
 
 		BadPoints = SavedData select 7;
 		MaxBadPoints = SavedData select 8;
-		BadPointsReason = SavedData select 9; 
-		iCampaignDay = SavedData select 10; 
+		BadPointsReason = SavedData select 9;
+		iCampaignDay = SavedData select 10;
 		publicVariable "BadPoints";
 		publicVariable "MaxBadPoints";
 		publicVariable "BadPointsReason";
 		publicVariable "iCampaignDay";
 
 		if (count SavedData > 11) then { //12 values, 11 indexes (savedData 11 is the 12th value)
-			AdvancedSettings = SavedData select 11; 
+			AdvancedSettings = SavedData select 11;
 			publicVariable "AdvancedSettings";
 		};
-		if (count SavedData > 12) then { 
-			EnemyFactionData = SavedData select 12; 
+		if (count SavedData > 12) then {
+			EnemyFactionData = SavedData select 12;
 			publicVariable "EnemyFactionData";
 		};
-		if (count SavedData > 13) then { 
-			LoadoutData = SavedData select 13; 
+		if (count SavedData > 13) then {
+			LoadoutData = SavedData select 13;
 			publicVariable "LoadoutData";
 		};
 
@@ -126,8 +126,8 @@ if (_LoadVersion != "") then {
 		SaveType = _SaveType;
 		publicVariable "SaveType";
 
-		bAndSoItBegins = true; 
-		publicVariable 'bAndSoItBegins'; 
+		bAndSoItBegins = true;
+		publicVariable 'bAndSoItBegins';
 		closedialog 0;
 	};
 };

@@ -1499,8 +1499,8 @@
 			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Mapdraw">
 				<Original>Mapdraw in direct only</Original>
 				<English>Mapdraw in direct only</English>
-                <Chinese>僅隊長能在地圖上繪製</Chinese>
-                <Chinesesimp>仅队长能在地图上绘制</Chinesesimp>
+                <Chinese>僅能在直接溝通頻道上進行地圖繪製</Chinese>
+                <Chinesesimp>仅能在直接沟通频道上进行地图绘制</Chinesesimp>
 			</Key>
 			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTimer">
 				<Original>Respawn Timer</Original>
@@ -1765,6 +1765,402 @@
 				<English>Main HQ</English>
                 <Chinese>在基地內</Chinese>
                 <Chinesesimp>在基地内</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType">
+				<Original>Mission Type:</Original>
+				<English>Mission Type:</English>
+                <Chinese>任務類型:</Chinese>
+                <Chinesesimp>任务类型:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType1">
+				<Original>Single random side mission</Original>
+				<English>Single random side mission</English>
+                <Chinese>單個支線任務: 隨機</Chinese>
+                <Chinesesimp>单个支线任务: 随机</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType2">
+				<Original>Double side: Random</Original>
+				<English>Double side: Random</English>
+                <Chinese>雙個支線任務: 隨機</Chinese>
+                <Chinesesimp>双个支线任务: 随机</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType3">
+				<Original>Main Mission: Random objective, no intel needed</Original>
+				<English>Main Mission: Random objective, no intel needed</English>
+                <Chinese>主任務: 隨機目標，不需要情報來定位</Chinese>
+                <Chinesesimp>主任务: 随机目标，不需要情报来定位</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType4">
+				<Original>Main Mission: Random Objective, intel required for main AO</Original>
+				<English>Main Mission: Random Objective, intel required for main AO</English>
+                <Chinese>主任務: 隨機目標，需要情報來定位主任務區域</Chinese>
+                <Chinesesimp>主任务: 随机目标，需要情报来定位主任务区域</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType5">
+				<Original>Training</Original>
+				<English>Training</English>
+                <Chinese>訓練</Chinese>
+                <Chinesesimp>训练</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType6">
+				<Original>single side: Hack Data</Original>
+				<English>single side: Hack Data</English>
+                <Chinese>單個支線任務: 駭取資料</Chinese>
+                <Chinesesimp>单个支线任务: 骇取资料</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType7">
+				<Original>single side: Speak with Informant</Original>
+				<English>single side: Speak with Informant</English>
+                <Chinese>單個支線任務: 與線人交談</Chinese>
+                <Chinesesimp>单个支线任务: 与线人交谈</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType8">
+				<Original>single side: Interrogate Officer</Original>
+				<English>single side: Interrogate Officer</English>
+                <Chinese>單個支線任務: 審問軍官</Chinese>
+                <Chinesesimp>单个支线任务: 审问军官</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType9">
+				<Original>single side: Bug Radio</Original>
+				<English>single side: Bug Radio</English>
+                <Chinese>單個支線任務: 轉送敵方通訊信號到總部</Chinese>
+                <Chinesesimp>单个支线任务: 转送敌方通讯信号到总部</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType10">
+				<Original>Double side: Get code, enter code (coming soon)</Original>
+				<English>Double side: Get code, enter code (coming soon)</English>
+                <Chinese>雙個支線任務: 取得密碼，輸入密碼(即將登場)</Chinese>
+                <Chinesesimp>双个支线任务: 取得密码，输入密码(即将登场)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType11">
+				<Original>Gather Intel(random) for Main location : Random</Original>
+				<English>Gather Intel(random) for Main location : Random</English>
+                <Chinese>取得情報(隨機)來定位主任務位置: 隨機</Chinese>
+                <Chinesesimp>取得情报(随机)来定位主任务位置: 随机</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType12">
+				<Original>Gather Intel(random) for Main location : Interrogate Officer</Original>
+				<English>Gather Intel(random) for Main location : Interrogate Officer</English>
+                <Chinese>取得情報(隨機)來定位主任務位置: 審問軍官</Chinese>
+                <Chinesesimp>取得情报(随机)来定位主任务位置: 审问军官</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType13">
+				<Original>Gather Intel(random) for Main location : Nuke (coming soon)</Original>
+				<English>Gather Intel(random) for Main location : Nuke (coming soon)</English>
+                <Chinese>取得情報(隨機)來定位主任務位置: 核彈(即將登場)</Chinese>
+                <Chinesesimp>取得情报(随机)来定位主任务位置: 核弹(即将登场)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType14">
+				<Original>Gather Intel(Radio) for Main location : Interrogate Officer</Original>
+				<English>Gather Intel(Radio) for Main location : Interrogate Officer</English>
+                <Chinese>取得情報(無線電)來定位主任務位置: 審問軍官</Chinese>
+                <Chinesesimp>取得情报(无线电)来定位主任务位置: 审问军官</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_MaxEnemy">
+				<Original>Maximum Enemies:</Original>
+				<English>Maximum Enemies:</English>
+                <Chinese>最大敵人數量:</Chinese>
+                <Chinesesimp>最大敌人数量:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_MaxEnemy_True">
+				<Original>True (WARNING ! this will mean some patrols will have around 9 units)</Original>
+				<English>True (WARNING ! this will mean some patrols will have around 9 units)</English>
+                <Chinese>是 (警告! 這將讓敵人巡邏隊的人數上升到9個單位)</Chinese>
+                <Chinesesimp>是 (警告! 这将让敌人巡逻队的人数上升到9个单位)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_True">
+				<Original>True</Original>
+				<English>True</English>
+                <Chinese>是</Chinese>
+                <Chinesesimp>是</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_False">
+				<Original>False</Original>
+				<English>False</English>
+                <Chinese>否</Chinese>
+                <Chinesesimp>否</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_WeatherTime">
+				<Original>Weather and Time:</Original>
+				<English>Weather and Time:</English>
+                <Chinese>天氣與時間:</Chinese>
+                <Chinesesimp>天气与时间:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_GPS">
+				<Original>Allow GPS:</Original>
+				<English>Allow GPS:</English>
+                <Chinese>允許使用GPS:</Chinese>
+                <Chinesesimp>允许使用GPS:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_NVG">
+				<Original>NVG:</Original>
+				<English>NVG:</English>
+                <Chinese>夜視鏡:</Chinese>
+                <Chinesesimp>夜视镜:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_NVG_PoorVis">
+				<Original>NVG with poor visibility</Original>
+				<English>NVG with poor visibility</English>
+                <Chinese>夜視鏡視線不良</Chinese>
+                <Chinesesimp>夜视镜视线不良</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_Revive">
+				<Original>Revive options:</Original>
+				<English>Revive options:</English>
+                <Chinese>復甦選項:</Chinese>
+                <Chinesesimp>复苏选项:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_AI">
+				<Original>Allow AI insertion and extraction:</Original>
+				<English>Allow AI insertion and extraction:</English>
+                <Chinese>允許AI進入與撤離:</Chinese>
+                <Chinesesimp>允许AI进入与撤离:</Chinesesimp>
+			</Key>
+		</Container>
+		<Container name="GUI">
+			<Key ID="STR_TRGM2_defines_UNCHECKED">
+				<Original>UNCHECKED</Original>
+				<English>UNCHECKED</English>
+                <Chinese>未勾選</Chinese>
+                <Chinesesimp>未勾选</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_defines_CHECKED">
+				<Original>CHECKED</Original>
+				<English>CHECKED</English>
+                <Chinese>已勾選</Chinese>
+                <Chinesesimp>已勾选</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_defines_OK">
+				<Original>OK</Original>
+				<English>OK</English>
+                <Chinese>確定</Chinese>
+                <Chinesesimp>确定</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_defines_Cancel">
+				<Original>Cancel</Original>
+				<English>Cancel</English>
+                <Chinese>取消</Chinese>
+                <Chinesesimp>取消</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_Weather">
+				<Original>Weather</Original>
+				<English>Weather</English>
+                <Chinese>天氣</Chinese>
+                <Chinesesimp>天气</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_Details">
+				<Original>Details about it here</Original>
+				<English>Details about it here</English>
+                <Chinese>它的細節在這裡</Chinese>
+                <Chinesesimp>它的细节在这里</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_HardcoreReputation">
+				<Original>Hardcore Reputation</Original>
+				<English>Hardcore Reputation</English>
+                <Chinese>困難聲譽</Chinese>
+                <Chinesesimp>困难声誉</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_NVG">
+				<Original>NVG</Original>
+				<English>NVG</English>
+                <Chinese>夜視鏡</Chinese>
+                <Chinesesimp>夜视镜</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_Revive">
+				<Original>Revive</Original>
+				<English>Revive</English>
+                <Chinese>復甦</Chinese>
+                <Chinesesimp>复苏</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_Begin">
+				<Original>Begin</Original>
+				<English>Begin</English>
+                <Chinese>開始</Chinese>
+                <Chinesesimp>开始</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_AdvOpt">
+				<Original>Advanced Options</Original>
+				<English>Advanced Options</English>
+                <Chinese>進階選項</Chinese>
+                <Chinesesimp>进阶选项</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_Objective">
+				<Original>Objective</Original>
+				<English>Objective</English>
+                <Chinese>目標</Chinese>
+                <Chinesesimp>目标</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_HardcoreReputation_HelpText">
+				<Original>You will have to keep your teams Reputation up.\nKilling civs, losing main assets and units, killing friendly rebels or any other mistakes will lower your Reputation.\nIf your Reputation is too low, and this option is enabled, your mission will be unassigned and you will have to return to base! (If this option is disabled, then you will just fail a task of keeping your rep above average)\n(I introduced this point system to make mistakes more costly, to make you think carefully about your actions\nand to feel any vehicle assets you use are not expendable!</Original>
+				<English>You will have to keep your teams Reputation up.\nKilling civs, losing main assets and units, killing friendly rebels or any other mistakes will lower your Reputation.\nIf your Reputation is too low, and this option is enabled, your mission will be unassigned and you will have to return to base! (If this option is disabled, then you will just fail a task of keeping your rep above average)\n(I introduced this point system to make mistakes more costly, to make you think carefully about your actions\nand to feel any vehicle assets you use are not expendable!</English>
+                <Chinese>你必須讓你的隊伍保持一定的聲譽以上。\n殺害平民、損失重要裝備與單位、殺害友方反抗軍或任何失誤都會減低你們的聲譽。\n假如你的聲譽過低，而且本選項有開啟的話，你的任務將會自動取消並命令你立刻返回基地! (假如本選項沒有開啟，那你只是在保持聲譽的這項任務上失敗而已)\n(我引進這個系統是為了讓每個失誤更加加重，來強迫玩家好好思考每個行動的後果，\n並讓你覺得每台載具並不是隨便的消耗品!</Chinese>
+                <Chinesesimp>你必须让你的队伍保持一定的声誉以上。\n杀害平民、损失重要装备与单位、杀害友方反抗军或任何失误都会减低你们的声誉。\n假如你的声誉过低，而且本选项有开启的话，你的任务将会自动取消并命令你立刻返回基地! (假如本选项没有开启，那你只是在保持声誉的这项任务上失败而已)\n(我引进这个系统是为了让每个失误更加加重，来强迫玩家好好思考每个行动的后果，\n并让你觉得每台载具并不是随便的消耗品!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_StartLocation">
+				<Original>Start Location</Original>
+				<English>Start Location</English>
+                <Chinese>出發位置</Chinese>
+                <Chinesesimp>出发位置</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_StartLocation_HelpText">
+				<Original>If you select to start Near AO, this you will start near the AO as a fast response team,\nno need for transport.\n\nYou will be allocated a drivable vehicle. Otherwise will start at the main base\nwith transport chopper to fly you to a choosen LZ</Original>
+				<English>If you select to start Near AO, this you will start near the AO as a fast response team,\nno need for transport.\n\nYou will be allocated a drivable vehicle. Otherwise will start at the main base\nwith transport chopper to fly you to a choosen LZ</English>
+                <Chinese>假如你選擇靠近任務區域，這將讓系統把你放在任務區域周遭，\n你的行動將會較像快速應變部隊，並不需要運輸部隊接送。\n\n假使從基地出發的話，你可以擁有一台\n運輸直升機運送你的部隊到你指定的降落點</Chinese>
+                <Chinesesimp>假如你选择靠近任务区域，这将让系统把你放在任务区域周遭，\n你的行动将会较像快速应变部队，并不需要运输部队接送。\n\n假使从基地出发的话，你可以拥有一台\n运输直升机运送你的部队到你指定的降落点</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_LoadLocal">
+				<Original>Load Local Campaign</Original>
+				<English>Load Local Campaign</English>
+                <Chinese>載入本地戰役存檔</Chinese>
+                <Chinesesimp>载入本地战役存档</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_LoadLocal_HelpText">
+				<Original>Will load the last campaign save data for the current map (that was saved by you only... i.e. the current person selecting mission parameters)</Original>
+				<English>Will load the last campaign save data for the current map (that was saved by you only... i.e. the current person selecting mission parameters)</English>
+                <Chinese>將從當前地圖載入上次戰役最後的存檔 (你自己儲存的存檔... 伺服器上通常為管理員負責)</Chinese>
+                <Chinesesimp>将从当前地图载入上次战役最后的存档 (你自己储存的存档... 伺服器上通常为管理员负责)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_LoadGlobal">
+				<Original>Load Global Campaign</Original>
+				<English>Load Global Campaign</English>
+                <Chinese>載入全域戰役存檔</Chinese>
+                <Chinesesimp>载入全域战役存档</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_LoadGlobal_HelpText">
+				<Original>Will load any previous campaign global saves for any map running TRGM2 (that was saved by you only... i.e. the current person selecting mission parameters</Original>
+				<English>Will load any previous campaign global saves for any map running TRGM2 (that was saved by you only... i.e. the current person selecting mission parameters</English>
+                <Chinese>將從全域存檔中調用任何運行TRGM2任務的存檔並載入之 (你自己儲存的存檔... 伺服器上通常為管理員負責)</Chinese>
+                <Chinesesimp>将从全域存档中调用任何运行TRGM2任务的存档并载入之 (你自己储存的存档... 伺服器上通常为管理员负责)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_Back">
+				<Original>Back</Original>
+				<English>Back</English>
+                <Chinese>返回</Chinese>
+                <Chinesesimp>返回</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogAdvancedMissionSettings_AdvOpt">
+				<Original>Advanced Options (more options soon!)</Original>
+				<English>Advanced Options (more options soon!)</English>
+                <Chinese>進階選項 (更多選項將慢慢加入!)</Chinese>
+                <Chinesesimp>进阶选项 (更多选项将慢慢加入!)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogAdvancedMissionSettings_CustomEnemy">
+				<Original>Custom Enemy Classnames</Original>
+				<English>Custom Enemy Classnames</English>
+                <Chinese>自訂敵人Classnames</Chinese>
+                <Chinesesimp>自订敌人Classnames</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogAdvancedMissionSettings_CustomLoadouts">
+				<Original>Custom Team Loadouts</Original>
+				<English>Custom Team Loadouts</English>
+                <Chinese>自訂隊伍裝備</Chinese>
+                <Chinesesimp>自订队伍装备</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogAdvancedMissionSettings_CustomFriend_Hint">
+				<Original>You have friendly class names active, this will overright friendly faction settings you have selected above</Original>
+				<English>You have friendly class names active, this will overright friendly faction settings you have selected above</English>
+                <Chinese>你已經自行設定友方的Classnames，這將覆寫任何你在上面的派別設定。</Chinese>
+                <Chinesesimp>你已经自行设定友方的Classnames，这将覆写任何你在上面的派别设定。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogAdvancedMissionSettings_CustomEnemy_Hint">
+				<Original>You have friendly class names active, this will overright friendly faction settings you have selected above</Original>
+				<English>You have friendly class names active, this will overright friendly faction settings you have selected above</English>
+                <Chinese>你已經自行設定敵方的Classnames，這將覆寫任何你在上面的派別設定。</Chinese>
+                <Chinesesimp>你已经自行设定敌方的Classnames，这将覆写任何你在上面的派别设定。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogEnemyFaction_SetEnemyFaction">
+				<Original>Set enemy faction classes</Original>
+				<English>Set enemy faction classes</English>
+                <Chinese>設定敵方派別</Chinese>
+                <Chinesesimp>设定敌方派别</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogEnemyFaction_URL">
+				<Original>Visit www.trgm2.com/CustomEnemyClasses.html for all unit types that can be overwritten</Original>
+				<English>Visit www.trgm2.com/CustomEnemyClasses.html for all unit types that can be overwritten</English>
+                <Chinese>請訪問www.trgm2.com/CustomEnemyClasses.html網頁來得知所有可以被覆寫的單位類型</Chinese>
+                <Chinesesimp>请访问www.trgm2.com/CustomEnemyClasses.html网页来得知所有可以被覆写的单位类型</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogEnemyFaction_SaveAndBack">
+				<Original>Save and Back</Original>
+				<English>Save and Back</English>
+                <Chinese>保存並返回</Chinese>
+                <Chinesesimp>保存并返回</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogEnemyFaction_ErrorMsg_NotExist">
+				<Original> - Class doesnt exist: %1 (class: %2) </Original>
+				<English> - Class doesnt exist: %1 (class: %2) </English>
+                <Chinese> - 類別並不存在: %1 (類別: %2) </Chinese>
+                <Chinesesimp> - 类别并不存在: %1 (类别: %2) </Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogEnemyFaction_ErrorMsg_CantEmpty">
+				<Original> - Class is empty: %1 (class: %2) </Original>
+				<English> - Class is empty: %1 (class: %2) </English>
+                <Chinese> - 類別為空: %1 (類別: %2) </Chinese>
+                <Chinesesimp> - 类别为空: %1 (类别: %2) </Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogTeamLoadouts_SetLoadout">
+				<Original>Set unit loadouts</Original>
+				<English>Set unit loadouts</English>
+                <Chinese>設定單位裝備</Chinese>
+                <Chinesesimp>设定单位装备</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogTeamLoadouts_URL">
+				<Original>Visit www.trgm2.com/CustomLoadouts.html for all unit types that can be overwritten</Original>
+				<English>Visit www.trgm2.com/CustomLoadouts.html for all unit types that can be overwritten</English>
+                <Chinese>請訪問www.trgm2.com/CustomLoadouts.html網頁來得知所有可以被覆寫的單位類型</Chinese>
+                <Chinesesimp>请访问www.trgm2.com/CustomLoadouts.html网页来得知所有可以被覆写的单位类型</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogTeamLoadouts_ErrorMsg_SetNotCorrectly">
+				<Original>something isnt set correctly</Original>
+				<English>something isnt set correctly</English>
+                <Chinese>某東西設定並不正確</Chinese>
+                <Chinesesimp>某东西设定并不正确</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetParamsAndBegin_ErrorMsg_NoData">
+				<Original>No data found! make sure you are using the same profile that you saved the last mission with</Original>
+				<English>No data found! make sure you are using the same profile that you saved the last mission with</English>
+                <Chinese>沒找到資料! 請確保你當前的使用者是使用之前負責存檔的那個使用者</Chinese>
+                <Chinesesimp>没找到资料! 请确保你当前的使用者是使用之前负责存档的那个使用者</Chinesesimp>
+			</Key>
+		</Container>
+		<Container name="RandScript">
+			<Key ID="STR_TRGM2_TRENDfncsetOtherAreaStuff_CheckEnemyComms">
+				<Original>Check for enemy comms</Original>
+				<English>Check for enemy comms</English>
+                <Chinese>檢查敵人的通訊</Chinese>
+                <Chinesesimp>检查敌人的通讯</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRENDfncsetOtherAreaStuff_MarkerText_Camp">
+				<Original>Camp</Original>
+				<English>Camp</English>
+                <Chinese>營地</Chinese>
+                <Chinesesimp>营地</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRENDfncsetOtherAreaStuff_MarkerText_ArmedBoat">
+				<Original>Armed Boat</Original>
+				<English>Armed Boat</English>
+                <Chinese>武裝船隻</Chinese>
+                <Chinesesimp>武装船只</Chinesesimp>
+			</Key>	
+			<Key ID="STR_TRGM2_trendFunctions_OccupiedByFriendRebel">
+				<Original>Occupied by friendly rebels</Original>
+				<English>Occupied by friendly rebels</English>
+                <Chinese>被友方反抗軍佔領</Chinese>
+                <Chinesesimp>被友方反抗军占领</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_trendFunctions_TalkToLeader">
+				<Original>Talk to leader</Original>
+				<English>Talk to leader</English>
+                <Chinese>與隊長交談</Chinese>
+                <Chinesesimp>与队长交谈</Chinesesimp>
+			</Key>
+		</Container>
+		<Container name="TGM">
+			<Key ID="STR_TRGM2_vehicledrop_spawn_VehicleDrop">
+				<Original>Vehicle Para drop on its way, eta 1 min.</Original>
+				<English>Vehicle Para drop on its way, eta 1 min.</English>
+                <Chinese>載具空投已上路，預計1分鐘內抵達。</Chinese>
+                <Chinesesimp>载具空投已上路，预计1分钟内抵达。</Chinesesimp>
 			</Key>
 		</Container>
 	</Package>
