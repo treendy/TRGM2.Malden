@@ -1499,8 +1499,8 @@
 			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Mapdraw">
 				<Original>Mapdraw in direct only</Original>
 				<English>Mapdraw in direct only</English>
-                <Chinese>僅能在直接溝通頻道上進行地圖繪製</Chinese>
-                <Chinesesimp>仅能在直接沟通频道上进行地图绘制</Chinesesimp>
+                <Chinese>僅在直接頻道繪製地圖</Chinese>
+                <Chinesesimp>仅在直接频道绘制地图</Chinesesimp>
 			</Key>
 			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTimer">
 				<Original>Respawn Timer</Original>
