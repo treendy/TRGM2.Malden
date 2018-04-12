@@ -198,6 +198,11 @@ if (isNil "EnemyID") then {
 			EnemyID = 1;
 			publicVariable "EnemyID";
 };
+if (isNil "FinalMissionStarted") then {
+	FinalMissionStarted = false;
+	publicVariable "FinalMissionStarted";	
+};
+
 
 
 if (isServer) then { //adjust weather here so intro animation is different everytime
@@ -387,8 +392,9 @@ if (isServer) then {
 
 	if (LoadoutData != "" || LoadoutDataDefault != "") then {
 		{
+			//_x setVariable ["UnitRole",_unitRole];
 			[_x] execVM "RandFramework\setLoadout.sqf";
-			_x addEventHandler ["Respawn", { [_x] execVM "RandFramework\setLoadout.sqf"; }];
+			_x addEventHandler ["Respawn", { [_this select 0] execVM "RandFramework\setLoadout.sqf"; }];
 		} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 	};
 	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
@@ -490,7 +496,7 @@ TREND_fnc_CheckBadPoints = {
 			if (BadPoints > _lastBadPoints) then {_bRepWorse = true};
 			_lastBadPoints = BadPoints;
 			if (iMissionParamType != 5) then {
-				if (BadPoints > MaxBadPoints && iMissionParamRepOption == 1) then {
+				if (_dCurrentRep <= 0 && iMissionParamRepOption == 1) then {
 					iCurrentTaskCount = 0;
 					["tskKeepAboveAverage", "failed"] call FHQ_TT_setTaskState;
 					while {iCurrentTaskCount < count ActiveTasks} do {
@@ -500,14 +506,15 @@ TREND_fnc_CheckBadPoints = {
 						};
 					};
 					sleep 2;
+
 					[FriendlySide, ["DeBrief", localize "STR_TRGM2_mainInit_Debrief", "Debrief", ""]] call FHQ_TT_addTasks;
-				};
-				if (BadPoints > MaxBadPoints && iMissionParamRepOption == 0) then { //note... when gaining rep, we increase the MaxBadPoints, and when lower, we incrase BadPoints (rep is calulated by the difference)
+				};	
+				if (_dCurrentRep <= 0 && iMissionParamRepOption == 0) then { //note... when gaining rep, we increase the MaxBadPoints, and when lower, we incrase BadPoints (rep is calulated by the difference)
 					["tskKeepAboveAverage", "failed"] call FHQ_TT_setTaskState;
-				};
-				if (BadPoints <= MaxBadPoints && iMissionParamRepOption == 0) then {
-					["tskKeepAboveAverage", "succeeded"] call FHQ_TT_setTaskState;
-				};
+				};				
+				if (_dCurrentRep > 0 && iMissionParamRepOption == 0) then {
+					["tskKeepAboveAverage", "succeeded"] call FHQ_TT_setTaskState;					
+				};				
 			};
 		};
 		if (_LastRank != _CurrentRank) then {
@@ -530,6 +537,10 @@ TREND_fnc_CheckBadPoints = {
 				}
 				else {
 					_sRankMessage = "<t color='#00ff00'>" + localize "STR_TRGM2_mainInit_ReputationIncreased" + "</t><br /><br />" + _sRankIcon + "<br /><br />" + localize "STR_TRGM2_mainInit_ReputationText";
+				};
+
+				if ((ActiveTasks call FHQ_TT_areTasksCompleted)) then { //if rank changed and tasks completed, then if now rank 5, need to reset board to show "Start final mission", otherwise, make sure shows "start next mission"
+					[["MISSION_COMPLETE"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
 				};
 				//hint parseText _sRankMessage;
 				[parseText _sRankMessage] remoteExec ["Hint", 0, true];
@@ -610,7 +621,7 @@ if (isServer) then {
 	TREND_fnc_SandStormEffect = {
 		_iSandStormOption = AdvancedSettings select ADVSET_SANDSTORM_IDX;
 
-		if (_iSandStormOption == 0 && selectRandom[true,false,false,false]) then { //Random
+		if (_iSandStormOption == 0 && selectRandom[true,false,false,false,false]) then { //Random
 			StartWhen = selectRandom [990,1290,1710];
 			sleep StartWhen;
 			//work out how to deal with JIP if sandstorm already playing
@@ -670,7 +681,7 @@ if (isServer) then {
 			//ok, if something is true, then in here we will start the sand storm and all clients!
 			//work out how to deal with JIP if sandstorm already playing
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
-			{nul = 18030 execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			{nul = [18030] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
 			//Set enemy skill
 			{
 				if (Side _x == East) then {

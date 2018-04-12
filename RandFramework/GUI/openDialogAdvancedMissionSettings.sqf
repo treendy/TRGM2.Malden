@@ -109,7 +109,9 @@ if (EnemyFactionData != "") then {
 	_lblctrlWarn1 = _display displayCtrl 6996;
 	_lblctrlWarn1 ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.70 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
 	_lblctrlWarn1 ctrlSetTextColor [1, 0, 0, 1];
-	ctrlSetText [6996,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomFriend_Hint"];
+
+	ctrlSetText [6996,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomEnemy_Hint"];
+
 	_lblctrlWarn1 ctrlCommit 0;
 };
 if (LoadoutData != "") then {
@@ -117,7 +119,9 @@ if (LoadoutData != "") then {
 	_lblctrlWarn2 = _display displayCtrl 6995;
 	_lblctrlWarn2 ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.72 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
 	_lblctrlWarn2 ctrlSetTextColor [1, 0, 0, 1];
-	ctrlSetText [6995,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomEnemy_Hint"];
+
+	ctrlSetText [6995,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomFriend_Hint"];
+
 	_lblctrlWarn2 ctrlCommit 0;
 };
 

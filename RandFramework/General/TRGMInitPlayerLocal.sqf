@@ -17,6 +17,11 @@ if (isNil "IntroMusic") then {
 	publicVariable "IntroMusic";
 };
 
+if (isNil "FinalMissionStarted") then {
+	FinalMissionStarted = false;
+	publicVariable "FinalMissionStarted";	
+};
+
 
 
 	waitUntil {!isNull player};
@@ -88,13 +93,15 @@ TREND_fnc_BasicInit = {
 		[chopper1,true] spawn TRGM_fnc_selectLZ;
 	};
 
-	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-		myaction = ['CallTransportChopper',localize 'STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport','',_transportSelectAction,{true}] call ace_interact_menu_fnc_createAction;
-		[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
-	}
-	else {
-		_transportChopperActionID = player addAction [localize "STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport",_transportSelectAction,0,0];
-		player setVariable ["callTransportChopperID", _transportChopperActionID];
+	if (side player != civilian) then {
+		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+			myaction = ['CallTransportChopper',localize 'STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport','',_transportSelectAction,{true}] call ace_interact_menu_fnc_createAction;
+			[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
+		}
+		else {
+			_transportChopperActionID = player addAction [localize "STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport",_transportSelectAction,0,0];	
+			player setVariable ["callTransportChopperID", _transportChopperActionID];	
+		};
 	};
 
 };
@@ -154,7 +161,13 @@ if (bUseRevive) then {
 };
 
 
-TREND_fnc_InitPostStarted = {
+
+TREND_fnc_InitPostStarted = {	
+
+	if (side player == civilian) then {
+		[] execvm "RandFramework\InitCameraMan.sqf";
+	};
+
 	if (iMissionSetup == 5 && isMultiplayer && str player == "sl") then {
 			if (SaveType == 0) then {
 				laptop1 addaction [localize "STR_TRGM2_TRGMInitPlayerLocal_SaveLocal",{[1,true] execVM "RandFramework\Campaign\ServerSave.sqf";}];
@@ -177,7 +190,7 @@ TREND_fnc_InitPostStarted = {
 
 	_iSandStormOption = AdvancedSettings select ADVSET_SANDSTORM_IDX;
 	if (_iSandStormOption == 3) then { //5 hours non stop
-		nul = 18030 execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";
+		nul = [18030] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";
 	};
 };
 [] spawn TREND_fnc_InitPostStarted;
@@ -240,54 +253,57 @@ player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInit; }];
 
 TREND_fnc_GeneralPlayerLoop = {
 	while {true} do {
-		if (count ObjectivePossitions > 0 && AllowUAVLocateHelp) then {
-			if ((Player distance (ObjectivePossitions select 0)) < 25) then {
-				if ((Player getVariable ["calUAVActionID", -1]) == -1) then {
-					hint (localize "STR_TRGM2_TRGMInitPlayerLocal_UAVAvailable");
-					_actionID = player addAction [localize "STR_TRGM2_TRGMInitPlayerLocal_CallUAV","RandFramework\callUAVFindObjective.sqf"];
-					player setVariable ["calUAVActionID",_actionID];
-				};
-			}
-			else {
-				if ((Player getVariable ["calUAVActionID", -1]) != -1) then {
-					player removeAction (Player getVariable ["calUAVActionID", -1]);
-					player setVariable ["calUAVActionID", nil];
-					hint (localize "STR_TRGM2_TRGMInitPlayerLocal_UAVNoAvailable");
-				};
-			};
-		};
-		if !(Player getVariable ["callTransportChopperID", -1] in actionIDs player) then {
-		//if ((Player getVariable ["callTransportChopperID", -1]) == -1) then {
-			_transportSelectAction = {
-				[chopper1,true] spawn TRGM_fnc_selectLZ;
-			};
-			_transportChopperActionID = player addAction [localize "STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport",_transportSelectAction,0,0];
-			player setVariable ["callTransportChopperID", _transportChopperActionID];
-		};
 
-		if (leader (group (vehicle player)) == player && AdvancedSettings select ADVSET_SUPPORT_OPTION_IDX == 1) then {
-			if (iMissionSetup == 5) then {
-				_dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
-				if (_dCurrentRep >= 1) then {
-					//hint "hmm2";
+		if (side player != civilian) then {
+			if (count ObjectivePossitions > 0 && AllowUAVLocateHelp) then {
+				if ((Player distance (ObjectivePossitions select 0)) < 25) then {
+					if ((Player getVariable ["calUAVActionID", -1]) == -1) then {
+						hint (localize "STR_TRGM2_TRGMInitPlayerLocal_UAVAvailable");
+						_actionID = player addAction [localize "STR_TRGM2_TRGMInitPlayerLocal_CallUAV","RandFramework\callUAVFindObjective.sqf"];
+						player setVariable ["calUAVActionID",_actionID];
+					};
+				};
+				//else {
+				//	if ((Player getVariable ["calUAVActionID", -1]) != -1) then {
+				//		player removeAction (Player getVariable ["calUAVActionID", -1]);
+				//		player setVariable ["calUAVActionID", nil];
+				//		hint "UAV no longer available";
+				//	};
+				//};
+			};
+			if !(Player getVariable ["callTransportChopperID", -1] in actionIDs player) then {
+			//if ((Player getVariable ["callTransportChopperID", -1]) == -1) then {
+				_transportSelectAction = {
+					[chopper1,true] spawn TRGM_fnc_selectLZ;
+				};
+				_transportChopperActionID = player addAction ["Call for transport chopper",_transportSelectAction,0,0];	
+				player setVariable ["callTransportChopperID", _transportChopperActionID];
+			};
+
+
+			if (leader (group (vehicle player)) == player && AdvancedSettings select ADVSET_SUPPORT_OPTION_IDX == 1) then {
+				if (iMissionSetup == 5) then {
+					_dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
+					if (_dCurrentRep >= 1) then {
+						//hint "hmm2";
+						[player, supReqSupply] call BIS_fnc_addSupportLink;
+					};
+					if (_dCurrentRep >= 3) then {
+						//hint "hmm2";
+						[player, supReq] call BIS_fnc_addSupportLink;
+					};
+					if (_dCurrentRep >= 7) then {
+						//hint "hmm3";
+						[player, supReqAir] call BIS_fnc_addSupportLink;
+					};
+				}
+				else {
 					[player, supReqSupply] call BIS_fnc_addSupportLink;
-				};
-				if (_dCurrentRep >= 3) then {
-					//hint "hmm2";
 					[player, supReq] call BIS_fnc_addSupportLink;
-				};
-				if (_dCurrentRep >= 7) then {
-					//hint "hmm3";
 					[player, supReqAir] call BIS_fnc_addSupportLink;
-				};
-			}
-			else {
-				[player, supReqSupply] call BIS_fnc_addSupportLink;
-				[player, supReq] call BIS_fnc_addSupportLink;
-				[player, supReqAir] call BIS_fnc_addSupportLink;
-			}
+				}
+			};
 		};
-
 		sleep 3;
 	};
 };
@@ -490,7 +506,7 @@ TREND_fnc_MissionOverAnimation = {
 
 		if (iMissionSetup == 5) then {
 			_dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
-			if (ActiveTasks call FHQ_TT_areTasksCompleted && _dCurrentRep >= 10) then {_bMissionEnded = true};
+			if (ActiveTasks call FHQ_TT_areTasksCompleted && _dCurrentRep >= 10 && FinalMissionStarted) then {_bMissionEnded = true};
 		}
 		else {
 			if (ActiveTasks call FHQ_TT_areTasksCompleted) then {_bMissionEnded = true};

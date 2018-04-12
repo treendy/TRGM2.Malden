@@ -139,15 +139,15 @@ if (iAllowLargePat == 3) then {bAllowLargerPatrols = selectRandom[False,True];};
 //1=Laptop  2=Steal data from research vehicle   3=Destroy Ammo Trucks
 //4=Speak with informant    5=interrogate officer    6=Bug Radio
 //7=Eliminate Officer     8=Assasinate weapon dealer    9=Destroy AAA vehicles
-//10=Destroy Artillery vehicles
+//10=Destroy Artillery vehicles 	11=Resue POW
 //SideMissionTasks = [7];
-SideMissionTasks = [1,2,3,4,5,6,7,8,9,10];
+SideMissionTasks = [1,2,3,4,5,6,7,8,9,10,11,12];
 //MainMissionTasks = [8];
-MainMissionTasks = [1,2,6,7,8];
+MainMissionTasks = [1,2,6,7,8,11,12];
 MissionsThatHaveIntel = [1,4,5,6];
 
 
-ChanceOfOccurance = [true,false,false,false,false,false];  //camp, downed chopper
+ChanceOfOccurance = [true,false,false,false];  //downed chopper,medical emergancy, downed convoy
 
 //[year.month,day,hour,min]
 Sunny = [2035, 1, 14, 12, 0];
@@ -163,19 +163,22 @@ GridYOffSet = 0;
 
 MissionTypeDescriptions =
 [
+
 localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions1",
+"TREEND_LOC_This is the same as the top mission type, however, the two optional objectives are not marked on the map.  There will be one main objective that is occupied by a heavy enemy army.\n\nYou will also have two optional mini missions, these mini missions will either give you intel on the main AO, or will help increase your reputation depending on the mission type.", 
 localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions2",
 localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions3",
 localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions4",
 localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions5",
-localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions6"
+"TREEND_LOC_Three mini missions, all of which are not marked!.\n\nIf you select the type of mission below, all three will be the same, could be ideal for practicing the mini mission types, or you may want to have three HVTs to takeout.\n\nThese mini missions could be very low enemy, high enemy, be aware that the area may be occupied by friendly rebels! or jsut a large civilian population (watch out though, some civs may be enemy undercover, or a friendly rebel may also be an enemy undercover!).",
+localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions6",
 ];
 
-MissionParamTypes = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName1",localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName2",localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName3",localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName4", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName5", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName6"];
-MissionParamTypesValues = [0,1,2,3,4,5];
+MissionParamTypes = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName1","TREEND_LOC_Heavy Mission (two hidden optional sides)",localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName2",localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName3",localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName4", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName5", "TREEND_LOC_Three Hidden Missions", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName6"];
+MissionParamTypesValues = [0,6,1,2,3,4,7,5];
 
-MissionParamObjectives = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_startInfMission_MissionTitle1",localize "STR_TRGM2_startInfMission_MissionTitle2",localize "STR_TRGM2_startInfMission_MissionTitle3",localize "STR_TRGM2_startInfMission_MissionTitle4",localize "STR_TRGM2_startInfMission_MissionTitle5",localize "STR_TRGM2_startInfMission_MissionTitle6",localize "STR_TRGM2_startInfMission_MissionTitle7",localize "STR_TRGM2_startInfMission_MissionTitle8",localize "STR_TRGM2_startInfMission_MissionTitle9",localize "STR_TRGM2_startInfMission_MissionTitle10"];
-MissionParamObjectivesValues = [0,1,2,3,4,5,6,7,8,9,10];
+MissionParamObjectives = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_startInfMission_MissionTitle1",localize "STR_TRGM2_startInfMission_MissionTitle2",localize "STR_TRGM2_startInfMission_MissionTitle3",localize "STR_TRGM2_startInfMission_MissionTitle4",localize "STR_TRGM2_startInfMission_MissionTitle5",localize "STR_TRGM2_startInfMission_MissionTitle6",localize "STR_TRGM2_startInfMission_MissionTitle7",localize "STR_TRGM2_startInfMission_MissionTitle8",localize "STR_TRGM2_startInfMission_MissionTitle9",localize "STR_TRGM2_startInfMission_MissionTitle10","TREEND_LOC_Rescue POW","TREEND_LOC_Rescue Reporter"];
+MissionParamObjectivesValues = [0,1,2,3,4,5,6,7,8,9,10,11,12];
 
 MissionParamRepOptions = [localize "STR_TRGM2_TRGMInitPlayerLocal_Enable", localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"];
 MissionParamRepOptionsValues = [1, 0];
@@ -195,11 +198,7 @@ MissionParamLocationOptionsValues = [2,1,0];
 FastResponseCarItems=[[[["arifle_SDAR_F"],[10]],[["20Rnd_556x45_UW_mag"],[20]],[["G_B_Diving","V_RebreatherB","U_B_Wetsuit"],[10,10,10]],[[],[]]],false];
 
 ThemeAndIntroMusic=["LeadTrack01_F_Curator","Fallout","Wasteland","AmbientTrack01_F","AmbientTrack01b_F","Track02_SolarPower","Track03_OnTheRoad","Track04_Underwater1","Track05_Underwater2","Track06_CarnHeli","Track07_ActionDark","Track08_Night_ambient","Track09_Night_percussions","Track10_StageB_action","Track11_StageB_stealth","Track12_StageC_action","Track13_StageC_negative","Track14_MainMenu","Track15_MainTheme","LeadTrack01_F_EPA","LeadTrack02_F_EPA","LeadTrack02a_F_EPA","LeadTrack02b_F_EPA","LeadTrack03_F_EPA","LeadTrack03a_F_EPA","EventTrack01_F_EPA","EventTrack01a_F_EPA","EventTrack02_F_EPA","EventTrack02a_F_EPA","EventTrack03_F_EPA","EventTrack03a_F_EPA","LeadTrack01_F_EPB","LeadTrack01a_F_EPB","LeadTrack02_F_EPB","LeadTrack02a_F_EPB","LeadTrack02b_F_EPB","LeadTrack03_F_EPB","LeadTrack03a_F_EPB","LeadTrack04_F_EPB","EventTrack01_F_EPB","EventTrack01a_F_EPB","EventTrack02_F_EPB","EventTrack02a_F_EPB","EventTrack03_F_EPB","EventTrack04_F_EPB","EventTrack04a_F_EPB","EventTrack03a_F_EPB","AmbientTrack01_F_EPB","BackgroundTrack01_F_EPB","LeadTrack01_F_EPC","LeadTrack02_F_EPC","LeadTrack03_F_EPC","LeadTrack04_F_EPC","LeadTrack05_F_EPC","LeadTrack06_F_EPC","LeadTrack06b_F_EPC","EventTrack01_F_EPC","EventTrack02_F_EPC","EventTrack02b_F_EPC","EventTrack03_F_EPC","BackgroundTrack01_F_EPC","BackgroundTrack02_F_EPC","BackgroundTrack03_F_EPC","BackgroundTrack04_F_EPC"
-,"LeadTrack01_F_Bootcamp","LeadTrack01b_F_Bootcamp","LeadTrack02_F_Bootcamp","LeadTrack03_F_Bootcamp","LeadTrack01_F_Heli","LeadTrack01_F_Mark","LeadTrack02_F_Mark","LeadTrack03_F_Mark","LeadTrack01_F_EXP","LeadTrack01a_F_EXP","LeadTrack01b_F_EXP","LeadTrack01c_F_EXP","LeadTrack02_F_EXP","LeadTrack03_F_EXP","LeadTrack04_F_EXP","AmbientTrack01_F_EXP","AmbientTrack01a_F_EXP","AmbientTrack01b_F_EXP","AmbientTrack02_F_EXP","AmbientTrack02a_F_EXP","AmbientTrack02b_F_EXP","AmbientTrack02c_F_EXP","AmbientTrack02d_F_EXP","LeadTrack01_F_Jets","LeadTrack02_F_Jets","EventTrack01_F_Jets","LeadTrack01_F_Malden","LeadTrack02_F_Malden","LeadTrack01_F_Orange","AmbientTrack02_F_Orange","EventTrack01_F_Orange","EventTrack02_F_Orange","AmbientTrack01_F_Orange","LeadTrack01_F_Tacops","LeadTrack02_F_Tacops","LeadTrack03_F_Tacops","LeadTrack04_F_Tacops","AmbientTrack01a_F_Tacops","AmbientTrack01b_F_Tacops","AmbientTrack02a_F_Tacops","AmbientTrack02b_F_Tacops","AmbientTrack03a_F_Tacops","AmbientTrack03b_F_Tacops","AmbientTrack04a_F_Tacops","AmbientTrack04b_F_Tacops","EventTrack01a_F_Tacops","EventTrack01b_F_Tacops","EventTrack02a_F_Tacops","EventTrack02b_F_Tacops","EventTrack03a_F_Tacops","EventTrack03b_F_Tacops","Defcon","SkyNet","MAD","AmbientTrack03_F","BackgroundTrack01_F","Track01_Proteus"];
-
-
-EnemyRadioSounds = ["ambient_radio2","ambient_radio8","ambient_radio10","ambient_radio11","ambient_radio12","ambient_radio13","ambient_radio15","ambient_radio16","ambient_radio18","ambient_radio20","ambient_radio24"];
-FriendlyRadioSounds = ["ambient_radio3","ambient_radio4","ambient_radio5","ambient_radio6","ambient_radio7","ambient_radio9","ambient_radio14","ambient_radio17","ambient_radio19","ambient_radio21","ambient_radio22","ambient_radio23","ambient_radio25","ambient_radio26","ambient_radio27","ambient_radio28","ambient_radio29","ambient_radio30"];
+,"LeadTrack01_F_Bootcamp","LeadTrack01b_F_Bootcamp","LeadTrack02_F_Bootcamp","LeadTrack03_F_Bootcamp","LeadTrack01_F_Heli","LeadTrack01_F_Mark","LeadTrack02_F_Mark","LeadTrack03_F_Mark","LeadTrack01_F_EXP","LeadTrack01a_F_EXP","LeadTrack01b_F_EXP","LeadTrack01c_F_EXP","LeadTrack02_F_EXP","LeadTrack03_F_EXP","LeadTrack04_F_EXP","AmbientTrack01_F_EXP","AmbientTrack01a_F_EXP","AmbientTrack01b_F_EXP","AmbientTrack02_F_EXP","AmbientTrack02a_F_EXP","AmbientTrack02b_F_EXP","AmbientTrack02c_F_EXP","AmbientTrack02d_F_EXP","LeadTrack01_F_Jets","LeadTrack02_F_Jets","EventTrack01_F_Jets","LeadTrack01_F_Malden","LeadTrack02_F_Malden","LeadTrack01_F_Orange","AmbientTrack02_F_Orange","EventTrack01_F_Orange","EventTrack02_F_Orange","AmbientTrack01_F_Orange","LeadTrack01_F_Tacops","LeadTrack02_F_Tacops","LeadTrack03_F_Tacops","LeadTrack04_F_Tacops","AmbientTrack01a_F_Tacops","AmbientTrack01b_F_Tacops","AmbientTrack02a_F_Tacops","AmbientTrack02b_F_Tacops","AmbientTrack03a_F_Tacops","AmbientTrack03b_F_Tacops","AmbientTrack04a_F_Tacops","AmbientTrack04b_F_Tacops","EventTrack01a_F_Tacops","EventTrack01b_F_Tacops","EventTrack02a_F_Tacops","EventTrack02b_F_Tacops","EventTrack03a_F_Tacops","EventTrack03b_F_Tacops","Defcon","SkyNet","MAD","AmbientTrack03_F","BackgroundTrack01_F","Track01_Proteus","MainTheme_F_Tank","LeadTrack01_F_Tank","LeadTrack02_F_Tank","LeadTrack03_F_Tank","LeadTrack04_F_Tank","LeadTrack05_F_Tank","LeadTrack06_F_Tank","AmbientTrack01_F_Tank"];
 
 
 
@@ -219,8 +218,22 @@ FriendlyRadioSounds = ["ambient_radio3","ambient_radio4","ambient_radio5","ambie
 /*=================================================================================================================================================================*/
 
 
-	sFriendlyNVClassName = "NVGoggles";
-	sEnemyNVClassName = "NVGoggles_tna_F";  //"NVGoggles_OPFOR"
+
+
+EnemyRadioSounds = ["ambient_radio2","ambient_radio8","ambient_radio10","ambient_radio11","ambient_radio12","ambient_radio13","ambient_radio15","ambient_radio16","ambient_radio18","ambient_radio20","ambient_radio24"];
+FriendlyRadioSounds = ["ambient_radio3","ambient_radio4","ambient_radio5","ambient_radio6","ambient_radio7","ambient_radio9","ambient_radio14","ambient_radio17","ambient_radio19","ambient_radio21","ambient_radio22","ambient_radio23","ambient_radio25","ambient_radio26","ambient_radio27","ambient_radio28","ambient_radio29","ambient_radio30"];
+
+
+
+MedicalMessItems = ["MedicalGarbage_01_1x1_v1_F","MedicalGarbage_01_1x1_v2_F","MedicalGarbage_01_1x1_v3_F","MedicalGarbage_01_3x3_v1_F","MedicalGarbage_01_3x3_v2_F","MedicalGarbage_01_5x5_v1_F"];
+MedicalBoxes = ["Land_PaperBox_01_small_closed_white_med_F","Land_FirstAidKit_01_open_F"];
+ConesWithLight = ["RoadCone_L_F"];
+Cones = ["RoadCone_F"];
+
+
+	sFriendlyNVClassName = "NVGoggles";	
+	sEnemyNVClassName = "NVGoggles_tna_F";  //"NVGoggles_OPFOR"	
+
 	FriendlySide = West;
 	EnemySide = East;
 	FriendlySideString = "West";
@@ -240,7 +253,7 @@ FriendlyRadioSounds = ["ambient_radio3","ambient_radio4","ambient_radio5","ambie
 	ReinforceStartPos1 = [200,200,0];
 	ReinforceStartPos2 = [100,100,0];
 
-	SideMissionMinDistFromBase = 3000;
+	SideMissionMinDistFromBase = 3000; //for min distached to have AO from base... BaseAreaRange is more for patrols and events (thees need to be seperate variables, because if we had main HQ on an island and an AO spawned on the small island away from main land... hen will cause issues spawning in everything else)
 	KilledZoneRadius = 1500;
 	KilledZoneInnerRadius = 1450;
 	SaveZoneRadius = 1000; //if 0 will be no safezone
@@ -257,9 +270,9 @@ FriendlyRadioSounds = ["ambient_radio3","ambient_radio4","ambient_radio5","ambie
 	//InitialBoxItems=[[[["hgun_P07_F","hgun_P07_khk_F","hgun_P07_snds_F","arifle_MX_F","arifle_MX_khk_F","arifle_MXC_F","arifle_MXC_Black_F","arifle_MXC_khk_F","arifle_MXM_F","arifle_MXM_Black_F","arifle_MXM_khk_F"],[50,50,50,50,50,50,50,50,50,50,50]],[["APERSBoundingMine_Range_Mag","APERSTripMine_Wire_Mag","ATMine_Range_Mag","DemoCharge_Remote_Mag","SatchelCharge_Remote_Mag","10Rnd_338_Mag","130Rnd_338_Mag","10Rnd_127x54_Mag","200Rnd_556x45_Box_Tracer_F","20Rnd_650x39_Cased_Mag_F","100Rnd_65x39_caseless_mag","100Rnd_65x39_caseless_mag_Tracer","200Rnd_65x39_cased_Box","200Rnd_65x39_cased_Box_Tracer","30Rnd_65x39_caseless_mag","30Rnd_65x39_caseless_mag_Tracer","150Rnd_762x54_Box_Tracer","10Rnd_762x54_Mag","150Rnd_762x54_Box","20Rnd_762x51_Mag","10Rnd_9x21_Mag","16Rnd_9x21_green_Mag","10Rnd_93x64_DMR_05_Mag","150Rnd_93x64_Mag","16Rnd_9x21_Mag","30Rnd_9x21_Mag","RPG7_F","RPG32_HE_F","RPG32_F","Titan_AA","Titan_AP","Titan_AT"],[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50]],[["ItemCompass","ItemMap","ItemWatch","optic_Hamr","optic_Hamr_khk_F"],[50,50,50,50,50]],[[],[]]],false];
 	//InitialBoxItemsWithAce=[[[["ACE_VMH3","ACE_VMM3","hgun_P07_F","hgun_P07_khk_F","hgun_P07_snds_F","arifle_MX_F","arifle_MX_khk_F","arifle_MXC_F","arifle_MXC_Black_F","arifle_MXC_khk_F","arifle_MXM_F","arifle_MXM_Black_F","arifle_MXM_khk_F"],[50,50,50,50,50,50,50,50,50,50,50,50,50]],[["APERSBoundingMine_Range_Mag","APERSTripMine_Wire_Mag","ATMine_Range_Mag","DemoCharge_Remote_Mag","SatchelCharge_Remote_Mag","ACE_10Rnd_338_300gr_HPBT_Mag","ACE_10Rnd_338_API526_Mag","10Rnd_338_Mag","130Rnd_338_Mag","10Rnd_127x54_Mag","150Rnd_556x45_Drum_Mag_F","150Rnd_556x45_Drum_Mag_Tracer_F","200Rnd_556x45_Box_Red_F","200Rnd_556x45_Box_F","200Rnd_556x45_Box_Tracer_Red_F","200Rnd_556x45_Box_Tracer_F","20Rnd_650x39_Cased_Mag_F","100Rnd_65x39_caseless_mag","ACE_100Rnd_65x39_caseless_mag_Tracer_Dim","100Rnd_65x39_caseless_mag_Tracer","200Rnd_65x39_cased_Box","200Rnd_65x39_cased_Box_Tracer","ACE_200Rnd_65x39_cased_Box_Tracer_Dim","30Rnd_65x39_caseless_mag","ACE_30Rnd_65x39_caseless_mag_Tracer_Dim","30Rnd_65x39_caseless_mag_Tracer","ACE_20Rnd_65_Creedmor_mag","ACE_20Rnd_65x47_Scenar_mag","150Rnd_762x54_Box_Tracer","10Rnd_762x54_Mag","150Rnd_762x54_Box","20Rnd_762x51_Mag","ACE_20Rnd_762x67_Berger_Hybrid_OTM_Mag","ACE_20Rnd_762x51_M118LR_Mag","ACE_20Rnd_762x51_M993_AP_Mag","ACE_20Rnd_762x67_Mk248_Mod_0_Mag","ACE_20Rnd_762x67_Mk248_Mod_1_Mag","ACE_20Rnd_762x51_Mk316_Mod_0_Mag","ACE_20Rnd_762x51_Mk319_Mod_0_Mag","ACE_20Rnd_762x51_Mag_SD","ACE_20Rnd_762x51_Mag_Tracer_Dim","ACE_20Rnd_762x51_Mag_Tracer","ACE_10Rnd_762x54_Tracer_mag","10Rnd_9x21_Mag","16Rnd_9x21_green_Mag","10Rnd_93x64_DMR_05_Mag","150Rnd_93x64_Mag","16Rnd_9x21_Mag","30Rnd_9x21_Mag","RPG7_F","RPG32_HE_F","RPG32_F","Titan_AA","Titan_AP","Titan_AT"],[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50]],[["ACE_RangeTable_82mm","ACE_adenosine","ACE_ATragMX","ACE_atropine","ACE_Banana","ACE_fieldDressing","ACE_elasticBandage","ACE_quikclot","ACE_bloodIV","ACE_bloodIV_250","ACE_bloodIV_500","ACE_bodyBag","ACE_CableTie","ItemCompass","ACE_DAGR","ACE_DefusalKit","ACE_EarPlugs","ACE_EntrenchingTool","ACE_epinephrine","ACE_Flashlight_MX991","ACE_Kestrel4500","ACE_Flashlight_KSF1","ACE_M26_Clacker","ACE_Clacker","ACE_Flashlight_XL50","ItemMap","ACE_MapTools","ACE_microDAGR","ACE_morphine","ACE_packingBandage","ACE_personalAidKit","ACE_plasmaIV","ACE_plasmaIV_250","ACE_plasmaIV_500","ACE_RangeCard","ACE_salineIV","ACE_salineIV_250","ACE_salineIV_500","ACE_Sandbag_empty","ACE_Tripod","ACE_surgicalKit","ACE_tourniquet","ACE_VectorDay","ItemWatch","ACE_wirecutter","optic_Hamr","ACE_optic_Hamr_2D","optic_Hamr_khk_F","ACE_optic_Hamr_PIP","tf_anprc152","tf_anprc154"],[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50]],[["tf_rt1523g","tf_rt1523g_big"],[50,50]]],false];
 
-	InitialBoxItems=[[[[],[]],[[],[]],[["ItemCompass","ItemMap","ItemWatch"],[5,5,5]],[[],[]]],false];
-	InitialBoxItemsWithAce=[[[["ACE_VMH3","ACE_VMM3"],[5,5]],[["DemoCharge_Remote_Mag","SatchelCharge_Remote_Mag"],[5,5]],[["ACE_RangeTable_82mm","ACE_adenosine","ACE_ATragMX","ACE_atropine","ACE_Banana","ACE_fieldDressing","ACE_elasticBandage","ACE_quikclot","ACE_bloodIV","ACE_bloodIV_250","ACE_bloodIV_500","ACE_bodyBag","ACE_CableTie","ItemCompass","ACE_DAGR","ACE_DefusalKit","ACE_EarPlugs","ACE_EntrenchingTool","ACE_epinephrine","ACE_Flashlight_MX991","ACE_Kestrel4500","ACE_Flashlight_KSF1","ACE_M26_Clacker","ACE_Clacker","ACE_Flashlight_XL50","ItemMap","ACE_MapTools","ACE_microDAGR","ACE_morphine","ACE_packingBandage","ACE_personalAidKit","ACE_plasmaIV","ACE_plasmaIV_250","ACE_plasmaIV_500","ACE_RangeCard","ACE_salineIV","ACE_salineIV_250","ACE_salineIV_500","ACE_Sandbag_empty","ACE_Tripod","ACE_surgicalKit","ACE_tourniquet","ACE_VectorDay","ItemWatch","ACE_wirecutter","tf_anprc152","tf_anprc154"],[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50]],[["tf_rt1523g","tf_rt1523g_big"],[3,3]]],false];
-
+	InitialBoxItems=[[[[],[]],[["SmokeShellBlue","SmokeShellGreen","SmokeShellOrange","SmokeShellRed","SmokeShell"],[20,20,20,20,20]],[["ItemCompass","ItemMap","ItemWatch"],[5,5,5]],[[],[]]],false];
+	InitialBoxItemsWithAce=[[[["ACE_VMH3","ACE_VMM3"],[5,5]],[["DemoCharge_Remote_Mag","SatchelCharge_Remote_Mag","SmokeShellGreen","SmokeShellOrange","SmokeShellRed","SmokeShell"],[5,5,20,20,20,20,20]],[["ACE_RangeTable_82mm","ACE_adenosine","ACE_ATragMX","ACE_atropine","ACE_Banana","ACE_fieldDressing","ACE_elasticBandage","ACE_quikclot","ACE_bloodIV","ACE_bloodIV_250","ACE_bloodIV_500","ACE_bodyBag","ACE_CableTie","ItemCompass","ACE_DAGR","ACE_DefusalKit","ACE_EarPlugs","ACE_EntrenchingTool","ACE_epinephrine","ACE_Flashlight_MX991","ACE_Kestrel4500","ACE_Flashlight_KSF1","ACE_M26_Clacker","ACE_Clacker","ACE_Flashlight_XL50","ItemMap","ACE_MapTools","ACE_microDAGR","ACE_morphine","ACE_packingBandage","ACE_personalAidKit","ACE_plasmaIV","ACE_plasmaIV_250","ACE_plasmaIV_500","ACE_RangeCard","ACE_salineIV","ACE_salineIV_250","ACE_salineIV_500","ACE_Sandbag_empty","ACE_Tripod","ACE_surgicalKit","ACE_tourniquet","ACE_VectorDay","ItemWatch","ACE_wirecutter","tf_anprc152","tf_anprc154"],[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50]],[["tf_rt1523g","tf_rt1523g_big"],[3,3]]],false];
+	
 	/*Unit class names*/
 
 	CampaignRecruitUnitRifleman = "B_Soldier_F";
@@ -276,7 +289,7 @@ FriendlyRadioSounds = ["ambient_radio3","ambient_radio4","ambient_radio5","ambie
 	SmallTransportVehicle = ["B_Quadbike_01_F"]; //used for AO camp, just incase no vehicles near, or too built up in jungle for cars
 	FriendlyFastResponseDingy = ["B_Boat_Transport_01_F"];
 
-
+	BaseAreaRange = 1500; //used to make sure enemy events, patrols etc... doesnt spawn too close to base
 /*=================================================================================================================================================================*/
 /*=================================================================================================================================================================*/
 /*=================================================================================================================================================================*/

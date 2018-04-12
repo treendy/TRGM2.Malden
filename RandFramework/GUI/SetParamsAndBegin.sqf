@@ -58,10 +58,10 @@ sleep 0.1;
 
 _LoadVersion = "";
 if (_SaveType == 1) then {
-	_LoadVersion = "LOCAL";
+	_LoadVersion = worldName;
 };
 if (_SaveType == 2) then {
-	_LoadVersion = worldName;
+	_LoadVersion = "GLOBAL";
 };
 
 //_ctrl = (findDisplay 5000) displayCtrl 5001;

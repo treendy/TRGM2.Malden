@@ -91,8 +91,10 @@ if (count _TowersNear > 0) then {
 };
 
 
-if (selectRandom ChanceOfOccurance) then {
-
+//if (selectRandom ChanceOfOccurance) then {
+if (false) then {
+	//change this, not camp, have parked ammo/fuel/repair vehicls like medicalevent, and if vehicles destroyed, gain 0.3 rep  (supply convoy at rest)
+	//[_mainObjPos] execVM "RandFramework\setRestingConvoyEvent.sqf";
 	_flatPos = nil;
 	_flatPos = [_mainObjPos , 200, 2000, 4, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 	if (str(_flatPos) != "[0,0,0]") then {
@@ -102,10 +104,10 @@ if (selectRandom ChanceOfOccurance) then {
 		_aaaX = _flatPos select 0;
 		_aaaY = _flatPos select 1;
 
-		_campMarkerText = localize "STR_TRGM2_TRENDfncsetOtherAreaStuff_MarkerText_Camp";
+
 		if (surfaceIsWater [_aaaX,_aaaY]) then {
-			[[_aaaX,_aaaY], (floor random 175+1), "O_Boat_Armed_01_hmg_F", _groupCamp1] call bis_fnc_spawnvehicle;
-			_campMarkerText = localize "STR_TRGM2_TRENDfncsetOtherAreaStuff_MarkerText_ArmedBoat";
+			[[_aaaX,_aaaY], (floor random 175+1), sBoatUnit, _groupCamp1] call bis_fnc_spawnvehicle;
+
 		}
 		else {
 			sTeamleader createUnit [[_aaaX+1, _aaaY], _groupCamp1];
@@ -118,43 +120,39 @@ if (selectRandom ChanceOfOccurance) then {
 	};
 };
 
-
+/*!!!MEDICAL EVENT!!!*/
 if (selectRandom ChanceOfOccurance) then {
-
-	_flatPos = nil;
-	_flatPos = [_mainObjPos , 200, 2000, 1, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-	if (str(_flatPos) != "[0,0,0]") then {
-
-		_groupCamp1 = createGroup east;
-
-		_aaaX = _flatPos select 0;
-		_aaaY = _flatPos select 1;
-
-		_wreck = selectRandom ChopperWrecks createVehicle _flatPos;
-		_objFlame1 = "test_EmptyObjectForFireBig" createVehicle _flatPos;
-		if (true) then {
-			sTeamleader createUnit [[_aaaX+1, _aaaY], _groupCamp1];
-			sRifleman createUnit [[_aaaX, _aaaY+1], _groupCamp1];
-			sRifleman createUnit [[_aaaX+1, _aaaY+1], _groupCamp1];
-			sRifleman createUnit [[_aaaX-1, _aaaY], _groupCamp1];
-			sRifleman createUnit [[_aaaX, _aaaY-1], _groupCamp1];
-		};
-	};
+//if (true) then {
+	[_mainObjPos] execVM "RandFramework\setMedicalEvent.sqf";
 };
 
 
+
 if (selectRandom ChanceOfOccurance) then {
+//if (true) then {
+	[_mainObjPos] execVM "RandFramework\setDownedChopperEvent.sqf";
 
-	_flatPos = nil;
-	_flatPos = [_mainObjPos , 200, 2000, 1, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-	if (str(_flatPos) != "[0,0,0]") then {
-
-		//find nearby town, if not, find distant road with building near... if still nothing, then dont do it
-
-		//once found, place ambulace, some medical equipment, crew, working on patient etc..
+};		
 
 
-	};
-};
+
+if (selectRandom ChanceOfOccurance) then {
+//if (true) then {
+	[_mainObjPos] execVM "RandFramework\setDownConvoyEvent.sqf";
+};		
+
+if (selectRandom ChanceOfOccurance) then {
+//if (true) then {
+	[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
+};		
+
+
+
+
+//chance of a convey, start somewhere random, parked up and ready to move, wait random time, then start driving to location
+// chance that players may get notified when convey leave.... if destroyed, gain 0.3 rep
+// if player is notificed, then have tracking on convey and show on map (important, as if it gets stuck, player will be waiting for nothing)
+
+
 
 

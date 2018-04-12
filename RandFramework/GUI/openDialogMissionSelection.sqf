@@ -113,7 +113,6 @@ closedialog 0;
 
 sleep 0.1;
 
-
 createDialog "Trend_DialogSetupParams";
 waitUntil {!isNull (findDisplay 5000);};
 //hint "opening 2dialogB";

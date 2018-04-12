@@ -1,4 +1,15 @@
 
+WoundedSounds = ["WoundedGuyA_01","WoundedGuyA_02","WoundedGuyA_03","WoundedGuyA_04","WoundedGuyA_05","WoundedGuyA_06","WoundedGuyA_07","WoundedGuyA_08","WoundedGuyB_01","WoundedGuyB_02","WoundedGuyB_03","WoundedGuyB_04","WoundedGuyB_05","WoundedGuyB_06","WoundedGuyB_07","WoundedGuyB_08","WoundedGuyC_01","WoundedGuyC_02","WoundedGuyC_03","WoundedGuyC_04","WoundedGuyC_05"];
+CivCars = ["C_Hatchback_01_F","C_Offroad_01_F","C_SUV_01_F","C_Van_01_transport_F","C_Van_01_box_F","C_Truck_02_transport_F"];
+sCivilian = ["C_man_polo_1_F","C_man_polo_2_F","C_man_polo_3_F","C_man_polo_4_F","C_man_polo_5_F","C_man_polo_6_F"];
+
+//DEFAULTS (over written below)
+
+
+
+
+
+
 switch (AdvancedSettings select ADVSET_ENEMY_FACTIONS_IDX) do {
 	case 1 : {
 
@@ -16,7 +27,7 @@ sTank3Tank = "O_T_MBT_02_cannon_ghex_F";
 sAAAVeh = "O_T_APC_Tracked_02_AA_ghex_F";
 sMortar = ["O_Mortar_01_F"];
 sSniper = "O_T_Sniper_F";
-sCivilian = ["C_man_polo_1_F"];
+//sCivilian = ["C_man_polo_1_F"];
 sArtilleryVeh = "O_T_MBT_02_arty_ghex_F";
 sBoatUnit = "O_T_Boat_Armed_01_hmg_F";		
 sExpSpec = "O_T_Soldier_Exp_F"; 		
@@ -161,6 +172,9 @@ sEnemyHeliPilot = "O_helipilot_F";
 		UnarmedScoutVehicles = ["O_G_Offroad_01_F","O_G_Van_01_transport_F","O_G_Van_02_vehicle_F"];
 		EnemyBaseChoppers = ["Land_HelipadEmpty_F"];
 		sEnemyHeliPilot = "Land_HelipadEmpty_F";
+
+
+		
 	};
 	case 4 : {
 
@@ -216,6 +230,7 @@ UnarmedScoutVehicles = ["rhs_tigr_msv","rhs_uaz_open_MSV_01","RHS_UAZ_MSV_01"];
 
 EnemyBaseChoppers = ["RHS_Ka52_vvs"];
 sEnemyHeliPilot = "rhs_pilot_combat_heli";
+
 	};	
 
 case 5 : {
@@ -273,6 +288,12 @@ UnarmedScoutVehicles = ["CUP_O_LR_Transport_TKM","CUP_O_V3S_Open_TKM"];
 
 EnemyBaseChoppers = ["CUP_O_Mi24_D_Dynamic_TK"];
 sEnemyHeliPilot = "CUP_O_TK_Pilot";
+
+CivCars = ["CUP_C_Volha_Limo_TKCIV","CUP_C_Lada_GreenTK_CIV","CUP_C_S1203_CIV","CUP_C_Ikarus_TKC"];
+
+
+
+
 	};	
 
 
@@ -330,6 +351,9 @@ UnarmedScoutVehicles = ["CUP_O_LR_Transport_TKM","CUP_O_V3S_Open_TKM"];
 
 EnemyBaseChoppers = ["CUP_O_Mi24_D_Dynamic_TK"];
 sEnemyHeliPilot = "CUP_O_TK_Pilot";
+
+CivCars = ["CUP_C_Volha_Limo_TKCIV","CUP_C_Lada_GreenTK_CIV","CUP_C_S1203_CIV","CUP_C_Ikarus_TKC"];
+
 	};	
 
 
@@ -387,6 +411,9 @@ UnarmedScoutVehicles = ["CUP_O_LR_Transport_TKM","CUP_O_V3S_Open_TKM"];
 
 EnemyBaseChoppers = ["Land_HelipadEmpty_F"];
 sEnemyHeliPilot = "CUP_O_TK_Pilot";
+
+CivCars = ["CUP_C_Volha_Limo_TKCIV","CUP_C_Lada_GreenTK_CIV","CUP_C_S1203_CIV","CUP_C_Ikarus_TKC"];
+
 	};	
 
 
