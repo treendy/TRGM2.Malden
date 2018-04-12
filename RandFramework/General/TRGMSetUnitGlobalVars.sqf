@@ -161,23 +161,21 @@ TowerRadius = 3500;
 GridXOffSet = 0;  //to work this out, get vector21, mark pos at [0,0], the number for the X or Y is the offset, as it should be zero, so if not, we need to use this as an offset
 GridYOffSet = 0;
 
-MissionTypeDescriptions =
-[
-
+MissionTypeDescriptions =[
 localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions1",
-"TREEND_LOC_This is the same as the top mission type, however, the two optional objectives are not marked on the map.  There will be one main objective that is occupied by a heavy enemy army.\n\nYou will also have two optional mini missions, these mini missions will either give you intel on the main AO, or will help increase your reputation depending on the mission type.", 
+localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions1b",
 localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions2",
 localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions3",
 localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions4",
 localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions5",
-"TREEND_LOC_Three mini missions, all of which are not marked!.\n\nIf you select the type of mission below, all three will be the same, could be ideal for practicing the mini mission types, or you may want to have three HVTs to takeout.\n\nThese mini missions could be very low enemy, high enemy, be aware that the area may be occupied by friendly rebels! or jsut a large civilian population (watch out though, some civs may be enemy undercover, or a friendly rebel may also be an enemy undercover!).",
-localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions6",
+localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions5b",
+localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions6"
 ];
 
-MissionParamTypes = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName1","TREEND_LOC_Heavy Mission (two hidden optional sides)",localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName2",localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName3",localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName4", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName5", "TREEND_LOC_Three Hidden Missions", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName6"];
+MissionParamTypes = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName1",localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName1b",localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName2",localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName3",localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName4", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName5", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName5b", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName6"];
 MissionParamTypesValues = [0,6,1,2,3,4,7,5];
 
-MissionParamObjectives = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_startInfMission_MissionTitle1",localize "STR_TRGM2_startInfMission_MissionTitle2",localize "STR_TRGM2_startInfMission_MissionTitle3",localize "STR_TRGM2_startInfMission_MissionTitle4",localize "STR_TRGM2_startInfMission_MissionTitle5",localize "STR_TRGM2_startInfMission_MissionTitle6",localize "STR_TRGM2_startInfMission_MissionTitle7",localize "STR_TRGM2_startInfMission_MissionTitle8",localize "STR_TRGM2_startInfMission_MissionTitle9",localize "STR_TRGM2_startInfMission_MissionTitle10","TREEND_LOC_Rescue POW","TREEND_LOC_Rescue Reporter"];
+MissionParamObjectives = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_startInfMission_MissionTitle1",localize "STR_TRGM2_startInfMission_MissionTitle2",localize "STR_TRGM2_startInfMission_MissionTitle3",localize "STR_TRGM2_startInfMission_MissionTitle4",localize "STR_TRGM2_startInfMission_MissionTitle5",localize "STR_TRGM2_startInfMission_MissionTitle6",localize "STR_TRGM2_startInfMission_MissionTitle7",localize "STR_TRGM2_startInfMission_MissionTitle8",localize "STR_TRGM2_startInfMission_MissionTitle9",localize "STR_TRGM2_startInfMission_MissionTitle10",localize "STR_TRGM2_startInfMission_MissionTitle11",localize "STR_TRGM2_startInfMission_MissionTitle12"];
 MissionParamObjectivesValues = [0,1,2,3,4,5,6,7,8,9,10,11,12];
 
 MissionParamRepOptions = [localize "STR_TRGM2_TRGMInitPlayerLocal_Enable", localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"];

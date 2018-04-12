@@ -15,9 +15,9 @@
 		if (!(["InfSide0"] call FHQ_TT_areTasksCompleted)) then {
 			sName = format["InfSide%1",0]; //zero because we only ever have the UAV option on the main objective
 			[sName, "failed"] remoteExec ["FHQ_TT_setTaskState", 0];
-			{hint "TREEND_LOC_HVT is either dead or has run away!";} remoteExec ["bis_fnc_call", 0];
+			{hint (localize "STR_TRGM2_UAV_HTV_DEAD");} remoteExec ["bis_fnc_call", 0];
 		};
-		[HQMan,"TREEND_LOC_UAV not been able to locate the HVT, he may be dead or escaped"] remoteExecCall ["sideChat",0,false];
+		[HQMan,(localize "STR_TRGM2_UAV_Fail")] remoteExecCall ["sideChat",0,false];
 
 	}
 	else {

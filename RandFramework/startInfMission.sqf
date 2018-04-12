@@ -173,8 +173,8 @@ if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMissi
 				if (_iThisTaskType == 8) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle8"}; //gain 1 point if side, no intel from him... if main need to id him before complete
 				if (_iThisTaskType == 9) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle9"}; //gain 1 point if side, no intel from him... if main need to id him before complete
 				if (_iThisTaskType == 10) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle10"}; //gain one point if side (player can call arti strikes on them, cost 0.3 points but gains one if complete)
-				if (_iThisTaskType == 11) then {_MissionTitle = "TREEND_LOC_Rescue POW"}; 
-				if (_iThisTaskType == 12) then {_MissionTitle = "TREEND_LOC_Rescue Reporter"}; 					
+				if (_iThisTaskType == 11) then {_MissionTitle = localize "STR_TRGM2_Rescue_POW"}; 
+				if (_iThisTaskType == 12) then {_MissionTitle = localize "STR_TRGM2_Rescue_Reporter"}; 					
 
 
 				//kill leader (he will run away in car to AO)    ::   save stranded guys    ::      

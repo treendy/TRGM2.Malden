@@ -2562,6 +2562,51 @@
                 <Chinese>%1需要救援，他倒在%2!</Chinese>
                 <Chinesesimp>%1需要救援，他倒在%2!</Chinesesimp>
 			</Key>
+			<Key ID="STR_TRGM2_UAV_Fail">
+				<Original>UAV not been able to locate the HVT, he may be dead or escaped</Original>
+				<English>UAV not been able to locate the HVT, he may be dead or escaped</English>
+			</Key>
+			<Key ID="STR_TRGM2_UAV_HTV_DEAD">
+				<Original>HVT is either dead or has run away!</Original>
+				<English>HVT is either dead or has run away!</English>
+			</Key>
+			<Key ID="STR_TRGM2_PickingUpComms">
+				<Original>You are picking up enemy comms from this tower! Listening for intel!</Original>
+				<English>You are picking up enemy comms from this tower! Listening for intel!</English>
+			</Key>
+			<Key ID="STR_TRGM2_Rescue_POW">
+				<Original>Rescue POW</Original>
+				<English>Rescue POW</English>
+			</Key>
+			<Key ID="STR_TRGM2_Rescue_Reporter">
+				<Original>Rescue Reporter</Original>
+				<English>Rescue Reporter</English>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions1b">
+				<Original>This is the same as the top mission type, however, the two optional objectives are not marked on the map.  There will be one main objective that is occupied by a heavy enemy army.\n\nYou will also have two optional mini missions, these mini missions will either give you intel on the main AO, or will help increase your reputation depending on the mission type.</Original>
+				<English>This is the same as the top mission type, however, the two optional objectives are not marked on the map.  There will be one main objective that is occupied by a heavy enemy army.\n\nYou will also have two optional mini missions, these mini missions will either give you intel on the main AO, or will help increase your reputation depending on the mission type.</English>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions5b">
+				<Original>Three mini missions, all of which are not marked!.\n\nIf you select the type of mission below, all three will be the same, could be ideal for practicing the mini mission types, or you may want to have three HVTs to takeout.\n\nThese mini missions could be very low enemy, high enemy, be aware that the area may be occupied by friendly rebels! or jsut a large civilian population (watch out though, some civs may be enemy undercover, or a friendly rebel may also be an enemy undercover!).</Original>
+				<English>Three mini missions, all of which are not marked!.\n\nIf you select the type of mission below, all three will be the same, could be ideal for practicing the mini mission types, or you may want to have three HVTs to takeout.\n\nThese mini missions could be very low enemy, high enemy, be aware that the area may be occupied by friendly rebels! or jsut a large civilian population (watch out though, some civs may be enemy undercover, or a friendly rebel may also be an enemy undercover!).</English>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName1b">
+				<Original>Heavy Mission (two hidden optional sides)</Original>
+				<English>Heavy Mission (two hidden optional sides)</English>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName5b">
+				<Original>Three Hidden Missions</Original>
+				<English>Three Hidden Missions</English>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle11">
+				<Original>Rescue POW</Original>
+				<English>Rescue POW</English>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle12">
+				<Original>Rescue Reportertest</Original>
+				<English>Rescue Reportertest</English>
+			</Key>
+
 		</Container>
 	</Package>
 </Project>

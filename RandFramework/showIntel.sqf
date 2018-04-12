@@ -16,7 +16,7 @@ if (side player == west) then {
 
 
 	if (_FoundViaType == "CommsTower") then {
-		hint "You are picking up enemy comms from this tower! Listening for intel!";
+		hint (localize "STR_TRGM2_PickingUpComms");
 		sleep 4;
 	};
 
@@ -46,10 +46,10 @@ if (side player == west) then {
 				_test setMarkerType "o_art";  
 				_test setMarkerText "Mortar"; 
 			} forEach TempIntelShowPos;
-			Hint "Map updated with enemy mortar possitions (if any 3k within main AO)";
+			Hint (localize "STR_TRGM2_showIntel_MortarMapUpdated");
 		}
 		else {
-			Hint "Intel confirms no mortar threat within 3k of main AO";
+			Hint (localize "STR_TRGM2_showIntel_MortarMapNoUpdate");
 		};
 	};
 	if (_IntelToShow == 2) then { //AAA team location
