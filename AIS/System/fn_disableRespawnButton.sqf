@@ -1,11 +1,11 @@
 ﻿/*
  * Author: Psycho
- 
+
  * Disable the respawn button for given time.
- 
+
  * Arguments:
 	1: Key (Number)
- 
+
  * Return value:
 	Bool
 */
@@ -18,13 +18,13 @@ private _ctrl = (findDisplay 49) displayCtrl 1010;
 
 while {!isNull (findDisplay 49) && {diag_tickTime < _delay}} do {
 	_ctrl ctrlEnable false;
-	_ctrl ctrlSetText format ["Respawn Disabled (%1 sec)", [(_delay - diag_tickTime)] call AIS_System_fnc_secondsToString];
+	_ctrl ctrlSetText format [localize "STR_TRGM2_fndisableRespawnButton_RespawnDisable", [(_delay - diag_tickTime)] call AIS_System_fnc_secondsToString];
 	uisleep 0.08;
 };
 
 if (!ctrlEnabled _ctrl) then {
 	_ctrl ctrlEnable true;
-	_ctrl ctrlSetText "Respawn";
+	_ctrl ctrlSetText (localize "STR_TRGM2_fndisableRespawnButton_Respawn");
 };
 
 

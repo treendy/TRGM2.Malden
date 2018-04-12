@@ -18,4 +18,5 @@ if (side player == west) then {
 		[1, "Downloaded research data"] execVM "RandFramework\AdjustMaxBadPoints.sqf";
 		"Data secured, reputation increased" remoteExecCall	["hint",side _caller];
 	};
+
 };

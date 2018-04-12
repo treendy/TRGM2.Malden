@@ -102,18 +102,18 @@ AuxSling_fnc_DoAttaching = {
 	_veh = vehicle _unit;
 	_vehweight = getNumber (configfile >> "CfgVehicles" >> typeOf _veh >> "slingLoadMaxCargoMass");
 	if (AuxSling_Weight == 0) then {_vehweight = 10000;};
-	if (!isNil {_veh getVariable "AuxSling_AttachedObject"}) exitWith {hint "There is still something attached"};
+	if (!isNil {_veh getVariable "AuxSling_AttachedObject"}) exitWith {hint (localize "STR_TRGM2_auxslingloading_Attached")};
 	_nearUnits = nearestObjects [_veh, ["Ship","LandVehicle","Air"],11];
 	_nearUnits = _nearUnits - [_veh];
-	if (count _nearUnits == 0) exitWith {hint "no near vehicles"};
+	if (count _nearUnits == 0) exitWith {hint (localize "STR_TRGM2_auxslingloading_NoNear")};
 	_obj = objNull;
 	_ropecount = [];
 
 	_returnofthedead = [_nearUnits,_vehweight] call AuxSling_fnc_InList;
 	_obj = _returnofthedead select 0;
 	_list = _returnofthedead select 1;
-	if ((isNull _obj) && (AuxSling_EveryVehicles == 0)) exitWith {hint "no valid sling targets"};
-	if ((AuxSling_allowDeadCarry == 0) && !(alive _obj)) exitWith {hint "can't carry dead objects"};
+	if ((isNull _obj) && (AuxSling_EveryVehicles == 0)) exitWith {hint (localize "STR_TRGM2_auxslingloading_NoValid")};
+	if ((AuxSling_allowDeadCarry == 0) && !(alive _obj)) exitWith {hint (localize "STR_TRGM2_auxslingloading_CantCarry")};
 
 	if (count getArray (configfile >> "CfgVehicles" >> typeof _obj >> "slingLoadCargoMemoryPoints") > 0) then {
 		_ropecount = getArray (configfile >> "CfgVehicles" >> typeof _obj >> "slingLoadCargoMemoryPoints");
@@ -258,15 +258,15 @@ AuxSling_fnc_Conditions1 = {
 	_list = _returnofthedead select 1;
 
 	if !(isNull _obj) then {
-		_vehname = format ["<t color='#FF0000'>Sling Load %1</t>",getText (configfile >> "CfgVehicles" >> typeOf _obj >> "displayName")];
+		_vehname = format [localize "STR_TRGM2_auxslingloading_SlingLoad",getText (configfile >> "CfgVehicles" >> typeOf _obj >> "displayName")];
 		_unit setUserActionText [(_unit getVariable "AuxSling_Load_Action"),_vehname];
 	} else {
-		_unit setUserActionText [(_unit getVariable "AuxSling_Load_Action"),"<t color='#FF0000'>Unable to Sling</t>"];
+		_unit setUserActionText [(_unit getVariable "AuxSling_Load_Action"),localize "STR_TRGM2_auxslingloading_UnableToSling"];
 	};
 	_return = (alive _veh) && ((isNil {_veh getVariable "AuxSling_AttachedObject"}) && (count _nearUnits > 0) && (_veh isKindOf "Helicopter"));
 	if (AuxSling_slingSlingableVehicles == 0) then { _return = _return && !(_veh canSlingLoad _obj); };
 	if ((AuxSling_allowDeadCarry == 0) && (!alive _obj) ) then {
-		_unit setUserActionText [(_unit getVariable "AuxSling_Load_Action"),"<t color='#FF0000'>Unable to Sling</t>"];
+		_unit setUserActionText [(_unit getVariable "AuxSling_Load_Action"),localize "STR_TRGM2_auxslingloading_UnableToSling"];
 	};
 
 	_return;
@@ -277,7 +277,7 @@ AuxSling_fnc_Conditions2 = {
 	_unit = _this select 0;
 	_veh = _this select 1;
 
-	_vehname = format ["<t color='#FF0000'>Detach %1</t>",getText (configfile >> "CfgVehicles" >> typeOf (_veh getVariable "AuxSling_AttachedObject") >> "displayName")];
+	_vehname = format [localize "STR_TRGM2_auxslingloading_Detach",getText (configfile >> "CfgVehicles" >> typeOf (_veh getVariable "AuxSling_AttachedObject") >> "displayName")];
 	_unit setUserActionText [AuxSling_unLoad_Action,_vehname];
 
 	_return = (!(isNil {_veh getVariable "AuxSling_AttachedObject"}));
@@ -288,9 +288,9 @@ AuxSling_fnc_Conditions2 = {
 AuxSling_fnc_AddAction = {
 	_unit = _this select 0;
 	if (isNil {_unit getVariable "AuxSling_Added"}) then {
-		AuxSling_Load_Action = _unit addAction ["<t color='#FF0000'>Sling Load</t>",{[(_this select 0)] spawn AuxSling_fnc_DoAttaching},"",-99,true,true,"",'[_this,_target] call AuxSling_fnc_Conditions1'];
+		AuxSling_Load_Action = _unit addAction [localize "STR_TRGM2_auxslingloading_SlingLoad",{[(_this select 0)] spawn AuxSling_fnc_DoAttaching},"",-99,true,true,"",'[_this,_target] call AuxSling_fnc_Conditions1'];
 		_unit setVariable ["AuxSling_Load_Action",AuxSling_Load_Action,true];
-		AuxSling_unLoad_Action = _unit addAction ["<t color='#FF0000'>Detach Load</t>",{[(_this select 0)] spawn AuxSling_fnc_DoDetaching},"",-99,false,true,"",'[_this,_target] call AuxSling_fnc_Conditions2'];
+		AuxSling_unLoad_Action = _unit addAction [localize "STR_TRGM2_auxslingloading_DetachLoad",{[(_this select 0)] spawn AuxSling_fnc_DoDetaching},"",-99,false,true,"",'[_this,_target] call AuxSling_fnc_Conditions2'];
 		_unit setVariable ["AuxSling_unLoad_Action",AuxSling_unLoad_Action,true];
 		_unit setVariable ["AuxSling_Added",true,true];
 	};
@@ -304,4 +304,4 @@ player addEventHandler ["Respawn",{
 
 AuxSling_Loaded = true;
 diag_log "AuxSling Loaded";
-systemChat "Auxiliary Sling Loading: Initialized";
+systemChat (localize "STR_TRGM2_auxslingloading_Init");

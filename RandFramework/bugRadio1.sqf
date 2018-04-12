@@ -9,12 +9,14 @@ if (side player == west) then {
 	//ClearedPositions pushBack (ObjectivePossitions select _iSelected);
 	ClearedPositions pushBack ([ObjectivePossitions, player] call BIS_fnc_nearestPosition);
 
+
 	[_radio] remoteExec ["removeAllActions", 0, true];
 
 	if (_bCreateTask) then {
 		sName = format["InfSide%1",_iSelected];
 		[sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0, true];
 		//hint format["c:%1",str(_iSelected)];
+
 	}
 	else {	
 		hint "HQ are listening in, stand by...";

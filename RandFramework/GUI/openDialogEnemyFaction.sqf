@@ -20,7 +20,7 @@ if (!isNull (findDisplay 6000)) then {
 		if (_lnpCtrlType == "RscEdit") then {
 			_value = ctrlText _ThisControlIDX;
 		};
-		AdvancedSettings pushBack _value; 
+		AdvancedSettings pushBack _value;
 	} forEach AdvControls;
 	publicVariable "AdvancedSettings";
 
@@ -44,7 +44,7 @@ _lineHeight = 0.03;
 _display ctrlCreate ["RscText", 7999];
 _lblctrlTitle = _display displayCtrl 7999;
 _lblctrlTitle ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.25 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
-ctrlSetText [7999,  "Set enemy faction classes"];
+ctrlSetText [7999,  localize "STR_TRGM2_openDialogEnemyFaction_SetEnemyFaction"];
 _lblctrlTitle ctrlCommit 0;
 
 _display ctrlCreate ["RscEditMulti", 7998];
@@ -64,13 +64,13 @@ _display ctrlCreate ["RscTextMulti", 7995];
 _lblctrlMessage = _display displayCtrl 7995;
 _lblctrlMessage ctrlSetPosition [0.5 * safezoneW + safezoneX, (0.30 + 0) * safezoneH + safezoneY,0.18 * safezoneW,0.40 * safezoneH];
 _lblctrlMessage ctrlCommit 0;
-ctrlSetText [7995,  "Visit www.trgm2.com/CustomEnemyClasses.html for all unit types that can be overwritten"];
+ctrlSetText [7995,  localize "STR_TRGM2_openDialogEnemyFaction_URL"];
 
 
 _display ctrlCreate ["RscButton", 7997];
 _btnSetEnemyFaction = _display displayCtrl 7997;
 _btnSetEnemyFaction ctrlSetPosition [0.5 * safezoneW + safezoneX, (0.72 + 0) * safezoneH + safezoneY,0.06 * safezoneW,0.02 * safezoneH];
-ctrlSetText [7997,  "Save and Back"];
+ctrlSetText [7997,  localize "STR_TRGM2_openDialogEnemyFaction_SaveAndBack"];
 _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {
 	//LOADENEMYFACTION
 	_TempEnemyFactionData = ctrlText 7998;
@@ -101,17 +101,17 @@ _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {
 				{
 					_className = _x;
 					if (str(_className) != "") then {
-						if (isClass (configFile >> "CfgVehicles" >> _className)) then {							
+						if (isClass (configFile >> "CfgVehicles" >> _className)) then {
 							//call compile _fullObj;
 						}
 						else {
-							_errorMessage = _errorMessage + format[" - Class doesnt exist: %1 (class: %2) ",_fullObj,_x];
+							_errorMessage = _errorMessage + format[localize "STR_TRGM2_openDialogEnemyFaction_ErrorMsg_NotExist",_fullObj,_x];
 						};
 					}
 					else {
-						_errorMessage = _errorMessage + format[" - Class is empty: %1 (class: %2) ",_fullObj,_x];
+						_errorMessage = _errorMessage + format[localize "STR_TRGM2_openDialogEnemyFaction_ErrorMsg_CantEmpty",_fullObj,_x];
 					};
-					
+
 				} forEach _classArray;
 			};
 		} forEach _ObjectPairs;
@@ -126,6 +126,6 @@ _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {
 	else {
 		EnemyFactionData = "";
 		[] execVM 'RandFramework\GUI\openDialogAdvancedMissionSettings.sqf'; false;
-	};	
+	};
 }];
 _btnSetEnemyFaction ctrlCommit 0;

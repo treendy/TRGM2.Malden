@@ -95,7 +95,7 @@ MDLALA_fnc_Mine_Noise = {
 		_pitch = (MDLala_Config select (_minetype call MDLALA_fnc_in_List) select 1) - _distance;
 		_timesleep = (_distance / (MDLala_Config select (_minetype call MDLALA_fnc_in_List) select 2));
 
-		hintSilent format ["Mine = %4\nDistance = %1\nTime Until Next Beep =  %2\nPitch = %3",_distance,_timesleep,_pitch,_minename];
+		hintSilent format [localize "STR_TRGM2_minedetector_MineReportFormat",_distance,_timesleep,_pitch,_minename];
 		playSound3D ["A3\UI_F\data\sound\CfgNotifications\addItemOk.wss",_unit,false,[getPosASL _unit select 0,getPosASL _unit select 1,(getPosASL _unit select 2) + 1],50,_pitch,5];
 		//playSound3D [_missiondir + "beep.wav",_unit,false,[getPosASL _unit select 0,getPosASL _unit select 1,(getPosASL _unit select 2) + 1],100,_pitch,5];
 		//playSound3D ["A3\Sounds_F\sfx\hint-3.wss",_unit,false,[getPosASL _unit select 0,getPosASL _unit select 1,(getPosASL _unit select 2) + 1],100,_pitch,5];
@@ -152,7 +152,7 @@ MDLALA_fnc_MineDetector_selectAction = {
 	if (isForcedWalk _unit && !_walkingalready) then {_unit setVariable ["MineDetectorWalking",isForcedWalk _unit,true];};
 
 	if (_action && !_walkingalready) then {
-		_unit setUserActionText [_actionid,"<t color='#FF0000'>Stop MineDetector</t>"];
+		_unit setUserActionText [_actionid,localize "STR_TRGM2_minedetector_StopMineDetector"];
 		if (MDMineDetectorWalkOnly == 1) then {
 			_unit forceWalk true;
 		};
@@ -163,7 +163,7 @@ MDLALA_fnc_MineDetector_selectAction = {
 			[_unit] spawn MDLALA_fnc_visualMineDetector;
 		};
 	} else {
-	_unit setUserActionText [_actionid,"<t color='#FF0000'>Use MineDetector</t>"];
+	_unit setUserActionText [_actionid,localize "STR_TRGM2_minedetector_UseMineDetector"];
 		if (isNil {_unit getVariable "MineDetectorWalking"}) then {
 			_unit forceWalk false;
 		};
@@ -178,7 +178,7 @@ MDLALA_fnc_MineDetector_addAction = {
 	private ["_unit"];
 	_unit = _this select 0;
 	if (isNil {_unit getVariable "MDMineDetectorActions"}) then {
-		_unit addAction ["<t color='#FF0000'>Use MineDetector</t>",{[(_this select 0),true,(_this select 2)] spawn MDLALA_fnc_MineDetector_selectAction;}, [], 0, false, true, "", '"MineDetector" in items _target'];
+		_unit addAction [localize "STR_TRGM2_minedetector_UseMineDetector",{[(_this select 0),true,(_this select 2)] spawn MDLALA_fnc_MineDetector_selectAction;}, [], 0, false, true, "", '"MineDetector" in items _target'];
 		_unit setVariable ["MDMineDetectorActions",true,true]
 	};
 };

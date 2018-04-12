@@ -1,12 +1,12 @@
 ﻿/*
  * Author: Psycho
- 
+
  * Handle Revive actions from a PLAYER
- 
+
  * Arguments:
 	0: Healer Unit (Object)
 	1: Injured Unit (Object)
- 
+
  * Return value:
 	Nothing
 */
@@ -29,7 +29,7 @@ if (primaryWeapon _healer != "") then {
 
 _healer playAction "medicStart";
 
-// full heal anim only with primary weapon possible. 
+// full heal anim only with primary weapon possible.
 ais_animChangeEVH = _healer addEventhandler ["AnimChanged", {
 	params ["_healer","_anim"];
 	if (primaryWeapon _healer isEqualTo "") then {
@@ -51,13 +51,13 @@ private _duration = [_healer, _injured] call AIS_System_fnc_calculateReviveTime;
 //hint format ["Revive Time Duration: %1", _duration];	// debug
 
 [
-    "Applying First Aid", 
+    localize "STR_TRGM2_fnRevive_ApplyingFirstAid",
     _duration,
     {
 		params ["_injured", "_healer"];
 
 		_injured setVariable ["ais_unconscious", false, true];
-		
+
 		_healer removeEventHandler ["AnimChanged", ais_animChangeEVH];
 		detach _healer;
 		detach _injured;
@@ -66,7 +66,7 @@ private _duration = [_healer, _injured] call AIS_System_fnc_calculateReviveTime;
 
 		_injured setVariable ["ais_hasHelper", ObjNull, true];
 		call AIS_Effects_fnc_garbage;
-		
+
 		// healing if enabled
 		if (AIS_REVIVE_HEAL) then {
 			_injured setDamage 0;
@@ -77,32 +77,32 @@ private _duration = [_healer, _injured] call AIS_System_fnc_calculateReviveTime;
 				[{(_this select 0) setHitIndex [10, 0.49]}, [_injured]] call AIS_Core_fnc_onNextFrame;
 			};
 		};
-		
+
 		[_injured] remoteExecCall ["AIS_System_fnc_restoreFaks", _injured, false];
-		
+
 		_injured stop false;
 		{_injured enableAI _x; nil} count ["MOVE","TARGET","AUTOTARGET","ANIM","AUTOCOMBAT"];
-		[_injured, false] remoteExecCall ["AIS_System_fnc_unconcsiousRemote", 0, false]; 
+		[_injured, false] remoteExecCall ["AIS_System_fnc_unconcsiousRemote", 0, false];
 		[_injured, false] remoteExec ["setCaptive", 0, false];
-		
+
 		["GetOutMan"] remoteExec ["removeAllEventHandlers", _injured, false];
     },
     [_injured, _healer],
 	{
 		params ["_injured", "_healer"];
-		
+
 		_injured setVariable ["ais_hasHelper", ObjNull, true];
-		
+
 		_healer removeEventHandler ["AnimChanged", ais_animChangeEVH];
 		detach _healer;
 		detach _injured;
-		
+
 		call AIS_Effects_fnc_garbage;
-		
+
 		if (alive _healer) then {
 			_healer playActionNow "medicStop";
 		};
-		if (!alive _injured) then {["He is not with us anymore."] call AIS_Core_fnc_dynamicText};
+		if (!alive _injured) then {[localize "STR_TRGM2_fnRevive_IsDead"] call AIS_Core_fnc_dynamicText};
 	},
 	(!alive _injured || _healer getVariable ["ais_unconscious",false])
 ] call AIS_Core_fnc_Progress_ShowBar;

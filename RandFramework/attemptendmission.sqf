@@ -13,16 +13,16 @@ if (isMultiplayer) then {
 	};
 
 	if (_bSLAlive && str(player) != "sl") then {
-		hint "The Kilo-1 teamleader needs to select this";
+		hint (localize "STR_TRGM2_attemptendmission_Kilo1");
 		_bAllowEnd = false;
 	};
 
 	if (!_bSLAlive && _bK1_1Alive && str(player) != "k2_1") then {
-		hint "The Kilo-2 teamleader needs to select this";
+		hint (localize "STR_TRGM2_attemptendmission_Kilo2");
 		_bAllowEnd = false;
 	};
 	if (!_bSLAlive && !_bK1_1Alive && (leader (group player))!=player) then {
-			hint "The Kilo-1 teamleader needs to select this";
+			hint (localize "STR_TRGM2_attemptendmission_Kilo1");
 			_bAllowEnd = false;
 	};
 
@@ -30,6 +30,6 @@ if (isMultiplayer) then {
 };
 
 if (_bAllowEnd) then {
-	hint "Mission Ending..."; 
+	hint (localize "STR_TRGM2_attemptendmission_Ending");
 	execVM "RandFramework\endMission.sqf";
 };

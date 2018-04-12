@@ -22,16 +22,17 @@ if (side player == west) then {
 
 
 
-
 	if (_IntelToShow == 0) then { //Nothing found
-		hint "No intel to report";
+		hint (localize "STR_TRGM2_showIntel_NoIntel");
 	}
 	else {
 		IntelFound pushBack _IntelToShow; 
+
 	};
 
 	if (_IntelToShow == 1) then { //Mortor team location
 		{
+    
 			TempIntelShowPos = nearestObjects [ObjectivePossitions select 0,sMortar + sMortarMilitia,3000];
 			publicVariable "TempIntelShowPos";
 		} remoteExec ["bis_fnc_call", 2];
@@ -65,13 +66,13 @@ if (side player == west) then {
 				_test = createMarker [format["MrkIntelAAA%1",_forEachIndex], getPos _x];  
 				_test setMarkerShape "ICON";  
 				_test setMarkerType "o_art";  
-				_test setMarkerText "AAA"; 
+				_test setMarkerText (localize "STR_TRGM2_showIntel_AAAMarker");
 				_iStep = _iStep + 1;
 			} forEach TempIntelShowPos;
-			Hint "Map updated with any enemy AAA possitions (if any 3k within main AO)";
+			Hint (localize "STR_TRGM2_showIntel_AAAMapUpdated");
 		}
 		else {
-			Hint "Intel confirms no AAA threat within 3k of main AO";
+			Hint (localize "STR_TRGM2_showIntel_AAAMapNoUpdate");
 		};
 	};
 	if (_IntelToShow == 3) then { //Comms tower location
@@ -80,11 +81,11 @@ if (side player == west) then {
 			_test = createMarker ["CommsIntelAAA1", CommsTowerPos];  
 			_test setMarkerShape "ICON";  
 			_test setMarkerType "mil_destroy";  
-			_test setMarkerText "Comms Tower"; 		
-			Hint "Map updated with any enemy comms tower possitions (if any 3k within main AO)";
+			_test setMarkerText (localize "STR_TRGM2_showIntel_CommsTowerMarker");
+		  Hint (localize "STR_TRGM2_showIntel_CommsTowerMapUpdated");
 		}
 		else {
-			Hint "Enemy are not using any nearby comms towers!";
+			Hint (localize "STR_TRGM2_showIntel_CommsTowerMapNoUpdate");
 		};
 	};
 	if (_IntelToShow == 4) then { //All checkpoints
@@ -98,14 +99,14 @@ if (side player == west) then {
 				_test = createMarker [format["MrkIntelCheckpoint%1%2",_checkpointPos select 0, _checkpointPos select 1], _checkpointPos];  
 				_test setMarkerShape "ICON";  
 				_test setMarkerType "o_inf";  
-				_test setMarkerText "Checkpoint";
+				_test setMarkerText (localize "STR_TRGM2_setCheckpoint_MarkerText");
 			};
 		} forEach CheckPointAreas;
 		if (_bFoundcheckpoints) then {		
-			Hint "Take a look at your map.  location of enemy checkpoints that are within one click of the main AO have been marked";
+			Hint (localize "STR_TRGM2_showIntel_CheckpointMapUpdated");
 		}
 		else {
-			hint "We havent any intel of any checkpoints within a click of the main AO";
+			hint (localize "STR_TRGM2_showIntel_CheckpointMapNoUpdate");
 		};
 
 	};

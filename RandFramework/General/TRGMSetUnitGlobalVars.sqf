@@ -1,9 +1,9 @@
 bDebugMode = false;
 
 DefaultEnemyFactionArray = [1,2,3];
-DefaultEnemyFactionArrayText = ["CSAT and FIA as militia","CSAT only","FIA only"];
+DefaultEnemyFactionArrayText = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Enemy1",localize "STR_TRGM2_TRGMSetUnitGlobalVars_Enemy2",localize "STR_TRGM2_TRGMSetUnitGlobalVars_Enemy3"];
 DefaultFriendlyFactionArray = [1,2];
-DefaultFriendlyFactionArrayText = ["NATO","FIA"];
+DefaultFriendlyFactionArrayText = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Friend1",localize "STR_TRGM2_TRGMSetUnitGlobalVars_Friend2"];
 
 publicVariable "DefaultEnemyFactionArray";
 publicVariable "DefaultEnemyFactionArrayText";
@@ -12,8 +12,8 @@ publicVariable "DefaultFriendlyFactionArray";
 publicVariable "DefaultFriendlyFactionArrayText";
 
 
-if ((isClass(configFile >> "CfgPatches" >> "rhs_main")) && 
-		isClass(configFile >> "CfgPatches" >> "rhsusf_main") && 
+if ((isClass(configFile >> "CfgPatches" >> "rhs_main")) &&
+		isClass(configFile >> "CfgPatches" >> "rhsusf_main") &&
 		isClass(configFile >> "CfgPatches" >> "rhsgref_main")) then {
 	//IF RHSAFRF, RHSUSAF, RHSGREF are active
 	DefaultEnemyFactionArray = DefaultEnemyFactionArray + [4];
@@ -26,9 +26,9 @@ if (isClass(configFile >> "CfgPatches" >> "rhsusf_main")) then {
 };
 if (isClass(configFile >> "CfgPatches" >> "CUP_Creatures_People_Core") &&
 		isClass(configFile >> "CfgPatches" >> "CUP_AirVehicles_Core") &&
-		isClass(configFile >> "CfgPatches" >> "CUP_Weapons_WeaponsCore") && 
-		isClass(configFile >> "CfgPatches" >> "CUP_TrackedVehicles_Core") && 
-		isClass(configFile >> "CfgPatches" >> "CUP_WaterVehicles_Core") && 
+		isClass(configFile >> "CfgPatches" >> "CUP_Weapons_WeaponsCore") &&
+		isClass(configFile >> "CfgPatches" >> "CUP_TrackedVehicles_Core") &&
+		isClass(configFile >> "CfgPatches" >> "CUP_WaterVehicles_Core") &&
 		isClass(configFile >> "CfgPatches" >> "CUP_WheeledVehicles_Core")) then {
 	DefaultEnemyFactionArray = DefaultEnemyFactionArray + [5];
 	DefaultEnemyFactionArrayText = DefaultEnemyFactionArrayText + ["CUP - Takistan Army/Milita"];
@@ -59,22 +59,22 @@ ADVSET_SANDSTORM_IDX = 8;
 
 //NOTE the id's must go up in twos!
 AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex(zero based index)
-	[6001, "Virtual Arsenal","RscCombo",["Enabled","Disabled"],[1,0],1],
-	[6003, "Group Name","RscEdit",[""],"",1], 
-	[6005, "Support options","RscCombo",["Enabled","Disabled"],[1,0],0],
-	[6007, "Respawn Tickets","RscCombo",["1","2","3","4","5","6","7","8","9","10","Unlimited"],[1,2,3,4,5,6,7,8,9,10,99999],0],
-	[6009, "Mapdraw in direct only","RscCombo",["Enabled","Disabled"],[1,0],0],
-	[6011, "Respawn Timer","RscCombo",["0 seconds","10 seconds","30 seconds","1 min","5 mins","10 mins","20 mins"],[0,10,30,60,300,600,1200],1],
-	[6013, "Enemy Factions","RscCombo",DefaultEnemyFactionArrayText,DefaultEnemyFactionArray,DefaultEnemyFactionValue select 0],
-	[6015, "Friendly Factions","RscCombo",DefaultFriendlyFactionArrayText,DefaultFriendlyFactionArray,DefaultFriendlyFactionValue select 0],
-	[6017, "Sand Storm","RscCombo",["Random","Always (at a random point)","Never","5 hours non stop"],[0,1,2,3],DefaultSandStormOption]
+	[6001, localize "STR_TRGM2_TRGMSetUnitGlobalVars_VirtualArsenal","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1],
+	[6003, localize "STR_TRGM2_TRGMSetUnitGlobalVars_GroupName","RscEdit",[""],"",1],
+	[6005, localize "STR_TRGM2_TRGMSetUnitGlobalVars_SupportOptions","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],0],
+	[6007, localize "STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTickets","RscCombo",["1","2","3","4","5","6","7","8","9","10",localize "STR_TRGM2_TRGMSetUnitGlobalVars_Unlimited"],[1,2,3,4,5,6,7,8,9,10,99999],0],
+	[6009, localize "STR_TRGM2_TRGMSetUnitGlobalVars_Mapdraw","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],0],
+	[6011, localize "STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTimer","RscCombo",["0 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","10 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","30 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","1 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","5 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","10 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","20 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min"],[0,10,30,60,300,600,1200],1],
+	[6013, localize "STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFactions","RscCombo",DefaultEnemyFactionArrayText,DefaultEnemyFactionArray,DefaultEnemyFactionValue select 0],
+	[6015, localize "STR_TRGM2_TRGMSetUnitGlobalVars_FriendlyFactions","RscCombo",DefaultFriendlyFactionArrayText,DefaultFriendlyFactionArray,DefaultFriendlyFactionValue select 0],
+	[6017, localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_Always",localize "STR_TRGM2_TRGMSetUnitGlobalVars_Never",localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_5Hours"],[0,1,2,3],DefaultSandStormOption]
 ];
 DefaultAdvancedSettings = [0,"Tactical Cannon Fodder",1,1,1,10,DefaultEnemyFactionValue select 0,DefaultFriendlyFactionValue select 0,DefaultSandStormOption];
 
 
 //0 = no, 1 = guarantee revive, 2 = realistic revive, 3 = realistic revive (only medics can revive)
 
-//iUseRevive = ("OUT_par_UseRevive" call BIS_fnc_getParamValue);	
+//iUseRevive = ("OUT_par_UseRevive" call BIS_fnc_getParamValue);
 if (isNil "iUseRevive") then {
 	iUseRevive = 0;
 	publicVariable "iUseRevive";
@@ -88,8 +88,8 @@ else
 };
 
 
-BasicBuildings = ["Land_LightHouse_F","Land_Lighthouse_small_F","Land_Metal_Shed_F","Land_Offices_01_V1_F","Land_Slum_House01_F","Land_Slum_House02_F","Land_Slum_House03_F","Land_Unfinished_Building_01_F","Land_Unfinished_Building_02_F","Land_d_House_Big_01_V1_F","Land_d_House_Big_02_V1_F","Land_d_House_Small_02_V1_F","Land_d_Stone_HouseBig_V1_F","Land_d_Stone_HouseSmall_V1_F","Land_d_Stone_Shed_V1_F","Land_dp_mainFactory_F","Land_i_House_Big_01_V1_F","Land_i_House_Big_01_V2_F","Land_i_House_Big_01_V3_F","Land_i_House_Big_02_V1_F","Land_i_House_Big_02_V2_F","Land_i_House_Big_02_V3_F","Land_i_House_Small_01_V1_F","Land_i_House_Small_01_V2_F","Land_i_House_Small_01_V3_F","Land_i_House_Small_02_V1_F","Land_i_House_Small_02_V2_F","Land_i_House_Small_02_V3_F","Land_i_House_Small_03_V1_F","Land_i_Stone_HouseBig_V1_F","Land_i_Stone_HouseBig_V2_F","Land_i_Stone_HouseBig_V3_F","Land_i_Stone_HouseSmall_V1_F","Land_i_Stone_HouseSmall_V2_F","Land_i_Stone_HouseSmall_V3_F","Land_u_House_Big_01_V1_F","Land_u_House_Big_02_V1_F","Land_u_House_Small_01_V1_F","Land_u_House_Small_02_V1_F","Land_cargo_house_slum_F","Land_jbad_House_1_old","Land_jbad_House_3_old","Land_jbad_House_4_old","Land_jbad_House_6_old","Land_jbad_House_7_old","Land_jbad_House_8_old","Land_jbad_House_9_old","Land_lbad_House_c_1_v2","Land_jbad_House_c_11","Land_jbad_House_c_1","Land_jbad_House_c_2","Land_jbad_House_c_3","Land_jbad_House_c_4","Land_jbad_House_c_5","Land_jbad_House_c_5_v1","Land_jbad_House_c_5_v2","Land_jbad_House_c_5_v3","Land_jbad_House_1","Land_jbad_House_3","Land_jbad_House_5","Land_jbad_House_6","Land_jbad_House_7","Land_jbad_House_8","Land_jbad_House2_basehide","Land_House_C_5_EP1","Land_House_C_5_V1_EP1","Land_House_C_5_V2_EP1","Land_House_C_5_V3_EP1","Land_House_C_12_EP1","Land_House_K_1_EP1","Land_House_K_3_EP1","Land_House_K_5_EP1","Land_House_L_8_EP1","Land_House_K_6_EP1","Land_House_K_7_EP1","Land_House_K_8_EP1","Land_House_L_1_EP1","Land_House_L_4_EP1","Land_House_L_6_EP1","Land_House_L_7_EP1","Land_House_L_8_EP1","Land_jbad_House_1_old","Land_jbad_House_3_old","Land_jbad_House_4_old","Land_jbad_House_6_old","Land_jbad_House_7_old","Land_jbad_House_8_old","Land_jbad_House_9_old","Land_lbad_House_c_1_v2","Land_jbad_House_c_11","Land_jbad_House_c_1","Land_jbad_House_c_2","Land_jbad_House_c_3","Land_jbad_House_c_4","Land_jbad_House_c_5","Land_jbad_House_c_5_v1","Land_jbad_House_c_5_v2","Land_jbad_House_c_5_v3","Land_jbad_House_1","Land_jbad_House_3","Land_jbad_House_5","Land_jbad_House_6","Land_jbad_House_7","Land_jbad_House_8","Land_jbad_House2_basehide","Land_Shed_02_F","Land_House_Small_02_F","Land_House_Small_03_F","Land_House_Small_04_F","Land_House_Small_05_F","Land_House_Small_06_F","Land_House_Big_01_F","Land_House_Big_02_F","Land_House_Big_03_F","Land_House_Big_05_F","Land_Shed_05_F","Land_Shed_06_F","Land_Shed_07_F","Land_Addon_04_F","Land_Shop_City_03_F","Land_Shop_City_05_F","Land_Shop_City_06_F","Land_Shop_City_07_F","Land_House_Big_04_F","Land_House_Native_01_F","Land_House_Native_02_F","Land_House_Native_03_F","Land_House_Native_04_F","Land_House_Native_05_F","Land_House_Native_06_F","Land_blud_hut1","Land_blud_hut2","Land_blud_hut3","Land_blud_hut4","Land_blud_hut5","Land_blud_hut6","Land_blud_hut7","Land_blud_hut8","Land_MBG_GER_RHUS_5","Land_MBG_ATC_Base","Land_MBG_GER_RHUS_2","Land_MBG_GER_HUS_1","Land_MBG_ATC_Segment","Land_MBG_GER_RHUS_1","Land_MBG_GER_HUS_2","Land_MBG_GER_RHUS_3","Land_MBG_GER_RHUS_4","Objects17","Objects18","Objects19","Objects21","Objects22","Objects23","Land_deox_House_A1","Land_deox_House_A2","Land_deox_House_B1","Land_deox_House_B2","Land_deox_House_C1","Land_deox_House_C2","Land_deox_House_D_L1","Land_deox_House_D_L2","Land_deox_House_D_L3","Land_deox_House_D_L4","Land_deox_House_D_M1","Land_deox_House_D_M2","Land_deox_House_D_M3","Land_deox_House_D_M4","Land_deox_House_D_R1","Land_deox_House_D_R3","MBG_Killhouse_3_InEditor","MBG_Killhouse_4_InEditor","MBG_Killhouse_5_InEditor","MBG_Killhouse_2_InEditor","MBG_Killhouse_5_InEditor","MBG_Killhouse_1_InEditor","land_Objects101","land_Objects77","jbad_House_c_1","jbad_House_c_1_v2","jbad_House_c_10","jbad_House_c_11","jbad_House_c_12","jbad_House_c_2","jbad_House_c_3","jbad_House_c_4","jbad_House_c_5","jbad_House_c_5_v1","jbad_House_c_5_v2","jbad_House_c_5_v3","jbad_House_c_9","jbad_dum_istan2","jbad_dum_istan4","Jbad_A_Villa","jbad_House_3_old_h","Jbad_A_BuildingWIP","Jbad_Ind_Workshop01_L","Jbad_A_Stationhouse","Jbad_Mil_Barracks","Jbad_Mil_ControlTower","Jbad_Mil_Guardhouse","Jbad_Mil_House","jbad_mosque_big_addon","jbad_mosque_big_hq","Jbad_A_Mosque_small_1","Land_Jbad_A_Mosque_small_1","Jbad_A_Mosque_small_2","Land_HouseV_1I4","Land_HouseV2_02_Interier","Land_HouseV2_02_Interier_dam","Land_HouseV2_04_interier","Land_HouseV2_04_interier_dam","Land_Farm_Cowshed_a","Land_Farm_Cowshed_a_dam","Land_Farm_Cowshed_b","Land_Farm_Cowshed_b_dam","Land_Farm_Cowshed_c","Land_Farm_Cowshed_c_dam","Land_Barn_W_01","Land_Barn_W_01_dam","Land_Barn_W_02","Land_Shed_wooden","Land_Church_05R","Land_Church_03","Land_Church_03_dam","Land_Ind_Vysypka","Land_A_Castle_Bergfrit","Land_A_Castle_Bergfrit_dam","Land_A_Castle_Donjon","Land_A_Castle_Donjon_dam","Land_R_HouseV2_02","Land_R_HouseV2_04","Land_A_Office01","Land_A_Office02","Land_A_Pub_01","Land_HouseB_Tenement"];	
-MilBuildings = ["Land_Cargo_Patrol_V1_F", "Land_Cargo_Patrol_V3_F", "Land_Cargo_HQ_V3_F", "Land_Cargo_HQ_V1_F","Land_Cargo_House_V3_F","Land_Cargo_House_V1_F", "Land_Cargo_Tower_V3_F", "Land_Cargo_Tower_V1_F", "Land_MilOfficers_V1_F","Land_PillboxBunker_01_big_F","Land_PillboxBunker_01_hex_F","Land_BagBunker_Large_F","Land_BagBunker_Small_F","Land_BagBunker_Tower_F","Land_Bunker_01_big_F","Land_Bunker_01_HQ_F","Land_Bunker_01_small_F","Land_Bunker_01_tall_F","Land_BagBunker_01_large_green_F","Land_BagBunker_01_small_green_F","Land_HBarrier_01_tower_green_F","Land_fortified_nest_big","Land_fortified_nest_small","Fort_Nest","Land_Fort_Watchtower","Land_fortified_nest_big_EP1","Land_fortified_nest_small_EP1","Land_Fort_Watchtower_EP1"];	
+BasicBuildings = ["Land_LightHouse_F","Land_Lighthouse_small_F","Land_Metal_Shed_F","Land_Offices_01_V1_F","Land_Slum_House01_F","Land_Slum_House02_F","Land_Slum_House03_F","Land_Unfinished_Building_01_F","Land_Unfinished_Building_02_F","Land_d_House_Big_01_V1_F","Land_d_House_Big_02_V1_F","Land_d_House_Small_02_V1_F","Land_d_Stone_HouseBig_V1_F","Land_d_Stone_HouseSmall_V1_F","Land_d_Stone_Shed_V1_F","Land_dp_mainFactory_F","Land_i_House_Big_01_V1_F","Land_i_House_Big_01_V2_F","Land_i_House_Big_01_V3_F","Land_i_House_Big_02_V1_F","Land_i_House_Big_02_V2_F","Land_i_House_Big_02_V3_F","Land_i_House_Small_01_V1_F","Land_i_House_Small_01_V2_F","Land_i_House_Small_01_V3_F","Land_i_House_Small_02_V1_F","Land_i_House_Small_02_V2_F","Land_i_House_Small_02_V3_F","Land_i_House_Small_03_V1_F","Land_i_Stone_HouseBig_V1_F","Land_i_Stone_HouseBig_V2_F","Land_i_Stone_HouseBig_V3_F","Land_i_Stone_HouseSmall_V1_F","Land_i_Stone_HouseSmall_V2_F","Land_i_Stone_HouseSmall_V3_F","Land_u_House_Big_01_V1_F","Land_u_House_Big_02_V1_F","Land_u_House_Small_01_V1_F","Land_u_House_Small_02_V1_F","Land_cargo_house_slum_F","Land_jbad_House_1_old","Land_jbad_House_3_old","Land_jbad_House_4_old","Land_jbad_House_6_old","Land_jbad_House_7_old","Land_jbad_House_8_old","Land_jbad_House_9_old","Land_lbad_House_c_1_v2","Land_jbad_House_c_11","Land_jbad_House_c_1","Land_jbad_House_c_2","Land_jbad_House_c_3","Land_jbad_House_c_4","Land_jbad_House_c_5","Land_jbad_House_c_5_v1","Land_jbad_House_c_5_v2","Land_jbad_House_c_5_v3","Land_jbad_House_1","Land_jbad_House_3","Land_jbad_House_5","Land_jbad_House_6","Land_jbad_House_7","Land_jbad_House_8","Land_jbad_House2_basehide","Land_House_C_5_EP1","Land_House_C_5_V1_EP1","Land_House_C_5_V2_EP1","Land_House_C_5_V3_EP1","Land_House_C_12_EP1","Land_House_K_1_EP1","Land_House_K_3_EP1","Land_House_K_5_EP1","Land_House_L_8_EP1","Land_House_K_6_EP1","Land_House_K_7_EP1","Land_House_K_8_EP1","Land_House_L_1_EP1","Land_House_L_4_EP1","Land_House_L_6_EP1","Land_House_L_7_EP1","Land_House_L_8_EP1","Land_jbad_House_1_old","Land_jbad_House_3_old","Land_jbad_House_4_old","Land_jbad_House_6_old","Land_jbad_House_7_old","Land_jbad_House_8_old","Land_jbad_House_9_old","Land_lbad_House_c_1_v2","Land_jbad_House_c_11","Land_jbad_House_c_1","Land_jbad_House_c_2","Land_jbad_House_c_3","Land_jbad_House_c_4","Land_jbad_House_c_5","Land_jbad_House_c_5_v1","Land_jbad_House_c_5_v2","Land_jbad_House_c_5_v3","Land_jbad_House_1","Land_jbad_House_3","Land_jbad_House_5","Land_jbad_House_6","Land_jbad_House_7","Land_jbad_House_8","Land_jbad_House2_basehide","Land_Shed_02_F","Land_House_Small_02_F","Land_House_Small_03_F","Land_House_Small_04_F","Land_House_Small_05_F","Land_House_Small_06_F","Land_House_Big_01_F","Land_House_Big_02_F","Land_House_Big_03_F","Land_House_Big_05_F","Land_Shed_05_F","Land_Shed_06_F","Land_Shed_07_F","Land_Addon_04_F","Land_Shop_City_03_F","Land_Shop_City_05_F","Land_Shop_City_06_F","Land_Shop_City_07_F","Land_House_Big_04_F","Land_House_Native_01_F","Land_House_Native_02_F","Land_House_Native_03_F","Land_House_Native_04_F","Land_House_Native_05_F","Land_House_Native_06_F","Land_blud_hut1","Land_blud_hut2","Land_blud_hut3","Land_blud_hut4","Land_blud_hut5","Land_blud_hut6","Land_blud_hut7","Land_blud_hut8","Land_MBG_GER_RHUS_5","Land_MBG_ATC_Base","Land_MBG_GER_RHUS_2","Land_MBG_GER_HUS_1","Land_MBG_ATC_Segment","Land_MBG_GER_RHUS_1","Land_MBG_GER_HUS_2","Land_MBG_GER_RHUS_3","Land_MBG_GER_RHUS_4","Objects17","Objects18","Objects19","Objects21","Objects22","Objects23","Land_deox_House_A1","Land_deox_House_A2","Land_deox_House_B1","Land_deox_House_B2","Land_deox_House_C1","Land_deox_House_C2","Land_deox_House_D_L1","Land_deox_House_D_L2","Land_deox_House_D_L3","Land_deox_House_D_L4","Land_deox_House_D_M1","Land_deox_House_D_M2","Land_deox_House_D_M3","Land_deox_House_D_M4","Land_deox_House_D_R1","Land_deox_House_D_R3","MBG_Killhouse_3_InEditor","MBG_Killhouse_4_InEditor","MBG_Killhouse_5_InEditor","MBG_Killhouse_2_InEditor","MBG_Killhouse_5_InEditor","MBG_Killhouse_1_InEditor","land_Objects101","land_Objects77","jbad_House_c_1","jbad_House_c_1_v2","jbad_House_c_10","jbad_House_c_11","jbad_House_c_12","jbad_House_c_2","jbad_House_c_3","jbad_House_c_4","jbad_House_c_5","jbad_House_c_5_v1","jbad_House_c_5_v2","jbad_House_c_5_v3","jbad_House_c_9","jbad_dum_istan2","jbad_dum_istan4","Jbad_A_Villa","jbad_House_3_old_h","Jbad_A_BuildingWIP","Jbad_Ind_Workshop01_L","Jbad_A_Stationhouse","Jbad_Mil_Barracks","Jbad_Mil_ControlTower","Jbad_Mil_Guardhouse","Jbad_Mil_House","jbad_mosque_big_addon","jbad_mosque_big_hq","Jbad_A_Mosque_small_1","Land_Jbad_A_Mosque_small_1","Jbad_A_Mosque_small_2","Land_HouseV_1I4","Land_HouseV2_02_Interier","Land_HouseV2_02_Interier_dam","Land_HouseV2_04_interier","Land_HouseV2_04_interier_dam","Land_Farm_Cowshed_a","Land_Farm_Cowshed_a_dam","Land_Farm_Cowshed_b","Land_Farm_Cowshed_b_dam","Land_Farm_Cowshed_c","Land_Farm_Cowshed_c_dam","Land_Barn_W_01","Land_Barn_W_01_dam","Land_Barn_W_02","Land_Shed_wooden","Land_Church_05R","Land_Church_03","Land_Church_03_dam","Land_Ind_Vysypka","Land_A_Castle_Bergfrit","Land_A_Castle_Bergfrit_dam","Land_A_Castle_Donjon","Land_A_Castle_Donjon_dam","Land_R_HouseV2_02","Land_R_HouseV2_04","Land_A_Office01","Land_A_Office02","Land_A_Pub_01","Land_HouseB_Tenement"];
+MilBuildings = ["Land_Cargo_Patrol_V1_F", "Land_Cargo_Patrol_V3_F", "Land_Cargo_HQ_V3_F", "Land_Cargo_HQ_V1_F","Land_Cargo_House_V3_F","Land_Cargo_House_V1_F", "Land_Cargo_Tower_V3_F", "Land_Cargo_Tower_V1_F", "Land_MilOfficers_V1_F","Land_PillboxBunker_01_big_F","Land_PillboxBunker_01_hex_F","Land_BagBunker_Large_F","Land_BagBunker_Small_F","Land_BagBunker_Tower_F","Land_Bunker_01_big_F","Land_Bunker_01_HQ_F","Land_Bunker_01_small_F","Land_Bunker_01_tall_F","Land_BagBunker_01_large_green_F","Land_BagBunker_01_small_green_F","Land_HBarrier_01_tower_green_F","Land_fortified_nest_big","Land_fortified_nest_small","Fort_Nest","Land_Fort_Watchtower","Land_fortified_nest_big_EP1","Land_fortified_nest_small_EP1","Land_Fort_Watchtower_EP1"];
 TowerBuildings = ["Land_TTowerBig_2_F","Land_TTowerBig_1_F (towertest)","land_Objects96"];//,"Land_TTowerSmall_2_F","Land_TTowerSmall_1_F"];  //these small towers are too small for Altis or Malden.. looks strange if this is the comms tower and nearby is a massive unused tower
 
 
@@ -98,13 +98,13 @@ TowerBuildings = ["Land_TTowerBig_2_F","Land_TTowerBig_1_F (towertest)","land_Ob
 
 sBreifing = "";
 sAltisRegainEngine = "";
-sScriptsUsed = "RickOShay's Dust Storm Script<br />Phsyco Revive Script";
+sScriptsUsed = localize "STR_TRGM2_TRGMSetUnitGlobalVars_ScriptsUsed";
 
 
 //iWeather = ("OUT_par_WeatherAndTimeConditions" call BIS_fnc_getParamValue);
 if (isNil "iWeather") then {
 	iWeather = 1;
-	publicVariable "iWeather";	
+	publicVariable "iWeather";
 };
 if (iWeather == 1) then {WeatherOptions = [1,1,1,2,2,2,3,3,3,4,5,6,7,7,8,9,10];};
 if (iWeather == 2) then {WeatherOptions = [1];};
@@ -136,7 +136,7 @@ if (iAllowLargePat == 1) then {bAllowLargerPatrols = True;};
 if (iAllowLargePat == 2) then {bAllowLargerPatrols = False;};
 if (iAllowLargePat == 3) then {bAllowLargerPatrols = selectRandom[False,True];};
 
-//1=Laptop  2=Steal data from research vehicle   3=Destroy Ammo Trucks   
+//1=Laptop  2=Steal data from research vehicle   3=Destroy Ammo Trucks
 //4=Speak with informant    5=interrogate officer    6=Bug Radio
 //7=Eliminate Officer     8=Assasinate weapon dealer    9=Destroy AAA vehicles
 //10=Destroy Artillery vehicles 	11=Resue POW
@@ -161,37 +161,38 @@ TowerRadius = 3500;
 GridXOffSet = 0;  //to work this out, get vector21, mark pos at [0,0], the number for the X or Y is the offset, as it should be zero, so if not, we need to use this as an offset
 GridYOffSet = 0;
 
-MissionTypeDescriptions = 
+MissionTypeDescriptions =
 [
-"This is the default mission type.  There will be one main objective that is occupied by a heavy enemy army.\n\nYou will also have two optional mini missions, these mini missions will either give you intel on the main AO, or will help increase your reputation depending on the mission type.", 
-"This is the same as the top mission type, however, the two optional objectives are not marked on the map.  There will be one main objective that is occupied by a heavy enemy army.\n\nYou will also have two optional mini missions, these mini missions will either give you intel on the main AO, or will help increase your reputation depending on the mission type.", 
-"One main objective that is occupied by a heavy enemy army\n\nThere will be two mini missions, one will give you intel on the main location of the AO, be careful, as there is always a possiblity that the objective could be in the middle of the main AO!.\n\nThe other mini mission could be intel or may increase your reputation.",
-"One main objective that is occupied by a heavy enemy army, no mini missions or intel required",
-"A single mini mission.\n\nThese mini missions could be very low enemy, high enemy, be aware that the area may be occupied by friendly rebels! or just a large civilian population (watch out though, some civs may be enemy undercover, or a friendly rebel may also be an enemy undercover!).",
-"Three mini missions.\n\nIf you select the type of mission below, all three will be the same, could be ideal for practicing the mini mission types, or you may want to have three HVTs to takeout.\n\nThese mini missions could be very low enemy, high enemy, be aware that the area may be occupied by friendly rebels! or jsut a large civilian population (watch out though, some civs may be enemy undercover, or a friendly rebel may also be an enemy undercover!).",
-"Three mini missions, all of which are not marked!.\n\nIf you select the type of mission below, all three will be the same, could be ideal for practicing the mini mission types, or you may want to have three HVTs to takeout.\n\nThese mini missions could be very low enemy, high enemy, be aware that the area may be occupied by friendly rebels! or jsut a large civilian population (watch out though, some civs may be enemy undercover, or a friendly rebel may also be an enemy undercover!).",
-"You will start at rank one (Novice), your aim is to work hard and become a highly reputable unit (i.e. get to rank 5).  The higher your reputation the better equipment high command will allow you to use, however, losing these in battle will lower your reputation, also killing civs, losing units and other assets, killing friendly rebels and any other mistake will lower your reputation.\n\nIf you manage to get a high enough reputation(10 points), high command will assign a final heavy objective!"
+
+localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions1",
+"TREEND_LOC_This is the same as the top mission type, however, the two optional objectives are not marked on the map.  There will be one main objective that is occupied by a heavy enemy army.\n\nYou will also have two optional mini missions, these mini missions will either give you intel on the main AO, or will help increase your reputation depending on the mission type.", 
+localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions2",
+localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions3",
+localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions4",
+localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions5",
+"TREEND_LOC_Three mini missions, all of which are not marked!.\n\nIf you select the type of mission below, all three will be the same, could be ideal for practicing the mini mission types, or you may want to have three HVTs to takeout.\n\nThese mini missions could be very low enemy, high enemy, be aware that the area may be occupied by friendly rebels! or jsut a large civilian population (watch out though, some civs may be enemy undercover, or a friendly rebel may also be an enemy undercover!).",
+localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions6",
 ];
 
-MissionParamTypes = ["Heavy Mission (with two optional sides)","Heavy Mission (two hidden optional sides)","Heavy Mission (Intel required for AO Location)","Heavy Mission Only","Single Mission", "Three Missions", "Three Hidden Missions", "Campaign"];
+MissionParamTypes = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName1","TREEND_LOC_Heavy Mission (two hidden optional sides)",localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName2",localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName3",localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName4", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName5", "TREEND_LOC_Three Hidden Missions", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName6"];
 MissionParamTypesValues = [0,6,1,2,3,4,7,5];
 
-MissionParamObjectives = ["Random","Hack Data","Steal data from research vehicle","Destroy Ammo Trucks","Speak with informant","interrogate officer","Transmit Enemy Comms to HQ","Eliminate Officer","Assasinate weapon dealer","Destroy AAA vehicles","Destroy Artillery vehicles","Rescue POW","Rescue Reporter"];
+MissionParamObjectives = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_startInfMission_MissionTitle1",localize "STR_TRGM2_startInfMission_MissionTitle2",localize "STR_TRGM2_startInfMission_MissionTitle3",localize "STR_TRGM2_startInfMission_MissionTitle4",localize "STR_TRGM2_startInfMission_MissionTitle5",localize "STR_TRGM2_startInfMission_MissionTitle6",localize "STR_TRGM2_startInfMission_MissionTitle7",localize "STR_TRGM2_startInfMission_MissionTitle8",localize "STR_TRGM2_startInfMission_MissionTitle9",localize "STR_TRGM2_startInfMission_MissionTitle10","TREEND_LOC_Rescue POW","TREEND_LOC_Rescue Reporter"];
 MissionParamObjectivesValues = [0,1,2,3,4,5,6,7,8,9,10,11,12];
 
-MissionParamRepOptions = ["Enabled", "Disabled"];
+MissionParamRepOptions = [localize "STR_TRGM2_TRGMInitPlayerLocal_Enable", localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"];
 MissionParamRepOptionsValues = [1, 0];
 
-MissionParamWeatherOptions = ["Random", "Sunny Clear", "Daytime Heavy Overcast", "Day average Overcast", "Dark Night Clear", "Dark Night Heavy Overcast", "Dark Night Average overcast", "Early Morning", "Moon Night Clear", "Moon Night slight overcast", "Moon Night heavy overcast"];
+MissionParamWeatherOptions = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random", localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sunny", localize "STR_TRGM2_TRGMSetUnitGlobalVars_DaytimeHeavyOvercast", localize "STR_TRGM2_TRGMSetUnitGlobalVars_DaytimeAverageOvercast", localize "STR_TRGM2_TRGMSetUnitGlobalVars_DarkNightClear", localize "STR_TRGM2_TRGMSetUnitGlobalVars_DarkNightHeavyOvercast", localize "STR_TRGM2_TRGMSetUnitGlobalVars_DarkNightAverageOvercast", localize "STR_TRGM2_TRGMSetUnitGlobalVars_EarlyMorning", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MoonNightClear", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MoonNightAverageOvercast", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MoonNightHeavyOvercast"];
 MissionParamWeatherOptionsValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-MissionParamNVGOptions = ["Realistic NVG", "Allowed", "No NVG"];
-MissionParamNVGOptionsValues = [2,1,0]; 
+MissionParamNVGOptions = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_NVG_Real", localize "STR_TRGM2_TRGMSetUnitGlobalVars_NVG_Allow", localize "STR_TRGM2_TRGMSetUnitGlobalVars_NVG_NoAllow"];
+MissionParamNVGOptionsValues = [2,1,0];
 
-MissionParamReviveOptions = ["No revive", "Guarantee revive", "Realistic revive (critical hits will kill you instantly)", "Realistic revive (only medics can revive with a medkit)", "Realistic, only medics, only near transport chopper, medi chopper, medi vehicle or medi facility at HQ", "Realistic, only medics, only at HQ"];
+MissionParamReviveOptions = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Revive_No", localize "STR_TRGM2_TRGMSetUnitGlobalVars_Revive_Guarantee", localize "STR_TRGM2_TRGMSetUnitGlobalVars_Revive_Real1", localize "STR_TRGM2_TRGMSetUnitGlobalVars_Revive_Real2", localize "STR_TRGM2_TRGMSetUnitGlobalVars_Revive_Real3", localize "STR_TRGM2_TRGMSetUnitGlobalVars_Revive_Real4"];
 MissionParamReviveOptionsValues = [0,1,2,3,4,5];
 
-MissionParamLocationOptions = ["Random", "Near AO", "Main HQ"];
+MissionParamLocationOptions = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random", localize "STR_TRGM2_TRGMSetUnitGlobalVars_NearAO", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MainHQ"];
 MissionParamLocationOptionsValues = [2,1,0];
 
 FastResponseCarItems=[[[["arifle_SDAR_F"],[10]],[["20Rnd_556x45_UW_mag"],[20]],[["G_B_Diving","V_RebreatherB","U_B_Wetsuit"],[10,10,10]],[[],[]]],false];
@@ -218,6 +219,7 @@ ThemeAndIntroMusic=["LeadTrack01_F_Curator","Fallout","Wasteland","AmbientTrack0
 
 
 
+
 EnemyRadioSounds = ["ambient_radio2","ambient_radio8","ambient_radio10","ambient_radio11","ambient_radio12","ambient_radio13","ambient_radio15","ambient_radio16","ambient_radio18","ambient_radio20","ambient_radio24"];
 FriendlyRadioSounds = ["ambient_radio3","ambient_radio4","ambient_radio5","ambient_radio6","ambient_radio7","ambient_radio9","ambient_radio14","ambient_radio17","ambient_radio19","ambient_radio21","ambient_radio22","ambient_radio23","ambient_radio25","ambient_radio26","ambient_radio27","ambient_radio28","ambient_radio29","ambient_radio30"];
 
@@ -231,6 +233,7 @@ Cones = ["RoadCone_F"];
 
 	sFriendlyNVClassName = "NVGoggles";	
 	sEnemyNVClassName = "NVGoggles_tna_F";  //"NVGoggles_OPFOR"	
+
 	FriendlySide = West;
 	EnemySide = East;
 	FriendlySideString = "West";
@@ -271,7 +274,7 @@ Cones = ["RoadCone_F"];
 	InitialBoxItemsWithAce=[[[["ACE_VMH3","ACE_VMM3"],[5,5]],[["DemoCharge_Remote_Mag","SatchelCharge_Remote_Mag","SmokeShellGreen","SmokeShellOrange","SmokeShellRed","SmokeShell"],[5,5,20,20,20,20,20]],[["ACE_RangeTable_82mm","ACE_adenosine","ACE_ATragMX","ACE_atropine","ACE_Banana","ACE_fieldDressing","ACE_elasticBandage","ACE_quikclot","ACE_bloodIV","ACE_bloodIV_250","ACE_bloodIV_500","ACE_bodyBag","ACE_CableTie","ItemCompass","ACE_DAGR","ACE_DefusalKit","ACE_EarPlugs","ACE_EntrenchingTool","ACE_epinephrine","ACE_Flashlight_MX991","ACE_Kestrel4500","ACE_Flashlight_KSF1","ACE_M26_Clacker","ACE_Clacker","ACE_Flashlight_XL50","ItemMap","ACE_MapTools","ACE_microDAGR","ACE_morphine","ACE_packingBandage","ACE_personalAidKit","ACE_plasmaIV","ACE_plasmaIV_250","ACE_plasmaIV_500","ACE_RangeCard","ACE_salineIV","ACE_salineIV_250","ACE_salineIV_500","ACE_Sandbag_empty","ACE_Tripod","ACE_surgicalKit","ACE_tourniquet","ACE_VectorDay","ItemWatch","ACE_wirecutter","tf_anprc152","tf_anprc154"],[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50]],[["tf_rt1523g","tf_rt1523g_big"],[3,3]]],false];
 	
 	/*Unit class names*/
-	
+
 	CampaignRecruitUnitRifleman = "B_Soldier_F";
 	CampaignRecruitUnitAT = "B_soldier_AT_F";
 	CampaignRecruitUnitAA = "B_soldier_AA_F";

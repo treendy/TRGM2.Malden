@@ -36,18 +36,18 @@ TREND_fnc_PopulateSideMission = {
 	_bHasVehicle = false;
 
 	AODetails pushBack [_iSideIndex,0,0,0,false,0,0];
-	publicVariable "AODetails";	
+	publicVariable "AODetails";
 
 
 	//_bFriendlyInsurgents = true;
 	_bFriendlyInsurgents = selectRandom bFriendlyInsurgents;
-	
+
 	_InsurgentSide = east;
 	if (_bFriendlyInsurgents) then {_InsurgentSide = west;};
 	if (_bIsMainObjective) then {_InsurgentSide = east; _bFriendlyInsurgents = false;}; //if main need to make sure not friendly insurgents
 
-	
-	
+
+
 	bThisMissionCivsOnly = selectRandom bCivsOnly;
 	_bTownBigenoughForFriendlyInsurgants = true;
 	_allBuildingsNearAO = nearestObjects [_sidePos, BasicBuildings, 100];
@@ -86,7 +86,7 @@ TREND_fnc_PopulateSideMission = {
 		sOfficerName = format["objInformant%1",_iSideIndex];
 		_officerObject = missionNamespace getVariable [sOfficerName , objNull];
 		_officerObject disableAI "anim";
-		_officerObject switchMove "Acts_ExecutionVictim_Loop"; 
+		_officerObject switchMove "Acts_ExecutionVictim_Loop";
 		_officerObject disableAI "anim";
 		_officerObject setCaptive true;
 		_officerObject setVariable ["StopWalkScript", true];
@@ -161,7 +161,7 @@ TREND_fnc_PopulateSideMission = {
 	_trgCustomAIScript setTriggerActivation [FriendlySideString, format["%1 D", EnemySideString], true];
 	_trgCustomAIScript setTriggerStatements ["this && SpottedActiveFinished", format["nul = [this, thisList, %1, %2, %3] execVM ""RandFramework\RandScript\TREND_fnc_CallNearbyPatrol.sqf"";",str(_sidePos),_iSideIndex, _bIsMainObjective], ""];
 	//AODetails [_iSideIndex,0,0,0,false,0]
-	//AODetails select 
+	//AODetails select
 
 	debugMessages = debugMessages + format["\n\ntrendFunctions.sqf : _bFriendlyInsurgents: %1 - bThisMissionCivsOnly: %2 ",str(_bFriendlyInsurgents),str(bThisMissionCivsOnly)];
 
@@ -188,7 +188,7 @@ TREND_fnc_PopulateSideMission = {
 				[_sidePos,15 + (floor random 50),[2,3],false,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
 				_bHasPatrols = true
 			};
-					
+
 
 			//Spawn wide patrol
 			//if main, need a couple of these and always have 2 or 3
@@ -201,7 +201,7 @@ TREND_fnc_PopulateSideMission = {
 					_bHasPatrols = true
 				};
 			};
-			
+
 			if (_bIsMainObjective && selectRandom [true,true,false]) then {
 				//[_sidePos,500 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
 				if (bAllowLargerPatrols && _bIsMainObjective) then {
@@ -209,9 +209,9 @@ TREND_fnc_PopulateSideMission = {
 					[_sidePos,900 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
 				};
 			};
-				
 
-			
+
+
 			//Spawn patrol to move from building to building
 			if (_bIsMainObjective || (selectRandom [true,false])) then {
 				[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 1200] spawn TREND_fnc_BuildingPatrol;
@@ -239,10 +239,10 @@ TREND_fnc_PopulateSideMission = {
 
 				if (bDebugMode) then {
 					_test = nil;
-					_test = createMarker [format["MORTARMrk%1%2%3",_flatPos select 0,_flatPos select 1,selectRandom[1,2,3,4,5]], _flatPos];  
-					_test setMarkerShape "ICON";  
-					_test setMarkerType "hd_dot";  
-					_test setMarkerText "MORTAR"; 
+					_test = createMarker [format["MORTARMrk%1%2%3",_flatPos select 0,_flatPos select 1,selectRandom[1,2,3,4,5]], _flatPos];
+					_test setMarkerShape "ICON";
+					_test setMarkerType "hd_dot";
+					_test setMarkerText "MORTAR";
 				};
 			};
 
@@ -251,7 +251,7 @@ TREND_fnc_PopulateSideMission = {
 			if (_bIsMainObjective || (selectRandom [true,false])) then {
 				//hint format["AAALoc:%1",sTank1ToUse];
 				//sleep 3;
-				
+
 					_flatPos = nil;
 					_flatPos = [_sidePos , 10, 200, 8, 0, 0.5, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 					[_flatPos,  (floor random 300), selectRandom[sTank1ArmedCarToUse,sTank2APCToUse,sTank3TankToUse], createGroup _InsurgentSide] call bis_fnc_spawnvehicle;
@@ -259,12 +259,12 @@ TREND_fnc_PopulateSideMission = {
 						_flatPos = nil;
 						_flatPos = [_sidePos , 10, 200, 8, 0, 0.5, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 						[_flatPos,  (floor random 300), selectRandom[sTank1ArmedCarToUse,sTank2APCToUse,sTank3TankToUse], createGroup _InsurgentSide] call bis_fnc_spawnvehicle;
-					};		
+					};
 					if (bAllowLargerPatrols && _bIsMainObjective && selectRandom [true,false]) then {
 						_flatPos = nil;
 						_flatPos = [_sidePos , 300, 1000, 8, 0, 0.5, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 						[_flatPos,  (floor random 300), selectRandom[sTank1ArmedCarToUse,sTank2APCToUse,sTank3TankToUse], createGroup _InsurgentSide] call bis_fnc_spawnvehicle;
-					};			
+					};
 					if (bAllowLargerPatrols && _bIsMainObjective) then {
 						_flatPos = nil;
 						_flatPos = [_sidePos , 300, 1000, 8, 0, 0.5, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
@@ -277,13 +277,13 @@ TREND_fnc_PopulateSideMission = {
 					};
 
 					_bHasVehicle = true;
-					
+
 			};
 
 			if (_bIsMainObjective || (selectRandom [true,false])) then {
 				//hint format["AAALoc:%1",sTank1ToUse];
 				//sleep 3;
-				
+
 					_flatPos = nil;
 					_flatPos = [_sidePos , 10, 200, 4, 0, 0.5, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 					_vehOneGroup = nil;
@@ -300,16 +300,16 @@ TREND_fnc_PopulateSideMission = {
 						[_flatPos,  (floor random 300), selectRandom[sTank1ArmedCarToUse,sTank2APCToUse,sTank3TankToUse], _vehTwoGroup] call bis_fnc_spawnvehicle;
 						[_vehTwoGroup, _sidePos, 2000 ] call bis_fnc_taskPatrol;
 						_vehTwoGroup setSpeedMode "LIMITED";
-					};		
-					
+					};
+
 
 					_bHasVehicle = true;
-					
+
 			};
 			if (_bIsMainObjective || (selectRandom [true,false])) then {
 				//hint format["AAALoc:%1",sTank1ToUse];
 				//sleep 3;
-				
+
 					_flatPos = nil;
 					_flatPos = [_sidePos , 10, 500, 4, 0, 0.5, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 					_vehScountOneGroup = nil;
@@ -326,9 +326,9 @@ TREND_fnc_PopulateSideMission = {
 						[_flatPos,  (floor random 300), selectRandom UnarmedScoutVehicles, _vehScoutTwoGroup] call bis_fnc_spawnvehicle;
 						[_vehScoutTwoGroup, _sidePos, 2000 ] call bis_fnc_taskPatrol;
 						_vehScoutTwoGroup setSpeedMode "LIMITED";
-					};		
+					};
 					_bHasVehicle = true;
-					
+
 			};
 
 			//if main then 100% occupie houses, and increase number and range
@@ -346,14 +346,14 @@ TREND_fnc_PopulateSideMission = {
 				if selectRandom [true,false] then {[_sidePos,100,[1,2],_InsurgentSide] spawn TREND_fnc_OccupyHouses;};
 				if selectRandom [true,false] then {[_sidePos,1000,[3,4],_InsurgentSide] spawn TREND_fnc_OccupyHouses;};
 			};
-			
+
 			//Spawn nasty surprise (AAA, IEDs, wider patrol)
 			if ((_bIsMainObjective && selectRandom [true,false]) || (!_bIsMainObjective && selectRandom [true,false,false,false])) then {
 				if (sAAAVehMilitia != "") then {
 					_flatPos = nil;
 					_flatPos = [_sidePos , 10, 200, 4, 0, 0.5, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 					_AAAGroup = createGroup _InsurgentSide;
-					[_flatPos,  (floor random 300), sAAAVehToUse, _AAAGroup] call bis_fnc_spawnvehicle;	
+					[_flatPos,  (floor random 300), sAAAVehToUse, _AAAGroup] call bis_fnc_spawnvehicle;
 					{
 						_x setskill ["aimingAccuracy",1];
 						_x setskill ["aimingShake",1];
@@ -365,7 +365,7 @@ TREND_fnc_PopulateSideMission = {
 						_x setskill ["general",1];
 						_x setskill ["endurance",1.0];
 						_x setskill ["reloadSpeed",0.5];
-					} forEach units _AAAGroup;		
+					} forEach units _AAAGroup;
 				};
 			};
 
@@ -379,13 +379,13 @@ TREND_fnc_PopulateSideMission = {
 				_checkPointGuidePos = _sidePos;
 				_iCount = _iCount - 1;
 				_flatPos = nil;
+
 				_flatPos = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]] + CheckPointAreas + SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 		
-
 				if (_flatPos select 0 > 0) then {
 					_thisPosAreaOfCheckpoint = _flatPos;
 					_thisRoadOnly = false;
-					_thisSide = east; 
+					_thisSide = east;
 					_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 					_thisAllowBarakade = selectRandom [false];
 					_thisIsDirectionAwayFromAO = true;
@@ -407,7 +407,7 @@ TREND_fnc_PopulateSideMission = {
 				if (_flatPos select 0 > 0) then {
 					_thisPosAreaOfCheckpoint = _flatPos;
 					_thisRoadOnly = true;
-					_thisSide = east; 
+					_thisSide = east;
 					_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 					_thisAllowBarakade = true;
 					_thisIsDirectionAwayFromAO = true;
@@ -430,7 +430,7 @@ TREND_fnc_PopulateSideMission = {
 				if (_flatPos select 0 > 0) then {
 					_thisPosAreaOfCheckpoint = _flatPos;
 					_thisRoadOnly = true;
-					_thisSide = east; 
+					_thisSide = east;
 					_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 					_thisAllowBarakade = true;
 					_thisIsDirectionAwayFromAO = true;
@@ -453,7 +453,7 @@ TREND_fnc_PopulateSideMission = {
 				if (_flatPos select 0 > 0) then {
 					_thisPosAreaOfCheckpoint = _flatPos;
 					_thisRoadOnly = true;
-					_thisSide = east; 
+					_thisSide = east;
 					_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 					_thisAllowBarakade = true;
 					_thisIsDirectionAwayFromAO = true;
@@ -476,7 +476,7 @@ TREND_fnc_PopulateSideMission = {
 				if (_flatPos select 0 > 0) then {
 					_thisPosAreaOfCheckpoint = _flatPos;
 					_thisRoadOnly = false;
-					_thisSide = east; 
+					_thisSide = east;
 					_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 					_thisAllowBarakade = selectRandom [false];
 					_thisIsDirectionAwayFromAO = true;
@@ -500,7 +500,7 @@ TREND_fnc_PopulateSideMission = {
 				if (_flatPos select 0 > 0) then {
 					_thisPosAreaOfCheckpoint = _flatPos;
 					_thisRoadOnly = true;
-					_thisSide = west; 
+					_thisSide = west;
 					_thisUnitTypes = FriendlyCheckpointUnits;
 					_thisAllowBarakade = true;
 					_thisIsDirectionAwayFromAO = false;
@@ -518,7 +518,7 @@ TREND_fnc_PopulateSideMission = {
 				_milOccupyOdds = [true,false];
 			};
 			if (count _allMilBuildings > 0) then {
-		
+
 				{
 					_distanceFromBase = getMarkerPos "mrkHQ" distance getPos _x;
 					if (SelectRandom _milOccupyOdds && _distanceFromBase > BaseAreaRange) then {
@@ -531,7 +531,7 @@ TREND_fnc_PopulateSideMission = {
 						_objMilUnit1 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[0,0,0],[],0,"NONE"];
 						_objMilUnit2 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[2,0,0],[],0,"NONE"];
 						_objMilUnit3 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[3,0,0],[],0,"NONE"];
-						[getPos _x, [_objMilUnit1,_objMilUnit2,_objMilUnit3], -1, true, false,true] execVM "RandFramework\Zen_OccupyHouse.sqf";	
+						[getPos _x, [_objMilUnit1,_objMilUnit2,_objMilUnit3], -1, true, false,true] execVM "RandFramework\Zen_OccupyHouse.sqf";
 						sleep 0.2;
 						_objMilUnit1 setUnitPos "up";
 						_objMilUnit2 setUnitPos "up";
@@ -553,11 +553,11 @@ TREND_fnc_PopulateSideMission = {
 							_guardUnit5 = _MilGroup4 createUnit [sRiflemanToUse,_pos5,[],0,"NONE"];
 							_guardUnit5 setVariable [_sCheckpointGuyName, _guardUnit5, true];
 							missionNamespace setVariable [_sCheckpointGuyName, _guardUnit5];
-							TREND_fnc_WalkingGuyLoop = {		
+							TREND_fnc_WalkingGuyLoop = {
 								_objManName = _this select 0;
 								_thisInitPos = _this select 1;
 								_objMan = missionNamespace getVariable _objManName;
-													
+
 								group _objMan setSpeedMode "LIMITED";
 								group _objMan setBehaviour "SAFE";
 
@@ -580,12 +580,12 @@ TREND_fnc_PopulateSideMission = {
 							_BaseChopperGroup = createGroup EnemySide;
 							_EnemyBaseChopper = selectRandom EnemyBaseChoppers createVehicle getPosATL baseHeliPad;
 							_EnemyBaseChopper setDir direction baseHeliPad;
-							sEnemyHeliPilot createUnit [[(getPos baseHeliPad select 0)+10,(getPos baseHeliPad select 1)+10], _BaseChopperGroup];	
+							sEnemyHeliPilot createUnit [[(getPos baseHeliPad select 0)+10,(getPos baseHeliPad select 1)+10], _BaseChopperGroup];
 							sEnemyHeliPilot createUnit [[(getPos baseHeliPad select 0)+11,(getPos baseHeliPad select 1)+10], _BaseChopperGroup];
 							{
 								[_x,"STAND","ASIS"] call BIS_fnc_ambientAnimCombat;
 							} forEach units _BaseChopperGroup;
-					
+
 							//EnemyBaseChopperPilot = getNEAREST sEnemyHeliPilot to chopper
 							_EnemyBaseChopperPilots = nearestObjects [getPos baseHeliPad, [sEnemyHeliPilot], 250];
 							EnemyBaseChopperPilot = _EnemyBaseChopperPilots select 0;
@@ -596,7 +596,7 @@ TREND_fnc_PopulateSideMission = {
 					};
 					if (_iCount > 10) exitWith {};
 				} forEach _allMilBuildings;
-		
+
 			};
 
 		}
@@ -614,7 +614,7 @@ TREND_fnc_PopulateSideMission = {
 				if (_flatPos select 0 > 0) then {
 					_thisPosAreaOfCheckpoint = _flatPos;
 					_thisRoadOnly = true;
-					_thisSide = east; 
+					_thisSide = east;
 					_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 					_thisAllowBarakade = true;
 					_thisIsDirectionAwayFromAO = true;
@@ -634,7 +634,7 @@ TREND_fnc_PopulateSideMission = {
 				if (_flatPos select 0 > 0) then {
 					_thisPosAreaOfCheckpoint = _flatPos;
 					_thisRoadOnly = false;
-					_thisSide = east; 
+					_thisSide = east;
 					_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 					_thisAllowBarakade = false;
 					_thisIsDirectionAwayFromAO = true;
@@ -653,7 +653,7 @@ TREND_fnc_PopulateSideMission = {
 		_markerFriendlyRebs = createMarker [format["mrkFriendlyRebs%1",_iSideIndex], _lapPos];
 		_markerFriendlyRebs setMarkerShape "ICON";
 		_markerFriendlyRebs setMarkerType "hd_dot";
-		_markerFriendlyRebs setMarkerText "Occupied by friendly rebels";
+		_markerFriendlyRebs setMarkerText (localize "STR_TRGM2_trendFunctions_OccupiedByFriendRebel");
 	};
 
 	if (selectRandom [true,false]) then {
@@ -723,10 +723,10 @@ TREND_fnc_PopulateSideMission = {
 
 			if (_bHightlightIEDTests) then {
 				_test = nil;
-				_test = createMarker [format["IEDMrk%1%2%3",_inf1X,_inf1Y,_iCount], _flatPos];  
-				_test setMarkerShape "ICON";  
-				_test setMarkerType "hd_dot";  
-				_test setMarkerText "IED"; 
+				_test = createMarker [format["IEDMrk%1%2%3",_inf1X,_inf1Y,_iCount], _flatPos];
+				_test setMarkerShape "ICON";
+				_test setMarkerType "hd_dot";
+				_test setMarkerText "IED";
 			};
 
 			_iCount = _iCount + 1;
@@ -748,17 +748,17 @@ TREND_fnc_PopulateSideMission = {
 		if (isNil "_nearestRoad") then {
 			//_bInfor1Found = false;
 		}
-		else {							
+		else {
 			_roadConnectedTo = roadsConnectedTo _nearestRoad;
 			if (count _roadConnectedTo > 0) then {
 				_objAT = nil;
 				_objAT = selectRandom ATMinesClassNames createVehicle getPosATL _nearestRoad;
 
 				//_test = nil;
-				//_test = createMarker [format["ATMrk%1%2%3",_inf1X,_inf1Y,_iCount], getPosATL _nearestRoad];  
-				//_test setMarkerShape "ICON";  
-				//_test setMarkerType "hd_dot";  
-				//_test setMarkerText "AT MINE"; 
+				//_test = createMarker [format["ATMrk%1%2%3",_inf1X,_inf1Y,_iCount], getPosATL _nearestRoad];
+				//_test setMarkerShape "ICON";
+				//_test setMarkerType "hd_dot";
+				//_test setMarkerText "AT MINE";
 
 			}
 			else {
@@ -783,31 +783,33 @@ TREND_fnc_SpawnCivs = {
 	_randBuilding = nil;
 
 	_bAllCivsBad = selectRandom [true,false,false,false];
-	
+
 	_bRebelLeaderPicked = false;
 	while {_iCount <= _unitCount} do
-	{		
+	{
 		//spanwn civ in random building pos
 		_randBuilding = selectRandom _allBuildings;
 		_sInitString = "";
 		//_sCivUniform = selectRandom civUniformClasses;
-		
+
 		if (selectRandom[true,false,false,false,false]) then {
+
 			if (_bIsRebels) then {				
 					//_sInitString = format["this execVM ""RandFramework\BadReb.sqf""; this forceAddUniform ""%1""; removeHeadgear this; Removevest this;",_sCivUniform];		
 					_sInitString = "this execVM ""RandFramework\BadReb.sqf"";";		
+
 			}
 			else {
 				//_sInitString = format["[this] spawn TRGM_fnc_badCivInitialize; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
 				//_sInitString = format["this execVM ""RandFramework\BadCiv.sqf""; this addaction [""Search Civ"",""RandFramework\SearchCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
-				_sInitString = "this execVM ""RandFramework\BadCiv.sqf""; this addaction [""Search Civ"",""RandFramework\SearchCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; removeHeadgear this;Removevest this;";
+				_sInitString = "this execVM ""RandFramework\BadCiv.sqf""; this addaction [localize ""STR_TRGM2_civillians_fnbadCivAddSearchAction_Button"",""RandFramework\SearchCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; removeHeadgear this;Removevest this;";
 			};
 		}
 		else {
 			if (_bIsRebels) then {
 				if (!_bRebelLeaderPicked) then {
 					//_sInitString = format["this addaction [""Talk to leader"",""RandFramework\TalkRebLead.sqf"", nil,1.5,true,true,"""",""true"",5]; this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; this forceAddUniform ""%1""; removeHeadgear this;",_sCivUniform];
-					_sInitString = "this addaction [""Talk to leader"",""RandFramework\TalkRebLead.sqf"", nil,1.5,true,true,"""",""true"",5]; this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; removeHeadgear this;";
+					_sInitString = "this addaction [localize ""STR_TRGM2_trendFunctions_TalkToLeader"",""RandFramework\TalkRebLead.sqf"", nil,1.5,true,true,"""",""true"",5]; this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; removeHeadgear this;";
 					_bRebelLeaderPicked = true;
 				}
 				else {
@@ -817,12 +819,12 @@ TREND_fnc_SpawnCivs = {
 			}
 			else {
 				//_sInitString = format["this addEventHandler [""killed"", {_this execVM ""RandFramework\CivKilled.sqf"";}]; this addaction [""Search Civ"",""RandFramework\SearchGoodCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
-				_sInitString = "this addEventHandler [""killed"", {_this execVM ""RandFramework\CivKilled.sqf"";}]; this addaction [""Search Civ"",""RandFramework\SearchGoodCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; removeHeadgear this;Removevest this;";
+				_sInitString = "this addEventHandler [""killed"", {_this execVM ""RandFramework\CivKilled.sqf"";}]; this addaction [localize ""STR_TRGM2_civillians_fnbadCivAddSearchAction_Button"",""RandFramework\SearchGoodCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; removeHeadgear this;Removevest this;";
 			};
 		};
 		_sideCivGroup = nil;
 		if (_bIsRebels) then {
-			_sideCivGroup = createGroup west; 
+			_sideCivGroup = createGroup west;
 		}
 		else {
 			_sideCivGroup = createGroup Civilian;
@@ -836,9 +838,9 @@ TREND_fnc_SpawnCivs = {
 				_SpawnedRifleman = (_sideCivGroup createUnit [sRiflemanFriendInsurg, _wayPosInit, [], 10, "NONE"]);
 				[_SpawnedRifleman] joinSilent (_sideCivGroup);
 				if (!_bRebelLeaderPicked) then {
-					_SpawnedRifleman addaction ["Talk to leader","RandFramework\TalkRebLead.sqf"];
+					_SpawnedRifleman addaction [localize "STR_TRGM2_trendFunctions_TalkToLeader","RandFramework\TalkRebLead.sqf"];
 					_SpawnedRifleman addEventHandler ["killed", {_this execVM "RandFramework\InsKilled.sqf";}];
-					//_SpawnedRifleman forceAddUniform _sCivUniform; 
+					//_SpawnedRifleman forceAddUniform _sCivUniform;
 					removeHeadgear _SpawnedRifleman;
 					_bRebelLeaderPicked = true;
 				}
@@ -846,13 +848,15 @@ TREND_fnc_SpawnCivs = {
 					//_sInitString = format["this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
 					_sInitString = "this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; removeHeadgear this;Removevest this;";
 					_SpawnedRifleman addEventHandler ["killed", {_this execVM "RandFramework\InsKilled.sqf";}];
+
 					_SpawnedRifleman execVM "RandFramework\BadReb.sqf";
+
 					Removevest _SpawnedRifleman;
 					removeHeadgear _SpawnedRifleman;
 					_SpawnedRifleman setVariable ["IsRebel", true, true];
 					_bRebelLeaderPicked = true;
 				};
-				
+
 			};
 		}
 		else {
@@ -869,9 +873,9 @@ TREND_fnc_SpawnCivs = {
 		//set waypoints to other buildings
 		_iCountWaypoints = 0;
 		while {_iCountWaypoints <= count _allBuildings} do
-		{	
+		{
 			_randBuilding2 = selectRandom _allBuildings; //pick one building from our buildings array
-			_allBuildingPos2 = _randBuilding2 buildingPos -1; 
+			_allBuildingPos2 = _randBuilding2 buildingPos -1;
 
 			_wpSideCiv = nil;
 			//_wpSideCiv = _sideCivGroup addWaypoint [_randBuilding2 buildingPos (selectRandom _allBuildingPos2), 0]; //This line has error "0 eleemnts provided, 3 expected"
@@ -881,7 +885,7 @@ TREND_fnc_SpawnCivs = {
 				if (!isNil "_wayPosInit") then {
 					_wpSideCiv = _sideCivGroup addWaypoint [_wayPosInit, 0]; //This line has error "0 eleemnts provided, 3 expected"
 				}
-				
+
 			}
 			catch {
 				hint format ["Script issue: %1",selectRandom _allBuildingPos2];
@@ -917,12 +921,12 @@ TREND_fnc_OccupyHouses = {
 		{
 			_allBuildings = nearestObjects [_sidePos, ["house"], _distFromCent];
 			_randBuilding = selectRandom _allBuildings;
-			
+
 			_thisGroup = nil;
 			_thisGroup = createGroup _InsurgentSide;
 			sRiflemanToUse createUnit [position _randBuilding, _thisGroup];
 			sRiflemanToUse createUnit [position _randBuilding, _thisGroup, "[getPosATL this, units group this, -1, false, false] execVM ""RandFramework\Zen_OccupyHouse.sqf"";"];
-					
+
 			_iCountNoOfCPs = selectRandom[0,0,0,0,1];
 			if ((_sidePos distance _randBuilding) > 400) then {_iCountNoOfCPs = selectRandom[0,0,1];};
 			//spawn inner random sentrys
@@ -934,12 +938,12 @@ TREND_fnc_OccupyHouses = {
 				_iCountNoOfCPs = _iCountNoOfCPs - 1;
 				_flatPos = nil;
 				_flatPos = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,CheckPointAreas + SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-		
+
 
 				if (_flatPos select 0 > 0) then {
 					_thisPosAreaOfCheckpoint = _flatPos;
 					_thisRoadOnly = false;
-					_thisSide = east; 
+					_thisSide = east;
 					_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 					_thisAllowBarakade = selectRandom [false];
 					_thisIsDirectionAwayFromAO = true;
@@ -978,7 +982,7 @@ TREND_fnc_RadiusPatrol = {
 	_wp4bPos = Nil;
 	_wp5Pos = Nil;
 
-	_group = createGroup _InsurgentSide; 
+	_group = createGroup _InsurgentSide;
 	_wayX = (_sidePos select 0);
 	_wayY = (_sidePos select 1);
 
@@ -987,9 +991,9 @@ TREND_fnc_RadiusPatrol = {
 	_wp2Pos = [ _wayX + _distFromCent, _wayY - _distFromCent, 0];
 	_wp2bPos = [ _wayX, _wayY - _distFromCent, 0];
 	_wp3Pos = [ _wayX - _distFromCent, _wayY - _distFromCent, 0];
-	_wp3bPos = [ _wayX - _distFromCent, _wayY, 0];							
+	_wp3bPos = [ _wayX - _distFromCent, _wayY, 0];
 	_wp4Pos = [ _wayX - _distFromCent, _wayY + _distFromCent, 0];
-	_wp4bPos = [ _wayX, _wayY + _distFromCent, 0];							
+	_wp4bPos = [ _wayX, _wayY + _distFromCent, 0];
 	_wp5Pos = [ _wayX + _distFromCent, _wayY + _distFromCent, 0];
 
 	//Adjust waypoints so they are not in water
@@ -1013,7 +1017,7 @@ TREND_fnc_RadiusPatrol = {
 	while {surfaceIsWater _wp4Pos} do {
 		_wp4Pos = [ _wayX - (_distFromCent - _iToReduce), _wayY + (_distFromCent - _iToReduce), 0];
 		_iToReduce = _iToReduce + 10;
-	};		
+	};
 	_iToReduce = 10;
 	while {surfaceIsWater _wp1bPos} do {
 		_wp1bPos = [ _wayX + (_distFromCent - _iToReduce), _wayY, 0];
@@ -1026,7 +1030,7 @@ TREND_fnc_RadiusPatrol = {
 	};
 	_iToReduce = 10;
 	while {surfaceIsWater _wp3bPos} do {
-		_wp3bPos = [ _wayX - (_distFromCent - _iToReduce), _wayY, 0];		
+		_wp3bPos = [ _wayX - (_distFromCent - _iToReduce), _wayY, 0];
 		_iToReduce = _iToReduce + 10;
 	};
 	_iToReduce = 10;
@@ -1048,7 +1052,7 @@ TREND_fnc_RadiusPatrol = {
 	_iWaypointCount = selectRandom[1,2,3,4,5,6,7,8,9];
 	_bWaypointsAdded = false;
 	_iWaypointLoopCount = 1;
-	while {!_bWaypointsAdded} do {	
+	while {!_bWaypointsAdded} do {
 		if (_iWaypointCount == 1) then {
 			_wp1 = _group addWaypoint [_wp1Pos, 0];
 			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp1Pos)],_wp1Pos] spawn TRGM_fnc_debugDotMarker;};
@@ -1087,16 +1091,16 @@ TREND_fnc_RadiusPatrol = {
 		};
 		_iWaypointCount = _iWaypointCount + 1;
 		_iWaypointLoopCount = _iWaypointLoopCount + 1;
-					
+
 		if (_iWaypointLoopCount == 10) then {
 			_bWaypointsAdded = true;
 		};
-					
+
 		if (_iWaypointCount == 10) then {
 			_iWaypointCount = 1;
-		};	
-									
-	};		
+		};
+
+	};
 	[_group, 0] setWaypointSpeed "LIMITED";
 	[_group, 0] setWaypointBehaviour "SAFE";
 	[_group, 1] setWaypointSpeed "LIMITED";
@@ -1120,9 +1124,9 @@ TREND_fnc_BuildingPatrol = {
 	_group = Nil;
 	_wayX = Nil;
 	_wayY = Nil;
-	_group = createGroup _InsurgentSide; 
+	_group = createGroup _InsurgentSide;
 
-	
+
 	_flatPos = nil;
 	_flatPos = [_sidePos , 100, _distFromCent, 4, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 	_wayX = (_flatPos select 0);
@@ -1142,9 +1146,9 @@ TREND_fnc_BuildingPatrol = {
 	//set waypoints to other buildings
 	_iCountWaypoints = 0;
 	while {_iCountWaypoints <= _buildingCount} do
-	{	
+	{
 		_randBuilding2 = selectRandom _allBuildings; //pick one building from our buildings array
-		_allBuildingPos2 = _randBuilding2 buildingPos -1; 
+		_allBuildingPos2 = _randBuilding2 buildingPos -1;
 
 		_wpSideBuildingPatrol = nil;
 		try {
@@ -1152,7 +1156,7 @@ TREND_fnc_BuildingPatrol = {
 			if (!isNil "_wayPosInit") then {
 				_wpSideBuildingPatrol = _group addWaypoint [_wayPosInit, 0]; //This line has error "0 eleemnts provided, 3 expected"
 			}
-				
+
 		}
 		catch {
 			hint format ["Script issue: %1",selectRandom _allBuildingPos2];
@@ -1192,7 +1196,7 @@ TREND_fnc_BackForthPatrol = {
 	_wp4bPos = Nil;
 	_wp5Pos = Nil;
 
-	_group = createGroup _InsurgentSide; 
+	_group = createGroup _InsurgentSide;
 	_wayX = (_sidePos select 0);
 	_wayY = (_sidePos select 1);
 
@@ -1201,9 +1205,9 @@ TREND_fnc_BackForthPatrol = {
 	_wp2Pos = [ _wayX, _wayY - _distFromCent, 0];
 	_wp2bPos = [ _wayX, _wayY, 0];
 	_wp3Pos = [ _wayX - _distFromCent, _wayY, 0];
-	_wp3bPos = [ _wayX, _wayY, 0];							
+	_wp3bPos = [ _wayX, _wayY, 0];
 	_wp4Pos = [ _wayX - _distFromCent, _wayY + _distFromCent, 0];
-	_wp4bPos = [ _wayX, _wayY, 0];							
+	_wp4bPos = [ _wayX, _wayY, 0];
 	_wp5Pos = [ _wayX + _distFromCent, _wayY + _distFromCent, 0];
 
 	//Adjust waypoints so they are not in water
@@ -1227,7 +1231,7 @@ TREND_fnc_BackForthPatrol = {
 	while {surfaceIsWater _wp4Pos} do {
 		_wp4Pos = [ _wayX - (_distFromCent - _iToReduce), _wayY + (_distFromCent - _iToReduce), 0];
 		_iToReduce = _iToReduce + 10;
-	};		
+	};
 	_iToReduce = 10;
 	while {surfaceIsWater _wp1bPos} do {
 		_wp1bPos = [ _wayX + (_distFromCent - _iToReduce), _wayY, 0];
@@ -1240,7 +1244,7 @@ TREND_fnc_BackForthPatrol = {
 	};
 	_iToReduce = 10;
 	while {surfaceIsWater _wp3bPos} do {
-		_wp3bPos = [ _wayX - (_distFromCent - _iToReduce), _wayY, 0];		
+		_wp3bPos = [ _wayX - (_distFromCent - _iToReduce), _wayY, 0];
 		_iToReduce = _iToReduce + 10;
 	};
 	_iToReduce = 10;
@@ -1262,7 +1266,7 @@ TREND_fnc_BackForthPatrol = {
 	_iWaypointCount = selectRandom[1,2,3,4,5,6,7,8,9];
 	_bWaypointsAdded = false;
 	_iWaypointLoopCount = 1;
-	while {!_bWaypointsAdded} do {	
+	while {!_bWaypointsAdded} do {
 		if (_iWaypointCount == 1) then {
 			_wp1 = _group addWaypoint [_wp1Pos, 0];
 			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp1Pos)],_wp1Pos] spawn TRGM_fnc_debugDotMarker;};
@@ -1301,16 +1305,16 @@ TREND_fnc_BackForthPatrol = {
 		};
 		_iWaypointCount = _iWaypointCount + 1;
 		_iWaypointLoopCount = _iWaypointLoopCount + 1;
-					
+
 		if (_iWaypointLoopCount == 10) then {
 			_bWaypointsAdded = true;
 		};
-					
+
 		if (_iWaypointCount == 10) then {
 			_iWaypointCount = 1;
-		};	
-									
-	};		
+		};
+
+	};
 	[_group, 0] setWaypointSpeed "LIMITED";
 	[_group, 0] setWaypointBehaviour "SAFE";
 	[_group, 1] setWaypointSpeed "LIMITED";

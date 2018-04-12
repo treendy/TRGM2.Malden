@@ -1,0 +1,2567 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project name="TRGM2_Language">
+	<Package name="RootFolder">
+		<Container name="Description">
+			<Key ID="STR_TRGM2_Description_OnLoadIntro">
+				<Original>Mission by Treendy</Original>
+				<English>Mission by Treendy</English>
+                <Chinese>任務由Treendy製作</Chinese>
+                <Chinesesimp>任务由Treendy制作</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_overviewText">
+				<Original>Treendy's Randomly Generated Missions.  Each play through will be different in many ways.  Also option to play in campaign mode and customise some of the mission settings.</Original>
+				<English>Treendy's Randomly Generated Missions.  Each play through will be different in many ways.  Also option to play in campaign mode and customise some of the mission settings.</English>
+                <Chinese>Treendy的隨機生成任務。每次遊玩都將獲得不一樣的體驗。可以使用戰役模式遊玩，任務也可給使用者自訂各種難易度。</Chinese>
+                <Chinesesimp>Treendy的随机生成任务。每次游玩都将获得不一样的体验。可以使用战役模式游玩，任务也可给使用者自订各种难易度。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_Debriefing_End_Success">
+				<Original>Success</Original>
+				<English>Success</English>
+                <Chinese>成功</Chinese>
+                <Chinesesimp>成功</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_Debriefing_End_Fail">
+				<Original>Fail</Original>
+				<English>Fail</English>
+                <Chinese>失敗</Chinese>
+                <Chinesesimp>失败</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_Debriefing_End_ToBeContinued">
+				<Original>To be continued</Original>
+				<English>To be continued</English>
+                <Chinese>下集待續</Chinese>
+                <Chinesesimp>下集待续</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_Debriefing_End1_Description">
+				<Original>Well done, Mission success!</Original>
+				<English>Well done, Mission success!</English>
+                <Chinese>幹的好，任務順利達成!</Chinese>
+                <Chinesesimp>干的好，任务顺利达成!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_Debriefing_End2_Description">
+				<Original>Your team killed too many civilians.  The officer in charge of this mission and the units who killed any civilians will need to attend a court hearing regarding these deaths!.</Original>
+				<English>Your team killed too many civilians.  The officer in charge of this mission and the units who killed any civilians will need to attend a court hearing regarding these deaths!.</English>
+                <Chinese>你的小隊擊殺了過多的平民。負責此次行動的帶隊官與擊殺平民的隊員將面臨軍事法庭的審判!</Chinese>
+                <Chinesesimp>你的小队击杀了过多的平民。负责此次行动的带队官与击杀平民的队员将面临军事法庭的审判!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_Debriefing_End3_Description">
+				<Original>Everyone was killed! maybe try to avoid that next time?</Original>
+				<English>Everyone was killed! maybe try to avoid that next time?</English>
+                <Chinese>所有人皆已陣亡!下次試著換個方法看看?</Chinese>
+                <Chinesesimp>所有人皆已阵亡!下次试着换个方法看看?</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_Debriefing_End4_Description">
+				<Original>To be continued another day...</Original>
+				<English>To be continued another day...</English>
+                <Chinese>欲知詳情，下回分曉...</Chinese>
+                <Chinesesimp>欲知详情，下回分晓...</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_RadioSubtitle_chopperspotted">
+				<Original>All teams, this is HQ, We are seeing something moveing into your location, possible enemy chopper. out.</Original>
+				<English>All teams, this is HQ, We are seeing something moveing into your location, possible enemy chopper. out.</English>
+                <Chinese>通告所有小隊，這裡是總部，我們發現到有物體正在靠近你們的位置中，推測應為敵人的直升機。完畢。</Chinese>
+                <Chinesesimp>通告所有小队，这里是总部，我们发现到有物体正在靠近你们的位置中，推测应为敌人的直升机。完毕。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_RadioSubtitle_FastMoverSpotted">
+				<Original>All teams, this is HQ, We have picked up a fast mover on our radar, moving into the area. out.</Original>
+				<English>All teams, this is HQ, We have picked up a fast mover on our radar, moving into the area. out.</English>
+                <Chinese>通告所有小隊，這裡是總部，我們在雷達上發現一台飛機正在靠近任務區域。完畢。</Chinese>
+                <Chinesesimp>通告所有小队，这里是总部，我们在雷达上发现一台飞机正在靠近任务区域。完毕。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_RadioSubtitle_EnemyCommsDown">
+				<Original>All team.  This is HQ, good work taking down the enemy comms tower.  We have intel confirming the enemy are trying to figure out how to fix this issue! Out.</Original>
+				<English>All team.  This is HQ, good work taking down the enemy comms tower.  We have intel confirming the enemy are trying to figure out how to fix this issue! Out.</English>
+                <Chinese>通告所有小隊，這裡是總部，恭喜你們拿下敵人的通訊塔。根據我們的情報顯示，敵人現在正為了這個問題大傷腦筋!完畢。</Chinese>
+                <Chinesesimp>通告所有小队，这里是总部，恭喜你们拿下敌人的通讯塔。根据我们的情报显示，敌人现在正为了这个问题大伤脑筋!完毕。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_RadioSubtitle_EnemyBaseIntel">
+				<Original>This is HQ.  We have gathered the intel found at the enemy base and have managed to locate the exact position of your targets.  Check your map for the red dots for the target locations.</Original>
+				<English>This is HQ.  We have gathered the intel found at the enemy base and have managed to locate the exact position of your targets.  Check your map for the red dots for the target locations.</English>
+                <Chinese>這裡是總部。我們從敵方基地裡的情報整理出你們目標的確切位置。已經在你們的地圖上使用紅色點標記出目標點，請查閱。</Chinese>
+                <Chinesesimp>这里是总部。我们从敌方基地里的情报整理出你们目标的确切位置。已经在你们的地图上使用红色点标记出目标点，请查阅。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_RadioSubtitle_LocationFound">
+				<Original>This is HQ.  We have just had intel of the exact location of one of the objectives, check your map for the red marker near the suspected location.  Out.</Original>
+				<English>This is HQ.  We have just had intel of the exact location of one of the objectives, check your map for the red marker near the suspected location.  Out.</English>
+                <Chinese>這裡是總部。我們剛剛掌握到其中一個目標的確切位置，已經在你們的地圖上使用紅色的標記畫出推定的區域。完畢。</Chinese>
+                <Chinesesimp>这里是总部。我们刚刚掌握到其中一个目标的确切位置，已经在你们的地图上使用红色的标记画出推定的区域。完毕。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_RadioSubtitle_takeoff">
+				<Original>Pegasus 2-1 you are clear to take off.</Original>
+				<English>Pegasus 2-1 you are clear to take off.</English>
+                <Chinese>飛馬2-1，你們可以起飛了。</Chinese>
+                <Chinesesimp>飞马2-1，你们可以起飞了。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Description_RadioSubtitle_land">
+				<Original>Pegasus 2-1 landing.</Original>
+				<English>Pegasus 2-1 landing.</English>
+                <Chinese>飛馬2-1正在降落。</Chinese>
+                <Chinesesimp>飞马2-1正在降落。</Chinesesimp>
+			</Key>
+		</Container>
+		<Container name="Init">
+			<Key ID="STR_TRGM2_Init_TRGM2Engine">
+				<Original>TRGM2 Engine</Original>
+				<English>TRGM2 Engine</English>
+                <Chinese>TRGM2引擎</Chinese>
+                <Chinesesimp>TRGM2引擎</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Init_Mission">
+				<Original>Mission</Original>
+				<English>Mission</English>
+                <Chinese>任務</Chinese>
+                <Chinesesimp>任务</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Init_Credits">
+				<Original>Credits</Original>
+				<English>Credits</English>
+                <Chinese>工作人員名單</Chinese>
+                <Chinesesimp>工作人员名单</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Init_ScriptsUsed">
+				<Original>Scripts used</Original>
+				<English>Scripts used</English>
+                <Chinese>使用的腳本</Chinese>
+                <Chinesesimp>使用的脚本</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Init_MarkerText_HQ">
+				<Original>Head Quarters</Original>
+				<English>Head Quarters</English>
+                <Chinese>司令部</Chinese>
+                <Chinesesimp>司令部</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_Init_MarkerText_TransportChopper">
+				<Original>Transport Chopper</Original>
+				<English>Transport Chopper</English>
+                <Chinese>運輸直升機</Chinese>
+                <Chinesesimp>运输直升机</Chinesesimp>
+			</Key>
+		</Container>
+	</Package>
+	<Package name="RandFrameworkFolder">
+		<Container name="Root">
+			<Key ID="STR_TRGM2_AirSupportRequested_Text">
+				<Original>Air support requested</Original>
+				<English>Air support requested</English>
+                <Chinese>已請求空中支援</Chinese>
+                <Chinesesimp>已请求空中支援</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_attemptendmission_Kilo1">
+				<Original>The Kilo-1 teamleader needs to select this</Original>
+				<English>The Kilo-1 teamleader needs to select this</English>
+                <Chinese>Kilo-1的隊長必需選擇這個</Chinese>
+                <Chinesesimp>Kilo-1的队长必需选择这个</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_attemptendmission_Kilo2">
+				<Original>The Kilo-2 teamleader needs to select this</Original>
+				<English>The Kilo-2 teamleader needs to select this</English>
+                <Chinese>Kilo-2的隊長必需選擇這個</Chinese>
+                <Chinesesimp>Kilo-2的队长必需选择这个</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_attemptendmission_Ending">
+				<Original>Mission Ending...</Original>
+				<English>Mission Ending...</English>
+                <Chinese>任務結束中...</Chinese>
+                <Chinesesimp>任务结束中...</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_Attached">
+				<Original>There is still something attached</Original>
+				<English>There is still something attached</English>
+                <Chinese>仍有些東西被掛載中</Chinese>
+                <Chinesesimp>仍有些东西被挂载中</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_NoNear">
+				<Original>no near vehicles</Original>
+				<English>no near vehicles</English>
+                <Chinese>沒有靠近的載具</Chinese>
+                <Chinesesimp>没有靠近的载具</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_NoValid">
+				<Original>no valid sling targets</Original>
+				<English>no valid sling targets</English>
+                <Chinese>沒有可用的吊掛目標</Chinese>
+                <Chinesesimp>没有可用的吊挂目标</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_CantCarry">
+				<Original>can't carry dead objects</Original>
+				<English>can't carry dead objects</English>
+                <Chinese>無法攜帶已經陣亡的目標</Chinese>
+                <Chinesesimp>无法携带已经阵亡的目标</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_SlingLoad">
+				<Original>&lt;t color='#FF0000'&gt;Sling Load %1&lt;/t&gt;</Original>
+				<English>&lt;t color='#FF0000'&gt;Sling Load %1&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#FF0000'&gt;吊掛%1&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#FF0000'&gt;吊挂%1&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_UnableToSling">
+				<Original>&lt;t color='#FF0000'&gt;Unable to Sling&lt;/t&gt;</Original>
+				<English>&lt;t color='#FF0000'&gt;Unable to Sling&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#FF0000'&gt;無法吊掛&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#FF0000'&gt;无法吊挂&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_Detach">
+				<Original>&lt;t color='#FF0000'&gt;Detach %1&lt;/t&gt;</Original>
+				<English>&lt;t color='#FF0000'&gt;Detach %1&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#FF0000'&gt;卸載%1&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#FF0000'&gt;卸载%1&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_DetachLoad">
+				<Original>&lt;t color='#FF0000'&gt;Detach Load&lt;/t&gt;</Original>
+				<English>&lt;t color='#FF0000'&gt;Detach Load&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#FF0000'&gt;卸載貨物&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#FF0000'&gt;卸载货物&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_auxslingloading_Init">
+				<Original>Auxiliary Sling Loading: Initialized</Original>
+				<English>Auxiliary Sling Loading: Initialized</English>
+                <Chinese>輔助吊掛系統: 初始化完成</Chinese>
+                <Chinesesimp>辅助吊挂系统: 初始化完成</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_bugRadio1_HQLisen">
+				<Original>HQ are listening in, stand by...</Original>
+				<English>HQ are listening in, stand by...</English>
+                <Chinese>總部正在收聽，請稍待...</Chinese>
+                <Chinesesimp>总部正在收听，请稍待...</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_bugRadio1_MapUpdated">
+				<Original>Map updated with main AO location</Original>
+				<English>Map updated with main AO location</English>
+                <Chinese>地圖標記已更新，請查閱行動區域</Chinese>
+                <Chinesesimp>地图标记已更新，请查阅行动区域</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_callUAVFindObjective_UAVInbound">
+				<Original>UAV inbound, eta 10 seconds</Original>
+				<English>UAV inbound, eta 10 seconds</English>
+                <Chinese>UAV進場中，10秒後抵達</Chinese>
+                <Chinesesimp>UAV进场中，10秒后抵达</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_callUAVFindObjective_UAVScanned">
+				<Original>UAV has scanned area, target location marked, UAV is RTB</Original>
+				<English>UAV has scanned area, target location marked, UAV is RTB</English>
+                <Chinese>UAV掃描完畢，已確認目標位置，UAV開始返航</Chinese>
+                <Chinesesimp>UAV扫描完毕，已确认目标位置，UAV开始返航</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_callUAVFindObjective_HVTLocation">
+				<Original>HVT Location</Original>
+				<English>HVT Location</English>
+                <Chinese>高價值目標位置</Chinese>
+                <Chinesesimp>高价值目标位置</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_checkForComms_GotEnemySignal">
+				<Original>You are picking up enemy comms from this tower!</Original>
+				<English>You are picking up enemy comms from this tower!</English>
+                <Chinese>你正在從這個塔台接收敵人的通訊信號!</Chinese>
+                <Chinesesimp>你正在从这个塔台接收敌人的通讯信号!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_checkForComms_NoEnemySignal">
+				<Original>Nothing of interest from this tower</Original>
+				<English>Nothing of interest from this tower</English>
+                <Chinese>這個塔台並沒有些有趣的信號</Chinese>
+                <Chinesesimp>这个塔台并没有些有趣的信号</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_CivKilled_Text">
+				<Original>Civ Killed by %1</Original>
+				<English>Civ Killed by %1</English>
+                <Chinese>平民已被%1擊殺</Chinese>
+                <Chinesesimp>平民已被%1击杀</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_downloadResearchData_DataSecured">
+				<Original>Data secured, reputation increased</Original>
+				<English>Data secured, reputation increased</English>
+                <Chinese>資料確保完成，已提高聲譽</Chinese>
+                <Chinesesimp>资料确保完成，已提高声誉</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fireArti_InvalidGrid">
+				<Original>Invalid grid ref, enter 3,4 or 5 digits in each box</Original>
+				<English>Invalid grid ref, enter 3,4 or 5 digits in each box</English>
+                <Chinese>座標格式錯誤，請輸入3、4或5碼的座標格式在欄位中</Chinese>
+                <Chinesesimp>座标格式错误，请输入3、4或5码的座标格式在栏位中</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fireArti_ArtiRequested">
+				<Original>Arti requested\ntarget: %1,%2, \nETA: %3 once round confirmed\nplease stand by</Original>
+				<English>Arti requested\ntarget: %1,%2, \nETA: %3 once round confirmed\nplease stand by</English>
+                <Chinese>已收到火力任務\n目標: %1 %2，\n預計彈著時間: 首發擊發後%3秒\n請稍待</Chinese>
+                <Chinesesimp>已收到火力任务\n目标: %1 %2，\n预计弹着时间: 首发击发后%3秒\n请稍待</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_getArtiETA_ETA">
+				<Original>Arti ETA: %1</Original>
+				<English>Arti ETA: %1</English>
+                <Chinese>預計彈著時間: %1</Chinese>
+                <Chinesesimp>预计弹着时间: %1</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_IdentifyHVT_Confirmed">
+				<Original>ID confirmed, this is our target!</Original>
+				<English>ID confirmed, this is our target!</English>
+                <Chinese>已確認身分，這就是我們的目標!</Chinese>
+                <Chinesesimp>已确认身分，这就是我们的目标!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_InsKilled_RebelKilled">
+				<Original>Friendly Rebel Killed by %1</Original>
+				<English>Friendly Rebel Killed by %1</English>
+                <Chinese>友方反抗軍已被%1擊殺</Chinese>
+                <Chinesesimp>友方反抗军已被%1击杀</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_interrogateOfficer_Muppet">
+				<Original>He is dead you muppet!</Original>
+				<English>He is dead you muppet!</English>
+                <Chinese>他已經死了，你這個白癡!</Chinese>
+                <Chinesesimp>他已经死了，你这个白痴!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_interrogateOfficer_MapIntel">
+				<Original>Map updated with intel found</Original>
+				<English>Map updated with intel found</English>
+                <Chinese>地圖已由被找到的情報所更新</Chinese>
+                <Chinesesimp>地图已由被找到的情报所更新</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_interrogateOfficer_DeadGuy">
+				<Original>Not quite sure why, but for some reason this dead guy isnt speaking!!!</Original>
+				<English>Not quite sure why, but for some reason this dead guy isnt speaking!!!</English>
+                <Chinese>不大確定是為什麼，但這個死人並不會說話!</Chinese>
+                <Chinesesimp>不大确定是为什么，但这个死人并不会说话!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_mainInit_Loading">
+				<Original>Loading mission...</Original>
+				<English>Loading mission...</English>
+                <Chinese>載入任務中...</Chinese>
+                <Chinesesimp>载入任务中...</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_mainInit_ErrorClassExist">
+				<Original>\nClass doesnt exist: %1 - class: %2 </Original>
+				<English>\nClass doesnt exist: %1 - class: %2 </English>
+                <Chinese>\n類別並不存在: %1 - 類別: %2 </Chinese>
+                <Chinesesimp>\n类别并不存在: %1 - 类别: %2 </Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_mainInit_ErrorClassEmpty">
+				<Original>\nClass is empty: %1 - class: %2 </Original>
+				<English>\nClass is empty: %1 - class: %2 </English>
+                <Chinese>\n類別為空: %1 - 類別: %2 </Chinese>
+                <Chinesesimp>\n类别为空: %1 - 类别: %2 </Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_mainInit_Debrief">
+				<Original>Return to HQ to debrief</Original>
+				<English>Return to HQ to debrief</English>
+                <Chinese>返回總部進行匯報</Chinese>
+                <Chinesesimp>返回总部进行汇报</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_mainInit_ReputationDropped">
+				<Original>Your reputation has dropped.  Team rank now: </Original>
+				<English>Your reputation has dropped.  Team rank now: </English>
+                <Chinese>你們的聲譽已下降。隊伍當前的聲譽:</Chinese>
+                <Chinesesimp>你们的声誉已下降。队伍当前的声誉:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_mainInit_ReputationIncreased">
+				<Original>Your reputation has increased.  Team rank now: </Original>
+				<English>Your reputation has increased.  Team rank now: </English>
+                <Chinese>你們的聲譽已提高。隊伍當前的聲譽:</Chinese>
+                <Chinesesimp>你们的声誉已提高。队伍当前的声誉:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_mainInit_ReputationText">
+				<Original>Check the notice board at base for your report</Original>
+				<English>Check the notice board at base for your report</English>
+                <Chinese>在基地的公告版可獲得更詳細的報告</Chinese>
+                <Chinesesimp>在基地的公告版可获得更详细的报告</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_minedetector_MineReportFormat">
+				<Original>Mine = %4\nDistance = %1\nTime Until Next Beep =  %2\nPitch = %3</Original>
+				<English>Mine = %4\nDistance = %1\nTime Until Next Beep =  %2\nPitch = %3</English>
+                <Chinese>地雷 = %4\n距離 = %1\n下個逼逼聲時間 =  %2\n音調 = %3</Chinese>
+                <Chinesesimp>地雷 = %4\n距离 = %1\n下个逼逼声时间 =  %2\n音调 = %3</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_minedetector_StopMineDetector">
+				<Original>&lt;t color='#FF0000'&gt;Stop MineDetector&lt;/t&gt;</Original>
+				<English>&lt;t color='#FF0000'&gt;Stop MineDetector&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#FF0000'&gt;停用掃雷器&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#FF0000'&gt;停用扫雷器&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_minedetector_UseMineDetector">
+				<Original>&lt;t color='#FF0000'&gt;Use MineDetector&lt;/t&gt;</Original>
+				<English>&lt;t color='#FF0000'&gt;Use MineDetector&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#FF0000'&gt;啟動掃雷器&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#FF0000'&gt;启动扫雷器&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_PushObject_PushEmpty">
+				<Original>Vehicle needs to be empty to push</Original>
+				<English>Vehicle needs to be empty to push</English>
+                <Chinese>在推動前必需先清空該載具</Chinese>
+                <Chinesesimp>在推动前必需先清空该载具</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SearchGoodCiv_Result1">
+				<Original>This civilian is ok.</Original>
+				<English>This civilian is ok.</English>
+                <Chinese>這個平民沒問題。</Chinese>
+                <Chinesesimp>这个平民没问题。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SearchGoodCiv_Result2">
+				<Original>This civilian is not a threat.</Original>
+				<English>This civilian is not a threat.</English>
+                <Chinese>這個平民不是個威脅。</Chinese>
+                <Chinesesimp>这个平民不是个威胁。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SearchGoodCiv_Result3">
+				<Original>You do not find anything.</Original>
+				<English>You do not find anything.</English>
+                <Chinese>你並沒有找到任何東西。</Chinese>
+                <Chinesesimp>你并没有找到任何东西。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_setCheckpoint_Ask">
+				<Original>Ask about the AO</Original>
+				<English>Ask about the AO</English>
+                <Chinese>詢問任務區內狀況</Chinese>
+                <Chinesesimp>询问任务区内状况</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_setCheckpoint_MarkerText">
+				<Original>Checkpoint</Original>
+				<English>Checkpoint</English>
+                <Chinese>檢查哨</Chinese>
+                <Chinesesimp>检查哨</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_NoIntel">
+				<Original>No intel to report</Original>
+				<English>No intel to report</English>
+                <Chinese>沒有要回報的情報</Chinese>
+                <Chinesesimp>没有要回报的情报</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_MortarMarker">
+				<Original>Mortar</Original>
+				<English>Mortar</English>
+                <Chinese>迫擊炮</Chinese>
+                <Chinesesimp>迫击炮</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_MortarMapUpdated">
+				<Original>Map updated with enemy mortar possitions (if any 3k within main AO)</Original>
+				<English>Map updated with enemy mortar possitions (if any 3k within main AO)</English>
+                <Chinese>已在地圖上標記出敵方的迫擊炮位置(任務區域附近3公里之內)</Chinese>
+                <Chinesesimp>已在地图上标记出敌方的迫击炮位置(任务区域附近3公里之内)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_MortarMapNoUpdate">
+				<Original>Intel confirms no mortar threat within 3k of main AO</Original>
+				<English>Intel confirms no mortar threat within 3k of main AO</English>
+                <Chinese>情報指出在任務區附近3公里的範圍內並無迫擊炮的威脅</Chinese>
+                <Chinesesimp>情报指出在任务区附近3公里的范围内并无迫击炮的威胁</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_AAAMarker">
+				<Original>AAA</Original>
+				<English>AAA</English>
+                <Chinese>高射炮</Chinese>
+                <Chinesesimp>高射炮</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_AAAMapUpdated">
+				<Original>Map updated with any enemy AAA possitions (if any 3k within main AO)</Original>
+				<English>Map updated with any enemy AAA possitions (if any 3k within main AO)</English>
+                <Chinese>已在地圖上標記出敵方的高射炮位置(任務區域附近3公里之內)</Chinese>
+                <Chinesesimp>已在地图上标记出敌方的高射炮位置(任务区域附近3公里之内)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_AAAMapNoUpdate">
+				<Original>Intel confirms no AAA threat within 3k of main AO</Original>
+				<English>Intel confirms no AAA threat within 3k of main AO</English>
+                <Chinese>情報指出在任務區附近3公里的範圍內並無高射炮的威脅</Chinese>
+                <Chinesesimp>情报指出在任务区附近3公里的范围内并无高射炮的威胁</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_CommsTowerMarker">
+				<Original>Comms Tower</Original>
+				<English>Comms Tower</English>
+                <Chinese>通訊塔</Chinese>
+                <Chinesesimp>通讯塔</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_CommsTowerMapUpdated">
+				<Original>Map updated with any enemy comms tower possitions (if any 3k within main AO)</Original>
+				<English>Map updated with any enemy comms tower possitions (if any 3k within main AO)</English>
+                <Chinese>已在地圖上標記出敵方的通訊塔位置(任務區域附近3公里之內)</Chinese>
+                <Chinesesimp>已在地图上标记出敌方的通讯塔位置(任务区域附近3公里之内)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_CommsTowerMapNoUpdate">
+				<Original>Enemy are not using any nearby comms towers!</Original>
+				<English>Enemy are not using any nearby comms towers!</English>
+                <Chinese>敵人並沒有在附近使用通訊塔!</Chinese>
+                <Chinesesimp>敌人并没有在附近使用通讯塔!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_CheckpointMapUpdated">
+				<Original>Take a look at your map.  location of enemy checkpoints that are within one click of the main AO have been marked</Original>
+				<English>Take a look at your map.  location of enemy checkpoints that are within one click of the main AO have been marked</English>
+                <Chinese>檢查下你的地圖。已標記出一個距離任務區域1公里遠的敵方檢查哨</Chinese>
+                <Chinesesimp>检查下你的地图。已标记出一个距离任务区域1公里远的敌方检查哨</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_showIntel_CheckpointMapNoUpdate">
+				<Original>We havent any intel of any checkpoints within a click of the main AO</Original>
+				<English>We havent any intel of any checkpoints within a click of the main AO</English>
+                <Chinese>我們並沒有任何情報指出在任務區1公里之內有敵方的檢查哨</Chinese>
+                <Chinesesimp>我们并没有任何情报指出在任务区1公里之内有敌方的检查哨</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_simpleEP_PutOn">
+				<Original>&lt;t color='#ffff33'&gt;Put on ear plugs&lt;/t&gt;</Original>
+				<English>&lt;t color='#ffff33'&gt;Put on ear plugs&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#ffff33'&gt;戴上耳塞&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#ffff33'&gt;戴上耳塞&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_simpleEP_TakeOff">
+				<Original>&lt;t color='#ffff33'&gt;Take off ear plugs&lt;/t&gt;</Original>
+				<English>&lt;t color='#ffff33'&gt;Take off ear plugs&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#ffff33'&gt;拿下耳塞&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#ffff33'&gt;拿下耳塞&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SpeakInformant_StartSpeak">
+				<Original>You start to talk to the informant...</Original>
+				<English>You start to talk to the informant...</English>
+                <Chinese>你開始跟線人交談...</Chinese>
+                <Chinesesimp>你开始跟线人交谈...</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SpeakToFriendlyCheckpoint_DontTell">
+				<Original>He doesnt seem to be saying much at this time</Original>
+				<English>He doesnt seem to be saying much at this time</English>
+                <Chinese>目前他似乎沒有要說些什麼</Chinese>
+                <Chinesesimp>目前他似乎没有要说些什么</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle1">
+				<Original>Hack Data</Original>
+				<English>Hack Data</English>
+                <Chinese>駭取資料</Chinese>
+                <Chinesesimp>骇取资料</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle1_Desc1">
+				<Original>Somewhere in the building marked is a laptop, it contains details of the latest enemy attack jet. We need you to hack the data and send the details back to us.</Original>
+				<English>Somewhere in the building marked is a laptop, it contains details of the latest enemy attack jet. We need you to hack the data and send the details back to us.</English>
+                <Chinese>在被標記的建築物裡有個筆電，內涵敵方最新型攻擊機的資料。我們需要你們過去駭取資料並把它傳回給我們。</Chinese>
+                <Chinesesimp>在被标记的建筑物里有个笔电，内涵敌方最新型攻击机的资料。我们需要你们过去骇取资料并把它传回给我们。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle1_Desc2">
+				<Original>We have discovered the location of an enemy laptop which we know contains a vast amount of data on enemy plans and movement, locate it and hack it! this could be a major step towards our victory</Original>
+				<English>We have discovered the location of an enemy laptop which we know contains a vast amount of data on enemy plans and movement, locate it and hack it! this could be a major step towards our victory</English>
+                <Chinese>我們得到一台裝有敵人作戰計畫的筆電位置，找到並駭取其中的資料!這可能可以讓我們向勝利踏出一大步。</Chinese>
+                <Chinesesimp>我们得到一台装有敌人作战计划的笔电位置，找到并骇取其中的资料!这可能可以让我们向胜利踏出一大步。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle2">
+				<Original>Steal data from research vehicle</Original>
+				<English>Steal data from research vehicle</English>
+                <Chinese>從研究載具上偷取資料</Chinese>
+                <Chinesesimp>从研究载具上偷取资料</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle2_Button">
+				<Original>Download research data</Original>
+				<English>Download research data</English>
+                <Chinese>下載研究資料</Chinese>
+                <Chinesesimp>下载研究资料</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle2_Desc">
+				<Original>We have seen the enemy have parked a research vehicle near the position marked.  We know they have been working on a new weapon, and belive the details of this research is located in this vehicle! locate and get the intel from it!</Original>
+				<English>We have seen the enemy have parked a research vehicle near the position marked.  We know they have been working on a new weapon, and belive the details of this research is located in this vehicle! locate and get the intel from it!</English>
+                <Chinese>我們在標記的位置上發現到一台敵方停在那邊的研究載具。我們知道他們正在著手開發新的武器，而我們相信這些情報就裝在這台載具中!找到並從中獲取我們要的情報!</Chinese>
+                <Chinesesimp>我们在标记的位置上发现到一台敌方停在那边的研究载具。我们知道他们正在着手开发新的武器，而我们相信这些情报就装在这台载具中!找到并从中获取我们要的情报!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle3">
+				<Original>Destroy Ammo Trucks</Original>
+				<English>Destroy Ammo Trucks</English>
+                <Chinese>摧毀彈藥卡車</Chinese>
+                <Chinesesimp>摧毁弹药卡车</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle3_Destory">
+				<Original>You have destroyed enemy ammo trucks, reputation increased</Original>
+				<English>You have destroyed enemy ammo trucks, reputation increased</English>
+                <Chinese>成功摧毀了敵人的彈藥卡車，你們的聲譽已提高</Chinese>
+                <Chinesesimp>成功摧毁了敌人的弹药卡车，你们的声誉已提高</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle3_Desc">
+				<Original>Two ammo truck have been located, they are getting ready to convoy these to reinforce an area in preperation of an attack.  Locate and destroy these vehicles.</Original>
+				<English>Two ammo truck have been located, they are getting ready to convoy these to reinforce an area in preperation of an attack.  Locate and destroy these vehicles.</English>
+                <Chinese>我們已定位到兩台彈藥卡車的位置，他們已經滿載彈藥並準備支援即將發起的攻勢。找到並摧毀掉這些載具。</Chinese>
+                <Chinesesimp>我们已定位到两台弹药卡车的位置，他们已经满载弹药并准备支援即将发起的攻势。找到并摧毁掉这些载具。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle4">
+				<Original>Speak with informant</Original>
+				<English>Speak with informant</English>
+                <Chinese>與線人交談</Chinese>
+                <Chinesesimp>与线人交谈</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle4_Desc">
+				<Original>We have a guy that holds valuable intel on enemy plans, he is walking around the area marked, unfortunately this area is occupied, but we need this intel regardless! move in, find him and talk to him.&lt;br/&gt;We are not exactly sure which of the following two is our guy, so look out for them both!&lt;br/&gt;</Original>
+				<English>We have a guy that holds valuable intel on enemy plans, he is walking around the area marked, unfortunately this area is occupied, but we need this intel regardless! move in, find him and talk to him.&lt;br/&gt;We are not exactly sure which of the following two is our guy, so look out for them both!&lt;br/&gt;</English>
+                <Chinese>我們的其中一位線人掌握了敵人的作戰計劃，他正漫步在標記的區域中，不幸的是這裡已被敵人給佔據，但我們非常需要這份情報的幫助!進入該區，找到並與他交談。&lt;br/&gt;我們不大確定照片中的這兩位哪個才是我們要的線人，所以建議你們找到他們兩個!&lt;br/&gt;</Chinese>
+                <Chinesesimp>我们的其中一位线人掌握了敌人的作战计划，他正漫步在标记的区域中，不幸的是这里已被敌人给占据，但我们非常需要这份情报的帮助!进入该区，找到并与他交谈。&lt;br/&gt;我们不大确定照片中的这两位哪个才是我们要的线人，所以建议你们找到他们两个!&lt;br/&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle5">
+				<Original>interrogate officer</Original>
+				<English>interrogate officer</English>
+                <Chinese>審問軍官</Chinese>
+                <Chinesesimp>审问军官</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle5_Desc">
+				<Original>We have located an enemy officer who is a lead role in a current operation, we need you to get as much intel from this guy as possible!&lt;br/&gt;&lt;br/&gt;Shoot him in the leg to incapacitate him, then approch to tie up and interrogate him!&lt;br/&gt;&lt;br/&gt;</Original>
+				<English>We have located an enemy officer who is a lead role in a current operation, we need you to get as much intel from this guy as possible!&lt;br/&gt;&lt;br/&gt;Shoot him in the leg to incapacitate him, then approch to tie up and interrogate him!&lt;br/&gt;&lt;br/&gt;</English>
+                <Chinese>我們已定位到敵人在這場行動中的重要負責人，我們需要你們盡可能從他身上搾取情報!&lt;br/&gt;&lt;br/&gt;對他的腿部射擊可以讓他失去行動能力，再來就綑綁住並開始審問!&lt;br/&gt;&lt;br/&gt;</Chinese>
+                <Chinesesimp>我们已定位到敌人在这场行动中的重要负责人，我们需要你们尽可能从他身上榨取情报!&lt;br/&gt;&lt;br/&gt;对他的腿部射击可以让他失去行动能力，再来就捆绑住并开始审问!&lt;br/&gt;&lt;br/&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle6">
+				<Original>Transmit Enemy Comms to HQ</Original>
+				<English>Transmit Enemy Comms to HQ</English>
+                <Chinese>轉送敵方通訊信號到總部</Chinese>
+                <Chinesesimp>转送敌方通讯信号到总部</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle6_Button">
+				<Original>Send transmission to HQ</Original>
+				<English>Send transmission to HQ</English>
+                <Chinese>轉送訊號到總部</Chinese>
+                <Chinesesimp>转送讯号到总部</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle6_Desc">
+				<Original>We need you to locate an enemy radio, we know its being used for comms of a planned attack, we need you to send the transmission to us so our team can listen in until the plans have been identified!</Original>
+				<English>We need you to locate an enemy radio, we know its being used for comms of a planned attack, we need you to send the transmission to us so our team can listen in until the plans have been identified!</English>
+                <Chinese>我們需要你們去找到敵人的一座通訊塔，我們知道它是被敵人用來協調攻擊用的重要通訊設施，我們需要你們去轉送他們的通訊信號到我們這邊，好讓我們的研究小隊能夠分析敵人的計劃!</Chinese>
+                <Chinesesimp>我们需要你们去找到敌人的一座通讯塔，我们知道它是被敌人用来协调攻击用的重要通讯设施，我们需要你们去转送他们的通讯信号到我们这边，好让我们的研究小队能够分析敌人的计划!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle7">
+				<Original>Eliminate Officer</Original>
+				<English>Eliminate Officer</English>
+                <Chinese>殲滅軍官</Chinese>
+                <Chinesesimp>歼灭军官</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle7_Desc">
+				<Original>HVT located, we need him dead! his death will cause major destruction to current enemy plans</Original>
+				<English>HVT located, we need him dead! his death will cause major destruction to current enemy plans</English>
+                <Chinese>已確認到高價值目標的位置，我們需要幹掉他!他的死將對敵方當前作戰計劃產生很大的影響。</Chinese>
+                <Chinesesimp>已确认到高价值目标的位置，我们需要干掉他!他的死将对敌方当前作战计划产生很大的影响。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle8">
+				<Original>Assasinate weapon dealer</Original>
+				<English>Assasinate weapon dealer</English>
+                <Chinese>刺殺軍火商</Chinese>
+                <Chinesesimp>刺杀军火商</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle8_Desc">
+				<Original>A weapons dealer is getting ready to meet up with an enemy general, he is about to sell weapons that have been stolen from us!  locate him and assainate him. We have intel of two dealers, here they both are, it will be one of these who you need to locate, we are unsure which one!</Original>
+				<English>A weapons dealer is getting ready to meet up with an enemy general, he is about to sell weapons that have been stolen from us!  locate him and assainate him. We have intel of two dealers, here they both are, it will be one of these who you need to locate, we are unsure which one!</English>
+                <Chinese>一位軍火商正準備接見敵方的將軍，他將對他們販售從我們這邊竊取到的武器!找到並幹掉他。我們的情報提供了兩個軍火商的照片，其中一位就是我們的目標，但我們不確定到底是哪位!</Chinese>
+                <Chinesesimp>一位军火商正准备接见敌方的将军，他将对他们贩售从我们这边窃取到的武器!找到并干掉他。我们的情报提供了两个军火商的照片，其中一位就是我们的目标，但我们不确定到底是哪位!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle8_Button">
+				<Original>Search for ID</Original>
+				<English>Search for ID</English>
+                <Chinese>搜索身份</Chinese>
+                <Chinesesimp>搜索身份</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle8_Button2">
+				<Original>Get Intel</Original>
+				<English>Get Intel</English>
+                <Chinese>取得情報</Chinese>
+                <Chinesesimp>取得情报</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle8_Eliminated">
+				<Original>A HVT has been eliminated, reputation increased</Original>
+				<English>A HVT has been eliminated, reputation increased</English>
+                <Chinese>成功殲滅重要目標，聲譽已提高</Chinese>
+                <Chinesesimp>成功歼灭重要目标，声誉已提高</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle8_MustSearch">
+				<Original>&lt;br/&gt;&lt;br/&gt;You must search the body to identify this target!&lt;br/&gt;&lt;br/&gt;</Original>
+				<English>&lt;br/&gt;&lt;br/&gt;You must search the body to identify this target!&lt;br/&gt;&lt;br/&gt;</English>
+                <Chinese>&lt;br/&gt;&lt;br/&gt;你必需搜索屍體來確認身分!&lt;br/&gt;&lt;br/&gt;</Chinese>
+                <Chinesesimp>&lt;br/&gt;&lt;br/&gt;你必需搜索尸体来确认身分!&lt;br/&gt;&lt;br/&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle9">
+				<Original>Destroy AAA vehicles</Original>
+				<English>Destroy AAA vehicles</English>
+                <Chinese>摧毀高射炮載具</Chinese>
+                <Chinesesimp>摧毁高射炮载具</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle9_Desc">
+				<Original>Two Anti Air vehicles have been causing havoc near the position marked.  Locate and destroy these ASAP!</Original>
+				<English>Two Anti Air vehicles have been causing havoc near the position marked.  Locate and destroy these ASAP!</English>
+                <Chinese>有兩台已被標記在地圖上的防空載具已造成我們很大的損失。請立即找到並摧毀掉他們!</Chinese>
+                <Chinesesimp>有两台已被标记在地图上的防空载具已造成我们很大的损失。请立即找到并摧毁掉他们!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle10">
+				<Original>Destroy Artillery vehicles</Original>
+				<English>Destroy Artillery vehicles</English>
+                <Chinese>摧毀火炮載具</Chinese>
+                <Chinesesimp>摧毁火炮载具</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle10_Desc">
+				<Original>Two artillery vehicles have been firing rounds at and around our HQ, we need them destroyed as soon as possible!</Original>
+				<English>Two artillery vehicles have been firing rounds at and around our HQ, we need them destroyed as soon as possible!</English>
+                <Chinese>有兩台火炮一直在對我們總部週遭進行火力打擊，我們需要你們盡快找到並摧毀他們!</Chinese>
+                <Chinesesimp>有两台火炮一直在对我们总部周遭进行火力打击，我们需要你们尽快找到并摧毁他们!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MainMission">
+				<Original>Main</Original>
+				<English>Main</English>
+                <Chinese>主線</Chinese>
+                <Chinesesimp>主线</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_OptionalMission">
+				<Original>Optional</Original>
+				<English>Optional</English>
+                <Chinese>支線</Chinese>
+                <Chinesesimp>支线</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_markerInformant">
+				<Original>An informat is located here.  No enemy reported at this location</Original>
+				<English>An informat is located here.  No enemy reported at this location</English>
+                <Chinese>一位線人位在這邊。該區域沒有回報說有出現過敵人</Chinese>
+                <Chinesesimp>一位线人位在这边。该区域没有回报说有出现过敌人</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionDayTitle">
+				<Original>Day: %1 : %2</Original>
+				<English>Day: %1 : %2</English>
+                <Chinese>第%1天 : %2</Chinese>
+                <Chinesesimp>第%1天 : %2</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_RTBNextMission">
+				<Original>return to base for next assignment!!</Original>
+				<English>return to base for next assignment!!</English>
+                <Chinese>返回基地等待新的指派!!</Chinese>
+                <Chinesesimp>返回基地等待新的指派!!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_DayComplete">
+				<Original>Day %1 task completed</Original>
+				<English>Day %1 task completed</English>
+                <Chinese>第%1天任務結束</Chinese>
+                <Chinesesimp>第%1天任务结束</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_HoldReputation_Desc">
+				<Original>Make too many mistakes, kill civs, lose too many units, your reputation will lower.  Try not to make too many errors</Original>
+				<English>Make too many mistakes, kill civs, lose too many units, your reputation will lower.  Try not to make too many errors</English>
+                <Chinese>失誤太多次，濫殺平民，損失過多的單位都會造成你們的聲譽下降。請試著不要犯太多的錯誤</Chinese>
+                <Chinesesimp>失误太多次，滥杀平民，损失过多的单位都会造成你们的声誉下降。请试着不要犯太多的错误</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_HoldReputation_Title">
+				<Original>(optional) Uphold reputation</Original>
+				<English>(optional) Uphold reputation</English>
+                <Chinese>(支線) 維持住聲譽</Chinese>
+                <Chinesesimp>(支线) 维持住声誉</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_HoldReputation_Title2">
+				<Original>!!Must uphold reputation!!</Original>
+				<English>!!Must uphold reputation!!</English>
+                <Chinese>!!必需維持住聲譽!!</Chinese>
+                <Chinesesimp>!!必需维持住声誉!!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_KiloCamp">
+				<Original>Kilo 1 - Camp</Original>
+				<English>Kilo 1 - Camp</English>
+                <Chinese>Kilo 1 - 營地</Chinese>
+                <Chinesesimp>Kilo 1 - 营地</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_RemoveVehicleFromTent">
+				<Original>Remove small vehicle from tent</Original>
+				<English>Remove small vehicle from tent</English>
+                <Chinese>從帳篷中取出小型載具</Chinese>
+                <Chinesesimp>从帐篷中取出小型载具</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_UnloadDingy">
+				<Original>Unload Dingy</Original>
+				<English>Unload Dingy</English>
+                <Chinese>卸載橡皮艇</Chinese>
+                <Chinesesimp>卸载橡皮艇</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_VirtualArsenal">
+				<Original>&lt;t color='#ff1111'&gt;Virtual Arsenal&lt;/t&gt;</Original>
+				<English>&lt;t color='#ff1111'&gt;Virtual Arsenal&lt;/t&gt;</English>
+                <Chinese>&lt;t color='#ff1111'&gt;虛擬軍火庫&lt;/t&gt;</Chinese>
+                <Chinesesimp>&lt;t color='#ff1111'&gt;虚拟军火库&lt;/t&gt;</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_SoItBegin">
+				<Original>And so it begins!</Original>
+				<English>And so it begins!</English>
+                <Chinese>就這麼開始了!</Chinese>
+                <Chinesesimp>就这么开始了!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SupplyDropVehInit_Hint">
+				<Original>Supply drop requested</Original>
+				<English>Supply drop requested</English>
+                <Chinese>已呼叫空投補給</Chinese>
+                <Chinesesimp>已呼叫空投补给</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SupportArtiRequested_Hint">
+				<Original>Arti round fired</Original>
+				<English>Arti round fired</English>
+                <Chinese>火炮已發射</Chinese>
+                <Chinesesimp>火炮已发射</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TalkRebLead_Hint">
+				<Original>This guy doesnt seem to want to speak much in his current state!!!</Original>
+				<English>This guy doesnt seem to want to speak much in his current state!!!</English>
+                <Chinese>在當前的狀況下這個傢伙似乎並不想多說些什麼!!!</Chinese>
+                <Chinesesimp>在当前的状况下这个家伙似乎并不想多说些什么!!!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_tele_SelectPosition">
+				<Original>Select Map Position</Original>
+				<English>Select Map Position</English>
+                <Chinese>在地圖上選擇一處位置</Chinese>
+                <Chinesesimp>在地图上选择一处位置</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_telePara_SelectPosition">
+				<Original>Select Paradrop position</Original>
+				<English>Select Paradrop position</English>
+                <Chinese>在地圖上選擇一處要跳傘的位置</Chinese>
+                <Chinesesimp>在地图上选择一处要跳伞的位置</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_UnloadDingy_NoArea">
+				<Original>Not enough room near vehicle to unload!</Original>
+				<English>Not enough room near vehicle to unload!</English>
+                <Chinese>載具附近沒有足夠的空間可以進行卸載!</Chinese>
+                <Chinesesimp>载具附近没有足够的空间可以进行卸载!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_UnloadDingy_DingyUnloaded">
+				<Original>Dingy unloaded!</Original>
+				<English>Dingy unloaded!</English>
+                <Chinese>已卸載橡皮艇!</Chinese>
+                <Chinesesimp>已卸载橡皮艇!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_UnloadDingy_DingyUnloadedWater">
+				<Original>Dingy unloaded to nearest water!</Original>
+				<English>Dingy unloaded to nearest water!</English>
+                <Chinese>已卸載橡皮艇到附近的水面上!</Chinese>
+                <Chinesesimp>已卸载橡皮艇到附近的水面上!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_UnloadDingy_push">
+				<Original>push</Original>
+				<English>push</English>
+                <Chinese>推</Chinese>
+                <Chinesesimp>推</Chinesesimp>
+			</Key>
+		</Container>
+		<Container name="Campaign">
+			<Key ID="STR_TRGM2_RecruiteInf_Read">
+				<Original>Read</Original>
+				<English>Read</English>
+                <Chinese>閱讀</Chinese>
+                <Chinesesimp>阅读</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_RecruiteInf_KIA">
+				<Original>KIA: %1</Original>
+				<English>KIA: %1</English>
+                <Chinese>行動中陣亡: %1</Chinese>
+                <Chinesesimp>行动中阵亡: %1</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_RecruiteInf_UnitAdd">
+				<Original>Unit Added: %1\n\nSpent %2 out of %3</Original>
+				<English>Unit Added: %1\n\nSpent %2 out of %3</English>
+                <Chinese>已增加單位: %1\n\n花費掉%3中的%2</Chinese>
+                <Chinesesimp>已增加单位: %1\n\n花费掉%3中的%2</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_RecruiteInf_MoreReputation">
+				<Original>Your reputation needs to be higher to recruit more units</Original>
+				<English>Your reputation needs to be higher to recruit more units</English>
+                <Chinese>你需要更多的聲譽才能招募更多的單位</Chinese>
+                <Chinesesimp>你需要更多的声誉才能招募更多的单位</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ServerSave_Save1">
+				<Original>This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save is only available to the current map</Original>
+				<English>This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save is only available to the current map</English>
+                <Chinese>這個戰役將在每次聲譽改變時自動儲存一次。\n\n只有你才能讀取這個存檔!\n\n這個存檔僅能使用在當前的地圖上</Chinese>
+                <Chinesesimp>这个战役将在每次声誉改变时自动储存一次。\n\n只有你才能读取这个存档!\n\n这个存档仅能使用在当前的地图上</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ServerSave_Save2">
+				<Original>This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save will be available on any map running TRGM2</Original>
+				<English>This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save will be available on any map running TRGM2</English>
+                <Chinese>這個戰役將在每次聲譽改變時自動儲存一次。\n\n只有你才能讀取這個存檔!\n\n這個存檔能使用於任何執行TRGM2的地圖上</Chinese>
+                <Chinesesimp>这个战役将在每次声誉改变时自动储存一次。\n\n只有你才能读取这个存档!\n\n这个存档能使用于任何执行TRGM2的地图上</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ServerSave_SaveLocal">
+				<Original>Campaign saves as Local</Original>
+				<English>Campaign saves as Local</English>
+                <Chinese>戰役儲存成本地</Chinese>
+                <Chinesesimp>战役储存成本地</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ServerSave_SaveGlobal">
+				<Original>Campaign saves as Global</Original>
+				<English>Campaign saves as Global</English>
+                <Chinese>戰役儲存成全域</Chinese>
+                <Chinesesimp>战役储存成全域</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ServerSave_SaveHint">
+				<Original>This mission will save only on the current map.\n\nEach time your reputation adjusts, the data will save automatically.</Original>
+				<English>This mission will save only on the current map.\n\nEach time your reputation adjusts, the data will save automatically.</English>
+                <Chinese>這個任務將儲存在當前的地圖中。\n\n這個戰役將在每次聲譽改變時自動儲存一次。</Chinese>
+                <Chinesesimp>这个任务将储存在当前的地图中。\n\n这个战役将在每次声誉改变时自动储存一次。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ServerSave_SaveHint2">
+				<Original>This mission will save and can be loaded from any map.\n\nEach time your reputation adjusts, the data will save automatically.</Original>
+				<English>This mission will save and can be loaded from any map.\n\nEach time your reputation adjusts, the data will save automatically.</English>
+                <Chinese>這個任務存檔將能用在任何地圖上。\n\n這個戰役將在每次聲譽改變時自動儲存一次。</Chinese>
+                <Chinesesimp>这个任务存档将能用在任何地图上。\n\n这个战役将在每次声誉改变时自动储存一次。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ServerSave_SaveError">
+				<Original>Problem saving... local or global save not set</Original>
+				<English>Problem saving... local or global save not set</English>
+                <Chinese>存檔時發生錯誤...沒有為存檔定義為本地或全域</Chinese>
+                <Chinesesimp>存档时发生错误...没有为存档定义为本地或全域</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_ShowRep">
+				<Original>Show Rep Report</Original>
+				<English>Show Rep Report</English>
+                <Chinese>顯示聲譽報告</Chinese>
+                <Chinesesimp>显示声誉报告</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_ShowRepLong">
+				<Original>Show reputation report</Original>
+				<English>Show reputation report</English>
+                <Chinese>顯示聲譽報告</Chinese>
+                <Chinesesimp>显示声誉报告</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_StartMission">
+				<Original>!!Start Mission!!</Original>
+				<English>!!Start Mission!!</English>
+                <Chinese>!!開始任務!!</Chinese>
+                <Chinesesimp>!!开始任务!!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitRifleman">
+				<Original>Recruit Rifleman</Original>
+				<English>Recruit Rifleman</English>
+                <Chinese>招募步槍兵</Chinese>
+                <Chinesesimp>招募步枪兵</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitAT">
+				<Original>Recruit AT Unit</Original>
+				<English>Recruit AT Unit</English>
+                <Chinese>招募反裝甲兵</Chinese>
+                <Chinesesimp>招募反装甲兵</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitAA">
+				<Original>Recruit AA Unit</Original>
+				<English>Recruit AA Unit</English>
+                <Chinese>招募防空兵</Chinese>
+                <Chinesesimp>招募防空兵</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitEngineer">
+				<Original>Recruit Engineer</Original>
+				<English>Recruit Engineer</English>
+                <Chinese>招募工兵</Chinese>
+                <Chinesesimp>招募工兵</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitExplosive">
+				<Original>Recruit Explosive Specialist</Original>
+				<English>Recruit Explosive Specialist</English>
+                <Chinese>招募爆破兵</Chinese>
+                <Chinesesimp>招募爆破兵</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitMedic">
+				<Original>Recruit Medic</Original>
+				<English>Recruit Medic</English>
+                <Chinese>招募醫護兵</Chinese>
+                <Chinesesimp>招募医护兵</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitAutomaticRiflemanS">
+				<Original>**Recruit Automatic Rifleman**</Original>
+				<English>**Recruit Automatic Rifleman**</English>
+                <Chinese>**招募自動步槍兵**</Chinese>
+                <Chinesesimp>**招募自动步枪兵**</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitAutomaticRifleman">
+				<Original>Recruit Automatic Rifleman</Original>
+				<English>Recruit Automatic Rifleman</English>
+                <Chinese>招募自動步槍兵</Chinese>
+                <Chinesesimp>招募自动步枪兵</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitSniperS">
+				<Original>**Recruit Sniper**</Original>
+				<English>**Recruit Sniper**</English>
+                <Chinese>**招募狙擊手**</Chinese>
+                <Chinesesimp>**招募狙击手**</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitSpotterS">
+				<Original>**Recruit Spotter**</Original>
+				<English>**Recruit Spotter**</English>
+                <Chinese>**招募觀察手**</Chinese>
+                <Chinesesimp>**招募观察手**</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitSniper">
+				<Original>Recruit Sniper</Original>
+				<English>Recruit Sniper</English>
+                <Chinese>招募狙擊手</Chinese>
+                <Chinesesimp>招募狙击手</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitSpotter">
+				<Original>Recruit Spotter</Original>
+				<English>Recruit Spotter</English>
+                <Chinese>招募觀察手</Chinese>
+                <Chinesesimp>招募观察手</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitUAVS">
+				<Original>**Recruit UAV Operator**</Original>
+				<English>**Recruit UAV Operator**</English>
+                <Chinese>**招募UAV操作員**</Chinese>
+                <Chinesesimp>**招募UAV操作员**</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RecruitUAV">
+				<Original>Recruit UAV Operator</Original>
+				<English>Recruit UAV Operator</English>
+                <Chinese>招募UAV操作員</Chinese>
+                <Chinesesimp>招募UAV操作员</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RequestFinal">
+				<Original>!!Request Final Assignment!!</Original>
+				<English>!!Request Final Assignment!!</English>
+                <Chinese>!!請求最終的指派!!</Chinese>
+                <Chinesesimp>!!请求最终的指派!!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_RequestNext">
+				<Original>!!Request Next Mission!!</Original>
+				<English>!!Request Next Mission!!</English>
+                <Chinese>!!請求下一個任務!!</Chinese>
+                <Chinesesimp>!!请求下一个任务!!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_EndMission">
+				<Original>End Mission</Original>
+				<English>End Mission</English>
+                <Chinese>任務結束</Chinese>
+                <Chinesesimp>任务结束</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_Save">
+				<Original>Save</Original>
+				<English>Save</English>
+                <Chinese>存檔</Chinese>
+                <Chinesesimp>存档</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_StartMission_Day">
+				<Original>Day %1</Original>
+				<English>Day %1</English>
+                <Chinese>第%1天</Chinese>
+                <Chinesesimp>第%1天</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_StartMission_Mission">
+				<Original>Mission: </Original>
+				<English>Mission: </English>
+                <Chinese>任務: </Chinese>
+                <Chinesesimp>任务: </Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_StartMission_Time">
+				<Original>Time: </Original>
+				<English>Time: </English>
+                <Chinese>時間: </Chinese>
+                <Chinesesimp>时间: </Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_StartMission_Final">
+				<Original>Final Objective: </Original>
+				<English>Final Objective: </English>
+                <Chinese>最終目標: </Chinese>
+                <Chinesesimp>最终目标: </Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_StartMission_Hint">
+				<Original>All players need to be at base, and current task needs to be completed or failed</Original>
+				<English>All players need to be at base, and current task needs to be completed or failed</English>
+                <Chinese>所有玩家必需返回到基地，並且當前的任務目標必需被完成或失敗</Chinese>
+                <Chinesesimp>所有玩家必需返回到基地，并且当前的任务目标必需被完成或失败</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ShowRepReport_Message1">
+				<Original>Your current team rank is:</Original>
+				<English>Your current team rank is:</English>
+                <Chinese>你的隊伍當前的階級:</Chinese>
+                <Chinesesimp>你的队伍当前的阶级:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ShowRepReport_Message2">
+				<Original>Get to rank 5 for final objective!</Original>
+				<English>Get to rank 5 for final objective!</English>
+                <Chinese>升到階級5來接受最終任務目標!</Chinese>
+                <Chinesesimp>升到阶级5来接受最终任务目标!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_ShowRepReport_TotalMessage">
+				<Original>TOTAL REP: %1 &lt;br/&gt;&lt;br/&gt;REASONS SO FAR: &lt;br/&gt;%2</Original>
+				<English>TOTAL REP: %1 &lt;br/&gt;&lt;br/&gt;REASONS SO FAR: &lt;br/&gt;%2</English>
+                <Chinese>總評價: %1 &lt;br/&gt;&lt;br/&gt;最大的原因: &lt;br/&gt;%2</Chinese>
+                <Chinesesimp>总评价: %1 &lt;br/&gt;&lt;br/&gt;最大的原因: &lt;br/&gt;%2</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_exitCampaign_RepSaaved">
+				<Original>Your rep and status has been saved.  Current day is ending</Original>
+				<English>Your rep and status has been saved.  Current day is ending</English>
+                <Chinese>你的聲譽與狀態皆已儲存。當前任務即將結束</Chinese>
+                <Chinesesimp>你的声誉与状态皆已储存。当前任务即将结束</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_exitCampaign_CampaignSaaved">
+				<Original>Campaign details saved, however cant end mission, as all players need to be at base!</Original>
+				<English>Campaign details saved, however cant end mission, as all players need to be at base!</English>
+                <Chinese>戰役已存檔，然而還不能結束任務，因為有玩家還沒回到基地裡!</Chinese>
+                <Chinesesimp>战役已存档，然而还不能结束任务，因为有玩家还没回到基地里!</Chinesesimp>
+			</Key>
+		</Container>
+		<Container name="Functions">
+			<Key ID="STR_TRGM2_civillians_fnbadCivAddSearchAction_Button">
+				<Original>Search Civ</Original>
+				<English>Search Civ</English>
+                <Chinese>對平民搜身</Chinese>
+                <Chinesesimp>对平民搜身</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_civillians_fnbadCivSearch_IsArmed1">
+				<Original>This civilian is carrying a gun.</Original>
+				<English>This civilian is carrying a gun.</English>
+                <Chinese>這個平民有帶著槍枝。</Chinese>
+                <Chinesesimp>这个平民有带着枪枝。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_civillians_fnbadCivSearch_IsArmed2">
+				<Original>The civilian is armed.</Original>
+				<English>The civilian is armed.</English>
+                <Chinese>這個平民有武裝。</Chinese>
+                <Chinesesimp>这个平民有武装。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_civillians_fnbadCivSearch_IsArmed3">
+				<Original>You spot a firearm under his clothes.</Original>
+				<English>You spot a firearm under his clothes.</English>
+                <Chinese>你在他的衣服底下發現到了一把槍。</Chinese>
+                <Chinesesimp>你在他的衣服底下发现到了一把枪。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fngetLocationName_DirOfName">
+				<Original>%1 of %2</Original>
+				<English>%1 of %2</English>
+                <Chinese>%2的%1方</Chinese>
+                <Chinesesimp>%2的%1方</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fngetLocationName_At">
+				<Original>at %1</Original>
+				<English>at %1</English>
+                <Chinese>在%1</Chinese>
+                <Chinesesimp>在%1</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_N_Word">
+				<Original>North</Original>
+				<English>North</English>
+                <Chinese>北</Chinese>
+                <Chinesesimp>北</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_NE_Word">
+				<Original>North East</Original>
+				<English>North East</English>
+                <Chinese>東北</Chinese>
+                <Chinesesimp>东北</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_E_Word">
+				<Original>East</Original>
+				<English>East</English>
+                <Chinese>東</Chinese>
+                <Chinesesimp>东</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_SE_Word">
+				<Original>South East</Original>
+				<English>South East</English>
+                <Chinese>東南</Chinese>
+                <Chinesesimp>东南</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_S_Word">
+				<Original>South</Original>
+				<English>South</English>
+                <Chinese>南</Chinese>
+                <Chinesesimp>南</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_SW_Word">
+				<Original>South West</Original>
+				<English>South West</English>
+                <Chinese>西南</Chinese>
+                <Chinesesimp>西南</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_W_Word">
+				<Original>West</Original>
+				<English>West</English>
+                <Chinese>西</Chinese>
+                <Chinesesimp>西</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_NW_Word">
+				<Original>North West</Original>
+				<English>North West</English>
+                <Chinese>西北</Chinese>
+                <Chinesesimp>西北</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_N">
+				<Original>N</Original>
+				<English>N</English>
+                <Chinese>北</Chinese>
+                <Chinesesimp>北</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_NE">
+				<Original>NE</Original>
+				<English>NE</English>
+                <Chinese>東北</Chinese>
+                <Chinesesimp>东北</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_E">
+				<Original>E</Original>
+				<English>E</English>
+                <Chinese>東</Chinese>
+                <Chinesesimp>东</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_SE">
+				<Original>SE</Original>
+				<English>SE</English>
+                <Chinese>東南</Chinese>
+                <Chinesesimp>东南</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_S">
+				<Original>S</Original>
+				<English>S</English>
+                <Chinese>南</Chinese>
+                <Chinesesimp>南</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_SW">
+				<Original>SW</Original>
+				<English>SW</English>
+                <Chinese>西南</Chinese>
+                <Chinesesimp>西南</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_W">
+				<Original>W</Original>
+				<English>W</English>
+                <Chinese>西</Chinese>
+                <Chinesesimp>西</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_location_fndirectionToText_NW">
+				<Original>NW</Original>
+				<English>NW</English>
+                <Chinese>西北</Chinese>
+                <Chinesesimp>西北</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnaddTransportAction_SelectDest">
+				<Original>Select Destination</Original>
+				<English>Select Destination</English>
+                <Chinese>選擇目的地</Chinese>
+                <Chinesesimp>选择目的地</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnaddTransportAction_DivertLZ">
+				<Original>Divert to different LZ</Original>
+				<English>Divert to different LZ</English>
+                <Chinese>變更到別的降落點</Chinese>
+                <Chinesesimp>变更到别的降落点</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnselectLzOnMapClick_RTB">
+				<Original>Copy that, RTB.</Original>
+				<English>Copy that, RTB.</English>
+                <Chinese>收到，開始返回基地。</Chinese>
+                <Chinesesimp>收到，开始返回基地。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnselectLzOnMapClick_TooCloseBase">
+				<Original>Please choose another location, you have selected a location too close to the Base\n\nTo abort press ESC</Original>
+				<English>Please choose another location, you have selected a location too close to the Base\n\nTo abort press ESC</English>
+                <Chinese>請選擇一個別的地點，你選的位置太靠近基地了\n\n按下ESC鍵即可取消動作</Chinese>
+                <Chinesesimp>请选择一个别的地点，你选的位置太靠近基地了\n\n按下ESC键即可取消动作</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnselectLzOnMapClick_TooCloseAO">
+				<Original>Please choose another location, you have selected a location too close to the AO\n\nTo abort press ESC</Original>
+				<English>Please choose another location, you have selected a location too close to the AO\n\nTo abort press ESC</English>
+                <Chinese>請選擇一個別的地點，你選的位置太靠近任務區域了\n\n按下ESC鍵即可取消動作</Chinese>
+                <Chinesesimp>请选择一个别的地点，你选的位置太靠近任务区域了\n\n按下ESC键即可取消动作</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnselectLzOnMapClick_TooCloseWalk">
+				<Original>You can walk that far soldier!</Original>
+				<English>You can walk that far soldier!</English>
+                <Chinese>你自己就可以走到了，大兵!</Chinese>
+                <Chinesesimp>你自己就可以走到了，大兵!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnselectLzOnMapClick_LessBuildUp">
+				<Original>Couldnt find a good LZ near your point, please select another.  Try to choose somewhere that is less built up</Original>
+				<English>Couldnt find a good LZ near your point, please select another.  Try to choose somewhere that is less built up</English>
+                <Chinese>無法在你指定的地點附近找到有效的降落點，請重新選擇一個地點。請試著找尋較少障礙物的地點</Chinese>
+                <Chinesesimp>无法在你指定的地点附近找到有效的降落点，请重新选择一个地点。请试着找寻较少障碍物的地点</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnselectLZ_SelectOutsideAO">
+				<Original>Select Map Position outside the AO areas</Original>
+				<English>Select Map Position outside the AO areas</English>
+                <Chinese>請選擇一個在任務區域外的降落點</Chinese>
+                <Chinesesimp>请选择一个在任务区域外的降落点</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToBase_RequestingLanding">
+				<Original>%1 requesting landing.</Original>
+				<English>%1 requesting landing.</English>
+                <Chinese>%1請求降落許可。</Chinese>
+                <Chinesesimp>%1请求降落许可。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToBase_ClearLand">
+				<Original>%1 you are cleared for landing.</Original>
+				<English>%1 you are cleared for landing.</English>
+                <Chinese>%1你可以降落了。</Chinese>
+                <Chinesesimp>%1你可以降落了。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToBase_BackHome">
+				<Original>Back home. Not that I've missed it...</Original>
+				<English>Back home. Not that I've missed it...</English>
+                <Chinese>到家了。甜蜜的家...</Chinese>
+                <Chinesesimp>到家了。甜蜜的家...</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToLz_ClearTakeoff">
+				<Original>%1, you are cleared for takeoff %2.</Original>
+				<English>%1, you are cleared for takeoff %2.</English>
+                <Chinese>%1，你們可以起飛前往%2了。</Chinese>
+                <Chinesesimp>%1，你们可以起飞前往%2了。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToLz_OffWeGo">
+				<Original>Off we go.</Original>
+				<English>Off we go.</English>
+                <Chinese>我們走吧。</Chinese>
+                <Chinesesimp>我们走吧。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToLz_Diverting">
+				<Original>Diverting.</Original>
+				<English>Diverting.</English>
+                <Chinese>轉移中。</Chinese>
+                <Chinesesimp>转移中。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToLz_ReachLZ_Out">
+				<Original>We reached our destination. Good Luck out there!</Original>
+				<English>We reached our destination. Good Luck out there!</English>
+                <Chinese>已抵達目的地。祝你們好運!</Chinese>
+                <Chinesesimp>已抵达目的地。祝你们好运!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToLz_ReachLZ_In">
+				<Original>We have landed at LZ, get in!</Original>
+				<English>We have landed at LZ, get in!</English>
+                <Chinese>我們已抵達降落點，快進來!</Chinese>
+                <Chinesesimp>我们已抵达降落点，快进来!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToLz_EnterAirspace">
+				<Original>%1 is entering airspace %2 - We're RTB.</Original>
+				<English>%1 is entering airspace %2 - We're RTB.</English>
+                <Chinese>%1正在進入%2的空域 - 我們正在返航。</Chinese>
+                <Chinesesimp>%1正在进入%2的空域 - 我们正在返航。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_transport_fnflyToLz_WelcomeAboard">
+				<Original>Welcome aboard, Let us know your destination!</Original>
+				<English>Welcome aboard, Let us know your destination!</English>
+                <Chinese>歡迎登機，讓我們知道你們的目的地!</Chinese>
+                <Chinesesimp>欢迎登机，让我们知道你们的目的地!</Chinesesimp>
+			</Key>
+		</Container>
+		<Container name="General">
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustFilled">
+				<Original>TOP SLOT NEEDS TO BE FILLED</Original>
+				<English>TOP SLOT NEEDS TO BE FILLED</English>
+                <Chinese>第一個角色位置不能為空</Chinese>
+                <Chinesesimp>第一个角色位置不能为空</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustPlayer">
+				<Original>TOP SLOT NEEDS TO BE A PLAYER</Original>
+				<English>TOP SLOT NEEDS TO BE A PLAYER</English>
+                <Chinese>第一個角色位置必需由玩家擔任</Chinese>
+                <Chinesesimp>第一个角色位置必需由玩家担任</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1">
+				<Original>Please wait, </Original>
+				<English>Please wait, </English>
+                <Chinese>請稍等，</Chinese>
+                <Chinesesimp>请稍等，</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2">
+				<Original> is choosing the mission settings</Original>
+				<English> is choosing the mission settings</English>
+                <Chinese>正在選擇任務設定</Chinese>
+                <Chinesesimp>正在选择任务设定</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic">
+				<Original>... if you cant hear music, turn up your music volume</Original>
+				<English>... if you cant hear music, turn up your music volume</English>
+                <Chinese>... 假如你聽不到音樂，請去設定中把音樂的音量調大</Chinese>
+                <Chinesesimp>... 假如你听不到音乐，请去设定中把音乐的音量调大</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport">
+				<Original>Call Transport Chopper</Original>
+				<English>Call Transport Chopper</English>
+                <Chinese>呼叫運輸直升機</Chinese>
+                <Chinesesimp>呼叫运输直升机</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_SaveLocal">
+				<Original>Save Local</Original>
+				<English>Save Local</English>
+                <Chinese>儲存為本地</Chinese>
+                <Chinesesimp>储存为本地</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_SaveGlobal">
+				<Original>Save Global</Original>
+				<English>Save Global</English>
+                <Chinese>儲存為全域</Chinese>
+                <Chinesesimp>储存为全域</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_FullReputationReport">
+				<Original>Current cost per life: %1&lt;br/&gt;&lt;br/&gt;Bad reputation points: %2 out of %3&lt;br/&gt;&lt;br/&gt;TOTAL REP: %4 &lt;br/&gt;&lt;br/&gt;REASONS SO FAR: &lt;br/&gt;%5</Original>
+				<English>Current cost per life: %1&lt;br/&gt;&lt;br/&gt;Bad reputation points: %2 out of %3&lt;br/&gt;&lt;br/&gt;TOTAL REP: %4 &lt;br/&gt;&lt;br/&gt;REASONS SO FAR: &lt;br/&gt;%5</English>
+                <Chinese>當前每條命需付出: %1&lt;br/&gt;&lt;br/&gt;壞評價點數: %3中的%2&lt;br/&gt;&lt;br/&gt;總評價: %4 &lt;br/&gt;&lt;br/&gt;最大的原因: &lt;br/&gt;%5</Chinese>
+                <Chinesesimp>当前每条命需付出: %1&lt;br/&gt;&lt;br/&gt;坏评价点数: %3中的%2&lt;br/&gt;&lt;br/&gt;总评价: %4 &lt;br/&gt;&lt;br/&gt;最大的原因: &lt;br/&gt;%5</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_TraceBullets">
+				<Original>Trace Bullets</Original>
+				<English>Trace Bullets</English>
+                <Chinese>曳光彈</Chinese>
+                <Chinesesimp>曳光弹</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_Enable">
+				<Original>Enable</Original>
+				<English>Enable</English>
+                <Chinese>啟用</Chinese>
+                <Chinesesimp>启用</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_Disable">
+				<Original>Disable</Original>
+				<English>Disable</English>
+                <Chinese>停用</Chinese>
+                <Chinesesimp>停用</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_CallUAV">
+				<Original>Call UAV to locate target</Original>
+				<English>Call UAV to locate target</English>
+                <Chinese>呼叫UAV搜尋目標</Chinese>
+                <Chinesesimp>呼叫UAV搜寻目标</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_UAVAvailable">
+				<Original>UAV available</Original>
+				<English>UAV available</English>
+                <Chinese>可呼叫UAV</Chinese>
+                <Chinesesimp>可呼叫UAV</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_UAVNoAvailable">
+				<Original>UAV no longer available</Original>
+				<English>UAV no longer available</English>
+                <Chinese>已不能再呼叫UAV</Chinese>
+                <Chinesesimp>已不能再呼叫UAV</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_WarningArea">
+				<Original>!!!!!WARNING!!!!! YOU ARE NOT PERMITTED TO ENTER THIS ZONE... TURN AROUND NOW!</Original>
+				<English>!!!!!WARNING!!!!! YOU ARE NOT PERMITTED TO ENTER THIS ZONE... TURN AROUND NOW!</English>
+                <Chinese>!!!!!警告!!!!! 你並不被允許進入此區域... 請立即掉頭!</Chinese>
+                <Chinesesimp>!!!!!警告!!!!! 你并不被允许进入此区域... 请立即掉头!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_Transfering">
+				<Original>Transfering... </Original>
+				<English>Transfering... </English>
+                <Chinese>轉移中... </Chinese>
+                <Chinesesimp>转移中... </Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_TRGM2Title">
+				<Original>Treendy's Randomly Generated Missions</Original>
+				<English>Treendy's Randomly Generated Missions</English>
+                <Chinese>Treendy的隨機生成任務</Chinese>
+                <Chinesesimp>Treendy的随机生成任务</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_RTBDebreif">
+				<Original>RTB to debreif</Original>
+				<English>RTB to debreif</English>
+                <Chinese>返回基地進行匯報</Chinese>
+                <Chinesesimp>返回基地进行汇报</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMOnPlayerKilled_Killed">
+				<Original>%1 was killed</Original>
+				<English>%1 was killed</English>
+                <Chinese>%1被殺害了</Chinese>
+                <Chinesesimp>%1被杀害了</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Enemy1">
+				<Original>CSAT and FIA as militia</Original>
+				<English>CSAT and FIA as militia</English>
+                <Chinese>廣協同盟與自由陣線為敵人</Chinese>
+                <Chinesesimp>广协同盟与自由阵线为敌人</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Enemy2">
+				<Original>CSAT only</Original>
+				<English>CSAT only</English>
+                <Chinese>廣協同盟為敵人</Chinese>
+                <Chinesesimp>广协同盟为敌人</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Enemy3">
+				<Original>FIA only</Original>
+				<English>FIA only</English>
+                <Chinese>自由陣線為敵人</Chinese>
+                <Chinesesimp>自由阵线为敌人</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Friend1">
+				<Original>NATO</Original>
+				<English>NATO</English>
+                <Chinese>北約</Chinese>
+                <Chinesesimp>北约</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Friend2">
+				<Original>FIA</Original>
+				<English>FIA</English>
+                <Chinese>自由陣線</Chinese>
+                <Chinesesimp>自由阵线</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_VirtualArsenal">
+				<Original>Virtual Arsenal</Original>
+				<English>Virtual Arsenal</English>
+                <Chinese>虛擬軍火庫</Chinese>
+                <Chinesesimp>虚拟军火库</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_GroupName">
+				<Original>Group Name</Original>
+				<English>Group Name</English>
+                <Chinese>小隊名稱</Chinese>
+                <Chinesesimp>小队名称</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_SupportOptions">
+				<Original>Support options</Original>
+				<English>Support options</English>
+                <Chinese>支援選項</Chinese>
+                <Chinesesimp>支援选项</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTickets">
+				<Original>Respawn Tickets</Original>
+				<English>Respawn Tickets</English>
+                <Chinese>重生次數</Chinese>
+                <Chinesesimp>重生次数</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Unlimited">
+				<Original>Unlimited</Original>
+				<English>Unlimited</English>
+                <Chinese>無限</Chinese>
+                <Chinesesimp>无限</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Mapdraw">
+				<Original>Mapdraw in direct only</Original>
+				<English>Mapdraw in direct only</English>
+                <Chinese>僅在直接頻道繪製地圖</Chinese>
+                <Chinesesimp>仅在直接频道绘制地图</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTimer">
+				<Original>Respawn Timer</Original>
+				<English>Respawn Timer</English>
+                <Chinese>重生秒數</Chinese>
+                <Chinesesimp>重生秒数</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Sec">
+				<Original>seconds</Original>
+				<English>seconds</English>
+                <Chinese>秒</Chinese>
+                <Chinesesimp>秒</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Min">
+				<Original>mins</Original>
+				<English>mins</English>
+                <Chinese>分鐘</Chinese>
+                <Chinesesimp>分钟</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFactions">
+				<Original>Enemy Factions</Original>
+				<English>Enemy Factions</English>
+                <Chinese>敵方派別</Chinese>
+                <Chinesesimp>敌方派别</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_FriendlyFactions">
+				<Original>Friendly Factions</Original>
+				<English>Friendly Factions</English>
+                <Chinese>友方派別</Chinese>
+                <Chinesesimp>友方派别</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm">
+				<Original>Sand Storm</Original>
+				<English>Sand Storm</English>
+                <Chinese>沙塵暴</Chinese>
+                <Chinesesimp>沙尘暴</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Random">
+				<Original>Random</Original>
+				<English>Random</English>
+                <Chinese>隨機</Chinese>
+                <Chinesesimp>随机</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Never">
+				<Original>Never</Original>
+				<English>Never</English>
+                <Chinese>關閉</Chinese>
+                <Chinesesimp>关闭</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_Always">
+				<Original>Always (at a random point)</Original>
+				<English>Always (at a random point)</English>
+                <Chinese>開啟 (在隨機地點)</Chinese>
+                <Chinesesimp>开启 (在随机地点)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_5Hours">
+				<Original>5 hours non stop</Original>
+				<English>5 hours non stop</English>
+                <Chinese>5小時內不間斷</Chinese>
+                <Chinesesimp>5小时内不间断</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_ScriptsUsed">
+				<Original>RickOShay's Dust Storm Script&lt;br/&gt;Phsyco Revive Script</Original>
+				<English>RickOShay's Dust Storm Script&lt;br/&gt;Phsyco Revive Script</English>
+                <Chinese>RickOShay的沙塵暴腳本&lt;br/&gt;Phsyco的復甦腳本</Chinese>
+                <Chinesesimp>RickOShay的沙尘暴脚本&lt;br/&gt;Phsyco的复苏脚本</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions1">
+				<Original>This is the default mission type.  There will be one main objective that is occupied by a heavy enemy army.\n\nYou will also have two optional mini missions, these mini missions will either give you intel on the main AO, or will help increase your reputation depending on the mission type.</Original>
+				<English>This is the default mission type.  There will be one main objective that is occupied by a heavy enemy army.\n\nYou will also have two optional mini missions, these mini missions will either give you intel on the main AO, or will help increase your reputation depending on the mission type.</English>
+                <Chinese>這是預設的任務形式。將會有一個主要目標被敵人嚴密的保護著。\n\n你將會收到兩個支線任務，完成這些任務將能讓你取得主要目標任務區內的一些情報，或者也可能是增加你的聲譽，是任務性質決定獎勵是什麼。</Chinese>
+                <Chinesesimp>这是预设的任务形式。将会有一个主要目标被敌人严密的保护着。\n\n你将会收到两个支线任务，完成这些任务将能让你取得主要目标任务区内的一些情报，或者也可能是增加你的声誉，是任务性质决定奖励是什么。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions2">
+				<Original>One main objective that is occupied by a heavy enemy army\n\nThere will be two mini missions, one will give you intel on the main location of the AO, be careful, as there is always a possiblity that the objective could be in the middle of the main AO!.\n\nThe other mini mission could be intel or may increase your reputation.</Original>
+				<English>One main objective that is occupied by a heavy enemy army\n\nThere will be two mini missions, one will give you intel on the main location of the AO, be careful, as there is always a possiblity that the objective could be in the middle of the main AO!.\n\nThe other mini mission could be intel or may increase your reputation.</English>
+                <Chinese>將會有一個主要目標被敵人嚴密的保護著。\n\n你將會收到兩個支線任務，其中一個任務將會為你提供主要任務區域的精確位置，但請小心，你也可能在前往執行支線任務的半路上誤入到主要任務區域!\n\n另一個任務可能會提供情報或是提高你的聲譽。</Chinese>
+                <Chinesesimp>将会有一个主要目标被敌人严密的保护着。\n\n你将会收到两个支线任务，其中一个任务将会为你提供主要任务区域的精确位置，但请小心，你也可能在前往执行支线任务的半路上误入到主要任务区域!\n\n另一个任务可能会提供情报或是提高你的声誉。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions3">
+				<Original>One main objective that is occupied by a heavy enemy army, no mini missions or intel required</Original>
+				<English>One main objective that is occupied by a heavy enemy army, no mini missions or intel required</English>
+                <Chinese>將會有一個主要目標被敵人嚴密的保護著，並沒有提供任何的支線任務。</Chinese>
+                <Chinesesimp>将会有一个主要目标被敌人严密的保护着，并没有提供任何的支线任务。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions4">
+				<Original>A single mini mission.\n\nThese mini missions could be very low enemy, high enemy, be aware that the area may be occupied by friendly rebels! or just a large civilian population (watch out though, some civs may be enemy undercover, or a friendly rebel may also be an enemy undercover!).</Original>
+				<English>A single mini mission.\n\nThese mini missions could be very low enemy, high enemy, be aware that the area may be occupied by friendly rebels! or just a large civilian population (watch out though, some civs may be enemy undercover, or a friendly rebel may also be an enemy undercover!).</English>
+                <Chinese>單一個迷你任務。\n\n在這種型態的任務中，敵人的數量可多可少，任務區域內也有可能出現友方的反抗軍! 也可能會是大量平民的集散地。(請小心，有些平民可能是敵人的臥底，有時也有友方的反抗軍在敵方陣營內執行臥底的任務!)</Chinese>
+                <Chinesesimp>单一个迷你任务。\n\n在这种型态的任务中，敌人的数量可多可少，任务区域内也有可能出现友方的反抗军! 也可能会是大量平民的集散地。(请小心，有些平民可能是敌人的卧底，有时也有友方的反抗军在敌方阵营内执行卧底的任务!)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions5">
+				<Original>Three mini missions.\n\nIf you select the type of mission below, all three will be the same, could be ideal for practicing the mini mission types, or you may want to have three HVTs to takeout.\n\nThese mini missions could be very low enemy, high enemy, be aware that the area may be occupied by friendly rebels! or jsut a large civilian population (watch out though, some civs may be enemy undercover, or a friendly rebel may also be an enemy undercover!).</Original>
+				<English>Three mini missions.\n\nIf you select the type of mission below, all three will be the same, could be ideal for practicing the mini mission types, or you may want to have three HVTs to takeout.\n\nThese mini missions could be very low enemy, high enemy, be aware that the area may be occupied by friendly rebels! or jsut a large civilian population (watch out though, some civs may be enemy undercover, or a friendly rebel may also be an enemy undercover!).</English>
+                <Chinese>三個迷你任務。\n\n假如你在下面選擇了任務類型，三個任務都將會是一樣的類型，這可以幫助你練習特定的任務類型，或者你想幹掉三個高價值目標也可以。\n\n在這些任務中，敵人的數量可多可少，任務區域內也有可能出現友方的反抗軍! 也可能會是大量平民的集散地。(請小心，有些平民可能是敵人的臥底，有時也有友方的反抗軍在敵方陣營內執行臥底的任務!)</Chinese>
+                <Chinesesimp>三个迷你任务。\n\n假如你在下面选择了任务类型，三个任务都将会是一样的类型，这可以帮助你练习特定的任务类型，或者你想干掉三个高价值目标也可以。\n\n在这些任务中，敌人的数量可多可少，任务区域内也有可能出现友方的反抗军! 也可能会是大量平民的集散地。(请小心，有些平民可能是敌人的卧底，有时也有友方的反抗军在敌方阵营内执行卧底的任务!)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions6">
+				<Original>You will start with 2 reputation, your aim is to work hard and become a highly reputable unit.  The higher your reputation the better equipment high command will allow you to use, however, losing these in battle will lower your reputation, also killing civs, losing units and other assets, killing friendly rebels and any other mistake will lower your reputation.\n\nIf you manage to get a high enough reputation(10 points), high command will assign a final heavy objective!</Original>
+				<English>You will start with 2 reputation, your aim is to work hard and become a highly reputable unit.  The higher your reputation the better equipment high command will allow you to use, however, losing these in battle will lower your reputation, also killing civs, losing units and other assets, killing friendly rebels and any other mistake will lower your reputation.\n\nIf you manage to get a high enough reputation(10 points), high command will assign a final heavy objective!</English>
+                <Chinese>你將會從2聲譽開始任務，你的目標將是盡可能的提高你的聲譽。擁有越多的聲譽值能讓你取得越好的裝備，然而如果你在任務中失去這些高聲譽的裝備後，你的聲譽將會降低，同樣如果不小心擊殺了平民、損失單位或者任何軍需品、殺死友方反抗軍等行為都會降低你的聲譽。\n\n假如你成功取得夠高的聲譽值(10點)，指揮部將會指派最終任務目標給你!</Chinese>
+                <Chinesesimp>你将会从2声誉开始任务，你的目标将是尽可能的提高你的声誉。拥有越多的声誉值能让你取得越好的装备，然而如果你在任务中失去这些高声誉的装备后，你的声誉将会降低，同样如果不小心击杀了平民、损失单位或者任何军需品、杀死友方反抗军等行为都会降低你的声誉。\n\n假如你成功取得够高的声誉值(10点)，指挥部将会指派最终任务目标给你!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName1">
+				<Original>Heavy Mission (with two optional sides)</Original>
+				<English>Heavy Mission (with two optional sides)</English>
+                <Chinese>重型任務 (有2個支線任務)</Chinese>
+                <Chinesesimp>重型任务 (有2个支线任务)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName2">
+				<Original>Heavy Mission (Intel required for AO Location)</Original>
+				<English>Heavy Mission (Intel required for AO Location)</English>
+                <Chinese>重型任務 (需要情報指明主任務區域的位置)</Chinese>
+                <Chinesesimp>重型任务 (需要情报指明主任务区域的位置)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName3">
+				<Original>Heavy Mission Only</Original>
+				<English>Heavy Mission Only</English>
+                <Chinese>僅有重型任務</Chinese>
+                <Chinesesimp>仅有重型任务</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName4">
+				<Original>Single Mission</Original>
+				<English>Single Mission</English>
+                <Chinese>單個任務</Chinese>
+                <Chinesesimp>单个任务</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName5">
+				<Original>Three Missions</Original>
+				<English>Three Missions</English>
+                <Chinese>三個任務</Chinese>
+                <Chinesesimp>三个任务</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName6">
+				<Original>Campaign</Original>
+				<English>Campaign</English>
+                <Chinese>戰役</Chinese>
+                <Chinesesimp>战役</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Sunny">
+				<Original>Sunny Clear</Original>
+				<English>Sunny Clear</English>
+                <Chinese>日間無雲</Chinese>
+                <Chinesesimp>日间无云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_DaytimeHeavyOvercast">
+				<Original>Daytime Heavy Overcast</Original>
+				<English>Daytime Heavy Overcast</English>
+                <Chinese>日間多雲</Chinese>
+                <Chinesesimp>日间多云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_DaytimeAverageOvercast">
+				<Original>Day average Overcast</Original>
+				<English>Day average Overcast</English>
+                <Chinese>日間少雲</Chinese>
+                <Chinesesimp>日间少云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_DarkNightClear">
+				<Original>Dark Night Clear</Original>
+				<English>Dark Night Clear</English>
+                <Chinese>夜間無雲</Chinese>
+                <Chinesesimp>夜间无云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_DarkNightHeavyOvercast">
+				<Original>Dark Night Heavy Overcast</Original>
+				<English>Dark Night Heavy Overcast</English>
+                <Chinese>夜間多雲</Chinese>
+                <Chinesesimp>夜间多云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_DarkNightAverageOvercast">
+				<Original>Dark Night Average overcast</Original>
+				<English>Dark Night Average overcast</English>
+                <Chinese>夜間少雲</Chinese>
+                <Chinesesimp>夜间少云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_EarlyMorning">
+				<Original>Early Morning</Original>
+				<English>Early Morning</English>
+                <Chinese>清晨</Chinese>
+                <Chinesesimp>清晨</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MoonNightClear">
+				<Original>Moon Night Clear</Original>
+				<English>Moon Night Clear</English>
+                <Chinese>月光無雲</Chinese>
+                <Chinesesimp>月光无云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MoonNightAverageOvercast">
+				<Original>Moon Night slight overcast</Original>
+				<English>Moon Night slight overcast</English>
+                <Chinese>月光少雲</Chinese>
+                <Chinesesimp>月光少云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MoonNightHeavyOvercast">
+				<Original>Moon Night heavy overcast</Original>
+				<English>Moon Night heavy overcast</English>
+                <Chinese>月光多雲</Chinese>
+                <Chinesesimp>月光多云</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_NVG_Real">
+				<Original>Realistic NVG</Original>
+				<English>Realistic NVG</English>
+                <Chinese>真實夜視鏡</Chinese>
+                <Chinesesimp>真实夜视镜</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_NVG_Allow">
+				<Original>Allowed</Original>
+				<English>Allowed</English>
+                <Chinese>允許使用夜視鏡</Chinese>
+                <Chinesesimp>允许使用夜视镜</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_NVG_NoAllow">
+				<Original>No NVG</Original>
+				<English>No NVG</English>
+                <Chinese>不允許使用夜視鏡</Chinese>
+                <Chinesesimp>不允许使用夜视镜</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Revive_No">
+				<Original>No revive</Original>
+				<English>No revive</English>
+                <Chinese>關閉復甦</Chinese>
+                <Chinesesimp>关闭复苏</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Revive_Guarantee">
+				<Original>Guarantee revive</Original>
+				<English>Guarantee revive</English>
+                <Chinese>一定可復甦</Chinese>
+                <Chinesesimp>一定可复苏</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Revive_Real1">
+				<Original>Realistic revive (critical hits will kill you instantly)</Original>
+				<English>Realistic revive (critical hits will kill you instantly)</English>
+                <Chinese>真實復甦 (重傷可導致單位直接死亡)</Chinese>
+                <Chinesesimp>真实复苏 (重伤可导致单位直接死亡)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Revive_Real2">
+				<Original>Realistic revive (only medics can revive with a medkit)</Original>
+				<English>Realistic revive (only medics can revive with a medkit)</English>
+                <Chinese>真實復甦 (只有醫護兵能使用醫療包進行復甦)</Chinese>
+                <Chinesesimp>真实复苏 (只有医护兵能使用医疗包进行复苏)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Revive_Real3">
+				<Original>Realistic, only medics, only near transport chopper, medi chopper, medi vehicle or medi facility at HQ</Original>
+				<English>Realistic, only medics, only near transport chopper, medi chopper, medi vehicle or medi facility at HQ</English>
+                <Chinese>真實復甦 (只有醫護兵帶著傷患靠近運輸/醫療直升機、基地內的醫療載具或是醫療設施時才能進行復甦)</Chinese>
+                <Chinesesimp>真实复苏 (只有医护兵带着伤患靠近运输/医疗直升机、基地内的医疗载具或是医疗设施时才能进行复苏)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Revive_Real4">
+				<Original>Realistic, only medics, only at HQ</Original>
+				<English>Realistic, only medics, only at HQ</English>
+                <Chinese>真實復甦 (只有醫護兵帶著傷患在基地內時才能進行復甦)</Chinese>
+                <Chinesesimp>真实复苏 (只有医护兵带着伤患在基地内时才能进行复苏)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_NearAO">
+				<Original>Near AO</Original>
+				<English>Near AO</English>
+                <Chinese>靠近任務區域</Chinese>
+                <Chinesesimp>靠近任务区域</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MainHQ">
+				<Original>Main HQ</Original>
+				<English>Main HQ</English>
+                <Chinese>在基地內</Chinese>
+                <Chinesesimp>在基地内</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType">
+				<Original>Mission Type:</Original>
+				<English>Mission Type:</English>
+                <Chinese>任務類型:</Chinese>
+                <Chinesesimp>任务类型:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType1">
+				<Original>Single random side mission</Original>
+				<English>Single random side mission</English>
+                <Chinese>單個支線任務: 隨機</Chinese>
+                <Chinesesimp>单个支线任务: 随机</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType2">
+				<Original>Double side: Random</Original>
+				<English>Double side: Random</English>
+                <Chinese>雙個支線任務: 隨機</Chinese>
+                <Chinesesimp>双个支线任务: 随机</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType3">
+				<Original>Main Mission: Random objective, no intel needed</Original>
+				<English>Main Mission: Random objective, no intel needed</English>
+                <Chinese>主任務: 隨機目標，不需要情報來定位</Chinese>
+                <Chinesesimp>主任务: 随机目标，不需要情报来定位</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType4">
+				<Original>Main Mission: Random Objective, intel required for main AO</Original>
+				<English>Main Mission: Random Objective, intel required for main AO</English>
+                <Chinese>主任務: 隨機目標，需要情報來定位主任務區域</Chinese>
+                <Chinesesimp>主任务: 随机目标，需要情报来定位主任务区域</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType5">
+				<Original>Training</Original>
+				<English>Training</English>
+                <Chinese>訓練</Chinese>
+                <Chinesesimp>训练</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType6">
+				<Original>single side: Hack Data</Original>
+				<English>single side: Hack Data</English>
+                <Chinese>單個支線任務: 駭取資料</Chinese>
+                <Chinesesimp>单个支线任务: 骇取资料</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType7">
+				<Original>single side: Speak with Informant</Original>
+				<English>single side: Speak with Informant</English>
+                <Chinese>單個支線任務: 與線人交談</Chinese>
+                <Chinesesimp>单个支线任务: 与线人交谈</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType8">
+				<Original>single side: Interrogate Officer</Original>
+				<English>single side: Interrogate Officer</English>
+                <Chinese>單個支線任務: 審問軍官</Chinese>
+                <Chinesesimp>单个支线任务: 审问军官</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType9">
+				<Original>single side: Bug Radio</Original>
+				<English>single side: Bug Radio</English>
+                <Chinese>單個支線任務: 轉送敵方通訊信號到總部</Chinese>
+                <Chinesesimp>单个支线任务: 转送敌方通讯信号到总部</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType10">
+				<Original>Double side: Get code, enter code (coming soon)</Original>
+				<English>Double side: Get code, enter code (coming soon)</English>
+                <Chinese>雙個支線任務: 取得密碼，輸入密碼(即將登場)</Chinese>
+                <Chinesesimp>双个支线任务: 取得密码，输入密码(即将登场)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType11">
+				<Original>Gather Intel(random) for Main location : Random</Original>
+				<English>Gather Intel(random) for Main location : Random</English>
+                <Chinese>取得情報(隨機)來定位主任務位置: 隨機</Chinese>
+                <Chinesesimp>取得情报(随机)来定位主任务位置: 随机</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType12">
+				<Original>Gather Intel(random) for Main location : Interrogate Officer</Original>
+				<English>Gather Intel(random) for Main location : Interrogate Officer</English>
+                <Chinese>取得情報(隨機)來定位主任務位置: 審問軍官</Chinese>
+                <Chinesesimp>取得情报(随机)来定位主任务位置: 审问军官</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType13">
+				<Original>Gather Intel(random) for Main location : Nuke (coming soon)</Original>
+				<English>Gather Intel(random) for Main location : Nuke (coming soon)</English>
+                <Chinese>取得情報(隨機)來定位主任務位置: 核彈(即將登場)</Chinese>
+                <Chinesesimp>取得情报(随机)来定位主任务位置: 核弹(即将登场)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_MissionType14">
+				<Original>Gather Intel(Radio) for Main location : Interrogate Officer</Original>
+				<English>Gather Intel(Radio) for Main location : Interrogate Officer</English>
+                <Chinese>取得情報(無線電)來定位主任務位置: 審問軍官</Chinese>
+                <Chinesesimp>取得情报(无线电)来定位主任务位置: 审问军官</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_MaxEnemy">
+				<Original>Maximum Enemies:</Original>
+				<English>Maximum Enemies:</English>
+                <Chinese>最大敵人數量:</Chinese>
+                <Chinesesimp>最大敌人数量:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_MaxEnemy_True">
+				<Original>True (WARNING ! this will mean some patrols will have around 9 units)</Original>
+				<English>True (WARNING ! this will mean some patrols will have around 9 units)</English>
+                <Chinese>是 (警告! 這將讓敵人巡邏隊的人數上升到9個單位)</Chinese>
+                <Chinesesimp>是 (警告! 这将让敌人巡逻队的人数上升到9个单位)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_True">
+				<Original>True</Original>
+				<English>True</English>
+                <Chinese>是</Chinese>
+                <Chinesesimp>是</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_False">
+				<Original>False</Original>
+				<English>False</English>
+                <Chinese>否</Chinese>
+                <Chinesesimp>否</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_WeatherTime">
+				<Original>Weather and Time:</Original>
+				<English>Weather and Time:</English>
+                <Chinese>天氣與時間:</Chinese>
+                <Chinesesimp>天气与时间:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_GPS">
+				<Original>Allow GPS:</Original>
+				<English>Allow GPS:</English>
+                <Chinese>允許使用GPS:</Chinese>
+                <Chinesesimp>允许使用GPS:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_NVG">
+				<Original>NVG:</Original>
+				<English>NVG:</English>
+                <Chinese>夜視鏡:</Chinese>
+                <Chinesesimp>夜视镜:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_NVG_PoorVis">
+				<Original>NVG with poor visibility</Original>
+				<English>NVG with poor visibility</English>
+                <Chinese>夜視鏡視線不良</Chinese>
+                <Chinesesimp>夜视镜视线不良</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_Revive">
+				<Original>Revive options:</Original>
+				<English>Revive options:</English>
+                <Chinese>復甦選項:</Chinese>
+                <Chinesesimp>复苏选项:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRGMdescription_Parameter_AI">
+				<Original>Allow AI insertion and extraction:</Original>
+				<English>Allow AI insertion and extraction:</English>
+                <Chinese>允許AI進入與撤離:</Chinese>
+                <Chinesesimp>允许AI进入与撤离:</Chinesesimp>
+			</Key>
+		</Container>
+		<Container name="GUI">
+			<Key ID="STR_TRGM2_defines_UNCHECKED">
+				<Original>UNCHECKED</Original>
+				<English>UNCHECKED</English>
+                <Chinese>未勾選</Chinese>
+                <Chinesesimp>未勾选</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_defines_CHECKED">
+				<Original>CHECKED</Original>
+				<English>CHECKED</English>
+                <Chinese>已勾選</Chinese>
+                <Chinesesimp>已勾选</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_defines_OK">
+				<Original>OK</Original>
+				<English>OK</English>
+                <Chinese>確定</Chinese>
+                <Chinesesimp>确定</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_defines_Cancel">
+				<Original>Cancel</Original>
+				<English>Cancel</English>
+                <Chinese>取消</Chinese>
+                <Chinesesimp>取消</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_Weather">
+				<Original>Weather</Original>
+				<English>Weather</English>
+                <Chinese>天氣</Chinese>
+                <Chinesesimp>天气</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_Details">
+				<Original>Details about it here</Original>
+				<English>Details about it here</English>
+                <Chinese>它的細節在這裡</Chinese>
+                <Chinesesimp>它的细节在这里</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_HardcoreReputation">
+				<Original>Hardcore Reputation</Original>
+				<English>Hardcore Reputation</English>
+                <Chinese>困難聲譽</Chinese>
+                <Chinesesimp>困难声誉</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_NVG">
+				<Original>NVG</Original>
+				<English>NVG</English>
+                <Chinese>夜視鏡</Chinese>
+                <Chinesesimp>夜视镜</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_Revive">
+				<Original>Revive</Original>
+				<English>Revive</English>
+                <Chinese>復甦</Chinese>
+                <Chinesesimp>复苏</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_Begin">
+				<Original>Begin</Original>
+				<English>Begin</English>
+                <Chinese>開始</Chinese>
+                <Chinesesimp>开始</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_AdvOpt">
+				<Original>Advanced Options</Original>
+				<English>Advanced Options</English>
+                <Chinese>進階選項</Chinese>
+                <Chinesesimp>进阶选项</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_Objective">
+				<Original>Objective</Original>
+				<English>Objective</English>
+                <Chinese>目標</Chinese>
+                <Chinesesimp>目标</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_HardcoreReputation_HelpText">
+				<Original>You will have to keep your teams Reputation up.\nKilling civs, losing main assets and units, killing friendly rebels or any other mistakes will lower your Reputation.\nIf your Reputation is too low, and this option is enabled, your mission will be unassigned and you will have to return to base! (If this option is disabled, then you will just fail a task of keeping your rep above average)\n(I introduced this point system to make mistakes more costly, to make you think carefully about your actions\nand to feel any vehicle assets you use are not expendable!</Original>
+				<English>You will have to keep your teams Reputation up.\nKilling civs, losing main assets and units, killing friendly rebels or any other mistakes will lower your Reputation.\nIf your Reputation is too low, and this option is enabled, your mission will be unassigned and you will have to return to base! (If this option is disabled, then you will just fail a task of keeping your rep above average)\n(I introduced this point system to make mistakes more costly, to make you think carefully about your actions\nand to feel any vehicle assets you use are not expendable!</English>
+                <Chinese>你必須讓你的隊伍保持一定的聲譽以上。\n殺害平民、損失重要裝備與單位、殺害友方反抗軍或任何失誤都會減低你們的聲譽。\n假如你的聲譽過低，而且本選項有開啟的話，你的任務將會自動取消並命令你立刻返回基地! (假如本選項沒有開啟，那你只是在保持聲譽的這項任務上失敗而已)\n(我引進這個系統是為了讓每個失誤更加加重，來強迫玩家好好思考每個行動的後果，\n並讓你覺得每台載具並不是隨便的消耗品!</Chinese>
+                <Chinesesimp>你必须让你的队伍保持一定的声誉以上。\n杀害平民、损失重要装备与单位、杀害友方反抗军或任何失误都会减低你们的声誉。\n假如你的声誉过低，而且本选项有开启的话，你的任务将会自动取消并命令你立刻返回基地! (假如本选项没有开启，那你只是在保持声誉的这项任务上失败而已)\n(我引进这个系统是为了让每个失误更加加重，来强迫玩家好好思考每个行动的后果，\n并让你觉得每台载具并不是随便的消耗品!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_StartLocation">
+				<Original>Start Location</Original>
+				<English>Start Location</English>
+                <Chinese>出發位置</Chinese>
+                <Chinesesimp>出发位置</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_StartLocation_HelpText">
+				<Original>If you select to start Near AO, this you will start near the AO as a fast response team,\nno need for transport.\n\nYou will be allocated a drivable vehicle. Otherwise will start at the main base\nwith transport chopper to fly you to a choosen LZ</Original>
+				<English>If you select to start Near AO, this you will start near the AO as a fast response team,\nno need for transport.\n\nYou will be allocated a drivable vehicle. Otherwise will start at the main base\nwith transport chopper to fly you to a choosen LZ</English>
+                <Chinese>假如你選擇靠近任務區域，這將讓系統把你放在任務區域周遭，\n你的行動將會較像快速應變部隊，並不需要運輸部隊接送。\n\n假使從基地出發的話，你可以擁有一台\n運輸直升機運送你的部隊到你指定的降落點</Chinese>
+                <Chinesesimp>假如你选择靠近任务区域，这将让系统把你放在任务区域周遭，\n你的行动将会较像快速应变部队，并不需要运输部队接送。\n\n假使从基地出发的话，你可以拥有一台\n运输直升机运送你的部队到你指定的降落点</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_LoadLocal">
+				<Original>Load Local Campaign</Original>
+				<English>Load Local Campaign</English>
+                <Chinese>載入本地戰役存檔</Chinese>
+                <Chinesesimp>载入本地战役存档</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_LoadLocal_HelpText">
+				<Original>Will load the last campaign save data for the current map (that was saved by you only... i.e. the current person selecting mission parameters)</Original>
+				<English>Will load the last campaign save data for the current map (that was saved by you only... i.e. the current person selecting mission parameters)</English>
+                <Chinese>將從當前地圖載入上次戰役最後的存檔 (你自己儲存的存檔... 伺服器上通常為管理員負責)</Chinese>
+                <Chinesesimp>将从当前地图载入上次战役最后的存档 (你自己储存的存档... 伺服器上通常为管理员负责)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_LoadGlobal">
+				<Original>Load Global Campaign</Original>
+				<English>Load Global Campaign</English>
+                <Chinese>載入全域戰役存檔</Chinese>
+                <Chinesesimp>载入全域战役存档</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_LoadGlobal_HelpText">
+				<Original>Will load any previous campaign global saves for any map running TRGM2 (that was saved by you only... i.e. the current person selecting mission parameters</Original>
+				<English>Will load any previous campaign global saves for any map running TRGM2 (that was saved by you only... i.e. the current person selecting mission parameters</English>
+                <Chinese>將從全域存檔中調用任何運行TRGM2任務的存檔並載入之 (你自己儲存的存檔... 伺服器上通常為管理員負責)</Chinese>
+                <Chinesesimp>将从全域存档中调用任何运行TRGM2任务的存档并载入之 (你自己储存的存档... 伺服器上通常为管理员负责)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_dialogs_Back">
+				<Original>Back</Original>
+				<English>Back</English>
+                <Chinese>返回</Chinese>
+                <Chinesesimp>返回</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogAdvancedMissionSettings_AdvOpt">
+				<Original>Advanced Options (more options soon!)</Original>
+				<English>Advanced Options (more options soon!)</English>
+                <Chinese>進階選項 (更多選項將慢慢加入!)</Chinese>
+                <Chinesesimp>进阶选项 (更多选项将慢慢加入!)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogAdvancedMissionSettings_CustomEnemy">
+				<Original>Custom Enemy Classnames</Original>
+				<English>Custom Enemy Classnames</English>
+                <Chinese>自訂敵人Classnames</Chinese>
+                <Chinesesimp>自订敌人Classnames</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogAdvancedMissionSettings_CustomLoadouts">
+				<Original>Custom Team Loadouts</Original>
+				<English>Custom Team Loadouts</English>
+                <Chinese>自訂隊伍裝備</Chinese>
+                <Chinesesimp>自订队伍装备</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogAdvancedMissionSettings_CustomFriend_Hint">
+				<Original>You have friendly class names active, this will overright friendly faction settings you have selected above</Original>
+				<English>You have friendly class names active, this will overright friendly faction settings you have selected above</English>
+                <Chinese>你已經自行設定友方的Classnames，這將覆寫任何你在上面的派別設定。</Chinese>
+                <Chinesesimp>你已经自行设定友方的Classnames，这将覆写任何你在上面的派别设定。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogAdvancedMissionSettings_CustomEnemy_Hint">
+				<Original>You have friendly class names active, this will overright friendly faction settings you have selected above</Original>
+				<English>You have friendly class names active, this will overright friendly faction settings you have selected above</English>
+                <Chinese>你已經自行設定敵方的Classnames，這將覆寫任何你在上面的派別設定。</Chinese>
+                <Chinesesimp>你已经自行设定敌方的Classnames，这将覆写任何你在上面的派别设定。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogEnemyFaction_SetEnemyFaction">
+				<Original>Set enemy faction classes</Original>
+				<English>Set enemy faction classes</English>
+                <Chinese>設定敵方派別</Chinese>
+                <Chinesesimp>设定敌方派别</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogEnemyFaction_URL">
+				<Original>Visit www.trgm2.com/CustomEnemyClasses.html for all unit types that can be overwritten</Original>
+				<English>Visit www.trgm2.com/CustomEnemyClasses.html for all unit types that can be overwritten</English>
+                <Chinese>請訪問www.trgm2.com/CustomEnemyClasses.html網頁來得知所有可以被覆寫的單位類型</Chinese>
+                <Chinesesimp>请访问www.trgm2.com/CustomEnemyClasses.html网页来得知所有可以被覆写的单位类型</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogEnemyFaction_SaveAndBack">
+				<Original>Save and Back</Original>
+				<English>Save and Back</English>
+                <Chinese>保存並返回</Chinese>
+                <Chinesesimp>保存并返回</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogEnemyFaction_ErrorMsg_NotExist">
+				<Original> - Class doesnt exist: %1 (class: %2) </Original>
+				<English> - Class doesnt exist: %1 (class: %2) </English>
+                <Chinese> - 類別並不存在: %1 (類別: %2) </Chinese>
+                <Chinesesimp> - 类别并不存在: %1 (类别: %2) </Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogEnemyFaction_ErrorMsg_CantEmpty">
+				<Original> - Class is empty: %1 (class: %2) </Original>
+				<English> - Class is empty: %1 (class: %2) </English>
+                <Chinese> - 類別為空: %1 (類別: %2) </Chinese>
+                <Chinesesimp> - 类别为空: %1 (类别: %2) </Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogTeamLoadouts_SetLoadout">
+				<Original>Set unit loadouts</Original>
+				<English>Set unit loadouts</English>
+                <Chinese>設定單位裝備</Chinese>
+                <Chinesesimp>设定单位装备</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogTeamLoadouts_URL">
+				<Original>Visit www.trgm2.com/CustomLoadouts.html for all unit types that can be overwritten</Original>
+				<English>Visit www.trgm2.com/CustomLoadouts.html for all unit types that can be overwritten</English>
+                <Chinese>請訪問www.trgm2.com/CustomLoadouts.html網頁來得知所有可以被覆寫的單位類型</Chinese>
+                <Chinesesimp>请访问www.trgm2.com/CustomLoadouts.html网页来得知所有可以被覆写的单位类型</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_openDialogTeamLoadouts_ErrorMsg_SetNotCorrectly">
+				<Original>something isnt set correctly</Original>
+				<English>something isnt set correctly</English>
+                <Chinese>某東西設定並不正確</Chinese>
+                <Chinesesimp>某东西设定并不正确</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_SetParamsAndBegin_ErrorMsg_NoData">
+				<Original>No data found! make sure you are using the same profile that you saved the last mission with</Original>
+				<English>No data found! make sure you are using the same profile that you saved the last mission with</English>
+                <Chinese>沒找到資料! 請確保你當前的使用者是使用之前負責存檔的那個使用者</Chinese>
+                <Chinesesimp>没找到资料! 请确保你当前的使用者是使用之前负责存档的那个使用者</Chinesesimp>
+			</Key>
+		</Container>
+		<Container name="RandScript">
+			<Key ID="STR_TRGM2_TRENDfncsetOtherAreaStuff_CheckEnemyComms">
+				<Original>Check for enemy comms</Original>
+				<English>Check for enemy comms</English>
+                <Chinese>檢查敵人的通訊</Chinese>
+                <Chinesesimp>检查敌人的通讯</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRENDfncsetOtherAreaStuff_MarkerText_Camp">
+				<Original>Camp</Original>
+				<English>Camp</English>
+                <Chinese>營地</Chinese>
+                <Chinesesimp>营地</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_TRENDfncsetOtherAreaStuff_MarkerText_ArmedBoat">
+				<Original>Armed Boat</Original>
+				<English>Armed Boat</English>
+                <Chinese>武裝船隻</Chinese>
+                <Chinesesimp>武装船只</Chinesesimp>
+			</Key>	
+			<Key ID="STR_TRGM2_trendFunctions_OccupiedByFriendRebel">
+				<Original>Occupied by friendly rebels</Original>
+				<English>Occupied by friendly rebels</English>
+                <Chinese>被友方反抗軍佔領</Chinese>
+                <Chinesesimp>被友方反抗军占领</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_trendFunctions_TalkToLeader">
+				<Original>Talk to leader</Original>
+				<English>Talk to leader</English>
+                <Chinese>與隊長交談</Chinese>
+                <Chinesesimp>与队长交谈</Chinesesimp>
+			</Key>
+		</Container>
+		<Container name="TGM">
+			<Key ID="STR_TRGM2_vehicledrop_spawn_VehicleDrop">
+				<Original>Vehicle Para drop on its way, eta 1 min.</Original>
+				<English>Vehicle Para drop on its way, eta 1 min.</English>
+                <Chinese>載具空投已上路，預計1分鐘內抵達。</Chinese>
+                <Chinesesimp>载具空投已上路，预计1分钟内抵达。</Chinesesimp>
+			</Key>
+		</Container>
+	</Package>
+	<Package name="AISFolder">
+		<Container name="Core">
+			<Key ID="STR_TRGM2_fnprogressShowBar_ObjectInUse">
+				<Original>Object in use</Original>
+				<English>Object in use</English>
+                <Chinese>物件正被使用中</Chinese>
+                <Chinesesimp>物件正被使用中</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnprogressShowBar_Abbort">
+				<Original>Abbort...</Original>
+				<English>Abbort...</English>
+                <Chinese>取消中...</Chinese>
+                <Chinesesimp>取消中...</Chinesesimp>
+			</Key>
+		</Container>
+		<Container name="Effects">
+			<Key ID="STR_TRGM2_fninjuredMarker_Down">
+				<Original> down</Original>
+				<English> down</English>
+                <Chinese>倒下</Chinese>
+                <Chinesesimp>倒下</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnbleeding_Stabilized">
+				<Original>You are stabilized.</Original>
+				<English>You are stabilized.</English>
+                <Chinese>你已經穩定了。</Chinese>
+                <Chinesesimp>你已经稳定了。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnbleeding_TooLate">
+				<Original>It's to late for you.</Original>
+				<English>It's to late for you.</English>
+                <Chinese>你已經太遲了。</Chinese>
+                <Chinesesimp>你已经太迟了。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnbleeding_BleedoutSec">
+				<Original>Bleedout in %1 Seconds</Original>
+				<English>Bleedout in %1 Seconds</English>
+                <Chinese>%1秒後將失血致死</Chinese>
+                <Chinesesimp>%1秒后将失血致死</Chinesesimp>
+			</Key>
+		</Container>
+		<Container name="System">
+			<Key ID="STR_TRGM2_fndiary_EDUCATION0">
+				<Original>Everyone can revive</Original>
+				<English>Everyone can revive</English>
+                <Chinese>所有人都可復甦</Chinese>
+                <Chinesesimp>所有人都可复苏</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_EDUCATION1">
+				<Original>Everybody with a First Aid Kit or Medkit</Original>
+				<English>Everybody with a First Aid Kit or Medkit</English>
+                <Chinese>有急救包或醫療包的人可以復甦</Chinese>
+                <Chinesesimp>有急救包或医疗包的人可以复苏</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_EDUCATION2">
+				<Original>Only medics can revive</Original>
+				<English>Only medics can revive</English>
+                <Chinese>只有醫護兵能進行復甦</Chinese>
+                <Chinesesimp>只有医护兵能进行复苏</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_InstantDeath">
+				<Original>Heavy damage can end in insta-death</Original>
+				<English>Heavy damage can end in insta-death</English>
+                <Chinese>重傷會導致直接死亡</Chinese>
+                <Chinesesimp>重伤会导致直接死亡</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_NoInstantDeath">
+				<Original>You are protected from insta-death</Original>
+				<English>You are protected from insta-death</English>
+                <Chinese>玩家並不會直接死亡</Chinese>
+                <Chinesesimp>玩家并不会直接死亡</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_TotalHeal">
+				<Original>completely healed</Original>
+				<English>completely healed</English>
+                <Chinese>完全醫療</Chinese>
+                <Chinesesimp>完全医疗</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_SepHeal">
+				<Original>separately healing action needed</Original>
+				<English>separately healing action needed</English>
+                <Chinese>傷口需分開治療</Chinese>
+                <Chinesesimp>伤口需分开治疗</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_AISSettings">
+				<Original>AIS Settings</Original>
+				<English>AIS Settings</English>
+                <Chinese>AIS設定</Chinese>
+                <Chinesesimp>AIS设定</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_MedicalEducation">
+				<Original>Medical Education</Original>
+				<English>Medical Education</English>
+                <Chinese>醫療能力</Chinese>
+                <Chinesesimp>医疗能力</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_WhoCanRevive">
+				<Original>Who can revive:</Original>
+				<English>Who can revive:</English>
+                <Chinese>可以復甦的單位:</Chinese>
+                <Chinesesimp>可以复苏的单位:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_HeavyDamageHandling">
+				<Original>Heavy Damage Handling</Original>
+				<English>Heavy Damage Handling</English>
+                <Chinese>重傷狀況設定</Chinese>
+                <Chinesesimp>重伤状况设定:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_ReviveChance">
+				<Original>Revive Chance:</Original>
+				<English>Revive Chance:</English>
+                <Chinese>復甦機會:</Chinese>
+                <Chinesesimp>复苏机会:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_BleedoutTime">
+				<Original>Bleedout Time</Original>
+				<English>Bleedout Time</English>
+                <Chinese>失血限時</Chinese>
+                <Chinesesimp>失血限时</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_BleedoutTime">
+				<Original>Average Bleedout Time:</Original>
+				<English>Average Bleedout Time:</English>
+                <Chinese>平均失血致死時間:</Chinese>
+                <Chinesesimp>平均失血致死时间:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_HealingStatus">
+				<Original>Healing Status</Original>
+				<English>Healing Status</English>
+                <Chinese>醫療狀況</Chinese>
+                <Chinesesimp>医疗状况</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_AfterDamage">
+				<Original>Damage status after revive:</Original>
+				<English>Damage status after revive:</English>
+                <Chinese>復甦後的醫療狀況:</Chinese>
+                <Chinesesimp>复苏后的医疗状况:</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_FirstAidSystem">
+				<Original>First Aid System</Original>
+				<English>First Aid System</English>
+                <Chinese>急救系統</Chinese>
+                <Chinesesimp>急救系统</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_AboutAndCredits">
+				<Original>About and Credits</Original>
+				<English>About and Credits</English>
+                <Chinese>關於作者</Chinese>
+                <Chinesesimp>关于作者</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_AboutAndCreditsDesc">
+				<Original>
+&lt;font face='PuristaMedium' size=18 color='#ffffff'&gt;Made by: &lt;/font&gt;&lt;font face='PuristaMedium' size=25 color='#8E8E8E'&gt;Psychobastard&lt;/font&gt;&lt;br/&gt;
+&lt;font face='PuristaMedium' size=18 color='#ffffff'&gt;Version: &lt;/font&gt;&lt;font face='PuristaMedium' size=20 color='#ffffff'&gt;21022016&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;
+&lt;font face='PuristaMedium' size=30 color='#014EE3'&gt;Credits&lt;/font&gt;&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;BonInf*&lt;/font&gt; for the first multiplayer compatible version (Arma 2)&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;BI&lt;/font&gt; for the design idea (Wounding module Arma 2)&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;Alwarren&lt;/font&gt; for his feedback and fixes&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;Lukio&lt;/font&gt; for his text revisions and better translations&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;NetFusion&lt;/font&gt; for the way of handling interactions&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;ACE3 Team&lt;/font&gt; for damage handling of droping units&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;CBA Team&lt;/font&gt; for some functions
+</Original>
+				<English>
+&lt;font face='PuristaMedium' size=18 color='#ffffff'&gt;Made by: &lt;/font&gt;&lt;font face='PuristaMedium' size=25 color='#8E8E8E'&gt;Psychobastard&lt;/font&gt;&lt;br/&gt;
+&lt;font face='PuristaMedium' size=18 color='#ffffff'&gt;Version: &lt;/font&gt;&lt;font face='PuristaMedium' size=20 color='#ffffff'&gt;21022016&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;
+&lt;font face='PuristaMedium' size=30 color='#014EE3'&gt;Credits&lt;/font&gt;&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;BonInf*&lt;/font&gt; for the first multiplayer compatible version (Arma 2)&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;BI&lt;/font&gt; for the design idea (Wounding module Arma 2)&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;Alwarren&lt;/font&gt; for his feedback and fixes&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;Lukio&lt;/font&gt; for his text revisions and better translations&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;NetFusion&lt;/font&gt; for the way of handling interactions&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;ACE3 Team&lt;/font&gt; for damage handling of droping units&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;CBA Team&lt;/font&gt; for some functions
+</English>
+                <Chinese>
+&lt;font face='PuristaMedium' size=18 color='#ffffff'&gt;作者:&lt;/font&gt;&lt;font face='PuristaMedium' size=25 color='#8E8E8E'&gt;Psychobastard&lt;/font&gt;&lt;br/&gt;
+&lt;font face='PuristaMedium' size=18 color='#ffffff'&gt;版本:&lt;/font&gt;&lt;font face='PuristaMedium' size=20 color='#ffffff'&gt;21022016&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;
+&lt;font face='PuristaMedium' size=30 color='#014EE3'&gt;工作人員&lt;/font&gt;&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;BonInf*&lt;/font&gt;製作出第一個多人遊戲版本(Arma 2)&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;BI&lt;/font&gt;給出設計理念(Arma 2的受傷系統)&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;Alwarren&lt;/font&gt;給予建議與修正&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;Lukio&lt;/font&gt;修訂詞彙並給予更好的翻譯&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;NetFusion&lt;/font&gt;給予更好的互動系統&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;ACE3團隊&lt;/font&gt;製作掉落單位的受傷系統&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;CBA團隊&lt;/font&gt;製作一些功能
+</Chinese>
+                <Chinesesimp>
+&lt;font face='PuristaMedium' size=18 color='#ffffff'&gt;作者:&lt;/font&gt;&lt;font face='PuristaMedium' size=25 color='#8E8E8E'&gt;Psychobastard&lt;/font&gt;&lt;br/&gt;
+&lt;font face='PuristaMedium' size=18 color='#ffffff'&gt;版本:&lt;/font&gt;&lt;font face='PuristaMedium' size=20 color='#ffffff'&gt;21022016&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;
+&lt;font face='PuristaMedium' size=30 color='#014EE3'&gt;工作人员&lt;/font&gt;&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;BonInf*&lt;/font&gt;制作出第一个多人游戏版本(Arma 2)&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;BI&lt;/font&gt;给出设计理念(Arma 2的受伤系统)&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;Alwarren&lt;/font&gt;给予建议与修正&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;Lukio&lt;/font&gt;修订词汇并给予更好的翻译&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;NetFusion&lt;/font&gt;给予更好的互动系统&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;ACE3团队&lt;/font&gt;制作掉落单位的受伤系统&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=18 color='#8E8E8E'&gt;CBA团队&lt;/font&gt;制作一些功能
+</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_Instructions">
+				<Original>Instructions</Original>
+				<English>Instructions</English>
+                <Chinese>說明</Chinese>
+                <Chinesesimp>说明></Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_InstructionsDesc">
+				<Original>
+&lt;font face='PuristaMedium' size=22 color='#014EE3'&gt;If you are unconscious:&lt;/font&gt;&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;Press 'FORWARD'&lt;/font&gt; to go prone and fire your current weapon.&lt;br/&gt;&lt;br/&gt;
+- You can &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;CRAWL&lt;/font&gt; to a safe position.&lt;br/&gt;&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;Press 'H'&lt;/font&gt; key to call friendly AI for help.&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+&lt;font face='PuristaMedium' size=22 color='#014EE3'&gt;How to give first aid:&lt;/font&gt;&lt;br/&gt;
+- Move close to an unconscious unit and select &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'Stabilize'&lt;/font&gt; to stop heavy bleeding. This will prevent the injured unit from bleedout. (death)&lt;br/&gt;&lt;br/&gt;
+- Move close to an unconscious unit and select &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'First Aid'&lt;/font&gt; to revive the unit.&lt;br/&gt;&lt;br/&gt;
+- If it is needed and you want to &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'Abbort'&lt;/font&gt; a revive process, simply press 'ESC' Button.&lt;br/&gt;&lt;br/&gt;
+- Move close to an unconscious unit and select &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'Drag'&lt;/font&gt; to drag the body out of the line of fire (Mousewheel menu).&lt;br/&gt;&lt;br/&gt;
+- While you are dragging a unit, you can select &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'Carry'&lt;/font&gt; to carry the unit on your shoulders (better to cover long distances).&lt;br/&gt;&lt;br/&gt;
+- In some cases you need medical equipment (First Aid Kit or Medkit) or must be a medic to start the 'First aid' action.
+</Original>
+				<English>
+&lt;font face='PuristaMedium' size=22 color='#014EE3'&gt;If you are unconscious:&lt;/font&gt;&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;Press 'FORWARD'&lt;/font&gt; to go prone and fire your current weapon.&lt;br/&gt;&lt;br/&gt;
+- You can &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;CRAWL&lt;/font&gt; to a safe position.&lt;br/&gt;&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;Press 'H'&lt;/font&gt; key to call friendly AI for help.&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+&lt;font face='PuristaMedium' size=22 color='#014EE3'&gt;How to give first aid:&lt;/font&gt;&lt;br/&gt;
+- Move close to an unconscious unit and select &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'Stabilize'&lt;/font&gt; to stop heavy bleeding. This will prevent the injured unit from bleedout. (death)&lt;br/&gt;&lt;br/&gt;
+- Move close to an unconscious unit and select &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'First Aid'&lt;/font&gt; to revive the unit.&lt;br/&gt;&lt;br/&gt;
+- If it is needed and you want to &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'Abbort'&lt;/font&gt; a revive process, simply press 'ESC' Button.&lt;br/&gt;&lt;br/&gt;
+- Move close to an unconscious unit and select &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'Drag'&lt;/font&gt; to drag the body out of the line of fire (Mousewheel menu).&lt;br/&gt;&lt;br/&gt;
+- While you are dragging a unit, you can select &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'Carry'&lt;/font&gt; to carry the unit on your shoulders (better to cover long distances).&lt;br/&gt;&lt;br/&gt;
+- In some cases you need medical equipment (First Aid Kit or Medkit) or must be a medic to start the 'First aid' action.
+</English>
+                <Chinese>
+&lt;font face='PuristaMedium' size=22 color='#014EE3'&gt;假如你在昏厥模式下:&lt;/font&gt;&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;按下'前進'&lt;/font&gt;來進入趴下的模式並可以射擊武器。&lt;br/&gt;&lt;br/&gt;
+- 你可以&lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;爬&lt;/font&gt;到安全的位置。&lt;br/&gt;&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;按下'H'&lt;/font&gt;按鍵呼叫友軍AI來幫助你。&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+&lt;font face='PuristaMedium' size=22 color='#014EE3'&gt;假如你要給予他人急救:&lt;/font&gt;&lt;br/&gt;
+- 靠近到昏厥單位的旁邊並選擇&lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'穩定'&lt;/font&gt;功能來為單位止血。這將阻止該單位失血過多致死。&lt;br/&gt;&lt;br/&gt;
+- 靠近到昏厥單位的旁邊並選擇&lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'急救'&lt;/font&gt;來復甦該單位。&lt;br/&gt;&lt;br/&gt;
+- 假如你需要&lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'取消'&lt;/font&gt;復甦的流程，單純按下'ESC'即可取消復甦流程。&lt;br/&gt;&lt;br/&gt;
+- 靠近到昏厥單位的旁邊並選擇&lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'拖行'&lt;/font&gt;來將其帶離火線。&lt;br/&gt;&lt;br/&gt;
+- 當你在拖行單位時，你可以選擇&lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'背負'&lt;/font&gt;來揹起該單位(適合穿過長距離的範圍)。&lt;br/&gt;&lt;br/&gt;
+- 在某些情況下你必須擁有急救包或醫療箱，或者必須是一位醫護兵才能使用'急救'的動作。
+</Chinese>
+                <Chinesesimp>
+&lt;font face='PuristaMedium' size=22 color='#014EE3'&gt;假如你在昏厥模式下:&lt;/font&gt;&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;按下'前进'&lt;/font&gt;来进入趴下的模式并可以射击武器。&lt;br/&gt;&lt;br/&gt;
+- 你可以&lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;爬&lt;/font&gt;到安全的位置。&lt;br/&gt;&lt;br/&gt;
+- &lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;按下'H'&lt;/font&gt;按键呼叫友军AI来帮助你。&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+&lt;font face='PuristaMedium' size=22 color='#014EE3'&gt;假如你要给予他人急救:&lt;/font&gt;&lt;br/&gt;
+- 靠近到昏厥单位的旁边并选择&lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'稳定'&lt;/font&gt;功能来为单位止血。这将阻止该单位失血过多致死。&lt;br/&gt;&lt;br/&gt;
+- 靠近到昏厥单位的旁边并选择&lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'急救'&lt;/font&gt;来复苏该单位。&lt;br/&gt;&lt;br/&gt;
+- 假如你需要&lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'取消'&lt;/font&gt;复苏的流程，单纯按下'ESC'即可取消复苏流程。&lt;br/&gt;&lt;br/&gt;
+- 靠近到昏厥单位的旁边并选择&lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'拖行'&lt;/font&gt;来将其带离火线。&lt;br/&gt;&lt;br/&gt;
+- 当你在拖行单位时，你可以选择&lt;font face='PuristaMedium' size=15 color='#8E8E8E'&gt;'背负'&lt;/font&gt;来背起该单位(适合穿过长距离的范围)。&lt;br/&gt;&lt;br/&gt;
+- 在某些情况下你必须拥有急救包或医疗箱，或者必须是一位医护兵才能使用'急救'的动作。
+</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_AboutWoundingDeath">
+				<Original>About wounding / death:</Original>
+				<English>About wounding / death:</English>
+                <Chinese>關於受傷/死亡:</Chinese>
+                <Chinesesimp>关于受伤/死亡:></Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_AboutWoundingDeathDesc">
+				<Original>If a unit receives too much damage, the unit goes unconscious. This means that the unit starts to bleed out and needs help from other units.&lt;br/&gt;&lt;br/&gt;If someone comes to help, he can stop the bleeding to prevent the injured from bleeding out and die. After the unit is stabilized you can start the first aid process to revive the unit. After a unit is revived maybe they need a regular healing process too.&lt;br/&gt;&lt;br/&gt;If nobody comes to help the unit eventually bleeds out. The time depends on the amount of damage the unit received. Everyone can stabilize unconscious units. The ability to start the first aid process can depend on the medical education. (medic or not, medical equipment)&lt;br/&gt;&lt;br/&gt;It is possible to load/unload wounded units in vehicles to bring them out of a dangerous area or evacuate them to a field hospital.</Original>
+				<English>If a unit receives too much damage, the unit goes unconscious. This means that the unit starts to bleed out and needs help from other units.&lt;br/&gt;&lt;br/&gt;If someone comes to help, he can stop the bleeding to prevent the injured from bleeding out and die. After the unit is stabilized you can start the first aid process to revive the unit. After a unit is revived maybe they need a regular healing process too.&lt;br/&gt;&lt;br/&gt;If nobody comes to help the unit eventually bleeds out. The time depends on the amount of damage the unit received. Everyone can stabilize unconscious units. The ability to start the first aid process can depend on the medical education. (medic or not, medical equipment)&lt;br/&gt;&lt;br/&gt;It is possible to load/unload wounded units in vehicles to bring them out of a dangerous area or evacuate them to a field hospital.</English>
+                <Chinese>假如你的單位受到過多的傷害，你將會暈厥。你的單位將會開始出血並需要其他人的幫助。&lt;br/&gt;&lt;br/&gt;假如有某人過來你旁邊，他可以先幫你止血，防止你失血致死。在穩定住傷口後就可以開始進行復甦的程序。在你被復甦後可能仍須一些標準的醫療步驟&lt;br/&gt;&lt;br/&gt;在你昏倒的期間經過一定秒數後將會失血致死，而這個秒數是來自於當初你受到多少傷害來計算的。所有人都可以幫助別人穩定傷口(止血)。但使用急救包進行復甦的動作就需要一些醫療專長的人才了。(醫護兵或擁有醫護兵的裝備)&lt;br/&gt;&lt;br/&gt;受傷的單位是有可能被裝載/卸載到載具上，方便撤離傷患到安全的地方或野戰醫院。</Chinese>
+                <Chinesesimp>假如你的单位受到过多的伤害，你将会晕厥。你的单位将会开始出血并需要其他人的帮助。&lt;br/&gt;&lt;br/&gt;假如有某人过来你旁边，他可以先帮你止血，防止你失血致死。在稳定住伤口后就可以开始进行复苏的程序。在你被复苏后可能仍须一些标准的医疗步骤&lt;br/&gt;&lt;br/&gt;在你昏倒的期间经过一定秒数后将会失血致死，而这个秒数是来自于当初你受到多少伤害来计算的。所有人都可以帮助别人稳定伤口(止血)。但使用急救包进行复苏的动作就需要一些医疗专长的人才了。(医护兵或拥有医护兵的装备)&lt;br/&gt;&lt;br/&gt;受伤的单位是有可能被装载/卸载到载具上，方便撤离伤患到安全的地方或野战医院。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_Description">
+				<Original>Description</Original>
+				<English>Description</English>
+                <Chinese>描述</Chinese>
+                <Chinesesimp>描述</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndiary_DescriptionDesc">
+				<Original>&lt;font face='PuristaMedium' size=30 color='#014EE3'&gt;Psycho's Wounding System&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;This First Aid System (AIS = Alternative Injury System) is an alternative system to all the current normal revive scripts.&lt;br/&gt;&lt;br/&gt;The main difference to a standard revive system is that the unit does not die before going into a state of agony. If critical damage level is reached, the unit goes unconscious and does not immediately die like in most other systems. The advantage: You can use it in missions without a revive option as well!&lt;br/&gt;&lt;br/&gt;Another advantage of the system is that if a unit is gravely wounded and waiting for others to help, the wounded unit is not completely defenseless. A wounded unit can go prone, crawl and use a weapon as last stand (until the magazine is empty). AIS also supports AI. AI soldiers can be unconscious or give first aid as well.</Original>
+				<English>&lt;font face='PuristaMedium' size=30 color='#014EE3'&gt;Psycho's Wounding System&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;This First Aid System (AIS = Alternative Injury System) is an alternative system to all the current normal revive scripts.&lt;br/&gt;&lt;br/&gt;The main difference to a standard revive system is that the unit does not die before going into a state of agony. If critical damage level is reached, the unit goes unconscious and does not immediately die like in most other systems. The advantage: You can use it in missions without a revive option as well!&lt;br/&gt;&lt;br/&gt;Another advantage of the system is that if a unit is gravely wounded and waiting for others to help, the wounded unit is not completely defenseless. A wounded unit can go prone, crawl and use a weapon as last stand (until the magazine is empty). AIS also supports AI. AI soldiers can be unconscious or give first aid as well.</English>
+                <Chinese>&lt;font face='PuristaMedium' size=30 color='#014EE3'&gt;Psycho的受傷系統&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;這個急救系統是用來取代原本的復甦腳本系統。&lt;br/&gt;&lt;br/&gt;最大的差別在於玩家並不會直接死亡，而是在當受到一定程度的致命傷後開始進入昏厥模式。&lt;br/&gt;&lt;br/&gt;使用本系統的優勢在於受傷倒地的單位並不是完全不能自衛，他們可以趴、爬行並使用武器(不能切換武器或重新裝填子彈)。此系統也支援AI，AI也會進入昏厥模式待援或使用急救包救治玩家。</Chinese>
+                <Chinesesimp>&lt;font face='PuristaMedium' size=30 color='#014EE3'&gt;Psycho的受伤系统&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;这个急救系统是用来取代原本的复苏脚本系统。&lt;br/&gt;&lt;br/&gt;最大的差别在于玩家并不会直接死亡，而是在当受到一定程度的致命伤后开始进入昏厥模式。&lt;br/&gt;&lt;br/&gt;使用本系统的优势在于受伤倒地的单位并不是完全不能自卫，他们可以趴、爬行并使用武器(不能切换武器或重新装填子弹)。此系统也支援AI，AI也会进入昏厥模式待援或使用急救包救治玩家。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fncallHelp_calledHelp">
+				<Original>You already have called for help!</Original>
+				<English>You already have called for help!</English>
+                <Chinese>你已經呼叫過救援了!</Chinese>
+                <Chinesesimp>你已经呼叫过救援了!</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fncarry_CantCarry1">
+				<Original>This action is only with a primary Weapon possible.</Original>
+				<English>This action is only with a primary Weapon possible.</English>
+                <Chinese>這個動作只能在拿著主武器時使用。</Chinese>
+                <Chinesesimp>这个动作只能在拿着主武器时使用。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fncarry_CantCarry2">
+				<Original>You are not able to carry anyone else while carrying a launcher on your back.</Original>
+				<English>You are not able to carry anyone else while carrying a launcher on your back.</English>
+                <Chinese>當你背上有發射器時，你就不能背負任何人在你的背上。</Chinese>
+                <Chinesesimp>当你背上有发射器时，你就不能背负任何人在你的背上。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndisableRespawnButton_RespawnDisable">
+				<Original>Respawn Disabled (%1 sec)</Original>
+				<English>Respawn Disabled (%1 sec)</English>
+                <Chinese>已關閉重生(%1秒)</Chinese>
+                <Chinesesimp>已关闭重生(%1秒)</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fndisableRespawnButton_Respawn">
+				<Original>Respawn</Original>
+				<English>Respawn</English>
+                <Chinese>重生</Chinese>
+                <Chinesesimp>重生</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnhandleHeal_FirstRevive">
+				<Original>First you have to Revive the injured.</Original>
+				<English>First you have to Revive the injured.</English>
+                <Chinese>你必需先復甦該傷患。</Chinese>
+                <Chinesesimp>你必需先复苏该伤患。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnhandleHeal_FirstStabilize">
+				<Original>First you have to Stabilize the injured.</Original>
+				<English>First you have to Stabilize the injured.</English>
+                <Chinese>你必需先穩定該傷患的傷勢。</Chinese>
+                <Chinesesimp>你必需先稳定该伤患的伤势。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnkeyHandler_ChatDisabled">
+				<Original>Chat disabled.</Original>
+				<English>Chat disabled.</English>
+                <Chinese>已關閉聊天。</Chinese>
+                <Chinesesimp>已关闭聊天。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnpostinit_FirstAid">
+				<Original>First Aid</Original>
+				<English>First Aid</English>
+                <Chinese>急救</Chinese>
+                <Chinesesimp>急救</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnpostinit_Stabilize">
+				<Original>Stabilize</Original>
+				<English>Stabilize</English>
+                <Chinese>穩定傷勢</Chinese>
+                <Chinesesimp>稳定伤势</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnpostinit_Drag">
+				<Original>Drag</Original>
+				<English>Drag</English>
+                <Chinese>拖行</Chinese>
+                <Chinesesimp>拖行</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnpostinit_Carry">
+				<Original>Carry</Original>
+				<English>Carry</English>
+                <Chinese>背負</Chinese>
+                <Chinesesimp>背负</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnpostinit_Release">
+				<Original>Release</Original>
+				<English>Release</English>
+                <Chinese>放下</Chinese>
+                <Chinesesimp>放下</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnpostinit_UnloadInjured">
+				<Original>Unload Injured</Original>
+				<English>Unload Injured</English>
+                <Chinese>卸載傷患</Chinese>
+                <Chinesesimp>卸载伤患</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnpostinit_LoadInjured">
+				<Original>Load Injured</Original>
+				<English>Load Injured</English>
+                <Chinese>裝載傷患</Chinese>
+                <Chinesesimp>装载伤患</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnRevive_ApplyingFirstAid">
+				<Original>Applying First Aid</Original>
+				<English>Applying First Aid</English>
+                <Chinese>急救中</Chinese>
+                <Chinesesimp>急救中</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnRevive_IsDead">
+				<Original>He is not with us anymore.</Original>
+				<English>He is not with us anymore.</English>
+                <Chinese>他已經去另一個更好的世界了。</Chinese>
+                <Chinesesimp>他已经去另一个更好的世界了。</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnstabilize_Stabilizeing">
+				<Original>Stabilize the Injured</Original>
+				<English>Stabilize the Injured</English>
+                <Chinese>穩定傷勢中</Chinese>
+                <Chinesesimp>穩定傷勢中</Chinesesimp>
+			</Key>
+			<Key ID="STR_TRGM2_fnunconcsiousRemote_SomeoneDown">
+				<Original>%1 is down and needs help at %2!</Original>
+				<English>%1 is down and needs help at %2!</English>
+                <Chinese>%1需要救援，他倒在%2!</Chinese>
+                <Chinesesimp>%1需要救援，他倒在%2!</Chinesesimp>
+			</Key>
+		</Container>
+	</Package>
+</Project>

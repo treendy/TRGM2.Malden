@@ -13,149 +13,154 @@ switch (_option) do {
 		endMissionBoard remoteExec ["removeAllActions"];
 		endMissionBoard2 remoteExec ["removeAllActions"];
 
-		[endMissionBoard, ["Show Rep Report","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Show Rep Report","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["!!Start Mission!!","[[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_StartMission","[[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
 		//[endMissionBoard2, ["!!Start Mission!!","[[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit Rifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitRifleman,"Rifleman"]]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Recruit Rifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitRifleman,"Rifleman"]]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitRifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitRifleman,"Rifleman"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitRifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitRifleman,"Rifleman"]]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit AT Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAT,"ATSpecialist"]]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Recruit AT Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAT,"ATSpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAT","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAT,"ATSpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAT","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAT,"ATSpecialist"]]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit AA Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAA,"AASpecialist"]]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Recruit AA Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAA,"AASpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAA","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAA,"AASpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAA","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAA,"AASpecialist"]]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit Engineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer,"Engineer"]]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Recruit Engineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer,"Engineer"]]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitEngineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer,"Engineer"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitEngineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer,"Engineer"]]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit Explosive Specialist","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist,"ExplosiveSpecialist"]]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Recruit Explosive Specialist","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist,"ExplosiveSpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitExplosive","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist,"ExplosiveSpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitExplosive","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist,"ExplosiveSpecialist"]]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit Medic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic,"Medic"]]] remoteExec ["addAction", 0];	
-		[endMissionBoard2, ["Recruit Medic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic,"Medic"]]] remoteExec ["addAction", 0];	
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitMedic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic,"Medic"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitMedic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic,"Medic"]]] remoteExec ["addAction", 0];
 	};
     case "NEW_MISSION": {
     	endMissionBoard remoteExec ["removeAllActions"];
     	endMissionBoard2 remoteExec ["removeAllActions"];
 
-		[endMissionBoard, ["Show Rep Report","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Show Rep Report","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit Rifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitRifleman,"Rifleman"]]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Recruit Rifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitRifleman,"Rifleman"]]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitRifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitRifleman,"Rifleman"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitRifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitRifleman,"Rifleman"]]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit AT Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAT,"ATSpecialist"]]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Recruit AT Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAT,"ATSpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAT","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAT,"ATSpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAT","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAT,"ATSpecialist"]]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit AA Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAA,"AASpecialist"]]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Recruit AA Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAA,"AASpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAA","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAA,"AASpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAA","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAA,"AASpecialist"]]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit Engineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer,"Engineer"]]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Recruit Engineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer,"Engineer"]]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitEngineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer,"Engineer"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitEngineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer,"Engineer"]]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit Explosive Specialist","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist,"ExplosiveSpecialist"]]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Recruit Explosive Specialist","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist,"ExplosiveSpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitExplosive","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist,"ExplosiveSpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitExplosive","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist,"ExplosiveSpecialist"]]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit Medic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic,"Medic"]]] remoteExec ["addAction", 0];	
-		[endMissionBoard2, ["Recruit Medic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic,"Medic"]]] remoteExec ["addAction", 0];	
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitMedic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic,"Medic"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitMedic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic,"Medic"]]] remoteExec ["addAction", 0];
 
 		if (_dCurrentRep == 3) then {
-			[endMissionBoard, ["**Recruit Automatic Rifleman**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
-			[endMissionBoard2, ["**Recruit Automatic Rifleman**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAutomaticRiflemanS","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAutomaticRiflemanS","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
 		};
 		if (_dCurrentRep > 3) then {
-			[endMissionBoard, ["Recruit Automatic Rifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
-			[endMissionBoard2, ["Recruit Automatic Rifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAutomaticRifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAutomaticRifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
 		};	
 		if (_dCurrentRep == 5) then {
-			[endMissionBoard, ["**Recruit Sniper**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
-			[endMissionBoard2, ["**Recruit Sniper**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSniperS","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSniperS","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
 
-			[endMissionBoard, ["**Recruit Spotter**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSpotter]]] remoteExec ["addAction", 0];
-			[endMissionBoard2, ["**Recruit Spotter**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSpotter]]] remoteExec ["addAction", 0];
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSpotterS","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSpotter]]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSpotterS","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSpotter]]] remoteExec ["addAction", 0];
 		};
-		if (_dCurrentRep > 5) then {
-			[endMissionBoard, ["Recruit Sniper","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
-			[endMissionBoard2, ["Recruit Sniper","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
 
-			[endMissionBoard, ["Recruit Spotter","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSpotter,"Spotter"]]] remoteExec ["addAction", 0];
-			[endMissionBoard2, ["Recruit Spotter","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSpotter,"Spotter"]]] remoteExec ["addAction", 0];
+		if (_dCurrentRep > 5) then {
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSniper","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSniper","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
+
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSpotter","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSpotter,"Spotter"]]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSpotter","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSpotter,"Spotter"]]] remoteExec ["addAction", 0];
 		};	
 		if (_dCurrentRep == 7) then {
-			[endMissionBoard, ["**Recruit UAV Operator**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
-			[endMissionBoard2, ["**Recruit UAV Operator**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitUAVS","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitUAVS","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
 		};
 		if (_dCurrentRep > 7) then {
-			[endMissionBoard, ["Recruit UAV Operator","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
-			[endMissionBoard2, ["Recruit UAV Operator","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitUAV","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitUAV","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
 		};	
     };
     case "MISSION_COMPLETE": {
     	endMissionBoard remoteExec ["removeAllActions"];
     	endMissionBoard remoteExec ["removeAllActions"];
+
     	if (_dCurrentRep >= 10) then {
-			[endMissionBoard, ["!!Request Final Assignment!!","FinalMissionStarted=true;publicVariable ""FinalMissionStarted""; [[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RequestFinal","FinalMissionStarted=true;publicVariable ""FinalMissionStarted""; [[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
+
 			//[endMissionBoard2, ["!!Request Final Assignment!!","[[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
 		} else {
-			[endMissionBoard, ["!!Request Next Mission!!","[[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RequestNext","[[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
 			//[endMissionBoard2, ["!!Request Next Mission!!","[[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
 		};
-		[endMissionBoard, ["Show Rep Report","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Show Rep Report","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit Rifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitRifleman,"Rifleman"]]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Recruit Rifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitRifleman,"Rifleman"]]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitRifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitRifleman,"Rifleman"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitRifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitRifleman,"Rifleman"]]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit AT Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAT,"ATSpecialist"]]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Recruit AT Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAT,"ATSpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAT","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAT,"ATSpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAT","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAT,"ATSpecialist"]]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit AA Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAA,"AASpecialist"]]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Recruit AA Unit","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAA,"AASpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAA","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAA,"AASpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAA","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAA,"AASpecialist"]]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit Engineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer,"Engineer"]]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Recruit Engineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer,"Engineer"]]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitEngineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer,"Engineer"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitEngineer","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitEngineer,"Engineer"]]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit Explosive Specialist","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist,"ExplosiveSpecialist"]]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Recruit Explosive Specialist","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist,"ExplosiveSpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitExplosive","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist,"ExplosiveSpecialist"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitExplosive","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitExplosiveSpecialist,"ExplosiveSpecialist"]]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["Recruit Medic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic,"Medic"]]] remoteExec ["addAction", 0];	
-		[endMissionBoard2, ["Recruit Medic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic,"Medic"]]] remoteExec ["addAction", 0];	
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitMedic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic,"Medic"]]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitMedic","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitMedic,"Medic"]]] remoteExec ["addAction", 0];
 
 		if (_dCurrentRep == 3) then {
-			[endMissionBoard, ["**Recruit Automatic Rifleman**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
-			[endMissionBoard2, ["**Recruit Automatic Rifleman**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAutomaticRiflemanS","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAutomaticRiflemanS","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
 		};
 		if (_dCurrentRep > 3) then {
-			[endMissionBoard, ["Recruit Automatic Rifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
-			[endMissionBoard2, ["Recruit Automatic Rifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAutomaticRifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAutomaticRifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
 		};	
 		if (_dCurrentRep == 5) then {
-			[endMissionBoard, ["**Recruit Sniper**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
-			[endMissionBoard2, ["**Recruit Sniper**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSniperS","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSniperS","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
 
-			[endMissionBoard, ["**Recruit Spotter**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSpotter,"Spotter"]]] remoteExec ["addAction", 0];
-			[endMissionBoard2, ["**Recruit Spotter**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSpotter,"Spotter"]]] remoteExec ["addAction", 0];
+
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSpotterS","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSpotter,"Spotter"]]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSpotterS","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSpotter,"Spotter"]]] remoteExec ["addAction", 0];
 		};
-		if (_dCurrentRep > 5) then {
-			[endMissionBoard, ["Recruit Sniper","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
-			[endMissionBoard2, ["Recruit Sniper","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
 
-			[endMissionBoard, ["Recruit Spotter","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSpotter,"Spotter"]]] remoteExec ["addAction", 0];
-			[endMissionBoard2, ["Recruit Spotter","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSpotter,"Spotter"]]] remoteExec ["addAction", 0];
+		if (_dCurrentRep > 5) then {
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSniper","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSniper","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
+
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSpotter","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSpotter,"Spotter"]]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSpotter","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitSpotter,"Spotter"]]] remoteExec ["addAction", 0];
 		};	
 		if (_dCurrentRep == 7) then {
-			[endMissionBoard, ["**Recruit UAV Operator**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
-			[endMissionBoard2, ["**Recruit UAV Operator**","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitUAVS","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitUAVS","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
 		};
 		if (_dCurrentRep > 7) then {
-			[endMissionBoard, ["Recruit UAV Operator","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
-			[endMissionBoard2, ["Recruit UAV Operator","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitUAV","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitUAV",[CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
 		};		
 		if (isMultiplayer) then {
-			[endMissionBoard, ["End Mission","RandFramework\attemptEndMission.sqf"]] remoteExec ["addAction", 0];
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_EndMission","RandFramework\attemptEndMission.sqf"]] remoteExec ["addAction", 0];
 			//[endMissionBoard2, ["End Mission","RandFramework\attemptEndMission.sqf"]] remoteExec ["addAction", 0];
 		};
 	};
@@ -163,15 +168,15 @@ switch (_option) do {
 		endMissionBoard remoteExec ["removeAllActions"];
 		//endMissionBoard2 remoteExec ["removeAllActions"];
 
-		[endMissionBoard, ["Show Rep Report","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
-		[endMissionBoard2, ["Show Rep Report","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, ["End Campaign","RandFramework\attemptEndMission.sqf"]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_EndMission","RandFramework\attemptEndMission.sqf"]] remoteExec ["addAction", 0];
 		//[endMissionBoard2, ["End Mission","RandFramework\attemptEndMission.sqf"]] remoteExec ["addAction", 0];
 		
 	};
 };
 if (!isMultiplayer) then {
-	endMissionBoard addAction ["Save", {saveGame}];
-	endMissionBoard2 addAction ["Save", {saveGame}];
+	endMissionBoard addAction [localize "STR_TRGM2_SetMissionBoardOptions_Save", {saveGame}];
+	endMissionBoard2 addAction [localize "STR_TRGM2_SetMissionBoardOptions_Save", {saveGame}];
 };

@@ -66,8 +66,8 @@ if (_thisRoadOnly) then {
 		_nearestRoad = selectRandom _nearestRoads;
 		_roadConnectedTo = roadsConnectedTo _nearestRoad;
 		if (count _roadConnectedTo == 2) then {
-			
-		
+
+
 			_connectedRoad = _roadConnectedTo select 0;
 			_generalDirection = [_thisAOPos, _nearestRoad] call BIS_fnc_DirTo;
 			_direction1 = [_nearestRoad, _connectedRoad] call BIS_fnc_DirTo;
@@ -86,7 +86,7 @@ if (_thisRoadOnly) then {
 			else {
 				_dif1 = _dif1B;
 			};
-	
+
 			_dif2 = 0;
 			_dif2A = _direction2 - _generalDirection;
 			if (_dif2A < 0) then {_dif2A = _dif2A + 360};
@@ -112,7 +112,7 @@ if (_thisRoadOnly) then {
 				_direction = _direction2
 			};
 			_PosFound = true;
-			
+
 		}
 		else {
 			//run loop again
@@ -139,7 +139,7 @@ else {
 
 if (_PosFound) then {
 
-	
+
 
 	if (!_thisIsDirectionAwayFromAO) then {
 		_direction = ([_direction,180] call fnc_AddToDirection);
@@ -182,7 +182,7 @@ if (_PosFound) then {
 		//SentryAreas
 		SentryAreas = SentryAreas + [[_roadBlockPos,_thisAreaAroundCheckpointSpacing]];
 	};
-	
+
 
 	_slope = abs(((getTerrainHeightASL _roadBlockSidePos)) - ((getTerrainHeightASL  _roadBlockPos)));
 	if (_slope > 0.6) then {
@@ -231,7 +231,7 @@ if (_PosFound) then {
 			_initItem = "Land_HelipadEmpty_F" createVehicle _roadBlockSidePos;
 			_initItem setDir ([_direction,180] call fnc_AddToDirection);
 		};
-		
+
 	};
 
 	if (_iBarricadeType != "NONE" && selectRandom [true,false]) then {
@@ -244,9 +244,9 @@ if (_PosFound) then {
 				playSound3D ["A3\Sounds_F\sfx\radio\" + _soundToPlay + ".wss",_initItem,false,getPosASL _initItem,0.5,1,0];
 				sleep selectRandom [10,15,20,30];
 			};
-		};		
+		};
 	};
-	
+
 
 	_bHasParkedCar = false;
 	_ParkedCar = nil;
@@ -285,7 +285,7 @@ if (_PosFound) then {
 	};
 	_behindBlockPos2 = _initItem getPos [3,([_direction,180] call fnc_AddToDirection)];
 	if (selectRandom [true,true,true,false]) then {
-		
+
 		_flatPos = nil;
 		_flatPos = [_behindBlockPos2 , 0, 5, 7, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call BIS_fnc_findSafePos;
 		_FloodLight = selectRandom ["Land_PortableLight_single_F"] createVehicle _flatPos;
@@ -298,7 +298,7 @@ if (_PosFound) then {
 	_pos1 = _initItem getPos [3,([_direction,100] call fnc_AddToDirection)];
 
 	_pos2 = _initItem getPos [4,([_direction,80] call fnc_AddToDirection)];
-	_group = createGroup _thisSide; 
+	_group = createGroup _thisSide;
 	_group setFormDir _direction;
 
 	_sUnitType = selectRandom _thisUnitTypes;
@@ -317,27 +317,27 @@ if (_PosFound) then {
 	else {
 		_pos3 = [_behindBlockPos2 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call BIS_fnc_findSafePos;
 		_pos4 = [_behindBlockPos2 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call BIS_fnc_findSafePos;
-		
-	
+
+
 		_chatDir1 = [_pos3, _pos4] call BIS_fnc_DirTo;
 		_chatDir2 = [_pos4, _pos3] call BIS_fnc_DirTo;
 
-		_group2 = createGroup _thisSide; 
+		_group2 = createGroup _thisSide;
 		_group2 setFormDir _chatDir1;
-		_group3 = createGroup _thisSide; 
+		_group3 = createGroup _thisSide;
 		_group3 setFormDir _chatDir2;
 
 		_sUnitType = selectRandom _thisUnitTypes;
-		_guardUnit3 = _group2 createUnit [_sUnitType,_pos3,[],0,"NONE"];	
+		_guardUnit3 = _group2 createUnit [_sUnitType,_pos3,[],0,"NONE"];
 		doStop [_guardUnit3];
 		_guardUnit3 setDir (_chatDir1);
-		
+
 		_sUnitType = selectRandom _thisUnitTypes;
-		_guardUnit4 = _group3 createUnit [_sUnitType,_pos4,[],0,"NONE"];	
+		_guardUnit4 = _group3 createUnit [_sUnitType,_pos4,[],0,"NONE"];
 		doStop [_guardUnit4];
 		_guardUnit4 setDir (_chatDir2);
 
-	
+
 		//[_guardUnit3,"STAND","ASIS"] call BIS_fnc_ambientAnimCombat;
 
 		if (_AllowAnimation) then {
@@ -361,28 +361,28 @@ if (_PosFound) then {
 
 	_group4 = createGroup _thisSide;
 	_sCheckpointGuyName = format["objCheckpointGuyName%1",(floor(random 999999))];
-	
-	
+
+
 	_pos5 = [_behindBlockPos2 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call BIS_fnc_findSafePos;
 
 	_guardUnit5 = _group4 createUnit [_sUnitType,_pos5,[],0,"NONE"];
 	_guardUnit5 setVariable [_sCheckpointGuyName, _guardUnit5, true];
 	missionNamespace setVariable [_sCheckpointGuyName, _guardUnit5];
 	if (_thisSide == west) then {
-		[[_guardUnit5, ["Ask about the AO","RandFramework\SpeakToFriendlyCheckpoint.sqf",[_pos5]]],"addAction",true,true] call BIS_fnc_MP;
+		[[_guardUnit5, [localize "STR_TRGM2_setCheckpoint_Ask","RandFramework\SpeakToFriendlyCheckpoint.sqf",[_pos5]]],"addAction",true,true] call BIS_fnc_MP;
 		if (selectRandom [true,true,false]) then {
 			_test = nil;
-			_test = createMarker [format["MrkFriendCheckpoint%1%2",_roadBlockPos select 0, _roadBlockPos select 1], _roadBlockPos];  
-			_test setMarkerShape "ICON";  
-			_test setMarkerType "b_inf";  
-			_test setMarkerText "Checkpoint";
+			_test = createMarker [format["MrkFriendCheckpoint%1%2",_roadBlockPos select 0, _roadBlockPos select 1], _roadBlockPos];
+			_test setMarkerShape "ICON";
+			_test setMarkerType "b_inf";
+			_test setMarkerText (localize "STR_TRGM2_setCheckpoint_MarkerText");
 		};
 	};
-	TREND_fnc_WalkingGuyLoop = {		
+	TREND_fnc_WalkingGuyLoop = {
 		_objManName = _this select 0;
 		_thisInitPos = _this select 1;
 		_objMan = missionNamespace getVariable _objManName;
-												
+
 		group _objMan setSpeedMode "LIMITED";
 		group _objMan setBehaviour "SAFE";
 

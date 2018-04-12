@@ -8,6 +8,7 @@ if (side player == west) then {
 
 	[_thisCheckpointUnit] remoteExec ["removeAllActions", 0, true];
 
+
 	if (alive _thisCheckpointUnit) then {
 		[IntelShownType,"TalkFriendCheckPoint"] execVM "RandFramework\showIntel.sqf";
 

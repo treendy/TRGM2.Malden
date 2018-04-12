@@ -6,6 +6,7 @@ if (side player == west) then {
 	//ClearedPositions pushBack (ObjectivePossitions select _iSelected);
 	ClearedPositions pushBack ([ObjectivePossitions, player] call BIS_fnc_nearestPosition);
 
+
 	//removeAllActions _thisCiv;
 	[_thisCiv] remoteExec ["removeAllActions", 0, true];
 
@@ -31,6 +32,7 @@ if (side player == west) then {
 
 		hint "Map updated with intel found";
 
+
 		if (alive _thisCiv) then {
 			//increased chance of results
 			_searchChance = [true,false];
@@ -47,15 +49,17 @@ if (side player == west) then {
 			hint "Map updated with main AO location";
 		}
 		else {
+
 			if (alive _thisCiv) then {
 				[IntelShownType,"IntOfficer"] execVM "RandFramework\showIntel.sqf";
 				sleep 2;
 				[IntelShownType,"IntOfficer"] execVM "RandFramework\showIntel.sqf";
 			}
 			else {
-				hint "Not quite sure why, but for some reason this dead guy isnt speaking!!!"
+				hint (localize "STR_TRGM2_interrogateOfficer_DeadGuy")
 			};
 		};
 	};
+
 
 };

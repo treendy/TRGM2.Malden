@@ -14,6 +14,7 @@ if (side player == west) then {
 	//removeAllActions _thisCiv;
 	[_thisCiv] remoteExec ["removeAllActions", 0, true];
 
+
 	if (_bCreateTask) then {
 		if (alive _thisCiv) then {
 			sName = format["InfSide%1",_iSelected];
@@ -28,6 +29,7 @@ if (side player == west) then {
 	else {
 
 		_ballowSearch = true;
+
 		hint "You start to talk to the informant...";
 		if (alive _thisCiv) then {
 			//increased chance of results
@@ -45,6 +47,7 @@ if (side player == west) then {
 		if (alive _thisCiv) then {
 			//normal search
 			_ballowSearch = true;
+
 		}
 		else {
 			hint "He is dead you muppet!";
@@ -63,5 +66,6 @@ if (side player == west) then {
 			};
 			
 		};
+
 	};
 };

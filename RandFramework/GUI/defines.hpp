@@ -75,7 +75,7 @@
 
 #define SL_TEXTURES       0x10
 
-// progress bar 
+// progress bar
 #define ST_VERTICAL       0x01
 #define ST_HORIZONTAL     0
 
@@ -1332,11 +1332,11 @@ class RscTextCheckBox
 	columns = 1;
 	strings[] =
 	{
-		"UNCHECKED"
+		$STR_TRGM2_defines_UNCHECKED
 	};
 	checked_strings[] =
 	{
-		"CHECKED"
+		$STR_TRGM2_defines_CHECKED
 	};
 };
 class RscButtonMenu
@@ -1526,7 +1526,7 @@ class RscButtonMenuOK
 		156
 	};
 	default = 1;
-	text = "OK";
+	text = $STR_TRGM2_defines_OK;
 	soundPush[] =
 	{
 		"\A3\ui_f\data\sound\RscButtonMenuOK\soundPush",
@@ -1541,7 +1541,7 @@ class RscButtonMenuCancel
 	{
 		"0x00050000 + 1"
 	};
-	text = "Cancel";
+	text = $STR_TRGM2_defines_Cancel;
 };
 class RscControlsGroup
 {

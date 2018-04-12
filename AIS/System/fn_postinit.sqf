@@ -4,7 +4,7 @@ if (isDedicated || !hasInterface) exitWith {};
 //waitUntil {bAndSoItBegins};
 //if (iUseRevive == 0) exitWith {["AIS: AIS shutdown, player disabled revive."] call BIS_fnc_logFormat};
 
-	
+
 if (ais_ace_shutdown) exitWith {diag_log ["AIS: AIS shutdown itself cause ACE mod was detected. ACE and AIS cant work at the same time."]};
 /*
 // expample action
@@ -22,7 +22,7 @@ _action = [
 */
 
 [
-	"First Aid",
+	localize "STR_TRGM2_fnpostinit_FirstAid",
 	player,
 	1.5,
 	"cursorTarget isKindOf 'CAManBase' && {cursorTarget getVariable ['ais_unconscious',false]} && {cursorTarget call AIS_System_fnc_allowRevive}",
@@ -34,7 +34,7 @@ _action = [
 ] call AIS_Core_fnc_addAction;
 
 [
-	"Stabilize",
+	localize "STR_TRGM2_fnpostinit_Stabilize",
 	player,
 	1.5,
 	"cursorTarget isKindOf 'CAManBase' && {cursorTarget getVariable ['ais_unconscious',false]} && {cursorTarget call AIS_System_fnc_allowStabilize}",
@@ -46,7 +46,7 @@ _action = [
 ] call AIS_Core_fnc_addAction;
 
 [
-	"Drag",
+	localize "STR_TRGM2_fnpostinit_Drag",
 	player,
 	1.8,
 	"cursorTarget isKindOf 'CAManBase' && {cursorTarget getVariable ['ais_unconscious',false]} && {cursorTarget call AIS_System_fnc_allowDrag}",
@@ -58,7 +58,7 @@ _action = [
 ] call AIS_Core_fnc_addAction;
 
 [
-	"Carry",
+	localize "STR_TRGM2_fnpostinit_Carry",
 	player,
 	0,
 	"!(isNull (player getVariable ['ais_DragDrop_Torso', objNull])) && {!(player getVariable ['ais_CarryDrop_Torso', false])}",
@@ -70,7 +70,7 @@ _action = [
 ] call AIS_Core_fnc_addAction;
 
 [
-	"Release",
+	localize "STR_TRGM2_fnpostinit_Release",
 	player,
 	0,
 	"!(isNull (player getVariable ['ais_DragDrop_Torso', objNull]))",
@@ -82,7 +82,7 @@ _action = [
 ] call AIS_Core_fnc_addAction;
 
 [
-	"Unload Injured",
+	localize "STR_TRGM2_fnpostinit_UnloadInjured",
 	player,
 	4,
 	"(cursorTarget isKindOf 'LandVehicle' || cursorTarget isKindOf 'Air') && {alive cursorTarget} && {cursorTarget call AIS_System_fnc_allowPullOut}",
@@ -95,7 +95,7 @@ _action = [
 
 
 [
-	"Load Injured",
+	localize "STR_TRGM2_fnpostinit_LoadInjured",
 	player,
 	4,
 	"!(isNull (player getVariable ['ais_DragDrop_Torso', objNull])) && {cursorTarget isKindOf 'LandVehicle' || cursorTarget isKindOf 'Air'} && {cursorTarget call AIS_System_fnc_allowPullIn}",
