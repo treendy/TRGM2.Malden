@@ -109,7 +109,7 @@ if (EnemyFactionData != "") then {
 	_lblctrlWarn1 = _display displayCtrl 6996;
 	_lblctrlWarn1 ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.70 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
 	_lblctrlWarn1 ctrlSetTextColor [1, 0, 0, 1];
-	ctrlSetText [6996,  "You have friendly class names active, this will overright friendly faction settings you have selected above"];
+	ctrlSetText [6996,  "You have enemy class names active, this will overright enemy faction settings you have selected above"];
 	_lblctrlWarn1 ctrlCommit 0;
 };
 if (LoadoutData != "") then {
@@ -117,7 +117,7 @@ if (LoadoutData != "") then {
 	_lblctrlWarn2 = _display displayCtrl 6995;
 	_lblctrlWarn2 ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.72 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
 	_lblctrlWarn2 ctrlSetTextColor [1, 0, 0, 1];
-	ctrlSetText [6995,  "You have enemy class names active, this will overright enemy faction settings you have selected above"];
+	ctrlSetText [6995,  "You have friendly class names active, this will overright friendly faction settings you have selected above"];
 	_lblctrlWarn2 ctrlCommit 0;
 };
 

@@ -69,6 +69,7 @@ if (_MergedLoudoutData != "") then {
 								car1 allowDamage false;
 								car1 setPos (_pos vectorAdd [0,0,0.1]);
 								car1 allowDamage true;
+								ArmoredCar = _object;
 							};
 							case "TankorAPC" : {			
 								_pos = getPos tank1;
@@ -80,6 +81,7 @@ if (_MergedLoudoutData != "") then {
 								tank1 allowDamage false;
 								tank1 setPos (_pos vectorAdd [0,0,0.1]);
 								tank1 allowDamage true;
+								TankorAPC = _object;
 							};
 							case "UnarmedCar" : {			
 								_pos = getPos k1car2;
@@ -91,6 +93,7 @@ if (_MergedLoudoutData != "") then {
 								k1car2 allowDamage false;
 								k1car2 setPos (_pos vectorAdd [0,0,0.1]);
 								k1car2 allowDamage true;
+								UnarmedCar = _object;
 							};
 							case "MedicalTruck" : {			
 								_pos = getPos medTruck;
@@ -102,6 +105,7 @@ if (_MergedLoudoutData != "") then {
 								medTruck allowDamage false;
 								medTruck setPos (_pos vectorAdd [0,0,0.1]);
 								medTruck allowDamage true;
+								MedicalTruck = _object;
 							};
 							case "MedicalChopper" : {			
 								_pos = getPos mediChop1;
@@ -141,6 +145,7 @@ if (_MergedLoudoutData != "") then {
 								Fuel2 allowDamage false;
 								Fuel2 setPos (_pos vectorAdd [0,0,0.1]);
 								Fuel2 allowDamage true;
+								FuelTruck = _object;
 							};
 							case "RepairTruck" : {			
 								_pos = getPos RepairTruck;
@@ -237,19 +242,45 @@ if (_MergedLoudoutData != "") then {
 							case "ArtiSupportOptions" : {
 								ArtiSupportOptions = _object;
 								SupProArti setVariable ['BIS_SUPP_vehicles',ArtiSupportOptions,true];
-								//_pos = getPos AIArti1;
-								//_dir = getDir AIArti1;
-								//{deleteVehicle _x;}forEach crew AIArti1;
-								//deleteVehicle AIArti1;
-								//sleep 0.01;
-								//AIArti1 = createVehicle [_object, _pos, [], 0, "CAN_COLLIDE"];
-								//AIArti1 setDir _dir;
-								//AIArti1 allowDamage false;
-								//AIArti1 setPos (_pos vectorAdd [0,0,0.1]);
-								//AIArti1 allowDamage true;
-								//createVehicleCrew AIArti1; 
-								//SupProArti synchronizeObjectsAdd [AIArti1];
-								//AIArti1 addEventHandler ["fired", "if (_this select 1 == 'mortar_155mm_AMOS') then {[0.1,'Arti round fired'] execVM 'RandFramework\AdjustBadPoints.sqf';hint ""Arti round fired"";AIArti1 setVehicleAmmo 1;};"]; 
+							};
+							case "FriendlyVictims" : {
+								FriendlyVictims = _object;
+							};
+							case "FriendlyVictimVehs" : {
+								FriendlyVictimVehs = _object;
+							};
+							case "Paramedics" : {
+								Paramedics = _object;
+							};
+							case "Ambulances" : {
+								Ambulances = _object;
+							};
+							case "AirAmbulances" : {
+								AirAmbulances = _object;
+							};
+							case "Police" : {
+								Police = _object;
+							};
+							case "PoliceVehicles" : {
+								PoliceVehicles = _object;
+							};
+							case "Reporters" : {
+								Reporters = _object;
+							};
+							case "ReporterChoppers" : {
+								ReporterChoppers = _object;
+							};
+							case "FriendlyUnarmedCar" : {
+								FriendlyUnarmedCar = _object;
+							};
+							case "FriendlyMedicalTruck" : {
+								FriendlyMedicalTruck = _object;
+							};
+							case "FriendlyArmoredCar" : {
+								FriendlyArmoredCar = _object;
+							};
+							case "FriendlyFuelTruck" : {
+								FriendlyFuelTruck = _object;
 							};
 
 							

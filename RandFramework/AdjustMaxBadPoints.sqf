@@ -1,3 +1,5 @@
+//example: [0.3, _PointsAdjustMessage] execVM "RandFramework\AdjustMaxBadPoints.sqf";
+
 #include "../setUnitGlobalVars.sqf";
 
 //if (bDebugMode) then {hint format["Points adjusting: %1", TRGM_Logic getVariable "PointsUpdating"]};
@@ -17,3 +19,5 @@ BadPointsReason = BadPointsReason + format["<br /><t color='#00ff00'>%1 (+%2)</t
 publicVariable "BadPointsReason";
 
 TRGM_Logic setVariable ["PointsUpdating", false, true];
+
+

@@ -14,6 +14,7 @@ switch (AdvancedSettings select ADVSET_FRIENDLY_LOADOUT_IDX) do {
 		addVest=V_Chestrig_oli;
 		addItemToVest=30Rnd_556x45_Stanag_Tracer_Yellow;
 		addItemToVest=9Rnd_45ACP_Mag;
+		addItemToVest=Laserbatteries;
 		addItemToVest=HandGrenade;
 		addItemToVest=MiniGrenade;
 		addItemToVest=SmokeShell;
@@ -44,8 +45,10 @@ switch (AdvancedSettings select ADVSET_FRIENDLY_LOADOUT_IDX) do {
 		addPrimaryWeaponItem=optic_ACO_grn;
 		addPrimaryWeaponItem=acc_flashlight;
 		addWeapon=hgun_ACPC2_F;
+		addWeapon=Laserdesignator;
 		linkItem=ItemMap;
 		linkItem=ItemCompass;
+		linkItem=B_UavTerminal;
 		#
 		Rifleman:
 		forceAddUniform=U_BG_Guerilla1_1;
@@ -259,6 +262,7 @@ switch (AdvancedSettings select ADVSET_FRIENDLY_LOADOUT_IDX) do {
 		addItemToUniform=MiniGrenade;
 		addVest=V_Chestrig_oli;
 		addItemToVest=30Rnd_556x45_Stanag;
+		addItemToVest=Laserbatteries;
 		addItemToVest=HandGrenade;
 		addItemToVest=SmokeShell;
 		addItemToVest=SmokeShellGreen;
@@ -268,10 +272,12 @@ switch (AdvancedSettings select ADVSET_FRIENDLY_LOADOUT_IDX) do {
 		addWeapon=arifle_TRG21_F;
 		addPrimaryWeaponItem=acc_flashlight;
 		addWeapon=Rangefinder;
+		addWeapon=Laserdesignator;
 		linkItem=ItemMap;
 		linkItem=ItemCompass;
 		linkItem=ItemWatch;
 		linkItem=ItemRadio;
+		linkItem=B_UavTerminal;
 		setFace=GreekHead_A3_08;
 		setSpeaker=male03gre;
 		#
@@ -305,12 +311,20 @@ switch (AdvancedSettings select ADVSET_FRIENDLY_LOADOUT_IDX) do {
 		SmallHeli=B_Heli_Light_01_F;
 		AITransportChopper=I_Heli_light_03_unarmed_F;
 		AIExtractSupuportChopper=B_Heli_Attack_01_F;
-		FriendlyScoutVehicles=[""B_GEN_Van_02_vehicle_F"",""B_GEN_Offroad_01_gen_F""];
-		FriendlyCheckpointUnits=[""B_GEN_Soldier_F""];		
+		FriendlyScoutVehicles=[""B_G_Offroad_01_F"",""B_G_Van_01_transport_F"",""B_G_Van_02_vehicle_F"",""B_G_Quadbike_01_F""];
+		FriendlyCheckpointUnits=[""B_G_Soldier_F""];		
 		FriendlyFastResponseVehicles=[""B_G_Offroad_01_F""];
 		SupplySupportChopperOptions=[""B_Heli_Transport_03_unarmed_F""];
 		AirSupportOptions=[""B_Heli_Light_01_dynamicLoadout_F""];	
 		ArtiSupportOptions=[""B_MBT_01_arty_F"",""B_MBT_01_mlrs_F""];
+
+		
+
+FriendlyVictims=[""B_G_Soldier_unarmed_F""];
+FriendlyUnarmedCar=[""B_G_Van_01_transport_F""];
+FriendlyMedicalTruck=[""B_G_Van_02_transport_F""];
+FriendlyArmoredCar=[""B_G_Offroad_01_armed_F""];
+FriendlyFuelTruck=[""B_G_Van_01_fuel_F""];
 		";
 	};
 	case 3 : {
@@ -759,7 +773,7 @@ switch (AdvancedSettings select ADVSET_FRIENDLY_LOADOUT_IDX) do {
 		#
 		OtherObjects:
 		AirSupport1=RHS_AH64D_wd;
-		AirSupport2=rhsusf_f22;
+		AirSupport2=RHS_A10;
 		ArmoredCar=rhsusf_m1025_w_s_m2;
 		TankorAPC=rhsusf_m1a1fep_wd;
 		UnarmedCar=rhsusf_m998_w_s_4dr;
@@ -775,9 +789,15 @@ switch (AdvancedSettings select ADVSET_FRIENDLY_LOADOUT_IDX) do {
 		FriendlyScoutVehicles=[""rhsusf_m998_w_2dr_halftop"",""rhsusf_m998_w_4dr_fulltop""];
 		FriendlyCheckpointUnits=[""rhsusf_usmc_marpat_wd_rifleman""];
 		FriendlyFastResponseVehicles=[""rhsusf_m998_w_s_4dr_fulltop""];	
-		SupplySupportChopperOptions=[""rhsusf_CH53E_USMC""];
-		AirSupportOptions=[""RHS_A10""];	
-		ArtiSupportOptions=[""rhsusf_m109_usarmy""];	
+		SupplySupportChopperOptions=[""B_Heli_Transport_03_unarmed_F""];
+		AirSupportOptions=[""B_Plane_CAS_01_dynamicLoadout_F""];
+		ArtiSupportOptions=[""B_MBT_01_arty_F""];
+
+FriendlyVictims=[""B_Soldier_unarmed_F""];
+FriendlyUnarmedCar=[""rhsusf_m998_w_s_4dr""];
+FriendlyMedicalTruck=[""rhsusf_M1085A1P2_B_WD_Medical_fmtv_usarmy""];
+FriendlyArmoredCar=[""rhsusf_m1025_w_s_m2""];
+FriendlyFuelTruck=[""rhsusf_M978A4_usarmy_wd""];
 		"
 	};
 	case 4 : {
@@ -1083,17 +1103,19 @@ addItemToUniform=FirstAidKit;
 addItemToUniform=CUP_30Rnd_556x45_Stanag;
 addItemToUniform=CUP_30Rnd_556x45_Stanag;
 addItemToUniform=CUP_HandGrenade_L109A1_HE;
+addItemToUniform=Laserbatteries;
 addBackpack=B_UAV_01_backpack_F;
 addWeapon=CUP_arifle_L85A2_G;
 addPrimaryWeaponItem=CUP_muzzle_snds_L85;
 addPrimaryWeaponItem=CUP_acc_ANPEQ_2;
 addPrimaryWeaponItem=CUP_optic_Elcan_reflex;
-addWeapon=CUP_Vector21Nite;
+addWeapon=Laserdesignator;
 linkItem=ItemMap;
 linkItem=ItemCompass;
 linkItem=ItemWatch;
 linkItem=ItemRadio;
 linkItem=CUP_NVG_PVS7;
+linkItem=B_UavTerminal;
 setFace=Barklem;
 setSpeaker=male02engb;
 #
@@ -1186,6 +1208,7 @@ addItemToUniform=FirstAidKit;
 addItemToUniform=CUP_30Rnd_556x45_Stanag;
 addItemToUniform=SmokeShell;
 addVest=CUP_V_BAF_Osprey_Mk4_MTP_Grenadier;
+addItemToVest=Laserbatteries;
 addItemToVest=CUP_30Rnd_556x45_Stanag;
 addItemToVest=CUP_30Rnd_556x45_Stanag;
 addItemToVest=CUP_30Rnd_556x45_Stanag;
@@ -1208,12 +1231,13 @@ addHeadgear=CUP_H_BAF_Helmet_Net_2_MTP;
 addWeapon=CUP_arifle_L85A2_GL;
 addPrimaryWeaponItem=CUP_acc_ANPEQ_2;
 addPrimaryWeaponItem=CUP_optic_Elcan_reflex;
-addWeapon=CUP_Vector21Nite;
+addWeapon=Laserdesignator;
 linkItem=ItemMap;
 linkItem=ItemCompass;
 linkItem=ItemWatch;
 linkItem=ItemRadio;
 linkItem=CUP_NVG_HMNVS;
+linkItem=B_UavTerminal;
 setFace=WhiteHead_08;
 setSpeaker=male04engb;
 #
@@ -1224,17 +1248,19 @@ addItemToUniform=CUP_30Rnd_556x45_Stanag;
 addItemToUniform=CUP_30Rnd_556x45_Stanag;
 addItemToUniform=CUP_HandGrenade_L109A1_HE;
 addVest=CUP_V_BAF_Osprey_Mk4_MTP_Grenadier;
+addItemToVest=Laserbatteries;
 addBackpack=B_UAV_01_backpack_F;
 addHeadgear=CUP_H_BAF_Helmet_Net_2_MTP;
 addWeapon=CUP_arifle_L85A2_G;
 addPrimaryWeaponItem=CUP_acc_ANPEQ_2;
 addPrimaryWeaponItem=CUP_optic_ACOG;
-addWeapon=CUP_Vector21Nite;
+addWeapon=Laserdesignator;
 linkItem=ItemMap;
 linkItem=ItemCompass;
 linkItem=ItemWatch;
 linkItem=ItemRadio;
 linkItem=CUP_NVG_PVS7;
+linkItem=B_UavTerminal;
 setFace=WhiteHead_05;
 setSpeaker=male03engb;
 #
@@ -1256,9 +1282,16 @@ AIExtractSupuportChopper=CUP_B_AH1_DL_BAF;
 FriendlyScoutVehicles=[""CUP_B_BAF_Coyote_L2A1_D"",""CUP_B_Mastiff_GMG_GB_D""];
 FriendlyCheckpointUnits=[""CUP_B_BAF_Soldier_Backpack_DDPM""];		
 FriendlyFastResponseVehicles=[""CUP_B_BAF_Coyote_L2A1_D""];
-SupplySupportChopperOptions=[""CUP_B_CH47F_GB""];
-AirSupportOptions=[""B_Plane_CAS_01_F""];	
-ArtiSupportOptions=[""B_MBT_01_arty_F"",""B_MBT_01_mlrs_F""];
+		SupplySupportChopperOptions=[""B_Heli_Transport_03_unarmed_F""];
+		AirSupportOptions=[""B_Plane_CAS_01_dynamicLoadout_F""];
+		ArtiSupportOptions=[""B_MBT_01_arty_F""];
+
+FriendlyVictims=[""B_Soldier_unarmed_F""];
+FriendlyUnarmedCar=[""CUP_B_LR_Transport_GB_D""];
+FriendlyMedicalTruck=[""CUP_B_LR_Ambulance_GB_D""];
+FriendlyArmoredCar=[""CUP_B_Mastiff_GMG_GB_D""];
+FriendlyFuelTruck=[""CUP_B_MTVR_Refuel_USA""];
+
 "};
 case 5 : {
 		LoadoutDataDefault = "
@@ -1562,17 +1595,19 @@ addItemToUniform=FirstAidKit;
 addItemToUniform=CUP_30Rnd_556x45_Stanag;
 addItemToUniform=CUP_30Rnd_556x45_Stanag;
 addItemToUniform=CUP_HandGrenade_L109A1_HE;
+addItemToUniform=Laserbatteries;
 addBackpack=B_UAV_01_backpack_F;
 addWeapon=CUP_arifle_L85A2_G;
 addPrimaryWeaponItem=CUP_muzzle_snds_L85;
 addPrimaryWeaponItem=CUP_acc_ANPEQ_2;
 addPrimaryWeaponItem=CUP_optic_Elcan_reflex;
-addWeapon=CUP_Vector21Nite;
+addWeapon=Laserdesignator;
 linkItem=ItemMap;
 linkItem=ItemCompass;
 linkItem=ItemWatch;
 linkItem=ItemRadio;
 linkItem=CUP_NVG_PVS7;
+linkItem=B_UavTerminal;
 setFace=Barklem;
 setSpeaker=male02engb;
 #
@@ -1665,6 +1700,7 @@ addItemToUniform=FirstAidKit;
 addItemToUniform=CUP_30Rnd_556x45_Stanag;
 addItemToUniform=SmokeShell;
 addVest=CUP_V_BAF_Osprey_Mk2_DDPM_Grenadier;
+addItemToVest=Laserbatteries;
 addItemToVest=CUP_30Rnd_556x45_Stanag;
 addItemToVest=CUP_30Rnd_556x45_Stanag;
 addItemToVest=CUP_30Rnd_556x45_Stanag;
@@ -1687,12 +1723,13 @@ addHeadgear=CUP_H_BAF_Helmet_Net_2_DDPM;
 addWeapon=CUP_arifle_L85A2_GL;
 addPrimaryWeaponItem=CUP_acc_ANPEQ_2;
 addPrimaryWeaponItem=CUP_optic_Elcan_reflex;
-addWeapon=CUP_Vector21Nite;
+addWeapon=Laserdesignator;
 linkItem=ItemMap;
 linkItem=ItemCompass;
 linkItem=ItemWatch;
 linkItem=ItemRadio;
 linkItem=CUP_NVG_HMNVS;
+linkItem=B_UavTerminal;
 setFace=WhiteHead_08;
 setSpeaker=male04engb;
 #
@@ -1703,17 +1740,19 @@ addItemToUniform=CUP_30Rnd_556x45_Stanag;
 addItemToUniform=CUP_30Rnd_556x45_Stanag;
 addItemToUniform=CUP_HandGrenade_L109A1_HE;
 addVest=CUP_V_BAF_Osprey_Mk2_DDPM_Grenadier;
+addItemToVest=Laserbatteries;
 addBackpack=B_UAV_01_backpack_F;
 addHeadgear=CUP_H_BAF_Helmet_Net_2_DDPM;
 addWeapon=CUP_arifle_L85A2_G;
 addPrimaryWeaponItem=CUP_acc_ANPEQ_2;
 addPrimaryWeaponItem=CUP_optic_ACOG;
-addWeapon=CUP_Vector21Nite;
+addWeapon=Laserdesignator;
 linkItem=ItemMap;
 linkItem=ItemCompass;
 linkItem=ItemWatch;
 linkItem=ItemRadio;
 linkItem=CUP_NVG_PVS7;
+linkItem=B_UavTerminal;
 setFace=WhiteHead_05;
 setSpeaker=male03engb;
 #
@@ -1735,10 +1774,18 @@ AIExtractSupuportChopper=CUP_B_AH1_DL_BAF;
 FriendlyScoutVehicles=[""CUP_B_BAF_Coyote_L2A1_D"",""CUP_B_Mastiff_GMG_GB_D""];
 FriendlyCheckpointUnits=[""CUP_B_BAF_Soldier_Backpack_MTP""];		
 FriendlyFastResponseVehicles=[""CUP_B_BAF_Coyote_L2A1_D""];
-SupplySupportChopperOptions=[""CUP_B_CH47F_GB""];
-AirSupportOptions=[""B_Plane_CAS_01_F""];	
-ArtiSupportOptions=[""B_MBT_01_arty_F"",""B_MBT_01_mlrs_F""];
-			
+		SupplySupportChopperOptions=[""B_Heli_Transport_03_unarmed_F""];
+		AirSupportOptions=[""B_Plane_CAS_01_dynamicLoadout_F""];
+		ArtiSupportOptions=[""B_MBT_01_arty_F""];
+
+FriendlyVictims=[""B_Soldier_unarmed_F""];
+Police=[""CUP_C_C_Policeman_02""];
+PoliceVehicles=[""CUP_C_S1203_Ambulance_CIV""];
+FriendlyUnarmedCar=[""CUP_B_LR_Transport_GB_D""];
+FriendlyMedicalTruck=[""CUP_B_LR_Ambulance_GB_D""];
+FriendlyArmoredCar=[""CUP_B_Mastiff_GMG_GB_D""];
+FriendlyFuelTruck=[""CUP_B_MTVR_Refuel_USA""];
+
 
 		"};
 	case 6 : {

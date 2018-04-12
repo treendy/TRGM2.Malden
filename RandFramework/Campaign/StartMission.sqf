@@ -46,13 +46,18 @@ if (_bAllowStart) then {
 		
 		if (_isCampaign) then {
 			[["NEW_MISSION"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
+			if ((Player getVariable ["calUAVActionID", -1]) != -1) then {
+				player removeAction (Player getVariable ["calUAVActionID", -1]);
+				player setVariable ["calUAVActionID", nil];
+				//hint "UAV no longer available";
+			};
 		};
 
 		//"Marker1" setMarkerPos getMarkerPos "mrkHQ";
 
 
 
-		
+
 
 		if (isServer && _isCampaign) then {
 			
@@ -120,9 +125,10 @@ if (_bAllowStart) then {
 			publicVariable "NewMissionMusic";	
 		
 
-			if (SaveType != 0) then {
-					[SaveType,false] execVM "RandFramework\Campaign\ServerSave.sqf";
-			};
+			//not saving when new day starts, we will save when points change (just incase day starts, but players exit anyway and nothing done on that day)
+			//if (SaveType != 0) then {
+			//		[SaveType,false] execVM "RandFramework\Campaign\ServerSave.sqf";
+			//};
 			
 		};
 

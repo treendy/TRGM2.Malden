@@ -12,8 +12,9 @@ if (isNil "AllowMissionTypeCampaign") then {
 	AllowMissionTypeCampaign = false;
 	publicVariable "AllowMissionTypeCampaign";	
 };
+_selectedTypeID = MissionParamTypesValues select _selectedIndex;
 
-if (_selectedIndex == 5) then {
+if (_selectedTypeID == 5) then {
 	if (!AllowMissionTypeCampaign) then {
 		_ctrlTypes = (findDisplay 5000) displayCtrl 5104;
 		_ctrlTypes ctrlEnable false;

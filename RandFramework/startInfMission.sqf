@@ -32,21 +32,21 @@ if (iMissionSetup == 0) then {
 	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 	_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
 	_CreateTasks = [true,false,false];
-	MaxBadPoints = 2;
+	MaxBadPoints = 1;
 };
 if (iMissionSetup == 1) then {
 	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom SideMissionTasks,selectRandom SideMissionTasks];
 	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 	_MarkerTypes = ["empty","hd_dot","hd_dot"];
 	_CreateTasks = [true,false,false];
-	MaxBadPoints = 2;
+	MaxBadPoints = 1;
 };
 if (iMissionSetup == 2) then {
 	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse];
 	_IsMainObjs = [true]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 	_MarkerTypes = ["mil_objective"];
 	_CreateTasks = [true];
-	MaxBadPoints = 2;
+	MaxBadPoints = 1;
 };
 if (iMissionSetup == 3) then {
 	if (selectRandom [true,false,false]) then {
@@ -70,10 +70,11 @@ if (iMissionSetup == 4) then {
 	_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 	_MarkerTypes = ["mil_objective","mil_objective","mil_objective"];
 	_CreateTasks = [true,true,true];
-	MaxBadPoints = 2;
+	MaxBadPoints = 1;
 };
 if (iMissionSetup == 5) then {
-	if (MaxBadPoints >= 10) then {
+	_totalRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
+	if (_totalRep >= 10) then {
 		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom MissionsThatHaveIntel,selectRandom MissionsThatHaveIntel];
 		_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 		_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
@@ -97,7 +98,20 @@ if (iMissionSetup == 5) then {
 	};
 	_bIsCampaign = true;
 };
-
+if (iMissionSetup == 6) then {
+	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom SideMissionTasks,selectRandom SideMissionTasks];
+	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+	_MarkerTypes = ["mil_objective","empty","empty"];
+	_CreateTasks = [true,false,false];
+	MaxBadPoints = 1;
+};
+if (iMissionSetup == 7) then {
+	_ThisTaskTypes = [selectRandom _SideMissionTasksToUse,selectRandom _SideMissionTasksToUse,selectRandom _SideMissionTasksToUse];
+	_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+	_MarkerTypes = ["empty","empty","empty"];
+	_CreateTasks = [true,true,true];
+	MaxBadPoints = 1;
+};
 
 publicVariable "MaxBadPoints";
 
@@ -121,6 +135,7 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 		_iThisTaskType = _ThisTaskTypes select InfTaskCount;
 	};
 	
+	//_iThisTaskType = 10;
 	
 	_bIsMainObjective = _IsMainObjs select InfTaskCount;  //more chance of bad things, and set middle area stuff around (comms, base etc...)
 	_MarkerType = _MarkerTypes select InfTaskCount; //"Empty" or other
@@ -159,6 +174,8 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 				if (_iThisTaskType == 8) then {_MissionTitle = "Assasinate weapon dealer"}; //gain 1 point if side, no intel from him... if main need to id him before complete
 				if (_iThisTaskType == 9) then {_MissionTitle = "Destroy AAA vehicles"}; //gain 1 point if side, no intel from him... if main need to id him before complete
 				if (_iThisTaskType == 10) then {_MissionTitle = "Destroy Artillery vehicles"}; //gain one point if side (player can call arti strikes on them, cost 0.3 points but gains one if complete)
+				if (_iThisTaskType == 11) then {_MissionTitle = "Rescue POW"}; 
+				if (_iThisTaskType == 12) then {_MissionTitle = "Rescue Reporter"}; 					
 
 
 				//kill leader (he will run away in car to AO)    ::   save stranded guys    ::      
@@ -286,11 +303,11 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									_triggerAmmoTruckClear = createTrigger ["EmptyDetector", [0,0]];
 									_triggerAmmoTruckClear setVariable ["DelMeOnNewCampaignDay",true];
 									if (!_bCreateTask) then {
-										_triggerAmmoTruckClear setTriggerStatements [format["!alive(%1) && !alive(%2)",_sTargetName,_sTargetName2], " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""You have destroyed enemy ammo trucks, reputation increased""; ClearedPositions pushBack (ObjectivePossitions select " + str(_iTaskIndex) + ");", ""];			
+										_triggerAmmoTruckClear setTriggerStatements [format["!alive(%1) && !alive(%2)",_sTargetName,_sTargetName2], " [1, ""Destroyed ammo trucks""] execVM ""RandFramework\AdjustMaxBadPoints.sqf""; Hint ""You have destroyed enemy ammo trucks, reputation increased""; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
 									}
 									else {
 										//!([InfSide%3] call FHQ_TT_areTasksCompleted)
-										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack (ObjectivePossitions select %1);",_iTaskIndex];
+										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
 										_triggerAmmoTruckClear setTriggerStatements [format["!alive(%1) && !alive(%2) && !([""InfSide%3""] call FHQ_TT_areTasksCompleted)",_sTargetName,_sTargetName2,_iTaskIndex], _sKillOfficerTaskComplete, ""];	
 									};
 									_sTaskDescription = selectRandom[
@@ -359,10 +376,10 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									_triggerAmmoTruckClear = createTrigger ["EmptyDetector", [0,0]];
 									_triggerAmmoTruckClear setVariable ["DelMeOnNewCampaignDay",true];
 									if (!_bCreateTask) then {
-										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""You have destroyed enemy ammo trucks, reputation increased""; ClearedPositions pushBack (ObjectivePossitions select " + str(_iTaskIndex) + ");", ""];			
+										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " [1, ""Destroyed AAA""] execVM ""RandFramework\AdjustMaxBadPoints.sqf""; Hint ""You have destroyed enemy AAA, reputation increased""; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
 									}
 									else {
-										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack (ObjectivePossitions select %1);",_iTaskIndex];
+										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
 										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, _sKillOfficerTaskComplete, ""];	
 									};
 									_sTaskDescription = selectRandom[
@@ -433,10 +450,10 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									_triggerAmmoTruckClear = createTrigger ["EmptyDetector", [0,0]];
 									_triggerAmmoTruckClear setVariable ["DelMeOnNewCampaignDay",true];
 									if (!_bCreateTask) then {
-										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""You have destroyed enemy ammo trucks, reputation increased""; ClearedPositions pushBack (ObjectivePossitions select " + str(_iTaskIndex) + ");", ""];			
+										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " [1, ""Destroyed Artillery""] execVM ""RandFramework\AdjustMaxBadPoints.sqf""; Hint ""You have destroyed enemy artillery, reputation increased""; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
 									}
 									else {
-										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack (ObjectivePossitions select %1);",_iTaskIndex];
+										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
 										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, _sKillOfficerTaskComplete, ""];	
 									};
 
@@ -444,8 +461,9 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									_sTaskDescription = selectRandom[
 										"Two artillery vehicles have been firing rounds at and around our HQ, we need them destroyed as soon as possible!"];
 								};
-								 //###################################### informant,intorigate officer, weapon dealer or kill officer #########################################
-								if (_iThisTaskType == 4 || _iThisTaskType == 5 || _iThisTaskType == 7 || _iThisTaskType == 8) then { //if informant,intorigate officer, weapon dealer or kill officer
+								 //###################################### informant,intorigate officer, weapon dealer or kill officer, POW #########################################
+								if (_iThisTaskType == 4 || _iThisTaskType == 5 || _iThisTaskType == 7 || _iThisTaskType == 8 || _iThisTaskType == 11 || _iThisTaskType == 12) then { //if informant,intorigate officer, weapon dealer or kill officer or rescue POW, rescue reporter
+
 									_allpositionsLaptop1 = _infBuilding buildingPos -1;
 									if (InfTaskCount == 0) then {
 										AllowUAVLocateHelp = true;
@@ -468,10 +486,27 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 										_infClassToUse = selectRandom InterogateOfficerClasses;
 										_sideToUse = EnemySide;
 									};
+									if (_iThisTaskType == 11) then { //if rescue POW
+										_infClassToUse = selectRandom FriendlyVictims;
+										_sideToUse = West;
+									};
+									if (_iThisTaskType == 12) then { //if rescue reporter
+										_infClassToUse = selectRandom Reporters;
+										_sideToUse = Civilian;
+									};
 	
 									_objInformant = createGroup _sideToUse createUnit [_infClassToUse,[0,0,500],[],0,"NONE"];
 									_objInformant setVariable [_sInformant1Name, _objInformant, true];
+									_objInformant setVariable [_sInformant1Name, _objInformant, true];
+									_objInformant setVariable ["taskIndex",_iTaskIndex, true];
 									missionNamespace setVariable [_sInformant1Name, _objInformant];
+									if (_iThisTaskType == 11 || _iThisTaskType == 12) then { //if POW or reporter
+										[_objInformant,["Carry",{
+											_civ=_this select 0; 
+											_player=_this select 1;
+											[_civ, _player] execVM "RandFramework\CarryAndJoinWounded.sqf";				
+										}]] remoteExecCall ["addAction", 0];
+									}; 
 									_initPos = selectRandom _allpositionsLaptop1;
 									_flatPosInform = nil;
 									_flatPosInform = [_initPos , 10, 75, 7, 0, 0.5, 0,[],[_initPos,_initPos]] call BIS_fnc_findSafePos;	
@@ -605,10 +640,10 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 													_trgKillOfficer setVariable ["DelMeOnNewCampaignDay",true];
 													//_trgKillOfficer setTriggerStatements [format["!alive(%1)",_sInformant1Name], " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""A HVT has been eliminated, reputation increased""; ", ""];			
 													if (!_bCreateTask) then {
-														_trgKillOfficer setTriggerStatements [format["!alive(%1)",_sInformant1Name], " MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""; Hint ""A HVT has been eliminated, reputation increased""; ClearedPositions pushBack (ObjectivePossitions select " + str(_iTaskIndex) + "); ", ""];			
+														_trgKillOfficer setTriggerStatements [format["!alive(%1)",_sInformant1Name], " [1, ""HVT Killed""] execVM ""RandFramework\AdjustMaxBadPoints.sqf""; Hint ""A HVT has been eliminated, reputation increased""; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions""; ", ""];			
 													}
 													else {
-														_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack (ObjectivePossitions select %1);",_iTaskIndex];
+														_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
 														//sleep 2;
 														//hint _sKillOfficerTaskComplete;
 														//sleep 2;
@@ -620,7 +655,64 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 										};
 									}
 									else {
-										[[_objInformant, ["Get Intel","RandFramework\SpeakInformant.sqf",[_iTaskIndex,_bCreateTask],1,false,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
+										if (_iThisTaskType == 4) then {
+											[[_objInformant, ["Get Intel","RandFramework\SpeakInformant.sqf",[_iTaskIndex,_bCreateTask],1,false,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
+										};
+										if (_iThisTaskType == 11 || _iThisTaskType == 12) then { //pow or reporter
+											_allowFriendlyIns = false;
+											[_objInformant, "Acts_ExecutionVictim_Loop"] remoteExec ["switchMove", 0];
+											_objInformant setCaptive true;
+											_objInformant setDamage 0.8;
+											_objInformant setHitPointDamage ["hitLegs", 1];
+											//_sideMainBuilding
+											_allpositionsMainBuiding = _infBuilding buildingPos -1;
+											_objInformant setPosATL (selectRandom _allpositionsMainBuiding);
+											removeAllWeapons _objInformant;
+											[_objInformant,["Join Group",{
+													_civ=_this select 0; 
+													_player=_this select 1;
+													[_civ] join (group _player);
+													_civ enableAI "MOVE"; 
+													removeAllActions _civ;
+													_civ switchMove "Acts_ExecutionVictim_Unbow"; 
+													_civ enableAI "anim";
+													_civ setCaptive false;
+													addSwitchableUnit _civ;
+													_taskIndex = _civ getVariable ["taskIndex",-1];
+													//ClearedPositions pushBack (ObjectivePossitions select _taskIndex);
+													ClearedPositions pushBack ([ObjectivePossitions, getPos _objInformant] call BIS_fnc_nearestPosition);
+													publicVariable "ClearedPositions";
+											}]] remoteExecCall ["addAction", 0];
+
+											TREND_fnc_POWCheck = {		
+												_objManName = _this select 0;
+												_bCreateTask = _this select 1;
+												_iTaskIndex = _this select 2;
+												_objMan = missionNamespace getVariable _objManName;
+												_doLoop = true;
+												while {_doLoop} do {
+													if (!alive(_objMan)) then {
+														_doLoop = false;
+														_sName = format["InfSide%1",_iTaskIndex];
+														[_sName, "failed"] remoteExec ["FHQ_TT_setTaskState", 0, true];
+													};
+													if (_objMan distance (getMarkerPos "mrkHQ") < 500 || vehicle _objMan distance (getMarkerPos "mrkHQ") < 500) then {
+														_doLoop = false;
+														if (!_bCreateTask) then {
+															[0.2, "Rescued a POW"] execVM "RandFramework\AdjustMaxBadPoints.sqf";
+														}
+														else {
+															_sName = format["InfSide%1",_iTaskIndex];
+															[_sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0, true];
+														};
+														
+													};
+												};
+											};
+											[_sInformant1Name,_bCreateTask,_iTaskIndex] spawn TREND_fnc_POWCheck; 
+
+										};
+										
 									};
 									//4=Speak with informant || 5=interrogate officer || 7=Eliminate Officer || 8=Assasinate weapon dealer
 
@@ -641,6 +733,14 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									if (_iThisTaskType == 8) then {
 										_sTaskDescription = selectRandom[
 										"A weapons dealer is getting ready to meet up with an enemy general, he is about to sell weapons that have been stolen from us!  locate him and assainate him. We have intel of two dealers, here they both are, it will be one of these who you need to locate, we are unsure which one!" + _bodyIDRequiredText + WeaponDealerImage];
+									};
+									if (_iThisTaskType == 11) then { //pow or reporter
+										_sTaskDescription = selectRandom[
+										"We need you to locate and rescue our POW, the enemy are trying to gain valuable information from our guy!"];
+									};
+									if (_iThisTaskType == 12) then { //pow or reporter
+										_sTaskDescription = selectRandom[
+										"We need you to locate and rescue a reporter!"];
 									};
 
 								};
@@ -752,7 +852,7 @@ _trgComplete setTriggerArea [0, 0, 0, false];
 if (iMissionParamType == 5) then {
 	//MaxBadPoints = MaxBadPoints + 1; publicVariable ""MaxBadPoints""
 	_totalRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
-	if (_totalRep >= 10) then {
+	if (_totalRep >= 10 && FinalMissionStarted) then {
 		_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "[FriendlySide, [""DeBrief"", ""Return to HQ to debrief"", ""Debrief"", """"]] call FHQ_TT_addTasks;  [[""CAMPAIGN_END""],""RandFramework\Campaign\SetMissionBoardOptions.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];}; deletevehicle thisTrigger", ""];
 	}
 	else {
