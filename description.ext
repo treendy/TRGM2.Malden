@@ -4,7 +4,7 @@
 
 
 author = "Treendy";
-OnLoadName = "TRGM 2.0 Malden";
+OnLoadName = "TRGM 2.0 Porto";
 OnLoadmission = "TRGM 2";
 OnLoadIntro = $STR_TRGM2_Description_OnLoadIntro;
 loadScreen = "TRGM2OverviewPic2.jpg";

@@ -778,6 +778,9 @@ TREND_fnc_SpawnCivs = {
 	_allBuildings = nearestObjects [_sidePos, BasicBuildings, _distFromCent];
 
 	_unitCount = count _allBuildings;
+	if (_unitCount > 10) then {
+		_unitCount = 10;
+	};
 
 	_iCount = 0; //_unitCount
 	_randBuilding = nil;
@@ -872,7 +875,7 @@ TREND_fnc_SpawnCivs = {
 
 		//set waypoints to other buildings
 		_iCountWaypoints = 0;
-		while {_iCountWaypoints <= count _allBuildings} do
+		while {_iCountWaypoints <= 4} do
 		{
 			_randBuilding2 = selectRandom _allBuildings; //pick one building from our buildings array
 			_allBuildingPos2 = _randBuilding2 buildingPos -1;
@@ -894,7 +897,7 @@ TREND_fnc_SpawnCivs = {
 
 			[_sideCivGroup, _iCountWaypoints] setWaypointSpeed "LIMITED";
 			[_sideCivGroup, _iCountWaypoints] setWaypointBehaviour "SAFE";
-			if (_iCountWaypoints == count _allBuildings) then{[_sideCivGroup, 8] setWaypointType "CYCLE";};
+			if (_iCountWaypoints == 4) then{[_sideCivGroup, 8] setWaypointType "CYCLE";};
 			_iCountWaypoints = _iCountWaypoints + 1;
 		};
 		_sideCivGroup setBehaviour "SAFE";
