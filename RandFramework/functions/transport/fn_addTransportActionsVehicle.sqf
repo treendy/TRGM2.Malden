@@ -1,11 +1,18 @@
 params ["_vehicle"];
 
+if (!isServer) exitWith {};
+
+
+/********************* Add Vehicle Actions ****************/
 _actionAdapter = {
 	params ["_target", "_caller", "_ID", "_arguments"];
 	[_target] spawn TRGM_fnc_selectLZ;
 };
 
+// add in vehicle Actions
 _actions = [
+
+	// Select Destination when in chopper on ground
 	[
 		localize "STR_TRGM2_transport_fnaddTransportAction_SelectDest",
 		_actionAdapter,
@@ -19,6 +26,8 @@ _actions = [
 		false,
 		""
 	],
+
+	// Select Destination when in chopper and flying
 	[
 		localize "STR_TRGM2_transport_fnaddTransportAction_DivertLZ",
 		_actionAdapter,
@@ -35,13 +44,8 @@ _actions = [
 ];
 
 
-_target = [0, -2] select isMultiplayer;
+// add actions on vehicle
 {
-	if (isMultiplayer) then {
-		if (isServer) then {
-			[_vehicle, _x] remoteExec ["addAction",_target,true];
-		};
-	} else {
-		_vehicle addAction _x;
-	}
+	[_vehicle, _x] remoteExec ["addAction",[0, -2] select isMultiplayer,true];
+	// TODO: ACE alternative
 }	foreach _actions;

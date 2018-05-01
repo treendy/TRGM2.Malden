@@ -340,7 +340,7 @@ if (isServer) then {
 	publicVariable "CustomObjectsSet";
 	call compile preprocessFileLineNumbers "RandFramework\setFriendlyObjects.sqf";
 
-	[chopper1] call TRGM_fnc_addTransportAction;
+	[[chopper1]] call TRGM_fnc_addTransportActions;
 
 	if (EnemyFactionData != "") then {
 		_errorMessage = "";
@@ -397,7 +397,7 @@ if (isServer) then {
 			_x addEventHandler ["Respawn", { [_this select 0] execVM "RandFramework\setLoadout.sqf"; }];
 		} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 	};
-	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+	if ([] call TRGM_fnc_isAceLoaded) then {
 		[box1,InitialBoxItemsWithAce] call bis_fnc_initAmmoBox;
 	}
 	else {

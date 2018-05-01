@@ -16,6 +16,17 @@ if (isNil "_thisMission") then {
 	deleteWaypoint _x
 } foreach waypoints group driver _vehicle;
 
+if ([_vehicle] call TRGM_fnc_helicopterIsFlying) then {
+	_locationText = [position _vehicle,true] call TRGM_fnc_getLocationName;
+	_text = format [localize "STR_TRGM2_transport_radio_message_RTB",  [_vehicle] call TRGM_fnc_getTransportName];
+	[driver _vehicle,_text] call TRGM_fnc_commsSide;
+} else {
+	_locationText = [position _vehicle,true] call TRGM_fnc_getLocationName;
+	_text = format [localize "STR_TRGM2_transport_fnflyToLz_EnterAirspace",  [_vehicle] call TRGM_fnc_getTransportName, _locationText];
+	[driver _vehicle,_text] call TRGM_fnc_commsSide;
+};
+
+
 _baseLZPos = _vehicle getVariable "baseLZ";
 
 _heliPad = "Land_HelipadEmpty_F" createVehicle _baseLZPos;
@@ -52,11 +63,11 @@ if ( !(_thisMission call TRGM_fnc_checkMissionIdActive)) then {
 
 // Landing Comms
 if ([_vehicle] call TRGM_fnc_helicopterIsFlying) then  {
-	_groupID = groupId group driver _vehicle;
-	_text = format [localize "STR_TRGM2_transport_fnflyToBase_RequestingLanding", _groupID];
+	_transportName = [_vehicle] call TRGM_fnc_getTransportName;
+	_text = format [localize "STR_TRGM2_transport_fnflyToBase_RequestingLanding", _transportName];
 	[driver _vehicle,_text] call TRGM_fnc_commsSide;
 	sleep 1.5;
-	_text = format [localize "STR_TRGM2_transport_fnflyToBase_ClearLand", _groupID];
+	_text = format [localize "STR_TRGM2_transport_fnflyToBase_ClearLand", _transportName];
 	[_text] call TRGM_fnc_commsHQ;
 };
 

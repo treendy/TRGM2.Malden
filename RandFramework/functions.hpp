@@ -3,6 +3,7 @@ class TRGM   { // TAG
     class common { // CATEGORY
         file = "RandFramework\functions\common";
 
+        class isAceLoaded {}
         class setMilitiaSkill {};
         class debugDotMarker {};
         class CountSpentPoints {};
@@ -32,7 +33,12 @@ class TRGM   { // TAG
         class selectLzCreateBolckedAreaMarker{};
         class selectLzOnMapClick{};
 
-        class addTransportAction{};
+        class addTransportActions{};
+        class addTransportActionsVehicle{};
+        class addTransportActionsPlayer{};
+
+        class getTransportName{};
+
 
         class flyToLz{};
         class flyToBase{};

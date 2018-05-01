@@ -3,7 +3,7 @@
 
 _thisBox = _this select 0;
 
-if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+if ([] call TRGM_fnc_isAceLoaded) then {
 	[_thisBox,InitialBoxItemsWithAce] call bis_fnc_initAmmoBox;
 }
 else {
