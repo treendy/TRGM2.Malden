@@ -1405,6 +1405,10 @@
                 <Chinesesimp>西北</Chinesesimp>
 				<Spanish>NO</Spanish>
 			</Key>
+			<Key ID="STR_TRGM2_transport_fnaddTransportActionsPlayer_CallTransport">
+				<Original>Call Transport</Original>
+				<English>Call Transport</English>
+			</Key>
 			<Key ID="STR_TRGM2_transport_fnaddTransportAction_SelectDest">
 				<Original>Select Destination</Original>
 				<English>Select Destination</English>
@@ -1517,6 +1521,10 @@
                 <Chinesesimp>我们已抵达降落点，快进来!</Chinesesimp>
 				<Spanish>Hemos aterrizado en la LZ, súbanse!</Spanish>
 			</Key>
+			<Key ID="STR_TRGM2_transport_radio_message_RTB">
+				<Original>%1 is returning to Base.</Original>
+				<English>%1 is returning to Base.</English>
+			</Key>
 			<Key ID="STR_TRGM2_transport_fnflyToLz_EnterAirspace">
 				<Original>%1 is entering airspace %2 - We're RTB.</Original>
 				<English>%1 is entering airspace %2 - We're RTB.</English>
@@ -1569,11 +1577,8 @@
 				<Spanish>... si no puedes oir la música sube tu volumen de música</Spanish>
 			</Key>
 			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport">
-				<Original>Call Transport Chopper</Original>
-				<English>Call Transport Chopper</English>
-                <Chinese>呼叫運輸直升機</Chinese>
-                <Chinesesimp>呼叫运输直升机</Chinesesimp>
-				<Spanish>LLamar a Helicóptero de Transporte</Spanish>
+				<Original>Call Transport (%1)</Original>
+				<English>Call Transport (%1)</English>
 			</Key>
 			<Key ID="STR_TRGM2_TRGMInitPlayerLocal_SaveLocal">
 				<Original>Save Local</Original>

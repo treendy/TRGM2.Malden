@@ -85,30 +85,6 @@ if (isNil "FinalMissionStarted") then {
 
 
 
-
-
-TREND_fnc_BasicInit = {
-
-	_transportSelectAction = {
-		[chopper1,true] spawn TRGM_fnc_selectLZ;
-	};
-
-	if (side player != civilian) then {
-		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-			myaction = ['CallTransportChopper',localize 'STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport','',_transportSelectAction,{true}] call ace_interact_menu_fnc_createAction;
-			[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
-		}
-		else {
-			_transportChopperActionID = player addAction [localize "STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport",_transportSelectAction,0,0];	
-			player setVariable ["callTransportChopperID", _transportChopperActionID];	
-		};
-	};
-
-};
-[] spawn TREND_fnc_BasicInit;
-//player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInit; }];
-
-
 TREND_fnc_BasicInitAndRespawn = {
 
 	if (isMultiplayer) then {
@@ -272,16 +248,7 @@ TREND_fnc_GeneralPlayerLoop = {
 				//	};
 				//};
 			};
-			if !(Player getVariable ["callTransportChopperID", -1] in actionIDs player) then {
-			//if ((Player getVariable ["callTransportChopperID", -1]) == -1) then {
-				_transportSelectAction = {
-					[chopper1,true] spawn TRGM_fnc_selectLZ;
-				};
-				_transportChopperActionID = player addAction ["Call for transport chopper",_transportSelectAction,0,0];	
-				player setVariable ["callTransportChopperID", _transportChopperActionID];
-			};
 
-			
 			if (leader (group (vehicle player)) == player && AdvancedSettings select ADVSET_SUPPORT_OPTION_IDX == 1) then {
 				if (iMissionSetup == 5) then {
 					if (isNil "CampaignInitiated") then {
