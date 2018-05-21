@@ -35,6 +35,8 @@ _fillEvenly = _this param [4, false, [true]];
 _sortHeight = _this param [5, false, [true]];
 _doMove = _this param [6, false, [true]];
 
+_bDeleteUnit = false;
+
 if (_center isEqualTo [0,0,0]) exitWith {
     player sideChat str "Zen_Occupy House Error : Invalid position given.";
     diag_log "Zen_Occupy House Error : Invalid position given.";
@@ -196,6 +198,13 @@ for [{_j = 0}, {(_unitIndex < count _units) && {(count _buildingPosArray > 0)}},
 
                                     doStop (_units select _unitIndex);
                                     (_units select _unitIndex) forceSpeed 0;
+                                    
+                                    _unit = (_units select _unitIndex);
+                                    _nearUnits = nearestObjects [(getPos _unit), ["Man"], 1];
+                                    if (count _nearUnits > 1) then {
+                                       deleteVehicle _unit;
+                                       //hint "TESTTEST";
+                                    };
                                 };
 
                                //** JBOY_UpDown by JohnnyBoy //*/
@@ -269,6 +278,8 @@ _unUsedUnits = [];
 for "_i" from _unitIndex to (count _units - 1) step 1 do {
     _unUsedUnits pushBack (_units select _i);
 };
+
+
 
 (_unUsedUnits)
 

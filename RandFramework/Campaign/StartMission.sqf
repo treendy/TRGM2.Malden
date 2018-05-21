@@ -3,6 +3,11 @@
 _isCampaign = (iMissionParamType == 5);
 
 
+_mrkHQPos = getMarkerPos "mrkHQ";
+_AOCampPos = getPos endMissionBoard2;
+bAllAtBase2 = ({(alive _x)&&((_x distance _mrkHQPos < 500)||(_x distance _AOCampPos < 500))} count (call BIS_fnc_listPlayers))==({ (alive _x) } count (call BIS_fnc_listPlayers));
+
+
 
 //Need to move the below to function that fires for player who called addAction, then inside that function can call StartMission for all
 //Also... in this extra file, we can set a publicVariable for "IntroPlayed=false", then after played set IntroPlayed=true... so will only play when mission starts or next mission picked
@@ -35,7 +40,7 @@ _bAllowStart = true;
 
 if (_bAllowStart) then {
 
-	if ((bAllAtBase && ActiveTasks call FHQ_TT_areTasksCompleted) || !_isCampaign) then {
+	if ((bAllAtBase2 && ActiveTasks call FHQ_TT_areTasksCompleted) || !_isCampaign) then {
 
 
 		player allowdamage false;

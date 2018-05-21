@@ -38,7 +38,7 @@ if (_MergedLoudoutData != "") then {
 						_tempAddedObjects pushBack _name;
 						switch (_name) do {
 							case "AirSupport1" : {			
-								_pos = getPosASL airSup1;
+								_pos = getPosATL airSup1;
 								_dir = getDir airSup1;
 								deleteVehicle airSup1;
 								sleep 0.01;
@@ -49,7 +49,7 @@ if (_MergedLoudoutData != "") then {
 								
 							};
 							case "AirSupport2" : {			
-								_pos = getPosASL airSup2;
+								_pos = getPosATL airSup2;
 								_dir = getDir airSup2;
 								deleteVehicle airSup2;
 								sleep 0.01;
@@ -59,7 +59,7 @@ if (_MergedLoudoutData != "") then {
 								airSup2 setPos (_pos vectorAdd [0,0,0.1]);
 							};
 							case "ArmoredCar" : {			
-								_pos = getPosASL car1;
+								_pos = getPosATL car1;
 								_dir = getDir car1;
 								deleteVehicle car1;
 								sleep 0.01;
@@ -70,7 +70,7 @@ if (_MergedLoudoutData != "") then {
 								ArmoredCar = _object;
 							};
 							case "TankorAPC" : {			
-								_pos = getPosASL tank1;
+								_pos = getPosATL tank1;
 								_dir = getDir tank1;
 								deleteVehicle tank1;
 								sleep 0.01;
@@ -81,7 +81,7 @@ if (_MergedLoudoutData != "") then {
 								TankorAPC = _object;
 							};
 							case "UnarmedCar" : {			
-								_pos = getPosASL k1car2;
+								_pos = getPosATL k1car2;
 								_dir = getDir k1car2;
 								deleteVehicle k1car2;
 								sleep 0.01;
@@ -92,7 +92,7 @@ if (_MergedLoudoutData != "") then {
 								UnarmedCar = _object;
 							};
 							case "MedicalTruck" : {			
-								_pos = getPosASL medTruck;
+								_pos = getPosATL medTruck;
 								_dir = getDir medTruck;
 								deleteVehicle medTruck;
 								sleep 0.01;
@@ -103,7 +103,7 @@ if (_MergedLoudoutData != "") then {
 								MedicalTruck = _object;
 							};
 							case "MedicalChopper" : {			
-								_pos = getPosASL mediChop1;
+								_pos = getPosATL mediChop1;
 								_dir = getDir mediChop1;
 								deleteVehicle mediChop1;
 								sleep 0.01;
@@ -113,7 +113,7 @@ if (_MergedLoudoutData != "") then {
 								mediChop1 setPos (_pos vectorAdd [0,0,0.1]);
 							};
 							case "LargeTransportChopper" : {			
-								_pos = getPosASL chin1;
+								_pos = getPosATL chin1;
 								_dir = getDir chin1;
 								deleteVehicle chin1;
 								sleep 0.01;
@@ -123,13 +123,13 @@ if (_MergedLoudoutData != "") then {
 								chin1 setPos (_pos vectorAdd [0,0,0.1]);
 							};
 							case "FuelTruck" : {			
-								_pos = getPosASL Fuel1;
+								_pos = getPosATL Fuel1;
 								_dir = getDir Fuel1;
 								deleteVehicle Fuel1;
 								sleep 0.01;
 								Fuel1 = createVehicle [_object, _pos, [], 0, "CAN_COLLIDE"];
 								Fuel1 setDir _dir;
-								_pos = getPosASL Fuel2;
+								_pos = getPosATL Fuel2;
 								_dir = getDir Fuel2;
 								deleteVehicle Fuel2;
 								sleep 0.01;
@@ -140,7 +140,7 @@ if (_MergedLoudoutData != "") then {
 								FuelTruck = _object;
 							};
 							case "RepairTruck" : {			
-								_pos = getPosASL RepairTruck;
+								_pos = getPosATL RepairTruck;
 								_dir = getDir RepairTruck;
 								deleteVehicle RepairTruck;
 								sleep 0.01;
@@ -150,7 +150,7 @@ if (_MergedLoudoutData != "") then {
 								RepairTruck setPos (_pos vectorAdd [0,0,0.1]);
 							};
 							case "AmmoTruck" : {			
-								_pos = getPosASL AmmoTruck;
+								_pos = getPosATL AmmoTruck;
 								_dir = getDir AmmoTruck;
 								deleteVehicle AmmoTruck;
 								sleep 0.01;
@@ -160,19 +160,19 @@ if (_MergedLoudoutData != "") then {
 								AmmoTruck setPos (_pos vectorAdd [0,0,0.1]);
 							};
 							case "SmallHeli" : {			
-								_pos = getPosASL SmallHeli1;
+								_pos = getPosATL SmallHeli1;
 								_dir = getDir SmallHeli1;
 								deleteVehicle SmallHeli1;
 								sleep 0.01;
 								SmallHeli1 = createVehicle [_object, _pos, [], 0, "CAN_COLLIDE"];
 								SmallHeli1 setDir _dir;
-								_pos = getPosASL SmallHeli2;
+								_pos = getPosATL SmallHeli2;
 								_dir = getDir SmallHeli2;
 								deleteVehicle SmallHeli2;
 								sleep 0.01;
 								SmallHeli2 = createVehicle [_object, _pos, [], 0, "CAN_COLLIDE"];
 								SmallHeli2 setDir _dir;
-								_pos = getPosASL SmallHeli3;
+								_pos = getPosATL SmallHeli3;
 								_dir = getDir SmallHeli3;
 								deleteVehicle SmallHeli3;
 								sleep 0.01;
@@ -185,7 +185,7 @@ if (_MergedLoudoutData != "") then {
 
 							};
 							case "AITransportChopper" : {
-								_pos = getPosASL chopper1;
+								_pos = getPosATL chopper1;
 								_dir = getDir chopper1;
 								{deleteVehicle _x;}forEach crew chopper1;
 								deleteVehicle chopper1;
@@ -204,7 +204,7 @@ if (_MergedLoudoutData != "") then {
 								publicVariable "chopper1";							
 							};
 							case "AIExtractSupuportChopper" : {
-								_pos = getPosASL chopper2;
+								_pos = getPosATL chopper2;
 								_dir = getDir chopper2;
 								{deleteVehicle _x;}forEach crew chopper2;
 								deleteVehicle chopper2;
@@ -288,21 +288,24 @@ if (_MergedLoudoutData != "") then {
 	if (_errorMessage != "") then {
 		hint  _errorMessage;
 	};
-	sleep 3;
-	airSup1 allowDamage true;
-	airSup2 allowDamage true;
-	car1 allowDamage true;
-	tank1 allowDamage true;
-	k1car2 allowDamage true;
-	medTruck allowDamage true;
-	mediChop1 allowDamage true;
-	chin1 allowDamage true;
-	Fuel2 allowDamage true;
-	RepairTruck allowDamage true;
-	AmmoTruck allowDamage true;
-	SmallHeli1 allowDamage true;
-	SmallHeli2 allowDamage true;
-	SmallHeli3 allowDamage true;
+
+	[] spawn {
+		sleep 30;
+		airSup1 allowDamage true;
+		airSup2 allowDamage true;
+		car1 allowDamage true;
+		tank1 allowDamage true;
+		k1car2 allowDamage true;
+		medTruck allowDamage true;
+		mediChop1 allowDamage true;
+		chin1 allowDamage true;
+		Fuel2 allowDamage true;
+		RepairTruck allowDamage true;
+		AmmoTruck allowDamage true;
+		SmallHeli1 allowDamage true;
+		SmallHeli2 allowDamage true;
+		SmallHeli3 allowDamage true;
+	};
 };
 
 

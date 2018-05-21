@@ -28,11 +28,15 @@ if (isMultiplayer) then {
 
 
 if (_bAllow) then {
+	_mrkHQPos = getMarkerPos "mrkHQ";
+	_AOCampPos = getPos endMissionBoard2;
+	bAllAtBase2 = ({(alive _x)&&((_x distance _mrkHQPos < 500)||(_x distance _AOCampPos < 500))} count (call BIS_fnc_listPlayers))==({ (alive _x) } count (call BIS_fnc_listPlayers));
+
 	if (SaveType != 0) then {
 		[SaveType,false] execVM "RandFramework\Campaign\ServerSave.sqf";
 	};
 
-	if (bAllAtBase) then {
+	if (bAllAtBase2) then {
 		Hint (localize "STR_TRGM2_exitCampaign_RepSaaved");
 		["end4", true, 7] remoteExec ["BIS_fnc_endMission"];
 		bAttemptedEnd = false; publicVariable "bAttemptedEnd";

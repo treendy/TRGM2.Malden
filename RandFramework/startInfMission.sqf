@@ -11,6 +11,8 @@ TRGM_Logic setVariable ["PointsUpdating", false, true];
 //publicVariable "debugMessages";
 
 
+
+
 _ThisTaskTypes = nil;
 _IsMainObjs = nil;
 _MarkerTypes = nil;
@@ -35,7 +37,7 @@ if (iMissionSetup == 0) then {
 	MaxBadPoints = 1;
 };
 if (iMissionSetup == 1) then {
-	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom SideMissionTasks,selectRandom SideMissionTasks];
+	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom MissionsThatHaveIntel,selectRandom SideMissionTasks];
 	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 	_MarkerTypes = ["empty","hd_dot","hd_dot"];
 	_CreateTasks = [true,false,false];
@@ -113,9 +115,15 @@ if (iMissionSetup == 7) then {
 	MaxBadPoints = 1;
 };
 
+if (!(isNil "IsTraining")) then {
+		_ThisTaskTypes = [12,8,3];
+		_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+		_MarkerTypes = ["mil_objective","mil_objective","mil_objective"];
+		_CreateTasks = [true,true,true];
+		MaxBadPoints = 100;
+};
+
 publicVariable "MaxBadPoints";
-
-
 
 
 while {(InfTaskCount < count _ThisTaskTypes)} do {
@@ -134,6 +142,8 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 	else {
 		_iThisTaskType = _ThisTaskTypes select InfTaskCount;
 	};
+
+//_iThisTaskType = 12;
 
 	_bIsMainObjective = _IsMainObjs select InfTaskCount;  //more chance of bad things, and set middle area stuff around (comms, base etc...)
 	_MarkerType = _MarkerTypes select InfTaskCount; //"Empty" or other
@@ -511,7 +521,9 @@ if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMissi
 										[_objInformant,["Carry",{
 											_civ=_this select 0; 
 											_player=_this select 1;
-											[_civ, _player] execVM "RandFramework\CarryAndJoinWounded.sqf";				
+											[_civ, _player] execVM "RandFramework\CarryAndJoinWounded.sqf";		
+											ClearedPositions pushBack ([ObjectivePossitions, _player] call BIS_fnc_nearestPosition);	
+											publicVariable "ClearedPositions";
 										}]] remoteExecCall ["addAction", 0];
 									}; 
 									_initPos = selectRandom _allpositionsLaptop1;
@@ -566,6 +578,7 @@ if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMissi
 															_thisInformant setHit ['legs',1];
 															_thisInformant setVariable ["StopWalkScript", true, true];
 															_thisInformant setCaptive true;
+															removeAllWeapons _thisInformant;
 														}
 														else {
 															//debugMessages = debugMessages + "\nhit leg 6 - " + _hitLocation;
@@ -683,14 +696,14 @@ if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMissi
 													_player=_this select 1;
 													[_civ] join (group _player);
 													_civ enableAI "MOVE"; 
-													removeAllActions _civ;
+													//removeAllActions _civ;
 													_civ switchMove "Acts_ExecutionVictim_Unbow"; 
 													_civ enableAI "anim";
 													_civ setCaptive false;
 													addSwitchableUnit _civ;
 													_taskIndex = _civ getVariable ["taskIndex",-1];
 													//ClearedPositions pushBack (ObjectivePossitions select _taskIndex);
-													ClearedPositions pushBack ([ObjectivePossitions, getPos _objInformant] call BIS_fnc_nearestPosition);
+													ClearedPositions pushBack ([ObjectivePossitions, getPos _civ] call BIS_fnc_nearestPosition);
 													publicVariable "ClearedPositions";
 											}]] remoteExecCall ["addAction", 0];
 
@@ -709,11 +722,22 @@ if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMissi
 													if (_objMan distance (getMarkerPos "mrkHQ") < 500 || vehicle _objMan distance (getMarkerPos "mrkHQ") < 500) then {
 														_doLoop = false;
 														if (!_bCreateTask) then {
-															[0.2, "Rescued a POW"] execVM "RandFramework\AdjustMaxBadPoints.sqf";
+															if (_iThisTaskType == 11) then {
+																[0.2, "Rescued a POW"] execVM "RandFramework\AdjustMaxBadPoints.sqf";
+																[_objMan] join grpNull;
+																deleteVehicle _objMan;
+															};
+															if (_iThisTaskType == 12) then {
+																[0.2, "Rescued a Reporter"] execVM "RandFramework\AdjustMaxBadPoints.sqf";
+																[_objMan] join grpNull;
+																deleteVehicle _objMan;
+															};
 														}
 														else {
 															_sName = format["InfSide%1",_iTaskIndex];
 															[_sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0, true];
+															[_objMan] join grpNull;
+															deleteVehicle _objMan;
 														};
 														
 													};
@@ -854,6 +878,8 @@ if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMissi
 
 	};
 };
+
+
 
 
 _trgComplete = createTrigger ["EmptyDetector", [0,0]];
@@ -1006,7 +1032,8 @@ if (_bMoveToAO) then {
 		_AmmoBox1 addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
 	}  forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 	if (AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
-		_AmmoBox1 addAction [localize "STR_TRGM2_startInfMission_VirtualArsenal", {["Open",true] spawn BIS_fnc_arsenal}];
+		//_AmmoBox1 addAction [localize "STR_TRGM2_startInfMission_VirtualArsenal", {["Open",true] spawn BIS_fnc_arsenal}];
+		[_AmmoBox1, [localize "STR_TRGM2_startInfMission_VirtualArsenal",{["Open",true] spawn BIS_fnc_arsenal}]] remoteExec ["addAction", 0];
 	};
 
 	_flatPosUnits = [_flatPosCampFire, 8, 17, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
@@ -1027,6 +1054,9 @@ if (_bMoveToAO) then {
 
 };
 
+
+
+
 MissionLoaded = true;
 publicVariable "MissionLoaded";
 
@@ -1035,7 +1065,6 @@ publicVariable "MissionLoaded";
 
 //now we have all our location positinos, we can set other area stuff
 [] execVM "RandFramework\RandScript\TREND_fnc_setOtherAreaStuff.sqf";
-
 
 
 

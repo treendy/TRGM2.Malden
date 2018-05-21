@@ -81,7 +81,7 @@ sEnemyHeliPilot = "O_helipilot_F";
 		sAAAVeh = "O_T_APC_Tracked_02_AA_ghex_F";
 		sMortar = ["O_Mortar_01_F"];
 		sSniper = "O_T_Sniper_F";
-		sCivilian = ["C_man_polo_1_F"];
+		//sCivilian = ["C_man_polo_1_F"];
 		sArtilleryVeh = "O_T_MBT_02_arty_ghex_F";
 		sBoatUnit = "O_T_Boat_Armed_01_hmg_F";		
 		sExpSpec = "O_T_Soldier_Exp_F"; 		
@@ -135,7 +135,7 @@ sEnemyHeliPilot = "O_helipilot_F";
 		sAAAVeh = "";
 		sMortar = ["O_G_Mortar_01_F"];
 		sSniper = "O_G_Soldier_F";
-		sCivilian = ["C_man_polo_1_F"];
+		//sCivilian = ["C_man_polo_1_F"];
 		sArtilleryVeh = "O_T_MBT_02_arty_ghex_F";
 		sBoatUnit = "Land_HelipadEmpty_F";		
 		sExpSpec = "O_G_Soldier_F"; 		
@@ -192,7 +192,7 @@ sTank3Tank = "rhs_t72ba_tv";
 sAAAVeh = "rhs_zsu234_aa";    
 sMortar = ["rhs_2b14_82mm_msv"];
 sSniper = "rhs_mvd_izlom_marksman";
-sCivilian = ["C_man_polo_1_F"];
+//sCivilian = ["C_man_polo_1_F"];
 sArtilleryVeh = "RHS_BM21_MSV_01";
 sBoatUnit = "Land_HelipadEmpty_F";		
 sExpSpec = "rhs_msv_emr_engineer"; 		
@@ -413,6 +413,66 @@ EnemyBaseChoppers = ["Land_HelipadEmpty_F"];
 sEnemyHeliPilot = "CUP_O_TK_Pilot";
 
 CivCars = ["CUP_C_Volha_Limo_TKCIV","CUP_C_Lada_GreenTK_CIV","CUP_C_S1203_CIV","CUP_C_Ikarus_TKC"];
+
+	};	
+
+
+case 8 : {
+
+sTeamleader = "rhsgref_ins_squadleader";
+sRifleman = "rhsgref_ins_rifleman";
+sATMan = "rhsgref_ins_grenadier_rpg";
+sAAMan = "rhsgref_ins_specialist_aa";
+sAmmobearer = "rhsgref_ins_militiaman_mosin";
+sGrenadier = "rhsgref_ins_engineer";
+sMedic = "rhsgref_ins_medic";
+sMachineGunMan = "rhsgref_ins_machinegunner";
+sTank1ArmedCar = "rhsgref_ins_uaz_spg9";
+sTank2APC = "rhsgref_ins_btr70";
+sTank3Tank = "rhsgref_ins_t72bc";
+sAAAVeh = "rhsgref_ins_zsu234";    
+sMortar = ["rhsgref_ins_rifleman"];
+sSniper = "rhsgref_ins_sniper";
+//sCivilian = ["CUP_C_TK_Man_04","CUP_C_TK_Man_04_Jack","CUP_C_TK_Man_04_Waist","CUP_C_TK_Man_07","CUP_C_TK_Man_07_Coat","CUP_C_TK_Man_07_Waist","CUP_C_TK_Man_08","CUP_C_TK_Man_08_Jack","CUP_C_TK_Man_08_Waist","CUP_C_TK_Man_05_Coat","CUP_C_TK_Man_05_Jack","CUP_C_TK_Man_05_Waist","CUP_C_TK_Man_06_Coat","CUP_C_TK_Man_06_Jack","CUP_C_TK_Man_06_Waist","CUP_C_TK_Man_02","CUP_C_TK_Man_02_Jack","CUP_C_TK_Man_02_Waist","CUP_C_TK_Man_01_Waist","CUP_C_TK_Man_01_Coat","CUP_C_TK_Man_01_Jack","CUP_C_TK_Man_03_Coat","CUP_C_TK_Man_03_Jack","CUP_C_TK_Man_03_Waist"];
+sArtilleryVeh = "rhsgref_ins_d30";
+sBoatUnit = "Land_HelipadEmpty_F";		
+sExpSpec = "rhsgref_ins_saboteur"; 		
+
+sTeamleaderMilitia = "rhsgref_ins_squadleader";
+sRiflemanMilitia = "rhsgref_ins_rifleman";
+sATManMilitia = "rhsgref_ins_grenadier_rpg";
+sAAManMilitia = "rhsgref_ins_specialist_aa";	
+sAmmobearerMilitia = "rhsgref_ins_militiaman_mosin";
+sGrenadierMilitia = "rhsgref_ins_engineer";
+sMedicMilitia = "rhsgref_ins_medic";
+sMachineGunManMilitia = "rhsgref_ins_machinegunner";
+sTank1ArmedCarMilitia = "rhsgref_ins_uaz_spg9";
+sTank2APCMilitia = "rhsgref_ins_uaz_spg9";
+sTank3TankMilitia = "rhsgref_ins_uaz_spg9";
+sAAAVehMilitia = "CUP_O_Ural_ZU23_TKA";
+sMortarMilitia = ["CUP_O_2b14_82mm_TK_INS"];
+
+InformantClasses = ["C_Orestes","C_Nikos"];
+InterogateOfficerClasses = ["rhsgref_ins_commander"];
+WeaponDealerClasses = ["C_Nikos_aged","C_man_hunter_1_F"];
+sideResarchTruck = ["rhsgref_ins_ural"];
+SideRadioClassNames = ["Land_PortableGenerator_01_F"];
+sideAmmoTruck = ["rhsgref_ins_gaz66_ammo"];
+DestroyAAAVeh = ["rhsgref_ins_d30"];
+
+sRiflemanFriendInsurg = "rhsgref_hidf_rifleman";
+
+ReinforceVehicle = "rhsgref_ins_Mi8amt";
+EnemyAirToAirSupports = ["rhs_mig29s_vvs"];
+EnemyAirToGroundSupports = ["RHS_Ka52_vvs"]; //This would normally be a chopper
+EnemyAirScout = ["rhs_pchela1t_vvs"];
+
+UnarmedScoutVehicles = ["rhsgref_ins_uaz","rhsgref_ins_uaz_open"];
+
+EnemyBaseChoppers = ["RHS_Ka52_vvs"];
+sEnemyHeliPilot = "rhsgref_ins_pilot";
+
+//CivCars = ["CUP_C_Volha_Limo_TKCIV","CUP_C_Lada_GreenTK_CIV","CUP_C_S1203_CIV","CUP_C_Ikarus_TKC"];
 
 	};	
 

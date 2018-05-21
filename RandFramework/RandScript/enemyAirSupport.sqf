@@ -66,13 +66,14 @@ if (isServer) then {
 		_v1wp5 = _groupp1 addWaypoint [[(_SpottedPos select 0) - _iFlyRange,(_SpottedPos select 1) - _iFlyRange], 0];
 		_v1wp6 = _groupp1 addWaypoint [[(_SpottedPos select 0) + _iFlyRange,(_SpottedPos select 1)], 0];
 		_v1wp7 = _groupp1 addWaypoint [ReinforceStartPos1, 0];
+		_v1wp8 = _groupp1 addWaypoint [ReinforceStartPos1, 0];
 		[_groupp1, 0] setWaypointStatements ["true", format["%1 flyInHeight 40;",_sAirName]];
 		[_groupp1, 0] setWaypointSpeed "FULL";
-		[_groupp1, 0] setWaypointBehaviour "COMBAT";
+		[_groupp1, 0] setWaypointBehaviour "SAFE";
 		[_groupp1, 1] setWaypointStatements ["true", format["%1 flyInHeight 40;",_sAirName]];
 		[_groupp1, 1] setWaypointSpeed "LIMITED";
-		[_groupp1, 1] setWaypointBehaviour "COMBAT";
-		[_groupp1, 6] setWaypointStatements ["true", format["deleteVehicle %1;",_sAirName]];
+		//[_groupp1, 1] setWaypointBehaviour "COMBAT";
+		[_groupp1, 7] setWaypointStatements ["true", format["deleteVehicle %1;",_sAirName]];
 		_groupp1 setBehaviour "COMBAT";
 		
 

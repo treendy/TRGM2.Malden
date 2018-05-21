@@ -250,6 +250,7 @@ TREND_fnc_GetAnimalsMoving = {
 [] spawn TREND_fnc_GetAnimalsMoving;
 player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInit; }];
 
+//[player, supReq] call BIS_fnc_addSupportLink;
 
 TREND_fnc_GeneralPlayerLoop = {
 	while {true} do {
@@ -280,31 +281,46 @@ TREND_fnc_GeneralPlayerLoop = {
 				player setVariable ["callTransportChopperID", _transportChopperActionID];
 			};
 
-
+			
 			if (leader (group (vehicle player)) == player && AdvancedSettings select ADVSET_SUPPORT_OPTION_IDX == 1) then {
 				if (iMissionSetup == 5) then {
-					_dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
-					if (_dCurrentRep >= 1) then {
-						//hint "hmm2";
-						[player, supReqSupply] call BIS_fnc_addSupportLink;
+					if (isNil "CampaignInitiated") then {
+						CampaignInitiated = false;
+						publicVariable "CampaignInitiated";
 					};
-					if (_dCurrentRep >= 3) then {
-						//hint "hmm2";
-						[player, supReq] call BIS_fnc_addSupportLink;
-					};
-					if (_dCurrentRep >= 7) then {
-						//hint "hmm3";
-						[player, supReqAir] call BIS_fnc_addSupportLink;
+					if (CampaignInitiated) then {
+
+						_dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
+						//TESTTEST = format["A:%1 - B:%2 - C:%3",MaxBadPoints,BadPoints,_dCurrentRep];
+						//hint TESTTEST;
+						if (_dCurrentRep >= 1) then {
+							//hint "hmm2";
+							[player, supReqSupply] call BIS_fnc_addSupportLink;
+							sleep 1;
+						};
+						if (_dCurrentRep >= 3) then {
+							//hint "hmm2";
+							[player, supReq] call BIS_fnc_addSupportLink;
+							sleep 1;
+						};
+						if (_dCurrentRep >= 7) then {
+							//hint "hmm3";
+							[player, supReqAir] call BIS_fnc_addSupportLink;
+							sleep 1;
+						};
 					};
 				}
 				else {
 					[player, supReqSupply] call BIS_fnc_addSupportLink;
+					sleep 1;
 					[player, supReq] call BIS_fnc_addSupportLink;
+					sleep 1;
 					[player, supReqAir] call BIS_fnc_addSupportLink;
+					sleep 1;
 				}
 			};
 		};
-		sleep 3;
+		sleep 10;
 	};
 };
 [] spawn TREND_fnc_GeneralPlayerLoop;
@@ -497,7 +513,7 @@ if (sArmaGroup == "TCF" && isMultiplayer) then {
 
 
 TREND_fnc_MissionOverAnimation = {
-	sleep 10;
+	sleep 60;
 	_bEnd = false;
 	while {!_bEnd} do {
 		_bMissionEndedAndPlayersOutOfAO = false;

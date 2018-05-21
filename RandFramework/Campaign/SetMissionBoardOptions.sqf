@@ -16,7 +16,9 @@ switch (_option) do {
 		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
 		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
 
-		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_StartMission","[[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
+		//[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_StartMission","[[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
+		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_StartMission",{[false] ExecVM "RandFramework\Campaign\StartMissionPreCheck.sqf"}]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_StartMission",{[false] ExecVM "RandFramework\Campaign\StartMissionPreCheck.sqf"}]] remoteExec ["addAction", 0];
 		//[endMissionBoard2, ["!!Start Mission!!","[[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
 
 		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitRifleman","RandFramework\Campaign\RecruiteInf.sqf",[CampaignRecruitUnitRifleman,"Rifleman"]]] remoteExec ["addAction", 0];
@@ -40,6 +42,9 @@ switch (_option) do {
     case "NEW_MISSION": {
     	endMissionBoard remoteExec ["removeAllActions"];
     	endMissionBoard2 remoteExec ["removeAllActions"];
+
+    	[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_TurnInMission",{[] ExecVM "RandFramework\Campaign\TurnInMission.sqf";}]] remoteExec ["addAction", 0];
+		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_TurnInMission",{[] ExecVM "RandFramework\Campaign\TurnInMission.sqf";}]] remoteExec ["addAction", 0];
 
 		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
 		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
@@ -96,16 +101,20 @@ switch (_option) do {
     };
     case "MISSION_COMPLETE": {
     	endMissionBoard remoteExec ["removeAllActions"];
-    	endMissionBoard remoteExec ["removeAllActions"];
+    	endMissionBoard2 remoteExec ["removeAllActions"];
 
     	if (_dCurrentRep >= 10) then {
-			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RequestFinal","FinalMissionStarted=true;publicVariable ""FinalMissionStarted""; [[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
-
+			//[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RequestFinal","FinalMissionStarted=true;publicVariable ""FinalMissionStarted""; [[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RequestFinal",{[true] ExecVM "RandFramework\Campaign\StartMissionPreCheck.sqf";}]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RequestFinal",{[true] ExecVM "RandFramework\Campaign\StartMissionPreCheck.sqf";}]] remoteExec ["addAction", 0];
 			//[endMissionBoard2, ["!!Request Final Assignment!!","[[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
 		} else {
-			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RequestNext","[[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
+			//[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RequestNext","[[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
+			[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_RequestNext",{[false] ExecVM "RandFramework\Campaign\StartMissionPreCheck.sqf";}]] remoteExec ["addAction", 0];
+			[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_RequestNext",{[false] ExecVM "RandFramework\Campaign\StartMissionPreCheck.sqf";}]] remoteExec ["addAction", 0];
 			//[endMissionBoard2, ["!!Request Next Mission!!","[[],""RandFramework\Campaign\StartMission.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];"]] remoteExec ["addAction", 0];
 		};
+		
 		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
 		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
 
@@ -166,7 +175,7 @@ switch (_option) do {
 	};
 	case "CAMPAIGN_END": {
 		endMissionBoard remoteExec ["removeAllActions"];
-		//endMissionBoard2 remoteExec ["removeAllActions"];
+		endMissionBoard2 remoteExec ["removeAllActions"];
 
 		[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
 		[endMissionBoard2, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"]] remoteExec ["addAction", 0];
