@@ -18,11 +18,19 @@ if ((isClass(configFile >> "CfgPatches" >> "rhs_main")) &&
 	//IF RHSAFRF, RHSUSAF, RHSGREF are active
 	DefaultEnemyFactionArray = DefaultEnemyFactionArray + [4];
 	DefaultEnemyFactionArrayText = DefaultEnemyFactionArrayText + ["RHS - Russia MSV"];
+
+	DefaultEnemyFactionArray = DefaultEnemyFactionArray + [8];
+	DefaultEnemyFactionArrayText = DefaultEnemyFactionArrayText + ["RHS - ChDKZ Insurgents"];
+
+	DefaultFriendlyFactionArray = DefaultFriendlyFactionArray + [6];
+	DefaultFriendlyFactionArrayText = DefaultFriendlyFactionArrayText + ["RHS Chernarus Ground Forces"];
 };
 if (isClass(configFile >> "CfgPatches" >> "rhsusf_main")) then {
 	//IF RHSUSAF is active
 	DefaultFriendlyFactionArray = DefaultFriendlyFactionArray + [3];
 	DefaultFriendlyFactionArrayText = DefaultFriendlyFactionArrayText + ["RHS USMC-F"];
+
+
 };
 if (isClass(configFile >> "CfgPatches" >> "CUP_Creatures_People_Core") &&
 		isClass(configFile >> "CfgPatches" >> "CUP_AirVehicles_Core") &&
@@ -43,6 +51,7 @@ if (isClass(configFile >> "CfgPatches" >> "CUP_Creatures_People_Core") &&
 	DefaultFriendlyFactionArrayText = DefaultFriendlyFactionArrayText + ["CUP UK MTP"];
 	DefaultFriendlyFactionArray = DefaultFriendlyFactionArray + [5];
 	DefaultFriendlyFactionArrayText = DefaultFriendlyFactionArrayText + ["CUP UK DDPM"];
+	
 };
 
 
@@ -139,7 +148,7 @@ if (iAllowLargePat == 3) then {bAllowLargerPatrols = selectRandom[False,True];};
 //1=Laptop  2=Steal data from research vehicle   3=Destroy Ammo Trucks
 //4=Speak with informant    5=interrogate officer    6=Bug Radio
 //7=Eliminate Officer     8=Assasinate weapon dealer    9=Destroy AAA vehicles
-//10=Destroy Artillery vehicles 	11=Resue POW
+//10=Destroy Artillery vehicles 	11=Resue POW  12=Resue Reporter
 //SideMissionTasks = [7];
 SideMissionTasks = [1,2,3,4,5,6,7,8,9,10,11,12];
 //MainMissionTasks = [8];

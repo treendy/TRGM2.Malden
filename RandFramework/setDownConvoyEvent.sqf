@@ -28,6 +28,10 @@ _vehs = FriendlyUnarmedCar + FriendlyMedicalTruck + FriendlyArmoredCar + Friendl
 _posOfAO =  _this select 0;
 
 _nearestRoads = _posOfAO nearRoads 3000;
+if (!(isNil "IsTraining")) then {
+	_nearestRoads = _posOfAO nearRoads 30000;		
+};
+
 if (count _nearestRoads > 0) then {	
 
 	_eventLocationPos = getPos (selectRandom _nearestRoads);
@@ -107,12 +111,21 @@ if (count _nearestRoads > 0) then {
 						sleep selectRandom [10,15,20,30];
 					};
 				};
-				if (selectRandom[true,false,false,false]) then {
-				//if (selectRandom[true]) then {
+
+				if (!(isNil "IsTraining")) then {
 					_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _mainVeh];
 					_markerEventMedi setMarkerShape "ICON";
 					_markerEventMedi setMarkerType "hd_dot";
-					_markerEventMedi setMarkerText "Distress Signal";				
+					_markerEventMedi setMarkerText "Ambushed Friendly Convoy";				
+				}		
+				else {
+					if (selectRandom[true,false,false,false]) then {
+					//if (selectRandom[true]) then {
+						_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _mainVeh];
+						_markerEventMedi setMarkerShape "ICON";
+						_markerEventMedi setMarkerType "hd_dot";
+						_markerEventMedi setMarkerText "Distress Signal";				
+					};
 				};
 
 			};
@@ -215,6 +228,7 @@ if (count _nearestRoads > 0) then {
 						[_downedCiv] join grpNull;
 						deleteVehicle _downedCiv;
 					};
+					sleep 10;
 
 				};
 			};

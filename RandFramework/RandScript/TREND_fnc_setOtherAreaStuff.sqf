@@ -10,6 +10,9 @@ _mainObjPos = ObjectivePossitions select 0;
 //_TowerBuilding = selectRandom TowerBuildings;
 _TowersNear = nearestObjects [_mainObjPos, TowerBuildings, TowerRadius];
 
+
+
+
 {
 	[[_x, [localize "STR_TRGM2_TRENDfncsetOtherAreaStuff_CheckEnemyComms","RandFramework\checkForComms.sqf",[_x]]],"addAction",true,true] call BIS_fnc_MP;
 } forEach _TowersNear;
@@ -120,33 +123,52 @@ if (false) then {
 	};
 };
 
-/*!!!MEDICAL EVENT!!!*/
-if (selectRandom ChanceOfOccurance) then {
-//if (true) then {
+
+
+if (!(isNil "IsTraining")) then {
 	[_mainObjPos] execVM "RandFramework\setMedicalEvent.sqf";
-};
+	[_mainObjPos] execVM "RandFramework\setMedicalEvent.sqf";
 
-
-
-if (selectRandom ChanceOfOccurance) then {
-//if (true) then {
+	[_mainObjPos] execVM "RandFramework\setDownedChopperEvent.sqf";
 	[_mainObjPos] execVM "RandFramework\setDownedChopperEvent.sqf";
 
-};		
-
-
-
-if (selectRandom ChanceOfOccurance) then {
-//if (true) then {
 	[_mainObjPos] execVM "RandFramework\setDownConvoyEvent.sqf";
-};		
+	[_mainObjPos] execVM "RandFramework\setDownConvoyEvent.sqf";
 
-if (selectRandom ChanceOfOccurance) then {
-//if (true) then {
 	[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
-};		
+	[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
+	[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
+
+}
+else {
+
+	/*!!!MEDICAL EVENT!!!*/
+	if (selectRandom ChanceOfOccurance) then {
+	//if (true) then {
+		[_mainObjPos] execVM "RandFramework\setMedicalEvent.sqf";
+	};
 
 
+
+	if (selectRandom ChanceOfOccurance) then {
+	//if (true) then {
+		[_mainObjPos] execVM "RandFramework\setDownedChopperEvent.sqf";
+
+	};		
+
+
+
+	if (selectRandom ChanceOfOccurance) then {
+	//if (true) then {
+		[_mainObjPos] execVM "RandFramework\setDownConvoyEvent.sqf";
+	};		
+
+	if (selectRandom ChanceOfOccurance) then {
+	//if (true) then {
+		[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
+	};		
+
+};
 
 
 //chance of a convey, start somewhere random, parked up and ready to move, wait random time, then start driving to location

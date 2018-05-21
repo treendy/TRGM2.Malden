@@ -8,14 +8,14 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=1264;
+		nextID=1266;
 	};
 	class Camera
 	{
-		pos[]={769.88757,70.028053,12224.949};
-		dir[]={-0.2211328,-0.31967488,-0.9214524};
-		up[]={-0.074609719,0.94749999,-0.31089574};
-		aside[]={-0.97247189,1.0680669e-006,0.23337413};
+		pos[]={758.93225,124.74924,12243.013};
+		dir[]={-0.040302511,-0.84195256,-0.53824329};
+		up[]={-0.062863179,0.5395788,-0.83955902};
+		aside[]={-0.99731231,-9.4318602e-007,0.074674189};
 	};
 };
 binarizationWanted=0;
@@ -404,7 +404,7 @@ class Mission
 				class Attribute0
 				{
 					property="groupID";
-					expression="_this setGroupID [_value];";
+					expression="[_this, _value] call CBA_fnc_setCallsign";
 					class Value
 					{
 						class data
@@ -570,7 +570,7 @@ class Mission
 				class Attribute0
 				{
 					property="groupID";
-					expression="_this setGroupID [_value];";
+					expression="[_this, _value] call CBA_fnc_setCallsign";
 					class Value
 					{
 						class data
@@ -742,7 +742,7 @@ class Mission
 				class Attribute0
 				{
 					property="groupID";
-					expression="_this setGroupID [_value];";
+					expression="[_this, _value] call CBA_fnc_setCallsign";
 					class Value
 					{
 						class data

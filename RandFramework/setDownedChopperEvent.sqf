@@ -30,8 +30,17 @@ _bloodPools = ["BloodPool_01_Large_New_F","BloodSplatter_01_Large_New_F"];
 
 
 
-_flatPos = nil;
+_flatPos = [0,0,0];
 _flatPos = [_mainObjPos , 200, 2000, 1, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+if (!(isNil "IsTraining")) then {
+	_nearestRoads = _mainObjPos nearRoads 30000;		
+	if (count _nearestRoads > 0) then {	
+		_thisDownedChopperCenter = getPos (selectRandom _nearestRoads);
+		_flatPos = [_thisDownedChopperCenter , 100, 2000, 1, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+	};
+};
+
+
 if (str(_flatPos) != "[0,0,0]") then {
 
 	_groupCamp1 = createGroup east;
@@ -125,6 +134,7 @@ if (str(_flatPos) != "[0,0,0]") then {
 	_downedCiv addEventHandler ["killed", {_this execVM "RandFramework\CivKilled.sqf";}];
 	_bloodPool1 = createVehicle [selectRandom _bloodPools, getpos _downedCiv, [], 0, "CAN_COLLIDE"];
 	_bloodPool1 setDir (floor(random 360));
+	[[_downedCiv, ["Talk to wounded guy",{hint "Please get me back to base!!"},[_downedCiv]]],"addAction",true,true] call BIS_fnc_MP;
 	if (selectRandom[true]) then {
 		_trialDir = (floor(random 360));
 		_trialPos = (getPos _bloodPool1) getPos [3,_trialDir];
@@ -166,12 +176,20 @@ if (str(_flatPos) != "[0,0,0]") then {
 	};
 
 
-	if (selectRandom[true,false,false,false]) then {
-	//if (selectRandom[true]) then {
-		_markerEventMedi = createMarker [format["_markerEventRescue%1",(floor(random 360))], getPos _downedCiv];
+	if (!(isNil "IsTraining")) then {
+		_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _downedCiv];
 		_markerEventMedi setMarkerShape "ICON";
 		_markerEventMedi setMarkerType "hd_dot";
-		_markerEventMedi setMarkerText "Distress Signal";				
+		_markerEventMedi setMarkerText "Crash Site";				
+	}	
+	else {	
+		if (selectRandom[true,false,false,false]) then {
+		//if (selectRandom[true]) then {
+			_markerEventMedi = createMarker [format["_markerEventRescue%1",(floor(random 360))], getPos _downedCiv];
+			_markerEventMedi setMarkerShape "ICON";
+			_markerEventMedi setMarkerType "hd_dot";
+			_markerEventMedi setMarkerText "Distress Signal";				
+		};
 	};
 
 	_doLoop = true;
@@ -187,7 +205,7 @@ if (str(_flatPos) != "[0,0,0]") then {
 			[_downedCiv] join grpNull;
 			deleteVehicle _downedCiv;
 		};
-
+		sleep 10;
 	};
 
 	

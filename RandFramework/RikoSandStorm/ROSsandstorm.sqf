@@ -29,7 +29,9 @@ if (_test) then {sleep 3};
 if (_test) then {hint "SS start"};
 
 // Warning length = 11 secs
-playsound ["sswarning", true];
+if (selectRandom [true,false]) then {
+    playsound ["sswarning", true];
+};
 
 sleep 15;
 
@@ -133,7 +135,7 @@ if (_test) then {hint "Start Wind loop";};
 // Start fog and synch make sure timemultiplier = 1 (see above) to avoid synch and timing issues
     if (_test) then {hint "Start fog"};
     if (isServer) then {
-        60 setFog 0.7;
+        60 setFog 0.5;
     };
 
 // Add particle effect
@@ -156,7 +158,7 @@ while {time < _future} do {
     [10, 10, 0],
     1,
     10.15,
-    7.9,
+    7.9, //HERE was 7.9  lower is 4.9
     0.01,
     [10, 10, 20],
     [[0.7, 0.66, 0.5, _y], [0.7, 0.66, 0.5, _y], [0.7, 0.66, 0.5, _y]],
@@ -171,7 +173,7 @@ while {time < _future} do {
     if (inside) then {_particles setParticleCircle [20, [1, 1, 0]]} else {_particles setParticleCircle [50, [1, 1, 0]]};
     _particles setDropInterval 0.04;
     sleep 1;
-    _y = _y + 0.015;
+    _y = _y + 0.005; //Here was 0.015 lower is 0.005
 };
 
 // Add Color correction
@@ -199,10 +201,10 @@ while {time < _future} do {
         [10, 10, 0],
         3,
         10.15,
-        7.9,
+        7.9, //Here was 7.9 lower is 4.9
         0.01,
         [10, 10, 20],
-        [[0.7, 0.66, 0.6, 0.1+random 0.4], [0.7, 0.66, 0.6, 0.1+random 0.4], [0.7, 0.66, 0.6, 0.1+random 0.4]],
+        [[0.7, 0.66, 0.6, 0.1+random 0.4], [0.7, 0.66, 0.6, 0.1+random 0.4], [0.7, 0.66, 0.6, 0.1+random 0.4]], //Here, was random 0.4,random 0.4,random 0.4 lower is random 0.1, random 0.1, random 0.1
         [0.08],
         1,
         0,

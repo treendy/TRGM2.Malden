@@ -42,6 +42,10 @@ _posOfAO =  _this select 0;
 
 
 _nearLocations = nearestLocations [_posOfAO, ["NameCity","NameCityCapital","NameVillage"], 2500];
+if (!(isNil "IsTraining")) then {
+	_nearLocations = nearestLocations [_posOfAO, ["NameCity","NameCityCapital","NameVillage"], 30000];
+};
+
 _eventLocationPos = nil;
 {
 	_xLocPos = locationPosition selectRandom _nearLocations;
@@ -53,6 +57,9 @@ _eventLocationPos = nil;
 } forEach _nearLocations;
 if (isNil("_eventLocationPos")) then {
 	_nearestRoads = _posOfAO nearRoads 5000;
+	if (!(isNil "IsTraining")) then {
+		_nearestRoads = _posOfAO nearRoads 30000;		
+	};
 	_eventLocationPos = getPos (selectRandom _nearestRoads);
 	//hint "B";
 };
@@ -133,12 +140,21 @@ while {_iteration <= 2} do {
 					sleep selectRandom [10,15,20,30];
 				};
 			};
-			if (selectRandom[true,false,false,false]) then {
-			//if (selectRandom[true]) then {
+
+			if (!(isNil "IsTraining")) then {
 				_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _mainVeh];
 				_markerEventMedi setMarkerShape "ICON";
 				_markerEventMedi setMarkerType "hd_dot";
-				_markerEventMedi setMarkerText "Distress Signal";				
+				_markerEventMedi setMarkerText "Medical Situation";				
+			}	
+			else {
+				if (selectRandom[true,false,false,false]) then {
+				//if (selectRandom[true]) then {
+					_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _mainVeh];
+					_markerEventMedi setMarkerShape "ICON";
+					_markerEventMedi setMarkerType "hd_dot";
+					_markerEventMedi setMarkerText "Distress Signal";				
+				};
 			};
 
 		};

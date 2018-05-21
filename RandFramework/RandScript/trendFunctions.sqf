@@ -343,8 +343,8 @@ TREND_fnc_PopulateSideMission = {
 			}
 			else {
 
-				if selectRandom [true,false] then {[_sidePos,100,[1,2],_InsurgentSide] spawn TREND_fnc_OccupyHouses;};
-				if selectRandom [true,false] then {[_sidePos,1000,[3,4],_InsurgentSide] spawn TREND_fnc_OccupyHouses;};
+				if selectRandom [true] then {[_sidePos,100,[1,2],_InsurgentSide] spawn TREND_fnc_OccupyHouses;};
+				if selectRandom [true] then {[_sidePos,1000,[1,2,3,4],_InsurgentSide] spawn TREND_fnc_OccupyHouses;};
 			};
 
 			//Spawn nasty surprise (AAA, IEDs, wider patrol)
@@ -735,7 +735,7 @@ TREND_fnc_PopulateSideMission = {
 	};
 
 
-	if (selectRandom [true,false] || bThisMissionCivsOnly) then {
+	if (selectRandom [true,true,true,false] || bThisMissionCivsOnly) then {
 		debugMessages = debugMessages + format["\n\ntrendFunctions.sqf - Populate Civs : _bFriendlyInsurgents: %1 - bThisMissionCivsOnly: %2 ",str(_bFriendlyInsurgents),str(bThisMissionCivsOnly)];
 		[_sidePos,200,false] spawn TREND_fnc_SpawnCivs;
 	};
@@ -928,9 +928,10 @@ TREND_fnc_OccupyHouses = {
 			_thisGroup = nil;
 			_thisGroup = createGroup _InsurgentSide;
 			sRiflemanToUse createUnit [position _randBuilding, _thisGroup];
+			if (selectRandom [true,false]) then {sRiflemanToUse createUnit [position _randBuilding, _thisGroup];};
 			sRiflemanToUse createUnit [position _randBuilding, _thisGroup, "[getPosATL this, units group this, -1, false, false] execVM ""RandFramework\Zen_OccupyHouse.sqf"";"];
 
-			_iCountNoOfCPs = selectRandom[0,0,0,0,1];
+			_iCountNoOfCPs = selectRandom[0,0,0,0,1];  //number of checkpoints (so high chance of not being any, or one may be near an occupied building)
 			if ((_sidePos distance _randBuilding) > 400) then {_iCountNoOfCPs = selectRandom[0,0,1];};
 			//spawn inner random sentrys
 			//if (!_bIsMainObjective) then {_iCountNoOfCPs = selectRandom [0,1];};

@@ -205,6 +205,7 @@ if (isNil "FinalMissionStarted") then {
 
 
 
+
 if (isServer) then { //adjust weather here so intro animation is different everytime
 		[true] execVM "RandFramework\SetTimeAndWeather.sqf";
 };
@@ -393,9 +394,11 @@ if (isServer) then {
 	if (LoadoutData != "" || LoadoutDataDefault != "") then {
 		{
 			//_x setVariable ["UnitRole",_unitRole];
-			[_x] execVM "RandFramework\setLoadout.sqf";
+			_handle = [_x] execVM "RandFramework\setLoadout.sqf";
+			waitUntil {scriptDone _handle};
 			_x addEventHandler ["Respawn", { [_this select 0] execVM "RandFramework\setLoadout.sqf"; }];
 		} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
+		sleep 1;
 	};
 	if ([] call TRGM_fnc_isAceLoaded) then {
 		[box1,InitialBoxItemsWithAce] call bis_fnc_initAmmoBox;
@@ -451,8 +454,6 @@ else {
 	//[] execVM "RandFramework\StartMission.sqf";
 
 	call compile preprocessFileLineNumbers  "RandFramework\Campaign\StartMission.sqf";
-	//HERE HERE HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!It calls the script above, but doesnt start the actual mission?????????????????????
-
 
 	//if (isServer) then {
 	//	call compile preprocessFileLineNumbers  "RandFramework\SetTimeAndWeather.sqf";
@@ -497,12 +498,12 @@ TREND_fnc_CheckBadPoints = {
 			_lastBadPoints = BadPoints;
 			if (iMissionParamType != 5) then {
 				if (_dCurrentRep <= 0 && iMissionParamRepOption == 1) then {
-					iCurrentTaskCount = 0;
+					_iCurrentTaskCount = 0;
 					["tskKeepAboveAverage", "failed"] call FHQ_TT_setTaskState;
-					while {iCurrentTaskCount < count ActiveTasks} do {
+					while {_iCurrentTaskCount < count ActiveTasks} do {
 						if (!(ActiveTasks call FHQ_TT_areTasksCompleted)) then {
-							[ActiveTasks select iCurrentTaskCount, "failed"] call FHQ_TT_setTaskState;
-							iCurrentTaskCount = iCurrentTaskCount + 1;
+							[ActiveTasks select _iCurrentTaskCount, "failed"] call FHQ_TT_setTaskState;
+							_iCurrentTaskCount = _iCurrentTaskCount + 1;
 						};
 					};
 					sleep 2;
@@ -634,8 +635,9 @@ if (isServer) then {
 				if (Side _x == East) then {
 					_x setskill ["aimingAccuracy",0.1];
 					_x setskill ["aimingShake",0.1];
-					_x setskill ["aimingSpeed",0.4];
-					_x setskill ["spotDistance",0.3];
+					_x setskill ["aimingSpeed",0.1];
+					_x setskill ["spotDistance",0.1];
+					_x setskill ["spotTime",0.1];
 				};
 			} forEach allUnits;
 			sleep SandStormTimer;
@@ -646,6 +648,7 @@ if (isServer) then {
 					_x setskill ["aimingShake",0.5];
 					_x setskill ["aimingSpeed",0.5];
 					_x setskill ["spotDistance",0.5];
+					_x setskill ["spotTime",0.5];
 				};
 			} forEach allUnits;
 		};
@@ -662,8 +665,9 @@ if (isServer) then {
 				if (Side _x == East) then {
 					_x setskill ["aimingAccuracy",0.1];
 					_x setskill ["aimingShake",0.1];
-					_x setskill ["aimingSpeed",0.4];
-					_x setskill ["spotDistance",0.3];
+					_x setskill ["aimingSpeed",0.1];
+					_x setskill ["spotDistance",0.1];
+					_x setskill ["spotTime",0.1];
 				};
 			} forEach allUnits;
 			sleep SandStormTimer;
@@ -674,6 +678,7 @@ if (isServer) then {
 					_x setskill ["aimingShake",0.5];
 					_x setskill ["aimingSpeed",0.5];
 					_x setskill ["spotDistance",0.5];
+					_x setskill ["spotTime",0.5];
 				};
 			} forEach allUnits;
 		};
@@ -687,8 +692,9 @@ if (isServer) then {
 				if (Side _x == East) then {
 					_x setskill ["aimingAccuracy",0.1];
 					_x setskill ["aimingShake",0.1];
-					_x setskill ["aimingSpeed",0.4];
-					_x setskill ["spotDistance",0.3];
+					_x setskill ["aimingSpeed",0.1];
+					_x setskill ["spotDistance",0.1];
+					_x setskill ["spotTime",0.1];
 				};
 			} forEach allUnits;
 			sleep 18030;
@@ -699,6 +705,7 @@ if (isServer) then {
 					_x setskill ["aimingShake",0.5];
 					_x setskill ["aimingSpeed",0.5];
 					_x setskill ["spotDistance",0.5];
+					_x setskill ["spotTime",0.5];
 				};
 			} forEach allUnits;
 			//reset enemy skill

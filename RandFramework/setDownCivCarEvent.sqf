@@ -25,6 +25,10 @@ _vehs = CivCars;
 _posOfAO =  _this select 0;
 
 _nearestRoads = _posOfAO nearRoads 2000;
+if (!(isNil "IsTraining")) then {
+	_nearestRoads = _posOfAO nearRoads 30000;		
+};
+
 if (count _nearestRoads > 0) then {	
 
 	_eventLocationPos = getPos (selectRandom _nearestRoads);
@@ -101,12 +105,20 @@ if (count _nearestRoads > 0) then {
 			};
 		};
 
-		if (selectRandom[false]) then { //will never show this for broken down civ! (only here if need to test)
+		if (!(isNil "IsTraining")) then {
 			_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _mainVeh];
 			_markerEventMedi setMarkerShape "ICON";
 			_markerEventMedi setMarkerType "hd_dot";
-			_markerEventMedi setMarkerText "Distress Signal";				
-		};		
+			_markerEventMedi setMarkerText "Stranded Civ";				
+		}	
+		else {
+			if (selectRandom[false]) then { //will never show this for broken down civ! (only here if need to test)
+				_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _mainVeh];
+				_markerEventMedi setMarkerShape "ICON";
+				_markerEventMedi setMarkerType "hd_dot";
+				_markerEventMedi setMarkerText "Distress Signal";				
+			};		
+		};
 	
 		_vehPos = getPos _mainVeh;
 		_backOfVehArea = _vehPos getPos [10,([_mainVehDirection,selectRandom[170,180,190]] call fnc_AddToDirection)];
@@ -161,7 +173,7 @@ if (count _nearestRoads > 0) then {
 				_downedCiv setUnitPos "UP";
 			};
 			if (!_bWaveDone) then {
-				_nearUnits = nearestObjects [(getPos _downedCiv), ["Man","Car"], 100];
+				_nearUnits = nearestObjects [(getPos _downedCiv), ["Man","Car","Helicopter"], 100];
 				//(driver ((nearestObjects [(getPos box1), ["car"], 20]) select 0)) in switchableUnits
 		  		{
 		  			if ((driver _x) in switchableUnits || (driver _x) in playableUnits) then {
@@ -192,7 +204,7 @@ if (count _nearestRoads > 0) then {
 								waitUntil {!alive(_downedCiv)};
 								[_downedCiv, ""] remoteExec ["switchMove", 0];
 							};
-							sleep 10;
+							sleep 15;
 							_downedCiv enableAI "anim";
 							_downedCiv switchMove "";
 						};	

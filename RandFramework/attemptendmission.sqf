@@ -30,6 +30,6 @@ if (isMultiplayer) then {
 };
 
 if (_bAllowEnd) then {
-	hint (localize "STR_TRGM2_attemptendmission_Ending");
+	//hint (localize "STR_TRGM2_attemptendmission_Ending");
 	execVM "RandFramework\endMission.sqf";
 };
