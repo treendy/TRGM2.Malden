@@ -30,6 +30,7 @@ TREND_fnc_PopulateSideMission = {
 	_allowFriendlyIns = _this select 5;
 	_ForceCivsOnly = _this select 6; //default is false
 
+	if (isNil "OccupiedHousesPos") then {OccupiedHousesPos = []};
 	if (isNil ("_ForceCivsOnly")) then {_ForceCivsOnly = false};
 
 	_dAngleAdustPerLoop = 0;
@@ -520,8 +521,10 @@ TREND_fnc_PopulateSideMission = {
 			if (count _allMilBuildings > 0) then {
 
 				{
+					_thisMilBuilPos = getPos _x;
 					_distanceFromBase = getMarkerPos "mrkHQ" distance getPos _x;
-					if (SelectRandom _milOccupyOdds && _distanceFromBase > BaseAreaRange) then {
+					if (SelectRandom _milOccupyOdds && _distanceFromBase > BaseAreaRange && !(_thisMilBuilPos in OccupiedHousesPos)) then {
+					//if (SelectRandom _milOccupyOdds && _distanceFromBase > BaseAreaRange) then {
 						_iCount = _iCount + 1;
 						_MilGroup1 = nil;
 						_objMilUnit1 = nil;
@@ -531,6 +534,7 @@ TREND_fnc_PopulateSideMission = {
 						_objMilUnit1 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[0,0,0],[],0,"NONE"];
 						_objMilUnit2 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[2,0,0],[],0,"NONE"];
 						_objMilUnit3 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[3,0,0],[],0,"NONE"];
+						OccupiedHousesPos = OccupiedHousesPos + [_thisMilBuilPos];
 						[getPos _x, [_objMilUnit1,_objMilUnit2,_objMilUnit3], -1, true, false,true] execVM "RandFramework\Zen_OccupyHouse.sqf";
 						sleep 0.2;
 						_objMilUnit1 setUnitPos "up";
@@ -919,42 +923,58 @@ TREND_fnc_OccupyHouses = {
 	_sAreaMarkerName = nil;
 	_randBuilding = nil;
 
+	
+
 	if (!bThisMissionCivsOnly) then {
 		while {_iCount <= _unitCount} do
 		{
-			_allBuildings = nearestObjects [_sidePos, ["house"], _distFromCent];
+			_allBuildings = nearestObjects [_sidePos, BasicBuildings, _distFromCent];
+			//_allBuildings = nearestObjects [_sidePos, ["house"], _distFromCent];
 			_randBuilding = selectRandom _allBuildings;
+			_randBuildingPos = getPos _randBuilding;
+			if ((_randBuilding distance getMarkerPos "mrkHQ") > BaseAreaRange && !(_randBuildingPos in OccupiedHousesPos)) then { //"mrkHQ", BaseAreaRange
+			//if ((_randBuilding distance getMarkerPos "mrkHQ") > BaseAreaRange) then { //"mrkHQ", BaseAreaRange
 
-			_thisGroup = nil;
-			_thisGroup = createGroup _InsurgentSide;
-			sRiflemanToUse createUnit [position _randBuilding, _thisGroup];
-			if (selectRandom [true,false]) then {sRiflemanToUse createUnit [position _randBuilding, _thisGroup];};
-			sRiflemanToUse createUnit [position _randBuilding, _thisGroup, "[getPosATL this, units group this, -1, false, false] execVM ""RandFramework\Zen_OccupyHouse.sqf"";"];
+				OccupiedHousesPos = OccupiedHousesPos + [_randBuildingPos];
+				//hint format["test:%1",(_randBuilding distance getMarkerPos "mrkHQ")];
+				//sleep 1;
 
-			_iCountNoOfCPs = selectRandom[0,0,0,0,1];  //number of checkpoints (so high chance of not being any, or one may be near an occupied building)
-			if ((_sidePos distance _randBuilding) > 400) then {_iCountNoOfCPs = selectRandom[0,0,1];};
-			//spawn inner random sentrys
-			//if (!_bIsMainObjective) then {_iCountNoOfCPs = selectRandom [0,1];};
-			if (_iCountNoOfCPs > 0) then {_dAngleAdustPerLoop = 360 / _iCountNoOfCPs;};
-			while {_iCountNoOfCPs > 0} do {
-				_thisAreaRange = 50;
-				_checkPointGuidePos = _sidePos;
-				_iCountNoOfCPs = _iCountNoOfCPs - 1;
-				_flatPos = nil;
-				_flatPos = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,CheckPointAreas + SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+				_thisGroup = nil;
+				_thisGroup = createGroup _InsurgentSide;
+				sRiflemanToUse createUnit [position _randBuilding, _thisGroup];
+				if (selectRandom [true,false]) then {sRiflemanToUse createUnit [position _randBuilding, _thisGroup];};
+					//HERE!!!! copy and paste the zen init script into a placed unig, then run and see if he is in building!!! (esc out of TRGM dialog)
+				//sRiflemanToUse createUnit [position _randBuilding, _thisGroup, "[getPosATL this, units group this, 10, false, false] execVM ""RandFramework\Zen_OccupyHouse.sqf"";"];
+
+				_teamLeaderUnit = _thisGroup createUnit [sRiflemanToUse,_randBuildingPos,[],0,"NONE"];
+				[_randBuildingPos, units group _teamLeaderUnit, -1, true, false,true] execVM "RandFramework\Zen_OccupyHouse.sqf";
 
 
-				if (_flatPos select 0 > 0) then {
-					_thisPosAreaOfCheckpoint = _flatPos;
-					_thisRoadOnly = false;
-					_thisSide = east;
-					_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
-					_thisAllowBarakade = selectRandom [false];
-					_thisIsDirectionAwayFromAO = true;
-					[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,50,false] execVM "RandFramework\setCheckpoint.sqf";
-				}
+
+				_iCountNoOfCPs = selectRandom[0,0,0,0,1];  //number of checkpoints (so high chance of not being any, or one may be near an occupied building)
+				if ((_sidePos distance _randBuilding) > 400) then {_iCountNoOfCPs = selectRandom[0,0,1];};
+				//spawn inner random sentrys
+				//if (!_bIsMainObjective) then {_iCountNoOfCPs = selectRandom [0,1];};
+				if (_iCountNoOfCPs > 0) then {_dAngleAdustPerLoop = 360 / _iCountNoOfCPs;};
+				while {_iCountNoOfCPs > 0} do {
+					_thisAreaRange = 50;
+					_checkPointGuidePos = _sidePos;
+					_iCountNoOfCPs = _iCountNoOfCPs - 1;
+					_flatPos = nil;
+					_flatPos = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,CheckPointAreas + SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+
+
+					if (_flatPos select 0 > 0) then {
+						_thisPosAreaOfCheckpoint = _flatPos;
+						_thisRoadOnly = false;
+						_thisSide = east;
+						_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
+						_thisAllowBarakade = selectRandom [false];
+						_thisIsDirectionAwayFromAO = true;
+						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,50,false] execVM "RandFramework\setCheckpoint.sqf";
+					}
+				};
 			};
-
 
 
 			_iCount = _iCount + 1;

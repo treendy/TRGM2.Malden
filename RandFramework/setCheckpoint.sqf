@@ -40,6 +40,12 @@ if (isNil "SentryAreas") then {
 		publicVariable "SentryAreas";
 };
 
+if (isNil "ISUNSUNG") then {
+		ISUNSUNG = false;
+};
+
+
+
 
 //{deleteVehicle _x} forEach nearestObjects [player, ["all"], 200];
 
@@ -121,8 +127,11 @@ if (_thisRoadOnly) then {
 			_iAttemptLimit = _iAttemptLimit - 1;
 		};
 	};
-}
-else {
+};
+
+if (!_thisRoadOnly || !_PosFound) then {
+	_thisRoadOnly = false;
+	_thisIsCheckPoint = false;
 	_generalDirection = [_thisAOPos, _thisPosAreaOfCheckpoint] call BIS_fnc_DirTo;
 	_dirAdd = 0;
 	if (selectRandom[true,false]) then {
@@ -233,20 +242,20 @@ if (_PosFound) then {
 		};
 
 	};
-
-	if (_iBarricadeType != "NONE" && selectRandom [true,false]) then {
-		[_initItem,_thisSide] spawn {
-			_initItem = _this select 0;
-			_thisSide = _this select 1;
-			while {alive(_initItem)} do {
-				_soundToPlay = selectRandom EnemyRadioSounds;
-				if (_thisSide == west) then {_soundToPlay = selectRandom FriendlyRadioSounds};
-				playSound3D ["A3\Sounds_F\sfx\radio\" + _soundToPlay + ".wss",_initItem,false,getPosASL _initItem,0.5,1,0];
-				sleep selectRandom [10,15,20,30];
+	if (!ISUNSUNG) then {
+		if (_iBarricadeType != "NONE" && selectRandom [true,false]) then {
+			[_initItem,_thisSide] spawn {
+				_initItem = _this select 0;
+				_thisSide = _this select 1;
+				while {alive(_initItem)} do {
+					_soundToPlay = selectRandom EnemyRadioSounds;
+					if (_thisSide == west) then {_soundToPlay = selectRandom FriendlyRadioSounds};
+					playSound3D ["A3\Sounds_F\sfx\radio\" + _soundToPlay + ".wss",_initItem,false,getPosASL _initItem,0.5,1,0];
+					sleep selectRandom [10,15,20,30];
+				};
 			};
 		};
 	};
-
 
 	_bHasParkedCar = false;
 	_ParkedCar = nil;
@@ -292,6 +301,21 @@ if (_PosFound) then {
 		_FloodLight setDir (([_direction,180] call fnc_AddToDirection));
 	};
 	//Land_PortableLight_single_F
+
+	if (ISUNSUNG) then {
+		if (selectRandom [true,true,true]) then {
+			_flatPos = nil;
+			_flatPos = [_behindBlockPos2 , 0, 5, 7, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call BIS_fnc_findSafePos;
+			_radio = nil;
+			if (_thisSide == west) then {
+				_radio = selectRandom ["uns_radio2_radio","uns_radio2_transitor","uns_radio2_transitor02"] createVehicle _flatPos;
+			}
+			else {
+				_radio = selectRandom ["uns_radio2_transitor_NVA","uns_radio2_transitor_NVA","uns_radio2_nva_radio","uns_radio2_recorder"] createVehicle _flatPos;
+			};
+			_radio setDir (([_direction,180] call fnc_AddToDirection));
+		};
+	};
 
 
 	//_pos1 = _initItem getPos [3,100];

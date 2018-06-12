@@ -203,6 +203,10 @@ if (isNil "FinalMissionStarted") then {
 	publicVariable "FinalMissionStarted";	
 };
 
+if (isNil "ISUNSUNG") then {
+		ISUNSUNG = false;
+};
+
 
 
 

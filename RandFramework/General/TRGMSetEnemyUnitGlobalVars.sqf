@@ -477,5 +477,68 @@ sEnemyHeliPilot = "rhsgref_ins_pilot";
 	};	
 
 
+
+
+case 9 : { //Unsung : VC 40th Battalion only
+
+sTeamleader = "uns_men_VC_mainforce_COM";
+sRifleman = "uns_men_VC_mainforce_RF3";
+sATMan = "uns_men_VC_mainforce_AT";
+sAAMan = "uns_men_VC_mainforce_AT2";
+sAmmobearer = "uns_men_VC_mainforce_RF4";
+sGrenadier = "uns_men_VC_mainforce_SAP";
+sMedic = "uns_men_VC_mainforce_MED";
+sMachineGunMan = "uns_men_VC_mainforce_LMG";
+sTank1ArmedCar = "uns_dshk_armoured_VC";
+sTank2APC = "uns_dshk_wheeled_VC";
+sTank3Tank = "uns_spiderhole_VC";
+sAAAVeh = "uns_Type74_VC";    
+sMortar = ["uns_m1941_82mm_mortarVC"];
+sSniper = "uns_men_VC_mainforce_Rmrk";
+sCivilian = ["uns_civilian1","uns_civilian1_b1","uns_civilian1_b2","uns_civilian2","uns_civilian2_b1","uns_civilian3","uns_civilian3_b1","uns_civilian4","uns_civilian4_b1"];
+sArtilleryVeh = "Uns_D30_artillery";
+sBoatUnit = "UNS_PATROL_BOAT_VC";		
+sExpSpec = "uns_men_VC_mainforce_MTS"; 		
+
+
+sTeamleaderMilitia = "uns_men_VC_mainforce_COM";
+sRiflemanMilitia = "uns_men_VC_mainforce_RF3";
+sATManMilitia = "uns_men_VC_mainforce_AT";
+sAAManMilitia = "uns_men_VC_mainforce_AT2";	
+sAmmobearerMilitia = "uns_men_VC_mainforce_RF4";
+sGrenadierMilitia = "uns_men_VC_mainforce_SAP";
+sMedicMilitia = "uns_men_VC_mainforce_MED";
+sMachineGunManMilitia = "uns_men_VC_mainforce_LMG";
+sTank1ArmedCarMilitia = "uns_dshk_armoured_VC";
+sTank2APCMilitia = "uns_dshk_wheeled_VC";
+sTank3TankMilitia = "uns_spiderhole_VC";
+sAAAVehMilitia = "uns_Type74_VC";
+sMortarMilitia = ["uns_m1941_82mm_mortarVC"];
+
+InformantClasses = ["C_Orestes","C_Nikos"];
+InterogateOfficerClasses = ["uns_men_NVA_65_COM"];
+WeaponDealerClasses = ["C_Nikos_aged","C_man_hunter_1_F"];
+sideResarchTruck = ["uns_nvatruck_camo"];
+SideRadioClassNames = ["Land_PortableGenerator_01_F"];
+sideAmmoTruck = ["uns_nvatruck_reammo"];
+DestroyAAAVeh = ["pook_SA2_static_NVA"];
+
+sRiflemanFriendInsurg = "uns_men_ARVN_RF1";
+
+ReinforceVehicle = "uns_nvatruck_open";
+EnemyAirToAirSupports = ["uns_Type55_twinMG"];
+EnemyAirToGroundSupports = ["uns_Type55_twinMG"]; //This would normally be a chopper
+EnemyAirScout = ["uns_men_VC_mainforce_RTO"];
+
+UnarmedScoutVehicles = ["uns_nvatruck_open","uns_nvatruck_open"];
+
+EnemyBaseChoppers = ["uns_Mi8TV_VPAF_MG"];
+sEnemyHeliPilot = "uns_nvaf_pilot2";
+
+//CivCars = ["CUP_C_Volha_Limo_TKCIV","CUP_C_Lada_GreenTK_CIV","CUP_C_S1203_CIV","CUP_C_Ikarus_TKC"];
+
+	};	
+
+
 };
 

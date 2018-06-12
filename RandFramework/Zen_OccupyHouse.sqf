@@ -35,8 +35,6 @@ _fillEvenly = _this param [4, false, [true]];
 _sortHeight = _this param [5, false, [true]];
 _doMove = _this param [6, false, [true]];
 
-_bDeleteUnit = false;
-
 if (_center isEqualTo [0,0,0]) exitWith {
     player sideChat str "Zen_Occupy House Error : Invalid position given.";
     diag_log "Zen_Occupy House Error : Invalid position given.";
@@ -102,7 +100,7 @@ _Zen_ArrayShuffle = {
 if (_buildingRadius < 0) then {
     _buildingsArray = [nearestBuilding _center];
 } else {
-    _buildingsArray0 = nearestObjects [_center, ["house"], _buildingRadius];
+    _buildingsArray0 = nearestObjects [_center, BasicBuildings, _buildingRadius];
     _buildingsArray1 = nearestObjects [_center, ["building"], _buildingRadius];
     _buildingsArray = _buildingsArray0 arrayIntersect _buildingsArray1;
 };
@@ -186,55 +184,53 @@ for [{_j = 0}, {(_unitIndex < count _units) && {(count _buildingPosArray > 0)}},
                                 };
                             };
 
-                            if (!(_isRoof) || {_edge}) then {
-                                (_units select _unitIndex) doWatch ([_housePos, CHECK_DISTANCE, (90 - _i), (_housePos select 2) - (getTerrainHeightASL _housePos)] call _Zen_ExtendPosition);
+                            if (isNil "OccupiedHousesPos") then {OccupiedHousesPos = []};
+                            _distanceFromBase = getMarkerPos "mrkHQ" distance _housePos;
+                            if (_distanceFromBase > BaseAreaRange && !(_housePos in OccupiedHousesPos)) then {
+                                OccupiedHousesPos = OccupiedHousesPos + [_housePos];
+                                if (!(_isRoof) || {_edge}) then {
+                                    (_units select _unitIndex) doWatch ([_housePos, CHECK_DISTANCE, (90 - _i), (_housePos select 2) - (getTerrainHeightASL _housePos)] call _Zen_ExtendPosition);
 
-                                (_units select _unitIndex) disableAI "TARGET";
-                                if (_doMove) then {
-                                    (_units select _unitIndex) doMove ASLToATL ([(_housePos select 0), (_housePos select 1), (_housePos select 2) - EYE_HEIGHT]);
-                                } else {
-                                    (_units select _unitIndex) setPosASL [(_housePos select 0), (_housePos select 1), (_housePos select 2) - EYE_HEIGHT];
-                                    (_units select _unitIndex) setDir _i;
+                                    (_units select _unitIndex) disableAI "TARGET";
+                                    if (_doMove) then {
+                                        (_units select _unitIndex) doMove ASLToATL ([(_housePos select 0), (_housePos select 1), (_housePos select 2) - EYE_HEIGHT]);
+                                    } else {
+                                        (_units select _unitIndex) setPosASL [(_housePos select 0), (_housePos select 1), (_housePos select 2) - EYE_HEIGHT];
+                                        (_units select _unitIndex) setDir _i;
 
-                                    doStop (_units select _unitIndex);
-                                    (_units select _unitIndex) forceSpeed 0;
-                                    
-                                    _unit = (_units select _unitIndex);
-                                    _nearUnits = nearestObjects [(getPos _unit), ["Man"], 1];
-                                    if (count _nearUnits > 1) then {
-                                       deleteVehicle _unit;
-                                       //hint "TESTTEST";
-                                    };
-                                };
-
-                               //** JBOY_UpDown by JohnnyBoy //*/
-                                #define JBOY_UpDown \
-                                    if (!isServer)  exitWith {}; \
-                                    _dude = _this select 0; \
-                                    _stances = _this select 1; \
-                                    _dude removeAllEventHandlers "FiredNear"; \
-                                    while {alive _dude} do { \
-                                        if ((unitPos _dude) == (_stances select 0)) then { \
-                                            _dude setUnitPos (_stances select 1); \
-                                        } else { \
-                                            _dude setUnitPos (_stances select 0); \
-                                        }; \
-                                        sleep (1 + (random 7)); \
+                                        doStop (_units select _unitIndex);
+                                        (_units select _unitIndex) forceSpeed 0;
                                     };
 
-                                if (_isRoof) then {
-                                    (_units select _unitIndex) setUnitPos "MIDDLE";
-                                   (_units select _unitIndex) addEventHandler ["FiredNear",{[(_this select 0),["DOWN","MIDDLE"]] spawn {JBOY_UpDown};}];
-                                } else {
-                                    (_units select _unitIndex) setUnitPos "UP";
-                                   (_units select _unitIndex) addEventHandler ["FiredNear",{[(_this select 0),["UP","MIDDLE"]] spawn {JBOY_UpDown};}];
-                                };
+                                   //** JBOY_UpDown by JohnnyBoy //*/
+                                    #define JBOY_UpDown \
+                                        if (!isServer)  exitWith {}; \
+                                        _dude = _this select 0; \
+                                        _stances = _this select 1; \
+                                        _dude removeAllEventHandlers "FiredNear"; \
+                                        while {alive _dude} do { \
+                                            if ((unitPos _dude) == (_stances select 0)) then { \
+                                                _dude setUnitPos (_stances select 1); \
+                                            } else { \
+                                                _dude setUnitPos (_stances select 0); \
+                                            }; \
+                                            sleep (1 + (random 7)); \
+                                        };
 
-                                I(_unitIndex)
-                                if (_fillEvenly) then {
-                                    breakTo "for";
-                                } else {
-                                    breakTo "while";
+                                    if (_isRoof) then {
+                                        (_units select _unitIndex) setUnitPos "MIDDLE";
+                                       (_units select _unitIndex) addEventHandler ["FiredNear",{[(_this select 0),["DOWN","MIDDLE"]] spawn {JBOY_UpDown};}];
+                                    } else {
+                                        (_units select _unitIndex) setUnitPos "UP";
+                                       (_units select _unitIndex) addEventHandler ["FiredNear",{[(_this select 0),["UP","MIDDLE"]] spawn {JBOY_UpDown};}];
+                                    };
+
+                                    I(_unitIndex)
+                                    if (_fillEvenly) then {
+                                        breakTo "for";
+                                    } else {
+                                        breakTo "while";
+                                    };
                                 };
                             };
                         };
@@ -278,8 +274,6 @@ _unUsedUnits = [];
 for "_i" from _unitIndex to (count _units - 1) step 1 do {
     _unUsedUnits pushBack (_units select _i);
 };
-
-
 
 (_unUsedUnits)
 

@@ -224,8 +224,16 @@ if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMissi
 							if (_bInfor1Found) then {
 								ObjectivePossitions pushBack [_inf1X,_inf1Y];
 								publicVariable "ObjectivePossitions";
-
 								_sTaskDescription = "";
+								if (ISUNSUNG) then {
+									if (_iThisTaskType == 6) then {
+										_radio = selectRandom ["uns_radio2_transitor_NVA","uns_radio2_transitor_NVA"] createVehicle (selectRandom (_infBuilding buildingPos -1));
+									}
+									else {
+										_radio = selectRandom ["uns_radio2_nva_radio","uns_radio2_transitor_NVA","uns_radio2_transitor_NVA"] createVehicle (selectRandom (_infBuilding buildingPos -1));
+									};
+
+								};
 								//###################################### Hack Data ###################
 								if (_iThisTaskType == 1) then {
 									_allpositionsLaptop1 = _infBuilding buildingPos -1;
@@ -1034,6 +1042,10 @@ if (_bMoveToAO) then {
 	if (AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
 		//_AmmoBox1 addAction [localize "STR_TRGM2_startInfMission_VirtualArsenal", {["Open",true] spawn BIS_fnc_arsenal}];
 		[_AmmoBox1, [localize "STR_TRGM2_startInfMission_VirtualArsenal",{["Open",true] spawn BIS_fnc_arsenal}]] remoteExec ["addAction", 0];
+	};
+
+	if (ISUNSUNG) then {
+		_radio = selectRandom ["uns_radio2_radio","uns_radio2_transitor","uns_radio2_transitor02"] createVehicle _flatPos7;
 	};
 
 	_flatPosUnits = [_flatPosCampFire, 8, 17, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
