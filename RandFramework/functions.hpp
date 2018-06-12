@@ -3,11 +3,14 @@ class TRGM   { // TAG
     class common { // CATEGORY
         file = "RandFramework\functions\common";
 
-        class isAceLoaded {}
+        class isAceLoaded {};
+        class isCbaLoaded {};
+
         class setMilitiaSkill {};
         class debugDotMarker {};
         class CountSpentPoints {};
         class AddToDirection {}; //Can add degrees to direction to calcuate final direction
+        class addPlayerActionPersistent {};
     };
 
     class location { // CATEGORY
