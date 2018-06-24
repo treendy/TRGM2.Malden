@@ -36,6 +36,16 @@ if (_SaveType == 0) then {
 	iStartLocation = MissionParamLocationOptionsValues select lbCurSel _ctrlLocation;
 	publicVariable "iStartLocation";
 
+	if (!isNull((findDisplay 5000) displayCtrl 7001)) then {
+		_ctrlTypes1 = (findDisplay 5000) displayCtrl 7001;
+		iMissionParamObjective2 = MissionParamObjectivesValues select lbCurSel _ctrlTypes1;
+		publicVariable "iMissionParamObjective2";
+
+		_ctrlTypes2 = (findDisplay 5000) displayCtrl 7002;
+		iMissionParamObjective3 = MissionParamObjectivesValues select lbCurSel _ctrlTypes2;
+		publicVariable "iMissionParamObjective3";
+	};
+	
 	publicVariable "AdvancedSettings";
 	publicVariable "EnemyFactionData";
 	publicVariable "LoadoutData";

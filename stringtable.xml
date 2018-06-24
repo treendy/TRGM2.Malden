@@ -3011,9 +3011,17 @@
 				<Spanish>Rescatar prisionero de guerra</Spanish>
 			</Key>
 			<Key ID="STR_TRGM2_startInfMission_MissionTitle12">
-				<Original>Rescue Reportertest</Original>
-				<English>Rescue Reportertest</English>
+				<Original>Rescue Reporter</Original>
+				<English>Rescue Reporter</English>
 				<Spanish>Rescatar periodista prueba</Spanish>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle9_Destory">
+				<Original>You have destroyed enemy AAA, reputation increased</Original>
+				<English>You have destroyed enemy AAA, reputation increased</English>
+			</Key>
+			<Key ID="STR_TRGM2_startInfMission_MissionTitle10_Destory">
+				<Original>You have destroyed enemy artillery, reputation increased</Original>
+				<English>You have destroyed enemy artillery, reputation increased</English>
 			</Key>
 
 		</Container>

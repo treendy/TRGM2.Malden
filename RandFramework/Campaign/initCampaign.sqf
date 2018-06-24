@@ -30,6 +30,8 @@ if (!isnil "k1_2") then {if (!isPlayer k1_2) then {deleteVehicle k1_2;}};
 if (!isnil "k1_3") then {if (!isPlayer k1_3) then {deleteVehicle k1_3;}};
 if (!isnil "k1_4") then {if (!isPlayer k1_4) then {deleteVehicle k1_4;}};
 if (!isnil "k1_5") then {if (!isPlayer k1_5) then {deleteVehicle k1_5;}};	
+if (!isnil "k1_6") then {if (!isPlayer k1_6) then {deleteVehicle k1_6;}};		
+if (!isnil "k1_7") then {if (!isPlayer k1_7) then {deleteVehicle k1_7;}};	
 
 CampaignInitiated = true;
 publicVariable "CampaignInitiated";

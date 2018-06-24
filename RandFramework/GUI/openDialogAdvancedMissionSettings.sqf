@@ -1,6 +1,15 @@
 #include "..\..\setUnitGlobalVars.sqf";
 disableSerialization;
 
+if (isNil "iMissionParamObjective2") then {
+	iMissionParamObjective2 = 0;
+	publicVariable "iMissionParamObjective2";
+};
+if (isNil "iMissionParamObjective3") then {
+	iMissionParamObjective3 = 0;
+	publicVariable "iMissionParamObjective3";
+};
+
 if (!isNull (findDisplay 5000)) then {
 	_ctrlItem = (findDisplay 5000) displayCtrl 5500;
 	iMissionParamType = MissionParamTypesValues select lbCurSel _ctrlItem;
@@ -30,6 +39,16 @@ if (!isNull (findDisplay 5000)) then {
 	_ctrlLocation = (findDisplay 5000) displayCtrl 2105;
 	iStartLocation = MissionParamLocationOptionsValues select lbCurSel _ctrlLocation;
 	publicVariable "iStartLocation";
+
+	if (!isNull((findDisplay 5000) displayCtrl 7001)) then {
+		_ctrlTypes1 = (findDisplay 5000) displayCtrl 7001;
+		iMissionParamObjective2 = MissionParamObjectivesValues select lbCurSel _ctrlTypes1;
+		publicVariable "iMissionParamObjective2";
+
+		_ctrlTypes2 = (findDisplay 5000) displayCtrl 7002;
+		iMissionParamObjective3 = MissionParamObjectivesValues select lbCurSel _ctrlTypes2;
+		publicVariable "iMissionParamObjective3";
+	};
 };
 
 //hint "opening 2dialogA";

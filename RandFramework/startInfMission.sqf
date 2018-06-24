@@ -22,22 +22,29 @@ _bIsCampaignFinalMission = false;
 _bSideMissionsCivOnly = false;
 
 _MainMissionTasksToUse = MainMissionTasks;
-_SideMissionTasksToUse = SideMissionTasks;
+_SideMissionTasksToUse1 = SideMissionTasks;
+_SideMissionTasksToUse2 = SideMissionTasks;
 if (iMissionParamObjective > 0) then {
 	_MainMissionTasksToUse = [iMissionParamObjective];
-	_SideMissionTasksToUse = [iMissionParamObjective];
+	_SideMissionTasksToUse1 = [iMissionParamObjective];
+};
+if (iMissionParamObjective2 > 0) then {
+	_SideMissionTasksToUse1 = [iMissionParamObjective2];
+};
+if (iMissionParamObjective3 > 0) then {
+	_SideMissionTasksToUse2 = [iMissionParamObjective3];
 };
 
 iMissionSetup = iMissionParamType;
 if (iMissionSetup == 0) then {
-	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom SideMissionTasks,selectRandom SideMissionTasks];
+	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
 	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 	_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
 	_CreateTasks = [true,false,false];
 	MaxBadPoints = 1;
 };
 if (iMissionSetup == 1) then {
-	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom MissionsThatHaveIntel,selectRandom SideMissionTasks];
+	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom MissionsThatHaveIntel,selectRandom MissionsThatHaveIntel];
 	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 	_MarkerTypes = ["empty","hd_dot","hd_dot"];
 	_CreateTasks = [true,false,false];
@@ -52,7 +59,7 @@ if (iMissionSetup == 2) then {
 };
 if (iMissionSetup == 3) then {
 	if (selectRandom [true,false,false]) then {
-		_ThisTaskTypes = [selectRandom _SideMissionTasksToUse,4];
+		_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1,4];
 		_IsMainObjs = [false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 		_MarkerTypes = ["mil_objective","hd_dot"];
 		_CreateTasks = [true,false];
@@ -60,7 +67,7 @@ if (iMissionSetup == 3) then {
 		_bSideMissionsCivOnly = true;
 	}
 	else {
-		_ThisTaskTypes = [selectRandom _SideMissionTasksToUse];
+		_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1];
 		_IsMainObjs = [false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 		_MarkerTypes = ["mil_objective"];
 		_CreateTasks = [true];
@@ -68,7 +75,13 @@ if (iMissionSetup == 3) then {
 	};
 };
 if (iMissionSetup == 4) then {
-	_ThisTaskTypes = [selectRandom _SideMissionTasksToUse,selectRandom _SideMissionTasksToUse,selectRandom _SideMissionTasksToUse];
+	if (iMissionParamObjective > 0) then {
+		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
+	}
+	else {
+		_ThisTaskTypes = [selectRandom SideMissionTasks,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
+	};
+	
 	_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 	_MarkerTypes = ["mil_objective","mil_objective","mil_objective"];
 	_CreateTasks = [true,true,true];
@@ -85,14 +98,14 @@ if (iMissionSetup == 5) then {
 	}
 	else {
 		if (selectRandom [true,false,false]) then {
-			_ThisTaskTypes = [selectRandom _SideMissionTasksToUse,4];
+			_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1,4];
 			_IsMainObjs = [false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 			_MarkerTypes = ["mil_objective","hd_dot"];
 			_CreateTasks = [true,false];
 			_bSideMissionsCivOnly = true;
 		}
 		else {
-			_ThisTaskTypes = [selectRandom _SideMissionTasksToUse];
+			_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1];
 			_IsMainObjs = [false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 			_MarkerTypes = ["mil_objective"];
 			_CreateTasks = [true];
@@ -101,14 +114,19 @@ if (iMissionSetup == 5) then {
 	_bIsCampaign = true;
 };
 if (iMissionSetup == 6) then {
-	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom SideMissionTasks,selectRandom SideMissionTasks];
+	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse1];
 	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 	_MarkerTypes = ["mil_objective","empty","empty"];
 	_CreateTasks = [true,false,false];
 	MaxBadPoints = 1;
 };
 if (iMissionSetup == 7) then {
-	_ThisTaskTypes = [selectRandom _SideMissionTasksToUse,selectRandom _SideMissionTasksToUse,selectRandom _SideMissionTasksToUse];
+	if (iMissionParamObjective > 0) then {
+		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
+	}
+	else {
+		_ThisTaskTypes = [selectRandom SideMissionTasks,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
+	};
 	_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 	_MarkerTypes = ["empty","empty","empty"];
 	_CreateTasks = [true,true,true];
@@ -397,7 +415,7 @@ if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMissi
 									_triggerAmmoTruckClear setVariable ["DelMeOnNewCampaignDay",true];
 									if (!_bCreateTask) then {
 
-										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " [1, ""Destroyed AAA""] execVM ""RandFramework\AdjustMaxBadPoints.sqf""; Hint (localize ""STR_TRGM2_startInfMission_MissionTitle3_Destory""); ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
+										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " [1, ""Destroyed AAA""] execVM ""RandFramework\AdjustMaxBadPoints.sqf""; Hint (localize ""STR_TRGM2_startInfMission_MissionTitle9_Destory""); ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
 									}
 									else {
 										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
@@ -473,7 +491,7 @@ if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMissi
 									_triggerAmmoTruckClear setVariable ["DelMeOnNewCampaignDay",true];
 									if (!_bCreateTask) then {
 
-										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " [1, ""Destroyed Artillery""] execVM ""RandFramework\AdjustMaxBadPoints.sqf""; Hint (localize ""STR_TRGM2_startInfMission_MissionTitle3_Destory""); ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
+										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " [1, ""Destroyed Artillery""] execVM ""RandFramework\AdjustMaxBadPoints.sqf""; Hint (localize ""STR_TRGM2_startInfMission_MissionTitle10_Destory""); ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
 									}
 									else {
 										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
@@ -1054,6 +1072,8 @@ if (_bMoveToAO) then {
 	if (!isnil "k1_3") then {k1_3  setPos _flatPosUnits};
 	if (!isnil "k1_4") then {k1_4  setPos _flatPosUnits};
 	if (!isnil "k1_5") then {k1_5  setPos _flatPosUnits};
+	if (!isnil "k1_6") then {k1_6  setPos _flatPosUnits};
+	if (!isnil "k1_7") then {k1_7  setPos _flatPosUnits};
 	_bGroupFound = false;
 	{
 		if (_x getVariable ["IsFRT",false] && !_bGroupFound) then {

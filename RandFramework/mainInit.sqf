@@ -137,6 +137,14 @@ if (isNil "iMissionParamObjective") then {
 	iMissionParamObjective = 0;
 	publicVariable "iMissionParamObjective";
 };
+if (isNil "iMissionParamObjective2") then {
+	iMissionParamObjective2 = 0;
+	publicVariable "iMissionParamObjective2";
+};
+if (isNil "iMissionParamObjective3") then {
+	iMissionParamObjective3 = 0;
+	publicVariable "iMissionParamObjective3";
+};
 
 if (isNil "iAllowNVG") then {
 	iAllowNVG = 2;
@@ -244,7 +252,9 @@ if (! isDedicated) then {
 waitUntil {!isNull player};
 
 TransferProviders = {
-
+	if !([] call TRGM_fnc_isCbaLoaded) then {
+		[[chopper1]] call TRGM_fnc_addTransportActions;
+	};
 	_oldUnit = _this select 0;
 	_oldProviders = _oldUnit getVariable ["BIS_SUPP_allProviderModules",[]];
 	_HQ = _oldUnit getVariable ["BIS_SUPP_HQ",nil];
@@ -637,20 +647,20 @@ if (isServer) then {
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.1];
-					_x setskill ["aimingShake",0.1];
-					_x setskill ["aimingSpeed",0.1];
-					_x setskill ["spotDistance",0.1];
-					_x setskill ["spotTime",0.1];
+					_x setskill ["aimingAccuracy",0.01];
+					_x setskill ["aimingShake",0.01];
+					_x setskill ["aimingSpeed",0.01];
+					_x setskill ["spotDistance",0.01];
+					_x setskill ["spotTime",0.01];
 				};
 			} forEach allUnits;
 			sleep SandStormTimer;
 			//reset enemy skill
 			{
 				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.5];
-					_x setskill ["aimingShake",0.5];
-					_x setskill ["aimingSpeed",0.5];
+					_x setskill ["aimingAccuracy",0.15];
+					_x setskill ["aimingShake",0.1];
+					_x setskill ["aimingSpeed",0.2];
 					_x setskill ["spotDistance",0.5];
 					_x setskill ["spotTime",0.5];
 				};
@@ -667,20 +677,20 @@ if (isServer) then {
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.1];
-					_x setskill ["aimingShake",0.1];
-					_x setskill ["aimingSpeed",0.1];
-					_x setskill ["spotDistance",0.1];
-					_x setskill ["spotTime",0.1];
+					_x setskill ["aimingAccuracy",0.01];
+					_x setskill ["aimingShake",0.01];
+					_x setskill ["aimingSpeed",0.01];
+					_x setskill ["spotDistance",0.01];
+					_x setskill ["spotTime",0.01];
 				};
 			} forEach allUnits;
 			sleep SandStormTimer;
 			//reset enemy skill
 			{
 				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.5];
-					_x setskill ["aimingShake",0.5];
-					_x setskill ["aimingSpeed",0.5];
+					_x setskill ["aimingAccuracy",0.15];
+					_x setskill ["aimingShake",0.1];
+					_x setskill ["aimingSpeed",0.2];
 					_x setskill ["spotDistance",0.5];
 					_x setskill ["spotTime",0.5];
 				};
@@ -694,20 +704,20 @@ if (isServer) then {
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.1];
-					_x setskill ["aimingShake",0.1];
-					_x setskill ["aimingSpeed",0.1];
-					_x setskill ["spotDistance",0.1];
-					_x setskill ["spotTime",0.1];
+					_x setskill ["aimingAccuracy",0.01];
+					_x setskill ["aimingShake",0.01];
+					_x setskill ["aimingSpeed",0.01];
+					_x setskill ["spotDistance",0.01];
+					_x setskill ["spotTime",0.01];
 				};
 			} forEach allUnits;
 			sleep 18030;
 			//reset enemy skill
 			{
 				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.5];
-					_x setskill ["aimingShake",0.5];
-					_x setskill ["aimingSpeed",0.5];
+					_x setskill ["aimingAccuracy",0.15];
+					_x setskill ["aimingShake",0.1];
+					_x setskill ["aimingSpeed",0.2];
 					_x setskill ["spotDistance",0.5];
 					_x setskill ["spotTime",0.5];
 				};

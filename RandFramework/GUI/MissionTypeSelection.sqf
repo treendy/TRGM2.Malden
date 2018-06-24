@@ -5,6 +5,26 @@ _thisThis = _this select 0;
 
 _selectedIndex = _thisThis select 1;
 
+if (isNil "iMissionParamObjective2") then {
+	iMissionParamObjective2 = 0;
+	publicVariable "iMissionParamObjective2";
+};
+if (isNil "iMissionParamObjective3") then {
+	iMissionParamObjective3 = 0;
+	publicVariable "iMissionParamObjective3";
+};
+
+if (!isNull((findDisplay 5000) displayCtrl 7001)) then {
+	_ctrlTypes1 = (findDisplay 5000) displayCtrl 7001;
+	iMissionParamObjective2 = MissionParamObjectivesValues select lbCurSel _ctrlTypes1;
+	publicVariable "iMissionParamObjective2";
+
+	_ctrlTypes2 = (findDisplay 5000) displayCtrl 7002;
+	iMissionParamObjective3 = MissionParamObjectivesValues select lbCurSel _ctrlTypes2;
+	publicVariable "iMissionParamObjective3";
+};
+
+_display = findDisplay 5000;
 _ctrl = (findDisplay 5000) displayCtrl 5001;
 _ctrl ctrlSetText format["%1",MissionTypeDescriptions select _selectedIndex]; // for Displays
 
@@ -31,6 +51,41 @@ else {
 	_ctrlRep ctrlEnable true;
 	_ctrlWeather = (findDisplay 5000) displayCtrl 5101;
 	_ctrlWeather ctrlEnable true;
+};
+
+if (_selectedTypeID == 0 || _selectedTypeID == 6 || _selectedTypeID == 4 || _selectedTypeID == 7) then {
+	if (isNull((findDisplay 5000) displayCtrl 7001)) then {
+		_display ctrlCreate ["RscCombo", 7001];
+		_inpctrl1 = _display displayCtrl 7001;
+		_inpctrl1 ctrlSetTextColor [1, 1, 0, 1];
+		_inpctrl1 ctrlSetPosition [0.541 * safezoneW + safezoneX, (0.561) * safezoneH + safezoneY,0.08 * safezoneW,0.02 * safezoneH];
+		_inpctrl1 ctrlCommit 0;
+
+		_display ctrlCreate ["RscCombo", 7002];
+		_inpctrl2 = _display displayCtrl 7002;
+		_inpctrl2 ctrlSetTextColor [1, 1, 0, 1];
+		_inpctrl2 ctrlSetPosition [0.621 * safezoneW + safezoneX, (0.561) * safezoneH + safezoneY,0.08 * safezoneW,0.02 * safezoneH];
+		_inpctrl2 ctrlCommit 0;
+
+		_ctrlTypes1 = (findDisplay 5000) displayCtrl 7001;
+		_ctrlTypes2 = (findDisplay 5000) displayCtrl 7002;
+		_optionTypes = MissionParamObjectives;
+		{
+			_ctrlTypes1 lbAdd _x;
+			_ctrlTypes2 lbAdd _x;
+		} forEach _optionTypes;
+
+		_ctrlTypes1 lbSetCurSel (MissionParamObjectivesValues find iMissionParamObjective2);
+		_ctrlTypes2 lbSetCurSel (MissionParamObjectivesValues find iMissionParamObjective3);
+	};
+}
+else {
+	if (!isNull((findDisplay 5000) displayCtrl 7001)) then {
+		ctrlDelete ((findDisplay 5000) displayCtrl 7001);
+		ctrlDelete ((findDisplay 5000) displayCtrl 7002);
+		iMissionParamObjective2 = 0;
+		iMissionParamObjective3 = 0;
+	};
 };
 
 if (!isMultiplayer) then {

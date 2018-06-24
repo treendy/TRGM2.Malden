@@ -224,7 +224,7 @@ TREND_fnc_GetAnimalsMoving = {
 	[] execVM "RandFramework\animateAnimals.sqf";
 };
 [] spawn TREND_fnc_GetAnimalsMoving;
-player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInit; }];
+player addEventHandler ["Respawn", { [] spawn TREND_fnc_GetAnimalsMoving; }];
 
 //[player, supReq] call BIS_fnc_addSupportLink;
 
