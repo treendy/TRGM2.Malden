@@ -24,7 +24,7 @@ _log_briefing = player createDiaryRecord ["ais_settings", [localize "STR_TRGM2_f
 _log_briefing = player createDiaryRecord ["ais_settings", [localize "STR_TRGM2_fndiary_HeavyDamageHandling", "
 <font face='PuristaMedium' size=15 color='#8E8E8E'>" + localize "STR_TRGM2_fndiary_ReviveChance" + "</font>" + _revive_guaranty]];
 _log_briefing = player createDiaryRecord ["ais_settings", [localize "STR_TRGM2_fndiary_BleedoutTime",
-format ["<font face='PuristaMedium' size=15 color='#8E8E8E'>" + localize "STR_TRGM2_fndiary_BleedoutTime" + "</font>%1", AIS_BLEEDOUT_TIME]]];
+format ["<font face='PuristaMedium' size=15 color='#8E8E8E'>" + localize "STR_TRGM2_fndiary_BleedoutTimeStatus" + "</font>%1", AIS_BLEEDOUT_TIME]]];
 _log_briefing = player createDiaryRecord ["ais_settings", [localize "STR_TRGM2_fndiary_HealingStatus", "
 <font face='PuristaMedium' size=15 color='#8E8E8E'>" + localize "STR_TRGM2_fndiary_AfterDamage" + "</font>" + _revive_heal]];
 
