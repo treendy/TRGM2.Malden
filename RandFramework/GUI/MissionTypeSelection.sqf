@@ -38,11 +38,14 @@ if (_selectedTypeID == 5) then {
 	if (!AllowMissionTypeCampaign) then {
 		_ctrlTypes = (findDisplay 5000) displayCtrl 5104;
 		_ctrlTypes ctrlEnable false;
+		_ctrlTypes lbSetCurSel (0);
 	};	
 	_ctrlRep = (findDisplay 5000) displayCtrl 5100;
 	_ctrlRep ctrlEnable false;
+	_ctrlRep lbSetCurSel (1);
 	_ctrlWeather = (findDisplay 5000) displayCtrl 5101;
 	_ctrlWeather ctrlEnable false;
+	_ctrlWeather lbSetCurSel (0);
 }
 else {
 	_ctrlTypes = (findDisplay 5000) displayCtrl 5104;

@@ -46,6 +46,7 @@ _actions = [
 
 // add actions on vehicle
 {
-	[_vehicle, _x] remoteExec ["addAction",[0, -2] select isMultiplayer,true];
+	//[_vehicle, _x] remoteExec ["addAction",[0, -2] select isMultiplayer,true];
+	[_vehicle, _x] remoteExec ["addAction",0,true];
 	// TODO: ACE alternative
 }	foreach _actions;

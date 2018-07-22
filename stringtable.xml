@@ -3476,7 +3476,10 @@
 				<Original>You have destroyed enemy artillery, reputation increased</Original>
 				<English>You have destroyed enemy artillery, reputation increased</English>
 			</Key>
-
+			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_GroupManagement">
+				<Original>Enable Group Management</Original>
+				<English>Enable Group Management</English>
+			</Key>
 		</Container>
 	</Package>
 </Project>

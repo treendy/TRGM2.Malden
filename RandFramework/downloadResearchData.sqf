@@ -5,6 +5,7 @@ if (side player == west) then {
 
 	//ClearedPositions pushBack (ObjectivePossitions select _iSelected);
 	ClearedPositions pushBack ([ObjectivePossitions, player] call BIS_fnc_nearestPosition);
+	publicVariable "ClearedPositions";
 
 	//removeAllActions _thisLaptop;
 	[_thisLaptop] remoteExec ["removeAllActions", 0, true];

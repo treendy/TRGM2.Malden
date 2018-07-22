@@ -59,7 +59,8 @@ if ([] call TRGM_fnc_isAceLoaded) then {
 	_code =  { 
 		[player, 1, ["ACE_SelfActions"], _this] call ace_interact_menu_fnc_addActionToObject;
 	};
-	[_selfAction,_code] remoteExec ["call", [0, -2] select isMultiplayer,true];
+	//[_selfAction,_code] remoteExec ["call", [0, -2] select isMultiplayer,true];
+	[_selfAction,_code] remoteExec ["call", 0,true];
 
 
 } else {
@@ -100,7 +101,8 @@ if ([] call TRGM_fnc_isAceLoaded) then {
 	
 	// add actions on player with CBA_fnc_addPlayerAction (respawn persistent)
 	{
-		[_x] remoteExec ["TRGM_fnc_addPlayerActionPersistent",[0, -2] select isMultiplayer,true];
+		//[_x] remoteExec ["TRGM_fnc_addPlayerActionPersistent",[0, -2] select isMultiplayer,true];
+		[_x] remoteExec ["TRGM_fnc_addPlayerActionPersistent",0,true];
 	}	foreach _playerActions;
 };
 

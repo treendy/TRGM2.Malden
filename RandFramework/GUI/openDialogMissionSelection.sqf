@@ -67,7 +67,10 @@ if (isNil "InitialLoadedPreviousSettings") then {
 		};
 
 		if (count AdvancedSettings < 9) then {
-			AdvancedSettings pushBack DefaultAdvancedSettings select 8;
+			AdvancedSettings pushBack (DefaultAdvancedSettings select 8);
+		};
+		if (count AdvancedSettings < 10) then {
+			AdvancedSettings pushBack (DefaultAdvancedSettings select 9);
 		};
 
 

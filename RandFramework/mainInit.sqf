@@ -217,6 +217,24 @@ if (isNil "ISUNSUNG") then {
 
 
 
+player createDiarySubject ["supportMe","Support Me"]; 
+player createDiaryRecord ["supportMe", ["-", "<br /><font color='#5555FF'>www.trgm2.com</font><br /><br />Thank you for taking the time to read this : )
+<br />
+<br />
+I love creating these missions and over the past few years have dedicated way too many hours to Arma 3 lol... nearly at the cost of my marriage!!! : S  
+
+<br /><br />
+<font color='#FFFF00'>Follow Me</font>
+<br />If you want to support my work, there are quite a few ways to do so... if you visit my steam workshop page and give a thumbs up and comment, it really means a lot... these thumbs up ratings, and adding to fav help move my work up the workshop pages,
+Follow me on steam, or my YouTube account, its nice to know my videos are being watched.
+<br />
+<br /><font color='#FFFF00'>
+Donations : www.trgm2.com</font>
+<br />
+If you really want to, you can make a donation via my site www.trgm2.com (paypal link at top right of site), I could buy my wife a curry to keep her quite while i edit lol.  I would also love to dedicate more time to the TRGM2 engine, making updates, fixes and new features, so would love to take some time off work to spend full days on my engine : )"]]; 
+
+
+//hintSilent parseText "<t size='1.25' font='Zeppelin33' color='#ff0000'>test lives remaining.</t><a href='http://arma3.com'>A3</a>";
 
 if (isServer) then { //adjust weather here so intro animation is different everytime
 		[true] execVM "RandFramework\SetTimeAndWeather.sqf";
@@ -255,6 +273,8 @@ TransferProviders = {
 	if !([] call TRGM_fnc_isCbaLoaded) then {
 		[[chopper1]] call TRGM_fnc_addTransportActions;
 	};
+	//player addAction [localize "STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport","[chopper1,true] spawn TRGM_fnc_selectLZ",0,0];	
+
 	_oldUnit = _this select 0;
 	_oldProviders = _oldUnit getVariable ["BIS_SUPP_allProviderModules",[]];
 	_HQ = _oldUnit getVariable ["BIS_SUPP_HQ",nil];
@@ -335,6 +355,13 @@ if (!isMultiplayer) then {
 
 waitUntil {bAndSoItBegins};
 
+if (isServer) then {
+	_iEnableGroupManagement = AdvancedSettings select ADVSET_GROUP_MANAGE_IDX;
+	if (_iEnableGroupManagement == 1) then {
+		["Initialize"] call BIS_fnc_dynamicGroups;//Exec on Server
+	};
+};
+
 if (!isDedicated) then {
 	titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED"];
 	_camera cameraEffect ["Terminate","back"];
@@ -355,7 +382,7 @@ if (isServer) then {
 	publicVariable "CustomObjectsSet";
 	call compile preprocessFileLineNumbers "RandFramework\setFriendlyObjects.sqf";
 
-	[[chopper1]] call TRGM_fnc_addTransportActions;
+	
 
 	if (EnemyFactionData != "") then {
 		_errorMessage = "";
@@ -436,6 +463,8 @@ if (isServer) then {
 };
 
 waitUntil {CustomObjectsSet};
+
+[[chopper1]] call TRGM_fnc_addTransportActions;
 
 if (iUseRevive > 0) then {
 	[] call AIS_Core_fnc_preInit;
