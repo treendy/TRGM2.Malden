@@ -3480,6 +3480,11 @@
 				<Original>Enable Group Management</Original>
 				<English>Enable Group Management</English>
 			</Key>
+			<Key ID="STR_TRGM2_SetMissionBoardOptions_TurnInMission">
+				<Original>Turn in mission</Original>
+				<English>Turn in mission</English>
+			</Key>
+			
 		</Container>
 	</Package>
 </Project>
