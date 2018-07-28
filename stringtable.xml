@@ -3484,6 +3484,11 @@
 				<Original>Turn in mission</Original>
 				<English>Turn in mission</English>
 			</Key>
+			<Key ID="STR_TRGM2_startInfMission_DayTurnedIn">
+				<Original>Mission turned in</Original>
+				<English>Mission turned in</English>
+			</Key>
+			
 			
 		</Container>
 	</Package>
