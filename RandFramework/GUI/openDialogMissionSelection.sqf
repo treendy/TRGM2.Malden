@@ -74,7 +74,7 @@ if (isNil "InitialLoadedPreviousSettings") then {
 		};
 
 
-		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+		if (isClass(configFile >> "CfgPatches" >> "ace_medical")) then {
 			if (iUseRevive != 0) then { //Ace is active, so need to make sure "no revive" is selected
 				iUseRevive = 0;
 				publicVariable "iUseRevive";
@@ -171,7 +171,7 @@ _ctrlRep lbSetCurSel (MissionParamRepOptionsValues find iMissionParamRepOption);
 _ctrlWeather lbSetCurSel (MissionParamWeatherOptionsValues find iWeather);
 _ctrlNVG lbSetCurSel (MissionParamNVGOptionsValues find iAllowNVG);
 _ctrlRevive lbSetCurSel (MissionParamReviveOptionsValues find iUseRevive);
-if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+if (isClass(configFile >> "CfgPatches" >> "ace_medical")) then {
 	_ctrlRevive ctrlEnable false;
 };
 _ctrlLocation lbSetCurSel (MissionParamLocationOptionsValues find iStartLocation);
