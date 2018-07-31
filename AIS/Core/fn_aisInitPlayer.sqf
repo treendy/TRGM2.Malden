@@ -1,7 +1,7 @@
 ﻿// this script run only by the player!
 private _player = _this;
 if (_player != player) exitWith {["%1 --- exit aisInitPlayer cause it's not the local player itself %2", diag_ticktime, _player] call BIS_fnc_logFormat};
-if (isClass (configFile >> "CfgPatches" >> "ace_main")) exitWith {["AIS: AIS shutdown itself cause ACE mod was detected. ACE and AIS cant work at the same time."] call BIS_fnc_logFormat};
+if (isClass (configFile >> "CfgPatches" >> "ace_medical")) exitWith {["AIS: AIS shutdown itself cause ACE mod was detected. ACE and AIS cant work at the same time."] call BIS_fnc_logFormat};
 
 if (_player getVariable ["AIS_noReviveInit", false]) exitWith {};
 
