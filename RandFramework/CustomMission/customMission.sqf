@@ -361,7 +361,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			_thisGuardUnit1 playMoveNow "Acts_CivilListening_2";
 			_thisGuardUnit1 disableAI "anim";
 
-			sleep 20;
+			sleep 120;
 			_thisMainHVT call BIS_fnc_ambientAnim__terminate;
 			_thisMainHVT enableAI "anim";
 			_thisGuardUnit1 call BIS_fnc_ambientAnim__terminate;
@@ -459,7 +459,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 		_sAliveCheck3 = format["%1 getVariable [""taskStatus"",""""] == ""ESCAPED"" ",_sTargetName];
 		_sTaskFail2 = format["[""InfSide%1"", ""failed""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
-		_customTaskEscaped setTriggerStatements [_sAliveCheck2, _sTaskFail2, ""];	
+		_customTaskEscaped setTriggerStatements [_sAliveCheck3, _sTaskFail2, ""];	
 	};
 
 	_MissionTitle = format["Meeting Assassination: %1",name(_mainHVT)];	//you can adjust this here to change what shows as marker and task text 
