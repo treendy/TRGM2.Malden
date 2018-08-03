@@ -28,6 +28,15 @@ _display = findDisplay 5000;
 _ctrl = (findDisplay 5000) displayCtrl 5001;
 _ctrl ctrlSetText format["%1",MissionTypeDescriptions select _selectedIndex]; // for Displays
 
+
+_display ctrlCreate ["RscStructuredText", 7003];
+_ctrlText1 = _display displayCtrl 7003;
+_ctrlText1 ctrlSetStructuredText parseText "<a href='http://www.trgm2.com'>Click here to visit www.trgm2.com for help and features</a>";
+_ctrlText1 ctrlSetTextColor [1, 1, 0, 1];
+_ctrlText1 ctrlSetPosition [0.303 * safezoneW + safezoneX, (0.770) * safezoneH + safezoneY,0.2 * safezoneW,0.1 * safezoneH];
+_ctrlText1 ctrlCommit 0;
+
+
 if (isNil "AllowMissionTypeCampaign") then {
 	AllowMissionTypeCampaign = false;
 	publicVariable "AllowMissionTypeCampaign";	
@@ -38,11 +47,14 @@ if (_selectedTypeID == 5) then {
 	if (!AllowMissionTypeCampaign) then {
 		_ctrlTypes = (findDisplay 5000) displayCtrl 5104;
 		_ctrlTypes ctrlEnable false;
+		_ctrlTypes lbSetCurSel (0);
 	};	
 	_ctrlRep = (findDisplay 5000) displayCtrl 5100;
 	_ctrlRep ctrlEnable false;
+	_ctrlRep lbSetCurSel (1);
 	_ctrlWeather = (findDisplay 5000) displayCtrl 5101;
 	_ctrlWeather ctrlEnable false;
+	_ctrlWeather lbSetCurSel (0);
 }
 else {
 	_ctrlTypes = (findDisplay 5000) displayCtrl 5104;

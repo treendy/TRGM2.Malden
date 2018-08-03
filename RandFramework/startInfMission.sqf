@@ -1,5 +1,6 @@
 #include "..\setUnitGlobalVars.sqf";
 #include "..\RandFramework\RandScript\trendFunctions.sqf";
+#include "..\RandFramework\CustomMission\customMission.sqf";
 
 //This is only ever called on server!!!!
 
@@ -154,12 +155,7 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 	};
 
 	_iThisTaskType = nil;
-	if (_bIsCampaign) then {
-		_iThisTaskType = _ThisTaskTypes select InfTaskCount;
-	}
-	else {
-		_iThisTaskType = _ThisTaskTypes select InfTaskCount;
-	};
+	_iThisTaskType = _ThisTaskTypes select InfTaskCount;
 
 //_iThisTaskType = 12;
 
@@ -190,8 +186,11 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 				_bInfor1Found = false;
 
 				_MissionTitle = "";
+				_RequiresNearbyRoad = false;
+				_roadSearchRange = 20;
+				_CustomMissionEnabled = false;
 
-if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle1"};
+				if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle1"};
 				if (_iThisTaskType == 2) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle2"};
 				if (_iThisTaskType == 3) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle3"};
 				if (_iThisTaskType == 4) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle4"};
@@ -203,6 +202,11 @@ if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMissi
 				if (_iThisTaskType == 10) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle10"}; //gain one point if side (player can call arti strikes on them, cost 0.3 points but gains one if complete)
 				if (_iThisTaskType == 11) then {_MissionTitle = localize "STR_TRGM2_Rescue_POW"}; 
 				if (_iThisTaskType == 12) then {_MissionTitle = localize "STR_TRGM2_Rescue_Reporter"}; 					
+				if (_iThisTaskType == 99999) then {
+					//hint format["pre: %1",_RequiresNearbyRoad]; sleep 2;
+					[] call fnc_CustomVars;					
+					//hint format["post: %1",_RequiresNearbyRoad]; sleep 2;
+				};
 
 
 				//kill leader (he will run away in car to AO)    ::   save stranded guys    ::      
@@ -224,20 +228,18 @@ if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMissi
 						_inf1Y = position _infBuilding select 1;
 						if (count _allBuildingPos > 2) then {
 
-							_roadSearchRange = 20;
+							
 							if (_iThisTaskType == 3) then {_roadSearchRange = 100;};
 							_nearestRoads = [_inf1X,_inf1Y] nearRoads _roadSearchRange;
 
-
-							if (_iThisTaskType == 2 || _iThisTaskType == 3) then { //2 = retrive tank << so we need a nearby road
+							_bCustomRequiredPass = true;
+							if (_CustomMissionEnabled) then {_bCustomRequiredPass = [_infBuilding,_inf1X,_inf1Y] call fnc_CustomRequired;};							
+							if (!_bCustomRequiredPass) then {_bInfor1Found = false};
+								
+							if (_iThisTaskType == 2 || _iThisTaskType == 3 || _RequiresNearbyRoad) then { //2 = retrive tank << so we need a nearby road
 								if (count _nearestRoads == 0) then {
 									_bInfor1Found = false;
 								}
-								else {
-
-
-
-								};
 							};
 							if (_bInfor1Found) then {
 								ObjectivePossitions pushBack [_inf1X,_inf1Y];
@@ -251,6 +253,10 @@ if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMissi
 										_radio = selectRandom ["uns_radio2_nva_radio","uns_radio2_transitor_NVA","uns_radio2_transitor_NVA"] createVehicle (selectRandom (_infBuilding buildingPos -1));
 									};
 
+								};
+								//###################################### CUSTOM MISSION ###################
+								if (_iThisTaskType == 99999) then {
+									[_MarkerType,_infBuilding,_inf1X,_inf1Y,_roadSearchRange, _bCreateTask, _iTaskIndex, _bIsMainObjective] call fnc_CustomMission;		
 								};
 								//###################################### Hack Data ###################
 								if (_iThisTaskType == 1) then {
@@ -543,6 +549,8 @@ if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMissi
 									_objInformant setVariable [_sInformant1Name, _objInformant, true];
 									_objInformant setVariable ["taskIndex",_iTaskIndex, true];
 									missionNamespace setVariable [_sInformant1Name, _objInformant];
+									sleep 0.2;
+									_MissionTitle = _MissionTitle + ": " + name _objInformant;
 									if (_iThisTaskType == 11 || _iThisTaskType == 12) then { //if POW or reporter
 										[_objInformant,["Carry",{
 											_civ=_this select 0; 

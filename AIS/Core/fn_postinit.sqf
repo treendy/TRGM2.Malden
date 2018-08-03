@@ -55,9 +55,12 @@ AIS_Core_realSide = getNumber (configfile >> "CfgVehicles" >> (typeOf AIS_Core_r
 		removeAllActions AIS_Core_realPlayer;
 		AIS_Core_realPlayer enableAI "TEAMSWITCH";
 		
-        ["AIS_playerChanged", [_currentPlayer, AIS_Core_realPlayer]] call AIS_Core_fnc_triggerEvent;
-		
+        ["AIS_playerChanged", [_currentPlayer, AIS_Core_realPlayer]] call AIS_Core_fnc_triggerEvent;		
         AIS_Core_realPlayer = _currentPlayer;
+        if !([] call TRGM_fnc_isCbaLoaded) then {
+	        AIS_Core_realPlayer setVariable ["TRGM_addedActions",[]];
+	        [[chopper1]] call TRGM_fnc_addTransportActions;
+	    };
 		AIS_Core_realSide = getNumber (configfile >> "CfgVehicles" >> (typeOf AIS_Core_realPlayer) >> "side");
     };
 }] call AIS_Core_fnc_onEachFrame;

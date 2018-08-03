@@ -1,3 +1,10 @@
+//#include "RandFramework\CustomMission\customMission.sqf";
+
+_CustomMissionEnabled = false;
+_MissionTitle = "";
+call compile preprocessFileLineNumbers  "RandFramework\CustomMission\customMission.sqf";
+call fnc_CustomVars;
+
 bDebugMode = false;
 
 DefaultEnemyFactionArray = [1,2,3];
@@ -81,6 +88,7 @@ ADVSET_RESPAWN_TIMER_IDX = 5;
 ADVSET_ENEMY_FACTIONS_IDX = 6;
 ADVSET_FRIENDLY_LOADOUT_IDX = 7;
 ADVSET_SANDSTORM_IDX = 8;
+ADVSET_GROUP_MANAGE_IDX = 9;
 
 //NOTE the id's must go up in twos!
 AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex(zero based index)
@@ -92,9 +100,10 @@ AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex(zero ba
 	[6011, localize "STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTimer","RscCombo",["0 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","10 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","30 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","1 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","5 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","10 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","20 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min"],[0,10,30,60,300,600,1200],1],
 	[6013, localize "STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFactions","RscCombo",DefaultEnemyFactionArrayText,DefaultEnemyFactionArray,DefaultEnemyFactionValue select 0],
 	[6015, localize "STR_TRGM2_TRGMSetUnitGlobalVars_FriendlyFactions","RscCombo",DefaultFriendlyFactionArrayText,DefaultFriendlyFactionArray,DefaultFriendlyFactionValue select 0],
-	[6017, localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_Always",localize "STR_TRGM2_TRGMSetUnitGlobalVars_Never",localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_5Hours"],[0,1,2,3],DefaultSandStormOption]
+	[6017, localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_Always",localize "STR_TRGM2_TRGMSetUnitGlobalVars_Never",localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_5Hours"],[0,1,2,3],DefaultSandStormOption],
+	[6019, localize "STR_TRGM2_TRGMSetUnitGlobalVars_GroupManagement","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1]
 ];
-DefaultAdvancedSettings = [0,"Tactical Cannon Fodder",1,1,1,10,DefaultEnemyFactionValue select 0,DefaultFriendlyFactionValue select 0,DefaultSandStormOption];
+DefaultAdvancedSettings = [0,"Tactical Cannon Fodder",1,1,1,10,DefaultEnemyFactionValue select 0,DefaultFriendlyFactionValue select 0,DefaultSandStormOption,0];
 
 
 //0 = no, 1 = guarantee revive, 2 = realistic revive, 3 = realistic revive (only medics can revive)
@@ -169,9 +178,9 @@ if (iAllowLargePat == 3) then {bAllowLargerPatrols = selectRandom[False,True];};
 //7=Eliminate Officer     8=Assasinate weapon dealer    9=Destroy AAA vehicles
 //10=Destroy Artillery vehicles 	11=Resue POW  12=Resue Reporter
 //SideMissionTasks = [7];
-SideMissionTasks = [1,2,3,4,5,6,7,8,9,10,11,12];
+SideMissionTasks = [1,2,3,4,5,6,7,8,9,10,11,12,99999];
 //MainMissionTasks = [8];
-MainMissionTasks = [1,2,6,7,8,11,12];
+MainMissionTasks = [1,2,6,7,8,11,12,99999];
 MissionsThatHaveIntel = [1,4,5,6];
 
 
@@ -205,6 +214,10 @@ MissionParamTypesValues = [0,6,1,2,3,4,7,5];
 
 MissionParamObjectives = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_startInfMission_MissionTitle1",localize "STR_TRGM2_startInfMission_MissionTitle2",localize "STR_TRGM2_startInfMission_MissionTitle3",localize "STR_TRGM2_startInfMission_MissionTitle4",localize "STR_TRGM2_startInfMission_MissionTitle5",localize "STR_TRGM2_startInfMission_MissionTitle6",localize "STR_TRGM2_startInfMission_MissionTitle7",localize "STR_TRGM2_startInfMission_MissionTitle8",localize "STR_TRGM2_startInfMission_MissionTitle9",localize "STR_TRGM2_startInfMission_MissionTitle10",localize "STR_TRGM2_startInfMission_MissionTitle11",localize "STR_TRGM2_startInfMission_MissionTitle12"];
 MissionParamObjectivesValues = [0,1,2,3,4,5,6,7,8,9,10,11,12];
+if (_CustomMissionEnabled) then {
+	MissionParamObjectives pushBack _MissionTitle; 
+	MissionParamObjectivesValues pushBack 99999; 
+};
 
 MissionParamRepOptions = [localize "STR_TRGM2_TRGMInitPlayerLocal_Enable", localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"];
 MissionParamRepOptionsValues = [1, 0];

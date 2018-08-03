@@ -4,11 +4,11 @@
 //hint "A";
 _requiredItemIndex = selectRandom [0,1,2];
 requiredItemsCount = [10,5,2] select _requiredItemIndex;
-RequestedMedicalItem = ["Item_FirstAidKit","Item_FirstAidKit","Medikit"] select _requiredItemIndex;
+RequestedMedicalItem = ["FirstAidKit","FirstAidKit","Medikit"] select _requiredItemIndex;
 RequestedMedicalItemName = ["First Aid Kits","First Aid Kits","Medikit"] select _requiredItemIndex;
 
 if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-	RequestedMedicalItem = ["ACE_bloodIVItem","ACE_quikclot","ACE_surgicalKit"] select _requiredItemIndex;
+	RequestedMedicalItem = ["ACE_bloodIV","ACE_quikclot","ACE_surgicalKit"] select _requiredItemIndex;
 	requiredItemsCount = [5,5,2] select _requiredItemIndex;
 	RequestedMedicalItemName = ["Blood IV (1000ml)","Basic Field Dressing (QuikClot)","Surgical Kits"] select _requiredItemIndex;
 };
@@ -285,7 +285,7 @@ if (isnil "fncMedicalParamedicLight") then {
 					//{"ACE_bloodIV" == _x} count (itemcargo cursorTarget)
 					//hint format["TEST: %1", _AceItemCount];
 					if (_VanillaItemCount >= requiredItemsCount || _AceItemCount >= requiredItemsCount) then {
-						Hint "Thank you, this should help us get things under control!";
+						["Thank you, this should help us get things under control"] remoteExecCall ["Hint", 0];
 						_completed = true;
 						removeAllActions _downedCivMedic;
 						[0.3, "Assited with medical emergency"] execVM "RandFramework\AdjustMaxBadPoints.sqf";

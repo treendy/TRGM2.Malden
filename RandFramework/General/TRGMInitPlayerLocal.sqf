@@ -62,7 +62,7 @@ if (isNil "FinalMissionStarted") then {
 					}
 					else {
 						txt1Layer = "txt1" call BIS_fnc_rscLayer;
-				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + name sl + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
+				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + name sl + " " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
 				    	[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
 
 						txt5Layer = "txt5" call BIS_fnc_rscLayer;
@@ -125,6 +125,10 @@ if (isNil "KilledPositions") then {
 	publicVariable "KilledPositions";
 };
 
+_iEnableGroupManagement = AdvancedSettings select ADVSET_GROUP_MANAGE_IDX;
+if (_iEnableGroupManagement == 1) then {
+	["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;//Exec on client
+};
 
 if (bUseRevive) then {
 

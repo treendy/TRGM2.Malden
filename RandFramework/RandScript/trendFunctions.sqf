@@ -215,11 +215,11 @@ TREND_fnc_PopulateSideMission = {
 
 			//Spawn patrol to move from building to building
 			if (_bIsMainObjective || (selectRandom [true,false])) then {
-				[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 1200] spawn TREND_fnc_BuildingPatrol;
+				[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
 				_bHasPatrols = true
 			};
 			if (_bIsMainObjective && bAllowLargerPatrols) then {
-				[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 1200] spawn TREND_fnc_BuildingPatrol;
+				[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
 			};
 
 			//Spawn distant patrol ready to move in (will need to spawn trigger)
@@ -1123,6 +1123,8 @@ TREND_fnc_RadiusPatrol = {
 		if (_iWaypointCount == 10) then {
 			_iWaypointCount = 1;
 		};
+		//hint format["TEST: %1", _iWaypointLoopCount];
+		//sleep 0.5;
 
 	};
 	[_group, 0] setWaypointSpeed "LIMITED";
