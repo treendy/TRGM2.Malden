@@ -7,7 +7,7 @@ requiredItemsCount = [10,5,2] select _requiredItemIndex;
 RequestedMedicalItem = ["FirstAidKit","FirstAidKit","Medikit"] select _requiredItemIndex;
 RequestedMedicalItemName = ["First Aid Kits","First Aid Kits","Medikit"] select _requiredItemIndex;
 
-if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+if (isClass(configFile >> "CfgPatches" >> "ace_medical")) then {
 	RequestedMedicalItem = ["ACE_bloodIV","ACE_quikclot","ACE_surgicalKit"] select _requiredItemIndex;
 	requiredItemsCount = [5,5,2] select _requiredItemIndex;
 	RequestedMedicalItemName = ["Blood IV (1000ml)","Basic Field Dressing (QuikClot)","Surgical Kits"] select _requiredItemIndex;
