@@ -44,13 +44,16 @@ if (count _nearestHidingPlaces > 5) then {
 		_nearUnits = nearestObjects [_triggerArea, ["Man"], _triggerSize];
 	  	{
 	  		if (_x in switchableUnits || _x in playableUnits) then {
-	  			if ( (floor(random 6)) == 1 ) then {
+	  			
 	  				_bWaiting = false;
-	  			};
+	  			
 	  		};
 	  	} forEach _nearUnits;
 	  	if (_bWaiting) then {
 			sleep 2;
+		}
+		else {
+			sleep 30 + (random 120);
 		};
 	};
 

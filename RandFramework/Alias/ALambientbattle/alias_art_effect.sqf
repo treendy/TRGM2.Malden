@@ -10,14 +10,15 @@ if ((player distance _art_object_name)>500) then {
 _range_art= random 500;
 _big = random 10;
 if (_big>9) then {
-	_range_art= 2000;	enableCamShake true;
-	addCamShake [0.5, 10, 35];
+	_range_art= 2000;	
+	//enableCamShake true;
+	//addCamShake [0.5, 10, 35];
 	sleep 1+random 1;
 	enableCamShake false;};
 
 //	sunet
 if (!al_art_sunet_play) then {
-	_art_object_name say3d "expozie";	
+	_art_object_name say3d ["expozie",2500];	
 	al_art_sunet_play = true;
 	publicVariable "al_art_sunet_play";
 };

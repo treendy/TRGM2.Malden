@@ -19,6 +19,7 @@ fnc_CustomRequired = { //used to set any required details for the AO (example, a
 fnc_CustomVars = { //This is called before the mission function is called below, and the variables below can be adjusted for your mission
 	_CustomMissionEnabled = true; //set this to true to allow this mission to show in the mission selection dialog
 	_RequiresNearbyRoad = true;
+	_roadSearchRange = 20; //this is how far out the engine will check to make sure a road is within range (if your objective requires a nearby road)
 	_allowFriendlyIns = false;
 	_MissionTitle = "Meeting Assassination"; //this is what shows in dialog mission selection
 };
@@ -48,7 +49,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_nearestRoad = nil;
 	_direction = nil;
 	_guardUnit1 = nil;
-	_nearestRoad = [getPos _objectiveMainBuilding, 20, []] call BIS_fnc_nearestRoad;
+	_nearestRoad = [getPos _objectiveMainBuilding, _roadSearchRange, []] call BIS_fnc_nearestRoad;
 	_roadConnectedTo = nil;
 	_roadConnectedTo = roadsConnectedTo _nearestRoad;
 	_meetingVehs = HVTCars + HVTVans;

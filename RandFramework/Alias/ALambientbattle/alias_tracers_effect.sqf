@@ -9,7 +9,7 @@ _tracer_object_name = _this select 0;
 _color_tracer		= _this select 1;
 
 if ((player distance _tracer_object_name)>300) then {
-
+//hint "asdf3";
 // hint "boi";
 
 _ro = 1;_ve = 1;_bl = 1;
@@ -29,7 +29,7 @@ _li_tracer setLightAmbient[_ro, _ve, _bl];
 _li_tracer setLightColor[_ro, _ve, _bl];
 
 //_dire=0;
-
+//hint str(player distance _tracer_object_name);
 while {(al_tracer) and ((player distance _tracer_object_name)>100) and (!isNull _tracer_object_name)} do {
 	_li_tracer setLightIntensity 3000+random 500;
 	_li_tracer setLightAttenuation [/*start*/ _range_trace, /*constant*/0, /*linear*/ 0, /*quadratic*/ 0, /*hardlimitstart*/_range_trace,_range_trace];  	
@@ -48,7 +48,7 @@ while {(al_tracer) and ((player distance _tracer_object_name)>100) and (!isNull 
 	
 	//	sunet
 	if (!al_tracers_sunet_play) then {
-		_tracer_object_name say3d "ground_air";	
+		_tracer_object_name say3d ["ground_air",2500];	
 		al_tracers_sunet_play = true;
 		publicVariable "al_tracers_sunet_play";
 	};

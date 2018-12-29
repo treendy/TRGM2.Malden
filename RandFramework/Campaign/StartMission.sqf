@@ -66,6 +66,38 @@ if (_bAllowStart) then {
 
 		if (isServer && _isCampaign) then {
 
+			if (!isNil("WarColor")) then {
+				WarColor ppEffectEnable false;
+	 			ppEffectDestroy WarColor;
+			};
+			if (!isNil("WarGrain")) then {
+    			WarGrain ppEffectEnable false;
+			    ppEffectDestroy WarGrain;
+			};
+			if (!isNil("WarEventActive")) then {
+    			WarEventActive = false;
+			};
+			if (!isNil("WarzonePos")) then {
+    			WarzonePos = nil;
+			};
+			if (!isNil("AOCampPos")) then {
+    			AOCampPos = nil;
+			};
+			
+			
+
+			al_aaa = false;
+			publicVariable "al_aaa";
+			al_search_light = false;
+			publicVariable "al_search_light";
+
+			tracer1 setPos [99999,99999];
+			tracer2 setPos [99999,99999];
+			tracer3 setPos [99999,99999];
+			tracer4 setPos [99999,99999];
+
+			ATFieldPos = [];
+
 			{
 				_y = _x;
 				{

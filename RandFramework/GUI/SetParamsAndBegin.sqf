@@ -40,7 +40,8 @@ if (_SaveType == 0) then {
 		_ctrlTypes1 = (findDisplay 5000) displayCtrl 7001;
 		iMissionParamObjective2 = MissionParamObjectivesValues select lbCurSel _ctrlTypes1;
 		publicVariable "iMissionParamObjective2";
-
+	};
+	if (!isNull((findDisplay 5000) displayCtrl 7002)) then {
 		_ctrlTypes2 = (findDisplay 5000) displayCtrl 7002;
 		iMissionParamObjective3 = MissionParamObjectivesValues select lbCurSel _ctrlTypes2;
 		publicVariable "iMissionParamObjective3";

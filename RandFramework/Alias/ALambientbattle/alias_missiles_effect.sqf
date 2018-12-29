@@ -20,7 +20,7 @@ _li setLightAmbient[1,0.7,0];
 _li setLightColor[1,1,1];
 _li lightAttachObject [_al_rocket, [0,0,-3]];
 	
-_al_rocket say3d _sunetr;
+_al_rocket say3d [_sunetr,2500];
 
 // Smoke
 _ps1 = "#particlesource" createVehicleLocal getpos _al_rocket;

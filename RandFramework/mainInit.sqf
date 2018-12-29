@@ -1,6 +1,7 @@
 
 #include "..\setUnitGlobalVars.sqf";
-
+#include "..\RandFramework\General\TRGMSetDefaultMissionSetupVars.sqf";
+//call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetDefaultUnitGlobalVars.sqf";
 
 civilian setFriend [east, 1];
 
@@ -97,7 +98,10 @@ if (isNil "ParaDropped") then {
 	ParaDropped = false;
 	publicVariable "ParaDropped";
 };
-
+if (isNil "ATFieldPos") then {
+	ATFieldPos = [];
+	publicVariable "ATFieldPos";
+};
 if (isNil "CommsTowerPos") then {
 	bHasCommsTower = false;
 	CommsTowerPos = [0,0];
@@ -130,7 +134,7 @@ if (isNil "bAndSoItBegins") then {
 };
 
 if (isNil "iMissionParamType") then {
-	iMissionParamType = 3;
+	iMissionParamType = 9;
 	publicVariable "iMissionParamType";
 };
 if (isNil "iMissionParamObjective") then {
@@ -214,7 +218,15 @@ if (isNil "FinalMissionStarted") then {
 if (isNil "ISUNSUNG") then {
 		ISUNSUNG = false;
 };
+if (isNil("ForceEndSandStorm")) then {
+	ForceEndSandStorm = false;
+	publicVariable "ForceEndSandStorm";
+};
 
+tracer1 setPos [99999,99999];
+tracer2 setPos [99999,99999];
+tracer3 setPos [99999,99999];
+tracer4 setPos [99999,99999];
 
 
 player createDiarySubject ["supportMe","Support Me"]; 
@@ -231,7 +243,7 @@ Follow me on steam, or my YouTube account, its nice to know my videos are being 
 <br /><font color='#FFFF00'>
 Donations : www.trgm2.com</font>
 <br />
-If you really want to, you can make a donation via my site www.trgm2.com (paypal link at top right of site), I could buy my wife a curry to keep her quite while i edit lol.  I would also love to dedicate more time to the TRGM2 engine, making updates, fixes and new features, so would love to take some time off work to spend full days on my engine : )"]]; 
+If you really want to, you can make a donation via my site www.trgm2.com (paypal link at top right of site).  I would also love to dedicate more time to the TRGM2 engine, making updates, fixes and new features, so would love to take some time off work to spend full days on my engine : )"]]; 
 
 
 //hintSilent parseText "<t size='1.25' font='Zeppelin33' color='#ff0000'>test lives remaining.</t><a href='http://arma3.com'>A3</a>";
@@ -672,7 +684,7 @@ if (isServer) then {
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
 			SandStormTimer = selectRandom [150,390,630];
 			publicVariable SandStormTimer;
-			{nul = [SandStormTimer] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			{nul = [SandStormTimer,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
@@ -702,7 +714,7 @@ if (isServer) then {
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
 			SandStormTimer = selectRandom [150,390,630];
 			publicVariable "SandStormTimer";
-			{nul = [SandStormTimer] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			{nul = [SandStormTimer,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
@@ -729,7 +741,7 @@ if (isServer) then {
 			//ok, if something is true, then in here we will start the sand storm and all clients!
 			//work out how to deal with JIP if sandstorm already playing
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
-			{nul = [18030] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			{nul = [18030,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
