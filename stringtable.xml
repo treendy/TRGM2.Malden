@@ -3498,17 +3498,23 @@
                 <Chinese>你們摧毀了敵方的火炮，聲譽值提高</Chinese>
                 <Chinesesimp>你们摧毁了敌方的火炮，声誉值提高</Chinesesimp>
             </Key>
-      			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_GroupManagement">
-              <Original>Enable Group Management</Original>
-              <English>Enable Group Management</English>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_GroupManagement">
+                <Original>Enable Group Management</Original>
+                <English>Enable Group Management</English>
+                <Chinese>開啟小隊管理器</Chinese>
+                <Chinesesimp>开启小队管理器</Chinesesimp>
             </Key>
             <Key ID="STR_TRGM2_SetMissionBoardOptions_TurnInMission">
-              <Original>Turn in mission</Original>
-              <English>Turn in mission</English>
+                <Original>Turn in mission</Original>
+                <English>Turn in mission</English>
+                <Chinese>交還任務</Chinese>
+                <Chinesesimp>交还任务</Chinesesimp>
             </Key>
             <Key ID="STR_TRGM2_startInfMission_DayTurnedIn">
-              <Original>Mission turned in</Original>
-              <English>Mission turned in</English>
+                <Original>Mission turned in</Original>
+                <English>Mission turned in</English>
+                <Chinese>任務已交還</Chinese>
+                <Chinesesimp>任务已交还</Chinesesimp>
             </Key>
         </Container>
     </Package>
