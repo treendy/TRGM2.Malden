@@ -43,9 +43,6 @@ if (iMissionParamObjective3 > 0) then {
 {systemChat "Mission Setup: 14";} remoteExec ["bis_fnc_call", 0];
 
 iMissionSetup = iMissionParamType;
-if (!isNil("MissionMode")) then {
-	iMissionSetup = MissionMode;
-};
 if (iMissionSetup == 0) then {
 	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
 	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
@@ -237,15 +234,6 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 	_iThisTaskType = nil;
 	_iThisTaskType = _ThisTaskTypes select InfTaskCount;
 
-	if (_iTaskIndex == 0 && !_bIsCampaign && !(isNil "Mission1Type")) then {
-		_iThisTaskType = Mission1Type;
-	};
-	if (_iTaskIndex == 1 && !_bIsCampaign && !(isNil "Mission2Type")) then {
-		_iThisTaskType = Mission2Type;
-	};
-	if (_iTaskIndex == 2 && !_bIsCampaign && !(isNil "Mission2Type")) then {
-		_iThisTaskType = Mission2Type;
-	};
 
 //_iThisTaskType = 12;
 
@@ -292,8 +280,8 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 				if (_iThisTaskType == 6) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle6"}; //Transmit Enemy Comms to HQ
 				if (_iThisTaskType == 7) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle7"}; //Eliminate Officer   -   gain 1 point if side, if main, need to id him before complete
 				if (_iThisTaskType == 8) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle8"}; //Assasinate weapon dealer   -   gain 1 point if side, no intel from him... if main need to id him before complete
-				if (_iThisTaskType == 9) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle9"}; //Destroy AAA vehicles   -   gain 1 point if side, no intel from him... if main need to id him before complete
-				if (_iThisTaskType == 10) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle10"}; //Destroy Artillery vehicles   -   gain one point if side (player can call arti strikes on them, cost 0.3 points but gains one if complete)
+				if (_iThisTaskType == 9) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle9"}; //Destroy AAA vehicles
+				if (_iThisTaskType == 10) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle10"}; //Destroy Artillery vehicles
 				if (_iThisTaskType == 11) then {_MissionTitle = localize "STR_TRGM2_Rescue_POW"}; 
 				if (_iThisTaskType == 12) then {_MissionTitle = localize "STR_TRGM2_Rescue_Reporter"}; 		
 				if (_iThisTaskType == 13) then {
@@ -333,19 +321,19 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 							_randInfor1X = Mission1Loc select 0;
 							_randInfor1Y = Mission1Loc select 1;							
 							_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], BasicBuildings, 50*_attempts];
-							if (_attempts > 10) then {hint format["Still no location found after %1 attempts!",_attempts]}
+							if (_attempts > 100) then {hint format["Still no location found after %1 attempts!",_attempts]}
 						};
 						if (_iTaskIndex == 1 && !_bIsCampaign && !(isNil "Mission2Loc")) then {
 							_randInfor1X = Mission2Loc select 0;
 							_randInfor1Y = Mission2Loc select 1;							
 							_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], BasicBuildings, 50*_attempts];
-							if (_attempts > 10) then {hint format["Still no location found after %1 attempts!",_attempts]}
+							if (_attempts > 100) then {hint format["Still no location found after %1 attempts!",_attempts]}
 						};
 						if (_iTaskIndex == 2 && !_bIsCampaign && !(isNil "Mission3Loc")) then {
 							_randInfor1X = Mission3Loc select 0;
 							_randInfor1Y = Mission3Loc select 1;							
 							_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], BasicBuildings, 50*_attempts];
-							if (_attempts > 10) then {hint format["Still no location found after %1 attempts!",_attempts]}
+							if (_attempts > 100) then {hint format["Still no location found after %1 attempts!",_attempts]}
 						};
 						
 						//hint format["_buildings: %1 pos: %2,%3", count _buildings,_randInfor1X,_randInfor1Y];
@@ -1143,163 +1131,168 @@ else {
 
 {systemChat "Mission Setup: 6";} remoteExec ["bis_fnc_call", 0];
 
-
-_bMoveToAO = false;
-if (iStartLocation == 2) then {
-	_bMoveToAO = selectRandom [true,false];
-};
-if (iStartLocation == 1) then {
-	_bMoveToAO = true;
-};
-if (_bMoveToAO) then {
-	_mainAOPos = ObjectivePossitions select 0;
-	HQPos = getMarkerPos "mrkHQ";
-
-	_flatPos = nil;
-	_flatPos = [_mainAOPos , 1300, 1700, 8, 0, 0.3, 0,AreasBlackList,[HQPos,HQPos]] call BIS_fnc_findSafePos;
-
-	if (str(_flatPos) == "[0,0,0]") then {_flatPos = [_mainAOPos , 1300, 2000, 8, 0, 0.4, 0,AreasBlackList,[HQPos,HQPos]] call BIS_fnc_findSafePos;};
-	//"Marker1" setMarkerPos _flatPos;
-
-
-	_nearestAOStartRoads = _flatPos nearRoads 60;
-	_bAOStartRoadFound = false;
-	if (count _nearestAOStartRoads > 0) then {
-		_bAOStartRoadFound = true;
-
-		_thisPosAreaOfCheckpoint = _flatPos;
-		_thisRoadOnly = true;
-		_thisSide = west;
-		_thisUnitTypes = FriendlyCheckpointUnits;
-		_thisAllowBarakade = true;
-		_thisIsDirectionAwayFromAO = false;
-		[_flatPos,_flatPos,50,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,FriendlyScoutVehicles,500] execVM "RandFramework\setCheckpoint.sqf";
+if (isServer) then {
+	_bMoveToAO = false;
+	if (iStartLocation == 2) then {
+		_bMoveToAO = selectRandom [true,false];
 	};
-
-	{systemChat "Mission Setup: 5";} remoteExec ["bis_fnc_call", 0];
-
-	AOCampPos = _flatPos;
-	_markerFastResponseStart = createMarker ["mrkFastResponseStart", _flatPos];
-	_markerFastResponseStart setMarkerShape "ICON";
-	_markerFastResponseStart setMarkerType "hd_dot";
-	_markerFastResponseStart setMarkerText (localize "STR_TRGM2_startInfMission_KiloCamp");
-	//k1Car1 setPos _flatPos;
-	//k1Car2 setPos _flatPos;
-
-	_behindBlockPos = _flatPos;
-	_flatPosCampFire = _behindBlockPos;
-	if (!_bAOStartRoadFound) then {
-		
-		_campFire = "Campfire_burning_F" createVehicle _flatPosCampFire;
-		_campFire setDir (floor(random 360));
-
-		_flatPosTent1 = nil;
-		_flatPosTent1 = [_flatPosCampFire , 5, 10, 5, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
-		_Tent1 = "Land_TentA_F" createVehicle _flatPosTent1;
-		_Tent1 setDir (floor(random 360));
-
-		_flatPos2 = nil;
-		_flatPos2 = [_flatPosCampFire , 5, 10, 5, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
-		_Tent2 = "Land_TentA_F" createVehicle _flatPos2;
-		_Tent2 setDir (floor(random 360));
-
-		[_Tent1, [localize "STR_TRGM2_startInfMission_RemoveVehicleFromTent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}]] remoteExec ["addAction", 0];
-		[_Tent2, [localize "STR_TRGM2_startInfMission_RemoveVehicleFromTent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}]] remoteExec ["addAction", 0];
-		//_Tent1 addAction [localize "STR_TRGM2_startInfMission_RemoveVehicleFromTent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}];
-		//_Tent2 addAction [localize "STR_TRGM2_startInfMission_RemoveVehicleFromTent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}];
-
-		_flatPos4 = nil;
-		_flatPos4 = [_flatPosCampFire , 5, 10, 5, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
-		_Tent4 = "Land_WoodPile_F" createVehicle _flatPos4;
-		_Tent4 setDir (floor(random 360));
+	if (iStartLocation == 1) then {
+		_bMoveToAO = true;
 	};
+	if (_bMoveToAO) then {
+		_mainAOPos = ObjectivePossitions select 0;
+		HQPos = getMarkerPos "mrkHQ";
 
-	
-
-	if (iMissionParamType == 5) then {
-		_flatPos4b = nil;
-		_flatPos4b = [_flatPosCampFire , 5, 10, 3, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
-		endMissionBoard2 setPos _flatPos4b;
-		_boardDirection = [_flatPosCampFire, endMissionBoard2] call BIS_fnc_DirTo;
-		endMissionBoard2 setDir _boardDirection;
-
-	};
-
-	_flatPos5 = nil;
-	_flatPos5 = [_flatPosCampFire, 12, 30, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-	_car1 = selectRandom FriendlyFastResponseVehicles createVehicle _flatPos5;
-	_car1 allowDamage false;
-	_car1 setDir (floor(random 360));
-
-	_flatPos6 = nil;
-	_flatPos6 = [_flatPosCampFire, 12, 30, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-	_car2 = selectRandom FriendlyFastResponseVehicles createVehicle _flatPos6;
-	_car2 allowDamage false;
-	_car2 setDir (floor(random 360));
-	sleep 1;
-	_car1 allowDamage true;
-	_car2 allowDamage true;
-
-	[_car1, [localize "STR_TRGM2_startInfMission_UnloadDingy","RandFramework\UnloadDingy.sqf"]] remoteExec ["addAction", 0];
-	[_car2, [localize "STR_TRGM2_startInfMission_UnloadDingy","RandFramework\UnloadDingy.sqf"]] remoteExec ["addAction", 0];
-	[_car1,FastResponseCarItems] call bis_fnc_initAmmoBox;
-	[_car2,FastResponseCarItems] call bis_fnc_initAmmoBox;
-
-	_flatPos7 = nil;
-	_flatPos7 = [_flatPosCampFire, 5, 12, 5, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
-	_AmmoBox1 = "C_T_supplyCrate_F" createVehicle _flatPos7;
-	_AmmoBox1 allowDamage false;
-	_AmmoBox1 setDir (floor(random 360));
-
-	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-		[_AmmoBox1,InitialBoxItemsWithAce] call bis_fnc_initAmmoBox;
-	}
-	else {
-		[_AmmoBox1,InitialBoxItems] call bis_fnc_initAmmoBox;
-	};
-	{
-		{
-			_AmmoBox1 addMagazineCargoGlobal [_x, 3];
-		} forEach magazines _x + primaryWeaponMagazine _x + secondaryWeaponMagazine _x;
-		{
-	   		_AmmoBox1 addItemCargoGlobal  [_x, 1];
-		} forEach items _x;
-		_AmmoBox1 addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
-	}  forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
-
-	{systemChat "Mission Setup: 4";} remoteExec ["bis_fnc_call", 0];
-
-	if (AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
-		//_AmmoBox1 addAction [localize "STR_TRGM2_startInfMission_VirtualArsenal", {["Open",true] spawn BIS_fnc_arsenal}];
-		[_AmmoBox1, [localize "STR_TRGM2_startInfMission_VirtualArsenal",{["Open",true] spawn BIS_fnc_arsenal}]] remoteExec ["addAction", 0];
-	};
-
-	if (ISUNSUNG) then {
-		_radio = selectRandom ["uns_radio2_radio","uns_radio2_transitor","uns_radio2_transitor02"] createVehicle _flatPos7;
-	};
-
-	_flatPosUnits = [_flatPosCampFire, 8, 17, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
-	if (!isnil "sl") then {sl setPos _flatPosUnits};
-	if (!isnil "k1_2") then {k1_2 setPos _flatPosUnits};
-	if (!isnil "k1_3") then {k1_3  setPos _flatPosUnits};
-	if (!isnil "k1_4") then {k1_4  setPos _flatPosUnits};
-	if (!isnil "k1_5") then {k1_5  setPos _flatPosUnits};
-	if (!isnil "k1_6") then {k1_6  setPos _flatPosUnits};
-	if (!isnil "k1_7") then {k1_7  setPos _flatPosUnits};
-	_bGroupFound = false;
-	{
-		if (_x getVariable ["IsFRT",false] && !_bGroupFound) then {
-			{
-				_bGroupFound = true;
-				_x setPos _flatPosUnits;
-			} forEach units group _x;
+		_flatPos = nil;
+		if (isNil "AOCampLocation") then {
+			_flatPos = [_mainAOPos , 1300, 1700, 8, 0, 0.3, 0,AreasBlackList,[HQPos,HQPos]] call BIS_fnc_findSafePos;
+			if (str(_flatPos) == "[0,0,0]") then {_flatPos = [_mainAOPos , 1300, 2000, 8, 0, 0.4, 0,AreasBlackList,[HQPos,HQPos]] call BIS_fnc_findSafePos;};
+		//"Marker1" setMarkerPos _flatPos;
+		}
+		else {
+			_flatPos = AOCampLocation;
 		};
-	} forEach allUnits;
 
-	{systemChat "Mission Setup: 3";} remoteExec ["bis_fnc_call", 0];
+		_nearestAOStartRoads = _flatPos nearRoads 60;
+		_bAOStartRoadFound = false;
+		if (count _nearestAOStartRoads > 0) then {
+			_bAOStartRoadFound = true;
 
+			_thisPosAreaOfCheckpoint = _flatPos;
+			_thisRoadOnly = true;
+			_thisSide = west;
+			_thisUnitTypes = FriendlyCheckpointUnits;
+			_thisAllowBarakade = true;
+			_thisIsDirectionAwayFromAO = false;
+			[_flatPos,_flatPos,50,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,FriendlyScoutVehicles,500] execVM "RandFramework\setCheckpoint.sqf";
+		};
+
+		{systemChat "Mission Setup: 5";} remoteExec ["bis_fnc_call", 0];
+
+		AOCampPos = _flatPos;
+		_markerFastResponseStart = createMarker ["mrkFastResponseStart", _flatPos];
+		_markerFastResponseStart setMarkerShape "ICON";
+		_markerFastResponseStart setMarkerType "hd_dot";
+		_markerFastResponseStart setMarkerText (localize "STR_TRGM2_startInfMission_KiloCamp");
+		//k1Car1 setPos _flatPos;
+		//k1Car2 setPos _flatPos;
+
+		_behindBlockPos = _flatPos;
+		_flatPosCampFire = _behindBlockPos;
+
+		if (!AOCampOnlyAmmoBox) then {
+			if (!_bAOStartRoadFound) then {
+				
+				_campFire = "Campfire_burning_F" createVehicle _flatPosCampFire;
+				_campFire setDir (floor(random 360));
+
+				_flatPosTent1 = nil;
+				_flatPosTent1 = [_flatPosCampFire , 5, 10, 5, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+				_Tent1 = "Land_TentA_F" createVehicle _flatPosTent1;
+				_Tent1 setDir (floor(random 360));
+
+				_flatPos2 = nil;
+				_flatPos2 = [_flatPosCampFire , 5, 10, 5, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+				_Tent2 = "Land_TentA_F" createVehicle _flatPos2;
+				_Tent2 setDir (floor(random 360));
+
+				[_Tent1, [localize "STR_TRGM2_startInfMission_RemoveVehicleFromTent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}]] remoteExec ["addAction", 0];
+				[_Tent2, [localize "STR_TRGM2_startInfMission_RemoveVehicleFromTent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}]] remoteExec ["addAction", 0];
+				//_Tent1 addAction [localize "STR_TRGM2_startInfMission_RemoveVehicleFromTent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}];
+				//_Tent2 addAction [localize "STR_TRGM2_startInfMission_RemoveVehicleFromTent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}];
+
+				_flatPos4 = nil;
+				_flatPos4 = [_flatPosCampFire , 5, 10, 5, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+				_Tent4 = "Land_WoodPile_F" createVehicle _flatPos4;
+				_Tent4 setDir (floor(random 360));
+			};
+
+		
+
+			if (iMissionParamType == 5) then {
+				_flatPos4b = nil;
+				_flatPos4b = [_flatPosCampFire , 5, 10, 3, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+				endMissionBoard2 setPos _flatPos4b;
+				_boardDirection = [_flatPosCampFire, endMissionBoard2] call BIS_fnc_DirTo;
+				endMissionBoard2 setDir _boardDirection;
+
+			};
+
+			_flatPos5 = nil;
+			_flatPos5 = [_flatPosCampFire, 12, 30, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+			_car1 = selectRandom FriendlyFastResponseVehicles createVehicle _flatPos5;
+			_car1 allowDamage false;
+			_car1 setDir (floor(random 360));
+
+			_flatPos6 = nil;
+			_flatPos6 = [_flatPosCampFire, 12, 30, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+			_car2 = selectRandom FriendlyFastResponseVehicles createVehicle _flatPos6;
+			_car2 allowDamage false;
+			_car2 setDir (floor(random 360));
+			sleep 1;
+			_car1 allowDamage true;
+			_car2 allowDamage true;
+
+			[_car1, [localize "STR_TRGM2_startInfMission_UnloadDingy","RandFramework\UnloadDingy.sqf"]] remoteExec ["addAction", 0];
+			[_car2, [localize "STR_TRGM2_startInfMission_UnloadDingy","RandFramework\UnloadDingy.sqf"]] remoteExec ["addAction", 0];
+			[_car1,FastResponseCarItems] call bis_fnc_initAmmoBox;
+			[_car2,FastResponseCarItems] call bis_fnc_initAmmoBox;
+		};
+		_flatPos7 = nil;
+		_flatPos7 = [_flatPosCampFire, 5, 12, 5, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+		_AmmoBox1 = "C_T_supplyCrate_F" createVehicle _flatPos7;
+		_AmmoBox1 allowDamage false;
+		_AmmoBox1 setDir (floor(random 360));
+
+		if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
+			[_AmmoBox1,InitialBoxItemsWithAce] call bis_fnc_initAmmoBox;
+		}
+		else {
+			[_AmmoBox1,InitialBoxItems] call bis_fnc_initAmmoBox;
+		};
+		{
+			{
+				_AmmoBox1 addMagazineCargoGlobal [_x, 3];
+			} forEach magazines _x + primaryWeaponMagazine _x + secondaryWeaponMagazine _x;
+			{
+				_AmmoBox1 addItemCargoGlobal  [_x, 1];
+			} forEach items _x;
+			_AmmoBox1 addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
+		}  forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
+
+		{systemChat "Mission Setup: 4";} remoteExec ["bis_fnc_call", 0];
+
+		if (AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
+			//_AmmoBox1 addAction [localize "STR_TRGM2_startInfMission_VirtualArsenal", {["Open",true] spawn BIS_fnc_arsenal}];
+			[_AmmoBox1, [localize "STR_TRGM2_startInfMission_VirtualArsenal",{["Open",true] spawn BIS_fnc_arsenal}]] remoteExec ["addAction", 0];
+		};
+
+		if (ISUNSUNG) then {
+			_radio = selectRandom ["uns_radio2_radio","uns_radio2_transitor","uns_radio2_transitor02"] createVehicle _flatPos7;
+		};
+
+		_flatPosUnits = [_flatPosCampFire, 8, 17, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+		if (!isnil "sl") then {sl setPos _flatPosUnits};
+		if (!isnil "k1_2") then {k1_2 setPos _flatPosUnits};
+		if (!isnil "k1_3") then {k1_3  setPos _flatPosUnits};
+		if (!isnil "k1_4") then {k1_4  setPos _flatPosUnits};
+		if (!isnil "k1_5") then {k1_5  setPos _flatPosUnits};
+		if (!isnil "k1_6") then {k1_6  setPos _flatPosUnits};
+		if (!isnil "k1_7") then {k1_7  setPos _flatPosUnits};
+		_bGroupFound = false;
+		{
+			if (_x getVariable ["IsFRT",false] && !_bGroupFound) then {
+				{
+					_bGroupFound = true;
+					_x setPos _flatPosUnits;
+				} forEach units group _x;
+			};
+		} forEach allUnits;
+
+		{systemChat "Mission Setup: 3";} remoteExec ["bis_fnc_call", 0];
+
+	};
 };
-
 
 {systemChat "Mission Setup: 2";} remoteExec ["bis_fnc_call", 0];
 

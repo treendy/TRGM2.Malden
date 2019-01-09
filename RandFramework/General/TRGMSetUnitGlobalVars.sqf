@@ -1,5 +1,6 @@
 //#include "RandFramework\CustomMission\customMission.sqf";
 
+
 _CustomMissionEnabled = false;
 _MissionTitle = "";
 call compile preprocessFileLineNumbers  "RandFramework\CustomMission\customMission.sqf";

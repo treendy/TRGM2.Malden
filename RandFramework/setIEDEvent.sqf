@@ -185,10 +185,10 @@ if (count _nearestRoads > 0) then {
 										[localize "STR_TRGM2_IEDOneWay"] remoteExecCall ["Hint", 0];
 									}
 									else {
-										hint localize "STR_TRGM2_IEDDefused";
 										_thisVeh setVariable ["isDefused",true];
 										[0.2, localize "STR_TRGM2_IEDDefused"] execVM "RandFramework\AdjustMaxBadPoints.sqf";	
 										removeAllActions _thisVeh;
+										[localize "STR_TRGM2_IEDDefused"] remoteExecCall ["Hint", 0];
 									}
 								},				// Code executed on completion
 								{},													// Code executed on interrupted

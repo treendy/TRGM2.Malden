@@ -1,5 +1,6 @@
 #include "..\..\setUnitGlobalVars.sqf";
 
+
 _actChooseMission = -1;
 
 if (isNil "bAndSoItBegins") then {

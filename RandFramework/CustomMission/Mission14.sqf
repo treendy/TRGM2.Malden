@@ -142,14 +142,14 @@ _missionBombWire = ["BLUE", "WHITE", "YELLOW", "GREEN"] call bis_fnc_selectRando
 	_sAliveCheck = format["%1 getVariable ['isDefused',false] && !([""InfSide%2""] call FHQ_TT_areTasksCompleted)",_sBomb1Name,_iTaskIndex];
 	
 	if (!_bCreateTask) then {
-		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Defused Bomb""] execVM ""RandFramework\AdjustMaxBadPoints.sqf""; Hint (""Defused IEDs, Rep increased""); ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
+		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Defused Bomb""] execVM ""RandFramework\AdjustMaxBadPoints.sqf""; Hint (""Defused IEDs, Rep increased""); ClearedPositions pushBack ([ObjectivePossitions, getPos objBomb" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
 	}
 	else {		
 		_sFailCheck = format["!alive %1 && !([""InfSide%2""] call FHQ_TT_areTasksCompleted)",_sBomb1Name,_iTaskIndex];
-		_sTaskFail = format["[""InfSide%1"", ""failed""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
+		_sTaskFail = format["[""InfSide%1"", ""failed""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objBomb%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
 		_customTaskFail setTriggerStatements [_sFailCheck, _sTaskFail, ""];	
 
-		_sTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
+		_sTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objBomb%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
 		_customTaskClear setTriggerStatements [_sAliveCheck, _sTaskComplete, ""];	
 	};
 	

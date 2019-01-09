@@ -1,6 +1,6 @@
-
+#include "..\CustomMission\TRGMSetDefaultMissionSetupVars.sqf";
 #include "..\setUnitGlobalVars.sqf";
-#include "..\RandFramework\General\TRGMSetDefaultMissionSetupVars.sqf";
+
 //call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetDefaultUnitGlobalVars.sqf";
 
 civilian setFriend [east, 1];
@@ -223,6 +223,23 @@ if (isNil("ForceEndSandStorm")) then {
 	publicVariable "ForceEndSandStorm";
 };
 
+
+if (isNil("AOCampOnlyAmmoBox")) then {
+	AOCampOnlyAmmoBox = false;
+	publicVariable "AOCampOnlyAmmoBox";
+};
+if (isNil("MainMissionTitle")) then {
+	MainMissionTitle = "";
+	publicVariable "MainMissionTitle";
+};
+if (isNil("ForceMissionSetup")) then {
+	ForceMissionSetup = false;
+	publicVariable "ForceMissionSetup";
+};
+
+
+
+
 tracer1 setPos [99999,99999];
 tracer2 setPos [99999,99999];
 tracer3 setPos [99999,99999];
@@ -247,6 +264,9 @@ If you really want to, you can make a donation via my site www.trgm2.com (paypa
 
 
 //hintSilent parseText "<t size='1.25' font='Zeppelin33' color='#ff0000'>test lives remaining.</t><a href='http://arma3.com'>A3</a>";
+
+
+
 
 if (isServer) then { //adjust weather here so intro animation is different everytime
 		[true] execVM "RandFramework\SetTimeAndWeather.sqf";
@@ -326,6 +346,7 @@ _thread = [] spawn {
 	_unit = player;
 	while {true} do {
 		waitUntil {_unit != player };
+		group player selectLeader player;
 		//hintSilent " Player has changed";
 		[_unit] call TransferProviders;
 		_unit = player;
@@ -390,11 +411,19 @@ if (isServer) then {
 	call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetDefaultUnitGlobalVars.sqf";
 	call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetEnemyUnitGlobalVars.sqf";
 	call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetFriendlyLoutoutsGlobalVars.sqf";
+
+	#include "..\CustomMission\TRGMSetEnemyFaction.sqf"; //if _useCustomEnemyFaction set to true within this sqf, will overright the above enemy faction data
+	#include "..\CustomMission\TRGMSetFriendlyLoadouts.sqf"; //as above, but for _useCustomFriendlyLoadouts
+
+	/*Fix any changed types	 */
+	if (typeName sCivilian != "ARRAY") then {sCivilian = [sCivilian]};
+	/*end */
+
+
 	CustomObjectsSet = true;
 	publicVariable "CustomObjectsSet";
-	call compile preprocessFileLineNumbers "RandFramework\setFriendlyObjects.sqf";
+	//call compile preprocessFileLineNumbers "RandFramework\setFriendlyObjects.sqf";
 
-	
 
 	if (EnemyFactionData != "") then {
 		_errorMessage = "";
