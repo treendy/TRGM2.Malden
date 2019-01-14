@@ -127,7 +127,7 @@ if (count _nearestRoads > 0) then {
 					if (floor (random 30) == 0 && _IEDType == "CAR" && !_alarmActive) then {
 						[_thisVeh] spawn {
 							_thisVeh = _this select 0;
-							_thisVeh setVariable ["alarmActive",true];
+							_thisVeh setVariable ["alarmActive",true, true];
 							while {alive _thisVeh && _thisVeh getVariable ["alarmActive",false]} do {
 								playSound3D ["a3\sounds_f\weapons\horns\truck_horn_2.wss", _thisVeh];
 								sleep 1;
@@ -180,12 +180,12 @@ if (count _nearestRoads > 0) then {
 					  					_li_aaa = _type createVehicle (getPos _thisVeh);
 										_li_aaa setDamage 1;
 										sleep 1;
-										_thisVeh setVariable ["isDefused",true];
+										_thisVeh setVariable ["isDefused",true, true];
 										sleep 4;
 										[localize "STR_TRGM2_IEDOneWay"] remoteExecCall ["Hint", 0];
 									}
 									else {
-										_thisVeh setVariable ["isDefused",true];
+										_thisVeh setVariable ["isDefused",true, true];
 										[0.2, localize "STR_TRGM2_IEDDefused"] execVM "RandFramework\AdjustMaxBadPoints.sqf";	
 										removeAllActions _thisVeh;
 										[localize "STR_TRGM2_IEDDefused"] remoteExecCall ["Hint", 0];
@@ -300,7 +300,7 @@ if (count _nearestRoads > 0) then {
 			  					_type = selectRandom ["Bomb_03_F","Missile_AA_04_F","M_Mo_82mm_AT_LG","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo"];
 			  					_li_aaa = _type createVehicle (getPos _mainVeh);
 								_li_aaa setDamage 1;
-								_mainVeh setVariable ["isDefused",true];
+								_mainVeh setVariable ["isDefused",true, true];
 								[localize "STR_TRGM2_IEDOmteresting"] remoteExecCall ["Hint", 0];
 							};
 						};

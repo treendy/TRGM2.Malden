@@ -30,7 +30,9 @@ if (_currentSpentPoints < (MaxBadPoints - BadPoints + 1)) then {
 	{
 		box1 addItemCargoGlobal  [_x, 1];
 	} forEach items _SpawnedUnit;
-	box1 addBackpackCargoGlobal [typeof(unitBackpack _SpawnedUnit), 1];
+	if (typeof(unitBackpack _SpawnedUnit) != "") then {
+		box1 addBackpackCargoGlobal [typeof(unitBackpack _SpawnedUnit), 1];
+	};
 
 	_SpawnedUnit addEventHandler ["killed",
 		{

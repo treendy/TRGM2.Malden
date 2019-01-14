@@ -422,7 +422,7 @@ if (isServer) then {
 
 	CustomObjectsSet = true;
 	publicVariable "CustomObjectsSet";
-	//call compile preprocessFileLineNumbers "RandFramework\setFriendlyObjects.sqf";
+	call compile preprocessFileLineNumbers "RandFramework\setFriendlyObjects.sqf";
 
 
 	if (EnemyFactionData != "") then {
@@ -497,7 +497,9 @@ if (isServer) then {
 		{
 	   		box1 addItemCargoGlobal  [_x, 1];
 		} forEach items _x;
-		box1 addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
+		if (typeof(unitBackpack _x) != "") then {
+			box1 addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
+		};
 	}  forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 
 

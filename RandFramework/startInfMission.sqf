@@ -1257,7 +1257,9 @@ if (isServer) then {
 			{
 				_AmmoBox1 addItemCargoGlobal  [_x, 1];
 			} forEach items _x;
-			_AmmoBox1 addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
+			if (typeof(unitBackpack _x) != "") then {
+				_AmmoBox1 addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
+			};
 		}  forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 
 		{systemChat "Mission Setup: 4";} remoteExec ["bis_fnc_call", 0];

@@ -531,16 +531,16 @@ TREND_fnc_PopulateSideMission = {
 						_objMilUnit2 = nil;
 						_objMilUnit3 = nil;
 						_MilGroup1 = createGroup east;
-						_objMilUnit1 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[0,0,0],[],0,"NONE"];
-						_objMilUnit2 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[2,0,0],[],0,"NONE"];
-						_objMilUnit3 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[3,0,0],[],0,"NONE"];
+						_objMilUnit1 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[-1000,0,0],[],0,"NONE"];
+						_objMilUnit2 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[-1002,0,0],[],0,"NONE"];
+						_objMilUnit3 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[-1003,0,0],[],0,"NONE"];
 						OccupiedHousesPos = OccupiedHousesPos + [_thisMilBuilPos];
 						[getPos _x, [_objMilUnit1,_objMilUnit2,_objMilUnit3], -1, true, false,true] execVM "RandFramework\Zen_OccupyHouse.sqf";
 						sleep 0.2;
 						_objMilUnit1 setUnitPos "up";
 						_objMilUnit2 setUnitPos "up";
 						_objMilUnit3 setUnitPos "up";
-						{deleteVehicle _x} forEach nearestObjects [[0,0,0], ["all"], 100];
+						{deleteVehicle _x} forEach nearestObjects [[-1000,0,0], ["all"], 100];
 
 						_ParkedCar = nil;
 						if (selectRandom [true,false,false]) then {
