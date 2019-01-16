@@ -472,13 +472,21 @@ if (isServer) then {
 		};
 	};
 
-
+        _isAceRespawnWithGear = false;
+ 	if ([] call TRGM_fnc_isCbaLoaded) then {
+	   // check for ACE respawn with gear setting
+  	   _isAceRespawnWithGear = "ace_respawn_savePreDeathGear" call CBA_settings_fnc_get;
+	};
+	
+	
 	if (LoadoutData != "" || LoadoutDataDefault != "") then {
 		{
 			//_x setVariable ["UnitRole",_unitRole];
 			_handle = [_x] execVM "RandFramework\setLoadout.sqf";
 			waitUntil {scriptDone _handle};
-			_x addEventHandler ["Respawn", { [_this select 0] execVM "RandFramework\setLoadout.sqf"; }];
+			if (!_isAceRespawnWithGear) then {
+			   _x addEventHandler ["Respawn", { [_this select 0] execVM "RandFramework\setLoadout.sqf"; }];
+		        };
 		} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 		sleep 1;
 	};
