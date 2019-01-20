@@ -3563,10 +3563,6 @@
                 <Original>Ask for bomb details</Original>
                 <English>Ask for bomb details</English>
             </Key> 
-            <Key ID="STR_TRGM2_BombMissionIntelAction">
-                <Original>Ask for bomb details</Original>
-                <English>Ask for bomb details</English>
-            </Key> 
             <Key ID="STR_TRGM2_IEDMissionTitle">
                 <Original>Defuse IEDs</Original>
                 <English>Defuse IEDs</English>
