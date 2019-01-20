@@ -313,7 +313,7 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 
 
 					
-					if (!_SamePrevAO) then {
+					if (!_SamePrevAO || _attempts > 100) then {
 						_randInfor1X = 0 + (floor random 25000);
 						_randInfor1Y = 0 + (floor random 25000);
 						_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], BasicBuildings, 200];

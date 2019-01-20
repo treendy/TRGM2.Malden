@@ -24,7 +24,6 @@ if (isNil "FinalMissionStarted") then {
 };
 
 CODEINPUT = [];
-
 	waitUntil {!isNull player};
 	waitUntil {player == player};
 
@@ -38,13 +37,13 @@ CODEINPUT = [];
 
 			if (str player == "sl") then {
 				if  (!dialog) then {
-					[] spawn {
+					//[] spawn {
 						sleep 1.5;
 						if  (!dialog && !bAndSoItBegins) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
 							[] execVM "RandFramework\GUI\openDialogMissionSelection.sqf";
 							//_actChooseMission = endMissionBoard addaction ["Select Mission Params", "RandFramework\GUI\openDialogMissionSelection.sqf"];
 						};
-					};
+					//};
 				};
 				sleep 0.5;
 			}
