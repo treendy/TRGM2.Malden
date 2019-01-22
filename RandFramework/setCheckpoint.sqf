@@ -156,7 +156,7 @@ if (_PosFound) then {
 	_RoadSideBarricadesHigh = ["Land_Barricade_01_4m_F"];
 	_RoadSideBarricadesLow = ["Land_BagFence_Long_F","Land_BagBunker_Small_F"];
 	_FullRoadBarricades = ["Land_Barricade_01_10m_F"];
-	_DefensiveObjects = ["Land_Barricade_01_4m_F","Land_BagFence_Long_F","FlagCarrierTakistan_EP1"];
+	_DefensiveObjects = ["Land_Barricade_01_4m_F","Land_BagFence_Long_F"];
 
 	_initItem = nil;
 	_BarrierToUse = "";
@@ -225,7 +225,7 @@ if (_PosFound) then {
 		_initItem setDir ([_direction,180] call fnc_AddToDirection);
 
 		if (_thisSide == east) then {
-			_NearTurret1 = createVehicle [selectRandom["CUP_O_KORD_high_TK"], _initItem getPos [1,_direction+180], [], 0, "CAN_COLLIDE"];
+			_NearTurret1 = createVehicle [selectRandom["O_HMG_01_high_F"], _initItem getPos [1,_direction+180], [], 0, "CAN_COLLIDE"];
 			_NearTurret1 setDir (_direction);
 			createVehicleCrew _NearTurret1;
 		};

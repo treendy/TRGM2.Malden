@@ -21,3 +21,6 @@ FriendlyUnarmedCar=["B_MRAP_01_F"];
 FriendlyMedicalTruck=["B_Truck_01_medical_F"];
 FriendlyArmoredCar=["B_MRAP_01_hmg_F"];
 FriendlyFuelTruck=["B_Truck_01_fuel_F"];
+
+FriendlyJet = ["B_Plane_Fighter_01_Stealth_F"];
+FriendlyChopper = ["B_Heli_Transport_03_unarmed_F","B_Heli_Transport_01_camo_F","B_Heli_Attack_01_F"];

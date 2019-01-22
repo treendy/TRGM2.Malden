@@ -3516,6 +3516,128 @@
                 <Chinese>任務已交還</Chinese>
                 <Chinesesimp>任务已交还</Chinesesimp>
             </Key>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions1c">
+                <Original>This is the same as the top mission type, however, the main objective consists of two tasks within the one AO. The AO will be occupied by a heavy enemy army.</Original>
+                <English>This is the same as the top mission type, however, the main objective consists of two tasks within the one AO.  The AO will be occupied by a heavy enemy army.</English>
+            </Key>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions4b">
+                <Original>A single mini mission.\n\nThese mini missions are could be low in enemey, or high.. recommend to gather intel.  This mode will allow two objectives within the one AO.</Original>
+                <English>A single mini mission.\n\nThese mini missions are could be low in enemey, or high.. recommend to gather intel.  This mode will allow two objectives within the one AO.</English>
+            </Key>
+             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName1c">
+                <Original>Heavy Mission (Two objectives in one AO)</Original>
+                <English>Heavy Mission (Two objectives in one AO)</English>
+            </Key>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName4b">
+                <Original>Single Mission (Two objectives in one AO)</Original>
+                <English>Single Mission (Two objectives in one AO)</English>
+            </Key>
+
+             <Key ID="STR_TRGM2_showIntel_NoATArea">
+                <Original>There are no AT restricted areas around!</Original>
+                <English>There are no AT restricted areas around!</English>
+            </Key>
+             <Key ID="STR_TRGM2_showIntel_ATArea">
+                <Original>AT Mine restricted area marked on map!</Original>
+                <English>AT Mine restricted area marked on map!</English>
+            </Key>
+             <Key ID="STR_TRGM2_showIntel_ATAreaMarker">
+                <Original>AT Mines</Original>
+                <English>AT Mines</English>
+            </Key>
+            <Key ID="STR_TRGM2_BombMissionDescription">
+                <Original>We have been informed of the location to a bomb and need it defused!  Speak to the informant to get the details to defuse the bomb (suggest making a note of the colour and code!)</Original>
+                <English>We have been informed of the location to a bomb and need it defused!  Speak to the informant to get the details to defuse the bomb (suggest making a note of the colour and code!)</English>
+            </Key>
+            <Key ID="STR_TRGM2_BombMissionDefuseAction">
+                <Original>Defuse Bomb</Original>
+                <English>Defuse Bomb</English>
+            </Key> 
+            <Key ID="STR_TRGM2_BombMissionTitle">
+                <Original>Bomb Disposal</Original>
+                <English>Bomb Disposal</English>
+            </Key>
+            <Key ID="STR_TRGM2_BombMissionReadSerialAction">
+                <Original>Read Serial Number</Original>
+                <English>Read Serial Number</English>
+            </Key> 
+            <Key ID="STR_TRGM2_BombMissionInformantMarker">
+                <Original>Informant for bomb codes</Original>
+                <English>Informant for bomb codes</English>
+            </Key> 
+             <Key ID="STR_TRGM2_BombMissionIntelAction">
+                <Original>Ask for bomb details</Original>
+                <English>Ask for bomb details</English>
+            </Key> 
+            <Key ID="STR_TRGM2_IEDMissionTitle">
+                <Original>Defuse IEDs</Original>
+                <English>Defuse IEDs</English>
+            </Key> 
+            <Key ID="STR_TRGM2_IEDMissionDescription">
+                <Original>We have intel of three IED positions which are marked on your map, they will be either a pile of rubble or an abandoned vehicle, we need you to defuse them all. Note: Engineers/Explosive experts have 100% chance of finding and defusing an IED, however anyone else will have to search a few times, and if they attempt defusing, they may set off the charge!</Original>
+                <English>We have intel of three IED positions which are marked on your map, they will be either a pile of rubble or an abandoned vehicle, we need you to defuse them all. Note: Engineers/Explosive experts have 100% chance of finding and defusing an IED, however anyone else will have to search a few times, and if they attempt defusing, they may set off the charge!</English>
+            </Key> 
+            <Key ID="STR_TRGM2_IEDMarkerText">
+                <Original>IED</Original>
+                <English>IED</English>
+            </Key> 
+            <Key ID="STR_TRGM2_IEDSearchIED">
+                <Original>Search for IED</Original>
+                <English>Search for IED</English>
+            </Key> 
+            <Key ID="STR_TRGM2_IEDSearchFailed">
+                <Original>Unsure, try to search again</Original>
+                <English>Unsure, try to search again</English>
+            </Key>
+            <Key ID="STR_TRGM2_IEDSearchFound">
+                <Original>IED Located!</Original>
+                <English>IED Located!</English>
+            </Key>
+            <Key ID="STR_TRGM2_IEDDefuse">
+                <Original>Defuse</Original>
+                <English>Defuse</English>
+            </Key> 
+            <Key ID="STR_TRGM2_IEDOhOh">
+                <Original>Oh no!!!</Original>
+                <English>Oh no!!!</English>
+            </Key> 
+            <Key ID="STR_TRGM2_IEDOneWay">
+                <Original>well.... that is one way to defuse an IED!</Original>
+                <English>well.... that is one way to defuse an IED!</English>
+            </Key> 
+            <Key ID="STR_TRGM2_IEDDefused">
+                <Original>IED Defused</Original>
+                <English>IED Defused</English>
+            </Key> 
+            <Key ID="STR_TRGM2_IEDNoneFound">
+                <Original>No IED here!</Original>
+                <English>No IED here!</English>
+            </Key> 
+            <Key ID="STR_TRGM2_IEDOmteresting">
+                <Original>Interesting defusal technique!</Original>
+                <English>Interesting defusal technique!</English>
+            </Key> 
+             <Key ID="STR_TRGM2_BombSerialNo">
+                <Original>"Serial Number: %1"</Original>
+                <English>"Serial Number: %1"</English>
+            </Key>
+            <Key ID="STR_TRGM2_BombNiceToMeet">
+                <Original>Nice to meet you %1.\n\nBomb serial number is: %2\n\nYou must cut the %3 wire first!! then you will have 10 seconds to enter the code:%4</Original>
+                <English>Nice to meet you %1.\n\nBomb serial number is: %2\n\nYou must cut the %3 wire first!! then you will have 10 seconds to enter the code:%4</English>
+            </Key> 
+            <Key ID="STR_TRGM2_BombPsst">
+                <Original>Psst %1.\n\nThis guy is dead... why are you trying to talk to him? (you will have to guess the code and colour now lol)</Original>
+                <English>Psst %1.\n\nThis guy is dead... why are you trying to talk to him? (you will have to guess the code and colour now lol)</English>
+            </Key> 
+            <Key ID="STR_TRGM2_BombCountdown">
+                <Original>Countdown: %1</Original>
+                <English>Countdown: %1</English>
+            </Key> 
+            <Key ID="STR_TRGM2_BombCodeEntered">
+                <Original>Code Entered</Original>
+                <English>Code Entered</English>
+            </Key>
+
         </Container>
     </Package>
 </Project>

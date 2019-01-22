@@ -1,6 +1,7 @@
-
+#include "..\CustomMission\TRGMSetDefaultMissionSetupVars.sqf";
 #include "..\setUnitGlobalVars.sqf";
 
+//call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetDefaultUnitGlobalVars.sqf";
 
 civilian setFriend [east, 1];
 
@@ -97,7 +98,10 @@ if (isNil "ParaDropped") then {
 	ParaDropped = false;
 	publicVariable "ParaDropped";
 };
-
+if (isNil "ATFieldPos") then {
+	ATFieldPos = [];
+	publicVariable "ATFieldPos";
+};
 if (isNil "CommsTowerPos") then {
 	bHasCommsTower = false;
 	CommsTowerPos = [0,0];
@@ -130,7 +134,7 @@ if (isNil "bAndSoItBegins") then {
 };
 
 if (isNil "iMissionParamType") then {
-	iMissionParamType = 3;
+	iMissionParamType = 9;
 	publicVariable "iMissionParamType";
 };
 if (isNil "iMissionParamObjective") then {
@@ -214,7 +218,32 @@ if (isNil "FinalMissionStarted") then {
 if (isNil "ISUNSUNG") then {
 		ISUNSUNG = false;
 };
+if (isNil("ForceEndSandStorm")) then {
+	ForceEndSandStorm = false;
+	publicVariable "ForceEndSandStorm";
+};
 
+
+if (isNil("AOCampOnlyAmmoBox")) then {
+	AOCampOnlyAmmoBox = false;
+	publicVariable "AOCampOnlyAmmoBox";
+};
+if (isNil("MainMissionTitle")) then {
+	MainMissionTitle = "";
+	publicVariable "MainMissionTitle";
+};
+if (isNil("ForceMissionSetup")) then {
+	ForceMissionSetup = false;
+	publicVariable "ForceMissionSetup";
+};
+
+
+
+
+tracer1 setPos [99999,99999];
+tracer2 setPos [99999,99999];
+tracer3 setPos [99999,99999];
+tracer4 setPos [99999,99999];
 
 
 player createDiarySubject ["supportMe","Support Me"]; 
@@ -231,10 +260,13 @@ Follow me on steam, or my YouTube account, its nice to know my videos are being 
 <br /><font color='#FFFF00'>
 Donations : www.trgm2.com</font>
 <br />
-If you really want to, you can make a donation via my site www.trgm2.com (paypal link at top right of site), I could buy my wife a curry to keep her quite while i edit lol.  I would also love to dedicate more time to the TRGM2 engine, making updates, fixes and new features, so would love to take some time off work to spend full days on my engine : )"]]; 
+If you really want to, you can make a donation via my site www.trgm2.com (paypal link at top right of site).  I would also love to dedicate more time to the TRGM2 engine, making updates, fixes and new features, so would love to take some time off work to spend full days on my engine : )"]]; 
 
 
 //hintSilent parseText "<t size='1.25' font='Zeppelin33' color='#ff0000'>test lives remaining.</t><a href='http://arma3.com'>A3</a>";
+
+
+
 
 if (isServer) then { //adjust weather here so intro animation is different everytime
 		[true] execVM "RandFramework\SetTimeAndWeather.sqf";
@@ -314,6 +346,7 @@ _thread = [] spawn {
 	_unit = player;
 	while {true} do {
 		waitUntil {_unit != player };
+		group player selectLeader player;
 		//hintSilent " Player has changed";
 		[_unit] call TransferProviders;
 		_unit = player;
@@ -378,11 +411,19 @@ if (isServer) then {
 	call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetDefaultUnitGlobalVars.sqf";
 	call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetEnemyUnitGlobalVars.sqf";
 	call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetFriendlyLoutoutsGlobalVars.sqf";
+
+	#include "..\CustomMission\TRGMSetEnemyFaction.sqf"; //if _useCustomEnemyFaction set to true within this sqf, will overright the above enemy faction data
+	#include "..\CustomMission\TRGMSetFriendlyLoadouts.sqf"; //as above, but for _useCustomFriendlyLoadouts
+
+	/*Fix any changed types	 */
+	if (typeName sCivilian != "ARRAY") then {sCivilian = [sCivilian]};
+	/*end */
+
+
 	CustomObjectsSet = true;
 	publicVariable "CustomObjectsSet";
 	call compile preprocessFileLineNumbers "RandFramework\setFriendlyObjects.sqf";
 
-	
 
 	if (EnemyFactionData != "") then {
 		_errorMessage = "";
@@ -431,13 +472,23 @@ if (isServer) then {
 		};
 	};
 
-
+        _isAceRespawnWithGear = false;
+ 	if ([] call TRGM_fnc_isCbaLoaded) then {
+	   // check for ACE respawn with gear setting
+  	   _isAceRespawnWithGear = "ace_respawn_savePreDeathGear" call CBA_settings_fnc_get;
+	};
+	
+	
 	if (LoadoutData != "" || LoadoutDataDefault != "") then {
 		{
 			//_x setVariable ["UnitRole",_unitRole];
 			_handle = [_x] execVM "RandFramework\setLoadout.sqf";
 			waitUntil {scriptDone _handle};
-			_x addEventHandler ["Respawn", { [_this select 0] execVM "RandFramework\setLoadout.sqf"; }];
+			if (!isNil("_isAceRespawnWithGear")) then {
+				if (!_isAceRespawnWithGear) then {
+			   		_x addEventHandler ["Respawn", { [_this select 0] execVM "RandFramework\setLoadout.sqf"; }];
+		        };
+			};
 		} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 		sleep 1;
 	};
@@ -456,7 +507,9 @@ if (isServer) then {
 		{
 	   		box1 addItemCargoGlobal  [_x, 1];
 		} forEach items _x;
-		box1 addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
+		if (typeof(unitBackpack _x) != "") then {
+			box1 addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
+		};
 	}  forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 
 
@@ -672,7 +725,7 @@ if (isServer) then {
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
 			SandStormTimer = selectRandom [150,390,630];
 			publicVariable SandStormTimer;
-			{nul = [SandStormTimer] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			{nul = [SandStormTimer,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
@@ -702,7 +755,7 @@ if (isServer) then {
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
 			SandStormTimer = selectRandom [150,390,630];
 			publicVariable "SandStormTimer";
-			{nul = [SandStormTimer] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			{nul = [SandStormTimer,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
@@ -729,7 +782,7 @@ if (isServer) then {
 			//ok, if something is true, then in here we will start the sand storm and all clients!
 			//work out how to deal with JIP if sandstorm already playing
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
-			{nul = [18030] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			{nul = [18030,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
 			//Set enemy skill
 			{
 				if (Side _x == East) then {

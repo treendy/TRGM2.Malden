@@ -1,5 +1,6 @@
 #include "..\..\setUnitGlobalVars.sqf";
 
+
 _actChooseMission = -1;
 
 if (isNil "bAndSoItBegins") then {
@@ -22,8 +23,7 @@ if (isNil "FinalMissionStarted") then {
 	publicVariable "FinalMissionStarted";	
 };
 
-
-
+CODEINPUT = [];
 	waitUntil {!isNull player};
 	waitUntil {player == player};
 
@@ -37,13 +37,13 @@ if (isNil "FinalMissionStarted") then {
 
 			if (str player == "sl") then {
 				if  (!dialog) then {
-					[] spawn {
+					//[] spawn {
 						sleep 1.5;
 						if  (!dialog && !bAndSoItBegins) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
 							[] execVM "RandFramework\GUI\openDialogMissionSelection.sqf";
 							//_actChooseMission = endMissionBoard addaction ["Select Mission Params", "RandFramework\GUI\openDialogMissionSelection.sqf"];
 						};
-					};
+					//};
 				};
 				sleep 0.5;
 			}
@@ -105,8 +105,17 @@ waitUntil {bAndSoItBegins && CustomObjectsSet};
 endMissionBoard removeAction _actChooseMission;
 
 [player] execVM "RandFramework\setLoadout.sqf";
-player addEventHandler ["Respawn", { [player] execVM "RandFramework\setLoadout.sqf"; }];
 
+_isAceRespawnWithGear = false;
+if ([] call TRGM_fnc_isCbaLoaded) then {
+	 // check for ACE respawn with gear setting
+   _isAceRespawnWithGear = "ace_respawn_savePreDeathGear" call CBA_settings_fnc_get;
+};
+if (!isNil("_isAceRespawnWithGear")) then {
+	if (!_isAceRespawnWithGear) then {
+		player addEventHandler ["Respawn", { [player] execVM "RandFramework\setLoadout.sqf"; }];
+	};
+};
 
 5 fadeMusic 0;
 [] spawn {
@@ -170,7 +179,7 @@ TREND_fnc_InitPostStarted = {
 
 	_iSandStormOption = AdvancedSettings select ADVSET_SANDSTORM_IDX;
 	if (_iSandStormOption == 3) then { //5 hours non stop
-		nul = [18030] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";
+		nul = [18030,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";
 	};
 };
 [] spawn TREND_fnc_InitPostStarted;

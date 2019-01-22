@@ -14,6 +14,7 @@
 _test = false;
 
 _dur = _this select 0;
+_isSmallEffect = _this select 1;
 _endtime = (time + _dur);
 inside = false;
 
@@ -29,7 +30,7 @@ if (_test) then {sleep 3};
 if (_test) then {hint "SS start"};
 
 // Warning length = 11 secs
-if (selectRandom [true,false]) then {
+if (selectRandom [true,false] && !_isSmallEffect) then {
     playsound ["sswarning", true];
 };
 
@@ -37,16 +38,21 @@ sleep 15;
 
 // Start wind intro = 20 secs ///////////////////////////////////////////////////////////////////////////
 if (_test) then {hint "Start Wind intro sound";};
-playsound ["sswindintro",false];
 
-// Change wind direction and increase wind 15 secs
+if (!_isSmallEffect) then {    
+    playsound ["sswindintro",false];
+};
+
+if (!_isSmallEffect) then {
+    // Change wind direction and increase wind 15 secs
     _initwind = wind;
     setwind [0,0,true];
     for "_i" from 1 to 5 do {
         setWind [(wind select 0) + _i, (wind select 1) + _i, true];
         sleep 3;
     };
-if (_test) then {hint "Wind speed increased 15/15";};
+    if (_test) then {hint "Wind speed increased 15/15";};
+};
 
 // Start leaves
     if (_test) then {hint "Start leaves";};
@@ -81,19 +87,28 @@ if (_test) then {hint "Wind speed increased 15/15";};
 
 // Start Wind loop sound
 if (_test) then {hint "Start Wind loop";};
-[_dur, _endtime, _test] execvm "RandFramework\RikoSandStorm\ROSwindloop.sqf";
+if (!_isSmallEffect) then {
+    [_dur, _endtime, _test] execvm "RandFramework\RikoSandStorm\ROSwindloop.sqf";
+};
 
 // Start Film grain
     if (_test) then {hint "Start filmgrain";};
     _hndlFg = ppEffectCreate ["FilmGrain", 2050];
     _hndlFg ppEffectEnable true;
-    _hndlFg ppEffectAdjust [0.08, 1.25, 2.05, 0.75, 1, false];
+    if (_isSmallEffect) then {
+        _hndlFg ppEffectAdjust [0.02, 1, 1, 0.1, 1, false];
+    }
+    else {
+        _hndlFg ppEffectAdjust [0.08, 1.25, 2.05, 0.75, 1, false];
+    };
     _hndlFg ppEffectCommit 45;
+
+    
 
 // Adjust camshake and sound volume if player in building or vehicle
 [_endtime] spawn {
     _endtime = _this select 0;
-    While {time < _endtime + 35} do {
+    While {time < _endtime + 35 && !ForceEndSandStorm} do {
  // extra time added due to fadeout time
             _building = nearestObject [player, "HouseBase"];
             _relPos = _building worldToModel (getPosATL player);
@@ -149,6 +164,10 @@ if (_test) then {hint "Start Wind loop";};
     _y = 0;
 
 while {time < _future} do {
+
+    _figureOne = 7.9;
+    if (_isSmallEffect) then {_figureOne = 2};
+
     _particles setParticleParams
     [["\A3\data_f\cl_basic", 1, 0, 1],
     "", "Billboard",
@@ -158,7 +177,7 @@ while {time < _future} do {
     [10, 10, 0],
     1,
     10.15,
-    7.9, //HERE was 7.9  lower is 4.9
+    _figureOne, //HERE was 7.9  lower is 4.9
     0.01,
     [10, 10, 20],
     [[0.7, 0.66, 0.5, _y], [0.7, 0.66, 0.5, _y], [0.7, 0.66, 0.5, _y]],
@@ -180,16 +199,26 @@ while {time < _future} do {
     if (_test) then {hint "Start color correction";};
     _hndl1 = ppEffectCreate ["colorCorrections", 1550];
     _hndl1 ppEffectEnable true;
-    _hndl1 ppEffectAdjust [0.5 + (overcast/3), 1, 0, [0.7, 0.66, 0.6, 0.2], [0.7, 0.66, 0.6, 0.2], [0.7, 0.66, 0.6, 0.2]];
+    if (_isSmallEffect) then {
+        _hndl1 ppEffectAdjust [1, 0.8, -0.001, [0.0, 0.0, 0.0, 0.0], [0.8*2, 0.5*2, 0.0, 0.7], [0.9, 0.9, 0.9, 0.0]];
+    }   
+    else {
+        _hndl1 ppEffectAdjust [0.5 + (overcast/3), 1, 0, [0.7, 0.66, 0.6, 0.2], [0.7, 0.66, 0.6, 0.2], [0.7, 0.66, 0.6, 0.2]];
+    };
     _hndl1 ppEffectCommit 10;
 
     sleep 15;
 
 // Modify Color correction and dust
     if (_test) then {hint "Start modify CC and alpha";};
-    While {time < _endtime} do {
+    While {time < _endtime && !ForceEndSandStorm} do {
         _hndl1 ppEffectAdjust [0.6 + (overcast/3), 1, 0.05, [0.7, 0.66, 0.6, 0.1 + random 0.4], [0.6 + random 0.1, 0.66, 0.6, 0.1 + random 0.4], [0.6 + random 0.1, 0.66, 0.6, 0.1 + random 0.4]];
         _hndl1 ppEffectCommit 3 + (floor random 2);
+
+        _figureTwo = 7.9;
+        if (_isSmallEffect) then {_figureTwo = 2};
+        _figureThree = 0.4;
+        if (_isSmallEffect) then {_figureThree = 0.1};
 
         _particles attachto [vehicle player];
         _particles setParticleParams
@@ -201,10 +230,10 @@ while {time < _future} do {
         [10, 10, 0],
         3,
         10.15,
-        7.9, //Here was 7.9 lower is 4.9
+        _figureTwo, //Here was 7.9 lower is 4.9
         0.01,
         [10, 10, 20],
-        [[0.7, 0.66, 0.6, 0.1+random 0.4], [0.7, 0.66, 0.6, 0.1+random 0.4], [0.7, 0.66, 0.6, 0.1+random 0.4]], //Here, was random 0.4,random 0.4,random 0.4 lower is random 0.1, random 0.1, random 0.1
+        [[0.7, 0.66, 0.6, 0.1+random 0.4], [0.7, 0.66, 0.6, 0.1+random _figureThree], [0.7, 0.66, 0.6, 0.1+random _figureThree]], //Here, was random 0.4,random 0.4,random 0.4 lower is random 0.1, random 0.1, random 0.1
         [0.08],
         1,
         0,

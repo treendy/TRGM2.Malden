@@ -9,7 +9,7 @@ _nearestHidingPlaces = _nearestHidingPlaces - _HidingPlacesTooClose;
 
 if (count _nearestHidingPlaces > 5) then {
 	_ambushGroup = createGroup east;
-
+	
 	_objMilUnit = _ambushGroup createUnit [selectRandom sCivilian,getPos (selectRandom _nearestHidingPlaces),[],0,"NONE"];
 	doStop _objMilUnit;
 	_ambushGroup setCombatMode "BLUE";
@@ -28,6 +28,7 @@ if (count _nearestHidingPlaces > 5) then {
 	_expl3 setVectorDirAndUp [ [0.5, -0.5, 0], [0.5, 0.5, 0] ]; 
 
 	_bWaiting = true;
+	_unitPos = _triggerArea;
 	while {_bWaiting} do {
 
 		
@@ -38,31 +39,49 @@ if (count _nearestHidingPlaces > 5) then {
 	  	{
 	  		if (_x in switchableUnits || _x in playableUnits) then {
 	  			_bWaiting = false;
+				_unitPos = getPos _x;
 	  		};
 	  	} forEach _nearUnits;
 		
 		_nearUnits = nearestObjects [_triggerArea, ["Man"], _triggerSize];
 	  	{
 	  		if (_x in switchableUnits || _x in playableUnits) then {
-	  			if ( (floor(random 6)) == 1 ) then {
+	  			
 	  				_bWaiting = false;
-	  			};
+	  				_unitPos = getPos _x;
 	  		};
 	  	} forEach _nearUnits;
 	  	if (_bWaiting) then {
 			sleep 2;
+		}
+		else {
+			sleep 30 + (random 120);
 		};
 	};
 
+	//after the wait, get the units pos again and move to it
+	_nearUnits = nearestObjects [(getPos _objMilUnit), ["Man"], 10];
+	{
+		if (_x in switchableUnits || _x in playableUnits) then {
+			_unitPos = getPos _x;
+		};
+	} forEach _nearUnits;
 	
+	_nearUnits = nearestObjects [_triggerArea, ["Man"], _triggerSize];
+	{
+		if (_x in switchableUnits || _x in playableUnits) then {
+				_unitPos = getPos _x;
+		};
+	} forEach _nearUnits;
+		
 	_objMilUnit setBehaviour "CARELESS";
-	_objMilUnit doMove _triggerArea;	
+	_objMilUnit doMove _unitPos;	
 	_ambushGroup setSpeedMode "FULL";
 	_objMilUnit setUnitPos "UP";
 
 	_BombSet = false;
 	while {!_BombSet} do {
-		if ((_objMilUnit distance _triggerArea) < 10 || !alive _objMilUnit) then {
+		if ((_objMilUnit distance _unitPos) < 10 || !alive _objMilUnit) then {
 			if (!alive _objMilUnit) then {sleep 2.5};
 			_BombSet = true;
 			_expl1 setDamage 1;

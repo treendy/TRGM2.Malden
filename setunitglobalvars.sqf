@@ -6,6 +6,8 @@ publicVariable "DefaultEnemyFactionIndex";
 publicVariable "DefaultFriendlyFactionIndex";
 publicVariable "DefaultSandStormOption";
 
+/*TopLeftPos = [25.4257,8173.69,0];
+BotRightPos = [8188.86,9.91748,0];*/
 
 call compile preprocessFileLineNumbers  "RandFramework\General\TRGMSetUnitGlobalVars.sqf";
 

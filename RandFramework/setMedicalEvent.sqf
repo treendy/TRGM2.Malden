@@ -231,6 +231,7 @@ if (isnil "fncMedicalParamedicLight") then {
 
 		//hint str(_backOfVehArea);
 		_group = createGroup civilian; 
+		
 		_downedCiv = _group createUnit [selectRandom sCivilian,_backOfVehArea,[],0,"NONE"];
 		_downedCiv setDamage 0.8;
 		[_downedCiv, "Acts_CivilInjuredGeneral_1"] remoteExec ["switchMove", 0];

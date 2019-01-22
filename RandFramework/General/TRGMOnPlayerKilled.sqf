@@ -12,6 +12,11 @@ if (player distance getMarkerPos "MrkHQ" > SaveZoneRadius) then {
 
 	_killer = _this select 1;
 
+	_aceSource = player getVariable ["ace_medical_lastDamageSource", objNull];
+	if (!(_aceSource isEqualTo objNull)) then {
+		_killer = _aceSource;
+	};
+
 	debugMessages = debugMessages + format["KILLED OUTSIDE SAFEZONE, SIDE: %1 - VEHICLE: %2 - PlayerObject: %3", side _killer,vehicle player, player];
 	if (_killer != player) then {
 		debugMessages = debugMessages + format["KILLER IS NOT THE PLAYER, Killer: %1 - %2", _killer, name _killer];

@@ -65,7 +65,7 @@ if (_bAllow) then {
 	} foreach waypoints group _escortPilot;
 	
 	sleep 0.2;
-	[[],"RandFramework\Campaign\StartMission.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
+	//[[],"RandFramework\Campaign\StartMission.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
 	//hint (localize "STR_TRGM2_attemptendmission_Ending");
 	//execVM "RandFramework\endMission.sqf";
 };

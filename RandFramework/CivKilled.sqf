@@ -5,6 +5,11 @@ if (isNil "CivDeathCount") then {
 	publicVariable "CivDeathCount";
 };
 
+_aceSource = _killed getVariable ["ace_medical_lastDamageSource", objNull];
+if (!(_aceSource isEqualTo objNull)) then {
+	_killer = _aceSource;
+};
+
 if (side _killer == west && str(_killed) != str(_killer)) then {
 	bCivKilled = true;
 	publicVariable "bCivKilled";

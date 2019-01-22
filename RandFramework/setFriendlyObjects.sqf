@@ -277,7 +277,12 @@ if (_MergedLoudoutData != "") then {
 							case "FriendlyFuelTruck" : {
 								FriendlyFuelTruck = _object;
 							};
-
+							case "FriendlyJet" : {
+								FriendlyJet = _object;
+							};
+							case "FriendlyChopper" : {
+								FriendlyChopper = _object;
+							};
 							
 						};
 					};

@@ -322,6 +322,8 @@ FriendlyUnarmedCar=[""B_G_Van_01_transport_F""];
 FriendlyMedicalTruck=[""B_G_Van_02_transport_F""];
 FriendlyArmoredCar=[""B_G_Offroad_01_armed_F""];
 FriendlyFuelTruck=[""B_G_Van_01_fuel_F""];
+FriendlyJet = [""B_Plane_Fighter_01_Stealth_F""];
+FriendlyChopper = [""B_Heli_Transport_03_unarmed_F"",""B_Heli_Transport_01_camo_F"",""B_Heli_Attack_01_F""];
 		";
 	};
 	case 3 : {
@@ -796,6 +798,8 @@ FriendlyUnarmedCar=[""rhsusf_m998_w_s_4dr""];
 FriendlyMedicalTruck=[""rhsusf_M1085A1P2_B_WD_Medical_fmtv_usarmy""];
 FriendlyArmoredCar=[""rhsusf_m1025_w_s_m2""];
 FriendlyFuelTruck=[""rhsusf_M978A4_usarmy_wd""];
+FriendlyJet = [""rhsusf_f22""];
+FriendlyChopper = [""rhsusf_CH53E_USMC_D"",""RHS_AH1Z"",""RHS_UH1Y_d""];
 		"
 	};
 	case 4 : {
@@ -1291,6 +1295,10 @@ FriendlyMedicalTruck=[""CUP_B_LR_Ambulance_GB_D""];
 FriendlyArmoredCar=[""CUP_B_Mastiff_GMG_GB_D""];
 FriendlyFuelTruck=[""CUP_B_MTVR_Refuel_USA""];
 
+FriendlyJet = [""CUP_B_F35B_BAF"",""CUP_B_F35B_BAF""];
+FriendlyChopper = [""CUP_B_AH1_DL_BAF"",""CUP_B_AW159_Unarmed_RN_Blackcat"",""CUP_B_CH47F_VIV_GB""];
+
+
 "};
 case 5 : {
 		LoadoutDataDefault = "
@@ -1783,6 +1791,9 @@ FriendlyUnarmedCar=[""CUP_B_LR_Transport_GB_D""];
 FriendlyMedicalTruck=[""CUP_B_LR_Ambulance_GB_D""];
 FriendlyArmoredCar=[""CUP_B_Mastiff_GMG_GB_D""];
 FriendlyFuelTruck=[""CUP_B_MTVR_Refuel_USA""];
+FriendlyJet = [""CUP_B_F35B_BAF"",""CUP_B_F35B_BAF""];
+FriendlyChopper = [""CUP_B_AH1_DL_BAF"",""CUP_B_AW159_Unarmed_RN_Blackcat"",""CUP_B_CH47F_VIV_GB""];
+
 
 
 		"};
@@ -2234,6 +2245,10 @@ FriendlyUnarmedCar=[""rhsgref_cdf_b_reg_uaz""];
 FriendlyMedicalTruck=[""rhsgref_cdf_b_gaz66_ap2""];
 FriendlyArmoredCar=[""rhsgref_cdf_b_btr60""];
 FriendlyFuelTruck=[""rhsgref_cdf_b_ural_fuel""];
+FriendlyJet = [""rhs_l159_cdf_b_CDF"",""rhs_l39_cdf_b_cdf"",""rhsgref_cdf_b_mig29s"",""rhsgref_cdf_b_su25""];
+FriendlyChopper = [""rhsgref_cdf_b_Mi24D"",""rhsgref_b_mi24g_CAS"",""rhsgref_cdf_b_reg_Mi17Sh""];
+
+
 		"};		
 
 	case 7 : {
@@ -2708,6 +2723,7 @@ FriendlyUnarmedCar=[""uns_willys_2""];
 FriendlyMedicalTruck=[""uns_M577_amb""];
 FriendlyArmoredCar=[""uns_M35A2""];
 FriendlyFuelTruck=[""uns_M35A2""];
+
 		"};		
 	case 8 : {
 		LoadoutDataDefault = "
@@ -3996,6 +4012,7 @@ FriendlyUnarmedCar=[""UK3CB_BAF_LandRover_Soft_FFR_Sand_A_MTP""];
 FriendlyMedicalTruck=[""UK3CB_BAF_LandRover_Amb_FFR_Sand_A_MTP""];
 FriendlyArmoredCar=[""UK3CB_BAF_Coyote_Passenger_L111A1_D_MTP""];
 FriendlyFuelTruck=[""UK3CB_BAF_Coyote_Logistics_L134A1_D_MTP""];	
+FriendlyChopper = [""UK3CB_BAF_Apache_AH1_AT_MTP"",""UK3CB_BAF_Wildcat_AH1_CAS_8D_MTP"",""UK3CB_BAF_Merlin_HC3_18_GPMG_MTP""];
 		"
 	};
 };

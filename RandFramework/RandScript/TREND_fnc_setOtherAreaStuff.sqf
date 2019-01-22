@@ -5,6 +5,9 @@
 
 _mainObjPos = ObjectivePossitions select 0;
 
+
+{systemChat "Mission Events: Comms 10";} remoteExec ["bis_fnc_call", 0];
+
 //Check if radio tower is near
 //Land_TTowerBig_2_F    Land_TTowerBig_1_F       Land_Communication_F       Land_TBox_F
 //_TowerBuilding = selectRandom TowerBuildings;
@@ -12,19 +15,20 @@ _TowersNear = nearestObjects [_mainObjPos, TowerBuildings, TowerRadius];
 
 
 
-
+{systemChat "Mission Events: Comms 9";} remoteExec ["bis_fnc_call", 0];
 {
 	[[_x, [localize "STR_TRGM2_TRENDfncsetOtherAreaStuff_CheckEnemyComms","RandFramework\checkForComms.sqf",[_x]]],"addAction",true,true] call BIS_fnc_MP;
 } forEach _TowersNear;
 if (count _TowersNear > 0) then {
 //if (!(isNull _pepe)) then {
-
+	{systemChat "Mission Events: Comms 8";} remoteExec ["bis_fnc_call", 0];
 	TowerBuild = _TowersNear select 0;
 	TowerClassName = typeOf TowerBuild;
 	publicVariable "TowerBuild";
 	_TowerX = position TowerBuild select 0;
 	_TowerY = position TowerBuild select 1;
 	_distanceHQ = getMarkerPos "mrkHQ" distance [_TowerX, _TowerY];
+	{systemChat "Mission Events: Comms 7";} remoteExec ["bis_fnc_call", 0];
 	if (_distanceHQ > 1400) then {
 		bHasCommsTower = true;
 		CommsTowerPos = [_TowerX, _TowerY];
@@ -40,8 +44,9 @@ if (count _TowersNear > 0) then {
 			_wp4PosTower = [ _wayX - _PatrolDist, _wayY + _PatrolDist, 0];
 			_wp5PosTower = [ _wayX + _PatrolDist, _wayY + _PatrolDist, 0];
 
-
+			{systemChat "Mission Events: Comms 6";} remoteExec ["bis_fnc_call", 0];
 			if (!(surfaceIsWater _wp1PosTower) && !(surfaceIsWater _wp2PosTower) && !(surfaceIsWater _wp3PosTower) && !(surfaceIsWater _wp4PosTower)) then {
+				{systemChat "Mission Events: Comms 5";} remoteExec ["bis_fnc_call", 0];
 				//1 in (_maxGroups*2) chance of having an AA/AT guy
 
 				_DiamPatrolGroupTower = createGroup east;
@@ -72,11 +77,13 @@ if (count _TowersNear > 0) then {
 				[_DiamPatrolGroupTower, 4] setWaypointType "CYCLE";
 				_DiamPatrolGroupTower setBehaviour "SAFE";
 			};
+			{systemChat "Mission Events: Comms 4";} remoteExec ["bis_fnc_call", 0];
 
 		};
 
 
 		if (selectRandom [true,true,true]) then {
+			{systemChat "Mission Events: Comms 3";} remoteExec ["bis_fnc_call", 0];
 
 			_trg = createTrigger ["EmptyDetector", position TowerBuild];
 			_trg setVariable ["DelMeOnNewCampaignDay",true];
@@ -87,42 +94,14 @@ if (count _TowersNear > 0) then {
 			_trg setTriggerStatements [_sTriggerString, "bCommsBlocked = true; publicVariable ""bCommsBlocked""; [this] execVM ""RandFramework\RandScript\commsBlocked.sqf"";", ""];
 
 			publicVariable "TowerBuild";
+			{systemChat "Mission Events: Comms 2";} remoteExec ["bis_fnc_call", 0];
 		};
-
+		{systemChat "Mission Events: Comms 1";} remoteExec ["bis_fnc_call", 0];
 
 	};
 };
 
-
-//if (selectRandom ChanceOfOccurance) then {
-if (false) then {
-	//change this, not camp, have parked ammo/fuel/repair vehicls like medicalevent, and if vehicles destroyed, gain 0.3 rep  (supply convoy at rest)
-	//[_mainObjPos] execVM "RandFramework\setRestingConvoyEvent.sqf";
-	_flatPos = nil;
-	_flatPos = [_mainObjPos , 200, 2000, 4, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-	if (str(_flatPos) != "[0,0,0]") then {
-
-		_groupCamp1 = createGroup east;
-
-		_aaaX = _flatPos select 0;
-		_aaaY = _flatPos select 1;
-
-
-		if (surfaceIsWater [_aaaX,_aaaY]) then {
-			[[_aaaX,_aaaY], (floor random 175+1), sBoatUnit, _groupCamp1] call bis_fnc_spawnvehicle;
-
-		}
-		else {
-			sTeamleader createUnit [[_aaaX+1, _aaaY], _groupCamp1];
-			sRifleman createUnit [[_aaaX, _aaaY+1], _groupCamp1];
-			sRifleman createUnit [[_aaaX+1, _aaaY+1], _groupCamp1];
-			sRifleman createUnit [[_aaaX-1, _aaaY], _groupCamp1];
-			sRifleman createUnit [[_aaaX, _aaaY-1], _groupCamp1];
-			_camp = "FirePlace_burning_F" createVehicle [_aaaX,_aaaY];
-		};
-	};
-};
-
+{systemChat "Mission Events: CommsEND";} remoteExec ["bis_fnc_call", 0];
 
 
 if (!(isNil "IsTraining")) then {
@@ -142,32 +121,96 @@ if (!(isNil "IsTraining")) then {
 }
 else {
 
-	/*!!!MEDICAL EVENT!!!*/
+
+{systemChat "Loading Events";} remoteExec ["bis_fnc_call", 0];
 	if (selectRandom ChanceOfOccurance) then {
 	//if (true) then {
-		[_mainObjPos] execVM "RandFramework\setMedicalEvent.sqf";
+		[_mainObjPos] execVM "RandFramework\setATMineEvent.sqf";
+		sleep 1;
 	};
 
-
-
-	if (selectRandom ChanceOfOccurance) then {
-	//if (true) then {
-		[_mainObjPos] execVM "RandFramework\setDownedChopperEvent.sqf";
-
-	};		
-
-
-
-	if (selectRandom ChanceOfOccurance) then {
-	//if (true) then {
-		[_mainObjPos] execVM "RandFramework\setDownConvoyEvent.sqf";
-	};		
-
+{systemChat "Loading Events : 12";} remoteExec ["bis_fnc_call", 0];
 	if (selectRandom ChanceOfOccurance) then {
 	//if (true) then {
 		[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
+		sleep 1;
+	};	
+
+{systemChat "Loading Events : 11";} remoteExec ["bis_fnc_call", 0];
+	if (selectRandom ChanceOfOccurance) then {
+	//if (true) then {
+		[_mainObjPos] execVM "RandFramework\setATMineEvent.sqf";
+		sleep 1;
+	};
+{systemChat "Loading Events : 10";} remoteExec ["bis_fnc_call", 0];
+	if (selectRandom ChanceOfOccurance || !isNil("ForceWarZoneLoc")) then {
+	//if (true) then {
+		//_eventType = selectRandom[4]; //1=fullWar  2=AOOnly  3=WarzoneOnly  4=warzoneOnlyFullWar (only set to warzone now... was strange over AO... maybe at some point in future can stop flak when player near AO)
+		if (!isNil("ForceWarZoneLoc")) then {
+			[ForceWarZoneLoc,4] execVM "RandFramework\setFireFightEvent.sqf";
+		}
+		else {
+			[_mainObjPos,4] execVM "RandFramework\setFireFightEvent.sqf";
+		};
+		sleep 1;
+	};
+{systemChat "Loading Events : 9";} remoteExec ["bis_fnc_call", 0];
+	if (selectRandom ChanceOfOccurance) then {
+	//if (true) then {
+		[_mainObjPos] execVM "RandFramework\setMedicalEvent.sqf";
+		sleep 1;
+	};
+{systemChat "Loading Events : 8";} remoteExec ["bis_fnc_call", 0];
+	if (selectRandom ChanceOfOccurance) then {
+	//if (true) then {
+		[_mainObjPos] execVM "RandFramework\setDownedChopperEvent.sqf";
+		sleep 1;
+	};		
+{systemChat "Loading Events : 7";} remoteExec ["bis_fnc_call", 0];
+	if (selectRandom ChanceOfOccurance) then {
+	//if (true) then {
+		[_mainObjPos] execVM "RandFramework\setDownConvoyEvent.sqf";
+		sleep 1;
+	};		
+{systemChat "Loading Events : 6";} remoteExec ["bis_fnc_call", 0];
+	if (selectRandom ChanceOfOccurance) then {
+	//if (true) then {
+		[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
+		sleep 1;
 	};		
 
+
+{systemChat "Loading Events : 5";} remoteExec ["bis_fnc_call", 0];
+	if (selectRandom [true,true,false]) then {
+		[_mainObjPos] execVM "RandFramework\setIEDEvent.sqf";
+		sleep 1;
+	};
+{systemChat "Loading Events : 4";} remoteExec ["bis_fnc_call", 0];
+	if (selectRandom [true,true,false]) then {
+		[_mainObjPos] execVM "RandFramework\setIEDEvent.sqf";
+		sleep 1;
+	};
+{systemChat "Loading Events : 3";} remoteExec ["bis_fnc_call", 0];
+	if (selectRandom [true,true,false]) then {
+		[_mainObjPos] execVM "RandFramework\setIEDEvent.sqf";
+		sleep 1;
+	};
+{systemChat "Loading Events : 2";} remoteExec ["bis_fnc_call", 0];
+	if (selectRandom [true,true,false]) then {
+		[_mainObjPos] execVM "RandFramework\setIEDEvent.sqf";
+		sleep 1;
+	};
+{systemChat "Loading Events : 1";} remoteExec ["bis_fnc_call", 0];
+	if (selectRandom [true,true,false]) then {
+		[_mainObjPos] execVM "RandFramework\setIEDEvent.sqf";
+		sleep 1;
+	};
+{systemChat "Loading Events : 0";} remoteExec ["bis_fnc_call", 0];
+	if (selectRandom [true,true,false]) then {
+		[_mainObjPos] execVM "RandFramework\setIEDEvent.sqf";
+		sleep 1;
+	};
+{systemChat "Loading Events : END";} remoteExec ["bis_fnc_call", 0];
 };
 
 

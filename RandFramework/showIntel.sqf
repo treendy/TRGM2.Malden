@@ -110,4 +110,19 @@ if (side player == west) then {
 		};
 
 	};
+	if (_IntelToShow == 5) then { //AT Mine field
+		if (count ATFieldPos == 0) then {
+			Hint (localize "STR_TRGM2_showIntel_NoATArea");
+		}
+		else {
+			{
+				_test = nil;
+				_test = createMarker [format["ATIntel%1%2",_x select 0,_x select 1], _x];  
+				_test setMarkerShape "ICON";  
+				_test setMarkerType "mil_warning";  
+				_test setMarkerText (localize "STR_TRGM2_showIntel_ATAreaMarker");
+				Hint (localize "STR_TRGM2_showIntel_ATArea");
+			} forEach ATFieldPos;
+		};
+	};
 };

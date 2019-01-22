@@ -16,5 +16,7 @@ else {
 	{ 
 		_thisBox addItemCargoGlobal  [_x, 1]; 
 	} forEach items _x; 
-	_thisBox addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
+	if (typeof(unitBackpack _x) != "") then {
+		_thisBox addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
+	};
 }  forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
