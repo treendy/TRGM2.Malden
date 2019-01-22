@@ -106,14 +106,16 @@ endMissionBoard removeAction _actChooseMission;
 
 [player] execVM "RandFramework\setLoadout.sqf";
 
-  _isAceRespawnWithGear = false;
- 	if ([] call TRGM_fnc_isCbaLoaded) then {
+_isAceRespawnWithGear = false;
+if ([] call TRGM_fnc_isCbaLoaded) then {
 	 // check for ACE respawn with gear setting
    _isAceRespawnWithGear = "ace_respawn_savePreDeathGear" call CBA_settings_fnc_get;
-	};
-  if (!_isAceRespawnWithGear) then {
+};
+if (!isNil("_isAceRespawnWithGear")) then {
+	if (!_isAceRespawnWithGear) then {
 		player addEventHandler ["Respawn", { [player] execVM "RandFramework\setLoadout.sqf"; }];
 	};
+};
 
 5 fadeMusic 0;
 [] spawn {

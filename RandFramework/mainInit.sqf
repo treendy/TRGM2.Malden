@@ -484,9 +484,11 @@ if (isServer) then {
 			//_x setVariable ["UnitRole",_unitRole];
 			_handle = [_x] execVM "RandFramework\setLoadout.sqf";
 			waitUntil {scriptDone _handle};
-			if (!_isAceRespawnWithGear) then {
-			   _x addEventHandler ["Respawn", { [_this select 0] execVM "RandFramework\setLoadout.sqf"; }];
+			if (!isNil("_isAceRespawnWithGear")) then {
+				if (!_isAceRespawnWithGear) then {
+			   		_x addEventHandler ["Respawn", { [_this select 0] execVM "RandFramework\setLoadout.sqf"; }];
 		        };
+			};
 		} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 		sleep 1;
 	};
