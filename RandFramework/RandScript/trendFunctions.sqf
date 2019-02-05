@@ -15,12 +15,6 @@ sATManToUse = sATMan;
 sMortarToUse = sMortar;
 sMachineGunManToUse = sMachineGunMan;
 
-
-
-bThisMissionCivsOnly = false;
-
-
-
 TREND_fnc_PopulateSideMission = {
 	_sidePos = _this select 0;
 	_sideType = _this select 1;
@@ -49,12 +43,12 @@ TREND_fnc_PopulateSideMission = {
 
 
 
-	bThisMissionCivsOnly = selectRandom bCivsOnly;
+	_bThisMissionCivsOnly = selectRandom bCivsOnly;
 	_bTownBigenoughForFriendlyInsurgants = true;
 	_allBuildingsNearAO = nearestObjects [_sidePos, BasicBuildings, 100];
 	_allBuildingsNearAOCount = count _allBuildingsNearAO;
 	if (_allBuildingsNearAOCount <= iBuildingCountToAllowCivsAndFriendlyInformants) then {
-		bThisMissionCivsOnly = false;
+		_bThisMissionCivsOnly = false;
 		_bTownBigenoughForFriendlyInsurgants = false;
 	};
 	if (!_bTownBigenoughForFriendlyInsurgants && _bFriendlyInsurgents) then {
@@ -66,12 +60,17 @@ TREND_fnc_PopulateSideMission = {
 		_bFriendlyInsurgents = false;
 	};
 
-	if (_bIsMainObjective) then {bThisMissionCivsOnly = false};
+	if (_bIsMainObjective) then {_bThisMissionCivsOnly = false};
 
-	if (_ForceCivsOnly) then {bThisMissionCivsOnly = true};
+	if (_ForceCivsOnly) then {
+		_bThisMissionCivsOnly = true;
+	}
+	else {
+		_bThisMissionCivsOnly = false;
+	};
 
 	if (!_bFriendlyInsurgents) then {
-		if (!bThisMissionCivsOnly) then {
+		if (!_bThisMissionCivsOnly) then {
 			//insert warlord
 			_flatPos = nil;
 			_flatPos = [_sidePos , 10, 40, 4, 0, 0.5, 0,[],[_sidePos,[0,0,0]]] call BIS_fnc_findSafePos;
@@ -106,7 +105,7 @@ TREND_fnc_PopulateSideMission = {
 	};
 
 	//if (selectRandom [true]) then {
-	if (selectRandom [true,false,false,false,false] && !bThisMissionCivsOnly) then {
+	if (selectRandom [true,false,false,false,false] && !_bThisMissionCivsOnly) then {
 		//"test_EmptyObjectForFireBig" createVehicle position board2;
 		_fireRootx = getPos _sideMainBuilding select 0;
 		_fireRooty = getPos _sideMainBuilding select 1;
@@ -135,7 +134,7 @@ TREND_fnc_PopulateSideMission = {
 	};
 
 	//if main var to set friendly insurg and also, if our random selction above plus 50/50 chance is true, then the units will be dressed as insurgents (player will not know if friendly of enemy)
-	if ((bThisMissionCivsOnly || (!_bIsMainObjective && selectRandom[true,false]))) then {
+	if ((_bThisMissionCivsOnly || (!_bIsMainObjective && selectRandom[true,false]))) then {
 		sTeamleaderToUse = sTeamleaderMilitia;
 		sRiflemanToUse = sRiflemanMilitia;
 		sTank1ArmedCarToUse = sTank1ArmedCarMilitia;
@@ -164,13 +163,13 @@ TREND_fnc_PopulateSideMission = {
 	//AODetails [_iSideIndex,0,0,0,false,0]
 	//AODetails select
 
-	debugMessages = debugMessages + format["\n\ntrendFunctions.sqf : _bFriendlyInsurgents: %1 - bThisMissionCivsOnly: %2 ",str(_bFriendlyInsurgents),str(bThisMissionCivsOnly)];
+	debugMessages = debugMessages + format["\n\ntrendFunctions.sqf : _bFriendlyInsurgents: %1 - _bThisMissionCivsOnly: %2 ",str(_bFriendlyInsurgents),str(_bThisMissionCivsOnly)];
 
 	if (!_bFriendlyInsurgents) then {
-		if (!bThisMissionCivsOnly) then {
+		if (!_bThisMissionCivsOnly) then {
 			
 
-			debugMessages = debugMessages + format["\n\ntrendFunctions.sqf : inside populate enemy -  _bFriendlyInsurgents: %1 - bThisMissionCivsOnly: %2 ",str(_bFriendlyInsurgents),str(bThisMissionCivsOnly)];
+			debugMessages = debugMessages + format["\n\ntrendFunctions.sqf : inside populate enemy -  _bFriendlyInsurgents: %1 - _bThisMissionCivsOnly: %2 ",str(_bFriendlyInsurgents),str(_bThisMissionCivsOnly)];
 			//Spawn patrol
 			//if main need a couple of these and always have 2 or 3
 
@@ -333,19 +332,19 @@ TREND_fnc_PopulateSideMission = {
 			};
 
 			//if main then 100% occupie houses, and increase number and range
-			if selectRandom [true] then {[_sidePos,10,[1],_InsurgentSide] spawn TREND_fnc_OccupyHouses;};
+			if selectRandom [true] then {[_sidePos,10,[1],_InsurgentSide,_bThisMissionCivsOnly] spawn TREND_fnc_OccupyHouses;};
 				//sleep 120;
 			if (_bIsMainObjective) then {
-				[_sidePos,200,[1,2,3],_InsurgentSide] spawn TREND_fnc_OccupyHouses;
-				[_sidePos,500,[4,5,6],_InsurgentSide] spawn TREND_fnc_OccupyHouses;
+				[_sidePos,200,[1,2,3],_InsurgentSide,_bThisMissionCivsOnly] spawn TREND_fnc_OccupyHouses;
+				[_sidePos,500,[4,5,6],_InsurgentSide,_bThisMissionCivsOnly] spawn TREND_fnc_OccupyHouses;
 				if (bAllowLargerPatrols && _bIsMainObjective) then {
-					[_sidePos,1000,[4,5,6],_InsurgentSide] spawn TREND_fnc_OccupyHouses;
+					[_sidePos,1000,[4,5,6],_InsurgentSide,_bThisMissionCivsOnly] spawn TREND_fnc_OccupyHouses;
 				};
 			}
 			else {
 
-				if selectRandom [true] then {[_sidePos,100,[1,2],_InsurgentSide] spawn TREND_fnc_OccupyHouses;};
-				if selectRandom [true] then {[_sidePos,1000,[1,2,3,4],_InsurgentSide] spawn TREND_fnc_OccupyHouses;};
+				if selectRandom [true] then {[_sidePos,100,[1,2],_InsurgentSide,_bThisMissionCivsOnly] spawn TREND_fnc_OccupyHouses;};
+				if selectRandom [true] then {[_sidePos,1000,[1,2,3,4],_InsurgentSide,_bThisMissionCivsOnly] spawn TREND_fnc_OccupyHouses;};
 			};
 
 			//Spawn nasty surprise (AAA, IEDs, wider patrol)
@@ -604,7 +603,7 @@ TREND_fnc_PopulateSideMission = {
 			};
 
 		}
-		else { //else if bThisMissionCivsOnly
+		else { //else if _bThisMissionCivsOnly
 			//spawn inner checkpoints
 			_iCount = selectRandom[0,0,0,0,1];
 			//if (!_bIsMainObjective) then {_iCount = selectRandom [0,1];};
@@ -739,8 +738,8 @@ TREND_fnc_PopulateSideMission = {
 	};
 
 
-	if (selectRandom [true,true,true,false] || bThisMissionCivsOnly) then {
-		debugMessages = debugMessages + format["\n\ntrendFunctions.sqf - Populate Civs : _bFriendlyInsurgents: %1 - bThisMissionCivsOnly: %2 ",str(_bFriendlyInsurgents),str(bThisMissionCivsOnly)];
+	if (selectRandom [true,true,true,false] || _bThisMissionCivsOnly) then {
+		debugMessages = debugMessages + format["\n\ntrendFunctions.sqf - Populate Civs : _bFriendlyInsurgents: %1 - _bThisMissionCivsOnly: %2 ",str(_bFriendlyInsurgents),str(_bThisMissionCivsOnly)];
 		[_sidePos,200,false] spawn TREND_fnc_SpawnCivs;
 	};
 
@@ -915,6 +914,7 @@ TREND_fnc_OccupyHouses = {
 	_distFromCent = _this select 1;
 	_unitCounts = _this select 2;
 	_InsurgentSide = _this select 3;
+	_bThisMissionCivsOnly = _this select 4;
 
 	_unitCount = selectRandom _unitCounts;
 
@@ -925,7 +925,7 @@ TREND_fnc_OccupyHouses = {
 
 	
 
-	if (!bThisMissionCivsOnly) then {
+	if (!_bThisMissionCivsOnly) then {
 		while {_iCount <= _unitCount} do
 		{
 			_allBuildings = nearestObjects [_sidePos, BasicBuildings, _distFromCent];
