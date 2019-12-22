@@ -59,6 +59,9 @@ HVTVans = ["C_Van_02_vehicle_F","C_Van_02_transport_F","C_Truck_02_covered_F","C
 HVTChoppers = ["C_Heli_Light_01_civil_F"];
 HVTPlanes = ["C_Plane_Civil_01_F"];
 BombToDefuse = ["Land_SatellitePhone_F"];
+CheckPointTurret = ["O_HMG_01_high_F"];
+TargetVehicles = ["O_SAM_System_04_F","O_Radar_System_02_F"];
+TargetCaches = ["Box_FIA_Support_F"];
 
 //DEFAULTS (over written below)
 
@@ -121,6 +124,7 @@ EnemyAirScout = ["O_UAV_02_dynamicLoadout_F"];
 UnarmedScoutVehicles = ["O_MRAP_02_F","O_G_Offroad_01_F","O_G_Van_01_transport_F","O_G_Van_02_vehicle_F"];
 EnemyBaseChoppers = ["O_T_VTOL_02_infantry_F"];
 sEnemyHeliPilot = "O_helipilot_F";
+CheckPointTurret = ["O_HMG_01_high_F"];
 	};
 	case 2 : {
 
@@ -175,6 +179,7 @@ sEnemyHeliPilot = "O_helipilot_F";
 		UnarmedScoutVehicles = ["O_MRAP_02_F","O_G_Offroad_01_F","O_G_Van_01_transport_F","O_G_Van_02_vehicle_F"];
 		EnemyBaseChoppers = ["O_T_VTOL_02_infantry_F"];
 		sEnemyHeliPilot = "O_helipilot_F";
+		CheckPointTurret = ["O_HMG_01_high_F"];
 	};
 	case 3 : {
 
@@ -191,7 +196,7 @@ sEnemyHeliPilot = "O_helipilot_F";
 		sTank3Tank = "O_G_Offroad_01_armed_F";
 		sAAAVeh = "";
 		sMortar = ["O_G_Mortar_01_F"];
-		sSniper = "O_G_Soldier_F";
+		sSniper = "O_G_Sharpshooter_F";
 		//sCivilian = ["C_man_polo_1_F"];
 		sArtilleryVeh = "O_T_MBT_02_arty_ghex_F";
 		sBoatUnit = "Land_HelipadEmpty_F";		
@@ -229,7 +234,7 @@ sEnemyHeliPilot = "O_helipilot_F";
 		UnarmedScoutVehicles = ["O_G_Offroad_01_F","O_G_Van_01_transport_F","O_G_Van_02_vehicle_F"];
 		EnemyBaseChoppers = ["Land_HelipadEmpty_F"];
 		sEnemyHeliPilot = "Land_HelipadEmpty_F";
-
+		CheckPointTurret = ["O_G_Soldier_AR_F"];
 
 		
 	};
@@ -288,6 +293,9 @@ UnarmedScoutVehicles = ["rhs_tigr_msv","rhs_uaz_open_MSV_01","RHS_UAZ_MSV_01"];
 EnemyBaseChoppers = ["RHS_Ka52_vvs"];
 sEnemyHeliPilot = "rhs_pilot_combat_heli";
 //HVTChoppers = ["C_Heli_Light_01_civil_F","RHS_Mi8amt_civilian"];
+CheckPointTurret = ["rhs_KORD_high_MSV"];
+
+TargetVehicles = ["RHS_Ural_Fuel_MSV_01","rhs_9k79"];
 
 	};	
 
@@ -434,7 +442,7 @@ sTank2APC = "CUP_O_BTR40_MG_TKM";
 sTank3Tank = "CUP_O_LR_SPG9_TKM";
 sAAAVeh = "CUP_O_Ural_ZU23_TKA";    
 sMortar = ["CUP_O_2b14_82mm_TK_INS"];
-sSniper = "CUP_O_TK_INS_Soldier";
+sSniper = "CUP_O_TK_Sniper";
 sCivilian = ["CUP_C_TK_Man_04","CUP_C_TK_Man_04_Jack","CUP_C_TK_Man_04_Waist","CUP_C_TK_Man_07","CUP_C_TK_Man_07_Coat","CUP_C_TK_Man_07_Waist","CUP_C_TK_Man_08","CUP_C_TK_Man_08_Jack","CUP_C_TK_Man_08_Waist","CUP_C_TK_Man_05_Coat","CUP_C_TK_Man_05_Jack","CUP_C_TK_Man_05_Waist","CUP_C_TK_Man_06_Coat","CUP_C_TK_Man_06_Jack","CUP_C_TK_Man_06_Waist","CUP_C_TK_Man_02","CUP_C_TK_Man_02_Jack","CUP_C_TK_Man_02_Waist","CUP_C_TK_Man_01_Waist","CUP_C_TK_Man_01_Coat","CUP_C_TK_Man_01_Jack","CUP_C_TK_Man_03_Coat","CUP_C_TK_Man_03_Jack","CUP_C_TK_Man_03_Waist"];
 sArtilleryVeh = "CUP_O_BM21_TKA";
 sBoatUnit = "Land_HelipadEmpty_F";		
@@ -537,6 +545,9 @@ sEnemyHeliPilot = "rhsgref_ins_pilot";
 //HVTChoppers = ["C_Heli_Light_01_civil_F","RHS_Mi8amt_civilian"];
 
 //CivCars = ["CUP_C_Volha_Limo_TKCIV","CUP_C_Lada_GreenTK_CIV","CUP_C_S1203_CIV","CUP_C_Ikarus_TKC"];
+CheckPointTurret = ["rhs_KORD_high_MSV"];
+
+TargetVehicles = ["RHS_Ural_Fuel_MSV_01","rhs_9k79"];
 
 	};	
 
@@ -603,6 +614,72 @@ sEnemyHeliPilot = "uns_nvaf_pilot2";
 
 	};	
 
+
+
+case 10 : { //GM Winter
+
+
+	//DEFAULTS (over written below)
+	sTeamleader = "gm_gc_army_squadleader_mpiak74n_80_win";
+	sRifleman = "gm_gc_army_rifleman_mpiak74n_80_win";
+	sATMan = "gm_gc_army_antitank_mpiak74n_rpg7_80_win";
+	sAAMan = "gm_gc_army_antitank_mpiak74n_fagot_80_win";
+	sAmmobearer = "gm_gc_army_machinegunner_assistant_mpiak74n_pk_80_win";
+	sGrenadier = "gm_gc_army_demolition_mpiaks74n_80_win";
+	sMedic = "gm_gc_army_engineer_mpiaks74n_80_win";
+	sMachineGunMan = "gm_gc_army_machinegunner_pk_80_win";
+	sTank1ArmedCar = "gm_gc_army_brdm2";
+	sTank2APC = "gm_gc_army_bmp1sp2";
+	sTank3Tank = "gm_gc_army_t55a";
+	sAAAVeh = "gm_gc_army_zsu234v1";
+	sMortar = ["gm_gc_army_fagot_launcher_tripod"];
+	sSniper = "gm_gc_army_engineer_mpiaks74n_80_win";
+	//sCivilian = ["C_man_polo_1_F"];
+	sArtilleryVeh = "I_Truck_02_MRL_F";
+	sBoatUnit = "O_Boat_Transport_01_F";		
+	sExpSpec = "gm_gc_army_demolition_mpiaks74n_80_win"; 		
+
+	sTeamleaderMilitia = "gm_gc_army_squadleader_mpiak74n_80_win";
+	sRiflemanMilitia = "gm_gc_army_rifleman_mpiak74n_80_win";
+	sATManMilitia = "gm_gc_army_antitank_mpiak74n_rpg7_80_win";
+	sAAManMilitia = "gm_gc_army_antitank_mpiak74n_fagot_80_win";	
+	sAmmobearerMilitia = "gm_gc_army_machinegunner_assistant_mpiak74n_pk_80_win";
+	sGrenadierMilitia = "gm_gc_army_demolition_mpiaks74n_80_win";
+	sMedicMilitia = "gm_gc_army_engineer_mpiaks74n_80_win";
+	sMachineGunManMilitia = "gm_gc_army_machinegunner_pk_80_win";
+	sTank1ArmedCarMilitia = "gm_gc_army_brdm2";
+	sTank2APCMilitia = "gm_gc_army_brdm2";
+	sTank3TankMilitia = "gm_gc_army_brdm2";
+	sAAAVehMilitia = "gm_gc_army_zsu234v1";
+	sMortarMilitia = ["gm_gc_army_fagot_launcher_tripod"];
+
+	InformantClasses = ["gm_ge_pol_patrol_80_blk", "gm_ge_dbp_man_01_80_blu"];
+	InterogateOfficerClasses = ["gm_gc_army_officer_80_gry"];
+	WeaponDealerClasses = ["O_G_Soldier_unarmed_F"];
+	sideResarchTruck = ["gm_gc_army_ural4320_repair"];
+	SideRadioClassNames = ["Land_PortableGenerator_01_F"];
+	sideAmmoTruck = ["gm_gc_army_ural4320_reammo"];
+	DestroyAAAVeh = ["gm_gc_army_zsu234v1"];
+
+	sRiflemanFriendInsurg = "gm_ge_bgs_rifleman_g3a3_80_smp";
+
+	ReinforceVehicle = "gm_gc_army_ural4320_cargo";
+	EnemyAirToAirSupports = ["gm_gc_army_zsu234v1"];
+	EnemyAirToGroundSupports = ["gm_gc_army_t55a"]; //This would normally be a chopper
+	EnemyAirScout = ["gm_gc_army_p601"];
+
+	UnarmedScoutVehicles = ["gm_gc_army_p601","gm_gc_army_ural44202"];
+	EnemyBaseChoppers = ["gm_gc_army_t55a"];
+	sEnemyHeliPilot = "gm_gc_army_crew_mpiaks74nk_80_blk";
+	CivCars = ["gm_ge_civ_typ1200","gm_ge_dbp_typ1200","gm_gc_civ_p601","gm_gc_civ_man_01_80_blu"];
+	sCivilian = ["gm_gc_civ_man_02_80_brn","gm_gc_civ_man_01_80_blu","gm_gc_civ_man_01_80_blk","gm_gc_civ_man_02_80_gry"];
+	HVTCars = ["gm_gc_army_p601","gm_ge_civ_typ1200","gm_ge_dbp_typ1200","gm_gc_civ_p601","gm_gc_civ_man_01_80_blu"];
+	HVTVans = ["gm_ge_civ_typ1200","gm_ge_dbp_typ1200","gm_gc_civ_p601","gm_gc_civ_man_01_80_blu"];
+	HVTChoppers = ["I_C_Heli_Light_01_civil_F"];
+	HVTPlanes = ["I_C_Heli_Light_01_civil_F"];
+	BombToDefuse = ["Land_SatellitePhone_F"];
+	CheckPointTurret = ["gm_gc_army_machinegunner_pk_80_win"];
+};
 
 };
 

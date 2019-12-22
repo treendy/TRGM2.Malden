@@ -7,11 +7,6 @@
 //	- if 10 rep, then the mission to load will be a main mission, with 2 optional sides for intel only!  (may have to be negative 10??? instead of rewritig the rep stuff)
 	
 
-//try to run it all on server (the two below need to run on server!)
-//call compile preprocessFileLineNumbers  "RandFramework\SetTimeAndWeather.sqf";
-//call compile preprocessFileLineNumbers  "RandFramework\startInfMission.sqf";
-
-
 
 
 

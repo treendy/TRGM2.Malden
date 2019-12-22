@@ -9,6 +9,7 @@ params [
 
 _radius = 900;
 _airEscort = false;
+_isHiddenObj = false;
 //{
 //		if ((_x distance2D _destinationPosition) < _radius) then {
 //			_airEscort = true;
@@ -21,6 +22,13 @@ if (! isNil "_mainAOPos") then {
 		_airEscort = true;
 	};
 };
+
+if (! isNil "_mainAOPos") then {
+	if (_mainAOPos in HiddenPossitions ) then {
+		_isHiddenObj = true;
+	};
+};
+
 
 
 //ObjectivePossitions
@@ -76,7 +84,7 @@ _vehicle setVariable ["targetPad",_heliPad,true];
 
 _vehicle setVariable ["landingInProgress",false,true];
 
-
+_emergencyLand = false;
 _waypointIndex = 0;
 /* Set Waypoint,Takeoff */
 if (!_airEscort) then {
@@ -107,27 +115,34 @@ if (!_airEscort) then {
 			};
 
 			if (_stepDistToAO < 1000) then {
-				_bEndSteps = true;
-				_divertDirectionA = ([_DirAtoB,80] call TRGM_fnc_AddToDirection);
-				_newPosA = _AvoidZonePos getPos [2000,_divertDirectionA];
-				_divertDirectionB = ([_DirAtoB,-80] call TRGM_fnc_AddToDirection);
-				_newPosB = _AvoidZonePos getPos [2000,_divertDirectionB];
-				_totalDistA = (_vehicle distance _newPosA) + (_newPosA distance _destinationPosition);
-				_totalDistB = (_vehicle distance _newPosB) + (_newPosB distance _destinationPosition);
-				_newPos = nil;
-				if (_totalDistA < _totalDistB) then {
-					_newPos = _newPosA;
+				if (_isHiddenObj) then {
+					_bEndSteps = true;
+					_destinationPosition = _stepPos;
+					_emergencyLand = true;
 				}
 				else {
-					_newPos = _newPosB;
+					_bEndSteps = true;
+					_divertDirectionA = ([_DirAtoB,80] call TRGM_fnc_AddToDirection);
+					_newPosA = _AvoidZonePos getPos [2000,_divertDirectionA];
+					_divertDirectionB = ([_DirAtoB,-80] call TRGM_fnc_AddToDirection);
+					_newPosB = _AvoidZonePos getPos [2000,_divertDirectionB];
+					_totalDistA = (_vehicle distance _newPosA) + (_newPosA distance _destinationPosition);
+					_totalDistB = (_vehicle distance _newPosB) + (_newPosB distance _destinationPosition);
+					_newPos = nil;
+					if (_totalDistA < _totalDistB) then {
+						_newPos = _newPosA;
+					}
+					else {
+						_newPos = _newPosB;
+					};
+					_waypointIndex = _waypointIndex + 1;
+					_flyToLZMid = group _driver addWaypoint [_newPos,0,0];
+					_flyToLZMid setWaypointType "MOVE";
+					_flyToLZMid setWaypointSpeed "FULL";
+					_flyToLZMid setWaypointBehaviour "CARELESS";
+					_flyToLZMid setWaypointCombatMode "BLUE";
+					_flyToLZMid setWaypointCompletionRadius 1000;
 				};
-				_waypointIndex = _waypointIndex + 1;
-				_flyToLZMid = group _driver addWaypoint [_newPos,0,0];
-				_flyToLZMid setWaypointType "MOVE";
-				_flyToLZMid setWaypointSpeed "FULL";
-				_flyToLZMid setWaypointBehaviour "CARELESS";
-				_flyToLZMid setWaypointCombatMode "BLUE";
-				_flyToLZMid setWaypointCompletionRadius 1000;
 			};
 			if (_stepDistLeft < 300) then {
 				_bEndSteps = true;
@@ -142,7 +157,14 @@ _flyToLZ setWaypointSpeed "FULL";
 _flyToLZ setWaypointBehaviour "CARELESS";
 _flyToLZ setWaypointCombatMode "BLUE";
 _flyToLZ setWaypointCompletionRadius 100;
-_flyToLZ setWaypointStatements ["true", "(vehicle this) land 'GET IN'; (vehicle this) setVariable [""landingInProgress"",true,true]"];
+if (_emergencyLand) then {
+	_flyToLZ setWaypointStatements ["true", "(vehicle this) land 'GET IN'; (vehicle this) setVariable [""landingInProgress"",true,true]; Hint ""LANDING!!!"""];
+}
+else {
+	_flyToLZ setWaypointStatements ["true", "(vehicle this) land 'GET IN'; (vehicle this) setVariable [""landingInProgress"",true,true]"];
+};
+
+//also, further above, set AOISHIDDEN
 
 if (_airEscort) then {
 	_escortPilot = driver chopper2;

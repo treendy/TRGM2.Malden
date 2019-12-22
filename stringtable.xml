@@ -3631,6 +3631,88 @@
                 <Original>Code Entered</Original>
                 <English>Code Entered</English>
             </Key>
+            <Key ID="STR_TRGM2_CivTalk">
+                <Original>Talk/Search civ</Original>
+                <English>Talk/Search civ</English>
+            </Key> 
+            <Key ID="STR_TRGM2_CivTalkDead">
+                <Original>you find nothing of interest</Original>
+                <English>you find nothing of interest</English>
+            </Key> 
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions7">
+                <Original>Heavy mission, location is unknown, and task is unknown, need to gain intel from locals, recon area, do what ever you can to locate and identity your objective!</Original>
+                <English>Heavy mission, location is unknown, and task is unknown, need to gain intel from locals, recon area, do what ever you can to locate and identity your objective!</English>
+            </Key>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName7">
+                <Original>Hidden Heavy Mission (Full map, gather intel)</Original>
+                <English>Hidden Heavy Mission (Full map, gather intel)</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_TargetMissionTitle">
+                <Original>Search and Destroy</Original>
+                <English>Search and Destroy</English>
+            </Key> 
+            <Key ID="STR_TRGM2_TargetMissionDescription">
+                <Original>We have intel of three Targets which are marked on your map, blow them up!</Original>
+                <English>We have intel of three Targets which are marked on your map, blow them up!</English>
+            </Key> 
+            <Key ID="STR_TRGM2_TargetMarkerText">
+                <Original>Target</Original>
+                <English>Target</English>
+            </Key> 
+
+            </Key>
+      		<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MainAOSelect">
+              <Original>Select main AO Pos</Original>
+              <English>Select main AO Pos</English>
+            </Key>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MainAO_CAMP_Select">
+              <Original>Select main AO Camp Pos</Original>
+              <English>Select main AO Camp Pos</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3">
+                <Original> is selecting the AO</Original>
+                <English> is selecting the AO</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_tele_SelectPositionAO1">
+                <Original>1. SELECT AO LOCATION (Press esc at anytime to randomly place all following points)</Original>
+                <English>1. SELECT AO LOCATION (Press esc at anytime to randomly place all following points)</English>
+            </Key>
+            <Key ID="STR_TRGM2_tele_SelectPositionAO2">
+                <Original>2. SELECT SECOND AO LOCATION (Press esc at anytime to randomly place all following points)</Original>
+                <English>2. SELECT SECOND AO LOCATION (Press esc at anytime to randomly place all following points)</English>
+            </Key>
+            <Key ID="STR_TRGM2_tele_SelectPositionAO3">
+                <Original>3. SELECT THIRD AO LOCATION (Press esc at anytime to randomly place all following points)</Original>
+                <English>3. SELECT THIRD AO LOCATION (Press esc at anytime to randomly place all following points)</English>
+            </Key>
+            <Key ID="STR_TRGM2_tele_SelectPosition_AO_Camp">
+                <Original>SELECT AO CAMP LOCATION (Press esc at anytime to randomly place all following points)</Original>
+                <English>SELECT AO CAMP LOCATION (Press esc at anytime to randomly place all following points)</English>
+            </Key>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFlashLights">
+                <Original>Enemy to have flashlights</Original>
+                <English>Enemy to have flashlights</English>
+            </Key>
+
+             <Key ID="STR_TRGM2_select_flare_location">
+                <Original>SELECT WHERE TO SEND FLARES TO</Original>
+                <English>SELECT WHERE TO SEND FLARES TO</English>
+            </Key>
+            <Key ID="STR_TRGM2_CacheMissionTitle">
+                <Original>Destroy Cache</Original>
+                <English>Destroy Cache</English>
+            </Key> 
+            <Key ID="STR_TRGM2_CacheMissionDescription">
+                <Original>Location of enemy cache found, destroy it</Original>
+                <English>Location of enemy cache found, destroy it</English>
+            </Key> 
+            <Key ID="STR_TRGM2_CacheMarkerText">
+                <Original>Target</Original>
+                <English>Target</English>
+            </Key> 
 
         </Container>
     </Package>

@@ -1,6 +1,6 @@
 params ["_vehicle",["_isPickup", false]];
 
-_redZonePositions = ObjectivePossitions-ClearedPositions;
+_redZonePositions = ObjectivePossitions-ClearedPositions-HiddenPossitions;
 _radius = 900;
 _minimumDistance = 300;
 _markers = [];

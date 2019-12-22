@@ -18,6 +18,7 @@ TREND_fnc_AnimateWildLife = {
 	{
 	   _x playMove "Goat_Idle_Stop";
 	} forEach nearestObjects [_pos, ["Goat_random_F"], 2500];
+
 };
 
 {

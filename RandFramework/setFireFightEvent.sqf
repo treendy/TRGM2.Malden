@@ -137,7 +137,7 @@ WarEventActive = true;
 		_yPos = (_eventLocationPos select 1)-125;
 
 
-		if (selectRandom[true,false]) then {
+		if (selectRandom[true,false,false,false,false,false,false]) then {
 			_li_aaa = _type createVehicleLocal [_xPos+(random 250),_yPos+(random 250),0];
 			_li_aaa setDamage 1;
 		}
@@ -151,10 +151,11 @@ WarEventActive = true;
 			_shotsToFire = selectRandom[3,10,15];
 			_weapon = currentWeapon _tempFireUnit;
 			_ammo = _tempFireUnit ammo _weapon;
+			_sleep = selectRandom [0.05,0.1];
 			while {_shotsToFire > 0} do {
 				_tempFireUnit forceWeaponFire [_weapon, "FullAuto"];
 				_shotsToFire = _shotsToFire - 1;
-				sleep 0.1;
+				sleep _sleep;
 			};
 		
 			deleteVehicle _tempFireUnit;
@@ -164,7 +165,7 @@ WarEventActive = true;
 		_diceRoll = floor(random 12)+1;
 
 		if (_diceRoll == 1) then {_sleep = 10+random 5};
-		if (_diceRoll > 8) then {_sleep = 0.5+random 1};
+		if (_diceRoll > 6) then {_sleep = 0.5+random 1};
 		//hint str(_sleep);
 
 		sleep _sleep;
@@ -231,7 +232,7 @@ WarEventActive = true;
 			};
 		};
 		
-		sleep selectRandom [60,80,100,120];
+		sleep selectRandom [240,480];
 		
 	};
 };

@@ -15,7 +15,9 @@ if (count _nearestHidingPlaces > 5) then {
 	_ambushGroup setCombatMode "BLUE";
 	_ambushGroup setBehaviour "SAFE";
 	_objMilUnit setUnitPos selectRandom ["MIDDLE","DOWN"];
-	_objMilUnit setDir ([_objMilUnit, _triggerArea] call BIS_fnc_DirTo);	
+	_direction = ([_objMilUnit, _triggerArea] call BIS_fnc_DirTo);
+	_objMilUnit setDir _direction;	
+	_objMilUnit setFormDir _direction;
 
 	_expl1 = "DemoCharge_Remote_Ammo" createVehicle position _objMilUnit;
 	_expl1 attachTo [_objMilUnit, [-0.1, 0.1, 0.15], "Pelvis"];

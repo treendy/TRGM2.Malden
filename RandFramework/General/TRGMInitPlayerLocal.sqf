@@ -8,6 +8,11 @@ if (isNil "bAndSoItBegins") then {
 	publicVariable "bAndSoItBegins";
 };
 
+if (isNil "bOptionsSet") then {
+	bOptionsSet = false;
+	publicVariable "bOptionsSet";
+};
+
 if (isNil "CustomObjectsSet") then {
 	CustomObjectsSet = false;
 	publicVariable "CustomObjectsSet";
@@ -32,14 +37,17 @@ CODEINPUT = [];
 
 	TREND_fnc_MissionSelectLoop = {
 		sleep 3;
-		if (!bAndSoItBegins) then {playMusic IntroMusic;};
+		if (!bAndSoItBegins) then {
+			playMusic IntroMusic;
+			{systemChat format["SelectLoop Music: %1", IntroMusic ];} remoteExec ["bis_fnc_call", 0];
+		};
 		while {!bAndSoItBegins} do {
 
 			if (str player == "sl") then {
 				if  (!dialog) then {
 					//[] spawn {
 						sleep 1.5;
-						if  (!dialog && !bAndSoItBegins) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
+						if  (!dialog && !bOptionsSet) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
 							[] execVM "RandFramework\GUI\openDialogMissionSelection.sqf";
 							//_actChooseMission = endMissionBoard addaction ["Select Mission Params", "RandFramework\GUI\openDialogMissionSelection.sqf"];
 						};
@@ -61,10 +69,16 @@ CODEINPUT = [];
 				    	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
 					}
 					else {
-						txt1Layer = "txt1" call BIS_fnc_rscLayer;
-				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + name sl + " " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
-				    	[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
-
+						if (!bOptionsSet) then {
+							txt1Layer = "txt1" call BIS_fnc_rscLayer;
+					    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + name sl + " " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
+					    	[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
+						}
+						else {
+							txt1Layer = "txt1" call BIS_fnc_rscLayer;
+				    		_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + name sl + " " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3" + "</t>";
+				    		[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
+						};
 						txt5Layer = "txt5" call BIS_fnc_rscLayer;
 				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>";
 				    	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
@@ -240,6 +254,15 @@ TREND_fnc_GetAnimalsMoving = {
 player addEventHandler ["Respawn", { [] spawn TREND_fnc_GetAnimalsMoving; }];
 
 //[player, supReq] call BIS_fnc_addSupportLink;
+if (leader (group (vehicle player)) == player) then {
+	_trg = createTrigger["EmptyDetector",getPos player];
+	_trg setTriggerActivation["ALPHA",  "PRESENT",true];
+	_trg setTriggerText "illuminate your position for 5 mins (eta 60 seconds)";
+	_trg setTriggerStatements["this", "[player] execVM ""RandFramework\RandScript\fireIllumFlares.sqf"";", ""];
+
+	//_trgCustomAIScript setTriggerStatements ["hint 'test'", format["nul = [this, thisList, %1, %2, %3] execVM ""RandFramework\RandScript\TREND_fnc_CallNearbyPatrol.sqf"";",str(_sidePos),_iSideIndex, _bIsMainObjective], ""];
+};
+
 
 TREND_fnc_GeneralPlayerLoop = {
 	while {true} do {
@@ -261,6 +284,9 @@ TREND_fnc_GeneralPlayerLoop = {
 				//	};
 				//};
 			};
+
+
+			
 
 			if (leader (group (vehicle player)) == player && AdvancedSettings select ADVSET_SUPPORT_OPTION_IDX == 1) then {
 				if (iMissionSetup == 5) then {
@@ -525,6 +551,7 @@ TREND_fnc_MissionOverAnimation = {
 			playMusic "";
 			0 fadeMusic 1;
 			playMusic selectRandom ThemeAndIntroMusic;
+			Hint format["InitPlayer Music: %1",ThemeAndIntroMusic];
 			sleep 8;
 			["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>TRGM 2</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TRGM2Title" + "</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText;
 			sleep 10;

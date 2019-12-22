@@ -7,6 +7,8 @@ disableSerialization;
 if (ForceMissionSetup) then {
 	bAndSoItBegins = true;
 	publicVariable 'bAndSoItBegins';
+	bOptionsSet = true;
+	publicVariable 'bOptionsSet';
 	closedialog 0;
 }
 else {
@@ -63,8 +65,9 @@ else {
 		profileNamespace setVariable [worldname + ":PreviousSettings",_savePreviousSettings];
 		saveProfileNamespace;
 
-		bAndSoItBegins = true;
-		publicVariable 'bAndSoItBegins';
+		
+		bOptionsSet = true;
+		publicVariable 'bOptionsSet';
 		closedialog 0;
 
 	};
@@ -145,7 +148,7 @@ else {
 
 			bAndSoItBegins = true;
 			publicVariable 'bAndSoItBegins';
-			closedialog 0;
+			closedialog 0;			
 		};
 	};
 };

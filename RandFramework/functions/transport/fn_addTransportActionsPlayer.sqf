@@ -3,10 +3,9 @@ params ["_vehicles"];
 if (!isServer) exitWith {};
 
 /********************* Add Player Actions ****************/
-
-if ([] call TRGM_fnc_isAceLoaded) then {
+_useAceInteractionForTransport = false;
+if (_useAceInteractionForTransport && [] call TRGM_fnc_isAceLoaded) then {
 	//Ace action
-
 	
 	_generateChildActions = {
 		params ["_target", "_player", "_params"];

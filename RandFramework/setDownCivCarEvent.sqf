@@ -22,10 +22,13 @@ fnc_AddToDirection = {
 
 _vehs = CivCars;
 
-_posOfAO =  _this select 0;
+
+params ["_posOfAO",["_isFullMap",false]];
+//_posOfAO =  _this select 0;
+
 
 _nearestRoads = _posOfAO nearRoads 2000;
-if (!(isNil "IsTraining")) then {
+if (!(isNil "IsTraining") || _isFullMap) then {
 	_nearestRoads = _posOfAO nearRoads 30000;		
 };
 
@@ -102,6 +105,9 @@ if (count _nearestRoads > 0) then {
 			};
 			if (selectRandom [true,false,false]) then {
 				[_eventLocationPos] execVM "RandFramework\createWaitingSuicideBomber.sqf";
+			};
+			if (selectRandom[true,false,false]) then {
+				[_eventLocationPos] execVM "RandFramework\RandScript\createEnemySniper.sqf";
 			};
 		};
 

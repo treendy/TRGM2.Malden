@@ -3,9 +3,13 @@
 //FriendlyRadioSounds = ["ambient_radio3","ambient_radio4","ambient_radio5","ambient_radio6","ambient_radio7","ambient_radio9","ambient_radio14","ambient_radio17","ambient_radio19","ambient_radio21","ambient_radio22","ambient_radio23","ambient_radio25","ambient_radio26","ambient_radio27","ambient_radio28","ambient_radio29","ambient_radio30"];
 //hint "A";
 
-_posOfAO =  _this select 0;
+params ["_posOfAO",["_isFullMap",false]];
 
 _currentATFieldPos = [_posOfAO , 1000, 1700, 100, 0, 0.4, 0,AreasBlackList,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+
+if (!(isNil "IsTraining") || _isFullMap) then {
+	_currentATFieldPos = [_posOfAO , 30000, 1700, 100, 0, 0.4, 0,AreasBlackList,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+};
 
 if (_currentATFieldPos select 0 != 0) then {
 

@@ -296,20 +296,20 @@ if (_MergedLoudoutData != "") then {
 
 	[] spawn {
 		sleep 30;
-		airSup1 allowDamage true;
-		airSup2 allowDamage true;
-		car1 allowDamage true;
-		tank1 allowDamage true;
-		k1car2 allowDamage true;
-		medTruck allowDamage true;
-		mediChop1 allowDamage true;
-		chin1 allowDamage true;
-		Fuel2 allowDamage true;
-		RepairTruck allowDamage true;
-		AmmoTruck allowDamage true;
-		SmallHeli1 allowDamage true;
-		SmallHeli2 allowDamage true;
-		SmallHeli3 allowDamage true;
+		if (!isNil "airSup1") then {airSup1 allowDamage true;};
+		if (!isNil "airSup2") then {airSup2 allowDamage true;};
+		if (!isNil "car1") then {car1 allowDamage true;};
+		if (!isNil "tank1") then {tank1 allowDamage true;};
+		if (!isNil "k1car2") then {k1car2 allowDamage true;};
+		if (!isNil "medTruck") then {medTruck allowDamage true;};
+		if (!isNil "mediChop1") then {mediChop1 allowDamage true;};
+		if (!isNil "chin1") then {chin1 allowDamage true;};
+		if (!isNil "Fuel2") then {Fuel2 allowDamage true;};
+		if (!isNil "RepairTruck") then {RepairTruck allowDamage true;};
+		if (!isNil "AmmoTruck") then {AmmoTruck allowDamage true;};
+		if (!isNil "SmallHeli1") then {SmallHeli1 allowDamage true;};
+		if (!isNil "SmallHeli2") then {SmallHeli2 allowDamage true;};
+		if (!isNil "SmallHeli3") then {SmallHeli3 allowDamage true;};
 	};
 };
 
