@@ -1,5 +1,9 @@
 //#include "RandFramework\CustomMission\customMission.sqf";
 
+//hardcoded for now... see notes in root setunitglobalvars.sqf (main git/malden version of this sqf!)
+DefaultEnemyFactionValue = [1];
+DefaultFriendlyFactionValue = [1];
+
 
 _CustomMissionEnabled = false;
 _MissionTitle = "";

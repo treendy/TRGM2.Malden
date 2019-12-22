@@ -1,6 +1,10 @@
 #include "..\..\setUnitGlobalVars.sqf";
 disableSerialization;
 
+//hardcoded for now... see notes in root setunitglobalvars.sqf (main git/malden version of this sqf!)
+DefaultEnemyFactionValue = [1];
+DefaultFriendlyFactionValue = [1];
+
 if (isNil "InitialLoadedPreviousSettings" && !ForceMissionSetup) then {
 	InitialLoadedPreviousSettings = profileNamespace getVariable [worldname + ":PreviousSettings",Nil]; //Get this from server only, but use player ID!!!
 	if (!(isNil("InitialLoadedPreviousSettings"))) then {

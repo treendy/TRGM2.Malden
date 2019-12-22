@@ -1,6 +1,6 @@
 
-DefaultEnemyFactionValue = [1];
-DefaultFriendlyFactionValue = [1];
+//DefaultEnemyFactionValue = [1];//No longer use these... was having issue with naked players and no enemy... may be one day will improve this and add in again (orignally this was to allow maps like Kunduz default to cup takistan militia if available, if not it should go to next available value)
+//DefaultFriendlyFactionValue = [1]; //same reason as above
 DefaultSandStormOption = 2;
 publicVariable "DefaultEnemyFactionIndex";
 publicVariable "DefaultFriendlyFactionIndex";
@@ -46,7 +46,7 @@ CampaignRecruitUnitSniper = "B_sniper_F";
 CampaignRecruitUnitSpotter = "B_spotter_F";
 CampaignRecruitUnitUAV = "B_soldier_UAV_F";
 
-GraveYardPos = [799.305,12129.2,1.90735e-006];
+GraveYardPos = [5028.07,1424.47,0];
 GraveYardDirection = 90;
 
 FriendlyFastResponseDingy = ["B_Boat_Transport_01_F"];
