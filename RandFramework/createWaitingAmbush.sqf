@@ -30,6 +30,7 @@ if (_bAllowAmbush) then {
 			_ambushGroup setBehaviour "SAFE";
 			_objMilUnit setUnitPos selectRandom ["MIDDLE","DOWN","DOWN","DOWN"];
 			_objMilUnit setDir ([_objMilUnit, _triggerArea] call BIS_fnc_DirTo);	
+			_objMilUnit setVariable ["ambushUnit", true];
 		};
 
 		_bWaiting = true;

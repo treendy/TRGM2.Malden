@@ -126,19 +126,19 @@ class CfgSounds
 	};
 	class sswindloop {
 		name="sswindloop";
-		sound[]={\RandFramework\Sounds\sswindloop.ogg, 5,1};
+		sound[]={\RandFramework\Sounds\sswindloop.ogg, 1,1};
 		titles[] = {};
 	};
 
 	class sswindintro {
 		name="sswindintro";
-		sound[]={\RandFramework\Sounds\sswindintro.ogg, 5,1};
+		sound[]={\RandFramework\Sounds\sswindintro.ogg, 1,1};
 		titles[] = {};
 	};
 
 	class sswindoutro {
 		name="sswindoutro";
-		sound[]={\RandFramework\Sounds\sswindoutro.ogg, 5,1};
+		sound[]={\RandFramework\Sounds\sswindoutro.ogg, 1,1};
 		titles[] = {};
 	};
 

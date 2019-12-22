@@ -42,7 +42,7 @@ _posOfAO =  _this select 0;
 
 
 _nearLocations = nearestLocations [_posOfAO, ["NameCity","NameCityCapital","NameVillage"], 2500];
-if (!(isNil "IsTraining")) then {
+if (!(isNil "IsTraining") || MainIsHidden) then {
 	_nearLocations = nearestLocations [_posOfAO, ["NameCity","NameCityCapital","NameVillage"], 30000];
 };
 
@@ -57,7 +57,7 @@ _eventLocationPos = nil;
 } forEach _nearLocations;
 if (isNil("_eventLocationPos")) then {
 	_nearestRoads = _posOfAO nearRoads 5000;
-	if (!(isNil "IsTraining")) then {
+	if (!(isNil "IsTraining") || MainIsHidden) then {
 		_nearestRoads = _posOfAO nearRoads 30000;		
 	};
 	_eventLocationPos = getPos (selectRandom _nearestRoads);
@@ -73,6 +73,9 @@ if (selectRandom [true,false,false,false,false]) then {
 };
 if (selectRandom [true,false,false,false,false]) then {
 	[_eventLocationPos] execVM "RandFramework\createWaitingSuicideBomber.sqf";
+};
+if (selectRandom[true,false,false]) then {
+	[_eventLocationPos] execVM "RandFramework\RandScript\createEnemySniper.sqf";
 };
 
 
@@ -139,6 +142,10 @@ while {_iteration <= 2} do {
 					playSound3D ["A3\Sounds_F\sfx\radio\" + selectRandom FriendlyRadioSounds + ".wss",_mainVeh,false,getPosASL _mainVeh,0.5,1,0];
 					sleep selectRandom [10,15,20,30];
 				};
+			};
+
+			if (MainIsHidden) then {
+				//Here... store location and type, so can learn this from intel
 			};
 
 			if (!(isNil "IsTraining")) then {

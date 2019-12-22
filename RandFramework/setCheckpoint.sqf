@@ -12,7 +12,10 @@ params [
 	"_thisIsCheckPoint", // only used to store possitions in our checkpointareas and sentryareas arrays
 	"_thisScoutVehicles",
 	"_thisAreaAroundCheckpointSpacing",
-	["_AllowAnimation", true]
+	["_AllowAnimation", true],
+	["_AllowVeh", true],
+	["_AllowTurrent", true],
+	["_isForceTents",false]
 ];
 
 fnc_AddToDirection = {
@@ -178,7 +181,7 @@ if (_PosFound) then {
 		_roadBlockPos = _flatPos;
 		_roadBlockSidePos = _flatPos;
 		_allRoadsNear = _flatPos nearRoads 500;
-		_nearestHouseCount = count(nearestObjects [_flatPos, ["building"],500]);
+		_nearestHouseCount = count(nearestObjects [_flatPos, ["building"],400]);
 		if (count _allRoadsNear == 0 && _nearestHouseCount == 0) then {_NoRoadsOrBuildingsNear = true;};
 	};
 
@@ -188,9 +191,16 @@ if (_PosFound) then {
 		publicVariable "CheckPointAreas";
 	}
 	else {
+		if (_thisSide == east) then {
 		//SentryAreas
-		SentryAreas = SentryAreas + [[_roadBlockPos,_thisAreaAroundCheckpointSpacing]];
+			SentryAreas = SentryAreas + [[_roadBlockPos,_thisAreaAroundCheckpointSpacing]];
+		};
 	};
+
+	if (_thisSide == west) then {
+		friendlySentryCheckpointPos = friendlySentryCheckpointPos + [_roadBlockPos]
+	};
+
 
 
 	_slope = abs(((getTerrainHeightASL _roadBlockSidePos)) - ((getTerrainHeightASL  _roadBlockPos)));
@@ -224,8 +234,8 @@ if (_PosFound) then {
 		_initItem = selectRandom _RoadSideBarricadesLow createVehicle _roadBlockSidePos;
 		_initItem setDir ([_direction,180] call fnc_AddToDirection);
 
-		if (_thisSide == east) then {
-			_NearTurret1 = createVehicle [selectRandom["O_HMG_01_high_F"], _initItem getPos [1,_direction+180], [], 0, "CAN_COLLIDE"];
+		if (_thisSide == east && _AllowTurrent) then {
+			_NearTurret1 = createVehicle [selectRandom CheckPointTurret, _initItem getPos [1,_direction+180], [], 0, "CAN_COLLIDE"];
 			_NearTurret1 setDir (_direction);
 			createVehicleCrew _NearTurret1;
 		};
@@ -259,16 +269,21 @@ if (_PosFound) then {
 
 	_bHasParkedCar = false;
 	_ParkedCar = nil;
-	if (selectRandom [true,true,true,false] || _thisSide == west) then {
+	if (_AllowVeh && (selectRandom [true,true,true,false] || _thisSide == west)) then {
 		_behindBlockPos = _initItem getPos [10,([_direction,180] call fnc_AddToDirection)];
 		_flatPos = nil;
 		_flatPos = [_behindBlockPos , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
 		_ParkedCar = selectRandom _thisScoutVehicles createVehicle _flatPos;
 		_ParkedCar setDir (floor(random 360));
+		sleep 0.1;
+		if (damage _ParkedCar > 0) then {
+			_bHasParkedCar = false;
+			deleteVehicle _ParkedCar;
+		};
 		_bHasParkedCar = true;
 	};
 	if (_NoRoadsOrBuildingsNear) then {
-		if (selectRandom [true,true,true,false]) then {
+		if (selectRandom [true,true,true,false] || _isForceTents) then {
 			_behindBlockPos = _initItem getPos [15,([_direction,180] call fnc_AddToDirection)];
 			_flatPos = nil;
 			_flatPos = [_behindBlockPos , 0, 15, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
@@ -393,13 +408,23 @@ if (_PosFound) then {
 	_guardUnit5 setVariable [_sCheckpointGuyName, _guardUnit5, true];
 	missionNamespace setVariable [_sCheckpointGuyName, _guardUnit5];
 	if (_thisSide == west) then {
-		[[_guardUnit5, [localize "STR_TRGM2_setCheckpoint_Ask","RandFramework\SpeakToFriendlyCheckpoint.sqf",[_pos5]]],"addAction",true,true] call BIS_fnc_MP;
-		if (selectRandom [true,true,false]) then {
-			_test = nil;
-			_test = createMarker [format["MrkFriendCheckpoint%1%2",_roadBlockPos select 0, _roadBlockPos select 1], _roadBlockPos];
-			_test setMarkerShape "ICON";
-			_test setMarkerType "b_inf";
-			_test setMarkerText (localize "STR_TRGM2_setCheckpoint_MarkerText");
+		_isHiddenObj = false;
+		_mainAOPos = ObjectivePossitions select 0;
+		if (! isNil "_mainAOPos") then {
+			if (_mainAOPos in HiddenPossitions ) then {
+				_isHiddenObj = true;
+			};
+		};
+
+		if (!_isHiddenObj) then {
+			[[_guardUnit5, [localize "STR_TRGM2_setCheckpoint_Ask","RandFramework\SpeakToFriendlyCheckpoint.sqf",[_pos5]]],"addAction",true,true] call BIS_fnc_MP;
+			if (selectRandom [true,true,false]) then {
+				_test = nil;
+				_test = createMarker [format["MrkFriendCheckpoint%1%2",_roadBlockPos select 0, _roadBlockPos select 1], _roadBlockPos];
+				_test setMarkerShape "ICON";
+				_test setMarkerType "b_inf";
+				_test setMarkerText (localize "STR_TRGM2_setCheckpoint_MarkerText");
+			};
 		};
 	};
 	TREND_fnc_WalkingGuyLoop = {

@@ -11,7 +11,7 @@
 // if (sandstormdone1) exitWith {};
 
 // Debug - disable hint debug
-_test = false;
+_test = true;
 
 _dur = _this select 0;
 _isSmallEffect = _this select 1;
@@ -31,9 +31,10 @@ if (_test) then {hint "SS start"};
 
 // Warning length = 11 secs
 if (selectRandom [true,false] && !_isSmallEffect) then {
-    playsound ["sswarning", true];
+    //playsound ["sswarning", true];
 };
-
+5 setOvercast 1;
+5 setRain 1;
 sleep 15;
 
 // Start wind intro = 20 secs ///////////////////////////////////////////////////////////////////////////
@@ -196,6 +197,7 @@ while {time < _future} do {
 };
 
 // Add Color correction
+if (!IsSnowMap) then {
     if (_test) then {hint "Start color correction";};
     _hndl1 = ppEffectCreate ["colorCorrections", 1550];
     _hndl1 ppEffectEnable true;
@@ -209,7 +211,8 @@ while {time < _future} do {
 
     sleep 15;
 
-// Modify Color correction and dust
+
+    // Modify Color correction and dust
     if (_test) then {hint "Start modify CC and alpha";};
     While {time < _endtime && !ForceEndSandStorm} do {
         _hndl1 ppEffectAdjust [0.6 + (overcast/3), 1, 0.05, [0.7, 0.66, 0.6, 0.1 + random 0.4], [0.6 + random 0.1, 0.66, 0.6, 0.1 + random 0.4], [0.6 + random 0.1, 0.66, 0.6, 0.1 + random 0.4]];
@@ -245,7 +248,12 @@ while {time < _future} do {
 
         sleep 5;
     };
-
+}
+else {
+    While {time < _endtime && !ForceEndSandStorm} do {
+        sleep 5;
+    }
+};
 // FADE OUT EFFECTS ///////////////////////////////////////////////////////////////////////////////
     if (_test) then {hint "Fade out Sandstorm"; sleep 1;};
 

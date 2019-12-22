@@ -1,12 +1,13 @@
 
 _useCustomMission = false;
+if (_useCustomMission) then {
+	ForceMissionSetup = true; //will mean the main player will not see an mission setup dialog, and will force the settings you have selected below.
+	publicVariable "ForceMissionSetup";
+	MainMissionTitle = "The Mission of DOOOOM";
+};
+
 if (isServer && _useCustomMission) then {
 
-	ForceMissionSetup = true;
-
-	MainMissionTitle = "The Mission of DOOOOM";
-
-	iMissionParamType = 3;
 	/*
 		0=Heavy Mission (with two optional sides)
 		6=Heavy Mission (two hidden optional sides)
@@ -17,9 +18,10 @@ if (isServer && _useCustomMission) then {
 		9=Single Mission (two objectives at AO, chance of side)
 		4=Three Missions
 		7=Three Hidden Missions
+		10=Heavy Mission, hidden location and type
 		5=Campaign
 	*/
-
+	iMissionParamType = 3;
 	
 
 	/*
@@ -36,21 +38,35 @@ if (isServer && _useCustomMission) then {
 	11 = Rescue POW
 	12 = Rescue Reporter
 	13 = defuse 3 IEDs
-	13 = defuse bomb
+	14 = defuse bomb
+	15 = Search and destroy (three targets)
+	16 = Destroy Cache
 	99999 = meeting assasination
 	*/
 	iMissionParamObjective = 3;
 	//iMissionParamObjective2 = 13;
 	//iMissionParamObjective3 = 7;
 
+	iStartLocation = 1;	//0=StartAtHQ 1=StartNearAO
 	AOCampOnlyAmmoBox = true; //If true, then if players start at camp near AO, then there will only be an ammo box at the position (you may want to set this to true if you have designed your own camp)
-
 	AOCampLocation = [1674.52,1846.55,0]; //ignored if start location is HQ
+
 	Mission1Loc = [2079.68,3054.64,0];
 	//Mission2Loc = [3153.53,3491.27,0]; 
 	//Mission3Loc = [2375.46,302.959,0];
+
+	//These are only used if your mission has a sub task (e.g. speak with bomb informant)
+	//However, if you have selected heavy with intel required above (i.e. iMissionParamType = 1), then just select the Mission2Loc to a pos where the informat will be
+	//Mission1SubLoc = [2079.68,3054.64,0]; 
+	//Mission2SubLoc = [3153.53,3491.27,0]; 
+	//Mission3SubLoc = [2375.46,302.959,0];	
+
+	Mission1Title = "Blow dem trucks up!";
+	Mission1Desc = "these trucks need to be blown up man.  They are bad and we need rid!";
+
 	ForceWarZoneLoc = [3021,18451.7,0]; //nil  << set to nil if not wanted!
 
+	UseEditorWeather = true; //set this to true, and the weather options will be ignored and will just use what was set in editor
 	DateTimeWeather = [/*YEAR*/2055,/*MONTH*/12,/*DAY*/16,/*HOUR*/09,/*MIN*/17,/*OVERCAST*/1,/*FOG*/[0,0,0]];
 	//FOG ARRAY:
 	/*
@@ -60,9 +76,14 @@ if (isServer && _useCustomMission) then {
 	*/	
 
 	iAllowNVG = 1;	//0=NotAllowed, 1=Allowed, 2=Realistic
-	iMissionParamRepOption =  1;	//1=FailMissionIfRepLow 0=JustFailTaskIfRepLow
+	iMissionParamRepOption =  0;	//1=FailMissionIfRepLow 0=JustFailTaskIfRepLow
 	iUseRevive = 0;	//0=NoRevive 1=GuaranteeRevive 2=CriticalHitsWillKill 3=As2ButOnlyMedicsCanRevive  4=As3ButMedicsNeedToBeNearMedicalVehicle  5=As3ButMedicsNeedToBeAtHQ
-	iStartLocation = 1;	//0=StartAtHQ 1=StartNearAO
+	
+	//NewMissionMusic = "LeadTrack02_F_Jets";
+	//PatrolType = 0; //0=random  1=smaller size, but more patrols spread around the AO
+	//AllowAOFires = false;
+	HideAoMarker = true; //just incase you want to add your own markers!
+
 	AdvancedSettings = 
 	[
 		1, //Allow virtual arsenal
@@ -71,10 +92,13 @@ if (isServer && _useCustomMission) then {
 		1, //Respawn ticket count (set to 1 for no respawn)
 		1, //Allow map drawing in direct channel only (Setting to zero will all map drawing in all channels)
 		10, //Respawn timer
-		1, //EnemyFaction
+		1, //EnemyFaction (1=CSAT/FIA  2=CSAT  3=FIA)
 		1, //FriendlyFaction
-		3, //Sandstorm option (0=Random, 1=Always, 2=Never, 3=NonStop)
-		0 //Enable Group Manager
+		2, //Sandstorm option (0=Random, 1=Always, 2=Never, 3=NonStop)
+		0, //Enable Group Manager
+		0, //allow to select AO position (pointless if ForceMissionSetup is set to false above)
+		0, //allow to select AO camp position (pointless if ForceMissionSetup is set to false above)
+		0 //enemy have flashlights (0=random, 1=yes, 2=no)
 	];
 	
 
@@ -87,4 +111,5 @@ if (isServer && _useCustomMission) then {
 	publicVariable "iMissionParamObjective";
 	publicVariable "iMissionParamObjective2";
 	publicVariable "iMissionParamObjective3";
+	publicVariable "NewMissionMusic";
 }

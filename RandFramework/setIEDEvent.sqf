@@ -1,5 +1,5 @@
 
-params ["_posOfAO",["_roadRange",2000],["_showMarker",false],["_forceTrap",false],["_objIED",nil],["_IEDType",nil]];
+params ["_posOfAO",["_roadRange",2000],["_showMarker",false],["_forceTrap",false],["_objIED",nil],["_IEDType",nil],["_isFullMap",false]];
 
 if (isNil "_IEDType") then {
 	_IEDType = selectRandom ["CAR","CAR","RUBBLE"];
@@ -27,7 +27,7 @@ fnc_AddToDirection = {
 
 
 _nearestRoads = _posOfAO nearRoads _roadRange;
-if (!(isNil "IsTraining") && _roadRange != 2000) then {
+if ((!(isNil "IsTraining") || _isFullMap) && _roadRange == 2000) then {
 	_nearestRoads = _posOfAO nearRoads 30000;		
 };
 
@@ -128,9 +128,13 @@ if (count _nearestRoads > 0) then {
 						[_thisVeh] spawn {
 							_thisVeh = _this select 0;
 							_thisVeh setVariable ["alarmActive",true, true];
-							while {alive _thisVeh && _thisVeh getVariable ["alarmActive",false]} do {
+							_beepLimit = 20;
+							_endLoop = false;
+							while {!_endLoop && alive _thisVeh && _thisVeh getVariable ["alarmActive",false]} do {
 								playSound3D ["a3\sounds_f\weapons\horns\truck_horn_2.wss", _thisVeh];
 								sleep 1;
+								_beepLimit = _beepLimit - 1;
+								if (_beepLimit < 1) then {_endLoop = true;};
 							};
 						};
 					};
@@ -213,7 +217,7 @@ if (count _nearestRoads > 0) then {
 			] remoteExec ["BIS_fnc_holdActionAdd", 0, _mainVeh];	// MP compatible implementation
 
 
-
+			_spawnedUnit = nil;
 			if (_bIsTrap) then {
 				
 				if (selectRandom [true,false,false,false]) then {
@@ -223,7 +227,75 @@ if (count _nearestRoads > 0) then {
 				if (selectRandom[true,false,false,false,false]) then {
 					[_eventLocationPos] execVM "RandFramework\createWaitingSuicideBomber.sqf";
 				};
+				if (selectRandom[true,false]) then {
+					[_eventLocationPos] execVM "RandFramework\RandScript\createEnemySniper.sqf";
+				};
 
+				/*
+				if (selectRandom[true,false]) then {
+					_targetPos = [_targetPos select 0, _targetPos select 1, 0]; //round (_targetPos select 2)];
+
+					_spawnedUnit = nil;
+					_foundPlace = false;
+
+					_maxRange = 800;
+					_minRange = 600;
+					_minHeight = 20;
+
+					_civToUse = selectRandom sCivilian;
+					_spawnedUnit = ((createGroup east) createUnit [_civToUse, [-135,-253,0], [], 10, "NONE"]);
+					_spawnedTempTarget = ((createGroup east) createUnit [_civToUse, _targetPos, [], 10, "NONE"]);
+
+					for "_i" from 1 to 20 do {
+						if (!_foundPlace) then {
+							//hint str(_i);
+							TestTestTargetPos = str(_targetPos);
+							//_pos = [_targetPos, _maxRange, 200, _minHeight, _targetPos] execVM "RandFramework\RandScript\findOverwatchOverride.sqf";
+							_pos = [_targetPos, _maxRange, 200, _minHeight, _targetPos] call compile preprocessFileLineNumbers "RandFramework\RandScript\findOverwatchOverride.sqf";
+							//_pos = [_targetPos, _maxRange, 200, _minHeight, _targetPos] call BIS_fnc_findOverwatch;
+							_spawnedUnit setPos _pos;
+							_direction = [getpos _spawnedUnit, _targetPos] call BIS_fnc_DirTo;
+							//hint str(_direction);
+							_spawnedUnit setDir _direction;
+							_spawnedUnit setFormDir _direction;
+							_spawnedUnit setUnitPos selectRandom ["MIDDLE"];
+							
+							//_lodPos = [_targetPos select 0, _targetPos select 1, (_targetPos select 2) + 20];
+							//Sign_Arrow_Large_Green_F
+							//_defi = "Sign_Arrow_Large_Green_F" createVehicle _lodPos;
+							_cansee = [objNull, "VIEW"] checkVisibility [eyePos _spawnedUnit, eyePos _spawnedTempTarget];
+							_direction2 = [getpos player, getpos _spawnedUnit] call BIS_fnc_DirTo;
+							//player setpos _pos;
+							//player setDir _direction2;
+							if (_cansee > 0) then {
+								_foundPlace = true;
+								_spawnedUnit addWeapon "Binocular";
+								_spawnedUnit selectWeapon "Binoculars";
+								//[format["mrkSniper%1", time, str(getpos _spawnedUnit select 0)],  position _spawnedUnit, "ICON", "ColorGreen", [0.5,0.5], "SNIPER"] call AIS_Core_fnc_createLocalMarker;
+								SpotterCount = SpotterCount + 1;
+							}
+							else {
+								//[format["mrkSniper%1", time, str(getpos _spawnedUnit select 0)],  position _spawnedUnit, "ICON", "ColorRed", [0.5,0.5], "SNIPER"] call AIS_Core_fnc_createLocalMarker;
+								SpotterAttemptCount = SpotterAttemptCount + 1;
+								if (_i < 11) then {
+									_minHeight = _minHeight - 1;
+									_maxRange = _maxRange - 10;
+									_minRange = _minRange - 45;
+									//hint str( _minRange);
+								};
+								//deleteVehicle _spawnedUnit;
+								//deleteVehicle _spawnedTempTarget
+							};
+						};
+						//hint str(_cansee);
+					};
+					deleteVehicle _spawnedTempTarget;
+
+					if (!_foundPlace) then {
+						deleteVehicle _spawnedUnit;
+					};
+				};
+				*/
 				_allowAPTraps = true;
 				_mainVehPos = getPos _mainVeh;
 				{
@@ -276,38 +348,51 @@ if (count _nearestRoads > 0) then {
 		  	  	//_bIsTrap
 			  	if (_bIsTrap) then {
 			  		//LandVehicle
-			  		/*if (_bHasHidingAmbush) then {
-				  		_nearUnits = nearestObjects [(_roadBlockSidePos), ["Man"], 10];
+			  		if (alive _mainVeh) then {
+				  		/*_nearUnits = nearestObjects [(_roadBlockSidePos), ["Man"], 10];
 				  		{
-				  			if (alive _expl1 && ((driver _x) in switchableUnits || (driver _x) in playableUnits || !(alive _mainVeh))) then {
-				  				_bWaiting = false;
+							if ((_x in switchableUnits || _x in playableUnits) && (alive _mainVeh)) then {
+								_bWaiting = false;
+								hint localize "STR_TRGM2_IEDOhOh";
+								sleep 1;
+								playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_mainVeh,false,getPosASL _mainVeh,0.5,1.5,0];
+								sleep 0.6;
+								playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_mainVeh,false,getPosASL _mainVeh,0.5,1.5,0];
+								sleep 0.5;
 								playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_mainVeh,false,getPosASL _mainVeh,0.5,1.5,0];
 								sleep 0.4;
 								playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_mainVeh,false,getPosASL _mainVeh,0.5,1.5,0];
-								sleep 0.4;
+								sleep 0.3;
+								playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_mainVeh,false,getPosASL _mainVeh,0.5,1.5,0];
+								sleep 0.2;
+								playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_mainVeh,false,getPosASL _mainVeh,0.5,1.5,0];
+								sleep 0.1;
 								playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_mainVeh,false,getPosASL _mainVeh,0.5,1.5,0];
 								sleep 1.5;
 								//do boooooom!!!!
-								_expl1 setDamage 1;
-							};
-							if (!_bWaiting) exitWith {true};
-						} forEach _nearUnits;
-					};*/
-					_nearUnits = nearestObjects [(_roadBlockSidePos), ["LandVehicle"], 10];
-			  		{
-			  			if ((driver _x) in switchableUnits || (driver _x) in playableUnits || !(alive _mainVeh)) then {
-			  				if (selectRandom [true,true]) then {
-			  					_type = selectRandom ["Bomb_03_F","Missile_AA_04_F","M_Mo_82mm_AT_LG","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo"];
-			  					_li_aaa = _type createVehicle (getPos _mainVeh);
+								_type = selectRandom ["Bomb_03_F","Missile_AA_04_F","M_Mo_82mm_AT_LG","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo"];
+								_li_aaa = _type createVehicle (getPos _mainVeh);
 								_li_aaa setDamage 1;
 								_mainVeh setVariable ["isDefused",true, true];
 								[localize "STR_TRGM2_IEDOmteresting"] remoteExecCall ["Hint", 0];
 							};
-						};
-						if (!_bWaiting) exitWith {true};
-					} forEach _nearUnits;
-			  	}; 
-			  	
+							if (!_bWaiting) exitWith {true};
+						} forEach _nearUnits;*/
+						_nearUnits = nearestObjects [(_roadBlockSidePos), ["LandVehicle"], 10];
+						{
+							if (((driver _x) in switchableUnits || (driver _x) in playableUnits) && (alive _mainVeh)) then {
+								if (selectRandom [true,true]) then {
+									_type = selectRandom ["Bomb_03_F","Missile_AA_04_F","M_Mo_82mm_AT_LG","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo"];
+									_li_aaa = _type createVehicle (getPos _mainVeh);
+									_li_aaa setDamage 1;
+									_mainVeh setVariable ["isDefused",true, true];
+									[localize "STR_TRGM2_IEDOmteresting"] remoteExecCall ["Hint", 0];
+								};
+							};
+							if (!_bWaiting) exitWith {true};
+						} forEach _nearUnits;
+			  		}; 
+				};
 			  
 			  	if (_bWaiting) then {
 					sleep 1;

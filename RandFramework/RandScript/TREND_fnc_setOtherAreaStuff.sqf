@@ -1,7 +1,7 @@
 #include "../../setUnitGlobalVars.sqf";
 #include "trendFunctions.sqf";
 
-
+///*orangestest
 
 _mainObjPos = ObjectivePossitions select 0;
 
@@ -104,6 +104,7 @@ if (count _TowersNear > 0) then {
 {systemChat "Mission Events: CommsEND";} remoteExec ["bis_fnc_call", 0];
 
 
+
 if (!(isNil "IsTraining")) then {
 	[_mainObjPos] execVM "RandFramework\setMedicalEvent.sqf";
 	[_mainObjPos] execVM "RandFramework\setMedicalEvent.sqf";
@@ -118,11 +119,28 @@ if (!(isNil "IsTraining")) then {
 	[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
 	[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
 
+	[_mainObjPos,20000,true,false,nil, true] execVM "RandFramework\setTargetEvent.sqf";
+	[_mainObjPos,20000,true,false,nil, true] execVM "RandFramework\setTargetEvent.sqf";
+	[_mainObjPos,20000,true,false,nil, true] execVM "RandFramework\setTargetEvent.sqf";
+	[_mainObjPos,20000,true,false,nil, true] execVM "RandFramework\setTargetEvent.sqf";
+
 }
 else {
 
 
-{systemChat "Loading Events";} remoteExec ["bis_fnc_call", 0];
+{systemChat "Loading Events : 15";} remoteExec ["bis_fnc_call", 0];
+	if (selectRandom ChanceOfOccurance) then {
+		[_mainObjPos,1900,false,false,nil, false] execVM "RandFramework\setTargetEvent.sqf";
+		sleep 1;
+	};	
+
+{systemChat "Loading Events : 14";} remoteExec ["bis_fnc_call", 0];
+	if (selectRandom ChanceOfOccurance) then {
+		[_mainObjPos,1900,false,false,nil, true] execVM "RandFramework\setTargetEvent.sqf";
+		sleep 1;
+	};	
+
+{systemChat "Loading Events : 13";} remoteExec ["bis_fnc_call", 0];
 	if (selectRandom ChanceOfOccurance) then {
 	//if (true) then {
 		[_mainObjPos] execVM "RandFramework\setATMineEvent.sqf";
@@ -177,9 +195,11 @@ else {
 	//if (true) then {
 		[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
 		sleep 1;
-	};		
+	};	
 
+	
 
+//these are more likely to show (instead of using ChanceOfOccurance), as a lot of times, these are not a trap, just an empty vehicle or a pile of rubbish
 {systemChat "Loading Events : 5";} remoteExec ["bis_fnc_call", 0];
 	if (selectRandom [true,true,false]) then {
 		[_mainObjPos] execVM "RandFramework\setIEDEvent.sqf";
@@ -210,14 +230,53 @@ else {
 		[_mainObjPos] execVM "RandFramework\setIEDEvent.sqf";
 		sleep 1;
 	};
+
+
+	
+
+
 {systemChat "Loading Events : END";} remoteExec ["bis_fnc_call", 0];
 };
 
+//worldName call BIS_fnc_mapSize << equals the width in meters
+//altis is 30720
+//kujari is 16384 wide
+//STratis is 8192
+_mapSizeTxt = "LARGE";
+_mapSize = worldName call BIS_fnc_mapSize;
+if (_mapSize < 13000) then {
+	_mapSizeTxt = "MEDIUM"
+};
+if (_mapSize < 10000) then {
+	_mapSizeTxt = "SMALL"
+};
 
+if (IsFullMap) then {
+	{systemChat "Loading Full Map Events : BEGIN";} remoteExec ["bis_fnc_call", 0];
+	[_mainObjPos,true] execVM "RandFramework\setDownCivCarEvent.sqf";
+	[_mainObjPos,true] execVM "RandFramework\setDownedChopperEvent.sqf";
+	[_mainObjPos,true] execVM "RandFramework\setATMineEvent.sqf";
+	[_mainObjPos,2000,false,false,nil,nil,true] execVM "RandFramework\setIEDEvent.sqf";
+	[_mainObjPos,2000,false,false,nil,nil,true] execVM "RandFramework\setIEDEvent.sqf";
+
+	if (_mapSizeTxt == "MEDIUM" || _mapSizeTxt == "LARGE") then {
+		[_mainObjPos,2000,false,false,nil,nil,true] execVM "RandFramework\setIEDEvent.sqf";
+		[_mainObjPos,2000,false,false,nil,nil,true] execVM "RandFramework\setIEDEvent.sqf";
+		[_mainObjPos,true] execVM "RandFramework\setATMineEvent.sqf";
+	};
+	if (_mapSizeTxt == "LARGE") then {
+		[_mainObjPos,true] execVM "RandFramework\setDownCivCarEvent.sqf";
+		[_mainObjPos,true] execVM "RandFramework\setDownedChopperEvent.sqf";
+		[_mainObjPos,2000,false,false,nil,nil,true] execVM "RandFramework\setIEDEvent.sqf";
+	};
+
+	{systemChat "Loading Full Map Events : END";} remoteExec ["bis_fnc_call", 0];
+
+};
 //chance of a convey, start somewhere random, parked up and ready to move, wait random time, then start driving to location
 // chance that players may get notified when convey leave.... if destroyed, gain 0.3 rep
 // if player is notificed, then have tracking on convey and show on map (important, as if it gets stuck, player will be waiting for nothing)
 
 
 
-
+//orangestest*/

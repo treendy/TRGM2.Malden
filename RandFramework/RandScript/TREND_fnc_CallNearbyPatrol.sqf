@@ -7,6 +7,14 @@ _FirstPos = _this select 2;
 _iSideIndex = _this select 3;
 _bIsMainObjective = _this select 4;
 
+
+if (isNil "FlareCounter") then {
+		FlareCounter = 15;
+};
+if (isNil "FireFlares") then {
+		FireFlares = selectRandom[true,false];
+};
+
 //hint format["THIS: \nTHISLIST: %1",str(_thisThisList)];
 //sleep 10;
 _MainObjectivePos = ObjectivePossitions select 0;
@@ -17,14 +25,22 @@ _MainObjectivePos = ObjectivePossitions select 0;
 
 if (isServer && count _thisThisList > 0) then {
 //9062.48,9828.87
-	//TREND_fnc_FireFlares = {
-	//	[_FirstPos] execVM "RandFramework\RandScript\fireAOFlares.sqf";
-	//	sleep 0.2;
-	//	[_FirstPos] execVM "RandFramework\RandScript\fireAOFlares.sqf";
-	//	sleep 10;
-	//	[_FirstPos] execVM "RandFramework\RandScript\fireAOFlares.sqf";
-	//};
-	//[] spawn TREND_fnc_FireFlares;
+	if (FireFlares) then {
+		//gives 3 second delay before firing up flare, and also, will wait 10 seconds before firing up more
+		FlareCounter = FlareCounter - 1; 
+		if (FlareCounter == 10) then {
+			_centPos = _FirstPos;
+			_FirstFlarePos = _centPos getPos [(floor random 150),(floor random 360)];
+			_SecondFlarePos = _centPos getPos [(floor random 150),(floor random 360)];
+			[_FirstFlarePos] execVM "RandFramework\RandScript\fireAOFlares.sqf";
+			sleep 0.5;
+			[_SecondFlarePos] execVM "RandFramework\RandScript\fireAOFlares.sqf";			
+
+		};
+		if (FlareCounter == 0) then {
+			FlareCounter = 30;
+		};
+	};
 
 	//[_SpottedUnitPos, 1] execVM "RandFramework\RandScript\enemyAirSupport.sqf";
 

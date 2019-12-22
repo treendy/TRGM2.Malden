@@ -35,7 +35,7 @@ if (isServer) then {
 			_AirVehicle = selectRandom EnemyAirScout;
 		};
 
-		hint format ["AirType: %1",_AirVehicle];
+		//hint format ["AirType: %1",_AirVehicle];
 		sleep 1;
 
 		_airSup1Array = [ReinforceStartPos1, 45, _AirVehicle, _groupp1] call Bis_fnc_spawnvehicle;
@@ -43,7 +43,7 @@ if (isServer) then {
 		_enemyAirSup1 flyInHeight 40;
 		_enemyAirSup1 setVehicleAmmo 1;
 
-		hint format ["Spawned pos: %1",ReinforceStartPos1];
+		//hint format ["Spawned pos: %1",ReinforceStartPos1];
 		sleep 1;
 
 		_sAirName = format["objAirSupport%1",CalledAirsupportIndex];
@@ -54,7 +54,7 @@ if (isServer) then {
 		//	[[HQMan,"FastMoverSpotted"],"sideRadio",true,true] call BIS_fnc_MP;
 		//};
 	
-		hint format ["_SpottedPos: %1",_SpottedPos];
+		//hint format ["_SpottedPos: %1",_SpottedPos];
 		sleep 1;
 
 		_iFlyRange = 1000;

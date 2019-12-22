@@ -4,6 +4,11 @@
 
 sleep random [1,2.5,5]; //to increase the chance of not fireing at same time! (not convinsed that the "PointsUpdating" variable actually helped)
 
+
+if (isNil { TRGM_Logic getVariable "PointsUpdating" }) then {
+	TRGM_Logic setVariable ["PointsUpdating", false, true];
+};
+
 waitUntil {!(TRGM_Logic getVariable "PointsUpdating")};
 TRGM_Logic setVariable ["PointsUpdating", true, true];
 

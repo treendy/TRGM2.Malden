@@ -66,7 +66,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	};
 
 	_firstGuardClass = selectRandom _HVTGuys;
-	_HVTGuys = _HVTGuys - InterogateOfficerClasses;
+	//_HVTGuys = _HVTGuys - InterogateOfficerClasses;
 	_HVTGuys = _HVTGuys - [_firstGuardClass];
 	_mainHVTClass = selectRandom _HVTGuys;
 	_HVTGuys = _HVTGuys - [_mainHVTClass];

@@ -10,8 +10,6 @@ _SecondPos = _this select 3;
 if (isServer) then {
 
 	TREND_fnc_FireFlares = {
-		[1] execVM "RandFramework\RandScript\fireAOFlares.sqf";
-		sleep 0.2;
 		[2] execVM "RandFramework\RandScript\fireAOFlares.sqf";
 		sleep 10;
 		[2] execVM "RandFramework\RandScript\fireAOFlares.sqf";
@@ -46,15 +44,15 @@ if (isServer) then {
 		_EnemyBaseChopperWP1 setWaypointSpeed "LIMITED";
 		_EnemyBaseChopperWP1 setWaypointBehaviour "AWARE";	
 
-		_EnemyBaseChopperWP1 = group EnemyBaseChopperPilot addWaypoint [getPos _SpottedUnit,0,1];
-		_EnemyBaseChopperWP1 setWaypointType "MOVE";
-		_EnemyBaseChopperWP1 setWaypointSpeed "LIMITED";
-		_EnemyBaseChopperWP1 setWaypointBehaviour "AWARE";	
+		_EnemyBaseChopperWP2 = group EnemyBaseChopperPilot addWaypoint [getPos _SpottedUnit,0,1];
+		_EnemyBaseChopperWP2 setWaypointType "MOVE";
+		_EnemyBaseChopperWP2 setWaypointSpeed "LIMITED";
+		_EnemyBaseChopperWP2 setWaypointBehaviour "AWARE";	
 
-		_EnemyBaseChopperWP1 = group EnemyBaseChopperPilot addWaypoint [getPos baseHeliPad,0,2];
-		_EnemyBaseChopperWP1 setWaypointType "MOVE";
-		_EnemyBaseChopperWP1 setWaypointSpeed "FULL";
-		_EnemyBaseChopperWP1 setWaypointStatements ["true", "(vehicle this) LAND 'LAND';"];
+		_EnemyBaseChopperWP3 = group EnemyBaseChopperPilot addWaypoint [getPos baseHeliPad,0,2];
+		_EnemyBaseChopperWP3 setWaypointType "MOVE";
+		_EnemyBaseChopperWP3 setWaypointSpeed "FULL";
+		_EnemyBaseChopperWP3 setWaypointStatements ["true", "(vehicle this) LAND 'LAND';"];
 	};
 	
 	_SpottedUnitCount = {_x distance _SpottedUnit < 200} count units group _SpottedUnit;

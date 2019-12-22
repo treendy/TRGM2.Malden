@@ -82,6 +82,11 @@ if (isNil "ObjectivePossitions") then {
 	publicVariable "ObjectivePossitions";
 };
 
+if (isNil "HiddenPossitions") then {
+	HiddenPossitions = [];
+	publicVariable "HiddenPossitions";
+};
+
 if (isNil "SpottedActiveFinished") then {
 	SpottedActiveFinished = true;
 	publicVariable "SpottedActiveFinished";
@@ -236,8 +241,34 @@ if (isNil("ForceMissionSetup")) then {
 	ForceMissionSetup = false;
 	publicVariable "ForceMissionSetup";
 };
+if (isNil "IsSnowMap") then {
+		IsSnowMap = false;
+		publicVariable "IsSnowMap";
+};
+if (isNil "MissionParamsSet") then {
+	MissionParamsSet = false;
+	publicVariable "MissionParamsSet";
+};
+if (isNil "IsFullMap") then {
+	IsFullMap = false;
+	publicVariable "IsFullMap";
+};
+if (isNil "bOptionsSet") then {
+	bOptionsSet = false;
+	publicVariable "bOptionsSet";
+};
+if (isNil "MissionLoaded") then {
+	MissionLoaded = false;
+	publicVariable "MissionLoaded";
+};
 
-
+if (isServer) then {
+	SniperCount = 0;
+	SniperAttemptCount = 0;
+	SpotterCount = 0;
+	SpotterAttemptCount = 0;
+	friendlySentryCheckpointPos = [];
+};
 
 
 tracer1 setPos [99999,99999];
@@ -298,60 +329,60 @@ _trgRatingAdjust setTriggerArea [0, 0, 0, false];
 _trgRatingAdjust setTriggerStatements ["((rating player) < 0)", "player addRating -(rating player)", ""];
 
 
-if (! isDedicated) then {
-waitUntil {!isNull player};
+if (!isDedicated) then {
+	waitUntil {!isNull player};
 
-TransferProviders = {
-	if !([] call TRGM_fnc_isCbaLoaded) then {
-		[[chopper1]] call TRGM_fnc_addTransportActions;
-	};
-	//player addAction [localize "STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport","[chopper1,true] spawn TRGM_fnc_selectLZ",0,0];	
+	TransferProviders = {
+		if !([] call TRGM_fnc_isCbaLoaded) then {
+			[[chopper1]] call TRGM_fnc_addTransportActions;
+		};
+		//player addAction [localize "STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport","[chopper1,true] spawn TRGM_fnc_selectLZ",0,0];	
 
-	_oldUnit = _this select 0;
-	_oldProviders = _oldUnit getVariable ["BIS_SUPP_allProviderModules",[]];
-	_HQ = _oldUnit getVariable ["BIS_SUPP_HQ",nil];
+		_oldUnit = _this select 0;
+		_oldProviders = _oldUnit getVariable ["BIS_SUPP_allProviderModules",[]];
+		_HQ = _oldUnit getVariable ["BIS_SUPP_HQ",nil];
 
-	if (isNil {player getVariable ["BIS_SUPP_HQ",nil]}) then {
-		if ((count _oldProviders) > 0) then {
-			{
-				_providerModule = _x;
+		if (isNil {player getVariable ["BIS_SUPP_HQ",nil]}) then {
+			if ((count _oldProviders) > 0) then {
 				{
-					if (typeOf _x == "SupportRequester" && _oldUnit in (synchronizedObjects _x)) then {
-						[player, _x, _providerModule] call BIS_fnc_addSupportLink;
-					};
-				}forEach synchronizedObjects _providerModule;
-			}forEach _oldProviders;
+					_providerModule = _x;
+					{
+						if (typeOf _x == "SupportRequester" && _oldUnit in (synchronizedObjects _x)) then {
+							[player, _x, _providerModule] call BIS_fnc_addSupportLink;
+						};
+					}forEach synchronizedObjects _providerModule;
+				}forEach _oldProviders;
+			};
+
+			player setVariable ["BIS_SUPP_transmitting", false];
+			player kbAddTopic ["BIS_SUPP_protocol", "A3\Modules_F\supports\kb\protocol.bikb", "A3\Modules_F\supports\kb\protocol.fsm", {call compile preprocessFileLineNumbers "A3\Modules_F\supports\kb\protocol.sqf"}];
+			player setVariable ["BIS_SUPP_HQ", _HQ];
 		};
 
-		player setVariable ["BIS_SUPP_transmitting", false];
-		player kbAddTopic ["BIS_SUPP_protocol", "A3\Modules_F\supports\kb\protocol.bikb", "A3\Modules_F\supports\kb\protocol.fsm", {call compile preprocessFileLineNumbers "A3\Modules_F\supports\kb\protocol.sqf"}];
-		player setVariable ["BIS_SUPP_HQ", _HQ];
+		{
+			_used = _oldUnit getVariable [format ["BIS_SUPP_used_%1",_x], 0];
+			player setVariable [format ["BIS_SUPP_used_%1", _x], _used, true]
+		} forEach [
+			"Artillery",
+			"CAS_Heli",
+			"CAS_Bombing",
+			"UAV",
+			"Drop",
+			"Transport"
+		];
 	};
 
-	{
-		_used = _oldUnit getVariable [format ["BIS_SUPP_used_%1",_x], 0];
-		player setVariable [format ["BIS_SUPP_used_%1", _x], _used, true]
-	} forEach [
-		"Artillery",
-		"CAS_Heli",
-		"CAS_Bombing",
-		"UAV",
-		"Drop",
-		"Transport"
-	];
-};
 
-
-_thread = [] spawn {
-	_unit = player;
-	while {true} do {
-		waitUntil {_unit != player };
-		group player selectLeader player;
-		//hintSilent " Player has changed";
-		[_unit] call TransferProviders;
+	_thread = [] spawn {
 		_unit = player;
+		while {true} do {
+			waitUntil {_unit != player };
+			group player selectLeader player;
+			//hintSilent " Player has changed";
+			[_unit] call TransferProviders;
+			_unit = player;
+		};
 	};
-};
 
 };
 
@@ -375,45 +406,121 @@ if (!isMultiplayer) then {
 
 
 
-//[markerPos "Marker1"," This is the part to change for the sitrep",300,200,180,0,[],1] spawn BIS_fnc_establishingShot;
+if (!isDedicated && str player == "sl") then {
+	waitUntil {bOptionsSet};
+	if (iMissionParamType != 5) then {	//if isCampaign, dont allow to select AO
+		if (AdvancedSettings select ADVSET_SELECT_AO_IDX == 1) then {
+			mrkAoSelect1 = nil;
+			mrkAoSelect2 = nil;
+			mrkAoSelect3 = nil;
+			titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED"];
+			_camera cameraEffect ["Terminate","back"];
+			titleText[localize "STR_TRGM2_tele_SelectPositionAO1", "PLAIN"];
+			openMap true;
+			onMapSingleClick "Mission1Loc = _pos; publicVariable 'Mission1Loc'; openMap false; onMapSingleClick '';true;";
+			sleep 1;
+			waitUntil {!visibleMap};
+			//if (!isNil("mrkAoSelect1")) then {
+				["mrkAoSelect1",  Mission1Loc, "ICON", "ColorRed", [1,1], "AO 1"] call AIS_Core_fnc_createLocalMarker;
+			//};
+			if (iMissionParamType == 0 || iMissionParamType == 4) then {
+				titleText[localize "STR_TRGM2_tele_SelectPositionAO2", "PLAIN"];
+				openMap true;
+				onMapSingleClick "Mission2Loc = _pos; publicVariable 'Mission2Loc'; openMap false; onMapSingleClick '';true;";
+				sleep 1;
+				waitUntil {!visibleMap};
+				//if (!isNil("mrkAoSelect2")) then {
+					["mrkAoSelect2",  Mission2Loc, "ICON", "ColorRed", [1,1], "AO 2"] call AIS_Core_fnc_createLocalMarker;
+				//};		
 
-//hint "AAAA";
-//sleep 3;
-//player cameraEffect ["terminate","back"];
-//hint "BBBB";
+				titleText[localize "STR_TRGM2_tele_SelectPositionAO3", "PLAIN"];
+				openMap true;
+				onMapSingleClick "Mission3Loc = _pos; publicVariable 'Mission3Loc'; openMap false; onMapSingleClick '';true;";
+				sleep 1;
+				waitUntil {!visibleMap};
+				//if (!isNil("mrkAoSelect3")) then {
+					["mrkAoSelect3",  Mission3Loc, "ICON", "ColorRed", [1,1], "AO 3"] call AIS_Core_fnc_createLocalMarker;
+				//};
+			};
+			if (getMarkerColor "mrkAoSelect1" != "") then {deleteMarker "mrkAoSelect1";};
+			if (getMarkerColor "mrkAoSelect2" != "") then {deleteMarker "mrkAoSelect2";};
+			if (getMarkerColor "mrkAoSelect3" != "") then {deleteMarker "mrkAoSelect3";};
+		};
 
+		if (AdvancedSettings select ADVSET_SELECT_AO_CAMP_IDX == 1 && iStartLocation == 1) then {
+			titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED"];
+			_camera cameraEffect ["Terminate","back"];
+			titleText[localize "STR_TRGM2_tele_SelectPosition_AO_Camp", "PLAIN"];
+			openMap true;
+			onMapSingleClick "AOCampLocation = _pos; publicVariable 'AOCampLocation'; openMap false; onMapSingleClick '';true;";
+			sleep 1;
+			waitUntil {!visibleMap};
+		};
+		
+
+	};
+	bAndSoItBegins = true;
+	publicVariable "bAndSoItBegins";
+
+};
 
 
 
 
 waitUntil {bAndSoItBegins};
 
+Private _coreCountSleep = 0.1;
+
+systemChat format["Mission Core: %1", "Init"];
+sleep _coreCountSleep;
+
+
+
 if (isServer) then {
 	_iEnableGroupManagement = AdvancedSettings select ADVSET_GROUP_MANAGE_IDX;
 	if (_iEnableGroupManagement == 1) then {
 		["Initialize"] call BIS_fnc_dynamicGroups;//Exec on Server
 	};
+	
 };
+
+systemChat format["Mission Core: %1", "GroupManagementSet"];
+sleep _coreCountSleep;
 
 if (!isDedicated) then {
 	titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED"];
 	_camera cameraEffect ["Terminate","back"];
 };
 
+systemChat format["Mission Core: %1", "CameraTerminated"];
+sleep _coreCountSleep;
 
 
 
 
 //#include "RandFramework\General\TRGMSetEnemyUnitGlobalVars.sqf";
 
+call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetDefaultUnitGlobalVars.sqf";
 
-if (isServer) then {
-	call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetDefaultUnitGlobalVars.sqf";
+systemChat format["Mission Core: %1", "GlobalVarsSet"];
+sleep _coreCountSleep;
+
+if (isServer) then {	
 	call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetEnemyUnitGlobalVars.sqf";
+	{systemChat format["Mission Core: %1", "EnemyGlobalVarsSet"];} remoteExec ["bis_fnc_call", 0];
+	sleep _coreCountSleep;
+
 	call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetFriendlyLoutoutsGlobalVars.sqf";
+	{systemChat format["Mission Core: %1", "FriendlyGlobalVarsSet"];} remoteExec ["bis_fnc_call", 0];
+	sleep _coreCountSleep;
 
 	#include "..\CustomMission\TRGMSetEnemyFaction.sqf"; //if _useCustomEnemyFaction set to true within this sqf, will overright the above enemy faction data
+	{systemChat format["Mission Core: %1", "EnemyFactionSet"];} remoteExec ["bis_fnc_call", 0];
+	sleep _coreCountSleep;
+	
 	#include "..\CustomMission\TRGMSetFriendlyLoadouts.sqf"; //as above, but for _useCustomFriendlyLoadouts
+	{systemChat format["Mission Core: %1", "FriendlyLoadoutSet"];} remoteExec ["bis_fnc_call", 0];
+	sleep _coreCountSleep;
 
 	/*Fix any changed types	 */
 	if (typeName sCivilian != "ARRAY") then {sCivilian = [sCivilian]};
@@ -423,6 +530,8 @@ if (isServer) then {
 	CustomObjectsSet = true;
 	publicVariable "CustomObjectsSet";
 	call compile preprocessFileLineNumbers "RandFramework\setFriendlyObjects.sqf";
+	{systemChat format["Mission Core: %1", "FriendlyObjectsSet"];} remoteExec ["bis_fnc_call", 0];
+	sleep _coreCountSleep;
 
 
 	if (EnemyFactionData != "") then {
@@ -471,6 +580,8 @@ if (isServer) then {
 			sleep 3;
 		};
 	};
+	{systemChat format["Mission Core: %1", "EnemyFactionDataProcessed"];} remoteExec ["bis_fnc_call", 0];
+	sleep _coreCountSleep;
 
         _isAceRespawnWithGear = false;
  	if ([] call TRGM_fnc_isCbaLoaded) then {
@@ -478,7 +589,8 @@ if (isServer) then {
   	   _isAceRespawnWithGear = "ace_respawn_savePreDeathGear" call CBA_settings_fnc_get;
 	};
 	
-	
+	{systemChat format["Mission Core: %1", "savePreDeathGear"];} remoteExec ["bis_fnc_call", 0];
+	sleep _coreCountSleep;
 	if (LoadoutData != "" || LoadoutDataDefault != "") then {
 		{
 			//_x setVariable ["UnitRole",_unitRole];
@@ -492,6 +604,9 @@ if (isServer) then {
 		} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 		sleep 1;
 	};
+	{systemChat format["Mission Core: %1", "setLoadout ran"];} remoteExec ["bis_fnc_call", 0];
+	sleep _coreCountSleep;
+
 	if ([] call TRGM_fnc_isAceLoaded) then {
 		[box1,InitialBoxItemsWithAce] call bis_fnc_initAmmoBox;
 	}
@@ -512,18 +627,33 @@ if (isServer) then {
 		};
 	}  forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 
+	{systemChat format["Mission Core: %1", "boxCargo set"];} remoteExec ["bis_fnc_call", 0];
+	sleep _coreCountSleep;
+
 
 };
 
+systemChat format["Mission Core: %1", "PreCustomObjectSet"];
+sleep _coreCountSleep;
+
 waitUntil {CustomObjectsSet};
 
+systemChat format["Mission Core: %1", "PostCustomObjectSet"];
+sleep _coreCountSleep;
+
 [[chopper1]] call TRGM_fnc_addTransportActions;
+
+systemChat format["Mission Core: %1", "TransportScriptRun"];
+sleep _coreCountSleep;
 
 if (iUseRevive > 0) then {
 	[] call AIS_Core_fnc_preInit;
 	[] call AIS_Core_fnc_postInit;
 	[] call AIS_System_fnc_postInit;
 };
+
+systemChat format["Mission Core: %1", "AIS Script Run"];
+sleep _coreCountSleep;
 
 
 //this setVariable ["MP_ONLY", true, true];
@@ -535,10 +665,15 @@ if (!isMultiplayer) then {
 	} forEach allUnits;
 };
 
+systemChat format["Mission Core: %1", "DeleteMpOnlyVehicles"];
+sleep _coreCountSleep;
+
 
 player doFollow player;
 
 
+systemChat format["Mission Core: %1", "DoFollowRun"];
+sleep _coreCountSleep;
 
 if (iMissionParamType == 5) then {
 	if (isServer) then {
@@ -547,15 +682,17 @@ if (iMissionParamType == 5) then {
 }
 else {
 
-	//[] execVM "RandFramework\StartMission.sqf";
 
 	call compile preprocessFileLineNumbers  "RandFramework\Campaign\StartMission.sqf";
 
-	//if (isServer) then {
-	//	call compile preprocessFileLineNumbers  "RandFramework\SetTimeAndWeather.sqf";
-	//	call compile preprocessFileLineNumbers  "RandFramework\startInfMission.sqf";
-	//};
 };
+systemChat format["Mission Core: %1", "InitCampaign/StartMission ran"];
+sleep _coreCountSleep;
+
+waitUntil {MissionLoaded};
+
+systemChat format["Mission Core: %1", "MissionLoaded true"];
+sleep _coreCountSleep;
 
 TREND_fnc_CheckBadPoints = {
 	if (isNil "BadPoints") then {
@@ -655,7 +792,8 @@ TREND_fnc_CheckBadPoints = {
 };
 [] spawn TREND_fnc_CheckBadPoints;
 player addEventHandler ["Respawn", { [] spawn TREND_fnc_CheckBadPoints; }];
-
+systemChat format["Mission Core: %1", "BadPointsSet"];
+sleep _coreCountSleep;
 
 
 
@@ -663,6 +801,8 @@ if (isServer) then {
 	{
 		_x setVariable ["DontDelete",true];
 	} forEach nearestObjects [getMarkerPos "mrkHQ", ["all"], 2000];
+	{systemChat format["Mission Core: %1", "DontDeleteSet"];} remoteExec ["bis_fnc_call", 0];
+	sleep _coreCountSleep;
 
 	if (isMultiplayer && !(iMissionParamType == 5)) then {
 		TREND_fnc_CheckAnyPlayersAlive = {
@@ -694,6 +834,9 @@ if (isServer) then {
 		[] spawn TREND_fnc_CheckAnyPlayersAlive;
  	};
 
+	 {systemChat format["Mission Core: %1", "NonAliveEndCheckRunning"];} remoteExec ["bis_fnc_call", 0];
+	sleep _coreCountSleep;
+
 
 	if (iAllowNVG == 0) then {
 		{
@@ -706,11 +849,13 @@ if (isServer) then {
 
 		} forEach allUnits;
 	};
+	{systemChat format["Mission Core: %1", "NVGStateSet"];} remoteExec ["bis_fnc_call", 0];
+	sleep _coreCountSleep;
 
 	TREND_fnc_PlayBaseRadioEffect = {
 		while {true} do {
 			playSound3D ["A3\Sounds_F\sfx\radio\" + selectRandom FriendlyRadioSounds + ".wss",baseRadio,false,getPosASL baseRadio,0.5,1,0];
-			sleep selectRandom [10,15,20,30];
+			sleep selectRandom [20,30,40];
 		};
 	};
 	[] spawn TREND_fnc_PlayBaseRadioEffect;
@@ -812,8 +957,13 @@ if (isServer) then {
 
 };
 
+systemChat format["Mission Core: %1", "SandStormStateSet"];
+sleep _coreCountSleep;
 
 [[],"RandFramework\animateAnimals.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
+
+systemChat format["Mission Core: %1", "AnimalStateSet"];
+sleep _coreCountSleep;
 
  if (!isDedicated && (player != player)) then {
 	waitUntil {player == player};
@@ -824,3 +974,33 @@ if (isServer) then {
 
 
 
+systemChat format["Mission Core: %1", "CoreFinished"];
+sleep _coreCountSleep;
+
+
+CoreCompleted = true;
+publicVariable "CoreCompleted";
+
+if (iMissionParamType != 5) then {
+	call compile preprocessFileLineNumbers  "RandFramework\Campaign\PostStartMission.sqf";
+};
+
+
+ systemChat format["Mission Core: %1", "RunFlashLightState"];
+sleep _coreCountSleep;
+
+ _iEnemyFlashLightOption = AdvancedSettings select ADVSET_SELECT_ENEMY_FLASHLIGHTS_IDX;
+if (_iEnemyFlashLightOption == 0) then {_iEnemyFlashLightOption = selectRandom [1,2]}; //1=yes, 2=no
+if (_iEnemyFlashLightOption == 1) then {
+	{
+		if ((side _x) == East) then
+		{
+			if (isNil { _x getVariable "ambushUnit" }) then {
+				_x addPrimaryWeaponItem "acc_flashlight"; 
+				_x enableGunLights "forceOn";
+				_x unassignItem sEnemyNVClassName; 
+				_x removeItem sEnemyNVClassName;
+			}; 
+		};
+	} forEach allUnits;
+};

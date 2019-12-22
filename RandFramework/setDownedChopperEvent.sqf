@@ -22,7 +22,8 @@ if (_iVictimType == 3) then {
 	_PointsAdjustMessage = "Friendly unit rescued";
 };
 
-_mainObjPos =  _this select 0;
+
+params ["_mainObjPos",["_isFullMap",false]];
 
 _bloodPools = ["BloodPool_01_Large_New_F","BloodSplatter_01_Large_New_F"];
 
@@ -32,7 +33,7 @@ _bloodPools = ["BloodPool_01_Large_New_F","BloodSplatter_01_Large_New_F"];
 
 _flatPos = [0,0,0];
 _flatPos = [_mainObjPos , 200, 2000, 1, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-if (!(isNil "IsTraining")) then {
+if (!(isNil "IsTraining") || _isFullMap) then {
 	_nearestRoads = _mainObjPos nearRoads 30000;		
 	if (count _nearestRoads > 0) then {	
 		_thisDownedChopperCenter = getPos (selectRandom _nearestRoads);
@@ -57,6 +58,9 @@ if (str(_flatPos) != "[0,0,0]") then {
 	};
 	if (selectRandom [true,false,false,false,false]) then {
 		[_flatPos] execVM "RandFramework\createWaitingSuicideBomber.sqf";
+	};
+	if (selectRandom[true,false,false]) then {
+		[_flatPos] execVM "RandFramework\RandScript\createEnemySniper.sqf";
 	};
 
 	_wreck = _sVictimVeh createVehicle _flatPos;	

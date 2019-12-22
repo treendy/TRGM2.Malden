@@ -70,7 +70,22 @@ _missionBombWire = ["BLUE", "WHITE", "YELLOW", "GREEN"] call bis_fnc_selectRando
 
 	
 	_objInformant = createGroup Civilian createUnit [selectRandom InformantClasses,[-200,-200,0],[],0,"NONE"];
-	_buildings = nearestObjects [[_centralAO_x,_centralAO_y], BasicBuildings, 1800];
+	_buildings = nil;
+	if (_iTaskIndex == 0 && !isNil "Mission1SubLoc") then {
+		_buildings = nearestObjects [Mission1SubLoc, BasicBuildings, 100];
+	};
+	if (_iTaskIndex == 1 && !isNil "Mission2SubLoc") then {
+		_buildings = nearestObjects [Mission2SubLoc, BasicBuildings, 100];
+	};
+	if (_iTaskIndex == 2 && !isNil "Mission3SubLoc") then {
+		_buildings = nearestObjects [Mission3SubLoc, BasicBuildings, 100];
+	};
+	if (isNil "_buildings") then {
+		_buildings = nearestObjects [[_centralAO_x,_centralAO_y], BasicBuildings, 1800];
+	};
+	
+	
+
 	_infBuilding = nil;
 	_attemptLimit = 5;
 	_bBuildingFound = false;
