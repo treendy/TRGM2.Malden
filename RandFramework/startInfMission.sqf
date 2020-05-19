@@ -675,13 +675,13 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									_objVehicle setPos _flatPos;
 									_objVehicle disableAI "MOVE";
 									TREND_fnc_ArtiFireLoop1 = {
-											_radioName = _this select 0;
-											_Ammo = getArtilleryAmmo [_radioName] select 0;
-											while {true} do {
+											_objVehicle = _this select 0;
+											_Ammo = getArtilleryAmmo [_objVehicle] select 0;
+											while {alive(_objVehicle)} do {
 												_flatPos = nil;
 												_flatPos = [getMarkerPos "mrkHQ", 1000, 1200, 20, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-												[[_radioName, 1],"setVehicleAmmo",true,false] call BIS_fnc_MP;
-												[[_radioName, [_flatPos, _Ammo, 1]],"commandArtilleryFire",false,false] call BIS_fnc_MP;
+												[[_objVehicle, 1],"setVehicleAmmo",true,false] call BIS_fnc_MP;
+												[[_objVehicle, [_flatPos, _Ammo, 1]],"commandArtilleryFire",false,false] call BIS_fnc_MP;
 												sleep selectRandom[10,30,60,120,240];
 											};
 										};
@@ -701,13 +701,13 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 										_objVehicle2 setPos _flatPos2;
 										_objVehicle2 disableAI "MOVE";
 										TREND_fnc_ArtiFireLoop2 = {
-											_radioName = _this select 0;
-											_Ammo = getArtilleryAmmo [_radioName] select 0;
-											while {true} do {
+											_objVehicle = _this select 0;
+											_Ammo = getArtilleryAmmo [_objVehicle] select 0;
+											while {alive(_objVehicle)} do {
 												_flatPos = nil;
 												_flatPos = [getMarkerPos "mrkHQ", 1000, 1200, 20, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-												[[_radioName, 1],"setVehicleAmmo",true,false] call BIS_fnc_MP;
-												[[_radioName, [_flatPos, _Ammo, 1]],"commandArtilleryFire",false,false] call BIS_fnc_MP;
+												[[_objVehicle, 1],"setVehicleAmmo",true,false] call BIS_fnc_MP;
+												[[_objVehicle, [_flatPos, _Ammo, 1]],"commandArtilleryFire",false,false] call BIS_fnc_MP;
 												sleep selectRandom[10,30,60,120,240];
 											};
 										};

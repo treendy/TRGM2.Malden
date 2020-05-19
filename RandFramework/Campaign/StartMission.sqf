@@ -127,6 +127,11 @@ if (_bAllowStart) then {
 				};
 			} forEach allMissionObjects "EmptyDetector";
 
+			{
+    			deleteGroup _x
+			} forEach allGroups select {count units _x isEqualTo 0};
+
+
 			InfTaskCount = 0;
 			publicVariable "InfTaskCount";
 			ActiveTasks = [];
