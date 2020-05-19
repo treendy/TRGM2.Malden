@@ -19,7 +19,7 @@ waitUntil {bAndSoItBegins && CustomObjectsSet};
 
 if (!MissionLoaded) exitWith {};
 
-hint "test";
+//hint "test";
 
 _mainObjPos = ObjectivePossitions select 0;
 _mrkHQPos = getMarkerPos "mrkHQ";

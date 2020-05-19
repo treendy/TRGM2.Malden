@@ -2,7 +2,7 @@
  Civilian Occupation System (COS)
  By BangaBob v0.5
  
- null=[] execVM "cos/cosInit.sqf";
+ null=[] execVM "RandFramework\cos\cosInit.sqf";
  
  IMPORTANT: BEFORE PROCEEDING ADD AN OBJECT NAMED SERVER INTO THE EDITOR.
  
