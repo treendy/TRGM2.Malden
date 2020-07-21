@@ -837,6 +837,7 @@ if (isServer) then {
 	 {systemChat format["Mission Core: %1", "NonAliveEndCheckRunning"];} remoteExec ["bis_fnc_call", 0];
 	sleep _coreCountSleep;
 
+	
 
 	if (iAllowNVG == 0) then {
 		{

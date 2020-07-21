@@ -31,7 +31,8 @@ if (_tempMergedLoadoutData != "" && _unitVarType !="") then {
 			_loadoutoptions = (_RoleDetails select 1) splitString ";";
 			removeAllWeapons _unit;
 			removeAllItems _unit;
-			removeAllAssignedItems _unit;
+			//removeAllAssignedItems _unit; //if this works, use assignedItems player to get array of items, loop through and remove all using unlinkItem, but not the radio
+			//									but, only if ACRE2 or TFAR is being used
 			removeUniform _unit;
 			removeVest _unit;
 			removeBackpack _unit;
@@ -90,7 +91,9 @@ if (_tempMergedLoadoutData != "" && _unitVarType !="") then {
 							_unit addPrimaryWeaponItem _object;
 						};
 						case "linkItem" : {
-							_unit linkItem _object;
+							if (_object != "ItemRadio") then {
+								_unit linkItem _object;
+							}
 						};
 						case "setFace" : {
 							_unit setFace _object;
