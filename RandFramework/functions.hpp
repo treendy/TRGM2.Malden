@@ -61,4 +61,17 @@ class TRGM   { // TAG
         class badCivAddSearchAction{};
         class badCivRemoveSearchAction{};
     };
+
+    class enemyUnits {
+        file = "RandFramework\functions\enemyUnits";
+        class CreateUnit{};
+        class SpawnPatrolUnit{};
+    };
+
+    class patrolPaterns {
+        file = "RandFramework\functions\patrolPaterns";
+        class BackForthPatrol{};
+        class BuildingPatrol{};
+        class RadiusPatrol{};
+    }
 };  

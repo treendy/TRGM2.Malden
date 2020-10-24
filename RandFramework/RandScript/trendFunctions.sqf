@@ -198,10 +198,10 @@ TREND_fnc_PopulateSideMission = {
 			if (_minimission) then {
 				if (selectRandom[true,false]) then {
 					if (selectRandom[true,false]) then {
-						[_sidePos,250 + (floor random 100),[2,3],true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
+						[_sidePos,250 + (floor random 100),[2,3],true,_InsurgentSide, 10] spawn TRGM_fnc_BuildingPatrol;
 					}
 					else {
-						[_sidePos getPos [300,0],180 + (floor random 20),[2,3],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+						[_sidePos getPos [300,0],180 + (floor random 20),[2,3],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 					};						
 				};
 			}
@@ -214,24 +214,24 @@ TREND_fnc_PopulateSideMission = {
 					};
 					
 					if (_bIsMainObjective) then {
-						[_sidePos,250 + (floor random 400),_patrolUnitCounts,true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
-						[_sidePos,250 + (floor random 100),_patrolUnitCounts,true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
-						[_sidePos getPos [300,0],180 + (floor random 20),_patrolUnitCounts,true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [300,90],180 + (floor random 20),_patrolUnitCounts,true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [300,180],180 + (floor random 20),_patrolUnitCounts,true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [300,270],180 + (floor random 20),_patrolUnitCounts,true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [600,45],200 + (floor random 50),_patrolUnitCounts,true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [600,135],200 + (floor random 50),_patrolUnitCounts,true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [600,225],200 + (floor random 50),_patrolUnitCounts,true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [600,315],200 + (floor random 50),_patrolUnitCounts,true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+						[_sidePos,250 + (floor random 400),_patrolUnitCounts,true,_InsurgentSide, 10] spawn TRGM_fnc_BuildingPatrol;
+						[_sidePos,250 + (floor random 100),_patrolUnitCounts,true,_InsurgentSide, 10] spawn TRGM_fnc_BuildingPatrol;
+						[_sidePos getPos [300,0],180 + (floor random 20),_patrolUnitCounts,true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [300,90],180 + (floor random 20),_patrolUnitCounts,true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [300,180],180 + (floor random 20),_patrolUnitCounts,true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [300,270],180 + (floor random 20),_patrolUnitCounts,true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [600,45],200 + (floor random 50),_patrolUnitCounts,true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [600,135],200 + (floor random 50),_patrolUnitCounts,true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [600,225],200 + (floor random 50),_patrolUnitCounts,true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [600,315],200 + (floor random 50),_patrolUnitCounts,true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 					}
 					else {
-						[_sidePos,250 + (floor random 100),[2,3],true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
-						[_sidePos,800 + (floor random 100),[2,3],true,_InsurgentSide, 200] spawn TREND_fnc_BuildingPatrol;
-						[_sidePos getPos [400,0],250 + (floor random 20),[2,3],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [400,90],250 + (floor random 20),[2,3],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [400,180],250 + (floor random 20),[2,3],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [400,270],250 + (floor random 20),[2,3],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+						[_sidePos,250 + (floor random 100),[2,3],true,_InsurgentSide, 10] spawn TRGM_fnc_BuildingPatrol;
+						[_sidePos,800 + (floor random 100),[2,3],true,_InsurgentSide, 200] spawn TRGM_fnc_BuildingPatrol;
+						[_sidePos getPos [400,0],250 + (floor random 20),[2,3],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [400,90],250 + (floor random 20),[2,3],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [400,180],250 + (floor random 20),[2,3],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [400,270],250 + (floor random 20),[2,3],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 					};
 					
 
@@ -239,14 +239,14 @@ TREND_fnc_PopulateSideMission = {
 				else {
 					if (_bIsMainObjective) then {
 
-						[_sidePos,15 + (floor random 150),[2,3],false,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+						[_sidePos,15 + (floor random 150),[2,3],false,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 						if (bAllowLargerPatrols && _bIsMainObjective) then {
-							[_sidePos,15 + (floor random 150),[2,3],false,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+							[_sidePos,15 + (floor random 150),[2,3],false,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 						};
 					};
 					if (selectRandom [true,false]) then {
 						//not adding a teamleader to small patrol as we need long dist to have teamleader for CallNearbyPatrols (3rd param for RadiusPatrol is false)
-						[_sidePos,15 + (floor random 50),[2,3],false,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+						[_sidePos,15 + (floor random 50),[2,3],false,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 						_bHasPatrols = true
 					};
 
@@ -254,20 +254,20 @@ TREND_fnc_PopulateSideMission = {
 					//Spawn wide patrol
 					//if main, need a couple of these and always have 2 or 3
 					if (_bIsMainObjective) then {
-						[_sidePos,500 + (floor random 250),[7,8,9],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+						[_sidePos,500 + (floor random 250),[7,8,9],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 					}
 					else {
 						if (selectRandom [true,false]) then {
-							[_sidePos,500 + (floor random 250),[4,5,6],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+							[_sidePos,500 + (floor random 250),[4,5,6],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 							_bHasPatrols = true
 						};
 					};
 
 					if (_bIsMainObjective && selectRandom [true,true,false]) then {
-						//[_sidePos,500 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+						//[_sidePos,500 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 						if (bAllowLargerPatrols && _bIsMainObjective) then {
-							//[_sidePos,700 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-							[_sidePos,900 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+							//[_sidePos,700 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+							[_sidePos,900 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 						};
 					};
 
@@ -275,20 +275,20 @@ TREND_fnc_PopulateSideMission = {
 
 					//Spawn patrol to move from building to building
 					if (_bIsMainObjective || (selectRandom [true,false])) then {
-						[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
+						[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 10] spawn TRGM_fnc_BuildingPatrol;
 						_bHasPatrols = true
 					};
 					if (_bIsMainObjective && bAllowLargerPatrols) then {
-						[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
+						[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 10] spawn TRGM_fnc_BuildingPatrol;
 					};
 
 					//Spawn distant patrol ready to move in (will need to spawn trigger)
 					if (_bIsMainObjective || (selectRandom [true,false])) then {
-						[_sidePos,1000 + (floor random 500),[5,6],true,_InsurgentSide] spawn TREND_fnc_BackForthPatrol;
+						[_sidePos,1000 + (floor random 500),[5,6],true,_InsurgentSide] spawn TRGM_fnc_BackForthPatrol;
 						_bHasPatrols = true
 					};
 					if (_bIsMainObjective && bAllowLargerPatrols) then {
-						[_sidePos,1000 + (floor random 500),[5,6,7],true,_InsurgentSide] spawn TREND_fnc_BackForthPatrol;
+						[_sidePos,1000 + (floor random 500),[5,6,7],true,_InsurgentSide] spawn TRGM_fnc_BackForthPatrol;
 					};
 				};
 			};
@@ -1141,387 +1141,3 @@ TREND_fnc_OccupyHouses = {
 		};
 	};
 };
-//--------------------------------------------------------------------------------------
-
-//one patrol that patrols around the ao
-TREND_fnc_RadiusPatrol = {
-	_sidePos = _this select 0;
-	_distFromCent = _this select 1;
-	_unitCounts = _this select 2;
-	_IncludTeamLeader = _this select 3;
-	_InsurgentSide = _this select 4;
-
-	_unitCount = selectRandom _unitCounts;
-	_group = Nil;
-	_wayX = Nil;
-	_wayY = Nil;
-
-	_wp1Pos = Nil;
-	_wp1bPos = Nil;
-	_wp2Pos = Nil;
-	_wp2bPos = Nil;
-	_wp3Pos = Nil;
-	_wp3bPos = Nil;
-	_wp4Pos = Nil;
-	_wp4bPos = Nil;
-	_wp5Pos = Nil;
-
-	_group = createGroup _InsurgentSide;
-	_wayX = (_sidePos select 0);
-	_wayY = (_sidePos select 1);
-
-	_wp1Pos = [ _wayX + _distFromCent, _wayY + _distFromCent, 0];
-	_wp1bPos = [ _wayX + _distFromCent, _wayY, 0];
-	_wp2Pos = [ _wayX + _distFromCent, _wayY - _distFromCent, 0];
-	_wp2bPos = [ _wayX, _wayY - _distFromCent, 0];
-	_wp3Pos = [ _wayX - _distFromCent, _wayY - _distFromCent, 0];
-	_wp3bPos = [ _wayX - _distFromCent, _wayY, 0];
-	_wp4Pos = [ _wayX - _distFromCent, _wayY + _distFromCent, 0];
-	_wp4bPos = [ _wayX, _wayY + _distFromCent, 0];
-	_wp5Pos = [ _wayX + _distFromCent, _wayY + _distFromCent, 0];
-
-	//Adjust waypoints so they are not in water
-	_iToReduce = 10;
-	while {surfaceIsWater _wp1Pos} do {
-		_wp1Pos = [ _wayX + (_distFromCent - _iToReduce), _wayY + (_distFromCent - _iToReduce), 0];
-		_wp5Pos = [ _wayX + (_distFromCent - _iToReduce), _wayY + (_distFromCent - _iToReduce), 0];
-		_iToReduce = _iToReduce + 10;
-	};
-	_iToReduce = 10;
-	while {surfaceIsWater _wp2Pos} do {
-		_wp2Pos = [ _wayX + (_distFromCent - _iToReduce), _wayY - (_distFromCent - _iToReduce), 0];
-		_iToReduce = _iToReduce + 10;
-	};
-	_iToReduce = 10;
-	while {surfaceIsWater _wp3Pos} do {
-		_wp3Pos = [ _wayX - (_distFromCent - _iToReduce), _wayY - (_distFromCent - _iToReduce), 0];
-		_iToReduce = _iToReduce + 10;
-	};
-	_iToReduce = 10;
-	while {surfaceIsWater _wp4Pos} do {
-		_wp4Pos = [ _wayX - (_distFromCent - _iToReduce), _wayY + (_distFromCent - _iToReduce), 0];
-		_iToReduce = _iToReduce + 10;
-	};
-	_iToReduce = 10;
-	while {surfaceIsWater _wp1bPos} do {
-		_wp1bPos = [ _wayX + (_distFromCent - _iToReduce), _wayY, 0];
-		_iToReduce = _iToReduce + 10;
-	};
-	_iToReduce = 10;
-	while {surfaceIsWater _wp2bPos} do {
-		_wp2bPos = [ _wayX, _wayY - (_distFromCent - _iToReduce), 0];
-		_iToReduce = _iToReduce + 10;
-	};
-	_iToReduce = 10;
-	while {surfaceIsWater _wp3bPos} do {
-		_wp3bPos = [ _wayX - (_distFromCent - _iToReduce), _wayY, 0];
-		_iToReduce = _iToReduce + 10;
-	};
-	_iToReduce = 10;
-	while {surfaceIsWater _wp4bPos} do {
-		_wp4bPos = [ _wayX, _wayY + (_distFromCent - _iToReduce), 0];
-		_iToReduce = _iToReduce + 10;
-	};
-
-	//Spawn in units
-
-	_iCount = 0; //_unitCount
-	while {_iCount <= _unitCount} do
-	{
-		[_wayX,_wayY,_group,_iCount,_IncludTeamLeader] spawn TREND_fnc_SpawnPatrolUnit;
-		_iCount = _iCount + 1;
-	};
-
-	//add the waypoints (will start at a random one so it doesnt always start at the same pos (mainly for if we have more than one patrol), and cycle through them all)
-	_iWaypointCount = selectRandom[1,2,3,4,5,6,7,8,9];
-	_bWaypointsAdded = false;
-	_iWaypointLoopCount = 1;
-	while {!_bWaypointsAdded} do {
-		if (_iWaypointCount == 1) then {
-			_wp1 = _group addWaypoint [_wp1Pos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp1Pos)],_wp1Pos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		if (_iWaypointCount == 2) then {
-			_wp1b = _group addWaypoint [_wp1bPos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp1bPos)],_wp1bPos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		if (_iWaypointCount == 3) then {
-			_wp2 = _group addWaypoint [_wp2Pos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp2Pos)],_wp2Pos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		if (_iWaypointCount == 4) then {
-			_wp2b = _group addWaypoint [_wp2bPos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp2bPos)],_wp2bPos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		if (_iWaypointCount == 5) then {
-			_wp3 = _group addWaypoint [_wp3Pos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp3Pos)],_wp3Pos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		if (_iWaypointCount == 6) then {
-			_wp3b = _group addWaypoint [_wp3bPos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp3bPos)],_wp3bPos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		if (_iWaypointCount == 7) then {
-			_wp4 = _group addWaypoint [_wp4Pos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp4Pos)],_wp4Pos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		if (_iWaypointCount == 8) then {
-			_wp4b = _group addWaypoint [_wp4bPos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp4bPos)],_wp4bPos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		if (_iWaypointCount == 9) then {
-			_wp5 = _group addWaypoint [_wp5Pos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp5Pos)],_wp5Pos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		_iWaypointCount = _iWaypointCount + 1;
-		_iWaypointLoopCount = _iWaypointLoopCount + 1;
-
-		if (_iWaypointLoopCount == 10) then {
-			_bWaypointsAdded = true;
-		};
-
-		if (_iWaypointCount == 10) then {
-			_iWaypointCount = 1;
-		};
-		//hint format["TEST: %1", _iWaypointLoopCount];
-		//sleep 0.5;
-
-	};
-	[_group, 0] setWaypointSpeed "LIMITED";
-	[_group, 0] setWaypointBehaviour "SAFE";
-	[_group, 1] setWaypointSpeed "LIMITED";
-	[_group, 1] setWaypointBehaviour "SAFE";
-	[_group, 8] setWaypointType "CYCLE";
-	_group setBehaviour "SAFE";
-};
-
-//--------------------------------------------------------------------------------------
-
-//one patrol that patrols from random building to building
-TREND_fnc_BuildingPatrol = {
-	_sidePos = _this select 0;
-	_distFromCent = _this select 1;
-	_unitCounts = _this select 2;
-	_IncludTeamLeader = _this select 3;
-	_InsurgentSide = _this select 4;
-	_buildingCount = _this select 5;
-
-	_unitCount = selectRandom _unitCounts;
-	_group = Nil;
-	_wayX = Nil;
-	_wayY = Nil;
-	_group = createGroup _InsurgentSide;
-
-
-	_flatPos = nil;
-	_flatPos = [_sidePos , 100, _distFromCent, 4, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-	_wayX = (_flatPos select 0);
-	_wayY = (_flatPos select 1);
-
-	_allBuildings = nil;
-	_allBuildings = nearestObjects [_sidePos, BasicBuildings, _distFromCent];
-
-	//Spawn in units
-	_iCount = 0; //_unitCount
-	while {_iCount <= _unitCount} do
-	{
-		[_wayX,_wayY,_group,_iCount,_IncludTeamLeader] spawn TREND_fnc_SpawnPatrolUnit;
-		_iCount = _iCount + 1;
-	};
-
-	//set waypoints to other buildings
-	_iCountWaypoints = 0;
-	while {_iCountWaypoints <= _buildingCount} do
-	{
-		_randBuilding2 = selectRandom _allBuildings; //pick one building from our buildings array
-		_allBuildingPos2 = _randBuilding2 buildingPos -1;
-
-		_wpSideBuildingPatrol = nil;
-		try {
-			_wayPosInit = selectRandom _allBuildingPos2;
-			if (!isNil "_wayPosInit") then {
-				_wpSideBuildingPatrol = _group addWaypoint [_wayPosInit, 0]; //This line has error "0 eleemnts provided, 3 expected"
-			}
-
-		}
-		catch {
-			hint format ["Script issue: %1",selectRandom _allBuildingPos2];
-		};
-		//_wp1 = _group addWaypoint [_wp1Pos, 0];
-
-		[_group, _iCountWaypoints] setWaypointSpeed "LIMITED";
-		[_group, _iCountWaypoints] setWaypointBehaviour "SAFE";
-		if (_iCountWaypoints == _buildingCount) then{[_group, 8] setWaypointType "CYCLE";};
-		_iCountWaypoints = _iCountWaypoints + 1;
-	};
-	_group setBehaviour "SAFE";
-};
-
-
-//--------------------------------------------------------------------------------------
-//one patrol that patrols from AO to distance and back
-TREND_fnc_BackForthPatrol = {
-	_sidePos = _this select 0;
-	_distFromCent = _this select 1;
-	_unitCounts = _this select 2;
-	_IncludTeamLeader = _this select 3;
-	_InsurgentSide = _this select 4;
-
-	_unitCount = selectRandom _unitCounts;
-	_group = Nil;
-	_wayX = Nil;
-	_wayY = Nil;
-
-	_wp1Pos = Nil;
-	_wp1bPos = Nil;
-	_wp2Pos = Nil;
-	_wp2bPos = Nil;
-	_wp3Pos = Nil;
-	_wp3bPos = Nil;
-	_wp4Pos = Nil;
-	_wp4bPos = Nil;
-	_wp5Pos = Nil;
-
-	_group = createGroup _InsurgentSide;
-	_wayX = (_sidePos select 0);
-	_wayY = (_sidePos select 1);
-
-	_wp1Pos = [ _wayX + _distFromCent, _wayY, 0];
-	_wp1bPos = [ _wayX, _wayY, 0];
-	_wp2Pos = [ _wayX, _wayY - _distFromCent, 0];
-	_wp2bPos = [ _wayX, _wayY, 0];
-	_wp3Pos = [ _wayX - _distFromCent, _wayY, 0];
-	_wp3bPos = [ _wayX, _wayY, 0];
-	_wp4Pos = [ _wayX - _distFromCent, _wayY + _distFromCent, 0];
-	_wp4bPos = [ _wayX, _wayY, 0];
-	_wp5Pos = [ _wayX + _distFromCent, _wayY + _distFromCent, 0];
-
-	//Adjust waypoints so they are not in water
-	_iToReduce = 10;
-	while {surfaceIsWater _wp1Pos} do {
-		_wp1Pos = [ _wayX + (_distFromCent - _iToReduce), _wayY + (_distFromCent - _iToReduce), 0];
-		_wp5Pos = [ _wayX + (_distFromCent - _iToReduce), _wayY + (_distFromCent - _iToReduce), 0];
-		_iToReduce = _iToReduce + 10;
-	};
-	_iToReduce = 10;
-	while {surfaceIsWater _wp2Pos} do {
-		_wp2Pos = [ _wayX + (_distFromCent - _iToReduce), _wayY - (_distFromCent - _iToReduce), 0];
-		_iToReduce = _iToReduce + 10;
-	};
-	_iToReduce = 10;
-	while {surfaceIsWater _wp3Pos} do {
-		_wp3Pos = [ _wayX - (_distFromCent - _iToReduce), _wayY - (_distFromCent - _iToReduce), 0];
-		_iToReduce = _iToReduce + 10;
-	};
-	_iToReduce = 10;
-	while {surfaceIsWater _wp4Pos} do {
-		_wp4Pos = [ _wayX - (_distFromCent - _iToReduce), _wayY + (_distFromCent - _iToReduce), 0];
-		_iToReduce = _iToReduce + 10;
-	};
-	_iToReduce = 10;
-	while {surfaceIsWater _wp1bPos} do {
-		_wp1bPos = [ _wayX + (_distFromCent - _iToReduce), _wayY, 0];
-		_iToReduce = _iToReduce + 10;
-	};
-	_iToReduce = 10;
-	while {surfaceIsWater _wp2bPos} do {
-		_wp2bPos = [ _wayX, _wayY - (_distFromCent - _iToReduce), 0];
-		_iToReduce = _iToReduce + 10;
-	};
-	_iToReduce = 10;
-	while {surfaceIsWater _wp3bPos} do {
-		_wp3bPos = [ _wayX - (_distFromCent - _iToReduce), _wayY, 0];
-		_iToReduce = _iToReduce + 10;
-	};
-	_iToReduce = 10;
-	while {surfaceIsWater _wp4bPos} do {
-		_wp4bPos = [ _wayX, _wayY + (_distFromCent - _iToReduce), 0];
-		_iToReduce = _iToReduce + 10;
-	};
-
-	//Spawn in units
-
-	_iCount = 0; //_unitCount
-	while {_iCount <= _unitCount} do
-	{
-		[_wp1Pos select 0,_wp1Pos select 1,_group,_iCount,_IncludTeamLeader] spawn TREND_fnc_SpawnPatrolUnit;
-		_iCount = _iCount + 1;
-	};
-
-	//add the waypoints (will start at a random one so it doesnt always start at the same pos (mainly for if we have more than one patrol), and cycle through them all)
-	_iWaypointCount = selectRandom[1,2,3,4,5,6,7,8,9];
-	_bWaypointsAdded = false;
-	_iWaypointLoopCount = 1;
-	while {!_bWaypointsAdded} do {
-		if (_iWaypointCount == 1) then {
-			_wp1 = _group addWaypoint [_wp1Pos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp1Pos)],_wp1Pos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		if (_iWaypointCount == 2) then {
-			_wp1b = _group addWaypoint [_wp1bPos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp1bPos)],_wp1bPos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		if (_iWaypointCount == 3) then {
-			_wp2 = _group addWaypoint [_wp2Pos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp2Pos)],_wp2Pos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		if (_iWaypointCount == 4) then {
-			_wp2b = _group addWaypoint [_wp2bPos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp2bPos)],_wp2bPos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		if (_iWaypointCount == 5) then {
-			_wp3 = _group addWaypoint [_wp3Pos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp3Pos)],_wp3Pos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		if (_iWaypointCount == 6) then {
-			_wp3b = _group addWaypoint [_wp3bPos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp3bPos)],_wp3bPos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		if (_iWaypointCount == 7) then {
-			_wp4 = _group addWaypoint [_wp4Pos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp4Pos)],_wp4Pos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		if (_iWaypointCount == 8) then {
-			_wp4b = _group addWaypoint [_wp4bPos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp4bPos)],_wp4bPos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		if (_iWaypointCount == 9) then {
-			_wp5 = _group addWaypoint [_wp5Pos, 0];
-			if (bDebugging) then {[format["(%1 - %2)",_iWaypointCount, str(_wp5Pos)],_wp5Pos] spawn TRGM_fnc_debugDotMarker;};
-		};
-		_iWaypointCount = _iWaypointCount + 1;
-		_iWaypointLoopCount = _iWaypointLoopCount + 1;
-
-		if (_iWaypointLoopCount == 10) then {
-			_bWaypointsAdded = true;
-		};
-
-		if (_iWaypointCount == 10) then {
-			_iWaypointCount = 1;
-		};
-
-	};
-	[_group, 0] setWaypointSpeed "LIMITED";
-	[_group, 0] setWaypointBehaviour "SAFE";
-	[_group, 1] setWaypointSpeed "LIMITED";
-	[_group, 1] setWaypointBehaviour "SAFE";
-	[_group, 8] setWaypointType "CYCLE";
-	_group setBehaviour "SAFE";
-};
-
-//--------------------------------------------------------------------------------------
-TREND_fnc_SpawnPatrolUnit = {
-	_wayX = _this select 0;
-	_wayY = _this select 1;
-	_group = _this select 2;
-	_index = _this select 3;
-	_IncludTeamLeader = _this select 4;
-
-	_startPos = [_wayX + 5 + floor random 10,_wayY + 5 + floor random 10];
-	_sUnitType = selectRandom [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
-	if (_index == 0 && _IncludTeamLeader) then {
-		_sUnitType = sTeamleaderToUse;
-	};
-	_sUnitType createUnit [_startPos, _group];
-}
-//---------------------------------------------------------------------------------------

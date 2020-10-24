@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=1514;
+		nextID=1516;
 	};
 	class Camera
 	{
