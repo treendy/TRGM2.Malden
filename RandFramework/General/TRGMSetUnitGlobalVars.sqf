@@ -111,25 +111,33 @@ ADVSET_GROUP_MANAGE_IDX = 9;
 ADVSET_SELECT_AO_IDX = 10;
 ADVSET_SELECT_AO_CAMP_IDX = 11;
 ADVSET_SELECT_ENEMY_FLASHLIGHTS_IDX = 12;
+ADVSET_MINIMISSIONS_IDX = 13;
 
 //NOTE the id's must go up in twos!
 AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex(zero based index)
-	[6001, localize "STR_TRGM2_TRGMSetUnitGlobalVars_VirtualArsenal","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1],
-	[6003, localize "STR_TRGM2_TRGMSetUnitGlobalVars_GroupName","RscEdit",[""],"",1],
-	[6005, localize "STR_TRGM2_TRGMSetUnitGlobalVars_SupportOptions","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],0],
-	[6007, localize "STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTickets","RscCombo",["1","2","3","4","5","6","7","8","9","10",localize "STR_TRGM2_TRGMSetUnitGlobalVars_Unlimited"],[1,2,3,4,5,6,7,8,9,10,99999],0],
-	[6009, localize "STR_TRGM2_TRGMSetUnitGlobalVars_Mapdraw","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],0],
-	[6011, localize "STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTimer","RscCombo",["5 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","10 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","30 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","1 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","5 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","10 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","20 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min"],[5,10,30,60,300,600,1200],1],
-	[6013, localize "STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFactions","RscCombo",DefaultEnemyFactionArrayText,DefaultEnemyFactionArray,DefaultEnemyFactionValue select 0],
-	[6015, localize "STR_TRGM2_TRGMSetUnitGlobalVars_FriendlyFactions","RscCombo",DefaultFriendlyFactionArrayText,DefaultFriendlyFactionArray,DefaultFriendlyFactionValue select 0],
-	[6017, localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_Always",localize "STR_TRGM2_TRGMSetUnitGlobalVars_Never",localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_5Hours"],[0,1,2,3],DefaultSandStormOption],
-	[6019, localize "STR_TRGM2_TRGMSetUnitGlobalVars_GroupManagement","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1],
-	[6021, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MainAOSelect","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1],
-	[6023, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MainAO_CAMP_Select","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1],
-	[6025, localize "STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFlashLights","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],0]
+	[6001, localize "STR_TRGM2_TRGMSetUnitGlobalVars_VirtualArsenal","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1,""],
+	[6003, localize "STR_TRGM2_TRGMSetUnitGlobalVars_GroupName","RscEdit",[""],"",1,""],
+	[6005, localize "STR_TRGM2_TRGMSetUnitGlobalVars_SupportOptions","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],0,""],
+	[6007, localize "STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTickets","RscCombo",["1","2","3","4","5","6","7","8","9","10",localize "STR_TRGM2_TRGMSetUnitGlobalVars_Unlimited"],[1,2,3,4,5,6,7,8,9,10,99999],0,""],
+	[6009, localize "STR_TRGM2_TRGMSetUnitGlobalVars_Mapdraw","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],0,""],
+	[6011, localize "STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTimer","RscCombo",["5 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","10 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","30 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","1 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","5 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","10 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","20 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min"],[5,10,30,60,300,600,1200],1,""],
+	[6013, localize "STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFactions","RscCombo",DefaultEnemyFactionArrayText,DefaultEnemyFactionArray,DefaultEnemyFactionValue select 0,""],
+	[6015, localize "STR_TRGM2_TRGMSetUnitGlobalVars_FriendlyFactions","RscCombo",DefaultFriendlyFactionArrayText,DefaultFriendlyFactionArray,DefaultFriendlyFactionValue select 0,""],
+	[6017, localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_Always",localize "STR_TRGM2_TRGMSetUnitGlobalVars_Never",localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_5Hours"],[0,1,2,3],DefaultSandStormOption,""],
+	[6019, localize "STR_TRGM2_TRGMSetUnitGlobalVars_GroupManagement","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1,""],
+	[6021, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MainAOSelect","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1,""],
+	[6023, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MainAO_CAMP_Select","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1,""],
+	[6025, localize "STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFlashLights","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],0,""],
+	[6027, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MiniMissions","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvMinimission"]
 ];
-DefaultAdvancedSettings = [0,"Tactical Cannon Fodder",1,1,1,10,DefaultEnemyFactionValue select 0,DefaultFriendlyFactionValue select 0,DefaultSandStormOption,0,0,0,0];
+DefaultAdvancedSettings = [0,"Tactical Cannon Fodder",1,1,1,10,DefaultEnemyFactionValue select 0,DefaultFriendlyFactionValue select 0,DefaultSandStormOption,0,0,0,0,2];
 
+
+/*DONT FORGET TO ADD THIS TO openDialogMissionselection.sqf 
+if (count AdvancedSettings < 14) then {
+	AdvancedSettings pushBack (DefaultAdvancedSettings select 13);
+};
+*/
 
 //0 = no, 1 = guarantee revive, 2 = realistic revive, 3 = realistic revive (only medics can revive)
 
@@ -254,9 +262,9 @@ MissionParamTypesValues = [0,6,8,1,2,3,9,4,7,10,5];
 //10=Destroy Artillery vehicles 	11=Resue POW  12=Resue Reporter
 //13=Defuse IEDs  14=BombMission 15=TargetMission
 //SideMissionTasks = [7];
-SideMissionTasks = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,99999];
+SideMissionTasks = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,99999];
 //MainMissionTasks = [8];
-MainMissionTasks = [1,2,6,7,8,11,12,14,15,16,99999];
+MainMissionTasks = [1,2,6,7,8,11,12,14,15,16,17,99999];
 MissionsThatHaveIntel = [1,4,5,6];
 
 MissionParamObjectives = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_startInfMission_MissionTitle1",localize "STR_TRGM2_startInfMission_MissionTitle2",localize "STR_TRGM2_startInfMission_MissionTitle3",localize "STR_TRGM2_startInfMission_MissionTitle4",localize "STR_TRGM2_startInfMission_MissionTitle5",localize "STR_TRGM2_startInfMission_MissionTitle6",localize "STR_TRGM2_startInfMission_MissionTitle7",localize "STR_TRGM2_startInfMission_MissionTitle8",localize "STR_TRGM2_startInfMission_MissionTitle9",localize "STR_TRGM2_startInfMission_MissionTitle10",localize "STR_TRGM2_startInfMission_MissionTitle11",localize "STR_TRGM2_startInfMission_MissionTitle12"];
@@ -280,6 +288,9 @@ MissionParamObjectivesValues pushBack 15;
 
 MissionParamObjectives pushBack localize "STR_TRGM2_CacheMissionTitle"; 
 MissionParamObjectivesValues pushBack 16; 
+
+MissionParamObjectives pushBack localize "STR_TRGM2_ClearAreaMissionTitle"; 
+MissionParamObjectivesValues pushBack 17; 
 
 if (_CustomMissionEnabled) then {
 	MissionParamObjectives pushBack _MissionTitle; 

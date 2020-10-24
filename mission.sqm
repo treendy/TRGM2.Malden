@@ -12,10 +12,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={922.6723,41.605614,12265.119};
-		dir[]={-0.93792927,-0.22932586,-0.26024806};
-		up[]={-0.22098589,0.97334671,-0.061317407};
-		aside[]={-0.26737452,-3.5408448e-007,0.96361101};
+		pos[]={921.711,72.257927,12295.581};
+		dir[]={-0.74045694,-0.4623487,-0.48783007};
+		up[]={-0.38609576,0.88669252,-0.25436926};
+		aside[]={-0.55016416,6.5891072e-008,0.83507186};
 	};
 };
 binarizationWanted=0;
@@ -231,7 +231,7 @@ class AddonsMetaData
 		class Item22
 		{
 			className="A3_Sounds_F_Enoch";
-			name="Arma 3 Enoch - Sound Effects";
+			name="Arma 3 Contact Platform - Sound Effects";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};

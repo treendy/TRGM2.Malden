@@ -50,6 +50,7 @@ if (!isNull (findDisplay 5000)) then {
 		iMissionParamObjective3 = MissionParamObjectivesValues select lbCurSel _ctrlTypes2;
 		publicVariable "iMissionParamObjective3";
 	};
+	
 };
 
 //hint "opening 2dialogA";
@@ -100,6 +101,7 @@ _lblctrlTitle ctrlCommit 0;
 	_Options = _x select 3;
 	_Values = _x select 4;
 	_DefaultSelIndex = _x select 5;
+	_toolTip = _x select 6;
 
 	_display ctrlCreate ["RscText", _lblCtrlID];
 	_lblctrl = _display displayCtrl _lblCtrlID;
@@ -121,6 +123,7 @@ _lblctrlTitle ctrlCommit 0;
 		_inpctrl ctrlSetText (AdvancedSettings select _forEachIndex);
 	};
 	_inpctrl ctrlCommit 0;
+	_inpctrl ctrlSetTooltip _toolTip;
 
 } forEach AdvControls;
 
