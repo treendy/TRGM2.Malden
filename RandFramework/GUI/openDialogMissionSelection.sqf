@@ -85,6 +85,9 @@ if (isNil "InitialLoadedPreviousSettings" && !ForceMissionSetup) then {
 			if (count AdvancedSettings < 14) then {
 				AdvancedSettings pushBack (DefaultAdvancedSettings select 13);
 			};
+			if (count AdvancedSettings < 15) then {
+				AdvancedSettings pushBack (DefaultAdvancedSettings select 14);
+			};
 
 			if (isClass(configFile >> "CfgPatches" >> "ace_medical")) then {
 				if (iUseRevive != 0) then { //Ace is active, so need to make sure "no revive" is selected
