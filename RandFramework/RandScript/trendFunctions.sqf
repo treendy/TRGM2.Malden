@@ -198,10 +198,10 @@ TREND_fnc_PopulateSideMission = {
 			if (_minimission) then {
 				if (selectRandom[true,false]) then {
 					if (selectRandom[true,false]) then {
-						[_sidePos,250 + (floor random 100),[2,3],true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
+						[_sidePos,250 + (floor random 100),[2,3],true,_InsurgentSide, 10] spawn TRGM_fnc_BuildingPatrol;
 					}
 					else {
-						[_sidePos getPos [300,0],180 + (floor random 20),[2,3],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+						[_sidePos getPos [300,0],180 + (floor random 20),[2,3],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 					};						
 				};
 			}
@@ -214,24 +214,24 @@ TREND_fnc_PopulateSideMission = {
 					};
 					
 					if (_bIsMainObjective) then {
-						[_sidePos,250 + (floor random 400),_patrolUnitCounts,true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
-						[_sidePos,250 + (floor random 100),_patrolUnitCounts,true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
-						[_sidePos getPos [300,0],180 + (floor random 20),_patrolUnitCounts,true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [300,90],180 + (floor random 20),_patrolUnitCounts,true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [300,180],180 + (floor random 20),_patrolUnitCounts,true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [300,270],180 + (floor random 20),_patrolUnitCounts,true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [600,45],200 + (floor random 50),_patrolUnitCounts,true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [600,135],200 + (floor random 50),_patrolUnitCounts,true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [600,225],200 + (floor random 50),_patrolUnitCounts,true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [600,315],200 + (floor random 50),_patrolUnitCounts,true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+						[_sidePos,250 + (floor random 400),_patrolUnitCounts,true,_InsurgentSide, 10] spawn TRGM_fnc_BuildingPatrol;
+						[_sidePos,250 + (floor random 100),_patrolUnitCounts,true,_InsurgentSide, 10] spawn TRGM_fnc_BuildingPatrol;
+						[_sidePos getPos [300,0],180 + (floor random 20),_patrolUnitCounts,true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [300,90],180 + (floor random 20),_patrolUnitCounts,true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [300,180],180 + (floor random 20),_patrolUnitCounts,true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [300,270],180 + (floor random 20),_patrolUnitCounts,true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [600,45],200 + (floor random 50),_patrolUnitCounts,true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [600,135],200 + (floor random 50),_patrolUnitCounts,true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [600,225],200 + (floor random 50),_patrolUnitCounts,true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [600,315],200 + (floor random 50),_patrolUnitCounts,true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 					}
 					else {
-						[_sidePos,250 + (floor random 100),[2,3],true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
-						[_sidePos,800 + (floor random 100),[2,3],true,_InsurgentSide, 200] spawn TREND_fnc_BuildingPatrol;
-						[_sidePos getPos [400,0],250 + (floor random 20),[2,3],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [400,90],250 + (floor random 20),[2,3],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [400,180],250 + (floor random 20),[2,3],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-						[_sidePos getPos [400,270],250 + (floor random 20),[2,3],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+						[_sidePos,250 + (floor random 100),[2,3],true,_InsurgentSide, 10] spawn TRGM_fnc_BuildingPatrol;
+						[_sidePos,800 + (floor random 100),[2,3],true,_InsurgentSide, 200] spawn TRGM_fnc_BuildingPatrol;
+						[_sidePos getPos [400,0],250 + (floor random 20),[2,3],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [400,90],250 + (floor random 20),[2,3],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [400,180],250 + (floor random 20),[2,3],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+						[_sidePos getPos [400,270],250 + (floor random 20),[2,3],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 					};
 					
 
@@ -239,14 +239,14 @@ TREND_fnc_PopulateSideMission = {
 				else {
 					if (_bIsMainObjective) then {
 
-						[_sidePos,15 + (floor random 150),[2,3],false,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+						[_sidePos,15 + (floor random 150),[2,3],false,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 						if (bAllowLargerPatrols && _bIsMainObjective) then {
-							[_sidePos,15 + (floor random 150),[2,3],false,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+							[_sidePos,15 + (floor random 150),[2,3],false,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 						};
 					};
 					if (selectRandom [true,false]) then {
 						//not adding a teamleader to small patrol as we need long dist to have teamleader for CallNearbyPatrols (3rd param for RadiusPatrol is false)
-						[_sidePos,15 + (floor random 50),[2,3],false,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+						[_sidePos,15 + (floor random 50),[2,3],false,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 						_bHasPatrols = true
 					};
 
@@ -254,20 +254,20 @@ TREND_fnc_PopulateSideMission = {
 					//Spawn wide patrol
 					//if main, need a couple of these and always have 2 or 3
 					if (_bIsMainObjective) then {
-						[_sidePos,500 + (floor random 250),[7,8,9],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+						[_sidePos,500 + (floor random 250),[7,8,9],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 					}
 					else {
 						if (selectRandom [true,false]) then {
-							[_sidePos,500 + (floor random 250),[4,5,6],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+							[_sidePos,500 + (floor random 250),[4,5,6],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 							_bHasPatrols = true
 						};
 					};
 
 					if (_bIsMainObjective && selectRandom [true,true,false]) then {
-						//[_sidePos,500 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+						//[_sidePos,500 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 						if (bAllowLargerPatrols && _bIsMainObjective) then {
-							//[_sidePos,700 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-							[_sidePos,900 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
+							//[_sidePos,700 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
+							[_sidePos,900 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TRGM_fnc_RadiusPatrol;
 						};
 					};
 
@@ -275,20 +275,20 @@ TREND_fnc_PopulateSideMission = {
 
 					//Spawn patrol to move from building to building
 					if (_bIsMainObjective || (selectRandom [true,false])) then {
-						[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
+						[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 10] spawn TRGM_fnc_BuildingPatrol;
 						_bHasPatrols = true
 					};
 					if (_bIsMainObjective && bAllowLargerPatrols) then {
-						[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
+						[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 10] spawn TRGM_fnc_BuildingPatrol;
 					};
 
 					//Spawn distant patrol ready to move in (will need to spawn trigger)
 					if (_bIsMainObjective || (selectRandom [true,false])) then {
-						[_sidePos,1000 + (floor random 500),[5,6],true,_InsurgentSide] spawn TREND_fnc_BackForthPatrol;
+						[_sidePos,1000 + (floor random 500),[5,6],true,_InsurgentSide] spawn TRGM_fnc_BackForthPatrol;
 						_bHasPatrols = true
 					};
 					if (_bIsMainObjective && bAllowLargerPatrols) then {
-						[_sidePos,1000 + (floor random 500),[5,6,7],true,_InsurgentSide] spawn TREND_fnc_BackForthPatrol;
+						[_sidePos,1000 + (floor random 500),[5,6,7],true,_InsurgentSide] spawn TRGM_fnc_BackForthPatrol;
 					};
 				};
 			};
