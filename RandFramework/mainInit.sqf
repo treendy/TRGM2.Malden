@@ -399,14 +399,8 @@ if (!isMultiplayer) then {
 	deleteVehicle vs10;
 };
 
-
-
-
-
-
-
-
-if (!isDedicated && str player == "sl") then {
+_isAdmin = (!isMultiplayer || isMultiplayer && !isDedicated && isServer || isMultiplayer && !isServer && (call BIS_fnc_admin) != 0);
+if (!isDedicated && _isAdmin) then {
 	waitUntil {bOptionsSet};
 	if (iMissionParamType != 5) then {	//if isCampaign, dont allow to select AO
 		if (AdvancedSettings select ADVSET_SELECT_AO_IDX == 1) then {

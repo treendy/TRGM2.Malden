@@ -3750,6 +3750,11 @@
                 <Korean>적군 손전등 소지</Korean>
             </Key>
 
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MiniMissions">
+                <Original>Make tasks mini missions</Original>
+                <English>Make tasks mini missions</English>
+            </Key>
+
              <Key ID="STR_TRGM2_select_flare_location">
                 <Original>SELECT WHERE TO SEND FLARES TO</Original>
                 <English>SELECT WHERE TO SEND FLARES TO</English>
@@ -3769,6 +3774,24 @@
                 <Original>Target</Original>
                 <English>Target</English>
                 <Korean>목표</Korean>
+            </Key> 
+
+            <Key ID="STR_TRGM2_Tooltip_AdvMinimission">
+                <Original>All objects will be set to minimissions, meaning very low enemy number, \nsmall group guarding objective, but always the chance of something nasty happening!</Original>
+                <English>All objects will be set to minimissions, meaning very low enemy number, \nsmall group guarding objective, but always the chance of something nasty happening!</English>
+            </Key>    
+
+            <Key ID="STR_TRGM2_ClearAreaMissionTitle">
+                <Original>Clear Area</Original>
+                <English>Clear Area</English>
+            </Key>      
+            <Key ID="STR_TRGM2_ClearAreaMissionDescription">
+                <Original>Secure AO, take down enemy flag and call in supply drop, wait for supplies to arrive before RTB</Original>
+                <English>Secure AO, take down enemy flag and call in supply drop, wait for supplies to arrive before RTB</English>
+            </Key>    
+            <Key ID="STR_TRGM2_FlagLowerCallSupply">
+                <Original>Lower Flag and call in supply drop</Original>
+                <English>Lower Flag and call in supply drop</English>
             </Key> 
 
         </Container>

@@ -341,6 +341,10 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 					#include "..\RandFramework\CustomMission\Mission16.sqf"; //Search and Destroy
 					[] call fnc_CustomVars;
 				};			
+				if (_iThisTaskType == 17) then {
+					#include "..\RandFramework\CustomMission\Mission17.sqf"; //Clear Area
+					[] call fnc_CustomVars;
+				};	
 				if (_iThisTaskType == 99999) then {
 					//hint format["pre: %1",_RequiresNearbyRoad]; sleep 2;
 					#include "..\RandFramework\CustomMission\customMission.sqf"; //meeting assasination

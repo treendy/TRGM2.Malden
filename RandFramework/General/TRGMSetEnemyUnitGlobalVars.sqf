@@ -63,6 +63,8 @@ CheckPointTurret = ["O_HMG_01_high_F"];
 TargetVehicles = ["O_SAM_System_04_F","O_Radar_System_02_F"];
 TargetCaches = ["Box_FIA_Support_F"];
 
+EnemyFlags = ["Flag_CSAT_F"];
+
 //DEFAULTS (over written below)
 
 
@@ -235,6 +237,8 @@ CheckPointTurret = ["O_HMG_01_high_F"];
 		EnemyBaseChoppers = ["Land_HelipadEmpty_F"];
 		sEnemyHeliPilot = "Land_HelipadEmpty_F";
 		CheckPointTurret = ["O_G_Soldier_AR_F"];
+
+		EnemyFlags = ["Flag_FIA_F"];
 
 		
 	};
