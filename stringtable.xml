@@ -3498,58 +3498,77 @@
                 <Chinese>你們摧毀了敵方的火炮，聲譽值提高</Chinese>
                 <Chinesesimp>你们摧毁了敌方的火炮，声誉值提高</Chinesesimp>
             </Key>
-      			<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_GroupManagement">
-              <Original>Enable Group Management</Original>
-              <English>Enable Group Management</English>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_GroupManagement">
+                <Original>Enable Group Management</Original>
+                <English>Enable Group Management</English>
+                <Chinese>開啟小隊管理器</Chinese>
+                <Chinesesimp>开启小队管理器</Chinesesimp>
+                <Korean>그룹 관리 사용</Korean>
             </Key>
             <Key ID="STR_TRGM2_SetMissionBoardOptions_TurnInMission">
-              <Original>Turn in mission</Original>
-              <English>Turn in mission</English>
+                <Original>Turn in mission</Original>
+                <English>Turn in mission</English>
+                <Chinese>交還任務</Chinese>
+                <Chinesesimp>交还任务</Chinesesimp>
+                <Korean>미션 넘기기</Korean>
             </Key>
             <Key ID="STR_TRGM2_startInfMission_DayTurnedIn">
-              <Original>Mission turned in</Original>
-              <English>Mission turned in</English>
+                <Original>Mission turned in</Original>
+                <English>Mission turned in</English>
+                <Chinese>任務已交還</Chinese>
+                <Chinesesimp>任务已交还</Chinesesimp>
+                <Korean>임무가 넘어갑니다</Korean>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions1c">
                 <Original>This is the same as the top mission type, however, the main objective consists of two tasks within the one AO. The AO will be occupied by a heavy enemy army.</Original>
                 <English>This is the same as the top mission type, however, the main objective consists of two tasks within the one AO.  The AO will be occupied by a heavy enemy army.</English>
+                <Korean>이것은 최고 임무 유형과 동일합니다. 그러나, 주 목표는 하나의 AO 내에서 두가지 작업으로 구성됩니다. 작전지역에 많은 적군이 점령합니다.</Korean>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions4b">
                 <Original>A single mini mission.\n\nThese mini missions are could be low in enemey, or high.. recommend to gather intel.  This mode will allow two objectives within the one AO.</Original>
                 <English>A single mini mission.\n\nThese mini missions are could be low in enemey, or high.. recommend to gather intel.  This mode will allow two objectives within the one AO.</English>
+                <Korean>단일 임무.\n\n이 작은 임무는 적이 적거나 높게 인텔을 모으는 것이 좋습니다. 이 모드는 작전지역에 내의 두 가지 목표를 허용합니다.</Korean>
             </Key>
              <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName1c">
                 <Original>Heavy Mission (Two objectives in one AO)</Original>
                 <English>Heavy Mission (Two objectives in one AO)</English>
+                <Korean>대형 임무 (작전지역에 2개 목표생성)</Korean>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName4b">
                 <Original>Single Mission (Two objectives in one AO)</Original>
                 <English>Single Mission (Two objectives in one AO)</English>
+                <Korean>단일 임무 (작전지역에 1개 목표생성)</Korean>
             </Key>
 
              <Key ID="STR_TRGM2_showIntel_NoATArea">
                 <Original>There are no AT restricted areas around!</Original>
                 <English>There are no AT restricted areas around!</English>
+                <Korean>주변에 대전차지뢰 제한구역이 없음!</Korean>
             </Key>
              <Key ID="STR_TRGM2_showIntel_ATArea">
                 <Original>AT Mine restricted area marked on map!</Original>
                 <English>AT Mine restricted area marked on map!</English>
+                <Korean>대전차지뢰 제한지역 지도에 표시!</Korean>
             </Key>
              <Key ID="STR_TRGM2_showIntel_ATAreaMarker">
                 <Original>AT Mines</Original>
                 <English>AT Mines</English>
+                <Korean>대전차지뢰</Korean>
             </Key>
             <Key ID="STR_TRGM2_BombMissionDescription">
                 <Original>We have been informed of the location to a bomb and need it defused!  Speak to the informant to get the details to defuse the bomb (suggest making a note of the colour and code!)</Original>
                 <English>We have been informed of the location to a bomb and need it defused!  Speak to the informant to get the details to defuse the bomb (suggest making a note of the colour and code!)</English>
+                <Korean>우리는 폭탄의 위치를 알았고 폭탄을 해체해야합니다! 정보원이 폭탄을 해체하기위한 세부사항을 알려줄 것입니다. (색상과 코드를 꼭 기억하세요!)</Korean>
             </Key>
             <Key ID="STR_TRGM2_BombMissionDefuseAction">
                 <Original>Defuse Bomb</Original>
                 <English>Defuse Bomb</English>
+                <Korean>폭탄 해체</Korean>
             </Key> 
             <Key ID="STR_TRGM2_BombMissionTitle">
                 <Original>Bomb Disposal</Original>
                 <English>Bomb Disposal</English>
+                <Korean>폭탄 처리</Korean>
             </Key>
             <Key ID="STR_TRGM2_BombMissionReadSerialAction">
                 <Original>Read Serial Number</Original>
@@ -3558,161 +3577,277 @@
             <Key ID="STR_TRGM2_BombMissionInformantMarker">
                 <Original>Informant for bomb codes</Original>
                 <English>Informant for bomb codes</English>
+                <Korean>폭탄 코드에 대한 정보 제공</Korean>
             </Key> 
              <Key ID="STR_TRGM2_BombMissionIntelAction">
                 <Original>Ask for bomb details</Original>
                 <English>Ask for bomb details</English>
+                 <Korean>폭탄에 대한 세부정보 요청</Korean>
             </Key> 
             <Key ID="STR_TRGM2_IEDMissionTitle">
                 <Original>Defuse IEDs</Original>
                 <English>Defuse IEDs</English>
+                <Korean>급조폭발물 해체</Korean>
             </Key> 
             <Key ID="STR_TRGM2_IEDMissionDescription">
                 <Original>We have intel of three IED positions which are marked on your map, they will be either a pile of rubble or an abandoned vehicle, we need you to defuse them all. Note: Engineers/Explosive experts have 100% chance of finding and defusing an IED, however anyone else will have to search a few times, and if they attempt defusing, they may set off the charge!</Original>
                 <English>We have intel of three IED positions which are marked on your map, they will be either a pile of rubble or an abandoned vehicle, we need you to defuse them all. Note: Engineers/Explosive experts have 100% chance of finding and defusing an IED, however anyone else will have to search a few times, and if they attempt defusing, they may set off the charge!</English>
+                <Korean>우리는 당신의 지도에 표시된 세 가지 폭발물 공격 위치의 정보를 가지고 있으며, 그들은 잔해 더미 또는 버려진 차량 중 하나가 될 것입니다. 우리는 모두 당신을 물리쳐야합니다. 참고 : 공병/폭발물 전문가가 폭발물 공격을 찾고 회피 할 확률은 100 %입니다. 그러나 다른 사람이 몇 번 검색해야하며, 진압을 시도하면 요금이 부과 될 수 있습니다!</Korean>
             </Key> 
             <Key ID="STR_TRGM2_IEDMarkerText">
                 <Original>IED</Original>
                 <English>IED</English>
+                <Korean>급조폭발물</Korean>
             </Key> 
             <Key ID="STR_TRGM2_IEDSearchIED">
                 <Original>Search for IED</Original>
                 <English>Search for IED</English>
+                <Korean>급조폭발물 수색</Korean>
             </Key> 
             <Key ID="STR_TRGM2_IEDSearchFailed">
                 <Original>Unsure, try to search again</Original>
                 <English>Unsure, try to search again</English>
+                <Korean>확실하지 않으면 다시 수색하십시오</Korean>
             </Key>
             <Key ID="STR_TRGM2_IEDSearchFound">
                 <Original>IED Located!</Original>
                 <English>IED Located!</English>
+                <Korean>급조폭발물 발견!</Korean>
             </Key>
             <Key ID="STR_TRGM2_IEDDefuse">
                 <Original>Defuse</Original>
                 <English>Defuse</English>
+                <Korean>해체하기</Korean>
             </Key> 
             <Key ID="STR_TRGM2_IEDOhOh">
                 <Original>Oh no!!!</Original>
                 <English>Oh no!!!</English>
+                <Korean>오~ 안돼!!</Korean>
             </Key> 
             <Key ID="STR_TRGM2_IEDOneWay">
                 <Original>well.... that is one way to defuse an IED!</Original>
                 <English>well.... that is one way to defuse an IED!</English>
+                <Korean>음.... 그것은 급조폭발물을 해체하는 한 가지 방법입니다!</Korean>
             </Key> 
             <Key ID="STR_TRGM2_IEDDefused">
                 <Original>IED Defused</Original>
                 <English>IED Defused</English>
+                <Korean>급조폭발물 제거</Korean>
             </Key> 
             <Key ID="STR_TRGM2_IEDNoneFound">
                 <Original>No IED here!</Original>
                 <English>No IED here!</English>
+                <Korean>급조폭발물 없음!</Korean>
             </Key> 
             <Key ID="STR_TRGM2_IEDOmteresting">
                 <Original>Interesting defusal technique!</Original>
                 <English>Interesting defusal technique!</English>
+                <Korean>흥미로운 해체 기술!</Korean>
             </Key> 
              <Key ID="STR_TRGM2_BombSerialNo">
                 <Original>"Serial Number: %1"</Original>
                 <English>"Serial Number: %1"</English>
+                <Korean>"일련 번호: %1"</Korean>
             </Key>
             <Key ID="STR_TRGM2_BombNiceToMeet">
                 <Original>Nice to meet you %1.\n\nBomb serial number is: %2\n\nYou must cut the %3 wire first!! then you will have 10 seconds to enter the code:%4</Original>
                 <English>Nice to meet you %1.\n\nBomb serial number is: %2\n\nYou must cut the %3 wire first!! then you will have 10 seconds to enter the code:%4</English>
+                <Korean>반갑습니다 %1.\n\n폭탄 일련 번호: %2\n\n%3 선을 먼저 잘라야 합니다!! 그리고 10초안에 코드를 입력해야 합니다: %4</Korean>
             </Key> 
             <Key ID="STR_TRGM2_BombPsst">
                 <Original>Psst %1.\n\nThis guy is dead... why are you trying to talk to him? (you will have to guess the code and colour now lol)</Original>
                 <English>Psst %1.\n\nThis guy is dead... why are you trying to talk to him? (you will have to guess the code and colour now lol)</English>
+                <Korean>잠깐! %1.\n그는 이미 죽었다... 당신은 그에게 무엇을 말하려 합니까? (당신은 코드와 색상을 추측해야합니다)</korean>
             </Key> 
             <Key ID="STR_TRGM2_BombCountdown">
                 <Original>Countdown: %1</Original>
                 <English>Countdown: %1</English>
+                <Korean>카운트다운: %1</Korean>
             </Key> 
             <Key ID="STR_TRGM2_BombCodeEntered">
                 <Original>Code Entered</Original>
                 <English>Code Entered</English>
+                <Korean>입력된 코드</Korean>
             </Key>
             <Key ID="STR_TRGM2_CivTalk">
                 <Original>Talk/Search civ</Original>
                 <English>Talk/Search civ</English>
+                <Korean>만간인 검문수색</Korean>
             </Key> 
             <Key ID="STR_TRGM2_CivTalkDead">
                 <Original>you find nothing of interest</Original>
                 <English>you find nothing of interest</English>
+                <Korean>당신은 아무것도 찾을 수 없다</Korean>
             </Key> 
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions7">
                 <Original>Heavy mission, location is unknown, and task is unknown, need to gain intel from locals, recon area, do what ever you can to locate and identity your objective!</Original>
                 <English>Heavy mission, location is unknown, and task is unknown, need to gain intel from locals, recon area, do what ever you can to locate and identity your objective!</English>
+                <Korean>대형 임무, 위치를 알 수 없으며 과업도 알 수 없습니다, 목표수행을 위해 현지인 정보 수집, 정찰수색 등 할 수 있는 모든 것을 수행하십시오!.</Korean>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName7">
                 <Original>Hidden Heavy Mission (Full map, gather intel)</Original>
                 <English>Hidden Heavy Mission (Full map, gather intel)</English>
+                <Korean>비밀 대형 임무 (전역, 정보수집)</Korean>
             </Key>
 
             <Key ID="STR_TRGM2_TargetMissionTitle">
                 <Original>Search and Destroy</Original>
                 <English>Search and Destroy</English>
+                <Korean>수색 및 파괴</Korean>
             </Key> 
             <Key ID="STR_TRGM2_TargetMissionDescription">
                 <Original>We have intel of three Targets which are marked on your map, blow them up!</Original>
                 <English>We have intel of three Targets which are marked on your map, blow them up!</English>
+                <Korean>우리는 지도에 표시되어있는 3개의 목표의 정보를 가지고 있습니다. 그들을 작살내세요!</Korean>
             </Key> 
             <Key ID="STR_TRGM2_TargetMarkerText">
                 <Original>Target</Original>
                 <English>Target</English>
+                <Korean>목표</Korean>
             </Key> 
 
             </Key>
       		<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MainAOSelect">
               <Original>Select main AO Pos</Original>
               <English>Select main AO Pos</English>
+                <Korean>주요 작전지역 선택</Korean>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MainAO_CAMP_Select">
               <Original>Select main AO Camp Pos</Original>
               <English>Select main AO Camp Pos</English>
+              <Korean>주요 작전캠프 선택</Korean>
             </Key>
 
             <Key ID="STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3">
                 <Original> is selecting the AO</Original>
                 <English> is selecting the AO</English>
+                <Korean> 작전지역 선택 중</Korean>
             </Key>
 
             <Key ID="STR_TRGM2_tele_SelectPositionAO1">
                 <Original>1. SELECT AO LOCATION (Press esc at anytime to randomly place all following points)</Original>
                 <English>1. SELECT AO LOCATION (Press esc at anytime to randomly place all following points)</English>
+                <Korean>>1. 작전지역 위치선택 (언제든지 ESC를 누르면 다음지점을 무작위로 배치)</Korean>
             </Key>
             <Key ID="STR_TRGM2_tele_SelectPositionAO2">
                 <Original>2. SELECT SECOND AO LOCATION (Press esc at anytime to randomly place all following points)</Original>
                 <English>2. SELECT SECOND AO LOCATION (Press esc at anytime to randomly place all following points)</English>
+                <Korean>>2. 두 번째 작전지역 위치선택 (언제든지 ESC를 누르면 다음지점을 무작위로 배치)</Korean>
             </Key>
             <Key ID="STR_TRGM2_tele_SelectPositionAO3">
                 <Original>3. SELECT THIRD AO LOCATION (Press esc at anytime to randomly place all following points)</Original>
                 <English>3. SELECT THIRD AO LOCATION (Press esc at anytime to randomly place all following points)</English>
+                <Korean>>3. 세 번째 작전지역 위치선택 (언제든지 ESC를 누르면 다음지점을 무작위로 배치)</Korean>
             </Key>
             <Key ID="STR_TRGM2_tele_SelectPosition_AO_Camp">
                 <Original>SELECT AO CAMP LOCATION (Press esc at anytime to randomly place all following points)</Original>
                 <English>SELECT AO CAMP LOCATION (Press esc at anytime to randomly place all following points)</English>
+                <Korean>>작전캠프 위치선택 (언제든지 ESC를 누르면 다음지점을 무작위로 배치)</Korean>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFlashLights">
                 <Original>Enemy to have flashlights</Original>
                 <English>Enemy to have flashlights</English>
-            </Key>
+                <Korean>적군 손전등 소지</Korean>
+            </Key>            
 
              <Key ID="STR_TRGM2_select_flare_location">
                 <Original>SELECT WHERE TO SEND FLARES TO</Original>
                 <English>SELECT WHERE TO SEND FLARES TO</English>
+                 <Korean>조명탄 발포 위치를 선택하시오</Korean>
             </Key>
             <Key ID="STR_TRGM2_CacheMissionTitle">
                 <Original>Destroy Cache</Original>
                 <English>Destroy Cache</English>
+                <Korean>은닉처 파괴</Korean>
             </Key> 
             <Key ID="STR_TRGM2_CacheMissionDescription">
                 <Original>Location of enemy cache found, destroy it</Original>
                 <English>Location of enemy cache found, destroy it</English>
+                <Korean>적 은닉처 위치를 찾았습니다</Korean>
             </Key> 
             <Key ID="STR_TRGM2_CacheMarkerText">
                 <Original>Target</Original>
                 <English>Target</English>
+                <Korean>목표</Korean>
             </Key> 
+
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MiniMissions">
+                <Original>Make tasks mini missions</Original>
+                <English>Make tasks mini missions</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_Tooltip_AdvMinimission">
+                <Original>All objects will be set to minimissions, meaning very low enemy number, \nsmall group guarding objective, but always the chance of something nasty happening!</Original>
+                <English>All objects will be set to minimissions, meaning very low enemy number, \nsmall group guarding objective, but always the chance of something nasty happening!</English>
+            </Key>    
+
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_IedTargetCompact">
+                <Original>Compact Target/Ied Missions</Original>
+                <English>Compact Target/Ied Missions</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_Tooltip_AdvIedTargetCompact">
+                <Original>If enabled, IED and Target missions will be grouped closer to the AO,\nas apposed to spaced out around the AO</Original>
+                <English>If enabled, IED and Target missions will be grouped closer to the AO,\nas apposed to spaced out around the AO</English>
+            </Key>
+
+
+            <Key ID="STR_TRGM2_Tooltip_AdvVirtualArsenal">
+                <Original>Will add an action to the supply create at base or camp to allow access to virtual arsenal</Original>
+                <English>Will add an action to the supply create at base or camp to allow access to virtual arsenal</English>
+            </Key>  
+
+            <Key ID="STR_TRGM2_Tooltip_AdvGroupName">
+                <Original>Displays a message at the start and end of missions and will include your group name</Original>
+                <English>Displays a message at the start and end of missions and will include your group name</English>
+            </Key>  
+
+            <Key ID="STR_TRGM2_Tooltip_AdvGroupManagement">
+                <Original>Enables the Dynamic Groups feature of Arma3</Original>
+                <English>Enables the Dynamic Groups feature of Arma3</English>
+            </Key>  
+
+            <Key ID="STR_TRGM2_Tooltip_AdvMapDraw">
+                <Original>If this is enabled, you will only be able to draw on the map in direct channel,\nmeaning, if you need to point out a target from a distance, you will need to call out grid refs</Original>
+                <English>If this is enabled, you will only be able to draw on the map in direct channel,\nmeaning, if you need to point out a target from a distance, you will need to call out grid refs</English>
+            </Key>  
+
+            <Key ID="STR_TRGM2_Tooltip_AdvAoSelect">
+                <Original>If enabled, you will be able to select on the map before the mission starts\nto mark where you want the AO locations to be</Original>
+                <English>If enabled, you will be able to select on the map before the mission starts\nto mark where you want the AO locations to be</English>
+            </Key>  
+
+            <Key ID="STR_TRGM2_Tooltip_AdvCampStart">
+                <Original>If enabled, you will be able to select your camp start position on the map</Original>
+                <English>If enabled, you will be able to select your camp start position on the map</English>
+            </Key>  
+
+
+            <Key ID="STR_TRGM2_ClearAreaMissionTitle">
+                <Original>Secure and Resupply</Original>
+                <English>Secure and Resupply</English>
+            </Key>      
+            <Key ID="STR_TRGM2_ClearAreaMissionDescription">
+                <Original>Secure AO, take down enemy flag and call in supply drop, wait for supplies to arrive before RTB</Original>
+                <English>Secure AO, take down enemy flag and call in supply drop, wait for supplies to arrive before RTB</English>
+            </Key>    
+            <Key ID="STR_TRGM2_FlagLowerCallSupply">
+                <Original>Lower Flag and call in supply drop</Original>
+                <English>Lower Flag and call in supply drop</English>
+            </Key> 
+
+            <Key ID="STR_TRGM2_MinUntilSupplyChopperInArea">
+                <Original>Minutes until supply chopper in area: %1</Original>
+                <English>Minutes until supply chopper in area: %1</English>
+            </Key> 
+
+            <Key ID="STR_TRGM2_SupplyChopperInbound">
+                <Original>supply choppers inbound</Original>
+                <English>supply choppers inbound</English>
+            </Key> 
+
+
+
 
         </Container>
     </Package>

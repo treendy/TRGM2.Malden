@@ -28,7 +28,14 @@ if (isNil "FinalMissionStarted") then {
 	publicVariable "FinalMissionStarted";	
 };
 
+if (isNil "IsAdminPlayerAvailable") then {
+	IsAdminPlayerAvailable = false;
+	publicVariable "IsAdminPlayerAvailable";
+};
+
+
 CODEINPUT = [];
+
 	waitUntil {!isNull player};
 	waitUntil {player == player};
 
@@ -43,56 +50,104 @@ CODEINPUT = [];
 		};
 		while {!bAndSoItBegins} do {
 
-			if (str player == "sl") then {
-				if  (!dialog) then {
-					//[] spawn {
-						sleep 1.5;
-						if  (!dialog && !bOptionsSet) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
-							[] execVM "RandFramework\GUI\openDialogMissionSelection.sqf";
-							//_actChooseMission = endMissionBoard addaction ["Select Mission Params", "RandFramework\GUI\openDialogMissionSelection.sqf"];
-						};
-					//};
-				};
-				sleep 0.5;
-			}
-			else {
+			if ("NEWWAY" == "NEWWAY") then {			
 
-				if (isNil "sl") then {
-					txt5Layer = "txt5" call BIS_fnc_rscLayer;
-			    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustFilled" + "</t>";
-			    	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+				_isAdmin = (!isMultiplayer || isMultiplayer && !isDedicated && isServer || isMultiplayer && !isServer && (call BIS_fnc_admin) != 0);
+
+				if (_isAdmin) then {
+					if (!IsAdminPlayerAvailable) then {
+						IsAdminPlayerAvailable = true;
+						publicVariable "IsAdminPlayerAvailable";
+					};
+					if  (!dialog) then {
+						//[] spawn {
+							sleep 1.5;
+							if  (!dialog && !bOptionsSet) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
+								[] execVM "RandFramework\GUI\openDialogMissionSelection.sqf";
+								//_actChooseMission = endMissionBoard addaction ["Select Mission Params", "RandFramework\GUI\openDialogMissionSelection.sqf"];
+							};
+						//};
+					};
+					sleep 0.5;
 				}
 				else {
-					if (!isPlayer sl) then {
-						txt5Layer = "txt5" call BIS_fnc_rscLayer;
-				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustPlayer" + "</t>";
-				    	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+					if (!bOptionsSet) then {
+						txt1Layer = "txt1" call BIS_fnc_rscLayer;
+						_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1 Admin " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
+						[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
 					}
 					else {
-						if (!bOptionsSet) then {
-							txt1Layer = "txt1" call BIS_fnc_rscLayer;
-					    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + name sl + " " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
-					    	[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
-						}
-						else {
-							txt1Layer = "txt1" call BIS_fnc_rscLayer;
-				    		_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + name sl + " " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3" + "</t>";
-				    		[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
-						};
-						txt5Layer = "txt5" call BIS_fnc_rscLayer;
-				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>";
-				    	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+						txt1Layer = "txt1" call BIS_fnc_rscLayer;
+						_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1 Admin " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3" + "</t>";
+						[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
+					};
+					txt5Layer = "txt5" call BIS_fnc_rscLayer;
+					_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>";
+					[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
 
 
-				    	txt51Layer = "txt51" call BIS_fnc_rscLayer;
-				    	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic" + "</t>";
-				    	[_texta, 0, 0.280, 7, 1,0,txt51Layer] spawn BIS_fnc_dynamicText;
+					txt51Layer = "txt51" call BIS_fnc_rscLayer;
+					_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic" + "</t>";
+					[_texta, 0, 0.280, 7, 1,0,txt51Layer] spawn BIS_fnc_dynamicText;
+					
+					
+					sleep 5;
 
-				    };
-			    };
-			    sleep 5;
+				};
 			};
 
+			//if 5 seconds have passed, and no admin player has joined, will default to using SL
+			if (!IsAdminPlayerAvailable) then {
+				if (str player == "sl") then {
+					if  (!dialog) then {
+						//[] spawn {
+							sleep 1.5;
+							if  (!dialog && !bOptionsSet) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
+								[] execVM "RandFramework\GUI\openDialogMissionSelection.sqf";
+								//_actChooseMission = endMissionBoard addaction ["Select Mission Params", "RandFramework\GUI\openDialogMissionSelection.sqf"];
+							};
+						//};
+					};
+					sleep 0.5;
+				}
+				else {
+
+					if (isNil "sl") then {
+						txt5Layer = "txt5" call BIS_fnc_rscLayer;
+						_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustFilled" + "</t>";
+						[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+					}
+					else {
+						if (!isPlayer sl) then {
+							txt5Layer = "txt5" call BIS_fnc_rscLayer;
+							_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustPlayer" + "</t>";
+							[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+						}
+						else {
+							if (!bOptionsSet) then {
+								txt1Layer = "txt1" call BIS_fnc_rscLayer;
+								_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + name sl + " " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
+								[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
+							}
+							else {
+								txt1Layer = "txt1" call BIS_fnc_rscLayer;
+								_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + name sl + " " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3" + "</t>";
+								[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
+							};
+							txt5Layer = "txt5" call BIS_fnc_rscLayer;
+							_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>";
+							[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+
+
+							txt51Layer = "txt51" call BIS_fnc_rscLayer;
+							_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic" + "</t>";
+							[_texta, 0, 0.280, 7, 1,0,txt51Layer] spawn BIS_fnc_dynamicText;
+
+						};
+					};
+					sleep 5;
+				};
+			};
 		};
 	};
 	[] spawn TREND_fnc_MissionSelectLoop;

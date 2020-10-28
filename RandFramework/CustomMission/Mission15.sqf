@@ -1,5 +1,7 @@
 //These are only ever called by the server!
 
+//MISSION 15: Search and Destroy
+
 fnc_CustomRequired = { //used to set any required details for the AO (example, a wide open space or factory nearby)... if this is not found in AO, the engine will scrap the area and loop around again with a different location
 //be careful about using this, some maps may not have what you require, so the engine will never satisfy the requirements here (example, if no airports are on a map and that is what you require)	
 	_objectiveMainBuilding = _this select 0; 
@@ -28,6 +30,16 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_bIsMainObjective = _this select 7;
 	if (_markerType != "empty") then { _markerType = "hd_unknown"; }; //You can set the type of marker here, but if the player has selected to hide mission locations, then your marker will not show
 
+	_compactIedTargets = false;
+	if (AdvancedSettings select ADVSET_IEDTARGET_COMPACT_SPACING_IDX == 1) then {
+		_compactIedTargets = true;
+	};
+	if (AdvancedSettings select ADVSET_IEDTARGET_COMPACT_SPACING_IDX == 0) then {
+		_compactIedTargets = selectRandom[false,true];
+	};
+
+	_spacingBetweenTargets = 1500;
+	if (_compactIedTargets) then {_spacingBetweenTargets = 150};
 
 	//_MissionTitle = format["Meeting Assassination: %1",name(_mainHVT)];	//you can adjust this here to change what shows as marker and task text 
 	_sTaskDescription = selectRandom[localize "STR_TRGM2_TargetMissionDescription"]; //adjust this based on veh? and man? if van then if car then?
@@ -57,7 +69,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_sTargetName2 = format["objInformant2_%1",_iTaskIndex];
 	_IED2 setVariable [_sTargetName2, _IED2, true];
 	missionNamespace setVariable [_sTargetName2, _IED2];
-	[_mainObjPos,1500,true,true,_IED2, _isCache2] execVM "RandFramework\setTargetEvent.sqf";
+	[_mainObjPos,_spacingBetweenTargets,true,true,_IED2, _isCache2] execVM "RandFramework\setTargetEvent.sqf";
 
 	_targetToUse3 = selectRandom _targetVehs;
 	_isCache3 = selectRandom[true];
@@ -68,7 +80,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_sTargetName3 = format["objInformant3_%1",_iTaskIndex];
 	_IED3 setVariable [_sTargetName3, _IED3, true];
 	missionNamespace setVariable [_sTargetName3, _IED3];
-	[_mainObjPos,1500,true,true,_IED3, _isCache3] execVM "RandFramework\setTargetEvent.sqf";
+	[_mainObjPos,_spacingBetweenTargets,true,true,_IED3, _isCache3] execVM "RandFramework\setTargetEvent.sqf";
 
 
 

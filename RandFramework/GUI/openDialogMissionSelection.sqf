@@ -1,6 +1,7 @@
 #include "..\..\setUnitGlobalVars.sqf";
 disableSerialization;
 
+//profileNamespace setVariable [worldname + ":PreviousSettings",Nil];
 
 if (isNil "InitialLoadedPreviousSettings" && !ForceMissionSetup) then {
 	InitialLoadedPreviousSettings = profileNamespace getVariable [worldname + ":PreviousSettings",Nil]; //Get this from server only, but use player ID!!!
@@ -80,6 +81,12 @@ if (isNil "InitialLoadedPreviousSettings" && !ForceMissionSetup) then {
 			};
 			if (count AdvancedSettings < 13) then {
 				AdvancedSettings pushBack (DefaultAdvancedSettings select 12);
+			};
+			if (count AdvancedSettings < 14) then {
+				AdvancedSettings pushBack (DefaultAdvancedSettings select 13);
+			};
+			if (count AdvancedSettings < 15) then {
+				AdvancedSettings pushBack (DefaultAdvancedSettings select 14);
 			};
 
 			if (isClass(configFile >> "CfgPatches" >> "ace_medical")) then {
