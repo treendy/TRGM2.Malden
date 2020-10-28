@@ -298,13 +298,13 @@ If you really want to, you can make a donation via my site www.trgm2.com (paypa
 
 
 
-
 if (isServer) then { //adjust weather here so intro animation is different everytime
 		[true] execVM "RandFramework\SetTimeAndWeather.sqf";
 };
 
+ waitUntil {time > 0};
 
-showcinemaborder true;
+showCinemaBorder  true;
 
 _centerPos = getArray (configfile >> "CfgWorlds" >> worldName >> "centerPosition");
 if !(isNil "CustomCenterPos") then {
@@ -670,6 +670,7 @@ sleep _coreCountSleep;
 
 
 player doFollow player;
+
 
 
 systemChat format["Mission Core: %1", "DoFollowRun"];
