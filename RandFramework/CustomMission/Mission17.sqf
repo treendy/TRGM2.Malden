@@ -37,7 +37,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_mainObjPos = getPos _objectiveMainBuilding;
 	
 	//spawn checkpoint with flag
-	_thisAreaRange = 50;
+	_thisAreaRange = 100;
 	_checkPointGuidePos = _mainObjPos;
 	_flatPos = nil;
 	_flatPos = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]] + CheckPointAreas + SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
@@ -79,22 +79,35 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			missionNamespace setVariable [_flagName, _newFlag];
 			_newFlag setVariable ["Lowered",true];			
 			
-			{
-				_group = _x;
-				if (side _group == east) then {
-					_groupLeader = leader _group;
-					if ((getPos _groupLeader) distance _pos < 1500) then {
-						//doStop (_units select _unitIndex);
-						{
-							_unit = _x;
-							_unit forceSpeed -1;
-							_unit doMove _pos;
-						} forEach units _group;
-					};					
-				};
-			} forEach allGroups;
+			[
+				[_newFlag],
+				{
+					{				
+						//hint str(_this);	
+						_flag = _this select 0;
+						_pos = getPos _flag;
+						_group = _x;
+						if (side _group == east) then {
+							_groupLeader = leader _group;
+							if ((getPos _groupLeader) distance _pos < 1500) then {
+								//doStop (_units select _unitIndex);
+								{
+									_unit = _x;
+									_unit setCombatMode "RED";
+									_unit setBehaviour "AWARE";
+									_unit setUnitPos "AUTO";
+									_unit = _x;
+									_unit forceSpeed -1;
+									_unit doMove _pos;
+								} forEach units _group;
+							};					
+						};
+					} forEach allGroups;
+				}
+			] remoteExec ["bis_fnc_call", 2];
 
-			{hint (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "4:00"]);} remoteExec ["bis_fnc_call", 0];
+
+			//{hint (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "4:00"]);} remoteExec ["bis_fnc_call", 0];
 			sleep 240; //wait 4 mins before supply drop in area
 			{hint (localize "STR_TRGM2_SupplyChopperInbound");} remoteExec ["bis_fnc_call", 0];
 
@@ -115,11 +128,10 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			(supChopper select 0) flyInHeight 45;
 			(supChopper select 0) setBehaviour "CARELESS";
 			(supChopper select 0) setSpeedMode "FULL";
-
 			_airSupWP1 = _supGrp addWaypoint [_pos,10];
 			_airSupWP1 setWaypointType "MOVE";
 			_airSupWP1 setWaypointSpeed "FULL";
-			_airSupWP1 setWaypointBehaviour "SAFE";	
+			_airSupWP1 setWaypointBehaviour "CARELESS";	
 			_airSupWP1 setWaypointStatements ["true", format["
 				hint (""DEST REACHED""); 
 				_suppcrate = ""B_supplyCrate_f"" createVehicle getPos (vehicle this);
@@ -131,12 +143,16 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 				_chute = createVehicle ['B_parachute_02_F', getPos _suppcrate, [], 0, 'FLY'];
 				_chute setDir getDir _suppcrate;
 				_suppcrate attachTo [_chute, [0,0,-5]];
-				ObjFlag%1 setVariable [""SupplyDropped"", true];
+				
+				{
+					ObjFlag%1 setVariable ['SupplyDropped', true];
+				}
+				remoteExec ['bis_fnc_call', 2];
 			", _iTaskIndex]];
 			_airSupWP2 = _supGrp addWaypoint [_spawnPos,10];
 			_airSupWP2 setWaypointType "MOVE";
 			_airSupWP2 setWaypointSpeed "FULL";
-			_airSupWP2 setWaypointBehaviour "SAFE";	
+			_airSupWP2 setWaypointBehaviour "CARELESS";	
 			_airSupWP2 setWaypointStatements ["true", "{deleteVehicle _x;} forEach crew (vehicle this) + [vehicle this];"];
 			
 			//spawn 2nd supply chopper
@@ -146,11 +162,10 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			(supChopper2 select 0) flyInHeight 45;
 			(supChopper2 select 0) setBehaviour "CARELESS";
 			(supChopper2 select 0) setSpeedMode "FULL";
-
 			_airSupWP1b = _supGrp2 addWaypoint [_pos,10];
 			_airSupWP1b setWaypointType "MOVE";
 			_airSupWP1b setWaypointSpeed "FULL";
-			_airSupWP1b setWaypointBehaviour "SAFE";	
+			_airSupWP1b setWaypointBehaviour "CARELESS";	
 			_airSupWP1b setWaypointStatements ["true", format["
 				hint (""DEST REACHED""); 
 				_suppcrate = ""B_supplyCrate_f"" createVehicle getPos (vehicle this);
@@ -162,13 +177,16 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 				_chute = createVehicle ['B_parachute_02_F', getPos _suppcrate, [], 0, 'FLY'];
 				_chute setDir getDir _suppcrate;
 				_suppcrate attachTo [_chute, [0,0,-5]];
-				ObjFlag%1 setVariable [""SupplyDropped"", true];
-			", _iTaskIndex]];
 
-			_airSupWP2b = _supGrp addWaypoint [_spawnPos,10];
+				{
+					ObjFlag%1 setVariable ['SupplyDropped', true];
+				}
+				remoteExec ['bis_fnc_call', 2];
+			", _iTaskIndex]];
+			_airSupWP2b = _supGrp2 addWaypoint [_spawnPos2,10];
 			_airSupWP2b setWaypointType "MOVE";
 			_airSupWP2b setWaypointSpeed "FULL";
-			_airSupWP2b setWaypointBehaviour "SAFE";	
+			_airSupWP2b setWaypointBehaviour "CARELESS";	
 			_airSupWP2b setWaypointStatements ["true", "{deleteVehicle _x;} forEach crew (vehicle this) + [vehicle this];"];
 			
 
