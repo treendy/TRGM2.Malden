@@ -263,10 +263,10 @@ MissionParamTypesValues = [0,6,8,1,2,3,9,4,7,10,5];
 //7=Eliminate Officer     8=Assasinate weapon dealer    9=Destroy AAA vehicles
 //10=Destroy Artillery vehicles 	11=Resue POW  12=Resue Reporter
 //13=Defuse IEDs  14=BombMission 15=TargetMission  16=Destroy Cache  17=Secure and Supply
-//SideMissionTasks = [7];
-SideMissionTasks = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,99999];
-//MainMissionTasks = [8];
-MainMissionTasks = [1,2,6,7,8,11,12,14,15,16,17,99999];
+SideMissionTasks = [17];
+//SideMissionTasks = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,99999];
+//MainMissionTasks = [17];
+MainMissionTasks = [1,2,3,6,7,8,9,10,11,12,13,14,15,16,17,99999];
 MissionsThatHaveIntel = [1,4,5,6];
 
 MissionParamObjectives = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_startInfMission_MissionTitle1",localize "STR_TRGM2_startInfMission_MissionTitle2",localize "STR_TRGM2_startInfMission_MissionTitle3",localize "STR_TRGM2_startInfMission_MissionTitle4",localize "STR_TRGM2_startInfMission_MissionTitle5",localize "STR_TRGM2_startInfMission_MissionTitle6",localize "STR_TRGM2_startInfMission_MissionTitle7",localize "STR_TRGM2_startInfMission_MissionTitle8",localize "STR_TRGM2_startInfMission_MissionTitle9",localize "STR_TRGM2_startInfMission_MissionTitle10",localize "STR_TRGM2_startInfMission_MissionTitle11",localize "STR_TRGM2_startInfMission_MissionTitle12"];
