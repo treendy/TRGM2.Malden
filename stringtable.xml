@@ -3799,12 +3799,12 @@
                 <English>If enabled, IED and Target missions will be grouped closer to the AO,\nas apposed to spaced out around the AO</English>
             </Key>
 
-            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MoreEnemiest">
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MoreEnemies">
                 <Original>More enemies</Original>
                 <English>More enemies</English>
             </Key>
 
-            <Key ID="STR_TRGM2_Tooltip_AdvMoreEnemiest">
+            <Key ID="STR_TRGM2_Tooltip_AdvMoreEnemies">
                 <Original>If enabled, more enemies will spawn around objectives. \n And they will call for reinforcements more often.</Original>
                 <English>If enabled, more enemies will spawn around objectives. \n And they will call for reinforcements more often.</English>
             </Key>

@@ -299,7 +299,7 @@ if (isServer) then {
 	if (typeName sCivilian != "ARRAY") then {sCivilian = [sCivilian]};
 	/*end */
 
-	private _airTransClassName = selectRandom SupplySupportChopperOptions;
+	private _airTransClassName = selectRandom (SupplySupportChopperOptions select {getNumber(configFile >> "CfgVehicles" >> _x >> "transportSoldier") >= 10});
 	if (_airTransClassName != typeOf chopper1) then {
 		{deleteVehicle _x;} forEach crew (vehicle chopper1) + [vehicle chopper1];
 		private _chopper1Arr = [getPos heliPad1, 0, _airTransClassName, WEST] call BIS_fnc_spawnVehicle;
