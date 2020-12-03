@@ -1,5 +1,8 @@
 
 
-if (SaveType != 0) then {
-		[SaveType,false] execVM "RandFramework\Campaign\ServerSave.sqf";
+if (TREND_SaveType != 0) then {
+	[TREND_SaveType,false] spawn TREND_fnc_ServerSave;
 };
+
+
+true;

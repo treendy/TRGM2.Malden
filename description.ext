@@ -1,10 +1,10 @@
-#include "RandFramework\GUI\defines.hpp"
+
 #include "RandFramework\GUI\dialogs.hpp"
 
 
-author = "Treendy";
-OnLoadName = "TRGM 2.0 Malden";
-OnLoadmission = "TRGM 2";
+author = "Treendy & TheAce0296";
+OnLoadName = "TRGM 2.1";
+OnLoadmission = "TRGM 2.1";
 OnLoadIntro = $STR_TRGM2_Description_OnLoadIntro;
 loadScreen = "TRGM2OverviewPic2.jpg";
 overviewText = $STR_TRGM2_Description_overviewText;
@@ -13,12 +13,16 @@ overviewPicture = "TRGM2OverviewPic2.jpg";
 disabledAI=0;
 joinUnassigned = 1;
 enableDebugConsole = 1;
+aiKills = 1;
 //forceRotorLibSimulation = 1;
 
 respawn = 3;
+respawnButton = 1;
 respawnDelay = 5;
+respawnVehicleDelay = 30;
 respawnDialog = 1;
-respawnTemplates[] = {"Tickets","Spectator"};
+respawnOnStart = -1;
+respawnTemplates[] = {"Tickets","Spectator","MenuPosition"};
 
 class Header
 {
@@ -32,6 +36,17 @@ class Params
 {
 
 };
+
+class CfgFunctions {
+	#include "fhqtt\functions.hpp"
+	#include "RandFramework\functions.hpp"
+	// #ifndef AIS_Core_Progress_BarDlg
+	// 	#include "AIS\cfgFunctions.hpp"
+	// #endif
+};
+// #ifndef AIS_Core_Progress_BarDlg
+// 	#include "AIS\Effects\BarDlg.hpp"
+// #endif
 
 class CfgDebriefing
 {
@@ -151,74 +166,74 @@ class CfgSounds
 	{
 		name = "expozie"; // Name for mission editor
 		sound[] = {\RandFramework\Alias\Sound\expozie.ogg, db+20, 1.0};
-		titles[] = {0, ""};	
-	};		
+		titles[] = {0, ""};
+	};
 	class bariera_1
 	{
 		name = "bariera_1"; // Name for mission editor
 		sound[] = {\RandFramework\Alias\Sound\bariera_1.ogg, db+15, 1.0};
-		titles[] = {0, ""};	
-	};	
+		titles[] = {0, ""};
+	};
 	class bariera_2
 	{
 		name = "bariera_2"; // Name for mission editor
 		sound[] = {\RandFramework\Alias\Sound\bariera_2.ogg, db+15, 1.0};
-		titles[] = {0, ""};	
-	};	
+		titles[] = {0, ""};
+	};
 	class bariera_3
 	{
 		name = "bariera_3"; // Name for mission editor
 		sound[] = {\RandFramework\Alias\Sound\bariera_3.ogg, db+15, 1.0};
-		titles[] = {0, ""};	
-	};	
+		titles[] = {0, ""};
+	};
 	class bariera_4
 	{
 		name = "bariera_4"; // Name for mission editor
 		sound[] = {\RandFramework\Alias\Sound\bariera_4.ogg, db+15, 1.0};
-		titles[] = {0, ""};	
-	};	
+		titles[] = {0, ""};
+	};
 	class bariera_5
 	{
 		name = "bariera_5"; // Name for mission editor
 		sound[] = {\RandFramework\Alias\Sound\bariera_5.ogg, db+15, 1.0};
-		titles[] = {0, ""};	
-	};	
+		titles[] = {0, ""};
+	};
 	class ground_air
 	{
 		name = "ground_air"; // Name for mission editor
 		sound[] = {\RandFramework\Alias\Sound\ground_air.ogg, db+15, 1.0};
-		titles[] = {0, ""};	
+		titles[] = {0, ""};
 	};
 	class roc_1
 	{
 		name = "roc_1"; // Name for mission editor
 		sound[] = {\RandFramework\Alias\Sound\roc_1.ogg, db+10, 1.0};
-		titles[] = {0, ""};	
-	};	
+		titles[] = {0, ""};
+	};
 	class roc_2
 	{
 		name = "roc_2"; // Name for mission editor
 		sound[] = {\RandFramework\Alias\Sound\roc_2.ogg, db+10, 1.0};
-		titles[] = {0, ""};	
-	};		
+		titles[] = {0, ""};
+	};
 	class roc_3
 	{
 		name = "roc_3"; // Name for mission editor
 		sound[] = {\RandFramework\Alias\Sound\roc_3.ogg, db+10, 1.0};
-		titles[] = {0, ""};	
-	};		
+		titles[] = {0, ""};
+	};
 	class roc_4
 	{
 		name = "roc_4"; // Name for mission editor
 		sound[] = {\RandFramework\Alias\Sound\roc_4.ogg, db+10, 1.0};
-		titles[] = {0, ""};	
+		titles[] = {0, ""};
 	};
 	class alarma_aeriana_scurt
 	{
 		name = "alarma_aeriana_scurt"; // Name for mission editor
 		sound[] = {\RandFramework\Alias\Sound\alarma_aeriana_scurt.ogg, db+10, 1.0};
-		titles[] = {0, ""};	
-	};	
+		titles[] = {0, ""};
+	};
 	#include "RandFramework\Sounds\cfgSounds.hpp"
 
 };
@@ -277,12 +292,6 @@ class CfgRadio
 
 };
 
-
-class CfgFunctions {
-	#include "AIS\cfgFunctions.hpp"
-	#include "RandFramework\functions.hpp"
-};
-#include "AIS\Effects\BarDlg.hpp"
 
 
 

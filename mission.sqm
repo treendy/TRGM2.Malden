@@ -8,14 +8,14 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=1516;
+		nextID=1518;
 	};
 	class Camera
 	{
-		pos[]={921.711,72.257927,12295.581};
-		dir[]={-0.74045694,-0.4623487,-0.48783007};
-		up[]={-0.38609576,0.88669252,-0.25436926};
-		aside[]={-0.55016416,6.5891072e-008,0.83507186};
+		pos[]={918.72272,71.423019,12292.104};
+		dir[]={-0.632195,-0.38021779,-0.67511958};
+		up[]={-0.259893,0.92489129,-0.27753976};
+		aside[]={-0.72993982,6.9499947e-008,0.68353027};
 	};
 };
 binarizationWanted=0;
@@ -54,6 +54,7 @@ addons[]=
 	"A3_Weapons_F_Acc",
 	"A3_Weapons_F",
 	"A3_Weapons_F_Pistols_P07",
+	"CSAT_Eyewear",
 	"A3_Weapons_F_Items",
 	"A3_Characters_F_Mark",
 	"A3_Sounds_F",
@@ -64,6 +65,11 @@ addons[]=
 	"A3_Characters_F_Orange_Facewear",
 	"A3_Weapons_F_Mark",
 	"A3_Drones_F_Weapons_F_Gamma_Items",
+	"TAC_VESTS_B",
+	"TAC_VESTS_S",
+	"TAC_VESTS_US",
+	"TAC_VESTS_Z2",
+	"TAC_VESTS",
 	"A3_Weapons_F_LongRangeRifles_M320",
 	"A3_Weapons_F_Mark_LongRangeRifles_M320_Camo",
 	"A3_Data_F_Exp_A_Virtual",
@@ -73,7 +79,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=28;
+		items=34;
 		class Item0
 		{
 			className="A3_Ui_F";
@@ -216,54 +222,84 @@ class AddonsMetaData
 		};
 		class Item20
 		{
+			className="CSAT_Eyewear";
+			name="CSAT_Eyewear";
+		};
+		class Item21
+		{
 			className="A3_Characters_F_Mark";
 			name="Arma 3 Marksmen - Characters and Clothing";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item21
+		class Item22
 		{
 			className="A3_Sounds_F";
 			name="Arma 3 - Sound Effects";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item22
+		class Item23
 		{
 			className="A3_Sounds_F_Enoch";
 			name="Arma 3 Contact Platform - Sound Effects";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item23
+		class Item24
 		{
 			className="A3_Weapons_F_Orange";
 			name="Arma 3 Orange - Weapons and Accessories";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item24
+		class Item25
 		{
 			className="A3_Characters_F_Orange";
 			name="Arma 3 Orange - Characters and Clothing";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item25
+		class Item26
 		{
 			className="A3_Weapons_F_Mark";
 			name="Arma 3 Marksmen - Weapons and Accessories";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item26
+		class Item27
 		{
 			className="A3_Drones_F";
 			name="Arma 3 Beta - Drones";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item27
+		class Item28
+		{
+			className="TAC_VESTS_B";
+			name="TAC_VESTS_B";
+		};
+		class Item29
+		{
+			className="TAC_VESTS_S";
+			name="TAC_VESTS_S";
+		};
+		class Item30
+		{
+			className="TAC_VESTS_US";
+			name="TAC_VESTS_US";
+		};
+		class Item31
+		{
+			className="TAC_VESTS_Z2";
+			name="TAC_VESTS_Z2";
+		};
+		class Item32
+		{
+			className="TAC_VESTS";
+			name="TAC_VESTS";
+		};
+		class Item33
 		{
 			className="A3_Data_F_Exp_A";
 			name="Arma 3 Nexus Update - Main Configuration";
@@ -276,6 +312,52 @@ randomSeed=7838675;
 class ScenarioData
 {
 	author="treendy";
+};
+class CustomAttributes
+{
+	class Category0
+	{
+		name="HNEG_emed_ped_session";
+		class Attribute0
+		{
+			property="HNEG_emed_ped_sessionRUN";
+			expression="false";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"SCALAR"
+						};
+					};
+					value=1;
+				};
+			};
+		};
+		class Attribute1
+		{
+			property="HNEG_emed_ped_sessionATTNOTOOL";
+			expression="false";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"SCALAR"
+						};
+					};
+					value=0;
+				};
+			};
+		};
+		nAttributes=2;
+	};
 };
 class Mission
 {
@@ -416,7 +498,7 @@ class Mission
 				class Attribute0
 				{
 					property="groupID";
-					expression="_this setGroupID [_value];";
+					expression="[_this, _value] call CBA_fnc_setCallsign";
 					class Value
 					{
 						class data
@@ -582,7 +664,7 @@ class Mission
 				class Attribute0
 				{
 					property="groupID";
-					expression="_this setGroupID [_value];";
+					expression="[_this, _value] call CBA_fnc_setCallsign";
 					class Value
 					{
 						class data
@@ -754,7 +836,7 @@ class Mission
 				class Attribute0
 				{
 					property="groupID";
-					expression="_this setGroupID [_value];";
+					expression="[_this, _value] call CBA_fnc_setCallsign";
 					class Value
 					{
 						class data
@@ -944,7 +1026,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(chin1)}";
-				onActivation="call{[1,""Large transport chopper destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
+				onActivation="call{[1,""Large transport chopper destroyed""] spawn TREND_fnc_AdjustBadPoints;}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -962,7 +1044,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(airSup1)}";
-				onActivation="call{[2,""Air support destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
+				onActivation="call{[2,""Air support destroyed""] spawn TREND_fnc_AdjustBadPoints;}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -989,7 +1071,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(car1)}";
-				onActivation="call{[0.5,""Vehicle destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
+				onActivation="call{[0.5,""Vehicle destroyed""] spawn TREND_fnc_AdjustBadPoints;}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -1139,7 +1221,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(tank1)}";
-				onActivation="call{[1,""Tank destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
+				onActivation="call{[1,""Tank destroyed""] spawn TREND_fnc_AdjustBadPoints;}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -1323,7 +1405,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(mediChop1)}";
-				onActivation="call{[1,""Medical chopper destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
+				onActivation="call{[1,""Medical chopper destroyed""] spawn TREND_fnc_AdjustBadPoints;}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -1903,7 +1985,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="[_this] execVM ""RandFramework\SupplyDropVehInit.sqf""";
+							value="[_this] spawn TREND_fnc_SupplyDropVehInit";
 						};
 					};
 				};
@@ -1960,7 +2042,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="[_this] execVM ""RandFramework\SupplyDropCrateInit.sqf""";
+							value="[_this] spawn TREND_fnc_SupplyDropCrateInit";
 						};
 					};
 				};
@@ -2163,7 +2245,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="[_this] execVM ""RandFramework\AirSupportRequested.sqf""";
+							value="[_this] spawn TREND_fnc_AirSupportRequested";
 						};
 					};
 				};
@@ -2851,7 +2933,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(airSup2)}";
-				onActivation="call{[2,""Air support destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
+				onActivation="call{[2,""Air support destroyed""] spawn TREND_fnc_AdjustBadPoints;}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -2924,7 +3006,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="[_this] execVM ""RandFramework\SupportArtiRequested.sqf""";
+							value="[_this] spawn TREND_fnc_SupportArtiRequested";
 						};
 					};
 				};

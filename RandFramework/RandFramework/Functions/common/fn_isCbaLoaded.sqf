@@ -1,0 +1,1 @@
+isClass(configFile >> "CfgPatches" >> "cba_main");

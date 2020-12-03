@@ -40,7 +40,7 @@ sleep 15;
 // Start wind intro = 20 secs ///////////////////////////////////////////////////////////////////////////
 if (_test) then {hint "Start Wind intro sound";};
 
-if (!_isSmallEffect) then {    
+if (!_isSmallEffect) then {
     playsound ["sswindintro",false];
 };
 
@@ -104,12 +104,12 @@ if (!_isSmallEffect) then {
     };
     _hndlFg ppEffectCommit 45;
 
-    
+
 
 // Adjust camshake and sound volume if player in building or vehicle
 [_endtime] spawn {
     _endtime = _this select 0;
-    While {time < _endtime + 35 && !ForceEndSandStorm} do {
+    While {time < _endtime + 35 && !TREND_ForceEndSandStorm} do {
  // extra time added due to fadeout time
             _building = nearestObject [player, "HouseBase"];
             _relPos = _building worldToModel (getPosATL player);
@@ -197,13 +197,13 @@ while {time < _future} do {
 };
 
 // Add Color correction
-if (!IsSnowMap) then {
+if (!TREND_IsSnowMap) then {
     if (_test) then {hint "Start color correction";};
     _hndl1 = ppEffectCreate ["colorCorrections", 1550];
     _hndl1 ppEffectEnable true;
     if (_isSmallEffect) then {
         _hndl1 ppEffectAdjust [1, 0.8, -0.001, [0.0, 0.0, 0.0, 0.0], [0.8*2, 0.5*2, 0.0, 0.7], [0.9, 0.9, 0.9, 0.0]];
-    }   
+    }
     else {
         _hndl1 ppEffectAdjust [0.5 + (overcast/3), 1, 0, [0.7, 0.66, 0.6, 0.2], [0.7, 0.66, 0.6, 0.2], [0.7, 0.66, 0.6, 0.2]];
     };
@@ -214,7 +214,7 @@ if (!IsSnowMap) then {
 
     // Modify Color correction and dust
     if (_test) then {hint "Start modify CC and alpha";};
-    While {time < _endtime && !ForceEndSandStorm} do {
+    While {time < _endtime && !TREND_ForceEndSandStorm} do {
         _hndl1 ppEffectAdjust [0.6 + (overcast/3), 1, 0.05, [0.7, 0.66, 0.6, 0.1 + random 0.4], [0.6 + random 0.1, 0.66, 0.6, 0.1 + random 0.4], [0.6 + random 0.1, 0.66, 0.6, 0.1 + random 0.4]];
         _hndl1 ppEffectCommit 3 + (floor random 2);
 
@@ -250,7 +250,7 @@ if (!IsSnowMap) then {
     };
 }
 else {
-    While {time < _endtime && !ForceEndSandStorm} do {
+    While {time < _endtime && !TREND_ForceEndSandStorm} do {
         sleep 5;
     }
 };

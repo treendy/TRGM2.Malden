@@ -1,3 +1,13 @@
+// #include "\a3\ui_f\hpp\definecommongrids.inc"
+// class RscListbox;
+// class RscText;
+// class RscFrame;
+// class RscButton;
+// class RscCombo;
+// class RscPicture;
+// class RscStructuredText;
+
+#include "defines.hpp"
 
 class Trend_DialogSetupParams
 	{
@@ -36,7 +46,7 @@ class Trend_DialogSetupParams
 			y = 0.315236 * safezoneH + safezoneY;
 			w = 0.180498 * safezoneW;
 			h = 0.239952 * safezoneH;
-			onLBSelChanged = "[_this] execVM 'RandFramework\GUI\MissionTypeSelection.sqf'; false; ";
+			onLBSelChanged = "[_this] spawn TREND_fnc_MissionTypeSelection; false; ";
 		};
 
 		class RscCombo_2100: RscCombo
@@ -136,7 +146,7 @@ class Trend_DialogSetupParams
 			h = 0.0989783 * safezoneH;
 			colorBackground[] = {0.85,0.4,0,1};
 			colorActive[] = {0.85,0.4,0,1};
-			action = "[_this] execVM 'RandFramework\GUI\SetParamsAndBegin.sqf'; false";
+			action = "[_this] spawn TREND_fnc_SetParamsAndBegin; false";
 		};
 
 		class btnAdvanced: RscButton
@@ -149,7 +159,7 @@ class Trend_DialogSetupParams
 			h = 0.022 * safezoneH;
 			colorBackground[] = {0.85,0.4,0,1};
 			colorActive[] = {0.85,0.4,0,1};
-			action = "[] execVM 'RandFramework\GUI\openDialogAdvancedMissionSettings.sqf'; false";
+			action = "[] spawn TREND_fnc_openDialogAdvancedMissionSettings; false";
 		};
 
 
@@ -285,7 +295,7 @@ class Trend_DialogSetupParams
 			colorBackground[] = {0.85,0.4,0,1};
 			colorActive[] = {0.85,0.4,0,1};
 			tooltip = $STR_TRGM2_dialogs_LoadLocal_HelpText; //--- ToDo: Localize;
-			action = "[_this,1] execVM 'RandFramework\GUI\SetParamsAndBegin.sqf'; false";
+			action = "[_this,1] spawn TREND_fnc_SetParamsAndBegin'; false";
 		};
 		class btnLoadglobalSave: RscButton
 		{
@@ -298,7 +308,7 @@ class Trend_DialogSetupParams
 			colorBackground[] = {0.85,0.4,0,1};
 			colorActive[] = {0.85,0.4,0,1};
 			tooltip = $STR_TRGM2_dialogs_LoadGlobal_HelpText; //--- ToDo: Localize;
-			action = "[_this,2] execVM 'RandFramework\GUI\SetParamsAndBegin.sqf'; false";
+			action = "[_this,2] spawn TREND_fnc_SetParamsAndBegin; false";
 		};
 
 
@@ -358,7 +368,7 @@ class Trend_DialogSetupParamsAdvanced
 			h = 0.022 * safezoneH;
 			colorBackground[] = {0,1,0,1};
 			colorActive[] = {0,1,0,1};
-			action = "[] execVM 'RandFramework\GUI\openDialogMissionSelection.sqf'; false";
+			action = "[] spawn TREND_fnc_openDialogMissionSelection; false";
 		};
 
 
@@ -369,6 +379,75 @@ class Trend_DialogSetupParamsAdvanced
 		////////////////////////////////////////////////////////
 
 
+
+	};
+};
+
+
+class Trend_DialogRequests
+{
+	idd = 8000;
+	movingEnabled = false;
+
+	class controls
+	{
+		////////////////////////////////////////////////////////
+		// GUI EDITOR OUTPUT START (by TheAce0296, v1.063, #Nosuty)
+		////////////////////////////////////////////////////////
+
+		class RscPicture_8001: RscPicture
+		{
+			idc = 8001;
+			text = "RandFramework\Media\table1.paa";
+			x = 0.298932 * safezoneW + safezoneX;
+			y = 0.236008 * safezoneH + safezoneY;
+			w = 0.402137 * safezoneW;
+			h = 0.527985 * safezoneH;
+		};
+		class RscButton_8003: RscButton
+		{
+			idc = 8003;
+			text = $STR_TRGM2_openDialogRequests_RequestUnit;
+			x = 0.365954 * safezoneW + safezoneX;
+			y = 0.478001 * safezoneH + safezoneY;
+			w = 0.123734 * safezoneW;
+			h = 0.0549984 * safezoneH;
+			colorBackground[] = {0,1,0,1};
+			colorActive[] = {0,1,0,1};
+		};
+		class RscButton_8005: RscButton
+		{
+			idc = 8005;
+			text = $STR_TRGM2_openDialogRequests_RequestVehicle;
+			x = 0.520622 * safezoneW + safezoneX;
+			y = 0.478001 * safezoneH + safezoneY;
+			w = 0.123734 * safezoneW;
+			h = 0.0549984 * safezoneH;
+			colorBackground[] = {0,1,0,1};
+			colorActive[] = {0,1,0,1};
+		};
+		// class RscCombo_8007: RscCombo
+		// {
+		// 	idc = 8007;
+		// 	text = "Select a Unit"; //--- ToDo: Localize;
+		// 	x = 0.365954 * safezoneW + safezoneX;
+		// 	y = 0.412003 * safezoneH + safezoneY;
+		// 	w = 0.123734 * safezoneW;
+		// 	h = 0.0329991 * safezoneH;
+		// };
+		// class RscCombo_8009: RscCombo
+		// {
+		// 	idc = 8009;
+		// 	text = "Select a Vehicle"; //--- ToDo: Localize;
+		// 	x = 0.520622 * safezoneW + safezoneX;
+		// 	y = 0.412003 * safezoneH + safezoneY;
+		// 	w = 0.123734 * safezoneW;
+		// 	h = 0.0329991 * safezoneH;
+		// };
+
+		////////////////////////////////////////////////////////
+		// GUI EDITOR OUTPUT END
+		////////////////////////////////////////////////////////
 
 	};
 };
@@ -418,7 +497,7 @@ class Trend_DialogSetupEnemyFaction
 			h = 0.022 * safezoneH;
 			colorBackground[] = {1,0,0,1};
 			colorActive[] = {1,0,0,1};
-			action = "[] execVM 'RandFramework\GUI\openDialogAdvancedMissionSettings.sqf'; false";
+			action = "[] spawn TREND_fnc_openDialogAdvancedMissionSettings; false";
 		};
 
 
@@ -434,15 +513,15 @@ class Trend_DialogSetupEnemyFaction
 };
 
 
-class KeypadDefuse 
+class KeypadDefuse
 {
 	idd = -1;
 	movingEnable = 1;
     enableSimulation = 1;
 	controlsBackground[] = {};
   	objects[] = {};
-	
-	class controls 
+
+	class controls
 	{
 		class B9: RscButton
 		{
@@ -684,7 +763,7 @@ class KeypadDefuse
 			offsetPressedX = 0.002;
 			offsetPressedY = 0.002;
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "[CODEINPUT] execVM 'RandFramework\CustomMission\GUI\fn_codeCompare.sqf'; ";
+			onMouseButtonDown = "[CODEINPUT] spawn TREND_fnc_codeCompare; ";
 		};
 		class Bclear: RscButton
 		{
@@ -708,7 +787,7 @@ class KeypadDefuse
 			soundClick[] = {"",0,0};
 			onMouseButtonDown = "playSound 'button_click'; CODEINPUT = []; ctrlSetText [1099, str CODEINPUT]";
 		};
-		
+
 		class KeypadImage: RscPicture
 		{
 			idc = -1;
@@ -721,7 +800,7 @@ class KeypadDefuse
 			h = 1.254 * safezoneH;
 			text = "RandFramework\Media\explosive.paa";
 		};
-		
+
 		class Bblue: RscButton
 		{
 			idc = -1;
@@ -731,7 +810,7 @@ class KeypadDefuse
 			h = 0.033 * safezoneH;
 			colorBackground[] = {0,0,1,1};
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'wire_cut'; ['BLUE'] execVM 'RandFramework\CustomMission\GUI\fn_wireCompare.sqf'";
+			onMouseButtonDown = "playSound 'wire_cut'; ['BLUE'] spawn TREND_fnc_wireCompare";
 		};
 		class Bwhite: RscButton
 		{
@@ -742,7 +821,7 @@ class KeypadDefuse
 			h = 0.033 * safezoneH;
 			colorBackground[] = {1,1,1,1};
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'wire_cut'; ['WHITE'] execVM 'RandFramework\CustomMission\GUI\fn_wireCompare.sqf'";
+			onMouseButtonDown = "playSound 'wire_cut'; ['WHITE'] spawn TREND_fnc_wireCompare";
 		};
 		class Byellow: RscButton
 		{
@@ -753,7 +832,7 @@ class KeypadDefuse
 			h = 0.033 * safezoneH;
 			colorBackground[] = {1,1,0,1};
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'wire_cut'; ['YELLOW'] execVM 'RandFramework\CustomMission\GUI\fn_wireCompare.sqf'";
+			onMouseButtonDown = "playSound 'wire_cut'; ['YELLOW'] spawn TREND_fnc_wireCompare";
 		};
 		class Bgreen: RscButton
 		{
@@ -764,7 +843,7 @@ class KeypadDefuse
 			h = 0.033 * safezoneH;
 			colorBackground[] = {0,1,0,1};
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'wire_cut'; ['GREEN'] execVM 'RandFramework\CustomMission\GUI\fn_wireCompare.sqf'";
+			onMouseButtonDown = "playSound 'wire_cut'; ['GREEN'] spawn TREND_fnc_wireCompare";
 		};
 		class NumberDisplay: RscStructuredText
 		{

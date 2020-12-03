@@ -1,0 +1,10 @@
+Create a mission in the editor.
+Create a Game Logic\Objects\Game Logic
+Name it SERVER
+Copy this into the initialization: null=[] execVM "RandFramework\cos\cosInit.sqf";
+Copy ths cos folder into your mission folder.
+
+Start the mission. 
+All towns now have civilians.
+
+For advanced options open RandFramework\COS\cosInit.sqf

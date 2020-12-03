@@ -16,7 +16,7 @@
     Remarks:
     * '_target' is the object inside the condition string.
     * [object, caller, ID, arguments] is _this in the callback
-    
+
 	Returns:
 	-
 
@@ -24,12 +24,12 @@
 	["Hint Hello!", player, 0, "true", { hint format ["Hello %1", name player]; }] call AIS_Core_fnc_addAction;
 	["Hint Hello!", "Man", 3, "true", { hint format ["Hello %1", name (_this select 0)]; }] call AIS_Core_fnc_addAction;
 */
-if (isNil "iUseRevive") then {
-	iUseRevive = 0;
-	publicVariable "iUseRevive";	
+if (isNil "TREND_iUseRevive") then {
+	TREND_iUseRevive = 0;
+	publicVariable "TREND_iUseRevive";
 };
 
-if (iUseRevive != 0) then {
+if (TREND_iUseRevive != 0) then {
 
 	params ["_text", "_onObject", "_distance", "_condition", "_callback", ["_args", []], ["_formated", "", [""]]];
 
@@ -41,7 +41,7 @@ if (iUseRevive != 0) then {
 
 	if (_onObject isEqualType objNull && {_onObject isEqualTo AIS_Core_realPlayer}) exitWith {
 	    private _action = _onObject addAction [_text, _callback, _args, 1.5, false, true, "", _condition, _distance];
-		
+
 		if (_formated != "") then {
 			_onObject setUserActionText [
 				_action,
@@ -50,15 +50,15 @@ if (iUseRevive != 0) then {
 				""
 			];
 		};
-		
+
 		[
 			"AIS_playerChanged", {
 				params ["_data", "_params"];
 				_data params ["_currentPlayer", "_oldPlayer"];
 				_params params ["_text", "_callback", "_distance", ["_args", []], "_condition", ["_formated", "", [""]]];
-	        
+
 				private _action = _currentPlayer addAction [_text, _callback, _args, 1.5, false, true, "", _condition, _distance];
-				
+
 				if (_formated != "") then {
 					_currentPlayer setUserActionText [
 						_action,
@@ -70,7 +70,7 @@ if (iUseRevive != 0) then {
 			},
 			[_text, _callback, _distance, _args, _condition, _formated]
 		] call AIS_Core_fnc_bindEventHandler;
-		
+
 	};
 
 	if (!(_onObject isEqualType [])) then {

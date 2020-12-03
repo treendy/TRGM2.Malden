@@ -35,7 +35,7 @@ _IEDType = "CAR";
 				"_this distance _target < 5",						// Condition for the action to be shown
 				"_caller distance _target < 5",						// Condition for the action to progress
 				{},													// Code executed when action starts
-				{	
+				{
 					_thisVeh = _this select 0;
 					_IEDType = (_this select 3) select 1;
 					_alarmActive = _thisVeh getVariable ["alarmActive",false];
@@ -59,7 +59,7 @@ _IEDType = "CAR";
 					_thisPlayer = _this select 1;
 					_bIsTrap = (_this select 3) select 0;
 					if (_thisPlayer getVariable "unitrole" != "Engineer" && selectRandom[true,true,true,false,false]) then {
-						hint localize "STR_TRGM2_IEDSearchFailed";						
+						hint localize "STR_TRGM2_IEDSearchFailed";
 					}
 					else {
 						if (_bIsTrap) then {
@@ -105,7 +105,7 @@ _IEDType = "CAR";
 									}
 									else {
 										_thisVeh setVariable ["isDefused",true, true];
-										[0.2, localize "STR_TRGM2_IEDDefused"] execVM "RandFramework\AdjustMaxBadPoints.sqf";	
+										[0.2, localize "STR_TRGM2_IEDDefused"] spawn TREND_fnc_AdjustMaxBadPoints;
 										removeAllActions _thisVeh;
 										[localize "STR_TRGM2_IEDDefused"] remoteExecCall ["Hint", 0];
 									}
@@ -115,12 +115,12 @@ _IEDType = "CAR";
 								6,							// Action duration [s]
 								100,													// Priority
 								false,												// Remove on completion
-								false												// Show in unconscious state 
+								false												// Show in unconscious state
 							] remoteExec ["BIS_fnc_holdActionAdd", 0, _thisVeh];	// MP compatible implementation
 						}
 						else {
 							hint localize "STR_TRGM2_IEDNoneFound";
-						};		
+						};
 					}
 				},				// Code executed on completion
 				{},													// Code executed on interrupted
@@ -128,5 +128,5 @@ _IEDType = "CAR";
 				6,													// Action duration [s]
 				90,													// Priority
 				false,												// Remove on completion
-				false												// Show in unconscious state 
+				false												// Show in unconscious state
 			] remoteExec ["BIS_fnc_holdActionAdd", 0, _veh];	// MP compatible implementation

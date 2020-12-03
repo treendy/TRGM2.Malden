@@ -1,10 +1,10 @@
 //These are only ever called by the server!
 
 fnc_CustomRequired = { //used to set any required details for the AO (example, a wide open space or factory nearby)... if this is not found in AO, the engine will scrap the area and loop around again with a different location
-//be careful about using this, some maps may not have what you require, so the engine will never satisfy the requirements here (example, if no airports are on a map and that is what you require)	
-	_objectiveMainBuilding = _this select 0; 
-	_centralAO_x = _this select 1; 
-	_centralAO_y = _this select 2; 
+//be careful about using this, some maps may not have what you require, so the engine will never satisfy the requirements here (example, if no airports are on a map and that is what you require)
+	_objectiveMainBuilding = _this select 0;
+	_centralAO_x = _this select 1;
+	_centralAO_y = _this select 2;
 
 	_result = false;
 
@@ -73,7 +73,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_mainHVTGuardClass = selectRandom _HVTGuys;
 
 	//TESTTEST = format ["TEST_ %1 - %2",_poshVehPos,getPosATL _objectiveMainBuilding];
-	if ((_poshVehPos distance _objectiveMainBuilding) < 100) then {		
+	if ((_poshVehPos distance _objectiveMainBuilding) < 100) then {
 		_objVehicle = selectRandom _meetingVehs createVehicle _poshVehPos;
 		//_objVehicle setPos _poshVehPos;
 		if (!isNil "_direction") then {
@@ -118,7 +118,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	//	_guardUnit3 = _hvtGuardGroup createUnit [_mainHVTGuardClass,[-500,-500,0],[],20,"NONE"];
 	//	sleep 0.1;
 	//	_mainHVT = _hvtGroup createUnit [_mainHVTClass,[-500,-500,0],[],20,"NONE"];
-	//};		
+	//};
 
 	_mainHVT = _hvtGroup createUnit [_mainHVTClass,[-500,-500,0],[],20,"NONE"];
 	sleep 0.1;
@@ -152,7 +152,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_hvtGuardGroup = _this select 6;
 		_iTaskIndex = _this select 7;
 
-		waitUntil {bAndSoItBegins && CustomObjectsSet && PlayersHaveLeftStartingArea};
+		waitUntil {TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_PlayersHaveLeftStartingArea};
 		//["debug: wait started"] remoteExecCall ["Hint", 0];
 
 		_iWait = 420 + floor(random 300);
@@ -167,7 +167,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_sMessageTwo = format["%1 is in the area and on way to AO (position is tracked and marked on map",name _thisMainHVT];
 		[[west, "HQ"],_sMessageTwo] remoteExec ["sideChat", 0];
 		[_sMessageTwo] remoteExecCall ["Hint", 0];
-		
+
 		_hvtChopperStartPos = [-400,-400,200] getPos [400 * sqrt random 1, random 360];
 		_hvtChopperStartPos = [_hvtChopperStartPos select 0,_hvtChopperStartPos select 1, selectRandom[150,160,170,180,190,200]];
 		_hvtChopper = createVehicle [selectRandom HVTChoppers, _hvtChopperStartPos, [], 50, "FLY"];
@@ -178,7 +178,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 		//_hvtChopper allowDamage false;
 
-		
+
 
 		_thisMainHVT assignAsDriver _hvtChopper;
 		_thisMainHVT moveInDriver _hvtChopper;
@@ -213,9 +213,9 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_thisGuardUnit3 allowDamage true;
 
 		_mrkMeetingHVTMarker = nil;
-		_mrkMeetingHVTMarker = createMarker [format["HVT%1",_iTaskIndex], getPos _hvtChopper];  
-		_mrkMeetingHVTMarker setMarkerShape "ICON";  
-		_mrkMeetingHVTMarker setMarkerType "o_inf";  
+		_mrkMeetingHVTMarker = createMarker [format["HVT%1",_iTaskIndex], getPos _hvtChopper];
+		_mrkMeetingHVTMarker setMarkerShape "ICON";
+		_mrkMeetingHVTMarker setMarkerType "o_inf";
 		_mrkMeetingHVTMarker setMarkerText format["HVT %1",name(_thisMainHVT)];
 		[_hvtChopper,_mrkMeetingHVTMarker] spawn {
 			_thisHvtChopper = _this select 0;
@@ -240,7 +240,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_wpHvtMeet1 = _hvtGroup addWaypoint [getPos _thisMainHVT, 0];
 		_wpHvtMeet2 = _hvtGroup addWaypoint [_thisHvtLzPos, 1];
 		_wpHvtMeet3 = _hvtGroup addWaypoint [_thisHvtLzPos, 2];
-		_wpHvtMeet4 = _hvtGroup addWaypoint [_thisHvtLzPos, 3];		
+		_wpHvtMeet4 = _hvtGroup addWaypoint [_thisHvtLzPos, 3];
        _wpHvtMeet5 = _hvtGroup addWaypoint [_thisHvtLzPos, 4];
        _wpHvtMeet5 setWaypointType "TR UNLOAD";
        _wpHvtMeet5 setWaypointType "GETOUT";
@@ -248,7 +248,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
        _wpHvtMeet6 = _hvtGroup addWaypoint [_thisMeetingPos, 5];
        _wpHvtMeet7 = _hvtGroup addWaypoint [_thisMeetingPos, 6];
        [_hvtGroup, 1] setWaypointSpeed "LIMITED";
-       
+
        [_thisGuardUnit3,_thisMeetingPos] spawn {
        		_thisGuardUnit3 = _this select 0;
        		_thisMeetingPos = _this select 1;
@@ -261,34 +261,34 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
        		doGetOut _thisGuardUnit3;
        		_wpHvtGuardMeet1 = _hvtGuardGroup addWaypoint [_moveToPos, 0];
        		[_hvtGuardGroup, 1] setWaypointSpeed "LIMITED";
-   		};     
-       
+   		};
+
        waitUntil {sleep 1; (currentWaypoint group _thisMainHVT) >= 6 };
        //sleep 5;
       	_hvtGroup setSpeedMode "LIMITED";
       	_hvtGroup setBehaviour "CARELESS";
 		_hvtGuardGroup setSpeedMode "LIMITED";
       	_hvtGuardGroup setBehaviour "CARELESS";
-     	
-     	
+
+
 
 
 		sleep 9;
 		if selectRandom [true]  then {
 			[_thisGuardUnit3] spawn {
 				_thisGuardUnit3 = _this select 0;
-				_thisGuardUnit3 switchMove "Acts_JetsCrewaidLCrouch_in"; 				
+				_thisGuardUnit3 switchMove "Acts_JetsCrewaidLCrouch_in";
 				_thisGuardUnit3 disableAI "anim";
 				sleep 2.2;
-				_thisGuardUnit3 switchMove "Acts_JetsCrewaidLCrouch_out"; 				
+				_thisGuardUnit3 switchMove "Acts_JetsCrewaidLCrouch_out";
 				_thisGuardUnit3 enableAI "anim";
 				sleep 3;
-				_thisGuardUnit3 switchMove ""; 				
+				_thisGuardUnit3 switchMove "";
 				_thisGuardUnit3 call BIS_fnc_ambientAnim__terminate;
 			};
 		};
-		
-				
+
+
 		//hint "waypoint wait";
 		_bWalkEnded = false;
 		while {!_bWalkEnded} do {
@@ -306,17 +306,17 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			sleep 0.5;
 		};
 		//hint "waypoint wait ended";
-       
+
        //waitUntil {sleep 1; (currentWaypoint group _mainHVT) == 9 };
        //waitUntil {sleep 1; speed _objMan == 0};
-		
+
 		_hvtGroup setBehaviour "SAFE";
 		_hvtGuardGroup setBehaviour "SAFE";
        	[_thisMainHVT,_thisGuardUnit1] spawn {
        		_thisGuardUnit1 = _this select 1;
        		_doLoop = true;
        		while {_doLoop} do {
-       			if (behaviour (_this select 0) == "combat" || !alive(_this select 0) || !SpottedActiveFinished) then { //SpottedActiveFinished : is set to false once any players are spotted, for one second
+       			if (behaviour (_this select 0) == "combat" || !alive(_this select 0) || !TREND_SpottedActiveFinished) then { //TREND_SpottedActiveFinished : is set to false once any players are spotted, for one second
 	       			(_this select 0) call BIS_fnc_ambientAnim__terminate;
 					(_this select 0) enableAI "anim";
 					group (_this select 0) setSpeedMode "FULL";
@@ -327,13 +327,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
        			};
        			if (!alive(_this select 0)) then {_doLoop = false};
        		}
-       		
+
 		};
 		[_thisGuardUnit3,_thisGuardUnit1] spawn {
 			_thisGuardUnit1 = _this select 1;
        		_doLoop = true;
        		while {_doLoop} do {
-       			if (behaviour (_this select 0) == "combat" || !alive(_this select 0) || !SpottedActiveFinished) then {
+       			if (behaviour (_this select 0) == "combat" || !alive(_this select 0) || !TREND_SpottedActiveFinished) then {
 	       			(_this select 0) call BIS_fnc_ambientAnim__terminate;
 					(_this select 0) enableAI "anim";
 					group (_this select 0) setSpeedMode "FULL";
@@ -353,7 +353,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			_thisMainHVT setDir _azimuth;
 			_azimuth2 = _thisGuardUnit1 getDir _thisMainHVT;
 			_thisGuardUnit1 setDir _azimuth2;
-			
+
 			_thisMainHVT call BIS_fnc_ambientAnim__terminate;
 			_thisMainHVT playMoveNow "Acts_CivilTalking_2";
 			_thisMainHVT disableAI "anim";
@@ -390,7 +390,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_wpHvtLeaveMeet2 = _hvtGroup addWaypoint [[0,0,100], 0];
 		_hvtGroup setBehaviour "CARELESS";
 		waitUntil {!isTouchingGround _hvtChopper};
-		
+
 		sleep 120;
 		if (alive(_thisMainHVT)) then {
 			hint "He got away!";
@@ -404,8 +404,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		if (!isTouchingGround _hvtChopper) then {deletevehicle _hvtChopper;};
 	};
 
-//[0.2,format["Paramedic Killed by %1", name _killer]] execVM "RandFramework\AdjustBadPoints.sqf";
-//AdjustMaxBadPoints << increase max bad poins which increases our rep
+//[0.2,format["Paramedic Killed by %1", name _killer]] spawn TREND_fnc_AdjustBadPoints;
+//TREND_fnc_AdjustMaxBadPoints << increase max bad poins which increases our rep
 
 
 
@@ -438,32 +438,32 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 	if (!_bCreateTask) then {
 		_sAliveCheck = format["%1 getVariable [""taskStatus"",""""] == ""KILLED"" ",_sTargetName];
-		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Killed HVT at meeting""] execVM ""RandFramework\AdjustMaxBadPoints.sqf""; Hint (""HVT Killed, rep increased""); ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
+		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Killed HVT at meeting""] spawn TREND_fnc_AdjustMaxBadPoints; Hint (""HVT Killed, rep increased""); TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
 
 		_sAliveCheck2 = format["%1 getVariable [""taskStatus"",""""] == ""KILLED""",_sTargetName2];
-		_customTaskFailed setTriggerStatements [_sAliveCheck2, " [0.8, ""our agent was killed!!!""] execVM ""RandFramework\AdjustBadPoints.sqf""; Hint (""You killed our agent! Rep lowered""); ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
+		_customTaskFailed setTriggerStatements [_sAliveCheck2, " [0.8, ""our agent was killed!!!""] spawn TREND_fnc_AdjustBadPoints; Hint (""You killed our agent! Rep lowered""); TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
 
 		//decided not to adjust rep if he escapes when no task cretaed, as this is means it's an optional task
 		//_sAliveCheck3 = format["""%1"" == ""ESCAPED"" ",_taskState];
-		//_customTaskEscaped setTriggerStatements [_sAliveCheck3, " [0.8, ""He got away!!!""] execVM ""RandFramework\AdjustBadPoints.sqf""; Hint (""HVT Escaped""); ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
+		//_customTaskEscaped setTriggerStatements [_sAliveCheck3, " [0.8, ""He got away!!!""] spawn TREND_fnc_AdjustBadPoints; Hint (""HVT Escaped""); TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
 	}
 	else {
-		_sAliveCheck = format["(%1 getVariable [""taskStatus"",""""] == ""KILLED"" || (%1 getVariable [""taskStatus"",""""] == ""DOCTAKEN"")) && !([""InfSide%2""] call FHQ_TT_areTasksCompleted)",_sTargetName,_iTaskIndex];
+		_sAliveCheck = format["(%1 getVariable [""taskStatus"",""""] == ""KILLED"" || (%1 getVariable [""taskStatus"",""""] == ""DOCTAKEN"")) && !([""InfSide%2""] call FHQ_fnc_ttAreTasksCompleted)",_sTargetName,_iTaskIndex];
 		//TESTTEST = _sAliveCheck;
-		//"objInformant0 getVariable [""taskStatus"",""""] == ""KILLED"" && !([""InfSide0""] call FHQ_TT_areTasksCompleted)"
-		_sTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
-		_customTaskClear setTriggerStatements [_sAliveCheck, _sTaskComplete, ""];	
+		//"objInformant0 getVariable [""taskStatus"",""""] == ""KILLED"" && !([""InfSide0""] call FHQ_fnc_ttAreTasksCompleted)"
+		_sTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";",_iTaskIndex];
+		_customTaskClear setTriggerStatements [_sAliveCheck, _sTaskComplete, ""];
 
 		_sAliveCheck2 = format["(%1 getVariable [""taskStatus"",""""] == ""KILLED"")",_sTargetName2];
-		_sTaskFail = format["[""InfSide%1"", ""failed""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
-		_customTaskFailed setTriggerStatements [_sAliveCheck2, _sTaskFail, ""];	
+		_sTaskFail = format["[""InfSide%1"", ""failed""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";",_iTaskIndex];
+		_customTaskFailed setTriggerStatements [_sAliveCheck2, _sTaskFail, ""];
 
 		_sAliveCheck3 = format["%1 getVariable [""taskStatus"",""""] == ""ESCAPED"" ",_sTargetName];
-		_sTaskFail2 = format["[""InfSide%1"", ""failed""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
-		_customTaskEscaped setTriggerStatements [_sAliveCheck3, _sTaskFail2, ""];	
+		_sTaskFail2 = format["[""InfSide%1"", ""failed""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";",_iTaskIndex];
+		_customTaskEscaped setTriggerStatements [_sAliveCheck3, _sTaskFail2, ""];
 	};
 
-	_MissionTitle = format["Meeting Assassination: %1",name(_mainHVT)];	//you can adjust this here to change what shows as marker and task text 
+	_MissionTitle = format["Meeting Assassination: %1",name(_mainHVT)];	//you can adjust this here to change what shows as marker and task text
 	_sTaskDescription = format[selectRandom["Intel has confirmed that our target %1 is on route to the AO marked on the map","%1 is flying into the area for a short meeting to hand over some documents! We need this HVT terminated!"],name(_mainHVT)]; //adjust this based on veh? and man? if van then if car then?
 		//or just random description that will fit all situations??
 	if (_bIsMainObjective) then {

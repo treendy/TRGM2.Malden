@@ -1080,8 +1080,8 @@
                 <Korean>물에 가깝지 않아, 고무 보트를 하역 할 수 없습니다.</Korean>
             </Key>
             <Key ID="STR_TRGM2_UnloadDingy_push">
-                <Original>push</Original>
-                <English>push</English>
+                <Original>PUSH %1</Original>
+                <English>PUSH %1</English>
                 <Chinese>推</Chinese>
                 <Chinesesimp>推</Chinesesimp>
                 <Spanish>empujar</Spanish>
@@ -2042,11 +2042,19 @@
                 <Spanish>Facciones Enemigas</Spanish>
                 <Korean>적군 진영</Korean>
             </Key>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MilitiaFactions">
+                <Original>Militia Factions</Original>
+                <English>Militia Factions</English>
+                <Chinese>民兵派系</Chinese>
+                <Chinesesimp>敌方派别</Chinesesimp>
+                <Spanish>Facciones de la milicia</Spanish>
+                <Korean>민병대 파벌</Korean>
+            </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_FriendlyFactions">
                 <Original>Friendly Factions</Original>
                 <English>Friendly Factions</English>
                 <Chinese>友方派別</Chinese>
-                <Chinesesimp>友方派别</Chinesesimp>
+                <Chinesesimp>民兵派系</Chinesesimp>
                 <Spanish>Facciones Aliadas</Spanish>
                 <Korean>아군 진영</Korean>
             </Key>
@@ -3564,7 +3572,7 @@
                 <Original>Defuse Bomb</Original>
                 <English>Defuse Bomb</English>
                 <Korean>폭탄 해체</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_BombMissionTitle">
                 <Original>Bomb Disposal</Original>
                 <English>Bomb Disposal</English>
@@ -3573,37 +3581,37 @@
             <Key ID="STR_TRGM2_BombMissionReadSerialAction">
                 <Original>Read Serial Number</Original>
                 <English>Read Serial Number</English>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_BombMissionInformantMarker">
                 <Original>Informant for bomb codes</Original>
                 <English>Informant for bomb codes</English>
                 <Korean>폭탄 코드에 대한 정보 제공</Korean>
-            </Key> 
+            </Key>
              <Key ID="STR_TRGM2_BombMissionIntelAction">
                 <Original>Ask for bomb details</Original>
                 <English>Ask for bomb details</English>
                  <Korean>폭탄에 대한 세부정보 요청</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_IEDMissionTitle">
                 <Original>Defuse IEDs</Original>
                 <English>Defuse IEDs</English>
                 <Korean>급조폭발물 해체</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_IEDMissionDescription">
                 <Original>We have intel of three IED positions which are marked on your map, they will be either a pile of rubble or an abandoned vehicle, we need you to defuse them all. Note: Engineers/Explosive experts have 100% chance of finding and defusing an IED, however anyone else will have to search a few times, and if they attempt defusing, they may set off the charge!</Original>
                 <English>We have intel of three IED positions which are marked on your map, they will be either a pile of rubble or an abandoned vehicle, we need you to defuse them all. Note: Engineers/Explosive experts have 100% chance of finding and defusing an IED, however anyone else will have to search a few times, and if they attempt defusing, they may set off the charge!</English>
                 <Korean>우리는 당신의 지도에 표시된 세 가지 폭발물 공격 위치의 정보를 가지고 있으며, 그들은 잔해 더미 또는 버려진 차량 중 하나가 될 것입니다. 우리는 모두 당신을 물리쳐야합니다. 참고 : 공병/폭발물 전문가가 폭발물 공격을 찾고 회피 할 확률은 100 %입니다. 그러나 다른 사람이 몇 번 검색해야하며, 진압을 시도하면 요금이 부과 될 수 있습니다!</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_IEDMarkerText">
                 <Original>IED</Original>
                 <English>IED</English>
                 <Korean>급조폭발물</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_IEDSearchIED">
                 <Original>Search for IED</Original>
                 <English>Search for IED</English>
                 <Korean>급조폭발물 수색</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_IEDSearchFailed">
                 <Original>Unsure, try to search again</Original>
                 <English>Unsure, try to search again</English>
@@ -3618,32 +3626,32 @@
                 <Original>Defuse</Original>
                 <English>Defuse</English>
                 <Korean>해체하기</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_IEDOhOh">
                 <Original>Oh no!!!</Original>
                 <English>Oh no!!!</English>
                 <Korean>오~ 안돼!!</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_IEDOneWay">
                 <Original>well.... that is one way to defuse an IED!</Original>
                 <English>well.... that is one way to defuse an IED!</English>
                 <Korean>음.... 그것은 급조폭발물을 해체하는 한 가지 방법입니다!</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_IEDDefused">
                 <Original>IED Defused</Original>
                 <English>IED Defused</English>
                 <Korean>급조폭발물 제거</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_IEDNoneFound">
                 <Original>No IED here!</Original>
                 <English>No IED here!</English>
                 <Korean>급조폭발물 없음!</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_IEDOmteresting">
                 <Original>Interesting defusal technique!</Original>
                 <English>Interesting defusal technique!</English>
                 <Korean>흥미로운 해체 기술!</Korean>
-            </Key> 
+            </Key>
              <Key ID="STR_TRGM2_BombSerialNo">
                 <Original>"Serial Number: %1"</Original>
                 <English>"Serial Number: %1"</English>
@@ -3653,17 +3661,17 @@
                 <Original>Nice to meet you %1.\n\nBomb serial number is: %2\n\nYou must cut the %3 wire first!! then you will have 10 seconds to enter the code:%4</Original>
                 <English>Nice to meet you %1.\n\nBomb serial number is: %2\n\nYou must cut the %3 wire first!! then you will have 10 seconds to enter the code:%4</English>
                 <Korean>반갑습니다 %1.\n\n폭탄 일련 번호: %2\n\n%3 선을 먼저 잘라야 합니다!! 그리고 10초안에 코드를 입력해야 합니다: %4</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_BombPsst">
                 <Original>Psst %1.\n\nThis guy is dead... why are you trying to talk to him? (you will have to guess the code and colour now lol)</Original>
                 <English>Psst %1.\n\nThis guy is dead... why are you trying to talk to him? (you will have to guess the code and colour now lol)</English>
                 <Korean>잠깐! %1.\n그는 이미 죽었다... 당신은 그에게 무엇을 말하려 합니까? (당신은 코드와 색상을 추측해야합니다)</korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_BombCountdown">
                 <Original>Countdown: %1</Original>
                 <English>Countdown: %1</English>
                 <Korean>카운트다운: %1</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_BombCodeEntered">
                 <Original>Code Entered</Original>
                 <English>Code Entered</English>
@@ -3673,12 +3681,12 @@
                 <Original>Talk/Search civ</Original>
                 <English>Talk/Search civ</English>
                 <Korean>만간인 검문수색</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_CivTalkDead">
                 <Original>you find nothing of interest</Original>
                 <English>you find nothing of interest</English>
                 <Korean>당신은 아무것도 찾을 수 없다</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions7">
                 <Original>Heavy mission, location is unknown, and task is unknown, need to gain intel from locals, recon area, do what ever you can to locate and identity your objective!</Original>
                 <English>Heavy mission, location is unknown, and task is unknown, need to gain intel from locals, recon area, do what ever you can to locate and identity your objective!</English>
@@ -3694,17 +3702,17 @@
                 <Original>Search and Destroy</Original>
                 <English>Search and Destroy</English>
                 <Korean>수색 및 파괴</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_TargetMissionDescription">
                 <Original>We have intel of three Targets which are marked on your map, blow them up!</Original>
                 <English>We have intel of three Targets which are marked on your map, blow them up!</English>
                 <Korean>우리는 지도에 표시되어있는 3개의 목표의 정보를 가지고 있습니다. 그들을 작살내세요!</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_TargetMarkerText">
                 <Original>Target</Original>
                 <English>Target</English>
                 <Korean>목표</Korean>
-            </Key> 
+            </Key>
 
             </Key>
       		<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MainAOSelect">
@@ -3748,7 +3756,7 @@
                 <Original>Enemy to have flashlights</Original>
                 <English>Enemy to have flashlights</English>
                 <Korean>적군 손전등 소지</Korean>
-            </Key>            
+            </Key>
 
              <Key ID="STR_TRGM2_select_flare_location">
                 <Original>SELECT WHERE TO SEND FLARES TO</Original>
@@ -3759,17 +3767,17 @@
                 <Original>Destroy Cache</Original>
                 <English>Destroy Cache</English>
                 <Korean>은닉처 파괴</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_CacheMissionDescription">
                 <Original>Location of enemy cache found, destroy it</Original>
                 <English>Location of enemy cache found, destroy it</English>
                 <Korean>적 은닉처 위치를 찾았습니다</Korean>
-            </Key> 
+            </Key>
             <Key ID="STR_TRGM2_CacheMarkerText">
                 <Original>Target</Original>
                 <English>Target</English>
                 <Korean>목표</Korean>
-            </Key> 
+            </Key>
 
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MiniMissions">
                 <Original>Make tasks mini missions</Original>
@@ -3779,7 +3787,7 @@
             <Key ID="STR_TRGM2_Tooltip_AdvMinimission">
                 <Original>All objects will be set to minimissions, meaning very low enemy number, \nsmall group guarding objective, but always the chance of something nasty happening!</Original>
                 <English>All objects will be set to minimissions, meaning very low enemy number, \nsmall group guarding objective, but always the chance of something nasty happening!</English>
-            </Key>    
+            </Key>
 
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_IedTargetCompact">
                 <Original>Compact Target/Ied Missions</Original>
@@ -3791,62 +3799,125 @@
                 <English>If enabled, IED and Target missions will be grouped closer to the AO,\nas apposed to spaced out around the AO</English>
             </Key>
 
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MoreEnemiest">
+                <Original>More enemies</Original>
+                <English>More enemies</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_Tooltip_AdvMoreEnemiest">
+                <Original>If enabled, more enemies will spawn around objectives. \n And they will call for reinforcements more often.</Original>
+                <English>If enabled, more enemies will spawn around objectives. \n And they will call for reinforcements more often.</English>
+            </Key>
+
 
             <Key ID="STR_TRGM2_Tooltip_AdvVirtualArsenal">
                 <Original>Will add an action to the supply create at base or camp to allow access to virtual arsenal</Original>
                 <English>Will add an action to the supply create at base or camp to allow access to virtual arsenal</English>
-            </Key>  
+            </Key>
 
             <Key ID="STR_TRGM2_Tooltip_AdvGroupName">
                 <Original>Displays a message at the start and end of missions and will include your group name</Original>
                 <English>Displays a message at the start and end of missions and will include your group name</English>
-            </Key>  
+            </Key>
 
             <Key ID="STR_TRGM2_Tooltip_AdvGroupManagement">
                 <Original>Enables the Dynamic Groups feature of Arma3</Original>
                 <English>Enables the Dynamic Groups feature of Arma3</English>
-            </Key>  
+            </Key>
 
             <Key ID="STR_TRGM2_Tooltip_AdvMapDraw">
                 <Original>If this is enabled, you will only be able to draw on the map in direct channel,\nmeaning, if you need to point out a target from a distance, you will need to call out grid refs</Original>
                 <English>If this is enabled, you will only be able to draw on the map in direct channel,\nmeaning, if you need to point out a target from a distance, you will need to call out grid refs</English>
-            </Key>  
+            </Key>
 
             <Key ID="STR_TRGM2_Tooltip_AdvAoSelect">
                 <Original>If enabled, you will be able to select on the map before the mission starts\nto mark where you want the AO locations to be</Original>
                 <English>If enabled, you will be able to select on the map before the mission starts\nto mark where you want the AO locations to be</English>
-            </Key>  
+            </Key>
 
             <Key ID="STR_TRGM2_Tooltip_AdvCampStart">
                 <Original>If enabled, you will be able to select your camp start position on the map</Original>
                 <English>If enabled, you will be able to select your camp start position on the map</English>
-            </Key>  
+            </Key>
 
 
             <Key ID="STR_TRGM2_ClearAreaMissionTitle">
                 <Original>Secure and Resupply</Original>
                 <English>Secure and Resupply</English>
-            </Key>      
+            </Key>
             <Key ID="STR_TRGM2_ClearAreaMissionDescription">
                 <Original>Secure AO, take down enemy flag and call in supply drop, wait for supplies to arrive before RTB</Original>
                 <English>Secure AO, take down enemy flag and call in supply drop, wait for supplies to arrive before RTB</English>
-            </Key>    
+            </Key>
             <Key ID="STR_TRGM2_FlagLowerCallSupply">
                 <Original>Lower Flag and call in supply drop</Original>
                 <English>Lower Flag and call in supply drop</English>
-            </Key> 
+            </Key>
 
             <Key ID="STR_TRGM2_MinUntilSupplyChopperInArea">
                 <Original>Minutes until supply chopper in area: %1</Original>
                 <English>Minutes until supply chopper in area: %1</English>
-            </Key> 
+            </Key>
 
             <Key ID="STR_TRGM2_SupplyChopperInbound">
                 <Original>supply choppers inbound</Original>
                 <English>supply choppers inbound</English>
-            </Key> 
+            </Key>
 
+            <Key ID="STR_TRGM2_InitClickSomewhere">
+                <Original>Click somewhere on the island to place the HQ.</Original>
+                <English>Click somewhere on the island to place the HQ.</English>
+            </Key>
 
+            <Key ID="STR_TRGM2_InitClickInvalidPos">
+                <Original>Invalid position, the position must be flat and no objects must be near the position.</Original>
+                <English>Invalid position, the position must be flat and no objects must be near the position.</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_InitClickValidPos">
+                <Original>Valid position, creating HQ.</Original>
+                <English>Valid position, creating HQ.</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_RequestUnit">
+                <Original>Request Unit</Original>
+                <English>Request Unit</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_RequestVehicle">
+                <Original>Request Vehicle</Original>
+                <English>Request Vehicle</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_RequestUnitDefault">
+                <Original>Select a Unit</Original>
+                <English>Select a Unit</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_RequestVehicleDefault">
+                <Original>Select a Vehicle</Original>
+                <English>Select a Vehicle</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_NotGroupLeader">
+                <Original>Only the group leader can request units!</Original>
+                <English>Only the group leader can request units!</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_UnitSpawned">
+                <Original>Unit spawned!</Original>
+                <English>Unit spawned!</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_VehicleSpawned">
+                <Original>Vehicle spawned!</Original>
+                <English>Vehicle spawned!</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_VehicleRelease">
+                <Original>RELEASE %1</Original>
+                <English>RELEASE %1</English>
+            </Key>
 
 
         </Container>

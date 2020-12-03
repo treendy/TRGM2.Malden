@@ -1,8 +1,8 @@
 if (isDedicated || !hasInterface) exitWith {};
 
 
-//waitUntil {bAndSoItBegins};
-//if (iUseRevive == 0) exitWith {["AIS: AIS shutdown, player disabled revive."] call BIS_fnc_logFormat};
+//waitUntil {TREND_bAndSoItBegins};
+//if (TREND_iUseRevive == 0) exitWith {["AIS: AIS shutdown, player disabled revive."] call BIS_fnc_logFormat};
 
 
 if (ais_ace_shutdown) exitWith {diag_log ["AIS: AIS shutdown itself cause ACE mod was detected. ACE and AIS cant work at the same time."]};
