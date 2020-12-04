@@ -29,7 +29,7 @@ if (isNil "TREND_iUseRevive") then {
 	publicVariable "TREND_iUseRevive";
 };
 
-if (TREND_iUseRevive != 0) then {
+if (TREND_iUseRevive != 0 && isNil "AIS_MOD_ENABLED") then {
 
 	params ["_text", "_onObject", "_distance", "_condition", "_callback", ["_args", []], ["_formated", "", [""]]];
 

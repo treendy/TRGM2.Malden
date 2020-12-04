@@ -6,6 +6,7 @@ if (isDedicated || !hasInterface) exitWith {};
 
 
 if (ais_ace_shutdown) exitWith {diag_log ["AIS: AIS shutdown itself cause ACE mod was detected. ACE and AIS cant work at the same time."]};
+if (!(isNil "AIS_MOD_ENABLED")) exitWith {diag_log ["AIS: AIS shutdown itself cause AIS mod was detected. Two instances of AIS cant work at the same time."]};
 /*
 // expample action
 _action = [

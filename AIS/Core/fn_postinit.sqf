@@ -1,5 +1,6 @@
 
 if (ais_ace_shutdown) exitWith {["AIS: AIS shutdown itself cause ACE mod was detected. ACE and AIS cant work at the same time."] call BIS_fnc_logFormat};
+if (!(isNil "AIS_MOD_ENABLED")) exitWith {diag_log ["AIS: AIS shutdown itself cause AIS mod was detected. Two instances of AIS cant work at the same time."]};
 #include "..\AIS_SETUP.sqf"
 
 if (isServer) then {
@@ -26,7 +27,7 @@ if (isServer) then {
 			true
 		} count _init_units;
 	};
-	
+
 	addMissionEventHandler ["HandleDisconnect", {_this call AIS_Core_fnc_handleDisconnect}];
 };
 
@@ -49,13 +50,13 @@ AIS_Core_realSide = getNumber (configfile >> "CfgVehicles" >> (typeOf AIS_Core_r
 [{
     // There is no command to get the current player but BI has an variable in mission namespace we can use.
 	private _currentPlayer = missionNameSpace getVariable ["bis_fnc_moduleRemoteControl_unit", player];	// Psycho: isNull until a unit is remote controlled
-    
+
     // If the player changed we trigger an event and update the global variable.
     if (AIS_Core_realPlayer != _currentPlayer) then {
 		removeAllActions AIS_Core_realPlayer;
 		AIS_Core_realPlayer enableAI "TEAMSWITCH";
-		
-        ["AIS_playerChanged", [_currentPlayer, AIS_Core_realPlayer]] call AIS_Core_fnc_triggerEvent;		
+
+        ["AIS_playerChanged", [_currentPlayer, AIS_Core_realPlayer]] call AIS_Core_fnc_triggerEvent;
         AIS_Core_realPlayer = _currentPlayer;
         if !([] call TRGM_fnc_isCbaLoaded) then {
 	        AIS_Core_realPlayer setVariable ["TRGM_addedActions",[]];

@@ -4,9 +4,9 @@
 west setFriend [east, 0];
 west setFriend [resistance, 0];
 east setFriend [west, 0];
-east setFriend [resistance, 0];
+east setFriend [resistance, 1];
 resistance setFriend [west, 0];
-resistance setFriend [east, 0];
+resistance setFriend [east, 1];
 civilian setFriend [west, 1];
 civilian setFriend [east, 1];
 
@@ -299,7 +299,7 @@ if (isServer) then {
 	if (typeName sCivilian != "ARRAY") then {sCivilian = [sCivilian]};
 	/*end */
 
-	private _airTransClassName = selectRandom SupplySupportChopperOptions;
+	private _airTransClassName = selectRandom (SupplySupportChopperOptions select {getNumber(configFile >> "CfgVehicles" >> _x >> "transportSoldier") >= 10});
 	if (_airTransClassName != typeOf chopper1) then {
 		{deleteVehicle _x;} forEach crew (vehicle chopper1) + [vehicle chopper1];
 		private _chopper1Arr = [getPos heliPad1, 0, _airTransClassName, WEST] call BIS_fnc_spawnVehicle;
@@ -347,24 +347,29 @@ if (isServer) then {
 		chopper2 allowDamage true;
 	};
 
+	TREND_counter = 0;
 	{
 		if (_x isKindOf "LandVehicle" || _x isKindOf "Air" || _x isKindOf "Ship") then {
 			private _faction = getText(configFile >> "CfgVehicles" >> typeOf _x >> "faction");
-			if ((count crew _x) == 0 && getNumber(configFile >> "CfgFactionClasses" >> _faction >> "side") == 1) then {
+			private _friendlyFactionIndex = TREND_AdvancedSettings select TREND_ADVSET_FRIENDLY_FACTIONS_IDX;
+			(TREND_WestFactionData select _friendlyFactionIndex) params ["_westClassName", "_westDisplayName"];
+			if ((count crew _x) == 0 && getNumber(configFile >> "CfgFactionClasses" >> _faction >> "side") == 1 && _faction != _westClassName) then {
 				private _newVehClass = [_x, WEST] call TREND_fnc_getFactionVehicle;
 				private _pos = getPosATL _x;
 				private _dir = getDir _x;
 				deleteVehicle _x;
 				sleep 0.01;
-				private _newVeh = createVehicle [_newVehClass, _pos, [], 0, "CAN_COLLIDE"];
+				private _newVeh = createVehicle [_newVehClass, _pos, [], 0, "NONE"];
 				_newVeh setDir _dir;
 				_newVeh allowDamage false;
 				_newVeh setPos (_pos vectorAdd [0,0,0.1]);
+				_newVeh allowDamage true;
+				TREND_counter = TREND_counter + 1;
 			};
 		};
 	} forEach vehicles;
 
-
+	// [TREND_counter, "Vehicle spawn corrections"] spawn TREND_fnc_AdjustMaxBadPoints;
 
 	TREND_CustomObjectsSet = true; publicVariable "TREND_CustomObjectsSet";
 	// call compile preprocessFileLineNumbers "RandFramework\setFriendlyObjects.sqf";
@@ -820,7 +825,7 @@ if (TREND_iMissionParamType != 5) then {
 };
 
 
- systemChat format["Mission Core: %1", "RunFlashLightState"];
+systemChat format["Mission Core: %1", "RunFlashLightState"];
 sleep _coreCountSleep;
 
  _iEnemyFlashLightOption = TREND_AdvancedSettings select TREND_ADVSET_SELECT_ENEMY_FLASHLIGHTS_IDX;
@@ -838,5 +843,7 @@ if (_iEnemyFlashLightOption == 1) then {
 		};
 	} forEach allUnits;
 };
+
+systemChat format["Mission Core: %1", "Main Init Complete"];
 
 true;

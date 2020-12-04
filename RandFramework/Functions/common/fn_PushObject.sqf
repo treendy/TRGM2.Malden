@@ -16,15 +16,15 @@ else {
 
 		sleep 0.5;
 
-		_actionReleaseObject = _Object addAction [format [localize "STR_TRGM2_openDialogRequests_VehicleRelease", getText (configFile >> "CfgVehicles" >> _classToSpawn >> "displayName")], {
+		_actionReleaseObject = _Object addAction [format [localize "STR_TRGM2_openDialogRequests_VehicleRelease", getText (configFile >> "CfgVehicles" >> (typeOf _Object)>> "displayName")], {
 			params ["_target", "_caller", "_actionId", "_arguments"];
 			detach _target;
 			_target setPos [getPos _target select 0, getPos _target select 1];
 			_target setVectorUp surfaceNormal position _target;
 			_target allowDamage true;
 			_target removeAction _actionId;
-			[_target, [localize "STR_TRGM2_UnloadDingy_push",{[_this select 0, _this select 1, _this select 2, _this select 3] spawn TREND_fnc_PushObject;}]] remoteExec ["addAction", 0];
-		}, nil, 10, true, true];
+			[_target, [format [localize "STR_TRGM2_UnloadDingy_push", getText (configFile >> "CfgVehicles" >> (typeOf _target) >> "displayName")],{[_this select 0, _this select 1, _this select 2, _this select 3] spawn TREND_fnc_PushObject;}, [], -99, false, false, "", "_this == player"]] remoteExec ["addAction", 0];
+		}, nil, 25, true, true];
 
 		private _largeObjectCorrection = if (((boundingBoxReal _Object select 1 select 1) - (boundingBoxReal _Object select 0 select 1)) != 0 && {
 				((boundingBoxReal _Object select 1 select 0) - (boundingBoxReal _Object select 0 select 0)) > 3.2 &&

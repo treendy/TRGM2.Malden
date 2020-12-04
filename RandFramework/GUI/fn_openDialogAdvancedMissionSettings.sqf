@@ -89,6 +89,12 @@ _lblctrlTitle ctrlCommit 0;
 	// _lblCtrlID , _lblText												,_lnpCtrlType ,_Options                          ,_Values                       ,_DefaultSelIndex                       ,tooltip
 	//[6013       , localize "STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFactions","RscCombo"   ,TREND_DefaultEnemyFactionArrayText,TREND_DefaultEnemyFactionArray,TREND_DefaultEnemyFactionValue select 0,""     ],
 	_currentLinePos = _lineHeight * (_forEachIndex + 1);
+	_ctrlWidth = 0.08 * safezoneW;
+	_ctrlHeight = 0.02 * safezoneH;
+	_lblXPos = (0.3 * safezoneW + safezoneX) + ([0, (2 * _ctrlWidth)] select {_forEachIndex <= 12});
+	_inpXPos = (0.4 * safezoneW + safezoneX) + ([0, (2 * _ctrlWidth)] select {_forEachIndex <= 12});
+	_ctrlYPos = ((0.27 + _currentLinePos) * safezoneH + safezoneY);
+
 	_lblCtrlID =  _x select 0;
 	_InpCtrlID = _lblCtrlID + 1;
 	_lblText = _x select 1;
@@ -100,13 +106,13 @@ _lblctrlTitle ctrlCommit 0;
 
 	_display ctrlCreate ["RscText", _lblCtrlID];
 	_lblctrl = _display displayCtrl _lblCtrlID;
-	_lblctrl ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.27 + _currentLinePos) * safezoneH + safezoneY,0.08 * safezoneW,0.02 * safezoneH];
+	_lblctrl ctrlSetPosition [_lblXPos, _ctrlYPos,_ctrlWidth,_ctrlHeight];
 	ctrlSetText [_lblCtrlID,  _x select 1];
 	_lblctrl ctrlCommit 0;
 
 	_display ctrlCreate [_lnpCtrlType, _InpCtrlID];
 	_inpctrl = _display displayCtrl _InpCtrlID;
-	_inpctrl ctrlSetPosition [0.4 * safezoneW + safezoneX, (0.27 + _currentLinePos) * safezoneH + safezoneY,0.08 * safezoneW,0.02 * safezoneH];
+	_inpctrl ctrlSetPosition [_inpXPos, _ctrlYPos,_ctrlWidth,_ctrlHeight];
 
 	if (_lnpCtrlType == "RscCombo") then {
 		{

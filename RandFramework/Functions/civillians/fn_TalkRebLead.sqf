@@ -1,12 +1,12 @@
-params ["_thisCiv", "_thisPlayer"];
+params ["_thisCiv", "_caller"];
 
-if (side player == west) then {
+if (side _caller == west) then {
 
 	[_thisCiv] remoteExec ["removeAllActions", 0, true];
 
 	if (alive _thisCiv) then {
 
-		_azimuth = _thisCiv getDir _thisPlayer;
+		_azimuth = _thisCiv getDir _caller;
 		_thisCiv setDir _azimuth;
 		_thisCiv switchMove "Acts_StandingSpeakingUnarmed";
 		sleep 3;

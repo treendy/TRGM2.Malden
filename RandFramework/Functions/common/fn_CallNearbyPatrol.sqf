@@ -38,6 +38,7 @@ if (isServer && count _thisThisList > 0) then {
 	//[_SpottedUnitPos, 1] spawn TREND_fnc_enemyAirSupport;
 
 	_SpottedUnit = _thisThisList select 0;
+	if (isNil "_SpottedUnit") exitWith {};
 	_SpottedUnitPos = getpos _SpottedUnit;
 
 	if (isPlayer _SpottedUnit) then {
@@ -187,7 +188,7 @@ if (isServer && count _thisThisList > 0) then {
 				//};
 
 
-				if (_bInfSpottedAction) then {
+				if (_bInfSpottedAction || (TREND_AdvancedSettings select TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX == 1) || (TREND_AdvancedSettings select TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX == 0 && selectRandom[false,true])) then {
 						if (_bIsMainObjective) then {
 							[EAST, TREND_ReinforceStartPos1, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
 							if (TREND_bAllowLargerPatrols) then {
@@ -381,27 +382,27 @@ if (isServer && count _thisThisList > 0) then {
 
 					if (TREND_bBaseHasChopper && selectRandom [true]) then {
 
-						while {(count (waypoints group EnemyBaseChopperPilot)) > 0} do {
-							deleteWaypoint ((waypoints group EnemyBaseChopperPilot) select 0);
+						while {(count (waypoints group TREND_EnemyBaseChopperPilot)) > 0} do {
+							deleteWaypoint ((waypoints group TREND_EnemyBaseChopperPilot) select 0);
 						};
 						//EnemyBaseChopper set waypoint to spotted location then AO then RTB
 						//GETIN NEAREST
 						//EnemyBaseChopperPilot
-						_EnemyBaseChopperWP0 = group EnemyBaseChopperPilot addWaypoint [getPos EnemyBaseChopperPilot,0,1];
+						_EnemyBaseChopperWP0 = group TREND_EnemyBaseChopperPilot addWaypoint [getPos TREND_EnemyBaseChopperPilot,0,1];
 						_EnemyBaseChopperWP0 setWaypointType "GETIN NEAREST";
 						_EnemyBaseChopperWP0 setWaypointSpeed "FULL";
 
-						_EnemyBaseChopperWP1 = group EnemyBaseChopperPilot addWaypoint [getPos _SpottedUnit,0,1];
+						_EnemyBaseChopperWP1 = group TREND_EnemyBaseChopperPilot addWaypoint [getPos _SpottedUnit,0,1];
 						_EnemyBaseChopperWP1 setWaypointType "SENTRY";
 						_EnemyBaseChopperWP1 setWaypointSpeed "LIMITED";
 						_EnemyBaseChopperWP1 setWaypointBehaviour "AWARE";
 
-						_EnemyBaseChopperWP1 = group EnemyBaseChopperPilot addWaypoint [getPos _SpottedUnit,0,1];
+						_EnemyBaseChopperWP1 = group TREND_EnemyBaseChopperPilot addWaypoint [getPos _SpottedUnit,0,1];
 						_EnemyBaseChopperWP1 setWaypointType "MOVE";
 						_EnemyBaseChopperWP1 setWaypointSpeed "LIMITED";
 						_EnemyBaseChopperWP1 setWaypointBehaviour "AWARE";
 
-						_EnemyBaseChopperWP1 = group EnemyBaseChopperPilot addWaypoint [getPos TREND_baseHeliPad,0,2];
+						_EnemyBaseChopperWP1 = group TREND_EnemyBaseChopperPilot addWaypoint [getPos TREND_baseHeliPad,0,2];
 						_EnemyBaseChopperWP1 setWaypointType "MOVE";
 						_EnemyBaseChopperWP1 setWaypointSpeed "FULL";
 						_EnemyBaseChopperWP1 setWaypointStatements ["true", "(vehicle this) LAND 'LAND';"];

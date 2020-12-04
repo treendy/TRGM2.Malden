@@ -156,7 +156,7 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 			_target setVectorUp surfaceNormal position _target;
 			_target allowDamage true;
 			_target removeAction _actionId;
-			[_target, [localize "STR_TRGM2_startInfMission_UnloadDingy",{[_this select 0, _this select 1, _this select 2, _this select 3] spawn TREND_fnc_UnloadDingy;}]] remoteExec ["addAction", 0];
+			[_target, [localize "STR_TRGM2_startInfMission_UnloadDingy",{[_this select 0, _this select 1, _this select 2, _this select 3] spawn TREND_fnc_UnloadDingy;}, [], -99, false, false, "", "_this == player"]] remoteExec ["addAction", 0];
 
 			{
 				{
@@ -169,6 +169,10 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 					_target addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
 				};
 			}  forEach units group _caller;
+
+			if (_target isKindOf "Static") then {
+				[_target, [format [localize "STR_TRGM2_UnloadDingy_push", getText (configFile >> "CfgVehicles" >> (typeOf _target) >> "displayName")],{[_this select 0, _this select 1, _this select 2, _this select 3] spawn TREND_fnc_PushObject;}, [], -99, false, false, "", "_this == player"]] remoteExec ["addAction", 0];
+			};
 		}, nil, 25, true, true];
 
 		private _largeObjectCorrection = if (((boundingBoxReal _SpawnedVeh select 1 select 1) - (boundingBoxReal _SpawnedVeh select 0 select 1)) != 0 && {

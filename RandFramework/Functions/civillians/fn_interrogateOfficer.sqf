@@ -1,10 +1,10 @@
-params ["_thisCiv","_thisPlayer","_id","_params"];
-_params params ["_iSelected","_bCreateTask"];
+params ["_thisCiv","_caller","_id","_args"];
+_args params ["_iSelected","_bCreateTask"];
 
-if (side player == west) then {
+if (side _caller == west) then {
 
 	//TREND_ClearedPositions pushBack (TREND_ObjectivePossitions select _iSelected);
-	TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, player] call BIS_fnc_nearestPosition);
+	TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, _caller] call BIS_fnc_nearestPosition);
 	publicVariable "TREND_ClearedPositions";
 
 	//removeAllActions _thisCiv;

@@ -8,7 +8,7 @@ if (isServer) then {
 	};
 	publicVariable "ais_ace_shutDown";
 };
-
+if (!(isNil "AIS_MOD_ENABLED")) exitWith {diag_log ["AIS: AIS shutdown itself cause AIS mod was detected. Two instances of AIS cant work at the same time."]};
 //removed this event handler clearing because ACE is already using it for the interaction menu
 //removeAllMissionEventHandlers "Draw3D";
 //removeAllMissionEventHandlers "EachFrame";

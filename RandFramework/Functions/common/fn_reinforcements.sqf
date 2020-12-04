@@ -370,7 +370,7 @@ _nul = [EAST, "spawnMrk", "LZMrk", 2, true, true, true, true, false] spawn TREND
 			};
 			sleep 10;
 			 if (_debugMode) then {player globalChat "New Reinforcements created";};
-			 [_side, _spawnMrk, _LZMrk, _skill, _sadMode, _bodyDelete, _cycleMode, _debugMode] spawn TREND_fnc_reinforcements;
+			 [_side, _spawnMrk, _LZMrk, _skill, _sadMode, _bodyDelete, false, _debugMode] spawn TREND_fnc_reinforcements;
 		};
 
 	// Function End

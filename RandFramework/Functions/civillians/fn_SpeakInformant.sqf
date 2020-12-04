@@ -1,15 +1,15 @@
 
 _thisCiv = _this select 0;
-_thisPlayer = _this select 1;
+_caller = _this select 1;
 _params = _this select 3;
 
 _iSelected = _params select 0;
 _bCreateTask = _params select 1;
 
-if (side player == west) then {
+if (side _caller == west) then {
 
 	//TREND_ClearedPositions pushBack (TREND_ObjectivePossitions select _iSelected);
-	TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, player] call BIS_fnc_nearestPosition);
+	TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, _caller] call BIS_fnc_nearestPosition);
 	publicVariable "TREND_ClearedPositions";
 	//removeAllActions _thisCiv;
 	[_thisCiv] remoteExec ["removeAllActions", 0, true];
