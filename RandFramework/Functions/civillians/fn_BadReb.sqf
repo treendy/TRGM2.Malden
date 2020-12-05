@@ -1,6 +1,7 @@
 //if some condition is true, we give this guy a gun and change side
 
 params["_thisCiv"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 _bFired = false;
 
 while {alive _thisCiv && !_bFired} do {

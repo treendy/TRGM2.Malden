@@ -1,5 +1,5 @@
 params[["_pos", [0,0,0]]];
-
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 
 // create the HQ building

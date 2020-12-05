@@ -3,6 +3,7 @@
 params ["_object","_caller","_id","_params"];
 _params params ["_unitClass","_unitRole"];
 
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 //TREND_CampaignRecruitUnitRifleman createUnit [getPos player, group player];
 

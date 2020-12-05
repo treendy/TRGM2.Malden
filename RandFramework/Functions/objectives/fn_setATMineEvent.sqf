@@ -1,4 +1,5 @@
 params ["_posOfAO",["_isFullMap",false]];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 _currentATFieldPos = [_posOfAO , 1000, 1700, 100, 0, 0.4, 0,TREND_AreasBlackList,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 

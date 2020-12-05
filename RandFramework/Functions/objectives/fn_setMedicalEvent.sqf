@@ -1,4 +1,5 @@
 
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 _requiredItemIndex = selectRandom [0,1,2];
 requiredItemsCount = [10,5,2] select _requiredItemIndex;
 RequestedMedicalItem = ["FirstAidKit","FirstAidKit","Medikit"] select _requiredItemIndex;

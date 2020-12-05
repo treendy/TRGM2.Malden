@@ -1,4 +1,5 @@
 params ["_triggerArea",["_nearestAmbush", 50],["_furthestAmbush",150]];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 //_triggerArea = _this select 0;
 

@@ -1,4 +1,5 @@
 params ["_Object", "_caller", "_id", "_args"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 if (count crew _Object > 0) then {
 	hint (localize "STR_TRGM2_PushObject_PushEmpty");

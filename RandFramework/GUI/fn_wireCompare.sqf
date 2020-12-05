@@ -1,5 +1,6 @@
 //Parameters
 params ["_cutWire"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 _thisBomb = player getVariable ["missionBomb",nil];
 _wire = _thisBomb getVariable ["missionBombWire","NONE"];

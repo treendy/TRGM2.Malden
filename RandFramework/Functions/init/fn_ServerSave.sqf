@@ -3,6 +3,7 @@
 // future update may allow this to be saved on single player, incase they want to run campaign on mixed maps
 
 params["_SaveType","_IsFirstSave"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 //sInitialSLPlayerID
 _SaveVersion = "";

@@ -1,10 +1,10 @@
-{systemChat "Mission Setup: 16";} remoteExec ["call", 0];
+"Mission Setup: 16" call TREND_fnc_log;
 
 call TREND_fnc_initMissionVars;
 //#include "..\RandFramework\CustomMission\customMission.sqf";
 
 //This is only ever called on server!!!!
-{systemChat "Mission Setup: 15";} remoteExec ["call", 0];
+"Mission Setup: 15" call TREND_fnc_log;
 
 TRGM_Logic setVariable ["DeathRunning", false, true];
 TRGM_Logic setVariable ["PointsUpdating", false, true];
@@ -14,7 +14,7 @@ TRGM_Logic setVariable ["PointsUpdating", false, true];
 //publicVariable "TREND_debugMessages";
 
 
-{systemChat "Mission Setup: 14.5";} remoteExec ["call", 0];
+"Mission Setup: 14.5" call TREND_fnc_log;
 
 _ThisTaskTypes = nil;
 _IsMainObjs = nil;
@@ -39,7 +39,7 @@ if (TREND_iMissionParamObjective3 > 0) then {
 	_SideMissionTasksToUse2 = [TREND_iMissionParamObjective3];
 };
 
-{systemChat "Mission Setup: 14";} remoteExec ["call", 0];
+"Mission Setup: 14" call TREND_fnc_log;
 
 TREND_iMissionSetup =  TREND_iMissionParamType; publicVariable "TREND_iMissionSetup";
 if (TREND_iMissionSetup == 0) then {
@@ -241,7 +241,7 @@ if (!(isNil "IsTraining")) then {
 
 TREND_MissionParamsSet =  true; publicVariable "TREND_MissionParamsSet";
 
-{systemChat "Mission Setup: 13";} remoteExec ["call", 0];
+"Mission Setup: 13" call TREND_fnc_log;
 
 publicVariable "TREND_MaxBadPoints";
 
@@ -249,7 +249,7 @@ _randInfor1X = nil;
 _randInfor1Y = nil;
 _buildings = nil;
 
-{systemChat "Mission Setup: 12.5";} remoteExec ["call", 0];
+"Mission Setup: 12.5" call TREND_fnc_log;
 
 while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 	_iTaskIndex = 0;
@@ -282,7 +282,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 	};
 
 	//hint "c";
-{systemChat "Mission Setup: 12";} remoteExec ["call", 0];
+"Mission Setup: 12" call TREND_fnc_log;
 
 	//if (!TREND_InfTaskStarted) then {
 	if (true) then {
@@ -304,7 +304,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 			_CustomMissionEnabled = false;
 
 			_bNewTaskSetup = false;
-			{systemChat "Mission Setup: 11";} remoteExec ["call", 0];
+			"Mission Setup: 11" call TREND_fnc_log;
 
 			if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle1"}; //Hack Data
 			if (_iThisTaskType == 2) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle2"}; //Steal data from research vehicle
@@ -364,11 +364,11 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 			//orangestest*/
 
 			//kill leader (he will run away in car to AO)    ::   save stranded guys    ::
-			{systemChat "Mission Setup: 10";} remoteExec ["call", 0];
+			"Mission Setup: 10" call TREND_fnc_log;
 			_attempts = 0;
 			while {!_bInfor1Found} do {
 				_attempts = _attempts + 1;
-				{systemChat "Mission Setup: 9";} remoteExec ["call", 0];
+				"Mission Setup: 9" call TREND_fnc_log;
 				_markerInformant1 = nil;
 
 
@@ -468,12 +468,12 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 							};
 							//###################################### CUSTOM MISSION ###################
 
-							{systemChat "Mission Setup: 8-0-10";} remoteExec ["call", 0];
+							"Mission Setup: 8-0-10" call TREND_fnc_log;
 							if (_iThisTaskType == 99999 || _bNewTaskSetup) then {
 								[_MarkerType,_infBuilding,_inf1X,_inf1Y,_roadSearchRange, _bCreateTask, _iTaskIndex, _bIsMainObjective] call fnc_CustomMission;
 							};
 							//###################################### Hack Data ###################
-							{systemChat "Mission Setup: 8-0-9";} remoteExec ["call", 0];
+							"Mission Setup: 8-0-9" call TREND_fnc_log;
 							if (_iThisTaskType == 1) then {
 								_allpositionsLaptop1 = _infBuilding buildingPos -1;
 								_sLaptop1Name = format["objLaptop%1",_iTaskIndex];
@@ -495,7 +495,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 									localize "STR_TRGM2_startInfMission_MissionTitle1_Desc2"];
 							};
 							//###################################### Steal data from research vehicle ###################
-							{systemChat "Mission Setup: 8-0-8";} remoteExec ["call", 0];
+							"Mission Setup: 8-0-8" call TREND_fnc_log;
 							if (_iThisTaskType == 2) then {
 								if (_MarkerType != "empty") then { _MarkerType = "hd_unknown"; };
 								_nearestRoad = nil;
@@ -514,7 +514,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 									localize "STR_TRGM2_startInfMission_MissionTitle2_Desc"];
 							};
 							//###################################### Destroy Ammo Trucks ###################
-							{systemChat "Mission Setup: 8-0-7";} remoteExec ["call", 0];
+							"Mission Setup: 8-0-7" call TREND_fnc_log;
 							if (_iThisTaskType == 3) then {
 								_allowFriendlyIns = false;
 								if (_MarkerType != "empty") then { _MarkerType = "hd_unknown"; };
@@ -575,7 +575,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 							};
 
 							//###################################### Destroy AAA ###################
-							{systemChat "Mission Setup: 8-0-6";} remoteExec ["call", 0];
+							"Mission Setup: 8-0-6" call TREND_fnc_log;
 							if (_iThisTaskType == 9) then {
 								_allowFriendlyIns = false;
 								if (_MarkerType != "empty") then { _MarkerType = "hd_unknown"; };
@@ -650,7 +650,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 
 							};
 							//###################################### Destroy Arti ###################
-							{systemChat "Mission Setup: 8-0-5";} remoteExec ["call", 0];
+							"Mission Setup: 8-0-5" call TREND_fnc_log;
 							if (_iThisTaskType == 10) then {
 								_allowFriendlyIns = false;
 								if (_MarkerType != "empty") then { _MarkerType = "hd_unknown"; };
@@ -728,7 +728,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 									localize "STR_TRGM2_startInfMission_MissionTitle10_Desc"];
 							};
 								//###################################### informant,intorigate officer, weapon dealer or kill officer, POW #########################################
-								{systemChat "Mission Setup: 8-4";} remoteExec ["call", 0];
+								"Mission Setup: 8-4" call TREND_fnc_log;
 							if (_iThisTaskType == 4 || _iThisTaskType == 5 || _iThisTaskType == 7 || _iThisTaskType == 8 || _iThisTaskType == 11 || _iThisTaskType == 12) then { //if informant,intorigate officer, weapon dealer or kill officer or rescue POW, rescue reporter
 
 								_allpositionsLaptop1 = _infBuilding buildingPos -1;
@@ -1029,7 +1029,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 
 							};
 							//####################BUG RADIO##########################
-							{systemChat "Mission Setup: 8-3";} remoteExec ["call", 0];
+							"Mission Setup: 8-3" call TREND_fnc_log;
 							if (_iThisTaskType == 6) then {
 								_allpositionsRadio1 = _infBuilding buildingPos -1;
 								_sRadio1Name = format["objRadio%1",_iTaskIndex];
@@ -1055,7 +1055,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 									(localize "STR_TRGM2_startInfMission_MissionTitle6_Desc")];
 							};
 							//##############################################
-							{systemChat "Mission Setup: 8-2";} remoteExec ["call", 0];
+							"Mission Setup: 8-2" call TREND_fnc_log;
 
 							if (!isNil "TREND_Mission1Title") then {_MissionTitle = TREND_Mission1Title};
 							if (!isNil "TREND_Mission1Desc") then {_sTaskDescription = TREND_Mission1Desc};
@@ -1162,7 +1162,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 					};
 
 				};
-				{systemChat "Mission Setup: 8-1";} remoteExec ["call", 0];
+				"Mission Setup: 8-1" call TREND_fnc_log;
 			};
 			if (TREND_InfTaskCount == 0) then {
 				TREND_CurrentZeroMissionTitle = _MissionTitle; //curently only used for campaign
@@ -1172,7 +1172,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 					TREND_MainMissionTitle = "Objective Unknown";
 				};
 			};
-			{systemChat "Mission Setup: 8-0";} remoteExec ["call", 0];
+			"Mission Setup: 8-0" call TREND_fnc_log;
 			TREND_InfTaskCount = TREND_InfTaskCount + 1;
 
 
@@ -1182,7 +1182,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 };
 
 
-{systemChat "Mission Setup: 7";} remoteExec ["call", 0];
+"Mission Setup: 7" call TREND_fnc_log;
 
 _trgComplete = createTrigger ["EmptyDetector", [0,0]];
 _trgComplete setVariable ["DelMeOnNewCampaignDay",true];
@@ -1216,7 +1216,7 @@ else {
 
 };
 
-{systemChat "Mission Setup: 6";} remoteExec ["call", 0];
+"Mission Setup: 6" call TREND_fnc_log;
 ///*orangestest
 
 
@@ -1227,7 +1227,7 @@ else {
 //orangestest*/
 
 //orangestest*/
-{systemChat "Mission Setup: 2";} remoteExec ["call", 0];
+"Mission Setup: 2" call TREND_fnc_log;
 
 
 TREND_fnc_PopulateLoadingWait = {
@@ -1246,7 +1246,7 @@ TREND_fnc_PopulateLoadingWait = {
 
 
 
-{systemChat "Mission Setup: 1";} remoteExec ["call", 0];
+"Mission Setup: 1" call TREND_fnc_log;
 
 
 publicVariable "TREND_debugMessages";
@@ -1259,5 +1259,5 @@ hint (localize "STR_TRGM2_startInfMission_SoItBegin");
 
 
 
-{systemChat "Mission Setup: 0";} remoteExec ["call", 0];
+"Mission Setup: 0" call TREND_fnc_log;
 true;

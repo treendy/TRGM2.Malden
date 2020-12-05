@@ -1,5 +1,6 @@
 disableSerialization;
 
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 _thisThis = _this select 0;
 
 _selectedIndex = _thisThis select 1;

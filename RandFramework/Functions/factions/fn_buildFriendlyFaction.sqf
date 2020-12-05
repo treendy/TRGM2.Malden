@@ -1,3 +1,4 @@
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 private _friendlyFactionIndex = TREND_AdvancedSettings select TREND_ADVSET_FRIENDLY_FACTIONS_IDX;
 (TREND_WestFactionData select _friendlyFactionIndex) params ["_westClassName", "_westDisplayName"];

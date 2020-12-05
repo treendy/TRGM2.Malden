@@ -1,4 +1,5 @@
 params ["_killed","_killer"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 if (isNil "TREND_CivDeathCount") then { TREND_CivDeathCount =   0; publicVariable "TREND_CivDeathCount"; };
 

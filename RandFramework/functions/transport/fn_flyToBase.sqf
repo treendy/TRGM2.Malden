@@ -2,6 +2,7 @@ params [
 	"_vehicle",
 	["_thisMission", nil,[],2]
 ];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 scopeName "FlyToBase";
 
 // if not part of a flying mission create a new one

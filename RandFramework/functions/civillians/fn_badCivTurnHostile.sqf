@@ -1,4 +1,5 @@
 params ["_badCiv"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 _grpName = createGroup east;
 [_badCiv] joinSilent _grpName;

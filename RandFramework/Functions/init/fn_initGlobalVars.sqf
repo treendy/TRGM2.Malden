@@ -1,3 +1,7 @@
+/////// Debug Mode ///////
+TREND_bDebugMode = true; publicVariable "TREND_bDebugMode";
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+
 if (isNil "TREND_NeededObjectsAvailable") then { TREND_NeededObjectsAvailable =   false; publicVariable "TREND_NeededObjectsAvailable"; };
 if (isNil "TREND_playerIsChoosingHQpos") then { TREND_playerIsChoosingHQpos = false; publicVariable "TREND_playerIsChoosingHQpos"; };
 if (isNil "TREND_HQPosFound") then { TREND_HQPosFound = false; publicVariable "TREND_HQPosFound"; };
@@ -121,7 +125,6 @@ if (isNil "TREND_iWeather") then {TREND_iWeather = 1; publicVariable "TREND_iWea
 if (isNil "TREND_iUseRevive") then {TREND_iUseRevive = 0; publicVariable "TREND_iUseRevive";};
 if (isNil "TREND_iCampaignDay") then {TREND_iCampaignDay = 0; publicVariable "TREND_iCampaignDay";};
 if (isNil "TREND_CurrentZeroMissionTitle") then {TREND_CurrentZeroMissionTitle = ""; publicVariable "TREND_CurrentZeroMissionTitle";};
-if (isNil "TREND_debugMessages") then {TREND_debugMessages = ""; publicVariable "TREND_debugMessages";};
 if (isNil "TREND_SaveType") then {TREND_SaveType = 0; publicVariable "TREND_SaveType";};
 if (isNil "TREND_IntelFound") then {TREND_IntelFound = []; publicVariable "TREND_IntelFound";};
 if (isNil "TREND_iStartLocation") then {TREND_iStartLocation = 2; publicVariable "TREND_iStartLocation";};

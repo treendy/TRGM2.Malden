@@ -1,4 +1,5 @@
 params [["_box", objNull, [objNull]], ["_units", []]];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 if (isNil "_box") exitWith {};
 

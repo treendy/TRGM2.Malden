@@ -1,4 +1,5 @@
 params [["_veh", objNull, [objNull]], ["_side", WEST]];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 private _vehClassName = typeOf _veh;
 private _configPath = (configFile >> "CfgVehicles" >> _vehClassName);

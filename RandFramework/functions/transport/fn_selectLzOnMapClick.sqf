@@ -1,4 +1,5 @@
 params["_vehicle","_redZonePositions","_vehiclePositon","_baseLZPos","_radius","_minimumDistance","_markers","_baseRadius","_baseReturnAllowed","_isPickup"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 scopeName "onMapClickedHandler";
 
 _resetMapState = {

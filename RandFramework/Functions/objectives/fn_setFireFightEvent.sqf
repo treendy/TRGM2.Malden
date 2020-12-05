@@ -1,5 +1,6 @@
 _posOfAO =  _this select 0;
 _eventType = _this select 1; //1=fullWar  2=AOOnly  3=WarzoneOnly 4=warzoneOnlyFullWar
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 _nearLocations = nearestLocations [_posOfAO, ["NameCity","NameCityCapital","NameVillage"], 1500];
 

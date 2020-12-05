@@ -1,5 +1,6 @@
 
 params ["_posOfAO",["_roadRange",2000],["_showMarker",false],["_forceTrap",false],["_objTarget",nil],["_isCache",false],["_isMainTask",false]];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 _ieds = CivCars;
 
@@ -111,7 +112,7 @@ if (!_isCache && count _nearestRoads > 0) then {
 
 			_posOfTarget = getPos _mainVeh;
 
-			{systemChat "Mission Events: Target 6";} remoteExec ["call", 0];
+			"Mission Events: Target 6" call TREND_fnc_log;
 
 			if (selectRandom[true,false,false]) then {
 				[_posOfTarget] spawn TREND_fnc_createEnemySniper;
@@ -142,7 +143,7 @@ if (!_isCache && count _nearestRoads > 0) then {
 				[_posOfTarget,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100,true,selectRandom[false,false,true],false] spawn TREND_fnc_setCheckpoint;
 			};
 
-			{systemChat "Mission Events: Target 4";} remoteExec ["call", 0];
+			"Mission Events: Target 4" call TREND_fnc_log;
 
 		};
 		//HERE 23_09_2019 : look at SetIEDEvent, or startInfMission line 541 (where we create triggers for ammotrucks)

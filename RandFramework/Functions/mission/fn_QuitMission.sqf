@@ -6,4 +6,7 @@
 //{removeAllActions endMissionBoard;} remoteExec ["call", 0];
 
 //run this as a string?? use CALL command???
-[InfSide%1, "failed"] remoteExec [FHQ_fnc_ttSetTaskState, 0]   ,   TREND_iCampaignDay
+
+// This seems to be not called by anything, should it be removed? - TheAce
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+// [InfSide%1, "failed"] remoteExec [FHQ_fnc_ttSetTaskState, 0], TREND_iCampaignDay

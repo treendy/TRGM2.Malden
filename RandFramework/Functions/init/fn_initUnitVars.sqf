@@ -1,3 +1,5 @@
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+
 
 TREND_WestFactionData =  [WEST] call TREND_fnc_getFactionDataBySide; publicVariable "TREND_WestFactionData";
 TREND_EastFactionData =  [EAST] call TREND_fnc_getFactionDataBySide; publicVariable "TREND_EastFactionData";
@@ -16,9 +18,6 @@ _CustomMissionEnabled = false;
 _MissionTitle = "";
 // call compile preprocessFileLineNumbers  "RandFramework\CustomMission\customMission.sqf";
 // call fnc_CustomVars;
-
-/////// Debug Mode ///////
-TREND_bDebugMode = false; publicVariable "TREND_bDebugMode";
 
 /////// Set up faction arrays ///////
 // TREND_WestFactionData;

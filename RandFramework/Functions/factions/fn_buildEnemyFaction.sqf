@@ -1,3 +1,4 @@
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 private _enemyFactionIndex = TREND_AdvancedSettings select TREND_ADVSET_ENEMY_FACTIONS_IDX;
 (TREND_EastFactionData select _enemyFactionIndex) params ["_eastClassName", "_eastDisplayName"];

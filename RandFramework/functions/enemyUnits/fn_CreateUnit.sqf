@@ -1,4 +1,5 @@
 params ["_sUnitType","_spawnPos", "_group"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 _unit = _group createUnit [_sUnitType,_spawnPos, [], 5, "NONE"];
 //HERE, check if EnemyRifleman exists

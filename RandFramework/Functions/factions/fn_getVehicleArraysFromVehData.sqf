@@ -1,4 +1,5 @@
 params["_vehData"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 _unarmedcars = []; _armedcars = []; _trucks = []; _apcs = []; _tanks = []; _artillery = []; _antiair = []; _turrets = []; _unarmedhelicopters = []; _armedhelicopters = []; _planes = []; _boats = []; _mortars = [];
 {

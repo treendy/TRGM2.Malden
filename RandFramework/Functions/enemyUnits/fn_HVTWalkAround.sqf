@@ -1,4 +1,5 @@
 params ["_objManName","_thisInitPos","_objMan","_walkRadius"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 _currentManPos = getPos _objMan;
 

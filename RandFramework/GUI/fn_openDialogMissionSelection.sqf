@@ -1,5 +1,6 @@
 disableSerialization;
 
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 //profileNamespace setVariable [worldname + ":PreviousSettings",Nil];
 
 if (isNil "TREND_InitialLoadedPreviousSettings" && !TREND_ForceMissionSetup) then {

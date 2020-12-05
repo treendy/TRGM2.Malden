@@ -1,5 +1,6 @@
 params ["_thisLaptop" , "_caller", "_ID", "_arguments"];
 _arguments params ["_iSelected","_bCreateTask"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 if (side _caller == west) then {
 

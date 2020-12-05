@@ -29,6 +29,7 @@ Output for CSAT in format: [[_riflemen], [_leaders], [_atsoldiers], [_aasoldiers
 // Note pilots were separated out after these outputs were generated.
 
 params["_unitData"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 _riflemen = []; _leaders = []; _atsoldiers = []; _aasoldiers = []; _engineers = []; _grenadiers = []; _medics = []; _autoriflemen = []; _snipers = []; _explosiveSpecs = []; _pilots = []; _uavOperators = [];
 {

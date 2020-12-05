@@ -25,6 +25,8 @@
 #define ROOF_CHECK 4
 #define ROOF_EDGE 2
 
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+
 private ["_center", "_units", "_buildingRadius", "_putOnRoof", "_fillEvenly", "_Zen_ExtendPosition", "_buildingsArray", "_buildingPosArray", "_buildingPositions", "_posArray", "_unitIndex", "_j", "_building", "_posArray", "_randomIndex", "_housePos", "_startAngle", "_i", "_checkPos", "_hitCount", "_isRoof", "_edge", "_k", "_unUsedUnits", "_array", "_sortHeight", "_Zen_InsertionSort", "_Zen_ArrayShuffle", "_doMove"];
 
 _center = _this param [0, [0,0,0], [[]], 3];

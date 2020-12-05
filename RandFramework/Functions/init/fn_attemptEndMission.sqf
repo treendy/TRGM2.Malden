@@ -1,3 +1,4 @@
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 _bAllowEnd = true;
 
 if (isMultiplayer && (leader (group player)) != player) then {

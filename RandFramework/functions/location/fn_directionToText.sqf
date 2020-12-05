@@ -1,7 +1,9 @@
 params [
-			["_direction",-1,[0]],  // direction 0 to 360
-			["_words",false,[false]] // use word style instead of acronyms
-		];
+	["_direction",-1,[0]],  // direction 0 to 360
+	["_words",false,[false]] // use word style instead of acronyms
+];
+
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 if (_direction < 0 ||_direction > 360) then {
 	"";

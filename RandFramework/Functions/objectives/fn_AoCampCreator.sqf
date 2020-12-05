@@ -8,6 +8,7 @@ while {_percentage < 100} do {
 	sleep 0.2;
 };
 */
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 if (isServer) then {
 
 	_mainAOPos = TREND_ObjectivePossitions select 0;
@@ -37,7 +38,7 @@ if (isServer) then {
 		[_flatPos,_flatPos,50,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,FriendlyScoutVehicles,500] spawn TREND_fnc_setCheckpoint;
 	};
 
-	{systemChat "Mission Setup: 5";} remoteExec ["call", 0];
+	"Mission Setup: 5" call TREND_fnc_log;
 
 	TREND_AOCampPos = _flatPos;
 	_markerFastResponseStart = createMarker ["mrkFastResponseStart", _flatPos];
@@ -131,7 +132,7 @@ if (isServer) then {
 
 	[_AmmoBox1] call TREND_fnc_initAmmoBox;
 
-	{systemChat "Mission Setup: 4";} remoteExec ["call", 0];
+	"Mission Setup: 4" call TREND_fnc_log;
 	sleep 1;
 	if (TREND_AdvancedSettings select TREND_ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
 		//_AmmoBox1 addAction [localize "STR_TRGM2_startInfMission_VirtualArsenal", {["Open",true] spawn BIS_fnc_arsenal}];
@@ -142,18 +143,18 @@ if (isServer) then {
 		_radio = selectRandom ["uns_radio2_radio","uns_radio2_transitor","uns_radio2_transitor02"] createVehicle _flatPos7;
 	};
 
-	{systemChat "Mission Setup: 3.7";} remoteExec ["call", 0];
+	"Mission Setup: 3.7" call TREND_fnc_log;
 	sleep 1;
 
 	//sl setPos [7772.8,20744.6,0];
 	/*HERE WHY THIS CAUSE MASSIVE SLOWDOWN??????????????????????????????????????? */
 	_flatPosUnits = _flatPosCampFire;
-	{systemChat "Mission Setup: 3.5";} remoteExec ["call", 0];
+	"Mission Setup: 3.5" call TREND_fnc_log;
 	sleep 1;
 
 	_flatPosUnits = [_flatPosCampFire, 8, 17, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
 
-	{systemChat "Mission Setup: 3.3";} remoteExec ["call", 0];
+	"Mission Setup: 3.3" call TREND_fnc_log;
 	sleep 1;
 
 	/* HERE ... why when this is uncommented does it cause slowdown?????
@@ -161,31 +162,31 @@ if (isServer) then {
 
 	//AOCampPos
 	if (!isnil "sl") then {sl setPos _flatPosUnits};
-	{systemChat "Mission Setup: 3.1.7";} remoteExec ["call", 0];
+	"Mission Setup: 3.1.7" call TREND_fnc_log;
 	sleep 1;
 
 	if (!isnil "k1_2") then {k1_2 setPos _flatPosUnits};
-	{systemChat "Mission Setup: 3.1.6";} remoteExec ["call", 0];
+	"Mission Setup: 3.1.6" call TREND_fnc_log;
 	sleep 1;
 
 	if (!isnil "k1_3") then {k1_3  setPos _flatPosUnits};
-	{systemChat "Mission Setup: 3.1.5";} remoteExec ["call", 0];
+	"Mission Setup: 3.1.5" call TREND_fnc_log;
 	sleep 1;
 
 	if (!isnil "k1_4") then {k1_4  setPos _flatPosUnits};
-	{systemChat "Mission Setup: 3.1.4";} remoteExec ["call", 0];
+	"Mission Setup: 3.1.4" call TREND_fnc_log;
 	sleep 1;
 
 	if (!isnil "k1_5") then {k1_5  setPos _flatPosUnits};
-	{systemChat "Mission Setup: 3.1.3";} remoteExec ["call", 0];
+	"Mission Setup: 3.1.3" call TREND_fnc_log;
 	sleep 1;
 
 	if (!isnil "k1_6") then {k1_6  setPos _flatPosUnits};
-	{systemChat "Mission Setup: 3.1.2";} remoteExec ["call", 0];
+	"Mission Setup: 3.1.2" call TREND_fnc_log;
 	sleep 1;
 
 	if (!isnil "k1_7") then {k1_7  setPos _flatPosUnits};
-	{systemChat "Mission Setup: 3.1.1";} remoteExec ["call", 0];
+	"Mission Setup: 3.1.1" call TREND_fnc_log;
 	sleep 1;
 	//*/
 
@@ -193,7 +194,7 @@ if (isServer) then {
 
 	TREND_MissionLoaded =  true; publicVariable "TREND_MissionLoaded";
 
-	{systemChat "Mission Setup: 3";} remoteExec ["call", 0];
+	"Mission Setup: 3" call TREND_fnc_log;
 	[""] remoteExecCall ["Hint", 0];
 };
 

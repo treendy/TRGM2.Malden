@@ -1,4 +1,5 @@
 params  ["_killed","_killer"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 //hint format ["killed: %1 - Killer: %2 - str1: %3 - str2: %4", str(side _killed), str(side _killer),str(_killed),str(_killer)];
 //sleep 3;

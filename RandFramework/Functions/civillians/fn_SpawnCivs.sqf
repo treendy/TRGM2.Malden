@@ -1,6 +1,5 @@
-_sidePos = _this select 0;
-_distFromCent = _this select 1;
-_bIsRebels = _this select 2;
+params ["_sidePos", "_distFromCent", "_bIsRebels"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 _allBuildings = nil;
 _allBuildings = nearestObjects [_sidePos, TREND_BasicBuildings, _distFromCent];

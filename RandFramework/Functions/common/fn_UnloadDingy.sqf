@@ -1,4 +1,5 @@
 params ["_target", "_caller", "_id", "_args"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 _flatPos = nil;
 _flatPos = [getPos _target, 5, 10, 5, 2, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;

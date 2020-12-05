@@ -3,6 +3,7 @@ params[
 	["_useAtLocation",false],
 	["_distanceConsideredInArea",400]
 ];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 _location = (nearestLocations [ _position, [ "NameVillage", "NameCity","NameCityCapital","NameMarine","Hill"],5000,_position]) select 0;
 _locationName =  text (_location);

@@ -1,3 +1,5 @@
+
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 _isCampaign = (TREND_iMissionParamType == 5);
 if (isNil "TREND_CoreCompleted") then { TREND_CoreCompleted =   false; publicVariable "TREND_CoreCompleted"; };
 
@@ -102,7 +104,7 @@ ace_hearing_disableVolumeUpdate = true;
 playMusic "";
 0 fadeMusic 1;
 playMusic TREND_NewMissionMusic;
-{systemChat format["StartMission Music: %1", TREND_NewMissionMusic];} remoteExec ["call", 0];
+format["StartMission Music: %1", TREND_NewMissionMusic] call TREND_fnc_log;
 
 txt1Layer = "txt1" call BIS_fnc_rscLayer;
 txt2Layer = "txt2" call BIS_fnc_rscLayer;
@@ -166,7 +168,7 @@ titleCut ["", "BLACK out", 5];
 sleep 3;
 
 
-{systemChat "FinalCleanup";} remoteExec ["call", 0];
+"FinalCleanup" call TREND_fnc_log;
 call TREND_fnc_FinalSetupCleaner;
 
 sleep 2;
@@ -175,7 +177,7 @@ if (_bMoveToAO) then {
 	//AOCampPos
 	if (!isnil "sl") then {
 		sl setPos TREND_AOCampPos;
-		{systemChat "Moving Players";} remoteExec ["call", 0];
+		"Moving Players" call TREND_fnc_log;
 		sleep 1;
 		{_x setpos TREND_AOCampPos} forEach units group sl;
 	};
@@ -200,6 +202,6 @@ sleep 1;
 
 player doFollow player;
 
-{systemChat "Mission setup finished!";} remoteExec ["call", 0];
+"Mission setup finished!" call TREND_fnc_log;
 
 true;

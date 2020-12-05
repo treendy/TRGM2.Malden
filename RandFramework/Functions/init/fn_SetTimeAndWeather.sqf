@@ -1,5 +1,7 @@
 
 params["_isIntro"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+
 if (isNil "_isIntro") then {_isIntro = false};
 
 

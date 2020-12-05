@@ -1,5 +1,10 @@
 class TREND {
 
+    class logging {
+        file = "RandFramework\Functions\logging";
+        class log {};
+    };
+
     class init {
         file = "RandFramework\Functions\init";
         class attemptEndMission{};

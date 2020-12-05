@@ -1,4 +1,5 @@
-
+"OnPlayerKilled.sqf" call TREND_fnc_log;
+params ["_oldUnit", "_killer", "_respawn", "_respawnDelay"];
 TREND_debugMessages = TREND_debugMessages + "Player Killed";
 TREND_debugMessages = TREND_debugMessages + format["KILLED: %1", name player];
 TREND_debugMessages = TREND_debugMessages + format["KILLED Distance: %1", player distance getMarkerPos "MrkHQ"];
@@ -8,8 +9,6 @@ if (TREND_bDebugMode) then {hint format["KILLED!: %1", player distance getMarker
 if (player distance getMarkerPos "MrkHQ" > TREND_SaveZoneRadius) then {
 	waitUntil {!(TRGM_Logic getVariable "DeathRunning")};
 	TRGM_Logic setVariable ["DeathRunning", true, true];
-
-	_killer = _this select 1;
 
 	_aceSource = player getVariable ["ace_medical_lastDamageSource", objNull];
 	if (!(_aceSource isEqualTo objNull)) then {

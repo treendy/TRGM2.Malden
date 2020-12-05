@@ -13,6 +13,7 @@
 	_this select 3: minimum height in relation to target in meters (optional)
 	_this select 4: position to start looking from, if different from target pos (optional)
 */
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 private["_setHeight","_targetPos","_refObj","_maxrange","_minrange","_minheight","_centerPos","_selectedPositions","_result","_attempts","_scan","_checkPos","_height","_dis","_terrainBlocked"];
 
 //Initialize

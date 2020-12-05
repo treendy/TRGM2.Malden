@@ -1,5 +1,6 @@
 
 _option = _this select 0;
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 
 //all players will have this run, need to make sure only show for commander

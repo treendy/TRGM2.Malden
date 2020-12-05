@@ -2,6 +2,7 @@ params["_thisBeginControl","_SaveType"]; //_SaveType optional, default 0  (1 is 
 if (isNil "_SaveType") then {_SaveType = 0};
 
 disableSerialization;
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 if (TREND_ForceMissionSetup) then {
 	TREND_bAndSoItBegins =  true; publicVariable "TREND_bAndSoItBegins";

@@ -8,7 +8,7 @@
 
 // If you make any improvments to this script try to tell me! I know there are things you can improve since I just started scripting 4 days before I finished this and if you manage to make a better version I wanna use it
 
-
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 if (isDedicated) exitWith {};
 if (player != player) then {waitUntil {player == player};};
 

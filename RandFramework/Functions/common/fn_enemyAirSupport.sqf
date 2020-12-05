@@ -2,7 +2,7 @@
 _SpottedPos = _this select 0;
 _IsAirType = _this select 1; // 1=AirToAir, 2=AirToGround, 3=Scout
 
-
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 if (isServer) then {
 

@@ -6,6 +6,7 @@
 //	- option to request asset or recrute unit
 //	- if 10 rep, then the mission to load will be a main mission, with 2 optional sides for intel only!  (may have to be negative 10??? instead of rewritig the rep stuff)
 
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 
 

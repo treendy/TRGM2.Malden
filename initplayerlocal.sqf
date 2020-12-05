@@ -1,4 +1,4 @@
-
+"Initplayerlocal.sqf" call TREND_fnc_log;
 call TREND_fnc_initGlobalVars;
 
 _actChooseMission = -1;
@@ -18,10 +18,11 @@ if (!TREND_NeededObjectsAvailable) then {
 };
 
 TREND_fnc_MissionSelectLoop = {
+	format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 	sleep 3;
 	if (!TREND_bAndSoItBegins) then {
 		playMusic TREND_IntroMusic;
-		{systemChat format["SelectLoop Music: %1", TREND_IntroMusic ];} remoteExec ["call", 0];
+		format["SelectLoop Music: %1", TREND_IntroMusic ] call TREND_fnc_log;
 	};
 	while {!TREND_bAndSoItBegins} do {
 
@@ -128,6 +129,7 @@ TREND_fnc_MissionSelectLoop = {
 
 
 TREND_fnc_BasicInitAndRespawn = {
+	format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 	// if (isMultiplayer) then
 	// {
@@ -202,6 +204,7 @@ if (_iEnableGroupManagement == 1) then {
 // };
 
 TREND_fnc_InitPostStarted = {
+	format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 	if (side player == civilian) then {
 
@@ -343,6 +346,7 @@ if (leader (group (vehicle player)) == player) then {
 
 
 TREND_fnc_GeneralPlayerLoop = {
+	format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 	while {true} do {
 		if (side player != civilian) then {
 			if (count TREND_ObjectivePossitions > 0 && TREND_AllowUAVLocateHelp) then {
@@ -405,6 +409,7 @@ player addEventHandler ["Respawn", { [] spawn TREND_fnc_GeneralPlayerLoop; }];
 
 
 TREND_fnc_OnlyAllowDirectMapDraw = {
+	format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 	while {isMultiplayer && (TREND_AdvancedSettings select TREND_ADVSET_MAP_DRAW_DIRECT_ONLY_IDX == 1)} do {
 		{
 			//WaitUntil {count allMapMarkers > 0};
@@ -422,6 +427,7 @@ TREND_fnc_OnlyAllowDirectMapDraw = {
 player addEventHandler ["Respawn", { [] spawn TREND_fnc_OnlyAllowDirectMapDraw; }];
 
 TREND_fnc_InSafeZone = {
+	format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 	if (isNil "TREND_PlayersHaveLeftStartingArea") then { TREND_PlayersHaveLeftStartingArea =   false; publicVariable "TREND_PlayersHaveLeftStartingArea"; };
 
 	while {true} do {
@@ -440,6 +446,7 @@ player addEventHandler ["Respawn", { [] spawn TREND_fnc_InSafeZone; }];
 
 
 TREND_fnc_setNVG = {
+	format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 	if (TREND_iAllowNVG == 0) then {
 		player addPrimaryWeaponItem "acc_flashlight";
 		player enableGunLights "forceOn";
@@ -450,21 +457,10 @@ TREND_fnc_setNVG = {
 [] spawn TREND_fnc_setNVG;
 player addEventHandler ["Respawn", { [] spawn TREND_fnc_setNVG; }];
 
-
-
-
-
-
-
-
-
-
-
-
-
 if (TREND_bCirclesOfDeath) then {
 
 	TREND_fnc_checkKilledRange = {
+		format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 		//loop here, sleep 5 (doesnt need to be too fast looping!!)
 		while {true} do {
 			if (getPlayerUID player in TREND_KilledPlayers && (vehicle player == player) && alive(player)) then {
@@ -476,7 +472,7 @@ if (TREND_bCirclesOfDeath) then {
 							if (player distance (_x select 1) < TREND_KilledZoneInnerRadius) then {
 								cutText [localize "STR_TRGM2_TRGMInitPlayerLocal_Transfering","BLACK FADED", 0];
 								sleep 1;
-								player setPos (getMarkerPos "respawn_west");
+								player setPos [(getMarkerPos "respawn_west"), (getMarkerPos "respawn_west_HQ")] select (isNil "respawn_west");
 							};
 						};
 					};
@@ -491,6 +487,7 @@ if (TREND_bCirclesOfDeath) then {
 
 
 	TREND_fnc_drawKilledRanges = {
+		format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 		if (getPlayerUID player in TREND_KilledPlayers) then {
 			{
 				if (getPlayerUID player == TREND_KilledPlayers select _forEachIndex) then {
@@ -520,6 +517,7 @@ if (TREND_bCirclesOfDeath) then {
 
 TOUR_fnc_startingMove = {
 	private ["_unit","_move"];
+	format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 	_unit = [_this,0,objNull,[objNull]] call BIS_fnc_param;
 	_move = [_this,1,"AmovPercMstpSlowWrflDnon",[""]] call BIS_fnc_param;
 	if !(isNull _unit) then
@@ -571,6 +569,7 @@ cutText ["","BLACK IN",3];
 
 
 TREND_fnc_MissionOverAnimation = {
+	format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 	sleep 60;
 	_bEnd = false;
 	while {!_bEnd} do {

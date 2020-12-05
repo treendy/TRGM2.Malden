@@ -1,9 +1,7 @@
-_thisLaptop = _this select 0;
-_caller = _this select 1;
-_params = _this select 3;
+params ["_thisLaptop", "_caller", "_args"];
+_args params ["_iSelected", "_bCreateTask"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
-_iSelected = _params select 0;
-_bCreateTask = _params select 1;
 
 if (side _caller == west) then {
 

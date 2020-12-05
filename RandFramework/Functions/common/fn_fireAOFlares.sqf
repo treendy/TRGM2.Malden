@@ -1,7 +1,7 @@
 //if (isServer) then {
 
 _Pos = _this select 0;
-
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 _flareposX = 0;
 _flareposY = 0;

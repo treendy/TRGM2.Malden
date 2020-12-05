@@ -1,5 +1,6 @@
 
 params ["_posOfAO",["_roadRange",2000],["_showMarker",false],["_forceTrap",false],["_objIED",nil],["_IEDType",nil],["_isFullMap",false]];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 if (isNil "_IEDType") then {
 	_IEDType = selectRandom ["CAR","CAR","RUBBLE"];

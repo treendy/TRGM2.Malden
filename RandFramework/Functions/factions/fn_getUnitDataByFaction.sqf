@@ -1,4 +1,5 @@
 params[["_factionClassName", "any"], ["_factionDispName", "any"]];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 // _unitData = [faction_className, faction_displayName] call TREND_fnc_getUnitDataByFaction;
 // Param format: [faction_className, faction_displayName]
 // Return format: [[unit1_className, unit1_dispName, unit1_icon, unit1_calloutName, unit1_isMedic, unit1_isEngineer, unit1_isExpSpecialist, unit1_isUAVHacker], ... , [unitN_className, unitN_dispName, unitN_icon, unitN_isMedic, unitN_isEngineer, unitN_isExpSpecialist, unitN_isUAVHacker]]

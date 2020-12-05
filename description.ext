@@ -10,9 +10,11 @@ loadScreen = "TRGM2OverviewPic2.jpg";
 overviewText = $STR_TRGM2_Description_overviewText;
 overviewPicture = "TRGM2OverviewPic2.jpg";
 
+enableDebugConsole = 1;
+allowFunctionsLog = 1;
+
 disabledAI=0;
 joinUnassigned = 1;
-enableDebugConsole = 1;
 aiKills = 1;
 //forceRotorLibSimulation = 1;
 
@@ -68,18 +70,3 @@ class CfgRadio
 {
 	#include "RandFramework\Sounds\cfgRadio.hpp"
 };
-
-
-
-//class CfgSounds
-//{
-//	sounds[] = {};
-//
-//	class MKY_Blizzard
-//	{
-//		name = "";
-//		sound[] = {"\RandFramework\MKY\sounds\m0nkey_blizzard.ogg", db+10, 1.0};
-//		titles[] = {0,""};
-//	};
-//
-//};

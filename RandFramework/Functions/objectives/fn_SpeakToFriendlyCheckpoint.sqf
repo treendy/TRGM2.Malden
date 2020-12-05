@@ -1,6 +1,5 @@
-_thisCheckpointUnit = _this select 0;
-_caller = _this select 1;
-_thisArrayParams = _this select 3;
+params ["_thisCheckpointUnit", "_caller", "_thisArrayParams"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 if (side _caller == west) then {
 

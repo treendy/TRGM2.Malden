@@ -1,8 +1,5 @@
-_sidePos = _this select 0;
-_distFromCent = _this select 1;
-_unitCounts = _this select 2;
-_InsurgentSide = _this select 3;
-_bThisMissionCivsOnly = _this select 4;
+params ["_sidePos", "_distFromCent", "_unitCounts", "_InsurgentSide", "_bThisMissionCivsOnly"];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 _unitCount = selectRandom _unitCounts;
 

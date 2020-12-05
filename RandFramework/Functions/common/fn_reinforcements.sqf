@@ -22,7 +22,8 @@ _nul = [SIDE, "string", "string", number, bool, bool, bool, bool, bool] spawn TR
 _nul = [EAST, "spawnMrk", "LZMrk", 2, true, true, true, true, false] spawn TREND_fnc_reinforcements; <<
 
  ---------------------------------------------------------------------------------------------------------*/
- if (isServer) then {
+ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+if (isServer) then {
 	 _spawnMrk = [0,0,0];
 	 _LZMrk = [0,0,0];
 

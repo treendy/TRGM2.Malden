@@ -1,4 +1,5 @@
 params ["_vehicle",["_isPickup", false]];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 _redZonePositions = TREND_ObjectivePossitions-TREND_ClearedPositions-TREND_HiddenPossitions;
 _radius = 900;

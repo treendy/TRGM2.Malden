@@ -1,5 +1,5 @@
 params ["_thisThis", "_thisThisList", "_FirstPos", "_iSideIndex", "_bIsMainObjective"];
-
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 if (isNil "TREND_FlareCounter") then {
 		TREND_FlareCounter = 15;

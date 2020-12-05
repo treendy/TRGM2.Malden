@@ -7,6 +7,7 @@ params [
 	"_allowFriendlyIns",
 	["_ForceCivsOnly", false]
 ];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 if (isNil "TREND_OccupiedHousesPos") then { TREND_OccupiedHousesPos =   []; publicVariable "TREND_OccupiedHousesPos"; };
 
@@ -173,11 +174,11 @@ if (!_bFriendlyInsurgents) then {
 		//Spawn patrol
 		//if main need a couple of these and always have 2 or 3
 
-		systemChat format["InitSniperCreator"];
+		"InitSniperCreator" call TREND_fnc_log;
 		if (selectRandom[true,false] || _moreEnemies) then {
 			[_sidePos] spawn TREND_fnc_createEnemySniper;
 		};
-		systemChat format["EndSniperCreator"];
+		"EndSniperCreator" call TREND_fnc_log;
 		_bHasPatrols = false;
 		if (_bIsMainObjective) then {_bHasPatrols = true};
 
@@ -413,7 +414,7 @@ if (!_bFriendlyInsurgents) then {
 		};
 
 		if (_minimission) then {
-			if selectRandom [true,false,false] then {[_sidePos,100,[1,2,3],_InsurgentSide,_bThisMissionCivsOnly] spawn TREND_fnc_OccupyHouses;};
+			if (selectRandom [true,false,false]) then {[_sidePos,100,[1,2,3],_InsurgentSide,_bThisMissionCivsOnly] spawn TREND_fnc_OccupyHouses;};
 		}
 		else {
 			//if main then 100% occupie houses, and increase number and range
@@ -426,8 +427,8 @@ if (!_bFriendlyInsurgents) then {
 				};
 			}
 			else {
-				if selectRandom [true] then {[_sidePos,100,[1,2],_InsurgentSide,_bThisMissionCivsOnly] spawn TREND_fnc_OccupyHouses;};
-				if selectRandom [true] then {[_sidePos,1000,[1,2,3,4],_InsurgentSide,_bThisMissionCivsOnly] spawn TREND_fnc_OccupyHouses;};
+				if (selectRandom [true]) then {[_sidePos,100,[1,2],_InsurgentSide,_bThisMissionCivsOnly] spawn TREND_fnc_OccupyHouses;};
+				if (selectRandom [true]) then {[_sidePos,1000,[1,2,3,4],_InsurgentSide,_bThisMissionCivsOnly] spawn TREND_fnc_OccupyHouses;};
 			};
 		};
 

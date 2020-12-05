@@ -1,6 +1,8 @@
 _civ=_this select 0;
 _player=_this select 1;
 
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+
 //Add other params here so can pass in rep reward reason (so can use for other events, or for bringing back dead players)
 
 if (alive _civ) then {

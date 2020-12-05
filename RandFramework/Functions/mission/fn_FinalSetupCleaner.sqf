@@ -1,6 +1,7 @@
 //loop through TREND_friendlySentryCheckpointPos
 //check if any of TREND_CheckPointAreas + TREND_SentryAreas are near
 //if so, delete any friendly units
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 {
 	_currentFriendCpPos = _x;
 	_enemyNear = false;
