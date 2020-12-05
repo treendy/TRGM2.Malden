@@ -67,6 +67,12 @@ publicVariable "TREND_DefaultEnemyFactionArray";
 publicVariable "TREND_DefaultMilitiaFactionArrayText";
 publicVariable "TREND_DefaultMilitiaFactionArray";
 
+/////// Patrol settings ///////
+if (isNil "TREND_iAllowLargePat") then { TREND_iAllowLargePat =  1; publicVariable "TREND_iAllowLargePat"; }; //("OUT_par_AllowLargePatrols" call BIS_fnc_getParamValue);
+if (TREND_iAllowLargePat == 0) then {TREND_bAllowLargerPatrols = True; publicVariable "TREND_bAllowLargerPatrols";};
+if (TREND_iAllowLargePat == 1) then {TREND_bAllowLargerPatrols = False; publicVariable "TREND_bAllowLargerPatrols";};
+if (TREND_iAllowLargePat == 2) then {TREND_bAllowLargerPatrols = selectRandom[False,True]; publicVariable "TREND_bAllowLargerPatrols";};
+
 /////// Advanced Settings Set up ///////
 
 //example: TREND_AdvancedSettings select TREND_ADVSET_ENEMY_FACTIONS_IDX
@@ -106,7 +112,8 @@ TREND_AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex(z
 	[6027, localize "STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFlashLights","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],0,""],
 	[6029, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MiniMissions","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvMinimission"],
 	[6031, localize "STR_TRGM2_TRGMSetUnitGlobalVars_IedTargetCompact","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvIedTargetCompact"],
-	[6033, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MoreEnemies","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvMoreEnemies"]
+	[6033, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MoreEnemies","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvMoreEnemies"],
+	[6035, localize "STR_TRGM2_TRGMSetUnitGlobalVars_LargePatrols","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],TREND_iAllowLargePat,""]
 ];
 publicVariable "TREND_AdvControls";
 
@@ -193,12 +200,6 @@ if (isNil "TREND_bCivsOnly") then { TREND_bCivsOnly =  [false,false,false,false,
 /////// Punish settings ///////
 if (isNil "TREND_PunishmentTimer") then { TREND_PunishmentTimer =  1200; publicVariable "TREND_PunishmentTimer"; };
 if (isNil "TREND_PunishmentRadius") then { TREND_PunishmentRadius =  1000; publicVariable "TREND_PunishmentRadius"; }; //if 0 will be no safezone
-
-/////// Patrol settings ///////
-if (isNil "TREND_iAllowLargePat") then { TREND_iAllowLargePat =  1; publicVariable "TREND_iAllowLargePat"; }; //("OUT_par_AllowLargePatrols" call BIS_fnc_getParamValue);
-if (TREND_iAllowLargePat == 1) then {TREND_bAllowLargerPatrols = True; publicVariable "TREND_bAllowLargerPatrols";};
-if (TREND_iAllowLargePat == 2) then {TREND_bAllowLargerPatrols = False; publicVariable "TREND_bAllowLargerPatrols";};
-if (TREND_iAllowLargePat == 3) then {TREND_bAllowLargerPatrols = selectRandom[False,True]; publicVariable "TREND_bAllowLargerPatrols";};
 
 /////// Mini mission and intel settings ///////
 if (isNil "TREND_ChanceOfOccurance") then { TREND_ChanceOfOccurance =  [true,false,false,false,false]; publicVariable "TREND_ChanceOfOccurance"; };  //downed chopper, medical emergancy, downed convoy, etc...

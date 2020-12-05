@@ -3,7 +3,7 @@ params[["_pos", [0,0,0]]];
 
 
 // create the HQ building
-[_safePos, sizeOf "Land_Cargo_HQ_V1_F"] call TREND_fnc_hideTerrainObjects;
+[_pos, sizeOf "Land_Cargo_HQ_V1_F"] call TREND_fnc_hideTerrainObjects;
 HQBuilding = "Land_Cargo_HQ_V1_F" createVehicle _pos;
 HQBuilding setVehicleVarName "HQBuilding";
 HQBuilding allowDamage false;

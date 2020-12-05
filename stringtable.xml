@@ -3813,6 +3813,10 @@
                 <English>If enabled, more enemies will spawn around objectives. \n And they will call for reinforcements more often.</English>
             </Key>
 
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_LargePatrols">
+                <Original>Large patrols</Original>
+                <English>Large patrols</English>
+            </Key>
 
             <Key ID="STR_TRGM2_Tooltip_AdvVirtualArsenal">
                 <Original>Will add an action to the supply create at base or camp to allow access to virtual arsenal</Original>
