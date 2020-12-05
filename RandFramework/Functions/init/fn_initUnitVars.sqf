@@ -293,7 +293,7 @@ TREND_MissionParamObjectivesValues = [0,1,2,3,4,5,6,7,8,9,10,11,12];
 /*ALSO,add the below to startInfMission.sqf
 	if (_iThisTaskType == 16) then {
 		#include "..\RandFramework\CustomMission\Mission16.sqf"; //Search and Destroy
-		[] call fnc_CustomVars;
+		call fnc_CustomVars;
 	};
 */
 TREND_MissionParamObjectives pushBack "Defuse IEDs";

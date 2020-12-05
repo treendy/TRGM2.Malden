@@ -4,6 +4,8 @@ switch (typeName _className) do {
     case ("OBJECT") : {_className = typeOf _className};
 };
 
+if !(isClass (configFile >> "CfgVehicles" >> _className)) exitWith {false};
+
 _isArmed = false;
 
 if (_className isKindOf "CAManBase") then {

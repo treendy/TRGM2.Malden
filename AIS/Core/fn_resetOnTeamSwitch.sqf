@@ -1,12 +1,12 @@
 ﻿/*
  * Author: Psycho
- 
+
  * Handle unit state after a teamswtich was performed.
- 
+
  * Arguments:
 	0: Player New (Object)
 	1: Unit Old (Object)
- 
+
  * Return value:
 	-
 */
@@ -16,7 +16,7 @@ params ["_new_player", "_old_player"];
 
 removeAllActions _old_player;
 _old_player enableAI "TEAMSWITCH";
-if !([] call TRGM_fnc_isCbaLoaded) then {
+if !(call TRGM_fnc_isCbaLoaded) then {
 	_new_player setVariable ["TRGM_addedActions",[]];
 	[[chopper1]] call TRGM_fnc_addTransportActions;
 };

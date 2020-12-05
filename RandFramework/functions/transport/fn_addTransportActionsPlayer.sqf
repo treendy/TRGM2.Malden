@@ -4,7 +4,7 @@ if (!isServer) exitWith {};
 
 /********************* Add Player Actions ****************/
 _useAceInteractionForTransport = false;
-if (_useAceInteractionForTransport && [] call TREND_fnc_isAceLoaded) then {
+if (_useAceInteractionForTransport && call TREND_fnc_isAceLoaded) then {
 	//Ace action
 
 	_generateChildActions = {

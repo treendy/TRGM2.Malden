@@ -15,7 +15,7 @@ if (isNil "TREND_DefaultSandStormOption") then { TREND_DefaultSandStormOption = 
 // if (isNil "TREND_TopLeftPos") then { TREND_TopLeftPos =   [25.4257,8173.69,0]; publicVariable "TREND_TopLeftPos"; };
 // if (isNil "TREND_BotRightPos") then { TREND_BotRightPos =   [8188.86,9.91748,0]; publicVariable "TREND_BotRightPos"; };
 
-[] call TREND_fnc_initUnitVars;
+call TREND_fnc_initUnitVars;
 
 if (isNil "TREND_sFriendlyNVClassName") then { TREND_sFriendlyNVClassName =   "NVGoggles"; publicVariable "TREND_sFriendlyNVClassName"; };
 if (isNil "TREND_sEnemyNVClassName") then { TREND_sEnemyNVClassName =   "NVGoggles_tna_F"; publicVariable "TREND_sEnemyNVClassName"; };  //"NVGoggles_OPFOR"
@@ -95,7 +95,7 @@ if (isNil "TREND_BadPointsReason") then {TREND_BadPointsReason = ""; publicVaria
 if (isNil "TREND_InfTaskStarted") then {TREND_InfTaskStarted = false; publicVariable "TREND_InfTaskStarted";};
 if (isNil "TREND_InfTaskCount") then {TREND_InfTaskCount = 0; publicVariable "TREND_InfTaskCount";};
 if (isNil "TREND_ActiveTasks") then {TREND_ActiveTasks = []; publicVariable "TREND_ActiveTasks";};
-if (isNil "TREND_MaxBadPoints") then {TREND_MaxBadPoints = 11; publicVariable "TREND_MaxBadPoints";};
+if (isNil "TREND_MaxBadPoints") then {TREND_MaxBadPoints = 1; publicVariable "TREND_MaxBadPoints";};
 if (isNil "TREND_ObjectivePossitions") then {TREND_ObjectivePossitions = []; publicVariable "TREND_ObjectivePossitions";};
 if (isNil "TREND_HiddenPossitions") then {TREND_HiddenPossitions = []; publicVariable "TREND_HiddenPossitions";};
 if (isNil "TREND_SpottedActiveFinished") then {TREND_SpottedActiveFinished = true; publicVariable "TREND_SpottedActiveFinished";};

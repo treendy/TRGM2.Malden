@@ -1,5 +1,5 @@
 
-[] call TREND_fnc_initGlobalVars;
+call TREND_fnc_initGlobalVars;
 
 _actChooseMission = -1;
 
@@ -21,7 +21,7 @@ TREND_fnc_MissionSelectLoop = {
 	sleep 3;
 	if (!TREND_bAndSoItBegins) then {
 		playMusic TREND_IntroMusic;
-		{systemChat format["SelectLoop Music: %1", TREND_IntroMusic ];} remoteExec ["bis_fnc_call", 0];
+		{systemChat format["SelectLoop Music: %1", TREND_IntroMusic ];} remoteExec ["call", 0];
 	};
 	while {!TREND_bAndSoItBegins} do {
 
@@ -166,7 +166,7 @@ endMissionBoard removeAction _actChooseMission;
 [player] spawn TREND_fnc_setLoadout;
 
 _isAceRespawnWithGear = false;
-if ([] call TREND_fnc_isCbaLoaded) then {
+if (call TREND_fnc_isCbaLoaded) then {
 	 // check for ACE respawn with gear setting
    _isAceRespawnWithGear = "ace_respawn_savePreDeathGear" call CBA_settings_fnc_get;
 };
@@ -191,21 +191,19 @@ if (_iEnableGroupManagement == 1) then {
 	["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;//Exec on client
 };
 
-if (TREND_bUseRevive) then {
+// if (TREND_bUseRevive) then {
 
-	// TcB AIS Wounding System --------------------------------------------------------------------------
-	//if (!isDedicated) then {
-	//	TCB_AIS_PATH = "ais_injury\";
-	//	{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});		// execute for every playable unit
-	//};
-	// --------------------------------------------------------------------------------------------------------------
-};
-
-
+// 	// TcB AIS Wounding System --------------------------------------------------------------------------
+// 	//if (!isDedicated) then {
+// 	//	TCB_AIS_PATH = "ais_injury\";
+// 	//	{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});		// execute for every playable unit
+// 	//};
+// 	// --------------------------------------------------------------------------------------------------------------
+// };
 
 TREND_fnc_InitPostStarted = {
 
-	/*if (side player == civilian) then {
+	if (side player == civilian) then {
 
 		0 enableChannel false;
 		1 enableChannel false;
@@ -254,7 +252,7 @@ TREND_fnc_InitPostStarted = {
 			};
 		};
 
-	};*/
+	};
 
 	if (TREND_iMissionSetup == 5 && isMultiplayer && str player == "sl") then {
 			if (TREND_SaveType == 0) then {
@@ -271,7 +269,7 @@ TREND_fnc_InitPostStarted = {
 			};
 	};
 	if (TREND_iAllowNVG == 2) then {
-		[] call TREND_fnc_NVscript;
+		call TREND_fnc_NVscript;
 	};
 
 	endMissionBoard addaction [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format[localize "STR_TRGM2_TRGMInitPlayerLocal_FullReputationReport",_iPointsToAdd,TREND_BadPoints, TREND_MaxBadPoints, TREND_MaxBadPoints - TREND_BadPoints, TREND_BadPointsReason]}];
@@ -290,9 +288,6 @@ if (TREND_AdvancedSettings select TREND_ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
 	box1 addAction [localize "STR_TRGM2_startInfMission_VirtualArsenal", {["Open",true] spawn BIS_fnc_arsenal}];
 };
 
-
-
-
 TREND_bCirclesOfDeath = false;
 TREND_iCirclesOfDeath = 0; //("TREND_par_CirclesOfDeath" call BIS_fnc_getParamValue);
 if (TREND_iCirclesOfDeath == 1) then {
@@ -304,7 +299,7 @@ if (TREND_iMissionSetup == 12 || TREND_iMissionSetup == 20) then {
 	//training
 	[player, 100] call BIS_fnc_respawnTickets;
 
-	if ([] call TREND_fnc_isAceLoaded) then {
+	if (call TREND_fnc_isAceLoaded) then {
 		myaction = ['TraceBulletAction',localize 'STR_TRGM2_TRGMInitPlayerLocal_TraceBullets','',{},{true}] call ace_interact_menu_fnc_createAction;
 		[player, 1, ["ACE_SelfActions"], myaction] call ace_interact_menu_fnc_addActionToObject;
 
@@ -349,7 +344,6 @@ if (leader (group (vehicle player)) == player) then {
 
 TREND_fnc_GeneralPlayerLoop = {
 	while {true} do {
-
 		if (side player != civilian) then {
 			if (count TREND_ObjectivePossitions > 0 && TREND_AllowUAVLocateHelp) then {
 				if ((Player distance (TREND_ObjectivePossitions select 0)) < 25) then {
@@ -367,10 +361,6 @@ TREND_fnc_GeneralPlayerLoop = {
 				//	};
 				//};
 			};
-
-
-
-
 			if (leader (group (vehicle player)) == player && TREND_AdvancedSettings select TREND_ADVSET_SUPPORT_OPTION_IDX == 1) then {
 				if (TREND_iMissionSetup == 5) then {
 					if (isNil "TREND_CampaignInitiated") then { TREND_CampaignInitiated =   false; publicVariable "TREND_CampaignInitiated"; };
@@ -425,6 +415,7 @@ TREND_fnc_OnlyAllowDirectMapDraw = {
 				};
 			};
 		} forEach allMapMarkers;
+		sleep 1;
 	};
 };
 [] spawn TREND_fnc_OnlyAllowDirectMapDraw;
@@ -450,10 +441,10 @@ player addEventHandler ["Respawn", { [] spawn TREND_fnc_InSafeZone; }];
 
 TREND_fnc_setNVG = {
 	if (TREND_iAllowNVG == 0) then {
-			 player addPrimaryWeaponItem "acc_flashlight";
-			 player enableGunLights "forceOn";
-			 player unassignItem TREND_sFriendlyNVClassName;
-			 player removeItem TREND_sFriendlyNVClassName;
+		player addPrimaryWeaponItem "acc_flashlight";
+		player enableGunLights "forceOn";
+		player unassignItem TREND_sFriendlyNVClassName;
+		player removeItem TREND_sFriendlyNVClassName;
 	};
 };
 [] spawn TREND_fnc_setNVG;

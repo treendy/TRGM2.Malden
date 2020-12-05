@@ -8,7 +8,7 @@ _dCurrentRep = [TREND_MaxBadPoints - TREND_BadPoints,1] call BIS_fnc_cutDecimals
 {
 	// Current missionboard is saved in variable _x
 	//These two lines do the same... just here for my reference
-	//{removeAllActions endMissionBoard;} remoteExec ["bis_fnc_call", 0];
+	//{removeAllActions endMissionBoard;} remoteExec ["call", 0];
 	_x remoteExec ["removeAllActions"];
 	[_x, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep",{[] spawn TREND_fnc_ShowRepReport;}]] remoteExec ["addAction", 0];
 } forEach [endMissionBoard, endMissionBoard2];

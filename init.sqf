@@ -1,5 +1,5 @@
 
-[] call TREND_fnc_initGlobalVars;
+call TREND_fnc_initGlobalVars;
 
 waitUntil { TREND_playerIsChoosingHQpos || TREND_NeededObjectsAvailable; };
 
@@ -8,7 +8,7 @@ if (isServer && !TREND_NeededObjectsAvailable) then {
 	_handle = [TREND_foundHQPos] spawn TREND_fnc_createNeededObjects;
    waitUntil {sleep 1; scriptDone _handle};
 
-   { [[_x], {(_this select 0) allowDamage false}] remoteExec ["call"]; } forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
+   { [[_x], {(_this select 0) allowDamage false}] remoteExec ["call", _x]; } forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 
    waitUntil { sleep 10; TREND_NeededObjectsAvailable; };
 
@@ -19,31 +19,30 @@ if (isServer && !TREND_NeededObjectsAvailable) then {
             (_this select 0) setpos (_this select 1);
             (_this select 0) setdamage 0;
             (_this select 0) allowDamage true;
-         }] remoteExec ["call"];
+         }] remoteExec ["call", _x];
       } else {
             [[_x], {
                (_this select 0) setpos [(TREND_foundHQPos select 0) - 10, (TREND_foundHQPos select 1)];
                (_this select 0) setdamage 0;
                (_this select 0) allowDamage true;
                titleCut ["", "BLACK IN", 5];
-            }] remoteExec ["call"];
+            }] remoteExec ["call", _x];
       };
    } forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 };
 
 if (isServer) then {
-	TREND_FirstSpottedHasHappend =  false; publicVariable "TREND_FirstSpottedHasHappend";
+	TREND_FirstSpottedHasHappend = false; publicVariable "TREND_FirstSpottedHasHappend";
 };
 
 tf_give_personal_radio_to_regular_soldier = true; publicVariable "tf_give_personal_radio_to_regular_soldier";
 tf_no_auto_long_range_radio = true; publicVariable "tf_no_auto_long_range_radio";
 
 
-_handle = [] call FHQ_fnc_ttiInit;
+_handle = call FHQ_fnc_ttiInit;
 waitUntil { _handle; };
-_handle = [] call FHQ_fnc_ttiPostInit;
+_handle = call FHQ_fnc_ttiPostInit;
 waitUntil { _handle; };
-
 
 [
    west,

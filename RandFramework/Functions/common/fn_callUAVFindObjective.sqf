@@ -15,7 +15,7 @@
 		if (!(["InfSide0"] call FHQ_fnc_ttAreTasksCompleted)) then {
 			sName = format["InfSide%1",0]; //zero because we only ever have the UAV option on the main objective
 			[sName, "failed"] remoteExec ["FHQ_fnc_ttSetTaskState", 0];
-			{hint (localize "STR_TRGM2_UAV_HTV_DEAD");} remoteExec ["bis_fnc_call", 0];
+			{hint (localize "STR_TRGM2_UAV_HTV_DEAD");} remoteExec ["call", 0];
 		};
 		[HQMan,(localize "STR_TRGM2_UAV_Fail")] remoteExecCall ["sideChat",0,false];
 
@@ -33,6 +33,6 @@
 	};
 
 
-} remoteExec ["bis_fnc_call", 2];
+} remoteExec ["call", 2];
 
 true;

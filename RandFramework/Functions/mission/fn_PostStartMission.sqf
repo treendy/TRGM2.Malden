@@ -15,7 +15,7 @@ if (TREND_iStartLocation == 1) then {
 	_bMoveToAO = true;
 };
 if (_bMoveToAO) then {
-	[] call TREND_fnc_AoCampCreator;
+	call TREND_fnc_AoCampCreator;
 }
 else {
 	/*TREND_fnc_PopulateLoadingWait = {
@@ -102,7 +102,7 @@ ace_hearing_disableVolumeUpdate = true;
 playMusic "";
 0 fadeMusic 1;
 playMusic TREND_NewMissionMusic;
-{systemChat format["StartMission Music: %1", TREND_NewMissionMusic];} remoteExec ["bis_fnc_call", 0];
+{systemChat format["StartMission Music: %1", TREND_NewMissionMusic];} remoteExec ["call", 0];
 
 txt1Layer = "txt1" call BIS_fnc_rscLayer;
 txt2Layer = "txt2" call BIS_fnc_rscLayer;
@@ -166,7 +166,7 @@ titleCut ["", "BLACK out", 5];
 sleep 3;
 
 
-{systemChat "FinalCleanup";} remoteExec ["bis_fnc_call", 0];
+{systemChat "FinalCleanup";} remoteExec ["call", 0];
 call TREND_fnc_FinalSetupCleaner;
 
 sleep 2;
@@ -175,7 +175,7 @@ if (_bMoveToAO) then {
 	//AOCampPos
 	if (!isnil "sl") then {
 		sl setPos TREND_AOCampPos;
-		{systemChat "Moving Players";} remoteExec ["bis_fnc_call", 0];
+		{systemChat "Moving Players";} remoteExec ["call", 0];
 		sleep 1;
 		{_x setpos TREND_AOCampPos} forEach units group sl;
 	};
@@ -200,6 +200,6 @@ sleep 1;
 
 player doFollow player;
 
-{systemChat "Mission setup finished!";} remoteExec ["bis_fnc_call", 0];
+{systemChat "Mission setup finished!";} remoteExec ["call", 0];
 
 true;

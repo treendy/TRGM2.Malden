@@ -6,9 +6,9 @@ _params params ["_unitClass","_unitRole"];
 
 //TREND_CampaignRecruitUnitRifleman createUnit [getPos player, group player];
 
-//YEAH_fnc_whatever = [] call TREND_fnc_CountSpentPoints;
-//_currentSpentPoints = [] call YEAH_fnc_whatever;
-_currentSpentPoints = [] call TREND_fnc_CountSpentPoints;
+//YEAH_fnc_whatever = call TREND_fnc_CountSpentPoints;
+//_currentSpentPoints = call YEAH_fnc_whatever;
+_currentSpentPoints = call TREND_fnc_CountSpentPoints;
 
 //plus 1 is an initial allowance
 if (_currentSpentPoints < (TREND_MaxBadPoints - TREND_BadPoints + 1)) then {

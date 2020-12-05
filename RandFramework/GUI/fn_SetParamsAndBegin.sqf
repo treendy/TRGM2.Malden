@@ -89,7 +89,7 @@ else {
 			TREND_SavedData = profileNamespace getVariable [TREND_sInitialSLPlayerID + ":" + TREND_SaveTypeString,[]]; //Get this from server only, but use player ID!!!
 			publicVariable "TREND_SavedData";
 			//_ctrl ctrlSetText "SavedData: " + SavedData;
-		} remoteExec ["bis_fnc_call", 2]; //Save this to server only
+		} remoteExec ["call", 2]; //Save this to server only
 		sleep 0.1;
 
 		if (count TREND_SavedData == 0) then {

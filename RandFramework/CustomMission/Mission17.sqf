@@ -133,11 +133,11 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			sleep 10;
 		};
 
-		{hint (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]);} remoteExec ["bis_fnc_call", 0];
+		{hint (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]);} remoteExec ["call", 0];
 		if (!TREND_bDebugMode) then {
 			sleep 300; //wait 5 mins before supply drop in area
 		};
-		{hint (localize "STR_TRGM2_SupplyChopperInbound");} remoteExec ["bis_fnc_call", 0];
+		{hint (localize "STR_TRGM2_SupplyChopperInbound");} remoteExec ["call", 0];
 
 		TREND_dropCrate = false; publicVariable "TREND_dropCrate";
 
@@ -207,7 +207,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 		waitUntil { !TREND_dropCrate; };
 
-		{hint (localize "STR_TRGM2_SupplyChopperInbound");} remoteExec ["bis_fnc_call", 0];
+		{hint (localize "STR_TRGM2_SupplyChopperInbound");} remoteExec ["call", 0];
 
 		_heloGroup = createGroup west;
 		_spawnPos = _flag getRelPos [3000, random 360];

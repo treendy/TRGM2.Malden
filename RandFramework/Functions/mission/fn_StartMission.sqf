@@ -152,18 +152,17 @@ if (_bAllowStart) then {
 
 		if (isServer) then {
 			TREND_MissionLoaded =  false; publicVariable "TREND_MissionLoaded";
-			[false] remoteExecCall ["TREND_fnc_SetTimeAndWeather", 0, true];
+			[false] call TREND_fnc_SetTimeAndWeather;
 			call TREND_fnc_startInfMission;
 		};
 
 	}
 	else {
-
-		{hint (localize "STR_TRGM2_StartMission_Hint");} remoteExec ["bis_fnc_call", 0];
+		{hint (localize "STR_TRGM2_StartMission_Hint");} remoteExec ["call", 0];
 	};
 
 	if (TREND_iMissionParamType == 5) then {
-		[] call TREND_fnc_PostStartMission;
+		call TREND_fnc_PostStartMission;
 	};
 
 };

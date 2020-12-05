@@ -91,7 +91,7 @@ If you really want to, you can make a donation via my site www.trgm2.com (paypa
 //hintSilent parseText "<t size='1.25' font='Zeppelin33' color='#ff0000'>test lives remaining.</t><a href='http://arma3.com'>A3</a>";
 
 if (isServer) then {
-	[true] remoteExecCall ["TREND_fnc_SetTimeAndWeather", 0, true];
+	[true] call TREND_fnc_SetTimeAndWeather;
 };
 
 waitUntil {time > 0};
@@ -125,7 +125,7 @@ if (!isDedicated) then {
 	waitUntil {!isNull player};
 
 	TransferProviders = {
-		if !([] call TREND_fnc_isCbaLoaded) then {
+		if !(call TREND_fnc_isCbaLoaded) then {
 			[[chopper1]] call TREND_fnc_addTransportActions;
 		};
 
@@ -244,22 +244,17 @@ if (!isDedicated && _isAdmin) then {
 	TREND_bAndSoItBegins = true; publicVariable "TREND_bAndSoItBegins";
 };
 
-
-
-
 waitUntil {TREND_bAndSoItBegins};
 
 private _coreCountSleep = 0.1;
-systemChat format["Mission Core: %1", "Init"];
+{systemChat format["Mission Core: %1", "Init"];} remoteExec ["call", 0];
 sleep _coreCountSleep;
-
-
 
 if (isServer && TREND_AdvancedSettings select TREND_ADVSET_GROUP_MANAGE_IDX == 1) then {
 	["Initialize"] call BIS_fnc_dynamicGroups;//Exec on Server
 };
 
-systemChat format["Mission Core: %1", "GroupManagementSet"];
+{systemChat format["Mission Core: %1", "GroupManagementSet"];} remoteExec ["call", 0];
 sleep _coreCountSleep;
 
 if (!isDedicated) then {
@@ -267,30 +262,29 @@ if (!isDedicated) then {
 	_camera cameraEffect ["Terminate","back"];
 };
 
-systemChat format["Mission Core: %1", "CameraTerminated"];
+{systemChat format["Mission Core: %1", "CameraTerminated"];} remoteExec ["call", 0];
 sleep _coreCountSleep;
 
+call TREND_fnc_initUnitVars;
 
-[] call TREND_fnc_initUnitVars;
-
-systemChat format["Mission Core: %1", "GlobalVarsSet"];
+{systemChat format["Mission Core: %1", "GlobalVarsSet"];} remoteExec ["call", 0];
 sleep _coreCountSleep;
 
 if (isServer) then {
-	[] call TREND_fnc_buildEnemyFaction;
-	{systemChat format["Mission Core: %1", "EnemyGlobalVarsSet"];} remoteExec ["bis_fnc_call", 0];
+	call TREND_fnc_buildEnemyFaction;
+	{systemChat format["Mission Core: %1", "EnemyGlobalVarsSet"];} remoteExec ["call", 0];
 	sleep _coreCountSleep;
 
-	[] call TREND_fnc_buildFriendlyFaction;
-	{systemChat format["Mission Core: %1", "FriendlyGlobalVarsSet"];} remoteExec ["bis_fnc_call", 0];
+	call TREND_fnc_buildFriendlyFaction;
+	{systemChat format["Mission Core: %1", "FriendlyGlobalVarsSet"];} remoteExec ["call", 0];
 	sleep _coreCountSleep;
 
 	// #include "..\CustomMission\TRGMSetEnemyFaction.sqf"; //if _useCustomEnemyFaction set to true within this sqf, will overright the above enemy faction data
-	{systemChat format["Mission Core: %1", "EnemyFactionSet"];} remoteExec ["bis_fnc_call", 0];
+	{systemChat format["Mission Core: %1", "EnemyFactionSet"];} remoteExec ["call", 0];
 	sleep _coreCountSleep;
 
 	// #include "..\CustomMission\TRGMSetFriendlyLoadouts.sqf"; //as above, but for _useCustomFriendlyLoadouts
-	{systemChat format["Mission Core: %1", "FriendlyLoadoutSet"];} remoteExec ["bis_fnc_call", 0];
+	{systemChat format["Mission Core: %1", "FriendlyLoadoutSet"];} remoteExec ["call", 0];
 	sleep _coreCountSleep;
 
 	/*Fix any changed types	 */
@@ -298,7 +292,7 @@ if (isServer) then {
 	/*end */
 
 	private _airTransClassName = selectRandom (SupplySupportChopperOptions select {getNumber(configFile >> "CfgVehicles" >> _x >> "transportSoldier") >= 10});
-	if (_airTransClassName != typeOf chopper1) then {
+	if (!isNil "chopper1" && {_airTransClassName != typeOf chopper1}) then {
 		{deleteVehicle _x;} forEach crew (vehicle chopper1) + [vehicle chopper1];
 		private _chopper1Arr = [getPos heliPad1, 0, _airTransClassName, WEST] call BIS_fnc_spawnVehicle;
 		chopper1 = _chopper1Arr select 0;
@@ -325,7 +319,7 @@ if (isServer) then {
 	};
 
 	private _airSupClassName = selectRandom FriendlyChopper;
-	if (_airSupClassName != typeOf chopper2) then {
+	if (!isNil "chopper2" && {_airSupClassName != typeOf chopper2}) then {
 		{deleteVehicle _x;} forEach crew (vehicle chopper2) + [vehicle chopper2];
 		private _chopper2Arr = [getPos airSupportHeliPad, 0, _airSupClassName, WEST] call BIS_fnc_spawnVehicle;
 		chopper2 = _chopper2Arr select 0;
@@ -345,13 +339,12 @@ if (isServer) then {
 		chopper2 allowDamage true;
 	};
 
-	TREND_counter = 0;
 	{
-		if (_x isKindOf "LandVehicle" || _x isKindOf "Air" || _x isKindOf "Ship") then {
+		if (isClass(configFile >> "CfgVehicles" >> typeOf _x) && {_x isKindOf "LandVehicle" || _x isKindOf "Air" || _x isKindOf "Ship"}) then {
 			private _faction = getText(configFile >> "CfgVehicles" >> typeOf _x >> "faction");
 			private _friendlyFactionIndex = TREND_AdvancedSettings select TREND_ADVSET_FRIENDLY_FACTIONS_IDX;
-			(TREND_WestFactionData select _friendlyFactionIndex) params ["_westClassName", "_westDisplayName"];
-			if ((count crew _x) == 0 && getNumber(configFile >> "CfgFactionClasses" >> _faction >> "side") == 1 && _faction != _westClassName) then {
+			_westClassName = (TREND_WestFactionData select _friendlyFactionIndex) select 0;
+			if ((crew _x) isEqualTo [] && getNumber(configFile >> "CfgFactionClasses" >> _faction >> "side") == 1 && _faction != _westClassName) then {
 				private _newVehClass = [_x, WEST] call TREND_fnc_getFactionVehicle;
 				private _pos = getPosATL _x;
 				private _dir = getDir _x;
@@ -362,16 +355,13 @@ if (isServer) then {
 				_newVeh allowDamage false;
 				_newVeh setPos (_pos vectorAdd [0,0,0.1]);
 				_newVeh allowDamage true;
-				TREND_counter = TREND_counter + 1;
 			};
 		};
 	} forEach vehicles;
 
-	// [TREND_counter, "Vehicle spawn corrections"] spawn TREND_fnc_AdjustMaxBadPoints;
-
 	TREND_CustomObjectsSet = true; publicVariable "TREND_CustomObjectsSet";
 	// call compile preprocessFileLineNumbers "RandFramework\setFriendlyObjects.sqf";
-	{systemChat format["Mission Core: %1", "FriendlyObjectsSet"];} remoteExec ["bis_fnc_call", 0];
+	{systemChat format["Mission Core: %1", "FriendlyObjectsSet"];} remoteExec ["call", 0];
 	sleep _coreCountSleep;
 
 /*
@@ -422,68 +412,60 @@ if (isServer) then {
 		};
 	};
 */
-	{systemChat format["Mission Core: %1", "EnemyFactionDataProcessed"];} remoteExec ["bis_fnc_call", 0];
+	{systemChat format["Mission Core: %1", "EnemyFactionDataProcessed"];} remoteExec ["call", 0];
 	sleep _coreCountSleep;
 
     _isAceRespawnWithGear = false;
- 	if ([] call TREND_fnc_isCbaLoaded) then {
+ 	if (call TREND_fnc_isCbaLoaded) then {
 	   // check for ACE respawn with gear setting
   	   _isAceRespawnWithGear = "ace_respawn_savePreDeathGear" call CBA_settings_fnc_get;
 	};
 
-	{systemChat format["Mission Core: %1", "savePreDeathGear"];} remoteExec ["bis_fnc_call", 0];
+	{systemChat format["Mission Core: %1", "savePreDeathGear"];} remoteExec ["call", 0];
 	sleep _coreCountSleep;
 	if (/*TREND_LoadoutData != "" || TREND_LoadoutDataDefault != ""*/true) then {
 		{
-			//_x setVariable ["UnitRole",_unitRole];
-			_handle = [_x] call TREND_fnc_setLoadout;
-			waitUntil {_handle};
-			if (!isNil("_isAceRespawnWithGear")) then {
-				if (!_isAceRespawnWithGear) then {
-			   		_x addEventHandler ["Respawn", { [_this select 0] call TREND_fnc_setLoadout; }];
-		        };
+			if (!isPlayer _x) then {
+				//_x setVariable ["UnitRole",_unitRole];
+				_handle = [_x] call TREND_fnc_setLoadout;
+				waitUntil {_handle};
+				if (!isNil("_isAceRespawnWithGear")) then {
+					if (!_isAceRespawnWithGear) then {
+						_x addEventHandler ["Respawn", { [_this select 0] call TREND_fnc_setLoadout; }];
+					};
+				};
 			};
 		} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
-		sleep 1;
 	};
-	{systemChat format["Mission Core: %1", "setLoadout ran"];} remoteExec ["bis_fnc_call", 0];
+	{systemChat format["Mission Core: %1", "setLoadout ran"];} remoteExec ["call", 0];
 	sleep _coreCountSleep;
-
-	if ([] call TREND_fnc_isAceLoaded) then {
-		[box1,TREND_InitialBoxItemsWithAce] call bis_fnc_initAmmoBox;
-	}
-	else {
-		[box1,TREND_InitialBoxItems] call bis_fnc_initAmmoBox;
-	};
 
 	box1 allowDamage false;
 	[box1] call TREND_fnc_initAmmoBox;
 
-	{systemChat format["Mission Core: %1", "boxCargo set"];} remoteExec ["bis_fnc_call", 0];
+	{systemChat format["Mission Core: %1", "boxCargo set"];} remoteExec ["call", 0];
 	sleep _coreCountSleep;
-
-
 };
 
-systemChat format["Mission Core: %1", "PreCustomObjectSet"];
+{systemChat format["Mission Core: %1", "PreCustomObjectSet"];} remoteExec ["call", 0];
 sleep _coreCountSleep;
 
 waitUntil {TREND_CustomObjectsSet};
 
-systemChat format["Mission Core: %1", "PostCustomObjectSet"];
+{systemChat format["Mission Core: %1", "PostCustomObjectSet"];} remoteExec ["call", 0];
 sleep _coreCountSleep;
 
 if (!isNil "chopper1") then {
 	[[chopper1]] call TREND_fnc_addTransportActions;
 };
 
-systemChat format["Mission Core: %1", "TransportScriptRun"];
+{systemChat format["Mission Core: %1", "TransportScriptRun"];} remoteExec ["call", 0];
 sleep _coreCountSleep;
 
-if (TREND_iUseRevive > 0 && isNil "AIS_MOD_ENABLED") then {
-	[] call AIS_Core_fnc_preInit;
-	[] call AIS_Core_fnc_postInit;
-	[] call AIS_System_fnc_postInit;
+if (TREND_iUseRevive > 0 && {isNil "AIS_MOD_ENABLED"}) then {
+	call AIS_Core_fnc_preInit;
+	call AIS_Core_fnc_postInit;
+	call AIS_System_fnc_postInit;
 };
 
 
@@ -500,14 +482,14 @@ if (!isMultiplayer) then {
 	} forEach allUnits;
 };
 
-systemChat format["Mission Core: %1", "DeleteMpOnlyVehicles"];
+{systemChat format["Mission Core: %1", "DeleteMpOnlyVehicles"];} remoteExec ["call", 0];
 sleep _coreCountSleep;
 
 
 player doFollow player;
 
 
-systemChat format["Mission Core: %1", "DoFollowRun"];
+{systemChat format["Mission Core: %1", "DoFollowRun"];} remoteExec ["call", 0];
 sleep _coreCountSleep;
 
 if (TREND_iMissionParamType == 5) then {
@@ -619,19 +601,17 @@ TREND_fnc_CheckBadPoints = {
 };
 [] spawn TREND_fnc_CheckBadPoints;
 player addEventHandler ["Respawn", { [] spawn TREND_fnc_CheckBadPoints; }];
-systemChat format["Mission Core: %1", "BadPointsSet"];
+{systemChat format["Mission Core: %1", "BadPointsSet"];} remoteExec ["call", 0];
 sleep _coreCountSleep;
-
-
 
 if (isServer) then {
 	{
 		_x setVariable ["DontDelete",true];
 	} forEach nearestObjects [getMarkerPos "mrkHQ", ["all"], 2000];
-	{systemChat format["Mission Core: %1", "DontDeleteSet"];} remoteExec ["bis_fnc_call", 0];
+	{systemChat format["Mission Core: %1", "DontDeleteSet"];} remoteExec ["call", 0];
 	sleep _coreCountSleep;
 
-	if (isMultiplayer && !(TREND_iMissionParamType == 5)) then {
+	if (isMultiplayer && {!(TREND_iMissionParamType == 5)}) then {
 		TREND_fnc_CheckAnyPlayersAlive = {
 			sleep 3;
 			_bEnded = false;
@@ -661,23 +641,20 @@ if (isServer) then {
 		[] spawn TREND_fnc_CheckAnyPlayersAlive;
  	};
 
-	 {systemChat format["Mission Core: %1", "NonAliveEndCheckRunning"];} remoteExec ["bis_fnc_call", 0];
+	{systemChat format["Mission Core: %1", "NonAliveEndCheckRunning"];} remoteExec ["call", 0];
 	sleep _coreCountSleep;
-
-
 
 	if (TREND_iAllowNVG == 0) then {
 		{
-			 _x addPrimaryWeaponItem "acc_flashlight";
-			 _x enableGunLights "forceOn";
-			 _x unassignItem TREND_sFriendlyNVClassName;
-			 _x removeItem TREND_sFriendlyNVClassName;
-    		_x unassignItem TREND_sEnemyNVClassName;
+			_x addPrimaryWeaponItem "acc_flashlight";
+			_x enableGunLights "forceOn";
+			_x unassignItem TREND_sFriendlyNVClassName;
+			_x removeItem TREND_sFriendlyNVClassName;
+			_x unassignItem TREND_sEnemyNVClassName;
 			_x removeItem TREND_sEnemyNVClassName;
-
 		} forEach allUnits;
 	};
-	{systemChat format["Mission Core: %1", "NVGStateSet"];} remoteExec ["bis_fnc_call", 0];
+	{systemChat format["Mission Core: %1", "NVGStateSet"];} remoteExec ["call", 0];
 	sleep _coreCountSleep;
 
 	TREND_fnc_PlayBaseRadioEffect = {
@@ -687,13 +664,13 @@ if (isServer) then {
 		};
 	};
 	[] spawn TREND_fnc_PlayBaseRadioEffect;
-	{systemChat format["Mission Core: %1", "PlayBaseRadioEffect"];} remoteExec ["bis_fnc_call", 0];
+	{systemChat format["Mission Core: %1", "PlayBaseRadioEffect"];} remoteExec ["call", 0];
 	sleep _coreCountSleep;
 
 	TREND_fnc_MonsoonEffect = {
 		_iWeatherOption = selectRandom TREND_WeatherOptions;
 		if (_iWeatherOption == 11) then {
-			{systemChat format["Mission Core: %1", "MonsoonEffect"];} remoteExec ["bis_fnc_call", 0];
+			{systemChat format["Mission Core: %1", "MonsoonEffect"];} remoteExec ["call", 0];
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
@@ -727,14 +704,14 @@ if (isServer) then {
 		_iSandStormOption = [2, (TREND_AdvancedSettings select TREND_ADVSET_SANDSTORM_IDX)] select ((selectRandom TREND_WeatherOptions) != 11);
 
 		if (_iSandStormOption == 0 && selectRandom[true,false,false,false,false]) then { //Random
-			{systemChat format["Mission Core: %1", "SandStormEffect"];} remoteExec ["bis_fnc_call", 0];
+			{systemChat format["Mission Core: %1", "SandStormEffect"];} remoteExec ["call", 0];
 			StartWhen = selectRandom [990,1290,1710];
 			sleep StartWhen;
 			//work out how to deal with JIP if sandstorm already playing
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
 			SandStormTimer = selectRandom [150,390,630];
 			publicVariable SandStormTimer;
-			{nul = [SandStormTimer,false] execVM "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			[[SandStormTimer,false], "RandFramework\RikoSandStorm\ROSSandstorm.sqf"] remoteExec ["execVM", 0];
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
@@ -756,17 +733,17 @@ if (isServer) then {
 					_x setskill ["spotTime",0.5];
 				};
 			} forEach allUnits;
-			{systemChat format["Mission Core: %1", "SandStormEffect"];} remoteExec ["bis_fnc_call", 0];
+			{systemChat format["Mission Core: %1", "SandStormEffect"];} remoteExec ["call", 0];
 		};
 		if (_iSandStormOption == 1) then { //Always
-			{systemChat format["Mission Core: %1", "SandStormEffect"];} remoteExec ["bis_fnc_call", 0];
+			{systemChat format["Mission Core: %1", "SandStormEffect"];} remoteExec ["call", 0];
 			StartWhen = selectRandom [990,1290,1710];
 			sleep StartWhen;
 			//work out how to deal with JIP if sandstorm already playing
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
 			SandStormTimer = selectRandom [150,390,630];
 			publicVariable "SandStormTimer";
-			{nul = [SandStormTimer,false] execVM "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			[[SandStormTimer,false], "RandFramework\RikoSandStorm\ROSSandstorm.sqf"] remoteExec ["execVM", 0];
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
@@ -790,11 +767,11 @@ if (isServer) then {
 			} forEach allUnits;
 		};
 		if (_iSandStormOption == 3) then { //5 hours non stop
-			{systemChat format["Mission Core: %1", "SandStormEffect"];} remoteExec ["bis_fnc_call", 0];
+			{systemChat format["Mission Core: %1", "SandStormEffect"];} remoteExec ["call", 0];
 			//ok, if something is true, then in here we will start the sand storm and all clients!
 			//work out how to deal with JIP if sandstorm already playing
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
-			{nul = [18030,false] execVM "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			[[18030,false], "RandFramework\RikoSandStorm\ROSSandstorm.sqf"] remoteExec ["execVM", 0];
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
@@ -823,35 +800,26 @@ if (isServer) then {
 	[] spawn TREND_fnc_SandStormEffect;
 };
 
-[] remoteExec ["TREND_fnc_animateAnimals",0,true];
+[] spawn TREND_fnc_animateAnimals;
 
-systemChat format["Mission Core: %1", "AnimalStateSet"];
+{systemChat format["Mission Core: %1", "AnimalStateSet"];} remoteExec ["call", 0];
 sleep _coreCountSleep;
 
- if (!isDedicated && (player != player)) then {
-	waitUntil {player == player};
-	waitUntil {time > 10};
-	[] remoteExec ["TREND_fnc_animateAnimals",0,true];
-	//hint "PING";
- };
-
-
-
-systemChat format["Mission Core: %1", "CoreFinished"];
+{systemChat format["Mission Core: %1", "CoreFinished"];} remoteExec ["call", 0];
 sleep _coreCountSleep;
 
 
 TREND_CoreCompleted = true; publicVariable "TREND_CoreCompleted";
 
 if (TREND_iMissionParamType != 5) then {
-	[] call TREND_fnc_PostStartMission;
+	call TREND_fnc_PostStartMission;
 };
 
 
-systemChat format["Mission Core: %1", "RunFlashLightState"];
+{systemChat format["Mission Core: %1", "RunFlashLightState"];} remoteExec ["call", 0];
 sleep _coreCountSleep;
 
- _iEnemyFlashLightOption = TREND_AdvancedSettings select TREND_ADVSET_SELECT_ENEMY_FLASHLIGHTS_IDX;
+_iEnemyFlashLightOption = TREND_AdvancedSettings select TREND_ADVSET_SELECT_ENEMY_FLASHLIGHTS_IDX;
 if (_iEnemyFlashLightOption == 0) then {_iEnemyFlashLightOption = selectRandom [1,2]}; //1=yes, 2=no
 if (_iEnemyFlashLightOption == 1) then {
 	{
@@ -867,6 +835,6 @@ if (_iEnemyFlashLightOption == 1) then {
 	} forEach allUnits;
 };
 
-systemChat format["Mission Core: %1", "Main Init Complete"];
+{systemChat format["Mission Core: %1", "Main Init Complete"];} remoteExec ["call", 0];
 
 true;

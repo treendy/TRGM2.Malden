@@ -24,7 +24,7 @@ if (_SaveVersion != "") then {
 		_saveData = [TREND_iMissionParamType,TREND_iMissionParamObjective,TREND_iAllowNVG,TREND_iAllowNVG,TREND_iWeather,TREND_iUseRevive,TREND_iStartLocation,TREND_BadPoints,TREND_MaxBadPoints,TREND_BadPointsReason,TREND_iCampaignDay,TREND_AdvancedSettings,TREND_EnemyFactionData,TREND_LoadoutData];
 		profileNamespace setVariable [TREND_sInitialSLPlayerID + ":" + TREND_SaveTypeString,_saveData];
 		saveProfileNamespace;
-	} remoteExec ["bis_fnc_call", 2]; //Save this to server only
+	} remoteExec ["call", 2]; //Save this to server only
 
 
 	TREND_laptop1 remoteExec ["removeAllActions"];

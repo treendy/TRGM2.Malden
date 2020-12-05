@@ -63,7 +63,7 @@ TREND_fnc_SetFlareLightStuff = {
 publicVariable "TREND_fnc_SetFlareLightStuff";
 
 
-//{[_al_flare_light] spawn TREND_fnc_SetFlareLightStuff;} remoteExec ["bis_fnc_call", 0];
+//{[_al_flare_light] spawn TREND_fnc_SetFlareLightStuff;} remoteExec ["call", 0];
 
 [_al_flare_light, _flare1] remoteExec ["TREND_fnc_SetFlareLightStuff", 0];
 

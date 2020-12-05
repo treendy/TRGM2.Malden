@@ -7,5 +7,5 @@ if (isMultiplayer && (leader (group player)) != player) then {
 
 if (_bAllowEnd) then {
 	//hint (localize "STR_TRGM2_attemptendmission_Ending");
-	[] call TREND_fnc_endMission;
+	call TREND_fnc_endMission;
 };
