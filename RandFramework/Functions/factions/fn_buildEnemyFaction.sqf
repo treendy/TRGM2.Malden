@@ -381,7 +381,7 @@ InterogateOfficerClasses = ["O_T_Officer_F"];
 WeaponDealerClasses		 = ["C_Nikos_aged","C_man_hunter_1_F"];
 sideResarchTruck		 = ["O_Truck_03_device_F"];
 SideRadioClassNames		 = ["Land_PortableGenerator_01_F"];
-sideAmmoTruck			 = call { _veh = ["O_Truck_03_ammo_F"]; if (count (TREND_EastUnarmedCars select {["Ammo", _x] call BIS_fnc_inString}) > 0) then { _veh = (TREND_EastUnarmedCars select {["Ammo", _x] call BIS_fnc_inString}); }; _veh; };
+sideAmmoTruck			 = call { _veh = ["O_Truck_03_ammo_F"]; if (count (TREND_EastUnarmedCars select {_x call TREND_fnc_isAmmo}) > 0) then { _veh = (TREND_EastUnarmedCars select {_x call TREND_fnc_isAmmo}); }; _veh; };
 DestroyAAAVeh			 = call { _veh = ["O_T_APC_Tracked_02_AA_ghex_F"]; if (count TREND_EastAntiAir > 0) then { _veh = TREND_EastAntiAir; }; _veh; };
 
 sRiflemanFriendInsurg	 = "B_G_Soldier_F";

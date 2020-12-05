@@ -90,10 +90,8 @@ If you really want to, you can make a donation via my site www.trgm2.com (paypa
 
 //hintSilent parseText "<t size='1.25' font='Zeppelin33' color='#ff0000'>test lives remaining.</t><a href='http://arma3.com'>A3</a>";
 
-
-
-if (isServer) then { //adjust weather here so intro animation is different everytime
-	[true] call TREND_fnc_SetTimeAndWeather;
+if (isServer) then {
+	[true] remoteExecCall ["TREND_fnc_SetTimeAndWeather", 0, true];
 };
 
 waitUntil {time > 0};
@@ -459,17 +457,7 @@ if (isServer) then {
 	};
 
 	box1 allowDamage false;
-	{
-		{
-			box1 addMagazineCargoGlobal [_x, 2];
-		} forEach magazines _x + primaryWeaponMagazine _x + secondaryWeaponMagazine _x;
-		{
-	   		box1 addItemCargoGlobal  [_x, 1];
-		} forEach items _x;
-		if (typeof(unitBackpack _x) != "") then {
-			box1 addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
-		};
-	}  forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
+	[box1] call TREND_fnc_initAmmoBox;
 
 	{systemChat format["Mission Core: %1", "boxCargo set"];} remoteExec ["bis_fnc_call", 0];
 	sleep _coreCountSleep;
@@ -699,18 +687,54 @@ if (isServer) then {
 		};
 	};
 	[] spawn TREND_fnc_PlayBaseRadioEffect;
+	{systemChat format["Mission Core: %1", "PlayBaseRadioEffect"];} remoteExec ["bis_fnc_call", 0];
+	sleep _coreCountSleep;
+
+	TREND_fnc_MonsoonEffect = {
+		_iWeatherOption = selectRandom TREND_WeatherOptions;
+		if (_iWeatherOption == 11) then {
+			{systemChat format["Mission Core: %1", "MonsoonEffect"];} remoteExec ["bis_fnc_call", 0];
+			//Set enemy skill
+			{
+				if (Side _x == East) then {
+					_x setskill ["aimingAccuracy",0.01];
+					_x setskill ["aimingShake",0.01];
+					_x setskill ["aimingSpeed",0.01];
+					_x setskill ["spotDistance",0.01];
+					_x setskill ["spotTime",0.01];
+				};
+			} forEach allUnits;
+			sleep 18030;
+			//reset enemy skill
+			{
+				if (Side _x == East) then {
+					_x setskill ["aimingAccuracy",0.15];
+					_x setskill ["aimingShake",0.1];
+					_x setskill ["aimingSpeed",0.2];
+					_x setskill ["spotDistance",0.5];
+					_x setskill ["spotTime",0.5];
+				};
+			} forEach allUnits;
+			//reset enemy skill
+		};
+	};
+	[] spawn TREND_fnc_MonsoonEffect;
+
+	sleep _coreCountSleep;
 
 	TREND_fnc_SandStormEffect = {
-		_iSandStormOption = TREND_AdvancedSettings select TREND_ADVSET_SANDSTORM_IDX;
+		// Make sure we're not trying to do monsoon and sandstorm at the same time...
+		_iSandStormOption = [2, (TREND_AdvancedSettings select TREND_ADVSET_SANDSTORM_IDX)] select ((selectRandom TREND_WeatherOptions) != 11);
 
 		if (_iSandStormOption == 0 && selectRandom[true,false,false,false,false]) then { //Random
+			{systemChat format["Mission Core: %1", "SandStormEffect"];} remoteExec ["bis_fnc_call", 0];
 			StartWhen = selectRandom [990,1290,1710];
 			sleep StartWhen;
 			//work out how to deal with JIP if sandstorm already playing
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
 			SandStormTimer = selectRandom [150,390,630];
 			publicVariable SandStormTimer;
-			{nul = [SandStormTimer,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			{nul = [SandStormTimer,false] execVM "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
@@ -732,15 +756,17 @@ if (isServer) then {
 					_x setskill ["spotTime",0.5];
 				};
 			} forEach allUnits;
+			{systemChat format["Mission Core: %1", "SandStormEffect"];} remoteExec ["bis_fnc_call", 0];
 		};
 		if (_iSandStormOption == 1) then { //Always
+			{systemChat format["Mission Core: %1", "SandStormEffect"];} remoteExec ["bis_fnc_call", 0];
 			StartWhen = selectRandom [990,1290,1710];
 			sleep StartWhen;
 			//work out how to deal with JIP if sandstorm already playing
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
 			SandStormTimer = selectRandom [150,390,630];
 			publicVariable "SandStormTimer";
-			{nul = [SandStormTimer,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			{nul = [SandStormTimer,false] execVM "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
@@ -764,10 +790,11 @@ if (isServer) then {
 			} forEach allUnits;
 		};
 		if (_iSandStormOption == 3) then { //5 hours non stop
+			{systemChat format["Mission Core: %1", "SandStormEffect"];} remoteExec ["bis_fnc_call", 0];
 			//ok, if something is true, then in here we will start the sand storm and all clients!
 			//work out how to deal with JIP if sandstorm already playing
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
-			{nul = [18030,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			{nul = [18030,false] execVM "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
@@ -794,11 +821,7 @@ if (isServer) then {
 
 	};
 	[] spawn TREND_fnc_SandStormEffect;
-
 };
-
-systemChat format["Mission Core: %1", "SandStormStateSet"];
-sleep _coreCountSleep;
 
 [] remoteExec ["TREND_fnc_animateAnimals",0,true];
 

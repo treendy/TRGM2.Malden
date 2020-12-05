@@ -2,6 +2,8 @@
 
 //if (TREND_bDebugMode) then {hint format["Points adjusting: %1", TRGM_Logic getVariable "PointsUpdating"]};
 
+if (!TREND_CoreCompleted) exitWith {};
+
 sleep random [1,2.5,5]; //to increase the chance of not fireing at same time! (not convinsed that the "PointsUpdating" variable actually helped)
 
 waitUntil {!(TRGM_Logic getVariable "PointsUpdating")};

@@ -1,7 +1,7 @@
 // ROS Sandstorm V3.0 by RickOShay 2017
 // You may use this script as long as I'm creditted and this header text is not removed.
-// nul = [duration in secs before fade out] execvm "scripts\ROSSandstorm.sqf";
-// nul = [90] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";
+// nul = [duration in secs before fade out] execVM "scripts\ROSSandstorm.sqf";
+// nul = [90] execVM "RandFramework\RikoSandStorm\ROSSandstorm.sqf";
 // Minimum SS length 90 secs = 30 secs intro + 60 secs loop (x N loops) = 90 secs due to intro + sound loop length x 1.
 // Other examples [210] = 30 + (60x3) ie. intro + 3 loops. Or [270] = 30 + (60x4) or [510] = 30 + (60x8). Each of these has a 60 outro excluded from SS length.
 // Lengths to use in secs: 90, 150, 210, 270, 330, 390, 450, 510, 570, 630, 690, 750, 810, 870, 930, 990. etc.
@@ -89,7 +89,7 @@ if (!_isSmallEffect) then {
 // Start Wind loop sound
 if (_test) then {hint "Start Wind loop";};
 if (!_isSmallEffect) then {
-    [_dur, _endtime, _test] execvm "RandFramework\RikoSandStorm\ROSwindloop.sqf";
+    [_dur, _endtime, _test] execVM "RandFramework\RikoSandStorm\ROSwindloop.sqf";
 };
 
 // Start Film grain

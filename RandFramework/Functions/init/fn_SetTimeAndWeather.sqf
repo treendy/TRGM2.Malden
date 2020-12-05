@@ -45,7 +45,7 @@ if (!TREND_UseEditorWeather && isServer) then {
 		[2035, 1, 1, 12, 0] params ["_year", "_month", "_day", "_hour", "_min"];
 		private _WeatherOption = selectRandom TREND_WeatherOptions;
 
-		if (_isIntro) then {_WeatherOption = selectRandom [2,8,9,10,11]};
+		if (_isIntro) then {_WeatherOption = selectRandom [2,8,9,10,7]};
 
 		switch (_WeatherOption) do {
 			case 1: { //Sunny Clear
@@ -56,7 +56,7 @@ if (!TREND_UseEditorWeather && isServer) then {
 				0 setOvercast 1;
 				setDate TREND_Sunny;
 			};
-			case 3: { //Day average Overcast
+			case 3: { //Day Average overcast
 				0 setOvercast 0.5;
 				setDate TREND_Sunny;
 			};
@@ -76,26 +76,33 @@ if (!TREND_UseEditorWeather && isServer) then {
 				0 setOvercast 0.6;
 				setDate TREND_EarlyMorning;
 			};
-			case 8: { //moon Night Clear
+			case 8: { //Moon Night Clear
 				0 setOvercast 0;
 				setDate TREND_MoonNight;
 			};
-			case 9: { //moon Night slight overcast
+			case 9: { //Moon Night Average overcast
 				0 setOvercast 0.4;
 				setDate TREND_MoonNight;
 			};
-			case 10: { //moon Night heavy overcast
+			case 10: { //Moon Night Heavy overcast
 				0 setOvercast 1;
 				setDate TREND_MoonNight;
 			};
-			case 11: { //Moon Night slight overcast
+			case 11: { //Monsoon (Day)
 				0 setOvercast 1;
-				setDate TREND_MoonNight;
+				setDate TREND_EarlyMorning;
+				_direction_monsoon	= 200; // direction of rain
+				_duration_monsoon	= 18030; //5 hrs
+				_effect_on_objects	= false; // no flying objs
+				_debris_branches	= false; // no flying debris
+				_rain_fog			= true; // ground fog
+				_rain_drop			= true; // rain drop effect on ground
+				_thunder_steroids	= true; // enable AL thunder effects
+				_delay_thunder		= 90; //every 1.5 min
+				[[_direction_monsoon,_duration_monsoon,_effect_on_objects,_debris_branches,_rain_fog,_rain_drop,_thunder_steroids,_delay_thunder],"RandFramework\Alias\AL_monsoon\al_monsoon.sqf"] remoteExec ["execVM",0,true];
 			};
-			case 12: { //Monsoon (Day)
-				0 setOvercast 1;
-				setDate TREND_Sunny;
-				// null = [220,5000,false] execVM "AL_storm\al_monsoon.sqf"; // File doesn't exists as of 11/24/20
+			case 99: {
+				// Using editor weather, this should never get here but just in-case...
 			};
 			default {// (Default) Sunny Clear
 				0 setOvercast 0;

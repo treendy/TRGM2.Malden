@@ -24,15 +24,7 @@ if (_currentSpentPoints < (TREND_MaxBadPoints - TREND_BadPoints + 1)) then {
 	//waitUntil { script_handler };
 	sleep 0.5;
 
-	{
-		box1 addMagazineCargoGlobal [_x, 3];
-	} forEach magazines _SpawnedUnit + primaryWeaponMagazine _SpawnedUnit + secondaryWeaponMagazine _SpawnedUnit;
-	{
-		box1 addItemCargoGlobal  [_x, 1];
-	} forEach items _SpawnedUnit;
-	if (typeof(unitBackpack _SpawnedUnit) != "") then {
-		box1 addBackpackCargoGlobal [typeof(unitBackpack _SpawnedUnit), 1];
-	};
+	[box1, [_SpawnedUnit]] call TREND_fnc_initAmmoBox;
 
 	_SpawnedUnit addEventHandler ["killed",
 		{

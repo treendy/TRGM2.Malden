@@ -2099,12 +2099,8 @@
                 <Korean>5시간 동안 계속</Korean>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_ScriptsUsed">
-                <Original>RickOShay's Dust Storm Script&lt;br/&gt;Phsyco Revive Script</Original>
-                <English>RickOShay's Dust Storm Script&lt;br/&gt;Phsyco Revive Script</English>
-                <Chinese>RickOShay的沙塵暴腳本&lt;br/&gt;Phsyco的復甦腳本</Chinese>
-                <Chinesesimp>RickOShay的沙尘暴脚本&lt;br/&gt;Phsyco的复苏脚本</Chinesesimp>
-                <Spanish>Script de Tormenta de Arena de RickOShay&lt;br/&gt;Script de Revivir de Phsyco</Spanish>
-                <Korean>RickOShay 의 모래 바람 스크립트&lt;br/&gt;Phsyco 의료 스크립트</Korean>
+                <Original>RickOShay's Dust Storm Script&lt;br/&gt;Psycho's A3 Wounding System&lt;br/&gt;Alias's Monsoon and Ambient Battle Scripts</Original>
+                <English>RickOShay's Dust Storm Script&lt;br/&gt;Psycho's A3 Wounding System&lt;br/&gt;Alias's Monsoon and Ambient Battle Scripts</English>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions1">
                 <Original>This is the default mission type.  There will be one main objective that is occupied by a heavy enemy army.\n\nYou will also have two optional mini missions, these mini missions will either give you intel on the main AO, or will help increase your reputation depending on the mission type.</Original>
@@ -2269,6 +2265,14 @@
                 <Chinesesimp>月光多云</Chinesesimp>
                 <Spanish>Noche con luna, muy nublado</Spanish>
                 <Korean>많이 흐린 달빛</Korean>
+            </Key>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Monsoon">
+                <Original>Day Monsoon</Original>
+                <English>Day Monsoon</English>
+            </Key>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_UseEditorWeather">
+                <Original>No change (Using editor weather or weather mod)</Original>
+                <English>No change (Using editor weather or weather mod)</English>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_NVG_Real">
                 <Original>Realistic NVG</Original>

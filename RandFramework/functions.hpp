@@ -22,7 +22,11 @@ class TREND {
         class getUnitDataByFaction {};
         // class getVehicleArraysFromVehData {}; // These were not returning their values when called for some reason, instead they are hard-coded for now in the buildXFaction functions.
         class getVehicleDataByFaction {};
+        class isAmmo {};
         class isArmed {};
+        class isFuel {};
+        class isMedical {};
+        class isRepair {};
     };
 
     class common {
@@ -38,6 +42,7 @@ class TREND {
         class fireIllumFlares{};
         class getFactionVehicle{};
         class hideTerrainObjects{};
+        class initAmmoBox{};
         class isAceLoaded {};
         class isCbaLoaded {};
         class NVscript{};

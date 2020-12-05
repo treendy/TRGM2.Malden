@@ -63,20 +63,20 @@ _lblctrlTitle = _display displayCtrl 6999;
 _lblctrlTitle ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.25 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
 ctrlSetText [6999,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_AdvOpt"];
 
-_display ctrlCreate ["RscButton", 6998];
-_btnSetEnemyFaction = _display displayCtrl 6998;
-_btnSetEnemyFaction ctrlSetPosition [0.6 * safezoneW + safezoneX, (0.25 + 0) * safezoneH + safezoneY,0.1 * safezoneW,0.02 * safezoneH];
-_btnSetEnemyFaction ctrlCommit 0;
-ctrlSetText [6998,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomEnemy"];
-_btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {[] spawn TREND_fnc_openDialogEnemyFaction; false}];
+// _display ctrlCreate ["RscButton", 6998];
+// _btnSetEnemyFaction = _display displayCtrl 6998;
+// _btnSetEnemyFaction ctrlSetPosition [0.6 * safezoneW + safezoneX, (0.25 + 0) * safezoneH + safezoneY,0.1 * safezoneW,0.02 * safezoneH];
+// _btnSetEnemyFaction ctrlCommit 0;
+// ctrlSetText [6998,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomEnemy"];
+// _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {[] spawn TREND_fnc_openDialogEnemyFaction; false}];
 
 
-_display ctrlCreate ["RscButton", 6997];
-_btnSetEnemyFaction = _display displayCtrl 6997;
-_btnSetEnemyFaction ctrlSetPosition [0.6 * safezoneW + safezoneX, (0.25 * 1.1) * safezoneH + safezoneY,0.1 * safezoneW,0.02 * safezoneH];
-_btnSetEnemyFaction ctrlCommit 0;
-ctrlSetText [6997,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomLoadouts"];
-_btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {[] spawn TREND_fnc_openDialogTeamLoadouts; false}];
+// _display ctrlCreate ["RscButton", 6997];
+// _btnSetEnemyFaction = _display displayCtrl 6997;
+// _btnSetEnemyFaction ctrlSetPosition [0.6 * safezoneW + safezoneX, (0.25 * 1.1) * safezoneH + safezoneY,0.1 * safezoneW,0.02 * safezoneH];
+// _btnSetEnemyFaction ctrlCommit 0;
+// ctrlSetText [6997,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomLoadouts"];
+// _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {[] spawn TREND_fnc_openDialogTeamLoadouts; false}];
 
 
 
@@ -88,11 +88,11 @@ _lblctrlTitle ctrlCommit 0;
 {
 	// _lblCtrlID , _lblText												,_lnpCtrlType ,_Options                          ,_Values                       ,_DefaultSelIndex                       ,tooltip
 	//[6013       , localize "STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFactions","RscCombo"   ,TREND_DefaultEnemyFactionArrayText,TREND_DefaultEnemyFactionArray,TREND_DefaultEnemyFactionValue select 0,""     ],
-	_currentLinePos = _lineHeight * (_forEachIndex + 1);
+	_currentLinePos = _lineHeight * (_forEachIndex + 1 - ([0, 13] select (_forEachIndex > 12)));
 	_ctrlWidth = 0.08 * safezoneW;
 	_ctrlHeight = 0.02 * safezoneH;
-	_lblXPos = (0.3 * safezoneW + safezoneX) + ([0, (2 * _ctrlWidth)] select {_forEachIndex <= 12});
-	_inpXPos = (0.4 * safezoneW + safezoneX) + ([0, (2 * _ctrlWidth)] select {_forEachIndex <= 12});
+	_lblXPos = ([0, ((2 * _ctrlWidth) + 0.1)] select (_forEachIndex > 12)) + (0.3 * safezoneW + safezoneX);
+	_inpXPos = ([0, ((2 * _ctrlWidth) + 0.1)] select (_forEachIndex > 12)) + (0.4 * safezoneW + safezoneX);
 	_ctrlYPos = ((0.27 + _currentLinePos) * safezoneH + safezoneY);
 
 	_lblCtrlID =  _x select 0;
@@ -128,24 +128,24 @@ _lblctrlTitle ctrlCommit 0;
 
 } forEach TREND_AdvControls;
 
-if (TREND_EnemyFactionData != "") then {
-	_display ctrlCreate ["RscText", 6996];
-	_lblctrlWarn1 = _display displayCtrl 6996;
-	_lblctrlWarn1 ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.70 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
-	_lblctrlWarn1 ctrlSetTextColor [1, 0, 0, 1];
+// if (TREND_EnemyFactionData != "") then {
+// 	_display ctrlCreate ["RscText", 6996];
+// 	_lblctrlWarn1 = _display displayCtrl 6996;
+// 	_lblctrlWarn1 ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.70 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
+// 	_lblctrlWarn1 ctrlSetTextColor [1, 0, 0, 1];
 
-	ctrlSetText [6996,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomEnemy_Hint"];
+// 	ctrlSetText [6996,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomEnemy_Hint"];
 
-	_lblctrlWarn1 ctrlCommit 0;
-};
-if (TREND_LoadoutData != "") then {
-	_display ctrlCreate ["RscText", 6995];
-	_lblctrlWarn2 = _display displayCtrl 6995;
-	_lblctrlWarn2 ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.72 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
-	_lblctrlWarn2 ctrlSetTextColor [1, 0, 0, 1];
+// 	_lblctrlWarn1 ctrlCommit 0;
+// };
+// if (TREND_LoadoutData != "") then {
+// 	_display ctrlCreate ["RscText", 6995];
+// 	_lblctrlWarn2 = _display displayCtrl 6995;
+// 	_lblctrlWarn2 ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.72 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
+// 	_lblctrlWarn2 ctrlSetTextColor [1, 0, 0, 1];
 
-	ctrlSetText [6995,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomFriend_Hint"];
+// 	ctrlSetText [6995,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomFriend_Hint"];
 
-	_lblctrlWarn2 ctrlCommit 0;
-};
+// 	_lblctrlWarn2 ctrlCommit 0;
+// };
 

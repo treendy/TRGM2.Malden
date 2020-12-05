@@ -196,11 +196,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		"SmokeShellBlue" createVehicle _finalPos;
 		sleep 0.1;
 		private _supplyObject = "B_supplyCrate_f" createVehicle _finalPos;
-		{
-			{
-				_supplyObject addMagazineCargoGlobal [_x, 2];
-			} forEach magazines _x + primaryWeaponMagazine _x + secondaryWeaponMagazine _x + handgunMagazine _x;
-		}  forEach units group player;
+		[_supplyObject, (units group player)] call TREND_fnc_initAmmoBox;
 		_supplyObject allowDamage false;
 		_supplyObject setPosATL _finalPos;
 		_supplyObject setVectorUp surfaceNormal position _supplyObject;
@@ -267,11 +263,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		"SmokeShellBlue" createVehicle _finalPos;
 		sleep 0.1;
 		_supplyObject = "B_supplyCrate_f" createVehicle _finalPos;
-		{
-			{
-				_supplyObject addMagazineCargoGlobal [_x, 2];
-			} forEach magazines _x + primaryWeaponMagazine _x + secondaryWeaponMagazine _x + handgunMagazine _x;
-		}  forEach units group player;
+		[_supplyObject, (units group player)] call TREND_fnc_initAmmoBox;
 		_supplyObject allowDamage false;
 		_supplyObject setPosATL _finalPos;
 		_supplyObject setVectorUp surfaceNormal position _supplyObject;

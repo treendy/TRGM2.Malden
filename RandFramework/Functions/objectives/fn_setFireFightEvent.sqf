@@ -235,7 +235,7 @@ TREND_WarEventActive = true;
 
 
 /*
-{nul = [99999,true] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+{nul = [99999,true] execVM "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
 */
 
 /*

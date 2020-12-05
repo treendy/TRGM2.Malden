@@ -152,7 +152,7 @@ if (_bAllowStart) then {
 
 		if (isServer) then {
 			TREND_MissionLoaded =  false; publicVariable "TREND_MissionLoaded";
-			call TREND_fnc_SetTimeAndWeather;
+			[false] remoteExecCall ["TREND_fnc_SetTimeAndWeather", 0, true];
 			call TREND_fnc_startInfMission;
 		};
 

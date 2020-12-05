@@ -103,6 +103,22 @@ else {
 			TREND_iAllowNVG =  TREND_SavedData select 2; publicVariable "TREND_iAllowNVG";
 			TREND_iMissionParamRepOption =   TREND_SavedData select 3; publicVariable "TREND_iMissionParamRepOption";
 			TREND_iWeather =  TREND_SavedData select 4; publicVariable "TREND_iWeather";
+			switch (TREND_iWeather) do {
+				case 0:  {TREND_WeatherOptions = [1,1,1,2,2,2,3,3,3,4,5,6,7,7,8,9,10]; publicVariable "TREND_WeatherOptions";};
+				case 1:  {TREND_WeatherOptions = [1]; publicVariable "TREND_WeatherOptions";};
+				case 2:  {TREND_WeatherOptions = [2]; publicVariable "TREND_WeatherOptions";};
+				case 3:  {TREND_WeatherOptions = [3]; publicVariable "TREND_WeatherOptions";};
+				case 4:  {TREND_WeatherOptions = [4]; publicVariable "TREND_WeatherOptions";};
+				case 5:  {TREND_WeatherOptions = [5]; publicVariable "TREND_WeatherOptions";};
+				case 6:  {TREND_WeatherOptions = [6]; publicVariable "TREND_WeatherOptions";};
+				case 7:  {TREND_WeatherOptions = [7]; publicVariable "TREND_WeatherOptions";};
+				case 8:  {TREND_WeatherOptions = [8]; publicVariable "TREND_WeatherOptions";};
+				case 9:  {TREND_WeatherOptions = [9]; publicVariable "TREND_WeatherOptions";};
+				case 10: {TREND_WeatherOptions = [10]; publicVariable "TREND_WeatherOptions";};
+				case 11: {TREND_WeatherOptions = [11]; publicVariable "TREND_WeatherOptions";};
+				case 99: {TREND_WeatherOptions = [99]; publicVariable "TREND_WeatherOptions"; TREND_UseEditorWeather =  true; publicVariable "TREND_UseEditorWeather";};
+				default  {TREND_WeatherOptions = [1,1,1,2,2,2,3,3,3,4,5,6,7,7,8,9,10]; publicVariable "TREND_WeatherOptions";};
+			};
 			TREND_iUseRevive =  TREND_SavedData select 5; publicVariable "TREND_iUseRevive";
 			TREND_iStartLocation =  TREND_SavedData select 6; publicVariable "TREND_iStartLocation";
 			TREND_BadPoints =  TREND_SavedData select 7; publicVariable "TREND_BadPoints";

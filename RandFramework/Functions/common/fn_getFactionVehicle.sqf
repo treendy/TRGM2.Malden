@@ -3,7 +3,7 @@ params [["_veh", objNull, [objNull]], ["_side", WEST]];
 private _vehClassName = typeOf _veh;
 private _configPath = (configFile >> "CfgVehicles" >> _vehClassName);
 
-private _returnVeh = _vehClassName;
+private _returnVeh = [_vehClassName];
 
 _UnarmedCars = ["B_Truck_01_covered_F"];
 _ArmedCars = ["B_MRAP_01_hmg_F"];
@@ -63,40 +63,69 @@ switch (_side) do {
 	};
 };
 
-[_vehClassName, getText(_configPath >> "displayName"), getText(_configPath >> "textSingular"), getText(configfile >> "CfgEditorSubcategories" >> getText(_configPath >> "editorSubcategory") >> "displayName"), getNumber (_configPath >> "transportSoldier") >= 8, (configname _configPath) call TREND_fnc_isArmed] params [["_className", ""], ["_dispName", ""], ["_calloutName", ""], ["_category", ""], ["_isTransport", false], ["_isArmed", false]];
+[_vehClassName, getText(_configPath >> "displayName"), getText(_configPath >> "textSingular"), getText(configfile >> "CfgEditorSubcategories" >> getText(_configPath >> "editorSubcategory") >> "displayName"), getNumber (_configPath >> "transportSoldier") >= 8, (configName _configPath) call TREND_fnc_isArmed] params [["_className", ""], ["_dispName", ""], ["_calloutName", ""], ["_category", ""], ["_isTransport", false], ["_isArmed", false]];
 
 if (isNil "_className" || isNil "_dispName" || isNil "_calloutName" || isNil "_category") then {
 
 } else {
 	if (["GMG", _dispName] call BIS_fnc_inString || ["Quadbike", _className] call BIS_fnc_inString || ["Designator", _className] call BIS_fnc_inString || ["Radar", _className] call BIS_fnc_inString || ["SAM", _className] call BIS_fnc_inString) then {
-		_returnVeh = selectRandom _UnarmedCars;
+		_returnVeh = _UnarmedCars;
 	} else {
 		if (_calloutName isEqualTo "mortar") then {
-			_returnVeh = selectRandom _Mortars;
+			_returnVeh = _Mortars;
 		} else {
 			switch (_category) do {
-				case "Turrets": 	{ _returnVeh = selectRandom _Turrets; };
-				case "Boats": 		{ _returnVeh = selectRandom _Boats; };
-				case "Boat": 		{ _returnVeh = selectRandom _Boats; };
-				case "Artillery": 	{ _returnVeh = selectRandom _Artillery; };
-				case "Anti-Air": 	{ _returnVeh = selectRandom _AntiAir; };
-				case "Planes": 		{ _returnVeh = selectRandom _Planes; };
-				case "Plane": 		{ _returnVeh = selectRandom _Planes; };
-				case "APCs": 		{ _returnVeh = selectRandom _APCs; };
-				case "APC": 		{ _returnVeh = selectRandom _APCs; };
-				case "IFV": 		{ _returnVeh = selectRandom _APCs; };
-				case "Tanks": 		{ _returnVeh = selectRandom _Tanks; };
-				case "Tank": 		{ _returnVeh = selectRandom _Tanks; };
-				case "Helicopters": { if (_isArmed) then { _returnVeh = selectRandom _ArmedHelos; } else { _returnVeh = selectRandom _UnarmedHelos; }; };
-				case "Helicopter": 	{ if (_isArmed) then { _returnVeh = selectRandom _ArmedHelos; } else { _returnVeh = selectRandom _UnarmedHelos; }; };
-				case "Cars": 		{ if (_isArmed) then { _returnVeh = selectRandom _ArmedCars; } else { _returnVeh = selectRandom _UnarmedCars; }; };
-				case "Car": 		{ if (_isArmed) then { _returnVeh = selectRandom _ArmedCars; } else { _returnVeh = selectRandom _UnarmedCars; }; };
-				case "MRAP": 		{ if (_isArmed) then { _returnVeh = selectRandom _ArmedCars; } else { _returnVeh = selectRandom _UnarmedCars; }; };
-				case "Truck": 		{ if (_isArmed) then { _returnVeh = selectRandom _ArmedCars; } else { _returnVeh = selectRandom _UnarmedCars; }; };
+				case "Turrets": 	{ _returnVeh = _Turrets; };
+				case "Boats": 		{ _returnVeh = _Boats; };
+				case "Boat": 		{ _returnVeh = _Boats; };
+				case "Artillery": 	{ _returnVeh = _Artillery; };
+				case "Anti-Air": 	{ _returnVeh = _AntiAir; };
+				case "Planes": 		{ _returnVeh = _Planes; };
+				case "Plane": 		{ _returnVeh = _Planes; };
+				case "APCs": 		{ _returnVeh = _APCs; };
+				case "APC": 		{ _returnVeh = _APCs; };
+				case "IFV": 		{ _returnVeh = _APCs; };
+				case "Tanks": 		{ _returnVeh = _Tanks; };
+				case "Tank": 		{ _returnVeh = _Tanks; };
+				case "Helicopters": { if (_isArmed) then { _returnVeh = _ArmedHelos; } else { _returnVeh = _UnarmedHelos; }; };
+				case "Helicopter": 	{ if (_isArmed) then { _returnVeh = _ArmedHelos; } else { _returnVeh = _UnarmedHelos; }; };
+				case "Cars": 		{ if (_isArmed) then { _returnVeh = _ArmedCars; } else { _returnVeh = _UnarmedCars; }; };
+				case "Car": 		{ if (_isArmed) then { _returnVeh = _ArmedCars; } else { _returnVeh = _UnarmedCars; }; };
+				case "MRAP": 		{ if (_isArmed) then { _returnVeh = _ArmedCars; } else { _returnVeh = _UnarmedCars; }; };
+				case "Truck": 		{ if (_isArmed) then { _returnVeh = _ArmedCars; } else { _returnVeh = _UnarmedCars; }; };
 				default { };
 			};
 		};
 	};
 };
 
+if (_isArmed) then {
+	_returnVeh = _returnVeh select {_x call TREND_fnc_isArmed};
+};
+
+if (_isTransport) then {
+	_returnVeh = _returnVeh select {getNumber (configFile >> "CfgVehicles" >> _x >> "transportSoldier") >= 8};
+};
+
+if (_vehClassName call TREND_fnc_isMedical) then {
+	_returnVeh = _returnVeh select {_x call TREND_fnc_isMedical};
+};
+
+if (_vehClassName call TREND_fnc_isFuel) then {
+	_returnVeh = _returnVeh select {_x call TREND_fnc_isFuel};
+};
+
+if (_vehClassName call TREND_fnc_isRepair) then {
+	_returnVeh = _returnVeh select {_x call TREND_fnc_isRepair};
+};
+
+if (_vehClassName call TREND_fnc_isAmmo) then {
+	_returnVeh = _returnVeh select {_x call TREND_fnc_isAmmo};
+};
+
+_returnVeh = selectRandom _returnVeh;
+
+// Some final failsafes:
+_returnVeh = [_returnVeh, _vehClassName] select (isNil "_returnVeh");
+_returnVeh = [_returnVeh, _vehClassName] select (count _returnVeh <= 0);
 _returnVeh;

@@ -141,9 +141,9 @@ AirSupportOptions			 = call { _veh = ["B_Plane_CAS_01_dynamicLoadout_F"]; if (co
 ArtiSupportOptions			 = call { _veh = ["B_MBT_01_arty_F"]; if (count TREND_WestArtillery > 0) then { _veh = selectRandom TREND_WestArtillery; }; _veh; };
 
 FriendlyUnarmedCar			 = call { _veh = ["B_MRAP_01_F"]; if (count TREND_WestUnarmedCars > 0) then { _veh = TREND_WestUnarmedCars; }; _veh; };
-FriendlyMedicalTruck		 = call { _veh = ["B_Truck_01_medical_F"]; if (count (TREND_WestUnarmedCars select {["Medical", _x] call BIS_fnc_inString}) > 0) then { _veh = (TREND_WestUnarmedCars select {["Medical", _x] call BIS_fnc_inString}); }; _veh; };
+FriendlyMedicalTruck		 = call { _veh = ["B_Truck_01_medical_F"]; if (count (TREND_WestUnarmedCars select {_x call TREND_fnc_isMedical}) > 0) then { _veh = (TREND_WestUnarmedCars select {_x call TREND_fnc_isMedical}); }; _veh; };
 FriendlyArmoredCar			 = call { _veh = ["B_MRAP_01_hmg_F"]; if (count TREND_WestArmedCars > 0) then { _veh = TREND_WestArmedCars; } else { _veh = ["B_MRAP_01_hmg_F"]; }; _veh; };
-FriendlyFuelTruck			 = call { _veh = ["B_Truck_01_fuel_F"]; if (count (TREND_WestUnarmedCars select {["Fuel", _x] call BIS_fnc_inString}) > 0) then { _veh = (TREND_WestUnarmedCars select {["Fuel", _x] call BIS_fnc_inString}); }; _veh; };
+FriendlyFuelTruck			 = call { _veh = ["B_Truck_01_fuel_F"]; if (count (TREND_WestUnarmedCars select {_x call TREND_fnc_isFuel}) > 0) then { _veh = (TREND_WestUnarmedCars select {_x call TREND_fnc_isFuel}); }; _veh; };
 
 FriendlyJet					 = call { _veh = ["B_Plane_Fighter_01_Stealth_F"]; if (count TREND_WestPlanes > 0) then { _veh = TREND_WestPlanes; }; _veh; };
 FriendlyChopper				 = call { _veh = ["B_Heli_Transport_01_camo_F","B_Heli_Attack_01_F"]; if (count TREND_WestArmedHelos > 0) then { _veh = TREND_WestArmedHelos; }; _veh; };

@@ -87,15 +87,7 @@ _btnSelectUnit ctrlAddEventHandler ["ButtonClick", {
 		_SpawnedUnit setVariable ["RepCost", 0.5, true];
 		_SpawnedUnit setVariable ["IsFRT", true, true];
 
-		{
-			box1 addMagazineCargoGlobal [_x, 3];
-		} forEach magazines _SpawnedUnit + primaryWeaponMagazine _SpawnedUnit + secondaryWeaponMagazine _SpawnedUnit;
-		{
-			box1 addItemCargoGlobal  [_x, 1];
-		} forEach items _SpawnedUnit;
-		if (typeof(unitBackpack _SpawnedUnit) != "") then {
-			box1 addBackpackCargoGlobal [typeof(unitBackpack _SpawnedUnit), 1];
-		};
+		[box1, [_SpawnedUnit]] call TREND_fnc_initAmmoBox;
 
 		_SpawnedUnit addEventHandler ["killed",
 		{
@@ -158,17 +150,7 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 			_target removeAction _actionId;
 			[_target, [localize "STR_TRGM2_startInfMission_UnloadDingy",{[_this select 0, _this select 1, _this select 2, _this select 3] spawn TREND_fnc_UnloadDingy;}, [], -99, false, false, "", "_this == player"]] remoteExec ["addAction", 0];
 
-			{
-				{
-					_target addMagazineCargoGlobal [_x, 2];
-				} forEach magazines _x + primaryWeaponMagazine _x + secondaryWeaponMagazine _x;
-				{
-					_target addItemCargoGlobal  [_x, 1];
-				} forEach items _x;
-				if (typeof(unitBackpack _x) != "") then {
-					_target addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
-				};
-			}  forEach units group _caller;
+			[_target, (units group _caller)] call TREND_fnc_initAmmoBox;
 
 			if (_target isKindOf "Static") then {
 				[_target, [format [localize "STR_TRGM2_UnloadDingy_push", getText (configFile >> "CfgVehicles" >> (typeOf _target) >> "displayName")],{[_this select 0, _this select 1, _this select 2, _this select 3] spawn TREND_fnc_PushObject;}, [], -99, false, false, "", "_this == player"]] remoteExec ["addAction", 0];

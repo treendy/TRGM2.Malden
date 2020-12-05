@@ -129,24 +129,7 @@ if (isServer) then {
 	_AmmoBox1 allowDamage false;
 	_AmmoBox1 setDir (floor(random 360));
 
-	if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-		[_AmmoBox1,TREND_InitialBoxItemsWithAce] call bis_fnc_initAmmoBox;
-	}
-	else {
-		[_AmmoBox1,TREND_InitialBoxItems] call bis_fnc_initAmmoBox;
-	};
-
-	{
-		{
-			_AmmoBox1 addMagazineCargoGlobal [_x, 3];
-		} forEach magazines _x + primaryWeaponMagazine _x + secondaryWeaponMagazine _x;
-		{
-			_AmmoBox1 addItemCargoGlobal  [_x, 1];
-		} forEach items _x;
-		if (typeof(unitBackpack _x) != "") then {
-			_AmmoBox1 addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
-		};
-	}  forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
+	[_AmmoBox1] call TREND_fnc_initAmmoBox;
 
 	{systemChat "Mission Setup: 4";} remoteExec ["bis_fnc_call", 0];
 	sleep 1;
