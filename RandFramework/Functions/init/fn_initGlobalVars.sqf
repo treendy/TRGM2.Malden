@@ -1,5 +1,5 @@
 /////// Debug Mode ///////
-TREND_bDebugMode = true; publicVariable "TREND_bDebugMode";
+TREND_bDebugMode = false; publicVariable "TREND_bDebugMode";
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 if (isNil "TREND_NeededObjectsAvailable") then { TREND_NeededObjectsAvailable =   false; publicVariable "TREND_NeededObjectsAvailable"; };

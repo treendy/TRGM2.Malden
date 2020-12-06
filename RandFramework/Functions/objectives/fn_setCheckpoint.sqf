@@ -427,13 +427,11 @@ if (_PosFound) then {
 		group _objMan setSpeedMode "LIMITED";
 		group _objMan setBehaviour "SAFE";
 
-		while {true && alive(_objMan)} do {
-			if (behaviour _objMan != "COMBAT") then {
-				[_objManName,_thisInitPos,_objMan,35] spawn TREND_fnc_HVTWalkAround;
-				sleep 2;
-				waitUntil {sleep 1; speed _objMan < 0.5};
-				sleep 10;
-			};
+		while {alive(_objMan) && {behaviour _objMan == "SAFE"}} do {
+			[_objManName,_thisInitPos,_objMan,35] spawn TREND_fnc_HVTWalkAround;
+			sleep 2;
+			waitUntil {sleep 1; speed _objMan < 0.5};
+			sleep 10;
 		};
 	};
 	[_sCheckpointGuyName,_pos5] spawn TREND_fnc_WalkingGuyLoop;

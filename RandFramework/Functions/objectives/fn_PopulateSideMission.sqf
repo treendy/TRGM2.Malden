@@ -174,11 +174,11 @@ if (!_bFriendlyInsurgents) then {
 		//Spawn patrol
 		//if main need a couple of these and always have 2 or 3
 
-		"InitSniperCreator" call TREND_fnc_log;
+		["InitSniperCreator", true] call TREND_fnc_log;
 		if (selectRandom[true,false] || _moreEnemies) then {
 			[_sidePos] spawn TREND_fnc_createEnemySniper;
 		};
-		"EndSniperCreator" call TREND_fnc_log;
+		["EndSniperCreator", true] call TREND_fnc_log;
 		_bHasPatrols = false;
 		if (_bIsMainObjective) then {_bHasPatrols = true};
 
@@ -727,7 +727,7 @@ if (!_bFriendlyInsurgents) then {
 							group _objMan setSpeedMode "LIMITED";
 							group _objMan setBehaviour "SAFE";
 
-							while {true && alive(_objMan) && behaviour _objMan == "SAFE"} do {
+							while {alive(_objMan) && {behaviour _objMan == "SAFE"}} do {
 								[_objManName,_thisInitPos,_objMan,35] spawn TREND_fnc_HVTWalkAround;
 								sleep 2;
 								waitUntil {sleep 1; speed _objMan < 0.5};

@@ -36,70 +36,53 @@ _objMan doMove (_WalkToPos);
 
 sleep 2;
 
-//if (TREND_bDebugMode) then {hint format["WalkToPos: %1 - MoveType: %2",_WalkToPos,_MoveType];};
+format["Man: %1 - WalkToPos: %2 - MoveType: %3",_objMan, _WalkToPos, _MoveType] call TREND_fnc_log;
 
 waitUntil {sleep 1; speed _objMan == 0};
-_nearMen = nearestObjects [_thisInitPos, ["man"], 7];
+_nearMen = (nearestObjects [_thisInitPos, ["man"], 7]) select {side _x == side _objMan};
+_animType = selectRandom [2,3,4];
 if (count _nearMen > 1) then {
-	_nearMan = _nearMen select 0;
-	_azimuth = _objMan getDir _nearMan;
-	_objMan setDir _azimuth;
-	//_azimuth2 = _nearMan getDir _objMan;
-	//_nearMan setDir _azimuth;
 	_animType = selectRandom [1,2,3,4];
+};
 
-	//hint format["Anim:%1",_animType];
-	//sleep 2;
-	if (_animType == 1) then { //salute
-			//SALUTE
-			//if (alive(_objMan)) then {_objMan playMoveNow "AmovPercMstpSnonWnonDnon_SaluteIn";};
-			//_nearMan playMoveNow "AmovPercMstpSnonWnonDnon_SaluteIn";
-			//sleep 8;
-			//if (alive(_objMan)) then {_objMan playMoveNow "AmovPercMstpSnonWnonDnon_SaluteOut";};
-			//_nearMan playMoveNow "AmovPercMstpSnonWnonDnon_SaluteOut";
-
-	};
-	if (_animType == 2) then { //talk
-			//TALK
-			if (alive(_objMan)) then {[_objMan,"STAND","ASIS"] call BIS_fnc_ambientAnimCombat;};
+if (alive(_objMan) && {behaviour _objMan == "SAFE"}) then {
+	switch (_animType) do {
+		case 1: { //SALUTE
+			_nearMan = _nearMen select 0;
+			_azimuth = _objMan getDir _nearMan;
+			_objMan setDir _azimuth;
+			_azimuth2 = _nearMan getDir _objMan;
+			_nearMan setDir _azimuth;
+			_objMan playActionNow "Salute";
+			_nearMan playActionNow "Salute";
 			sleep selectRandom [30,60,120];
 			if (!(_objMan getVariable ["StopWalkScript", false])) then {
-				_objMan call BIS_fnc_ambientAnim__terminate
+				_objMan switchMove "";
+				_nearMan switchMove "";
 			};
-
-	};
-	if (_animType == 3) then { //talk
-			//TALK
-			if (alive(_objMan)) then {[_objMan,"WATCH","ASIS"] call BIS_fnc_ambientAnimCombat;};
-			sleep selectRandom [30,60,120];
-			if (!(_objMan getVariable ["StopWalkScript", false])) then {
-				_objMan call BIS_fnc_ambientAnim__terminate
-			};
-	};
-	if (_animType == 4) then { //talk
-			//TALK
-			if (alive(_objMan)) then {[_objMan,"STAND","ASIS"] call BIS_fnc_ambientAnimCombat;};
-			sleep selectRandom [30,60,120];
-			if (!(_objMan getVariable ["StopWalkScript", false])) then {
-				_objMan call BIS_fnc_ambientAnim__terminate
-			};
-	};
-}
-else {
-	//no man nearby
-	_animType = selectRandom [1,2];
-	//hint format["NoManAnim:%1",_animType];
-	if (_animType == 1) then { //stretch
-		if (alive(_objMan)) then {[_objMan,"STAND","ASIS"] call BIS_fnc_ambientAnimCombat;};
-		sleep selectRandom [30,60,120];
-		if (!(_objMan getVariable ["StopWalkScript", false])) then {
-			_objMan call BIS_fnc_ambientAnim__terminate
 		};
-	};
-	if (_animType == 1) then { //Radio
-		if (!(_objMan getVariable ["StopWalkScript", false])) then {
-			_objMan switchMove "AinvPercMstpSnonWnonDnon_G01";
+		case 2: { //Relax
+			_objMan playActionNow "Relax";
+			sleep selectRandom [30,60,120];
+			if (!(_objMan getVariable ["StopWalkScript", false])) then {
+				_objMan switchMove "";
+			};
 		};
+		case 3: { //Binoculars
+			_objMan playActionNow "Binoculars";
+			sleep selectRandom [30,60,120];
+			if (!(_objMan getVariable ["StopWalkScript", false])) then {
+				_objMan switchMove "";
+			};
+		};
+		case 4: { //reloadMagazine
+			_objMan playActionNow "reloadMagazine";
+			sleep selectRandom [30,60,120];
+			if (!(_objMan getVariable ["StopWalkScript", false])) then {
+				_objMan switchMove "";
+			};
+		};
+		default { };
 	};
 };
 

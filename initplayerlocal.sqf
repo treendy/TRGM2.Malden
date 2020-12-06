@@ -22,7 +22,7 @@ TREND_fnc_MissionSelectLoop = {
 	sleep 3;
 	if (!TREND_bAndSoItBegins) then {
 		playMusic TREND_IntroMusic;
-		format["SelectLoop Music: %1", TREND_IntroMusic ] call TREND_fnc_log;
+		[format["SelectLoop Music: %1", TREND_IntroMusic ], true] call TREND_fnc_log;
 	};
 	while {!TREND_bAndSoItBegins} do {
 

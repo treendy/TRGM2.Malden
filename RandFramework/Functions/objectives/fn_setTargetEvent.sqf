@@ -112,7 +112,7 @@ if (!_isCache && count _nearestRoads > 0) then {
 
 			_posOfTarget = getPos _mainVeh;
 
-			"Mission Events: Target 6" call TREND_fnc_log;
+			["Mission Events: Target 6", true] call TREND_fnc_log;
 
 			if (selectRandom[true,false,false]) then {
 				[_posOfTarget] spawn TREND_fnc_createEnemySniper;
@@ -143,7 +143,7 @@ if (!_isCache && count _nearestRoads > 0) then {
 				[_posOfTarget,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100,true,selectRandom[false,false,true],false] spawn TREND_fnc_setCheckpoint;
 			};
 
-			"Mission Events: Target 4" call TREND_fnc_log;
+			["Mission Events: Target 4", true] call TREND_fnc_log;
 
 		};
 		//HERE 23_09_2019 : look at SetIEDEvent, or startInfMission line 541 (where we create triggers for ammotrucks)

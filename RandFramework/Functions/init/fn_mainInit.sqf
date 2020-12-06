@@ -126,7 +126,7 @@ if (!isDedicated) then {
 	waitUntil {!isNull player};
 
 	TransferProviders = {
-		format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+		format["%1 called by %2", "TransferProviders", "TREND_fnc_mainInit"] call TREND_fnc_log;
 		if !(call TREND_fnc_isCbaLoaded) then {
 			[[chopper1]] call TREND_fnc_addTransportActions;
 		};
@@ -249,7 +249,7 @@ if (!isDedicated && _isAdmin) then {
 waitUntil {TREND_bAndSoItBegins};
 
 private _coreCountSleep = 0.1;
-format["Mission Core: %1", "Init"] call TREND_fnc_log;
+[format["Mission Core: %1", "Init"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
 if (isServer && TREND_AdvancedSettings select TREND_ADVSET_GROUP_MANAGE_IDX == 1) then {
@@ -264,29 +264,29 @@ if (!isDedicated) then {
 	_camera cameraEffect ["Terminate","back"];
 };
 
-format["Mission Core: %1", "CameraTerminated"] call TREND_fnc_log;
+[format["Mission Core: %1", "CameraTerminated"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
 call TREND_fnc_initUnitVars;
 
-format["Mission Core: %1", "GlobalVarsSet"] call TREND_fnc_log;
+[format["Mission Core: %1", "GlobalVarsSet"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
 if (isServer) then {
 	call TREND_fnc_buildEnemyFaction;
-	format["Mission Core: %1", "EnemyGlobalVarsSet"] call TREND_fnc_log;
+	[format["Mission Core: %1", "EnemyGlobalVarsSet"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;
 
 	call TREND_fnc_buildFriendlyFaction;
-	format["Mission Core: %1", "FriendlyGlobalVarsSet"] call TREND_fnc_log;
+	[format["Mission Core: %1", "FriendlyGlobalVarsSet"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;
 
 	// #include "..\CustomMission\TRGMSetEnemyFaction.sqf"; //if _useCustomEnemyFaction set to true within this sqf, will overright the above enemy faction data
-	format["Mission Core: %1", "EnemyFactionSet"] call TREND_fnc_log;
+	[format["Mission Core: %1", "EnemyFactionSet"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;
 
 	// #include "..\CustomMission\TRGMSetFriendlyLoadouts.sqf"; //as above, but for _useCustomFriendlyLoadouts
-	format["Mission Core: %1", "FriendlyLoadoutSet"] call TREND_fnc_log;
+	[format["Mission Core: %1", "FriendlyLoadoutSet"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;
 
 	/*Fix any changed types	 */
@@ -363,7 +363,7 @@ if (isServer) then {
 
 	TREND_CustomObjectsSet = true; publicVariable "TREND_CustomObjectsSet";
 	// call compile preprocessFileLineNumbers "RandFramework\setFriendlyObjects.sqf";
-	format["Mission Core: %1", "FriendlyObjectsSet"] call TREND_fnc_log;
+	[format["Mission Core: %1", "FriendlyObjectsSet"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;
 
 /*
@@ -414,7 +414,7 @@ if (isServer) then {
 		};
 	};
 */
-	format["Mission Core: %1", "EnemyFactionDataProcessed"] call TREND_fnc_log;
+	[format["Mission Core: %1", "EnemyFactionDataProcessed"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;
 
     _isAceRespawnWithGear = false;
@@ -423,7 +423,7 @@ if (isServer) then {
   	   _isAceRespawnWithGear = "ace_respawn_savePreDeathGear" call CBA_settings_fnc_get;
 	};
 
-	format["Mission Core: %1", "savePreDeathGear"] call TREND_fnc_log;
+	[format["Mission Core: %1", "savePreDeathGear"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;
 	if (/*TREND_LoadoutData != "" || TREND_LoadoutDataDefault != ""*/true) then {
 		{
@@ -439,29 +439,29 @@ if (isServer) then {
 			};
 		} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 	};
-	format["Mission Core: %1", "setLoadout ran"] call TREND_fnc_log;
+	[format["Mission Core: %1", "setLoadout ran"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;
 
 	box1 allowDamage false;
 	[box1] call TREND_fnc_initAmmoBox;
 
-	format["Mission Core: %1", "boxCargo set"] call TREND_fnc_log;
+	[format["Mission Core: %1", "boxCargo set"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;
 };
 
-format["Mission Core: %1", "PreCustomObjectSet"] call TREND_fnc_log;
+[format["Mission Core: %1", "PreCustomObjectSet"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
 waitUntil {TREND_CustomObjectsSet};
 
-format["Mission Core: %1", "PostCustomObjectSet"] call TREND_fnc_log;
+[format["Mission Core: %1", "PostCustomObjectSet"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
 if (!isNil "chopper1") then {
 	[[chopper1]] call TREND_fnc_addTransportActions;
 };
 
-format["Mission Core: %1", "TransportScriptRun"] call TREND_fnc_log;
+[format["Mission Core: %1", "TransportScriptRun"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
 if (TREND_iUseRevive > 0 && {isNil "AIS_MOD_ENABLED"}) then {
@@ -471,7 +471,7 @@ if (TREND_iUseRevive > 0 && {isNil "AIS_MOD_ENABLED"}) then {
 };
 
 
-format["Mission Core: %1", "AIS Script Run"] call TREND_fnc_log;
+[format["Mission Core: %1", "AIS Script Run"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
 
@@ -484,14 +484,14 @@ if (!isMultiplayer) then {
 	} forEach allUnits;
 };
 
-format["Mission Core: %1", "DeleteMpOnlyVehicles"] call TREND_fnc_log;
+[format["Mission Core: %1", "DeleteMpOnlyVehicles"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
 
 player doFollow player;
 
 
-format["Mission Core: %1", "DoFollowRun"] call TREND_fnc_log;
+[format["Mission Core: %1", "DoFollowRun"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
 if (TREND_iMissionParamType == 5) then {
@@ -502,16 +502,16 @@ if (TREND_iMissionParamType == 5) then {
 else {
 	call TREND_fnc_StartMission;
 };
-format["Mission Core: %1", "InitCampaign/StartMission ran"] call TREND_fnc_log;
+[format["Mission Core: %1", "InitCampaign/StartMission ran"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
 waitUntil {TREND_MissionLoaded};
 
-format["Mission Core: %1", "TREND_MissionLoaded true"] call TREND_fnc_log;
+[format["Mission Core: %1", "TREND_MissionLoaded true"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
 TREND_fnc_CheckBadPoints = {
-	format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+	format["%1 called by %2", "TREND_fnc_CheckBadPoints", "TREND_fnc_mainInit"] call TREND_fnc_log;
 	if (isNil "TREND_BadPoints") then {TREND_BadPoints = 0; publicVariable "TREND_BadPoints";};
 	_lastRepPoints = [TREND_MaxBadPoints - TREND_BadPoints,1] call BIS_fnc_cutDecimals;
 	_lastBadPoints = TREND_BadPoints;
@@ -604,19 +604,19 @@ TREND_fnc_CheckBadPoints = {
 };
 [] spawn TREND_fnc_CheckBadPoints;
 player addEventHandler ["Respawn", { [] spawn TREND_fnc_CheckBadPoints; }];
-format["Mission Core: %1", "BadPointsSet"] call TREND_fnc_log;
+[format["Mission Core: %1", "BadPointsSet"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
 if (isServer) then {
 	{
 		_x setVariable ["DontDelete",true];
 	} forEach nearestObjects [getMarkerPos "mrkHQ", ["all"], 2000];
-	format["Mission Core: %1", "DontDeleteSet"] call TREND_fnc_log;
+	[format["Mission Core: %1", "DontDeleteSet"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;
 
 	if (isMultiplayer && {!(TREND_iMissionParamType == 5)}) then {
 		TREND_fnc_CheckAnyPlayersAlive = {
-			format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+			format["%1 called by %2", "TREND_fnc_CheckAnyPlayersAlive", "TREND_fnc_mainInit"] call TREND_fnc_log;
 			sleep 3;
 			_bEnded = false;
 			while {!_bEnded} do {
@@ -645,7 +645,7 @@ if (isServer) then {
 		[] spawn TREND_fnc_CheckAnyPlayersAlive;
  	};
 
-	format["Mission Core: %1", "NonAliveEndCheckRunning"] call TREND_fnc_log;
+	[format["Mission Core: %1", "NonAliveEndCheckRunning"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;
 
 	if (TREND_iAllowNVG == 0) then {
@@ -658,25 +658,25 @@ if (isServer) then {
 			_x removeItem TREND_sEnemyNVClassName;
 		} forEach allUnits;
 	};
-	format["Mission Core: %1", "NVGStateSet"] call TREND_fnc_log;
+	[format["Mission Core: %1", "NVGStateSet"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;
 
 	TREND_fnc_PlayBaseRadioEffect = {
-		format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+		format["%1 called by %2", "TREND_fnc_PlayBaseRadioEffect", "TREND_fnc_mainInit"] call TREND_fnc_log;
 		while {true} do {
 			playSound3D ["A3\Sounds_F\sfx\radio\" + selectRandom TREND_FriendlyRadioSounds + ".wss",baseRadio,false,getPosASL baseRadio,0.5,1,0];
 			sleep selectRandom [20,30,40];
 		};
 	};
 	[] spawn TREND_fnc_PlayBaseRadioEffect;
-	format["Mission Core: %1", "PlayBaseRadioEffect"] call TREND_fnc_log;
+	[format["Mission Core: %1", "PlayBaseRadioEffect"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;
 
 	TREND_fnc_MonsoonEffect = {
-		format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+		format["%1 called by %2", "TREND_fnc_MonsoonEffect", "TREND_fnc_mainInit"] call TREND_fnc_log;
 		_iWeatherOption = selectRandom TREND_WeatherOptions;
 		if (_iWeatherOption == 11) then {
-			format["Mission Core: %1", "MonsoonEffect"] call TREND_fnc_log;
+			[format["Mission Core: %1", "MonsoonEffect"], true] call TREND_fnc_log;
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
@@ -706,12 +706,12 @@ if (isServer) then {
 	sleep _coreCountSleep;
 
 	TREND_fnc_SandStormEffect = {
-		format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+		format["%1 called by %2", "TREND_fnc_SandStormEffect", "TREND_fnc_mainInit"] call TREND_fnc_log;
 		// Make sure we're not trying to do monsoon and sandstorm at the same time...
 		_iSandStormOption = [2, (TREND_AdvancedSettings select TREND_ADVSET_SANDSTORM_IDX)] select ((selectRandom TREND_WeatherOptions) != 11);
 
 		if (_iSandStormOption == 0 && selectRandom[true,false,false,false,false]) then { //Random
-			format["Mission Core: %1", "SandStormEffect"] call TREND_fnc_log;
+			[format["Mission Core: %1", "SandStormEffect"], true] call TREND_fnc_log;
 			StartWhen = selectRandom [990,1290,1710];
 			sleep StartWhen;
 			//work out how to deal with JIP if sandstorm already playing
@@ -740,10 +740,9 @@ if (isServer) then {
 					_x setskill ["spotTime",0.5];
 				};
 			} forEach allUnits;
-			format["Mission Core: %1", "SandStormEffect"] call TREND_fnc_log;
 		};
 		if (_iSandStormOption == 1) then { //Always
-			format["Mission Core: %1", "SandStormEffect"] call TREND_fnc_log;
+			[format["Mission Core: %1", "SandStormEffect"], true] call TREND_fnc_log;
 			StartWhen = selectRandom [990,1290,1710];
 			sleep StartWhen;
 			//work out how to deal with JIP if sandstorm already playing
@@ -774,7 +773,7 @@ if (isServer) then {
 			} forEach allUnits;
 		};
 		if (_iSandStormOption == 3) then { //5 hours non stop
-			format["Mission Core: %1", "SandStormEffect"] call TREND_fnc_log;
+			[format["Mission Core: %1", "SandStormEffect"], true] call TREND_fnc_log;
 			//ok, if something is true, then in here we will start the sand storm and all clients!
 			//work out how to deal with JIP if sandstorm already playing
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
@@ -809,10 +808,10 @@ if (isServer) then {
 
 [] spawn TREND_fnc_animateAnimals;
 
-format["Mission Core: %1", "AnimalStateSet"] call TREND_fnc_log;
+[format["Mission Core: %1", "AnimalStateSet"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
-format["Mission Core: %1", "CoreFinished"] call TREND_fnc_log;
+[format["Mission Core: %1", "CoreFinished"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
 TREND_CoreCompleted = true; publicVariable "TREND_CoreCompleted";
@@ -821,7 +820,7 @@ if (TREND_iMissionParamType != 5) then {
 	call TREND_fnc_PostStartMission;
 };
 
-format["Mission Core: %1", "RunFlashLightState"] call TREND_fnc_log;
+[format["Mission Core: %1", "RunFlashLightState"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
 _iEnemyFlashLightOption = TREND_AdvancedSettings select TREND_ADVSET_SELECT_ENEMY_FLASHLIGHTS_IDX;
@@ -840,6 +839,6 @@ if (_iEnemyFlashLightOption == 1) then {
 	} forEach allUnits;
 };
 
-format["Mission Core: %1", "Main Init Complete"] call TREND_fnc_log;
+[format["Mission Core: %1", "Main Init Complete"], true] call TREND_fnc_log;
 
 true;
