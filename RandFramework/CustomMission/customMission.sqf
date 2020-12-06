@@ -9,7 +9,7 @@ fnc_CustomRequired = { //used to set any required details for the AO (example, a
 	_result = false;
 
 	_flatPos = nil;
-	_flatPos = [[_centralAO_x,_centralAO_y,0] , 10, 150, 10, 0, 0.3, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+	_flatPos = [[_centralAO_x,_centralAO_y,0] , 10, 150, 10, 0, 0.3, 0,[],[[_centralAO_x,_centralAO_y],[_centralAO_x,_centralAO_y]]] call TREND_fnc_findSafePos;
 
 	if ((_flatPos select 0) > 0) then {_result = true};
 	//flatPosDebug = _flatPos;
@@ -36,7 +36,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	if (_markerType != "empty") then { _markerType = "hd_unknown"; }; //You can set the type of marker here, but if the player has selected to hide mission locations, then your marker will not show
 
 	_hvtLzPos = nil;
-	_hvtLzPos = [[_centralAO_x,_centralAO_y,0] , 10, 150, 10, 0, 0.3, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+	_hvtLzPos = [[_centralAO_x,_centralAO_y,0] , 10, 150, 10, 0, 0.3, 0,[],[[_centralAO_x,_centralAO_y],[_centralAO_x,_centralAO_y]]] call TREND_fnc_findSafePos;
 	if ((_hvtLzPos select 0) > 0) then {
 		_hPad = createVehicle ["Land_HelipadEmpty_F", _hvtLzPos, [], 0, "NONE"];
 	}
@@ -61,7 +61,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	}
 	else {
 		_flatPos = nil;
-		_flatPos = [getPos _objectiveMainBuilding, 10, 100, 10, 0, 0.3, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+		_flatPos = [getPos _objectiveMainBuilding, 10, 100, 10, 0, 0.3, 0,[],[getPos _objectiveMainBuilding,getPos _objectiveMainBuilding]] call TREND_fnc_findSafePos;
 		_poshVehPos = _flatPos;
 	};
 
@@ -83,7 +83,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	}
 	else {
 		_flatPos = nil;
-		_flatPos = [getPos _objectiveMainBuilding, 10, 50, 5, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+		_flatPos = [getPos _objectiveMainBuilding, 10, 50, 5, 0, 0.5, 0,[],[getPos _objectiveMainBuilding,getPos _objectiveMainBuilding]] call TREND_fnc_findSafePos;
 		if ((_flatPos select 0) > 0) then {
 			_guardUnit1 = (createGroup east) createUnit [_firstGuardClass,_flatPos,[],0,"NONE"];
 		}

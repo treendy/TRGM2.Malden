@@ -35,12 +35,12 @@ _bloodPools = ["BloodPool_01_Large_New_F","BloodSplatter_01_Large_New_F"];
 
 
 _flatPos = [0,0,0];
-_flatPos = [_mainObjPos , 200, 2000, 1, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+_flatPos = [_mainObjPos , 200, 2000, 1, 0, 0.5, 0,[],[[0,0,0],[0,0,0]],_sVictimVeh] call TREND_fnc_findSafePos;
 if (!(isNil "IsTraining") || _isFullMap) then {
 	_nearestRoads = _mainObjPos nearRoads 30000;
 	if (count _nearestRoads > 0) then {
 		_thisDownedChopperCenter = getPos (selectRandom _nearestRoads);
-		_flatPos = [_thisDownedChopperCenter , 100, 2000, 1, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+		_flatPos = [_thisDownedChopperCenter , 100, 2000, 1, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call TREND_fnc_findSafePos;
 	};
 };
 
@@ -83,7 +83,7 @@ if (str(_flatPos) != "[0,0,0]") then {
 		_checkPointGuidePos = _flatPos;
 		_iCount = _iCount - 1;
 		_flatPosSentry = nil;
-		_flatPosSentry = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+		_flatPosSentry = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[_checkPointGuidePos,_checkPointGuidePos]] call TREND_fnc_findSafePos;
 		if (_flatPosSentry select 0 > 0) then {
 			_thisPosAreaOfCheckpoint = _flatPosSentry;
 			_thisRoadOnly = false;
@@ -96,7 +96,7 @@ if (str(_flatPos) != "[0,0,0]") then {
 	};
 
 	_flatPos2 = nil;
-	_flatPos2 = [_flatPos , 10, 25, 3, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+	_flatPos2 = [_flatPos , 10, 25, 3, 0, 0.5, 0,[],[[0,0,0],[0,0,0]],_sVictim] call TREND_fnc_findSafePos;
 	_group = createGroup civilian;
 	_downedCiv = _group createUnit [_sVictim,_flatPos2,[],0,"NONE"];
 

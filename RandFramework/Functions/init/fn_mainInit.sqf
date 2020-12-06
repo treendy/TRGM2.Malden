@@ -142,7 +142,7 @@ if (!isDedicated) then {
 				{
 					_providerModule = _x;
 					{
-						if (typeOf _x == "SupportRequester" && _oldUnit in (synchronizedObjects _x)) then {
+						if (typeOf _x isEqualTo "SupportRequester" && _oldUnit in (synchronizedObjects _x)) then {
 							[player, _x, _providerModule] call BIS_fnc_addSupportLink;
 						};
 					}forEach synchronizedObjects _providerModule;
@@ -197,7 +197,7 @@ private _isAdmin = (!isMultiplayer || isMultiplayer && !isDedicated && isServer 
 if (!isDedicated && _isAdmin) then {
 	waitUntil {TREND_bOptionsSet};
 	if (TREND_iMissionParamType != 5) then {	//if isCampaign, dont allow to select AO
-		if (TREND_AdvancedSettings select TREND_ADVSET_SELECT_AO_IDX == 1) then {
+		if (TREND_AdvancedSettings select TREND_ADVSET_SELECT_AO_IDX isEqualTo 1) then {
 			mrkAoSelect1 = nil;
 			mrkAoSelect2 = nil;
 			mrkAoSelect3 = nil;
@@ -208,22 +208,28 @@ if (!isDedicated && _isAdmin) then {
 			onMapSingleClick "Mission1Loc = _pos; publicVariable 'Mission1Loc'; openMap false; onMapSingleClick ''; true;";
 			sleep 1;
 			waitUntil {!visibleMap};
-			["mrkAoSelect1",  Mission1Loc, "ICON", "ColorRed", [1,1], "AO 1"] call AIS_Core_fnc_createLocalMarker;
+			if (!isNil "Mission1Loc") then {
+				["mrkAoSelect1",  Mission1Loc, "ICON", "ColorRed", [1,1], "AO 1"] call AIS_Core_fnc_createLocalMarker;
+			};
 
-			if (TREND_iMissionParamType == 0 || TREND_iMissionParamType == 4) then {
+			if (TREND_iMissionParamType isEqualTo 0 || TREND_iMissionParamType isEqualTo 4) then {
 				titleText[localize "STR_TRGM2_tele_SelectPositionAO2", "PLAIN"];
 				openMap true;
 				onMapSingleClick "Mission2Loc = _pos; publicVariable 'Mission2Loc'; openMap false; onMapSingleClick ''; true;";
 				sleep 1;
 				waitUntil {!visibleMap};
-				["mrkAoSelect2",  Mission2Loc, "ICON", "ColorRed", [1,1], "AO 2"] call AIS_Core_fnc_createLocalMarker;
+				if (!isNil "Mission2Loc") then {
+					["mrkAoSelect2",  Mission2Loc, "ICON", "ColorRed", [1,1], "AO 2"] call AIS_Core_fnc_createLocalMarker;
+				};
 
 				titleText[localize "STR_TRGM2_tele_SelectPositionAO3", "PLAIN"];
 				openMap true;
 				onMapSingleClick "Mission3Loc = _pos; publicVariable 'Mission3Loc'; openMap false; onMapSingleClick ''; true;";
 				sleep 1;
 				waitUntil {!visibleMap};
-				["mrkAoSelect3",  Mission3Loc, "ICON", "ColorRed", [1,1], "AO 3"] call AIS_Core_fnc_createLocalMarker;
+				if (!isNil "Mission3Loc") then {
+					["mrkAoSelect2",  Mission3Loc, "ICON", "ColorRed", [1,1], "AO 2"] call AIS_Core_fnc_createLocalMarker;
+				};
 			};
 
 			if (getMarkerColor "mrkAoSelect1" != "") then {deleteMarker "mrkAoSelect1";};
@@ -231,7 +237,7 @@ if (!isDedicated && _isAdmin) then {
 			if (getMarkerColor "mrkAoSelect3" != "") then {deleteMarker "mrkAoSelect3";};
 		};
 
-		if (TREND_AdvancedSettings select TREND_ADVSET_SELECT_AO_CAMP_IDX == 1) then {
+		if (TREND_AdvancedSettings select TREND_ADVSET_SELECT_AO_CAMP_IDX isEqualTo 1) then {
 			titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED"];
 			_camera cameraEffect ["Terminate","back"];
 			titleText[localize "STR_TRGM2_tele_SelectPosition_AO_Camp", "PLAIN"];
@@ -252,7 +258,7 @@ private _coreCountSleep = 0.1;
 [format["Mission Core: %1", "Init"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
-if (isServer && TREND_AdvancedSettings select TREND_ADVSET_GROUP_MANAGE_IDX == 1) then {
+if (isServer && TREND_AdvancedSettings select TREND_ADVSET_GROUP_MANAGE_IDX isEqualTo 1) then {
 	["Initialize"] call BIS_fnc_dynamicGroups;//Exec on Server
 };
 
@@ -293,7 +299,7 @@ if (isServer) then {
 	if (typeName sCivilian != "ARRAY") then {sCivilian = [sCivilian]};
 	/*end */
 
-	private _airTransClassName = selectRandom (SupplySupportChopperOptions select {getNumber(configFile >> "CfgVehicles" >> _x >> "transportSoldier") >= 10});
+	private _airTransClassName = selectRandom (SupplySupportChopperOptions select {_x call TREND_fnc_isTransport});
 	if (!isNil "chopper1" && {_airTransClassName != typeOf chopper1}) then {
 		{deleteVehicle _x;} forEach crew (vehicle chopper1) + [vehicle chopper1];
 		private _chopper1Arr = [getPos heliPad1, 0, _airTransClassName, WEST] call BIS_fnc_spawnVehicle;
@@ -343,20 +349,23 @@ if (isServer) then {
 
 	{
 		if (isClass(configFile >> "CfgVehicles" >> typeOf _x) && {_x isKindOf "LandVehicle" || _x isKindOf "Air" || _x isKindOf "Ship"}) then {
-			private _faction = getText(configFile >> "CfgVehicles" >> typeOf _x >> "faction");
-			private _friendlyFactionIndex = TREND_AdvancedSettings select TREND_ADVSET_FRIENDLY_FACTIONS_IDX;
-			_westClassName = (TREND_WestFactionData select _friendlyFactionIndex) select 0;
-			if ((crew _x) isEqualTo [] && getNumber(configFile >> "CfgFactionClasses" >> _faction >> "side") == 1 && _faction != _westClassName) then {
-				private _newVehClass = [_x, WEST] call TREND_fnc_getFactionVehicle;
-				private _pos = getPosATL _x;
-				private _dir = getDir _x;
-				deleteVehicle _x;
-				sleep 0.01;
-				private _newVeh = createVehicle [_newVehClass, _pos, [], 0, "NONE"];
-				_newVeh setDir _dir;
-				_newVeh allowDamage false;
-				_newVeh setPos (_pos vectorAdd [0,0,0.1]);
-				_newVeh allowDamage true;
+			_faction = getText(configFile >> "CfgVehicles" >> typeOf _x >> "faction");
+			_friendlyFactionIndex = TREND_AdvancedSettings select TREND_ADVSET_FRIENDLY_FACTIONS_IDX;
+			_westFaction = (TREND_WestFactionData select _friendlyFactionIndex) select 0;
+			if ((crew _x) isEqualTo [] && {getNumber(configFile >> "CfgFactionClasses" >> _faction >> "side") isEqualTo 1 && {!(_faction isEqualTo _westFaction)}}) then {
+				_newVehClass = [_x, WEST] call TREND_fnc_getFactionVehicle;
+				if (!isNil "_newVehClass") then {
+					private _pos = getPosATL _x;
+					private _dir = getDir _x;
+					deleteVehicle _x;
+					sleep 0.01;
+					private _newVeh = createVehicle [_newVehClass, _pos, [], 0, "NONE"];
+					_newVeh setDir _dir;
+					_newVeh allowDamage false;
+					_newVeh setPos (_pos vectorAdd [0,0,0.1]);
+					_newVeh allowDamage true;
+				};
+
 			};
 		};
 	} forEach vehicles;
@@ -384,7 +393,7 @@ if (isServer) then {
  			 		_class = _class select 0;
 				};
 				_classArray = [];
-				if (typeName _class == "ARRAY") then {
+				if (typeName _class isEqualTo "ARRAY") then {
 					_classArray = _class;
 				}
 				else {
@@ -494,7 +503,7 @@ player doFollow player;
 [format["Mission Core: %1", "DoFollowRun"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
-if (TREND_iMissionParamType == 5) then {
+if (TREND_iMissionParamType isEqualTo 5) then {
 	if (isServer) then {
 		call TREND_fnc_initCampaign;
 	};
@@ -544,7 +553,7 @@ TREND_fnc_CheckBadPoints = {
 			if (TREND_BadPoints > _lastBadPoints) then {_bRepWorse = true};
 			_lastBadPoints = TREND_BadPoints;
 			if (TREND_iMissionParamType != 5) then {
-				if (_dCurrentRep <= 0 && TREND_iMissionParamRepOption == 1) then {
+				if (_dCurrentRep <= 0 && {TREND_iMissionParamRepOption isEqualTo 1}) then {
 					_iCurrentTaskCount = 0;
 					["tskKeepAboveAverage", "failed"] call FHQ_fnc_ttSetTaskState;
 					while {_iCurrentTaskCount < count TREND_ActiveTasks} do {
@@ -557,10 +566,10 @@ TREND_fnc_CheckBadPoints = {
 
 					[TREND_FriendlySide, ["DeBrief", localize "STR_TRGM2_mainInit_Debrief", "Debrief", ""]] call FHQ_fnc_ttAddTasks;
 				};
-				if (_dCurrentRep <= 0 && TREND_iMissionParamRepOption == 0) then { //note... when gaining rep, we increase the TREND_MaxBadPoints, and when lower, we incrase TREND_BadPoints (rep is calulated by the difference)
+				if (_dCurrentRep <= 0 && {TREND_iMissionParamRepOption isEqualTo 0}) then { //note... when gaining rep, we increase the TREND_MaxBadPoints, and when lower, we incrase TREND_BadPoints (rep is calulated by the difference)
 					["tskKeepAboveAverage", "failed"] call FHQ_fnc_ttSetTaskState;
 				};
-				if (_dCurrentRep > 0 && TREND_iMissionParamRepOption == 0) then {
+				if (_dCurrentRep > 0 && {TREND_iMissionParamRepOption isEqualTo 0}) then {
 					["tskKeepAboveAverage", "succeeded"] call FHQ_fnc_ttSetTaskState;
 				};
 			};
@@ -569,7 +578,7 @@ TREND_fnc_CheckBadPoints = {
 			_bRepWorse = true;
 			if (_CurrentRank > _LastRank) then {_bRepWorse = false};
 			_LastRank = _CurrentRank;
-			if (TREND_iMissionParamType == 5) then {
+			if (TREND_iMissionParamType isEqualTo 5) then {
 				_sRankIcon = "";
 				_sRankMessage = "";
 				//HERE HERE HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -614,7 +623,7 @@ if (isServer) then {
 	[format["Mission Core: %1", "DontDeleteSet"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;
 
-	if (isMultiplayer && {!(TREND_iMissionParamType == 5)}) then {
+	if (isMultiplayer && {!(TREND_iMissionParamType isEqualTo 5)}) then {
 		TREND_fnc_CheckAnyPlayersAlive = {
 			format["%1 called by %2", "TREND_fnc_CheckAnyPlayersAlive", "TREND_fnc_mainInit"] call TREND_fnc_log;
 			sleep 3;
@@ -648,7 +657,7 @@ if (isServer) then {
 	[format["Mission Core: %1", "NonAliveEndCheckRunning"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;
 
-	if (TREND_iAllowNVG == 0) then {
+	if (TREND_iAllowNVG isEqualTo 0) then {
 		{
 			_x addPrimaryWeaponItem "acc_flashlight";
 			_x enableGunLights "forceOn";
@@ -675,11 +684,11 @@ if (isServer) then {
 	TREND_fnc_MonsoonEffect = {
 		format["%1 called by %2", "TREND_fnc_MonsoonEffect", "TREND_fnc_mainInit"] call TREND_fnc_log;
 		_iWeatherOption = selectRandom TREND_WeatherOptions;
-		if (_iWeatherOption == 11) then {
+		if (_iWeatherOption isEqualTo 11) then {
 			[format["Mission Core: %1", "MonsoonEffect"], true] call TREND_fnc_log;
 			//Set enemy skill
 			{
-				if (Side _x == East) then {
+				if (Side _x isEqualTo East) then {
 					_x setskill ["aimingAccuracy",0.01];
 					_x setskill ["aimingShake",0.01];
 					_x setskill ["aimingSpeed",0.01];
@@ -690,7 +699,7 @@ if (isServer) then {
 			sleep 18030;
 			//reset enemy skill
 			{
-				if (Side _x == East) then {
+				if (Side _x isEqualTo East) then {
 					_x setskill ["aimingAccuracy",0.15];
 					_x setskill ["aimingShake",0.1];
 					_x setskill ["aimingSpeed",0.2];
@@ -710,7 +719,7 @@ if (isServer) then {
 		// Make sure we're not trying to do monsoon and sandstorm at the same time...
 		_iSandStormOption = [2, (TREND_AdvancedSettings select TREND_ADVSET_SANDSTORM_IDX)] select ((selectRandom TREND_WeatherOptions) != 11);
 
-		if (_iSandStormOption == 0 && selectRandom[true,false,false,false,false]) then { //Random
+		if (_iSandStormOption isEqualTo 0 && {selectRandom[true,false,false,false,false]}) then { //Random
 			[format["Mission Core: %1", "SandStormEffect"], true] call TREND_fnc_log;
 			StartWhen = selectRandom [990,1290,1710];
 			sleep StartWhen;
@@ -721,7 +730,7 @@ if (isServer) then {
 			[[SandStormTimer,false], "RandFramework\RikoSandStorm\ROSSandstorm.sqf"] remoteExec ["execVM", 0];
 			//Set enemy skill
 			{
-				if (Side _x == East) then {
+				if (Side _x isEqualTo East) then {
 					_x setskill ["aimingAccuracy",0.01];
 					_x setskill ["aimingShake",0.01];
 					_x setskill ["aimingSpeed",0.01];
@@ -732,7 +741,7 @@ if (isServer) then {
 			sleep SandStormTimer;
 			//reset enemy skill
 			{
-				if (Side _x == East) then {
+				if (Side _x isEqualTo East) then {
 					_x setskill ["aimingAccuracy",0.15];
 					_x setskill ["aimingShake",0.1];
 					_x setskill ["aimingSpeed",0.2];
@@ -741,7 +750,7 @@ if (isServer) then {
 				};
 			} forEach allUnits;
 		};
-		if (_iSandStormOption == 1) then { //Always
+		if (_iSandStormOption isEqualTo 1) then { //Always
 			[format["Mission Core: %1", "SandStormEffect"], true] call TREND_fnc_log;
 			StartWhen = selectRandom [990,1290,1710];
 			sleep StartWhen;
@@ -752,7 +761,7 @@ if (isServer) then {
 			[[SandStormTimer,false], "RandFramework\RikoSandStorm\ROSSandstorm.sqf"] remoteExec ["execVM", 0];
 			//Set enemy skill
 			{
-				if (Side _x == East) then {
+				if (Side _x isEqualTo East) then {
 					_x setskill ["aimingAccuracy",0.01];
 					_x setskill ["aimingShake",0.01];
 					_x setskill ["aimingSpeed",0.01];
@@ -763,7 +772,7 @@ if (isServer) then {
 			sleep SandStormTimer;
 			//reset enemy skill
 			{
-				if (Side _x == East) then {
+				if (Side _x isEqualTo East) then {
 					_x setskill ["aimingAccuracy",0.15];
 					_x setskill ["aimingShake",0.1];
 					_x setskill ["aimingSpeed",0.2];
@@ -772,7 +781,7 @@ if (isServer) then {
 				};
 			} forEach allUnits;
 		};
-		if (_iSandStormOption == 3) then { //5 hours non stop
+		if (_iSandStormOption isEqualTo 3) then { //5 hours non stop
 			[format["Mission Core: %1", "SandStormEffect"], true] call TREND_fnc_log;
 			//ok, if something is true, then in here we will start the sand storm and all clients!
 			//work out how to deal with JIP if sandstorm already playing
@@ -780,7 +789,7 @@ if (isServer) then {
 			[[18030,false], "RandFramework\RikoSandStorm\ROSSandstorm.sqf"] remoteExec ["execVM", 0];
 			//Set enemy skill
 			{
-				if (Side _x == East) then {
+				if (Side _x isEqualTo East) then {
 					_x setskill ["aimingAccuracy",0.01];
 					_x setskill ["aimingShake",0.01];
 					_x setskill ["aimingSpeed",0.01];
@@ -791,7 +800,7 @@ if (isServer) then {
 			sleep 18030;
 			//reset enemy skill
 			{
-				if (Side _x == East) then {
+				if (Side _x isEqualTo East) then {
 					_x setskill ["aimingAccuracy",0.15];
 					_x setskill ["aimingShake",0.1];
 					_x setskill ["aimingSpeed",0.2];
@@ -824,10 +833,10 @@ if (TREND_iMissionParamType != 5) then {
 sleep _coreCountSleep;
 
 _iEnemyFlashLightOption = TREND_AdvancedSettings select TREND_ADVSET_SELECT_ENEMY_FLASHLIGHTS_IDX;
-if (_iEnemyFlashLightOption == 0) then {_iEnemyFlashLightOption = selectRandom [1,2]}; //1=yes, 2=no
-if (_iEnemyFlashLightOption == 1) then {
+if (_iEnemyFlashLightOption isEqualTo 0) then {_iEnemyFlashLightOption = selectRandom [1,2]}; //1=yes, 2=no
+if (_iEnemyFlashLightOption isEqualTo 1) then {
 	{
-		if ((side _x) == East) then
+		if ((side _x) isEqualTo East) then
 		{
 			if (isNil { _x getVariable "ambushUnit" }) then {
 				_x addPrimaryWeaponItem "acc_flashlight";

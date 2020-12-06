@@ -93,7 +93,7 @@ private _building_spawn = {
 	private _newx = (_center select 0) + (_offset select 0);
 	private _newy = (_center select 1) + (_offset select 1);
 	private _newz = (_offset select 2);
-	private _safePos = [[_newx, _newy, _newz], 20,75,25,0,0.15,0,[],[[_newx, _newy],[_newx, _newy]]] call BIS_fnc_findSafePos; // find a valid pos
+	private _safePos = [[_newx, _newy, _newz], sizeOf "Land_Cargo_HQ_V1_F",(sizeOf "Land_Cargo_HQ_V1_F" + sizeOf _name),25,0,0.15,0,[],[[_newx, _newy],[_newx, _newy]], _name] call TREND_fnc_findSafePos; // find a valid pos
 
 	[_safePos, sizeOf _name] call TREND_fnc_hideTerrainObjects;
 	private _building = createVehicle [_name, [0,0,0], [], 0, "NONE"];
@@ -108,7 +108,7 @@ private _helo_spawn = {
 	private _newx = (_center select 0) + (_offset select 0);
 	private _newy = (_center select 1) + (_offset select 1);
 	private _newz = (_offset select 2);
-	private _safePos = [[_newx, _newy, _newz], 20,100,25,0,0.15,0,[],[[_newx, _newy],[_newx, _newy]]] call BIS_fnc_findSafePos; // find a valid pos
+	private _safePos = [[_newx, _newy, _newz], sizeOf "Land_Cargo_HQ_V1_F",((2 * sizeOf "Land_Cargo_HQ_V1_F") + sizeOf _name),25,0,0.15,0,[],[[_newx, _newy],[_newx, _newy]], _name] call TREND_fnc_findSafePos; // find a valid pos
 
 	[_safePos, sizeOf _name] call TREND_fnc_hideTerrainObjects;
 	private _heloArray = [_safePos, 0, _name, WEST] call BIS_fnc_spawnVehicle;

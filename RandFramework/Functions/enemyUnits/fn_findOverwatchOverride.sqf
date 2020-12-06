@@ -33,7 +33,7 @@ _result = _targetPos;
 
 
 while {_scan} do {
-	_checkPos = [_centerPos,0,_maxrange,3,0,50,0,[],[]] call BIS_Fnc_findSafePos;
+	_checkPos = [_centerPos,0,_maxrange,3,0,50,0,[],[]] call TREND_fnc_findSafePos;
 	_height = (_refObj worldtomodel _checkPos) select 2;
 	_dis = _checkPos distance _targetPos;
 	if ((_height > _minheight) and (_dis > _minrange)) then {

@@ -15,7 +15,7 @@ for "_i" from 0 to (count _configPath - 1) do {
 	private _element = _configPath select _i;
 
 	if (isclass _element) then {
-		if ((getText(_element >> "faction")) isEqualTo _factionClassName && (getnumber(_element >> "scope")) == 2 && ((configname _element) isKindOf "LandVehicle" || (configname _element) isKindOf "Air"|| (configname _element) isKindOf "Ship")) then {
+		if ((getText(_element >> "faction")) isEqualTo _factionClassName && {(getnumber(_element >> "scope")) == 2 && {((configname _element) isKindOf "LandVehicle" || (configname _element) isKindOf "Air"|| (configname _element) isKindOf "Ship")}}) then {
 			_vehConfigPaths pushbackunique _element;
 		};
 	};
@@ -23,8 +23,8 @@ for "_i" from 0 to (count _configPath - 1) do {
 
 private _vehs = [];
 {
-	if (getText(_x >> "vehicleClass") != "Training" && !((getText(configfile >> "CfgEditorSubcategories" >> getText(_x >> "editorSubcategory") >> "displayName")) in ["Storage", "Submersibles", "Drones"])) then {
-		_vehs pushBack [(configname _x), getText(_x >> "displayName"), getText(_x >> "textSingular"), getText(configfile >> "CfgEditorSubcategories" >> getText(_x >> "editorSubcategory") >> "displayName"), getNumber (_x >> "transportSoldier") >= 8, (configname _x) call TREND_fnc_isArmed];
+	if (getText(_x >> "vehicleClass") != "Training" && {!((getText(configfile >> "CfgEditorSubcategories" >> getText(_x >> "editorSubcategory") >> "displayName")) in ["Storage", "Submersibles", "Drones"])}) then {
+		_vehs pushBack [(configname _x), getText(_x >> "displayName"), getText(_x >> "textSingular"), getText(configfile >> "CfgEditorSubcategories" >> getText(_x >> "editorSubcategory") >> "displayName"), (configname _x) call TREND_fnc_isTransport, (configname _x) call TREND_fnc_isArmed];
 	};
 } forEach _vehConfigPaths;
 

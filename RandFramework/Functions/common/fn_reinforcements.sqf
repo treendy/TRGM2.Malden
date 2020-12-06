@@ -190,7 +190,7 @@ if (isServer) then {
 	};
 
 	//Find a flat position around the LZ marker & create an HPad there.
-	_flatPos = [_LZMrk , 0, 600, 20, 0, 0.3, 0] call BIS_fnc_findSafePos;
+	_flatPos = [_LZMrk , 0, 600, 20, 0, 0.3, 0, [],[_LZMrk,_LZMrk], (_helo select 0)] call TREND_fnc_findSafePos;
 	_hPad = createVehicle ["Land_HelipadEmpty_F", _flatPos, [], 0, "NONE"];
 
 	//Debug output map markers

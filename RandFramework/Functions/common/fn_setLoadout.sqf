@@ -62,53 +62,29 @@ switch (side _unit) do {
 
 [_unitClassName, getText(_configPath >> "displayName"), getText(_configPath >> "icon"), getText(_configPath >> "textSingular"), getNumber(_configPath >> "attendant"), getNumber(_configPath >> "engineer"), getNumber(_configPath >> "canDeactivateMines"), getNumber(_configPath >> "uavHacker")] params ["_className", "_dispName", "_icon", "_calloutName", "_isMedic", "_isEngineer", "_isExpSpecialist", "_isUAVHacker"];
 
-if (["Asst", _dispName] call BIS_fnc_inString || ["Assi", _dispName] call BIS_fnc_inString || ["Story", _dispName] call BIS_fnc_inString || ["Support", _className] call BIS_fnc_inString || ["Crew", _className] call BIS_fnc_inString) then {
-	_unit setUnitLoadout (getUnitLoadout (selectRandom _riflemen));
+_x params ["_className", "_dispName", "_icon", "_calloutName", ["_isMedic", 0], ["_isEngineer", 0], ["_isExpSpecialist", 0], ["_isUAVHacker", 0]];
+if (isNil "_className" ||isNil "_dispName" || isNil "_icon" || isNil "_calloutName") then {
+
 } else {
-	if (_isEngineer == 1 || _icon == "iconManEngineer") then {
-		_unit setUnitLoadout (getUnitLoadout (selectRandom _engineers));
-	};
-
-	if (_isMedic == 1 || _icon == "iconManMedic") then {
-		_unit setUnitLoadout (getUnitLoadout (selectRandom _medics));
-	};
-
-	if (_isExpSpecialist == 1 || _icon == "iconManExplosive") then {
-		_unit setUnitLoadout (getUnitLoadout (selectRandom _explosiveSpecs));
-	};
-
-	if (_isUAVHacker isEqualTo 1) then {
-		_unit setUnitLoadout (getUnitLoadout (selectRandom _uavOps));
-	};
-
-	if (_icon == "iconManLeader" || _icon == "iconManOfficer") then {
-		_unit setUnitLoadout (getUnitLoadout (selectRandom _leaders));
-	};
-
-	if (_icon == "iconManMG" || ["Auto", _dispName, true] call BIS_fnc_inString || ["Machine", _dispName, true] call BIS_fnc_inString) then {
-		_unit setUnitLoadout (getUnitLoadout (selectRandom _autoriflemen));
-	};
-
-	if (_icon == "iconManAT" || _calloutName == "AT soldier") then {
-		if (["AA", _dispName, true] call BIS_fnc_inString || ["AA", _className] call BIS_fnc_inString) then {
-			_unit setUnitLoadout (getUnitLoadout (selectRandom _aasoldiers));
-		} else {
-			_unit setUnitLoadout (getUnitLoadout (selectRandom _atsoldiers));
-		};
-	};
-
-	if (_icon == "iconMan") then {
-		if (_calloutName == "sniper") then {
-			_unit setUnitLoadout (getUnitLoadout (selectRandom _snipers));
-		} else {
-			if (["Grenadier", _dispName] call BIS_fnc_inString || ["Grenadier", _className] call BIS_fnc_inString) then {
-				_unit setUnitLoadout (getUnitLoadout (selectRandom _grenadiers));
-			} else {
-				if (["Pilot", _dispName] call BIS_fnc_inString || ["Pilot", _className] call BIS_fnc_inString) then {
-					_unit setUnitLoadout (getUnitLoadout (selectRandom _pilots));
-				} else {
-					_unit setUnitLoadout (getUnitLoadout (selectRandom _riflemen));
-				};
+	if (["Ass.", _dispName] call BIS_fnc_inString || ["Asst", _dispName] call BIS_fnc_inString || ["Assi", _dispName] call BIS_fnc_inString || ["Story", _dispName] call BIS_fnc_inString || ["Support", _className] call BIS_fnc_inString || ["Crew", _className] call BIS_fnc_inString) then {
+		_unit setUnitLoadout (getUnitLoadout (selectRandom _riflemen));
+	} else {
+		switch (_icon) do {
+			case "iconManEngineer":	 { _unit setUnitLoadout (getUnitLoadout (selectRandom _engineers)); };
+			case "iconManMedic": 	 { _unit setUnitLoadout (getUnitLoadout (selectRandom _medics)); };
+			case "iconManExplosive": { _unit setUnitLoadout (getUnitLoadout (selectRandom _explosiveSpecs)); };
+			case "iconManLeader":	 { _unit setUnitLoadout (getUnitLoadout (selectRandom _leaders)); };
+			case "iconManOfficer":	 { _unit setUnitLoadout (getUnitLoadout (selectRandom _leaders)); };
+			case "iconManMG":		 { _unit setUnitLoadout (getUnitLoadout (selectRandom _autoriflemen)); };
+			case "iconManAT":		 { if (["AA", _dispName, true] call BIS_fnc_inString || ["AA", _className] call BIS_fnc_inString) then { _unit setUnitLoadout (getUnitLoadout (selectRandom _aasoldiers)); } else { _unit setUnitLoadout (getUnitLoadout (selectRandom _atsoldiers)); }; };
+			default {
+				if (_isEngineer isEqualTo 1) then { _unit setUnitLoadout (getUnitLoadout (selectRandom _engineers)); };
+				if (_isMedic isEqualTo 1) then { _unit setUnitLoadout (getUnitLoadout (selectRandom _medics)); };
+				if (_isExpSpecialist isEqualTo 1) then { _unit setUnitLoadout (getUnitLoadout (selectRandom _explosiveSpecs)); };
+				if (_isUAVHacker isEqualTo 1) then { _unit setUnitLoadout (getUnitLoadout (selectRandom _uavOps)); };
+				if (["Auto", _dispName, true] call BIS_fnc_inString || ["Machine", _dispName, true] call BIS_fnc_inString) then { _unit setUnitLoadout (getUnitLoadout (selectRandom _autoriflemen)); };
+				if (_calloutName isEqualTo "AT soldier") then { if (["AA", _dispName, true] call BIS_fnc_inString || ["AA", _className] call BIS_fnc_inString) then { _unit setUnitLoadout (getUnitLoadout (selectRandom _aasoldiers)); } else { _unit setUnitLoadout (getUnitLoadout (selectRandom _atsoldiers)); }; };
+				if ((_icon isEqualTo "iconMan")) then { if (_calloutName isEqualTo "sniper") then { _unit setUnitLoadout (getUnitLoadout (selectRandom _snipers)); } else { if (["Grenadier", _dispName] call BIS_fnc_inString || ["Grenadier", _className] call BIS_fnc_inString) then { _unit setUnitLoadout (getUnitLoadout (selectRandom _grenadiers)); } else { if (["Pilot", _dispName] call BIS_fnc_inString || ["Pilot", _className] call BIS_fnc_inString) then { _unit setUnitLoadout (getUnitLoadout (selectRandom _pilots)); } else { _unit setUnitLoadout (getUnitLoadout (selectRandom _riflemen)); }; }; }; };
 			};
 		};
 	};

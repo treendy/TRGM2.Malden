@@ -547,7 +547,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 								missionNamespace setVariable [_sTargetName2, _objVehicle2];
 								if (isNil "_nearestRoad2") then {
 									_flatPos = nil;
-									_flatPos = [[_inf1X,_inf1Y,0] , 10, 40, 7, 0, 0.5, 0,[],[[_inf1X,_inf1Y,0],[_inf1X,_inf1Y,0]]] call BIS_fnc_findSafePos;
+									_flatPos = [[_inf1X,_inf1Y,0] , 10, 40, 7, 0, 0.5, 0,[],[[_inf1X,_inf1Y,0],[_inf1X,_inf1Y,0]]] call TREND_fnc_findSafePos;
 									_objVehicle2 setPos _flatPos;
 								}
 								else {
@@ -589,8 +589,8 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 								sAliveCheck = format["!alive(%1) && !alive(%2) && !([""InfSide%3""] call FHQ_fnc_ttAreTasksCompleted)",_sTargetName,_sTargetName2,_iTaskIndex];
 
 								_flatPos = nil;
-								_flatPos = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-								if (str(_flatPos) == "[0,0,0]") then {_flatPos = [[_inf1X,_inf1Y,0] , 15, 250, 7, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;};
+								_flatPos = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]],_truckType] call TREND_fnc_findSafePos;
+								if (str(_flatPos) == "[0,0,0]") then {_flatPos = [[_inf1X,_inf1Y,0] , 15, 250, 7, 0, 0.5, 0,[],[[_inf1X,_inf1Y,0],[_inf1X,_inf1Y,0]],_truckType] call TREND_fnc_findSafePos;};
 								_objVehicle = nil;
 								_objVehicle = _truckType createVehicle [0,0,500];
 								_objVehicle setVariable [_sTargetName, _objVehicle, true];
@@ -610,7 +610,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 								[_sTargetName] spawn TREND_fnc_AAARadioLoop1;
 
 								_flatPos2 = nil;
-								_flatPos2 = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[[_flatPos,100]],[[_inf1X,_inf1Y,0],[_inf1X,_inf1Y,0]]] call BIS_fnc_findSafePos;
+								_flatPos2 = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[[_flatPos,100]],[[0,0,0],[0,0,0]],_truckType] call TREND_fnc_findSafePos;
 								if (str(_flatPos2) == "[0,0,0]") then {
 									sAliveCheck = format["!alive(%1) && !([""InfSide%2""] call FHQ_fnc_ttAreTasksCompleted)",_sTargetName,_iTaskIndex];
 								}
@@ -663,8 +663,8 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 								sAliveCheck = format["!alive(%1) && !alive(%2) && !([""InfSide%3""] call FHQ_fnc_ttAreTasksCompleted)",_sTargetName,_sTargetName2,_iTaskIndex];
 
 								_flatPos = nil;
-								_flatPos = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-								if (str(_flatPos) == "[0,0,0]") then {_flatPos = [[_inf1X,_inf1Y,0] , 15, 250, 7, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;};
+								_flatPos = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]],_truckType] call TREND_fnc_findSafePos;
+								if (str(_flatPos) == "[0,0,0]") then {_flatPos = [[_inf1X,_inf1Y,0] , 15, 250, 7, 0, 0.5, 0,[],[[0,0,0],[0,0,0]],_truckType] call TREND_fnc_findSafePos;};
 								_objVehicle = nil;
 								_objVehicle = _truckType createVehicle [0,0,500];
 								_objVehicle setVariable [_sTargetName, _objVehicle, true];
@@ -686,7 +686,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 									[_objVehicle] spawn TREND_fnc_ArtiFireLoop1;
 
 								_flatPos2 = nil;
-								_flatPos2 = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[[_flatPos,100]],[[_inf1X,_inf1Y,0],[_inf1X,_inf1Y,0]]] call BIS_fnc_findSafePos;
+								_flatPos2 = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[[_flatPos,100]],[[_inf1X,_inf1Y,0],[_inf1X,_inf1Y,0]],_truckType] call TREND_fnc_findSafePos;
 								if (str(_flatPos2) == "[0,0,0]") then {
 									sAliveCheck = format["!alive(%1) && !([""InfSide%2""] call FHQ_fnc_ttAreTasksCompleted)",_sTargetName,_iTaskIndex];
 								}
@@ -783,7 +783,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 								};
 								_initPos = selectRandom _allpositionsLaptop1;
 								_flatPosInform = nil;
-								_flatPosInform = [_initPos , 10, 75, 7, 0, 0.5, 0,[],[_initPos,_initPos]] call BIS_fnc_findSafePos;
+								_flatPosInform = [_initPos , 10, 75, 7, 0, 0.5, 0,[],[_initPos,_initPos],_objInformant] call TREND_fnc_findSafePos;
 								if (count _flatPosInform == 3) then {
 									//if pos is [x,x] instead of [x,x,x] then dont setPosATL!
 									_objInformant setPosATL (_flatPosInform);

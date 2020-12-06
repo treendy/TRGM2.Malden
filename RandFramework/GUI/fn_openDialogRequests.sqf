@@ -127,7 +127,10 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 	private _unitClass = TREND_SpawnVehArray select _index;
 	[_unitClass] spawn {
 		params ["_classToSpawn"];
-		private _safePos = [getPos player, 20,100,25,0,0.15,0,[],[getPos player,getPos player]] call BIS_fnc_findSafePos; // find a valid pos
+		private _safePos = [getPos player, 20,100,25,0,0.15,0,[],[getPos player,getPos player],_classToSpawn] call TREND_fnc_findSafePos; // find a valid pos
+		if (_safePos isEqualTo getPos player) then {
+			_safePos = [getPos player, 20,150,25,0,0.30,0,[],[getPos player,getPos player],_classToSpawn] call TREND_fnc_findSafePos; // find a valid pos
+		};
 		player setPos (_safePos vectorAdd [5,0,0]);
 		private _SpawnedVeh = createVehicle [_classToSpawn, _safePos, [], 0, "NONE"];
 		_SpawnedVeh allowdamage false;

@@ -10,7 +10,7 @@ _group = createGroup _InsurgentSide;
 
 
 _flatPos = nil;
-_flatPos = [_sidePos , 100, _distFromCent, 4, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+_flatPos = [_sidePos , 100, _distFromCent, 4, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call TREND_fnc_findSafePos;
 _wayX = (_flatPos select 0);
 _wayY = (_flatPos select 1);
 

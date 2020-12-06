@@ -365,7 +365,7 @@ if (isnil "fncMedicalParamedicLight") then {
 		};
 
 		_flatPos = nil;
-		_flatPos = [_vehPos , 10, 15, 10, 0, 0.3, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+		_flatPos = [_vehPos , 10, 15, 10, 0, 0.3, 0,[],[[0,0,0],[0,0,0]],selectRandom CivCars] call TREND_fnc_findSafePos;
 
 
 
@@ -381,7 +381,7 @@ if (isnil "fncMedicalParamedicLight") then {
 
 		if (_iteration == 1 and selectRandom [true,false]) then {
 			_flatPosPolice1 = nil;
-			_flatPosPolice1 = [_vehPos , 30, 50, 10, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+			_flatPosPolice1 = [_vehPos , 30, 50, 10, 0, 0.5, 0,[],[[0,0,0],[0,0,0]],selectRandom PoliceVehicles] call TREND_fnc_findSafePos;
 			_carPolice = createVehicle [selectRandom PoliceVehicles, _flatPosPolice1, [], 0, "NONE"];
 			_manPolice = createGroup west createUnit [selectRandom Police,getpos _carPolice,[],15,"NONE"];
 			_manPolice setDir (floor(random 360));
@@ -406,7 +406,7 @@ if (isnil "fncMedicalParamedicLight") then {
 				_checkPointGuidePos = _sidePos;
 				_iCount = _iCount - 1;
 				_flatPos = nil;
-				_flatPos = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+				_flatPos = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[[0,0,0],[0,0,0]]] call TREND_fnc_findSafePos;
 				if (_flatPos select 0 > 0) then {
 					_thisPosAreaOfCheckpoint = _flatPos;
 					_thisRoadOnly = true;
@@ -427,7 +427,7 @@ if (isnil "fncMedicalParamedicLight") then {
 				_checkPointGuidePos = _sidePos;
 				_iCount = _iCount - 1;
 				_flatPos = nil;
-				_flatPos = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+				_flatPos = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[[0,0,0],[0,0,0]]] call TREND_fnc_findSafePos;
 				if (_flatPos select 0 > 0) then {
 					_thisPosAreaOfCheckpoint = _flatPos;
 					_thisRoadOnly = false;

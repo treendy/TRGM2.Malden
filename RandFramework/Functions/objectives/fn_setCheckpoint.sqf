@@ -167,7 +167,7 @@ if (_PosFound) then {
 	}
 	else {
 		_flatPos = nil;
-		_flatPos = [_thisPosAreaOfCheckpoint , 0, 50, 20, 0, 0.2, 0,[],[_thisPosAreaOfCheckpoint,_thisPosAreaOfCheckpoint]] call BIS_fnc_findSafePos;
+		_flatPos = [_thisPosAreaOfCheckpoint , 0, 50, 20, 0, 0.2, 0,[],[_thisPosAreaOfCheckpoint,_thisPosAreaOfCheckpoint]] call TREND_fnc_findSafePos;
 		_roadBlockPos = _flatPos;
 		_roadBlockSidePos = _flatPos;
 		_allRoadsNear = _flatPos nearRoads 500;
@@ -177,7 +177,7 @@ if (_PosFound) then {
 
 	if (_thisIsCheckPoint && _thisSide == east) then {
 		//TREND_CheckPointAreas
-		TREND_CheckPointAreas = TREND_CheckPointAreas + [[_roadBlockPos,_thisAreaAroundCheckpointSpacing]]; //the ,_thisAreaAroundCheckpointSpacing is for when we use BIS_fnc_findSafePos to make sure no other road block is within 100 meters
+		TREND_CheckPointAreas = TREND_CheckPointAreas + [[_roadBlockPos,_thisAreaAroundCheckpointSpacing]]; //the ,_thisAreaAroundCheckpointSpacing is for when we use TREND_fnc_findSafePos/BIS_fnc_findSafePos to make sure no other road block is within 100 meters
 		publicVariable "TREND_CheckPointAreas";
 	}
 	else {
@@ -264,7 +264,7 @@ if (_PosFound) then {
 	if (_AllowVeh && (selectRandom [true,true,true,false] || _thisSide == west)) then {
 		_behindBlockPos = _initItem getPos [10,([_direction,180] call fnc_AddToDirection)];
 		_flatPos = nil;
-		_flatPos = [_behindBlockPos , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+		_flatPos = [_behindBlockPos , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos],selectRandom _thisScoutVehicles] call TREND_fnc_findSafePos;
 		_ParkedCar = selectRandom _thisScoutVehicles createVehicle _flatPos;
 		_ParkedCar setDir (floor(random 360));
 		sleep 0.1;
@@ -278,22 +278,22 @@ if (_PosFound) then {
 		if (selectRandom [true,true,true,false] || _isForceTents) then {
 			_behindBlockPos = _initItem getPos [15,([_direction,180] call fnc_AddToDirection)];
 			_flatPos = nil;
-			_flatPos = [_behindBlockPos , 0, 15, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+			_flatPos = [_behindBlockPos , 0, 15, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos],"Land_TentA_F"] call TREND_fnc_findSafePos;
 			_Tent1 = "Land_TentA_F" createVehicle _flatPos;
 			_Tent1 setDir (floor(random 360));
 
 			_flatPos2 = nil;
-			_flatPos2 = [getPos _Tent1 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+			_flatPos2 = [getPos _Tent1 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos],"Land_TentA_F"] call TREND_fnc_findSafePos;
 			_Tent2 = "Land_TentA_F" createVehicle _flatPos2;
 			_Tent2 setDir (floor(random 360));
 
 			_flatPos3 = nil;
-			_flatPos3 = [getPos _Tent1 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+			_flatPos3 = [getPos _Tent1 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos],"Campfire_burning_F"] call TREND_fnc_findSafePos;
 			_Tent3 = "Campfire_burning_F" createVehicle _flatPos2;
 			_Tent3 setDir (floor(random 360));
 
 			_flatPos4 = nil;
-			_flatPos4 = [getPos _Tent1 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
+			_flatPos4 = [getPos _Tent1 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos],"Land_WoodPile_F"] call TREND_fnc_findSafePos;
 			_Tent4 = "Land_WoodPile_F" createVehicle _flatPos2;
 			_Tent4 setDir (floor(random 360));
 
@@ -303,8 +303,8 @@ if (_PosFound) then {
 	if (selectRandom [true,true,true,false]) then {
 
 		_flatPos = nil;
-		_flatPos = [_behindBlockPos2 , 0, 5, 7, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call BIS_fnc_findSafePos;
-		_FloodLight = selectRandom ["Land_PortableLight_single_F"] createVehicle _flatPos;
+		_flatPos = [_behindBlockPos2 , 0, 5, 7, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2],"Land_PortableLight_single_F"] call TREND_fnc_findSafePos;
+		_FloodLight = "Land_PortableLight_single_F" createVehicle _flatPos;
 		_FloodLight setDir (([_direction,180] call fnc_AddToDirection));
 	};
 	//Land_PortableLight_single_F
@@ -312,7 +312,7 @@ if (_PosFound) then {
 	if (TREND_ISUNSUNG) then {
 		if (selectRandom [true,true,true]) then {
 			_flatPos = nil;
-			_flatPos = [_behindBlockPos2 , 0, 5, 7, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call BIS_fnc_findSafePos;
+			_flatPos = [_behindBlockPos2 , 0, 5, 7, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call TREND_fnc_findSafePos;
 			_radio = nil;
 			if (_thisSide == west) then {
 				_radio = selectRandom ["uns_radio2_radio","uns_radio2_transitor","uns_radio2_transitor02"] createVehicle _flatPos;
@@ -346,8 +346,8 @@ if (_PosFound) then {
 		//[_guardUnit2,"STAND","ASIS"] call BIS_fnc_ambientAnimCombat;
 	}
 	else {
-		_pos3 = [_behindBlockPos2 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call BIS_fnc_findSafePos;
-		_pos4 = [_behindBlockPos2 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call BIS_fnc_findSafePos;
+		_pos3 = [_behindBlockPos2 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call TREND_fnc_findSafePos;
+		_pos4 = [_behindBlockPos2 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call TREND_fnc_findSafePos;
 
 
 		_chatDir1 = [_pos3, _pos4] call BIS_fnc_DirTo;
@@ -394,7 +394,7 @@ if (_PosFound) then {
 	_sCheckpointGuyName = format["objCheckpointGuyName%1",(floor(random 999999))];
 
 
-	_pos5 = [_behindBlockPos2 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call BIS_fnc_findSafePos;
+	_pos5 = [_behindBlockPos2 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2],_sUnitType] call TREND_fnc_findSafePos;
 
 	_guardUnit5 = _group4 createUnit [_sUnitType,_pos5,[],0,"NONE"];
 	_guardUnit5 setVariable [_sCheckpointGuyName, _guardUnit5, true];

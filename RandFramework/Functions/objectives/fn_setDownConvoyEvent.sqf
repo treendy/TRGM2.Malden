@@ -288,7 +288,7 @@ if (count _nearestRoads > 0) then {
 
 
 			_flatPos = nil;
-			_flatPos = [_vehPos , 10, 15, 10, 0, 0.3, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+			_flatPos = [_vehPos , 10, 15, 10, 0, 0.3, 0,[],[[0,0,0],[0,0,0]],selectRandom _vehs] call TREND_fnc_findSafePos;
 
 
 

@@ -104,7 +104,7 @@ _missionBombWire = ["BLUE", "WHITE", "YELLOW", "GREEN"] call bis_fnc_selectRando
 	};
 	if (!_bBuildingFound) then {
 		//didnt find a building with enough space... so have the guy outside
-		_flatPosInf = [getPos _infBuilding , 0, 50, 5, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+		_flatPosInf = [getPos _infBuilding , 0, 50, 5, 0, 0.5, 0,[],[getPos _infBuilding,getPos _infBuilding], _objInformant] call TREND_fnc_findSafePos;
 		_objInformant setPos (_flatPosInf);
 	};
 
@@ -132,7 +132,7 @@ _missionBombWire = ["BLUE", "WHITE", "YELLOW", "GREEN"] call bis_fnc_selectRando
 			_thisAreaRange = 20;
 			_checkPointGuidePos = getPos _objInformant;
 			_flatPosSentry = nil;
-			_flatPosSentry = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+			_flatPosSentry = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[_checkPointGuidePos,_checkPointGuidePos]] call TREND_fnc_findSafePos;
 			if (_flatPosSentry select 0 > 0) then {
 				_thisPosAreaOfCheckpoint = _flatPosSentry;
 				_thisRoadOnly = false;

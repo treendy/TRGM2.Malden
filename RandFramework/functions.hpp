@@ -32,6 +32,7 @@ class TREND {
         class isFuel {};
         class isMedical {};
         class isRepair {};
+        class isTransport{};
     };
 
     class common {
@@ -134,6 +135,7 @@ class TREND {
         file = "RandFramework\functions\location";
         class AddToDirection {}; //Can add degrees to direction to calcuate final direction
         class directionToText {};
+        class findSafePos{};
         class getLocationName {};
     };
 

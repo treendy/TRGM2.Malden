@@ -132,7 +132,7 @@ if (!_isCache && count _nearestRoads > 0) then {
 
 			_thisAreaRange = 20;
 			_flatPos = nil;
-			_flatPos = [_posOfTarget , 0, 20, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+			_flatPos = [_posOfTarget , 0, 20, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[[0,0,0],[0,0,0]]] call TREND_fnc_findSafePos;
 			if (_flatPos select 0 > 0) then {
 				_thisPosAreaOfCheckpoint = _flatPos;
 				_thisRoadOnly = true;
@@ -226,7 +226,7 @@ if (_isCache) then {
 
 		_thisAreaRange = 20;
 		_flatPos = nil;
-		_flatPos = [_posCache , 0, 20, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+		_flatPos = [_posCache , 0, 20, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[[0,0,0],[0,0,0]]] call TREND_fnc_findSafePos;
 		if (_flatPos select 0 > 0) then {
 			_thisPosAreaOfCheckpoint = _flatPos;
 			_thisRoadOnly = false;
@@ -287,20 +287,20 @@ if (!_objectiveCreated) then {
 	_flatPosPolice1 = nil;
 
 	if (_isMainTask) then {
-		_flatPosPolice1 = [_posOfAO , 20, 400, 10, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+		_flatPosPolice1 = [_posOfAO , 20, 400, 10, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call TREND_fnc_findSafePos;
 	}
 	else {
 		_eventPosFound = false;
 		_iAttemptLimit = 15;
 		while {!_eventPosFound && _iAttemptLimit > 0} do {
 			_iAttemptLimit = _iAttemptLimit - 1;
-			_flatPosPolice1 = [_posOfAO , 500, 1500, 10, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+			_flatPosPolice1 = [_posOfAO , 500, 1500, 10, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call TREND_fnc_findSafePos;
 			_farEnoughFromWarzone = true;
 			if (!isNil "TREND_WarzonePos") then {_farEnoughFromWarzone = (_flatPosPolice1 distance TREND_WarzonePos > 500)};
 			if (_isMainTask || _farEnoughFromWarzone) then {_eventPosFound = true;};
 		};
 		if (!_eventPosFound) then {
-			_flatPosPolice1 = [_posOfAO , 500, 1500, 10, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+			_flatPosPolice1 = [_posOfAO , 500, 1500, 10, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call TREND_fnc_findSafePos;
 		};
 	};
 
@@ -327,7 +327,7 @@ if (!_objectiveCreated) then {
 
 	_thisAreaRange = 20;
 	_flatPos = nil;
-	_flatPos = [_posObj , 0, 20, 5, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+	_flatPos = [_posObj , 0, 20, 5, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[[0,0,0],[0,0,0]]] call TREND_fnc_findSafePos;
 	if (_flatPos select 0 > 0) then {
 		_thisPosAreaOfCheckpoint = _flatPos;
 		_thisRoadOnly = false;

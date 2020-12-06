@@ -64,7 +64,7 @@ switch (_side) do {
 	};
 };
 
-[_vehClassName, getText(_configPath >> "displayName"), getText(_configPath >> "textSingular"), getText(configfile >> "CfgEditorSubcategories" >> getText(_configPath >> "editorSubcategory") >> "displayName"), getNumber (_configPath >> "transportSoldier") >= 8, (configName _configPath) call TREND_fnc_isArmed] params [["_className", ""], ["_dispName", ""], ["_calloutName", ""], ["_category", ""], ["_isTransport", false], ["_isArmed", false]];
+[_vehClassName, getText(_configPath >> "displayName"), getText(_configPath >> "textSingular"), getText(configfile >> "CfgEditorSubcategories" >> getText(_configPath >> "editorSubcategory") >> "displayName"), (configName _configPath) call TREND_fnc_isTransport, (configName _configPath) call TREND_fnc_isArmed] params [["_className", ""], ["_dispName", ""], ["_calloutName", ""], ["_category", ""], ["_isTransport", false], ["_isArmed", false]];
 
 if (isNil "_className" || isNil "_dispName" || isNil "_calloutName" || isNil "_category") then {
 
@@ -102,37 +102,36 @@ if (isNil "_className" || isNil "_dispName" || isNil "_calloutName" || isNil "_c
 
 if (_isArmed) then {
 	_returnVeh = _returnVeh select {_x call TREND_fnc_isArmed};
-	if (isNil "_returnVeh" || _returnVeh isEqualTo []) exitWith {_vehClassName};
+	if (isNil "_returnVeh" || { _returnVeh isEqualTo []}) exitWith {_vehClassName};
 };
 
 if (_isTransport) then {
-	_returnVeh = _returnVeh select {getNumber (configFile >> "CfgVehicles" >> _x >> "transportSoldier") >= 8};
-	if (isNil "_returnVeh" || _returnVeh isEqualTo []) exitWith {_vehClassName};
+	_returnVeh = _returnVeh select {_x call TREND_fnc_isTransport};
+	if (isNil "_returnVeh" || { _returnVeh isEqualTo []}) exitWith {_vehClassName};
 };
 
 if (_vehClassName call TREND_fnc_isMedical) then {
 	_returnVeh = _returnVeh select {_x call TREND_fnc_isMedical};
-	if (isNil "_returnVeh" || _returnVeh isEqualTo []) exitWith {_vehClassName};
+	if (isNil "_returnVeh" || { _returnVeh isEqualTo []}) exitWith {_vehClassName};
 };
 
 if (_vehClassName call TREND_fnc_isFuel) then {
 	_returnVeh = _returnVeh select {_x call TREND_fnc_isFuel};
-	if (isNil "_returnVeh" || _returnVeh isEqualTo []) exitWith {_vehClassName};
+	if (isNil "_returnVeh" || { _returnVeh isEqualTo []}) exitWith {_vehClassName};
 };
 
 if (_vehClassName call TREND_fnc_isRepair) then {
 	_returnVeh = _returnVeh select {_x call TREND_fnc_isRepair};
-	if (isNil "_returnVeh" || _returnVeh isEqualTo []) exitWith {_vehClassName};
+	if (isNil "_returnVeh" || { _returnVeh isEqualTo []}) exitWith {_vehClassName};
 };
 
 if (_vehClassName call TREND_fnc_isAmmo) then {
 	_returnVeh = _returnVeh select {_x call TREND_fnc_isAmmo};
-	if (isNil "_returnVeh" || _returnVeh isEqualTo []) exitWith {_vehClassName};
+	if (isNil "_returnVeh" || { _returnVeh isEqualTo []}) exitWith {_vehClassName};
 };
 
 _returnVeh = selectRandom _returnVeh;
 
-// Some final failsafes:
-_returnVeh = [_returnVeh, _vehClassName] select (isNil "_returnVeh");
-_returnVeh = [_returnVeh, _vehClassName] select (_returnVeh isEqualTo []);
+// Final fail safe:
+if (isNil "_returnVeh" || { _returnVeh isEqualTo []}) exitWith {_vehClassName};
 _returnVeh;

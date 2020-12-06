@@ -37,7 +37,7 @@ _riflemen = []; _leaders = []; _atsoldiers = []; _aasoldiers = []; _engineers = 
 	if (isNil "_className" ||isNil "_dispName" || isNil "_icon" || isNil "_calloutName") then {
 
 	} else {
-		if (["Asst", _dispName] call BIS_fnc_inString || ["Assi", _dispName] call BIS_fnc_inString || ["Story", _dispName] call BIS_fnc_inString || ["Support", _className] call BIS_fnc_inString || ["Crew", _className] call BIS_fnc_inString) then {
+		if (["Ass.", _dispName] call BIS_fnc_inString || ["Asst", _dispName] call BIS_fnc_inString || ["Assi", _dispName] call BIS_fnc_inString || ["Story", _dispName] call BIS_fnc_inString || ["Support", _className] call BIS_fnc_inString || ["Crew", _className] call BIS_fnc_inString) then {
 			// Do nothing for these units. (Currently removing any "assistant", "crew", and "support" type units, since they are generally redundant)
 		} else {
 			switch (_icon) do {

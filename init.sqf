@@ -19,7 +19,7 @@ if (isServer && !TREND_NeededObjectsAvailable) then {
 
    {
       if (!isPlayer _x) then {
-         _safePos = [TREND_foundHQPos, 0,25,15,0,0.15,0,[],[[TREND_foundHQPos select 0, TREND_foundHQPos select 1],[TREND_foundHQPos select 0, TREND_foundHQPos select 1]]] call BIS_fnc_findSafePos;
+         _safePos = [TREND_foundHQPos, 0,25,15,0,0.15,0,[],[[TREND_foundHQPos select 0, TREND_foundHQPos select 1],[TREND_foundHQPos select 0, TREND_foundHQPos select 1]]] call TREND_fnc_findSafePos;
          [[_x, _safePos], {
             (_this select 0) setpos (_this select 1);
             (_this select 0) setdamage 0;

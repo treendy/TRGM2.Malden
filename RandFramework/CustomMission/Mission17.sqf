@@ -40,7 +40,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_thisAreaRange = 100;
 	_checkPointGuidePos = _mainObjPos;
 	_flatPos = _mainObjPos;
-	_flatPos = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[_mainObjPos,_mainObjPos]] call BIS_fnc_findSafePos;
+	_flatPos = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[_mainObjPos,_mainObjPos]] call TREND_fnc_findSafePos;
 	if (_flatPos select 0 > 0) then {
 		_thisPosAreaOfCheckpoint = _flatPos;
 		_thisRoadOnly = true;

@@ -8,8 +8,6 @@ _allBuildings = nil;
 _sAreaMarkerName = nil;
 _randBuilding = nil;
 
-
-
 if (!_bThisMissionCivsOnly) then {
 	while {_iCount <= _unitCount} do
 	{
@@ -35,8 +33,6 @@ if (!_bThisMissionCivsOnly) then {
 				_teamLeaderUnit = _thisGroup createUnit [sRiflemanToUse,_randBuildingPos,[],0,"NONE"];
 				[_randBuildingPos, units group _teamLeaderUnit, -1, true, false,true] spawn TREND_fnc_Zen_OccupyHouse;
 
-
-
 				_iCountNoOfCPs = selectRandom[0,0,0,0,1];  //number of checkpoints (so high chance of not being any, or one may be near an occupied building)
 				if ((_sidePos distance _randBuilding) > 400) then {_iCountNoOfCPs = selectRandom[0,0,1];};
 				//spawn inner random sentrys
@@ -47,9 +43,7 @@ if (!_bThisMissionCivsOnly) then {
 					_checkPointGuidePos = _sidePos;
 					_iCountNoOfCPs = _iCountNoOfCPs - 1;
 					_flatPos = nil;
-					_flatPos = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,TREND_CheckPointAreas + TREND_SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-
-
+					_flatPos = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,TREND_CheckPointAreas + TREND_SentryAreas,[[0,0,0],[0,0,0]]] call TREND_fnc_findSafePos;
 					if (_flatPos select 0 > 0) then {
 						_thisPosAreaOfCheckpoint = _flatPos;
 						_thisRoadOnly = false;
