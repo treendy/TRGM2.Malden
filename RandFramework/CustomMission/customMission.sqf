@@ -274,7 +274,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 
 		sleep 9;
-		if selectRandom [true]  then {
+		if (selectRandom [true])  then {
 			[_thisGuardUnit3] spawn {
 				_thisGuardUnit3 = _this select 0;
 				_thisGuardUnit3 switchMove "Acts_JetsCrewaidLCrouch_in";

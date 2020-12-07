@@ -2186,89 +2186,29 @@
                 <Chinesesimp>战役</Chinesesimp>
                 <Korean>캠페인</Korean>
             </Key>
-            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Sunny">
-                <Original>Sunny Clear</Original>
-                <English>Sunny Clear</English>
-                <Chinese>日間無雲</Chinese>
-                <Chinesesimp>日间无云</Chinesesimp>
-                <Spanish>Día, despejado</Spanish>
-                <Korean>맑음</Korean>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Clear">
+                <Original>Clear</Original>
+                <English>Clear</English>
             </Key>
-            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_DaytimeHeavyOvercast">
-                <Original>Daytime Heavy Overcast</Original>
-                <English>Daytime Heavy Overcast</English>
-                <Chinese>日間多雲</Chinese>
-                <Chinesesimp>日间多云</Chinesesimp>
-                <Spanish>Día, muy nublado</Spanish>
-                <Korean>낮에는 구름 많음</Korean>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_HeavyOvercast">
+                <Original>Heavy Overcast</Original>
+                <English>Heavy Overcast</English>
             </Key>
-            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_DaytimeAverageOvercast">
-                <Original>Day average Overcast</Original>
-                <English>Day average Overcast</English>
-                <Chinese>日間少雲</Chinese>
-                <Chinesesimp>日间少云</Chinesesimp>
-                <Spanish>Día, con nubes</Spanish>
-                <Korean>낮에는 구름 적음</Korean>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_AverageOvercast">
+                <Original>Average Overcast</Original>
+                <English>Average Overcast</English>
             </Key>
-            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_DarkNightClear">
-                <Original>Dark Night Clear</Original>
-                <English>Dark Night Clear</English>
-                <Chinese>夜間無雲</Chinese>
-                <Chinesesimp>夜间无云</Chinesesimp>
-                <Spanish>Noche sin luna, despejado</Spanish>
-                <Korean>밤에는 구름 없음</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_DarkNightHeavyOvercast">
-                <Original>Dark Night Heavy Overcast</Original>
-                <English>Dark Night Heavy Overcast</English>
-                <Chinese>夜間多雲</Chinese>
-                <Chinesesimp>夜间多云</Chinesesimp>
-                <Spanish>Noche sin luna, muy nublado</Spanish>
-                <Korean>밤에는 구름 많음</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_DarkNightAverageOvercast">
-                <Original>Dark Night Average overcast</Original>
-                <English>Dark Night Average overcast</English>
-                <Chinese>夜間少雲</Chinese>
-                <Chinesesimp>夜间少云</Chinesesimp>
-                <Spanish>Noche sin luna, con nubes</Spanish>
-                <Korean>밤에는 구름 적음</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_EarlyMorning">
-                <Original>Early Morning</Original>
-                <English>Early Morning</English>
-                <Chinese>清晨</Chinese>
-                <Chinesesimp>清晨</Chinesesimp>
-                <Spanish>Día, madrugada</Spanish>
-                <Korean>이른 아침</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MoonNightClear">
-                <Original>Moon Night Clear</Original>
-                <English>Moon Night Clear</English>
-                <Chinese>月光無雲</Chinese>
-                <Chinesesimp>月光无云</Chinesesimp>
-                <Spanish>Noche con luna, despejado</Spanish>
-                <Korean>구름 없는 달빛</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MoonNightAverageOvercast">
-                <Original>Moon Night slight overcast</Original>
-                <English>Moon Night slight overcast</English>
-                <Chinese>月光少雲</Chinese>
-                <Chinesesimp>月光少云</Chinesesimp>
-                <Spanish>Noche con luna, con nubes</Spanish>
-                <Korean>약간 흐린 달빛</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MoonNightHeavyOvercast">
-                <Original>Moon Night heavy overcast</Original>
-                <English>Moon Night heavy overcast</English>
-                <Chinese>月光多雲</Chinese>
-                <Chinesesimp>月光多云</Chinesesimp>
-                <Spanish>Noche con luna, muy nublado</Spanish>
-                <Korean>많이 흐린 달빛</Korean>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Realistic">
+                <Original>Realistic</Original>
+                <English>Realistic</English>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Monsoon">
                 <Original>Day Monsoon</Original>
                 <English>Day Monsoon</English>
+            </Key>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_Snowstorm">
+                <Original>Day Blizzard</Original>
+                <English>Day Blizzard</English>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_UseEditorWeather">
                 <Original>No change (Using editor weather or weather mod)</Original>
@@ -2603,6 +2543,10 @@
                 <Chinesesimp>天气</Chinesesimp>
                 <Spanish>Clima</Spanish>
                 <Korean>날씨</Korean>
+            </Key>
+            <Key ID="STR_TRGM2_dialogs_Time">
+                <Original>Time</Original>
+                <English>Time</English>
             </Key>
             <Key ID="STR_TRGM2_dialogs_Details">
                 <Original>Details about it here</Original>

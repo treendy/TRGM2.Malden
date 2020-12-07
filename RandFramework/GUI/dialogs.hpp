@@ -8,6 +8,20 @@
 // class RscStructuredText;
 
 #include "defines.hpp"
+#define UI_GRID_X	(safezoneX)
+#define UI_GRID_Y	(safezoneY)
+#define UI_GRID_W	(safezoneW / 40)
+#define UI_GRID_H	(safezoneH / 25)
+#define UI_GRID_WAbs	(safezoneW)
+#define UI_GRID_HAbs	(safezoneH)
+
+#define SliderTimeX (15.46 * UI_GRID_W + UI_GRID_X)
+#define SliderTimeY (16.07 * UI_GRID_H + UI_GRID_Y)
+#define SliderTimeW (6.18854 * UI_GRID_W)
+#define SliderTimeH (0.54988 * UI_GRID_H)
+
+#define OneThirdSliderTimeW SliderTimeW / 3
+#define TwoThirdSliderTimeW OneThirdSliderTimeW * 2
 
 class Trend_DialogSetupParams
 	{
@@ -15,311 +29,454 @@ class Trend_DialogSetupParams
 	movingEnabled = false;
 
 	class controls {
-
 		////////////////////////////////////////////////////////
-		// GUI EDITOR OUTPUT START (by treendy, v1.063, #Nazety)
+		// GUI EDITOR OUTPUT START (by TheAce0296, v1.063, #Fiholy)
 		////////////////////////////////////////////////////////
 
-		//class RscPicture_1201: RscPicture
-		//{
-		//	idc = 1201;
-		//	text = "RandFramework\Media\table1.paa";
-		//	x = 0.226718 * safezoneW + safezoneX;
-		//	y = 0.0446 * safezoneH + safezoneY;
-		//	w = 0.531094 * safezoneW;
-		//	h = 0.935 * safezoneH;
-		//};
-
-		//class IGUIBack_2200: IGUIBack
-		//{
-		//	idc = 5200;
-		//	x = 0.29375 * safezoneW + safezoneX;
-		//	y = 0.225 * safezoneH + safezoneY;
-		//	w = 0.4125 * safezoneW;
-		//	h = 0.55 * safezoneH;
-		//};
-
-		class RscListbox_1500: RscListbox
+		class RscListbox_1500: RscListBox
 		{
 			idc = 5500;
-			x = 0.298873 * safezoneW + safezoneX;
-			y = 0.315236 * safezoneH + safezoneY;
-			w = 0.180498 * safezoneW;
-			h = 0.239952 * safezoneH;
 			onLBSelChanged = "[_this] spawn TREND_fnc_MissionTypeSelection; false; ";
-		};
 
+			x = 11.96 * UI_GRID_W + UI_GRID_X;
+			y = 7.28 * UI_GRID_H + UI_GRID_Y;
+			w = 7.2199 * UI_GRID_W;
+			h = 5.99879 * UI_GRID_H;
+		};
 		class RscCombo_2100: RscCombo
 		{
 			idc = 5100;
-			text = $STR_TRGM2_dialogs_Weather; //--- ToDo: Localize;
-			x = 0.381406 * safezoneW + safezoneX;
-			y = 0.59681 * safezoneH + safezoneY;
-			w = 0.154713 * safezoneW;
-			h = 0.0219952 * safezoneH;
+
+			text = $STR_TRGM2_dialogs_HardcoreReputation; //--- ToDo: Localize;
+			x = 15.46 * UI_GRID_W + UI_GRID_X;
+			y = 14.42 * UI_GRID_H + UI_GRID_Y;
+			w = 6.18854 * UI_GRID_W;
+			h = 0.54988 * UI_GRID_H;
 		};
 		class RscText_1001: RscText
 		{
 			idc = 5001;
-			style = ST_MULTI;
-			lineSpacing = 1;
+			style = 16;
+
 			text = $STR_TRGM2_dialogs_Details; //--- ToDo: Localize;
-			x = 0.489686 * safezoneW + safezoneX;
-			y = 0.317436 * safezoneH + safezoneY;
-			w = 0.211441 * safezoneW;
-			h = 0.241947 * safezoneH;
+			x = 19.59 * UI_GRID_W + UI_GRID_X;
+			y = 7.28 * UI_GRID_H + UI_GRID_Y;
+			w = 8.45766 * UI_GRID_W;
+			h = 6.04867 * UI_GRID_H;
 		};
 		class RscText_1004: RscText
 		{
 			idc = 5004;
+
 			text = $STR_TRGM2_dialogs_HardcoreReputation; //--- ToDo: Localize;
-			x = 0.302 * safezoneW + safezoneX;
-			y = 0.596807 * safezoneH + safezoneY;
-			w = 0.0773437 * safezoneW;
-			h = 0.022 * safezoneH;
+			x = 11.96 * UI_GRID_W + UI_GRID_X;
+			y = 14.42 * UI_GRID_H + UI_GRID_Y;
+			w = 3.29958 * UI_GRID_W;
+			h = 0.549984 * UI_GRID_H;
 			colorText[] = {0.85,0.4,0,1};
 		};
 		class RscText_1005: RscText
 		{
 			idc = 5005;
+
 			text = $STR_TRGM2_dialogs_Weather; //--- ToDo: Localize;
-			x = 0.302 * safezoneW + safezoneX;
-			y = 0.627606 * safezoneH + safezoneY;
-			w = 0.0773437 * safezoneW;
-			h = 0.022 * safezoneH;
+			x = 11.96 * UI_GRID_W + UI_GRID_X;
+			y = 15.25 * UI_GRID_H + UI_GRID_Y;
+			w = 3.29958 * UI_GRID_W;
+			h = 0.549984 * UI_GRID_H;
 			colorText[] = {0.85,0.4,0,1};
 		};
 		class RscCombo_2101: RscCombo
 		{
 			idc = 5101;
+
 			text = $STR_TRGM2_dialogs_Weather; //--- ToDo: Localize;
-			x = 0.381406 * safezoneW + safezoneX;
-			y = 0.62981 * safezoneH + safezoneY;
-			w = 0.154713 * safezoneW;
-			h = 0.0219952 * safezoneH;
+			x = 15.46 * UI_GRID_W + UI_GRID_X;
+			y = 15.25 * UI_GRID_H + UI_GRID_Y;
+			w = 6.18854 * UI_GRID_W;
+			h = 0.54988 * UI_GRID_H;
+		};
+		class RscText_1014: RscText
+		{
+			idc = 5014;
+
+			text = $STR_TRGM2_dialogs_Time; //--- ToDo: Localize;
+			x = 11.96 * UI_GRID_W + UI_GRID_X;
+			y = 16.07 * UI_GRID_H + UI_GRID_Y;
+			w = 3.29958 * UI_GRID_W;
+			h = 0.549984 * UI_GRID_H;
+			colorText[] = {0.85,0.4,0,1};
+		};
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		// Time Slider
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		class PreviewNight1_2114: ctrlStaticPicture
+		{
+			idc = -1;
+			text = "\a3\3DEN\Data\Attributes\SliderTimeDay\night_ca.paa";
+			colorText[] = {1,1,1,0.60000002};
+			x = SliderTimeX + OneThirdSliderTimeW - (SliderTimeH / 2) + SliderTimeH + SliderTimeH - (3 * SliderTimeH / 16);
+			y = SliderTimeY;
+			w = SliderTimeH;
+			h = SliderTimeH;
+		};
+		class PreviewNight2: ctrlStaticPicture
+		{
+			idc = -1;
+			text = "\a3\3DEN\Data\Attributes\SliderTimeDay\night_ca.paa";
+			colorText[] = {1,1,1,0.60000002};
+			x = SliderTimeX + OneThirdSliderTimeW - (SliderTimeH / 2) - SliderTimeH - SliderTimeH + (3 * SliderTimeH / 16);
+			y = SliderTimeY;
+			w = SliderTimeH;
+			h = SliderTimeH;
+		};
+		class PreviewDay: ctrlStaticPicture
+		{
+			idc = -1;
+			text = "\a3\3DEN\Data\Attributes\SliderTimeDay\day_ca.paa";
+			colorText[] = {1,1,1,0.60000002};
+			x = SliderTimeX + OneThirdSliderTimeW - (SliderTimeH / 2);
+			y = SliderTimeY;
+			w = SliderTimeH;
+			h = SliderTimeH;
+		};
+		class PreviewSunrise: ctrlStaticPicture
+		{
+			idc = -1;
+			text = "\a3\3DEN\Data\Attributes\SliderTimeDay\sunrise_ca.paa";
+			colorText[] = {1,1,1,0.60000002};
+			x = SliderTimeX + OneThirdSliderTimeW - (SliderTimeH / 2) - SliderTimeH;
+			y = SliderTimeY;
+			w = SliderTimeH;
+			h = SliderTimeH;
+		};
+		class PreviewSunset: ctrlStaticPicture
+		{
+			idc = -1;
+			text = "\a3\3DEN\Data\Attributes\SliderTimeDay\sunset_ca.paa";
+			colorText[] = {1,1,1,0.60000002};
+			x = SliderTimeX + OneThirdSliderTimeW - (SliderTimeH / 2) + SliderTimeH;
+			y = SliderTimeY;
+			w = SliderTimeH;
+			h = SliderTimeH;
+		};
+		class Sun_2114: ctrlStaticPicture
+		{
+			idc = -1;
+			text = "\a3\3DEN\Data\Attributes\SliderTimeDay\sun_ca.paa";
+			colorText[] = {1,1,1,0.60000002};
+			x = SliderTimeX + OneThirdSliderTimeW - (SliderTimeH / 2);
+			y = SliderTimeY;
+			w = SliderTimeH;
+			h = SliderTimeH;
+		};
+		class Value_2114: RscXSliderH
+		{
+			idc = 5115;
+			sliderRange[] = {0,23.9999};
+			sliderPosition = 12;
+			lineSize = 1;
+			pageSize = 3600;
+			border = "\a3\3DEN\Data\Attributes\SliderTimeDay\border_ca.paa";
+			thumb = "\a3\3DEN\Data\Attributes\SliderTimeDay\thumb_ca.paa";
+			color[] = {1,1,1,0.6};
+
+			x = SliderTimeX;
+			y = SliderTimeY;
+			w = TwoThirdSliderTimeW;
+			h = SliderTimeH;
+			colorActive[] = {1,1,1,1};
+
+			onSliderPosChanged="[_this select 0, _this select 1, ""Slider""] call TREND_fnc_timeSliderOnChange; false;";
+		};
+		class Frame_2114: ctrlStaticFrame
+		{
+			idc = -1;
+			x = SliderTimeX + TwoThirdSliderTimeW;
+			y = SliderTimeY;
+			w = OneThirdSliderTimeW;
+			h = SliderTimeH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {0,0,0,0};
+			sizeEx = GUI_TEXT_SIZE_MEDIUM;
+		};
+		class Hour_2114: ctrlEdit
+		{
+			idc = 5116;
+			text = "00"; //--- ToDo: Localize;
+			style = "0x02 + 0x200";
+			x = SliderTimeX + TwoThirdSliderTimeW;
+			y = SliderTimeY;
+			w = OneThirdSliderTimeW / 3;
+			h = SliderTimeH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {0,0,0,0};
+			tooltip = $STR_3DEN_Attributes_SliderTime_Hour_tooltip; //--- ToDo: Localize;
+			sizeEx = GUI_TEXT_SIZE_MEDIUM;
+			font = "EtelkaMonospacePro";
+			onKillFocus = "[_this, nil, ""Edit""] call TREND_fnc_timeSliderOnChange; false;";
+		};
+		class Minute_2114: Hour_2114
+		{
+			idc = 5117;
+			text = "00"; //--- ToDo: Localize;
+			x = SliderTimeX + TwoThirdSliderTimeW + (OneThirdSliderTimeW / 3);
+			y = SliderTimeY;
+			w = OneThirdSliderTimeW / 3;
+			h = SliderTimeH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {0,0,0,0};
+			tooltip = $STR_3DEN_Attributes_SliderTime_Minute_tooltip; //--- ToDo: Localize;
+			sizeEx = GUI_TEXT_SIZE_MEDIUM;
+		};
+		class Second_2114: Minute_2114
+		{
+			idc = 5118;
+			text = "00"; //--- ToDo: Localize;
+			x = SliderTimeX + TwoThirdSliderTimeW + (OneThirdSliderTimeW / 3) * 2;
+			y = SliderTimeY;
+			w = OneThirdSliderTimeW / 3;
+			h = SliderTimeH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {0,0,0,0};
+			tooltip = $STR_3DEN_Attributes_SliderTime_Second_tooltip; //--- ToDo: Localize;
+			sizeEx = GUI_TEXT_SIZE_MEDIUM;
+		};
+		class Separator_2114: ctrlStatic
+		{
+			idc = -1;
+			text = "  :  :  "; //--- ToDo: Localize;
+			style = 2;
+			x = SliderTimeX + TwoThirdSliderTimeW;
+			y = SliderTimeY;
+			w = OneThirdSliderTimeW;
+			h = SliderTimeH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {0,0,0,0.5};
+			sizeEx = GUI_TEXT_SIZE_MEDIUM;
+			font="EtelkaMonospacePro";
+		};
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		class RscText_1006: RscText
+		{
+			idc = 5006;
+
+			text = $STR_TRGM2_dialogs_NVG; //--- ToDo: Localize;
+			x = 11.96 * UI_GRID_W + UI_GRID_X;
+			y = 16.9 * UI_GRID_H + UI_GRID_Y;
+			w = 3.29958 * UI_GRID_W;
+			h = 0.549984 * UI_GRID_H;
+			colorText[] = {0.85,0.4,0,1};
 		};
 		class RscCombo_2102: RscCombo
 		{
 			idc = 5102;
-			text = $STR_TRGM2_dialogs_Weather; //--- ToDo: Localize;
-			x = 0.381406 * safezoneW + safezoneX;
-			y = 0.662803 * safezoneH + safezoneY;
-			w = 0.154713 * safezoneW;
-			h = 0.0219952 * safezoneH;
-		};
-		class RscText_1006: RscText
-		{
-			idc = 5006;
+
 			text = $STR_TRGM2_dialogs_NVG; //--- ToDo: Localize;
-			x = 0.302 * safezoneW + safezoneX;
-			y = 0.660603 * safezoneH + safezoneY;
-			w = 0.0773437 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {0.85,0.4,0,1};
+			x = 15.46 * UI_GRID_W + UI_GRID_X;
+			y = 16.9 * UI_GRID_H + UI_GRID_Y;
+			w = 6.18854 * UI_GRID_W;
+			h = 0.54988 * UI_GRID_H;
 		};
 		class RscText_1007: RscText
 		{
 			idc = 5007;
+
 			text = $STR_TRGM2_dialogs_Revive; //--- ToDo: Localize;
-			x = 0.303031 * safezoneW + safezoneX;
-			y = 0.693606 * safezoneH + safezoneY;
-			w = 0.0773437 * safezoneW;
-			h = 0.022 * safezoneH;
+			x = 11.96 * UI_GRID_W + UI_GRID_X;
+			y = 17.72 * UI_GRID_H + UI_GRID_Y;
+			w = 3.29958 * UI_GRID_W;
+			h = 0.549984 * UI_GRID_H;
 			colorText[] = {0.85,0.4,0,1};
 		};
 		class RscCombo_2103: RscCombo
 		{
 			idc = 5103;
-			text = $STR_TRGM2_dialogs_Weather; //--- ToDo: Localize;
-			x = 0.381406 * safezoneW + safezoneX;
-			y = 0.69581 * safezoneH + safezoneY;
-			w = 0.154713 * safezoneW;
-			h = 0.0219952 * safezoneH;
-		};
-		class RscButton_1600: RscButton
-		{
-			idc = 5600;
-			text = $STR_TRGM2_dialogs_Begin; //--- ToDo: Localize;
-			x = 0.582514 * safezoneW + safezoneX;
-			y = 0.642969 * safezoneH + safezoneY;
-			w = 0.103142 * safezoneW;
-			h = 0.0989783 * safezoneH;
-			colorBackground[] = {0.85,0.4,0,1};
-			colorActive[] = {0.85,0.4,0,1};
-			action = "[_this] spawn TREND_fnc_SetParamsAndBegin; false";
-		};
 
-		class btnAdvanced: RscButton
-		{
-			idc = 1603;
-			text = $STR_TRGM2_dialogs_AdvOpt; //--- ToDo: Localize;
-			x = 0.582514 * safezoneW + safezoneX;
-			y = 0.7442 * safezoneH + safezoneY;
-			w = 0.103142 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorBackground[] = {0.85,0.4,0,1};
-			colorActive[] = {0.85,0.4,0,1};
-			action = "[] spawn TREND_fnc_openDialogAdvancedMissionSettings; false";
+			text = $STR_TRGM2_dialogs_Revive; //--- ToDo: Localize;
+			x = 15.46 * UI_GRID_W + UI_GRID_X;
+			y = 17.72 * UI_GRID_H + UI_GRID_Y;
+			w = 6.18854 * UI_GRID_W;
+			h = 0.54988 * UI_GRID_H;
 		};
-
-
-		//class RscText_1000: RscText
-		//{
-		//	idc = 5033;
-		//	text = "Select your options"; //--- ToDo: Localize;
-		//	x = 0.298824 * safezoneW + safezoneX;
-		//	y = 0.236 * safezoneH + safezoneY;
-		//	w = 0.175341 * safezoneW;
-		//	h = 0.0659856 * safezoneH;
-		//	colorText[] = {0.85,0.4,0,1};
-		//};
-		class RscText_1002: RscText
-		{
-			idc = 5002;
-			text = $STR_TRGM2_dialogs_Objective; //--- ToDo: Localize;
-			x = 0.301968 * safezoneW + safezoneX;
-			y = 0.561583 * safezoneH + safezoneY;
-			w = 0.0773437 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {0.85,0.4,0,1};
-		};
-		class RscCombo_2104: RscCombo
-		{
-			idc = 5104;
-			text = $STR_TRGM2_dialogs_Weather; //--- ToDo: Localize;
-			x = 0.381387 * safezoneW + safezoneX;
-			y = 0.561583 * safezoneH + safezoneY;
-			w = 0.154713 * safezoneW;
-			h = 0.0219952 * safezoneH;
-		};
-		class RscText_1003: RscText
-		{
-			idc = 5003;
-			text = ""; //--- ToDo: Localize;
-			x = 0.538171 * safezoneW + safezoneX;
-			y = 0.5616 * safezoneH + safezoneY;
-			w = 0.0154751 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {1,1,1,1};
-		};
-		class RscText_1008: RscText
-		{
-			idc = 5008;
-			text = "[?]"; //--- ToDo: Localize;
-			x = 0.538171 * safezoneW + safezoneX;
-			y = 0.5946 * safezoneH + safezoneY;
-			w = 0.0154751 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {1,1,1,1};
-			tooltip = $STR_TRGM2_dialogs_HardcoreReputation_HelpText; //--- ToDo: Localize;
-		};
-		class RscText_1009: RscText
-		{
-			idc = 5009;
-			text = ""; //--- ToDo: Localize;
-			x = 0.538171 * safezoneW + safezoneX;
-			y = 0.6276 * safezoneH + safezoneY;
-			w = 0.0154751 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {1,1,1,1};
-		};
-		class RscText_1010: RscText
-		{
-			idc = 5010;
-			text = ""; //--- ToDo: Localize;
-			x = 0.538171 * safezoneW + safezoneX;
-			y = 0.6606 * safezoneH + safezoneY;
-			w = 0.0154751 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {1,1,1,1};
-		};
-		class RscText_1011: RscText
-		{
-			idc = 5011;
-			text = ""; //--- ToDo: Localize;
-			x = 0.538171 * safezoneW + safezoneX;
-			y = 0.6936 * safezoneH + safezoneY;
-			w = 0.0154751 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {1,1,1,1};
-		};
-		class RscPicture_1200: RscPicture
-		{
-			idc = 5201;
-			text = "RandFramework\Media\TRGM7.paa";
-			x = 0.536108 * safezoneW + safezoneX;
-			y = 0.159 * safezoneH + safezoneY;
-			w = 0.165067 * safezoneW;
-			h = 0.242 * safezoneH;
-		};
-
 		class RscText_1012: RscText
 		{
 			idc = 1012;
+
 			text = $STR_TRGM2_dialogs_StartLocation; //--- ToDo: Localize;
-			x = 0.304062 * safezoneW + safezoneX;
-			y = 0.7266 * safezoneH + safezoneY;
-			w = 0.0773437 * safezoneW;
-			h = 0.022 * safezoneH;
+			x = 11.96 * UI_GRID_W + UI_GRID_X;
+			y = 18.55 * UI_GRID_H + UI_GRID_Y;
+			w = 3.29958 * UI_GRID_W;
+			h = 0.549984 * UI_GRID_H;
 			colorText[] = {0.85,0.4,0,1};
 		};
 		class RscCombo_2105: RscCombo
 		{
 			idc = 2105;
-			text = $STR_TRGM2_dialogs_Weather; //--- ToDo: Localize;
-			x = 0.381406 * safezoneW + safezoneX;
-			y = 0.7288 * safezoneH + safezoneY;
-			w = 0.154713 * safezoneW;
-			h = 0.0219952 * safezoneH;
+
+			text = $STR_TRGM2_dialogs_StartLocation; //--- ToDo: Localize;
+			x = 15.46 * UI_GRID_W + UI_GRID_X;
+			y = 18.55 * UI_GRID_H + UI_GRID_Y;
+			w = 6.18854 * UI_GRID_W;
+			h = 0.54988 * UI_GRID_H;
+		};
+		class RscButton_1600: RscButton
+		{
+			idc = 5600;
+			action = "[_this] spawn TREND_fnc_SetParamsAndBegin; false";
+
+			text = $STR_TRGM2_dialogs_Begin; //--- ToDo: Localize;
+			x = 23.3 * UI_GRID_W + UI_GRID_X;
+			y = 16.07 * UI_GRID_H + UI_GRID_Y;
+			w = 4.12568 * UI_GRID_W;
+			h = 2.36963 * UI_GRID_H;
+			colorBackground[] = {0.85,0.4,0,1};
+			colorActive[] = {0.85,0.4,0,1};
+		};
+		class btnAdvanced: RscButton
+		{
+			idc = 1603;
+			action = "[] spawn TREND_fnc_openDialogAdvancedMissionSettings; false";
+
+			text = $STR_TRGM2_dialogs_AdvOpt; //--- ToDo: Localize;
+			x = 23.3 * UI_GRID_W + UI_GRID_X;
+			y = 18.6 * UI_GRID_H + UI_GRID_Y;
+			w = 4.12568 * UI_GRID_W;
+			h = 0.550001 * UI_GRID_H;
+			colorBackground[] = {0.85,0.4,0,1};
+			colorActive[] = {0.85,0.4,0,1};
+		};
+		class RscText_1002: RscText
+		{
+			idc = 5002;
+
+			text = $STR_TRGM2_dialogs_Objective; //--- ToDo: Localize;
+			x = 11.96 * UI_GRID_W + UI_GRID_X;
+			y = 13.6 * UI_GRID_H + UI_GRID_Y;
+			w = 3.09375 * UI_GRID_W;
+			h = 0.550001 * UI_GRID_H;
+			colorText[] = {0.85,0.4,0,1};
+		};
+		class RscCombo_2104: RscCombo
+		{
+			idc = 5104;
+
+			text = $STR_TRGM2_dialogs_Objective; //--- ToDo: Localize;
+			x = 15.46 * UI_GRID_W + UI_GRID_X;
+			y = 13.6 * UI_GRID_H + UI_GRID_Y;
+			w = 6.18854 * UI_GRID_W;
+			h = 0.54988 * UI_GRID_H;
+		};
+		class RscText_1003: RscText
+		{
+			idc = 5003;
+
+			x = 21.65 * UI_GRID_W + UI_GRID_X;
+			y = 13.6 * UI_GRID_H + UI_GRID_Y;
+			w = 0.619002 * UI_GRID_W;
+			h = 0.550001 * UI_GRID_H;
+		};
+		class RscText_1008: RscText
+		{
+			idc = 5008;
+
+			text = "[?]"; //--- ToDo: Localize;
+			x = 21.65 * UI_GRID_W + UI_GRID_X;
+			y = 14.42 * UI_GRID_H + UI_GRID_Y;
+			w = 0.619002 * UI_GRID_W;
+			h = 0.550001 * UI_GRID_H;
+			tooltip = $STR_TRGM2_dialogs_HardcoreReputation_HelpText; //--- ToDo: Localize;
+		};
+		class RscText_1009: RscText
+		{
+			idc = 5009;
+
+			x = 21.65 * UI_GRID_W + UI_GRID_X;
+			y = 15.25 * UI_GRID_H + UI_GRID_Y;
+			w = 0.619002 * UI_GRID_W;
+			h = 0.550001 * UI_GRID_H;
+		};
+		class RscText_1010: RscText
+		{
+			idc = 5010;
+
+			x = 21.65 * UI_GRID_W + UI_GRID_X;
+			y = 16.9 * UI_GRID_H + UI_GRID_Y;
+			w = 0.619002 * UI_GRID_W;
+			h = 0.550001 * UI_GRID_H;
+		};
+		class RscText_1011: RscText
+		{
+			idc = 5011;
+
+			x = 21.65 * UI_GRID_W + UI_GRID_X;
+			y = 17.72 * UI_GRID_H + UI_GRID_Y;
+			w = 0.619002 * UI_GRID_W;
+			h = 0.550001 * UI_GRID_H;
+		};
+		class RscPicture_1200: RscPicture
+		{
+			idc = 5201;
+
+			text = "RandFramework\Media\TRGM7.paa";
+			x = 19.59 * UI_GRID_W + UI_GRID_X;
+			y = 3.49 * UI_GRID_H + UI_GRID_Y;
+			w = 6.60267 * UI_GRID_W;
+			h = 6.04999 * UI_GRID_H;
 		};
 		class RscText_1013: RscText
 		{
 			idc = 1013;
+
 			text = "[?]"; //--- ToDo: Localize;
-			x = 0.538156 * safezoneW + safezoneX;
-			y = 0.7288 * safezoneH + safezoneY;
-			w = 0.0154751 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {1,1,1,1};
+			x = 21.65 * UI_GRID_W + UI_GRID_X;
+			y = 18.55 * UI_GRID_H + UI_GRID_Y;
+			w = 0.619002 * UI_GRID_W;
+			h = 0.550001 * UI_GRID_H;
 			tooltip = $STR_TRGM2_dialogs_StartLocation_HelpText; //--- ToDo: Localize;
 		};
-
 		class btnLoadLocalSave: RscButton
 		{
 			idc = 1601;
+			action = "[_this,1] spawn TREND_fnc_SetParamsAndBegin'; false";
+
 			text = $STR_TRGM2_dialogs_LoadLocal; //--- ToDo: Localize;
-			x = 0.5825 * safezoneW + safezoneX;
-			y = 0.566 * safezoneH + safezoneY;
-			w = 0.103125 * safezoneW;
-			h = 0.022 * safezoneH;
+			x = 23.3 * UI_GRID_W + UI_GRID_X;
+			y = 14.42 * UI_GRID_H + UI_GRID_Y;
+			w = 4.12502 * UI_GRID_W;
+			h = 0.550001 * UI_GRID_H;
 			colorBackground[] = {0.85,0.4,0,1};
 			colorActive[] = {0.85,0.4,0,1};
 			tooltip = $STR_TRGM2_dialogs_LoadLocal_HelpText; //--- ToDo: Localize;
-			action = "[_this,1] spawn TREND_fnc_SetParamsAndBegin'; false";
 		};
 		class btnLoadglobalSave: RscButton
 		{
 			idc = 1602;
+			action = "[_this,2] spawn TREND_fnc_SetParamsAndBegin; false";
+
 			text = $STR_TRGM2_dialogs_LoadGlobal; //--- ToDo: Localize;
-			x = 0.5825 * safezoneW + safezoneX;
-			y = 0.599 * safezoneH + safezoneY;
-			w = 0.103125 * safezoneW;
-			h = 0.022 * safezoneH;
+			x = 23.3 * UI_GRID_W + UI_GRID_X;
+			y = 15.25 * UI_GRID_H + UI_GRID_Y;
+			w = 4.12502 * UI_GRID_W;
+			h = 0.550001 * UI_GRID_H;
 			colorBackground[] = {0.85,0.4,0,1};
 			colorActive[] = {0.85,0.4,0,1};
 			tooltip = $STR_TRGM2_dialogs_LoadGlobal_HelpText; //--- ToDo: Localize;
-			action = "[_this,2] spawn TREND_fnc_SetParamsAndBegin; false";
 		};
+		class creditsText: RscStructuredText
+		{
+			idc = 7003;
 
-
-
-
+			text = "<t color='#ccaaaa'>Visit <a href='http://www.trgm2.com'>www.trgm2.com</a> for help and features... or donations : )</t>"; //--- ToDo: Localize;
+			x = 15.67 * UI_GRID_W + UI_GRID_X;
+			y = 19.65 * UI_GRID_H + UI_GRID_Y;
+			w = 9.07386 * UI_GRID_W;
+			h = 0.549984 * UI_GRID_H;
+			colorText[] = {1,1,0,1};
+		};
 		////////////////////////////////////////////////////////
 		// GUI EDITOR OUTPUT END
 		////////////////////////////////////////////////////////
-
-
-
 	};
 };
 

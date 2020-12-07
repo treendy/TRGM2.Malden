@@ -681,11 +681,11 @@ if (isServer) then {
 	[format["Mission Core: %1", "PlayBaseRadioEffect"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;
 
-	TREND_fnc_MonsoonEffect = {
-		format["%1 called by %2", "TREND_fnc_MonsoonEffect", "TREND_fnc_mainInit"] call TREND_fnc_log;
+	TREND_fnc_WeatherAffectsAI = {
+		format["%1 called by %2", "TREND_fnc_WeatherAffectsAI", "TREND_fnc_mainInit"] call TREND_fnc_log;
 		_iWeatherOption = selectRandom TREND_WeatherOptions;
-		if (_iWeatherOption isEqualTo 11) then {
-			[format["Mission Core: %1", "MonsoonEffect"], true] call TREND_fnc_log;
+		if (_iWeatherOption >= 11 && {_iWeatherOption != 99}) then {
+			[format["Mission Core: %1", "Weather Dependant AI Skill"], true] call TREND_fnc_log;
 			//Set enemy skill
 			{
 				if (Side _x isEqualTo East) then {
@@ -710,14 +710,14 @@ if (isServer) then {
 			//reset enemy skill
 		};
 	};
-	[] spawn TREND_fnc_MonsoonEffect;
+	[] spawn TREND_fnc_WeatherAffectsAI;
 
 	sleep _coreCountSleep;
 
 	TREND_fnc_SandStormEffect = {
 		format["%1 called by %2", "TREND_fnc_SandStormEffect", "TREND_fnc_mainInit"] call TREND_fnc_log;
-		// Make sure we're not trying to do monsoon and sandstorm at the same time...
-		_iSandStormOption = [2, (TREND_AdvancedSettings select TREND_ADVSET_SANDSTORM_IDX)] select ((selectRandom TREND_WeatherOptions) != 11);
+		// Make sure we're not trying to do monsoon/blizzard and sandstorm at the same time...
+		_iSandStormOption = [2, (TREND_AdvancedSettings select TREND_ADVSET_SANDSTORM_IDX)] select ((selectRandom TREND_WeatherOptions) < 11);
 
 		if (_iSandStormOption isEqualTo 0 && {selectRandom[true,false,false,false,false]}) then { //Random
 			[format["Mission Core: %1", "SandStormEffect"], true] call TREND_fnc_log;

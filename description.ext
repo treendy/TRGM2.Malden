@@ -71,16 +71,3 @@ class CfgRadio
 {
 	#include "RandFramework\Sounds\cfgRadio.hpp"
 };
-
-//class CfgSounds
-//{
-//	sounds[] = {};
-//
-//	class MKY_Blizzard
-//	{
-//		name = "";
-//		sound[] = {"\RandFramework\MKY\sounds\m0nkey_blizzard.ogg", db+10, 1.0};
-//		titles[] = {0,""};
-//	};
-//
-//};

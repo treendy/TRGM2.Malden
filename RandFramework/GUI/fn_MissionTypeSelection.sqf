@@ -5,6 +5,17 @@ _thisThis = _this select 0;
 
 _selectedIndex = _thisThis select 1;
 
+#define UI_GRID_X	(safezoneX)
+#define UI_GRID_Y	(safezoneY)
+#define UI_GRID_W	(safezoneW / 40)
+#define UI_GRID_H	(safezoneH / 25)
+#define UI_GRID_WAbs	(safezoneW)
+#define UI_GRID_HAbs	(safezoneH)
+#define MissionListX (15.46 * UI_GRID_W + UI_GRID_X)
+#define MissionListY (13.6 * UI_GRID_H + UI_GRID_Y)
+#define MissionListW (6.18854 * UI_GRID_W)
+#define MissionListH (0.54988 * UI_GRID_H)
+
 if (isNil "TREND_iMissionParamObjective2") then { TREND_iMissionParamObjective2 =   0; publicVariable "TREND_iMissionParamObjective2"; };
 if (isNil "TREND_iMissionParamObjective3") then { TREND_iMissionParamObjective3 =   0; publicVariable "TREND_iMissionParamObjective3"; };
 
@@ -24,12 +35,12 @@ _ctrl = (findDisplay 5000) displayCtrl 5001;
 _ctrl ctrlSetText format["%1",TREND_MissionTypeDescriptions select _selectedIndex]; // for Displays
 
 
-_display ctrlCreate ["RscStructuredText", 7003];
-_ctrlText1 = _display displayCtrl 7003;
-_ctrlText1 ctrlSetStructuredText parseText "<t color='#ccaaaa'>Visit <a href='http://www.trgm2.com'>www.trgm2.com</a> for help and features... or donations : )</t>";
-_ctrlText1 ctrlSetTextColor [1, 1, 0, 1];
-_ctrlText1 ctrlSetPosition [0.303 * safezoneW + safezoneX, (0.770) * safezoneH + safezoneY,0.3 * safezoneW,0.1 * safezoneH];
-_ctrlText1 ctrlCommit 0;
+// _display ctrlCreate ["RscStructuredText", 7003];
+// _ctrlText1 = _display displayCtrl 7003;
+// _ctrlText1 ctrlSetStructuredText parseText "<t color='#ccaaaa'>Visit <a href='http://www.trgm2.com'>www.trgm2.com</a> for help and features... or donations : )</t>";
+// _ctrlText1 ctrlSetTextColor [1, 1, 0, 1];
+// _ctrlText1 ctrlSetPosition [0.303 * safezoneW + safezoneX, (0.770) * safezoneH + safezoneY,0.3 * safezoneW,0.1 * safezoneH];
+// _ctrlText1 ctrlCommit 0;
 
 
 if (isNil "TREND_AllowMissionTypeCampaign") then { TREND_AllowMissionTypeCampaign =   false; publicVariable "TREND_AllowMissionTypeCampaign"; };
@@ -62,7 +73,7 @@ if (_selectedTypeID == 0 || _selectedTypeID == 6 || _selectedTypeID == 4 || _sel
 		_display ctrlCreate ["RscCombo", 7001];
 		_inpctrl1 = _display displayCtrl 7001;
 		_inpctrl1 ctrlSetTextColor [1, 1, 0, 1];
-		_inpctrl1 ctrlSetPosition [0.541 * safezoneW + safezoneX, (0.561) * safezoneH + safezoneY,0.08 * safezoneW,0.02 * safezoneH];
+		_inpctrl1 ctrlSetPosition [MissionListX+MissionListW, MissionListY,MissionListW/2,MissionListH];
 		_inpctrl1 ctrlCommit 0;
 		_ctrlTypes1 = (findDisplay 5000) displayCtrl 7001;
 		_optionTypes = TREND_MissionParamObjectives;
@@ -75,7 +86,7 @@ if (_selectedTypeID == 0 || _selectedTypeID == 6 || _selectedTypeID == 4 || _sel
 		_display ctrlCreate ["RscCombo", 7002];
 		_inpctrl2 = _display displayCtrl 7002;
 		_inpctrl2 ctrlSetTextColor [1, 1, 0, 1];
-		_inpctrl2 ctrlSetPosition [0.621 * safezoneW + safezoneX, (0.561) * safezoneH + safezoneY,0.08 * safezoneW,0.02 * safezoneH];
+		_inpctrl2 ctrlSetPosition [MissionListX+MissionListW+(MissionListW/2), MissionListY,MissionListW/2,MissionListH];
 		_inpctrl2 ctrlCommit 0;
 		_ctrlTypes2 = (findDisplay 5000) displayCtrl 7002;
 		_optionTypes = TREND_MissionParamObjectives;

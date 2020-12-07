@@ -22,6 +22,11 @@ class wire_cut
 	sound[] = {"RandFramework\Sounds\cutting.ogg", 1, 1};
 	titles[] = {};
 };
+class sswarning {
+    name="sswarning";
+    sound[]={"\RandFramework\Sounds\sswarning.ogg", 5,1};
+    titles[] = {};
+};
 class sswindloop {
 		name="sswindloop";
 		sound[]={"\RandFramework\Sounds\sswindloop.ogg", 1,1};

@@ -1,56 +1,9 @@
-class bcg_wind
+
+class NoSound
 {
-    name = "bcg_wind";
-    sound[] = {"RandFramework\Alias\Sound\bcg_wind.ogg", db+5, 1};
-    titles[] = {1, ""};
-};
-class rafala_1
-{
-    name = "rafala_1";
-    sound[] = {"RandFramework\Alias\Sound\rafala_1.ogg", db+10, 1};
-    titles[] = {1, ""};
-};
-class rafala_2
-{
-    name = "rafala_2";
-    sound[] = {"RandFramework\Alias\Sound\rafala_2.ogg", db+5, 1};
-    titles[] = {1, ""};
-};
-class rafala_4_dr
-{
-    name = "rafala_4_dr";
-    sound[] = {"RandFramework\Alias\Sound\rafala_4_dr.ogg", db+10, 1};
-    titles[] = {1, ""};
-};
-class rafala_5_st
-{
-    name = "rafala_5_st";
-    sound[] = {"RandFramework\Alias\Sound\rafala_5_st.ogg", db+10, 1};
-    titles[] = {1, ""};
-};
-class rafala_6
-{
-    name = "rafala_6";
-    sound[] = {"RandFramework\Alias\Sound\rafala_6.ogg", db+15, 1};
-    titles[] = {1, ""};
-};
-class rafala_7
-{
-    name = "rafala_7";
-    sound[] = {"RandFramework\Alias\Sound\rafala_7.ogg", db+10, 1};
-    titles[] = {1, ""};
-};
-class rafala_8
-{
-    name = "rafala_8";
-    sound[] = {"RandFramework\Alias\Sound\rafala_8.ogg", db+15, 1};
-    titles[] = {1, ""};
-};
-class rafala_9
-{
-    name = "rafala_9";
-    sound[] = {"RandFramework\Alias\Sound\rafala_9.ogg", db+10, 1};
-    titles[] = {1, ""};
+    name = "NoSound";
+    sound[] = {"", 0, 1};
+    titles[] = {0, ""};
 };
 class 01_far
 {
@@ -208,15 +161,10 @@ class 27_far
     sound[] = {"RandFramework\Alias\Sound\27_far.ogg", 1, 1.0};
     titles[] = {0, ""};
 };
-class sswarning {
-    name="sswarning";
-    sound[]={"\RandFramework\Sounds\sswarning.ogg", 5,1};
-    titles[] = {};
-};
-class expozie
+class alarma_aeriana_scurt
 {
-    name = "expozie"; // Name for mission editor
-    sound[] = {"\RandFramework\Alias\Sound\expozie.ogg", db+20, 1.0};
+    name = "alarma_aeriana_scurt"; // Name for mission editor
+    sound[] = {"\RandFramework\Alias\Sound\alarma_aeriana_scurt.ogg", db+10, 1.0};
     titles[] = {0, ""};
 };
 class bariera_1
@@ -249,11 +197,107 @@ class bariera_5
     sound[] = {"\RandFramework\Alias\Sound\bariera_5.ogg", db+15, 1.0};
     titles[] = {0, ""};
 };
+class bcg_wind
+{
+    name = "bcg_wind";
+    sound[] = {"RandFramework\Alias\Sound\bcg_wind.ogg", db+5, 1};
+    titles[] = {1, ""};
+};
+class bcg_wind_mild
+{
+    name = "bcg_wind_mild";
+    sound[] = {"\RandFramework\Alias\Sound\bcg_wind_mild.ogg", 0.05, 1};
+    titles[] = {1, ""};
+};
+class expozie
+{
+    name = "expozie"; // Name for mission editor
+    sound[] = {"\RandFramework\Alias\Sound\expozie.ogg", db+20, 1.0};
+    titles[] = {0, ""};
+};
 class ground_air
 {
     name = "ground_air"; // Name for mission editor
     sound[] = {"\RandFramework\Alias\Sound\ground_air.ogg", db+15, 1.0};
     titles[] = {0, ""};
+};
+class lup_01
+{
+    name = "lup_01";
+    sound[] = {"\RandFramework\Alias\Sound\lup_01.ogg", 1, 1};
+    titles[] = {};
+};
+class lup_02
+{
+    name = "lup_02";
+    sound[] = {"\RandFramework\Alias\Sound\lup_02.ogg", 1, 1};
+    titles[] = {};
+};
+class lup_03
+{
+    name = "lup_03";
+    sound[] = {"\RandFramework\Alias\Sound\lup_03.ogg", 1, 1};
+    titles[] = {};
+};
+class rafala_1
+{
+    name = "rafala_1";
+    sound[] = {"RandFramework\Alias\Sound\rafala_1.ogg", db+10, 1};
+    titles[] = {1, ""};
+};
+class rafala_2
+{
+    name = "rafala_2";
+    sound[] = {"RandFramework\Alias\Sound\rafala_2.ogg", db+5, 1};
+    titles[] = {1, ""};
+};
+class rafala_3
+{
+    name = "rafala_3";
+    sound[] = {"\RandFramework\Alias\Sound\rafala_3.ogg",1,1};
+    titles[] = {1, ""};
+};
+class rafala_4_dr
+{
+    name = "rafala_4_dr";
+    sound[] = {"RandFramework\Alias\Sound\rafala_4_dr.ogg", db+10, 1};
+    titles[] = {1, ""};
+};
+class rafala_5
+{
+    name = "rafala_9";
+    sound[] = {"\RandFramework\Alias\Sound\rafala_9.ogg",1,1};
+    titles[] = {1, ""};
+};
+class rafala_5_st
+{
+    name = "rafala_5_st";
+    sound[] = {"RandFramework\Alias\Sound\rafala_5_st.ogg", db+10, 1};
+    titles[] = {1, ""};
+};
+class rafala_6
+{
+    name = "rafala_6";
+    sound[] = {"RandFramework\Alias\Sound\rafala_6.ogg", db+15, 1};
+    titles[] = {1, ""};
+};
+class rafala_7
+{
+    name = "rafala_7";
+    sound[] = {"RandFramework\Alias\Sound\rafala_7.ogg", db+10, 1};
+    titles[] = {1, ""};
+};
+class rafala_8
+{
+    name = "rafala_8";
+    sound[] = {"RandFramework\Alias\Sound\rafala_8.ogg", db+15, 1};
+    titles[] = {1, ""};
+};
+class rafala_9
+{
+    name = "rafala_9";
+    sound[] = {"RandFramework\Alias\Sound\rafala_9.ogg", db+10, 1};
+    titles[] = {1, ""};
 };
 class roc_1
 {
@@ -279,9 +323,63 @@ class roc_4
     sound[] = {"\RandFramework\Alias\Sound\roc_4.ogg", db+10, 1.0};
     titles[] = {0, ""};
 };
-class alarma_aeriana_scurt
+class tremurat_1
 {
-    name = "alarma_aeriana_scurt"; // Name for mission editor
-    sound[] = {"\RandFramework\Alias\Sound\alarma_aeriana_scurt.ogg", db+10, 1.0};
-    titles[] = {0, ""};
+    name = "tremurat_1";
+    sound[] = {"\RandFramework\Alias\Sound\tremurat_1.ogg", 1, 1};
+    titles[] = {1, ""};
+};
+class tremurat_2
+{
+    name = "tremurat_2";
+    sound[] = {"\RandFramework\Alias\Sound\tremurat_2.ogg", 1, 1};
+    titles[] = {1, ""};
+};
+class tremurat_3
+{
+    name = "tremurat_3";
+    sound[] = {"\RandFramework\Alias\Sound\tremurat_3.ogg", 1, 1};
+    titles[] = {1, ""};
+};
+class tremurat_4
+{
+    name = "tremurat_4";
+    sound[] = {"\RandFramework\Alias\Sound\tremurat_4.ogg", 1, 1};
+    titles[] = {1, ""};
+};
+class tuse_1
+{
+    name = "tuse_1";
+    sound[] = {"\RandFramework\Alias\Sound\tuse_1.ogg", 1, 1};
+    titles[] = {1, ""};
+};
+class tuse_2
+{
+    name = "tuse_2";
+    sound[] = {"\RandFramework\Alias\Sound\tuse_2.ogg", 1, 1};
+    titles[] = {1, ""};
+};
+class tuse_3
+{
+    name = "tuse_3";
+    sound[] = {"\RandFramework\Alias\Sound\tuse_3.ogg", 1, 1};
+    titles[] = {1, ""};
+};
+class tuse_4
+{
+    name = "tuse_4";
+    sound[] = {"\RandFramework\Alias\Sound\tuse_4.ogg", 1, 1};
+    titles[] = {1, ""};
+};
+class tuse_5
+{
+    name = "tuse_5";
+    sound[] = {"\RandFramework\Alias\Sound\tuse_5.ogg", 1, 1};
+    titles[] = {1, ""};
+};
+class tuse_6
+{
+    name = "tuse_6";
+    sound[] = {"\RandFramework\Alias\Sound\tuse_6.ogg", 1, 1};
+    titles[] = {1, ""};
 };

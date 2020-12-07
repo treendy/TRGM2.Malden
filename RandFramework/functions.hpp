@@ -78,6 +78,7 @@ class TREND {
         class openDialogRequests{};
         class openDialogTeamLoadouts{};
         class SetParamsAndBegin{};
+        class timeSliderOnChange{};
         class wireCompare{};
     };
 

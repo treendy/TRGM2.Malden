@@ -289,8 +289,8 @@ if (!_bFriendlyInsurgents) then {
 					_trgCustomAIScript setVariable ["DelMeOnNewCampaignDay",true];
 					_trgCustomAIScript setTriggerArea [1250, 1250, 0, false];
 					_trgCustomAIScript setTriggerActivation [TREND_FriendlySideString, format["%1 D", TREND_EnemySideString], true];
-					if (isNil "TREND_NumReinforcementsCalled") then {TREND_NumReinforcementsCalled = 0; publicVariable "TREND_NumReinforcementsCalled";};
-					_trgCustomAIScript setTriggerStatements ["this && TREND_SpottedActiveFinished && TREND_NumReinforcementsCalled < 4", format["nul = [EAST, TREND_ReinforceStartPos1, %1, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; nul = [EAST, TREND_ReinforceStartPos2, %1, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements; TREND_NumReinforcementsCalled = TREND_NumReinforcementsCalled + 1; publicVariable 'TREND_NumReinforcementsCalled';", str(_sidePos)], ""];
+					if (isNil "TREND_TimeSinceAdditionalReinforcementsCalled") then {TREND_TimeSinceAdditionalReinforcementsCalled = time; publicVariable "TREND_TimeSinceAdditionalReinforcementsCalled";};
+					_trgCustomAIScript setTriggerStatements ["this && {(time - TREND_TimeSinceAdditionalReinforcementsCalled) > 300}", format["nul = [EAST, TREND_ReinforceStartPos1, %1, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; nul = [EAST, TREND_ReinforceStartPos2, %1, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements; TREND_TimeSinceAdditionalReinforcementsCalled = time; publicVariable 'TREND_TimeSinceAdditionalReinforcementsCalled';", str(_sidePos)], ""];
 				};
 			};
 		};

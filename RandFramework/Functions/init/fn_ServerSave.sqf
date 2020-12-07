@@ -22,7 +22,23 @@ if (_SaveVersion != "") then {
 
 	sleep 0.1;
 	{
-		_saveData = [TREND_iMissionParamType,TREND_iMissionParamObjective,TREND_iAllowNVG,TREND_iAllowNVG,TREND_iWeather,TREND_iUseRevive,TREND_iStartLocation,TREND_BadPoints,TREND_MaxBadPoints,TREND_BadPointsReason,TREND_iCampaignDay,TREND_AdvancedSettings,TREND_EnemyFactionData,TREND_LoadoutData];
+		_saveData = [
+			TREND_iMissionParamType,
+			TREND_iMissionParamObjective,
+			TREND_iAllowNVG,
+			TREND_iMissionParamRepOption,
+			TREND_iWeather,
+			TREND_iUseRevive,
+			TREND_iStartLocation,
+			TREND_BadPoints,
+			TREND_MaxBadPoints,
+			TREND_BadPointsReason,
+			TREND_iCampaignDay,
+			TREND_AdvancedSettings,
+			TREND_EnemyFactionData,
+			TREND_LoadoutData,
+			TREND_arrayTime
+		];
 		profileNamespace setVariable [TREND_sInitialSLPlayerID + ":" + TREND_SaveTypeString,_saveData];
 		saveProfileNamespace;
 	} remoteExec ["call", 2]; //Save this to server only

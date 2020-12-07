@@ -170,22 +170,19 @@ if (isNil "TREND_sScriptsUsed") then { TREND_sScriptsUsed =  localize "STR_TRGM2
 if (isNil "TREND_iWeather") then { TREND_iWeather =  1; publicVariable "TREND_iWeather"; };
 if (isNil "TREND_UseEditorWeather") then { TREND_UseEditorWeather =  false; publicVariable "TREND_UseEditorWeather"; };
 
-switch (TREND_iWeather) do {
-	case 0:  {TREND_WeatherOptions = [1,1,1,2,2,2,3,3,3,4,5,6,7,7,8,9,10]; publicVariable "TREND_WeatherOptions";};
-	case 1:  {TREND_WeatherOptions = [1]; publicVariable "TREND_WeatherOptions";};
-	case 2:  {TREND_WeatherOptions = [2]; publicVariable "TREND_WeatherOptions";};
-	case 3:  {TREND_WeatherOptions = [3]; publicVariable "TREND_WeatherOptions";};
-	case 4:  {TREND_WeatherOptions = [4]; publicVariable "TREND_WeatherOptions";};
-	case 5:  {TREND_WeatherOptions = [5]; publicVariable "TREND_WeatherOptions";};
-	case 6:  {TREND_WeatherOptions = [6]; publicVariable "TREND_WeatherOptions";};
-	case 7:  {TREND_WeatherOptions = [7]; publicVariable "TREND_WeatherOptions";};
-	case 8:  {TREND_WeatherOptions = [8]; publicVariable "TREND_WeatherOptions";};
-	case 9:  {TREND_WeatherOptions = [9]; publicVariable "TREND_WeatherOptions";};
-	case 10: {TREND_WeatherOptions = [10]; publicVariable "TREND_WeatherOptions";};
-	case 11: {TREND_WeatherOptions = [11]; publicVariable "TREND_WeatherOptions";};
-	case 99: {TREND_WeatherOptions = [99]; publicVariable "TREND_WeatherOptions"; TREND_UseEditorWeather =  true; publicVariable "TREND_UseEditorWeather";};
-	default  {TREND_WeatherOptions = [1,1,1,2,2,2,3,3,3,4,5,6,7,7,8,9,10]; publicVariable "TREND_WeatherOptions";};
-};
+TREND_WeatherOptions = call {
+	_weatherOption = [TREND_iWeather];
+	switch (TREND_iWeather) do {
+		case 0:  { _weatherOption = [1,1,1,2,2,2,3,3,3,3];};
+		case 99: { _weatherOption = [TREND_iWeather]; TREND_UseEditorWeather =  true; publicVariable "TREND_UseEditorWeather"; };
+		default  { _weatherOption = [TREND_iWeather]; };
+	};
+	_weatherOption;
+}; publicVariable "TREND_WeatherOptions";
+
+/////// Time settings set up ///////
+//[hour,min]
+if (isNil "TREND_arrayTime") then { TREND_arrayTime =  [8, 15]; publicVariable "TREND_arrayTime"; };
 
 /////// Minefield settings ///////
 if (isNil "TREND_iAllowMineField") then { TREND_iAllowMineField =  0; publicVariable "TREND_iAllowMineField"; };
@@ -204,13 +201,6 @@ if (isNil "TREND_PunishmentRadius") then { TREND_PunishmentRadius =  1000; publi
 if (isNil "TREND_ChanceOfOccurance") then { TREND_ChanceOfOccurance =  [true,false,false,false,false]; publicVariable "TREND_ChanceOfOccurance"; };  //downed chopper, medical emergancy, downed convoy, etc...
 TREND_IntelShownType = [1,2,3,4,5]; publicVariable "TREND_IntelShownType";  // 1=Mortar    2=AAA    3=commsTower    4=checkpoints    5=ATMinefield
 if (isNil "TREND_TowerRadius") then { TREND_TowerRadius =  3500; publicVariable "TREND_TowerRadius"; };
-
-/////// Datetime settings set up ///////
-//[year.month,day,hour,min]
-TREND_Sunny = [2035, 1, 14, 12, 0]; publicVariable "TREND_Sunny";
-TREND_DarkNight = [2035, 1, 15, 0, 0]; publicVariable "TREND_DarkNight";
-TREND_MoonNight = [2035, 11, 09, 23, 0]; publicVariable "TREND_MoonNight";
-TREND_EarlyMorning = [2035, 1, 14, 8, 15]; publicVariable "TREND_EarlyMorning";
 
 /////// Artillery offsets ///////
 if (isNil "TREND_GridXOffSet") then { TREND_GridXOffSet =  0; publicVariable "TREND_GridXOffSet"; };  //to work this out, get vector21, mark pos at [0,0], the number for the X or Y is the offset, as it should be zero, so if not, we need to use this as an offset
@@ -322,8 +312,8 @@ publicVariable "TREND_MissionParamObjectivesValues";
 TREND_MissionParamRepOptions = [localize "STR_TRGM2_TRGMInitPlayerLocal_Enable", localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"]; publicVariable "TREND_MissionParamRepOptions";
 TREND_MissionParamRepOptionsValues = [1, 0]; publicVariable "TREND_MissionParamRepOptionsValues";
 
-TREND_MissionParamWeatherOptions = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random", localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sunny", localize "STR_TRGM2_TRGMSetUnitGlobalVars_DaytimeHeavyOvercast", localize "STR_TRGM2_TRGMSetUnitGlobalVars_DaytimeAverageOvercast", localize "STR_TRGM2_TRGMSetUnitGlobalVars_DarkNightClear", localize "STR_TRGM2_TRGMSetUnitGlobalVars_DarkNightHeavyOvercast", localize "STR_TRGM2_TRGMSetUnitGlobalVars_DarkNightAverageOvercast", localize "STR_TRGM2_TRGMSetUnitGlobalVars_EarlyMorning", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MoonNightClear", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MoonNightAverageOvercast", localize "STR_TRGM2_TRGMSetUnitGlobalVars_MoonNightHeavyOvercast", localize "STR_TRGM2_TRGMSetUnitGlobalVars_Monsoon", localize "STR_TRGM2_TRGMSetUnitGlobalVars_UseEditorWeather"]; publicVariable "TREND_MissionParamWeatherOptions";
-TREND_MissionParamWeatherOptionsValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 99]; publicVariable "TREND_MissionParamWeatherOptionsValues";
+TREND_MissionParamWeatherOptions = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random", localize "STR_TRGM2_TRGMSetUnitGlobalVars_Clear", localize "STR_TRGM2_TRGMSetUnitGlobalVars_HeavyOvercast", localize "STR_TRGM2_TRGMSetUnitGlobalVars_AverageOvercast", localize "STR_TRGM2_TRGMSetUnitGlobalVars_Realistic", localize "STR_TRGM2_TRGMSetUnitGlobalVars_Monsoon", localize "STR_TRGM2_TRGMSetUnitGlobalVars_Snowstorm", localize "STR_TRGM2_TRGMSetUnitGlobalVars_UseEditorWeather"]; publicVariable "TREND_MissionParamWeatherOptions";
+TREND_MissionParamWeatherOptionsValues = [0, 1, 2, 3, 4, 31, 41, 99]; publicVariable "TREND_MissionParamWeatherOptionsValues";
 
 TREND_MissionParamNVGOptions =  [localize "STR_TRGM2_TRGMSetUnitGlobalVars_NVG_Real", localize "STR_TRGM2_TRGMSetUnitGlobalVars_NVG_Allow", localize "STR_TRGM2_TRGMSetUnitGlobalVars_NVG_NoAllow"]; publicVariable "TREND_MissionParamNVGOptions";
 TREND_MissionParamNVGOptionsValues =  [2,1,0]; publicVariable "TREND_MissionParamNVGOptionsValues";

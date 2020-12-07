@@ -1,3 +1,16 @@
+/******************************************************
+The purpose of having a wrapper around BIS_fnc_findSafePos
+is to increase the likelihood of a successful safe position.
+This script does this by attempting two different methods,
+the first is by just calling BIS_fnc_findSafePos, if the return
+is NOT equal to the default value, the function returns. However,
+if the value is the default value, we use findEmptyPosition to try
+and find a position, defaulting to a safe position for a quadbike
+since it allows for both most vehicles and units to occupy the space,
+but any class or object can be passed after the default pos parameter
+to use something else.
+******************************************************/
+
 params [
 	["_checkPos",[]],
 	["_minDistance",0],

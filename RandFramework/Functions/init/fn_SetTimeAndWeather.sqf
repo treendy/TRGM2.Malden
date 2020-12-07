@@ -44,55 +44,33 @@ if (!TREND_UseEditorWeather && isServer) then {
 		0 setFog (_fog);
 	}
 	else {
-		[2035, 1, 1, 12, 0] params ["_year", "_month", "_day", "_hour", "_min"];
+		_BrightestNightDate = [2033, 2, 12]; //This date is a night with the moon phase == 1 (i.e. super moon), note that it is different than real life.
+		_BrightestNightDate params ["_year", "_month", "_day"];
+		TREND_arrayTime params ["_hour", "_min"];
+		[[], {setDate [_year, _month, _day, _hour, _min]}] remoteExec ["call",0,true];
+
 		private _WeatherOption = selectRandom TREND_WeatherOptions;
 
 		if (_isIntro) then {_WeatherOption = selectRandom [2,8,9,10,7]};
 
 		switch (_WeatherOption) do {
-			case 1: { //Sunny Clear
+			case 1: { //Clear
 				0 setOvercast 0;
-				setDate TREND_Sunny;
 			};
-			case 2: { //Daytime Heavy Overcast
+			case 2: { //Heavy Overcast
 				0 setOvercast 1;
-				setDate TREND_Sunny;
 			};
-			case 3: { //Day Average overcast
+			case 3: { //Average overcast
 				0 setOvercast 0.5;
-				setDate TREND_Sunny;
 			};
-			case 4: { //Dark Night Clear
-				0 setOvercast 0;
-				setDate TREND_DarkNight;
+			case 4: { //Realistic
+				// These are really just guestimates, but it basically is saying "it's clear at night, foggy in the morning, cloudy during the day, chance of rain in the evening, clears up by midnight.
+				// I'm not a Meteorologist though ¯\_(ツ)_/¯
+				_timeBasedOvercast = [0, 0, (1/16), (1/8), (1/4), (1/2), (3/4), 1, (3/4), (1/2), (1/4), (1/8), (1/16), (1/8), (1/4), (1/2), (3/4), 1, (1/2), (1/4), (1/8), (1/16), 0, 0] select _hour;
+				0 setOvercast (_timeBasedOvercast);
 			};
-			case 5: { //Dark Night Heavy Overcast
+			case 31: { //Monsoon
 				0 setOvercast 1;
-				setDate TREND_DarkNight;
-			};
-			case 6: { //Dark Night Average overcast
-				0 setOvercast 0.5;
-				setDate TREND_DarkNight;
-			};
-			case 7: { //EarlyMorning
-				0 setOvercast 0.6;
-				setDate TREND_EarlyMorning;
-			};
-			case 8: { //Moon Night Clear
-				0 setOvercast 0;
-				setDate TREND_MoonNight;
-			};
-			case 9: { //Moon Night Average overcast
-				0 setOvercast 0.4;
-				setDate TREND_MoonNight;
-			};
-			case 10: { //Moon Night Heavy overcast
-				0 setOvercast 1;
-				setDate TREND_MoonNight;
-			};
-			case 11: { //Monsoon (Day)
-				0 setOvercast 1;
-				setDate TREND_EarlyMorning;
 				_direction_monsoon	= 200; // direction of rain
 				_duration_monsoon	= 18030; //5 hrs
 				_effect_on_objects	= false; // no flying objs
@@ -103,12 +81,25 @@ if (!TREND_UseEditorWeather && isServer) then {
 				_delay_thunder		= 90; //every 1.5 min
 				[[_direction_monsoon,_duration_monsoon,_effect_on_objects,_debris_branches,_rain_fog,_rain_drop,_thunder_steroids,_delay_thunder],"RandFramework\Alias\AL_monsoon\al_monsoon.sqf"] remoteExec ["execVM",0,true];
 			};
+			case 41: { //Blizzard
+				0 setOvercast 1;
+				_snowfall			= true; // snow particles
+				_duration_storm		= 18030; // 5 hrs
+				_ambient_sounds		= 60; // ambient sounds
+				_breath_vapors		= false; // no breath (bad for a lot of units)
+				_snow_burst			= 90; // frequency of snow bursts
+				_effect_on_objects	= false; // snow burst blows debris
+				_vanilla_fog		= true; // script controls fog levels
+				_local_fog			= true; // use script's local fog
+				_intensifywind		= true; // wind has force
+				_unitsneeze			= true; // units will randomly sneeze/cough during snow bursts
+				[[_snowfall,_duration_storm,_ambient_sounds,_breath_vapors,_snow_burst,_effect_on_objects,_vanilla_fog,_local_fog,_intensifywind,_unitsneeze],"RandFramework\Alias\AL_snowstorm\al_snow.sqf"] remoteExec ["execVM",0,true];
+			};
 			case 99: {
 				// Using editor weather, this should never get here but just in-case...
 			};
 			default {// (Default) Sunny Clear
 				0 setOvercast 0;
-				setDate TREND_Sunny;
 			};
 		};
 	};

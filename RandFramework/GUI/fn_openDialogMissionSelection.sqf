@@ -7,11 +7,26 @@ if (isNil "TREND_InitialLoadedPreviousSettings" && !TREND_ForceMissionSetup) the
 	TREND_InitialLoadedPreviousSettings = profileNamespace getVariable [worldname + ":PreviousSettings",Nil]; //Get this from server only, but use player ID!!!
 	if (!isNil "TREND_InitialLoadedPreviousSettings") then {
 		if (count TREND_InitialLoadedPreviousSettings > 0) then {
+		_savePreviousSettings = [
+			TREND_iMissionParamType,
+			TREND_iMissionParamObjective,
+			TREND_iAllowNVG,
+			TREND_iMissionParamRepOption,
+			TREND_iWeather,
+			TREND_iUseRevive,
+			TREND_iStartLocation,
+			TREND_AdvancedSettings,
+			TREND_EnemyFactionData,
+			TREND_LoadoutData,
+			TREND_arrayTime
+		];
 			TREND_iMissionParamType =  TREND_InitialLoadedPreviousSettings select 0; publicVariable "TREND_iMissionParamType";
 			//TREND_iMissionParamObjective =  TREND_InitialLoadedPreviousSettings select 1; publicVariable "TREND_iMissionParamObjective";
 			TREND_iAllowNVG =  TREND_InitialLoadedPreviousSettings select 2; publicVariable "TREND_iAllowNVG";
 			TREND_iMissionParamRepOption =  TREND_InitialLoadedPreviousSettings select 3; publicVariable "TREND_iMissionParamRepOption";
 			TREND_iWeather =  TREND_InitialLoadedPreviousSettings select 4; publicVariable "TREND_iWeather";
+			TREND_arrayTime = TREND_InitialLoadedPreviousSettings select 10; publicVariable "TREND_arrayTime";
+			if (isNil "TREND_arrayTime") then { TREND_arrayTime =  [8, 15]; publicVariable "TREND_arrayTime"; };
 			TREND_iUseRevive =  TREND_InitialLoadedPreviousSettings select 5; publicVariable "TREND_iUseRevive";
 			TREND_iStartLocation =  TREND_InitialLoadedPreviousSettings select 6; publicVariable "TREND_iStartLocation";
 
@@ -197,5 +212,12 @@ else {
 		_ctrlRevive ctrlEnable false;
 	};
 	_ctrlLocation lbSetCurSel (TREND_MissionParamLocationOptionsValues find TREND_iStartLocation);
+
+	if ([8, 15] isEqualTo TREND_arrayTime) then {
+		[nil, [date select 3, date select 4], "Init"] call TREND_fnc_timeSliderOnChange;
+	} else {
+		[nil, TREND_arrayTime, "Init"] call TREND_fnc_timeSliderOnChange;
+	};
+
 };
 

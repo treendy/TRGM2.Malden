@@ -278,7 +278,7 @@ TREND_fnc_InitPostStarted = {
 	endMissionBoard addaction [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format[localize "STR_TRGM2_TRGMInitPlayerLocal_FullReputationReport",_iPointsToAdd,TREND_BadPoints, TREND_MaxBadPoints, TREND_MaxBadPoints - TREND_BadPoints, TREND_BadPointsReason]}];
 
 	// I don't know if this is required anymore since MainInit remoteExec's this...
-	// _iSandStormOption = [2, (TREND_AdvancedSettings select TREND_ADVSET_SANDSTORM_IDX)] select ((selectRandom TREND_WeatherOptions) != 11);
+	// _iSandStormOption = [2, (TREND_AdvancedSettings select TREND_ADVSET_SANDSTORM_IDX)] select ((selectRandom TREND_WeatherOptions) < 11);
 	// if (_iSandStormOption == 3) then { //5 hours non stop
 	// 	nul = [18030,false] execVM "RandFramework\RikoSandStorm\ROSSandstorm.sqf";
 	// };
