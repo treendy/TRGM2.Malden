@@ -39,7 +39,7 @@ if (player distance getMarkerPos "MrkHQ" > TREND_SaveZoneRadius) then {
 		_tombStone setDir TREND_GraveYardDirection;
 		_tombStone setVariable ["Message", format[localize "STR_TRGM2_RecruiteInf_KIA",name player],true];
 		//_tombStone addAction ["Read",{hint format["%1",(_this select 0) getVariable "Message"]}];
-		[[_tombStone, [localize "STR_TRGM2_RecruiteInf_Read","hint format['%1',(_this select 0) getVariable 'Message']"]],"addAction",true,true] call BIS_fnc_MP;
+		[_tombStone, [localize "STR_TRGM2_RecruiteInf_Read","hint format['%1',(_this select 0) getVariable 'Message']"]] remoteExec ["addAction", 0, true];
 		//[0.2, format["KIA: %1",name (_this select 0)]] spawn TREND_fnc_AdjustBadPoints;
 	};
 

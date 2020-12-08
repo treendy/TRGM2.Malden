@@ -34,12 +34,6 @@ class Header
 	MaxPlayers = 35;
 };
 
-
-class Params
-{
-
-};
-
 class CfgFunctions {
 	#include "fhqtt\functions.hpp"
 	#include "RandFramework\functions.hpp"
@@ -70,4 +64,9 @@ class CfgSounds
 class CfgRadio
 {
 	#include "RandFramework\Sounds\cfgRadio.hpp"
+};
+
+class Params
+{
+
 };

@@ -188,7 +188,7 @@ if (isServer && count _thisThisList > 0) then {
 				//};
 
 
-				if (_bInfSpottedAction || (TREND_AdvancedSettings select TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX == 1) || (TREND_AdvancedSettings select TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX == 0 && selectRandom[false,true])) then {
+				if (_bInfSpottedAction) then {
 						if (_bIsMainObjective) then {
 							[EAST, TREND_ReinforceStartPos1, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
 							if (TREND_bAllowLargerPatrols) then {
@@ -360,7 +360,7 @@ if (isServer && count _thisThisList > 0) then {
 									while {_iFiredCount < _iRoundsToFire} do {
 										_iFiredCount = _iRoundsToFire + 1;
 										_TargetPos = [(_SpottedUnitPos select 0)+(75 * sin floor(random 360)),(_SpottedUnitPos select 1)+(75 * cos floor(random 360))];
-										[[_nearestMortar, [_TargetPos, _Ammo, 1]],"commandArtilleryFire",false,false] call BIS_fnc_MP;
+										[_nearestMortar, [_TargetPos, _Ammo, 1]] remoteExec ["commandArtilleryFire", -2, false];
 										sleep 3;
 									};
 									TREND_bMortarFiring = false;
@@ -380,7 +380,7 @@ if (isServer && count _thisThisList > 0) then {
 
 				if (!(vehicle _SpottedUnit isKindOf "Car") && !(vehicle _SpottedUnit isKindOf "Air") && _bAllowPatrolChange) then {
 
-					if (TREND_bBaseHasChopper && selectRandom [true]) then {
+					if (TREND_bBaseHasChopper) then {
 
 						while {(count (waypoints group TREND_EnemyBaseChopperPilot)) > 0} do {
 							deleteWaypoint ((waypoints group TREND_EnemyBaseChopperPilot) select 0);

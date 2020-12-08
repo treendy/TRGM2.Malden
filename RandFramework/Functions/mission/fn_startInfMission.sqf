@@ -491,7 +491,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 									missionNamespace setVariable [_sIED1Name, _objIED1];
 									_objIED1 setPosATL (selectRandom _allpositionsLaptop1);
 								};
-								[[_objLaptop1, [localize "STR_TRGM2_startInfMission_MissionTitle1",{_this spawn TREND_fnc_hackIntel1;},[_iTaskIndex,_bCreateTask]]],"addAction",true,true] call BIS_fnc_MP;
+								[_objLaptop1, [localize "STR_TRGM2_startInfMission_MissionTitle1",{_this spawn TREND_fnc_hackIntel1;},[_iTaskIndex,_bCreateTask]]] remoteExec ["addAction", 0, true];
 								_sTaskDescription = selectRandom[
 									localize "STR_TRGM2_startInfMission_MissionTitle1_Desc1",
 									localize "STR_TRGM2_startInfMission_MissionTitle1_Desc2"];
@@ -506,7 +506,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 								_roadConnectedTo = roadsConnectedTo _nearestRoad;
 								_objVehicle = selectRandom sideResarchTruck createVehicle [0,0,500];
 								_objVehicle setPosATL getPosATL _nearestRoad;
-								[[_objVehicle, [localize "STR_TRGM2_startInfMission_MissionTitle2_Button",{_this spawn TREND_fnc_downloadResearchData},[_iTaskIndex,_bCreateTask]]],"addAction",true,true] call BIS_fnc_MP;
+								[_objVehicle, [localize "STR_TRGM2_startInfMission_MissionTitle2_Button",{_this spawn TREND_fnc_downloadResearchData},[_iTaskIndex,_bCreateTask]]] remoteExec ["addAction", 0, true];
 								if (count _roadConnectedTo > 0) then {
 									_connectedRoad = _roadConnectedTo select 0;
 									_direction = [_nearestRoad, _connectedRoad] call BIS_fnc_DirTo;
@@ -678,8 +678,8 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 										while {alive(_objVehicle)} do {
 											_flatPos = nil;
 											_flatPos = [getMarkerPos "mrkHQ", 1000, 1200, 20, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-											[[_objVehicle, 1],"setVehicleAmmo",true,false] call BIS_fnc_MP;
-											[[_objVehicle, [_flatPos, _Ammo, 1]],"commandArtilleryFire",false,false] call BIS_fnc_MP;
+											[_objVehicle, 1] remoteExec ["setVehicleAmmo", 0, true];
+											[_objVehicle, [_flatPos, _Ammo, 1]] remoteExec ["commandArtilleryFire", -2, true];
 											sleep selectRandom[10,30,60,120,240];
 										};
 									};
@@ -704,8 +704,8 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 										while {alive(_objVehicle)} do {
 											_flatPos = nil;
 											_flatPos = [getMarkerPos "mrkHQ", 1000, 1200, 20, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-											[[_objVehicle, 1],"setVehicleAmmo",true,false] call BIS_fnc_MP;
-											[[_objVehicle, [_flatPos, _Ammo, 1]],"commandArtilleryFire",false,false] call BIS_fnc_MP;
+											[_objVehicle, 1] remoteExec ["setVehicleAmmo", 0, true];
+											[_objVehicle, [_flatPos, _Ammo, 1]] remoteExec ["commandArtilleryFire", -2, true];
 											sleep selectRandom[10,30,60,120,240];
 										};
 									};
@@ -797,7 +797,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 								_objInformant allowDamage false;
 								_objInformant setVariable ["TaskType",_iThisTaskType,true];
 
-								[[_objInformant, ["HitPart",
+								[_objInformant, ["HitPart",
 									{
 										_thisInformant = ((_this select 0) select 0);
 										_thisShooter =((_this select 0) select 1);
@@ -854,18 +854,18 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 										};
 
 									}
-								]],"addEventHandler",true,true] call BIS_fnc_MP;
+								]] remoteExec ["addEventHandler", 0, true];
 
 								if (_bIsMainObjective && (_iThisTaskType == 5 || _iThisTaskType == 8 || _iThisTaskType == 7)) then {
 									//if interrogate officer or kill weapon dealer or eleminate officer and main objective, then complete task when searched
 									//its only the main objectie that we require the player to get to the body... otherwise, can kill him from a distance
-									[[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button",{_this spawn TREND_fnc_IdentifyHVT;},[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
+									[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button",{_this spawn TREND_fnc_IdentifyHVT;},[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 								}
 								else {
 									if (!(_iThisTaskType == 5)) then {
 										//pass in false so we know to just hint if this was our guy or not (just in case player wants to be sure before moving to next objective)
 										//only need to search if its a kill objective... if for example its "interogate officer", there will already be an action to get intel
-										[[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button",{_this spawn TREND_fnc_IdentifyHVT;},[_iTaskIndex,false],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
+										[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button",{_this spawn TREND_fnc_IdentifyHVT;},[_iTaskIndex,false],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 									};
 								};
 
@@ -879,7 +879,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 										_objInformant addWeapon "SMG_02_F";
 									};
 									if (_iThisTaskType == 5) then {
-										[[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button2",{_this spawn TREND_fnc_InterrogateOfficer;},[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
+										[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button2",{_this spawn TREND_fnc_InterrogateOfficer;},[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 									};
 									if (_iThisTaskType == 5 || _iThisTaskType == 8 || _iThisTaskType == 7) then {
 
@@ -902,7 +902,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 										[_sInformant1Name,_initPos] spawn TREND_fnc_WalkingGuyLoop;
 
 										if (_bIsMainObjective) then {
-											//[[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button",{_this spawn TREND_fnc_IdentifyHVT;},[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
+											//[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button",{_this spawn TREND_fnc_IdentifyHVT;},[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 										}
 										else {
 											if (_iThisTaskType != 5) then {
@@ -927,7 +927,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 								else {
 
 									if (_iThisTaskType == 4) then {
-										[[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button2",{_this spawn TREND_fnc_SpeakInformant;},[_iTaskIndex,_bCreateTask],1,false,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
+										[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button2",{_this spawn TREND_fnc_SpeakInformant;},[_iTaskIndex,_bCreateTask],1,false,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 									};
 									if (_iThisTaskType == 11 || _iThisTaskType == 12) then { //pow or reporter
 										_allowFriendlyIns = false;
@@ -1037,7 +1037,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 								missionNamespace setVariable [_sRadio1Name, _objRadio1];
 								_objRadio1 setPosATL (selectRandom _allpositionsRadio1);
 
-								[[_objRadio1, [localize "STR_TRGM2_startInfMission_MissionTitle6_Button",{_this spawn TREND_fnc_bugRadio1;},[_iTaskIndex,_bCreateTask]]],"addAction",true,true] call BIS_fnc_MP;
+								[_objRadio1, [localize "STR_TRGM2_startInfMission_MissionTitle6_Button",{_this spawn TREND_fnc_bugRadio1;},[_iTaskIndex,_bCreateTask]]] remoteExec ["addAction", 0, true];
 
 								TREND_fnc_RadioLoop = {
 									_radioName = _this select 0;

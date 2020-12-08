@@ -278,7 +278,7 @@ if (isnil "fncMedicalParamedicLight") then {
 		[_downedCivMedic] remoteExec ["fncMedicalParamedicLight", 0, true];
 
 		if (_iteration == 1) then {
-			[[_downedCivMedic, ["Ask if needs assistance",{hint format["Please can you supply us with %1 * %2.  Place them in this vehicle!",requiredItemsCount,RequestedMedicalItemName]},[_downedCivMedic]]],"addAction",true,true] call BIS_fnc_MP;
+			[_downedCivMedic, ["Ask if needs assistance",{hint format["Please can you supply us with %1 * %2.  Place them in this vehicle!",requiredItemsCount,RequestedMedicalItemName]},[_downedCivMedic]]] remoteExec ["addAction", 0, true];
 			//_downedCivMedic addAction ["Ask if needs assistance",{hint format["Please can you supply us with %1 * %2.  Place them in this vehicle!",requiredItemsCount,RequestedMedicalItemName]}];
 			//_RequestedMedicalItem = "Item_FirstAidKit";
 			[_mainVeh,_downedCivMedic] spawn {

@@ -4,6 +4,6 @@ TREND_WaitTimeCommsDown = (floor random 300) + 60; //any time up to 5 mins plus 
 publicVariable "TREND_WaitTimeCommsDown";
 sleep TREND_WaitTimeCommsDown;
 
-[[HQMan,"EnemyCommsDown"],"sideRadio",true,true] call BIS_fnc_MP;
+[HQMan,"EnemyCommsDown"] remoteExec ["sideRadio", 0, true];
 
 true;

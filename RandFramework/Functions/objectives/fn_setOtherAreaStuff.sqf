@@ -15,7 +15,7 @@ _TowersNear = nearestObjects [_mainObjPos, TREND_TowerBuildings, TREND_TowerRadi
 
 ["Mission Events: Comms 9", true] call TREND_fnc_log;
 {
-	[[_x, [localize "STR_TRGM2_TRENDfncsetOtherAreaStuff_CheckEnemyComms",{_this spawn TREND_fnc_checkForComms;},[_x]]],"addAction",true,true] call BIS_fnc_MP;
+	[_x, [localize "STR_TRGM2_TRENDfncsetOtherAreaStuff_CheckEnemyComms",{_this spawn TREND_fnc_checkForComms;},[_x]]] remoteExec ["addAction", 0, true];
 } forEach _TowersNear;
 if (count _TowersNear > 0) then {
 //if (!(isNull _pepe)) then {

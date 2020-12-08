@@ -99,7 +99,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		100,																							// Priority
 		false,																							// Remove on completion
 		false																							// Show in unconscious state
-	] remoteExec ["BIS_fnc_holdActionAdd", 0, _flag];													// MP compatible implementation
+	] remoteExec ["BIS_fnc_holdActionAdd", 0, true];													// MP compatible implementation
 
 	[_flag, _iTaskIndex] spawn {
 		params ["_flag", "_iTaskIndex"];
@@ -127,11 +127,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		[EAST, TREND_ReinforceStartPos1, getPos _flag, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements;
 		[EAST, TREND_ReinforceStartPos2, getPos _flag, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;
 		sleep 10;
-		if (TREND_AdvancedSettings select TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX == 1 || (TREND_AdvancedSettings select TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX == 0 && selectRandom[false,true])) then {
-			[EAST, TREND_ReinforceStartPos1, getPos _flag, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements;
-			[EAST, TREND_ReinforceStartPos2, getPos _flag, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;
-			sleep 10;
-		};
 
 		{hint (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]);} remoteExec ["call", 0];
 		if (!TREND_bDebugMode) then {

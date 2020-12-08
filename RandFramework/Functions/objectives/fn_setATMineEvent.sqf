@@ -62,7 +62,7 @@ if (_currentATFieldPos select 0 != 0) then {
 		_guardUnit2 setDir (floor random 360);
 	 	[_guardUnit2,"WATCH","ASIS"] call BIS_fnc_ambientAnimCombat;
 
-		[[_guardUnit1, ["Ask if needs assistance",{
+		[_guardUnit1, ["Ask if needs assistance",{
 			_guardUnit1 = _this select 0;
 			if (alive _guardUnit1) then {
 				hint "We are stranded in the middle of an AT mine area.  please help move this car ovrt 100 meters in any direction from here!"
@@ -70,7 +70,7 @@ if (_currentATFieldPos select 0 != 0) then {
 			else {
 				hint "Is there a reason you are trying to talk to a dead guy??"
 			}
-		},[_guardUnit1]]],"addAction",true,true] call BIS_fnc_MP;
+		},[_guardUnit1]]] remoteExec ["addAction", 0, true];
 
 	 	[_mainVeh,_guardUnit1,_group] spawn {
 	 		_mainVeh = _this select 0;

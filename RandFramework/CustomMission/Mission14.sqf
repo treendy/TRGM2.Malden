@@ -57,18 +57,18 @@ _missionBombWire = ["BLUE", "WHITE", "YELLOW", "GREEN"] call bis_fnc_selectRando
 	_bombSerialNumber = format["%1%2%3%4%5",selectRandom["AA","BA","ZN"],(round(random 9)), (round(random 9)), (round(random 9)), (round(random 9))];
 	_objBomb1 setVariable ["serialNumber",_bombSerialNumber,true];
 
-	[[_objBomb1, [localize "STR_TRGM2_BombMissionDefuseAction",{
+	[_objBomb1, [localize "STR_TRGM2_BombMissionDefuseAction",{
 		_thisPlayer = _this select 1;
 		_thisBomb = (_this select 3) select 0;
 		_thisPlayer setVariable ["missionBomb",_thisBomb];
 		createDialog 'KeypadDefuse';
-	},[_objBomb1]]],"addAction",true,true] call BIS_fnc_MP;
+	},[_objBomb1]]] remoteExec ["addAction", 0, true];
 
-	[[_objBomb1, [localize "STR_TRGM2_BombMissionReadSerialAction",{
+	[_objBomb1, [localize "STR_TRGM2_BombMissionReadSerialAction",{
 		_thisPlayer = _this select 1;
 		_bombSerialNumber = (_this select 3) select 0;
 		hint format[localize "STR_TRGM2_BombSerialNo",_bombSerialNumber];
-	},[_bombSerialNumber]]],"addAction",true,true] call BIS_fnc_MP;
+	},[_bombSerialNumber]]]; remoteExec ["addAction", 0, true];
 
 
 	_objInformant = createGroup Civilian createUnit [selectRandom InformantClasses,[-200,-200,0],[],0,"NONE"];
@@ -108,7 +108,7 @@ _missionBombWire = ["BLUE", "WHITE", "YELLOW", "GREEN"] call bis_fnc_selectRando
 		_objInformant setPos (_flatPosInf);
 	};
 
-	[[_objInformant, [localize "STR_TRGM2_BombMissionIntelAction",{
+	[_objInformant, [localize "STR_TRGM2_BombMissionIntelAction",{
 		_thisInformant = _this select 0;
 		_thisPlayer = _this select 1;
 		_bombSerialNumber = (_this select 3) select 0;
@@ -120,7 +120,7 @@ _missionBombWire = ["BLUE", "WHITE", "YELLOW", "GREEN"] call bis_fnc_selectRando
 		else{
 			hint format[localize "STR_TRGM2_BombPsst",name(_thisPlayer)];
 		};
-	},[_bombSerialNumber,_missionBombWire,_missionBombCODE]]],"addAction",true,true] call BIS_fnc_MP;
+	},[_bombSerialNumber,_missionBombWire,_missionBombCODE]]] remoteExec ["addAction", 0, true];
 
 	_markerstrBombInf = createMarker [format ["BombInfLoc%1",(getPos _objInformant) select 0],getPos _objInformant];
 	_markerstrBombInf setMarkerShape "ICON";

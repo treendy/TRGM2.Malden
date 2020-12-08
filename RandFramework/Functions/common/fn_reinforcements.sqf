@@ -23,13 +23,17 @@ _nul = [EAST, "spawnMrk", "LZMrk", 2, true, true, true, true, false] spawn TREND
 
  ---------------------------------------------------------------------------------------------------------*/
  format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
-if (isServer) then {
+if (isNil "TREND_NumReinforcementsCalled") then {TREND_NumReinforcementsCalled = 0; publicVariable "TREND_NumReinforcementsCalled"};
+if (isServer && TREND_NumReinforcementsCalled < 6) then {
+	TREND_NumReinforcementsCalled = TREND_NumReinforcementsCalled + 1;
+	publicVariable "TREND_NumReinforcementsCalled";
 	 _spawnMrk = [0,0,0];
 	 _LZMrk = [0,0,0];
 
 	 //arguments definitions
 	 params [["_side", EAST], ["_spawnMrk", [0,0,0]], ["_LZMrk", [0,0,0]], ["_skill", 3], ["_sadMode", true], ["_bodyDelete", true], ["_cycleMode", false], ["_paraDrop", false], ["_debugMode", false]];
 	_heloCrew = createGroup _side;
+	_cycleMode = false;
 
 	//set the scope of local variables that are defined in other scope(s), so they can be used over the entire script
 	private ["_ranGrp","_helo","_infgrp"];

@@ -93,6 +93,7 @@ TREND_ADVSET_MINIMISSIONS_IDX = 14; publicVariable "TREND_ADVSET_MINIMISSIONS_ID
 TREND_ADVSET_IEDTARGET_COMPACT_SPACING_IDX = 15; publicVariable "TREND_ADVSET_IEDTARGET_COMPACT_SPACING_IDX";
 TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX = 16; publicVariable "TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX";
 
+
 //NOTE the id's must go up in twos!
 TREND_AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex(zero based index)
 	[6001, localize "STR_TRGM2_TRGMSetUnitGlobalVars_VirtualArsenal","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1,localize "STR_TRGM2_Tooltip_AdvVirtualArsenal"],
@@ -111,7 +112,7 @@ TREND_AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex(z
 	[6027, localize "STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFlashLights","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],0,""],
 	[6029, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MiniMissions","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvMinimission"],
 	[6031, localize "STR_TRGM2_TRGMSetUnitGlobalVars_IedTargetCompact","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvIedTargetCompact"],
-	[6033, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MoreEnemies","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvMoreEnemies"],
+	[6033, localize "STR_TRGM2_TRGMSetUnitGlobalVars_selectRandomW","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvMoreEnemies"],
 	[6035, localize "STR_TRGM2_TRGMSetUnitGlobalVars_LargePatrols","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],TREND_iAllowLargePat,""]
 ];
 publicVariable "TREND_AdvControls";
@@ -129,6 +130,10 @@ if (count TREND_AdvControls < 14) then {
 	TREND_AdvControls pushBack (TREND_DefaultAdvancedSettings select 13);
 };
 */
+
+/////// Higher Enemy Count ///////
+TREND_bMoreEnemies = call { [false, true] select ( (TREND_AdvancedSettings select TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX == 1) || (TREND_AdvancedSettings select TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX == 0 && selectRandom[false,true,false]) ); };
+
 
 
 /////// Revive Settings Set up ///////

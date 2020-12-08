@@ -48,10 +48,6 @@ if (isServer) then {
 		_enemyAirSup1 setVariable [_sAirName, _enemyAirSup1, true];
 		missionNamespace setVariable [_sAirName, _enemyAirSup1];
 
-		//if (PlayAirSupportWarningRadio && _IsAirType == 1) then {
-		//	[[HQMan,"FastMoverSpotted"],"sideRadio",true,true] call BIS_fnc_MP;
-		//};
-
 		//hint format ["_SpottedPos: %1",_SpottedPos];
 		sleep 1;
 

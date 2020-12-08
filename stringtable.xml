@@ -3747,7 +3747,7 @@
                 <English>If enabled, IED and Target missions will be grouped closer to the AO,\nas apposed to spaced out around the AO</English>
             </Key>
 
-            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MoreEnemies">
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_selectRandomW">
                 <Original>More enemies</Original>
                 <English>More enemies</English>
             </Key>

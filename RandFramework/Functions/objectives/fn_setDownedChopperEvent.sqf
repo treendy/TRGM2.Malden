@@ -141,7 +141,7 @@ if (str(_flatPos) != "[0,0,0]") then {
 	_downedCiv addEventHandler ["killed", {_this spawn TREND_fnc_CivKilled;}];
 	_bloodPool1 = createVehicle [selectRandom _bloodPools, getpos _downedCiv, [], 0, "CAN_COLLIDE"];
 	_bloodPool1 setDir (floor(random 360));
-	[[_downedCiv, ["Talk to wounded guy",{hint "Please get me back to base!!"},[_downedCiv]]],"addAction",true,true] call BIS_fnc_MP;
+	[_downedCiv, ["Talk to wounded guy",{hint "Please get me back to base!!"},[_downedCiv]]] remoteExec ["addAction", 0, true];
 	if (selectRandom[true]) then {
 		_trialDir = (floor(random 360));
 		_trialPos = (getPos _bloodPool1) getPos [3,_trialDir];

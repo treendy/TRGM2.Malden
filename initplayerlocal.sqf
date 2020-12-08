@@ -539,7 +539,7 @@ sleep 0.1;
 doStop player;
 
 ////INITIATE ANIMATION OVER NETWORK
-[[player],"TOUR_fnc_startingMove",true] spawn BIS_fnc_MP;
+[[],{player spawn TOUR_fnc_startingMove;}] remoteExec ["call", 0, true];
 
 ////WAIT A SECOND
 sleep 1;
@@ -552,14 +552,6 @@ camDestroy _cam;
 
 ////FADE IN FROM BLACK SCREEN
 cutText ["","BLACK IN",3];
-
-
-//sleep 0.1;
-//doStop player;
-//waitUntil {!isNull player};
-//waitUntil {player == player};
-//[[player],"TOUR_fnc_startingMove",true] spawn BIS_fnc_MP;
-
 
 
 // if (TREND_sArmaGroup == "TCF" && isMultiplayer) then {

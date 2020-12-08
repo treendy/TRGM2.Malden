@@ -137,8 +137,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 	_mainHVT setVariable ["taskStatus","",true];
 
-	[[_mainHVT, ["This is our target!","{hint ""This is our target"" }",[],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
-	[[_guardUnit3, ["This is our friendly agent!","{hint ""This is our target"" }",[],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
+	[_mainHVT, ["This is our target!","{hint ""This is our target"" }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
+	[_guardUnit3, ["This is our friendly agent!","{hint ""This is our target"" }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 
 
 	sleep 1;
@@ -412,9 +412,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_guardUnit3 addEventHandler ["Killed", {(_this select 0) setVariable ["taskStatus","KILLED",true] }];
 
 	if (_bIsMainObjective) then { //if mainobjective (i.e. heavy mission or final campaign mission) we will require team to get document from corpse
-		//[[_mainHVT, ["Take document","{(_this select 0) setVariable [""taskStatus"",""DOCTAKEN"",true] }",[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
-		[[_mainHVT, ["Take document",{(_this select 0) setVariable ["taskStatus","DOCTAKEN",true]},[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
-		//[[objInformant0, ["Take document9",{(_this select 0) setVariable ["taskStatus","DOCTAKEN",true]},[2,true],10,true,true,""]],"addAction",true,true] call BIS_fnc_MP;
+		[_mainHVT, ["Take document",{(_this select 0) setVariable ["taskStatus","DOCTAKEN",true]},[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 	}
 	else { //if single mission or side then we can pass this task as soon as HVT is killed
 		_mainHVT addEventHandler ["Killed", {(_this select 0) setVariable ["taskStatus","KILLED",true] }];

@@ -248,7 +248,7 @@ if (count _nearestRoads > 0) then {
 				_downedCiv2 playmove "Acts_CivilTalking_2";
 				_downedCiv2 disableAI "anim";
 				_downedCiv2 addEventHandler ["killed", {_this spawn TREND_fnc_CivKilled;}]; //ParamedicKilled
-				[[_downedCiv2, ["Ask if needs assistance",{hint "We need to get our wounded out of here, help us get these guys back to base!!"},[_downedCiv2]]],"addAction",true,true] call BIS_fnc_MP;
+				[_downedCiv2, ["Ask if needs assistance",{hint "We need to get our wounded out of here, help us get these guys back to base!!"},[_downedCiv2]]] remoteExec ["addAction", 0, true];
 				_directionFromMed2ToCiv2 = [_downedCivMedic2, _downedCiv2] call BIS_fnc_DirTo;
 				_downedCivMedic2 setDir _directionFromMed2ToCiv2;
 				_directionFromCiv2ToMed2 = [_downedCiv2, _downedCivMedic2] call BIS_fnc_DirTo;

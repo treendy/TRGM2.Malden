@@ -38,6 +38,7 @@ switch (_ctrlStr) do {
 		_ctrlSecond ctrlSetText _textSecond;
 		_value = (round (_valueHour) + round (_valueMinute) / 60 + round (_valueSecond) / 3600) * 3600;
 		_ctrlSlider sliderSetPosition (_value / 3600);
+		TREND_arrayTime = [_valueHour, _valueMinute]; publicVariable "TREND_arrayTime";
 	};
 	default {};
 };
