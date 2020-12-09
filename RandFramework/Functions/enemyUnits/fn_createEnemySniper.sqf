@@ -10,8 +10,8 @@ _maxRange = 800;
 _minRange = 600;
 _minHeight = 20;
 
-_spawnedUnit = ((createGroup east) createUnit [sSniper, [-135,-253,0], [], 10, "NONE"]);
-_spawnedTempTarget = ((createGroup east) createUnit [sSniper, _targetPos, [], 10, "NONE"]);
+_spawnedUnit = ((createGroup east) createUnit [(call sSniper), [-135,-253,0], [], 10, "NONE"]);
+_spawnedTempTarget = ((createGroup east) createUnit [(call sSniper), _targetPos, [], 10, "NONE"]);
 
 for "_i" from 1 to 20 do {
 	if (!_foundPlace) then {

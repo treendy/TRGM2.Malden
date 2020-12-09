@@ -1939,7 +1939,7 @@ class ctrlEdit: RscEdit
 		"(profilenamespace getvariable ['GUI_BCG_RGB_B',0.08])",
 		1
 	};
-	canModify=1;
+	canModify=0;
 	autocomplete="";
 	onCanDestroy="";
 	onDestroy="";

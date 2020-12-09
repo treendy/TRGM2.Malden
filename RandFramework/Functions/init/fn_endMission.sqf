@@ -7,6 +7,13 @@ bAllAtBase2 = ({(alive _x)&&((_x distance _mrkHQPos < 500)||(_x distance _AOCamp
 //bAllAtBase2 replaces bAllAtBase (bAllAtBase2 covers units withing range of AO Camp too)
 if (bAllAtBase2 && TREND_ActiveTasks call FHQ_fnc_ttAreTasksCompleted) then {
 	["DeBrief", "succeeded"] call FHQ_fnc_ttsetTaskState;
+	sleep 5;
+	_dCurrentRep = [TREND_MaxBadPoints - TREND_BadPoints,1] call BIS_fnc_cutDecimals;
+	if (_dCurrentRep > 0 && {TREND_iMissionParamRepOption isEqualTo 1}) then {
+		["tskKeepAboveAverage", "succeeded"] call FHQ_fnc_ttSetTaskState;
+	};
+
+	sleep 10;
 
 	if (TREND_iMissionParamType == 5) then {
 		["end1", true, 7] remoteExec ["BIS_fnc_endMission"];

@@ -38,13 +38,13 @@ else {
 if (isNil("_eventLocationPos")) then {_eventType == 2};
 
 
-//sTeamleader
-//sRifleman
-//sMachineGunMan
-//sTank3Tank
+//(call sTeamleader)
+//(call sRifleman)
+//(call sMachineGunMan)
+//(call sTank3Tank)
 
 //TankorAPC
-//FriendlyCheckpointUnits
+//(call FriendlyCheckpointUnits)
 
 //TESTTESTeventLocationPos = _eventLocationPos;
 
@@ -82,19 +82,19 @@ _objPos = _eventLocationPos getPos [100 * sqrt random 1, random 360];
 };*/
 if (selectRandom[true,false] || _eventType == 1 || _eventType == 4) then {
 	_flatPos1 =  _eventLocationPos getPos [100 * sqrt random 1, random 360];
-	_flatPos1 = [_eventLocationPos , 0, 100, 8, 0, 0.5, 0,[],[_flatPos1,_flatPos1]] call BIS_fnc_findSafePos;
+	_flatPos1 = [_eventLocationPos , 0, 100, 8, 0, 0.5, 0,[],[_flatPos1,_flatPos1]] call TREND_fnc_findSafePos;
 	tracer1 setPos _flatPos1;
 
 	_flatPos2 =  _eventLocationPos getPos [100 * sqrt random 1, random 360];
-	_flatPos2 = [_eventLocationPos , 0, 100, 8, 0, 0.5, 0,[],[_flatPos2,_flatPos2]] call BIS_fnc_findSafePos;
+	_flatPos2 = [_eventLocationPos , 0, 100, 8, 0, 0.5, 0,[],[_flatPos2,_flatPos2]] call TREND_fnc_findSafePos;
 	tracer2 setPos _flatPos2;
 
 	_flatPos3 =  _eventLocationPos getPos [100 * sqrt random 1, random 360];
-	_flatPos3 = [_eventLocationPos , 0, 100, 8, 0, 0.5, 0,[],[_flatPos3,_flatPos3]] call BIS_fnc_findSafePos;
+	_flatPos3 = [_eventLocationPos , 0, 100, 8, 0, 0.5, 0,[],[_flatPos3,_flatPos3]] call TREND_fnc_findSafePos;
 	tracer3 setPos _flatPos3;
 
 	_flatPos4 =  _eventLocationPos getPos [100 * sqrt random 1, random 360];
-	_flatPos4 = [_eventLocationPos , 0, 100, 8, 0, 0.5, 0,[],[_flatPos4,_flatPos4]] call BIS_fnc_findSafePos;
+	_flatPos4 = [_eventLocationPos , 0, 100, 8, 0, 0.5, 0,[],[_flatPos4,_flatPos4]] call TREND_fnc_findSafePos;
 	tracer4 setPos _flatPos4;
 
 };
@@ -140,7 +140,7 @@ TREND_WarEventActive = true;
 		else {
 
 			_group = createGroup east;
-			_sUnitType = selectRandom [sRiflemanToUse,sMachineGunManToUse];
+			_sUnitType = selectRandom [(call sRiflemanToUse),(call sMachineGunManToUse)];
 			_tempFireUnit = _group createUnit [_sUnitType,[_xPos+(random 250),_yPos+(random 250),0],[],0,"NONE"];
 			hideObject _tempFireUnit;
 			sleep 1;
@@ -175,11 +175,11 @@ TREND_WarEventActive = true;
 
 		waitUntil {TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_PlayersHaveLeftStartingArea};
 
-		_AirToUse = selectRandom FriendlyJet;
+		_AirToUse = selectRandom (call FriendlyJet);
 		_NoOfVeh = selectRandom [1,2];
 		_bSetCaptive = selectRandom [true,true,true,false];
 		if (selectRandom [true,false,false]) then {
-			_AirToUse = selectRandom FriendlyChopper;
+			_AirToUse = selectRandom (call FriendlyChopper);
 		};
 		_pos = _eventLocationPos getPos [3000,random 360];//random 360 and 3 clicks out and no playable units within 2 clicks
 		_pos = [_pos select 0,_pos select 1, 365];

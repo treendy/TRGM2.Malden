@@ -173,12 +173,12 @@ _unarmedcars = []; _armedcars = []; _trucks = []; _apcs = []; _tanks = []; _arti
 					case "IFV": 		{ _apcs pushBackUnique _className; };
 					case "Tanks": 		{ _tanks pushBackUnique _className; };
 					case "Tank": 		{ _tanks pushBackUnique _className; };
-					case "Helicopters": { if (_isArmed) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
-					case "Helicopter": 	{ if (_isArmed) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
-					case "Cars": 		{ if (_isArmed) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
-					case "Car": 		{ if (_isArmed) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
-					case "MRAP": 		{ if (_isArmed) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
-					case "Truck": 		{ if (_isArmed) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Helicopters": { if (_isArmed && !_isTransport) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
+					case "Helicopter": 	{ if (_isArmed && !_isTransport) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
+					case "Cars": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Car": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "MRAP": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Truck": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
 					default { };
 				};
 			};
@@ -214,31 +214,31 @@ TREND_EastPlanes =  _eastplanes; publicVariable "TREND_EastPlanes";
 TREND_EastBoats =  _eastboats; publicVariable "TREND_EastBoats";
 TREND_EastMortars = _eastmortars; publicVariable "TREND_EastMortars";
 
-sRifleman 		= call { _unit = "O_T_Soldier_F"; if (count TREND_EastRiflemen > 0) then { _unit = selectRandom TREND_EastRiflemen; }; _unit; };
-sTeamleader 	= call { _unit = "O_T_Soldier_TL_F"; if (count TREND_EastLeaders > 0) then { _unit = selectRandom TREND_EastLeaders; }; _unit; };
-sATMan 			= call { _unit = "O_T_Soldier_LAT_F"; if (count TREND_EastATSoldiers > 0) then { _unit = selectRandom TREND_EastATSoldiers; }; _unit; };
-sAAMan 			= call { _unit = "O_T_Soldier_AA_F"; if (count TREND_EastAASoldiers > 0) then { _unit = selectRandom TREND_EastAASoldiers; }; _unit; };
-sEngineer 		= call { _unit = "O_T_Engineer_F"; if (count TREND_EastEngineers > 0) then { _unit = selectRandom TREND_EastEngineers; }; _unit; };
-sGrenadier 		= call { _unit = "O_T_Soldier_GL_F"; if (count TREND_EastGrenadiers > 0) then { _unit = selectRandom TREND_EastGrenadiers; }; _unit; };
-sMedic 			= call { _unit = "O_T_Medic_F"; if (count TREND_EastMedics > 0) then { _unit = selectRandom TREND_EastMedics; }; _unit; };
-sMachineGunMan 	= call { _unit = "O_T_Soldier_AR_F"; if (count TREND_EastAutoriflemen > 0) then { _unit = selectRandom TREND_EastAutoriflemen; }; _unit; };
-sSniper 		= call { _unit = "O_T_Sniper_F"; if (count TREND_EastSnipers > 0) then { _unit = selectRandom TREND_EastSnipers; }; _unit; };
-sExpSpec 		= call { _unit = "O_T_Soldier_Exp_F"; if (count TREND_EastExpSpecs > 0) then { _unit = selectRandom TREND_EastExpSpecs; }; _unit; };
-sEnemyHeliPilot = call { _unit = "O_T_Helipilot_F"; if (count TREND_EastPilots > 0) then { _unit = selectRandom TREND_EastPilots; }; _unit; };
+sRifleman 		= { _unit = "O_T_Soldier_F"; if (count TREND_EastRiflemen > 0) then { _unit = selectRandom TREND_EastRiflemen; }; _unit; };
+sTeamleader 	= { _unit = "O_T_Soldier_TL_F"; if (count TREND_EastLeaders > 0) then { _unit = selectRandom TREND_EastLeaders; }; _unit; };
+sATMan 			= { _unit = "O_T_Soldier_LAT_F"; if (count TREND_EastATSoldiers > 0) then { _unit = selectRandom TREND_EastATSoldiers; }; _unit; };
+sAAMan 			= { _unit = "O_T_Soldier_AA_F"; if (count TREND_EastAASoldiers > 0) then { _unit = selectRandom TREND_EastAASoldiers; }; _unit; };
+sEngineer 		= { _unit = "O_T_Engineer_F"; if (count TREND_EastEngineers > 0) then { _unit = selectRandom TREND_EastEngineers; }; _unit; };
+sGrenadier 		= { _unit = "O_T_Soldier_GL_F"; if (count TREND_EastGrenadiers > 0) then { _unit = selectRandom TREND_EastGrenadiers; }; _unit; };
+sMedic 			= { _unit = "O_T_Medic_F"; if (count TREND_EastMedics > 0) then { _unit = selectRandom TREND_EastMedics; }; _unit; };
+sMachineGunMan 	= { _unit = "O_T_Soldier_AR_F"; if (count TREND_EastAutoriflemen > 0) then { _unit = selectRandom TREND_EastAutoriflemen; }; _unit; };
+sSniper 		= { _unit = "O_T_Sniper_F"; if (count TREND_EastSnipers > 0) then { _unit = selectRandom TREND_EastSnipers; }; _unit; };
+sExpSpec 		= { _unit = "O_T_Soldier_Exp_F"; if (count TREND_EastExpSpecs > 0) then { _unit = selectRandom TREND_EastExpSpecs; }; _unit; };
+sEnemyHeliPilot = { _unit = "O_T_Helipilot_F"; if (count TREND_EastPilots > 0) then { _unit = selectRandom TREND_EastPilots; }; _unit; };
 
-sTank1ArmedCar			 = call { _veh = "O_T_LSV_02_armed_F"; if (count TREND_EastArmedCars > 0) then { _veh = selectRandom TREND_EastArmedCars; }; _veh; };
-sTank2APC				 = call { _veh = "O_APC_Wheeled_02_rcws_v2_F"; if (count TREND_EastAPCs > 0) then { _veh = selectRandom TREND_EastAPCs; }; _veh; };
-sTank3Tank				 = call { _veh = "O_MBT_02_cannon_F"; if (count TREND_EastTanks > 0) then { _veh = selectRandom TREND_EastTanks; }; _veh; };
-sAAAVeh					 = call { _veh = "O_APC_Tracked_02_AA_F"; if (count TREND_EastAntiAir > 0) then { _veh = selectRandom TREND_EastAntiAir; }; _veh; };
-sMortar					 = call { _veh = ["O_Mortar_01_F"]; if (count TREND_EastMortars > 0) then { _veh = TREND_EastMortars; }; _veh; };
-sArtilleryVeh			 = call { _veh = "O_MBT_02_arty_F"; if (count TREND_EastArtillery > 0) then { _veh = selectRandom TREND_EastArtillery; }; _veh; };
-sBoatUnit				 = call { _veh = "O_Boat_Armed_01_hmg_F"; if (count TREND_EastBoats > 0) then { _veh = selectRandom TREND_EastBoats; }; _veh; };
-ReinforceVehicle		 = call { _veh = "O_Heli_Light_02_unarmed_F"; if (count TREND_EastUnarmedHelos > 0) then { _veh = selectRandom TREND_EastUnarmedHelos; }; _veh; };
-EnemyAirToAirSupports	 = call { _veh = ["O_Plane_Fighter_02_F"]; if (count TREND_EastPlanes > 0) then { _veh = TREND_EastPlanes; }; _veh; };
-EnemyAirToGroundSupports = call { _veh = ["O_Heli_Light_02_dynamicLoadout_F"]; if (count TREND_EastArmedHelos > 0) then { _veh = TREND_EastArmedHelos; }; _veh; };
-EnemyAirScout			 = call { _veh = ["O_Heli_Light_02_dynamicLoadout_F"]; if (count TREND_EastArmedHelos > 0) then { _veh = TREND_EastArmedHelos; }; _veh; };
-UnarmedScoutVehicles	 = call { _veh = ["O_Truck_02_covered_F"]; if (count TREND_EastUnarmedCars > 0) then { _veh = TREND_EastUnarmedCars; }; _veh; };
-EnemyBaseChoppers		 = call { _veh = ["O_Heli_Light_02_unarmed_F"]; if (count TREND_EastUnarmedHelos > 0) then { _veh = TREND_EastUnarmedHelos; }; _veh; };
+sTank1ArmedCar			 = { _veh = "O_T_LSV_02_armed_F"; if (count TREND_EastArmedCars > 0) then { _veh = selectRandom TREND_EastArmedCars; }; _veh; };
+sTank2APC				 = { _veh = "O_APC_Wheeled_02_rcws_v2_F"; if (count TREND_EastAPCs > 0) then { _veh = selectRandom TREND_EastAPCs; }; _veh; };
+sTank3Tank				 = { _veh = "O_MBT_02_cannon_F"; if (count TREND_EastTanks > 0) then { _veh = selectRandom TREND_EastTanks; }; _veh; };
+sAAAVeh					 = { _veh = "O_APC_Tracked_02_AA_F"; if (count TREND_EastAntiAir > 0) then { _veh = selectRandom TREND_EastAntiAir; }; _veh; };
+sMortar					 = { _veh = ["O_Mortar_01_F"]; if (count TREND_EastMortars > 0) then { _veh = TREND_EastMortars; }; _veh; };
+sArtilleryVeh			 = { _veh = "O_MBT_02_arty_F"; if (count TREND_EastArtillery > 0) then { _veh = selectRandom TREND_EastArtillery; }; _veh; };
+sBoatUnit				 = { _veh = "O_Boat_Armed_01_hmg_F"; if (count TREND_EastBoats > 0) then { _veh = selectRandom TREND_EastBoats; }; _veh; };
+ReinforceVehicle		 = { _veh = "O_Heli_Light_02_unarmed_F"; if (count (TREND_EastUnarmedHelos select {_x call TREND_fnc_isTransport}) > 0) then { _veh = selectRandom (TREND_EastUnarmedHelos select {_x call TREND_fnc_isTransport}); }; _veh; };
+EnemyAirToAirSupports	 = { _veh = ["O_Plane_Fighter_02_F"]; if (count TREND_EastPlanes > 0) then { _veh = TREND_EastPlanes; }; _veh; };
+EnemyAirToGroundSupports = { _veh = ["O_Heli_Light_02_dynamicLoadout_F"]; if (count TREND_EastArmedHelos > 0) then { _veh = TREND_EastArmedHelos; }; _veh; };
+EnemyAirScout			 = { _veh = ["O_Heli_Light_02_dynamicLoadout_F"]; if (count TREND_EastArmedHelos > 0) then { _veh = TREND_EastArmedHelos; }; _veh; };
+UnarmedScoutVehicles	 = { _veh = ["O_Truck_02_covered_F"]; if (count TREND_EastUnarmedCars > 0) then { _veh = TREND_EastUnarmedCars; }; _veh; };
+EnemyBaseChoppers		 = { _veh = ["O_Heli_Light_02_unarmed_F"]; if (count TREND_EastUnarmedHelos > 0) then { _veh = TREND_EastUnarmedHelos; }; _veh; };
 
 
 
@@ -322,12 +322,12 @@ _unarmedcars = []; _armedcars = []; _trucks = []; _apcs = []; _tanks = []; _arti
 					case "IFV": 		{ _apcs pushBackUnique _className; };
 					case "Tanks": 		{ _tanks pushBackUnique _className; };
 					case "Tank": 		{ _tanks pushBackUnique _className; };
-					case "Helicopters": { if (_isArmed) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
-					case "Helicopter": 	{ if (_isArmed) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
-					case "Cars": 		{ if (_isArmed) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
-					case "Car": 		{ if (_isArmed) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
-					case "MRAP": 		{ if (_isArmed) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
-					case "Truck": 		{ if (_isArmed) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Helicopters": { if (_isArmed && !_isTransport) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
+					case "Helicopter": 	{ if (_isArmed && !_isTransport) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
+					case "Cars": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Car": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "MRAP": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Truck": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
 					default { };
 				};
 			};
@@ -363,27 +363,29 @@ TREND_GuerPlanes =  _guerplanes; publicVariable "TREND_GuerPlanes";
 TREND_GuerBoats =  _guerboats; publicVariable "TREND_GuerBoats";
 TREND_GuerMortars = _guermortars; publicVariable "TREND_GuerMortars";
 
-sRiflemanMilitia	  = call { _unit = "I_G_Soldier_F"; if (count TREND_GuerRiflemen > 0) then { _unit = selectRandom TREND_GuerRiflemen; }; _unit; };
-sTeamleaderMilitia	  = call { _unit = "I_G_Soldier_SL_F"; if (count TREND_GuerLeaders > 0) then { _unit = selectRandom TREND_GuerLeaders; }; _unit; };
-sATManMilitia		  = call { _unit = "I_G_Soldier_LAT_F"; if (count TREND_GuerATSoldiers > 0) then { _unit = selectRandom TREND_GuerATSoldiers; }; _unit; };
-sAAManMilitia		  = call { _unit = "I_G_Soldier_LAT_F"; if (count TREND_GuerAASoldiers > 0) then { _unit = selectRandom TREND_GuerAASoldiers; }; _unit; };
-sEngineerMilitia	  = call { _unit = "I_G_engineer_F"; if (count TREND_GuerEngineers > 0) then { _unit = selectRandom TREND_GuerEngineers; }; _unit; };
-sGrenadierMilitia	  = call { _unit = "I_G_Soldier_GL_F"; if (count TREND_GuerGrenadiers > 0) then { _unit = selectRandom TREND_GuerGrenadiers; }; _unit; };
-sMedicMilitia		  = call { _unit = "I_G_medic_F"; if (count TREND_GuerMedics > 0) then { _unit = selectRandom TREND_GuerMedics; }; _unit; };
-sMachineGunManMilitia = call { _unit = "I_G_Soldier_AR_F"; if (count TREND_GuerAutoriflemen > 0) then { _unit = selectRandom TREND_GuerAutoriflemen; }; _unit; };
-sTank1ArmedCarMilitia = call { _veh = "I_C_Offroad_02_LMG_F"; if (count TREND_GuerArmedCars > 0) then { _veh = selectRandom TREND_GuerArmedCars; }; _veh; };
-sTank2APCMilitia 	  = call { _veh = "I_E_APC_tracked_03_cannon_F"; if (count TREND_GuerAPCs > 0) then { _veh = selectRandom TREND_GuerAPCs; }; _veh; };
-sTank3TankMilitia	  = call { _veh = "I_LT_01_AT_F"; if (count TREND_GuerTanks > 0) then { _veh = selectRandom TREND_GuerTanks; }; _veh; };
-sAAAVehMilitia 		  = call { _veh = "I_LT_01_AA_F"; if (count TREND_GuerAntiAir > 0) then { _veh = selectRandom TREND_GuerAntiAir; }; _veh; };
-sMortarMilitia		  = call { _veh = ["I_Mortar_01_F"]; if (count TREND_GuerMortars > 0) then { _veh = TREND_GuerMortars; }; _veh; };
+sRiflemanMilitia	  = { _unit = "I_G_Soldier_F"; if (count TREND_GuerRiflemen > 0) then { _unit = selectRandom TREND_GuerRiflemen; }; _unit; };
+sTeamleaderMilitia	  = { _unit = "I_G_Soldier_SL_F"; if (count TREND_GuerLeaders > 0) then { _unit = selectRandom TREND_GuerLeaders; }; _unit; };
+sATManMilitia		  = { _unit = "I_G_Soldier_LAT_F"; if (count TREND_GuerATSoldiers > 0) then { _unit = selectRandom TREND_GuerATSoldiers; }; _unit; };
+sAAManMilitia		  = { _unit = "I_G_Soldier_LAT_F"; if (count TREND_GuerAASoldiers > 0) then { _unit = selectRandom TREND_GuerAASoldiers; }; _unit; };
+sEngineerMilitia	  = { _unit = "I_G_engineer_F"; if (count TREND_GuerEngineers > 0) then { _unit = selectRandom TREND_GuerEngineers; }; _unit; };
+sGrenadierMilitia	  = { _unit = "I_G_Soldier_GL_F"; if (count TREND_GuerGrenadiers > 0) then { _unit = selectRandom TREND_GuerGrenadiers; }; _unit; };
+sMedicMilitia		  = { _unit = "I_G_medic_F"; if (count TREND_GuerMedics > 0) then { _unit = selectRandom TREND_GuerMedics; }; _unit; };
+sMachineGunManMilitia = { _unit = "I_G_Soldier_AR_F"; if (count TREND_GuerAutoriflemen > 0) then { _unit = selectRandom TREND_GuerAutoriflemen; }; _unit; };
+sTank1ArmedCarMilitia = { _veh = "I_C_Offroad_02_LMG_F"; if (count TREND_GuerArmedCars > 0) then { _veh = selectRandom TREND_GuerArmedCars; }; _veh; };
+sTank2APCMilitia 	  = { _veh = "I_E_APC_tracked_03_cannon_F"; if (count TREND_GuerAPCs > 0) then { _veh = selectRandom TREND_GuerAPCs; }; _veh; };
+sTank3TankMilitia	  = { _veh = "I_LT_01_AT_F"; if (count TREND_GuerTanks > 0) then { _veh = selectRandom TREND_GuerTanks; }; _veh; };
+sAAAVehMilitia 		  = { _veh = "I_LT_01_AA_F"; if (count TREND_GuerAntiAir > 0) then { _veh = selectRandom TREND_GuerAntiAir; }; _veh; };
+sMortarMilitia		  = { _veh = ["I_Mortar_01_F"]; if (count TREND_GuerMortars > 0) then { _veh = TREND_GuerMortars; }; _veh; };
+
+ReinforceVehicleMilitia = { _veh = "I_E_Heli_light_03_unarmed_F"; if (count (TREND_GuerUnarmedHelos select {_x call TREND_fnc_isTransport}) > 0) then { _veh = selectRandom (TREND_GuerUnarmedHelos select {_x call TREND_fnc_isTransport}); }; _veh; };
 
 InformantClasses 		 = ["C_Orestes","C_Nikos"];
 InterogateOfficerClasses = ["O_T_Officer_F"];
 WeaponDealerClasses		 = ["C_Nikos_aged","C_man_hunter_1_F"];
 sideResarchTruck		 = ["O_Truck_03_device_F"];
 SideRadioClassNames		 = ["Land_PortableGenerator_01_F"];
-sideAmmoTruck			 = call { _veh = ["O_Truck_03_ammo_F"]; if (count (TREND_EastUnarmedCars select {_x call TREND_fnc_isAmmo}) > 0) then { _veh = (TREND_EastUnarmedCars select {_x call TREND_fnc_isAmmo}); }; _veh; };
-DestroyAAAVeh			 = call { _veh = ["O_T_APC_Tracked_02_AA_ghex_F"]; if (count TREND_EastAntiAir > 0) then { _veh = TREND_EastAntiAir; }; _veh; };
+sideAmmoTruck			 = { _veh = ["O_Truck_03_ammo_F"]; if (count (TREND_EastUnarmedCars select {_x call TREND_fnc_isAmmo}) > 0) then { _veh = (TREND_EastUnarmedCars select {_x call TREND_fnc_isAmmo}); }; _veh; };
+DestroyAAAVeh			 = { _veh = ["O_T_APC_Tracked_02_AA_ghex_F"]; if (count TREND_EastAntiAir > 0) then { _veh = TREND_EastAntiAir; }; _veh; };
 
 sRiflemanFriendInsurg	 = "B_G_Soldier_F";
 
@@ -395,7 +397,7 @@ HVTVans			 = ["C_Van_02_vehicle_F","C_Van_02_transport_F","C_Truck_02_covered_F"
 HVTChoppers		 = ["C_Heli_Light_01_civil_F"];
 HVTPlanes		 = ["C_Plane_Civil_01_F"];
 BombToDefuse	 = ["Land_SatellitePhone_F"];
-CheckPointTurret = call { _veh = ["O_G_HMG_02_high_F"]; if (count TREND_EastTurrets > 0) then { _veh = TREND_EastTurrets; }; _veh;};
+CheckPointTurret = { _veh = ["O_G_HMG_02_high_F"]; if (count TREND_EastTurrets > 0) then { _veh = TREND_EastTurrets; }; _veh;};
 TargetVehicles	 = ["O_SAM_System_04_F","O_Radar_System_02_F"];
 TargetCaches	 = ["Box_FIA_Support_F"];
 

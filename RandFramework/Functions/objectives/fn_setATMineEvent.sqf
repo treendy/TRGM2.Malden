@@ -1,10 +1,10 @@
 params ["_posOfAO",["_isFullMap",false]];
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
-_currentATFieldPos = [_posOfAO , 1000, 1700, 100, 0, 0.4, 0,TREND_AreasBlackList,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+_currentATFieldPos = [_posOfAO , 1000, 1700, 100, 0, 0.4, 0,TREND_AreasBlackList,[[0,0,0],[0,0,0]]] call TREND_fnc_findSafePos;
 
 if (!(isNil "IsTraining") || _isFullMap) then {
-	_currentATFieldPos = [_posOfAO , 30000, 1700, 100, 0, 0.4, 0,TREND_AreasBlackList,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+	_currentATFieldPos = [_posOfAO , 30000, 1700, 100, 0, 0.4, 0,TREND_AreasBlackList,[[0,0,0],[0,0,0]]] call TREND_fnc_findSafePos;
 };
 
 if (_currentATFieldPos select 0 != 0) then {
@@ -36,7 +36,7 @@ if (_currentATFieldPos select 0 != 0) then {
 
 	if (selectRandom [true,false,false,false,false]) then {
 	//if (true) then {
-		_mainVeh = createVehicle [selectRandom FriendlyScoutVehicles,_currentATFieldPos,[],0,"NONE"];
+		_mainVeh = createVehicle [selectRandom (call FriendlyScoutVehicles),_currentATFieldPos,[],0,"NONE"];
 		_mainVeh setDir (floor random 360);
 		clearItemCargoGlobal _mainVeh;
 		if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_1_steering",1];};
@@ -50,7 +50,7 @@ if (_currentATFieldPos select 0 != 0) then {
 		_pos1 = _mainVeh getPos [5,(floor random 360)];
 		_pos2 = _mainVeh getPos [5,(floor random 360)];
 		_group = createGroup west;
-		_sUnitType = selectRandom FriendlyCheckpointUnits;
+		_sUnitType = selectRandom (call FriendlyCheckpointUnits);
 
 		_guardUnit1 = _group createUnit [_sUnitType,_pos1,[],0,"NONE"];
 		doStop [_guardUnit1];

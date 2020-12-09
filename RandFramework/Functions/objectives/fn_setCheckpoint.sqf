@@ -177,7 +177,7 @@ if (_PosFound) then {
 
 	if (_thisIsCheckPoint && _thisSide == east) then {
 		//TREND_CheckPointAreas
-		TREND_CheckPointAreas = TREND_CheckPointAreas + [[_roadBlockPos,_thisAreaAroundCheckpointSpacing]]; //the ,_thisAreaAroundCheckpointSpacing is for when we use TREND_fnc_findSafePos/BIS_fnc_findSafePos to make sure no other road block is within 100 meters
+		TREND_CheckPointAreas = TREND_CheckPointAreas + [[_roadBlockPos,_thisAreaAroundCheckpointSpacing]]; //the ,_thisAreaAroundCheckpointSpacing is for when we use TREND_fnc_findSafePos to make sure no other road block is within 100 meters
 		publicVariable "TREND_CheckPointAreas";
 	}
 	else {
@@ -227,7 +227,7 @@ if (_PosFound) then {
 		_initItem setDir ([_direction,180] call fnc_AddToDirection);
 
 		if (_thisSide == east && _AllowTurrent) then {
-			_NearTurret1 = createVehicle [selectRandom CheckPointTurret, _initItem getPos [1,_direction+180], [], 0, "CAN_COLLIDE"];
+			_NearTurret1 = createVehicle [selectRandom (call CheckPointTurret), _initItem getPos [1,_direction+180], [], 0, "CAN_COLLIDE"];
 			_NearTurret1 setDir (_direction);
 			createVehicleCrew _NearTurret1;
 		};

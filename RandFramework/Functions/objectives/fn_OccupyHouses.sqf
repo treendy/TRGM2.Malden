@@ -25,12 +25,12 @@ if (!_bThisMissionCivsOnly) then {
 
 				_thisGroup = nil;
 				_thisGroup = createGroup _InsurgentSide;
-				sRiflemanToUse createUnit [position _randBuilding, _thisGroup];
-				if (selectRandom [true,false]) then {sRiflemanToUse createUnit [position _randBuilding, _thisGroup];};
-					//HERE!!!! copy and paste the zen init script into a placed unig, then run and see if he is in building!!! (esc out of TRGM dialog)
-				//sRiflemanToUse createUnit [position _randBuilding, _thisGroup, "[getPosATL this, units group this, 10, false, false] spawn TREND_fnc_Zen_OccupyHouse;"];
+				_thisGroup createUnit [(call sRiflemanToUse), position _randBuilding, [], 0, "NONE"];
+				if (selectRandom [true,false]) then {_thisGroup createUnit [(call sRiflemanToUse), position _randBuilding, [], 0, "NONE"];};
+				//HERE!!!! copy and paste the zen init script into a placed unig, then run and see if he is in building!!! (esc out of TRGM dialog)
+				//(call sRiflemanToUse) createUnit [position _randBuilding, _thisGroup, "[getPosATL this, units group this, 10, false, false] spawn TREND_fnc_Zen_OccupyHouse;"];
 
-				_teamLeaderUnit = _thisGroup createUnit [sRiflemanToUse,_randBuildingPos,[],0,"NONE"];
+				_teamLeaderUnit = _thisGroup createUnit [(call sRiflemanToUse),_randBuildingPos,[],0,"NONE"];
 				[_randBuildingPos, units group _teamLeaderUnit, -1, true, false,true] spawn TREND_fnc_Zen_OccupyHouse;
 
 				_iCountNoOfCPs = selectRandom[0,0,0,0,1];  //number of checkpoints (so high chance of not being any, or one may be near an occupied building)
@@ -48,10 +48,10 @@ if (!_bThisMissionCivsOnly) then {
 						_thisPosAreaOfCheckpoint = _flatPos;
 						_thisRoadOnly = false;
 						_thisSide = east;
-						_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sEngineerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
+						_thisUnitTypes = [(call sRiflemanToUse), (call sRiflemanToUse),(call sRiflemanToUse),(call sMachineGunManToUse), (call sEngineerToUse), (call sGrenadierToUse), (call sMedicToUse),(call sAAManToUse),(call sATManToUse)];
 						_thisAllowBarakade = selectRandom [false];
 						_thisIsDirectionAwayFromAO = true;
-						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,50,false] spawn TREND_fnc_setCheckpoint;
+						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,(call UnarmedScoutVehicles),50,false] spawn TREND_fnc_setCheckpoint;
 					}
 				};
 			};

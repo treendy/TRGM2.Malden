@@ -11,7 +11,7 @@ _WalkToPos = getPos _objMan;
 //sleep 3;
 if (_MoveType == "OpenArea") then {
 	_flatPos = nil;
-	_flatPos = [_thisInitPos , 10, _walkRadius, 7, 0, 0.5, 0,[[_currentManPos,10]],[_thisInitPos,_thisInitPos], _objMan] call TREND_fnc_findSafePos;
+	_flatPos = [_thisInitPos , 10, _walkRadius, 7, 0, 0.5, 0,[[_currentManPos,10]],[_thisInitPos,_thisInitPos]] call BIS_fnc_findSafePos;
 	_WalkToPos = _flatPos;
 };
 if (_MoveType == "Man") then {

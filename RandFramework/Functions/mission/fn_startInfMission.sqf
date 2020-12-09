@@ -528,7 +528,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 								_sTargetName2 = format["objInformant2_%1",_iTaskIndex];
 
 								_objVehicle = nil;
-								_truckType = selectRandom sideAmmoTruck ;
+								_truckType = selectRandom (call sideAmmoTruck) ;
 								_objVehicle = _truckType createVehicle [0,0,500];
 								_objVehicle setVariable [_sTargetName, _objVehicle, true];
 								missionNamespace setVariable [_sTargetName, _objVehicle];
@@ -585,7 +585,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 								_sTargetName = format["objInformant%1",_iTaskIndex];
 								_sTargetName2 = format["objInformant2_%1",_iTaskIndex];
 								_sTargetName3 = format["objInformant3_%1",_iTaskIndex];
-								_truckType = selectRandom DestroyAAAVeh;
+								_truckType = selectRandom (call DestroyAAAVeh);
 								sAliveCheck = format["!alive(%1) && !alive(%2) && !([""InfSide%3""] call FHQ_fnc_ttAreTasksCompleted)",_sTargetName,_sTargetName2,_iTaskIndex];
 
 								_flatPos = nil;
@@ -659,7 +659,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 
 								_sTargetName = format["objInformant%1",_iTaskIndex];
 								_sTargetName2 = format["objInformant2_%1",_iTaskIndex];
-								_truckType = sArtilleryVeh;
+								_truckType = (call sArtilleryVeh);
 								sAliveCheck = format["!alive(%1) && !alive(%2) && !([""InfSide%3""] call FHQ_fnc_ttAreTasksCompleted)",_sTargetName,_sTargetName2,_iTaskIndex];
 
 								_flatPos = nil;
@@ -1205,12 +1205,12 @@ else {
 	if (TREND_iMissionParamRepOption == 0) then {
 		//CREATE TASK HERE... we fail it in mainInit.sqf when checking rep points
 		[TREND_FriendlySide, ["tskKeepAboveAverage",localize "STR_TRGM2_startInfMission_HoldReputation_Desc",localize "STR_TRGM2_startInfMission_HoldReputation_Title",""]] call FHQ_fnc_ttAddTasks;
-		["tskKeepAboveAverage", "succeeded"] call FHQ_fnc_ttSetTaskState;
+		["tskKeepAboveAverage", "created"] call FHQ_fnc_ttSetTaskState;
 	};
 	if (TREND_iMissionParamRepOption == 1) then {
 		//CREATE TASK HERE... we fail it in mainInit.sqf when checking rep points
 		[TREND_FriendlySide, ["tskKeepAboveAverage",localize "STR_TRGM2_startInfMission_HoldReputation_Desc",localize "STR_TRGM2_startInfMission_HoldReputation_Title2",""]] call FHQ_fnc_ttAddTasks;
-		["tskKeepAboveAverage", "succeeded"] call FHQ_fnc_ttSetTaskState;
+		["tskKeepAboveAverage", "created"] call FHQ_fnc_ttSetTaskState;
 	};
 
 };

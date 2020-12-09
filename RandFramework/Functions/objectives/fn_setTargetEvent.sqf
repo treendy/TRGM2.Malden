@@ -118,12 +118,12 @@ if (!_isCache && count _nearestRoads > 0) then {
 				[_posOfTarget] spawn TREND_fnc_createEnemySniper;
 			};
 
-			_spawnedUnitTarget1 = ((createGroup east) createUnit [sRiflemanToUse, _posOfTarget, [], 10, "NONE"]);
+			_spawnedUnitTarget1 = ((createGroup east) createUnit [(call sRiflemanToUse), _posOfTarget, [], 10, "NONE"]);
 			_directionTarget1 = [_mainVeh,_spawnedUnitTarget1] call BIS_fnc_DirTo;
 			_spawnedUnitTarget1 setDir _directionTarget1;
 			_spawnedUnitTarget1 setFormDir _directionTarget1;
 
-			_spawnedUnitTarget2 = ((createGroup east) createUnit [sRiflemanToUse, _posOfTarget, [], 10, "NONE"]);
+			_spawnedUnitTarget2 = ((createGroup east) createUnit [(call sRiflemanToUse), _posOfTarget, [], 10, "NONE"]);
 			_directionTarget2 = [_mainVeh,_spawnedUnitTarget2] call BIS_fnc_DirTo;
 			_spawnedUnitTarget2 setDir _directionTarget2;
 			_spawnedUnitTarget2 setFormDir _directionTarget2;
@@ -137,10 +137,10 @@ if (!_isCache && count _nearestRoads > 0) then {
 				_thisPosAreaOfCheckpoint = _flatPos;
 				_thisRoadOnly = true;
 				_thisSide = east;
-				_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sEngineerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
+				_thisUnitTypes = [(call sRiflemanToUse), (call sRiflemanToUse),(call sRiflemanToUse),(call sMachineGunManToUse), (call sEngineerToUse), (call sGrenadierToUse), (call sMedicToUse),(call sAAManToUse),(call sATManToUse)];
 				_thisAllowBarakade = true;
 				_thisIsDirectionAwayFromAO = true;
-				[_posOfTarget,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100,true,selectRandom[false,false,true],false] spawn TREND_fnc_setCheckpoint;
+				[_posOfTarget,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,(call UnarmedScoutVehicles),100,true,selectRandom[false,false,true],false] spawn TREND_fnc_setCheckpoint;
 			};
 
 			["Mission Events: Target 4", true] call TREND_fnc_log;
@@ -231,15 +231,15 @@ if (_isCache) then {
 			_thisPosAreaOfCheckpoint = _flatPos;
 			_thisRoadOnly = false;
 			_thisSide = east;
-			_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sEngineerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
+			_thisUnitTypes = [(call sRiflemanToUse), (call sRiflemanToUse),(call sRiflemanToUse),(call sMachineGunManToUse), (call sEngineerToUse), (call sGrenadierToUse), (call sMedicToUse),(call sAAManToUse),(call sATManToUse)];
 			_thisAllowBarakade = false;
 			_thisIsDirectionAwayFromAO = false;
-			[_posCache,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100,true,selectRandom[false,false,true],false] spawn TREND_fnc_setCheckpoint;
+			[_posCache,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,(call UnarmedScoutVehicles),100,true,selectRandom[false,false,true],false] spawn TREND_fnc_setCheckpoint;
 		};
 
 		//two guards at door!!!
 		_building = (nearestBuilding _posCache);
-		_spawnedUnit = ((createGroup east) createUnit [sRiflemanToUse, [-135,-253,0], [], 0, "NONE"]);
+		_spawnedUnit = ((createGroup east) createUnit [(call sRiflemanToUse), [-135,-253,0], [], 0, "NONE"]);
 		_spawnedUnit setpos (_building buildingExit 0);
 
 		_direction = [_building,_spawnedUnit] call BIS_fnc_DirTo;
@@ -262,7 +262,7 @@ if (_isCache) then {
 			_checkedPositions pushBack _newPos;
 			if (_allowed) then {
 				//_doLoop = false;
-				_spawnedUnit2 = ((createGroup east) createUnit [sRiflemanToUse, _newPos, [], 0, "NONE"]);
+				_spawnedUnit2 = ((createGroup east) createUnit [(call sRiflemanToUse), _newPos, [], 0, "NONE"]);
 				_direction2 = [_building,_spawnedUnit2] call BIS_fnc_DirTo;
 				_spawnedUnit2 setDir _direction2;
 				_spawnedUnit2 setFormDir _direction2;
@@ -270,11 +270,11 @@ if (_isCache) then {
 			_i = _i + 1;
 		};
 
-		_spawnedUnit3 = ((createGroup east) createUnit [sRiflemanToUse, [-135,-253,0], [], 0, "NONE"]);
+		_spawnedUnit3 = ((createGroup east) createUnit [(call sRiflemanToUse), [-135,-253,0], [], 0, "NONE"]);
 		[getPos _building, [_spawnedUnit3], -1, false, false,false] spawn TREND_fnc_Zen_OccupyHouse;
 
 		if (selectRandom[true,false]) then {
-			_spawnedUnit4 = ((createGroup east) createUnit [sRiflemanToUse, [-135,-253,0], [], 0, "NONE"]);
+			_spawnedUnit4 = ((createGroup east) createUnit [(call sRiflemanToUse), [-135,-253,0], [], 0, "NONE"]);
 			[getPos _building, [_spawnedUnit4], -1, false, false,false] spawn TREND_fnc_Zen_OccupyHouse;
 		};
 	}
@@ -332,10 +332,10 @@ if (!_objectiveCreated) then {
 		_thisPosAreaOfCheckpoint = _flatPos;
 		_thisRoadOnly = false;
 		_thisSide = east;
-		_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sEngineerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
+		_thisUnitTypes = [(call sRiflemanToUse), (call sRiflemanToUse),(call sRiflemanToUse),(call sMachineGunManToUse), (call sEngineerToUse), (call sGrenadierToUse), (call sMedicToUse),(call sAAManToUse),(call sATManToUse)];
 		_thisAllowBarakade = true;
 		_thisIsDirectionAwayFromAO = true;
-		[_posObj,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100,true,selectRandom[false,false,true],false,true] spawn TREND_fnc_setCheckpoint;
+		[_posObj,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,(call UnarmedScoutVehicles),100,true,selectRandom[false,false,true],false,true] spawn TREND_fnc_setCheckpoint;
 	};
 
 
@@ -344,12 +344,12 @@ if (!_objectiveCreated) then {
 		[_posObj] spawn TREND_fnc_createEnemySniper;
 	};
 
-	_spawnedUnitTarget1 = ((createGroup east) createUnit [sRiflemanToUse, _posObj, [], 10, "NONE"]);
+	_spawnedUnitTarget1 = ((createGroup east) createUnit [(call sRiflemanToUse), _posObj, [], 10, "NONE"]);
 	_directionTarget1 = [_mainVeh,_spawnedUnitTarget1] call BIS_fnc_DirTo;
 	_spawnedUnitTarget1 setDir _directionTarget1;
 	_spawnedUnitTarget1 setFormDir _directionTarget1;
 
-	_spawnedUnitTarget2 = ((createGroup east) createUnit [sRiflemanToUse, _posObj, [], 10, "NONE"]);
+	_spawnedUnitTarget2 = ((createGroup east) createUnit [(call sRiflemanToUse), _posObj, [], 10, "NONE"]);
 	_directionTarget2 = [_mainVeh,_spawnedUnitTarget2] call BIS_fnc_DirTo;
 	_spawnedUnitTarget2 setDir _directionTarget2;
 	_spawnedUnitTarget2 setFormDir _directionTarget2;

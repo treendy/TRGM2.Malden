@@ -7,7 +7,7 @@ Description:
 A function that will create a fully manned helo which inserts infantry units into an AO.
 
 Parameter(s):
-_this select 0 <side> - EAST, WEST, RESISTANCE
+_this select 0 <side> - EAST, WEST, INDEPENDENT
 _this select 1 <string> - Marker: (spawn position of the helo)
 _this select 2 <string> - Marker: (Landing Zone for the helo)
 _this select 3 <number> - Skill Setting: (1,2,3,4 >> 1 = Noob AI -- 4 = Deadly Ai)
@@ -22,16 +22,23 @@ _nul = [SIDE, "string", "string", number, bool, bool, bool, bool, bool] spawn TR
 _nul = [EAST, "spawnMrk", "LZMrk", 2, true, true, true, true, false] spawn TREND_fnc_reinforcements; <<
 
  ---------------------------------------------------------------------------------------------------------*/
- format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
-if (isNil "TREND_NumReinforcementsCalled") then {TREND_NumReinforcementsCalled = 0; publicVariable "TREND_NumReinforcementsCalled"};
-if (isServer && TREND_NumReinforcementsCalled < 6) then {
-	TREND_NumReinforcementsCalled = TREND_NumReinforcementsCalled + 1;
-	publicVariable "TREND_NumReinforcementsCalled";
-	 _spawnMrk = [0,0,0];
-	 _LZMrk = [0,0,0];
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
-	 //arguments definitions
-	 params [["_side", EAST], ["_spawnMrk", [0,0,0]], ["_LZMrk", [0,0,0]], ["_skill", 3], ["_sadMode", true], ["_bodyDelete", true], ["_cycleMode", false], ["_paraDrop", false], ["_debugMode", false]];
+FPSMAX=60; //60 FPS max
+FPSLIMIT=15; // 15 FPS min
+MAXDELAY=5; // 5 sec max delay
+_AdditionalUnitCreationDelay = ((abs(FPSMAX - diag_fps) / (FPSMAX - FPSLIMIT))^2) * MAXDELAY;
+
+//arguments definitions
+params [["_side", EAST], ["_spawnMrk", [0,0,0]], ["_LZMrk", [0,0,0]], ["_skill", 3], ["_sadMode", true], ["_bodyDelete", true], ["_cycleMode", false], ["_paraDrop", false], ["_debugMode", false]];
+
+if ((_LZMrk select 0) isEqualTo 0 && (_LZMrk select 1) isEqualTo 0) exitWith {};
+
+if (isNil "TREND_TimeLastReinforcementsCalled") then {TREND_TimeLastReinforcementsCalled = time; publicVariable "TREND_TimeLastReinforcementsCalled"};
+if (isServer && {(time - TREND_TimeLastReinforcementsCalled) > 60}) then {
+	TREND_TimeLastReinforcementsCalled = time;
+	publicVariable "TREND_TimeLastReinforcementsCalled";
+
 	_heloCrew = createGroup _side;
 	_cycleMode = false;
 
@@ -55,23 +62,46 @@ if (isServer && TREND_NumReinforcementsCalled < 6) then {
 	//Side Check to spawn appropriate helicopter & cargo
 	switch (_side) do {
 		case WEST : {
-			_ranGrp = ["BUS_InfSquad","BUS_InfSquad_Weapons"] call BIS_fnc_selectRandom;
-			_helo = [_spawnMrk, 45, "B_Heli_Transport_01_F", WEST] call BIS_FNC_spawnVehicle;
-			_infgrp = [_spawnMrk, WEST, (configFile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> _ranGrp)] call BIS_fnc_spawnGroup;
+			_infgrp = createGroup WEST;
+			(call fTeamleader) createUnit [[0+1, 0], _infgrp];
+			sleep(_AdditionalUnitCreationDelay);
+			(call fGrenadier) createUnit [[0, 0+1], _infgrp];
+			sleep(_AdditionalUnitCreationDelay);
+			(call fMedic) createUnit [[0+1, 0+1], _infgrp];
+			sleep(_AdditionalUnitCreationDelay);
+			sfRifleman createUnit [[0-1, 0], _infgrp];
+			sleep(_AdditionalUnitCreationDelay);
+			(call fRifleman) createUnit [[0, 0-1], _infgrp];
+			sleep(_AdditionalUnitCreationDelay);
+			_helo = [_spawnMrk, 45, (call ReinforceVehicleFriendly), _side] call BIS_FNC_spawnVehicle;
 		};
 		case EAST : {
-				_infgrp = createGroup east;
-				sTeamleader createUnit [[0+1, 0], _infgrp];
-				sGrenadier createUnit [[0, 0+1], _infgrp];
-				sMedic createUnit [[0+1, 0+1], _infgrp];
-				sRifleman createUnit [[0-1, 0], _infgrp];
-				sRifleman createUnit [[0, 0-1], _infgrp];
-				_helo = [_spawnMrk, 45, ReinforceVehicle, EAST] call BIS_FNC_spawnVehicle;
+			_infgrp = createGroup EAST;
+			(call sTeamleader) createUnit [[0+1, 0], _infgrp];
+			sleep(_AdditionalUnitCreationDelay);
+			(call sGrenadier) createUnit [[0, 0+1], _infgrp];
+			sleep(_AdditionalUnitCreationDelay);
+			(call sMedic) createUnit [[0+1, 0+1], _infgrp];
+			sleep(_AdditionalUnitCreationDelay);
+			(call sRifleman) createUnit [[0-1, 0], _infgrp];
+			sleep(_AdditionalUnitCreationDelay);
+			(call sMachineGunMan) createUnit [[0, 0-1], _infgrp];
+			sleep(_AdditionalUnitCreationDelay);
+			_helo = [_spawnMrk, 45, (call ReinforceVehicle), _side] call BIS_FNC_spawnVehicle;
 		};
-		case RESISTANCE : {
-			_ranGrp = ["HAF_InfSquad","HAF_InfSquad_Weapons"] call BIS_fnc_selectRandom;
-			_helo = [_spawnMrk, 45, "I_Heli_Transport_02_F", RESISTANCE] call BIS_FNC_spawnVehicle;
-			_infgrp = [_spawnMrk, RESISTANCE, (configFile >> "CfgGroups" >> "Indep" >> "IND_F" >> "Infantry" >> _ranGrp)] call BIS_fnc_spawnGroup;
+		case INDEPENDENT : {
+			_infgrp = createGroup INDEPENDENT;
+			(call sTeamleaderMilitia) createUnit [[0+1, 0], _infgrp];
+			sleep(_AdditionalUnitCreationDelay);
+			(call sGrenadierMilitia) createUnit [[0, 0+1], _infgrp];
+			sleep(_AdditionalUnitCreationDelay);
+			(call sMedicMilitia) createUnit [[0+1, 0+1], _infgrp];
+			sleep(_AdditionalUnitCreationDelay);
+			(call sRiflemanMilitia) createUnit [[0-1, 0], _infgrp];
+			sleep(_AdditionalUnitCreationDelay);
+			(call sMachineGunManMilitia) createUnit [[0, 0-1], _infgrp];
+			sleep(_AdditionalUnitCreationDelay);
+			_helo = [_spawnMrk, 45, (call ReinforceVehicleMilitia), _side] call BIS_FNC_spawnVehicle;
 		};
 	};
 
@@ -156,6 +186,8 @@ if (isServer && TREND_NumReinforcementsCalled < 6) then {
 	//Assign the crew to a group & assign cargo to the helo
 	{[_x] joinSilent _heloCrew;} forEach crew (_helo select 0);
 	{_x assignAsCargo (_helo select 0); _x moveInCargo (_helo select 0);} forEach units _infgrp;
+	_infgrp deleteGroupWhenEmpty true;
+	_heloCrew deleteGroupWhenEmpty true;
 
 	//Debug output of the total crew count (cargo counts as crew too)
 	if (_debugMode) then {player globalChat format ["Helicopter Total Crew Count: %1", count crew (_helo select 0)];};

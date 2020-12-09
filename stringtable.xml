@@ -3747,19 +3747,24 @@
                 <English>If enabled, IED and Target missions will be grouped closer to the AO,\nas apposed to spaced out around the AO</English>
             </Key>
 
-            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_selectRandomW">
-                <Original>More enemies</Original>
-                <English>More enemies</English>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MoreEnemies">
+                <Original>Harder mission (beta)</Original>
+                <English>Harder mission (beta)</English>
             </Key>
 
             <Key ID="STR_TRGM2_Tooltip_AdvMoreEnemies">
-                <Original>If enabled, more enemies will spawn around objectives. \n And they will call for reinforcements more often.</Original>
-                <English>If enabled, more enemies will spawn around objectives. \n And they will call for reinforcements more often.</English>
+                <Original>If enabled, more vehicles and patrols will spawn around objectives. \n And they will call for reinforcements more often.</Original>
+                <English>If enabled, more vehicles and patrols will spawn around objectives. \n And they will call for reinforcements more often.</English>
             </Key>
 
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_LargePatrols">
                 <Original>Large patrols</Original>
                 <English>Large patrols</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_Tooltip_AdvLargePatrols">
+                <Original>If enabled, groups of enemies will be larger.</Original>
+                <English>If enabled, groups of enemies will be larger.</English>
             </Key>
 
             <Key ID="STR_TRGM2_Tooltip_AdvVirtualArsenal">
@@ -3827,8 +3832,8 @@
             </Key>
 
             <Key ID="STR_TRGM2_InitClickValidPos">
-                <Original>Valid position, creating HQ.</Original>
-                <English>Valid position, creating HQ.</English>
+                <Original>Valid position, close the map to accept positon, or click anywhere to choose a different position.</Original>
+                <English>Valid position, close the map to accept positon, or click anywhere to choose a different position.</English>
             </Key>
 
             <Key ID="STR_TRGM2_openDialogRequests_RequestUnit">

@@ -7,6 +7,8 @@ switch (typeName _className) do {
 
 if !(isClass (configFile >> "CfgVehicles" >> _className)) exitWith {false};
 
+
+
 _isArmed = false;
 
 if (_className isKindOf "CAManBase") then {

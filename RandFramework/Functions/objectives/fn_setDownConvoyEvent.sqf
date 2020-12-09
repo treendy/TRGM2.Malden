@@ -20,7 +20,7 @@ fnc_AddToDirection = {
 	_iResult;
 };
 
-_vehs = FriendlyUnarmedCar + FriendlyMedicalTruck + FriendlyArmoredCar + FriendlyFuelTruck + FriendlyFuelTruck + FriendlyFuelTruck;
+_vehs = (call FriendlyUnarmedCar) + (call FriendlyMedicalTruck) + (call FriendlyArmoredCar) + (call FriendlyFuelTruck) + (call FriendlyFuelTruck) + (call FriendlyFuelTruck);
 
 
 _posOfAO =  _this select 0;
@@ -169,7 +169,7 @@ if (count _nearestRoads > 0) then {
 
 			//hint str(_backOfVehArea);
 			_group = createGroup civilian;
-			_downedCiv = _group createUnit [selectRandom FriendlyCheckpointUnits,_backOfVehArea,[],0,"NONE"];
+			_downedCiv = _group createUnit [selectRandom (call FriendlyCheckpointUnits),_backOfVehArea,[],0,"NONE"];
 			_downedCiv setDamage 0.8;
 			[_downedCiv, "Acts_CivilInjuredGeneral_1"] remoteExec ["switchMove", 0];
 			//_downedCiv playMoveNow "Acts_CivilInjuredGeneral_1"; //"AinjPpneMstpSnonWrflDnon";
@@ -199,7 +199,7 @@ if (count _nearestRoads > 0) then {
 
 			//Paramedics object1 attachTo [object2, offset, memPoint]
 			//_group = createGroup civilian;
-			_downedCivMedic = _group createUnit [selectRandom FriendlyCheckpointUnits,_backOfVehArea,[],0,"CAN_COLLIDE"];
+			_downedCivMedic = _group createUnit [selectRandom (call FriendlyCheckpointUnits),_backOfVehArea,[],0,"CAN_COLLIDE"];
 			_downedCivMedic playmove "Acts_TreatingWounded02";
 			_downedCivMedic disableAI "anim";
 			_downedCivMedic attachTo [_downedCiv, [0.5,-0.3,-0.1]];
@@ -237,14 +237,14 @@ if (count _nearestRoads > 0) then {
 
 			if (_iteration == 1) then {
 
-				_downedCivMedic2 = _group createUnit [selectRandom FriendlyCheckpointUnits,_backOfVehArea,[],8,"NONE"];
+				_downedCivMedic2 = _group createUnit [selectRandom (call FriendlyCheckpointUnits),_backOfVehArea,[],8,"NONE"];
 				_downedCivMedic2 playmove "Acts_CivilListening_2";
 				_downedCivMedic2 disableAI "anim";
 				_downedCivMedic2 addEventHandler ["killed", {_this spawn TREND_fnc_ParamedicKilled;}]; //ParamedicKilled
 
 				//_RequestedMedicalItems
 
-				_downedCiv2 = _group createUnit [selectRandom FriendlyCheckpointUnits,getpos _downedCivMedic2,[],2,"NONE"];
+				_downedCiv2 = _group createUnit [selectRandom (call FriendlyCheckpointUnits),getpos _downedCivMedic2,[],2,"NONE"];
 				_downedCiv2 playmove "Acts_CivilTalking_2";
 				_downedCiv2 disableAI "anim";
 				_downedCiv2 addEventHandler ["killed", {_this spawn TREND_fnc_CivKilled;}]; //ParamedicKilled
@@ -265,7 +265,7 @@ if (count _nearestRoads > 0) then {
 			if (_iteration == 2) then {
 
 
-				_downedCiv3 = _group createUnit [selectRandom FriendlyCheckpointUnits,_backOfVehArea,[],25,"NONE"];
+				_downedCiv3 = _group createUnit [selectRandom (call FriendlyCheckpointUnits),_backOfVehArea,[],25,"NONE"];
 				_downedCiv3 playmove "Acts_CivilShocked_1";
 				_downedCiv3 disableAI "anim";
 				_downedCiv3 setDir (floor(random 360));

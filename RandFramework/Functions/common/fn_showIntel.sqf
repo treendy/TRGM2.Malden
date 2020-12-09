@@ -31,7 +31,7 @@ if (side player == west) then {
 
 	if (_IntelToShow == 1) then { //Mortor team location
 		{
-			TREND_TempIntelShowPos = nearestObjects [TREND_ObjectivePossitions select 0,sMortar + sMortarMilitia,3000];
+			TREND_TempIntelShowPos = nearestObjects [TREND_ObjectivePossitions select 0,(call sMortar) + (call sMortarMilitia),3000];
 			publicVariable "TREND_TempIntelShowPos";
 		} remoteExec ["call", 2];
 		waitUntil {typeName TREND_TempIntelShowPos == "ARRAY"};
@@ -52,7 +52,7 @@ if (side player == west) then {
 	};
 	if (_IntelToShow == 2) then { //AAA team location
 		{
-			TREND_TempIntelShowPos = nearestObjects [TREND_ObjectivePossitions select 0,[sAAAVeh] + [sAAAVehMilitia] + DestroyAAAVeh,3000];
+			TREND_TempIntelShowPos = nearestObjects [TREND_ObjectivePossitions select 0,[(call sAAAVeh)] + [(call sAAAVehMilitia)] + (call DestroyAAAVeh),3000];
 			publicVariable "TREND_TempIntelShowPos";
 		} remoteExec ["call", 2];
 		waitUntil {typeName TREND_TempIntelShowPos == "ARRAY"};

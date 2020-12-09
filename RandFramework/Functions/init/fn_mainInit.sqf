@@ -3,11 +3,11 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc
 
 // Set relationships
 west setFriend [east, 0];
-west setFriend [resistance, 0];
+west setFriend [independent, 0];
 east setFriend [west, 0];
-east setFriend [resistance, 1];
-resistance setFriend [west, 0];
-resistance setFriend [east, 1];
+east setFriend [independent, 1];
+independent setFriend [west, 0];
+independent setFriend [east, 1];
 civilian setFriend [west, 1];
 civilian setFriend [east, 1];
 
@@ -299,7 +299,7 @@ if (isServer) then {
 	if (typeName sCivilian != "ARRAY") then {sCivilian = [sCivilian]};
 	/*end */
 
-	private _airTransClassName = selectRandom (SupplySupportChopperOptions select {_x call TREND_fnc_isTransport});
+	private _airTransClassName = selectRandom ((call SupplySupportChopperOptions) select {_x call TREND_fnc_isTransport});
 	if (!isNil "chopper1" && {_airTransClassName != typeOf chopper1}) then {
 		{deleteVehicle _x;} forEach crew (vehicle chopper1) + [vehicle chopper1];
 		private _chopper1Arr = [getPos heliPad1, 0, _airTransClassName, WEST] call BIS_fnc_spawnVehicle;
@@ -326,7 +326,7 @@ if (isServer) then {
 		{ doStop _x; } forEach (_chopper1Arr select 1);
 	};
 
-	private _airSupClassName = selectRandom FriendlyChopper;
+	private _airSupClassName = selectRandom (call FriendlyChopper);
 	if (!isNil "chopper2" && {_airSupClassName != typeOf chopper2}) then {
 		{deleteVehicle _x;} forEach crew (vehicle chopper2) + [vehicle chopper2];
 		private _chopper2Arr = [getPos airSupportHeliPad, 0, _airSupClassName, WEST] call BIS_fnc_spawnVehicle;
@@ -352,7 +352,7 @@ if (isServer) then {
 			_faction = getText(configFile >> "CfgVehicles" >> typeOf _x >> "faction");
 			_friendlyFactionIndex = TREND_AdvancedSettings select TREND_ADVSET_FRIENDLY_FACTIONS_IDX;
 			_westFaction = (TREND_WestFactionData select _friendlyFactionIndex) select 0;
-			if ((crew _x) isEqualTo [] && {getNumber(configFile >> "CfgFactionClasses" >> _faction >> "side") isEqualTo 1 && {!(_faction isEqualTo _westFaction)}}) then {
+			if ((crew _x) isEqualTo [] && {getNumber(configFile >> "CfgFactionClasses" >> _faction >> "side") isEqualTo 1 && {_faction != _westFaction}}) then {
 				_newVehClass = [_x, WEST] call TREND_fnc_getFactionVehicle;
 				if (!isNil "_newVehClass") then {
 					private _pos = getPosATL _x;

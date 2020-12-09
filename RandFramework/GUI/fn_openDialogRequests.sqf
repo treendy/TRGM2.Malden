@@ -131,6 +131,7 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 		if (_safePos isEqualTo getPos player) then {
 			_safePos = [getPos player, 20,150,25,0,0.30,0,[],[getPos player,getPos player],_classToSpawn] call TREND_fnc_findSafePos; // find a valid pos
 		};
+		if (_safePos isEqualTo getPos player) exitWith {hint "No safe location nearby to create vehicle!"};
 		player setPos (_safePos vectorAdd [5,0,0]);
 		private _SpawnedVeh = createVehicle [_classToSpawn, _safePos, [], 0, "NONE"];
 		_SpawnedVeh allowdamage false;
@@ -145,21 +146,32 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 
 		sleep 0.5;
 
-		_actionReleaseObject = _SpawnedVeh addAction [format [localize "STR_TRGM2_openDialogRequests_VehicleRelease", getText (configFile >> "CfgVehicles" >> _classToSpawn >> "displayName")], {
+		_actionReleaseObject = player addAction [format [localize "STR_TRGM2_openDialogRequests_VehicleRelease", getText (configFile >> "CfgVehicles" >> _classToSpawn >> "displayName")], {
 			params ["_target", "_caller", "_actionId", "_arguments"];
-			detach _target;
-			_target setPos [getPos _target select 0, getPos _target select 1];
-			_target setVectorUp surfaceNormal position _target;
-			_target allowDamage true;
+			_arguments params ["_spawnedVeh"];
+			detach _spawnedVeh;
+			_spawnedVeh setPos [getPos _spawnedVeh select 0, getPos _spawnedVeh select 1];
+			_spawnedVeh setVectorUp surfaceNormal position _spawnedVeh;
+			_spawnedVeh allowDamage true;
 			_target removeAction _actionId;
-			[_target, [localize "STR_TRGM2_startInfMission_UnloadDingy",{[_this select 0, _this select 1, _this select 2, _this select 3] spawn TREND_fnc_UnloadDingy;}, [], -99, false, false, "", "_this == player"]] remoteExec ["addAction", 0];
 
-			[_target, (units group _caller)] call TREND_fnc_initAmmoBox;
-
-			if (_target isKindOf "Static") then {
-				[_target, [format [localize "STR_TRGM2_UnloadDingy_push", getText (configFile >> "CfgVehicles" >> (typeOf _target) >> "displayName")],{[_this select 0, _this select 1, _this select 2, _this select 3] spawn TREND_fnc_PushObject;}, [], -99, false, false, "", "_this == player"]] remoteExec ["addAction", 0];
+			if (_spawnedVeh isKindOf "Turret") then {
+				[_spawnedVeh, [format [localize "STR_TRGM2_UnloadDingy_push", getText (configFile >> "CfgVehicles" >> (typeOf _spawnedVeh) >> "displayName")],{_this spawn TREND_fnc_PushObject;}, [], -99, false, false, "", "_this == player"]] remoteExec ["addAction", 0];
+			} else {
+				[_spawnedVeh, [localize "STR_TRGM2_startInfMission_UnloadDingy",{_this spawn TREND_fnc_UnloadDingy;}, [], -99, false, false, "", "_this == player"]] remoteExec ["addAction", 0];
+				[_spawnedVeh, (units group _caller)] call TREND_fnc_initAmmoBox;
 			};
-		}, nil, 25, true, true];
+
+			BIS_fnc_garage_center = _spawnedVeh;
+			BIS_fnc_garage_data = [
+				[
+					getText(configFile >> 'cfgVehicles' >> (typeOf _spawnedVeh) >> 'model'),
+					[ (configFile >> 'cfgVehicles' >> (typeOf _spawnedVeh)) ]
+				]
+			];
+			uinamespace setvariable ["bis_fnc_garage_defaultClass", typeOf _spawnedVeh];
+			["Open",true] call BIS_fnc_garage;
+		}, [_SpawnedVeh], 5, true, true];
 
 		private _largeObjectCorrection = if (((boundingBoxReal _SpawnedVeh select 1 select 1) - (boundingBoxReal _SpawnedVeh select 0 select 1)) != 0 && {
 				((boundingBoxReal _SpawnedVeh select 1 select 0) - (boundingBoxReal _SpawnedVeh select 0 select 0)) > 3.2 &&

@@ -32,10 +32,10 @@ if (isServer) then {
 		_thisPosAreaOfCheckpoint = _flatPos;
 		_thisRoadOnly = true;
 		_thisSide = west;
-		_thisUnitTypes = FriendlyCheckpointUnits;
+		_thisUnitTypes = (call FriendlyCheckpointUnits);
 		_thisAllowBarakade = true;
 		_thisIsDirectionAwayFromAO = false;
-		[_flatPos,_flatPos,50,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,FriendlyScoutVehicles,500] spawn TREND_fnc_setCheckpoint;
+		[_flatPos,_flatPos,50,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,(call FriendlyScoutVehicles),500] spawn TREND_fnc_setCheckpoint;
 	};
 
 	["Mission Setup: 5", true] call TREND_fnc_log;
@@ -101,16 +101,16 @@ if (isServer) then {
 		};
 
 		_flatPos5 = nil;
-		_flatPos5 = [_flatPosCampFire, 12, 30, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]],selectRandom FriendlyFastResponseVehicles] call TREND_fnc_findSafePos;
-		//_car1 = selectRandom FriendlyFastResponseVehicles createVehicle _flatPos5;
-		_car1 = createVehicle [selectRandom FriendlyFastResponseVehicles, _flatPos5, [], 50, "NONE"];
+		_flatPos5 = [_flatPosCampFire, 12, 30, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]],selectRandom (call FriendlyFastResponseVehicles)] call TREND_fnc_findSafePos;
+		//_car1 = selectRandom (call FriendlyFastResponseVehicles) createVehicle _flatPos5;
+		_car1 = createVehicle [selectRandom (call FriendlyFastResponseVehicles), _flatPos5, [], 50, "NONE"];
 		_car1 allowDamage false;
 		_car1 setDir (floor(random 360));
 
 		_flatPos6 = nil;
-		_flatPos6 = [_flatPosCampFire, 12, 30, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]],selectRandom FriendlyFastResponseVehicles] call TREND_fnc_findSafePos;
-		//_car2 = selectRandom FriendlyFastResponseVehicles createVehicle _flatPos6;
-		_car2 = createVehicle [selectRandom FriendlyFastResponseVehicles, _flatPos5, [], 50, "NONE"];
+		_flatPos6 = [_flatPosCampFire, 12, 30, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]],selectRandom (call FriendlyFastResponseVehicles)] call TREND_fnc_findSafePos;
+		//_car2 = selectRandom (call FriendlyFastResponseVehicles) createVehicle _flatPos6;
+		_car2 = createVehicle [selectRandom (call FriendlyFastResponseVehicles), _flatPos5, [], 50, "NONE"];
 		_car2 allowDamage false;
 		_car2 setDir (floor(random 360));
 

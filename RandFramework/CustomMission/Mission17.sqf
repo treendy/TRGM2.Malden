@@ -45,10 +45,10 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_thisPosAreaOfCheckpoint = _flatPos;
 		_thisRoadOnly = true;
 		_thisSide = east;
-		_thisUnitTypes = [sRifleman, sRifleman,sRifleman,sMachineGunMan, sEngineer, sEngineer, sMedic,sAAMan];
+		_thisUnitTypes = [(call sRifleman), (call sRifleman),(call sRifleman),(call sMachineGunMan), (call sEngineer), (call sEngineer), (call sMedic),(call sAAMan)];
 		_thisAllowBarakade = selectRandom [true];
 		_thisIsDirectionAwayFromAO = true;
-		[_mainObjPos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,50] spawn TREND_fnc_setCheckpoint;
+		[_mainObjPos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,(call UnarmedScoutVehicles),50] spawn TREND_fnc_setCheckpoint;
 	};
 
 	//create flag and give its id
@@ -136,7 +136,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 		TREND_dropCrate = false; publicVariable "TREND_dropCrate";
 
-		private _airToUse = selectRandom SupplySupportChopperOptions;
+		private _airToUse = selectRandom (call SupplySupportChopperOptions);
 		private _heloGroup = createGroup west;
 		private _spawnPos = _flag getRelPos [3000, random 360];
 		private _exitPos = _flag getRelPos [25000, random 360];

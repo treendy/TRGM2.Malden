@@ -24,13 +24,13 @@ if (isServer) then {
 
 		_AirVehicle = nil;
 		if (_IsAirType == 1) then {
-			_AirVehicle = selectRandom EnemyAirToAirSupports;
+			_AirVehicle = selectRandom (call EnemyAirToAirSupports);
 		};
 		if (_IsAirType == 2) then {
-			_AirVehicle = selectRandom EnemyAirToGroundSupports;
+			_AirVehicle = selectRandom (call EnemyAirToGroundSupports);
 		};
 		if (_IsAirType == 3) then {
-			_AirVehicle = selectRandom EnemyAirScout;
+			_AirVehicle = selectRandom (call EnemyAirScout);
 		};
 
 		//hint format ["AirType: %1",_AirVehicle];

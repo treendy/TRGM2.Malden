@@ -27,12 +27,12 @@ _unarmedcars = []; _armedcars = []; _trucks = []; _apcs = []; _tanks = []; _arti
 					case "IFV": 		{ _apcs pushBackUnique _className; };
 					case "Tanks": 		{ _tanks pushBackUnique _className; };
 					case "Tank": 		{ _tanks pushBackUnique _className; };
-					case "Helicopters": { if (_isArmed) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
-					case "Helicopter": 	{ if (_isArmed) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
-					case "Cars": 		{ if (_isArmed) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
-					case "Car": 		{ if (_isArmed) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
-					case "MRAP": 		{ if (_isArmed) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
-					case "Truck": 		{ if (_isArmed) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Helicopters": { if (_isArmed && !_isTransport) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
+					case "Helicopter": 	{ if (_isArmed && !_isTransport) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
+					case "Cars": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Car": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "MRAP": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Truck": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
 					default { };
 				};
 			};

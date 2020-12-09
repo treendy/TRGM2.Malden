@@ -39,11 +39,10 @@ if !(_returnPosition isEqualTo _defaultPos) exitWith {
 
 _returnPosition = _checkPos;
 private _spawnPosition = [];
-private _radius = _maxDistance max 25;
 
 for "_i" from 1 to 3 do {
-	private _randomOffset = [random (_radius - _radius / 2), random (_radius - _radius / 2), 0];
-	_spawnPosition = (_checkPos vectorAdd _randomOffset) findEmptyPosition [0, (_radius / 2), _object];
+	private _randomOffset = [random (_maxDistance - _maxDistance / 2), random (_maxDistance - _maxDistance / 2), 0];
+	_spawnPosition = (_checkPos vectorAdd _randomOffset) findEmptyPosition [_minDistance, _maxDistance, _object];
 
 	if !(_spawnPosition isEqualTo []) exitWith {};
 };
