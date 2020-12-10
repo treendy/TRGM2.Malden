@@ -1,0 +1,1 @@
+[] spawn TREND_fnc_attemptEndMission;

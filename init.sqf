@@ -68,5 +68,4 @@ waitUntil { _handle; };
 
 [] spawn TREND_fnc_mainInit;
 
-
 true;

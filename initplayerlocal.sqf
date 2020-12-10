@@ -8,7 +8,14 @@ CODEINPUT = [];
 waitUntil {!isNull player};
 waitUntil {player == player};
 
-sleep 4;
+sleep 5;
+
+_isAdmin = (!isMultiplayer || isMultiplayer && !isDedicated && isServer || isMultiplayer && !isServer && (call BIS_fnc_admin) != 0);
+if (_isAdmin && isNull "TREND_AdminPlayer") then {
+	TREND_AdminPlayer = player; publicVariable "TREND_AdminPlayer";
+};
+
+sleep 5;
 
 if (!TREND_NeededObjectsAvailable) then {
 	player allowDamage false;
@@ -17,149 +24,171 @@ if (!TREND_NeededObjectsAvailable) then {
 	waitUntil { sleep 10; TREND_NeededObjectsAvailable; };
 };
 
+showCinemaBorder  true;
+
+_centerPos = getArray (configfile >> "CfgWorlds" >> worldName >> "centerPosition");
+if !(isNil "TREND_CustomCenterPos") then {
+	_centerPos = TREND_CustomCenterPos;
+};
+
+_pos1 = (_centerPos getPos [(floor(random 5000))+50, (floor(random 360))]);
+_pos2 = (_centerPos getPos [(floor(random 5000))+50, (floor(random 360))]);
+_pos1 = [_pos1 select 0,_pos1 select 1,selectRandom[200,300]];
+_pos2 = [_pos2 select 0,_pos2 select 1,selectRandom[200,300]];
+_camera = "camera" camCreate _pos1;
+_camera cameraEffect ["internal","back"];
+_camera camPreparePos _pos2;
+_camera camPrepareTarget _centerPos;
+_camera camPrepareFOV 0.4;
+_camera camCommitPrepared 600;
+
 TREND_fnc_MissionSelectLoop = {
 	"TREND_fnc_MissionSelectLoop called" call TREND_fnc_log;
 	sleep 3;
-	if (!TREND_bAndSoItBegins) then {
-		playMusic TREND_IntroMusic;
-		[format["SelectLoop Music: %1", TREND_IntroMusic ], true] call TREND_fnc_log;
-	};
+	playMusic TREND_IntroMusic;
+	[format["SelectLoop Music: %1", TREND_IntroMusic ], true] call TREND_fnc_log;
+
 	while {!TREND_bAndSoItBegins} do {
 
-		if ("NEWWAY" == "NEWWAY") then {
+		if (isNil "sl" && !isNull "TREND_AdminPlayer") then {
+			txt5Layer = "txt5" call BIS_fnc_rscLayer;
+			_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustFilled" + "</t>";
+			[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+		};
 
-			_isAdmin = (!isMultiplayer || isMultiplayer && !isDedicated && isServer || isMultiplayer && !isServer && (call BIS_fnc_admin) != 0);
+		if (!isPlayer sl && !isNull "TREND_AdminPlayer") then {
+			txt5Layer = "txt5" call BIS_fnc_rscLayer;
+			_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustPlayer" + "</t>";
+			[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+		};
 
-			if (_isAdmin) then {
-				if (!TREND_IsAdminPlayerAvailable) then {
-					TREND_IsAdminPlayerAvailable =  true; publicVariable "TREND_IsAdminPlayerAvailable";
+		if ((!isNull "TREND_AdminPlayer" && str player isEqualTo "sl") || (TREND_AdminPlayer isEqualTo player)) then {
+			if (!dialog) then {
+				sleep 1.5;
+				if  (!dialog && !TREND_bOptionsSet) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
+					[] spawn TREND_fnc_openDialogMissionSelection;
 				};
-				if  (!dialog) then {
-					//[] spawn {
-						sleep 1.5;
-						if  (!dialog && !TREND_bOptionsSet) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
-							[] spawn TREND_fnc_openDialogMissionSelection;
-						};
-					//};
-				};
-				sleep 0.5;
-			}
-			else {
-				if (!TREND_bOptionsSet) then {
-					txt1Layer = "txt1" call BIS_fnc_rscLayer;
-					_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1 Admin " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
-					[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
-				}
-				else {
-					txt1Layer = "txt1" call BIS_fnc_rscLayer;
-					_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1 Admin " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3" + "</t>";
-					[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
-				};
-				txt5Layer = "txt5" call BIS_fnc_rscLayer;
-				_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>";
-				[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
-
-
-				txt51Layer = "txt51" call BIS_fnc_rscLayer;
-				_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic" + "</t>";
-				[_texta, 0, 0.280, 7, 1,0,txt51Layer] spawn BIS_fnc_dynamicText;
-
-
-				sleep 5;
-
+			};
+			sleep 0.5;
+		} else {
+			if (!TREND_bOptionsSet) then {
+				txt1Layer = "txt1" call BIS_fnc_rscLayer;
+				_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1 Admin " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
+				[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
+			} else {
+				txt1Layer = "txt1" call BIS_fnc_rscLayer;
+				_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1 Admin " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3" + "</t>";
+				[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
 			};
 		};
 
-		//if 5 seconds have passed, and no admin player has joined, will default to using SL
-		if (!TREND_IsAdminPlayerAvailable) then {
-			if (str player == "sl") then {
-				if  (!dialog) then {
-					//[] spawn {
-						sleep 1.5;
-						if  (!dialog && !TREND_bOptionsSet) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
-							[] spawn TREND_fnc_openDialogMissionSelection;
-							//_actChooseMission = endMissionBoard addaction ["Select Mission Params", {[] spawn TREND_fnc_openDialogMissionSelection;}];
-						};
-					//};
-				};
-				sleep 0.5;
-			}
-			else {
+		waitUntil {TREND_bOptionsSet};
 
-				if (isNil "sl") then {
-					txt5Layer = "txt5" call BIS_fnc_rscLayer;
-					_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustFilled" + "</t>";
-					[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
-				}
-				else {
-					if (!isPlayer sl) then {
-						txt5Layer = "txt5" call BIS_fnc_rscLayer;
-						_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustPlayer" + "</t>";
-						[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
-					}
-					else {
-						if (!TREND_bOptionsSet) then {
-							txt1Layer = "txt1" call BIS_fnc_rscLayer;
-							_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + name sl + " " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
-							[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
-						}
-						else {
-							txt1Layer = "txt1" call BIS_fnc_rscLayer;
-							_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + name sl + " " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3" + "</t>";
-							[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
-						};
-						txt5Layer = "txt5" call BIS_fnc_rscLayer;
-						_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>";
-						[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+		txt5Layer = "txt5" call BIS_fnc_rscLayer;
+		_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>";
+		[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
 
 
-						txt51Layer = "txt51" call BIS_fnc_rscLayer;
-						_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic" + "</t>";
-						[_texta, 0, 0.280, 7, 1,0,txt51Layer] spawn BIS_fnc_dynamicText;
+		txt51Layer = "txt51" call BIS_fnc_rscLayer;
+		_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic" + "</t>";
+		[_texta, 0, 0.280, 7, 1,0,txt51Layer] spawn BIS_fnc_dynamicText;
 
-					};
-				};
-				sleep 5;
-			};
-		};
+		sleep 5;
 	};
 };
 [] spawn TREND_fnc_MissionSelectLoop;
 
+waitUntil {TREND_bOptionsSet};
+titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED"];
+_camera cameraEffect ["Terminate","back"];
+[format["Mission Core: %1", "CameraTerminated"], true] call TREND_fnc_log;
+sleep 3;
+
+if (!isDedicated && {(!isNull "TREND_AdminPlayer" && str player isEqualTo "sl") || (TREND_AdminPlayer isEqualTo player)}) then {
+	if (TREND_iMissionParamType != 5) then {	//if isCampaign, dont allow to select AO
+		if (TREND_AdvancedSettings select TREND_ADVSET_SELECT_AO_IDX isEqualTo 1) then {
+			mrkAoSelect1 = nil;
+			mrkAoSelect2 = nil;
+			mrkAoSelect3 = nil;
+			titleText[localize "STR_TRGM2_tele_SelectPositionAO1", "PLAIN"];
+			openMap true;
+			onMapSingleClick "Mission1Loc = _pos; publicVariable 'Mission1Loc'; openMap false; onMapSingleClick ''; true;";
+			sleep 1;
+			waitUntil {!visibleMap};
+			if (!isNil "Mission1Loc") then {
+				["mrkAoSelect1",  Mission1Loc, "ICON", "ColorRed", [1,1], "AO 1"] call AIS_Core_fnc_createLocalMarker;
+			};
+
+			if (TREND_iMissionParamType isEqualTo 0 || TREND_iMissionParamType isEqualTo 4) then {
+				titleText[localize "STR_TRGM2_tele_SelectPositionAO2", "PLAIN"];
+				openMap true;
+				onMapSingleClick "Mission2Loc = _pos; publicVariable 'Mission2Loc'; openMap false; onMapSingleClick ''; true;";
+				sleep 1;
+				waitUntil {!visibleMap};
+				if (!isNil "Mission2Loc") then {
+					["mrkAoSelect2",  Mission2Loc, "ICON", "ColorRed", [1,1], "AO 2"] call AIS_Core_fnc_createLocalMarker;
+				};
+
+				titleText[localize "STR_TRGM2_tele_SelectPositionAO3", "PLAIN"];
+				openMap true;
+				onMapSingleClick "Mission3Loc = _pos; publicVariable 'Mission3Loc'; openMap false; onMapSingleClick ''; true;";
+				sleep 1;
+				waitUntil {!visibleMap};
+				if (!isNil "Mission3Loc") then {
+					["mrkAoSelect2",  Mission3Loc, "ICON", "ColorRed", [1,1], "AO 2"] call AIS_Core_fnc_createLocalMarker;
+				};
+			};
+
+			if (getMarkerColor "mrkAoSelect1" != "") then {deleteMarker "mrkAoSelect1";};
+			if (getMarkerColor "mrkAoSelect2" != "") then {deleteMarker "mrkAoSelect2";};
+			if (getMarkerColor "mrkAoSelect3" != "") then {deleteMarker "mrkAoSelect3";};
+		};
+
+		if (TREND_AdvancedSettings select TREND_ADVSET_SELECT_AO_CAMP_IDX isEqualTo 1) then {
+			titleText[localize "STR_TRGM2_tele_SelectPosition_AO_Camp", "PLAIN"];
+			openMap true;
+			onMapSingleClick "AOCampLocation = _pos; publicVariable 'AOCampLocation'; openMap false; onMapSingleClick ''; true;";
+			sleep 1;
+			waitUntil {!visibleMap};
+		};
 
 
-TREND_fnc_BasicInitAndRespawn = {
-	"TREND_fnc_BasicInitAndRespawn called" call TREND_fnc_log;
-
-	// if (isMultiplayer) then
-	// {
-	// 	waitUntil {!(isNull (findDisplay 46))};
-
-	// 	player setspeaker "NoVoice";
-	// 	//ShowRad = showRadio false;
-	// 	//EnabRad = enableRadio false;
-	// 	player disableConversation true;
-
-	// 	player addEventHandler
-	// 	[
-	// 	"respawn",
-	// 		{
-	// 		player setspeaker "NoVoice";
-	// 		//ShowRad = showRadio false;
-	// 		//EnabRad = enableRadio false;
-	// 		player disableConversation true
-	// 		}
-	// 	];
-	// };
-
-	TREND_iAllowGPS = ("OUT_par_AllowGPS" call BIS_fnc_getParamValue);
-	if (TREND_iAllowGPS == 0) then {
-		showGPS false;
 	};
-
+	TREND_bAndSoItBegins = true; publicVariable "TREND_bAndSoItBegins";
 };
-[] spawn TREND_fnc_BasicInitAndRespawn;
-player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInitAndRespawn; }];
+
+// TREND_fnc_BasicInitAndRespawn = {
+// 	"TREND_fnc_BasicInitAndRespawn called" call TREND_fnc_log;
+
+// 	if (isMultiplayer) then
+// 	{
+// 		waitUntil {!(isNull (findDisplay 46))};
+
+// 		player setspeaker "NoVoice";
+// 		//ShowRad = showRadio false;
+// 		//EnabRad = enableRadio false;
+// 		player disableConversation true;
+
+// 		player addEventHandler
+// 		[
+// 		"respawn",
+// 			{
+// 			player setspeaker "NoVoice";
+// 			//ShowRad = showRadio false;
+// 			//EnabRad = enableRadio false;
+// 			player disableConversation true
+// 			}
+// 		];
+// 	};
+
+// 	TREND_iAllowGPS = ("OUT_par_AllowGPS" call BIS_fnc_getParamValue);
+// 	if (TREND_iAllowGPS == 0) then {
+// 		showGPS false;
+// 	};
+
+// };
+// [] spawn TREND_fnc_BasicInitAndRespawn;
+// player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInitAndRespawn; }];
 
 waitUntil {TREND_bAndSoItBegins && TREND_CustomObjectsSet};
 
@@ -367,7 +396,7 @@ TREND_fnc_GeneralPlayerLoop = {
 			};
 			if (leader (group (vehicle player)) == player && TREND_AdvancedSettings select TREND_ADVSET_SUPPORT_OPTION_IDX == 1) then {
 				if (TREND_iMissionSetup == 5) then {
-					if (isNil "TREND_CampaignInitiated") then { TREND_CampaignInitiated =   false; publicVariable "TREND_CampaignInitiated"; };
+					if (isNil "TREND_CampaignInitiated") then { TREND_CampaignInitiated = false; publicVariable "TREND_CampaignInitiated"; };
 					if (TREND_CampaignInitiated) then {
 
 						_dCurrentRep = [TREND_MaxBadPoints - TREND_BadPoints,1] call BIS_fnc_cutDecimals;

@@ -3,12 +3,12 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc
 
 if (_player != player) exitWith {false;};
 
-private _isAdmin = (!isMultiplayer || isMultiplayer && !isDedicated && isServer || isMultiplayer && !isServer && (call BIS_fnc_admin) != 0);
-if (_isAdmin && !TREND_IsAdminPlayerAvailable) then {
-	TREND_IsAdminPlayerAvailable =  true; publicVariable "TREND_IsAdminPlayerAvailable";
+_isAdmin = (!isMultiplayer || isMultiplayer && !isDedicated && isServer || isMultiplayer && !isServer && (call BIS_fnc_admin) != 0);
+if (_isAdmin && isNull "TREND_AdminPlayer") then {
+	TREND_AdminPlayer = player; publicVariable "TREND_AdminPlayer";
 };
 
-if ((!TREND_IsAdminPlayerAvailable && str player isEqualTo "sl") || (_isAdmin && TREND_IsAdminPlayerAvailable)) then {
+if ((!isNull "TREND_AdminPlayer" && str player isEqualTo "sl") || (TREND_AdminPlayer isEqualTo player)) then {
 	if (!TREND_HQPosFound) then {
 		TREND_playerIsChoosingHQpos = true; publicVariable "TREND_playerIsChoosingHQpos";
 		TREND_MapClicked = 0; publicVariable "TREND_MapClicked";

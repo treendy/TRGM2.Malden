@@ -155,22 +155,53 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 			_spawnedVeh allowDamage true;
 			_target removeAction _actionId;
 
-			if (_spawnedVeh isKindOf "Turret") then {
+			if ((tolower (getText (configFile >> 'cfgVehicles' >> (typeOf _spawnedVeh) >> 'vehicleClass')) isEqualTo 'static')) then {
 				[_spawnedVeh, [format [localize "STR_TRGM2_UnloadDingy_push", getText (configFile >> "CfgVehicles" >> (typeOf _spawnedVeh) >> "displayName")],{_this spawn TREND_fnc_PushObject;}, [], -99, false, false, "", "_this == player"]] remoteExec ["addAction", 0];
 			} else {
 				[_spawnedVeh, [localize "STR_TRGM2_startInfMission_UnloadDingy",{_this spawn TREND_fnc_UnloadDingy;}, [], -99, false, false, "", "_this == player"]] remoteExec ["addAction", 0];
 				[_spawnedVeh, (units group _caller)] call TREND_fnc_initAmmoBox;
 			};
 
-			BIS_fnc_garage_center = _spawnedVeh;
-			BIS_fnc_garage_data = [
-				[
-					getText(configFile >> 'cfgVehicles' >> (typeOf _spawnedVeh) >> 'model'),
-					[ (configFile >> 'cfgVehicles' >> (typeOf _spawnedVeh)) ]
-				]
-			];
-			uinamespace setvariable ["bis_fnc_garage_defaultClass", typeOf _spawnedVeh];
-			["Open",true] call BIS_fnc_garage;
+			// _vehicleData = [
+			// 	[],	//CARS
+			// 	[],	//ARMOUR
+			// 	[],	//HELIS
+			// 	[],	//PLANES
+			// 	[],	//NAVAL
+			// 	[]	//STATICS
+			// ];
+
+			// _vehicleDataTypes_enum = [
+			// 	[ "car", "carx" ],
+			// 	[ "tank", "tankx" ],
+			// 	[ "helicopter", "helicopterx", "helicopterrtd" ],
+			// 	[ "airplane", "airplanex" ],
+			// 	[ "ship", "shipx", "sumbarinex" ]
+			// ];
+
+			// _type = toLower getText(configFile >> 'cfgVehicles' >> (typeOf _spawnedVeh) >> 'simulation' );
+			// _simulIndex = -1;
+			// {
+			// 	if (_type in _x) exitWith {
+			// 		_simulIndex = _forEachIndex;
+			// 	};
+			// } forEach _vehicleDataTypes_enum;
+
+			// if ((tolower (getText (configFile >> 'cfgVehicles' >> (typeOf _spawnedVeh) >> 'vehicleClass')) isEqualTo 'static')) then {
+			// 	_simulIndex = 5;
+			// };
+
+			// if (_simulIndex >= 0) then {
+			// 	_tmpType = _vehicleData select _simulIndex;
+			// 	_tmpType pushback (getText(configFile >> 'cfgVehicles' >> (typeOf _spawnedVeh) >> 'model'));
+			// 	_tmpType pushback [(configFile >> 'cfgVehicles' >> (typeOf _spawnedVeh))];
+
+			// 	BIS_fnc_garage_center = _spawnedVeh;
+			// 	BIS_fnc_garage_data = _vehicleData;
+			// 	uinamespace setvariable ["bis_fnc_garage_defaultClass", typeOf _spawnedVeh];
+			// 	missionnamespace setvariable ["BIS_fnc_arsenal_fullGarage", false];
+			// 	["Open",true] call BIS_fnc_garage;
+			// };
 		}, [_SpawnedVeh], 5, true, true];
 
 		private _largeObjectCorrection = if (((boundingBoxReal _SpawnedVeh select 1 select 1) - (boundingBoxReal _SpawnedVeh select 0 select 1)) != 0 && {

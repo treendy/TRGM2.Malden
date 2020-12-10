@@ -150,6 +150,5 @@ if (isNil "TREND_bOptionsSet") then { TREND_bOptionsSet =   false; publicVariabl
 if (isNil "TREND_CustomObjectsSet") then { TREND_CustomObjectsSet =   false; publicVariable "TREND_CustomObjectsSet"; };
 if (isNil "TREND_IntroMusic") then { TREND_IntroMusic =   selectRandom TREND_ThemeAndIntroMusic; publicVariable "TREND_IntroMusic"; };
 if (isNil "TREND_FinalMissionStarted") then { TREND_FinalMissionStarted =   false; publicVariable "TREND_FinalMissionStarted"; };
-if (isNil "TREND_IsAdminPlayerAvailable") then { TREND_IsAdminPlayerAvailable =   false; publicVariable "TREND_IsAdminPlayerAvailable"; };
-
+if (isNil "TREND_AdminPlayer") then { TREND_AdminPlayer = objNull; publicVariable "TREND_AdminPlayer"; };
 true;

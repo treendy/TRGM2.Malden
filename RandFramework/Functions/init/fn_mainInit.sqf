@@ -97,26 +97,6 @@ if (isServer) then {
 
 waitUntil {time > 0};
 
-showCinemaBorder  true;
-
-_centerPos = getArray (configfile >> "CfgWorlds" >> worldName >> "centerPosition");
-if !(isNil "TREND_CustomCenterPos") then {
-	_centerPos = TREND_CustomCenterPos;
-};
-
-_pos1 = (_centerPos getPos [(floor(random 5000))+50, (floor(random 360))]);
-_pos2 = (_centerPos getPos [(floor(random 5000))+50, (floor(random 360))]);
-_pos1 = [_pos1 select 0,_pos1 select 1,selectRandom[200,300]];
-_pos2 = [_pos2 select 0,_pos2 select 1,selectRandom[200,300]];
-_camera = "camera" camCreate _pos1;
-_camera cameraEffect ["internal","back"];
-_camera camPreparePos _pos2;
-_camera camPrepareTarget _centerPos;
-_camera camPrepareFOV 0.4;
-_camera camCommitPrepared 600;
-
-
-
 _trgRatingAdjust = createTrigger ["EmptyDetector", [0,0]];
 _trgRatingAdjust setTriggerArea [0, 0, 0, false];
 _trgRatingAdjust setTriggerStatements ["((rating player) < 0)", "player addRating -(rating player)", ""];
@@ -193,65 +173,6 @@ if (!isNil "vs8")  then { deleteVehicle vs8; };
 if (!isNil "vs9")  then { deleteVehicle vs9; };
 if (!isNil "vs10") then { deleteVehicle vs10; };
 
-private _isAdmin = (!isMultiplayer || isMultiplayer && !isDedicated && isServer || isMultiplayer && !isServer && (call BIS_fnc_admin) != 0);
-if (!isDedicated && _isAdmin) then {
-	waitUntil {TREND_bOptionsSet};
-	if (TREND_iMissionParamType != 5) then {	//if isCampaign, dont allow to select AO
-		if (TREND_AdvancedSettings select TREND_ADVSET_SELECT_AO_IDX isEqualTo 1) then {
-			mrkAoSelect1 = nil;
-			mrkAoSelect2 = nil;
-			mrkAoSelect3 = nil;
-			titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED"];
-			_camera cameraEffect ["Terminate","back"];
-			titleText[localize "STR_TRGM2_tele_SelectPositionAO1", "PLAIN"];
-			openMap true;
-			onMapSingleClick "Mission1Loc = _pos; publicVariable 'Mission1Loc'; openMap false; onMapSingleClick ''; true;";
-			sleep 1;
-			waitUntil {!visibleMap};
-			if (!isNil "Mission1Loc") then {
-				["mrkAoSelect1",  Mission1Loc, "ICON", "ColorRed", [1,1], "AO 1"] call AIS_Core_fnc_createLocalMarker;
-			};
-
-			if (TREND_iMissionParamType isEqualTo 0 || TREND_iMissionParamType isEqualTo 4) then {
-				titleText[localize "STR_TRGM2_tele_SelectPositionAO2", "PLAIN"];
-				openMap true;
-				onMapSingleClick "Mission2Loc = _pos; publicVariable 'Mission2Loc'; openMap false; onMapSingleClick ''; true;";
-				sleep 1;
-				waitUntil {!visibleMap};
-				if (!isNil "Mission2Loc") then {
-					["mrkAoSelect2",  Mission2Loc, "ICON", "ColorRed", [1,1], "AO 2"] call AIS_Core_fnc_createLocalMarker;
-				};
-
-				titleText[localize "STR_TRGM2_tele_SelectPositionAO3", "PLAIN"];
-				openMap true;
-				onMapSingleClick "Mission3Loc = _pos; publicVariable 'Mission3Loc'; openMap false; onMapSingleClick ''; true;";
-				sleep 1;
-				waitUntil {!visibleMap};
-				if (!isNil "Mission3Loc") then {
-					["mrkAoSelect2",  Mission3Loc, "ICON", "ColorRed", [1,1], "AO 2"] call AIS_Core_fnc_createLocalMarker;
-				};
-			};
-
-			if (getMarkerColor "mrkAoSelect1" != "") then {deleteMarker "mrkAoSelect1";};
-			if (getMarkerColor "mrkAoSelect2" != "") then {deleteMarker "mrkAoSelect2";};
-			if (getMarkerColor "mrkAoSelect3" != "") then {deleteMarker "mrkAoSelect3";};
-		};
-
-		if (TREND_AdvancedSettings select TREND_ADVSET_SELECT_AO_CAMP_IDX isEqualTo 1) then {
-			titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED"];
-			_camera cameraEffect ["Terminate","back"];
-			titleText[localize "STR_TRGM2_tele_SelectPosition_AO_Camp", "PLAIN"];
-			openMap true;
-			onMapSingleClick "AOCampLocation = _pos; publicVariable 'AOCampLocation'; openMap false; onMapSingleClick ''; true;";
-			sleep 1;
-			waitUntil {!visibleMap};
-		};
-
-
-	};
-	TREND_bAndSoItBegins = true; publicVariable "TREND_bAndSoItBegins";
-};
-
 waitUntil {TREND_bAndSoItBegins};
 
 private _coreCountSleep = 0.1;
@@ -263,14 +184,6 @@ if (isServer && TREND_AdvancedSettings select TREND_ADVSET_GROUP_MANAGE_IDX isEq
 };
 
 format["Mission Core: %1", "GroupManagementSet"] call TREND_fnc_log;
-sleep _coreCountSleep;
-
-if (!isDedicated) then {
-	titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED"];
-	_camera cameraEffect ["Terminate","back"];
-};
-
-[format["Mission Core: %1", "CameraTerminated"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
 call TREND_fnc_initUnitVars;
@@ -301,7 +214,7 @@ if (isServer) then {
 
 	private _airTransClassName = selectRandom ((call SupplySupportChopperOptions) select {_x call TREND_fnc_isTransport});
 	if (!isNil "chopper1" && {_airTransClassName != typeOf chopper1}) then {
-		{deleteVehicle _x;} forEach crew (vehicle chopper1) + [vehicle chopper1];
+		{deleteVehicle _x;} forEach crew chopper1 + [chopper1];
 		private _chopper1Arr = [getPos heliPad1, 0, _airTransClassName, WEST] call BIS_fnc_spawnVehicle;
 		chopper1 = _chopper1Arr select 0;
 		chopper1 setVehicleVarName "chopper1";
@@ -328,7 +241,7 @@ if (isServer) then {
 
 	private _airSupClassName = selectRandom (call FriendlyChopper);
 	if (!isNil "chopper2" && {_airSupClassName != typeOf chopper2}) then {
-		{deleteVehicle _x;} forEach crew (vehicle chopper2) + [vehicle chopper2];
+		{deleteVehicle _x;} forEach crew chopper2 + [chopper2];
 		private _chopper2Arr = [getPos airSupportHeliPad, 0, _airSupClassName, WEST] call BIS_fnc_spawnVehicle;
 		chopper2 = _chopper2Arr select 0;
 		chopper2 setVehicleVarName "chopper2";
@@ -347,6 +260,7 @@ if (isServer) then {
 		chopper2 allowDamage true;
 	};
 
+	TREND_transportHelosToGetActions = [];
 	{
 		if (isClass(configFile >> "CfgVehicles" >> typeOf _x) && {_x isKindOf "LandVehicle" || _x isKindOf "Air" || _x isKindOf "Ship"}) then {
 			_faction = getText(configFile >> "CfgVehicles" >> typeOf _x >> "faction");
@@ -368,7 +282,15 @@ if (isServer) then {
 
 			};
 		};
+
+		if ((count crew _x) > 0 && {isClass(configFile >> "CfgVehicles" >> typeOf _x) && {_x isKindOf "Air" && {_x call TREND_fnc_isTransport}}}) then {
+			TREND_transportHelosToGetActions pushBackUnique _x;
+		};
 	} forEach vehicles;
+
+	[TREND_transportHelosToGetActions] call TREND_fnc_addTransportActions;
+	[format["Mission Core: %1", "TransportScriptRun"], true] call TREND_fnc_log;
+	sleep _coreCountSleep;
 
 	TREND_CustomObjectsSet = true; publicVariable "TREND_CustomObjectsSet";
 	// call compile preprocessFileLineNumbers "RandFramework\setFriendlyObjects.sqf";
@@ -464,13 +386,6 @@ sleep _coreCountSleep;
 waitUntil {TREND_CustomObjectsSet};
 
 [format["Mission Core: %1", "PostCustomObjectSet"], true] call TREND_fnc_log;
-sleep _coreCountSleep;
-
-if (!isNil "chopper1") then {
-	[[chopper1]] call TREND_fnc_addTransportActions;
-};
-
-[format["Mission Core: %1", "TransportScriptRun"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
 if (TREND_iUseRevive > 0 && {isNil "AIS_MOD_ENABLED"}) then {
