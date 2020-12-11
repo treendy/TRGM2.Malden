@@ -11,7 +11,7 @@ waitUntil {player == player};
 sleep 5;
 
 _isAdmin = (!isMultiplayer || isMultiplayer && !isDedicated && isServer || isMultiplayer && !isServer && (call BIS_fnc_admin) != 0);
-if (_isAdmin && isNull "TREND_AdminPlayer") then {
+if (_isAdmin && isNull TREND_AdminPlayer) then {
 	TREND_AdminPlayer = player; publicVariable "TREND_AdminPlayer";
 };
 
@@ -50,19 +50,7 @@ TREND_fnc_MissionSelectLoop = {
 
 	while {!TREND_bAndSoItBegins} do {
 
-		if (isNil "sl" && !isNull "TREND_AdminPlayer") then {
-			txt5Layer = "txt5" call BIS_fnc_rscLayer;
-			_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustFilled" + "</t>";
-			[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
-		};
-
-		if (!isPlayer sl && !isNull "TREND_AdminPlayer") then {
-			txt5Layer = "txt5" call BIS_fnc_rscLayer;
-			_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustPlayer" + "</t>";
-			[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
-		};
-
-		if ((!isNull "TREND_AdminPlayer" && str player isEqualTo "sl") || (TREND_AdminPlayer isEqualTo player)) then {
+		if ((!isNull TREND_AdminPlayer && str player isEqualTo "sl") || (TREND_AdminPlayer isEqualTo player)) then {
 			if (!dialog) then {
 				sleep 1.5;
 				if  (!dialog && !TREND_bOptionsSet) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
@@ -76,9 +64,21 @@ TREND_fnc_MissionSelectLoop = {
 				_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1 Admin " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
 				[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
 			} else {
-				txt1Layer = "txt1" call BIS_fnc_rscLayer;
-				_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1 Admin " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3" + "</t>";
-				[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
+				if (isNil "sl" && !isNull TREND_AdminPlayer) then {
+					txt5Layer = "txt5" call BIS_fnc_rscLayer;
+					_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustFilled" + "</t>";
+					[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+				} else {
+					if (!isPlayer sl && !isNull TREND_AdminPlayer) then {
+						txt5Layer = "txt5" call BIS_fnc_rscLayer;
+						_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustPlayer" + "</t>";
+						[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+					} else {
+						txt1Layer = "txt1" call BIS_fnc_rscLayer;
+						_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1 Admin " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3" + "</t>";
+						[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
+					};
+				};
 			};
 		};
 
@@ -104,7 +104,7 @@ _camera cameraEffect ["Terminate","back"];
 [format["Mission Core: %1", "CameraTerminated"], true] call TREND_fnc_log;
 sleep 3;
 
-if (!isDedicated && {(!isNull "TREND_AdminPlayer" && str player isEqualTo "sl") || (TREND_AdminPlayer isEqualTo player)}) then {
+if (!isDedicated && {(!isNull TREND_AdminPlayer && str player isEqualTo "sl") || (TREND_AdminPlayer isEqualTo player)}) then {
 	if (TREND_iMissionParamType != 5) then {	//if isCampaign, dont allow to select AO
 		if (TREND_AdvancedSettings select TREND_ADVSET_SELECT_AO_IDX isEqualTo 1) then {
 			mrkAoSelect1 = nil;
@@ -112,30 +112,30 @@ if (!isDedicated && {(!isNull "TREND_AdminPlayer" && str player isEqualTo "sl") 
 			mrkAoSelect3 = nil;
 			titleText[localize "STR_TRGM2_tele_SelectPositionAO1", "PLAIN"];
 			openMap true;
-			onMapSingleClick "Mission1Loc = _pos; publicVariable 'Mission1Loc'; openMap false; onMapSingleClick ''; true;";
+			onMapSingleClick "TREND_Mission1Loc = _pos; publicVariable 'TREND_Mission1Loc'; openMap false; onMapSingleClick ''; true;";
 			sleep 1;
 			waitUntil {!visibleMap};
-			if (!isNil "Mission1Loc") then {
-				["mrkAoSelect1",  Mission1Loc, "ICON", "ColorRed", [1,1], "AO 1"] call AIS_Core_fnc_createLocalMarker;
+			if (!isNil "TREND_Mission1Loc") then {
+				["mrkAoSelect1",  TREND_Mission1Loc, "ICON", "ColorRed", [1,1], "AO 1"] call AIS_Core_fnc_createLocalMarker;
 			};
 
 			if (TREND_iMissionParamType isEqualTo 0 || TREND_iMissionParamType isEqualTo 4) then {
 				titleText[localize "STR_TRGM2_tele_SelectPositionAO2", "PLAIN"];
 				openMap true;
-				onMapSingleClick "Mission2Loc = _pos; publicVariable 'Mission2Loc'; openMap false; onMapSingleClick ''; true;";
+				onMapSingleClick "TREND_Mission2Loc = _pos; publicVariable 'TREND_Mission2Loc'; openMap false; onMapSingleClick ''; true;";
 				sleep 1;
 				waitUntil {!visibleMap};
-				if (!isNil "Mission2Loc") then {
-					["mrkAoSelect2",  Mission2Loc, "ICON", "ColorRed", [1,1], "AO 2"] call AIS_Core_fnc_createLocalMarker;
+				if (!isNil "TREND_Mission2Loc") then {
+					["mrkAoSelect2",  TREND_Mission2Loc, "ICON", "ColorRed", [1,1], "AO 2"] call AIS_Core_fnc_createLocalMarker;
 				};
 
 				titleText[localize "STR_TRGM2_tele_SelectPositionAO3", "PLAIN"];
 				openMap true;
-				onMapSingleClick "Mission3Loc = _pos; publicVariable 'Mission3Loc'; openMap false; onMapSingleClick ''; true;";
+				onMapSingleClick "TREND_Mission3Loc = _pos; publicVariable 'TREND_Mission3Loc'; openMap false; onMapSingleClick ''; true;";
 				sleep 1;
 				waitUntil {!visibleMap};
-				if (!isNil "Mission3Loc") then {
-					["mrkAoSelect2",  Mission3Loc, "ICON", "ColorRed", [1,1], "AO 2"] call AIS_Core_fnc_createLocalMarker;
+				if (!isNil "TREND_Mission3Loc") then {
+					["mrkAoSelect2",  TREND_Mission3Loc, "ICON", "ColorRed", [1,1], "AO 2"] call AIS_Core_fnc_createLocalMarker;
 				};
 			};
 
@@ -304,7 +304,8 @@ TREND_fnc_InitPostStarted = {
 		call TREND_fnc_NVscript;
 	};
 
-	endMissionBoard addaction [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format[localize "STR_TRGM2_TRGMInitPlayerLocal_FullReputationReport",_iPointsToAdd,TREND_BadPoints, TREND_MaxBadPoints, TREND_MaxBadPoints - TREND_BadPoints, TREND_BadPointsReason]}];
+	// This is being overwritten in TREND_fnc_SetMissionBoardOptions almost immediately?
+	endMissionBoard addaction [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {[true] spawn TREND_fnc_ShowRepReport;}];
 
 	// I don't know if this is required anymore since MainInit remoteExec's this...
 	// _iSandStormOption = [2, (TREND_AdvancedSettings select TREND_ADVSET_SANDSTORM_IDX)] select ((selectRandom TREND_WeatherOptions) < 11);

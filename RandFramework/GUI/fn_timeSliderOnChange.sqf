@@ -13,8 +13,8 @@ switch (_ctrlStr) do {
 	case "Slider": {
 		_value = _newvalue * 3600;
 		_valueHour = floor (_value / 3600);
-		_valueMinute = floor ((_value / 60) % 60);
-		_valueSecond = floor (_value % 60);
+		_valueMinute = floor ((_value / 60) mod 60);
+		_valueSecond = floor (_value mod 60);
 		_textHour = if (_valueHour < 10) then {'0' + str _valueHour} else {str _valueHour};
 		_textMinute = if (_valueMinute < 10) then {'0' + str _valueMinute} else {str _valueMinute};
 		_textSecond = if (_valueSecond < 10) then {'0' + str _valueSecond} else {str _valueSecond};

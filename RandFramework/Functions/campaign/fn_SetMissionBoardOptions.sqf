@@ -10,8 +10,11 @@ _dCurrentRep = [TREND_MaxBadPoints - TREND_BadPoints,1] call BIS_fnc_cutDecimals
 	// Current missionboard is saved in variable _x
 	//These two lines do the same... just here for my reference
 	//{removeAllActions endMissionBoard;} remoteExec ["call", 0];
-	_x remoteExec ["removeAllActions"];
-	[_x, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep",{[] spawn TREND_fnc_ShowRepReport;}]] remoteExec ["addAction", 0];
+	_x remoteExec ["removeAllActions", 0];
+	[_x, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRep",{[false] spawn TREND_fnc_ShowRepReport;}]] remoteExec ["addAction", 0];
+	if (!isMultiplayer) then {
+		[_x, [localize "STR_TRGM2_SetMissionBoardOptions_Save", {saveGame}]] remoteExec ["addAction", 0];
+	};
 } forEach [endMissionBoard, endMissionBoard2];
 
 switch (_option) do {
@@ -74,10 +77,5 @@ switch (_option) do {
 // 		};
 // 	} forEach [endMissionBoard, endMissionBoard2];
 // };
-
-if (!isMultiplayer) then {
-	endMissionBoard addAction [localize "STR_TRGM2_SetMissionBoardOptions_Save", {saveGame}];
-	endMissionBoard2 addAction [localize "STR_TRGM2_SetMissionBoardOptions_Save", {saveGame}];
-};
 
 true;

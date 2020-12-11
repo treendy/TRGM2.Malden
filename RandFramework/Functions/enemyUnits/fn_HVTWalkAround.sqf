@@ -1,5 +1,7 @@
 params ["_objManName","_thisInitPos","_objMan","_walkRadius"];
-format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+if (_fnc_scriptName != _fnc_scriptNameParent) then { //Reduce RPT Spam for this looping function...
+	format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+};
 
 _currentManPos = getPos _objMan;
 
@@ -35,8 +37,6 @@ if (_MoveType == "Man") then {
 _objMan doMove (_WalkToPos);
 
 sleep 2;
-
-format["Man: %1 - WalkToPos: %2 - MoveType: %3",_objMan, _WalkToPos, _MoveType] call TREND_fnc_log;
 
 waitUntil {sleep 1; speed _objMan == 0};
 _nearMen = (nearestObjects [_thisInitPos, ["man"], 7]) select {side _x == side _objMan};

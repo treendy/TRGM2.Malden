@@ -36,7 +36,7 @@ else {
 
 		_ctrlTime = (findDisplay 5000) displayCtrl 5115;
 		_ctrlTimeValue = (sliderPosition _ctrlTime) * 3600;
-		TREND_arrayTime = [floor (_ctrlTimeValue / 3600), floor ((_ctrlTimeValue / 60) % 60)];
+		TREND_arrayTime = [floor (_ctrlTimeValue / 3600), floor ((_ctrlTimeValue / 60) mod 60)];
 		publicVariable "TREND_arrayTime";
 
 		_ctrlRevive = (findDisplay 5000) displayCtrl 5103;
@@ -115,7 +115,7 @@ else {
 			_ctrl ctrlSetText (localize "STR_TRGM2_SetParamsAndBegin_ErrorMsg_NoData");
 		}
 		else {
-		
+
 			TREND_iMissionParamType =  TREND_SavedData select 0; publicVariable "TREND_iMissionParamType";
 			TREND_iMissionParamObjective =  TREND_SavedData select 1; publicVariable "TREND_iMissionParamObjective";
 			TREND_iAllowNVG =  TREND_SavedData select 2; publicVariable "TREND_iAllowNVG";

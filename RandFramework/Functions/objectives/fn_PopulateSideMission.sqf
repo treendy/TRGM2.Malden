@@ -218,7 +218,7 @@ if (!_bFriendlyInsurgents) then {
 				if (_bIsMainObjective) then {
 
 					[_sidePos,15 + (floor random 150),[2,3],false,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-					if ((TREND_bAllowLargerPatrols && _bIsMainObjective)) then {
+					if ((call TREND_bAllowLargerPatrols && _bIsMainObjective)) then {
 						[_sidePos,15 + (floor random 150),[2,3],false,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
 					};
 				};
@@ -243,7 +243,7 @@ if (!_bFriendlyInsurgents) then {
 
 				if ((_bIsMainObjective && _selectRandomW)) then {
 					//[_sidePos,500 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
-					if (TREND_bAllowLargerPatrols && _bIsMainObjective) then {
+					if (call TREND_bAllowLargerPatrols && _bIsMainObjective) then {
 						//[_sidePos,700 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
 						[_sidePos,900 + (floor random 250),[7,8,9,10],true,_InsurgentSide] spawn TREND_fnc_RadiusPatrol;
 					};
@@ -256,7 +256,7 @@ if (!_bFriendlyInsurgents) then {
 					[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
 					_bHasPatrols = true
 				};
-				if (_bIsMainObjective && TREND_bAllowLargerPatrols) then {
+				if (_bIsMainObjective && call TREND_bAllowLargerPatrols) then {
 					[_sidePos,1000 + (floor random 500),[3,4,5],true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
 				};
 
@@ -265,7 +265,7 @@ if (!_bFriendlyInsurgents) then {
 					[_sidePos,1000 + (floor random 500),[5,6],true,_InsurgentSide] spawn TREND_fnc_BackForthPatrol;
 					_bHasPatrols = true
 				};
-				if (_bIsMainObjective && TREND_bAllowLargerPatrols) then {
+				if (_bIsMainObjective && call TREND_bAllowLargerPatrols) then {
 					[_sidePos,1000 + (floor random 500),[5,6,7],true,_InsurgentSide] spawn TREND_fnc_BackForthPatrol;
 				};
 
@@ -306,7 +306,7 @@ if (!_bFriendlyInsurgents) then {
 		//Spawn vehicle
 		_chanceOfVeh = [true,false];
 		if (_bIsMainObjective) then {_chanceOfVeh = [true]};
-		if (_minimission) then {_chanceOfVeh = _selectRandomW;};
+		if (_minimission) then {_chanceOfVeh = [_selectRandomW];};
 		//if main, spawn 1 or two, and also, spawn 2 or three in larger radius
 		if (selectRandom _chanceOfVeh || _selectRandomW) then {
 			//hint format["AAALoc:%1",sTank1ToUse];
@@ -324,12 +324,12 @@ if (!_bFriendlyInsurgents) then {
 						_flatPos = [_sidePos , 10, 200, 8, 0, 0.5, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]],[[0,0,0],[0,0,0]],selectRandom[(call sTank1ArmedCarToUse),(call sTank2APCToUse),(call sTank3TankToUse)]] call TREND_fnc_findSafePos;
 						[_flatPos,  (floor random 300), selectRandom[(call sTank1ArmedCarToUse),(call sTank2APCToUse),(call sTank3TankToUse)], createGroup _InsurgentSide] call BIS_fnc_spawnVehicle;
 					};
-					if (TREND_bAllowLargerPatrols && _bIsMainObjective && _selectRandomW) then {
+					if (call TREND_bAllowLargerPatrols && _bIsMainObjective && _selectRandomW) then {
 						_flatPos = nil;
 						_flatPos = [_sidePos , 300, 1000, 8, 0, 0.5, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]],[[0,0,0],[0,0,0]],selectRandom[(call sTank1ArmedCarToUse),(call sTank2APCToUse),(call sTank3TankToUse)]] call TREND_fnc_findSafePos;
 						[_flatPos,  (floor random 300), selectRandom[(call sTank1ArmedCarToUse),(call sTank2APCToUse),(call sTank3TankToUse)], createGroup _InsurgentSide] call BIS_fnc_spawnVehicle;
 					};
-					if (TREND_bAllowLargerPatrols && _bIsMainObjective) then {
+					if (call TREND_bAllowLargerPatrols && _bIsMainObjective) then {
 						_flatPos = nil;
 						_flatPos = [_sidePos , 300, 1000, 8, 0, 0.5, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]],[[0,0,0],[0,0,0]],selectRandom[(call sTank1ArmedCarToUse),(call sTank2APCToUse),(call sTank3TankToUse)]] call TREND_fnc_findSafePos;
 						[_flatPos,  (floor random 300), selectRandom[(call sTank1ArmedCarToUse),(call sTank2APCToUse),(call sTank3TankToUse)], createGroup _InsurgentSide] call BIS_fnc_spawnVehicle;
@@ -410,7 +410,7 @@ if (!_bFriendlyInsurgents) then {
 			if (_bIsMainObjective || _selectRandomW) then {
 				[_sidePos,200,[1,2,3],_InsurgentSide,_bThisMissionCivsOnly] spawn TREND_fnc_OccupyHouses;
 				[_sidePos,500,[4,5,6],_InsurgentSide,_bThisMissionCivsOnly] spawn TREND_fnc_OccupyHouses;
-				if (TREND_bAllowLargerPatrols && _bIsMainObjective) then {
+				if (call TREND_bAllowLargerPatrols && _bIsMainObjective) then {
 					[_sidePos,1000,[4,5,6],_InsurgentSide,_bThisMissionCivsOnly] spawn TREND_fnc_OccupyHouses;
 				};
 			}

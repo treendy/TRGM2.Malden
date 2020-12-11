@@ -244,7 +244,7 @@ if (showTownLabel and (server getvariable _trigID))
 
 	COSTownLabel=[(_civilians+_vehicles),_mkr];PUBLICVARIABLE "COSTownLabel";
 	_population=format ["Population: %1",_civilians+_vehicles];
-		0=[markerText _mkr,_population] spawn BIS_fnc_infoText;// FOR USE IN SINGLEPLAYER
+		[markerText _mkr,_population] spawn BIS_fnc_infoText;// FOR USE IN SINGLEPLAYER
 		};
 
 

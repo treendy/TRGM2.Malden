@@ -43,191 +43,179 @@ if (TREND_iMissionParamObjective3 > 0) then {
 
 ["Mission Setup: 14", true] call TREND_fnc_log;
 
-TREND_iMissionSetup =  TREND_iMissionParamType; publicVariable "TREND_iMissionSetup";
-if (TREND_iMissionSetup == 0) then {
-	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
-	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-	_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
-	_CreateTasks = [true,false,false];
-	_SamePrevAOStats = [false,false,false];
-	_bSideMissionsCivOnly = [false,false,false];
-	TREND_MaxBadPoints = 1;
-};
-if (TREND_iMissionSetup == 1) then {
-	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom TREND_MissionsThatHaveIntel,selectRandom TREND_MissionsThatHaveIntel];
-	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-	_MarkerTypes = ["empty","hd_dot","hd_dot"];
-	_CreateTasks = [true,false,false];
-	_SamePrevAOStats = [false,false,false];
-	_bSideMissionsCivOnly = [false,false,false];
-	TREND_MaxBadPoints = 1;
-};
-if (TREND_iMissionSetup == 2) then {
-	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse];
-	_IsMainObjs = [true]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-	_MarkerTypes = ["mil_objective"]; //INFORMANT: changed this back to mil_objective
-	_CreateTasks = [true];
-	_SamePrevAOStats = [false];
-	_bSideMissionsCivOnly = [false];
-	TREND_MaxBadPoints = 1;
-};
-
-if (TREND_iMissionSetup == 8) then { //Heavy Mission, hidden AO and mission type
-	if (selectRandom[false,false]) then {
+TREND_iMissionSetup = TREND_iMissionParamType; publicVariable "TREND_iMissionSetup";
+switch (TREND_iMissionSetup) do {
+	case 0: {
 		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
-		_IsMainObjs = [true,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-		_MarkerTypes = ["mil_objective","hd_dot"];
-		_CreateTasks = [true,true];
-		_SamePrevAOStats = [false,true];
-		_bSideMissionsCivOnly = [false,false];
-		TREND_MaxBadPoints = 1;
-	}
-	else {
-		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,4];
-		_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-		_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
-		_CreateTasks = [true,true,false];
-		_SamePrevAOStats = [false,true,false];
-		_bSideMissionsCivOnly = [false,false,true];
-		TREND_MaxBadPoints = 1;
-	}
-};
-
-if (TREND_iMissionSetup == 3) then {
-	if (selectRandom [true,false,false]) then {
-		_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1,4];
-		_IsMainObjs = [false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-		_MarkerTypes = ["mil_objective","hd_dot"];
-		_CreateTasks = [true,false];
-		_SamePrevAOStats = [false,false];
-		TREND_MaxBadPoints = 1;
-		_bSideMissionsCivOnly = [false,true];
-	}
-	else {
-		_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1];
-		_IsMainObjs = [false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-		_MarkerTypes = ["mil_objective"];
-		_CreateTasks = [true];
-		_SamePrevAOStats = [false];
-		_bSideMissionsCivOnly = [false];
-		TREND_MaxBadPoints = 1;
-	};
-};
-if (TREND_iMissionSetup == 9) then { //Heavy Mission (two objectives at AO, chance of side)
-	if (selectRandom[true,false]) then {
-		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1];
-		_IsMainObjs = [false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-		_MarkerTypes = ["mil_objective","hd_dot"];
-		_CreateTasks = [true,true];
-		_SamePrevAOStats = [false,true];
-		_bSideMissionsCivOnly = [false,false];
-		TREND_MaxBadPoints = 1;
-	}
-	else {
-		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,4];
-		_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-		_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
-		_CreateTasks = [true,true,false];
-		_SamePrevAOStats = [false,true,false];
-		_bSideMissionsCivOnly = [false,false,true];
-		TREND_MaxBadPoints = 1;
-	}
-};
-
-if (TREND_iMissionSetup == 4) then {
-	if (TREND_iMissionParamObjective > 0) then {
-		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
-	}
-	else {
-		_ThisTaskTypes = [selectRandom TREND_SideMissionTasks,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
-	};
-
-	_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-	_MarkerTypes = ["mil_objective","mil_objective","mil_objective"];
-	_CreateTasks = [true,true,true];
-	_SamePrevAOStats = [false,false,false];
-	_bSideMissionsCivOnly = [false,false,false];
-	TREND_MaxBadPoints = 1;
-};
-if (TREND_iMissionSetup == 5) then {
-	_totalRep = [TREND_MaxBadPoints - TREND_BadPoints,1] call BIS_fnc_cutDecimals;
-	if (_totalRep >= 10) then {
-		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom TREND_MissionsThatHaveIntel,selectRandom TREND_MissionsThatHaveIntel];
 		_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 		_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
 		_CreateTasks = [true,false,false];
 		_SamePrevAOStats = [false,false,false];
 		_bSideMissionsCivOnly = [false,false,false];
-		_bIsCampaignFinalMission = true;
-	}
-	else {
+		TREND_MaxBadPoints = 1;
+	};
+	case 1: {
+		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom TREND_MissionsThatHaveIntel,selectRandom TREND_MissionsThatHaveIntel];
+		_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+		_MarkerTypes = ["empty","hd_dot","hd_dot"];
+		_CreateTasks = [true,false,false];
+		_SamePrevAOStats = [false,false,false];
+		_bSideMissionsCivOnly = [false,false,false];
+		TREND_MaxBadPoints = 1;
+	};
+	case 2: {
+		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse];
+		_IsMainObjs = [true]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+		_MarkerTypes = ["mil_objective"]; //INFORMANT: changed this back to mil_objective
+		_CreateTasks = [true];
+		_SamePrevAOStats = [false];
+		_bSideMissionsCivOnly = [false];
+		TREND_MaxBadPoints = 1;
+	};
+	case 3: {
 		if (selectRandom [true,false,false]) then {
 			_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1,4];
 			_IsMainObjs = [false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 			_MarkerTypes = ["mil_objective","hd_dot"];
 			_CreateTasks = [true,false];
 			_SamePrevAOStats = [false,false];
+			TREND_MaxBadPoints = 1;
 			_bSideMissionsCivOnly = [false,true];
-		}
-		else {
+		} else {
 			_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1];
 			_IsMainObjs = [false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 			_MarkerTypes = ["mil_objective"];
 			_CreateTasks = [true];
 			_SamePrevAOStats = [false];
 			_bSideMissionsCivOnly = [false];
+			TREND_MaxBadPoints = 1;
 		};
 	};
-	_bIsCampaign = true;
-};
-if (TREND_iMissionSetup == 6) then {
-	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse1];
-	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-	_MarkerTypes = ["mil_objective","empty","empty"];
-	_CreateTasks = [true,false,false];
-	_SamePrevAOStats = [false,false,false];
-	_bSideMissionsCivOnly = [false,false,false];
-	TREND_MaxBadPoints = 1;
-};
-if (TREND_iMissionSetup == 7) then {
-	if (TREND_iMissionParamObjective > 0) then {
-		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
-	}
-	else {
-		_ThisTaskTypes = [selectRandom TREND_SideMissionTasks,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
+	case 4: {
+		if (TREND_iMissionParamObjective > 0) then {
+			_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
+		} else {
+			_ThisTaskTypes = [selectRandom TREND_SideMissionTasks,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
+		};
+
+		_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+		_MarkerTypes = ["mil_objective","mil_objective","mil_objective"];
+		_CreateTasks = [true,true,true];
+		_SamePrevAOStats = [false,false,false];
+		_bSideMissionsCivOnly = [false,false,false];
+		TREND_MaxBadPoints = 1;
 	};
-	_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-	_MarkerTypes = ["empty","empty","empty"];
-	_CreateTasks = [true,true,true];
-	_SamePrevAOStats = [false,false,false];
-	_bSideMissionsCivOnly = [false,false,false];
-	TREND_MaxBadPoints = 1;
-};
-
-
-if (TREND_iMissionSetup == 10) then { //Hidden Full map Heavy Mission
-	TREND_IsFullMap =  true; publicVariable "TREND_IsFullMap";
-	if (selectRandom[true]) then {
-		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse];
-		_IsMainObjs = [true]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-		_MarkerTypes = ["empty"];
-		_CreateTasks = [true];
-		_SamePrevAOStats = [false];
-		_bSideMissionsCivOnly = [false];
-		TREND_MaxBadPoints = 1;
-	}
-	else {
-		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,4];
+	case 5: {
+		_totalRep = [TREND_MaxBadPoints - TREND_BadPoints,1] call BIS_fnc_cutDecimals;
+		if (_totalRep >= 10) then {
+			_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom TREND_MissionsThatHaveIntel,selectRandom TREND_MissionsThatHaveIntel];
+			_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+			_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
+			_CreateTasks = [true,false,false];
+			_SamePrevAOStats = [false,false,false];
+			_bSideMissionsCivOnly = [false,false,false];
+			_bIsCampaignFinalMission = true;
+		} else {
+			if (selectRandom [true,false,false]) then {
+				_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1,4];
+				_IsMainObjs = [false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+				_MarkerTypes = ["mil_objective","hd_dot"];
+				_CreateTasks = [true,false];
+				_SamePrevAOStats = [false,false];
+				_bSideMissionsCivOnly = [false,true];
+			} else {
+				_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1];
+				_IsMainObjs = [false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+				_MarkerTypes = ["mil_objective"];
+				_CreateTasks = [true];
+				_SamePrevAOStats = [false];
+				_bSideMissionsCivOnly = [false];
+			};
+		};
+		_bIsCampaign = true;
+	};
+	case 6: {
+		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse1];
 		_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-		_MarkerTypes = ["empty","empty","hd_dot"];
-		_CreateTasks = [true,true,false];
-		_SamePrevAOStats = [false,true,false];
-		_bSideMissionsCivOnly = [false,false,true];
+		_MarkerTypes = ["mil_objective","empty","empty"];
+		_CreateTasks = [true,false,false];
+		_SamePrevAOStats = [false,false,false];
+		_bSideMissionsCivOnly = [false,false,false];
 		TREND_MaxBadPoints = 1;
-	}
+	};
+	case 7: {
+		if (TREND_iMissionParamObjective > 0) then {
+			_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
+		} else {
+			_ThisTaskTypes = [selectRandom TREND_SideMissionTasks,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
+		};
+		_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+		_MarkerTypes = ["empty","empty","empty"];
+		_CreateTasks = [true,true,true];
+		_SamePrevAOStats = [false,false,false];
+		_bSideMissionsCivOnly = [false,false,false];
+		TREND_MaxBadPoints = 1;
+	};
+	case 8: {
+		if (selectRandom[false,false]) then {
+			_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
+			_IsMainObjs = [true,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+			_MarkerTypes = ["mil_objective","hd_dot"];
+			_CreateTasks = [true,true];
+			_SamePrevAOStats = [false,true];
+			_bSideMissionsCivOnly = [false,false];
+			TREND_MaxBadPoints = 1;
+		} else {
+			_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,4];
+			_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+			_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
+			_CreateTasks = [true,true,false];
+			_SamePrevAOStats = [false,true,false];
+			_bSideMissionsCivOnly = [false,false,true];
+			TREND_MaxBadPoints = 1;
+		};
+	};
+	case 9: {
+		if (selectRandom[true,false]) then {
+			_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1];
+			_IsMainObjs = [false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+			_MarkerTypes = ["mil_objective","hd_dot"];
+			_CreateTasks = [true,true];
+			_SamePrevAOStats = [false,true];
+			_bSideMissionsCivOnly = [false,false];
+			TREND_MaxBadPoints = 1;
+		} else {
+			_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,4];
+			_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+			_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
+			_CreateTasks = [true,true,false];
+			_SamePrevAOStats = [false,true,false];
+			_bSideMissionsCivOnly = [false,false,true];
+			TREND_MaxBadPoints = 1;
+		};
+	};
+	case 10: {
+		TREND_IsFullMap =  true; publicVariable "TREND_IsFullMap";
+		if (selectRandom[true]) then {
+			_ThisTaskTypes = [selectRandom _MainMissionTasksToUse];
+			_IsMainObjs = [true]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+			_MarkerTypes = ["empty"];
+			_CreateTasks = [true];
+			_SamePrevAOStats = [false];
+			_bSideMissionsCivOnly = [false];
+			TREND_MaxBadPoints = 1;
+		} else {
+			_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,4];
+			_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+			_MarkerTypes = ["empty","empty","hd_dot"];
+			_CreateTasks = [true,true,false];
+			_SamePrevAOStats = [false,true,false];
+			_bSideMissionsCivOnly = [false,false,true];
+			TREND_MaxBadPoints = 1;
+		}
+	};
+	default { };
 };
-
-
 
 //HERE.... two objectives at one AO : as above, but also... randomo chance of third mission (inttel or mission)
 
@@ -308,43 +296,46 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 			_bNewTaskSetup = false;
 			["Mission Setup: 11", true] call TREND_fnc_log;
 
-			if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle1"}; //Hack Data
-			if (_iThisTaskType == 2) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle2"}; //Steal data from research vehicle
-			if (_iThisTaskType == 3) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle3"}; //Destroy Ammo Trucks
-			if (_iThisTaskType == 4) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle4"}; //Speak with informant
-			if (_iThisTaskType == 5) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle5"}; //interrogate officer
-			if (_iThisTaskType == 6) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle6"}; //Transmit Enemy Comms to HQ
-			if (_iThisTaskType == 7) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle7"}; //Eliminate Officer   -   gain 1 point if side, if main, need to id him before complete
-			if (_iThisTaskType == 8) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle8"}; //Assasinate weapon dealer   -   gain 1 point if side, no intel from him... if main need to id him before complete
-			if (_iThisTaskType == 9) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle9"}; //Destroy AAA vehicles
-			if (_iThisTaskType == 10) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle10"}; //Destroy Artillery vehicles
-			if (_iThisTaskType == 11) then {_MissionTitle = localize "STR_TRGM2_Rescue_POW"};
-			if (_iThisTaskType == 12) then {_MissionTitle = localize "STR_TRGM2_Rescue_Reporter"};
-			if (_iThisTaskType == 13) then {
-				#include "..\..\CustomMission\Mission13.sqf"; //defuse 3 IEDs
-				call fnc_CustomVars;
-			};
-			if (_iThisTaskType == 14) then {
-				#include "..\..\CustomMission\Mission14.sqf"; //defuse bomb
-				call fnc_CustomVars;
-			};
-			if (_iThisTaskType == 15) then {
-				#include "..\..\CustomMission\Mission15.sqf"; //Search and Destroy
-				call fnc_CustomVars;
-			};
-			if (_iThisTaskType == 16) then {
-				#include "..\..\CustomMission\Mission16.sqf"; //Search and Destroy
-				call fnc_CustomVars;
-			};
-			if (_iThisTaskType == 17) then {
-				#include "..\..\CustomMission\Mission17.sqf"; //Clear Area
-				call fnc_CustomVars;
-			};
-			if (_iThisTaskType == 99999) then {
-				//hint format["pre: %1",_RequiresNearbyRoad]; sleep 2;
-				#include "..\..\CustomMission\customMission.sqf"; //meeting assasination
-				call fnc_CustomVars;
-				//hint format["post: %1",_RequiresNearbyRoad]; sleep 2;
+			switch (_iThisTaskType) do {
+				case 1: {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle1"}; //Hack Data
+				case 2: {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle2"}; //Steal data from research vehicle
+				case 3: {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle3"}; //Destroy Ammo Trucks
+				case 4: {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle4"}; //Speak with informant
+				case 5: {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle5"}; //interrogate officer
+				case 6: {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle6"}; //Transmit Enemy Comms to HQ
+				case 7: {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle7"}; //Eliminate Officer   -   gain 1 point if side, if main, need to id him before complete
+				case 8: {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle8"}; //Assasinate weapon dealer   -   gain 1 point if side, no intel from him... if main need to id him before complete
+				case 9: {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle9"}; //Destroy AAA vehicles
+				case 10: {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle10"}; //Destroy Artillery vehicles
+				case 11: {_MissionTitle = localize "STR_TRGM2_Rescue_POW"};
+				case 12: {_MissionTitle = localize "STR_TRGM2_Rescue_Reporter"};
+				case 13: {
+					#include "..\..\CustomMission\Mission13.sqf"; //defuse 3 IEDs
+					call fnc_CustomVars;
+				};
+				case 14: {
+					#include "..\..\CustomMission\Mission13.sqf"; //defuse 3 IEDs
+					call fnc_CustomVars;
+				};
+				case 15: {
+					#include "..\..\CustomMission\Mission15.sqf"; //Search and Destroy
+					call fnc_CustomVars;
+				};
+				case 16: {
+					#include "..\..\CustomMission\Mission16.sqf"; //Search and Destroy
+					call fnc_CustomVars;
+				};
+				case 17:  {
+					#include "..\..\CustomMission\Mission17.sqf"; //Clear Area
+					call fnc_CustomVars;
+				};
+				case 99999: {
+					//hint format["pre: %1",_RequiresNearbyRoad]; sleep 2;
+					#include "..\..\CustomMission\customMission.sqf"; //meeting assasination
+					call fnc_CustomVars;
+					//hint format["post: %1",_RequiresNearbyRoad]; sleep 2;
+				};
+				default { };
 			};
 
 			if (_iThisTaskType > 12 && _iThisTaskType < 99999) then {
@@ -354,13 +345,13 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 
 			_bUserDefinedAO = false;
 			///*orangestest
-			if (_iTaskIndex == 0 && !isNil "Mission1Loc") then {
+			if (_iTaskIndex == 0 && !isNil "TREND_Mission1Loc") then {
 				_bUserDefinedAO = true;
 			};
-			if (_iTaskIndex == 1 && !isNil "Mission2Loc") then {
+			if (_iTaskIndex == 1 && !isNil "TREND_Mission2Loc") then {
 				_bUserDefinedAO = true;
 			};
-			if (_iTaskIndex == 2 && !isNil "Mission3Loc") then {
+			if (_iTaskIndex == 2 && !isNil "TREND_Mission3Loc") then {
 				_bUserDefinedAO = true;
 			};
 			//orangestest*/
@@ -379,21 +370,21 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 					_randInfor1X = 0 + (floor random 25000);
 					_randInfor1Y = 0 + (floor random 25000);
 					_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], TREND_BasicBuildings, 200];
-					if (_iTaskIndex == 0 && !_bIsCampaign && !(isNil "Mission1Loc")) then {
-						_randInfor1X = Mission1Loc select 0;
-						_randInfor1Y = Mission1Loc select 1;
+					if (_iTaskIndex == 0 && !_bIsCampaign && !(isNil "TREND_Mission1Loc")) then {
+						_randInfor1X = TREND_Mission1Loc select 0;
+						_randInfor1Y = TREND_Mission1Loc select 1;
 						_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], TREND_BasicBuildings, 50*_attempts];
 						if (_attempts > 100) then {hint format["Still no location found after %1 attempts!",_attempts]}
 					};
-					if (_iTaskIndex == 1 && !_bIsCampaign && !(isNil "Mission2Loc")) then {
-						_randInfor1X = Mission2Loc select 0;
-						_randInfor1Y = Mission2Loc select 1;
+					if (_iTaskIndex == 1 && !_bIsCampaign && !(isNil "TREND_Mission2Loc")) then {
+						_randInfor1X = TREND_Mission2Loc select 0;
+						_randInfor1Y = TREND_Mission2Loc select 1;
 						_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], TREND_BasicBuildings, 50*_attempts];
 						if (_attempts > 100) then {hint format["Still no location found after %1 attempts!",_attempts]}
 					};
-					if (_iTaskIndex == 2 && !_bIsCampaign && !(isNil "Mission3Loc")) then {
-						_randInfor1X = Mission3Loc select 0;
-						_randInfor1Y = Mission3Loc select 1;
+					if (_iTaskIndex == 2 && !_bIsCampaign && !(isNil "TREND_Mission3Loc")) then {
+						_randInfor1X = TREND_Mission3Loc select 0;
+						_randInfor1Y = TREND_Mission3Loc select 1;
 						_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], TREND_BasicBuildings, 50*_attempts];
 						if (_attempts > 100) then {hint format["Still no location found after %1 attempts!",_attempts]}
 					};

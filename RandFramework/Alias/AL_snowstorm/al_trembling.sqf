@@ -21,7 +21,7 @@ _snow_flakes setDropInterval 0.01;
 if (player_act_cold) then {
 enableCamShake true;
 
-0 = ["FilmGrain",2000] spawn
+["FilmGrain",2000] spawn
 {
 	params ["_name","_priority","_effect","_handle"];
 	while {_handle = ppEffectCreate [_name, _priority];	_handle < 0} do {_priority = _priority + 1};
@@ -50,7 +50,7 @@ enableCamShake true;
 };
 if (goggles player=="") then
 {
-	0 = ["RadialBlur",100,[0.11,1,0.33,0.16]] spawn
+	["RadialBlur",100,[0.11,1,0.33,0.16]] spawn
 	{
 		params ["_name", "_priority", "_effect", "_handle"];
 		while {	_handle = ppEffectCreate [_name, _priority];_handle < 0} do {_priority = _priority + 1};

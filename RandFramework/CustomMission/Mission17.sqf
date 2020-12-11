@@ -55,11 +55,11 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_flag = selectRandom EnemyFlags createVehicle _flatPos;
 	_flagName = format["ObjFlag%1",_iTaskIndex];
 	_flag setVariable [_flagName, _flag, true];
-	missionNamespace setVariable [format ["SupplyDropped_%1", _iTaskIndex], 0];
-	missionNamespace setVariable [_flagName, _flag];
+	missionNamespace setVariable [format ["SupplyDropped_%1", _iTaskIndex], 0, true];
+	missionNamespace setVariable [_flagName, _flag, true];
 	_flag setflagAnimationPhase 1;
 	_flag setFlagTexture "\A3\Data_F\Flags\flag_red_CO.paa";
-	_flag setVariable ["TREND_flagSide", east];
+	_flag setVariable ["TREND_flagSide", east, true];
 
 	//attach addaction to lowerflag and call supplydrop
 	[
@@ -85,13 +85,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		{
 			params ["_flag", "_caller", "_actionId", "_arguments"];
 			_arguments params ["_iTaskIndex"];
-			_flag setVariable ["TREND_flagSide",west];
-			_flag setVariable ["Lowered",true];
+			_flag setVariable ["TREND_flagSide",west, true];
+			_flag setVariable ["Lowered",true, true];
 		},																								// Code executed on completion
 		{
 			params ["_flag", "_caller", "_actionId", "_arguments"];
 			_flag setFlagAnimationPhase 1;
-			_side = _flag getVariable ["TREND_flagSide",east];
+			_side = _flag setVariable ["TREND_flagSide",east,true];
 			_flag setFlagTexture "\A3\Data_F\Flags\flag_red_CO.paa";
 		},																								// Code executed on interrupted
 		[_iTaskIndex],																					// Arguments passed to the scripts as _this select 3
@@ -105,24 +105,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		params ["_flag", "_iTaskIndex"];
 		waitUntil { sleep 30; _flag getVariable ["Lowered",false]; };
 
-		{
-			_pos = getPos _flag;
-			_group = _x;
-			if (side _group == east || side _group == independent) then {
-				_groupLeader = leader _group;
-				if ((getPos _groupLeader) distance _pos < 1500) then {
-					{
-						_unit = _x;
-						_unit setCombatMode "RED";
-						_unit setBehaviour "AWARE";
-						_unit setUnitPos "AUTO";
-						_unit = _x;
-						_unit forceSpeed -1;
-						_unit doMove _pos;
-					} forEach units _group;
-				};
-			};
-		} forEach allGroups;
+		[{missionNamespace getVariable ['SupplyDropped_%1', 0] < 2}, getPos _flag] spawn TREND_fnc_alertNearbyUnits;
 
 		[EAST, TREND_ReinforceStartPos1, getPos _flag, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements;
 		[EAST, TREND_ReinforceStartPos2, getPos _flag, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;
@@ -198,10 +181,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_supplyObject allowDamage true;
 		TREND_dropCrate = false; publicVariable "TREND_dropCrate";
 		{deleteVehicle _x;} forEach crew (vehicle airDropHelo1) + [vehicle airDropHelo1];
-		missionNamespace setVariable [format ["SupplyDropped_%1", _iTaskIndex], 1];
+		missionNamespace setVariable [format ["SupplyDropped_%1", _iTaskIndex], 1, true];
 
 		waitUntil { !TREND_dropCrate; };
-
+		{hint (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]);} remoteExec ["call", 0];
+		if (!TREND_bDebugMode) then {
+			sleep 300; //wait 5 mins before supply drop in area
+		};
 		{hint (localize "STR_TRGM2_SupplyChopperInbound");} remoteExec ["call", 0];
 
 		_heloGroup = createGroup west;
@@ -265,12 +251,12 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_supplyObject allowDamage true;
 		TREND_dropCrate = false; publicVariable "TREND_dropCrate";
 		{deleteVehicle _x;} forEach crew (vehicle airDropHelo2) + [vehicle airDropHelo2];
-		missionNamespace setVariable [format ["SupplyDropped_%1", _iTaskIndex], 2];
+		missionNamespace setVariable [format ["SupplyDropped_%1", _iTaskIndex], 2, true];
 	};
 
 	_customTaskClear = nil;
 	_customTaskClear = createTrigger ["EmptyDetector", [0,0]];
-	_customTaskClear setVariable ["DelMeOnNewCampaignDay",true];
+	_customTaskClear setVariable ["DelMeOnNewCampaignDay",true, true];
 
 	_sTaskCheck = format["missionNamespace getVariable ['SupplyDropped_%1', 0] == 2 && !(['InfSide%1'] call FHQ_fnc_ttAreTasksCompleted)",_iTaskIndex];
 

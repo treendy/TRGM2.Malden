@@ -1,6 +1,7 @@
 disableSerialization;
 
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+
 if (isNil "TREND_iMissionParamObjective2") then { TREND_iMissionParamObjective2 =   0; publicVariable "TREND_iMissionParamObjective2"; };
 if (isNil "TREND_iMissionParamObjective3") then { TREND_iMissionParamObjective3 =   0; publicVariable "TREND_iMissionParamObjective3"; };
 
@@ -25,6 +26,11 @@ if (!isNull (findDisplay 5000)) then {
 	_ctrlWeather = (findDisplay 5000) displayCtrl 5101;
 	TREND_iWeather = TREND_MissionParamWeatherOptionsValues select lbCurSel _ctrlWeather;
 	publicVariable "TREND_iWeather";
+
+	_ctrlTime = (findDisplay 5000) displayCtrl 5115;
+	_ctrlTimeValue = (sliderPosition _ctrlTime) * 3600;
+	TREND_arrayTime = [floor (_ctrlTimeValue / 3600), floor ((_ctrlTimeValue / 60) mod 60)];
+	publicVariable "TREND_arrayTime";
 
 	_ctrlRevive = (findDisplay 5000) displayCtrl 5103;
 	TREND_iUseRevive = TREND_MissionParamReviveOptionsValues select lbCurSel _ctrlRevive;
@@ -128,6 +134,8 @@ _lblctrlTitle ctrlCommit 0;
 	_inpctrl ctrlSetTooltip _toolTip;
 
 } forEach TREND_AdvControls;
+
+// Ace - TODO: Convert Custom Faction System into new Faction selection...
 
 // if (TREND_EnemyFactionData != "") then {
 // 	_display ctrlCreate ["RscText", 6996];

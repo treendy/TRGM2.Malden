@@ -374,7 +374,7 @@ if (isServer) then {
 	sleep _coreCountSleep;
 
 	box1 allowDamage false;
-	[box1] call TREND_fnc_initAmmoBox;
+	[box1, (if (isMultiplayer) then {playableUnits} else {switchableUnits})] call TREND_fnc_initAmmoBox;
 
 	[format["Mission Core: %1", "boxCargo set"], true] call TREND_fnc_log;
 	sleep _coreCountSleep;

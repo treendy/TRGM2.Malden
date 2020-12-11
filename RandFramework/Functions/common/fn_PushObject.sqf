@@ -24,8 +24,8 @@ else {
 			_target setPos [getPos _target select 0, getPos _target select 1];
 			_target setVectorUp surfaceNormal position _target;
 			_target allowDamage true;
-			_target removeAction _actionId;
-			[_target, [format [localize "STR_TRGM2_UnloadDingy_push", getText (configFile >> "CfgVehicles" >> (typeOf _target) >> "displayName")],{_this spawn TREND_fnc_PushObject;}, [], -99, false, false, "", "_this == player"]] remoteExec ["addAction", 0];
+			_player removeAction _actionId;
+			[_target, [format [localize "STR_TRGM2_UnloadDingy_push", getText (configFile >> "CfgVehicles" >> (typeOf _target) >> "displayName")],{_this spawn TREND_fnc_PushObject;}, [], -99, false, false, "", "_this == player && count crew _target isEqualTo 0"]] remoteExec ["addAction", 0];
 		}, [_Object], 5, true, true];
 
 		private _largeObjectCorrection = if (((boundingBoxReal _Object select 1 select 1) - (boundingBoxReal _Object select 0 select 1)) != 0 && {

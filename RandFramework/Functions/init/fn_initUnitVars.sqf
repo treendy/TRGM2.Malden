@@ -1,13 +1,5 @@
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
-
-TREND_WestFactionData =  [WEST] call TREND_fnc_getFactionDataBySide; publicVariable "TREND_WestFactionData";
-TREND_EastFactionData =  [EAST] call TREND_fnc_getFactionDataBySide; publicVariable "TREND_EastFactionData";
-TREND_GuerFactionData =  [INDEPENDENT] call TREND_fnc_getFactionDataBySide; publicVariable "TREND_GuerFactionData";
-// _unitData = [faction_className, faction_displayName] call TREND_fnc_getUnitDataByFaction;
-
-
-
 //hardcoded for now... see notes in root setunitglobalvars.sqf (main git/malden version of this sqf!)
 TREND_DefaultEnemyFactionValue = [2]; publicVariable "TREND_DefaultEnemyFactionValue"; //default to FIA
 TREND_DefaultMilitiaFactionValue = [1]; publicVariable "TREND_DefaultMilitiaFactionValue"; //default to AAF
@@ -45,7 +37,7 @@ for "_i" from 0 to (count TREND_EastFactionData - 1) do {
 	(TREND_EastFactionData select _i) params ["_className", "_displayName"];
 	TREND_DefaultEnemyFactionArrayText pushBack _displayName;
 	TREND_DefaultEnemyFactionArray pushBack _i;
-	if (_className == "OPF_G_F") then {
+	if (_className == "OPF_F") then {
 		TREND_DefaultEnemyFactionValue = [_i]; publicVariable "TREND_DefaultEnemyFactionValue";
 	};
 };
@@ -54,7 +46,7 @@ for "_i" from 0 to (count TREND_GuerFactionData - 1) do {
 	(TREND_GuerFactionData select _i) params ["_className", "_displayName"];
 	TREND_DefaultMilitiaFactionArrayText pushBack _displayName;
 	TREND_DefaultMilitiaFactionArray pushBack _i;
-	if (_className == "IND_F") then {
+	if (_className == "IND_G_F") then {
 		TREND_DefaultMilitiaFactionValue = [_i]; publicVariable "TREND_DefaultMilitiaFactionValue";
 	};
 };
@@ -68,9 +60,13 @@ publicVariable "TREND_DefaultMilitiaFactionArray";
 
 /////// Patrol settings ///////
 if (isNil "TREND_iAllowLargePat") then { TREND_iAllowLargePat =  1; publicVariable "TREND_iAllowLargePat"; }; //("OUT_par_AllowLargePatrols" call BIS_fnc_getParamValue);
-if (TREND_iAllowLargePat == 0) then {TREND_bAllowLargerPatrols = True; publicVariable "TREND_bAllowLargerPatrols";};
-if (TREND_iAllowLargePat == 1) then {TREND_bAllowLargerPatrols = False; publicVariable "TREND_bAllowLargerPatrols";};
-if (TREND_iAllowLargePat == 2) then {TREND_bAllowLargerPatrols = selectRandom[False,True]; publicVariable "TREND_bAllowLargerPatrols";};
+TREND_bAllowLargerPatrols = {
+	if (TREND_iAllowLargePat == 0) exitWith {true};
+	if (TREND_iAllowLargePat == 2) exitWith {selectRandom[false,true]};
+	false;
+};
+publicVariable "TREND_bAllowLargerPatrols";
+
 
 /////// Advanced Settings Set up ///////
 
@@ -92,7 +88,7 @@ TREND_ADVSET_SELECT_ENEMY_FLASHLIGHTS_IDX = 13; publicVariable "TREND_ADVSET_SEL
 TREND_ADVSET_MINIMISSIONS_IDX = 14; publicVariable "TREND_ADVSET_MINIMISSIONS_IDX";
 TREND_ADVSET_IEDTARGET_COMPACT_SPACING_IDX = 15; publicVariable "TREND_ADVSET_IEDTARGET_COMPACT_SPACING_IDX";
 TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX = 16; publicVariable "TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX";
-
+TREND_ADVSET_VEHICLE_SPAWNING_REQ_REP_IDX = 17; publicVariable "TREND_ADVSET_VEHICLE_SPAWNING_REQ_REP_IDX";
 
 //NOTE the id's must go up in twos!
 TREND_AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex(zero based index)
@@ -113,7 +109,8 @@ TREND_AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex(z
 	[6029, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MiniMissions","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvMinimission"],
 	[6031, localize "STR_TRGM2_TRGMSetUnitGlobalVars_IedTargetCompact","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvIedTargetCompact"],
 	[6033, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MoreEnemies","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvMoreEnemies"],
-	[6035, localize "STR_TRGM2_TRGMSetUnitGlobalVars_LargePatrols","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],TREND_iAllowLargePat,localize "STR_TRGM2_Tooltip_AdvLargePatrols"]
+	[6035, localize "STR_TRGM2_TRGMSetUnitGlobalVars_LargePatrols","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],TREND_iAllowLargePat,localize "STR_TRGM2_Tooltip_AdvLargePatrols"],
+	[6037, localize "STR_TRGM2_TRGMSetUnitGlobalVars_VehicleReqRep","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Disable", localize "STR_TRGM2_TRGMInitPlayerLocal_Enable"],[0,1],0,localize "STR_TRGM2_Tooltip_AdvVehicleReqRep"]
 ];
 publicVariable "TREND_AdvControls";
 
@@ -132,9 +129,12 @@ if (count TREND_AdvControls < 14) then {
 */
 
 /////// Higher Enemy Count ///////
-TREND_bMoreEnemies = { ( (TREND_AdvancedSettings select TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX == 1) || (TREND_AdvancedSettings select TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX == 0 && selectRandom[false,true,false]) ); };
+TREND_bMoreEnemies = { ( (TREND_AdvancedSettings select TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX isEqualTo 1) || (TREND_AdvancedSettings select TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX isEqualTo 0 && selectRandom[false,true,false]) ); };
 publicVariable "TREND_bMoreEnemies";
 
+//////// Vehicle Spawning Rep Requirement ///////
+TREND_VehiclesRequireRep = { [false, true] select (TREND_AdvancedSettings select TREND_ADVSET_VEHICLE_SPAWNING_REQ_REP_IDX isEqualTo 1); };
+publicVariable "TREND_VehiclesRequireRep";
 
 /////// Revive Settings Set up ///////
 //0 = no, 1 = guarantee revive, 2 = realistic revive, 3 = realistic revive (only medics can revive)

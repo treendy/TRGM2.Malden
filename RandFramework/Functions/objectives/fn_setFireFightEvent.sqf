@@ -5,7 +5,7 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc
 _nearLocations = nearestLocations [_posOfAO, ["NameCity","NameCityCapital","NameVillage"], 1500];
 
 _eventLocationPos = nil;
-if (!isNil("ForceWarZoneLoc")) then {
+if (!isNil("TREND_ForceWarZoneLoc")) then {
 	_eventLocationPos = _posOfAO;
 }
 else {

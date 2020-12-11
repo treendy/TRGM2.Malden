@@ -157,11 +157,11 @@ else {
 		sleep 1;
 	};
 ["Loading Events : 10", true] call TREND_fnc_log;
-	if (selectRandom TREND_ChanceOfOccurance || !isNil("ForceWarZoneLoc")) then {
+	if (selectRandom TREND_ChanceOfOccurance || !isNil("TREND_ForceWarZoneLoc")) then {
 	//if (true) then {
 		//_eventType = selectRandom[4]; //1=fullWar  2=AOOnly  3=WarzoneOnly  4=warzoneOnlyFullWar (only set to warzone now... was strange over AO... maybe at some point in future can stop flak when player near AO)
-		if (!isNil("ForceWarZoneLoc")) then {
-			[ForceWarZoneLoc,4] spawn TREND_fnc_setFireFightEvent;
+		if (!isNil("TREND_ForceWarZoneLoc")) then {
+			[TREND_ForceWarZoneLoc,4] spawn TREND_fnc_setFireFightEvent;
 		}
 		else {
 			[_mainObjPos,4] spawn TREND_fnc_setFireFightEvent;

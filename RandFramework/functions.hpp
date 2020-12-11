@@ -183,6 +183,7 @@ class TREND {
 
     class enemyUnits {
         file = "RandFramework\functions\enemyUnits";
+        class alertNearbyUnits {};
         class createEnemySniper {};
         class CreateUnit{};
         class createWaitingAmbush{};

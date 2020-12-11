@@ -1,11 +1,23 @@
+/*
+ * Author: TheAce0296
+ * Adds initial items to inventory, if array of units are
+ * provided, also adds ammo for those units.
+ *
+ * Arguments:
+ * 0: Object whose inventory should recieve items <OBJECT>
+ * 1: Units to get list of ammo/weapons from <ARRAY>
+ *
+ * Return Value:
+ * true <BOOL>
+ *
+ * Example:
+ * [box1, units group player] call TREND_fnc_initAmmoBox
+ */
+
 params [["_box", objNull, [objNull]], ["_units", []]];
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 if (isNil "_box") exitWith {};
-
-if (count _units <= 0) then {
-	_units = (if (isMultiplayer) then {playableUnits} else {switchableUnits});
-};
 
 _initBoxItems = [TREND_InitialBoxItems, TREND_InitialBoxItemsWithAce] select (call TREND_fnc_isAceLoaded);
 _initBoxItems params [
@@ -36,68 +48,48 @@ _classes = _list select 0;
 _values = _list select 1;
 {_box addbackpackcargoglobal [_x,_values select _foreachindex];} foreach _classes;
 
-{
-	if (count (primaryWeaponMagazine _x) > 0) then {
-		if (isClass(configFile >> "CfgWeapons" >> (primaryWeapon _x)) && {getNumber(configfile >> "CfgWeapons" >> (primaryWeapon _x) >> "scope") == 2}) then {
-			_box addWeaponCargoGlobal [primaryWeapon _x, 1];
-		};
-		{
-			if (isClass(configFile >> "CfgMagazines" >> _x) && {getNumber(configfile >> "CfgMagazines" >> _x >> "scope") == 2}) then {
-				_box addMagazineCargoGlobal [_x, 2];
-			};
-		} forEach primaryWeaponMagazine _x;
-	} else {
-		if (primaryWeapon _x != "") then {
-			if (isClass(configFile >> "CfgWeapons" >> (primaryWeapon _x)) && {getNumber(configfile >> "CfgWeapons" >> (primaryWeapon _x) >> "scope") == 2}) then {
-				_box addWeaponCargoGlobal [primaryWeapon _x, 1];
-				_box addMagazineCargoGlobal [getText(configfile >> "CfgVehicles" >> (primaryWeapon _x) >> "TransportMagazines"), 2];
-			};
-		};
-	};
-
-	if (count (secondaryWeaponMagazine _x) > 0) then {
-		if (isClass(configFile >> "CfgWeapons" >> (secondaryWeapon _x)) && {getNumber(configfile >> "CfgWeapons" >> (secondaryWeapon _x) >> "scope") == 2}) then {
-			_box addWeaponCargoGlobal [secondaryWeapon _x, 1];
-		};
-		{
-			if (isClass(configFile >> "CfgMagazines" >> _x) && {getNumber(configfile >> "CfgMagazines" >> _x >> "scope") == 2}) then {
-				_box addMagazineCargoGlobal [_x, 2];
-			};
-		} forEach secondaryWeaponMagazine _x;
-	} else {
-		if (secondaryWeapon _x != "") then {
-			if (isClass(configFile >> "CfgWeapons" >> (secondaryWeapon _x)) && {getNumber(configfile >> "CfgWeapons" >> (secondaryWeapon _x) >> "scope") == 2}) then {
-				_box addWeaponCargoGlobal [secondaryWeapon _x, 1];
-				_box addMagazineCargoGlobal [getText(configfile >> "CfgVehicles" >> (secondaryWeapon _x) >> "TransportMagazines"), 2];
-			};
-		};
-	};
-
-	if (count (handgunMagazine _x) > 0) then {
-		if (isClass(configFile >> "CfgWeapons" >> (handgunWeapon _x)) && {getNumber(configfile >> "CfgWeapons" >> (handgunWeapon _x) >> "scope") == 2}) then {
-			_box addWeaponCargoGlobal [handgunWeapon _x, 1];
-		};
-		{
-			if (isClass(configFile >> "CfgMagazines" >> _x) && {getNumber(configfile >> "CfgMagazines" >> _x >> "scope") == 2}) then {
-				_box addMagazineCargoGlobal [_x, 2];
-			};
-		} forEach handgunMagazine _x;
-	} else {
-		if (handgunWeapon _x != "") then {
-			if (isClass(configFile >> "CfgWeapons" >> (handgunWeapon _x)) && {getNumber(configfile >> "CfgWeapons" >> (handgunWeapon _x) >> "scope") == 2}) then {
-				_box addWeaponCargoGlobal [handgunWeapon _x, 1];
-				_box addMagazineCargoGlobal [getText(configfile >> "CfgVehicles" >> (handgunWeapon _x) >> "TransportMagazines"), 2];
-			};
-		};
-	};
-
+if (count _units > 0) then {
 	{
-		_box addItemCargoGlobal  [_x, 1];
-	} forEach items _x;
+		TREND_fnc_isWeaponValid = {
+			(isClass(configFile >> "CfgWeapons" >> _this) && {getNumber(configFile >> "CfgWeapons" >> _this >> "scope") isEqualTo 2});
+		};
+		TREND_fnc_isMagazineValid = {
+			(isClass(configFile >> "CfgMagazines" >> _this) && {getNumber(configFile >> "CfgMagazines" >> _this >> "scope") isEqualTo 2});
+		};
+		_weapons = [[primaryWeapon _x, primaryWeaponMagazine _x], [secondaryWeapon _x, secondaryWeaponMagazine _x], [handgunWeapon _x, handgunMagazine _x], ["", magazines _x]];
+		{
+			_x params ["_weapon", "_mags"];
+			if (_weapon != "" && {_weapon call TREND_fnc_isWeaponValid}) then {
+				_box addWeaponCargoGlobal [_weapon, 1];
+				format["Weapon: %2 added to %1", str _box, _weapon] call TREND_fnc_log;
+				if ({_x call TREND_fnc_isMagazineValid} count _mags isEqualTo 0) then {
+					_mags = getArray(configfile >> "CfgWeapons" >> _weapon >> "magazines");
+				};
+				{
+					_box addMagazineCargoGlobal [_x, 2];
+					format["Mags: %2 added to %1", str _box, _x] call TREND_fnc_log;
+				} forEach (_mags select {_x call TREND_fnc_isMagazineValid});
+			};
+			if (_weapon isEqualTo "" && {{_x call TREND_fnc_isMagazineValid} count _mags > 0}) then {
+				{
+					_box addMagazineCargoGlobal [_x, 2];
+					format["Mags: %2 added to %1", str _box, _x] call TREND_fnc_log;
+				} forEach (_mags select {_x call TREND_fnc_isMagazineValid});
+			};
+		} forEach _weapons;
 
-	// Scope == 2 excludes protected backpacks that act strange when in an inventory (can't remove, infinite items, etc...)
-	if (typeof(unitBackpack _x) != "" && isClass(configfile >> "CfgVehicles" >> typeof(unitBackpack _x)) && getNumber(configfile >> "CfgVehicles" >> typeof(unitBackpack _x) >> "scope") == 2) then {
-		_box addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
-	};
+		{
+			_box addItemCargoGlobal  [_x, 1];
+			format["Item: %2 added to %1", str _box, _x] call TREND_fnc_log;
+		} forEach items _x;
 
-} forEach _units;
+		// Scope isEqualTo 2 excludes protected backpacks that act strange when in an inventory (can't remove, infinite items, etc...)
+		if (typeof(unitBackpack _x) != "" && isClass(configfile >> "CfgVehicles" >> typeof(unitBackpack _x)) && getNumber(configfile >> "CfgVehicles" >> typeof(unitBackpack _x) >> "scope") isEqualTo 2) then {
+			_box addBackpackCargoGlobal [typeof(unitBackpack _x), 1];
+			format["Backpack: %2 added to %1", str _box, typeof(unitBackpack _x)] call TREND_fnc_log;
+		};
+
+	} forEach _units;
+};
+
+true;

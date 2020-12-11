@@ -178,7 +178,7 @@ if (isServer && count _thisThisList > 0) then {
 				//	if (!TREND_ParaDropped) then {
 				//
 				//		[EAST, TREND_ReinforceStartPos1, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
-				//		if (TREND_bAllowLargerPatrols) then {
+				//		if (call TREND_bAllowLargerPatrols) then {
 				//			sleep 3;
 				//			[EAST, TREND_ReinforceStartPos1, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
 				//		};

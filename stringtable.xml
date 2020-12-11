@@ -1121,6 +1121,10 @@
                 <Spanish>Tu reputación debe ser mayor para reclutar más unidades</Spanish>
                 <Korean>더 많은 유닛을 모집하려면 명성이 높아야 합니다.</Korean>
             </Key>
+            <Key ID="STR_TRGM2_SpawnVehicles_MoreReputation">
+                <Original>Your reputation needs to be higher to spawn vehicles</Original>
+                <English>Your reputation needs to be higher to spawn vehicles</English>
+            </Key>
             <Key ID="STR_TRGM2_ServerSave_Save1">
                 <Original>This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save is only available to the current map</Original>
                 <English>This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save is only available to the current map</English>
@@ -3765,6 +3769,16 @@
             <Key ID="STR_TRGM2_Tooltip_AdvLargePatrols">
                 <Original>If enabled, groups of enemies will be larger.</Original>
                 <English>If enabled, groups of enemies will be larger.</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_VehicleReqRep">
+                <Original>Vehicles Require Rep</Original>
+                <English>Vehicles Require Rep</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_Tooltip_AdvVehicleReqRep">
+                <Original>Vehicle spawning via the requests menu, will require rep points.\n If enabled, vehicles will cost 1 rep point and lower rep when destroyed.</Original>
+                <English>Vehicle spawning via the requests menu, will require rep points.\n If enabled, vehicles will cost 1 rep point and lower rep when destroyed.</English>
             </Key>
 
             <Key ID="STR_TRGM2_Tooltip_AdvVirtualArsenal">
