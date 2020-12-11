@@ -1,3 +1,22 @@
+/*
+ * Author: TheAce0296
+ * Sets the value of the time setting slider/edit boxes.
+ *
+ * Arguments:
+ * 0 - Control that called this function. <CONTROL> (Can be NIL)
+ * 1 - Base value to set other values from <NUMBER/ARRAY> (Can be NIL)
+ * 2 - String identifier of where the value is coming from. <STRING>
+ *     "Slider" - Value is coming from the time slider,    Arg 2 should be a number.
+ *     "Edit" 	- Value is coming from the edit boxes,     Arg 2 does not apply.
+ *     "Init" 	- Value is coming from an internal script, Arg 2 should be an array of [hour, minute].
+ *
+ * Return Value:
+ * true <BOOL>
+ *
+ * Example:
+ * [nil, [8, 15], "Init"] call TREND_fnc_timeSliderOnChange;
+ */
+
 disableSerialization;
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 

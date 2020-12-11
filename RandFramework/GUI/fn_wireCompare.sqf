@@ -1,4 +1,19 @@
-//Parameters
+/*
+ * Author: Trendy
+ * Takes an input wire color for the mission bomb and compares
+ * it with the input from a player, if they are the same
+ * the bomb is ready to take a code input, otherwise it blows up.
+ *
+ * Arguments:
+ * 0: The color of the wire that was cut <STRING>
+ *
+ * Return Value:
+ * true <BOOL>
+ *
+ * Example:
+ * ['BLUE'] spawn TREND_fnc_wireCompare
+ */
+
 params ["_cutWire"];
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 

@@ -1,5 +1,24 @@
+/*
+ * Author: Trendy (Modified by TheAce0296)
+ * Applies selected mission settings and sets
+ * global variables signal the rest of the mission
+ * to generate.
+ *
+ * Arguments:
+ * 0 - Control that called this function. <CONTROL>
+ * 1 - Savetype to load mission data from. <NUMBER> [Default: 0]
+ *     0 = None, 1 = Local Load, 2 = Global Load
+ *
+ * Return Value:
+ * true <BOOL>
+ *
+ * Example:
+ * [_this, 1] spawn TREND_fnc_SetParamsAndBegin
+ */
+
 params["_thisBeginControl","_SaveType"]; //_SaveType optional, default 0  (1 is local load, 2 is global load)
 if (isNil "_SaveType") then {_SaveType = 0};
+if (_SaveType > 2) then {_SaveType = 0};
 
 disableSerialization;
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;

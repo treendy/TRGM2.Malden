@@ -1,4 +1,18 @@
-//Parameters
+/*
+ * Author: Trendy
+ * Takes an input code for the mission bomb and compares
+ * it with the input from a player, if they are the same
+ * the bomb is defused, otherwise it blows up.
+ *
+ * Arguments:
+ * 0: The code inputed by the player <ARRAY>
+ *
+ * Return Value:
+ * true <BOOL>
+ *
+ * Example:
+ * [CODEINPUT] spawn TREND_fnc_codeCompare
+ */
 params ["_inputCode"];
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 

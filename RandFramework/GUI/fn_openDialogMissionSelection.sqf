@@ -1,3 +1,17 @@
+/*
+ * Author: Trendy (Modified by TheAce0296)
+ * Opens the main mission set up dialog.
+ * Loads the previous settings if they exist.
+ *
+ * Arguments: None
+ *
+ * Return Value:
+ * true <BOOL>
+ *
+ * Example:
+ * [] spawn TREND_fnc_openDialogMissionSelection
+ */
+
 disableSerialization;
 
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;

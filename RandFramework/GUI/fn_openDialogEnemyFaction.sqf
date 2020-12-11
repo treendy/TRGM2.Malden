@@ -1,3 +1,16 @@
+/*
+ * Author: Trendy
+ * Opens the custom enemy faction dialog.
+ *
+ * Arguments: None
+ *
+ * Return Value:
+ * true <BOOL>
+ *
+ * Example:
+ * [] spawn TREND_fnc_openDialogEnemyFaction
+ */
+
 disableSerialization;
 
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
@@ -28,8 +41,6 @@ if (!isNull (findDisplay 6000)) then {
 	//TREND_iMissionParamType = TREND_MissionParamTypesValues select lbCurSel _ctrlItem;
 	//publicVariable "TREND_iMissionParamType";
 };
-
-//hint "opening 2dialogA";
 
 closedialog 0;
 

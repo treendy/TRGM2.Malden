@@ -1,3 +1,16 @@
+/*
+ * Author: Trendy
+ * Opens the custom friendly faction dialog.
+ *
+ * Arguments: None
+ *
+ * Return Value:
+ * true <BOOL>
+ *
+ * Example:
+ * [] spawn TREND_fnc_openDialogTeamLoadouts
+ */
+
 disableSerialization;
 
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;

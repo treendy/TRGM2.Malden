@@ -1,20 +1,35 @@
+/*
+ * Author: Trendy (Modified by TheAce0296)
+ * Does various checks when the mission type is selected,
+ * for example, if a triple mission is selected, this function
+ * adds the two additional mission task lists to the dialog.
+ *
+ * Arguments:
+ * 0: The list control type that invoked this function.
+ *    Arg 0 select 1 is the selected index from the list control.
+ *
+ * Return Value:
+ * true <BOOL>
+ *
+ * Example:
+ * [_this] spawn TREND_fnc_MissionTypeSelection
+ */
 disableSerialization;
 
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 _thisThis = _this select 0;
-
 _selectedIndex = _thisThis select 1;
 
-#define UI_GRID_X	(safezoneX)
-#define UI_GRID_Y	(safezoneY)
-#define UI_GRID_W	(safezoneW / 40)
-#define UI_GRID_H	(safezoneH / 25)
+#define UI_GRID_X		(safezoneX)
+#define UI_GRID_Y		(safezoneY)
+#define UI_GRID_W		(safezoneW / 40)
+#define UI_GRID_H		(safezoneH / 25)
 #define UI_GRID_WAbs	(safezoneW)
 #define UI_GRID_HAbs	(safezoneH)
-#define MissionListX (15.46 * UI_GRID_W + UI_GRID_X)
-#define MissionListY (13.6 * UI_GRID_H + UI_GRID_Y)
-#define MissionListW (6.18854 * UI_GRID_W)
-#define MissionListH (0.54988 * UI_GRID_H)
+#define MissionListX 	(15.46 * UI_GRID_W + UI_GRID_X)
+#define MissionListY 	(13.6 * UI_GRID_H + UI_GRID_Y)
+#define MissionListW 	(6.18854 * UI_GRID_W)
+#define MissionListH 	(0.54988 * UI_GRID_H)
 
 if (isNil "TREND_iMissionParamObjective2") then { TREND_iMissionParamObjective2 =   0; publicVariable "TREND_iMissionParamObjective2"; };
 if (isNil "TREND_iMissionParamObjective3") then { TREND_iMissionParamObjective3 =   0; publicVariable "TREND_iMissionParamObjective3"; };
@@ -33,14 +48,6 @@ if (!isNull((findDisplay 5000) displayCtrl 7002)) then {
 _display = findDisplay 5000;
 _ctrl = (findDisplay 5000) displayCtrl 5001;
 _ctrl ctrlSetText format["%1",TREND_MissionTypeDescriptions select _selectedIndex]; // for Displays
-
-
-// _display ctrlCreate ["RscStructuredText", 7003];
-// _ctrlText1 = _display displayCtrl 7003;
-// _ctrlText1 ctrlSetStructuredText parseText "<t color='#ccaaaa'>Visit <a href='http://www.trgm2.com'>www.trgm2.com</a> for help and features... or donations : )</t>";
-// _ctrlText1 ctrlSetTextColor [1, 1, 0, 1];
-// _ctrlText1 ctrlSetPosition [0.303 * safezoneW + safezoneX, (0.770) * safezoneH + safezoneY,0.3 * safezoneW,0.1 * safezoneH];
-// _ctrlText1 ctrlCommit 0;
 
 
 if (isNil "TREND_AllowMissionTypeCampaign") then { TREND_AllowMissionTypeCampaign =   false; publicVariable "TREND_AllowMissionTypeCampaign"; };

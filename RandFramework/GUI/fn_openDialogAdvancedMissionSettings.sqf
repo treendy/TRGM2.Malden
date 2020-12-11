@@ -1,3 +1,19 @@
+/*
+ * Author: Trendy (Modified by TheAce0296)
+ * Opens the advanced mission settings dialog,
+ * also saves the settings in the main dialog so
+ * they don't get overwritten when moving from the
+ * advanced settings dialog to the main dialog.
+ *
+ * Arguments: None
+ *
+ * Return Value:
+ * true <BOOL>
+ *
+ * Example:
+ * [] spawn TREND_fnc_openDialogAdvancedMissionSettings
+ */
+
 disableSerialization;
 
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
@@ -45,6 +61,7 @@ if (!isNull (findDisplay 5000)) then {
 		TREND_iMissionParamObjective2 = TREND_MissionParamObjectivesValues select lbCurSel _ctrlTypes1;
 		publicVariable "TREND_iMissionParamObjective2";
 	};
+
 	if (!isNull((findDisplay 5000) displayCtrl 7002)) then {
 		_ctrlTypes2 = (findDisplay 5000) displayCtrl 7002;
 		TREND_iMissionParamObjective3 = TREND_MissionParamObjectivesValues select lbCurSel _ctrlTypes2;
@@ -52,8 +69,6 @@ if (!isNull (findDisplay 5000)) then {
 	};
 
 };
-
-//hint "opening 2dialogA";
 
 closedialog 0;
 
@@ -69,26 +84,6 @@ _display ctrlCreate ["RscText", 6999];
 _lblctrlTitle = _display displayCtrl 6999;
 _lblctrlTitle ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.25 + 0) * safezoneH + safezoneY,1 * safezoneW,0.02 * safezoneH];
 ctrlSetText [6999,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_AdvOpt"];
-
-// _display ctrlCreate ["RscButton", 6998];
-// _btnSetEnemyFaction = _display displayCtrl 6998;
-// _btnSetEnemyFaction ctrlSetPosition [0.6 * safezoneW + safezoneX, (0.25 + 0) * safezoneH + safezoneY,0.1 * safezoneW,0.02 * safezoneH];
-// _btnSetEnemyFaction ctrlCommit 0;
-// ctrlSetText [6998,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomEnemy"];
-// _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {[] spawn TREND_fnc_openDialogEnemyFaction; false}];
-
-
-// _display ctrlCreate ["RscButton", 6997];
-// _btnSetEnemyFaction = _display displayCtrl 6997;
-// _btnSetEnemyFaction ctrlSetPosition [0.6 * safezoneW + safezoneX, (0.25 * 1.1) * safezoneH + safezoneY,0.1 * safezoneW,0.02 * safezoneH];
-// _btnSetEnemyFaction ctrlCommit 0;
-// ctrlSetText [6997,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomLoadouts"];
-// _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {[] spawn TREND_fnc_openDialogTeamLoadouts; false}];
-
-
-
-
-//colorText[] = {0,1,0,1};
 
 _lblctrlTitle ctrlCommit 0;
 
@@ -136,6 +131,20 @@ _lblctrlTitle ctrlCommit 0;
 } forEach TREND_AdvControls;
 
 // Ace - TODO: Convert Custom Faction System into new Faction selection...
+
+// _display ctrlCreate ["RscButton", 6998];
+// _btnSetEnemyFaction = _display displayCtrl 6998;
+// _btnSetEnemyFaction ctrlSetPosition [0.6 * safezoneW + safezoneX, (0.25 + 0) * safezoneH + safezoneY,0.1 * safezoneW,0.02 * safezoneH];
+// _btnSetEnemyFaction ctrlCommit 0;
+// ctrlSetText [6998,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomEnemy"];
+// _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {[] spawn TREND_fnc_openDialogEnemyFaction; false}];
+
+// _display ctrlCreate ["RscButton", 6997];
+// _btnSetEnemyFaction = _display displayCtrl 6997;
+// _btnSetEnemyFaction ctrlSetPosition [0.6 * safezoneW + safezoneX, (0.25 * 1.1) * safezoneH + safezoneY,0.1 * safezoneW,0.02 * safezoneH];
+// _btnSetEnemyFaction ctrlCommit 0;
+// ctrlSetText [6997,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomLoadouts"];
+// _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {[] spawn TREND_fnc_openDialogTeamLoadouts; false}];.
 
 // if (TREND_EnemyFactionData != "") then {
 // 	_display ctrlCreate ["RscText", 6996];

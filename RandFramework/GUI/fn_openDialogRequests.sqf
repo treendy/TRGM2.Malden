@@ -1,6 +1,6 @@
 /*
  * Author: TheAce0296
- * Creates the request units/vehicles dialog (WIP)
+ * Creates the request units/vehicles dialog.
  *
  * Arguments:
  * 0: The unit opened the dialog (should be player) <OBJECT>

@@ -438,7 +438,7 @@ class Trend_DialogSetupParams
 		class btnLoadLocalSave: RscButton
 		{
 			idc = 1601;
-			action = "[_this,1] spawn TREND_fnc_SetParamsAndBegin'; false";
+			action = "[_this,1] spawn TREND_fnc_SetParamsAndBegin; false";
 
 			text = $STR_TRGM2_dialogs_LoadLocal; //--- ToDo: Localize;
 			x = 23.3 * UI_GRID_W + UI_GRID_X;
