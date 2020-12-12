@@ -77,6 +77,7 @@ class TREND {
         class openDialogMissionSelection{};
         class openDialogRequests{};
         class openDialogTeamLoadouts{};
+        class openVehicleCustomizationDialog{};
         class SetParamsAndBegin{};
         class timeSliderOnChange{};
         class wireCompare{};

@@ -1955,3 +1955,101 @@ class ctrlEdit: RscEdit
 	onMouseMoving="";
 	onMouseHolding="";
 };
+
+class RscButtonArsenal: RscButton
+{
+    style = "0x30 + 0x800";
+    colorBackground[] = {0,0,0,0.8};
+    colorDisabled[] = {1,1,1,1};
+};
+
+class RscBackgroundGUITop: RscText
+{
+    colorBackground[] = {0,0,0,1};
+    align = "top";
+    moving = 1;
+    background = 1;
+};
+
+class RscBackgroundGUI: RscText
+{
+    colorBackground[] = {0,0,0,0.5};
+    colorText[] = {1,1,1,1};
+    background = 1;
+};
+
+class RscMessageBox: RscControlsGroupNoScrollbars
+{
+    idc = 2351;
+    x = -1;
+    y = -1;
+    w = 0;
+    h = 0;
+    class Controls
+    {
+        class BcgCommonTop: RscBackgroundGUITop
+        {
+            idc = 235100;
+            x = 0;
+            y = 0;
+            w = "18.8 * 					(			((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "1 * 					(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.13])","(profilenamespace getvariable ['GUI_BCG_RGB_G',0.54])","(profilenamespace getvariable ['GUI_BCG_RGB_B',0.21])",1};
+        };
+        class BcgCommon: RscBackgroundGUI
+        {
+            idc = 235101;
+            x = 0;
+            y = "1.1 * 					(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "18.8 * 					(			((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "1.7 * 					(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            colorBackground[] = {0,0,0,1};
+        };
+        class Text: RscStructuredText
+        {
+            idc = 235102;
+            x = "0.7 * 					(			((safezoneW / safezoneH) min 1.2) / 40)";
+            y = "1.8 * 					(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "17 * 					(			((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "1 * 					(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+        };
+        class BackgroundButtonOK: RscBackgroundGUI
+        {
+            idc = 235103;
+            x = 0;
+            y = "2.9 * 					(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "6.2 * 					(			((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "1 * 					(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            colorBackground[] = {0,0,0,1};
+        };
+        class BackgroundButtonMiddle: BackgroundButtonOK
+        {
+            idc = 235104;
+            x = "6.3 * 					(			((safezoneW / safezoneH) min 1.2) / 40)";
+        };
+        class BackgroundButtonCancel: BackgroundButtonOK
+        {
+            idc = 235105;
+            x = "12.6 * 					(			((safezoneW / safezoneH) min 1.2) / 40)";
+        };
+        class ButtonOK: RscButtonMenuOK
+        {
+            default = 1;
+            idc = 235106;
+            colorBackground[] = {0,0,0,1};
+            x = 0;
+            y = "2.9 * 					(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "6.2 * 					(			((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "1 * 					(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+        };
+        class ButtonCancel: RscButtonMenuCancel
+        {
+            idc = 235107;
+            colorBackground[] = {0,0,0,1};
+            x = "12.6 * 					(			((safezoneW / safezoneH) min 1.2) / 40)";
+            y = "2.9 * 					(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "6.2 * 					(			((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "1 * 					(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+        };
+    };
+};

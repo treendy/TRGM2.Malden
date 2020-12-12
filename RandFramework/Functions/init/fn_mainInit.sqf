@@ -418,6 +418,11 @@ player doFollow player;
 [format["Mission Core: %1", "DoFollowRun"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
+[format["Mission Core: %1", "CoreFinished"], true] call TREND_fnc_log;
+sleep _coreCountSleep;
+
+TREND_CoreCompleted = true; publicVariable "TREND_CoreCompleted";
+
 if (TREND_iMissionParamType isEqualTo 5) then {
 	if (isServer) then {
 		call TREND_fnc_initCampaign;
@@ -734,11 +739,6 @@ if (isServer) then {
 
 [format["Mission Core: %1", "AnimalStateSet"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
-
-[format["Mission Core: %1", "CoreFinished"], true] call TREND_fnc_log;
-sleep _coreCountSleep;
-
-TREND_CoreCompleted = true; publicVariable "TREND_CoreCompleted";
 
 if (TREND_iMissionParamType != 5) then {
 	call TREND_fnc_PostStartMission;

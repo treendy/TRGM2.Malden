@@ -49,15 +49,15 @@ private _vehArray = TREND_WestUnarmedCars;
 _vehArray append TREND_WestUnarmedHelos;
 _vehArray append TREND_WestTurrets;
 _vehArray append TREND_WestBoats;
-if (_dCurrentRep >= 3) then {
+if (_dCurrentRep >= 3 || {!(call TREND_VehiclesRequireRep)}) then {
 	_vehArray append TREND_WestArmedCars;
 	_vehArray append TREND_WestAPCs;
 };
-if (_dCurrentRep >= 5) then {
+if (_dCurrentRep >= 5 || {!(call TREND_VehiclesRequireRep)}) then {
 	_vehArray append TREND_WestTanks;
 	_vehArray append TREND_WestArmedHelos;
 };
-if (_dCurrentRep >= 7) then {
+if (_dCurrentRep >= 7 || {!(call TREND_VehiclesRequireRep)}) then {
 	_vehArray append TREND_WestArtillery;
 	_vehArray append TREND_WestAntiAir;
 	_vehArray append TREND_WestPlanes;
@@ -144,7 +144,7 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 	private _index = lbCurSel 8009;
 	private _unitClass = TREND_SpawnVehArray select _index;
 	_currentSpentPoints = call TREND_fnc_CountSpentPoints;
-	if ((call TREND_VehiclesRequireRep) || {_currentSpentPoints < (TREND_MaxBadPoints - TREND_BadPoints + 1)}) then {
+	if (!(call TREND_VehiclesRequireRep) || {_currentSpentPoints < (TREND_MaxBadPoints - TREND_BadPoints + 1)}) then {
 		[_unitClass] spawn {
 			params ["_classToSpawn"];
 			private _safePos = [getPos player, 20,100,25,0,0.15,0,[],[getPos player,getPos player],_classToSpawn] call TREND_fnc_findSafePos; // find a valid pos
@@ -182,48 +182,7 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 					[_spawnedVeh, [localize "STR_TRGM2_startInfMission_UnloadDingy",{_this spawn TREND_fnc_UnloadDingy;}, [], -99, false, false, "", "_this == player && count crew _target isEqualTo 0"]] remoteExec ["addAction", 0];
 					[_spawnedVeh, (units group _caller)] call TREND_fnc_initAmmoBox;
 				};
-
-				// TODO: Vehicle customization on spawn??? BIS Garage is half-baked and doesn't really work as advertised...
-				// _vehicleData = [
-				// 	[],	//CARS
-				// 	[],	//ARMOUR
-				// 	[],	//HELIS
-				// 	[],	//PLANES
-				// 	[],	//NAVAL
-				// 	[]	//STATICS
-				// ];
-
-				// _vehicleDataTypes_enum = [
-				// 	[ "car", "carx" ],
-				// 	[ "tank", "tankx" ],
-				// 	[ "helicopter", "helicopterx", "helicopterrtd" ],
-				// 	[ "airplane", "airplanex" ],
-				// 	[ "ship", "shipx", "sumbarinex" ]
-				// ];
-
-				// _type = toLower getText(configFile >> 'cfgVehicles' >> (typeOf _spawnedVeh) >> 'simulation' );
-				// _simulIndex = -1;
-				// {
-				// 	if (_type in _x) exitWith {
-				// 		_simulIndex = _forEachIndex;
-				// 	};
-				// } forEach _vehicleDataTypes_enum;
-
-				// if ((tolower (getText (configFile >> 'cfgVehicles' >> (typeOf _spawnedVeh) >> 'vehicleClass')) isEqualTo 'static')) then {
-				// 	_simulIndex = 5;
-				// };
-
-				// if (_simulIndex >= 0) then {
-				// 	_tmpType = _vehicleData select _simulIndex;
-				// 	_tmpType pushback (getText(configFile >> 'cfgVehicles' >> (typeOf _spawnedVeh) >> 'model'));
-				// 	_tmpType pushback [(configFile >> 'cfgVehicles' >> (typeOf _spawnedVeh))];
-
-				// 	BIS_fnc_garage_center = _spawnedVeh;
-				// 	BIS_fnc_garage_data = _vehicleData;
-				// 	uinamespace setvariable ["bis_fnc_garage_defaultClass", typeOf _spawnedVeh];
-				// 	missionnamespace setvariable ["BIS_fnc_arsenal_fullGarage", false];
-				// 	["Open",true] call BIS_fnc_garage;
-				// };
+				["Open",_spawnedVeh] spawn TREND_fnc_openVehicleCustomizationDialog;
 			}, [_SpawnedVeh], 5, true, true];
 
 			private _largeObjectCorrection = if (((boundingBoxReal _SpawnedVeh select 1 select 1) - (boundingBoxReal _SpawnedVeh select 0 select 1)) != 0 && {
@@ -238,6 +197,14 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 			];
 
 			_SpawnedVeh attachTo [player, _attachPos, "head"];
+
+			if (call TREND_VehiclesRequireRep) then {
+				TREND_SpawnedVehicles pushBack _SpawnedVeh; publicVariable "TREND_SpawnedVehicles";
+				_SpawnedVeh addEventHandler ["Killed", {
+					params ["_unit", "_killer", "_instigator", "_useEffects"];
+					[1, format[localize "STR_TRGM2_SpawnVehicles_KIA",name _unit]] spawn TREND_fnc_AdjustBadPoints;
+				}];
+			};
 
 			titleText[localize "STR_TRGM2_openDialogRequests_VehicleSpawned", "PLAIN"];
 		};

@@ -58,18 +58,6 @@ publicVariable "TREND_DefaultEnemyFactionArray";
 publicVariable "TREND_DefaultMilitiaFactionArrayText";
 publicVariable "TREND_DefaultMilitiaFactionArray";
 
-/////// Patrol settings ///////
-if (isNil "TREND_iAllowLargePat") then { TREND_iAllowLargePat =  1; publicVariable "TREND_iAllowLargePat"; }; //("OUT_par_AllowLargePatrols" call BIS_fnc_getParamValue);
-TREND_bAllowLargerPatrols = {
-	if (TREND_iAllowLargePat == 0) exitWith {true};
-	if (TREND_iAllowLargePat == 2) exitWith {selectRandom[false,true]};
-	false;
-};
-publicVariable "TREND_bAllowLargerPatrols";
-
-
-/////// Advanced Settings Set up ///////
-
 //example: TREND_AdvancedSettings select TREND_ADVSET_ENEMY_FACTIONS_IDX
 TREND_ADVSET_VIRTUAL_ARSENAL_IDX = 0; publicVariable "TREND_ADVSET_VIRTUAL_ARSENAL_IDX";
 TREND_ADVSET_GROUP_NAME_IDX = 1; publicVariable "TREND_ADVSET_GROUP_NAME_IDX";
@@ -88,8 +76,16 @@ TREND_ADVSET_SELECT_ENEMY_FLASHLIGHTS_IDX = 13; publicVariable "TREND_ADVSET_SEL
 TREND_ADVSET_MINIMISSIONS_IDX = 14; publicVariable "TREND_ADVSET_MINIMISSIONS_IDX";
 TREND_ADVSET_IEDTARGET_COMPACT_SPACING_IDX = 15; publicVariable "TREND_ADVSET_IEDTARGET_COMPACT_SPACING_IDX";
 TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX = 16; publicVariable "TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX";
-TREND_ADVSET_VEHICLE_SPAWNING_REQ_REP_IDX = 17; publicVariable "TREND_ADVSET_VEHICLE_SPAWNING_REQ_REP_IDX";
+TREND_ADVSET_LARGE_PATROLS_IDX = 17; publicVariable "TREND_ADVSET_LARGE_PATROLS_IDX";
+TREND_ADVSET_VEHICLE_SPAWNING_REQ_REP_IDX = 18; publicVariable "TREND_ADVSET_VEHICLE_SPAWNING_REQ_REP_IDX";
 
+/////// Patrol settings ///////
+if (isNil "TREND_iAllowLargePat") then { TREND_iAllowLargePat =  1; publicVariable "TREND_iAllowLargePat"; }; //("OUT_par_AllowLargePatrols" call BIS_fnc_getParamValue);
+TREND_bAllowLargerPatrols = { [selectRandom [true,false], true, false] select (TREND_AdvancedSettings select TREND_ADVSET_LARGE_PATROLS_IDX)};
+publicVariable "TREND_bAllowLargerPatrols";
+
+
+/////// Advanced Settings Set up ///////
 //NOTE the id's must go up in twos!
 TREND_AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex(zero based index)
 	[6001, localize "STR_TRGM2_TRGMSetUnitGlobalVars_VirtualArsenal","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1,localize "STR_TRGM2_Tooltip_AdvVirtualArsenal"],
@@ -133,7 +129,7 @@ TREND_bMoreEnemies = { ( (TREND_AdvancedSettings select TREND_ADVSET_HIGHER_ENEM
 publicVariable "TREND_bMoreEnemies";
 
 //////// Vehicle Spawning Rep Requirement ///////
-TREND_VehiclesRequireRep = { [false, true] select (TREND_AdvancedSettings select TREND_ADVSET_VEHICLE_SPAWNING_REQ_REP_IDX isEqualTo 1); };
+TREND_VehiclesRequireRep = { [false, true] select (TREND_AdvancedSettings select TREND_ADVSET_VEHICLE_SPAWNING_REQ_REP_IDX); };
 publicVariable "TREND_VehiclesRequireRep";
 
 /////// Revive Settings Set up ///////

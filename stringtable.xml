@@ -1125,6 +1125,10 @@
                 <Original>Your reputation needs to be higher to spawn vehicles</Original>
                 <English>Your reputation needs to be higher to spawn vehicles</English>
             </Key>
+            <Key ID="STR_TRGM2_SpawnVehicles_KIA">
+                <Original>Destoryed: %1</Original>
+                <English>Destoryed: %1</English>
+            </Key>
             <Key ID="STR_TRGM2_ServerSave_Save1">
                 <Original>This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save is only available to the current map</Original>
                 <English>This campaign will saved each time your reputation changes.\n\nOnly you will be able to load this save data!\n\nThis save is only available to the current map</English>

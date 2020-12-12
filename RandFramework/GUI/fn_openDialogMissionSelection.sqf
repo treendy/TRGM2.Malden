@@ -123,6 +123,9 @@ if (isNil "TREND_InitialLoadedPreviousSettings" && !TREND_ForceMissionSetup) the
 			if (count TREND_AdvancedSettings < 17) then {
 				TREND_AdvancedSettings pushBack (TREND_DefaultAdvancedSettings select 16);
 			};
+			if (count TREND_AdvancedSettings < 18) then {
+				TREND_AdvancedSettings pushBack (TREND_DefaultAdvancedSettings select 17);
+			};
 
 			if (isClass(configFile >> "CfgPatches" >> "ace_medical")) then {
 				if (TREND_iUseRevive != 0) then { //Ace is active, so need to make sure "no revive" is selected
