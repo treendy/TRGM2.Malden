@@ -231,7 +231,7 @@ sTank2APC				 = { _veh = "O_APC_Wheeled_02_rcws_v2_F"; if (count TREND_EastAPCs 
 sTank3Tank				 = { _veh = "O_MBT_02_cannon_F"; if (count TREND_EastTanks > 0) then { _veh = selectRandom TREND_EastTanks; }; _veh; };
 sAAAVeh					 = { _veh = "O_APC_Tracked_02_AA_F"; if (count TREND_EastAntiAir > 0) then { _veh = selectRandom TREND_EastAntiAir; }; _veh; };
 sMortar					 = { _veh = ["O_Mortar_01_F"]; if (count TREND_EastMortars > 0) then { _veh = TREND_EastMortars; }; _veh; };
-sArtilleryVeh			 = { _veh = "O_MBT_02_arty_F"; if (count TREND_EastArtillery > 0) then { _veh = selectRandom TREND_EastArtillery; }; _veh; };
+sArtilleryVeh			 = { _veh = ["O_MBT_02_arty_F"]; if (count TREND_EastArtillery > 0) then { _veh = TREND_EastArtillery; }; _veh; };
 sBoatUnit				 = { _veh = "O_Boat_Armed_01_hmg_F"; if (count TREND_EastBoats > 0) then { _veh = selectRandom TREND_EastBoats; }; _veh; };
 ReinforceVehicle		 = { _veh = "O_Heli_Light_02_unarmed_F"; if (count (TREND_EastUnarmedHelos select {_x call TREND_fnc_isTransport}) > 0) then { _veh = selectRandom (TREND_EastUnarmedHelos select {_x call TREND_fnc_isTransport}); }; _veh; };
 EnemyAirToAirSupports	 = { _veh = ["O_Plane_Fighter_02_F"]; if (count TREND_EastPlanes > 0) then { _veh = TREND_EastPlanes; }; _veh; };

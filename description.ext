@@ -69,7 +69,7 @@ class Params
 {
 	class CustomMission
 	{
-		title = "Enable Custom Mission (Disables mission setup dialog, mission is set up using TRGMSetDefaultMissionSetupVars.sqf)"; // Param name visible in the list
+		title = "Enable Custom Mission (Disables mission setup dialog, mission is set up using 'CustomMission/TRGMSetDefaultMissionSetupVars.sqf')"; // Param name visible in the list
 		values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
 		texts[] = {"Disable","Enable"}; // Description of each selectable item
 		default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
@@ -78,6 +78,14 @@ class Params
 	class DebugMode
 	{
 		title = "Enable Debugging Mode"; // Param name visible in the list
+		values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
+		texts[] = {"Disable","Enable"}; // Description of each selectable item
+		default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
+		// Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
+	};
+	class ResetMissionSettings
+	{
+		title = "Reset all saved mission settings to default values"; // Param name visible in the list
 		values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
 		texts[] = {"Disable","Enable"}; // Description of each selectable item
 		default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used

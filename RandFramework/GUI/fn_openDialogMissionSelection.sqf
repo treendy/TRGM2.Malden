@@ -19,22 +19,8 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc
 
 if (isNil "TREND_InitialLoadedPreviousSettings" && !TREND_ForceMissionSetup) then {
 	TREND_InitialLoadedPreviousSettings = profileNamespace getVariable [worldname + ":PreviousSettings",Nil]; //Get this from server only, but use player ID!!!
-	if (!isNil "TREND_InitialLoadedPreviousSettings") then {
-		if (count TREND_InitialLoadedPreviousSettings > 0) then {
-		_savePreviousSettings = [
-			TREND_iMissionParamType,
-			TREND_iMissionParamObjective,
-			TREND_iAllowNVG,
-			TREND_iMissionParamRepOption,
-			TREND_iWeather,
-			TREND_iUseRevive,
-			TREND_iStartLocation,
-			TREND_AdvancedSettings,
-			TREND_EnemyFactionData,
-			TREND_LoadoutData,
-			TREND_arrayTime
-		];
-			TREND_iMissionParamType =  TREND_InitialLoadedPreviousSettings select 0; publicVariable "TREND_iMissionParamType";
+	if (!isNil "TREND_InitialLoadedPreviousSettings" && {count TREND_InitialLoadedPreviousSettings > 0 && {((["ResetMissionSettings", 0] call BIS_fnc_getParamValue) isEqualTo 0)}}) then {
+		TREND_iMissionParamType =  TREND_InitialLoadedPreviousSettings select 0; publicVariable "TREND_iMissionParamType";
 			//TREND_iMissionParamObjective =  TREND_InitialLoadedPreviousSettings select 1; publicVariable "TREND_iMissionParamObjective";
 			TREND_iAllowNVG =  TREND_InitialLoadedPreviousSettings select 2; publicVariable "TREND_iAllowNVG";
 			TREND_iMissionParamRepOption =  TREND_InitialLoadedPreviousSettings select 3; publicVariable "TREND_iMissionParamRepOption";
@@ -52,86 +38,67 @@ if (isNil "TREND_InitialLoadedPreviousSettings" && !TREND_ForceMissionSetup) the
 
 			TREND_LoadoutData =  TREND_InitialLoadedPreviousSettings select 9; publicVariable "TREND_InitialLoadedPreviousSettings";
 			if (isNil "TREND_LoadoutData") then { TREND_LoadoutData =   ""; publicVariable "TREND_LoadoutData"; };
+	};
 
-			if (count TREND_AdvancedSettings < 6) then {
-				TREND_AdvancedSettings pushBack 10;
-			};
-			if (count TREND_AdvancedSettings < 7) then {
-				TREND_AdvancedSettings pushBack (TREND_DefaultEnemyFactionValue select 0);
-			};
-			if (TREND_AdvancedSettings select 6 == 0) then { //we had an issue with some being set to zero (due to a bad published version, this makes sure any zeros are adjusted to correct id)
-				TREND_AdvancedSettings set [6,TREND_DefaultEnemyFactionValue select 0];
-			};
+	if (count TREND_AdvancedSettings < 6) then {
+		TREND_AdvancedSettings pushBack 10;
+	};
 
-			if (count TREND_AdvancedSettings < 8) then {
-				TREND_AdvancedSettings pushBack (TREND_DefaultMilitiaFactionValue select 0);
-			};
+	if (count TREND_AdvancedSettings < 7) then {
+		TREND_AdvancedSettings pushBack (TREND_DefaultEnemyFactionValue select 0);
+	};
 
-			if (count TREND_AdvancedSettings < 9) then {
-				TREND_AdvancedSettings pushBack (TREND_DefaultFriendlyFactionValue select 0);
-			};
+	if (TREND_AdvancedSettings select 6 == 0) then { //we had an issue with some being set to zero (due to a bad published version, this makes sure any zeros are adjusted to correct id)
+		TREND_AdvancedSettings set [6,TREND_DefaultEnemyFactionValue select 0];
+	};
 
-			if !(TREND_AdvancedSettings select 6 in TREND_DefaultEnemyFactionArray) then {
-				_bFound = false;
-				{
-					if (!_bFound && _x in TREND_DefaultEnemyFactionArray) then {
-						_bFound = true;
-						TREND_AdvancedSettings set [6,_x];
-					};
-				} forEach TREND_DefaultEnemyFactionValue;
-			};
-			if !(TREND_AdvancedSettings select 7 in TREND_DefaultMilitiaFactionArray) then {
-				_bFound = false;
-				{
-					if (!_bFound && _x in TREND_DefaultMilitiaFactionArray) then {
-						_bFound = true;
-						TREND_AdvancedSettings set [7,_x];
-					};
-				} forEach TREND_DefaultMilitiaFactionValue;
-			};
-			if !(TREND_AdvancedSettings select 8 in TREND_DefaultFriendlyFactionArray) then {
-				_bFound = false;
-				{
-					if (!_bFound && _x in TREND_DefaultFriendlyFactionArray) then {
-						_bFound = true;
-						TREND_AdvancedSettings set [8,_x];
-					};
-				} forEach TREND_DefaultFriendlyFactionValue;
-			};
+	if (count TREND_AdvancedSettings < 8) then {
+		TREND_AdvancedSettings pushBack (TREND_DefaultMilitiaFactionValue select 0);
+	};
 
-			if (count TREND_AdvancedSettings < 10) then {
-				TREND_AdvancedSettings pushBack (TREND_DefaultAdvancedSettings select 9);
-			};
-			if (count TREND_AdvancedSettings < 11) then {
-				TREND_AdvancedSettings pushBack (TREND_DefaultAdvancedSettings select 10);
-			};
-			if (count TREND_AdvancedSettings < 12) then {
-				TREND_AdvancedSettings pushBack (TREND_DefaultAdvancedSettings select 11);
-			};
-			if (count TREND_AdvancedSettings < 13) then {
-				TREND_AdvancedSettings pushBack (TREND_DefaultAdvancedSettings select 12);
-			};
-			if (count TREND_AdvancedSettings < 14) then {
-				TREND_AdvancedSettings pushBack (TREND_DefaultAdvancedSettings select 13);
-			};
-			if (count TREND_AdvancedSettings < 15) then {
-				TREND_AdvancedSettings pushBack (TREND_DefaultAdvancedSettings select 14);
-			};
-			if (count TREND_AdvancedSettings < 16) then {
-				TREND_AdvancedSettings pushBack (TREND_DefaultAdvancedSettings select 15);
-			};
-			if (count TREND_AdvancedSettings < 17) then {
-				TREND_AdvancedSettings pushBack (TREND_DefaultAdvancedSettings select 16);
-			};
-			if (count TREND_AdvancedSettings < 18) then {
-				TREND_AdvancedSettings pushBack (TREND_DefaultAdvancedSettings select 17);
-			};
+	if (count TREND_AdvancedSettings < 9) then {
+		TREND_AdvancedSettings pushBack (TREND_DefaultFriendlyFactionValue select 0);
+	};
 
-			if (isClass(configFile >> "CfgPatches" >> "ace_medical")) then {
-				if (TREND_iUseRevive != 0) then { //Ace is active, so need to make sure "no revive" is selected
-					TREND_iUseRevive =  0; publicVariable "TREND_iUseRevive";
-				};
+	if !(TREND_AdvancedSettings select 6 in TREND_DefaultEnemyFactionArray) then {
+		_bFound = false;
+		{
+			if (!_bFound && _x in TREND_DefaultEnemyFactionArray) then {
+				_bFound = true;
+				TREND_AdvancedSettings set [6,_x];
 			};
+		} forEach TREND_DefaultEnemyFactionValue;
+	};
+
+	if !(TREND_AdvancedSettings select 7 in TREND_DefaultMilitiaFactionArray) then {
+		_bFound = false;
+		{
+			if (!_bFound && _x in TREND_DefaultMilitiaFactionArray) then {
+				_bFound = true;
+				TREND_AdvancedSettings set [7,_x];
+			};
+		} forEach TREND_DefaultMilitiaFactionValue;
+	};
+
+	if !(TREND_AdvancedSettings select 8 in TREND_DefaultFriendlyFactionArray) then {
+		_bFound = false;
+		{
+			if (!_bFound && _x in TREND_DefaultFriendlyFactionArray) then {
+				_bFound = true;
+				TREND_AdvancedSettings set [8,_x];
+			};
+		} forEach TREND_DefaultFriendlyFactionValue;
+	};
+
+	for [{private _i = 9}, {_i < count TREND_DefaultAdvancedSettings}, {_i = _i + 1}] do {
+		if (count TREND_AdvancedSettings < (_i + 1)) then {
+			TREND_AdvancedSettings pushBack (TREND_DefaultAdvancedSettings select _i);
+		};
+	};
+
+	if (isClass(configFile >> "CfgPatches" >> "ace_medical")) then {
+		if (TREND_iUseRevive != 0) then { //Ace is active, so need to make sure "no revive" is selected
+			TREND_iUseRevive =  0; publicVariable "TREND_iUseRevive";
 		};
 	};
 	TREND_InitialLoadedPreviousSettings = []; // no longer Nil, so will not reload our previously saved data and change any current changes

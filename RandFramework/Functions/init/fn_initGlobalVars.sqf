@@ -19,6 +19,7 @@ if ((["CustomMission", 0] call BIS_fnc_getParamValue) isEqualTo 1) then {
 	call compile preprocessFileLineNumbers "CustomMission\TRGMSetDefaultMissionSetupVars.sqf";
 };
 
+
 // if (isNil "TREND_DefaultEnemyFactionValue") then { TREND_DefaultEnemyFactionValue = [1]; publicVariable "TREND_DefaultEnemyFactionValue"; };//No longer use these... was having issue with naked players and no enemy... may be one day will improve this and add in again (orignally this was to allow maps like Kunduz default to cup takistan militia if available, if not it should go to next available value)
 // if (isNil "TREND_DefaultFriendlyFactionValue") then { TREND_DefaultFriendlyFactionValue = [1]; publicVariable "TREND_DefaultFriendlyFactionValue"; }; //same reason as above
 

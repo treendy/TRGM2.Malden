@@ -164,7 +164,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		[_sInformant1Name,_initPos] spawn TREND_fnc_WalkingGuyLoop;
 
 		if (_bIsMainObjective) then {
-			//if interrogate officer or kill weapon dealer or eleminate officer and main objective, then complete task when searched
+			//if interrogate or kill, and is a main objective, then complete task when searched
 			//its only the main objective that we require the player to get to the body... otherwise, can kill him from a distance
 			[_objInformant, [_searchText, {_this spawn TREND_fnc_IdentifyHVT;}, [], 10, true, true, "", "_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 		};
