@@ -1,4 +1,21 @@
-
+/*
+ * Author: TheAce0296
+ * Revised version the BIS_fnc_garage to work as a
+ * vehicle customization during the mission.
+ *
+ * Only the "Open" mode should be called externally, all
+ * other modes are called internally by this function.
+ *
+ * Arguments:
+ * 0: Mode <STRING>
+ * 1: The vehicle to be customized <OBJECT> (Only applies to "Open" mode)
+ *
+ * Return Value:
+ * nil
+ *
+ * Example:
+ * ["Open", vehicle player] spawn TREND_fnc_openVehicleCustomizationDialog
+ */
 #define FADE_DELAY	0.15
 
 #define STATS\
@@ -26,6 +43,7 @@ private _checkboxTextures =
 ];
 
 ///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
 if (_mode isEqualTo "draw3D") exitWith
 {
 	private _display = uiNamespace getVariable ["TREND_vehicleDisplay", findDisplay 8080];
@@ -49,6 +67,7 @@ if (_mode isEqualTo "draw3D") exitWith
 	};
 };
 
+///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 if (_mode isEqualTo "Mouse") exitwith
 {
@@ -109,7 +128,11 @@ if (_mode isEqualTo "Mouse") exitwith
 	};
 };
 
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
 switch _mode do {
+	///////////////////////////////////////////////////////////////////////////////////////////
 	case "Open": {
 		params ["_center"];
 		if !(isnull (uinamespace getvariable ["TREND_vehicleCam", objnull])) exitwith { "Vehicle customization is already running" call TREND_fnc_log };
@@ -119,11 +142,152 @@ switch _mode do {
 		uiNamespace setVariable ["TREND_vehicleDisplay", _display];
 		uiNamespace setVariable ["TREND_vehicleCenter", _center];
 
+		_display displayAddEventHandler ["KeyDown", {
+			params ["_display", "_key", "_shift", "_ctrl", "_alt"];
+			_handled = false;
+			switch (_key) do
+			{
+				//Esc key
+				case 1:
+				{
+					["buttonClose", [_display]] call TREND_fnc_openVehicleCustomizationDialog;
+					_handled = true;
+				};
+			};
+			_handled;
+		}];
+
 		["InitGUI",[_display]] call TREND_fnc_openVehicleCustomizationDialog;
 		["Preload"] call TREND_fnc_openVehicleCustomizationDialog;
 		["ListAdd",[_display]] call TREND_fnc_openVehicleCustomizationDialog;
 
 		["BIS_fnc_arsenal"] call BIS_fnc_endLoadingScreen;
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////
+	case "InitGUI":
+	{
+		_display = uiNamespace getVariable ["TREND_vehicleDisplay", findDisplay 8080];
+
+		TREND_vehicleButtons = [[],[]];
+
+		private _center = uiNamespace getvariable ["TREND_vehicleCenter", player];
+		_center hideObject false;
+		cuttext ["","plain"];
+		showcommandingmenu "";
+
+		//--- Force internal view to enable consistent screen blurring. Restore the original view after closing Arsenal.
+		uiNamespace setVariable ["TREND_playerBaseView", cameraview];
+		player switchcamera "internal";
+
+		showhud false;
+
+		_display displayaddeventhandler ["mousebuttondown","['MouseButtonDown',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
+		_display displayaddeventhandler ["mousebuttonup","['MouseButtonUp',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
+
+		_ctrlMouseArea = _display displayctrl 899;
+		_ctrlMouseArea ctrladdeventhandler ["mousemoving","['Mouse',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
+		_ctrlMouseArea ctrladdeventhandler ["mouseholding","['Mouse',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
+		_ctrlMouseArea ctrladdeventhandler ["mousebuttonclick","['TabDeselect',[ctrlparent (_this select 0),_this select 1]] call TREND_fnc_openVehicleCustomizationDialog;"];
+		_ctrlMouseArea ctrladdeventhandler ["mousezchanged","['MouseZChanged',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
+		ctrlsetfocus _ctrlMouseArea;
+
+		_ctrlMouseBlock = _display displayctrl 898;
+		_ctrlMouseBlock ctrlenable false;
+		_ctrlMouseBlock ctrladdeventhandler ["setfocus",{_this spawn {disableserialization; (_this select 0) ctrlenable false; (_this select 0) ctrlenable true;};}];
+
+		_ctrlMessage = _display displayctrl 996;
+		_ctrlMessage ctrlsetfade 1;
+		_ctrlMessage ctrlcommit 0;
+
+		//--- UI event handlers
+		_ctrlButtonInterface = _display displayctrl 44151;
+		_ctrlButtonInterface ctrladdeventhandler ["buttonclick","['buttonInterface',[ctrlparent (_this select 0)]] call TREND_fnc_openVehicleCustomizationDialog;"];
+
+		_ctrlButtonOK = _display displayctrl 44346;
+		_ctrlButtonOK ctrladdeventhandler ["buttonclick","['buttonOK',[ctrlparent (_this select 0),'init']] call TREND_fnc_openVehicleCustomizationDialog;"];
+
+		_ctrlArrowLeft = _display displayctrl 992;
+		_ctrlArrowLeft ctrladdeventhandler ["buttonclick","['buttonCargo',[ctrlparent (_this select 0),-1]] call TREND_fnc_openVehicleCustomizationDialog;"];
+
+		//--- Menus
+		_ctrlIcon = _display displayctrl 930;
+
+		if !(isnull _ctrlIcon) then
+		{
+			_ctrlIconPos = ctrlposition _ctrlIcon;
+			_ctrlTabs = _display displayctrl 1800;
+			_ctrlTabsPos = ctrlposition _ctrlTabs;
+			_ctrlTabsPosX = _ctrlTabsPos select 0;
+			_ctrlTabsPosY = _ctrlTabsPos select 1;
+			_ctrlIconPosW = _ctrlIconPos select 2;
+			_ctrlIconPosH = _ctrlIconPos select 3;
+			_columns = (_ctrlTabsPos select 2) / _ctrlIconPosW;
+			_rows = (_ctrlTabsPos select 3) / _ctrlIconPosH;
+			_gridH = ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25);
+			{
+				_idc = _x;
+				_ctrlTab = _display displayctrl (930 + _idc);
+
+				_ctrlTab ctrladdeventhandler ["buttonclick",format ["['TabSelectLeft',[ctrlparent (_this select 0),%1]] call TREND_fnc_openVehicleCustomizationDialog;",_idc]];
+				_ctrlTab ctrladdeventhandler ["mousezchanged","['MouseZChanged',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
+
+				_ctrlList = _display displayctrl (960 + _idc);
+				_ctrlList ctrlenable false;
+				_ctrlList ctrlsetfade 1;
+				_ctrlList ctrlsetfontheight (_gridH * 0.8);
+				_ctrlList ctrlcommit 0;
+
+				_ctrlList ctrladdeventhandler ["lbselchanged",format ["['SelectItem',[ctrlparent (_this select 0),(_this select 0),%1]] call TREND_fnc_openVehicleCustomizationDialog;",_idc]];
+
+				_ctrlListDisabled = _display displayctrl (860 + _idc);
+				_ctrlListDisabled ctrlenable false;
+			}
+			foreach [0,1];
+		};
+
+		['TabDeselect',[_display,-1]] call TREND_fnc_openVehicleCustomizationDialog;
+		['SelectItem',[_display,controlnull,-1]] call TREND_fnc_openVehicleCustomizationDialog;
+
+		_ctrlButtonClose = _display displayctrl 44448;
+		_ctrlButtonClose ctrladdeventhandler ["buttonclick","['buttonClose',[ctrlparent (_this select 0)]] spawn TREND_fnc_openVehicleCustomizationDialog; true"];
+
+		{
+			_ctrl = _display displayctrl _x;
+			_ctrl ctrlenable false;
+			_ctrl ctrlsetfade 1;
+			_ctrl ctrlcommit 0;
+		}
+		foreach [1801,994,1803,1804];
+
+		_ctrlSpace = _display displayctrl 27903;
+		_ctrlSpace ctrlsetposition [-1,-1,0,0];
+		_ctrlSpace ctrlcommit 0;
+
+		//--- Camera init
+		TREND_vehicleCamPos = [5,0,0,[0,0,0.85]];
+
+		private _posCenter = getPosASLVisual _center;
+
+		private _target = createAgent ["Logic", _posCenter, [], 0, "none"];
+		_target attachTo [_center, TREND_vehicleCamPos select 3, ""];
+		uiNamespace setVariable ["TREND_vehicleTarget", _target];
+
+		private _cam = "camera" camCreate _posCenter;
+		//_cam setPosASL _posCenter;
+		_cam cameraEffect ["internal", "back"];
+		_cam camPrepareFocus [-1,-1];
+		_cam camPrepareFov 0.35;
+		_cam camCommitPrepared 0;
+		//cameraEffectEnableHUD true;
+		showCinemaBorder false;
+		uiNamespace setVariable ["TREND_vehicleCam", _cam];
+		["#(argb,8,8,3)color(0,0,0,1)",false,nil,0,[0,0.5]] call BIS_fnc_textTiles;
+
+		//--- Camera reset
+		["Mouse", [controlnull, 0, 0]] call TREND_fnc_openVehicleCustomizationDialog;
+		_draw3D = addMissionEventHandler ["draw3D", { ["draw3D"] call TREND_fnc_openVehicleCustomizationDialog; }];
+		uiNamespace setVariable ["TREND_vehicleDraw3D", _draw3D];
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -503,131 +667,5 @@ switch _mode do {
 
 			_ctrlListTextures lbsetpicture [_i,_checkboxTextures select _selected];
 		};
-	};
-
-	///////////////////////////////////////////////////////////////////////////////////////////
-	case "InitGUI":
-	{
-		_display = uiNamespace getVariable ["TREND_vehicleDisplay", findDisplay 8080];
-
-		TREND_vehicleButtons = [[],[]];
-
-		private _center = uiNamespace getvariable ["TREND_vehicleCenter", player];
-		_center hideObject false;
-		cuttext ["","plain"];
-		showcommandingmenu "";
-
-		//--- Force internal view to enable consistent screen blurring. Restore the original view after closing Arsenal.
-		uiNamespace setVariable ["TREND_playerBaseView", cameraview];
-		player switchcamera "internal";
-
-		showhud false;
-
-		_display displayaddeventhandler ["mousebuttondown","['MouseButtonDown',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
-		_display displayaddeventhandler ["mousebuttonup","['MouseButtonUp',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
-
-		_ctrlMouseArea = _display displayctrl 899;
-		_ctrlMouseArea ctrladdeventhandler ["mousemoving","['Mouse',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
-		_ctrlMouseArea ctrladdeventhandler ["mouseholding","['Mouse',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
-		_ctrlMouseArea ctrladdeventhandler ["mousebuttonclick","['TabDeselect',[ctrlparent (_this select 0),_this select 1]] call TREND_fnc_openVehicleCustomizationDialog;"];
-		_ctrlMouseArea ctrladdeventhandler ["mousezchanged","['MouseZChanged',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
-		ctrlsetfocus _ctrlMouseArea;
-
-		_ctrlMouseBlock = _display displayctrl 898;
-		_ctrlMouseBlock ctrlenable false;
-		_ctrlMouseBlock ctrladdeventhandler ["setfocus",{_this spawn {disableserialization; (_this select 0) ctrlenable false; (_this select 0) ctrlenable true;};}];
-
-		_ctrlMessage = _display displayctrl 996;
-		_ctrlMessage ctrlsetfade 1;
-		_ctrlMessage ctrlcommit 0;
-
-		//--- UI event handlers
-		_ctrlButtonInterface = _display displayctrl 44151;
-		_ctrlButtonInterface ctrladdeventhandler ["buttonclick","['buttonInterface',[ctrlparent (_this select 0)]] call TREND_fnc_openVehicleCustomizationDialog;"];
-
-		_ctrlButtonOK = _display displayctrl 44346;
-		_ctrlButtonOK ctrladdeventhandler ["buttonclick","['buttonOK',[ctrlparent (_this select 0),'init']] call TREND_fnc_openVehicleCustomizationDialog;"];
-
-		_ctrlArrowLeft = _display displayctrl 992;
-		_ctrlArrowLeft ctrladdeventhandler ["buttonclick","['buttonCargo',[ctrlparent (_this select 0),-1]] call TREND_fnc_openVehicleCustomizationDialog;"];
-
-		//--- Menus
-		_ctrlIcon = _display displayctrl 930;
-
-		if !(isnull _ctrlIcon) then
-		{
-			_ctrlIconPos = ctrlposition _ctrlIcon;
-			_ctrlTabs = _display displayctrl 1800;
-			_ctrlTabsPos = ctrlposition _ctrlTabs;
-			_ctrlTabsPosX = _ctrlTabsPos select 0;
-			_ctrlTabsPosY = _ctrlTabsPos select 1;
-			_ctrlIconPosW = _ctrlIconPos select 2;
-			_ctrlIconPosH = _ctrlIconPos select 3;
-			_columns = (_ctrlTabsPos select 2) / _ctrlIconPosW;
-			_rows = (_ctrlTabsPos select 3) / _ctrlIconPosH;
-			_gridH = ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25);
-			{
-				_idc = _x;
-				_ctrlTab = _display displayctrl (930 + _idc);
-
-				_ctrlTab ctrladdeventhandler ["buttonclick",format ["['TabSelectLeft',[ctrlparent (_this select 0),%1]] call TREND_fnc_openVehicleCustomizationDialog;",_idc]];
-				_ctrlTab ctrladdeventhandler ["mousezchanged","['MouseZChanged',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
-
-				_ctrlList = _display displayctrl (960 + _idc);
-				_ctrlList ctrlenable false;
-				_ctrlList ctrlsetfade 1;
-				_ctrlList ctrlsetfontheight (_gridH * 0.8);
-				_ctrlList ctrlcommit 0;
-
-				_ctrlList ctrladdeventhandler ["lbselchanged",format ["['SelectItem',[ctrlparent (_this select 0),(_this select 0),%1]] call TREND_fnc_openVehicleCustomizationDialog;",_idc]];
-
-				_ctrlListDisabled = _display displayctrl (860 + _idc);
-				_ctrlListDisabled ctrlenable false;
-			}
-			foreach [0,1];
-		};
-
-		['TabDeselect',[_display,-1]] call TREND_fnc_openVehicleCustomizationDialog;
-		['SelectItem',[_display,controlnull,-1]] call TREND_fnc_openVehicleCustomizationDialog;
-
-		_ctrlButtonClose = _display displayctrl 44448;
-		_ctrlButtonClose ctrladdeventhandler ["buttonclick","['buttonClose',[ctrlparent (_this select 0)]] spawn TREND_fnc_openVehicleCustomizationDialog; true"];
-
-		{
-			_ctrl = _display displayctrl _x;
-			_ctrl ctrlenable false;
-			_ctrl ctrlsetfade 1;
-			_ctrl ctrlcommit 0;
-		}
-		foreach [1801,994,1803,1804];
-
-		_ctrlSpace = _display displayctrl 27903;
-		_ctrlSpace ctrlsetposition [-1,-1,0,0];
-		_ctrlSpace ctrlcommit 0;
-
-		//--- Camera init
-		TREND_vehicleCamPos = [5,0,0,[0,0,0.85]];
-
-		private _posCenter = getPosASLVisual _center;
-
-		private _target = createAgent ["Logic", _posCenter, [], 0, "none"];
-		_target attachTo [_center, TREND_vehicleCamPos select 3, ""];
-		uiNamespace setVariable ["TREND_vehicleTarget", _target];
-
-		private _cam = "camera" camCreate _posCenter;
-		//_cam setPosASL _posCenter;
-		_cam cameraEffect ["internal", "back"];
-		_cam camPrepareFocus [-1,-1];
-		_cam camPrepareFov 0.35;
-		_cam camCommitPrepared 0;
-		//cameraEffectEnableHUD true;
-		showCinemaBorder false;
-		uiNamespace setVariable ["TREND_vehicleCam", _cam];
-		["#(argb,8,8,3)color(0,0,0,1)",false,nil,0,[0,0.5]] call BIS_fnc_textTiles;
-
-		//--- Camera reset
-		["Mouse", [controlnull, 0, 0]] call TREND_fnc_openVehicleCustomizationDialog;
-		_draw3D = addMissionEventHandler ["draw3D", { ["draw3D"] call TREND_fnc_openVehicleCustomizationDialog; }];
-		uiNamespace setVariable ["TREND_vehicleDraw3D", _draw3D];
 	};
 };

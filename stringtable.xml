@@ -133,8 +133,8 @@
         </Container>
         <Container name="Init">
             <Key ID="STR_TRGM2_Init_TRGM2Engine">
-                <Original>TRGM2 Engine</Original>
-                <English>TRGM2 Engine</English>
+                <Original>TRGM2</Original>
+                <English>TRGM2</English>
                 <Chinese>TRGM2引擎</Chinese>
                 <Chinesesimp>TRGM2引擎</Chinesesimp>
                 <Spanish>Motor TRGM2</Spanish>
@@ -2107,8 +2107,8 @@
                 <Korean>5시간 동안 계속</Korean>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_ScriptsUsed">
-                <Original>RickOShay's Dust Storm Script&lt;br/&gt;Psycho's A3 Wounding System&lt;br/&gt;Alias's Monsoon and Ambient Battle Scripts</Original>
-                <English>RickOShay's Dust Storm Script&lt;br/&gt;Psycho's A3 Wounding System&lt;br/&gt;Alias's Monsoon and Ambient Battle Scripts</English>
+                <Original>RickOShay's Dust Storm Script&lt;br/&gt;Psycho's A3 Wounding System&lt;br/&gt;Alias's Monsoon, Blizzard, and Ambient Battle Scripts</Original>
+                <English>RickOShay's Dust Storm Script&lt;br/&gt;Psycho's A3 Wounding System&lt;br/&gt;Alias's Monsoon, Blizzard, and Ambient Battle Scripts</English>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions1">
                 <Original>This is the default mission type.  There will be one main objective that is occupied by a heavy enemy army.\n\nYou will also have two optional mini missions, these mini missions will either give you intel on the main AO, or will help increase your reputation depending on the mission type.</Original>
@@ -3653,6 +3653,22 @@
                 <English>Hidden Heavy Mission (Full map, gather intel)</English>
                 <Korean>비밀 대형 임무 (전역, 정보수집)</Korean>
             </Key>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions11">
+                <Original>There will be three main objectives that are occupied by a heavy enemy army.</Original>
+                <English>There will be three main objectives that are occupied by a heavy enemy army.</English>
+            </Key>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName11">
+                <Original>Three Heavy Missions</Original>
+                <English>Three Heavy Mission</English>
+            </Key>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions12">
+                <Original>Three Heavy missions, locations are unknown, and tasks are unknown, need to gain intel from locals, recon area, do what ever you can to locate and identity your objectives!</Original>
+                <English>Three Heavy missions, locations are unknown, and tasks are unknown, need to gain intel from locals, recon area, do what ever you can to locate and identity your objectives!</English>
+            </Key>
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName12">
+                <Original>Three Hidden Heavy Missions (Full map, gather intel)</Original>
+                <English>Three Hidden Heavy Missions (Full map, gather intel)</English>
+            </Key>
 
             <Key ID="STR_TRGM2_TargetMissionTitle">
                 <Original>Search and Destroy</Original>
@@ -3783,6 +3799,16 @@
             <Key ID="STR_TRGM2_Tooltip_AdvVehicleReqRep">
                 <Original>Vehicle spawning via the requests menu, will require rep points.\n If enabled, vehicles will cost 1 rep point and lower rep when destroyed.</Original>
                 <English>Vehicle spawning via the requests menu, will require rep points.\n If enabled, vehicles will cost 1 rep point and lower rep when destroyed.</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_TimeBetweenSpotted">
+                <Original>Friendly Spotted Cooldown</Original>
+                <English>Friendly Spotted Cooldown</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_Tooltip_TimeBetweenSpotted">
+                <Original>Sets the time between enemy responses to a player being spotted. (Higher value means longer time before enemy units will call reinforcements, artillery, nearby units, etc.)</Original>
+                <English>Sets the time between enemy responses to a player being spotted. (Higher value means longer time before enemy units will call reinforcements, artillery, nearby units, etc.)</English>
             </Key>
 
             <Key ID="STR_TRGM2_Tooltip_AdvVirtualArsenal">

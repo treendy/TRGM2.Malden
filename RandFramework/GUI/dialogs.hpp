@@ -640,17 +640,17 @@ class Trend_DialogRequests_VehicleCustomization
             text = "-";
             x = -1;
             y = -1;
-            w = "1 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            h = "1 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "(((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
         };
         class BackgroundLeft: RscText
         {
             fade = 1;
             idc = 994;
-            x = "safezoneX + (1 + 1.5 * 	2) * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            y = "safezoneY + 0.5 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-            w = "15 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            h = "safezoneH - 2.5 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            x = "safezoneX + (1 + 1.5 * 2) * (((safezoneW / safezoneH) min 1.2) / 40)";
+            y = "safezoneY + 0.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "15 * (((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "safezoneH - 2.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
             colorBackground[] = {0,0,0,0.5};
         };
         class LineIcon: RscFrame
@@ -669,8 +669,8 @@ class Trend_DialogRequests_VehicleCustomization
             idc = 1804;
             x = -1;
             y = -1;
-            w = "0.6 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            h = "1.4 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "0.6 * (((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "1.4 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
             colorBackground[] = {0,0,0,1};
         };
         class LineTabLeftSelected: RscText
@@ -678,90 +678,90 @@ class Trend_DialogRequests_VehicleCustomization
             idc = 1805;
             x = "safezoneX";
             y = -1;
-            w = "0.5 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            h = "1.4 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "0.5 * (((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "1.4 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
             colorBackground[] = {0,0,0,0.8};
         };
         class Tabs: RscFrame
         {
             fade = 1;
             idc = 1800;
-            x = "safezoneX + 0.5 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            y = "safezoneY + 0.5 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-            w = "1.5 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            h = "40 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            x = "safezoneX + 0.5 * (((safezoneW / safezoneH) min 1.2) / 40)";
+            y = "safezoneY + 0.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "1.5 * (((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "40 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
             colorText[] = {0,0,0,0};
         };
         class FrameLeft: RscFrame
         {
             fade = 1;
             idc = 1801;
-            x = "safezoneX + (1 + 1.5 * 	2) * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            y = "safezoneY + 0.5 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-            w = "15 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            h = "safezoneH - 2.5 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            x = "safezoneX + (1 + 1.5 * 2) * (((safezoneW / safezoneH) min 1.2) / 40)";
+            y = "safezoneY + 0.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "15 * (((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "safezoneH - 2.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
             colorText[] = {0,0,0,1};
         };
         class Message: RscText
         {
             fade = 1;
             idc = 996;
-            x = "safezoneX + (0.5 * safezoneW) - (0.5 * ((safezoneW - 36 * 			(			((safezoneW / safezoneH) min 1.2) / 40)) max 0.4))";
-            y = "21.5 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) + 			(safezoneY + safezoneH - 			(			((safezoneW / safezoneH) min 1.2) / 1.2))";
-            w = "((safezoneW - 36 * 			(			((safezoneW / safezoneH) min 1.2) / 40)) max 0.4)";
-            h = "1.5 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            x = "safezoneX + (0.5 * safezoneW) - (0.5 * ((safezoneW - 36 * (((safezoneW / safezoneH) min 1.2) / 40)) max 0.4))";
+            y = "21.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) + (safezoneY + safezoneH - (((safezoneW / safezoneH) min 1.2) / 1.2))";
+            w = "((safezoneW - 36 * (((safezoneW / safezoneH) min 1.2) / 40)) max 0.4)";
+            h = "1.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
             colorBackground[] = {0,0,0,0.7};
             style = 2;
             shadow = 0;
             text = "";
-            sizeEx = "0.8 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            sizeEx = "0.8 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
         };
         class Space: RscControlsGroup
         {
-            x = "safezoneX + safezoneW * 0.5 - 4 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
+            x = "safezoneX + safezoneW * 0.5 - 4 * (((safezoneW / safezoneH) min 1.2) / 40)";
             y = "safezoneY";
             show = 0;
             idc = 27903;
-            w = "8.1 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            h = "2 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "8.1 * (((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
             class controls
             {
                 class SpaceArsenalBackground: RscText
                 {
                     idc = 26603;
-                    x = "0 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-                    y = "0 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-                    w = "4 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-                    h = "2 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                    x = "0 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                    y = "0 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                    w = "4 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                    h = "2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
                     colorBackground[] = {0,0,0,0.7};
                 };
                 class SpaceArsenal: RscActivePicture
                 {
                     idc = 26803;
                     text = "\a3\Ui_f\data\GUI\Rsc\RscDisplayArsenal\spaceArsenal_ca.paa";
-                    x = "1 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-                    y = "0 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-                    w = "2 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-                    h = "2 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                    x = "1 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                    y = "0 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                    w = "2 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                    h = "2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
                     tooltip = "Arsenal";
                 };
                 class SpaceGarageBackground: SpaceArsenalBackground
                 {
                     idc = 26604;
-                    x = "4.1 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-                    y = "0 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-                    w = "4 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-                    h = "2 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                    x = "4.1 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                    y = "0 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                    w = "4 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                    h = "2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
                     colorBackground[] = {0,0,0,0.7};
                 };
                 class SpaceGarage: SpaceArsenal
                 {
                     idc = 26804;
                     text = "\a3\Ui_f\data\GUI\Rsc\RscDisplayArsenal\spaceGarage_ca.paa";
-                    x = "5 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-                    y = "0 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-                    w = "1.99996 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-                    h = "2 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                    x = "5 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                    y = "0 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                    w = "1.99996 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                    h = "2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
                     tooltip = "Garage";
                 };
             };
@@ -770,34 +770,34 @@ class Trend_DialogRequests_VehicleCustomization
         {
             w = "safezoneW";
             idc = 44046;
-            x = "0.5 * 			(			((safezoneW / safezoneH) min 1.2) / 40) + 			(safezoneX)";
-            y = "23.5 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) + 			(safezoneY + safezoneH - 			(			((safezoneW / safezoneH) min 1.2) / 1.2))";
-            h = "1 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            x = "0.5 * (((safezoneW / safezoneH) min 1.2) / 40) + (safezoneX)";
+            y = "23.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) + (safezoneY + safezoneH - (((safezoneW / safezoneH) min 1.2) / 1.2))";
+            h = "1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
             class controls
             {
                 class ButtonClose: RscButtonMenu
                 {
                     idc = 44448;
                     text = "Close";
-                    x = "0 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-                    y = "0 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-                    w = "((safezoneW - 1 * 			(			((safezoneW / safezoneH) min 1.2) / 40)) * 0.2) - 0.1 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-                    h = "1 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                    x = "0 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                    y = "0 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                    w = "((safezoneW - 1 * (((safezoneW / safezoneH) min 1.2) / 40)) * 0.2) - 0.1 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                    h = "1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
                     tooltip = "Exit the Garage";
                 };
                 class ButtonInterface: ButtonClose
                 {
                     idc = 44151;
                     text = "Hide";
-                    x = "2 * 	((safezoneW - 1 * 			(			((safezoneW / safezoneH) min 1.2) / 40)) * 0.1)";
-                    w = "((safezoneW - 1 * 			(			((safezoneW / safezoneH) min 1.2) / 40)) * 0.1) - 0.1 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
+                    x = "2 * ((safezoneW - 1 * (((safezoneW / safezoneH) min 1.2) / 40)) * 0.1)";
+                    w = "((safezoneW - 1 * (((safezoneW / safezoneH) min 1.2) / 40)) * 0.1) - 0.1 * (((safezoneW / safezoneH) min 1.2) / 40)";
                     tooltip = "Hide the interface";
                 };
                 class ButtonOK: ButtonClose
                 {
                     idc = 44346;
                     text = "OK";
-                    x = "8 * 	((safezoneW - 1 * 			(			((safezoneW / safezoneH) min 1.2) / 40)) * 0.1)";
+                    x = "8 * ((safezoneW - 1 * (((safezoneW / safezoneH) min 1.2) / 40)) * 0.1)";
                     tooltip = "Use the selected loadout";
                 };
             };
@@ -819,21 +819,21 @@ class Trend_DialogRequests_VehicleCustomization
             idc = "930 + 0";
             idcx = 930;
             text = "\A3\Ui_f\data\GUI\Rsc\RscDisplayGarage\AnimationSources_ca.paa";
-            x = "safezoneX + 0.5 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
+            x = "safezoneX + 0.5 * (((safezoneW / safezoneH) min 1.2) / 40)";
             y = "safezoneY + 0.5 * 0.04 + 0 * 0.04";
-            w = "(1.4 * 		2) * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            h = "(1.4 * 		2) * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "(1.4 * 2) * (((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "(1.4 * 2) * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
             tooltip = "Components";
         };
         class ListAnimationSources: RscListBox
         {
             idc = "960 + 0";
             idcx = 960;
-            x = "safezoneX + (1 + 1.5 * 	2) * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            y = "safezoneY + 0.5 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-            w = "15 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            h = "safezoneH - 2.5 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-            sizeEx = "1.4 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            x = "safezoneX + (1 + 1.5 * 2) * (((safezoneW / safezoneH) min 1.2) / 40)";
+            y = "safezoneY + 0.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "15 * (((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "safezoneH - 2.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            sizeEx = "1.4 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
             colorBackground[] = {0,0,0,0};
             colorSelectBackground[] = {1,1,1,0.5};
             colorSelectBackground2[] = {1,1,1,0.5};
@@ -845,11 +845,11 @@ class Trend_DialogRequests_VehicleCustomization
         class ListDisabledAnimationSources: RscText
         {
             idc = "860 + 0";
-            x = "safezoneX + (1 + 1.5 * 	2) * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            y = "safezoneY + 0.5 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-            w = "15 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            h = "safezoneH - 2.5 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-            sizeEx = "2 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            x = "safezoneX + (1 + 1.5 * 2) * (((safezoneW / safezoneH) min 1.2) / 40)";
+            y = "safezoneY + 0.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "15 * (((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "safezoneH - 2.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            sizeEx = "2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
             text = "N/A";
             style = 2;
             show = 0;
@@ -861,21 +861,21 @@ class Trend_DialogRequests_VehicleCustomization
             idc = "930 + 1";
             idcx = 931;
             text = "\A3\Ui_f\data\GUI\Rsc\RscDisplayGarage\TextureSources_ca.paa";
-            x = "safezoneX + 0.5 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
+            x = "safezoneX + 0.5 * (((safezoneW / safezoneH) min 1.2) / 40)";
             y = "safezoneY + 0.5 * 0.04 + 3 * 0.04";
-            w = "(1.4 * 		2) * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            h = "(1.4 * 		2) * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "(1.4 * 2) * (((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "(1.4 * 2) * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
             tooltip = "Camouflage";
         };
         class ListTextureSources: RscListBox
         {
             idc = "960 + 1";
             idcx = 961;
-            x = "safezoneX + (1 + 1.5 * 	2) * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            y = "safezoneY + 0.5 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-            w = "15 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            h = "safezoneH - 2.5 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-            sizeEx = "1.4 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            x = "safezoneX + (1 + 1.5 * 2) * (((safezoneW / safezoneH) min 1.2) / 40)";
+            y = "safezoneY + 0.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "15 * (((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "safezoneH - 2.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            sizeEx = "1.4 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
             colorBackground[] = {0,0,0,0};
             colorSelectBackground[] = {1,1,1,0.5};
             colorSelectBackground2[] = {1,1,1,0.5};
@@ -887,11 +887,11 @@ class Trend_DialogRequests_VehicleCustomization
         class ListDisabledTextureSources: RscText
         {
             idc = "860 + 1";
-            x = "safezoneX + (1 + 1.5 * 	2) * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            y = "safezoneY + 0.5 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-            w = "15 * 			(			((safezoneW / safezoneH) min 1.2) / 40)";
-            h = "safezoneH - 2.5 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-            sizeEx = "2 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            x = "safezoneX + (1 + 1.5 * 2) * (((safezoneW / safezoneH) min 1.2) / 40)";
+            y = "safezoneY + 0.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            w = "15 * (((safezoneW / safezoneH) min 1.2) / 40)";
+            h = "safezoneH - 2.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+            sizeEx = "2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
             text = "N/A";
             style = 2;
             show = 0;

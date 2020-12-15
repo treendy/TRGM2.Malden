@@ -7,18 +7,13 @@ _mainObjPos = TREND_ObjectivePossitions select 0;
 ["Mission Events: Comms 10", true] call TREND_fnc_log;
 
 //Check if radio tower is near
-//Land_TTowerBig_2_F    Land_TTowerBig_1_F       Land_Communication_F       Land_TBox_F
-//_TowerBuilding = selectRandom TREND_TowerBuildings;
 _TowersNear = nearestObjects [_mainObjPos, TREND_TowerBuildings, TREND_TowerRadius];
 
-
-
 ["Mission Events: Comms 9", true] call TREND_fnc_log;
-{
-	[_x, [localize "STR_TRGM2_TRENDfncsetOtherAreaStuff_CheckEnemyComms",{_this spawn TREND_fnc_checkForComms;},[_x]]] remoteExec ["addAction", 0, true];
-} forEach _TowersNear;
 if (count _TowersNear > 0) then {
-//if (!(isNull _pepe)) then {
+	{
+		[_x, [localize "STR_TRGM2_TRENDfncsetOtherAreaStuff_CheckEnemyComms",{_this spawn TREND_fnc_checkForComms;},[_x]]] remoteExec ["addAction", 0, true];
+	} forEach _TowersNear;
 	["Mission Events: Comms 8", true] call TREND_fnc_log;
 	TREND_TowerBuild = _TowersNear select 0;
 	TREND_TowerClassName = typeOf TREND_TowerBuild;
@@ -98,8 +93,6 @@ if (count _TowersNear > 0) then {
 };
 
 ["Mission Events: CommsEND", true] call TREND_fnc_log;
-
-
 
 if (!(isNil "IsTraining")) then {
 	[_mainObjPos] spawn TREND_fnc_setMedicalEvent;

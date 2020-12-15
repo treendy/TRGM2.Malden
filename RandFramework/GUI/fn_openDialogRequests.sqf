@@ -142,10 +142,10 @@ _btnSelectVehicle = _display displayCtrl 8005;
 _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 	params ["_control"];
 	private _index = lbCurSel 8009;
-	private _unitClass = TREND_SpawnVehArray select _index;
+	private _vehClass = TREND_SpawnVehArray select _index;
 	_currentSpentPoints = call TREND_fnc_CountSpentPoints;
 	if (!(call TREND_VehiclesRequireRep) || {_currentSpentPoints < (TREND_MaxBadPoints - TREND_BadPoints + 1)}) then {
-		[_unitClass] spawn {
+		[_vehClass] spawn {
 			params ["_classToSpawn"];
 			private _safePos = [getPos player, 20,100,25,0,0.15,0,[],[getPos player,getPos player],_classToSpawn] call TREND_fnc_findSafePos; // find a valid pos
 			if (_safePos isEqualTo getPos player) then {
@@ -153,9 +153,8 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 			};
 			if (_safePos isEqualTo getPos player) exitWith {hint "No safe location nearby to create vehicle!"};
 			player setPos (_safePos vectorAdd [5,0,0]);
-			private _SpawnedVeh = createVehicle [_classToSpawn, _safePos, [], 0, "NONE"];
+			private _SpawnedVeh = createVehicle [_classToSpawn, [0,0,0], [], 0, "NONE"];
 			_SpawnedVeh allowdamage false;
-			_SpawnedVeh setpos _safePos;
 			_SpawnedVeh setdamage 0;
 
 			if (!local _SpawnedVeh) then {
@@ -165,6 +164,8 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 			};
 
 			sleep 0.5;
+
+			_SpawnedVeh setpos _safePos;
 
 			_actionReleaseObject = player addAction [format [localize "STR_TRGM2_openDialogRequests_VehicleRelease", getText (configFile >> "CfgVehicles" >> _classToSpawn >> "displayName")], {
 				params ["_target", "_caller", "_actionId", "_arguments"];

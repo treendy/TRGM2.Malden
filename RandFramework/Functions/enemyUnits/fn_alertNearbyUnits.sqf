@@ -1,3 +1,18 @@
+/*
+ * Author: TheAce0296
+ * Alerts nearby enemy units to converge onto a positon.
+ *
+ * Arguments:
+ * 0: A condition that must be true for the units to be/stay alerted. <CODE>
+ * 1: A central position units should converge towards. <POSITION>
+ * 2: Radius from the center position to apply alertness to. <NUMBER>
+ *
+ * Return Value:
+ * true <BOOL>
+ *
+ * Example:
+ * [{alive player}, position player, 1500] spawn TREND_fnc_alertNearbyUnits
+ */
 params[
 	["_condition",{ true }, [{}]],
 	["_centerPos", []],
@@ -30,4 +45,7 @@ while {_condition} do {
 		};
 		_groupsAlerted pushBack _group;
 	} forEach allGroups;
+	sleep 60;
 };
+
+true;

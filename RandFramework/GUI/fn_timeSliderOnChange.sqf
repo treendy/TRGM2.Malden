@@ -22,9 +22,9 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc
 
 params ["_ctrl", "_newvalue", "_ctrlStr"];
 
-_display = findDisplay 5000;
+_display 	= findDisplay 5000;
 _ctrlSlider = _display displayCtrl 5115;
-_ctrlHour = _display displayCtrl 5116;
+_ctrlHour 	= _display displayCtrl 5116;
 _ctrlMinute = _display displayCtrl 5117;
 _ctrlSecond = _display displayCtrl 5118;
 

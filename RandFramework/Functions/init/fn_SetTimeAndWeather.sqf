@@ -1,11 +1,6 @@
 
-params["_isIntro"];
+params[["_isIntro", false]];
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
-
-if (isNil "_isIntro") then {_isIntro = false};
-
-
-if (isNil "TREND_UseEditorWeather") then { TREND_UseEditorWeather =   false; publicVariable "TREND_UseEditorWeather"; };
 
 private _fullMoonDates = {
 	private _year = param [0, 2035];
@@ -49,9 +44,9 @@ if (!TREND_UseEditorWeather && isServer) then {
 		TREND_arrayTime params ["_hour", "_min"];
 		[[_year, _month, _day, _hour, _min], {params ["_year", "_month", "_day", "_hour", "_min"]; setDate [_year, _month, _day, _hour, _min]}] remoteExec ["call",0,true];
 
-		private _WeatherOption = selectRandom TREND_WeatherOptions;
+		private _WeatherOption = call TREND_WeatherOption;
 
-		if (_isIntro) then {_WeatherOption = selectRandom [2,8,9,10,7]};
+		if (_isIntro) then {_WeatherOption = selectRandom [1,2,3]};
 
 		switch (_WeatherOption) do {
 			case 1: { //Clear

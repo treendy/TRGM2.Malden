@@ -20,15 +20,21 @@ fnc_CustomVars = { //This is called before the mission function is called below,
 };
 
 fnc_CustomMission = { //This function is the main script for your mission, some if the parameters passed in must not be changed!!!
-	_markerType = _this select 0;
-	_objectiveMainBuilding = _this select 1; //DO NOT EDIT THIS VALUE (this is the main building location selected within your AO)
-	_centralAO_x = _this select 2; //DO NOT EDIT THIS VALUE
-	_centralAO_y = _this select 3; //DO NOT EDIT THIS VALUE
-	_roadSearchRange = _this select 4; //this is past in from the engine, and is the value you set above (DO NOT INREASE THE VALUE ON THIS LINE!!, you can decrease as it will pick a road within your range above)
-	_bCreateTask = _this select 5; //the engine passes this in, it will be set to false for option sides mission, and the action to happen when this mission is complete is set in the lines at the bottom of this file
-	_iTaskIndex = _this select 6; // for the engine, so it knows which index it is working on (do not change this value!!)
-	_bIsMainObjective = _this select 7;
-	if (_markerType != "empty") then { _markerType = "hd_unknown"; }; //You can set the type of marker here, but if the player has selected to hide mission locations, then your marker will not show
+	/*
+	 * Parameter Descriptions
+	 * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	 * _markerType 				: The marker type to be used, you can set the type of marker below, but if the player has selected to hide mission locations, then your marker will not show.
+	 * _objectiveMainBuilding 	: DO NOT EDIT THIS VALUE (this is the main building location selected within your AO)
+	 * _centralAO_x 			: DO NOT EDIT THIS VALUE (this is the X coord of the AO)
+	 * _centralAO_y 			: DO NOT EDIT THIS VALUE (this is the Y coord of the AO)
+	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in fnc_CustomVars)
+	 * _bCreateTask 			: DO NOT EDIT THIS VALUE (this is determined by the player, if the player selected to play a hidden mission, the task is not created!)
+	 * _iTaskIndex 				: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the index of the task used to determine mission/task completion!)
+	 * _args 					: These are additional arguments that might be required for the mission, for an example, see the Destroy Vehicles Mission.
+	 * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	*/
+	params ["_markerType","_objectiveMainBuilding","_centralAO_x","_centralAO_y","_roadSearchRange", "_bCreateTask", "_iTaskIndex", "_bIsMainObjective", ["_args", []]];
+	if (_markerType != "empty") then { _markerType = "hd_unknown"; }; // Set marker type here...
 
 	_compactIedTargets = false;
 	if (TREND_AdvancedSettings select TREND_ADVSET_IEDTARGET_COMPACT_SPACING_IDX == 1) then {

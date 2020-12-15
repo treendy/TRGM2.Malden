@@ -7,7 +7,7 @@ if (isNil "TREND_playerIsChoosingHQpos") then { TREND_playerIsChoosingHQpos = fa
 if (isNil "TREND_HQPosFound") then { TREND_HQPosFound = false; publicVariable "TREND_HQPosFound"; };
 
 if (!isNil "laptop1") then {
- TREND_NeededObjectsAvailable = true; publicVariable "TREND_NeededObjectsAvailable";
+	TREND_NeededObjectsAvailable = true; publicVariable "TREND_NeededObjectsAvailable";
 };
 
 //// These must be declared BEFORE either initUnitVars or TRGMSetDefaultMissionSetupVars!!!
@@ -16,21 +16,18 @@ TREND_EastFactionData =  [EAST] call TREND_fnc_getFactionDataBySide; publicVaria
 TREND_GuerFactionData =  [INDEPENDENT] call TREND_fnc_getFactionDataBySide; publicVariable "TREND_GuerFactionData";
 
 if ((["CustomMission", 0] call BIS_fnc_getParamValue) isEqualTo 1) then {
- call compile preprocessFileLineNumbers "CustomMission\TRGMSetDefaultMissionSetupVars.sqf";
+	call compile preprocessFileLineNumbers "CustomMission\TRGMSetDefaultMissionSetupVars.sqf";
 };
 
 // if (isNil "TREND_DefaultEnemyFactionValue") then { TREND_DefaultEnemyFactionValue = [1]; publicVariable "TREND_DefaultEnemyFactionValue"; };//No longer use these... was having issue with naked players and no enemy... may be one day will improve this and add in again (orignally this was to allow maps like Kunduz default to cup takistan militia if available, if not it should go to next available value)
 // if (isNil "TREND_DefaultFriendlyFactionValue") then { TREND_DefaultFriendlyFactionValue = [1]; publicVariable "TREND_DefaultFriendlyFactionValue"; }; //same reason as above
-
-if (isNil "TREND_DefaultSandStormOption") then { TREND_DefaultSandStormOption = 2; publicVariable "TREND_DefaultSandStormOption"; };
 
 // if (isNil "TREND_TopLeftPos") then { TREND_TopLeftPos = [25.4257,8173.69,0]; publicVariable "TREND_TopLeftPos"; };
 // if (isNil "TREND_BotRightPos") then { TREND_BotRightPos = [8188.86,9.91748,0]; publicVariable "TREND_BotRightPos"; };
 
 call TREND_fnc_initUnitVars;
 
-if (isNil "TREND_sFriendlyNVClassName") then { TREND_sFriendlyNVClassName = "NVGoggles"; publicVariable "TREND_sFriendlyNVClassName"; };
-if (isNil "TREND_sEnemyNVClassName") then { TREND_sEnemyNVClassName = "NVGoggles_tna_F"; publicVariable "TREND_sEnemyNVClassName"; };  //"NVGoggles_OPFOR"
+if (isNil "TREND_aNVClassNames") then { TREND_aNVClassNames = ["NVGoggles","NVGoggles_tna_F"]; publicVariable "TREND_aNVClassNames"; };
 if (isNil "TREND_FriendlySide") then { TREND_FriendlySide = West; publicVariable "TREND_FriendlySide"; };
 if (isNil "TREND_EnemySide") then { TREND_EnemySide = East; publicVariable "TREND_EnemySide"; };
 if (isNil "TREND_FriendlySideString") then { TREND_FriendlySideString = "West"; publicVariable "TREND_FriendlySideString"; };
@@ -40,8 +37,7 @@ if (isNil "TREND_sArmaGroup") then { TREND_sArmaGroup = "TCF"; publicVariable "T
 
 if (isNil "TREND_bNoVNChance") then { TREND_bNoVNChance = [false]; publicVariable "TREND_bNoVNChance"; };
 
-if (isNil "TREND_ReinforceStartPos1") then { TREND_ReinforceStartPos1 = [200,200,0]; publicVariable "TREND_ReinforceStartPos1"; };
-if (isNil "TREND_ReinforceStartPos2") then { TREND_ReinforceStartPos2 = [100,100,0]; publicVariable "TREND_ReinforceStartPos2"; };
+TREND_GetReinforceStartPos = { [random 500, random 500, 0]; }; publicVariable "TREND_GetReinforceStartPos";
 
 if (isNil "TREND_SideMissionMinDistFromBase") then { TREND_SideMissionMinDistFromBase = 3000; publicVariable "TREND_SideMissionMinDistFromBase"; }; //for min distached to have AO from base... TREND_BaseAreaRange is more for patrols and events (thees need to be seperate variables, because if we had main HQ on an island and an AO spawned on the small island away from main land... hen will cause issues spawning in everything else)
 if (isNil "TREND_BaseAreaRange") then { TREND_BaseAreaRange = 1500; publicVariable "TREND_BaseAreaRange"; }; //used to make sure enemy events, patrols etc... doesnt spawn too close to base
@@ -92,71 +88,71 @@ if (isNil "TREND_OfficerImage") then { TREND_OfficerImage = "<img image='RandFra
 if (isNil "TREND_WeaponDealerImage") then { TREND_WeaponDealerImage = "<img image='RandFramework\Media\WeaponDealers2.jpg' size='1' />"; publicVariable "TREND_WeaponDealerImage"; };
 
 
-// From main init
-if (isNil "TREND_CustomObjectsSet") then {TREND_CustomObjectsSet = false; publicVariable "TREND_CustomObjectsSet";};
-if (isNil "TREND_EnemyFactionData") then {TREND_EnemyFactionData = ""; publicVariable "TREND_EnemyFactionData";};
-if (isNil "TREND_LoadoutData") then {TREND_LoadoutData = ""; publicVariable "TREND_LoadoutData";};
-if (isNil "TREND_LoadoutDataDefault") then {TREND_LoadoutDataDefault = ""; publicVariable "TREND_LoadoutDataDefault";};
-if (isNil "TREND_bBreifingPrepped") then {TREND_bBreifingPrepped = false; publicVariable "TREND_bBreifingPrepped";};
-if (isNil "TREND_BadPoints") then {TREND_BadPoints = 0; publicVariable "TREND_BadPoints";};
-if (isNil "TREND_PlayersHaveLeftStartingArea") then {TREND_PlayersHaveLeftStartingArea = false; publicVariable "TREND_PlayersHaveLeftStartingArea";};
-if (isNil "TREND_KilledPlayers") then {TREND_KilledPlayers = []; publicVariable "TREND_KilledPlayers";};
-if (isNil "TREND_KilledPositions") then {TREND_KilledPositions = []; publicVariable "TREND_KilledPositions";};
-if (isNil "TREND_bBaseHasChopper") then {TREND_bBaseHasChopper = false; publicVariable "TREND_bBaseHasChopper";};
-if (isNil "TREND_BadPointsReason") then {TREND_BadPointsReason = ""; publicVariable "TREND_BadPointsReason";};
-if (isNil "TREND_InfTaskStarted") then {TREND_InfTaskStarted = false; publicVariable "TREND_InfTaskStarted";};
-if (isNil "TREND_InfTaskCount") then {TREND_InfTaskCount = 0; publicVariable "TREND_InfTaskCount";};
-if (isNil "TREND_ActiveTasks") then {TREND_ActiveTasks = []; publicVariable "TREND_ActiveTasks";};
-if (isNil "TREND_MaxBadPoints") then {TREND_MaxBadPoints = 1; publicVariable "TREND_MaxBadPoints";};
-if (isNil "TREND_ObjectivePossitions") then {TREND_ObjectivePossitions = []; publicVariable "TREND_ObjectivePossitions";};
-if (isNil "TREND_HiddenPossitions") then {TREND_HiddenPossitions = []; publicVariable "TREND_HiddenPossitions";};
-if (isNil "TREND_SpottedActiveFinished") then {TREND_SpottedActiveFinished = true; publicVariable "TREND_SpottedActiveFinished";};
-if (isNil "TREND_bCommsBlocked") then {TREND_bCommsBlocked = false; publicVariable "TREND_bCommsBlocked";};
-if (isNil "TREND_ParaDropped") then {TREND_ParaDropped = false; publicVariable "TREND_ParaDropped";};
-if (isNil "TREND_ATFieldPos") then {TREND_ATFieldPos = []; publicVariable "TREND_ATFieldPos";};
-if (isNil "TREND_bHasCommsTower") then {TREND_bHasCommsTower = false; publicVariable "TREND_bHasCommsTower";};
-if (isNil "TREND_CommsTowerPos") then {TREND_CommsTowerPos = [0,0]; publicVariable "TREND_CommsTowerPos";};
+if (isNil "TREND_AOCampOnlyAmmoBox") then {TREND_AOCampOnlyAmmoBox = false; publicVariable "TREND_AOCampOnlyAmmoBox";};
 //TREND_AODetails = [[AOIndex,InfSpottedCount,VehSpottedCount,AirSpottedCount,bScoutCalled,patrolMoveCounter]]
 //example TREND_AODetails [[1,0,0,0,False,0],[2,0,0,0,True,0]]
 if (isNil "TREND_AODetails") then {TREND_AODetails = []; publicVariable "TREND_AODetails";};
+if (isNil "TREND_ATFieldPos") then {TREND_ATFieldPos = []; publicVariable "TREND_ATFieldPos";};
+if (isNil "TREND_ActiveTasks") then {TREND_ActiveTasks = []; publicVariable "TREND_ActiveTasks";};
+if (isNil "TREND_AdminPlayer") then { TREND_AdminPlayer = objNull; publicVariable "TREND_AdminPlayer"; };
+if (isNil "TREND_AdvancedSettings") then {TREND_AdvancedSettings = TREND_DefaultAdvancedSettings; publicVariable "TREND_AdvancedSettings";};
+if (isNil "TREND_AllowUAVLocateHelp") then {TREND_AllowUAVLocateHelp = false; publicVariable "TREND_AllowUAVLocateHelp";};
+if (isNil "TREND_BadPoints") then {TREND_BadPoints = 0; publicVariable "TREND_BadPoints";};
+if (isNil "TREND_BadPointsReason") then {TREND_BadPointsReason = ""; publicVariable "TREND_BadPointsReason";};
+if (isNil "TREND_CalledAirsupportIndex") then { TREND_CalledAirsupportIndex = 1; publicVariable "TREND_CalledAirsupportIndex";};
+if (isNil "TREND_CampaignInitiated") then { TREND_CampaignInitiated = false; publicVariable "TREND_CampaignInitiated"; };
 if (isNil "TREND_CheckPointAreas") then {TREND_CheckPointAreas = []; publicVariable "TREND_CheckPointAreas";};
+if (isNil "TREND_CivDeathCount") then { TREND_CivDeathCount = 0; publicVariable "TREND_CivDeathCount"; };
+if (isNil "TREND_ClearedPositions") then {TREND_ClearedPositions = []; publicVariable "TREND_ClearedPositions";};
+if (isNil "TREND_CommsTowerPos") then {TREND_CommsTowerPos = [0,0]; publicVariable "TREND_CommsTowerPos";};
+if (isNil "TREND_CurrentZeroMissionTitle") then {TREND_CurrentZeroMissionTitle = ""; publicVariable "TREND_CurrentZeroMissionTitle";};
+if (isNil "TREND_CustomObjectsSet") then {TREND_CustomObjectsSet = false; publicVariable "TREND_CustomObjectsSet";};
+if (isNil "TREND_EnemyFactionData") then {TREND_EnemyFactionData = ""; publicVariable "TREND_EnemyFactionData";};
+if (isNil "TREND_EnemyID") then {TREND_EnemyID = 1; publicVariable "TREND_EnemyID";};
+if (isNil "TREND_FinalMissionStarted") then {TREND_FinalMissionStarted = false; publicVariable "TREND_FinalMissionStarted";};
+if (isNil "TREND_FlareCounter") then {TREND_FlareCounter = 15; publicVariable "TREND_FlareCounter";};
+if (isNil "TREND_FireFlares") then {TREND_FireFlares = selectRandom[true,false]; publicVariable "TREND_FireFlares";};
+if (isNil "TREND_ForceEndSandStorm") then {TREND_ForceEndSandStorm = false; publicVariable "TREND_ForceEndSandStorm";};
+if (isNil "TREND_ForceMissionSetup") then {TREND_ForceMissionSetup = false; publicVariable "TREND_ForceMissionSetup";};
+if (isNil "TREND_HiddenPossitions") then {TREND_HiddenPossitions = []; publicVariable "TREND_HiddenPossitions";};
+if (isNil "TREND_ISUNSUNG") then {TREND_ISUNSUNG = false; publicVariable "TREND_ISUNSUNG";};
+if (isNil "TREND_InfTaskCount") then {TREND_InfTaskCount = 0; publicVariable "TREND_InfTaskCount";};
+if (isNil "TREND_InfTaskStarted") then {TREND_InfTaskStarted = false; publicVariable "TREND_InfTaskStarted";};
+if (isNil "TREND_IntelFound") then {TREND_IntelFound = []; publicVariable "TREND_IntelFound";};
+if (isNil "TREND_IntroMusic") then { TREND_IntroMusic = selectRandom TREND_ThemeAndIntroMusic; publicVariable "TREND_IntroMusic"; };
+if (isNil "TREND_IsFullMap") then {TREND_IsFullMap = false; publicVariable "TREND_IsFullMap";};
+if (isNil "TREND_IsSnowMap") then {TREND_IsSnowMap = false; publicVariable "TREND_IsSnowMap";};
+if (isNil "TREND_KilledPlayers") then { TREND_KilledPlayers = []; publicVariable "TREND_KilledPlayers"; };
+if (isNil "TREND_KilledPositions") then { TREND_KilledPositions = []; publicVariable "TREND_KilledPositions"; };
+if (isNil "TREND_LoadoutData") then {TREND_LoadoutData = ""; publicVariable "TREND_LoadoutData";};
+if (isNil "TREND_LoadoutDataDefault") then {TREND_LoadoutDataDefault = ""; publicVariable "TREND_LoadoutDataDefault";};
+if (isNil "TREND_MainMissionTitle") then {TREND_MainMissionTitle = ""; publicVariable "TREND_MainMissionTitle";};
+if (isNil "TREND_MaxBadPoints") then {TREND_MaxBadPoints = 1; publicVariable "TREND_MaxBadPoints";};
+if (isNil "TREND_MissionLoaded") then {TREND_MissionLoaded = false; publicVariable "TREND_MissionLoaded";};
+if (isNil "TREND_MissionParamsSet") then {TREND_MissionParamsSet = false; publicVariable "TREND_MissionParamsSet";};
+if (isNil "TREND_ObjectivePossitions") then {TREND_ObjectivePossitions = []; publicVariable "TREND_ObjectivePossitions";};
+if (isNil "TREND_ParaDropped") then {TREND_ParaDropped = false; publicVariable "TREND_ParaDropped";};
+if (isNil "TREND_PlayersHaveLeftStartingArea") then {TREND_PlayersHaveLeftStartingArea = false; publicVariable "TREND_PlayersHaveLeftStartingArea";};
+if (isNil "TREND_SaveType") then {TREND_SaveType = 0; publicVariable "TREND_SaveType";};
 if (isNil "TREND_SentryAreas") then {TREND_SentryAreas = []; publicVariable "TREND_SentryAreas";};
-if (isNil "TREND_bMortarFiring") then {TREND_bMortarFiring = false; publicVariable "TREND_bMortarFiring";};
+if (isNil "TREND_TimeSinceAdditionalReinforcementsCalled") then {TREND_TimeSinceAdditionalReinforcementsCalled = time; publicVariable "TREND_TimeSinceAdditionalReinforcementsCalled";};
+if (isNil "TREND_TimeSinceLastSpottedAction") then {TREND_TimeSinceLastSpottedAction = time; publicVariable "TREND_TimeSinceLastSpottedAction";};
 if (isNil "TREND_bAndSoItBegins") then {TREND_bAndSoItBegins = false; publicVariable "TREND_bAndSoItBegins";};
-if (isNil "TREND_iMissionParamType") then {TREND_iMissionParamType = 9; publicVariable "TREND_iMissionParamType";};
+if (isNil "TREND_bBaseHasChopper") then {TREND_bBaseHasChopper = false; publicVariable "TREND_bBaseHasChopper";};
+if (isNil "TREND_bBreifingPrepped") then {TREND_bBreifingPrepped = false; publicVariable "TREND_bBreifingPrepped";};
+if (isNil "TREND_bCommsBlocked") then {TREND_bCommsBlocked = false; publicVariable "TREND_bCommsBlocked";};
+if (isNil "TREND_bHasCommsTower") then {TREND_bHasCommsTower = false; publicVariable "TREND_bHasCommsTower";};
+if (isNil "TREND_bMortarFiring") then {TREND_bMortarFiring = false; publicVariable "TREND_bMortarFiring";};
+if (isNil "TREND_bOptionsSet") then { TREND_bOptionsSet = false; publicVariable "TREND_bOptionsSet"; };
+if (isNil "TREND_bOptionsSet") then {TREND_bOptionsSet = false; publicVariable "TREND_bOptionsSet";};
+if (isNil "TREND_iAllowNVG") then {TREND_iAllowNVG = 2; publicVariable "TREND_iAllowNVG";};
+if (isNil "TREND_iCampaignDay") then {TREND_iCampaignDay = 0; publicVariable "TREND_iCampaignDay";};
 if (isNil "TREND_iMissionParamObjective") then {TREND_iMissionParamObjective = 0; publicVariable "TREND_iMissionParamObjective";};
 if (isNil "TREND_iMissionParamObjective2") then {TREND_iMissionParamObjective2 = 0; publicVariable "TREND_iMissionParamObjective2";};
 if (isNil "TREND_iMissionParamObjective3") then {TREND_iMissionParamObjective3 = 0; publicVariable "TREND_iMissionParamObjective3";};
-if (isNil "TREND_iAllowNVG") then {TREND_iAllowNVG = 2; publicVariable "TREND_iAllowNVG";};
 if (isNil "TREND_iMissionParamRepOption") then {TREND_iMissionParamRepOption = 0; publicVariable "TREND_iMissionParamRepOption";};
-if (isNil "TREND_iWeather") then {TREND_iWeather = 1; publicVariable "TREND_iWeather";};
-if (isNil "TREND_iUseRevive") then {TREND_iUseRevive = 0; publicVariable "TREND_iUseRevive";};
-if (isNil "TREND_iCampaignDay") then {TREND_iCampaignDay = 0; publicVariable "TREND_iCampaignDay";};
-if (isNil "TREND_CurrentZeroMissionTitle") then {TREND_CurrentZeroMissionTitle = ""; publicVariable "TREND_CurrentZeroMissionTitle";};
-if (isNil "TREND_SaveType") then {TREND_SaveType = 0; publicVariable "TREND_SaveType";};
-if (isNil "TREND_IntelFound") then {TREND_IntelFound = []; publicVariable "TREND_IntelFound";};
+if (isNil "TREND_iMissionParamType") then {TREND_iMissionParamType = 9; publicVariable "TREND_iMissionParamType";};
 if (isNil "TREND_iStartLocation") then {TREND_iStartLocation = 2; publicVariable "TREND_iStartLocation";};
-if (isNil "TREND_AdvancedSettings") then {TREND_AdvancedSettings = TREND_DefaultAdvancedSettings; publicVariable "TREND_AdvancedSettings";};
-if (isNil "TREND_ClearedPositions") then {TREND_ClearedPositions = []; publicVariable "TREND_ClearedPositions";};
-if (isNil "TREND_AllowUAVLocateHelp") then {TREND_AllowUAVLocateHelp = false; publicVariable "TREND_AllowUAVLocateHelp";};
-if (isNil "TREND_EnemyID") then {TREND_EnemyID = 1; publicVariable "TREND_EnemyID";};
-if (isNil "TREND_FinalMissionStarted") then {TREND_FinalMissionStarted = false; publicVariable "TREND_FinalMissionStarted";};
-if (isNil "TREND_ISUNSUNG") then {TREND_ISUNSUNG = false; publicVariable "TREND_ISUNSUNG";};
-if (isNil "TREND_ForceEndSandStorm") then {TREND_ForceEndSandStorm = false; publicVariable "TREND_ForceEndSandStorm";};
-if (isNil "TREND_AOCampOnlyAmmoBox") then {TREND_AOCampOnlyAmmoBox = false; publicVariable "TREND_AOCampOnlyAmmoBox";};
-if (isNil "TREND_MainMissionTitle") then {TREND_MainMissionTitle = ""; publicVariable "TREND_MainMissionTitle";};
-if (isNil "TREND_ForceMissionSetup") then {TREND_ForceMissionSetup = false; publicVariable "TREND_ForceMissionSetup";};
-if (isNil "TREND_IsSnowMap") then {TREND_IsSnowMap = false; publicVariable "TREND_IsSnowMap";};
-if (isNil "TREND_MissionParamsSet") then {TREND_MissionParamsSet = false; publicVariable "TREND_MissionParamsSet";};
-if (isNil "TREND_IsFullMap") then {TREND_IsFullMap = false; publicVariable "TREND_IsFullMap";};
-if (isNil "TREND_bOptionsSet") then {TREND_bOptionsSet = false; publicVariable "TREND_bOptionsSet";};
-if (isNil "TREND_MissionLoaded") then {TREND_MissionLoaded = false; publicVariable "TREND_MissionLoaded";};
-
-// From init player local:
-if (isNil "TREND_bAndSoItBegins") then { TREND_bAndSoItBegins = false; publicVariable "TREND_bAndSoItBegins"; };
-if (isNil "TREND_bOptionsSet") then { TREND_bOptionsSet = false; publicVariable "TREND_bOptionsSet"; };
-if (isNil "TREND_CustomObjectsSet") then { TREND_CustomObjectsSet = false; publicVariable "TREND_CustomObjectsSet"; };
-if (isNil "TREND_IntroMusic") then { TREND_IntroMusic = selectRandom TREND_ThemeAndIntroMusic; publicVariable "TREND_IntroMusic"; };
-if (isNil "TREND_FinalMissionStarted") then { TREND_FinalMissionStarted = false; publicVariable "TREND_FinalMissionStarted"; };
-if (isNil "TREND_AdminPlayer") then { TREND_AdminPlayer = objNull; publicVariable "TREND_AdminPlayer"; };
+if (isNil "TREND_iUseRevive") then {TREND_iUseRevive = 0; publicVariable "TREND_iUseRevive";};
+if (isNil "TREND_iWeather") then {TREND_iWeather = 1; publicVariable "TREND_iWeather";};
 true;

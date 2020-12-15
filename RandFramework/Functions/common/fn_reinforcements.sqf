@@ -34,8 +34,12 @@ params [["_side", EAST], ["_spawnMrk", [0,0,0]], ["_LZMrk", [0,0,0]], ["_skill",
 
 if ((_LZMrk select 0) isEqualTo 0 && (_LZMrk select 1) isEqualTo 0) exitWith {};
 
-if (isNil "TREND_TimeLastReinforcementsCalled") then {TREND_TimeLastReinforcementsCalled = time; publicVariable "TREND_TimeLastReinforcementsCalled"};
-if (isServer && {(time - TREND_TimeLastReinforcementsCalled) > 60}) then {
+if (isServer) then {
+
+	if (isNil "TREND_TimeLastReinforcementsCalled") then {TREND_TimeLastReinforcementsCalled = time; publicVariable "TREND_TimeLastReinforcementsCalled"};
+
+	waitUntil { (time - TREND_TimeLastReinforcementsCalled) > 60; };
+
 	TREND_TimeLastReinforcementsCalled = time;
 	publicVariable "TREND_TimeLastReinforcementsCalled";
 

@@ -114,7 +114,7 @@ _lblctrlTitle ctrlCommit 0;
 
 	_display ctrlCreate [_lnpCtrlType, _InpCtrlID];
 	_inpctrl = _display displayCtrl _InpCtrlID;
-	_inpctrl ctrlSetPosition [_inpXPos, _ctrlYPos,_ctrlWidth,_ctrlHeight];
+	_inpctrl ctrlSetPosition [_inpXPos, _ctrlYPos,[_ctrlWidth, .75*_ctrlWidth] select (_lnpCtrlType == "RscXSliderH"),_ctrlHeight];
 
 	if (_lnpCtrlType == "RscCombo") then {
 		{
@@ -124,6 +124,26 @@ _lblctrlTitle ctrlCommit 0;
 	};
 	if (_lnpCtrlType == "RscEdit") then {
 		_inpctrl ctrlSetText (TREND_AdvancedSettings select _forEachIndex);
+	};
+	if (_lnpCtrlType == "RscXSliderH") then {
+		_inpctrl sliderSetRange [_Options, _Values];
+		_inpctrl sliderSetSpeed [(_Values / _Options), 1];
+		_inpctrl sliderSetPosition (TREND_AdvancedSettings select _forEachIndex);
+
+		_display ctrlCreate ["ctrlEdit", (_InpCtrlID+500)];
+		_valctrl = _display displayCtrl (_InpCtrlID+500);
+		_valctrl ctrlSetPosition [_inpXPos+(.75*_ctrlWidth), _ctrlYPos,.25*_ctrlWidth,_ctrlHeight];
+		_valctrl ctrlSetText (str(round sliderPosition _inpctrl) + "s");
+		_valctrl ctrlCommit 0;
+
+		_inpctrl ctrlAddEventHandler ["SliderPosChanged", {
+			params ["_control", "_newValue"];
+			_display 	= findDisplay 6000;
+			_ctrlIDC 	= ctrlIDC _control;
+			_ctrlSlider	= _display displayCtrl _ctrlIDC;
+			_ctrlVal 	= _display displayCtrl (_ctrlIDC+500);
+			_ctrlVal ctrlSetText (str(round _newValue) + "s");
+		}];
 	};
 	_inpctrl ctrlCommit 0;
 	_inpctrl ctrlSetTooltip _toolTip;

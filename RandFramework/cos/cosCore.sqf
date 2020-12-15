@@ -6,8 +6,8 @@ _pos = (_this select 1);
 //Hint format["TESTTEST2: %1", _pos];
 //sleep 3;
 
-if (isNil "TREND_bAndSoItBegins") then { TREND_bAndSoItBegins =   false; publicVariable "TREND_bAndSoItBegins"; };
-if (isNil "TREND_CustomObjectsSet") then { TREND_CustomObjectsSet =   false; publicVariable "TREND_CustomObjectsSet"; };
+if (isNil "TREND_bAndSoItBegins") then { TREND_bAndSoItBegins = false; publicVariable "TREND_bAndSoItBegins"; };
+if (isNil "TREND_CustomObjectsSet") then { TREND_CustomObjectsSet = false; publicVariable "TREND_CustomObjectsSet"; };
 
 waitUntil {TREND_bAndSoItBegins && TREND_CustomObjectsSet};
 

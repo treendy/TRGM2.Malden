@@ -155,6 +155,9 @@ if (!isNull (findDisplay 6000)) then {
 		if (_lnpCtrlType == "RscEdit") then {
 			_value = ctrlText _ThisControlIDX;
 		};
+		if (_lnpCtrlType == "RscXSliderH") then {
+			_value = sliderPosition _ThisControlIDX;
+		};
 		TREND_AdvancedSettings pushBack _value;
 	} forEach TREND_AdvControls;
 	publicVariable "TREND_AdvancedSettings";

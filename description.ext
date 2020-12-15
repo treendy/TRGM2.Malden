@@ -1,7 +1,7 @@
 
 #include "RandFramework\GUI\dialogs.hpp"
 
-author = "Treendy & TheAce0296";
+author = "Treendy, Refactored by TheAce0296";
 OnLoadName = "TRGM 2.1";
 OnLoadmission = "TRGM 2.1";
 OnLoadIntro = $STR_TRGM2_Description_OnLoadIntro;

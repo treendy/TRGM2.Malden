@@ -53,9 +53,9 @@ else {
 	_bThisMissionCivsOnly = false;
 };
 
-_selectRandomW = call {selectRandomWeighted [false, 0.60, true, 0.40]};;
-if ((call TREND_bMoreEnemies)) then {
-	_selectRandomW = call {selectRandomWeighted [false, 0.40, true, 0.60]};
+_selectRandomW = call {random 1 > .75};;
+if (call TREND_bMoreEnemies) then {
+	_selectRandomW = call {random 1 > .25};
 	_bThisMissionCivsOnly = false;
 	_InsurgentSide = east;
 	_bFriendlyInsurgents = false;
@@ -140,7 +140,7 @@ _trgCustomAIScript = createTrigger ["EmptyDetector", _sidePos];
 _trgCustomAIScript setVariable ["DelMeOnNewCampaignDay",true];
 _trgCustomAIScript setTriggerArea [1250, 1250, 0, false];
 _trgCustomAIScript setTriggerActivation [TREND_FriendlySideString, format["%1 D", TREND_EnemySideString], true];
-_trgCustomAIScript setTriggerStatements ["this && TREND_SpottedActiveFinished", format["nul = [this, thisList, %1, %2, %3] spawn TREND_fnc_CallNearbyPatrol;",str(_sidePos),_iSideIndex, _bIsMainObjective], ""];
+_trgCustomAIScript setTriggerStatements ["this && {(time - TREND_TimeSinceLastSpottedAction) > (call TREND_GetSpottedDelay)}", format["nul = [this, thisList, %1, %2, %3] spawn TREND_fnc_CallNearbyPatrol;",str(_sidePos),_iSideIndex, _bIsMainObjective], ""];
 //TREND_AODetails [_iSideIndex,0,0,0,false,0]
 //TREND_AODetails select
 
@@ -277,8 +277,7 @@ if (!_bFriendlyInsurgents) then {
 					_trgCustomAIScript setVariable ["DelMeOnNewCampaignDay",true];
 					_trgCustomAIScript setTriggerArea [1250, 1250, 0, false];
 					_trgCustomAIScript setTriggerActivation [TREND_FriendlySideString, format["%1 D", TREND_EnemySideString], true];
-					if (isNil "TREND_TimeSinceAdditionalReinforcementsCalled") then {TREND_TimeSinceAdditionalReinforcementsCalled = time; publicVariable "TREND_TimeSinceAdditionalReinforcementsCalled";};
-					_trgCustomAIScript setTriggerStatements ["this && {(time - TREND_TimeSinceAdditionalReinforcementsCalled) > 300}", format["nul = [EAST, TREND_ReinforceStartPos1, %1, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; nul = [EAST, TREND_ReinforceStartPos2, %1, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements; TREND_TimeSinceAdditionalReinforcementsCalled = time; publicVariable 'TREND_TimeSinceAdditionalReinforcementsCalled';", str(_sidePos)], ""];
+					_trgCustomAIScript setTriggerStatements ["this && {(time - TREND_TimeSinceAdditionalReinforcementsCalled) > (call TREND_GetSpottedDelay)}", format["nul = [EAST, call TREND_GetReinforceStartPos, %1, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; nul = [EAST, call TREND_GetReinforceStartPos, %1, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements; TREND_TimeSinceAdditionalReinforcementsCalled = time; publicVariable 'TREND_TimeSinceAdditionalReinforcementsCalled';", str(_sidePos)], ""];
 				};
 			};
 		};

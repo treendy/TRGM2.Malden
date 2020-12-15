@@ -59,7 +59,7 @@ TREND_fnc_MissionSelectLoop = {
 			};
 			sleep 0.5;
 		} else {
-			if (!TREND_bOptionsSet) then {
+			if (!TREND_bOptionsSet && {!(TREND_AdminPlayer isEqualTo player)}) then {
 				txt1Layer = "txt1" call BIS_fnc_rscLayer;
 				_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1 Admin " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
 				[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
@@ -106,7 +106,7 @@ sleep 3;
 
 if (!isDedicated && {(!isNull TREND_AdminPlayer && str player isEqualTo "sl") || (TREND_AdminPlayer isEqualTo player)}) then {
 	if (TREND_iMissionParamType != 5) then {	//if isCampaign, dont allow to select AO
-		if (TREND_AdvancedSettings select TREND_ADVSET_SELECT_AO_IDX isEqualTo 1) then {
+		if (call TREND_manualAOPlacement) then {
 			mrkAoSelect1 = nil;
 			mrkAoSelect2 = nil;
 			mrkAoSelect3 = nil;
@@ -119,7 +119,7 @@ if (!isDedicated && {(!isNull TREND_AdminPlayer && str player isEqualTo "sl") ||
 				["mrkAoSelect1",  TREND_Mission1Loc, "ICON", "ColorRed", [1,1], "AO 1"] call AIS_Core_fnc_createLocalMarker;
 			};
 
-			if (TREND_iMissionParamType isEqualTo 0 || TREND_iMissionParamType isEqualTo 4) then {
+			if (TREND_iMissionParamType isEqualTo 0 || TREND_iMissionParamType isEqualTo 4 || TREND_iMissionParamType isEqualTo 11) then {
 				titleText[localize "STR_TRGM2_tele_SelectPositionAO2", "PLAIN"];
 				openMap true;
 				onMapSingleClick "TREND_Mission2Loc = _pos; publicVariable 'TREND_Mission2Loc'; openMap false; onMapSingleClick ''; true;";
@@ -144,7 +144,7 @@ if (!isDedicated && {(!isNull TREND_AdminPlayer && str player isEqualTo "sl") ||
 			if (getMarkerColor "mrkAoSelect3" != "") then {deleteMarker "mrkAoSelect3";};
 		};
 
-		if (TREND_AdvancedSettings select TREND_ADVSET_SELECT_AO_CAMP_IDX isEqualTo 1) then {
+		if (call TREND_manualCampPlacement) then {
 			titleText[localize "STR_TRGM2_tele_SelectPosition_AO_Camp", "PLAIN"];
 			openMap true;
 			onMapSingleClick "AOCampLocation = _pos; publicVariable 'AOCampLocation'; openMap false; onMapSingleClick ''; true;";
@@ -213,9 +213,6 @@ if (!isNil("_isAceRespawnWithGear")) then {
 	ace_hearing_disableVolumeUpdate = false;
 	playMusic "";
 };
-
-if (isNil "TREND_KilledPlayers") then { TREND_KilledPlayers =   []; publicVariable "TREND_KilledPlayers"; };
-if (isNil "TREND_KilledPositions") then { TREND_KilledPositions =   []; publicVariable "TREND_KilledPositions"; };
 
 _iEnableGroupManagement = TREND_AdvancedSettings select TREND_ADVSET_GROUP_MANAGE_IDX;
 if (_iEnableGroupManagement == 1) then {
@@ -308,7 +305,7 @@ TREND_fnc_InitPostStarted = {
 	endMissionBoard addaction [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {[true] spawn TREND_fnc_ShowRepReport;}];
 
 	// I don't know if this is required anymore since MainInit remoteExec's this...
-	// _iSandStormOption = [2, (TREND_AdvancedSettings select TREND_ADVSET_SANDSTORM_IDX)] select ((selectRandom TREND_WeatherOptions) < 11);
+	// _iSandStormOption = [2, call TREND_sandStormOption] select (call TREND_WeatherOption < 11);
 	// if (_iSandStormOption == 3) then { //5 hours non stop
 	// 	nul = [18030,false] execVM "RandFramework\RikoSandStorm\ROSSandstorm.sqf";
 	// };
@@ -397,7 +394,6 @@ TREND_fnc_GeneralPlayerLoop = {
 			};
 			if (leader (group (vehicle player)) == player && TREND_AdvancedSettings select TREND_ADVSET_SUPPORT_OPTION_IDX == 1) then {
 				if (TREND_iMissionSetup == 5) then {
-					if (isNil "TREND_CampaignInitiated") then { TREND_CampaignInitiated = false; publicVariable "TREND_CampaignInitiated"; };
 					if (TREND_CampaignInitiated) then {
 
 						_dCurrentRep = [TREND_MaxBadPoints - TREND_BadPoints,1] call BIS_fnc_cutDecimals;
@@ -458,8 +454,6 @@ player addEventHandler ["Respawn", { [] spawn TREND_fnc_OnlyAllowDirectMapDraw; 
 
 TREND_fnc_InSafeZone = {
 	"TREND_fnc_InSafeZone called" call TREND_fnc_log;
-	if (isNil "TREND_PlayersHaveLeftStartingArea") then { TREND_PlayersHaveLeftStartingArea =   false; publicVariable "TREND_PlayersHaveLeftStartingArea"; };
-
 	while {true} do {
 		if (getMarkerPos "mrkHQ" distance player < TREND_PunishmentRadius) then {
 			//if (!TREND_bDebugMode) then { player allowDamage false};
@@ -480,8 +474,7 @@ TREND_fnc_setNVG = {
 	if (TREND_iAllowNVG == 0) then {
 		player addPrimaryWeaponItem "acc_flashlight";
 		player enableGunLights "forceOn";
-		player unassignItem TREND_sFriendlyNVClassName;
-		player removeItem TREND_sFriendlyNVClassName;
+		{player unassignItem _x; player removeItem _x;} forEach TREND_aNVClassNames;
 	};
 };
 [] spawn TREND_fnc_setNVG;

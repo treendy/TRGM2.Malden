@@ -579,12 +579,10 @@ if (isServer) then {
 
 	if (TREND_iAllowNVG isEqualTo 0) then {
 		{
-			_x addPrimaryWeaponItem "acc_flashlight";
-			_x enableGunLights "forceOn";
-			_x unassignItem TREND_sFriendlyNVClassName;
-			_x removeItem TREND_sFriendlyNVClassName;
-			_x unassignItem TREND_sEnemyNVClassName;
-			_x removeItem TREND_sEnemyNVClassName;
+			_unit = _x;
+			_unit addPrimaryWeaponItem "acc_flashlight";
+			_unit enableGunLights "forceOn";
+			{_unit unassignItem _x; _unit removeItem _x;} forEach TREND_aNVClassNames;
 		} forEach allUnits;
 	};
 	[format["Mission Core: %1", "NVGStateSet"], true] call TREND_fnc_log;
@@ -603,7 +601,7 @@ if (isServer) then {
 
 	TREND_fnc_WeatherAffectsAI = {
 		format["%1 called by %2", "TREND_fnc_WeatherAffectsAI", "TREND_fnc_mainInit"] call TREND_fnc_log;
-		_iWeatherOption = selectRandom TREND_WeatherOptions;
+		_iWeatherOption = call TREND_WeatherOption;
 		if (_iWeatherOption >= 11 && {_iWeatherOption != 99}) then {
 			[format["Mission Core: %1", "Weather Dependant AI Skill"], true] call TREND_fnc_log;
 			//Set enemy skill
@@ -637,7 +635,7 @@ if (isServer) then {
 	TREND_fnc_SandStormEffect = {
 		format["%1 called by %2", "TREND_fnc_SandStormEffect", "TREND_fnc_mainInit"] call TREND_fnc_log;
 		// Make sure we're not trying to do monsoon/blizzard and sandstorm at the same time...
-		_iSandStormOption = [2, (TREND_AdvancedSettings select TREND_ADVSET_SANDSTORM_IDX)] select ((selectRandom TREND_WeatherOptions) < 11);
+		_iSandStormOption = [2, call TREND_sandStormOption] select (call TREND_WeatherOption < 11);
 
 		if (_iSandStormOption isEqualTo 0 && {selectRandom[true,false,false,false,false]}) then { //Random
 			[format["Mission Core: %1", "SandStormEffect"], true] call TREND_fnc_log;
@@ -754,10 +752,10 @@ if (_iEnemyFlashLightOption isEqualTo 1) then {
 		if ((side _x) isEqualTo East) then
 		{
 			if (isNil { _x getVariable "ambushUnit" }) then {
-				_x addPrimaryWeaponItem "acc_flashlight";
-				_x enableGunLights "forceOn";
-				_x unassignItem TREND_sEnemyNVClassName;
-				_x removeItem TREND_sEnemyNVClassName;
+				_unit = _x;
+				_unit addPrimaryWeaponItem "acc_flashlight";
+				_unit enableGunLights "forceOn";
+				{_unit unassignItem _x; _unit removeItem _x;} forEach TREND_aNVClassNames;
 			};
 		};
 	} forEach allUnits;

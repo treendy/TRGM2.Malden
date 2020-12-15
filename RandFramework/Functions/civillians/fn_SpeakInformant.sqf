@@ -2,6 +2,13 @@ params ["_thisCiv", "_caller", "_args"];
 _args params ["_iSelected", "_bCreateTask"];
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
+if (isNil "_iSelected") then {
+	_iSelected = _thisCiv getVariable "taskIndex";
+};
+if (isNil "_bCreateTask") then {
+	_bCreateTask = _thisCiv getVariable "CreateTask";
+};
+
 if (side _caller == west) then {
 
 	//TREND_ClearedPositions pushBack (TREND_ObjectivePossitions select _iSelected);
@@ -51,16 +58,16 @@ if (side _caller == west) then {
 		};
 
 		if (_ballowSearch) then {
-			if (getMarkerType format["mrkMainObjective%1",0] == "empty") then {
-				format["mrkMainObjective%1",0] setMarkerType "mil_unknown"; //NOTE: hard coded zero as only one main task will exict (currently!)
-				hint "Map updated with main AO Location";
-			}
-			else {
-				[TREND_IntelShownType,"SpeakInform"] spawn TREND_fnc_showIntel;
-				sleep 5;
-				[TREND_IntelShownType,"SpeakInform"] spawn TREND_fnc_showIntel;
+			for [{private _i = 0;}, {_i < 3;}, {_i = _i + 1;}] do {
+				if (getMarkerType format["mrkMainObjective%1", _i] == "empty") then {
+					format["mrkMainObjective%1", _i] setMarkerType "mil_unknown";
+					["Map updated with main AO location"] remoteExec ["hint", 0, true];
+				} else {
+					[TREND_IntelShownType,"SpeakInform"] spawn TREND_fnc_showIntel;
+					sleep 5;
+					[TREND_IntelShownType,"SpeakInform"] spawn TREND_fnc_showIntel;
+				};
 			};
-
 		};
 
 	};

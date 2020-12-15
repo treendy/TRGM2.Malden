@@ -164,14 +164,14 @@ else {
 
 			TREND_SaveType =  _SaveType; publicVariable "TREND_SaveType";
 
-			TREND_bAndSoItBegins =  true; publicVariable "TREND_bAndSoItBegins";
-			TREND_bOptionsSet =  true; publicVariable "TREND_bOptionsSet";
+			TREND_bAndSoItBegins = true; publicVariable "TREND_bAndSoItBegins";
+			TREND_bOptionsSet = true; publicVariable "TREND_bOptionsSet";
 			closedialog 0;
 		};
 	};
 };
 
-TREND_bAndSoItBegins =  true; publicVariable "TREND_bAndSoItBegins";
-TREND_bOptionsSet =  true; publicVariable "TREND_bOptionsSet";
+
+TREND_bOptionsSet = true; publicVariable "TREND_bOptionsSet";
 
 true;

@@ -75,7 +75,7 @@ else {
 	_ctrlWeather ctrlEnable true;
 };
 
-if (_selectedTypeID == 0 || _selectedTypeID == 6 || _selectedTypeID == 4 || _selectedTypeID == 7 || _selectedTypeID == 8 || _selectedTypeID == 9) then {
+if (_selectedTypeID == 0 || _selectedTypeID == 6 || _selectedTypeID == 4 || _selectedTypeID == 7 || _selectedTypeID == 8 || _selectedTypeID == 9 || _selectedTypeID == 11 || _selectedTypeID == 12) then {
 	if (isNull((findDisplay 5000) displayCtrl 7001)) then {
 		_display ctrlCreate ["RscCombo", 7001];
 		_inpctrl1 = _display displayCtrl 7001;

@@ -127,7 +127,6 @@ if (_bAllowStart) then {
 			TREND_InfTaskCount =  0; publicVariable "TREND_InfTaskCount";
 			TREND_ActiveTasks =  []; publicVariable "TREND_ActiveTasks";
 			TREND_ObjectivePossitions =  []; publicVariable "TREND_ObjectivePossitions";
-			TREND_SpottedActiveFinished =  true; publicVariable "TREND_SpottedActiveFinished";
 			TREND_bCommsBlocked =  false; publicVariable "TREND_bCommsBlocked";
 			TREND_bBaseHasChopper =  false; publicVariable "TREND_bBaseHasChopper";
 			TREND_ParaDropped =  false; publicVariable "TREND_ParaDropped";

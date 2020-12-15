@@ -1928,7 +1928,9 @@ class ctrlStaticFrame: ctrlStatic
 class ctrlEdit: RscEdit
 {
 	type = CT_EDIT;
-	colorBackground[]={0,0,0,0.5};
+	style = "0x02 + 0x200";
+	sizeEx = GUI_TEXT_SIZE_MEDIUM;
+	colorBackground[]={0,0,0,0};
 	text="";
 	colorText[]={1,1,1,1};
 	colorDisabled[]={1,1,1,0.25};

@@ -78,35 +78,32 @@ TREND_ADVSET_IEDTARGET_COMPACT_SPACING_IDX = 15; publicVariable "TREND_ADVSET_IE
 TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX = 16; publicVariable "TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX";
 TREND_ADVSET_LARGE_PATROLS_IDX = 17; publicVariable "TREND_ADVSET_LARGE_PATROLS_IDX";
 TREND_ADVSET_VEHICLE_SPAWNING_REQ_REP_IDX = 18; publicVariable "TREND_ADVSET_VEHICLE_SPAWNING_REQ_REP_IDX";
-
-/////// Patrol settings ///////
-if (isNil "TREND_iAllowLargePat") then { TREND_iAllowLargePat =  1; publicVariable "TREND_iAllowLargePat"; }; //("OUT_par_AllowLargePatrols" call BIS_fnc_getParamValue);
-TREND_bAllowLargerPatrols = { [selectRandom [true,false], true, false] select (TREND_AdvancedSettings select TREND_ADVSET_LARGE_PATROLS_IDX)};
-publicVariable "TREND_bAllowLargerPatrols";
-
+TREND_ADVSET_TIME_BETWEEN_SPOTTED_ACTIONS_IDX = 19; publicVariable "TREND_ADVSET_TIME_BETWEEN_SPOTTED_ACTIONS_IDX";
 
 /////// Advanced Settings Set up ///////
 //NOTE the id's must go up in twos!
+#define AdvCtrlIDC(IDX) 6001 + (2 * IDX)
 TREND_AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex(zero based index)
-	[6001, localize "STR_TRGM2_TRGMSetUnitGlobalVars_VirtualArsenal","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1,localize "STR_TRGM2_Tooltip_AdvVirtualArsenal"],
-	[6003, localize "STR_TRGM2_TRGMSetUnitGlobalVars_GroupName","RscEdit",[""],"",1,localize "STR_TRGM2_Tooltip_AdvGroupName"],
-	[6005, localize "STR_TRGM2_TRGMSetUnitGlobalVars_SupportOptions","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],0,""],
-	[6007, localize "STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTickets","RscCombo",["1","2","3","4","5","6","7","8","9","10",localize "STR_TRGM2_TRGMSetUnitGlobalVars_Unlimited"],[1,2,3,4,5,6,7,8,9,10,99999],0,""],
-	[6009, localize "STR_TRGM2_TRGMSetUnitGlobalVars_Mapdraw","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],0,localize "STR_TRGM2_Tooltip_AdvMapDraw"],
-	[6011, localize "STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTimer","RscCombo",["5 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","10 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","30 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","1 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","5 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","10 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","20 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min"],[5,10,30,60,300,600,1200],1,""],
-	[6013, localize "STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFactions","RscCombo",TREND_DefaultEnemyFactionArrayText,TREND_DefaultEnemyFactionArray,TREND_DefaultEnemyFactionValue select 0,""],
-	[6015, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MilitiaFactions","RscCombo",TREND_DefaultMilitiaFactionArrayText,TREND_DefaultMilitiaFactionArray,TREND_DefaultMilitiaFactionValue select 0,""],
-	[6017, localize "STR_TRGM2_TRGMSetUnitGlobalVars_FriendlyFactions","RscCombo",TREND_DefaultFriendlyFactionArrayText,TREND_DefaultFriendlyFactionArray,TREND_DefaultFriendlyFactionValue select 0,""],
-	[6019, localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_Always",localize "STR_TRGM2_TRGMSetUnitGlobalVars_Never",localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_5Hours"],[0,1,2,3],TREND_DefaultSandStormOption,""],
-	[6021, localize "STR_TRGM2_TRGMSetUnitGlobalVars_GroupManagement","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1,localize "STR_TRGM2_Tooltip_AdvGroupManagement"],
-	[6023, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MainAOSelect","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1,localize "STR_TRGM2_Tooltip_AdvAoSelect"],
-	[6025, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MainAO_CAMP_Select","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1,localize "STR_TRGM2_Tooltip_AdvCampStart"],
-	[6027, localize "STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFlashLights","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],0,""],
-	[6029, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MiniMissions","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvMinimission"],
-	[6031, localize "STR_TRGM2_TRGMSetUnitGlobalVars_IedTargetCompact","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvIedTargetCompact"],
-	[6033, localize "STR_TRGM2_TRGMSetUnitGlobalVars_MoreEnemies","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvMoreEnemies"],
-	[6035, localize "STR_TRGM2_TRGMSetUnitGlobalVars_LargePatrols","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],TREND_iAllowLargePat,localize "STR_TRGM2_Tooltip_AdvLargePatrols"],
-	[6037, localize "STR_TRGM2_TRGMSetUnitGlobalVars_VehicleReqRep","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Disable", localize "STR_TRGM2_TRGMInitPlayerLocal_Enable"],[0,1],0,localize "STR_TRGM2_Tooltip_AdvVehicleReqRep"]
+	[AdvCtrlIDC(TREND_ADVSET_VIRTUAL_ARSENAL_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_VirtualArsenal","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1,localize "STR_TRGM2_Tooltip_AdvVirtualArsenal"],
+	[AdvCtrlIDC(TREND_ADVSET_GROUP_NAME_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_GroupName","RscEdit",[""],"",1,localize "STR_TRGM2_Tooltip_AdvGroupName"],
+	[AdvCtrlIDC(TREND_ADVSET_SUPPORT_OPTION_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_SupportOptions","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],0,""],
+	[AdvCtrlIDC(TREND_ADVSET_RESPAWN_TICKET_COUNT_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTickets","RscCombo",["1","2","3","4","5","6","7","8","9","10",localize "STR_TRGM2_TRGMSetUnitGlobalVars_Unlimited"],[1,2,3,4,5,6,7,8,9,10,99999],0,""],
+	[AdvCtrlIDC(TREND_ADVSET_MAP_DRAW_DIRECT_ONLY_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_Mapdraw","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],0,localize "STR_TRGM2_Tooltip_AdvMapDraw"],
+	[AdvCtrlIDC(TREND_ADVSET_RESPAWN_TIMER_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_RespawnTimer","RscCombo",["5 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","10 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","30 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Sec","1 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","5 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","10 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min","20 " + localize "STR_TRGM2_TRGMSetUnitGlobalVars_Min"],[5,10,30,60,300,600,1200],1,""],
+	[AdvCtrlIDC(TREND_ADVSET_ENEMY_FACTIONS_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFactions","RscCombo",TREND_DefaultEnemyFactionArrayText,TREND_DefaultEnemyFactionArray,TREND_DefaultEnemyFactionValue select 0,""],
+	[AdvCtrlIDC(TREND_ADVSET_MILITIA_FACTIONS_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_MilitiaFactions","RscCombo",TREND_DefaultMilitiaFactionArrayText,TREND_DefaultMilitiaFactionArray,TREND_DefaultMilitiaFactionValue select 0,""],
+	[AdvCtrlIDC(TREND_ADVSET_FRIENDLY_FACTIONS_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_FriendlyFactions","RscCombo",TREND_DefaultFriendlyFactionArrayText,TREND_DefaultFriendlyFactionArray,TREND_DefaultFriendlyFactionValue select 0,""],
+	[AdvCtrlIDC(TREND_ADVSET_SANDSTORM_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_Always",localize "STR_TRGM2_TRGMSetUnitGlobalVars_Never",localize "STR_TRGM2_TRGMSetUnitGlobalVars_SandStorm_5Hours"],[0,1,2,3],2,""],
+	[AdvCtrlIDC(TREND_ADVSET_GROUP_MANAGE_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_GroupManagement","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1,localize "STR_TRGM2_Tooltip_AdvGroupManagement"],
+	[AdvCtrlIDC(TREND_ADVSET_SELECT_AO_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_MainAOSelect","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1,localize "STR_TRGM2_Tooltip_AdvAoSelect"],
+	[AdvCtrlIDC(TREND_ADVSET_SELECT_AO_CAMP_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_MainAO_CAMP_Select","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[1,0],1,localize "STR_TRGM2_Tooltip_AdvCampStart"],
+	[AdvCtrlIDC(TREND_ADVSET_SELECT_ENEMY_FLASHLIGHTS_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_EnemyFlashLights","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],0,""],
+	[AdvCtrlIDC(TREND_ADVSET_MINIMISSIONS_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_MiniMissions","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvMinimission"],
+	[AdvCtrlIDC(TREND_ADVSET_IEDTARGET_COMPACT_SPACING_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_IedTargetCompact","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvIedTargetCompact"],
+	[AdvCtrlIDC(TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_MoreEnemies","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvMoreEnemies"],
+	[AdvCtrlIDC(TREND_ADVSET_LARGE_PATROLS_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_LargePatrols","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],1,localize "STR_TRGM2_Tooltip_AdvLargePatrols"],
+	[AdvCtrlIDC(TREND_ADVSET_VEHICLE_SPAWNING_REQ_REP_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_VehicleReqRep","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Disable", localize "STR_TRGM2_TRGMInitPlayerLocal_Enable"],[0,1],0,localize "STR_TRGM2_Tooltip_AdvVehicleReqRep"],
+	[AdvCtrlIDC(TREND_ADVSET_TIME_BETWEEN_SPOTTED_ACTIONS_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_TimeBetweenSpotted","RscXSliderH",60,600,300,localize "STR_TRGM2_Tooltip_TimeBetweenSpotted"]
 ];
 publicVariable "TREND_AdvControls";
 
@@ -118,11 +115,21 @@ TREND_DefaultAdvancedSettings = [];
 publicVariable "TREND_DefaultAdvancedSettings";
 
 
-/*DONT FORGET TO ADD THIS TO openDialogMissionselection.sqf
+/*DONT FORGET TO ADD THIS TO fn_openDialogMissionselection.sqf
 if (count TREND_AdvControls < 14) then {
 	TREND_AdvControls pushBack (TREND_DefaultAdvancedSettings select 13);
 };
 */
+
+/////// Sandstorm settings ///////
+if (isNil "TREND_DefaultSandStormOption") then { TREND_DefaultSandStormOption = 2; publicVariable "TREND_DefaultSandStormOption"; };
+TREND_sandStormOption = { TREND_AdvancedSettings select TREND_ADVSET_SANDSTORM_IDX };
+publicVariable "TREND_sandStormOption";
+
+/////// Patrol settings ///////
+if (isNil "TREND_iAllowLargePat") then { TREND_iAllowLargePat =  1; publicVariable "TREND_iAllowLargePat"; }; //("OUT_par_AllowLargePatrols" call BIS_fnc_getParamValue);
+TREND_bAllowLargerPatrols = { [selectRandom [true,false], true, false] select (TREND_AdvancedSettings select TREND_ADVSET_LARGE_PATROLS_IDX)};
+publicVariable "TREND_bAllowLargerPatrols";
 
 /////// Higher Enemy Count ///////
 TREND_bMoreEnemies = { ( (TREND_AdvancedSettings select TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX isEqualTo 1) || (TREND_AdvancedSettings select TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX isEqualTo 0 && selectRandom[false,true,false]) ); };
@@ -131,6 +138,22 @@ publicVariable "TREND_bMoreEnemies";
 //////// Vehicle Spawning Rep Requirement ///////
 TREND_VehiclesRequireRep = { [false, true] select (TREND_AdvancedSettings select TREND_ADVSET_VEHICLE_SPAWNING_REQ_REP_IDX); };
 publicVariable "TREND_VehiclesRequireRep";
+
+//////// Spotted Delay ///////
+TREND_GetSpottedDelay = { TREND_AdvancedSettings select TREND_ADVSET_TIME_BETWEEN_SPOTTED_ACTIONS_IDX };
+publicVariable "TREND_GetSpottedDelay";
+
+//////// Manual AO Placement ///////
+TREND_manualAOPlacement = { TREND_AdvancedSettings select TREND_ADVSET_SELECT_AO_IDX isEqualTo 1 };
+publicVariable "TREND_manualAOPlacement";
+
+//////// Manual Camp Placement ///////
+TREND_manualCampPlacement = { TREND_AdvancedSettings select TREND_ADVSET_SELECT_AO_CAMP_IDX isEqualTo 1 };
+publicVariable "TREND_manualCampPlacement";
+
+//////// Enemy Flashlights ///////
+TREND_enemyHaveFlashlights = { [] select (TREND_AdvancedSettings select TREND_ADVSET_SELECT_ENEMY_FLASHLIGHTS_IDX) };
+publicVariable "TREND_enemyHaveFlashlights";
 
 /////// Revive Settings Set up ///////
 //0 = no, 1 = guarantee revive, 2 = realistic revive, 3 = realistic revive (only medics can revive)
@@ -159,27 +182,19 @@ publicVariable "TREND_MilBuildings";
 TREND_TowerBuildings = ["Land_TTowerBig_2_F","Land_TTowerBig_1_F (towertest)","land_Objects96","Land_wx_radiomast","LAND_uns_signaltower","rso_radiomast"];//,"Land_TTowerSmall_2_F","Land_TTowerSmall_1_F"];  //these small towers are too small for Altis or Malden.. looks strange if this is the comms tower and nearby is a massive unused tower
 publicVariable "TREND_TowerBuildings";
 
-
-
-/////// Briefing Vars ///////
-if (isNil "TREND_sBreifing") then { TREND_sBreifing =  ""; publicVariable "TREND_sBreifing"; };
-if (isNil "TREND_sAltisRegainEngine") then { TREND_sAltisRegainEngine =  ""; publicVariable "TREND_sAltisRegainEngine"; };
-if (isNil "TREND_sScriptsUsed") then { TREND_sScriptsUsed =  localize "STR_TRGM2_TRGMSetUnitGlobalVars_ScriptsUsed"; publicVariable "TREND_sScriptsUsed"; };
-
-
 /////// Weather settings set up ///////
 if (isNil "TREND_iWeather") then { TREND_iWeather =  1; publicVariable "TREND_iWeather"; };
 if (isNil "TREND_UseEditorWeather") then { TREND_UseEditorWeather =  false; publicVariable "TREND_UseEditorWeather"; };
 
-TREND_WeatherOptions = call {
+TREND_WeatherOption = {
 	_weatherOption = [TREND_iWeather];
 	switch (TREND_iWeather) do {
-		case 0:  { _weatherOption = [1,1,1,2,2,2,3,3,3,3];};
+		case 0:  { _weatherOption = [1,2,3];};
 		case 99: { _weatherOption = [TREND_iWeather]; TREND_UseEditorWeather =  true; publicVariable "TREND_UseEditorWeather"; };
 		default  { _weatherOption = [TREND_iWeather]; };
 	};
-	_weatherOption;
-}; publicVariable "TREND_WeatherOptions";
+	selectRandom _weatherOption;
+}; publicVariable "TREND_WeatherOption";
 
 /////// Time settings set up ///////
 //[hour,min]
@@ -220,6 +235,8 @@ localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions4b", //Single M
 localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions5",  //Three Missions
 localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions5b", //Three Hidden Missions
 localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions7",  //Heavy mission (Hidden, full map)
+localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions11", //Three Heavy Missions
+localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions12", //Three Heavy Missions (Hidden, full map)
 localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions6"   //Campaign
 ];
 publicVariable "TREND_MissionTypeDescriptions";
@@ -233,6 +250,8 @@ publicVariable "TREND_MissionTypeDescriptions";
 // 4  = Three Missions
 // 7  = Three Hidden Missions
 // 10 = Heavy full map hidden mission
+// 11 = Three heavy missions
+// 12 = Three hidden heavy missions, full map
 // 5  = Campaign
 
 TREND_MissionParamTypes = [
@@ -246,10 +265,12 @@ TREND_MissionParamTypes = [
 	localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName5",
 	localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName5b",
 	localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName7",
+	localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName11",
+	localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName12",
 	localize "STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeName6"
 ];
 publicVariable "TREND_MissionParamTypes";
-TREND_MissionParamTypesValues = [0,6,8,1,2,3,9,4,7,10,5]; publicVariable "TREND_MissionParamTypesValues";
+TREND_MissionParamTypesValues = [0,6,8,1,2,3,9,4,7,10,11,12,5]; publicVariable "TREND_MissionParamTypesValues";
 
 
 // 1  = Laptop

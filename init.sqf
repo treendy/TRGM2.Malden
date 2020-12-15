@@ -51,14 +51,14 @@ waitUntil { _handle; };
 
 [
    west,
-      [(localize "STR_TRGM2_Init_TRGM2Engine"), TREND_sAltisRegainEngine],
-      [(localize "STR_TRGM2_Init_Mission"), TREND_sBreifing],
+      [(localize "STR_TRGM2_Init_Mission"), ""],
+      ["", ""],
    east,
       ["", ""],
       ["", ""],
    {true},
-      ["Credits", (localize "STR_TRGM2_Init_Credits"), "Treendy, Refactored by TheAce0296"],
-      ["Credits", (localize "STR_TRGM2_Init_ScriptsUsed"), TREND_sScriptsUsed]
+      [(localize "STR_TRGM2_Init_TRGM2Engine"), (localize "STR_TRGM2_Init_Credits"), "Treendy, Refactored by TheAce0296"],
+      [(localize "STR_TRGM2_Init_TRGM2Engine"), (localize "STR_TRGM2_Init_ScriptsUsed"), localize "STR_TRGM2_TRGMSetUnitGlobalVars_ScriptsUsed"]
 ] call FHQ_fnc_ttAddBriefing;
 
 "Marker1" setMarkerTextLocal (localize "STR_TRGM2_Init_MarkerText_HQ"); //Head Quarters marker localize

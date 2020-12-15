@@ -33,6 +33,6 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc
 	};
 
 
-} remoteExec ["call", 2];
+} remoteExec ["spawn", 2];
 
 true;

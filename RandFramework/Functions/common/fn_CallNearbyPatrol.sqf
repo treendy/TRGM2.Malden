@@ -1,13 +1,6 @@
 params ["_thisThis", "_thisThisList", "_FirstPos", "_iSideIndex", "_bIsMainObjective"];
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
-if (isNil "TREND_FlareCounter") then {
-		TREND_FlareCounter = 15;
-};
-if (isNil "TREND_FireFlares") then {
-		TREND_FireFlares = selectRandom[true,false];
-};
-
 //hint format["THIS: \nTHISLIST: %1",str(_thisThisList)];
 //sleep 10;
 _MainObjectivePos = TREND_ObjectivePossitions select 0;
@@ -45,9 +38,7 @@ if (isServer && count _thisThisList > 0) then {
 
 		//so trigger will only be active for one second... inside this class we how many times its been called agasint the sideindex to decide if we continue (each side has its own trigger, so will be called multiple times if players sptted in multiple areas)
 		//two counters, one to count if to use reinforcments/air support etc... and the other to make sure we dont call patrol to move to pos every second (need to give the patrol at least 30 seconds to move before relocate waypoints)
-		TREND_SpottedActiveFinished = false; PublicVariable "TREND_SpottedActiveFinished";
-		sleep 1;
-		TREND_SpottedActiveFinished = true; PublicVariable "TREND_SpottedActiveFinished";
+		TREND_TimeSinceLastSpottedAction = time; publicVariable "TREND_TimeSinceLastSpottedAction";
 
 
 		_SpottedUnitPos = getpos _SpottedUnit;
@@ -177,10 +168,10 @@ if (isServer && count _thisThisList > 0) then {
 				//if (_SpottedUnit distance _MainObjectivePos < 300 && !(vehicle _SpottedUnit isKindOf "Air")) then {
 				//	if (!TREND_ParaDropped) then {
 				//
-				//		[EAST, TREND_ReinforceStartPos1, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
+				//		[EAST, call TREND_GetReinforceStartPos, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
 				//		if (call TREND_bAllowLargerPatrols) then {
 				//			sleep 3;
-				//			[EAST, TREND_ReinforceStartPos1, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
+				//			[EAST, call TREND_GetReinforceStartPos, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
 				//		};
 				//		TREND_ParaDropped = true;
 				//		publicVariable "TREND_ParaDropped";
@@ -190,15 +181,19 @@ if (isServer && count _thisThisList > 0) then {
 
 				if (_bInfSpottedAction) then {
 						if (_bIsMainObjective) then {
-							[EAST, TREND_ReinforceStartPos1, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
-							if ((call TREND_bMoreEnemies)) then {
+							[EAST, call TREND_GetReinforceStartPos, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
+							if (call TREND_bMoreEnemies) then {
 								sleep 3;
-								[EAST, TREND_ReinforceStartPos1, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
+								[EAST, call TREND_GetReinforceStartPos, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
 							};
 							TREND_ParaDropped = true; publicVariable "TREND_ParaDropped";
 						}
 						else {
-							[EAST, TREND_ReinforceStartPos1, _SpottedUnitPos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
+							[EAST, call TREND_GetReinforceStartPos, _SpottedUnitPos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
+							if (call TREND_bMoreEnemies) then {
+								sleep 3;
+								[EAST, call TREND_GetReinforceStartPos, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
+							};
 						};
 
 				};
