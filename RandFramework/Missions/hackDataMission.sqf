@@ -57,7 +57,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_laptopPos = (selectRandom _allpositionsLaptop1);
 	_objLaptop1 setPosATL _laptopPos;
 
-	if (selectRandom[true,false]) then {
+	if (random 1 < .50) then {
 		_sIED1Name = format["objIED%1",_iTaskIndex];
 		_objIED1 = selectRandom TREND_IEDClassNames createVehicle [0,0,500];
 		_objIED1 setVariable [_sIED1Name, _objIED1, true];
@@ -69,6 +69,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_objLaptop1 setVariable ["taskIndex", _iTaskIndex, true];
 	_objLaptop1 setVariable ["CreateTask", _bCreateTask, true];
 
-	[_objLaptop1, [localize "STR_TRGM2_startInfMission_MissionTitle1",{_this spawn TREND_fnc_hackIntel1;},[]]] remoteExec ["addAction", 0, true];
+	[_objLaptop1, [localize "STR_TRGM2_startInfMission_MissionTitle1", {_this spawn TREND_fnc_hackIntel1;}, []]] remoteExec ["addAction", 0, true];
 	_sTaskDescription = selectRandom[localize "STR_TRGM2_startInfMission_MissionTitle1_Desc1", localize "STR_TRGM2_startInfMission_MissionTitle1_Desc2"];
 };

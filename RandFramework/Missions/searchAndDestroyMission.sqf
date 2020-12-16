@@ -41,7 +41,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_compactIedTargets = true;
 	};
 	if (TREND_AdvancedSettings select TREND_ADVSET_IEDTARGET_COMPACT_SPACING_IDX == 0) then {
-		_compactIedTargets = selectRandom[false,true];
+		_compactIedTargets = random 1 < .50;
 	};
 
 	_spacingBetweenTargets = 1500;
@@ -56,7 +56,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_targetCaches = TargetCaches;
 
 	_targetToUse = selectRandom _targetVehs;
-	_isCache = selectRandom[true,false];
+	_isCache = random 1 < .50;
 	if (_isCache) then {
 		_targetToUse = selectRandom _targetCaches;
 	};
@@ -67,7 +67,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	[_mainObjPos,100,true,true,_target1, _isCache] spawn TREND_fnc_setTargetEvent;
 
 	_targetToUse2 = selectRandom _targetVehs;
-	_isCache2 = selectRandom[false];
+	_isCache2 = false;
 	if (_isCache2) then {
 		_targetToUse2 = selectRandom _targetCaches;
 	};
@@ -78,7 +78,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	[_mainObjPos,_spacingBetweenTargets,true,true,_IED2, _isCache2] spawn TREND_fnc_setTargetEvent;
 
 	_targetToUse3 = selectRandom _targetVehs;
-	_isCache3 = selectRandom[true];
+	_isCache3 = true;
 	if (_isCache3) then {
 		_targetToUse3 = selectRandom _targetCaches;
 	};

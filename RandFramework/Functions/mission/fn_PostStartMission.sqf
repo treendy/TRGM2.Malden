@@ -11,7 +11,7 @@ sleep 2;
 
 _bMoveToAO = false;
 if (TREND_iStartLocation == 2) then {
-	_bMoveToAO = selectRandom [true,false];
+	_bMoveToAO = random 1 < .50;
 };
 if (TREND_iStartLocation == 1) then {
 	_bMoveToAO = true;

@@ -115,7 +115,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_guardUnit3 = nil;
 	_hvtGroup = createGroup east;
 	_hvtGuardGroup = createGroup east;
-	//if (selectRandom [true,false]) then { //so 50/50 who is leader, so we will have no idea which of these guys is our agent and which is the target!
+	//if (random 1 < .50) then { //so 50/50 who is leader, so we will have no idea which of these guys is our agent and which is the target!
 	//	_mainHVT = _hvtGroup createUnit [_mainHVTClass,[-500,-500,0],[],20,"NONE"];
 	//	sleep 0.1;
 	//	_guardUnit3 = _hvtGuardGroup createUnit [_mainHVTGuardClass,[-500,-500,0],[],20,"NONE"];
@@ -280,7 +280,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 
 		sleep 9;
-		if (selectRandom [true])  then {
+		if (true)  then {
 			[_thisGuardUnit3] spawn {
 				_thisGuardUnit3 = _this select 0;
 				_thisGuardUnit3 switchMove "Acts_JetsCrewaidLCrouch_in";

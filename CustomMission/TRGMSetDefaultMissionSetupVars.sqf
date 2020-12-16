@@ -1,11 +1,11 @@
 
-_useCustomMission = false;
-if (_useCustomMission || (["CustomMission", 0] call BIS_fnc_getParamValue) isEqualTo 1) then {
+_useCustomMission = (["CustomMission", 0] call BIS_fnc_getParamValue) isEqualTo 1;
+if (_useCustomMission) then {
 	TREND_ForceMissionSetup = true; //will mean the main player will not see an mission setup dialog, and will force the settings you have selected below.
 	TREND_MainMissionTitle = "The Mission of DOOOOM";
 };
 
-if (isServer && {_useCustomMission || (["CustomMission", 0] call BIS_fnc_getParamValue) isEqualTo 1}) then {
+if (isServer && {_useCustomMission}) then {
 
 	/*
 		0=Heavy Mission (with two optional sides)

@@ -114,7 +114,7 @@ if (!_isCache && count _nearestRoads > 0) then {
 
 			["Mission Events: Target 6", true] call TREND_fnc_log;
 
-			if (selectRandom[true,false,false]) then {
+			if (random 1 < .33) then {
 				[_posOfTarget] spawn TREND_fnc_createEnemySniper;
 			};
 
@@ -140,7 +140,7 @@ if (!_isCache && count _nearestRoads > 0) then {
 				_thisUnitTypes = [(call sRiflemanToUse), (call sRiflemanToUse),(call sRiflemanToUse),(call sMachineGunManToUse), (call sEngineerToUse), (call sGrenadierToUse), (call sMedicToUse),(call sAAManToUse),(call sATManToUse)];
 				_thisAllowBarakade = true;
 				_thisIsDirectionAwayFromAO = true;
-				[_posOfTarget,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,(call UnarmedScoutVehicles),100,true,selectRandom[false,false,true],false] spawn TREND_fnc_setCheckpoint;
+				[_posOfTarget,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,(call UnarmedScoutVehicles),100,true,random 1 < .33,false] spawn TREND_fnc_setCheckpoint;
 			};
 
 			["Mission Events: Target 4", true] call TREND_fnc_log;
@@ -220,7 +220,7 @@ if (_isCache) then {
 			_markerstrcache setMarkerType "hd_dot";
 		};
 
-		if (selectRandom[true,false,false]) then {
+		if (random 1 < .33) then {
 			[_posCache] spawn TREND_fnc_createEnemySniper;
 		};
 
@@ -234,7 +234,7 @@ if (_isCache) then {
 			_thisUnitTypes = [(call sRiflemanToUse), (call sRiflemanToUse),(call sRiflemanToUse),(call sMachineGunManToUse), (call sEngineerToUse), (call sGrenadierToUse), (call sMedicToUse),(call sAAManToUse),(call sATManToUse)];
 			_thisAllowBarakade = false;
 			_thisIsDirectionAwayFromAO = false;
-			[_posCache,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,(call UnarmedScoutVehicles),100,true,selectRandom[false,false,true],false] spawn TREND_fnc_setCheckpoint;
+			[_posCache,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,(call UnarmedScoutVehicles),100,true,random 1 < .33,false] spawn TREND_fnc_setCheckpoint;
 		};
 
 		//two guards at door!!!
@@ -273,7 +273,7 @@ if (_isCache) then {
 		_spawnedUnit3 = ((createGroup east) createUnit [(call sRiflemanToUse), [-135,-253,0], [], 0, "NONE"]);
 		[getPos _building, [_spawnedUnit3], -1, false, false,false] spawn TREND_fnc_Zen_OccupyHouse;
 
-		if (selectRandom[true,false]) then {
+		if (random 1 < .50) then {
 			_spawnedUnit4 = ((createGroup east) createUnit [(call sRiflemanToUse), [-135,-253,0], [], 0, "NONE"]);
 			[getPos _building, [_spawnedUnit4], -1, false, false,false] spawn TREND_fnc_Zen_OccupyHouse;
 		};
@@ -335,12 +335,12 @@ if (!_objectiveCreated) then {
 		_thisUnitTypes = [(call sRiflemanToUse), (call sRiflemanToUse),(call sRiflemanToUse),(call sMachineGunManToUse), (call sEngineerToUse), (call sGrenadierToUse), (call sMedicToUse),(call sAAManToUse),(call sATManToUse)];
 		_thisAllowBarakade = true;
 		_thisIsDirectionAwayFromAO = true;
-		[_posObj,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,(call UnarmedScoutVehicles),100,true,selectRandom[false,false,true],false,true] spawn TREND_fnc_setCheckpoint;
+		[_posObj,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,(call UnarmedScoutVehicles),100,true,random 1 < .33,false,true] spawn TREND_fnc_setCheckpoint;
 	};
 
 
 
-	if (selectRandom[true,false,false]) then {
+	if (random 1 < .33) then {
 		[_posObj] spawn TREND_fnc_createEnemySniper;
 	};
 

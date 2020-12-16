@@ -637,7 +637,7 @@ if (isServer) then {
 		// Make sure we're not trying to do monsoon/blizzard and sandstorm at the same time...
 		_iSandStormOption = [2, call TREND_sandStormOption] select (call TREND_WeatherOption < 11);
 
-		if (_iSandStormOption isEqualTo 0 && {selectRandom[true,false,false,false,false]}) then { //Random
+		if (_iSandStormOption isEqualTo 0 && {random 1 < .20}) then { //Random
 			[format["Mission Core: %1", "SandStormEffect"], true] call TREND_fnc_log;
 			StartWhen = selectRandom [990,1290,1710];
 			sleep StartWhen;

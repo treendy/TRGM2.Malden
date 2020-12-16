@@ -31,7 +31,7 @@ if (_test) then {sleep 3};
 if (_test) then {hint "SS start"};
 
 // Warning length = 11 secs
-if (selectRandom [true,false] && !_isSmallEffect) then {
+if (random 1 < .50 && !_isSmallEffect) then {
     //playsound ["sswarning", true];
 };
 5 setOvercast 1;

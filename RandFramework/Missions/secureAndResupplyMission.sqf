@@ -54,7 +54,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         _thisRoadOnly = true;
         _thisSide = east;
         _thisUnitTypes = [(call sRifleman), (call sRifleman), (call sRifleman), (call sMachineGunMan), (call sEngineer), (call sEngineer), (call sMedic), (call sAAMan)];
-        _thisAllowBarakade = selectRandom[true];
+        _thisAllowBarakade = true;
         _thisIsDirectionAwayFromAO = true;
         [_mainObjPos, _thisPosAreaOfCheckpoint, _thisAreaRange, _thisRoadOnly, _thisSide, _thisUnitTypes, _thisAllowBarakade, _thisIsDirectionAwayFromAO, false, (call UnarmedScoutVehicles), 50] spawn TREND_fnc_setCheckpoint;
     };

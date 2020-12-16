@@ -81,20 +81,18 @@ TREND_fnc_MissionSelectLoop = {
 				};
 			};
 		};
-
-		waitUntil {TREND_bOptionsSet};
-
-		txt5Layer = "txt5" call BIS_fnc_rscLayer;
-		_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>";
-		[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
-
-
-		txt51Layer = "txt51" call BIS_fnc_rscLayer;
-		_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic" + "</t>";
-		[_texta, 0, 0.280, 7, 1,0,txt51Layer] spawn BIS_fnc_dynamicText;
-
 		sleep 5;
 	};
+	waitUntil {TREND_bOptionsSet};
+
+	txt5Layer = "txt5" call BIS_fnc_rscLayer;
+	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>";
+	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+
+
+	txt51Layer = "txt51" call BIS_fnc_rscLayer;
+	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic" + "</t>";
+	[_texta, 0, 0.280, 7, 1,0,txt51Layer] spawn BIS_fnc_dynamicText;
 };
 [] spawn TREND_fnc_MissionSelectLoop;
 
@@ -302,7 +300,7 @@ TREND_fnc_InitPostStarted = {
 	};
 
 	// This is being overwritten in TREND_fnc_SetMissionBoardOptions almost immediately?
-	endMissionBoard addaction [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {[true] spawn TREND_fnc_ShowRepReport;}];
+	// endMissionBoard addaction [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {[true] spawn TREND_fnc_ShowRepReport;}];
 
 	// I don't know if this is required anymore since MainInit remoteExec's this...
 	// _iSandStormOption = [2, call TREND_sandStormOption] select (call TREND_WeatherOption < 11);
@@ -368,7 +366,7 @@ if (leader (group (vehicle player)) == player) then {
 	_trg setTriggerText "illuminate your position for 5 mins (eta 60 seconds)";
 	_trg setTriggerStatements["this", "[player] spawn TREND_fnc_fireIllumFlares;", ""];
 
-	//_trgCustomAIScript setTriggerStatements ["hint 'test'", format["nul = [this, thisList, %1, %2, %3] spawn TREND_fnc_CallNearbyPatrol;",str(_sidePos),_iSideIndex, _bIsMainObjective], ""];
+	//_trgCustomAIScript setTriggerStatements ["hint 'test'", format["nul = [%1, %2, %3, this, thisList] spawn TREND_fnc_CallNearbyPatrol;",str(_sidePos),_iSideIndex, _bIsMainObjective], ""];
 };
 
 

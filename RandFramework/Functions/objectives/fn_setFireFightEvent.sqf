@@ -71,7 +71,7 @@ _objPos = _eventLocationPos getPos [100 * sqrt random 1, random 360];
 //_Obj1 = "land_helipadempty_f" createVehicle _objPos;
 //nul = [_Obj1] execVM "RandFramework\Alias\ALambientbattle\alias_flaks.sqf";
 
-/*if (selectRandom[true,false] || _eventType == 1 || _eventType == 4) then {
+/*if (random 1 < .50 || _eventType == 1 || _eventType == 4) then {
 	_objPos = _eventLocationPos getPos [100 * sqrt random 1, random 360];
 	_Obj8  = "land_helipadempty_f" createVehicle _objPos;
 	null = [_Obj8,false] execVM "RandFramework\Alias\ALambientbattle\aaa_search_light.sqf";
@@ -80,7 +80,7 @@ _objPos = _eventLocationPos getPos [100 * sqrt random 1, random 360];
 	_Obj9  = "land_helipadempty_f" createVehicle _objPos;
 	null = [_Obj9,false] execVM "RandFramework\Alias\ALambientbattle\aaa_search_light.sqf";
 };*/
-if (selectRandom[true,false] || _eventType == 1 || _eventType == 4) then {
+if (random 1 < .50 || _eventType == 1 || _eventType == 4) then {
 	_flatPos1 =  _eventLocationPos getPos [100 * sqrt random 1, random 360];
 	_flatPos1 = [_eventLocationPos , 0, 100, 8, 0, 0.5, 0,[],[_flatPos1,_flatPos1]] call TREND_fnc_findSafePos;
 	tracer1 setPos _flatPos1;
@@ -133,7 +133,7 @@ TREND_WarEventActive = true;
 		_yPos = (_eventLocationPos select 1)-125;
 
 
-		if (selectRandom[true,false,false,false,false,false,false]) then {
+		if (random 1 < .15) then {
 			_li_aaa = _type createVehicleLocal [_xPos+(random 250),_yPos+(random 250),0];
 			_li_aaa setDamage 1;
 		}
@@ -177,8 +177,8 @@ TREND_WarEventActive = true;
 
 		_AirToUse = selectRandom (call FriendlyJet);
 		_NoOfVeh = selectRandom [1,2];
-		_bSetCaptive = selectRandom [true,true,true,false];
-		if (selectRandom [true,false,false]) then {
+		_bSetCaptive = random 1 < .75;
+		if (random 1 < .33) then {
 			_AirToUse = selectRandom (call FriendlyChopper);
 		};
 		_pos = _eventLocationPos getPos [3000,random 360];//random 360 and 3 clicks out and no playable units within 2 clicks

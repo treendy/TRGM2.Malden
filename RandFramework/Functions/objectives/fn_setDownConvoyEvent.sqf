@@ -34,13 +34,13 @@ if (count _nearestRoads > 0) then {
 
 	_eventLocationPos = getPos (selectRandom _nearestRoads);
 
-	if (selectRandom [true,false,false]) then {
+	if (random 1 < .33) then {
 		[_eventLocationPos] spawn TREND_fnc_createWaitingAmbush;
-		if (selectRandom[true,false]) then {
+		if (random 1 < .50) then {
 			[_eventLocationPos] spawn TREND_fnc_createWaitingSuicideBomber;
 		};
 	};
-	if (selectRandom [true,false,false]) then {
+	if (random 1 < .33) then {
 		[_eventLocationPos] spawn TREND_fnc_createWaitingSuicideBomber;
 	};
 
@@ -117,18 +117,18 @@ if (count _nearestRoads > 0) then {
 					_markerEventMedi setMarkerText "Ambushed Friendly Convoy";
 				}
 				else {
-					if (selectRandom[true,false,false,false]) then {
-					//if (selectRandom[true]) then {
+					//if (random 1 < .25) then {
+					//if (true) then {
 						_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _mainVeh];
 						_markerEventMedi setMarkerShape "ICON";
 						_markerEventMedi setMarkerType "hd_dot";
 						_markerEventMedi setMarkerText "Distress Signal";
-					};
+					//};
 				};
 
 			};
 
-	if (selectRandom [true,false]) then {
+	if (random 1 < .50) then {
 		[_mainVeh] spawn {
 			_mainVeh = _this select 0;
 			while{ (alive _mainVeh)} do {
@@ -179,7 +179,7 @@ if (count _nearestRoads > 0) then {
 			_downedCiv addEventHandler ["killed", {_this spawn TREND_fnc_CivKilled;}];
 			_bloodPool1 = createVehicle [selectRandom _bloodPools, getpos _downedCiv, [], 0, "CAN_COLLIDE"];
 			_bloodPool1 setDir (floor(random 360));
-			if (selectRandom[true]) then {
+			if (true) then {
 				_trialDir = (floor(random 360));
 				_trialPos = (getPos _bloodPool1) getPos [3,_trialDir];
 				_bloodTrail1 = createVehicle ["BloodTrail_01_New_F", _trialPos, [], 0, "CAN_COLLIDE"];

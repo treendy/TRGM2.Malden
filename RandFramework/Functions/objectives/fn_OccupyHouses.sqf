@@ -26,7 +26,7 @@ if (!_bThisMissionCivsOnly) then {
 				_thisGroup = nil;
 				_thisGroup = createGroup _InsurgentSide;
 				_thisGroup createUnit [(call sRiflemanToUse), position _randBuilding, [], 0, "NONE"];
-				if (selectRandom [true,false]) then {_thisGroup createUnit [(call sRiflemanToUse), position _randBuilding, [], 0, "NONE"];};
+				if (random 1 < .50) then {_thisGroup createUnit [(call sRiflemanToUse), position _randBuilding, [], 0, "NONE"];};
 				//HERE!!!! copy and paste the zen init script into a placed unig, then run and see if he is in building!!! (esc out of TRGM dialog)
 				//(call sRiflemanToUse) createUnit [position _randBuilding, _thisGroup, "[getPosATL this, units group this, 10, false, false] spawn TREND_fnc_Zen_OccupyHouse;"];
 
@@ -49,7 +49,7 @@ if (!_bThisMissionCivsOnly) then {
 						_thisRoadOnly = false;
 						_thisSide = east;
 						_thisUnitTypes = [(call sRiflemanToUse), (call sRiflemanToUse),(call sRiflemanToUse),(call sMachineGunManToUse), (call sEngineerToUse), (call sGrenadierToUse), (call sMedicToUse),(call sAAManToUse),(call sATManToUse)];
-						_thisAllowBarakade = selectRandom [false];
+						_thisAllowBarakade = false;
 						_thisIsDirectionAwayFromAO = true;
 						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,(call UnarmedScoutVehicles),50,false] spawn TREND_fnc_setCheckpoint;
 					}

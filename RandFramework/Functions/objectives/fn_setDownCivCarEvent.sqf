@@ -33,7 +33,7 @@ if (count _nearestRoads > 0) then {
 
 	_eventLocationPos = getPos (selectRandom _nearestRoads);
 
-	_bIsTrap = selectRandom[true,true,false,false,false];
+	_bIsTrap = random 1 < .40;
 	//_bIsTrap = true;
 
 
@@ -94,16 +94,16 @@ if (count _nearestRoads > 0) then {
    			_expl3 attachTo [_mainVeh, [0, -0.2, -1.65]];
 			_expl3 setVectorDirAndUp [[0,0,-1],[0,1,0]];
 
-			if (selectRandom [true,false]) then {
+			if (random 1 < .50) then {
 				[_eventLocationPos] spawn TREND_fnc_createWaitingAmbush;
-				if (selectRandom[true,false]) then {
+				if (random 1 < .50) then {
 					[_eventLocationPos] spawn TREND_fnc_createWaitingSuicideBomber;
 				};
 			};
-			if (selectRandom [true,false,false]) then {
+			if (random 1 < .33) then {
 				[_eventLocationPos] spawn TREND_fnc_createWaitingSuicideBomber;
 			};
-			if (selectRandom[true,false,false]) then {
+			if (random 1 < .33) then {
 				[_eventLocationPos] spawn TREND_fnc_createEnemySniper;
 			};
 		};
@@ -115,7 +115,7 @@ if (count _nearestRoads > 0) then {
 			_markerEventMedi setMarkerText "Stranded Civ";
 		}
 		else {
-			if (selectRandom[false]) then { //will never show this for broken down civ! (only here if need to test)
+			if (false) then { //will never show this for broken down civ! (only here if need to test)
 				_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _mainVeh];
 				_markerEventMedi setMarkerShape "ICON";
 				_markerEventMedi setMarkerType "hd_dot";
@@ -150,11 +150,11 @@ if (count _nearestRoads > 0) then {
 		},[_downedCiv]]] remoteExec ["addAction", 0, true];
 
 		//set veh damage;
-		//if (selectRandom[true,false]) then {_mainVeh setHit ["engine",0.75];};
-		if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_1_steering",1];};
-		if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_2_steering",1];};
-		if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_2_1_steering",1];};
-		if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_2_2_steering",1];};
+		//if (random 1 < .50) then {_mainVeh setHit ["engine",0.75];};
+		if (random 1 < .50) then {_mainVeh setHit ["wheel_1_1_steering",1];};
+		if (random 1 < .50) then {_mainVeh setHit ["wheel_1_2_steering",1];};
+		if (random 1 < .50) then {_mainVeh setHit ["wheel_2_1_steering",1];};
+		if (random 1 < .50) then {_mainVeh setHit ["wheel_2_2_steering",1];};
 		if (((_mainVeh getHit "wheel_1_1_steering") < 0.5) && ((_mainVeh getHit "wheel_1_2_steering") < 0.5) && ((_mainVeh getHit "wheel_2_1_steering") < 0.5) && ((_mainVeh getHit "wheel_2_2_steering") < 0.5)) then {
 			_mainVeh setHit ["wheel_1_1_steering",1];
 		};

@@ -12,7 +12,7 @@ if (_unitCount > 10) then {
 _iCount = 0; //_unitCount
 _randBuilding = nil;
 
-_bAllCivsBad = selectRandom [true,false,false,false];
+_bAllCivsBad = random 1 < .25;
 
 _bRebelLeaderPicked = false;
 while {_iCount <= _unitCount} do
@@ -21,7 +21,7 @@ while {_iCount <= _unitCount} do
 	_randBuilding = selectRandom _allBuildings;
 	_sInitString = "";
 
-	if (selectRandom[true,false,false,false,false]) then {
+	if (random 1 < .20) then {
 
 		if (_bIsRebels) then {
 				_sInitString = "this spawn TREND_fnc_badReb;";

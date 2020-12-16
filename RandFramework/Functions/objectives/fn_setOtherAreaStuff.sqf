@@ -25,7 +25,7 @@ if (count _TowersNear > 0) then {
 	if (_distanceHQ > 1400) then {
 		TREND_bHasCommsTower =  true; publicVariable "TREND_bHasCommsTower";
 		TREND_CommsTowerPos =  [_TowerX, _TowerY]; publicVariable "TREND_CommsTowerPos";
-		if (selectRandom[true]) then {
+		if (true) then {
 			_PatrolDist = 70;
 			_wayX = _TowerX;
 			_wayY = _TowerY;
@@ -41,7 +41,7 @@ if (count _TowersNear > 0) then {
 				//1 in (_maxGroups*2) chance of having an AA/AT guy
 
 				_DiamPatrolGroupTower = createGroup east;
-					if (selectRandom [true,false]) then {
+					if (random 1 < .50) then {
 						(call sAAMan) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower];
 						_iHasAA = 1;
 					}
@@ -51,10 +51,10 @@ if (count _TowersNear > 0) then {
 					};
 
 				(call sRifleman) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower];
-				if (selectRandom [true,false]) then {(call sRifleman) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
-				if (selectRandom [true,false]) then {(call sRifleman) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
-				if (selectRandom [true,false]) then {(call sRifleman) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
-				if (selectRandom [true,false]) then {(call sRifleman) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
+				if (random 1 < .50) then {(call sRifleman) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
+				if (random 1 < .50) then {(call sRifleman) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
+				if (random 1 < .50) then {(call sRifleman) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
+				if (random 1 < .50) then {(call sRifleman) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
 
 				_wp1Tower = _DiamPatrolGroupTower addWaypoint [_wp1PosTower, 0];
 				_wp2Tower = _DiamPatrolGroupTower addWaypoint [_wp2PosTower, 0];
@@ -73,7 +73,7 @@ if (count _TowersNear > 0) then {
 		};
 
 
-		if (selectRandom [true,true,true]) then {
+		if (true) then {
 			["Mission Events: Comms 3", true] call TREND_fnc_log;
 
 			_trg = createTrigger ["EmptyDetector", position TREND_TowerBuild];
@@ -190,32 +190,32 @@ else {
 
 //these are more likely to show (instead of using TREND_ChanceOfOccurance), as a lot of times, these are not a trap, just an empty vehicle or a pile of rubbish
 ["Loading Events : 5", true] call TREND_fnc_log;
-	if (selectRandom [true,true,false]) then {
+	if (random 1 < .66) then {
 		[_mainObjPos] spawn TREND_fnc_setIEDEvent;
 		sleep 1;
 	};
 ["Loading Events : 4", true] call TREND_fnc_log;
-	if (selectRandom [true,true,false]) then {
+	if (random 1 < .66) then {
 		[_mainObjPos] spawn TREND_fnc_setIEDEvent;
 		sleep 1;
 	};
 ["Loading Events : 3", true] call TREND_fnc_log;
-	if (selectRandom [true,true,false]) then {
+	if (random 1 < .66) then {
 		[_mainObjPos] spawn TREND_fnc_setIEDEvent;
 		sleep 1;
 	};
 ["Loading Events : 2", true] call TREND_fnc_log;
-	if (selectRandom [true,true,false]) then {
+	if (random 1 < .66) then {
 		[_mainObjPos] spawn TREND_fnc_setIEDEvent;
 		sleep 1;
 	};
 ["Loading Events : 1", true] call TREND_fnc_log;
-	if (selectRandom [true,true,false]) then {
+	if (random 1 < .66) then {
 		[_mainObjPos] spawn TREND_fnc_setIEDEvent;
 		sleep 1;
 	};
 ["Loading Events : 0", true] call TREND_fnc_log;
-	if (selectRandom [true,true,false]) then {
+	if (random 1 < .66) then {
 		[_mainObjPos] spawn TREND_fnc_setIEDEvent;
 		sleep 1;
 	};

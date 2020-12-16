@@ -74,7 +74,7 @@ switch (TREND_iMissionSetup) do {
 		TREND_MaxBadPoints = 1;
 	};
 	case 3: {
-		if (selectRandom [true,false,false]) then {
+		if (random 1 < .33) then {
 			_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1,4];
 			_IsMainObjs = [false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 			_MarkerTypes = ["mil_objective","hd_dot"];
@@ -117,7 +117,7 @@ switch (TREND_iMissionSetup) do {
 			_bSideMissionsCivOnly = [false,false,false];
 			_bIsCampaignFinalMission = true;
 		} else {
-			if (selectRandom [true,false,false]) then {
+			if (random 1 < .33) then {
 				_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1,4];
 				_IsMainObjs = [false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 				_MarkerTypes = ["mil_objective","hd_dot"];
@@ -158,7 +158,7 @@ switch (TREND_iMissionSetup) do {
 		TREND_MaxBadPoints = 1;
 	};
 	case 8: {
-		if (selectRandom[false,false]) then {
+		if (random 1 < .80) then {
 			_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
 			_IsMainObjs = [true,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 			_MarkerTypes = ["mil_objective","hd_dot"];
@@ -177,7 +177,7 @@ switch (TREND_iMissionSetup) do {
 		};
 	};
 	case 9: {
-		if (selectRandom[true,false]) then {
+		if (random 1 < .50) then {
 			_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1];
 			_IsMainObjs = [false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 			_MarkerTypes = ["mil_objective","hd_dot"];
@@ -197,7 +197,7 @@ switch (TREND_iMissionSetup) do {
 	};
 	case 10: {
 		TREND_IsFullMap =  true; publicVariable "TREND_IsFullMap";
-		if (selectRandom[true,false]) then {
+		if (random 1 < .50) then {
 			_ThisTaskTypes = [selectRandom _MainMissionTasksToUse];
 			_IsMainObjs = [true]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
 			_MarkerTypes = ["empty"];

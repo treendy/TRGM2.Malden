@@ -117,7 +117,7 @@ if (!isNull (findDisplay 6000)) then {
 		_value = nil;
 		if (_lnpCtrlType == "RscCombo") then {
 			TREND_debugMessages = TREND_debugMessages + "\n\nHERE80:" + str(lbCurSel _ctrlItem);
-			_value = _ThisControlOptions select (lbCurSel _ctrlItem);
+			_value = _ThisControlOptions select ([lbCurSel _ctrlItem, 0] select (lbCurSel _ctrlItem isEqualTo -1));
 		};
 		if (_lnpCtrlType == "RscEdit") then {
 			_value = ctrlText _ThisControlIDX;

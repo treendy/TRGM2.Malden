@@ -127,7 +127,7 @@ if (!_thisRoadOnly || !_PosFound) then {
 	_thisIsCheckPoint = false;
 	_generalDirection = [_thisAOPos, _thisPosAreaOfCheckpoint] call BIS_fnc_DirTo;
 	_dirAdd = 0;
-	if (selectRandom[true,false]) then {
+	if (random 1 < .50) then {
 		_dirAdd = floor(random 40);
 	}
 	else {
@@ -234,7 +234,7 @@ if (_PosFound) then {
 	};
 	if (_iBarricadeType == "NONE") then {  //if none, then either use flag or defensive object
 		//FlagCarrierTakistan_EP1, FlagCarrierTKMilitia_EP1
-		if (!(isOnRoad _roadBlockSidePos) && selectRandom[true,false]) then {
+		if (!(isOnRoad _roadBlockSidePos) && random 1 < .50) then {
 			_initItem = selectRandom _DefensiveObjects createVehicle _roadBlockSidePos;
 			_initItem setDir ([_direction,180] call fnc_AddToDirection);
 		}
@@ -245,7 +245,7 @@ if (_PosFound) then {
 
 	};
 	if (!TREND_ISUNSUNG) then {
-		if (_iBarricadeType != "NONE" && selectRandom [true,false]) then {
+		if (_iBarricadeType != "NONE" && random 1 < .50) then {
 			[_initItem,_thisSide] spawn {
 				_initItem = _this select 0;
 				_thisSide = _this select 1;
@@ -261,7 +261,7 @@ if (_PosFound) then {
 
 	_bHasParkedCar = false;
 	_ParkedCar = nil;
-	if (_AllowVeh && (selectRandom [true,true,true,false] || _thisSide == west)) then {
+	if (_AllowVeh && (random 1 < .75 || _thisSide == west)) then {
 		_behindBlockPos = _initItem getPos [10,([_direction,180] call fnc_AddToDirection)];
 		_flatPos = nil;
 		_flatPos = [_behindBlockPos , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos],selectRandom _thisScoutVehicles] call TREND_fnc_findSafePos;
@@ -275,7 +275,7 @@ if (_PosFound) then {
 		_bHasParkedCar = true;
 	};
 	if (_NoRoadsOrBuildingsNear) then {
-		if (selectRandom [true,true,true,false] || _isForceTents) then {
+		if (random 1 < .75 || _isForceTents) then {
 			_behindBlockPos = _initItem getPos [15,([_direction,180] call fnc_AddToDirection)];
 			_flatPos = nil;
 			_flatPos = [_behindBlockPos , 0, 15, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos],"Land_TentA_F"] call TREND_fnc_findSafePos;
@@ -300,7 +300,7 @@ if (_PosFound) then {
 		}
 	};
 	_behindBlockPos2 = _initItem getPos [3,([_direction,180] call fnc_AddToDirection)];
-	if (selectRandom [true,true,true,false]) then {
+	if (random 1 < .75) then {
 
 		_flatPos = nil;
 		_flatPos = [_behindBlockPos2 , 0, 5, 7, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2],"Land_PortableLight_single_F"] call TREND_fnc_findSafePos;
@@ -310,7 +310,7 @@ if (_PosFound) then {
 	//Land_PortableLight_single_F
 
 	if (TREND_ISUNSUNG) then {
-		if (selectRandom [true,true,true]) then {
+		if (random 1 < .66) then {
 			_flatPos = nil;
 			_flatPos = [_behindBlockPos2 , 0, 5, 7, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call TREND_fnc_findSafePos;
 			_radio = nil;
@@ -338,7 +338,7 @@ if (_PosFound) then {
 	_guardUnit1 setDir (_direction);
  	if (_AllowAnimation) then {[_guardUnit1,"WATCH","ASIS"] call BIS_fnc_ambientAnimCombat;};
 	//hint "HMM2";
-	if (selectRandom [true,true,false]) then {
+	if (random 1 < .66) then {
 		_sUnitType = selectRandom _thisUnitTypes;
 		_guardUnit2 = _group createUnit [_sUnitType,_pos2,[],0,"NONE"];
 		doStop [_guardUnit2];
@@ -410,7 +410,7 @@ if (_PosFound) then {
 
 		if (!_isHiddenObj) then {
 			[_guardUnit5, [localize "STR_TRGM2_setCheckpoint_Ask", {_this spawn TREND_fnc_SpeakToFriendlyCheckpoint;}, [_pos5], 0, true, true, "", "_this == player"]] remoteExec ["addAction", 0, true];
-			if (selectRandom [true,true,false]) then {
+			if (random 1 < .66) then {
 				_test = nil;
 				_test = createMarker [format["MrkFriendCheckpoint%1%2",_roadBlockPos select 0, _roadBlockPos select 1], _roadBlockPos];
 				_test setMarkerShape "ICON";

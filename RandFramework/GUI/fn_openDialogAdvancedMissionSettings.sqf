@@ -133,7 +133,7 @@ _lblctrlTitle ctrlCommit 0;
 		_display ctrlCreate ["ctrlEdit", (_InpCtrlID+500)];
 		_valctrl = _display displayCtrl (_InpCtrlID+500);
 		_valctrl ctrlSetPosition [_inpXPos+(.75*_ctrlWidth), _ctrlYPos,.25*_ctrlWidth,_ctrlHeight];
-		_valctrl ctrlSetText (str(round sliderPosition _inpctrl) + "s");
+		_valctrl ctrlSetText (str(round (TREND_AdvancedSettings select _forEachIndex)) + "s");
 		_valctrl ctrlCommit 0;
 
 		_inpctrl ctrlAddEventHandler ["SliderPosChanged", {

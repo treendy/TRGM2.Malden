@@ -9,7 +9,7 @@ while {alive _thisCiv && !_bFired} do {
 
 	{
 		if ((_x in playableunits)) then {
-			if (selectRandom[true,false,false]) then {
+			if (random 1 < .33) then {
 				_grpName = createGroup east;
 				[_thisCiv] joinSilent _grpName;
 

@@ -53,22 +53,22 @@ if (str(_flatPos) != "[0,0,0]") then {
 	_aaaY = _flatPos select 1;
 
 
-	if (selectRandom [true,false,false,false,false]) then {
+	if (random 1 < .20) then {
 		[_flatPos] spawn TREND_fnc_createWaitingAmbush;
-		if (selectRandom[true,false,false,false]) then {
+		if (random 1 < .25) then {
 			[_flatPos] spawn TREND_fnc_createWaitingSuicideBomber;
 		};
 	};
-	if (selectRandom [true,false,false,false,false]) then {
+	if (random 1 < .20) then {
 		[_flatPos] spawn TREND_fnc_createWaitingSuicideBomber;
 	};
-	if (selectRandom[true,false,false]) then {
+	if (random 1 < .33) then {
 		[_flatPos] spawn TREND_fnc_createEnemySniper;
 	};
 
 	_wreck = _sVictimVeh createVehicle _flatPos;
 	_wreck setDamage [1,false];
-	if (selectRandom [true,false]) then {
+	if (random 1 < .50) then {
 		_objFlame1 = createVehicle ["test_EmptyObjectForFireBig", _flatPos, [], 0, "CAN_COLLIDE"];
 	};
 
@@ -126,7 +126,7 @@ if (str(_flatPos) != "[0,0,0]") then {
 
 	_downedCiv setDamage 0.8;
 	_downedCiv setHitPointDamage ["hitLegs", 1];
-	//if (selectRandom[true,false] && !_HasEnemy) then {
+	//if (random 1 < .50 && !_HasEnemy) then {
 		[_downedCiv, "Acts_CivilInjuredGeneral_1"] remoteExec ["switchMove", 0];
 	//}
 	//else {
@@ -142,7 +142,7 @@ if (str(_flatPos) != "[0,0,0]") then {
 	_bloodPool1 = createVehicle [selectRandom _bloodPools, getpos _downedCiv, [], 0, "CAN_COLLIDE"];
 	_bloodPool1 setDir (floor(random 360));
 	[_downedCiv, ["Talk to wounded guy",{hint "Please get me back to base!!"},[_downedCiv]]] remoteExec ["addAction", 0, true];
-	if (selectRandom[true]) then {
+	if (true) then {
 		_trialDir = (floor(random 360));
 		_trialPos = (getPos _bloodPool1) getPos [3,_trialDir];
 		_bloodTrail1 = createVehicle ["BloodTrail_01_New_F", _trialPos, [], 0, "CAN_COLLIDE"];
@@ -190,13 +190,13 @@ if (str(_flatPos) != "[0,0,0]") then {
 		_markerEventMedi setMarkerText "Crash Site";
 	}
 	else {
-		if (selectRandom[true,false,false,false]) then {
-		//if (selectRandom[true]) then {
+		//if (random 1 < .25) then {
+		//if (true) then {
 			_markerEventMedi = createMarker [format["_markerEventRescue%1",(floor(random 360))], getPos _downedCiv];
 			_markerEventMedi setMarkerShape "ICON";
 			_markerEventMedi setMarkerType "hd_dot";
 			_markerEventMedi setMarkerText "Distress Signal";
-		};
+		//};
 	};
 
 	_doLoop = true;

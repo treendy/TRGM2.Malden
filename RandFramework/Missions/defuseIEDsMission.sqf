@@ -41,7 +41,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_compactIedTargets = true;
 	};
 	if (TREND_AdvancedSettings select TREND_ADVSET_IEDTARGET_COMPACT_SPACING_IDX == 0) then {
-		_compactIedTargets = selectRandom[false,true];
+		_compactIedTargets = random 1 < .50;
 	};
 
 	_spacingBetweenTargets = 1500;

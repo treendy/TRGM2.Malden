@@ -30,19 +30,19 @@ if (_currentATFieldPos select 0 != 0) then {
 		if (_iCountMines >= 50) then {_minesPlaced = true};
 	};
 
-	if (selectRandom [true,false,false,false,false]) then {
+	if (random 1 < .20) then {
 		[_currentATFieldPos,200,250] spawn TREND_fnc_createWaitingAmbush;
 	};
 
-	if (selectRandom [true,false,false,false,false]) then {
+	if (random 1 < .20) then {
 	//if (true) then {
 		_mainVeh = createVehicle [selectRandom (call FriendlyScoutVehicles),_currentATFieldPos,[],0,"NONE"];
 		_mainVeh setDir (floor random 360);
 		clearItemCargoGlobal _mainVeh;
-		if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_1_steering",1];};
-			if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_2_steering",1];};
-			if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_2_1_steering",1];};
-			if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_2_2_steering",1];};
+		if (random 1 < .50) then {_mainVeh setHit ["wheel_1_1_steering",1];};
+			if (random 1 < .50) then {_mainVeh setHit ["wheel_1_2_steering",1];};
+			if (random 1 < .50) then {_mainVeh setHit ["wheel_2_1_steering",1];};
+			if (random 1 < .50) then {_mainVeh setHit ["wheel_2_2_steering",1];};
 			if (((_mainVeh getHit "wheel_1_1_steering") < 0.5) && ((_mainVeh getHit "wheel_1_2_steering") < 0.5) && ((_mainVeh getHit "wheel_2_1_steering") < 0.5) && ((_mainVeh getHit "wheel_2_2_steering") < 0.5)) then {
 				_mainVeh setHit ["wheel_1_1_steering",1];
 		};

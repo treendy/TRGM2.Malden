@@ -63,16 +63,16 @@ if (isNil("_eventLocationPos")) then {
 };
 
 
-if (selectRandom [true,false,false,false,false]) then {
+if (random 1 < .20) then {
 	[_eventLocationPos] spawn TREND_fnc_createWaitingAmbush;
-	if (selectRandom[true,false,false]) then {
+	if (random 1 < .33) then {
 		[_eventLocationPos] spawn TREND_fnc_createWaitingSuicideBomber;
 	};
 };
-if (selectRandom [true,false,false,false,false]) then {
+if (random 1 < .20) then {
 	[_eventLocationPos] spawn TREND_fnc_createWaitingSuicideBomber;
 };
-if (selectRandom[true,false,false]) then {
+if (random 1 < .33) then {
 	[_eventLocationPos] spawn TREND_fnc_createEnemySniper;
 };
 
@@ -153,18 +153,18 @@ while {_iteration <= 2} do {
 				_markerEventMedi setMarkerText "Medical Situation";
 			}
 			else {
-				if (selectRandom[true,false,false,false]) then {
-				//if (selectRandom[true]) then {
+				//if (random 1 < .25) then {
+				//if (true) then {
 					_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _mainVeh];
 					_markerEventMedi setMarkerShape "ICON";
 					_markerEventMedi setMarkerType "hd_dot";
 					_markerEventMedi setMarkerText "Distress Signal";
-				};
+				//};
 			};
 
 		};
 
-if (selectRandom [true,false]) then {
+if (random 1 < .50) then {
 	[_mainVeh] spawn {
 		_mainVeh = _this select 0;
 		while{ (alive _mainVeh)} do {
@@ -247,7 +247,7 @@ if (isnil "fncMedicalParamedicLight") then {
 		_downedCiv addEventHandler ["killed", {_this spawn TREND_fnc_CivKilled;}];
 		_bloodPool1 = createVehicle [selectRandom _bloodPools, getpos _downedCiv, [], 0, "CAN_COLLIDE"];
 		_bloodPool1 setDir (floor(random 360));
-		if (selectRandom[true]) then {
+		if (true) then {
 			_trialDir = (floor(random 360));
 			_trialPos = (getPos _bloodPool1) getPos [3,_trialDir];
 			_bloodTrail1 = createVehicle ["BloodTrail_01_New_F", _trialPos, [], 0, "CAN_COLLIDE"];
@@ -379,7 +379,7 @@ if (isnil "fncMedicalParamedicLight") then {
 
 		};
 
-		if (_iteration == 1 and selectRandom [true,false]) then {
+		if (_iteration == 1 && random 1 < .50) then {
 			_flatPosPolice1 = nil;
 			_flatPosPolice1 = [_vehPos , 30, 50, 10, 0, 0.5, 0,[],[[0,0,0],[0,0,0]],selectRandom PoliceVehicles] call TREND_fnc_findSafePos;
 			_carPolice = createVehicle [selectRandom PoliceVehicles, _flatPosPolice1, [], 0, "NONE"];

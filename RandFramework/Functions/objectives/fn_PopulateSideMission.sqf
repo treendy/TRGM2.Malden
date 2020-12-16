@@ -3,7 +3,7 @@ params [
 	"_sideType",
 	"_sideMainBuilding",
 	"_bIsMainObjective",
-	"_iSideIndex",
+	"_iTaskIndex",
 	"_allowFriendlyIns",
 	["_ForceCivsOnly", false]
 ];
@@ -14,7 +14,7 @@ if (isNil "TREND_OccupiedHousesPos") then { TREND_OccupiedHousesPos =   []; publ
 _dAngleAdustPerLoop = 0;
 _bHasVehicle = false;
 
-TREND_AODetails pushBack [_iSideIndex,0,0,0,false,0,0];
+TREND_AODetails pushBack [_iTaskIndex,0,0,0,false,0,0];
 publicVariable "TREND_AODetails";
 
 
@@ -55,7 +55,7 @@ else {
 
 _selectRandomW = call {random 1 > .75};;
 if (call TREND_bMoreEnemies) then {
-	_selectRandomW = call {random 1 > .25};
+	_selectRandomW = call {random 1 > .50};
 	_bThisMissionCivsOnly = false;
 	_InsurgentSide = east;
 	_bFriendlyInsurgents = false;
@@ -75,7 +75,7 @@ else {
 };
 
 if ((_sideType == 7 || _sideType == 5) && _bFriendlyInsurgents) then { //if mission is kill officer or kill officer and in fridnldy area then make him prisoner
-	sOfficerName = format["objInformant%1",_iSideIndex];
+	sOfficerName = format["objInformant%1",_iTaskIndex];
 	_officerObject = missionNamespace getVariable [sOfficerName , objNull];
 	_officerObject disableAI "anim";
 	_officerObject switchMove "Acts_ExecutionVictim_Loop";
@@ -88,7 +88,7 @@ if ((_sideType == 7 || _sideType == 5) && _bFriendlyInsurgents) then { //if miss
 	removeAllWeapons _officerObject;
 };
 if (_sideType == 4) then { //if mission is informat, then dont be walkig around
-	sInformantName = format["objInformant%1",_iSideIndex];
+	sInformantName = format["objInformant%1",_iTaskIndex];
 	_InformantObject = missionNamespace getVariable [sInformantName , objNull];
 	_InformantObject setVariable ["StopWalkScript", true];
 	//_sideMainBuilding
@@ -97,7 +97,7 @@ if (_sideType == 4) then { //if mission is informat, then dont be walkig around
 };
 
 if (isNil "TREND_AllowAOFires") then { TREND_AllowAOFires =   true; publicVariable "TREND_AllowAOFires"; };
-//if (selectRandom [true]) then {
+//if (true) then {
 if (TREND_AllowAOFires && _selectRandomW && !_bThisMissionCivsOnly) then {
 	//"test_EmptyObjectForFireBig" createVehicle position board2;
 	_fireRootx = getPos _sideMainBuilding select 0;
@@ -127,7 +127,7 @@ if (TREND_AllowAOFires && _selectRandomW && !_bThisMissionCivsOnly) then {
 };
 
 //if main var to set friendly insurg and also, if our random selction above plus 25/75 chance is true, then the units will be dressed as insurgents (player will not know if friendly of enemy)
-if ((_bThisMissionCivsOnly || (!_bIsMainObjective && selectRandom[true,false,false,false]))) then {
+if ((_bThisMissionCivsOnly || (!_bIsMainObjective && random 1 < .25))) then {
 	TREND_ToUseMilitia_Side = true; publicVariable "TREND_ToUseMilitia_Side";
 };
 
@@ -140,8 +140,8 @@ _trgCustomAIScript = createTrigger ["EmptyDetector", _sidePos];
 _trgCustomAIScript setVariable ["DelMeOnNewCampaignDay",true];
 _trgCustomAIScript setTriggerArea [1250, 1250, 0, false];
 _trgCustomAIScript setTriggerActivation [TREND_FriendlySideString, format["%1 D", TREND_EnemySideString], true];
-_trgCustomAIScript setTriggerStatements ["this && {(time - TREND_TimeSinceLastSpottedAction) > (call TREND_GetSpottedDelay)}", format["nul = [this, thisList, %1, %2, %3] spawn TREND_fnc_CallNearbyPatrol;",str(_sidePos),_iSideIndex, _bIsMainObjective], ""];
-//TREND_AODetails [_iSideIndex,0,0,0,false,0]
+_trgCustomAIScript setTriggerStatements ["this && {(time - TREND_TimeSinceLastSpottedAction) > (call TREND_GetSpottedDelay)}", format["nul = [%1, %2, %3, thisTrigger, thisList] spawn TREND_fnc_CallNearbyPatrol;",str(_sidePos),_iTaskIndex, _bIsMainObjective], ""];
+//TREND_AODetails [_iTaskIndex,0,0,0,false,0]
 //TREND_AODetails select
 
 TREND_debugMessages = TREND_debugMessages + format["\n\ntrendFunctions.sqf : _bFriendlyInsurgents: %1 - _bThisMissionCivsOnly: %2 ",str(_bFriendlyInsurgents),str(_bThisMissionCivsOnly)];
@@ -154,7 +154,7 @@ if (!_bFriendlyInsurgents) then {
 			_minimission = true;
 		};
 		if (TREND_AdvancedSettings select TREND_ADVSET_MINIMISSIONS_IDX == 0) then {
-			_minimission = selectRandom[false,true];
+			_minimission = random 1 < .50;
 		};
 
 
@@ -171,11 +171,11 @@ if (!_bFriendlyInsurgents) then {
 		if (_bIsMainObjective) then {_bHasPatrols = true};
 
 		if (isNil "TREND_PatrolType") then { TREND_PatrolType =   0; publicVariable "TREND_PatrolType"; };
-		_bSmallerAllOverPatrols = selectRandom [true,false] || TREND_PatrolType == 1 || TREND_PatrolType == 2; //if single mission and random 50/50, or if forced by custom mission
+		_bSmallerAllOverPatrols = random 1 < .50 || TREND_PatrolType == 1 || TREND_PatrolType == 2; //if single mission and random 50/50, or if forced by custom mission
 
 		if (_minimission) then {
-			if (selectRandom[true,false]) then {
-				if (selectRandom[true,false]) then {
+			if (random 1 < .50) then {
+				if (random 1 < .50) then {
 					[_sidePos,250 + (floor random 100),[2,3],true,_InsurgentSide, 10] spawn TREND_fnc_BuildingPatrol;
 				}
 				else {
@@ -277,7 +277,7 @@ if (!_bFriendlyInsurgents) then {
 					_trgCustomAIScript setVariable ["DelMeOnNewCampaignDay",true];
 					_trgCustomAIScript setTriggerArea [1250, 1250, 0, false];
 					_trgCustomAIScript setTriggerActivation [TREND_FriendlySideString, format["%1 D", TREND_EnemySideString], true];
-					_trgCustomAIScript setTriggerStatements ["this && {(time - TREND_TimeSinceAdditionalReinforcementsCalled) > (call TREND_GetSpottedDelay)}", format["nul = [EAST, call TREND_GetReinforceStartPos, %1, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; nul = [EAST, call TREND_GetReinforceStartPos, %1, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements; TREND_TimeSinceAdditionalReinforcementsCalled = time; publicVariable 'TREND_TimeSinceAdditionalReinforcementsCalled';", str(_sidePos)], ""];
+					_trgCustomAIScript setTriggerStatements ["this && {(time - TREND_TimeSinceAdditionalReinforcementsCalled) > (call TREND_GetSpottedDelay * 1.5)}", format["nul = [EAST, call TREND_GetReinforceStartPos, %1, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; nul = [EAST, call TREND_GetReinforceStartPos, %1, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements; TREND_TimeSinceAdditionalReinforcementsCalled = time; publicVariable 'TREND_TimeSinceAdditionalReinforcementsCalled';", str(_sidePos)], ""];
 				};
 			};
 		};
@@ -800,7 +800,7 @@ else {
 	[_sidePos,200,true] spawn TREND_fnc_SpawnCivs; //3rd param of true says these are rebels and function will set rebels instead of civs
 
 	_lapPos = _sidePos getPos [50, 180];
-	_markerFriendlyRebs = createMarker [format["mrkFriendlyRebs%1",_iSideIndex], _lapPos];
+	_markerFriendlyRebs = createMarker [format["mrkFriendlyRebs%1",_iTaskIndex], _lapPos];
 	_markerFriendlyRebs setMarkerShape "ICON";
 	_markerFriendlyRebs setMarkerType "hd_dot";
 	_markerFriendlyRebs setMarkerText (localize "STR_TRGM2_trendFunctions_OccupiedByFriendRebel");
@@ -866,7 +866,7 @@ if (_selectRandomW) then {
 			_objIED1 = selectRandom TREND_IEDClassNames createVehicle _flatPos;
 			_IEDCount = _IEDCount + 1;
 		};
-		//if (selectRandom[true,false,false,false] || _LoopMax == _high) then {
+		//if (random 1 < .25 || _LoopMax == _high) then {
 		//	_objIED1b = selectRandom TREND_IEDFakeClassNames createVehicle _flatPos;
 		//	_objIED1b setPos _flatPos;
 		//};
@@ -892,7 +892,7 @@ if (_selectRandomW || _bThisMissionCivsOnly) then {
 
 
 //Spawn AT Mine on road if not vehicles and hack data mission
-if (_sideType == 1 && selectRandom[true,false]) then {
+if (_sideType == 1 && random 1 < .50) then {
 
 	_nearestRoad = [[_inf1X,_inf1Y], 100, []] call BIS_fnc_nearestRoad;
 	if (isNil "_nearestRoad") then {

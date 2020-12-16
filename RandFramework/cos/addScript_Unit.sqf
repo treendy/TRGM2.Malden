@@ -65,30 +65,30 @@ else {
 
 		_potentialIntel = format["%1: I dont have anything of interest to tell you", name _thisUnit];
 
-		if (_distanceFromAO == "FAR" && selectRandom [true,false]) then {
+		if (_distanceFromAO == "FAR" && random 1 < .50) then {
 			_potentialIntel = format["After talking to %2, you discover something is happening far to the %1",_locationDirection, name _thisUnit];
 		};
 		if (_distanceFromAO == "MED") then {
-			if (selectRandom [true,true,false]) then {
+			if (random 1 < .66) then {
 				_potentialIntel = format["After talking to %2, you discover something is happening around %1",_locationText, name _thisUnit];
 			};
-			if (selectRandom [true,false,false]) then {
+			if (random 1 < .33) then {
 				_potentialIntel = format["After talking to %0, you discover something is happening not too far to the %1",_locationDirection, name _thisUnit];
 			};
 		};
 		if (_distanceFromAO == "CLOSE") then {
-			if (selectRandom [true,false]) then {
+			if (random 1 < .50) then {
 				_potentialIntel = format["After talking to %1, you discover our Objective is: %2", name _thisUnit, TREND_CurrentZeroMissionTitle];
 			};
-			if (selectRandom [true,false,false,false]) then {
+			if (random 1 < .25) then {
 				_potentialIntel = format["After talking to %2, you discover something is happening close to the %1",_locationDirection, name _thisUnit];
 			};
 		};
 		if (_distanceFromAO == "VERYCLOSE") then {
-			if (selectRandom [true]) then {
+			if (true) then {
 				_potentialIntel = format["After talking to %1, you discover our objective is: %2", name _thisUnit, TREND_CurrentZeroMissionTitle];
 			};
-			if (selectRandom [true,false]) then {
+			if (random 1 < .50) then {
 				_potentialIntel = format["After talking to %0, you discover something is happening very close to the %1",_locationDirection, name _thisUnit];
 			};
 		};

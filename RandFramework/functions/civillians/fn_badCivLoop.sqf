@@ -10,7 +10,7 @@ _bActivated = false;
 while {alive _badCiv && !_bFired} do {
     {
         if ((_x in playableUnits)) then {
-            if (selectRandom[true,false,false]) then {
+            if (random 1 < .33) then {
                 //load armament
 
                 if (!_bActivated) then {

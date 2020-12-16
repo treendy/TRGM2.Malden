@@ -37,7 +37,7 @@ if (isServer) then { // only do once -> on the serer
 		while {alive _thisCiv && !_bFired} do {
 			{
 				if ((_x in playableUnits) || _x in switchableUnits) then {
-					if (selectRandom[true,false,false]) then {
+					if (random 1 < .33) then {
 						//load armament
 						if (!_bActivated) then {
 							_bActivated = true;

@@ -133,8 +133,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_markerstrBombInf setMarkerType "hd_dot";
 	_markerstrBombInf setMarkerText localize "STR_TRGM2_BombMissionInformantMarker";
 
-	if ((_objInformant distance [_centralAO_x,_centralAO_y]) > 500 && selectRandom [true,false,false,false]) then {
-		if (selectRandom [true,false]) then {
+	if ((_objInformant distance [_centralAO_x,_centralAO_y]) > 500 && random 1 < .25) then {
+		if (random 1 < .50) then {
 			_thisAreaRange = 20;
 			_checkPointGuidePos = getPos _objInformant;
 			_flatPosSentry = nil;

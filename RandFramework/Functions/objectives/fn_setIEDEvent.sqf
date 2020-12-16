@@ -50,7 +50,7 @@ if (count _nearestRoads > 0) then {
 
 	if (_eventLocationPos select 0 > 0) then {
 
-		_bIsTrap = selectRandom[true,false,false];
+		_bIsTrap = random 1 < .33;
 		if (_forceTrap) then {
 			_bIsTrap = true;
 		};
@@ -144,7 +144,7 @@ if (count _nearestRoads > 0) then {
 					_thisVeh = _this select 0;
 					_thisPlayer = _this select 1;
 					_bIsTrap = (_this select 3) select 0;
-					if (_thisPlayer getVariable "unitrole" != "Engineer" && selectRandom[true,true,true,false,false]) then {
+					if (_thisPlayer getVariable "unitrole" != "Engineer" && random 1 < .60) then {
 						hint localize "STR_TRGM2_IEDSearchFailed";
 					}
 					else {
@@ -163,7 +163,7 @@ if (count _nearestRoads > 0) then {
 									_thisVeh = _this select 0;
 									_thisPlayer = _this select 1;
 									_bIsTrap = (_this select 3) select 0;
-									if (_thisPlayer getVariable "unitrole" != "Engineer" && selectRandom[true,false,false,false]) then {
+									if (_thisPlayer getVariable "unitrole" != "Engineer" && random 1 < .25) then {
 										hint localize "STR_TRGM2_IEDOhOh";
 										sleep 1;
 										playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_thisVeh,false,getPosASL _thisVeh,0.5,1.5,0];
@@ -221,14 +221,14 @@ if (count _nearestRoads > 0) then {
 			_spawnedUnit = nil;
 			if (_bIsTrap) then {
 
-				if (selectRandom [true,false,false,false]) then {
+				if (random 1 < .25) then {
 					[_eventLocationPos] spawn TREND_fnc_createWaitingAmbush;
 					_bHasHidingAmbush = true;
 				};
-				if (selectRandom[true,false,false,false,false]) then {
+				if (random 1 < .20) then {
 					[_eventLocationPos] spawn TREND_fnc_createWaitingSuicideBomber;
 				};
-				if (selectRandom[true,false]) then {
+				if (random 1 < .50) then {
 					[_eventLocationPos] spawn TREND_fnc_createEnemySniper;
 				};
 
@@ -239,7 +239,7 @@ if (count _nearestRoads > 0) then {
 						_allowAPTraps = false;
 					};
 				} forEach TREND_ObjectivePossitions;
-				if (selectRandom[true,false,false] && _allowAPTraps) then {
+				if (random 1 < .33 && _allowAPTraps) then {
 					_minesPlaced = false;
 					_iCountMines = 20;
 					_mainVehPos = getPos _mainVeh;
@@ -265,12 +265,12 @@ if (count _nearestRoads > 0) then {
 
 
 			//set veh damage;
-			//if (selectRandom[true,false]) then {_mainVeh setHit ["engine",0.75];};
+			//if (random 1 < .50) then {_mainVeh setHit ["engine",0.75];};
 			_mainVeh setFuel 0;
-			if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_1_steering",1];};
-			if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_2_steering",1];};
-			if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_2_1_steering",1];};
-			if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_2_2_steering",1];};
+			if (random 1 < .50) then {_mainVeh setHit ["wheel_1_1_steering",1];};
+			if (random 1 < .50) then {_mainVeh setHit ["wheel_1_2_steering",1];};
+			if (random 1 < .50) then {_mainVeh setHit ["wheel_2_1_steering",1];};
+			if (random 1 < .50) then {_mainVeh setHit ["wheel_2_2_steering",1];};
 			_mainVeh setDamage selectRandom[0,0.7];
 
 			_bWaiting = true;
@@ -288,7 +288,7 @@ if (count _nearestRoads > 0) then {
 						_nearUnits = nearestObjects [(_roadBlockSidePos), ["LandVehicle"], 10];
 						{
 							if (((driver _x) in switchableUnits || (driver _x) in playableUnits) && (alive _mainVeh)) then {
-								if (selectRandom [true,true]) then {
+								if (true) then {
 									_type = selectRandom ["Bomb_03_F","Missile_AA_04_F","M_Mo_82mm_AT_LG","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo"];
 									_li_aaa = _type createVehicle (getPos _mainVeh);
 									_li_aaa setDamage 1;

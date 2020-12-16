@@ -5,10 +5,10 @@ _veh = Vehicle. Refer to vehicle as _veh.
 
 _veh =(_this select 0);
 
-_bIsTrap = selectRandom[true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+_bIsTrap = random 1 < .05;
 _IEDType = "CAR";
 
-[[_veh, ["Tell driver to get out",{
+[_veh, ["Tell driver to get out",{
 			_veh = _this select 0;
 			_unit = driver _veh;
 			if (alive _unit) then {
@@ -23,7 +23,7 @@ _IEDType = "CAR";
 			else {
 				hint "are actually trying to talk to a ghost?"
 			}
-		},[_veh]]],"addAction",true,true] call BIS_fnc_MP;
+		},[_veh]]] remoteExec ["addAction", 0, true];
 
 
 
@@ -58,7 +58,7 @@ _IEDType = "CAR";
 					_thisVeh = _this select 0;
 					_thisPlayer = _this select 1;
 					_bIsTrap = (_this select 3) select 0;
-					if (_thisPlayer getVariable "unitrole" != "Engineer" && selectRandom[true,true,true,false,false]) then {
+					if (_thisPlayer getVariable "unitrole" != "Engineer" && random 1 < .60) then {
 						hint localize "STR_TRGM2_IEDSearchFailed";
 					}
 					else {
@@ -77,7 +77,7 @@ _IEDType = "CAR";
 									_thisVeh = _this select 0;
 									_thisPlayer = _this select 1;
 									_bIsTrap = (_this select 3) select 0;
-									if (_thisPlayer getVariable "unitrole" != "Engineer" && selectRandom[true,false,false,false]) then {
+									if (_thisPlayer getVariable "unitrole" != "Engineer" && random 1 < .25) then {
 										hint localize "STR_TRGM2_IEDOhOh";
 										sleep 1;
 										playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_thisVeh,false,getPosASL _thisVeh,0.5,1.5,0];

@@ -1,6 +1,4 @@
 
-#include "RandFramework\GUI\dialogs.hpp"
-
 author = "Treendy, Refactored by TheAce0296";
 OnLoadName = "TRGM 2.1";
 OnLoadmission = "TRGM 2.1";
@@ -32,6 +30,8 @@ class Header
 	minPlayers = 5;
 	MaxPlayers = 35;
 };
+
+#include "RandFramework\GUI\dialogs.hpp"
 
 class CfgFunctions {
 	#include "fhqtt\functions.hpp"

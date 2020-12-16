@@ -130,6 +130,7 @@ TREND_WestAntiAir =  _westantiair; publicVariable "TREND_WestAntiAir";
 TREND_WestTurrets =  _westturrets; publicVariable "TREND_WestTurrets";
 TREND_WestUnarmedHelos =  _westunarmedhelicopters; publicVariable "TREND_WestUnarmedHelos";
 TREND_WestArmedHelos =  _westarmedhelicopters; publicVariable "TREND_WestArmedHelos";
+TREND_WestHelos =  (_westarmedhelicopters + _westunarmedhelicopters); publicVariable "TREND_WestHelos";
 TREND_WestPlanes =  _westplanes; publicVariable "TREND_WestPlanes";
 TREND_WestBoats =  _westboats; publicVariable "TREND_WestBoats";
 TREND_WestMortars = _westmortars; publicVariable "TREND_WestMortars";
@@ -137,7 +138,7 @@ TREND_WestMortars = _westmortars; publicVariable "TREND_WestMortars";
 FriendlyScoutVehicles		 = { _veh = ["B_T_MRAP_01_F","B_T_LSV_01_unarmed_F"]; if (count TREND_WestUnarmedCars > 0) then { _veh = TREND_WestUnarmedCars; }; _veh; };
 FriendlyCheckpointUnits		 = { _unit = ["B_Soldier_F"]; if (count TREND_WestRiflemen > 0) then { _unit = TREND_WestRiflemen; }; _unit; };
 FriendlyFastResponseVehicles = { _veh = ["B_T_MRAP_01_F"]; if (count TREND_WestArmedCars > 0) then { _veh = TREND_WestArmedCars; }; _veh; };
-SupplySupportChopperOptions	 = { _veh = ["B_Heli_Transport_03_unarmed_F"]; if (count TREND_WestUnarmedHelos > 0) then { _veh = TREND_WestUnarmedHelos; }; _veh; };
+SupplySupportChopperOptions	 = { _veh = ["B_Heli_Transport_03_unarmed_F"]; if (count (TREND_WestHelos select {_x call TREND_fnc_isTransport}) > 0) then { _veh = (TREND_WestHelos select {_x call TREND_fnc_isTransport}); }; _veh; };
 AirSupportOptions			 = { _veh = ["B_Plane_CAS_01_dynamicLoadout_F"]; if (count TREND_WestPlanes > 0) then { _veh = TREND_WestPlanes; }; _veh; };
 ArtiSupportOptions			 = { _veh = ["B_MBT_01_arty_F"]; if (count TREND_WestArtillery > 0) then { _veh = selectRandom TREND_WestArtillery; }; _veh; };
 
@@ -146,10 +147,10 @@ FriendlyMedicalTruck		 = { _veh = ["B_Truck_01_medical_F"]; if (count (TREND_Wes
 FriendlyArmoredCar			 = { _veh = ["B_MRAP_01_hmg_F"]; if (count TREND_WestArmedCars > 0) then { _veh = TREND_WestArmedCars; } else { _veh = ["B_MRAP_01_hmg_F"]; }; _veh; };
 FriendlyFuelTruck			 = { _veh = ["B_Truck_01_fuel_F"]; if (count (TREND_WestUnarmedCars select {_x call TREND_fnc_isFuel}) > 0) then { _veh = (TREND_WestUnarmedCars select {_x call TREND_fnc_isFuel}); }; _veh; };
 
-FriendlyJet					 = { _veh = ["B_Plane_Fighter_01_Stealth_F"]; if (count TREND_WestPlanes > 0) then { _veh = TREND_WestPlanes; }; _veh; };
-FriendlyChopper				 = { _veh = ["B_Heli_Transport_01_camo_F","B_Heli_Attack_01_F"]; if (count TREND_WestArmedHelos > 0) then { _veh = TREND_WestArmedHelos; }; _veh; };
+FriendlyJet					 = { _veh = ["B_Plane_Fighter_01_Stealth_F"]; if (count (TREND_WestPlanes select {_x call TREND_fnc_isArmed && !(_x call TREND_fnc_isTransport)}) > 0) then { _veh = (TREND_WestPlanes select {_x call TREND_fnc_isArmed && !(_x call TREND_fnc_isTransport)}); }; _veh; };
+FriendlyChopper				 = { _veh = ["B_Heli_Transport_01_camo_F","B_Heli_Attack_01_F"]; if (count (TREND_WestHelos select {_x call TREND_fnc_isArmed && !(_x call TREND_fnc_isTransport)}) > 0) then { _veh = (TREND_WestHelos select {_x call TREND_fnc_isArmed && !(_x call TREND_fnc_isTransport)}); }; _veh; };
 
-ReinforceVehicleFriendly	 = { _veh = "B_Heli_Transport_03_unarmed_F"; if (count (TREND_WestUnarmedHelos select {_x call TREND_fnc_isTransport}) > 0) then { _veh = selectRandom (TREND_WestUnarmedHelos select {_x call TREND_fnc_isTransport}); }; _veh; };
+ReinforceVehicleFriendly	 = { _veh = "B_Heli_Transport_03_unarmed_F"; if (count (TREND_WestHelos select {_x call TREND_fnc_isTransport;}) > 0) then { _veh = selectRandom (TREND_WestHelos select {_x call TREND_fnc_isTransport;}); }; _veh; };
 fRifleman 		= { _unit = "B_Soldier_F"; if (count TREND_WestRiflemen > 0) then { _unit = selectRandom TREND_WestRiflemen; }; _unit; };
 fTeamleader 	= { _unit = "B_Soldier_TL_F"; if (count TREND_WestLeaders > 0) then { _unit = selectRandom TREND_WestLeaders; }; _unit; };
 fATMan 			= { _unit = "B_Soldier_LAT_F"; if (count TREND_WestATSoldiers > 0) then { _unit = selectRandom TREND_WestATSoldiers; }; _unit; };
