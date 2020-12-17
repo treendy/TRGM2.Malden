@@ -21,7 +21,7 @@ fnc_CustomVars = { //This is called before the mission function is called below,
 	_RequiresNearbyRoad = true;
 	_roadSearchRange = 20; //this is how far out the engine will check to make sure a road is within range (if your objective requires a nearby road)
 	_allowFriendlyIns = false;
-	_MissionTitle = "Meeting Assassination"; //this is what shows in dialog mission selection
+	_MissionTitle = localize "STR_TRGM2_MeetingAssassinationMissionTitle"; //this is what shows in dialog mission selection
 };
 
 fnc_CustomMission = { //This function is the main script for your mission, some if the parameters passed in must not be changed!!!
@@ -414,6 +414,18 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 //TREND_fnc_AdjustMaxBadPoints << increase max bad poins which increases our rep
 
 
+	_mainHVT addEventHandler ["FiredNear", {
+		params ["_unit", "_firer", "_distance", "_weapon", "_muzzle", "_mode", "_ammo", "_gunner"];
+		[{
+			_unit getVariable['taskStatus', ""] == "KILLED" || _unit getVariable['taskStatus', ""] == "DOCTAKEN"
+		}, getPos _unit] spawn TREND_fnc_alertNearbyUnits;
+
+		[side _unit, call TREND_GetReinforceStartPos, getPos _unit, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements;
+
+		[side _unit, call TREND_GetReinforceStartPos, getPos _unit, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;
+		sleep 10;
+	}];
+
 
 	_guardUnit3 addEventHandler ["Killed", {(_this select 0) setVariable ["taskStatus","KILLED",true] }];
 
@@ -421,7 +433,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		[_mainHVT, ["Take document",{(_this select 0) setVariable ["taskStatus","DOCTAKEN",true]},[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 	}
 	else { //if single mission or side then we can pass this task as soon as HVT is killed
-		_mainHVT addEventHandler ["Killed", {(_this select 0) setVariable ["taskStatus","KILLED",true] }];
+		_mainHVT addEventHandler ["Killed", {(_this select 0) setVariable ["taskStatus","KILLED",true]; }];
 	};
 
 	//waitUntil {((_mainHVT getVariable ["taskStatus",false]) != "" || !alive(_mainHVT))};
@@ -468,7 +480,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	};
 
 	_MissionTitle = format["Meeting Assassination: %1",name(_mainHVT)];	//you can adjust this here to change what shows as marker and task text
-	_sTaskDescription = format[selectRandom["Intel has confirmed that our target %1 is on route to the AO marked on the map","%1 is flying into the area for a short meeting to hand over some documents! We need this HVT terminated!"],name(_mainHVT)]; //adjust this based on veh? and man? if van then if car then?
+	_sTaskDescription = format[localize "STR_TRGM2_ClearAreaMissionDescription",name(_mainHVT)]; //adjust this based on veh? and man? if van then if car then?
 		//or just random description that will fit all situations??
 	if (_bIsMainObjective) then {
 		sTaskDescription = _sTaskDescription + "<br /><br />Once killed, search his body for the documents he is carrying!"

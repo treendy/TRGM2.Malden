@@ -416,10 +416,15 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
 		};
+		case 18:  {
+			#include "..\..\Missions\meetingAssassinationMission.sqf"; //Meeting Assassination
+			call fnc_CustomVars;
+			_bNewTaskSetup = true;
+		};
 		case 99999: {
 			//hint format["pre: %1",_RequiresNearbyRoad]; sleep 2;
-			#include "..\..\Missions\customMission.sqf"; //Custom Mission
-			call fnc_CustomVars;
+			//#include "..\..\CustomMission\customMission.sqf"; //Custom Mission
+			//call fnc_CustomVars;
 			//hint format["post: %1",_RequiresNearbyRoad]; sleep 2;
 		};
 		default { };

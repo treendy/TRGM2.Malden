@@ -3841,6 +3841,15 @@
                 <English>If enabled, you will be able to select your camp start position on the map</English>
             </Key>
 
+            <Key ID="STR_TRGM2_MeetingAssassinationMissionTitle">
+                <Original>Meeting Assassination</Original>
+                <English>Meeting Assassination</English>
+            </Key>
+            <Key ID="STR_TRGM2_MeetingAssassinationMissionDescription">
+                <Original>Intel has confirmed that our target %1 is on route to the AO marked on the map","%1 is flying into the area for a short meeting to hand over some documents! We need this HVT terminated!</Original>
+                <English>Intel has confirmed that our target %1 is on route to the AO marked on the map","%1 is flying into the area for a short meeting to hand over some documents! We need this HVT terminated!</English>
+            </Key>
+
 
             <Key ID="STR_TRGM2_ClearAreaMissionTitle">
                 <Original>Secure and Resupply</Original>

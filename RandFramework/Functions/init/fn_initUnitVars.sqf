@@ -9,7 +9,7 @@ TREND_DefaultFriendlyFactionValue = [1]; publicVariable "TREND_DefaultFriendlyFa
 // _CustomMissionEnabled = (["CustomMission", 0] call BIS_fnc_getParamValue) isEqualTo 1;
 // _MissionTitle         = "";
 // if (_CustomMissionEnabled) then {
-// 	call compile preprocessFileLineNumbers "CustomMission\TRGMSetDefaultMissionSetupVars.sqf";
+// 	call compile preprocessFileLineNumbers "CustomMission\customMission.sqf";
 // };
 // call fnc_CustomVars;
 
@@ -290,6 +290,7 @@ TREND_MissionParamTypesValues = [0,6,8,1,2,3,9,4,7,10,11,12,5]; publicVariable "
 // 15 = TargetMission
 // 16 = Destroy Cache
 // 17 = Secure and Supply
+// 18 = Meeting Assassination
 // 99999 = CustomMission
 
 /*
@@ -299,9 +300,9 @@ Also, add new missions as cases in functions/mission/fn_startInfMission.sqf
 */
 
 // TREND_SideMissionTasks   = [17]; publicVariable "TREND_SideMissionTasks";
-TREND_SideMissionTasks      = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 99999]; publicVariable "TREND_SideMissionTasks";
+TREND_SideMissionTasks      = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]; publicVariable "TREND_SideMissionTasks";
 // TREND_MainMissionTasks   = [17]; publicVariable "TREND_MainMissionTasks";
-TREND_MainMissionTasks      = [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 99999]; publicVariable "TREND_MainMissionTasks";
+TREND_MainMissionTasks      = [1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]; publicVariable "TREND_MainMissionTasks";
 TREND_MissionsThatHaveIntel = [1, 4, 5, 6]; publicVariable "TREND_MissionsThatHaveIntel";
 
 TREND_MissionParamObjectives       = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random", localize "STR_TRGM2_startInfMission_MissionTitle1", localize "STR_TRGM2_startInfMission_MissionTitle2", localize "STR_TRGM2_startInfMission_MissionTitle3", localize "STR_TRGM2_startInfMission_MissionTitle4", localize "STR_TRGM2_startInfMission_MissionTitle5", localize "STR_TRGM2_startInfMission_MissionTitle6", localize "STR_TRGM2_startInfMission_MissionTitle7", localize "STR_TRGM2_startInfMission_MissionTitle8", localize "STR_TRGM2_startInfMission_MissionTitle9", localize "STR_TRGM2_startInfMission_MissionTitle10", localize "STR_TRGM2_startInfMission_MissionTitle11", localize "STR_TRGM2_startInfMission_MissionTitle12"];
@@ -322,10 +323,13 @@ TREND_MissionParamObjectivesValues pushBack 16;
 TREND_MissionParamObjectives       pushBack localize "STR_TRGM2_ClearAreaMissionTitle";
 TREND_MissionParamObjectivesValues pushBack 17;
 
-if (_CustomMissionEnabled || true) then {
-	TREND_MissionParamObjectives       pushBack _MissionTitle;
-	TREND_MissionParamObjectivesValues pushBack 99999;
-};
+TREND_MissionParamObjectives       pushBack localize "STR_TRGM2_MeetingAssassinationMissionTitle";
+TREND_MissionParamObjectivesValues pushBack 18;
+
+// if (_CustomMissionEnabled) then {
+// 	TREND_MissionParamObjectives       pushBack _MissionTitle;
+// 	TREND_MissionParamObjectivesValues pushBack 99999;
+// };
 
 publicVariable "TREND_MissionParamObjectives";
 publicVariable "TREND_MissionParamObjectivesValues";
