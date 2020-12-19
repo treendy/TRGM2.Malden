@@ -51,19 +51,19 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	["Mission Setup: 8-0-9", true] call TREND_fnc_log;
 	_allpositionsLaptop1 = _objectiveMainBuilding buildingPos -1;
 	_sLaptop1Name = format["objLaptop%1",_iTaskIndex];
-	_objLaptop1 = "Land_Laptop_device_F" createVehicle [0,0,500];
+	_objLaptop1 = "Land_SatellitePhone_F" createVehicle [0,0,500];
 	_objLaptop1 setVariable [_sLaptop1Name, _objLaptop1, true];
 	missionNamespace setVariable [_sLaptop1Name, _objLaptop1];
 	_laptopPos = (selectRandom _allpositionsLaptop1);
 	_objLaptop1 setPosATL _laptopPos;
 
-	missionNamespace setVariable["playersInAO", false, true];
-	_playersInAO = nil;
-	_playersInAO = createTrigger ["EmptyDetector", getPos _objLaptop1];
-	_playersInAO   setVariable ["DelMeOnNewCampaignDay",true];
-	_playersInAO   setTriggerArea [150, 150, 0, false];
-	_playersInAO   setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-	_playersInAO   setTriggerStatements ["this", "missionNamespace setVariable[""playersInAO"", true, true]; [{missionNamespace getVariable[""playersInAO"", false]}, getPos thistrigger] spawn TREND_fnc_alertNearbyUnits; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;", "missionNamespace setVariable[""playersInAO"", false, true];"];
+	// missionNamespace setVariable["playersInAO", false, true];
+	// _playersInAO = nil;
+	// _playersInAO = createTrigger ["EmptyDetector", getPos _objLaptop1];
+	// _playersInAO   setVariable ["DelMeOnNewCampaignDay",true];
+	// _playersInAO   setTriggerArea [150, 150, 0, false];
+	// _playersInAO   setTriggerActivation ["ANYPLAYER", "PRESENT", true];
+	// _playersInAO   setTriggerStatements ["this", "missionNamespace setVariable[""playersInAO"", true, true]; [{missionNamespace getVariable[""playersInAO"", false]}, getPos thistrigger] spawn TREND_fnc_alertNearbyUnits; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;", "missionNamespace setVariable[""playersInAO"", false, true];"];
 
 	if (random 1 < .50) then {
 		_sIED1Name = format["objIED%1",_iTaskIndex];

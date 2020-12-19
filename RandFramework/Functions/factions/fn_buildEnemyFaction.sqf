@@ -210,6 +210,7 @@ TREND_EastAntiAir =  _eastantiair; publicVariable "TREND_EastAntiAir";
 TREND_EastTurrets =  _eastturrets; publicVariable "TREND_EastTurrets";
 TREND_EastUnarmedHelos =  _eastunarmedhelicopters; publicVariable "TREND_EastUnarmedHelos";
 TREND_EastArmedHelos =  _eastarmedhelicopters; publicVariable "TREND_EastArmedHelos";
+TREND_EastHelos =  (_eastunarmedhelicopters + _eastarmedhelicopters); publicVariable "TREND_EastHelos";
 TREND_EastPlanes =  _eastplanes; publicVariable "TREND_EastPlanes";
 TREND_EastBoats =  _eastboats; publicVariable "TREND_EastBoats";
 TREND_EastMortars = _eastmortars; publicVariable "TREND_EastMortars";
@@ -233,7 +234,7 @@ sAAAVeh					 = { _veh = "O_APC_Tracked_02_AA_F"; if (count TREND_EastAntiAir > 0
 sMortar					 = { _veh = ["O_Mortar_01_F"]; if (count TREND_EastMortars > 0) then { _veh = TREND_EastMortars; }; _veh; };
 sArtilleryVeh			 = { _veh = ["O_MBT_02_arty_F"]; if (count TREND_EastArtillery > 0) then { _veh = TREND_EastArtillery; }; _veh; };
 sBoatUnit				 = { _veh = "O_Boat_Armed_01_hmg_F"; if (count TREND_EastBoats > 0) then { _veh = selectRandom TREND_EastBoats; }; _veh; };
-ReinforceVehicle		 = { _veh = "O_Heli_Light_02_unarmed_F"; if (count (TREND_EastUnarmedHelos select {_x call TREND_fnc_isTransport}) > 0) then { _veh = selectRandom (TREND_EastUnarmedHelos select {_x call TREND_fnc_isTransport}); }; _veh; };
+ReinforceVehicle		 = { _veh = "O_Heli_Light_02_unarmed_F"; if (count (TREND_EastHelos select {_x call TREND_fnc_isTransport;}) > 0) then { _veh = selectRandom (TREND_EastHelos select {_x call TREND_fnc_isTransport;}); }; _veh; };
 EnemyAirToAirSupports	 = { _veh = ["O_Plane_Fighter_02_F"]; if (count TREND_EastPlanes > 0) then { _veh = TREND_EastPlanes; }; _veh; };
 EnemyAirToGroundSupports = { _veh = ["O_Heli_Light_02_dynamicLoadout_F"]; if (count TREND_EastArmedHelos > 0) then { _veh = TREND_EastArmedHelos; }; _veh; };
 EnemyAirScout			 = { _veh = ["O_Heli_Light_02_dynamicLoadout_F"]; if (count TREND_EastArmedHelos > 0) then { _veh = TREND_EastArmedHelos; }; _veh; };
@@ -359,6 +360,7 @@ TREND_GuerAntiAir =  _guerantiair; publicVariable "TREND_GuerAntiAir";
 TREND_GuerTurrets =  _guerturrets; publicVariable "TREND_GuerTurrets";
 TREND_GuerUnarmedHelos =  _guerunarmedhelicopters; publicVariable "TREND_GuerUnarmedHelos";
 TREND_GuerArmedHelos =  _guerarmedhelicopters; publicVariable "TREND_GuerArmedHelos";
+TREND_GuerHelos =  (_guerunarmedhelicopters + _guerarmedhelicopters); publicVariable "TREND_GuerHelos";
 TREND_GuerPlanes =  _guerplanes; publicVariable "TREND_GuerPlanes";
 TREND_GuerBoats =  _guerboats; publicVariable "TREND_GuerBoats";
 TREND_GuerMortars = _guermortars; publicVariable "TREND_GuerMortars";
@@ -377,7 +379,11 @@ sTank3TankMilitia	  = { _veh = "I_LT_01_AT_F"; if (count TREND_GuerTanks > 0) th
 sAAAVehMilitia 		  = { _veh = "I_LT_01_AA_F"; if (count TREND_GuerAntiAir > 0) then { _veh = selectRandom TREND_GuerAntiAir; }; _veh; };
 sMortarMilitia		  = { _veh = ["I_Mortar_01_F"]; if (count TREND_GuerMortars > 0) then { _veh = TREND_GuerMortars; }; _veh; };
 
-ReinforceVehicleMilitia = { _veh = "I_E_Heli_light_03_unarmed_F"; if (count (TREND_GuerUnarmedHelos select {_x call TREND_fnc_isTransport}) > 0) then { _veh = selectRandom (TREND_GuerUnarmedHelos select {_x call TREND_fnc_isTransport}); }; _veh; };
+ReinforceVehicleMilitia = { _veh = "I_E_Heli_light_03_unarmed_F"; if (count (TREND_GuerHelos select {_x call TREND_fnc_isTransport;}) > 0) then { _veh = selectRandom (TREND_GuerHelos select {_x call TREND_fnc_isTransport;}); }; _veh; };
+
+
+
+/// Mission Required Vehicles! ///
 
 InformantClasses 		 = ["C_Orestes","C_Nikos"];
 InterogateOfficerClasses = ["O_T_Officer_F"];

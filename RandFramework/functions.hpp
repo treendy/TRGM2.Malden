@@ -52,6 +52,7 @@ class TREND {
         class isAceLoaded {};
         class isCbaLoaded {};
         class NVscript{};
+        class paraDrop{};
         class PushObject{};
         class reinforcements{};
         class setLoadout {};
@@ -96,6 +97,7 @@ class TREND {
         file = "RandFramework\functions\mission";
         class FinalSetupCleaner{};
         class initMissionVars {};
+        class PopulateSideMission{};
         class PostStartMission {};
         class QuitMission {};
         class startInfMission {};
@@ -119,7 +121,6 @@ class TREND {
         class downloadResearchData{};
         class hackIntel1{};
         class OccupyHouses{};
-        class PopulateSideMission{};
         class setATMineEvent{};
         class setCheckpoint {};
         class setDownCivCarEvent{};

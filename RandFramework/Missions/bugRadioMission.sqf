@@ -61,13 +61,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 	[_objRadio1, [localize "STR_TRGM2_startInfMission_MissionTitle6_Button",{_this spawn TREND_fnc_bugRadio1;},[]]] remoteExec ["addAction", 0, true];
 
-	missionNamespace setVariable["playersInAO", false, true];
-	_playersInAO = nil;
-	_playersInAO = createTrigger ["EmptyDetector", getPos _objRadio1];
-	_playersInAO   setVariable ["DelMeOnNewCampaignDay",true];
-	_playersInAO   setTriggerArea [150, 150, 0, false];
-	_playersInAO   setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-	_playersInAO   setTriggerStatements ["this", "missionNamespace setVariable[""playersInAO"", true, true]; [{missionNamespace getVariable[""playersInAO"", false]}, getPos thistrigger] spawn TREND_fnc_alertNearbyUnits; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;", "missionNamespace setVariable[""playersInAO"", false, true];"];
+	// missionNamespace setVariable["playersInAO", false, true];
+	// _playersInAO = nil;
+	// _playersInAO = createTrigger ["EmptyDetector", getPos _objRadio1];
+	// _playersInAO   setVariable ["DelMeOnNewCampaignDay",true];
+	// _playersInAO   setTriggerArea [150, 150, 0, false];
+	// _playersInAO   setTriggerActivation ["ANYPLAYER", "PRESENT", true];
+	// _playersInAO   setTriggerStatements ["this", "missionNamespace setVariable[""playersInAO"", true, true]; [{missionNamespace getVariable[""playersInAO"", false]}, getPos thistrigger] spawn TREND_fnc_alertNearbyUnits; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;", "missionNamespace setVariable[""playersInAO"", false, true];"];
 
 	TREND_fnc_RadioLoop = {
 		_radio = _this select 0;

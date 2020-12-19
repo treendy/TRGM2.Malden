@@ -41,6 +41,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	params ["_markerType","_objectiveMainBuilding","_centralAO_x","_centralAO_y","_roadSearchRange", "_bCreateTask", "_iTaskIndex", "_bIsMainObjective", ["_args", []]];
 	if (_markerType != "empty") then { _markerType = "hd_unknown"; }; // Set marker type here...
 
+
 	_hvtLzPos = nil;
 	_hvtLzPos = [[_centralAO_x,_centralAO_y,0] , 10, 150, 10, 0, 0.3, 0,[],[[_centralAO_x,_centralAO_y],[_centralAO_x,_centralAO_y]]] call TREND_fnc_findSafePos;
 	if ((_hvtLzPos select 0) > 0) then {
@@ -161,6 +162,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		waitUntil {TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_PlayersHaveLeftStartingArea};
 		//["debug: wait started"] remoteExecCall ["Hint", 0];
 
+		waitUntil { sleep 10; _playersInAO = false; { if (_thisMeetingPos distance _x < 2000) exitWith { _playersInAO = true; }; } forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits}); _playersInAO; };
+
 		_iWait = 420 + floor(random 300);
 		//_iWait = 20;
 		sleep floor(random 120);
@@ -247,15 +250,15 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_wpHvtMeet2 = _hvtGroup addWaypoint [_thisHvtLzPos, 1];
 		_wpHvtMeet3 = _hvtGroup addWaypoint [_thisHvtLzPos, 2];
 		_wpHvtMeet4 = _hvtGroup addWaypoint [_thisHvtLzPos, 3];
-       _wpHvtMeet5 = _hvtGroup addWaypoint [_thisHvtLzPos, 4];
-       _wpHvtMeet5 setWaypointType "TR UNLOAD";
-       _wpHvtMeet5 setWaypointType "GETOUT";
-       _wpHvtMeet5 synchronizeWaypoint [_wpHvtMeet3];
-       _wpHvtMeet6 = _hvtGroup addWaypoint [_thisMeetingPos, 5];
-       _wpHvtMeet7 = _hvtGroup addWaypoint [_thisMeetingPos, 6];
-       [_hvtGroup, 1] setWaypointSpeed "LIMITED";
+		_wpHvtMeet5 = _hvtGroup addWaypoint [_thisHvtLzPos, 4];
+		_wpHvtMeet5 setWaypointType "TR UNLOAD";
+		_wpHvtMeet5 setWaypointType "GETOUT";
+		_wpHvtMeet5 synchronizeWaypoint [_wpHvtMeet3];
+		_wpHvtMeet6 = _hvtGroup addWaypoint [_thisMeetingPos, 5];
+		_wpHvtMeet7 = _hvtGroup addWaypoint [_thisMeetingPos, 6];
+		[_hvtGroup, 1] setWaypointSpeed "LIMITED";
 
-       [_thisGuardUnit3,_thisMeetingPos] spawn {
+		[_thisGuardUnit3,_thisMeetingPos] spawn {
        		_thisGuardUnit3 = _this select 0;
        		_thisMeetingPos = _this select 1;
        		_moveToPos = (_thisMeetingPos) getPos [3,selectRandom[1, 95, 180, 270]];
@@ -269,8 +272,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
        		[_hvtGuardGroup, 1] setWaypointSpeed "LIMITED";
    		};
 
-       waitUntil {sleep 1; (currentWaypoint group _thisMainHVT) >= 6 };
-       //sleep 5;
+		waitUntil {sleep 1; (currentWaypoint group _thisMainHVT) >= 6 };
+		//sleep 5;
       	_hvtGroup setSpeedMode "LIMITED";
       	_hvtGroup setBehaviour "CARELESS";
 		_hvtGuardGroup setSpeedMode "LIMITED";
@@ -469,7 +472,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		//"objInformant0 getVariable [""taskStatus"",""""] == ""KILLED"" && !([""InfSide0""] call FHQ_fnc_ttAreTasksCompleted)"
 		_sTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";",_iTaskIndex];
 		_customTaskClear setTriggerStatements [_sAliveCheck, _sTaskComplete, ""];
-
 		_sAliveCheck2 = format["(%1 getVariable [""taskStatus"",""""] == ""KILLED"")",_sTargetName2];
 		_sTaskFail = format["[""InfSide%1"", ""failed""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";",_iTaskIndex];
 		_customTaskFailed setTriggerStatements [_sAliveCheck2, _sTaskFail, ""];
@@ -480,13 +482,12 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	};
 
 	_MissionTitle = format["Meeting Assassination: %1",name(_mainHVT)];	//you can adjust this here to change what shows as marker and task text
-	_sTaskDescription = format[localize "STR_TRGM2_ClearAreaMissionDescription",name(_mainHVT)]; //adjust this based on veh? and man? if van then if car then?
+	_sTaskDescription = format[localize "STR_TRGM2_MeetingAssassinationMissionDescription",name(_mainHVT)]; //adjust this based on veh? and man? if van then if car then?
 		//or just random description that will fit all situations??
 	if (_bIsMainObjective) then {
 		sTaskDescription = _sTaskDescription + "<br /><br />Once killed, search his body for the documents he is carrying!"
 	};
-	_sTaskDescription = _sTaskDescription + "<br /><br />!NOTE: we have an under cover agent flying in with our HVT, so watch your fire! Our agent will give a signal (tie his shoelace) to confirm his identity, but if you fail to see that, then you can confirm who the HVT is by who meets up and talks to they guy waiting at the AO.<br />Try not to get spotted before you take out the target, getting spotted will cause the HVT to run to the meeting and will have a smoke shield in place!"
-
+	_sTaskDescription = _sTaskDescription + "<br /><br />!NOTE: we have an under cover agent flying in with our HVT, so watch your fire! Our agent will give a signal (tie his shoelace) to confirm his identity, but if you fail to see that, then you can confirm who the HVT is by who meets up and talks to they guy waiting at the AO.<br />Try not to get spotted before you take out the target, getting spotted will cause the HVT to run to the meeting and will have a smoke shield in place!";
 };
 
 //TEST ON SERVER!!!!!

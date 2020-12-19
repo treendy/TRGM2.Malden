@@ -136,7 +136,7 @@ TREND_bMoreEnemies = { ( (TREND_AdvancedSettings select TREND_ADVSET_HIGHER_ENEM
 publicVariable "TREND_bMoreEnemies";
 
 //////// Vehicle Spawning Rep Requirement ///////
-TREND_VehiclesRequireRep = { [false, true] select (TREND_AdvancedSettings select TREND_ADVSET_VEHICLE_SPAWNING_REQ_REP_IDX); };
+TREND_VehiclesRequireRep = { TREND_AdvancedSettings select TREND_ADVSET_VEHICLE_SPAWNING_REQ_REP_IDX isEqualTo 1; };
 publicVariable "TREND_VehiclesRequireRep";
 
 //////// Spotted Delay ///////
@@ -150,10 +150,6 @@ publicVariable "TREND_manualAOPlacement";
 //////// Manual Camp Placement ///////
 TREND_manualCampPlacement = { TREND_AdvancedSettings select TREND_ADVSET_SELECT_AO_CAMP_IDX isEqualTo 1 };
 publicVariable "TREND_manualCampPlacement";
-
-//////// Enemy Flashlights ///////
-TREND_enemyHaveFlashlights = { [] select (TREND_AdvancedSettings select TREND_ADVSET_SELECT_ENEMY_FLASHLIGHTS_IDX) };
-publicVariable "TREND_enemyHaveFlashlights";
 
 /////// Revive Settings Set up ///////
 //0 = no, 1 = guarantee revive, 2 = realistic revive, 3 = realistic revive (only medics can revive)

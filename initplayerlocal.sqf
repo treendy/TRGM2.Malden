@@ -145,7 +145,7 @@ if (!isDedicated && {(!isNull TREND_AdminPlayer && str player isEqualTo "sl") ||
 		if (call TREND_manualCampPlacement) then {
 			titleText[localize "STR_TRGM2_tele_SelectPosition_AO_Camp", "PLAIN"];
 			openMap true;
-			onMapSingleClick "AOCampLocation = _pos; publicVariable 'AOCampLocation'; openMap false; onMapSingleClick ''; true;";
+			onMapSingleClick "TREND_AOCampLocation = _pos; publicVariable 'TREND_AOCampLocation'; openMap false; onMapSingleClick ''; true;";
 			sleep 1;
 			waitUntil {!visibleMap};
 		};
@@ -299,8 +299,12 @@ TREND_fnc_InitPostStarted = {
 		call TREND_fnc_NVscript;
 	};
 
-	// This is being overwritten in TREND_fnc_SetMissionBoardOptions almost immediately?
-	// endMissionBoard addaction [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {[true] spawn TREND_fnc_ShowRepReport;}];
+	endMissionBoard addaction [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {[true] spawn TREND_fnc_ShowRepReport;}];
+
+	_trg = createTrigger["EmptyDetector", getPos player];
+	_trg setTriggerActivation["ALPHA", "PRESENT", true];
+	_trg setTriggerText "illuminate your position for 5 mins (eta 60 seconds)";
+	_trg setTriggerStatements["this", "[player] spawn TREND_fnc_fireIllumFlares;", ""];
 
 	// I don't know if this is required anymore since MainInit remoteExec's this...
 	// _iSandStormOption = [2, call TREND_sandStormOption] select (call TREND_WeatherOption < 11);
@@ -358,17 +362,6 @@ else {
 
 [] spawn TREND_fnc_animateAnimals;
 player addEventHandler ["Respawn", { [] spawn TREND_fnc_animateAnimals; }];
-
-//[player, supReq] call BIS_fnc_addSupportLink;
-if (leader (group (vehicle player)) == player) then {
-	_trg = createTrigger["EmptyDetector",getPos player];
-	_trg setTriggerActivation["ALPHA",  "PRESENT",true];
-	_trg setTriggerText "illuminate your position for 5 mins (eta 60 seconds)";
-	_trg setTriggerStatements["this", "[player] spawn TREND_fnc_fireIllumFlares;", ""];
-
-	//_trgCustomAIScript setTriggerStatements ["hint 'test'", format["nul = [%1, %2, %3, this, thisList] spawn TREND_fnc_CallNearbyPatrol;",str(_sidePos),_iSideIndex, _bIsMainObjective], ""];
-};
-
 
 TREND_fnc_GeneralPlayerLoop = {
 	"TREND_fnc_GeneralPlayerLoop called" call TREND_fnc_log;
@@ -547,33 +540,36 @@ TOUR_fnc_startingMove = {
 	};
 };
 
-////INSTANT FADE TO BLACK SCREEN
-cutText ["","BLACK FADED",1];
 
-////CREATE CAMERA
-private ["_cam"];
-_cam = "camera" camCreate (getPosATL player);
-_cam cameraEffect ["External","BACK"];
+TREND_fnc_introCamera = {
+	////INSTANT FADE TO BLACK SCREEN
+	cutText ["","BLACK FADED",1];
 
-////WAIT FOR BRIEFING TO END
-sleep 0.1;
-doStop player;
+	////CREATE CAMERA
+	private ["_cam"];
+	_cam = "camera" camCreate (getPosATL player);
+	_cam cameraEffect ["External","BACK"];
 
-////INITIATE ANIMATION OVER NETWORK
-[[],{player spawn TOUR_fnc_startingMove;}] remoteExec ["call", 0, true];
+	////WAIT FOR BRIEFING TO END
+	sleep 0.1;
+	doStop player;
 
-////WAIT A SECOND
-sleep 1;
+	////INITIATE ANIMATION OVER NETWORK
+	[[],{player spawn TOUR_fnc_startingMove;}] remoteExec ["call", 0, true];
 
-////DESTROY CAMERA
-_cam cameraEffect ["Terminate", "BACK"];
-_cam camCommit 0;
-waitUntil { camCommitted _cam };
-camDestroy _cam;
+	////WAIT A SECOND
+	sleep 1;
 
-////FADE IN FROM BLACK SCREEN
-cutText ["","BLACK IN",3];
+	////DESTROY CAMERA
+	_cam cameraEffect ["Terminate", "BACK"];
+	_cam camCommit 0;
+	waitUntil { camCommitted _cam };
+	camDestroy _cam;
 
+	////FADE IN FROM BLACK SCREEN
+	cutText ["","BLACK IN",3];
+};
+[] spawn TREND_fnc_introCamera;
 
 // if (TREND_sArmaGroup == "TCF" && isMultiplayer) then {
 // 	//_handle=createdialog "DialogMessAround";

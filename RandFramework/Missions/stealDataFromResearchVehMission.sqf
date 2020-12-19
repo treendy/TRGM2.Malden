@@ -61,13 +61,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 	[_objVehicle, [localize "STR_TRGM2_startInfMission_MissionTitle2_Button",{_this spawn TREND_fnc_downloadResearchData},[]]] remoteExec ["addAction", 0, true];
 
-	missionNamespace setVariable["playersInAO", false, true];
-	_playersInAO = nil;
-	_playersInAO = createTrigger ["EmptyDetector", getPos _objVehicle];
-	_playersInAO   setVariable ["DelMeOnNewCampaignDay",true];
-	_playersInAO   setTriggerArea [150, 150, 0, false];
-	_playersInAO   setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-	_playersInAO   setTriggerStatements ["this", "missionNamespace setVariable[""playersInAO"", true, true]; [{missionNamespace getVariable[""playersInAO"", false]}, getPos thistrigger] spawn TREND_fnc_alertNearbyUnits; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;", "missionNamespace setVariable[""playersInAO"", false, true];"];
+	// missionNamespace setVariable["playersInAO", false, true];
+	// _playersInAO = nil;
+	// _playersInAO = createTrigger ["EmptyDetector", getPos _objVehicle];
+	// _playersInAO   setVariable ["DelMeOnNewCampaignDay",true];
+	// _playersInAO   setTriggerArea [150, 150, 0, false];
+	// _playersInAO   setTriggerActivation ["ANYPLAYER", "PRESENT", true];
+	// _playersInAO   setTriggerStatements ["this", "missionNamespace setVariable[""playersInAO"", true, true]; [{missionNamespace getVariable[""playersInAO"", false]}, getPos thistrigger] spawn TREND_fnc_alertNearbyUnits; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;", "missionNamespace setVariable[""playersInAO"", false, true];"];
 
 	if (count _roadConnectedTo > 0) then {
 		_connectedRoad = _roadConnectedTo select 0;

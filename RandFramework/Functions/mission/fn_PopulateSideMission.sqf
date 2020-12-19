@@ -53,9 +53,9 @@ else {
 	_bThisMissionCivsOnly = false;
 };
 
-_selectRandomW = call {random 1 > .75};;
+_selectRandomW = call {random 1 > .80};;
 if (call TREND_bMoreEnemies) then {
-	_selectRandomW = call {random 1 > .50};
+	_selectRandomW = call {random 1 > .65};
 	_bThisMissionCivsOnly = false;
 	_InsurgentSide = east;
 	_bFriendlyInsurgents = false;
@@ -143,6 +143,16 @@ _trgCustomAIScript setTriggerActivation [TREND_FriendlySideString, format["%1 D"
 _trgCustomAIScript setTriggerStatements ["this && {(time - TREND_TimeSinceLastSpottedAction) > (call TREND_GetSpottedDelay)}", format["nul = [%1, %2, %3, thisTrigger, thisList] spawn TREND_fnc_CallNearbyPatrol;",str(_sidePos),_iTaskIndex, _bIsMainObjective], ""];
 //TREND_AODetails [_iTaskIndex,0,0,0,false,0]
 //TREND_AODetails select
+
+//Create extra detected trigger for more reinforcements
+if (call TREND_bMoreEnemies) then {
+	_trgCustomAIScript = nil;
+	_trgCustomAIScript = createTrigger ["EmptyDetector", _sidePos];
+	_trgCustomAIScript setVariable ["DelMeOnNewCampaignDay",true];
+	_trgCustomAIScript setTriggerArea [1250, 1250, 0, false];
+	_trgCustomAIScript setTriggerActivation [TREND_FriendlySideString, format["%1 D", TREND_EnemySideString], true];
+	_trgCustomAIScript setTriggerStatements ["this && {(time - TREND_TimeSinceAdditionalReinforcementsCalled) > (call TREND_GetSpottedDelay * 1.5)}", format["nul = [EAST, call TREND_GetReinforceStartPos, %1, 3, true, true, true, true, false, false] spawn TREND_fnc_reinforcements;", str(_sidePos)], ""];
+};
 
 TREND_debugMessages = TREND_debugMessages + format["\n\ntrendFunctions.sqf : _bFriendlyInsurgents: %1 - _bThisMissionCivsOnly: %2 ",str(_bFriendlyInsurgents),str(_bThisMissionCivsOnly)];
 
@@ -268,25 +278,14 @@ if (!_bFriendlyInsurgents) then {
 				if (_bIsMainObjective && call TREND_bAllowLargerPatrols) then {
 					[_sidePos,1000 + (floor random 500),[5,6,7],true,_InsurgentSide] spawn TREND_fnc_BackForthPatrol;
 				};
-
-
-				//Create extra detected trigger for more reinforcements
-				if (_selectRandomW) then {
-					_trgCustomAIScript = nil;
-					_trgCustomAIScript = createTrigger ["EmptyDetector", _sidePos];
-					_trgCustomAIScript setVariable ["DelMeOnNewCampaignDay",true];
-					_trgCustomAIScript setTriggerArea [1250, 1250, 0, false];
-					_trgCustomAIScript setTriggerActivation [TREND_FriendlySideString, format["%1 D", TREND_EnemySideString], true];
-					_trgCustomAIScript setTriggerStatements ["this && {(time - TREND_TimeSinceAdditionalReinforcementsCalled) > (call TREND_GetSpottedDelay * 1.5)}", format["nul = [EAST, call TREND_GetReinforceStartPos, %1, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; nul = [EAST, call TREND_GetReinforceStartPos, %1, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements; TREND_TimeSinceAdditionalReinforcementsCalled = time; publicVariable 'TREND_TimeSinceAdditionalReinforcementsCalled';", str(_sidePos)], ""];
-				};
 			};
 		};
 
-		_chanceOfMortorTeam = [true,false];
-		if (_bIsMainObjective) then {_chanceOfMortorTeam = [true]};
-		if (_minimission) then {_chanceOfMortorTeam = [true,false,false,false,false,false];};
+		_chanceOfMortorTeam = .50;
+		if (_bIsMainObjective) then {_chanceOfMortorTeam = 1};
+		if (_minimission) then {_chanceOfMortorTeam = .15;};
 		//Spawn Mortar team
-		if (selectRandom _chanceOfMortorTeam || _selectRandomW) then {
+		if (random 1 < _chanceOfMortorTeam || _selectRandomW) then {
 
 			_flatPos = _sidePos;
 			_flatPos = [_sidePos , 10, 200, 8, 0, 0.5, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]],[_sidePos,_sidePos]] call TREND_fnc_findSafePos;
@@ -303,11 +302,11 @@ if (!_bFriendlyInsurgents) then {
 		};
 
 		//Spawn vehicle
-		_chanceOfVeh = [true,false];
-		if (_bIsMainObjective) then {_chanceOfVeh = [true]};
-		if (_minimission) then {_chanceOfVeh = [_selectRandomW];};
+		_chanceOfVeh = .50;
+		if (_bIsMainObjective) then {_chanceOfVeh = 1};
+		if (_minimission) then {_chanceOfVeh = .15;};
 		//if main, spawn 1 or two, and also, spawn 2 or three in larger radius
-		if (selectRandom _chanceOfVeh || _selectRandomW) then {
+		if (random 1 < _chanceOfVeh || _selectRandomW) then {
 			//hint format["AAALoc:%1",sTank1ToUse];
 			//sleep 3;
 
@@ -517,7 +516,7 @@ if (!_bFriendlyInsurgents) then {
 		}
 		else {
 			//spawn inner random sentrys
-			_iCount = 1;
+			_iCount = [1,2] select (call TREND_bMoreEnemies);
 			//if (!_bIsMainObjective) then {_iCount = selectRandom [0,1];};
 			if (_iCount > 0) then {_dAngleAdustPerLoop = 360 / _iCount;};
 			while {_iCount > 0} do {
@@ -540,7 +539,7 @@ if (!_bFriendlyInsurgents) then {
 			};
 
 			//spawn inner checkpoints
-			_iCount = 1;
+			_iCount = [1,2] select (call TREND_bMoreEnemies);
 			if (!_bIsMainObjective) then {_iCount = selectRandom [0,1,1];};
 			if ((!_bIsMainObjective && !_bHasPatrols) || _selectRandomW) then {_iCount = selectRandom [1,1,2];};
 			if (_iCount > 0) then {_dAngleAdustPerLoop = 360 / _iCount;};
@@ -562,8 +561,8 @@ if (!_bFriendlyInsurgents) then {
 			};
 
 			//spawn outer but close surrunding checkpoints
-			_iCount = 2;
-			if (!_bIsMainObjective) then {_iCount = selectRandom [0,1];};
+			_iCount = [2,3] select (call TREND_bMoreEnemies);
+			if (!_bIsMainObjective) then {_iCount = selectRandom ([[0,1], [1,2]] select (call TREND_bMoreEnemies));};
 			if ((!_bIsMainObjective && !_bHasPatrols) || _selectRandomW) then {_iCount = selectRandom [0,1,2];};
 			if (_iCount > 0) then {_dAngleAdustPerLoop = 360 / _iCount;};
 			while {_iCount > 0} do {
@@ -585,9 +584,9 @@ if (!_bFriendlyInsurgents) then {
 			};
 
 			//spawn outer far checkpoints
-			_iCount = 2;
-			if (!_bIsMainObjective) then {_iCount = selectRandom [0,1];};
-			if ((!_bIsMainObjective && !_bHasPatrols) || _selectRandomW) then {_iCount = selectRandom [1,2];};
+			_iCount = [2,3] select (call TREND_bMoreEnemies);
+			if (!_bIsMainObjective) then {_iCount = selectRandom ([[0,1], [1,2]] select (call TREND_bMoreEnemies));};
+			if ((!_bIsMainObjective && !_bHasPatrols) || _selectRandomW) then {_iCount = selectRandom [[1,2], [2,3]] select (call TREND_bMoreEnemies);};
 			if (_iCount > 0) then {_dAngleAdustPerLoop = 360 / _iCount;};
 			while {_iCount > 0} do {
 				_thisAreaRange = 250;
@@ -608,9 +607,9 @@ if (!_bFriendlyInsurgents) then {
 			};
 
 			//spawn outer far sentrys
-			_iCount = 1;
-			if (!_bIsMainObjective) then {_iCount = selectRandom [0,1];};
-			if ((!_bIsMainObjective && !_bHasPatrols) || _selectRandomW) then {_iCount = selectRandom [1,2];};
+			_iCount = [1,2] select (call TREND_bMoreEnemies);
+			if (!_bIsMainObjective) then {_iCount = selectRandom ([[0,1], [1,2]] select (call TREND_bMoreEnemies));};
+			if ((!_bIsMainObjective && !_bHasPatrols) || _selectRandomW) then {_iCount = selectRandom [[1,2], [2,3]] select (call TREND_bMoreEnemies);};
 			if (_iCount > 0) then {_dAngleAdustPerLoop = 360 / _iCount;};
 			while {_iCount > 0} do {
 				_thisAreaRange = 250;
@@ -633,8 +632,8 @@ if (!_bFriendlyInsurgents) then {
 
 			//future update... player faction here, or frienly rebels
 			//spawn outer nearish friendly checkpoint
-			_iCount = selectRandom [1,2];
-			if (!_bIsMainObjective || _selectRandomW) then {_iCount = 1;};
+			_iCount = selectRandom ([[1,2], [2,3]] select (call TREND_bMoreEnemies));
+			if (!_bIsMainObjective || _selectRandomW) then {_iCount = [1,2] select (call TREND_bMoreEnemies);};
 			if (_iCount > 0) then {_dAngleAdustPerLoop = 360 / _iCount;};
 			while {_iCount > 0} do {
 				_thisAreaRange = 500;
@@ -752,7 +751,7 @@ if (!_bFriendlyInsurgents) then {
 	}
 	else { //else if _bThisMissionCivsOnly
 		//spawn inner checkpoints
-		_iCount = selectRandom[0,0,0,0,1];
+		_iCount = selectRandom ([[0,0,0,0,1], [1,1,1,1,2]] select (call TREND_bMoreEnemies));
 		//if (!_bIsMainObjective) then {_iCount = selectRandom [0,1];};
 		if (_iCount > 0) then {_dAngleAdustPerLoop = 360 / _iCount;};
 		while {_iCount > 0} do {
@@ -772,7 +771,7 @@ if (!_bFriendlyInsurgents) then {
 			};
 		};
 		//spawn inner sentry
-		_iCount = selectRandom[0,0,0,0,1];
+		_iCount = selectRandom ([[0,0,0,0,1], [1,1,1,1,2]] select (call TREND_bMoreEnemies));
 		//if (!_bIsMainObjective) then {_iCount = selectRandom [0,1];};
 		if (_iCount > 0) then {_dAngleAdustPerLoop = 360 / _iCount;};
 		while {_iCount > 0} do {

@@ -118,13 +118,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		};
 	};
 
-	missionNamespace setVariable["playersInAO", false, true];
-	_playersInAO = nil;
-	_playersInAO = createTrigger ["EmptyDetector", [_centralAO_x,_centralAO_y]];
-	_playersInAO   setVariable ["DelMeOnNewCampaignDay",true];
-	_playersInAO   setTriggerArea [150, 150, 0, false];
-	_playersInAO   setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-	_playersInAO   setTriggerStatements ["this", "missionNamespace setVariable[""playersInAO"", true, true]; [{missionNamespace getVariable[""playersInAO"", false]}, getPos thistrigger] spawn TREND_fnc_alertNearbyUnits; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;", "missionNamespace setVariable[""playersInAO"", false, true];"];
+	// missionNamespace setVariable["playersInAO", false, true];
+	// _playersInAO = nil;
+	// _playersInAO = createTrigger ["EmptyDetector", [_centralAO_x,_centralAO_y]];
+	// _playersInAO   setVariable ["DelMeOnNewCampaignDay",true];
+	// _playersInAO   setTriggerArea [150, 150, 0, false];
+	// _playersInAO   setTriggerActivation ["ANYPLAYER", "PRESENT", true];
+	// _playersInAO   setTriggerStatements ["this", "missionNamespace setVariable[""playersInAO"", true, true]; [{missionNamespace getVariable[""playersInAO"", false]}, getPos thistrigger] spawn TREND_fnc_alertNearbyUnits; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;", "missionNamespace setVariable[""playersInAO"", false, true];"];
 
 	_triggerTruckClear = nil;
 	_triggerTruckClear = createTrigger ["EmptyDetector", [0,0]];
