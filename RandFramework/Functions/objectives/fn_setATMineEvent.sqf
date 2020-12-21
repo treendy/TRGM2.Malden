@@ -113,7 +113,7 @@ if (_currentATFieldPos select 0 != 0) then {
 									_guardUnit1 disableAI "anim";
 									[_guardUnit1] spawn {
 										_guardUnit1 = _this select 0;
-										waitUntil {!alive(_guardUnit1)};
+										waitUntil {sleep 2; !alive(_guardUnit1)};
 										[_guardUnit1, ""] remoteExec ["switchMove", 0];
 									};
 									sleep 20;

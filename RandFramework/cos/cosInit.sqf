@@ -23,7 +23,7 @@ if (isNil "TREND_CustomObjectsSet") then { TREND_CustomObjectsSet =   false; pub
 if (isNil "TREND_MissionParamsSet") then { TREND_MissionParamsSet =   false; publicVariable "TREND_MissionParamsSet"; };
 if (isNil "TREND_IsFullMap") then { TREND_IsFullMap =   false; publicVariable "TREND_IsFullMap"; };
 
-waitUntil {TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_MissionParamsSet};
+waitUntil {sleep 2; TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_MissionParamsSet};
 
 if (TREND_IsFullMap) Then {
 

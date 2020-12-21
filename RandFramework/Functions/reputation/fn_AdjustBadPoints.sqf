@@ -12,7 +12,7 @@ if (isNil { TRGM_Logic getVariable "PointsUpdating" }) then {
 	TRGM_Logic setVariable ["PointsUpdating", false, true];
 };
 
-waitUntil {!(TRGM_Logic getVariable "PointsUpdating")};
+waitUntil {sleep 2; !(TRGM_Logic getVariable "PointsUpdating")};
 TRGM_Logic setVariable ["PointsUpdating", true, true];
 
 params ["_pointsToAdd","_message"];

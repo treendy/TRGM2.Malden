@@ -256,7 +256,7 @@ if (count _nearestRoads > 0) then {
 
 				/*[_downedCiv2] spawn {
 					_downedCiv2 = _this select 0;
-					waitUntil {behaviour _downedCiv2 == "combat"};
+					waitUntil {sleep 2; behaviour _downedCiv2 == "combat"};
 					_downedCiv2 call BIS_fnc_ambientAnim__terminate;
 				};*/
 

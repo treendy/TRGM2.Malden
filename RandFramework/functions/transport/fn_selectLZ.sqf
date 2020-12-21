@@ -55,7 +55,7 @@ if (!([_vehicle] call TREND_fnc_helicopterIsFlying)) then {
 
 openMap true;
 titleText[localize "STR_TRGM2_transport_fnselectLZ_SelectOutsideAO", "PLAIN"];
-waitUntil {!visibleMap || !alive player};
+waitUntil {sleep 2; !visibleMap || !alive player};
 onMapSingleClick "";
 { deleteMarkerLocal _X; } forEach _markers;
 

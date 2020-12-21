@@ -9,7 +9,7 @@ _pos = (_this select 1);
 if (isNil "TREND_bAndSoItBegins") then { TREND_bAndSoItBegins = false; publicVariable "TREND_bAndSoItBegins"; };
 if (isNil "TREND_CustomObjectsSet") then { TREND_CustomObjectsSet = false; publicVariable "TREND_CustomObjectsSet"; };
 
-waitUntil {TREND_bAndSoItBegins && TREND_CustomObjectsSet};
+waitUntil {sleep 2; TREND_bAndSoItBegins && TREND_CustomObjectsSet};
 
 if (!TREND_MissionLoaded) exitWith {};
 

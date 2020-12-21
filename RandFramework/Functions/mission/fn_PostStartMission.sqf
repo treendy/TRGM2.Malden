@@ -3,7 +3,7 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc
 _isCampaign = (TREND_iMissionParamType == 5);
 if (isNil "TREND_CoreCompleted") then { TREND_CoreCompleted =   false; publicVariable "TREND_CoreCompleted"; };
 
-waituntil {TREND_CoreCompleted};
+waituntil {sleep 2; TREND_CoreCompleted};
 
 sleep 2;
 

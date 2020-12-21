@@ -35,7 +35,7 @@ if ((!isNull TREND_AdminPlayer && str player isEqualTo "sl") || (TREND_AdminPlay
 					_HQPosMarker  setMarkerSize [5,5];
 					_HQPosMarker  setMarkerColor "ColorGreen";
 					_HQPosMarker  setMarkerText "HQ Location";
-					waitUntil { (TREND_MapClicked isEqualTo 2 || !visibleMap); };
+					waitUntil { sleep 1; (TREND_MapClicked isEqualTo 2 || !visibleMap); };
 					deleteMarker _HQPosMarker;
 					if (TREND_MapClicked isEqualTo 2) then {
 						TREND_MapClicked = 0; publicVariable "TREND_MapClicked";

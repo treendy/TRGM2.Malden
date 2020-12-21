@@ -6,7 +6,10 @@ params [
 	["_hvtUnitClass", ""],
 	["_hvtVehClass", ""],
 	["_guardUnitClasses", []],
-	["_wpPosArray", []]
+	["_wpPosArray", []],
+	["_convoySpeed", 50],
+    ["_convoySeparation", 50],
+    ["_pushThrough", true]
 ];
 
 _finalGroup = [];
@@ -30,7 +33,7 @@ _pos = _startPos;
 		{
 			_x setVariable ["zbe_cacheDisabled", true, true];
 		} forEach crew _vehicle;
-		if (_forEachIndex == 0) then {
+		if (_forEachIndex isEqualTo 0) then {
 			_group selectLeader (commander _vehicle);
 		};
 		_group setFormation "FILE";
@@ -55,6 +58,7 @@ if !(_hvtUnitClass isEqualTo "") then {
 
 		_hvtVehicleNew = _hvtVehClass createVehicle ([_startPos, 0, 50, 10, 0, 0.5, 0, [], [_startPos,_startPos], _hvtVehClass] call TREND_fnc_findSafePos);
 		_hvtVehicleNew allowDamage false;
+		_group addVehicle _hvtVehicleNew;
 		_hvtVehicle = _hvtVehicleNew;
 		_hvtVehicle setpos _pos;
 		_hvtVehicle setdir _dir;
@@ -83,24 +87,20 @@ if !(_hvtUnitClass isEqualTo "") then {
 
 	_hvtUnit = _group createUnit [_hvtUnitClass, [_startPos select 0, _startPos select 1, 0], [], 0, "NONE"];
 	_hvtUnit setVariable ["zbe_cacheDisabled", true, true];
-	_hvtUnit setCaptive true;
-	removeAllWeapons _hvtUnit;
 	_hvtUnit assignAsCargo _hvtVehicle;
 	_hvtUnit moveInCargo _hvtVehicle;
 };
 
 {
-	if !(_x isEqualTo _hvtVehicle) then {
-		_thisVehicle = _x;
-		for [{private _i = 0}, {_i < (_thisVehicle emptyPositions "NONE")}, {_i = _i + 1}] do {
-			_unitTypeIndex = [_i, 8] select (_i > 8);
-			_convoyUnit = _group createUnit [[call sTeamleader, call sMachineGunMan, call sATMan, call sMedic, call sAAMan, call sEngineer, call sGrenadier, call sSniper, call sRifleman] select _unitTypeIndex, [getPos _thisVehicle select 0, getPos _thisVehicle select 1 + 5, 0], [], 0, "NONE"];
-			_convoyUnit setVariable ["zbe_cacheDisabled", true, true];
-			_convoyUnit assignAsCargo _thisVehicle;
-			_convoyUnit moveInCargo _thisVehicle;
-		};
+	_thisVehicle = _x;
+	for [{private _i = 0}, {_i < (_thisVehicle emptyPositions "Cargo")}, {_i = _i + 1}] do {
+		_unitTypeIndex = [_i, 8] select (_i > 8);
+		_convoyUnit = _group createUnit [[call sTeamleader, call sMachineGunMan, call sATMan, call sMedic, call sAAMan, call sEngineer, call sGrenadier, call sSniper, call sRifleman] select _unitTypeIndex, [getPos _thisVehicle select 0, getPos _thisVehicle select 1 + 5, 0], [], 0, "NONE"];
+		_convoyUnit setVariable ["zbe_cacheDisabled", true, true];
+		_convoyUnit assignAsCargo _thisVehicle;
+		_convoyUnit moveInCargo _thisVehicle;
 	};
-} forEach _finalGroup;
+} forEach (_finalGroup - [_hvtVehicle]);
 
 if !(_wpPosArray isEqualTo []) then {
 	{
@@ -126,8 +126,13 @@ _finalwp setWaypointBehaviour "SAFE";
 
 {
 	_unit = _x;
+	// Disable ASR
+	_unit setVariable ["asr_ai_exclude", true];
+	// Disable VCOM
+	_unit setVariable ["NOAI", 1, true];
+	// Disable ZBE Caching
 	_unit setVariable ["zbe_cacheDisabled", true, true];
-	if (vehicle _unit == _unit) then {
+	if (vehicle _unit isEqualTo _unit) then {
 		{
 			if (_x emptyPositions "CARGO" > 0) exitWith {
 				_unit assignAsCargo _x;
@@ -141,6 +146,6 @@ _finalwp setWaypointBehaviour "SAFE";
 	_x allowDamage true;
 } forEach _finalGroup;
 
-[_group, 50, 20, true] spawn TREND_fnc_convoy;
+[_group, _convoySpeed, _convoySeparation, _pushThrough] spawn TREND_fnc_convoy;
 
 [_group, _finalGroup, _hvtVehicle, _hvtUnit, _finalwp];

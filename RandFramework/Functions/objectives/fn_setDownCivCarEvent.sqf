@@ -204,7 +204,7 @@ if (count _nearestRoads > 0) then {
 							_downedCiv disableAI "anim";
 							[_downedCiv] spawn {
 								_downedCiv = _this select 0;
-								waitUntil {!alive(_downedCiv)};
+								waitUntil {sleep 2; !alive(_downedCiv)};
 								[_downedCiv, ""] remoteExec ["switchMove", 0];
 							};
 							sleep 15;

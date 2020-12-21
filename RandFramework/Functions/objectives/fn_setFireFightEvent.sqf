@@ -173,7 +173,7 @@ TREND_WarEventActive = true;
 
 	while {TREND_WarEventActive} do {
 
-		waitUntil {TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_PlayersHaveLeftStartingArea};
+		waitUntil {sleep 2; TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_PlayersHaveLeftStartingArea};
 
 		_AirToUse = selectRandom (call FriendlyJet);
 		_NoOfVeh = selectRandom [1,2];

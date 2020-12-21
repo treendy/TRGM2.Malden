@@ -6,12 +6,12 @@ if (isNil "TREND_debugMessages") then {TREND_debugMessages = ""; publicVariable 
 
 call TREND_fnc_initGlobalVars;
 
-waitUntil { TREND_playerIsChoosingHQpos || TREND_NeededObjectsAvailable; };
+waitUntil { sleep 2; TREND_playerIsChoosingHQpos || TREND_NeededObjectsAvailable; };
 
 if (isServer && !TREND_NeededObjectsAvailable) then {
-	waitUntil {TREND_HQPosFound};
+	waitUntil {sleep 2; TREND_HQPosFound};
 	_handle = [TREND_foundHQPos] spawn TREND_fnc_createNeededObjects;
-   waitUntil {sleep 1; scriptDone _handle};
+   waitUntil {sleep 2; scriptDone _handle};
 
    { [[_x], {(_this select 0) allowDamage false}] remoteExec ["call", _x]; } forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 
@@ -45,9 +45,9 @@ tf_no_auto_long_range_radio = true; publicVariable "tf_no_auto_long_range_radio"
 
 
 _handle = call FHQ_fnc_ttiInit;
-waitUntil { _handle; };
+waitUntil { sleep 2; _handle; };
 _handle = call FHQ_fnc_ttiPostInit;
-waitUntil { _handle; };
+waitUntil { sleep 2; _handle; };
 
 [
    west,

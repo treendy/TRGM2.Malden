@@ -55,7 +55,7 @@ if (!isTouchingGround chopper2) then {
 };
 
 //hint str(_thisMission);
-waitUntil {((_vehicle distance2D _baseLZPos) < 300) || !(_thisMission call TREND_fnc_checkMissionIdActive)};
+waitUntil {sleep 2; ((_vehicle distance2D _baseLZPos) < 300) || !(_thisMission call TREND_fnc_checkMissionIdActive)};
 if ( !(_thisMission call TREND_fnc_checkMissionIdActive)) then {
 	deleteVehicle _heliPad;
 	breakOut "FlyToBase";
@@ -74,7 +74,7 @@ if ([_vehicle] call TREND_fnc_helicopterIsFlying) then  {
 
 setWind [0,0,true]; // prevent stuck helicopter during duststorm
 
-waitUntil {(!([_vehicle] call TREND_fnc_helicopterIsFlying)) || {!canMove _vehicle} || !(_thisMission call TREND_fnc_checkMissionIdActive)};
+waitUntil {sleep 2; (!([_vehicle] call TREND_fnc_helicopterIsFlying)) || {!canMove _vehicle} || !(_thisMission call TREND_fnc_checkMissionIdActive)};
 if ( !(_thisMission call TREND_fnc_checkMissionIdActive)) then {
 	breakOut "FlyToBase";
 };

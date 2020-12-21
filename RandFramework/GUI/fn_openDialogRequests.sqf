@@ -152,8 +152,18 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 				_safePos = [getPos player, 20,150,25,0,0.30,0,[],[getPos player,getPos player],_classToSpawn] call TREND_fnc_findSafePos; // find a valid pos
 			};
 			if (_safePos isEqualTo getPos player) exitWith {hint "No safe location nearby to create vehicle!"};
-			player setPos (_safePos vectorAdd [5,0,0]);
-			private _SpawnedVeh = createVehicle [_classToSpawn, [0,0,0], [], 0, "NONE"];
+			player setPos _safePos;
+			private _largeObjectCorrection = if (((boundingBoxReal _SpawnedVeh select 1 select 1) - (boundingBoxReal _SpawnedVeh select 0 select 1)) != 0 && {
+				((boundingBoxReal _SpawnedVeh select 1 select 0) - (boundingBoxReal _SpawnedVeh select 0 select 0)) > 3.2 &&
+				((boundingBoxReal _SpawnedVeh select 1 select 0) - (boundingBoxReal _SpawnedVeh select 0 select 0)) / ((boundingBoxReal _SpawnedVeh select 1 select 1) - (boundingBoxReal _SpawnedVeh select 0 select 1)) > 1.25 })
+				then { 90; } else { 0; };
+
+			private _attachPos = [
+				(boundingCenter _SpawnedVeh select 0) * cos _largeObjectCorrection - (boundingCenter _SpawnedVeh select 1) * sin _largeObjectCorrection,
+				((-(boundingBoxReal _SpawnedVeh select 0 select 0) * sin _largeObjectCorrection) max (-(boundingBoxReal _SpawnedVeh select 1 select 0) * sin _largeObjectCorrection)) + ((-(boundingBoxReal _SpawnedVeh select 0 select 1) * cos _largeObjectCorrection) max (-(boundingBoxReal _SpawnedVeh select 1 select 1) * cos _largeObjectCorrection)) + 2 + 0.3 * (((boundingBoxReal _SpawnedVeh select 1 select 1)-(boundingBoxReal _SpawnedVeh select 0 select 1)) * abs sin _largeObjectCorrection + ((boundingBoxReal _SpawnedVeh select 1 select 0)-(boundingBoxReal _SpawnedVeh select 0 select 0)) * abs cos _largeObjectCorrection),
+				-(boundingBoxReal _SpawnedVeh select 0 select 2)
+			];
+			private _SpawnedVeh = createVehicle [_classToSpawn, [_safePos select 0, _safePos select 1, _safePos select 2 + 250], [], 0, "NONE"];
 			_SpawnedVeh allowdamage false;
 			_SpawnedVeh setdamage 0;
 
@@ -166,6 +176,7 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 			sleep 0.5;
 
 			_SpawnedVeh setpos _safePos;
+			_SpawnedVeh attachTo [player, _attachPos, "head"];
 
 			_actionReleaseObject = player addAction [format [localize "STR_TRGM2_openDialogRequests_VehicleRelease", getText (configFile >> "CfgVehicles" >> _classToSpawn >> "displayName")], {
 				params ["_target", "_caller", "_actionId", "_arguments"];
@@ -185,19 +196,6 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 				};
 				["Open",_spawnedVeh] spawn TREND_fnc_openVehicleCustomizationDialog;
 			}, [_SpawnedVeh], 5, true, true];
-
-			private _largeObjectCorrection = if (((boundingBoxReal _SpawnedVeh select 1 select 1) - (boundingBoxReal _SpawnedVeh select 0 select 1)) != 0 && {
-					((boundingBoxReal _SpawnedVeh select 1 select 0) - (boundingBoxReal _SpawnedVeh select 0 select 0)) > 3.2 &&
-					((boundingBoxReal _SpawnedVeh select 1 select 0) - (boundingBoxReal _SpawnedVeh select 0 select 0)) / ((boundingBoxReal _SpawnedVeh select 1 select 1) - (boundingBoxReal _SpawnedVeh select 0 select 1)) > 1.25 })
-					then { 90; } else { 0; };
-
-			private _attachPos = [
-				(boundingCenter _SpawnedVeh select 0) * cos _largeObjectCorrection - (boundingCenter _SpawnedVeh select 1) * sin _largeObjectCorrection,
-				((-(boundingBoxReal _SpawnedVeh select 0 select 0) * sin _largeObjectCorrection) max (-(boundingBoxReal _SpawnedVeh select 1 select 0) * sin _largeObjectCorrection)) + ((-(boundingBoxReal _SpawnedVeh select 0 select 1) * cos _largeObjectCorrection) max (-(boundingBoxReal _SpawnedVeh select 1 select 1) * cos _largeObjectCorrection)) + 2 + 0.3 * (((boundingBoxReal _SpawnedVeh select 1 select 1)-(boundingBoxReal _SpawnedVeh select 0 select 1)) * abs sin _largeObjectCorrection + ((boundingBoxReal _SpawnedVeh select 1 select 0)-(boundingBoxReal _SpawnedVeh select 0 select 0)) * abs cos _largeObjectCorrection),
-				-(boundingBoxReal _SpawnedVeh select 0 select 2)
-			];
-
-			_SpawnedVeh attachTo [player, _attachPos, "head"];
 
 			if (call TREND_VehiclesRequireRep) then {
 				TREND_SpawnedVehicles pushBack _SpawnedVeh; publicVariable "TREND_SpawnedVehicles";

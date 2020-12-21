@@ -5,7 +5,7 @@ titleText[localize "STR_TRGM2_select_flare_location", "PLAIN"];
 openMap true;
 onMapSingleClick "FlarePos = _pos; openMap false; onMapSingleClick '';true;";
 sleep 1;
-waitUntil {!visibleMap};
+waitUntil {sleep 2; !visibleMap};
 
 //sleep 60;
 _countSec = 300; //300 = 5 mins

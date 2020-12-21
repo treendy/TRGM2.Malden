@@ -34,7 +34,7 @@ if (side player == west) then {
 			TREND_TempIntelShowPos = nearestObjects [TREND_ObjectivePossitions select 0,(call sMortar) + (call sMortarMilitia),3000];
 			publicVariable "TREND_TempIntelShowPos";
 		} remoteExec ["call", 2];
-		waitUntil {typeName TREND_TempIntelShowPos == "ARRAY"};
+		waitUntil {sleep 2; typeName TREND_TempIntelShowPos == "ARRAY"};
 		_iCount = count TREND_TempIntelShowPos;
 		if (_iCount > 0) then {
 			{
@@ -55,7 +55,7 @@ if (side player == west) then {
 			TREND_TempIntelShowPos = nearestObjects [TREND_ObjectivePossitions select 0,[(call sAAAVeh)] + [(call sAAAVehMilitia)] + (call DestroyAAAVeh),3000];
 			publicVariable "TREND_TempIntelShowPos";
 		} remoteExec ["call", 2];
-		waitUntil {typeName TREND_TempIntelShowPos == "ARRAY"};
+		waitUntil {sleep 2; typeName TREND_TempIntelShowPos == "ARRAY"};
 		_iCount = count TREND_TempIntelShowPos;
 		_iStep = 0;
 		if (_iCount > 0) then {

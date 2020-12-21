@@ -12,7 +12,7 @@ else {
 		if (!local _Object) then {
 			private _makeLocalStartTime = time;
 			_Object setOwner (owner player);
-			waitUntil {local _Object || time > _makeLocalStartTime + 1.5};
+			waitUntil {sleep 2; local _Object || time > _makeLocalStartTime + 1.5};
 		};
 
 		sleep 0.5;

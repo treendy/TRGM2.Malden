@@ -66,7 +66,9 @@ HQMan disableAI "MOVE";
 // Disable ASR for officer
 HQMan setVariable ["asr_ai_exclude", true];
 // Disable VCOM for officer
-HQMan setVariable ["NOAI",1,false];
+HQMan setVariable ["NOAI", 1, true];
+// Disable ZBE Caching
+HQMan setVariable ["zbe_cacheDisabled", true, true];
 HQMan setpos [_HQpos select 0, _HQpos select 1, 0.59];
 HQMan setdir 270;
 removeallweapons HQMan;

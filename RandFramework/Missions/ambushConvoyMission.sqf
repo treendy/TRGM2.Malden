@@ -85,7 +85,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			} forEach (_this select 1);
 		}];
 
-		waitUntil { count convoyPath > 0; };
+		waitUntil { sleep 2; count convoyPath > 0; };
 
 		{
 			if (_forEachIndex mod 25 isEqualTo 0) then {
@@ -98,7 +98,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			};
 		} forEach convoyPath;
 
-		waitUntil {TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_PlayersHaveLeftStartingArea};
+		waitUntil {sleep 2; TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_PlayersHaveLeftStartingArea};
 
 		if (!TREND_bDebugMode) then {
 			_iWait = 420 + floor(random 300);
@@ -113,8 +113,23 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_mainHVTClass = selectRandom _HVTGuys;
 		_HVTGuys = _HVTGuys - [_mainHVTClass];
 		_meetingVehs = (HVTCars + HVTVans) select {getNumber(configFile >> "CfgVehicles" >> _x >> "transportSoldier") >= 3};
+		_convoySpeed = 40;
+		_convoySeperation = 25;
+		_pushThrough = false;
 
-		_convoyArr = [EAST, _convoyVehicleClasses, _convoyStartPosition, _poshVehPos, _mainHVTClass, selectRandom _meetingVehs, [selectRandom _HVTGuys, selectRandom _HVTGuys], _convoyStopPositons] call TREND_fnc_createConvoy;
+		_convoyArr = [
+			EAST, // Side of created convoy group
+			_convoyVehicleClasses, // Classnames of vehicles to create for convoy (size of this array is also the number of vehicles created)
+			_convoyStartPosition, // Spawn position of convoy
+			_poshVehPos, // Final destination of convoy
+			_mainHVTClass, // Classname of HVT unit
+			selectRandom _meetingVehs, // Classname of HVT car
+			[selectRandom _HVTGuys, selectRandom _HVTGuys], // Classnames of HVT guards (size of this array is also the number of guards created for HVT)
+			_convoyStopPositons, // Additional positions the convoy should move through (using the calculatePath function above allows these to be "natural" points the convoy would drive through)
+			_convoySpeed, // Top speed of the convoy
+			_convoySeperation, // Distance between convoy vehicles
+			_pushThrough // Whether the convoy should stop driving if they encounter contact
+		] call TREND_fnc_createConvoy;
 		_convoyArr params ["_hvtGroup", "_convoyVehicles", "_hvtVehicle", "_mainHVT", "_finalwp"];
 
 		_sTargetName = format["objInformant%1",_thisiTaskIndex]; //ignore that it is "objInformant", all objectives have this name, do not change this!
@@ -132,7 +147,9 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		[_guardUnit3, ["This is our friendly agent!","{hint ""This is our friendly agent!"" }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 
 		_mainHVT setCaptive true;
+		removeAllWeapons _mainHVT;
 		_guardUnit3 setCaptive true;
+		removeAllWeapons _guardUnit3;
 
 		_mrkMeetingHVTMarker = nil;
 		_mrkMeetingHVTMarker = createMarker [format["HVT%1",_thisiTaskIndex], getPos _hvtVehicle];
@@ -154,7 +171,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 		[_guardUnit3] spawn {
 			_thisGuardUnit3 = _this select 0;
-			waitUntil { vehicle _thisGuardUnit3 == _thisGuardUnit3; };
+			waitUntil { sleep 2; vehicle _thisGuardUnit3 == _thisGuardUnit3; };
 			_thisGuardUnit3 switchMove "Acts_JetsCrewaidLCrouch_in";
 			_thisGuardUnit3 disableAI "anim";
 			sleep 2.2;

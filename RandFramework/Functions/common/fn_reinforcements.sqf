@@ -256,13 +256,13 @@ if (!_paraDrop) then {
 		//hint "test2";
 	}
 	else {
-		waitUntil {isTouchingGround (_helo select 0) || {!canMove (_helo select 0)}};
+		waitUntil {sleep 2; isTouchingGround (_helo select 0) || {!canMove (_helo select 0)}};
 		{unAssignVehicle _x; _x action ["eject", vehicle _x]; sleep 0.5;} forEach units _infgrp; //Eject the cargo
 	};
 
 	//hint "a";
 	//wait Until the infantry group is no longer in the helicopter before assigning a new WP to the helicopter
-	waitUntil {{!alive _x || !(_x in (_helo select 0))} count (units _infGrp) == count (units _infGrp)};
+	waitUntil {sleep 2; {!alive _x || !(_x in (_helo select 0))} count (units _infGrp) == count (units _infGrp)};
 		if (_debugMode) then {player globalChat format ["Helo Cargo Count: %1", {alive _x && (_x in (_helo select 0))} count (units _infGrp)];};
 			_heloWp = _heloCrew addWaypoint [[0,0,0], 0];
 			_heloWp setWaypointType "MOVE";
@@ -295,7 +295,7 @@ if (!_paraDrop) then {
 };
 
 //wait until cargo is empty & if _sadMode is passed as true, then add a SAD WP on the nearest enemy.. else, go into patrol mode
-	waitUntil {{!alive _x || !(_x in (_helo select 0))} count (units _infGrp) == count (units _infGrp)};
+	waitUntil {sleep 2; {!alive _x || !(_x in (_helo select 0))} count (units _infGrp) == count (units _infGrp)};
 	if (_debugMode) then {
 		{deleteMarker _x;} forEach [_mrkLZ, _mrkPos];
 	};

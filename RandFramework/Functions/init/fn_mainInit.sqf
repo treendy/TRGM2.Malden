@@ -95,7 +95,7 @@ if (isServer) then {
 	[true] call TREND_fnc_SetTimeAndWeather;
 };
 
-waitUntil {time > 0};
+waitUntil {sleep 2; time > 0};
 
 _trgRatingAdjust = createTrigger ["EmptyDetector", [0,0]];
 _trgRatingAdjust setTriggerArea [0, 0, 0, false];
@@ -103,7 +103,7 @@ _trgRatingAdjust setTriggerStatements ["((rating player) < 0)", "player addRatin
 
 
 if (!isDedicated) then {
-	waitUntil {!isNull player};
+	waitUntil {sleep 2; !isNull player};
 
 	TransferProviders = {
 		format["%1 called by %2", "TransferProviders", "TREND_fnc_mainInit"] call TREND_fnc_log;
@@ -151,7 +151,7 @@ if (!isDedicated) then {
 	_thread = [] spawn {
 		_unit = player;
 		while {true} do {
-			waitUntil {_unit != player };
+			waitUntil {sleep 2; _unit != player };
 			group player selectLeader player;
 			//hintSilent " Player has changed";
 			[_unit] call TransferProviders;
@@ -173,7 +173,7 @@ if (!isNil "vs8")  then { deleteVehicle vs8; };
 if (!isNil "vs9")  then { deleteVehicle vs9; };
 if (!isNil "vs10") then { deleteVehicle vs10; };
 
-waitUntil {TREND_bAndSoItBegins};
+waitUntil {sleep 2; TREND_bAndSoItBegins};
 
 private _coreCountSleep = 0.1;
 [format["Mission Core: %1", "Init"], true] call TREND_fnc_log;
@@ -361,7 +361,7 @@ if (isServer) then {
 			if (!isPlayer _x) then {
 				//_x setVariable ["UnitRole",_unitRole];
 				_handle = [_x] call TREND_fnc_setLoadout;
-				waitUntil {_handle};
+				waitUntil {sleep 2; _handle};
 				if (!isNil("_isAceRespawnWithGear")) then {
 					if (!_isAceRespawnWithGear) then {
 						_x addEventHandler ["Respawn", { [_this select 0] call TREND_fnc_setLoadout; }];
@@ -383,7 +383,7 @@ if (isServer) then {
 [format["Mission Core: %1", "PreCustomObjectSet"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
-waitUntil {TREND_CustomObjectsSet};
+waitUntil {sleep 2; TREND_CustomObjectsSet};
 
 [format["Mission Core: %1", "PostCustomObjectSet"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
@@ -434,7 +434,7 @@ else {
 [format["Mission Core: %1", "InitCampaign/StartMission ran"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
 
-waitUntil {TREND_MissionLoaded};
+waitUntil {sleep 2; TREND_MissionLoaded};
 
 [format["Mission Core: %1", "TREND_MissionLoaded true"], true] call TREND_fnc_log;
 sleep _coreCountSleep;

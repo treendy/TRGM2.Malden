@@ -158,7 +158,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_hvtGuardGroup = _this select 6;
 		_iTaskIndex = _this select 7;
 
-		waitUntil {TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_PlayersHaveLeftStartingArea};
+		waitUntil {sleep 2; TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_PlayersHaveLeftStartingArea};
 		//["debug: wait started"] remoteExecCall ["Hint", 0];
 
 		waitUntil { sleep 10; _playersInAO = false; { if (_thisMeetingPos distance _x < 2000) exitWith { _playersInAO = true; }; } forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits}); _playersInAO; };
@@ -262,7 +262,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
        		_thisMeetingPos = _this select 1;
        		_moveToPos = (_thisMeetingPos) getPos [3,selectRandom[1, 95, 180, 270]];
        		_hvtGuardGroup = group _thisGuardUnit3;
-       		waitUntil {!alive(_thisGuardUnit3) || isTouchingGround (vehicle _thisGuardUnit3)};
+       		waitUntil {sleep 2; !alive(_thisGuardUnit3) || isTouchingGround (vehicle _thisGuardUnit3)};
        		_thisGuardUnit3 enableAI "MOVE"; //for some reason, sometimes this guy will just stay in the water???
      		_thisGuardUnit3 enableAI "FSM";
        		unassignVehicle _thisGuardUnit3;
@@ -397,7 +397,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		[_hvtGroup, 1] setWaypointType "GETIN";
 		_wpHvtLeaveMeet2 = _hvtGroup addWaypoint [[0,0,100], 0];
 		_hvtGroup setBehaviour "CARELESS";
-		waitUntil {!isTouchingGround _hvtChopper};
+		waitUntil {sleep 2; !isTouchingGround _hvtChopper};
 
 		sleep 120;
 		if (alive(_thisMainHVT)) then {
@@ -424,7 +424,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_mainHVT addEventHandler ["Killed", {(_this select 0) setVariable ["taskStatus","KILLED",true]; }];
 	};
 
-	//waitUntil {((_mainHVT getVariable ["taskStatus",false]) != "" || !alive(_mainHVT))};
+	//waitUntil {sleep 2; ((_mainHVT getVariable ["taskStatus",false]) != "" || !alive(_mainHVT))};
 
 	//sleep 1; //give enough time for variable to be set against mainHVT if he was killed (i check if he is alive too, as if for some reason this unit is deleted and no variable set against him, i will need to make sure these waituntil loops are not just hanging around the entire mission)
 

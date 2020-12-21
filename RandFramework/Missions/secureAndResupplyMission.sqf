@@ -181,6 +181,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         [_heloGroup, 2] setWaypointSpeed "FULL";
 
         waitUntil {
+            sleep 2;
             TREND_dropCrate;
         };
         sleep 1;
@@ -191,6 +192,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         _supplyObjectDummy setPos[getPos _flag select 0, getPos _flag select 1, 200];
 
         waitUntil {
+            sleep 2;
             getPos _supplyObjectDummy select 2 < 75
         };
 
@@ -200,6 +202,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         _para setPos[getPos _flag select 0, getPos _flag select 1, 100];
 
         waitUntil {
+            sleep 2;
             getPos _supplyObjectDummy select 2 >= 0 && getPos _supplyObjectDummy select 2 <= 1
         };
 
@@ -228,6 +231,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         missionNamespace setVariable[format["SupplyDropped_%1", _iTaskIndex], 1, true];
 
         waitUntil {
+            sleep 2;
             !TREND_dropCrate;
         };
         [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements;
@@ -275,6 +279,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         [_heloGroup, 2] setWaypointSpeed "FULL";
 
         waitUntil {
+            sleep 2;
             TREND_dropCrate;
         };
         sleep 1;
@@ -285,6 +290,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         _supplyObjectDummy setPos[getPos _flag select 0, getPos _flag select 1, 200];
 
         waitUntil {
+            sleep 2;
             getPos _supplyObjectDummy select 2 < 75
         };
 
@@ -294,6 +300,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         _para setPos[getPos _flag select 0, getPos _flag select 1, 100];
 
         waitUntil {
+            sleep 2;
             getPos _supplyObjectDummy select 2 >= 0 && getPos _supplyObjectDummy select 2 <= 1
         };
 

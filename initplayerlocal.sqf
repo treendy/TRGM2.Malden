@@ -83,7 +83,7 @@ TREND_fnc_MissionSelectLoop = {
 		};
 		sleep 5;
 	};
-	waitUntil {TREND_bOptionsSet};
+	waitUntil {sleep 2; TREND_bOptionsSet};
 
 	txt5Layer = "txt5" call BIS_fnc_rscLayer;
 	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>";
@@ -96,7 +96,7 @@ TREND_fnc_MissionSelectLoop = {
 };
 [] spawn TREND_fnc_MissionSelectLoop;
 
-waitUntil {TREND_bOptionsSet};
+waitUntil {sleep 2; TREND_bOptionsSet};
 // titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED"];
 _camera cameraEffect ["Terminate","back"];
 [format["Mission Core: %1", "CameraTerminated"], true] call TREND_fnc_log;
@@ -112,7 +112,7 @@ if (!isDedicated && {(!isNull TREND_AdminPlayer && str player isEqualTo "sl") ||
 			openMap true;
 			onMapSingleClick "TREND_Mission1Loc = _pos; publicVariable 'TREND_Mission1Loc'; openMap false; onMapSingleClick ''; true;";
 			sleep 1;
-			waitUntil {!visibleMap};
+			waitUntil {sleep 1; !visibleMap};
 			if (!isNil "TREND_Mission1Loc") then {
 				["mrkAoSelect1",  TREND_Mission1Loc, "ICON", "ColorRed", [1,1], "AO 1"] call AIS_Core_fnc_createLocalMarker;
 			};
@@ -122,7 +122,7 @@ if (!isDedicated && {(!isNull TREND_AdminPlayer && str player isEqualTo "sl") ||
 				openMap true;
 				onMapSingleClick "TREND_Mission2Loc = _pos; publicVariable 'TREND_Mission2Loc'; openMap false; onMapSingleClick ''; true;";
 				sleep 1;
-				waitUntil {!visibleMap};
+				waitUntil {sleep 1; !visibleMap};
 				if (!isNil "TREND_Mission2Loc") then {
 					["mrkAoSelect2",  TREND_Mission2Loc, "ICON", "ColorRed", [1,1], "AO 2"] call AIS_Core_fnc_createLocalMarker;
 				};
@@ -131,7 +131,7 @@ if (!isDedicated && {(!isNull TREND_AdminPlayer && str player isEqualTo "sl") ||
 				openMap true;
 				onMapSingleClick "TREND_Mission3Loc = _pos; publicVariable 'TREND_Mission3Loc'; openMap false; onMapSingleClick ''; true;";
 				sleep 1;
-				waitUntil {!visibleMap};
+				waitUntil {sleep 1; !visibleMap};
 				if (!isNil "TREND_Mission3Loc") then {
 					["mrkAoSelect2",  TREND_Mission3Loc, "ICON", "ColorRed", [1,1], "AO 2"] call AIS_Core_fnc_createLocalMarker;
 				};
@@ -147,7 +147,7 @@ if (!isDedicated && {(!isNull TREND_AdminPlayer && str player isEqualTo "sl") ||
 			openMap true;
 			onMapSingleClick "TREND_AOCampLocation = _pos; publicVariable 'TREND_AOCampLocation'; openMap false; onMapSingleClick ''; true;";
 			sleep 1;
-			waitUntil {!visibleMap};
+			waitUntil {sleep 1; !visibleMap};
 		};
 
 
@@ -188,9 +188,10 @@ if (!isDedicated && {(!isNull TREND_AdminPlayer && str player isEqualTo "sl") ||
 // [] spawn TREND_fnc_BasicInitAndRespawn;
 // player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInitAndRespawn; }];
 
-waitUntil {TREND_bAndSoItBegins && TREND_CustomObjectsSet};
+waitUntil {sleep 2; TREND_bAndSoItBegins && TREND_CustomObjectsSet};
 
-endMissionBoard removeAction _actChooseMission;
+removeAllActions endMissionBoard;
+removeAllActions endMissionBoard2;
 
 [player] spawn TREND_fnc_setLoadout;
 

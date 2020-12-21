@@ -8,7 +8,7 @@ if (!TREND_CoreCompleted) exitWith {};
 
 sleep random [1,2.5,5]; //to increase the chance of not fireing at same time! (not convinsed that the "PointsUpdating" variable actually helped)
 
-waitUntil {!(TRGM_Logic getVariable "PointsUpdating")};
+waitUntil {sleep 2; !(TRGM_Logic getVariable "PointsUpdating")};
 TRGM_Logic setVariable ["PointsUpdating", true, true];
 
 params ["_pointsToAdd","_message"];

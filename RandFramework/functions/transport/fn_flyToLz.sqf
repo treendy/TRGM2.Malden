@@ -188,7 +188,7 @@ if (!([_vehicle] call TREND_fnc_helicopterIsFlying)) then {
 };
 
 if (!([_vehicle] call TREND_fnc_helicopterIsFlying)) then {
-	waitUntil {(!([_vehicle] call TREND_fnc_helicopterIsFlying)) || !(_thisMission call TREND_fnc_checkMissionIdActive)};
+	waitUntil {sleep 2; (!([_vehicle] call TREND_fnc_helicopterIsFlying)) || !(_thisMission call TREND_fnc_checkMissionIdActive)};
 	if (!(_thisMission call TREND_fnc_checkMissionIdActive)) then {
 		[_thisMission] call _cleanupMission;
 		breakOut "FlyTo";
@@ -202,14 +202,14 @@ if (!([_vehicle] call TREND_fnc_helicopterIsFlying)) then {
 
 /* Landing done **/
 
-waitUntil { ((_vehicle getVariable ["landingInProgress",false]) || !(_thisMission call TREND_fnc_checkMissionIdActive)); };
+waitUntil { sleep 2; ((_vehicle getVariable ["landingInProgress",false]) || !(_thisMission call TREND_fnc_checkMissionIdActive)); };
 if (!(_thisMission call TREND_fnc_checkMissionIdActive)) then {
 	_vehicle land "NONE";
 	[_thisMission] call _cleanupMission;
 	breakOut "FlyTo";
 };
 
-waitUntil { ((!([_vehicle] call TREND_fnc_helicopterIsFlying)) || {!canMove _vehicle} || !(_thisMission call TREND_fnc_checkMissionIdActive)); };
+waitUntil { sleep 2; ((!([_vehicle] call TREND_fnc_helicopterIsFlying)) || {!canMove _vehicle} || !(_thisMission call TREND_fnc_checkMissionIdActive)); };
 if (!(_thisMission call TREND_fnc_checkMissionIdActive)) then {
 	_vehicle land "NONE";
 	[_thisMission] call _cleanupMission;
@@ -237,7 +237,7 @@ sleep 5;
 /* wait for empty helicopter */
 
 if (!_isPickup) then {
-	waitUntil { ([_vehicle] call TREND_fnc_isOnlyBoardCrewOnboard) || !(_thisMission call TREND_fnc_checkMissionIdActive) }; // helicopter empty except pilot + crew
+	waitUntil { sleep 2; ([_vehicle] call TREND_fnc_isOnlyBoardCrewOnboard) || !(_thisMission call TREND_fnc_checkMissionIdActive) }; // helicopter empty except pilot + crew
 
 	if (!(_thisMission call TREND_fnc_checkMissionIdActive)) then {
 		_vehicle land "NONE";
@@ -248,7 +248,7 @@ if (!_isPickup) then {
 	[_vehicle,_thisMission] spawn TREND_fnc_flyToBase;
 }
 else {
-	waitUntil { !([_vehicle] call TREND_fnc_isOnlyBoardCrewOnboard) || !(_thisMission call TREND_fnc_checkMissionIdActive) }; // helicopter has passengers (not just pilot + crew)
+	waitUntil { sleep 2; !([_vehicle] call TREND_fnc_isOnlyBoardCrewOnboard) || !(_thisMission call TREND_fnc_checkMissionIdActive) }; // helicopter has passengers (not just pilot + crew)
 	if (!(_thisMission call TREND_fnc_checkMissionIdActive)) then {
 		_vehicle land "NONE";
 		[_thisMission] call _cleanupMission;

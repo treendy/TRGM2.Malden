@@ -10,7 +10,7 @@
 
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 if (isDedicated) exitWith {};
-if (player != player) then {waitUntil {player == player};};
+if (player != player) then {waitUntil {sleep 2; player == player};};
 
 // Figures out how zoomed in you are (KillzoneKid is Awesome)
 KK_fnc_getZoom = {
@@ -29,7 +29,7 @@ KK_fnc_getZoom = {
 
     while {true} do {
     waitUntil {
-
+    sleep 2;
     // Adds Effects When NV Enabled
     ((vehicle player) == player) && ((currentVisionMode player) == 1)};
 
@@ -63,6 +63,7 @@ KK_fnc_getZoom = {
     2501 ppEffectForceInNVG true;
 
     waitUntil {
+    sleep 2;
     // Scaling effects during Zooming
 
     _zoomintensity = (call kk_fnc_getZoom * 10) /30;
