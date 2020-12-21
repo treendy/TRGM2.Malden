@@ -43,7 +43,7 @@ if (_bAllowStart) then {
 
 	if ((bAllAtBase2 && TREND_ActiveTasks call FHQ_fnc_ttAreTasksCompleted) || !_isCampaign) then {
 		player allowdamage false;
-		titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED", 5];
+		// titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED", 5];
 		//sleep 3;
 
 		if (_isCampaign) then {

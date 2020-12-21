@@ -97,7 +97,7 @@ TREND_fnc_MissionSelectLoop = {
 [] spawn TREND_fnc_MissionSelectLoop;
 
 waitUntil {TREND_bOptionsSet};
-titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED"];
+// titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED"];
 _camera cameraEffect ["Terminate","back"];
 [format["Mission Core: %1", "CameraTerminated"], true] call TREND_fnc_log;
 sleep 3;

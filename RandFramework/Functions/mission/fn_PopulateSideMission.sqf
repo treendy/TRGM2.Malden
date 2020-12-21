@@ -146,12 +146,12 @@ _trgCustomAIScript setTriggerStatements ["this && {(time - TREND_TimeSinceLastSp
 
 //Create extra detected trigger for more reinforcements
 if (call TREND_bMoreEnemies) then {
-	_trgCustomAIScript = nil;
-	_trgCustomAIScript = createTrigger ["EmptyDetector", _sidePos];
-	_trgCustomAIScript setVariable ["DelMeOnNewCampaignDay",true];
-	_trgCustomAIScript setTriggerArea [1250, 1250, 0, false];
-	_trgCustomAIScript setTriggerActivation [TREND_FriendlySideString, format["%1 D", TREND_EnemySideString], true];
-	_trgCustomAIScript setTriggerStatements ["this && {(time - TREND_TimeSinceAdditionalReinforcementsCalled) > (call TREND_GetSpottedDelay * 1.5)}", format["nul = [EAST, call TREND_GetReinforceStartPos, %1, 3, true, true, true, true, false, false] spawn TREND_fnc_reinforcements;", str(_sidePos)], ""];
+	_trgCustomAIScript2 = nil;
+	_trgCustomAIScript2 = createTrigger ["EmptyDetector", _sidePos];
+	_trgCustomAIScript2 setVariable ["DelMeOnNewCampaignDay",true];
+	_trgCustomAIScript2 setTriggerArea [1250, 1250, 0, false];
+	_trgCustomAIScript2 setTriggerActivation [TREND_FriendlySideString, format["%1 D", TREND_EnemySideString], true];
+	_trgCustomAIScript2 setTriggerStatements ["this && {(time - TREND_TimeSinceAdditionalReinforcementsCalled) > (call TREND_GetSpottedDelay * 1.5)}", format["nul = [EAST, call TREND_GetReinforceStartPos, %1, 3, true, true, true, true, false, false] spawn TREND_fnc_reinforcements; [true, %1] spawn TREND_fnc_alertNearbyUnits;", str(_sidePos)], ""];
 };
 
 TREND_debugMessages = TREND_debugMessages + format["\n\ntrendFunctions.sqf : _bFriendlyInsurgents: %1 - _bThisMissionCivsOnly: %2 ",str(_bFriendlyInsurgents),str(_bThisMissionCivsOnly)];

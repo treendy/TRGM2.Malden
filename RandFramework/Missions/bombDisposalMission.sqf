@@ -36,7 +36,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	params ["_markerType","_objectiveMainBuilding","_centralAO_x","_centralAO_y","_roadSearchRange", "_bCreateTask", "_iTaskIndex", "_bIsMainObjective", ["_args", []]];
 	if (_markerType != "empty") then { _markerType = "hd_unknown"; }; // Set marker type here...
 
-
 	//DEFUSED = false;
 	//ARMED = false;
 
@@ -59,14 +58,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_objBomb1 setVariable ["missionBombCODE",_missionBombCODE,true];
 	_objBomb1 setVariable ["missionBombWire",_missionBombWire,true];
 	_objBomb1 setVariable ["isDefused",false];
-
-	// missionNamespace setVariable["playersInAO", false, true];
-	// _playersInAO = nil;
-	// _playersInAO = createTrigger ["EmptyDetector", getPos _objBomb1];
-	// _playersInAO   setVariable ["DelMeOnNewCampaignDay",true];
-	// _playersInAO   setTriggerArea [150, 150, 0, false];
-	// _playersInAO   setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-	// _playersInAO   setTriggerStatements ["this", "missionNamespace setVariable[""playersInAO"", true, true]; [{missionNamespace getVariable[""playersInAO"", false]}, getPos thistrigger] spawn TREND_fnc_alertNearbyUnits; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;", "missionNamespace setVariable[""playersInAO"", false, true];"];
 
 	_bombSerialNumber = format["%1%2%3%4%5",selectRandom["AA","BA","ZN"],(round(random 9)), (round(random 9)), (round(random 9)), (round(random 9))];
 	_objBomb1 setVariable ["serialNumber",_bombSerialNumber,true];

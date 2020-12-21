@@ -42,6 +42,8 @@ class TREND {
         class CallNearbyPatrol{};
         class callUAVFindObjective{};
         class CarryAndJoinWounded{};
+        class convoy{};
+        class createConvoy{};
         class debugDotMarker {};
         class enemyAirSupport{};
         class fireAOFlares{};
@@ -140,6 +142,7 @@ class TREND {
         class directionToText {};
         class findSafePos{};
         class getLocationName {};
+        class randomPosIntersection{};
     };
 
     class transport { // CATEGORY

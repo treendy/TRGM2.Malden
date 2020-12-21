@@ -121,13 +121,17 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
             _flag getVariable["Lowered", false];
         };
 
-        [{
-            missionNamespace getVariable['SupplyDropped_%1', 0] < 2
-        }, getPos _flag] spawn TREND_fnc_alertNearbyUnits;
+        [_flag] spawn {
+            private _thisFlag = _this select 0;
+            while {missionNamespace getVariable['SupplyDropped_%1', 0] < 2} do {
+                [true, getPos _thisFlag] spawn TREND_fnc_alertNearbyUnits;
+                sleep 60;
+            };
+        };
 
-        [EAST, call TREND_GetReinforceStartPos, getPos _flag, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements;
+        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements;
 
-        [EAST, call TREND_GetReinforceStartPos, getPos _flag, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;
+        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;
         sleep 10;
 
         {
@@ -226,8 +230,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         waitUntil {
             !TREND_dropCrate;
         };
-        [EAST, call TREND_GetReinforceStartPos, getPos _flag, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements;
-        [EAST, call TREND_GetReinforceStartPos, getPos _flag, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;
+        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements;
+        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;
         sleep 10; {
             hint(format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]);
         }

@@ -41,7 +41,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	params ["_markerType","_objectiveMainBuilding","_centralAO_x","_centralAO_y","_roadSearchRange", "_bCreateTask", "_iTaskIndex", "_bIsMainObjective", ["_args", []]];
 	if (_markerType != "empty") then { _markerType = "hd_unknown"; }; // Set marker type here...
 
-
 	_hvtLzPos = nil;
 	_hvtLzPos = [[_centralAO_x,_centralAO_y,0] , 10, 150, 10, 0, 0.3, 0,[],[[_centralAO_x,_centralAO_y],[_centralAO_x,_centralAO_y]]] call TREND_fnc_findSafePos;
 	if ((_hvtLzPos select 0) > 0) then {
@@ -415,20 +414,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 //[0.2,format["Paramedic Killed by %1", name _killer]] spawn TREND_fnc_AdjustBadPoints;
 //TREND_fnc_AdjustMaxBadPoints << increase max bad poins which increases our rep
-
-
-	_mainHVT addEventHandler ["FiredNear", {
-		params ["_unit", "_firer", "_distance", "_weapon", "_muzzle", "_mode", "_ammo", "_gunner"];
-		[{
-			_unit getVariable['taskStatus', ""] == "KILLED" || _unit getVariable['taskStatus', ""] == "DOCTAKEN"
-		}, getPos _unit] spawn TREND_fnc_alertNearbyUnits;
-
-		[side _unit, call TREND_GetReinforceStartPos, getPos _unit, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements;
-
-		[side _unit, call TREND_GetReinforceStartPos, getPos _unit, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;
-		sleep 10;
-	}];
-
 
 	_guardUnit3 addEventHandler ["Killed", {(_this select 0) setVariable ["taskStatus","KILLED",true] }];
 

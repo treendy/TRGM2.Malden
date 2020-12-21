@@ -36,7 +36,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	params ["_markerType","_objectiveMainBuilding","_centralAO_x","_centralAO_y","_roadSearchRange", "_bCreateTask", "_iTaskIndex", "_bIsMainObjective", ["_args", []]];
 	if (_markerType != "empty") then { _markerType = "hd_unknown"; }; // Set marker type here...
 
-
 	//_MissionTitle = format["Meeting Assassination: %1",name(_mainHVT)];	//you can adjust this here to change what shows as marker and task text
 	_sTaskDescription = selectRandom[localize "STR_TRGM2_CacheMissionDescription"]; //adjust this based on veh? and man? if van then if car then?
 
@@ -51,14 +50,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	missionNamespace setVariable [_sTargetName1, _target1];
 
 	[_mainObjPos,100,true,true,_target1, _isCache] spawn TREND_fnc_setTargetEvent;
-
-	// missionNamespace setVariable["playersInAO", false, true];
-	// _playersInAO = nil;
-	// _playersInAO = createTrigger ["EmptyDetector", getPos _target1];
-	// _playersInAO   setVariable ["DelMeOnNewCampaignDay",true];
-	// _playersInAO   setTriggerArea [150, 150, 0, false];
-	// _playersInAO   setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-	// _playersInAO   setTriggerStatements ["this", "missionNamespace setVariable[""playersInAO"", true, true]; [{missionNamespace getVariable[""playersInAO"", false]}, getPos thistrigger] spawn TREND_fnc_alertNearbyUnits; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements; [TREND_EnemySide, call TREND_GetReinforceStartPos, getPos thistrigger, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;", "missionNamespace setVariable[""playersInAO"", false, true];"];
 
 	_customTaskClear = nil;
 	_customTaskClear = createTrigger ["EmptyDetector", [0,0]];

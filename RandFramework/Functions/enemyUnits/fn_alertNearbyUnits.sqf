@@ -3,20 +3,24 @@
  * Alerts nearby enemy units to converge onto a positon.
  *
  * Arguments:
- * 0: A condition that must be true for the units to be/stay alerted. <CODE>
+ * 0: A condition that must be true for the units to be/stay alerted. <CODE> or <BOOL>
  * 1: A central position units should converge towards. <POSITION>
  * 2: Radius from the center position to apply alertness to. <NUMBER>
+ * 3: Whether to repeat the function if the condition was true. <BOOL>
+ *    TRY NOT TO USE CYCLE MODE IF THE CONDITION IS NOT OF <CODE> TYPE!
+ *    A safer alternative is to use a trigger, or a while loop to call TREND_fnc_alertNearbyUnits.
  *
  * Return Value:
  * true <BOOL>
  *
  * Example:
- * [{alive player}, position player, 1500] spawn TREND_fnc_alertNearbyUnits
+ * [alive player, position player, 1500, false] spawn TREND_fnc_alertNearbyUnits
  */
 params[
-	["_condition",{ true }, [{}]],
+	["_condition", {true}, [{},true]],
 	["_centerPos", []],
-	["_radius", 1500]
+	["_radius", 1500],
+	["_cycleMode", false]
 ];
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
@@ -24,7 +28,11 @@ if (isNil "_condition" || isNil "_centerPos") exitWith {};
 
 _groupsAlerted = [];
 
-while {_condition} do {
+if (_condition isEqualType {}) then {
+	_condition = call _condition;
+};
+
+if (_condition) then {
 	{
 		_group = _x;
 		if (!(_group in _groupsAlerted) && {(side _group == east || side _group == independent)}) then {
@@ -46,6 +54,9 @@ while {_condition} do {
 		_groupsAlerted pushBack _group;
 	} forEach allGroups;
 	sleep 60;
+	if (_cycleMode) then {
+		[_condition, _centerPos, _radius, _cycleMode] spawn TREND_fnc_alertNearbyUnits;
+	};
 };
 
 true;

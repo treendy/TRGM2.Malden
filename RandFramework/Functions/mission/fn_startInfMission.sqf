@@ -282,10 +282,10 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 	_iThisTaskType = nil;
 	_iThisTaskType = _ThisTaskTypes select TREND_InfTaskCount;
 
-	_bIsMainObjective = _IsMainObjs select TREND_InfTaskCount;  //more chance of bad things, and set middle area stuff around (comms, base etc...)
-	_MarkerType = _MarkerTypes select TREND_InfTaskCount; //"Empty" or other
-	_bCreateTask = _CreateTasks select TREND_InfTaskCount;
-	_SamePrevAO = _SamePrevAOStats select TREND_InfTaskCount;
+	_bIsMainObjective = _IsMainObjs select TREND_InfTaskCount; if (isNil "_bIsMainObjective") then { _bIsMainObjective = false; }; //more chance of bad things, and set middle area stuff around (comms, base etc...)
+	_MarkerType = _MarkerTypes select TREND_InfTaskCount; if (isNil "_MarkerType") then { _MarkerType = "hd_dot"; };//"Empty" or other
+	_bCreateTask = _CreateTasks select TREND_InfTaskCount; if (isNil "_bCreateTask") then { _bCreateTask = true; };
+	_SamePrevAO = _SamePrevAOStats select TREND_InfTaskCount; if (isNil "_SamePrevAO") then { _SamePrevAO = false; };
 	_allowFriendlyIns = true;
 	_bSideMissionsCivOnlyToUse = _bSideMissionsCivOnly select TREND_InfTaskCount;
 	_hideTitleAndDesc = false;
@@ -418,6 +418,11 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 		};
 		case 18:  {
 			#include "..\..\Missions\meetingAssassinationMission.sqf"; //Meeting Assassination
+			call fnc_CustomVars;
+			_bNewTaskSetup = true;
+		};
+		case 19:  {
+			#include "..\..\Missions\ambushConvoyMission.sqf"; //Ambush Convoy
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
 		};

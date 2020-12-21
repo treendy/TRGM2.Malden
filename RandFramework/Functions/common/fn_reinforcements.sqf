@@ -59,10 +59,6 @@ if (_isPartOfMainTrigger) then {
 	publicVariable "TREND_TimeSinceAdditionalReinforcementsCalled";
 };
 
-if (isNil "TREND_reinforcementsScriptInProgress") then {TREND_reinforcementsScriptInProgress = false; publicVariable "TREND_reinforcementsScriptInProgress";};
-
-waitUntil { sleep 15; TREND_reinforcementsScriptInProgress;}; //Let's make sure helos aren't spawning on top of each other, we'll reset this once the units are all spawned.
-
 _heloCrew = createGroup _side;
 _cycleMode = false; //Cycle mode gets a bit too intense for most situations, using this as an opportunity to make sure it's not enabled...
 
@@ -83,8 +79,6 @@ if (_debugMode) then {
 	player globalChat format ["Debug Mode: %1", _debugMode];
 	player globalChat format ["Is Part of Main Trigger: %1", _isPartOfMainTrigger];
 };
-
-TREND_reinforcementsScriptInProgress = true; publicVariable "TREND_reinforcementsScriptInProgress";
 
 //Side Check to spawn appropriate helicopter & cargo
 switch (_side) do {
@@ -234,7 +228,6 @@ if (_debugMode) then {
 };
 
 
-TREND_reinforcementsScriptInProgress = false; publicVariable "TREND_reinforcementsScriptInProgress";
 //Give the helicopter an unload waypoint onto the hpad
 
 if (!_paraDrop) then {
@@ -349,16 +342,16 @@ if (_sadMode) then {
 	if (_debugMode) then {player globalChat "Patrol Mode";};
 
 };
-	// IF _cycleMode is passed as true, then re-run the function (this function!), else do nothing.
-	if (_cycleMode) then {
-		waitUntil {{alive _x} count units _infgrp + [(_helo select 0)] == 0};
-		if (_debugMode) then {
-			player globalChat "Patrol and helicopter dead";
-			{deleteMarker _x;} forEach [_mrkHelo, _mrkinf, _mrkTarget];
-		};
-		sleep 10;
-			if (_debugMode) then {player globalChat "New Reinforcements created";};
-			[_side, _spawnMrk, _LZMrk, _skill, _sadMode, _bodyDelete, false, _debugMode] spawn TREND_fnc_reinforcements;
-	};
+
+// IF _cycleMode is passed as true, then re-run the function (this function!), else do nothing.
+// if (_cycleMode) then {
+// 	waitUntil {{alive _x} count units _infgrp + [(_helo select 0)] == 0};
+// 	if (_debugMode) then {
+// 		player globalChat "Patrol and helicopter dead";
+// 		{deleteMarker _x;} forEach [_mrkHelo, _mrkinf, _mrkTarget];
+// 	};
+// 	if (_debugMode) then {player globalChat "New Reinforcements created";};
+// 	[_side, _spawnMrk, _LZMrk, _skill, _sadMode, _bodyDelete, false, _debugMode] spawn TREND_fnc_reinforcements;
+// };
 
 // Function End
