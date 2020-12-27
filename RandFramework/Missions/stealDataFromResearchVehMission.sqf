@@ -59,7 +59,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_objVehicle setVariable ["taskIndex", _iTaskIndex, true];
 	_objVehicle setVariable ["CreateTask", _bCreateTask, true];
 
-	[_objVehicle, [localize "STR_TRGM2_startInfMission_MissionTitle2_Button",{_this spawn TREND_fnc_downloadResearchData},[]]] remoteExec ["addAction", 0, true];
+	[_objVehicle, [localize "STR_TRGM2_startInfMission_MissionTitle2_Button", {_this spawn TREND_fnc_downloadData;}, [localize "STR_TRGM2_downloadData_title", true, "TREND_fnc_downloadResearchData", [_iTaskIndex, _bCreateTask]], 0, true, true, "", "_this == player"]] remoteExec ["addAction", 0, true];
 
 	if (count _roadConnectedTo > 0) then {
 		_connectedRoad = _roadConnectedTo select 0;

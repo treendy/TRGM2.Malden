@@ -170,6 +170,18 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		[[west, "HQ"],_sMessageOne] remoteExec ["sideChat", 0];
 		[_sMessageOne] remoteExecCall ["Hint", 0];
 
+		[time + _iWait] spawn {
+			_endTime = _this select 0;
+			while {_endTime - time >= 0} do {
+				_color = "#45f442";//green
+				_timeLeft = _endTime - time;
+				if (_timeLeft < 16) then {_color = "#eef441";};//yellow
+				if (_timeLeft < 6) then {_color = "#ff0000";};//red
+				if (_timeLeft < 0) exitWith {};
+				[parseText format ["Time Until HVT is in AO:<br/><t color='%1'>--- %2 ---</t>", _color, [(_timeLeft/3600),"HH:MM:SS"] call BIS_fnc_timeToString]] remoteExec ["hintSilent"];
+			};
+		};
+
 		sleep _iWait;
 
 		_sMessageTwo = format["%1 is in the area and on way to AO (position is tracked and marked on map",name _thisMainHVT];

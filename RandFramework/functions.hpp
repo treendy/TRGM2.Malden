@@ -74,6 +74,7 @@ class TREND {
     class gui {
         file = "RandFramework\GUI";
         class codeCompare{};
+        class downloadData{};
         class MissionTypeSelection{};
         class openDialogAdvancedMissionSettings{};
         class openDialogEnemyFaction{};

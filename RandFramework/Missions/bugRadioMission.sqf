@@ -59,7 +59,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_objRadio1 setVariable ["taskIndex", _iTaskIndex, true];
 	_objRadio1 setVariable ["CreateTask", _bCreateTask, true];
 
-	[_objRadio1, [localize "STR_TRGM2_startInfMission_MissionTitle6_Button",{_this spawn TREND_fnc_bugRadio1;},[]]] remoteExec ["addAction", 0, true];
+	[_objRadio1, [localize "STR_TRGM2_startInfMission_MissionTitle6_Button", {_this spawn TREND_fnc_downloadData;}, [localize "STR_TRGM2_downloadData_title", true, "TREND_fnc_bugRadio1", [_iTaskIndex, _bCreateTask]], 0, true, true, "", "_this == player"]] remoteExec ["addAction", 0, true];
 
 	TREND_fnc_RadioLoop = {
 		_radio = _this select 0;

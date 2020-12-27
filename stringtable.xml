@@ -3929,6 +3929,10 @@
                 <English>RELEASE %1</English>
             </Key>
 
+            <Key ID="STR_TRGM2_downloadData_title">
+                <Original>Transmitting data...</Original>
+                <English>Transmitting data...</English>
+            </Key>
 
         </Container>
     </Package>

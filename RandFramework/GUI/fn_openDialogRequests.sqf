@@ -153,6 +153,10 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 			};
 			if (_safePos isEqualTo getPos player) exitWith {hint "No safe location nearby to create vehicle!"};
 			player setPos _safePos;
+			private _SpawnedVeh = createVehicle [_classToSpawn, _safePos vectorAdd [0,0,250], [], 0, "NONE"];
+			_SpawnedVeh allowdamage false;
+			_SpawnedVeh setdamage 0;
+
 			private _largeObjectCorrection = if (((boundingBoxReal _SpawnedVeh select 1 select 1) - (boundingBoxReal _SpawnedVeh select 0 select 1)) != 0 && {
 				((boundingBoxReal _SpawnedVeh select 1 select 0) - (boundingBoxReal _SpawnedVeh select 0 select 0)) > 3.2 &&
 				((boundingBoxReal _SpawnedVeh select 1 select 0) - (boundingBoxReal _SpawnedVeh select 0 select 0)) / ((boundingBoxReal _SpawnedVeh select 1 select 1) - (boundingBoxReal _SpawnedVeh select 0 select 1)) > 1.25 })
@@ -163,9 +167,6 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 				((-(boundingBoxReal _SpawnedVeh select 0 select 0) * sin _largeObjectCorrection) max (-(boundingBoxReal _SpawnedVeh select 1 select 0) * sin _largeObjectCorrection)) + ((-(boundingBoxReal _SpawnedVeh select 0 select 1) * cos _largeObjectCorrection) max (-(boundingBoxReal _SpawnedVeh select 1 select 1) * cos _largeObjectCorrection)) + 2 + 0.3 * (((boundingBoxReal _SpawnedVeh select 1 select 1)-(boundingBoxReal _SpawnedVeh select 0 select 1)) * abs sin _largeObjectCorrection + ((boundingBoxReal _SpawnedVeh select 1 select 0)-(boundingBoxReal _SpawnedVeh select 0 select 0)) * abs cos _largeObjectCorrection),
 				-(boundingBoxReal _SpawnedVeh select 0 select 2)
 			];
-			private _SpawnedVeh = createVehicle [_classToSpawn, [_safePos select 0, _safePos select 1, _safePos select 2 + 250], [], 0, "NONE"];
-			_SpawnedVeh allowdamage false;
-			_SpawnedVeh setdamage 0;
 
 			if (!local _SpawnedVeh) then {
 				private _makeLocalStartTime = time;

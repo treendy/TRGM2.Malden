@@ -47,14 +47,15 @@ if ((_LZMrk select 0) isEqualTo 0 && (_LZMrk select 1) isEqualTo 0) exitWith {};
 
 if (!isServer) exitWith {};
 
+if (isNil "TREND_TimeLastReinforcementsCalled") then {TREND_TimeLastReinforcementsCalled = time; publicVariable "TREND_TimeLastReinforcementsCalled"};
+if (isNil "TREND_TimeSinceAdditionalReinforcementsCalled") then {TREND_TimeSinceAdditionalReinforcementsCalled = time; publicVariable "TREND_TimeSinceAdditionalReinforcementsCalled"};
+
 if (_isPartOfMainTrigger) then {
-	if (isNil "TREND_TimeLastReinforcementsCalled") then {TREND_TimeLastReinforcementsCalled = time; publicVariable "TREND_TimeLastReinforcementsCalled"};
-	waitUntil { sleep 15; (time - TREND_TimeLastReinforcementsCalled) > (call TREND_GetSpottedDelay); };
+	if ((time - TREND_TimeLastReinforcementsCalled) < (call TREND_GetSpottedDelay)) exitWith {};
 	TREND_TimeLastReinforcementsCalled = time;
 	publicVariable "TREND_TimeLastReinforcementsCalled";
 } else {
-	if (isNil "TREND_TimeSinceAdditionalReinforcementsCalled") then {TREND_TimeSinceAdditionalReinforcementsCalled = time; publicVariable "TREND_TimeSinceAdditionalReinforcementsCalled"};
-	waitUntil { sleep 15; (time - TREND_TimeSinceAdditionalReinforcementsCalled) > (call TREND_GetSpottedDelay * 1.5); }; //Using 1.5 multiplier for the delay so the main and additional triggers don't fire at the same time.
+	if ((time - TREND_TimeSinceAdditionalReinforcementsCalled) < (call TREND_GetSpottedDelay * 1.5)) exitWith {}; //Using 1.5 multiplier for the delay so the main and additional triggers don't fire at the same time.
 	TREND_TimeSinceAdditionalReinforcementsCalled = time;
 	publicVariable "TREND_TimeSinceAdditionalReinforcementsCalled";
 };

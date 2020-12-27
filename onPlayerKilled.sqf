@@ -7,7 +7,7 @@ TREND_debugMessages = TREND_debugMessages + format["KILLED Distance: %1", player
 if (TREND_bDebugMode) then {hint format["KILLED!: %1", player distance getMarkerPos "MrkHQ"]; sleep 3;};
 
 if (player distance getMarkerPos "MrkHQ" > TREND_SaveZoneRadius) then {
-	waitUntil {sleep 2; !(TRGM_Logic getVariable "DeathRunning")};
+	waitUntil {!(TRGM_Logic getVariable "DeathRunning")};
 	TRGM_Logic setVariable ["DeathRunning", true, true];
 
 	_aceSource = player getVariable ["ace_medical_lastDamageSource", objNull];

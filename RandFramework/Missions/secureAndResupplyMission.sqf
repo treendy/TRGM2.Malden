@@ -69,7 +69,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
     _flag setFlagTexture "\A3\Data_F\Flags\flag_red_CO.paa";
     _flag setVariable["TREND_flagSide", east, true];
 
-    //attach addaction to lowerflag and call supplydrop
+    //attach hold action to lowerflag and call supplydrop
     [
         _flag, // Object the action is attached to
         localize "STR_TRGM2_FlagLowerCallSupply", // Title of the action
@@ -134,16 +134,20 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;
         sleep 10;
 
-        {
-            hint(format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]);
-        }
-        remoteExec["call", 0];
-        if (!TREND_bDebugMode) then {
-            sleep 300; //wait 5 mins before supply drop in area
-        }; {
-            hint(localize "STR_TRGM2_SupplyChopperInbound");
-        }
-        remoteExec["call", 0];
+        { hint(format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]); } remoteExec["call", 0];
+        [time + 300] spawn {
+            _endTime = _this select 0;
+            while {_endTime - time >= 0} do {
+                _color = "#45f442";//green
+                _timeLeft = _endTime - time;
+                if (_timeLeft < 16) then {_color = "#eef441";};//yellow
+                if (_timeLeft < 6) then {_color = "#ff0000";};//red
+                if (_timeLeft < 0) exitWith {};
+                [parseText format ["Time Until Supplies Drop:<br/><t color='%1'>--- %2 ---</t>", _color, [(_timeLeft/3600),"HH:MM:SS"] call BIS_fnc_timeToString]] remoteExec ["hintSilent"];
+            };
+        };
+        sleep 300; //wait 5 mins before supply drop in area
+        { hint(localize "STR_TRGM2_SupplyChopperInbound"); } remoteExec["call", 0];
 
         TREND_dropCrate = false;
         publicVariable "TREND_dropCrate";
@@ -236,16 +240,22 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         };
         [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, true, true, true, false] spawn TREND_fnc_reinforcements;
         [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, true, true, false, false] spawn TREND_fnc_reinforcements;
-        sleep 10; {
-            hint(format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]);
-        }
-        remoteExec["call", 0];
-        if (!TREND_bDebugMode) then {
-            sleep 300; //wait 5 mins before supply drop in area
-        }; {
-            hint(localize "STR_TRGM2_SupplyChopperInbound");
-        }
-        remoteExec["call", 0];
+        sleep 10;
+
+        { hint(format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]); } remoteExec["call", 0];
+        [time + 300] spawn {
+            _endTime = _this select 0;
+            while {_endTime - time >= 0} do {
+                _color = "#45f442";//green
+                _timeLeft = _endTime - time;
+                if (_timeLeft < 16) then {_color = "#eef441";};//yellow
+                if (_timeLeft < 6) then {_color = "#ff0000";};//red
+                if (_timeLeft < 0) exitWith {};
+                [parseText format ["Time Until Supplies Drop:<br/><t color='%1'>--- %2 ---</t>", _color, [(_timeLeft/3600),"HH:MM:SS"] call BIS_fnc_timeToString]] remoteExec ["hintSilent"];
+            };
+        };
+        sleep 300; //wait 5 mins before supply drop in area
+        { hint(localize "STR_TRGM2_SupplyChopperInbound"); } remoteExec["call", 0];
 
         _heloGroup = createGroup west;
         _spawnPos = _flag getRelPos[3000, random 360];

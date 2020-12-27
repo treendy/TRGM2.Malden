@@ -9,6 +9,7 @@ HQBuilding setVehicleVarName "HQBuilding";
 HQBuilding allowDamage false;
 publicVariable "HQBuilding";
 private _HQpos = getPos HQBuilding;
+TREND_spawnedObjectsArray = [[_HQpos, sizeOf "Land_Cargo_HQ_V1_F"]];
 bAllAtBase = false; publicVariable "bAllAtBase";
 
 Marker1 = createMarker ["Marker1", _HQpos];
@@ -67,6 +68,8 @@ HQMan disableAI "MOVE";
 HQMan setVariable ["asr_ai_exclude", true];
 // Disable VCOM for officer
 HQMan setVariable ["NOAI", 1, true];
+// Disable LAMBS for officer
+HQMan setVariable ["lambs_danger_disableAI", true, true];
 // Disable ZBE Caching
 HQMan setVariable ["zbe_cacheDisabled", true, true];
 HQMan setpos [_HQpos select 0, _HQpos select 1, 0.59];
@@ -87,6 +90,7 @@ private _object_spawn = {
 	_object enableSimulation _enableSim;
 	_object setpos [_newx, _newy, _newz];
 	_object setdamage 0;
+	TREND_spawnedObjectsArray pushBack [getPos _object, sizeOf _name];
 	_object;
 };
 
@@ -95,13 +99,14 @@ private _building_spawn = {
 	private _newx = (_center select 0) + (_offset select 0);
 	private _newy = (_center select 1) + (_offset select 1);
 	private _newz = (_offset select 2);
-	private _safePos = [[_newx, _newy, _newz], sizeOf "Land_Cargo_HQ_V1_F",(sizeOf "Land_Cargo_HQ_V1_F" + sizeOf _name),25,0,0.15,0,[],[[_newx, _newy],[_newx, _newy]], _name] call TREND_fnc_findSafePos; // find a valid pos
+	private _safePos = [[_newx, _newy, _newz], sizeOf "Land_Cargo_HQ_V1_F", (sizeOf "Land_Cargo_HQ_V1_F" + sizeOf _name), sizeOf _name, 0, 0.2, 0, TREND_spawnedObjectsArray, [[_newx, _newy],[_newx, _newy]], _name] call TREND_fnc_findSafePos; // find a valid pos
 
 	[_safePos, sizeOf _name] call TREND_fnc_hideTerrainObjects;
 	private _building = createVehicle [_name, [0,0,0], [], 0, "NONE"];
 	_building allowdamage false;
 	_building setpos _safePos;
 	_building setdamage 0;
+	TREND_spawnedObjectsArray pushBack [getPos _building, sizeOf _name];
 	_building;
 };
 
@@ -110,12 +115,13 @@ private _helo_spawn = {
 	private _newx = (_center select 0) + (_offset select 0);
 	private _newy = (_center select 1) + (_offset select 1);
 	private _newz = (_offset select 2);
-	private _safePos = [[_newx, _newy, _newz], sizeOf "Land_Cargo_HQ_V1_F",((2 * sizeOf "Land_Cargo_HQ_V1_F") + sizeOf _name),25,0,0.15,0,[],[[_newx, _newy],[_newx, _newy]], _name] call TREND_fnc_findSafePos; // find a valid pos
+	private _safePos = [[_newx, _newy, _newz], sizeOf "Land_Cargo_HQ_V1_F", ((2 * sizeOf "Land_Cargo_HQ_V1_F") + sizeOf _name), sizeOf _name, 0, 0.2, 0, TREND_spawnedObjectsArray, [[_newx, _newy],[_newx, _newy]], _name] call TREND_fnc_findSafePos; // find a valid pos
 
 	[_safePos, sizeOf _name] call TREND_fnc_hideTerrainObjects;
 	private _heloArray = [_safePos, 0, _name, WEST] call BIS_fnc_spawnVehicle;
 	(_heloArray select 0) allowDamage false;
 	(_heloArray select 0) setpos _safePos;
+	(_heloArray select 0) setVelocity [0,0,0];
 	(_heloArray select 0) setPosASL [getPosASL (_heloArray select 0) select 0, getPosASL (_heloArray select 0) select 1, getTerrainHeightASL getPosASL (_heloArray select 0)];
 	(_heloArray select 0) setdamage 0;
 	(_heloArray select 0) engineOn false;
@@ -123,6 +129,7 @@ private _helo_spawn = {
 	private _totalTurrets = [_name, true] call BIS_fnc_allTurrets;
 	{(_heloArray select 0) lockTurret [_x, true]} forEach _totalTurrets;
 	{ doStop _x; } forEach (_heloArray select 1);
+	TREND_spawnedObjectsArray pushBack [getPos (_heloArray select 0), sizeOf _name];
 	_heloArray;
 };
 
@@ -168,7 +175,7 @@ box1 setdir 0;
 box1 setVehicleVarName "box1";
 publicVariable "box1";
 
-medBuilding = ["Land_Medevac_HQ_V1_F", _HQpos, [-20,-20,0]] call _building_spawn;
+medBuilding = ["Land_Medevac_house_V1_F", _HQpos, [-20,-20,0]] call _building_spawn;
 medBuilding setVehicleVarName "medBuilding";
 publicVariable "medBuilding";
 sleep 5;
