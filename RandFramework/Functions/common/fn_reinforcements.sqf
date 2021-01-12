@@ -16,10 +16,11 @@ _this select 5 <bool> - Body Deletion: (True = delete dead Bodies of the reinfor
 _this select 6 <bool> - Cycle Mode: (True = ON, False = OFF)
 _this select 7 <bool> - Paradrop: (True = Enabled, False = Disabled)
 _this select 8 <bool> - Debug Mode: (True = Enabled, False = Disabled)
+_this select 8 <bool> - Use standard reinforcements delay: (True = Use alternate delay, False = Use standard delay)
 
 Usage:
-_nul = [SIDE, "string", "string", number, bool, bool, bool, bool, bool] spawn TREND_fnc_reinforcements; >>
-_nul = [EAST, "spawnMrk", "LZMrk", 2, true, true, true, true, false] spawn TREND_fnc_reinforcements; <<
+_nul = [SIDE, "string", "string", number, bool, bool, bool, bool, bool, bool] spawn TREND_fnc_reinforcements; >>
+_nul = [EAST, "spawnMrk", "LZMrk", 2, true, true, true, true, false, false] spawn TREND_fnc_reinforcements; <<
 
  ---------------------------------------------------------------------------------------------------------*/
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
@@ -40,28 +41,35 @@ params [
 	["_cycleMode", false],
 	["_paraDrop", false],
 	["_debugMode", false],
-	["_isPartOfMainTrigger", true] // This is set to false for the additional trigger added when the "More enemies" option is enabled.
+	["_useStandardDelay", true]
 ];
 
 if ((_LZMrk select 0) isEqualTo 0 && (_LZMrk select 1) isEqualTo 0) exitWith {};
 
 if (!isServer) exitWith {};
 
-if (isNil "TREND_TimeLastReinforcementsCalled") then {TREND_TimeLastReinforcementsCalled = time; publicVariable "TREND_TimeLastReinforcementsCalled"};
-if (isNil "TREND_TimeSinceAdditionalReinforcementsCalled") then {TREND_TimeSinceAdditionalReinforcementsCalled = time; publicVariable "TREND_TimeSinceAdditionalReinforcementsCalled"};
+if (isNil "TREND_ReinforcementsCalled") then {TREND_ReinforcementsCalled = 0; publicVariable "TREND_ReinforcementsCalled";};
 
-if (_isPartOfMainTrigger) then {
-	if ((time - TREND_TimeLastReinforcementsCalled) < (call TREND_GetSpottedDelay)) exitWith {};
+sleep(_AdditionalUnitCreationDelay);
+
+if (TREND_ReinforcementsCalled > 4) exitWith {};
+TREND_ReinforcementsCalled = TREND_ReinforcementsCalled + 1; publicVariable "TREND_ReinforcementsCalled";
+
+if (isNil "TREND_TimeLastReinforcementsCalled") then {TREND_TimeLastReinforcementsCalled = time; publicVariable "TREND_TimeLastReinforcementsCalled";};
+if (isNil "TREND_TimeSinceAdditionalReinforcementsCalled") then {TREND_TimeSinceAdditionalReinforcementsCalled = time; publicVariable "TREND_TimeSinceAdditionalReinforcementsCalled";};
+
+if (_useStandardDelay && {(time - TREND_TimeLastReinforcementsCalled) < (call TREND_GetSpottedDelay)}) exitWith {};
+if (!_useStandardDelay && {(time - TREND_TimeSinceAdditionalReinforcementsCalled) < (call TREND_GetSpottedDelay * 1.5)}) exitWith {}; //Using 1.5 multiplier for the delay so the main and additional triggers don't fire at the same time.
+
+if (_useStandardDelay) then {
 	TREND_TimeLastReinforcementsCalled = time;
 	publicVariable "TREND_TimeLastReinforcementsCalled";
 } else {
-	if ((time - TREND_TimeSinceAdditionalReinforcementsCalled) < (call TREND_GetSpottedDelay * 1.5)) exitWith {}; //Using 1.5 multiplier for the delay so the main and additional triggers don't fire at the same time.
 	TREND_TimeSinceAdditionalReinforcementsCalled = time;
 	publicVariable "TREND_TimeSinceAdditionalReinforcementsCalled";
 };
 
 _heloCrew = createGroup _side;
-_cycleMode = false; //Cycle mode gets a bit too intense for most situations, using this as an opportunity to make sure it's not enabled...
 
 //set the scope of local variables that are defined in other scope(s), so they can be used over the entire script
 private ["_ranGrp","_helo","_infgrp"];
@@ -78,7 +86,7 @@ if (_debugMode) then {
 	player globalChat format ["Body Deletion: %1", _bodyDelete];
 	player globalChat format ["Cycle Mode: %1", _cycleMode];
 	player globalChat format ["Debug Mode: %1", _debugMode];
-	player globalChat format ["Is Part of Main Trigger: %1", _isPartOfMainTrigger];
+	player globalChat format ["Use standard delay: %1", _useStandardDelay];
 };
 
 //Side Check to spawn appropriate helicopter & cargo
@@ -285,7 +293,7 @@ if (!_paraDrop) then {
 	_heloWp setWaypointBehaviour "CARELESS";
 	_heloWp setWaypointCombatMode "BLUE";
 	_heloWp setWaypointSpeed "FULL";
-	_heloWp setWaypointStatements ["true", "{ nul = [_x] spawn TREND_fnc_paraDrop; } forEach assignedCargo (vehicle this);"];
+	_heloWp setWaypointStatements ["true", "nul = [assignedCargo (vehicle this)] spawn TREND_fnc_para;"];
 
 	_heloWp = _heloCrew addWaypoint [[0,0,0], 0];
 	_heloWp setWaypointType "MOVE";
@@ -344,6 +352,7 @@ if (_sadMode) then {
 
 };
 
+// Cycle mode gets a bit too intense for most situations, commenting out to avoid usage...
 // IF _cycleMode is passed as true, then re-run the function (this function!), else do nothing.
 // if (_cycleMode) then {
 // 	waitUntil {{alive _x} count units _infgrp + [(_helo select 0)] == 0};
@@ -352,7 +361,10 @@ if (_sadMode) then {
 // 		{deleteMarker _x;} forEach [_mrkHelo, _mrkinf, _mrkTarget];
 // 	};
 // 	if (_debugMode) then {player globalChat "New Reinforcements created";};
-// 	[_side, _spawnMrk, _LZMrk, _skill, _sadMode, _bodyDelete, false, _debugMode] spawn TREND_fnc_reinforcements;
+// 	[_side, _spawnMrk, _LZMrk, _skill, _sadMode, _bodyDelete, false, _debugMode, _useStandardDelay] spawn TREND_fnc_reinforcements;
 // };
 
+TREND_ReinforcementsCalled = TREND_ReinforcementsCalled - 1; publicVariable "TREND_ReinforcementsCalled";
+
 // Function End
+true;

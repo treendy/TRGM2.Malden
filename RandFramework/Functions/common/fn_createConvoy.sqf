@@ -49,10 +49,9 @@ _pos = _startPos;
 	};
 } forEach _vehicles;
 
-_hvtVehicle = objNull;
-_hvtUnit = objNull;
+_hvtVehicle = _finalGroup select floor ((count _finalGroup)/2); // Middle vehicle works for an HVT, additional options later?
+_hvtUnit = driver _hvtVehicle;
 if !(_hvtUnitClass isEqualTo "") then {
-	_hvtVehicle = _finalGroup select floor ((count _finalGroup)/2); // Middle vehicle works for an HVT, additional options later?
 
 	if !(_hvtVehClass isEqualTo "") then { // Does HVT get a special vehicle?
 		_index = _finalGroup find _hvtVehicle;
@@ -119,7 +118,7 @@ if (!_noWaypoints) then {
 		{
 			_aslPos = [_x select 0, _x select 1, getTerrainHeightASL [_x select 0, _x select 1]];
 			_aglPos = ASLToAGL _aslPos;
-			private _wp = _group addWaypoint [_aglPos, 25];
+			private _wp = _group addWaypoint [_aglPos, 0];
 			_wp setWaypointType "MOVE";
 			_wp setWaypointCompletionRadius 25;
 			_wp setwaypointCombatMode "GREEN";
@@ -130,7 +129,7 @@ if (!_noWaypoints) then {
 
 	_aslPos = [_endPos select 0, _endPos select 1, getTerrainHeightASL [_endPos select 0, _endPos select 1]];
 	_aglPos = ASLToAGL _aslPos;
-	private _finalwp = _group addWaypoint [_aglPos, 25];
+	private _finalwp = _group addWaypoint [_aglPos, 0];
 	_finalwp setWaypointType (["GETOUT", "MOVE"] select (_cycleMode));
 	_finalwp setWaypointCompletionRadius 25;
 	_finalwp setwaypointCombatMode "GREEN";
@@ -140,7 +139,7 @@ if (!_noWaypoints) then {
 	if (_cycleMode) then {
 		_aslPos = [_startPos select 0, _startPos select 1, getTerrainHeightASL [_startPos select 0, _startPos select 1]];
 		_aglPos = ASLToAGL _aslPos;
-		private _startwp = _group addWaypoint [_aglPos, 25];
+		private _startwp = _group addWaypoint [_aglPos, 0];
 		_startwp setWaypointType "MOVE";
 		_startwp setWaypointCompletionRadius 25;
 		_startwp setwaypointCombatMode "GREEN";
@@ -148,7 +147,7 @@ if (!_noWaypoints) then {
 		_startwp setWaypointBehaviour "SAFE";
 		_aslPos = [_startPos select 0, _startPos select 1, getTerrainHeightASL [_startPos select 0, _startPos select 1]];
 		_aglPos = ASLToAGL _aslPos;
-		private _cyclewp = _group addWaypoint [_aglPos, 25];
+		private _cyclewp = _group addWaypoint [_aglPos, 0];
 		_cyclewp setWaypointType "CYCLE";
 		_cyclewp setWaypointCompletionRadius 25;
 		_cyclewp setwaypointCombatMode "GREEN";

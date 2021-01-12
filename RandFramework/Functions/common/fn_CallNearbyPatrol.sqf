@@ -166,34 +166,20 @@ if (_SpottedUnitCount > 0) then {
 	if (!(isNil "_currentAODetail")) then {
 		sleep 5; //wait 5 seconds before enemy react
 
-		//if (_SpottedUnit distance _MainObjectivePos < 300 && !(vehicle _SpottedUnit isKindOf "Air")) then {
-		//	if (!TREND_ParaDropped) then {
-		//
-		//		[EAST, call TREND_GetReinforceStartPos, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
-		//		if (call TREND_bAllowLargerPatrols) then {
-		//			sleep 3;
-		//			[EAST, call TREND_GetReinforceStartPos, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
-		//		};
-		//		TREND_ParaDropped = true;
-		//		publicVariable "TREND_ParaDropped";
-		//	};
-		//};
-
-
 		if (_bInfSpottedAction) then {
 				if (_bIsMainObjective) then {
-					[EAST, call TREND_GetReinforceStartPos, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
+					[EAST, call TREND_GetReinforceStartPos, _MainObjectivePos, 3, true, false, false, false, false, false] spawn TREND_fnc_reinforcements;
 					if (call TREND_bMoreEnemies) then {
-						sleep 3;
-						[EAST, call TREND_GetReinforceStartPos, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
+						sleep 5;
+						[EAST, call TREND_GetReinforceStartPos, _MainObjectivePos, 3, true, false, false, false, false, false] spawn TREND_fnc_reinforcements;
 					};
 					TREND_ParaDropped = true; publicVariable "TREND_ParaDropped";
 				}
 				else {
-					[EAST, call TREND_GetReinforceStartPos, _SpottedUnitPos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
+					[EAST, call TREND_GetReinforceStartPos, _SpottedUnitPos, 3, true, false, false, false, false, false] spawn TREND_fnc_reinforcements;
 					if (call TREND_bMoreEnemies) then {
-						sleep 3;
-						[EAST, call TREND_GetReinforceStartPos, _MainObjectivePos, 3, true, false, false, false, false] spawn TREND_fnc_reinforcements;
+						sleep 5;
+						[EAST, call TREND_GetReinforceStartPos, _MainObjectivePos, 3, true, false, false, false, false, false] spawn TREND_fnc_reinforcements;
 					};
 				};
 

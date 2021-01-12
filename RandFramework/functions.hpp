@@ -7,15 +7,27 @@ class TREND {
 
     class init {
         file = "RandFramework\Functions\init";
-        class attemptEndMission{};
-        class createNeededObjects{};
-        class endMission{};
-        class findValidHQPosition{};
+        class attemptEndMission {};
+        class createNeededObjects {};
+        class endMission {};
+        class findValidHQPosition {};
         class initGlobalVars {};
+        class InitPostStarted {};
         class initUnitVars {};
         class mainInit {};
         class ServerSave {};
         class SetTimeAndWeather {};
+    };
+
+    class init_player {
+        file = "RandFramework\Functions\init_player";
+        class GeneralPlayerLoop {};
+        class InSafeZone {};
+        class introCamera {};
+        class MissionOverAnimation {};
+        class MissionSelectLoop {};
+        class OnlyAllowDirectMapDraw {};
+        class startingMove {};
     };
 
     class factions {
@@ -112,6 +124,7 @@ class TREND {
         file = "RandFramework\functions\reputation";
         class AdjustBadPoints{};
         class AdjustMaxBadPoints{};
+        class CheckBadPoints{};
         class CountSpentPoints {};
         class ShowRepReport {};
     };

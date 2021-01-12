@@ -271,9 +271,9 @@ _buildings = nil;
 ["Mission Setup: 12.5", true] call TREND_fnc_log;
 
 while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
-	_iTaskIndex = 0;
+	_iTaskIndex = TREND_InfTaskCount;
 	if (_bIsCampaign) then {
-		_iTaskIndex = (TREND_iCampaignDay-1) + TREND_InfTaskCount;
+		_iTaskIndex = (TREND_iCampaignDay - 1) + TREND_InfTaskCount;
 	}
 	else {
 		_iTaskIndex = TREND_InfTaskCount;

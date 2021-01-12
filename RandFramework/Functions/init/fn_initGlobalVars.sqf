@@ -127,6 +127,7 @@ if (isNil "TREND_ParaDropped")                             then {TREND_ParaDropp
 if (isNil "TREND_PlayersHaveLeftStartingArea")             then {TREND_PlayersHaveLeftStartingArea = false;                 publicVariable "TREND_PlayersHaveLeftStartingArea";};
 if (isNil "TREND_SaveType")                                then {TREND_SaveType = 0;                                        publicVariable "TREND_SaveType";};
 if (isNil "TREND_SentryAreas")                             then {TREND_SentryAreas = [];                                    publicVariable "TREND_SentryAreas";};
+if (isNil "TREND_TimeLastReinforcementsCalled")            then {TREND_TimeLastReinforcementsCalled = time;                 publicVariable "TREND_TimeLastReinforcementsCalled"};
 if (isNil "TREND_TimeSinceAdditionalReinforcementsCalled") then {TREND_TimeSinceAdditionalReinforcementsCalled = time;      publicVariable "TREND_TimeSinceAdditionalReinforcementsCalled";};
 if (isNil "TREND_TimeSinceLastSpottedAction")              then {TREND_TimeSinceLastSpottedAction = time;                   publicVariable "TREND_TimeSinceLastSpottedAction";};
 if (isNil "TREND_bAndSoItBegins")                          then {TREND_bAndSoItBegins = false;                              publicVariable "TREND_bAndSoItBegins";};
