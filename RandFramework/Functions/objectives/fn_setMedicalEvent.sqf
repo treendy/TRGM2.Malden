@@ -22,7 +22,7 @@ fnc_AddToDirection = {
 	params ["_origDirection","_addToDirection"];
 
 	_iResult = _origDirection + _addToDirection;
-	//hint format["result:%1",_iResult];
+	//[format["result:%1",_iResult]] call TREND_fnc_notify;
 	//sleep 2;
 	if (_iResult > 360) then {
 		_iResult = _iResult - 360;
@@ -50,7 +50,7 @@ _eventLocationPos = nil;
 	if (_xLocPos distance _posOfAO > 1000) then {
 		_nearestRoads = _xLocPos nearRoads 150;
 		_eventLocationPos = getPos (selectRandom _nearestRoads);
-		//hint str(_xLocPos distance _posOfAO);
+		//[str(_xLocPos distance _posOfAO)] call TREND_fnc_notify;
 	};
 } forEach _nearLocations;
 if (isNil("_eventLocationPos")) then {
@@ -59,7 +59,7 @@ if (isNil("_eventLocationPos")) then {
 		_nearestRoads = _posOfAO nearRoads 30000;
 	};
 	_eventLocationPos = getPos (selectRandom _nearestRoads);
-	//hint "B";
+	//["B"] call TREND_fnc_notify;
 };
 
 
@@ -81,11 +81,11 @@ _thisAreaRange = 50;
 _iteration = 1;
 
 while {_iteration <= 2} do {
-	//hint str(_iteration);
+	//[str(_iteration)] call TREND_fnc_notify;
 	if (_iteration == 2) then {
 		_thisAreaRange = 50;
 	};
-	//hint str(_thisAreaRange);
+	//[str(_thisAreaRange)] call TREND_fnc_notify;
 
 	_nearestRoads = _eventLocationPos nearRoads _thisAreaRange;
 
@@ -95,7 +95,7 @@ while {_iteration <= 2} do {
 
 	_connectedRoad = nil;
 	_direction = nil;
-	//hint "2";
+	//["2"] call TREND_fnc_notify;
 	//sleep 1;
 
 	_PosFound = false;
@@ -116,7 +116,7 @@ while {_iteration <= 2} do {
 			_iAttemptLimit = _iAttemptLimit - 1;
 		};
 	};
-//hint format["A: %1 - %2",_iteration,_eventLocationPos];
+//[format["A: %1 - %2",_iteration,_eventLocationPos]] call TREND_fnc_notify;
 	if (_PosFound) then {
 
 		_roadBlockPos =  getPos _nearestRoad;
@@ -234,7 +234,7 @@ if (isnil "fncMedicalParamedicLight") then {
 		//_mainVehDirection is direction of first veh
 		//use these to lay down guys, cones, rubbish, barriers, lights etc...
 
-		//hint str(_backOfVehArea);
+		//[str(_backOfVehArea)] call TREND_fnc_notify;
 		_group = createGroup civilian;
 
 		_downedCiv = _group createUnit [selectRandom sCivilian,_backOfVehArea,[],0,"NONE"];
@@ -278,8 +278,8 @@ if (isnil "fncMedicalParamedicLight") then {
 		[_downedCivMedic] remoteExec ["fncMedicalParamedicLight", 0, true];
 
 		if (_iteration == 1) then {
-			[_downedCivMedic, ["Ask if needs assistance",{hint format["Please can you supply us with %1 * %2.  Place them in this vehicle!",requiredItemsCount,RequestedMedicalItemName]},[_downedCivMedic]]] remoteExec ["addAction", 0, true];
-			//_downedCivMedic addAction ["Ask if needs assistance",{hint format["Please can you supply us with %1 * %2.  Place them in this vehicle!",requiredItemsCount,RequestedMedicalItemName]}];
+			[_downedCivMedic, ["Ask if needs assistance",{[format["Please can you supply us with %1 * %2.  Place them in this vehicle!",requiredItemsCount,RequestedMedicalItemName]] call TREND_fnc_notify;},[_downedCivMedic]]] remoteExec ["addAction", 0, true];
+			//_downedCivMedic addAction ["Ask if needs assistance",{[format["Please can you supply us with %1 * %2.  Place them in this vehicle!",requiredItemsCount,RequestedMedicalItemName]] call TREND_fnc_notify;}];
 			//_RequestedMedicalItem = "Item_FirstAidKit";
 			[_mainVeh,_downedCivMedic] spawn {
 				_mainVeh = _this select 0;
@@ -289,7 +289,7 @@ if (isnil "fncMedicalParamedicLight") then {
 					_VanillaItemCount = {RequestedMedicalItem == _x} count (itemcargo _mainVeh);
 					_AceItemCount = {RequestedMedicalItem == _x} count (itemcargo _mainVeh);
 					//{"ACE_bloodIV" == _x} count (itemcargo cursorTarget)
-					//hint format["TEST: %1", _AceItemCount];
+					//[format["TEST: %1", _AceItemCount]] call TREND_fnc_notify;
 					if (_VanillaItemCount >= requiredItemsCount || _AceItemCount >= requiredItemsCount) then {
 						["Thank you, this should help us get things under control"] remoteExecCall ["Hint", 0];
 						_completed = true;
@@ -354,7 +354,7 @@ if (isnil "fncMedicalParamedicLight") then {
 			_connectedRoad2 = _roadConnectedTo2 select 0;
 			_direction2 = [_nearestRoad2, _connectedRoad2] call BIS_fnc_DirTo;
 
-			//hint str(getpos _nearestRoad2);
+			//[str(getpos _nearestRoad2)] call TREND_fnc_notify;
 
 			_conelight1 = createVehicle [selectRandom TREND_ConesWithLight, (_nearestRoad2 getpos [3,[_direction2,90] call fnc_AddToDirection]), [], 0, "CAN_COLLIDE"];
 			_conelight1 enableSimulation false;
@@ -370,7 +370,7 @@ if (isnil "fncMedicalParamedicLight") then {
 
 
 		_buildings = nearestObjects [_vehPos, TREND_BasicBuildings, 100];
-		//hint str(count _buildings);
+		//[str(count _buildings)] call TREND_fnc_notify;
 		if (count _buildings < 5 && _iteration == 1) then {
 			_car1 = createVehicle [selectRandom CivCars, _flatPos, [], 0, "CAN_COLLIDE"];
 			_car1 setDamage [1,false];

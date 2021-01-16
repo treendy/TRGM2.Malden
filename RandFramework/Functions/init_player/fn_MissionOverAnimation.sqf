@@ -32,7 +32,7 @@ while {!_bEnd} do {
 		playMusic "";
 		0 fadeMusic 1;
 		playMusic selectRandom TREND_ThemeAndIntroMusic;
-		//Hint format["InitPlayer Music: %1",TREND_ThemeAndIntroMusic];
+		//[format["InitPlayer Music: %1",TREND_ThemeAndIntroMusic]] call TREND_fnc_notify;
 		sleep 8;
 		["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>TRGM 2</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TRGM2Title" + "</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText;
 		sleep 10;

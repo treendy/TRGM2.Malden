@@ -1,6 +1,6 @@
 //example: [0.3, _PointsAdjustMessage] spawn TREND_fnc_AdjustMaxBadPoints;
 
-//if (TREND_bDebugMode) then {hint format["Points adjusting: %1", TRGM_Logic getVariable "PointsUpdating"]};
+//if (TREND_bDebugMode) then {[format["Points adjusting: %1", TRGM_Logic getVariable "PointsUpdating"]] call TREND_fnc_notify;};
 
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 if (isNil "TREND_CoreCompleted") then { TREND_CoreCompleted =   false; publicVariable "TREND_CoreCompleted"; };

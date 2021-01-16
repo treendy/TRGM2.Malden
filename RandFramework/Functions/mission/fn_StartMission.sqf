@@ -24,16 +24,16 @@ _bAllowStart = true;
 //	};
 //
 //	if (_bSLAlive && str(player) != "sl") then {
-//		hint "The Kilo-1 teamleader needs to select this";
+//		["The Kilo-1 teamleader needs to select this"] call TREND_fnc_notify;
 //		_bAllowStart = false;
 //	};
 //
 //	if (!_bSLAlive && _bK1_1Alive && str(player) != "k2_1") then {
-//		hint "The Kilo-2 teamleader needs to select this";
+//		["The Kilo-2 teamleader needs to select this"] call TREND_fnc_notify;
 //		_bAllowStart = false;
 //	};
 //	if (!_bSLAlive && !_bK1_1Alive && (leader (group player))!=player) then {
-//			hint "The assigned Kilo-1 teamleader needs to select this";
+//			["The assigned Kilo-1 teamleader needs to select this"] call TREND_fnc_notify;
 //			_bAllowStart = false;
 //	};
 //};
@@ -51,7 +51,7 @@ if (_bAllowStart) then {
 			if ((player getVariable ["calUAVActionID", -1]) != -1) then {
 				player removeAction (player getVariable ["calUAVActionID", -1]);
 				player setVariable ["calUAVActionID", nil];
-				//hint "UAV no longer available";
+				//["UAV no longer available"] call TREND_fnc_notify;
 			};
 		};
 
@@ -158,7 +158,7 @@ if (_bAllowStart) then {
 
 	}
 	else {
-		{hint (localize "STR_TRGM2_StartMission_Hint");} remoteExec ["call", 0];
+		{[(localize "STR_TRGM2_StartMission_Hint")] call TREND_fnc_notify;} remoteExec ["call", 0];
 	};
 
 	if (TREND_iMissionParamType == 5) then {

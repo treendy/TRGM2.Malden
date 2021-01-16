@@ -133,7 +133,7 @@ while {!_bWaypointsAdded} do {
 	if (_iWaypointCount == 10) then {
 		_iWaypointCount = 1;
 	};
-	//hint format["TEST: %1", _iWaypointLoopCount];
+	//[format["TEST: %1", _iWaypointLoopCount]] call TREND_fnc_notify;
 	//sleep 0.5;
 
 };

@@ -16,19 +16,19 @@ if (_baseReturnAllowed && _pos distance2D _baseLZPos <= _baseRadius) then {
 	call _resetMapState;
 } else {
 	if (!_baseReturnAllowed && _pos distance2D _baseLZPos <= _baseRadius) then {
-		hint (localize "STR_TRGM2_transport_fnselectLzOnMapClick_TooCloseBase");
+		[(localize "STR_TRGM2_transport_fnselectLzOnMapClick_TooCloseBase")] call TREND_fnc_notify;
 		breakOut "onMapClickedHandler"; // no need to check more
 	};
 
 	{
 		if ((_x distance2D _pos) < _radius) then {
-			hint (localize "STR_TRGM2_transport_fnselectLzOnMapClick_TooCloseAO");
+			[(localize "STR_TRGM2_transport_fnselectLzOnMapClick_TooCloseAO")] call TREND_fnc_notify;
 			breakOut "onMapClickedHandler"; // no need to check more
 		};
 	} forEach _redZonePositions;
 
 	if (!(objNull isEqualTo _vehiclePositon) && (_vehiclePositon distance2D _pos < _minimumDistance)) then {
-		hint (localize "STR_TRGM2_transport_fnselectLzOnMapClick_TooCloseWalk");
+		[(localize "STR_TRGM2_transport_fnselectLzOnMapClick_TooCloseWalk")] call TREND_fnc_notify;
 		breakOut "onMapClickedHandler"; // no need to check more
 	};
 
@@ -43,7 +43,7 @@ if (_baseReturnAllowed && _pos distance2D _baseLZPos <= _baseRadius) then {
 	};
 
 	if (_safeLandingZonePosition select 0 == 0) then { // no safe zone found
-		hint (localize "STR_TRGM2_transport_fnselectLzOnMapClick_LessBuildUp");
+		[(localize "STR_TRGM2_transport_fnselectLzOnMapClick_LessBuildUp")] call TREND_fnc_notify;
 	} else {
 		call _resetMapState;
 		[_safeLandingZonePosition, _vehicle, _isPickup] spawn TREND_fnc_flyToLZ;

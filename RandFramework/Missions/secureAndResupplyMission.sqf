@@ -135,15 +135,17 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         sleep 10;
 
         { hint(format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]); } remoteExec["call", 0];
-        [time + 300] spawn {
-            _endTime = _this select 0;
+        [300, _iTaskIndex] spawn {
+            params ["_duration", "_taskIndex"];
+			_endTime = _duration + time;
             while {_endTime - time >= 0} do {
                 _color = "#45f442";//green
                 _timeLeft = _endTime - time;
                 if (_timeLeft < 16) then {_color = "#eef441";};//yellow
                 if (_timeLeft < 6) then {_color = "#ff0000";};//red
                 if (_timeLeft < 0) exitWith {};
-                [parseText format ["Time Until Supplies Drop:<br/><t color='%1'>--- %2 ---</t>", _color, [(_timeLeft/3600),"HH:MM:SS"] call BIS_fnc_timeToString]] remoteExec ["hintSilent"];
+                _content = parseText format ["Time Until Supplies Drop: <t color='%1'>--- %2 ---</t>", _color, [(_timeLeft/3600),"HH:MM:SS"] call BIS_fnc_timeToString];
+                [[_content, _duration + 1, _taskIndex, _taskIndex], {_this spawn TREND_fnc_handleNotification}] remoteExec ["call"]; // After the first run, this will only update the text for the notification with index = _taskIndex
             };
         };
         sleep 300; //wait 5 mins before supply drop in area
@@ -244,15 +246,17 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         sleep 10;
 
         { hint(format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]); } remoteExec["call", 0];
-        [time + 300] spawn {
-            _endTime = _this select 0;
+        [300, _iTaskIndex] spawn {
+            params ["_duration", "_taskIndex"];
+			_endTime = _duration + time;
             while {_endTime - time >= 0} do {
                 _color = "#45f442";//green
                 _timeLeft = _endTime - time;
                 if (_timeLeft < 16) then {_color = "#eef441";};//yellow
                 if (_timeLeft < 6) then {_color = "#ff0000";};//red
                 if (_timeLeft < 0) exitWith {};
-                [parseText format ["Time Until Supplies Drop:<br/><t color='%1'>--- %2 ---</t>", _color, [(_timeLeft/3600),"HH:MM:SS"] call BIS_fnc_timeToString]] remoteExec ["hintSilent"];
+                _content = parseText format ["Time Until Supplies Drop: <t color='%1'>--- %2 ---</t>", _color, [(_timeLeft/3600),"HH:MM:SS"] call BIS_fnc_timeToString];
+                [[_content, _duration + 1, _taskIndex, _taskIndex], {_this spawn TREND_fnc_handleNotification}] remoteExec ["call"]; // After the first run, this will only update the text for the notification with index = _taskIndex
             };
         };
         sleep 300; //wait 5 mins before supply drop in area
@@ -347,7 +351,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
     _sTaskCheck = format["missionNamespace getVariable ['SupplyDropped_%1', 0] == 2 && !(['InfSide%1'] call FHQ_fnc_ttAreTasksCompleted)", _iTaskIndex];
 
     if (!_bCreateTask) then {
-        _sTaskComplete = format["[1, 'Area Cleared'] spawn TREND_fnc_AdjustMaxBadPoints; Hint ('Area Cleared, Rep increased'); TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1 ] call BIS_fnc_nearestPosition); publicVariable 'TREND_ClearedPositions';", _iTaskIndex];
+        _sTaskComplete = format["[1, 'Area Cleared'] spawn TREND_fnc_AdjustMaxBadPoints; [('Area Cleared, Rep increased')] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1 ] call BIS_fnc_nearestPosition); publicVariable 'TREND_ClearedPositions';", _iTaskIndex];
         _customTaskClear setTriggerStatements[_sTaskCheck, _sTaskComplete, ""];
     }
     else {

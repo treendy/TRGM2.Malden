@@ -14,7 +14,7 @@ fnc_AddToDirection = {
 	params ["_origDirection","_addToDirection"];
 
 	_iResult = _origDirection + _addToDirection;
-	//hint format["result:%1",_iResult];
+	//[format["result:%1",_iResult]] call TREND_fnc_notify;
 	//sleep 2;
 	if (_iResult > 360) then {
 		_iResult = _iResult - 360;
@@ -79,7 +79,7 @@ if (count _nearestRoads > 0) then {
 				_iAttemptLimit = _iAttemptLimit - 1;
 			};
 		};
-	//hint format["A: %1 - %2",_iteration,_eventLocationPos];
+	//[format["A: %1 - %2",_iteration,_eventLocationPos]] call TREND_fnc_notify;
 		if (_PosFound) then {
 
 
@@ -145,11 +145,11 @@ if (count _nearestRoads > 0) then {
 					_thisPlayer = _this select 1;
 					_bIsTrap = (_this select 3) select 0;
 					if (_thisPlayer getVariable "unitrole" != "Engineer" && random 1 < .60) then {
-						hint localize "STR_TRGM2_IEDSearchFailed";
+						[localize "STR_TRGM2_IEDSearchFailed"] call TREND_fnc_notify;
 					}
 					else {
 						if (_bIsTrap) then {
-							hint localize "STR_TRGM2_IEDSearchFound";
+							[localize "STR_TRGM2_IEDSearchFound"] call TREND_fnc_notify;
 							[
 								_thisVeh,											// Object the action is attached to
 								localize "STR_TRGM2_IEDDefuse",										// Title of the action
@@ -164,7 +164,7 @@ if (count _nearestRoads > 0) then {
 									_thisPlayer = _this select 1;
 									_bIsTrap = (_this select 3) select 0;
 									if (_thisPlayer getVariable "unitrole" != "Engineer" && random 1 < .25) then {
-										hint localize "STR_TRGM2_IEDOhOh";
+										[localize "STR_TRGM2_IEDOhOh"] call TREND_fnc_notify;
 										sleep 1;
 										playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_thisVeh,false,getPosASL _thisVeh,0.5,1.5,0];
 										sleep 0.6;
@@ -205,7 +205,7 @@ if (count _nearestRoads > 0) then {
 							] remoteExec ["BIS_fnc_holdActionAdd", 0, _thisVeh];	// MP compatible implementation
 						}
 						else {
-							hint localize "STR_TRGM2_IEDNoneFound";
+							[localize "STR_TRGM2_IEDNoneFound"] call TREND_fnc_notify;
 						};
 					}
 				},				// Code executed on completion

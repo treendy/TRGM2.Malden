@@ -15,16 +15,16 @@ if (isMultiplayer) then {
 	};
 
 	if (_bSLAlive && str(player) != "sl") then {
-		hint (localize "STR_TRGM2_attemptendmission_Kilo1");
+		[(localize "STR_TRGM2_attemptendmission_Kilo1")] call TREND_fnc_notify;
 		_bAllow = false;
 	};
 
 	if (!_bSLAlive && _bK1_1Alive && str(player) != "k2_1") then {
-		hint (localize "STR_TRGM2_attemptendmission_Kilo2");
+		[(localize "STR_TRGM2_attemptendmission_Kilo2")] call TREND_fnc_notify;
 		_bAllow = false;
 	};
 	if (!_bSLAlive && !_bK1_1Alive && (leader (group player))!=player) then {
-			hint (localize "STR_TRGM2_attemptendmission_Kilo1");
+			[(localize "STR_TRGM2_attemptendmission_Kilo1")] call TREND_fnc_notify;
 			_bAllow = false;
 	};
 
@@ -49,7 +49,7 @@ if (_bAllow) then {
 	} foreach waypoints group _escortPilot;
 	sleep 0.2;
 	[] remoteExec ["TREND_fnc_StartMission",0,true];
-	//hint (localize "STR_TRGM2_attemptendmission_Ending");
+	//[(localize "STR_TRGM2_attemptendmission_Ending")] call TREND_fnc_notify;
 	//[] spawn TREND_fnc_endMission;
 };
 

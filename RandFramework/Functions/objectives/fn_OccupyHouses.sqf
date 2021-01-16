@@ -20,7 +20,7 @@ if (!_bThisMissionCivsOnly) then {
 			//if ((_randBuilding distance getMarkerPos "mrkHQ") > TREND_BaseAreaRange) then { //"mrkHQ", TREND_BaseAreaRange
 
 				TREND_OccupiedHousesPos = TREND_OccupiedHousesPos + [_randBuildingPos];
-				//hint format["test:%1",(_randBuilding distance getMarkerPos "mrkHQ")];
+				//[format["test:%1",(_randBuilding distance getMarkerPos "mrkHQ")]] call TREND_fnc_notify;
 				//sleep 1;
 
 				_thisGroup = nil;
@@ -30,7 +30,7 @@ if (!_bThisMissionCivsOnly) then {
 				//HERE!!!! copy and paste the zen init script into a placed unig, then run and see if he is in building!!! (esc out of TRGM dialog)
 				//(call sRiflemanToUse) createUnit [position _randBuilding, _thisGroup, "[getPosATL this, units group this, 10, false, false] spawn TREND_fnc_Zen_OccupyHouse;"];
 
-				_teamLeaderUnit = _thisGroup createUnit [(call sRiflemanToUse),_randBuildingPos,[],0,"NONE"];
+				_teamLeaderUnit = _thisGroup createUnit [(call sTeamleaderToUse),_randBuildingPos,[],0,"NONE"];
 				[_randBuildingPos, units group _teamLeaderUnit, -1, true, false,true] spawn TREND_fnc_Zen_OccupyHouse;
 
 				_iCountNoOfCPs = selectRandom[0,0,0,0,1];  //number of checkpoints (so high chance of not being any, or one may be near an occupied building)

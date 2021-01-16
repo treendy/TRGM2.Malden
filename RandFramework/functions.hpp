@@ -3,6 +3,8 @@ class TREND {
     class logging {
         file = "RandFramework\Functions\logging";
         class log {};
+        class notify {};
+        class notifyGlobal {};
     };
 
     class init {
@@ -21,12 +23,15 @@ class TREND {
 
     class init_player {
         file = "RandFramework\Functions\init_player";
+        class checkKilledRange {};
+        class drawKilledRanges {};
         class GeneralPlayerLoop {};
         class InSafeZone {};
         class introCamera {};
         class MissionOverAnimation {};
         class MissionSelectLoop {};
         class OnlyAllowDirectMapDraw {};
+        class setNVG {};
         class startingMove {};
     };
 
@@ -86,7 +91,11 @@ class TREND {
     class gui {
         file = "RandFramework\GUI";
         class codeCompare{};
+        class createNotification{};
+        class deleteNotification{};
         class downloadData{};
+        class handleNotification{};
+        class initNotifications {};
         class MissionTypeSelection{};
         class openDialogAdvancedMissionSettings{};
         class openDialogEnemyFaction{};

@@ -47,19 +47,19 @@ if (_SaveVersion != "") then {
 	TREND_laptop1 remoteExec ["removeAllActions"];
 
 	if (TREND_SaveType == 1) then {
-		if (_IsFirstSave) then {hint (localize "STR_TRGM2_ServerSave_Save1");};
-		[TREND_laptop1, [localize "STR_TRGM2_ServerSave_SaveLocal",{hint (localize "STR_TRGM2_ServerSave_SaveHint")}]] remoteExec ["addAction", 0];
+		if (_IsFirstSave) then {[(localize "STR_TRGM2_ServerSave_Save1")] call TREND_fnc_notify;};
+		[TREND_laptop1, [localize "STR_TRGM2_ServerSave_SaveLocal",{[(localize "STR_TRGM2_ServerSave_SaveHint")] call TREND_fnc_notify}]] remoteExec ["addAction", 0];
 
 	}
 	else {
-		if (_IsFirstSave) then {hint (localize "STR_TRGM2_ServerSave_Save2");};
-		TREND_laptop1 addAction [localize "STR_TRGM2_ServerSave_SaveGlobal",{hint (localize "STR_TRGM2_ServerSave_SaveHint")}];
+		if (_IsFirstSave) then {[(localize "STR_TRGM2_ServerSave_Save2")] call TREND_fnc_notify;};
+		TREND_laptop1 addAction [localize "STR_TRGM2_ServerSave_SaveGlobal",{[(localize "STR_TRGM2_ServerSave_SaveHint")] call TREND_fnc_notify}];
 	};
 
 	true;
 }
 else {
-	hint (localize "STR_TRGM2_ServerSave_SaveError");
+	[(localize "STR_TRGM2_ServerSave_SaveError")] call TREND_fnc_notify;
 	false;
 };
 

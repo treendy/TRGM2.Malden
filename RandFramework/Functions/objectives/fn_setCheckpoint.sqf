@@ -23,7 +23,7 @@ fnc_AddToDirection = {
 	params ["_origDirection","_addToDirection"];
 
 	_iResult = _origDirection + _addToDirection;
-	//hint format["result:%1",_iResult];
+	//[format["result:%1",_iResult]] call TREND_fnc_notify;
 	//sleep 2;
 	if (_iResult > 360) then {
 		_iResult = _iResult - 360;
@@ -53,7 +53,7 @@ _roadConnectedTo = nil;
 
 _connectedRoad = nil;
 _direction = nil;
-//hint "2";
+//["2"] call TREND_fnc_notify;
 //sleep 1;
 
 _PosFound = false;
@@ -100,7 +100,7 @@ if (_thisRoadOnly) then {
 
 
 
-			//hint format["AOAwayDir:%1 - dir1:%2 - dir2:%3  \nDif1:%4 - dif2:%5",_generalDirection,_direction1,_direction2,_dif1,_dif2];
+			//[format["AOAwayDir:%1 - dir1:%2 - dir2:%3  \nDif1:%4 - dif2:%5",_generalDirection,_direction1,_direction2,_dif1,_dif2]] call TREND_fnc_notify;
 			//sleep 5;
 
 
@@ -115,7 +115,7 @@ if (_thisRoadOnly) then {
 		}
 		else {
 			//run loop again
-			//Hint "Too many roads";
+			//["Too many roads"] call TREND_fnc_notify;
 
 			_iAttemptLimit = _iAttemptLimit - 1;
 		};
@@ -135,7 +135,7 @@ if (!_thisRoadOnly || !_PosFound) then {
 	};
 	_direction = ([_generalDirection,_dirAdd] call fnc_AddToDirection);
 	_PosFound = true;
-	//hint format["DIR:%1",_direction];
+	//[format["DIR:%1",_direction]] call TREND_fnc_notify;
 	//sleep 3;
 };
 
@@ -202,7 +202,7 @@ if (_PosFound) then {
 
 	_nearestHouseObjectDist = (nearestObject [_roadBlockSidePos, "building"]) distance _roadBlockSidePos;
 	//_nearestWallObjectDist = (nearestObject [_roadBlockSidePos, "wall"]) distance _roadBlockSidePos;
-	//hint format["nearestWallObjectDist: %1",_nearestHouseObjectDist];
+	//[format["nearestWallObjectDist: %1",_nearestHouseObjectDist]] call TREND_fnc_notify;
 	//sleep 2;
 	if (_nearestHouseObjectDist < 10) then {
 		_iBarricadeType = "FULL"; //if slope too much, then bunker and other barricades on side of road will have gap on one side
@@ -337,7 +337,7 @@ if (_PosFound) then {
 	doStop [_guardUnit1];
 	_guardUnit1 setDir (_direction);
  	if (_AllowAnimation) then {[_guardUnit1,"WATCH","ASIS"] call BIS_fnc_ambientAnimCombat;};
-	//hint "HMM2";
+	//["HMM2"] call TREND_fnc_notify;
 	if (random 1 < .66) then {
 		_sUnitType = selectRandom _thisUnitTypes;
 		_guardUnit2 = _group createUnit [_sUnitType,_pos2,[],0,"NONE"];

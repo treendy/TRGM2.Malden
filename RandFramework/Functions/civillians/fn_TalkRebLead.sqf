@@ -19,7 +19,7 @@ if (side _caller == west) then {
 
 	}
 	else {
-		hint "This guy doesnt seem to want to speak much in his current state!!!"
+		["This guy doesnt seem to want to speak much in his current state!!!"] call TREND_fnc_notify;
 	};
 };
 

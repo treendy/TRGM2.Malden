@@ -27,7 +27,7 @@ if (side _caller == west) then {
 		}
 		else {
 			//fail task
-			hint "He is dead you muppet!";
+			["He is dead you muppet!"] call TREND_fnc_notify;
 			//TREND_badPoints = TREND_badPoints + 10;
 			//publicVariable "TREND_badPoints";
 			//[format["InfSide%1",_iSelected], "failed"] call FHQ_fnc_ttsetTaskState;
@@ -38,7 +38,7 @@ if (side _caller == west) then {
 	else {
 		_searchChance = [true,false,false,false];
 
-		hint "Map updated with intel found";
+		["Map updated with intel found"] call TREND_fnc_notify;
 
 
 		if (alive _thisCiv) then {
@@ -62,7 +62,7 @@ if (side _caller == west) then {
 					sleep 2;
 					[TREND_IntelShownType,"IntOfficer"] spawn TREND_fnc_showIntel;
 				} else {
-					hint (localize "STR_TRGM2_interrogateOfficer_DeadGuy")
+					[(localize "STR_TRGM2_interrogateOfficer_DeadGuy")] call TREND_fnc_notify;
 				};
 			};
 		};

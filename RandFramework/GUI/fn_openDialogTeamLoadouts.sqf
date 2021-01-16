@@ -45,7 +45,7 @@ if (!isNull (findDisplay 6000)) then {
 	//publicVariable "TREND_iMissionParamType";
 };
 
-//hint "opening 2dialogA";
+//["opening 2dialogA"] call TREND_fnc_notify;
 
 closedialog 0;
 

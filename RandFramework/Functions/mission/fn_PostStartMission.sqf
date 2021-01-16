@@ -21,11 +21,11 @@ if (_bMoveToAO) then {
 }
 else {
 	/*TREND_fnc_PopulateLoadingWait = {
-		Hint "Populating AO please wait...";
+		["Populating AO please wait..."] call TREND_fnc_notify;
 		_percentage = 0;
 		while {_percentage < 100} do {
 			[format["Populating AO please wait... Percentage: %1", _percentage]] remoteExecCall ["Hint", 0];
-			//Hint format["Populating AO please wait... %1 %", _percentage];
+			//[format["Populating AO please wait... %1 %", _percentage]] call TREND_fnc_notify;
 			_percentage = _percentage + 1;
 			sleep 0.2;
 		};

@@ -22,6 +22,6 @@ if (side _caller == west) then {
 		[sName, "succeeded"] remoteExec ["FHQ_fnc_ttsetTaskState", 0];
 	}
 	else {
-		hint (localize "STR_TRGM2_IdentifyHVT_Confirmed");
+		[(localize "STR_TRGM2_IdentifyHVT_Confirmed")] call TREND_fnc_notify;
 	};
 };

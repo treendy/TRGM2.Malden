@@ -15,14 +15,14 @@ if (side player == west) then {
 
 
 	if (_FoundViaType == "CommsTower") then {
-		hint (localize "STR_TRGM2_PickingUpComms");
+		[(localize "STR_TRGM2_PickingUpComms")] call TREND_fnc_notify;
 		sleep 4;
 	};
 
 
 
 	if (_IntelToShow == 0) then { //Nothing found
-		hint (localize "STR_TRGM2_showIntel_NoIntel");
+		[(localize "STR_TRGM2_showIntel_NoIntel")] call TREND_fnc_notify;
 	}
 	else {
 		TREND_IntelFound pushBack _IntelToShow;
@@ -44,10 +44,10 @@ if (side player == west) then {
 				_test setMarkerType "o_art";
 				_test setMarkerText "Mortar";
 			} forEach TREND_TempIntelShowPos;
-			Hint (localize "STR_TRGM2_showIntel_MortarMapUpdated");
+			[(localize "STR_TRGM2_showIntel_MortarMapUpdated")] call TREND_fnc_notify;
 		}
 		else {
-			Hint (localize "STR_TRGM2_showIntel_MortarMapNoUpdate");
+			[(localize "STR_TRGM2_showIntel_MortarMapNoUpdate")] call TREND_fnc_notify;
 		};
 	};
 	if (_IntelToShow == 2) then { //AAA team location
@@ -67,10 +67,10 @@ if (side player == west) then {
 				_test setMarkerText (localize "STR_TRGM2_showIntel_AAAMarker");
 				_iStep = _iStep + 1;
 			} forEach TREND_TempIntelShowPos;
-			Hint (localize "STR_TRGM2_showIntel_AAAMapUpdated");
+			[(localize "STR_TRGM2_showIntel_AAAMapUpdated")] call TREND_fnc_notify;
 		}
 		else {
-			Hint (localize "STR_TRGM2_showIntel_AAAMapNoUpdate");
+			[(localize "STR_TRGM2_showIntel_AAAMapNoUpdate")] call TREND_fnc_notify;
 		};
 	};
 	if (_IntelToShow == 3) then { //Comms tower location
@@ -80,10 +80,10 @@ if (side player == west) then {
 			_test setMarkerShape "ICON";
 			_test setMarkerType "mil_destroy";
 			_test setMarkerText (localize "STR_TRGM2_showIntel_CommsTowerMarker");
-		  Hint (localize "STR_TRGM2_showIntel_CommsTowerMapUpdated");
+		  [(localize "STR_TRGM2_showIntel_CommsTowerMapUpdated")] call TREND_fnc_notify;
 		}
 		else {
-			Hint (localize "STR_TRGM2_showIntel_CommsTowerMapNoUpdate");
+			[(localize "STR_TRGM2_showIntel_CommsTowerMapNoUpdate")] call TREND_fnc_notify;
 		};
 	};
 	if (_IntelToShow == 4) then { //All checkpoints
@@ -101,16 +101,16 @@ if (side player == west) then {
 			};
 		} forEach TREND_CheckPointAreas;
 		if (_bFoundcheckpoints) then {
-			Hint (localize "STR_TRGM2_showIntel_CheckpointMapUpdated");
+			[(localize "STR_TRGM2_showIntel_CheckpointMapUpdated")] call TREND_fnc_notify;
 		}
 		else {
-			hint (localize "STR_TRGM2_showIntel_CheckpointMapNoUpdate");
+			[(localize "STR_TRGM2_showIntel_CheckpointMapNoUpdate")] call TREND_fnc_notify;
 		};
 
 	};
 	if (_IntelToShow == 5) then { //AT Mine field
 		if (count TREND_ATFieldPos == 0) then {
-			Hint (localize "STR_TRGM2_showIntel_NoATArea");
+			[(localize "STR_TRGM2_showIntel_NoATArea")] call TREND_fnc_notify;
 		}
 		else {
 			{
@@ -119,7 +119,7 @@ if (side player == west) then {
 				_test setMarkerShape "ICON";
 				_test setMarkerType "mil_warning";
 				_test setMarkerText (localize "STR_TRGM2_showIntel_ATAreaMarker");
-				Hint (localize "STR_TRGM2_showIntel_ATArea");
+				[(localize "STR_TRGM2_showIntel_ATArea")] call TREND_fnc_notify;
 			} forEach TREND_ATFieldPos;
 		};
 	};

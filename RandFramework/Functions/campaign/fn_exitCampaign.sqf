@@ -13,16 +13,16 @@ if (isMultiplayer) then {
 	};
 
 	if (_bSLAlive && str(player) != "sl") then {
-		hint (localize "STR_TRGM2_attemptendmission_Kilo1");
+		[(localize "STR_TRGM2_attemptendmission_Kilo1")] call TREND_fnc_notify;
 		_bAllow = false;
 	};
 
 	if (!_bSLAlive && _bK1_1Alive && str(player) != "k2_1") then {
-		hint (localize "STR_TRGM2_attemptendmission_Kilo2");
+		[(localize "STR_TRGM2_attemptendmission_Kilo2")] call TREND_fnc_notify;
 		_bAllow = false;
 	};
 	if (!_bSLAlive && !_bK1_1Alive && (leader (group player))!=player) then {
-			hint (localize "STR_TRGM2_attemptendmission_Kilo1");
+			[(localize "STR_TRGM2_attemptendmission_Kilo1")] call TREND_fnc_notify;
 			_bAllow = false;
 	};
 };
@@ -38,12 +38,12 @@ if (_bAllow) then {
 	};
 
 	if (bAllAtBase2) then {
-		Hint (localize "STR_TRGM2_exitCampaign_RepSaaved");
+		[(localize "STR_TRGM2_exitCampaign_RepSaaved")] call TREND_fnc_notify;
 		["end4", true, 7] remoteExec ["BIS_fnc_endMission"];
 		bAttemptedEnd = false; publicVariable "bAttemptedEnd";
 	}
 	else {
-		Hint (localize "STR_TRGM2_exitCampaign_CampaignSaaved");
+		[(localize "STR_TRGM2_exitCampaign_CampaignSaaved")] call TREND_fnc_notify;
 	};
 };
 

@@ -297,7 +297,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 		TREND_MainIsHidden =  false; publicVariable "TREND_MainIsHidden";
 	};
 
-	//hint "c";
+	//["c"] call TREND_fnc_notify;
 	["Mission Setup: 12", true] call TREND_fnc_log;
 
 	TREND_InfTaskStarted =  true; publicVariable "TREND_InfTaskStarted";
@@ -427,10 +427,10 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 			_bNewTaskSetup = true;
 		};
 		case 99999: {
-			//hint format["pre: %1",_RequiresNearbyRoad]; sleep 2;
+			//[format["pre: %1",_RequiresNearbyRoad]] call TREND_fnc_notify; sleep 2;
 			//#include "..\..\CustomMission\customMission.sqf"; //Custom Mission
 			//call fnc_CustomVars;
-			//hint format["post: %1",_RequiresNearbyRoad]; sleep 2;
+			//[format["post: %1",_RequiresNearbyRoad]] call TREND_fnc_notify; sleep 2;
 		};
 		default { };
 	};
@@ -465,21 +465,21 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 				_randInfor1X = TREND_Mission1Loc select 0;
 				_randInfor1Y = TREND_Mission1Loc select 1;
 				_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], TREND_BasicBuildings, 50*_attempts] select {!((_x buildingPos -1) isEqualTo [])};
-				if (_attempts > 100) then {hint format["Still no location found after %1 attempts!",_attempts]}
+				if (_attempts > 100) then {[format["Still no location found after %1 attempts!",_attempts]] call TREND_fnc_notify;}
 			};
 
 			if (_iTaskIndex == 1 && {!_bIsCampaign && {!(isNil "TREND_Mission2Loc")}}) then {
 				_randInfor1X = TREND_Mission2Loc select 0;
 				_randInfor1Y = TREND_Mission2Loc select 1;
 				_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], TREND_BasicBuildings, 50*_attempts] select {!((_x buildingPos -1) isEqualTo [])};
-				if (_attempts > 100) then {hint format["Still no location found after %1 attempts!",_attempts]}
+				if (_attempts > 100) then {[format["Still no location found after %1 attempts!",_attempts]] call TREND_fnc_notify;}
 			};
 
 			if (_iTaskIndex == 2 && {!_bIsCampaign && {!(isNil "TREND_Mission3Loc")}}) then {
 				_randInfor1X = TREND_Mission3Loc select 0;
 				_randInfor1Y = TREND_Mission3Loc select 1;
 				_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], TREND_BasicBuildings, 50*_attempts] select {!((_x buildingPos -1) isEqualTo [])};
-				if (_attempts > 100) then {hint format["Still no location found after %1 attempts!",_attempts]}
+				if (_attempts > 100) then {[format["Still no location found after %1 attempts!",_attempts]] call TREND_fnc_notify;}
 			};
 		};
 
@@ -625,7 +625,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 						};
 					};
 
-					//hint _sTaskDescription;
+					//[_sTaskDescription] call TREND_fnc_notify;
 
 					if (_bCreateTask) then {
 						if (_bIsCampaign) then {
@@ -687,7 +687,7 @@ if (TREND_iMissionParamType == 5) then {
 
 	}
 	else {
-		_trgComplete setTriggerStatements ["TREND_ActiveTasks call FHQ_fnc_ttAreTasksCompleted;", "hint (localize ""STR_TRGM2_startInfMission_RTBNextMission""); [""MISSION_COMPLETE""] remoteExec [""TREND_fnc_SetMissionBoardOptions"",0,true]; if (TREND_ActiveTasks call FHQ_fnc_ttAreTasksSuccessful) then {[1, format[localize ""STR_TRGM2_startInfMission_DayComplete"",str(TREND_iCampaignDay)]] spawn TREND_fnc_AdjustMaxBadPoints}; deletevehicle thisTrigger", ""];
+		_trgComplete setTriggerStatements ["TREND_ActiveTasks call FHQ_fnc_ttAreTasksCompleted;", "[(localize ""STR_TRGM2_startInfMission_RTBNextMission"")] call TREND_fnc_notify; [""MISSION_COMPLETE""] remoteExec [""TREND_fnc_SetMissionBoardOptions"",0,true]; if (TREND_ActiveTasks call FHQ_fnc_ttAreTasksSuccessful) then {[1, format[localize ""STR_TRGM2_startInfMission_DayComplete"",str(TREND_iCampaignDay)]] spawn TREND_fnc_AdjustMaxBadPoints}; deletevehicle thisTrigger", ""];
 	};
 	//TESTTEST = triggerStatements _trgComplete;
 }
@@ -723,15 +723,15 @@ else {
 
 
 TREND_fnc_PopulateLoadingWait = {
-	hintSilent "Populating AO please wait...";
-	_percentage = 0;
-	while {_percentage < 100} do {
-		[format["Populating AO please wait... %1 percent", _percentage]] remoteExecCall ["hintSilent", 0];
-		//Hint format["Populating AO please wait... %1 %", _percentage];
-		_percentage = _percentage + 1;
+	TREND_PopulateLoadingWait_percentage = 0; publicVariable "TREND_PopulateLoadingWait_percentage";
+	while {TREND_PopulateLoadingWait_percentage < 100} do {
+		[format["Populating AO please wait... %1 percent", TREND_PopulateLoadingWait_percentage], {TREND_PopulateLoadingWait_percentage < 100}, 100] call TREND_fnc_notifyGlobal;
+		TREND_PopulateLoadingWait_percentage = TREND_PopulateLoadingWait_percentage + 1;
+		publicVariable "TREND_PopulateLoadingWait_percentage";
 		sleep 0.1;
 	};
-	[""] remoteExecCall ["Hint", 0];
+	sleep 10;
+	TREND_PopulateLoadingWait_percentage = nil; publicVariable "TREND_PopulateLoadingWait_percentage";
 	TREND_MissionLoaded =  true; publicVariable "TREND_MissionLoaded";
 };
 [] spawn TREND_fnc_PopulateLoadingWait;
@@ -743,7 +743,7 @@ TREND_fnc_PopulateLoadingWait = {
 
 publicVariable "TREND_debugMessages";
 
-hint (localize "STR_TRGM2_startInfMission_SoItBegin");
+[(localize "STR_TRGM2_startInfMission_SoItBegin")] call TREND_fnc_notify;
 
 ///*orangestest
 [] remoteExec ["TREND_fnc_animateAnimals",0,true];

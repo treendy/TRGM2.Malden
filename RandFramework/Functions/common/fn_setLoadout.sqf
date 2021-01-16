@@ -33,7 +33,7 @@ switch (side _unit) do {
 		if (count TREND_WestUAVOps > 0) then { _uavOps = TREND_WestUAVOps; } else { _uavOps = _riflemen; };
 	};
 	case EAST: {
-		if (count TREND_EastRiflemen > 0) then { _riflemen = TREND_EastRiflemen; } else { _riflemen = ["B_Soldier_F"]; };
+		if (count TREND_EastRiflemen > 0) then { _riflemen = TREND_EastRiflemen; } else { _riflemen = ["O_T_Soldier_F"]; };
 		if (count TREND_EastLeaders > 0) then { _leaders = TREND_EastLeaders; } else { _leaders = _riflemen; };
 		if (count TREND_EastATSoldiers > 0) then { _atsoldiers = TREND_EastATSoldiers; } else { _atsoldiers = _riflemen; };
 		if (count TREND_EastAASoldiers > 0) then { _aasoldiers = TREND_EastAASoldiers; } else { _aasoldiers = _riflemen; };
@@ -46,7 +46,7 @@ switch (side _unit) do {
 		if (count TREND_EastPilots > 0) then { _pilots = TREND_EastPilots; } else { _pilots = _riflemen; };
 	};
 	case INDEPENDENT: {
-		if (count TREND_GuerRiflemen > 0) then { _riflemen = TREND_GuerRiflemen; } else { _riflemen = ["B_Soldier_F"]; };
+		if (count TREND_GuerRiflemen > 0) then { _riflemen = TREND_GuerRiflemen; } else { _riflemen = ["I_G_Soldier_F"]; };
 		if (count TREND_GuerLeaders > 0) then { _leaders = TREND_GuerLeaders; } else { _leaders = _riflemen; };
 		if (count TREND_GuerATSoldiers > 0) then { _atsoldiers = TREND_GuerATSoldiers; } else { _atsoldiers = _riflemen; };
 		if (count TREND_GuerAASoldiers > 0) then { _aasoldiers = TREND_GuerAASoldiers; } else { _aasoldiers = _riflemen; };

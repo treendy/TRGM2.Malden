@@ -1,9 +1,9 @@
 /*
 
-Hint "Populating AO222 please wait...";
+["Populating AO222 please wait..."] call TREND_fnc_notify;
 _percentage = 0;
 while {_percentage < 100} do {
-	Hint format["Populating AO please wait... %1 %", _percentage];
+	[format["Populating AO please wait... %1 %", _percentage]] call TREND_fnc_notify;
 	_percentage = _percentage + 1;
 	sleep 0.2;
 };

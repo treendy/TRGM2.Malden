@@ -54,7 +54,7 @@ if (!isTouchingGround chopper2) then {
 	_escortFlyToWaypoint setWaypointStatements ["true", "(vehicle this) land 'LAND';"];
 };
 
-//hint str(_thisMission);
+//[str(_thisMission)] call TREND_fnc_notify;
 waitUntil {sleep 2; ((_vehicle distance2D _baseLZPos) < 300) || !(_thisMission call TREND_fnc_checkMissionIdActive)};
 if ( !(_thisMission call TREND_fnc_checkMissionIdActive)) then {
 	deleteVehicle _heliPad;

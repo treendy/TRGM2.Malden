@@ -174,7 +174,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			_trgKill setTriggerArea [0, 0, 0, false];
 			_trgKill setVariable ["DelMeOnNewCampaignDay",true];
 			if (!_bCreateTask) then {
-				_sKillTaskComplete = format["[1, %1] spawn TREND_fnc_AdjustMaxBadPoints; Hint %2; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%3] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", _repReasonOnComplete, _hintStrOnComplete, _iTaskIndex];
+				_sKillTaskComplete = format["[1, %1] spawn TREND_fnc_AdjustMaxBadPoints; [%2] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%3] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", _repReasonOnComplete, _hintStrOnComplete, _iTaskIndex];
 				_trgKill setTriggerStatements [format["!alive(%1)",_sInformant1Name], _sKillTaskComplete, ""];
 			}
 			else {

@@ -95,7 +95,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_sAliveCheck = format["!alive %1 && !alive %2 && !alive %3 && !([""InfSide%4""] call FHQ_fnc_ttAreTasksCompleted)",_sTargetName1,_sTargetName2,_sTargetName3,_iTaskIndex];
 
 	if (!_bCreateTask) then {
-		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Targets Destroyed""] spawn TREND_fnc_AdjustMaxBadPoints; Hint (""Targets Destroyed, Rep increased""); TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
+		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Targets Destroyed""] spawn TREND_fnc_AdjustMaxBadPoints; [(""Targets Destroyed, Rep increased"")] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
 	}
 	else {
 		_sTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";",_iTaskIndex];

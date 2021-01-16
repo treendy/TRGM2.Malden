@@ -27,7 +27,7 @@ if (isServer) then {
 		_AirVehicle = selectRandom (call EnemyAirScout);
 	};
 
-	//hint format ["AirType: %1",_AirVehicle];
+	//[format ["AirType: %1",_AirVehicle]] call TREND_fnc_notify;
 	sleep 1;
 
 	_airSup1Array = [call TREND_GetReinforceStartPos, 45, _AirVehicle, _groupp1] call Bis_fnc_spawnvehicle;
@@ -41,7 +41,7 @@ if (isServer) then {
 	_enemyAirSup1 setVariable [_sAirName, _enemyAirSup1, true];
 	missionNamespace setVariable [_sAirName, _enemyAirSup1];
 
-	//hint format ["_SpottedPos: %1",_SpottedPos];
+	//[format ["_SpottedPos: %1",_SpottedPos]] call TREND_fnc_notify;
 	sleep 1;
 
 	_iFlyRange = 1000;

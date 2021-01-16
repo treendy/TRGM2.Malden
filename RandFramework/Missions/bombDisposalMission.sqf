@@ -72,7 +72,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	[_objBomb1, [localize "STR_TRGM2_BombMissionReadSerialAction",{
 		_thisPlayer = _this select 1;
 		_bombSerialNumber = (_this select 3) select 0;
-		hint format[localize "STR_TRGM2_BombSerialNo",_bombSerialNumber];
+		[format[localize "STR_TRGM2_BombSerialNo",_bombSerialNumber]] call TREND_fnc_notify;
 	},[_bombSerialNumber]]]; remoteExec ["addAction", 0, true];
 
 
@@ -120,10 +120,10 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_missionBombWire = (_this select 3) select 1;
 		_missionBombCODE = (_this select 3) select 2;
 		if (alive _thisInformant) then {
-			hint format[localize "STR_TRGM2_BombNiceToMeet",name(_thisPlayer),_bombSerialNumber,_missionBombWire,_missionBombCODE];
+			[format[localize "STR_TRGM2_BombNiceToMeet",name(_thisPlayer),_bombSerialNumber,_missionBombWire,_missionBombCODE]] call TREND_fnc_notify;
 		}
 		else{
-			hint format[localize "STR_TRGM2_BombPsst",name(_thisPlayer)];
+			[format[localize "STR_TRGM2_BombPsst",name(_thisPlayer)]] call TREND_fnc_notify;
 		};
 	},[_bombSerialNumber,_missionBombWire,_missionBombCODE]]] remoteExec ["addAction", 0, true];
 
@@ -164,7 +164,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_sAliveCheck = format["%1 getVariable ['isDefused',false] && !([""InfSide%2""] call FHQ_fnc_ttAreTasksCompleted)",_sBomb1Name,_iTaskIndex];
 
 	if (!_bCreateTask) then {
-		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Defused Bomb""] spawn TREND_fnc_AdjustMaxBadPoints; Hint (""Defused IEDs, Rep increased""); TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objBomb" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
+		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Defused Bomb""] spawn TREND_fnc_AdjustMaxBadPoints; [(""Defused IEDs, Rep increased"")] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objBomb" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
 	}
 	else {
 		_sFailCheck = format["!alive %1 && !([""InfSide%2""] call FHQ_fnc_ttAreTasksCompleted)",_sBomb1Name,_iTaskIndex];

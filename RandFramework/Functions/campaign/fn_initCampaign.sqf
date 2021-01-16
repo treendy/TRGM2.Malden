@@ -28,8 +28,4 @@ else {
 
 TREND_CampaignInitiated =  true; publicVariable "TREND_CampaignInitiated";
 
-//hint "go to the board to get started"
-
-
-
 true;

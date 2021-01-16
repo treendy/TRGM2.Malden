@@ -19,11 +19,11 @@ if (side _caller == west) then {
 	if (_bCreateTask) then {
 		sName = format["InfSide%1",_iSelected];
 		[sName, "succeeded"] remoteExec ["FHQ_fnc_ttsetTaskState", 0, true];
-		//hint format["c:%1",str(_iSelected)];
+		//[format["c:%1",str(_iSelected)]] call TREND_fnc_notify;
 
 	}
 	else {
-		hint "HQ are listening in, stand by...";
+		["HQ are listening in, stand by..."] call TREND_fnc_notify;
 		sleep 10;
 		for [{private _i = 0;}, {_i < 3;}, {_i = _i + 1;}] do {
 			if (getMarkerType format["mrkMainObjective%1", _i] == "empty") then {

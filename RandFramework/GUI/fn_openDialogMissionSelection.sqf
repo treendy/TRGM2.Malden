@@ -145,7 +145,7 @@ if (TREND_ForceMissionSetup) then {
 else {
 	createDialog "Trend_DialogSetupParams";
 	waitUntil {!isNull (findDisplay 5000);};
-	//hint "opening 2dialogB";
+	//["opening 2dialogB"] call TREND_fnc_notify;
 
 	_ctrlItem = (findDisplay 5000) displayCtrl 5500;
 	_optionItem = TREND_MissionParamTypes;

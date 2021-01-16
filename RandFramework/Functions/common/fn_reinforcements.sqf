@@ -77,7 +77,7 @@ private ["_ranGrp","_helo","_infgrp"];
 //Debug output of the passed arguments
 if (_debugMode) then {
 	sleep 1;
-	hint format ["Debug mode is enabled %1 (SP ONLY!!). Mapclick teleport, invincibility and marker tracking are enabled.", name player];
+	[format ["Debug mode is enabled %1 (SP ONLY!!). Mapclick teleport, invincibility and marker tracking are enabled.", name player]] call TREND_fnc_notify;
 	player globalChat format ["Side: %1", _side];
 	player globalChat format ["Spawn Position: %1 ", _spawnMrk];
 	player globalChat format ["Landing Zone: %1", _LZMrk];
@@ -246,9 +246,9 @@ if (!_paraDrop) then {
 	_heloWp setWaypointCombatMode "BLUE";
 	_heloWp setWaypointSpeed "FULL";
 	if (_spawnMrk select 2 == 0) then {
-		//_heloWp setWaypointStatements ["true", "hint ""hmmmm""; {this spawn {unAssignVehicle _x; _x action [""eject"", vehicle _x]; sleep 0.5;} forEach crew vehicle _this;"}];
+		//_heloWp setWaypointStatements ["true", "[""hmmmm""] call TREND_fnc_notify; {this spawn {unAssignVehicle _x; _x action [""eject"", vehicle _x]; sleep 0.5;} forEach crew vehicle _this;"}];
 		_heloWp setWaypointStatements ["true", "{unAssignVehicle _x; _x action [""eject"", vehicle _x]; sleep 0.5;} forEach crew vehicle this;"];
-		//_heloWp setWaypointStatements ["true", "hint ""hmmmm""; {unAssignVehicle _x; _x action [""eject"", vehicle _x]; sleep 0.5;} forEach crew vehicle this;"];
+		//_heloWp setWaypointStatements ["true", "[""hmmmm""] call TREND_fnc_notify; {unAssignVehicle _x; _x action [""eject"", vehicle _x]; sleep 0.5;} forEach crew vehicle this;"];
 	}
 	else {
 		_heloWp setWaypointStatements ["true", "(vehicle this) LAND 'LAND';"];
@@ -258,18 +258,18 @@ if (!_paraDrop) then {
 	//wait until the helicopter is touching the ground before ejecting the cargo
 
 	if (_spawnMrk select 2 == 0) then {
-		//hint format["test3: %1 - %2",currentWaypoint _infgrp,fuel _helo];
+		//[format["test3: %1 - %2",currentWaypoint _infgrp,fuel _helo]] call TREND_fnc_notify;
 
 		//waitUntil {fuel _helo == 0};
 
-		//hint "test2";
+		//["test2"] call TREND_fnc_notify;
 	}
 	else {
 		waitUntil {sleep 2; isTouchingGround (_helo select 0) || {!canMove (_helo select 0)}};
 		{unAssignVehicle _x; _x action ["eject", vehicle _x]; sleep 0.5;} forEach units _infgrp; //Eject the cargo
 	};
 
-	//hint "a";
+	//["a"] call TREND_fnc_notify;
 	//wait Until the infantry group is no longer in the helicopter before assigning a new WP to the helicopter
 	waitUntil {sleep 2; {!alive _x || !(_x in (_helo select 0))} count (units _infGrp) == count (units _infGrp)};
 		if (_debugMode) then {player globalChat format ["Helo Cargo Count: %1", {alive _x && (_x in (_helo select 0))} count (units _infGrp)];};
@@ -280,7 +280,7 @@ if (!_paraDrop) then {
 			_heloWp setWaypointSpeed "FULL";
 			_heloWp setWaypointStatements ["true", "{deleteVehicle _x;} forEach crew (vehicle this) + [vehicle this];"];
 
-	//hint "b";
+	//["b"] call TREND_fnc_notify;
 
 } else {
 

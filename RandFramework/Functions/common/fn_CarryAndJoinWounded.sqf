@@ -25,7 +25,7 @@ if (alive _civ) then {
 */
 	//_civ switchMove "";
 	//sleep 0.1;
-	//hint "AAAAA";
+	//["AAAAA"] call TREND_fnc_notify;
 	disableUserInput true;
 	_pos = _player ModelToWorld [0,1.8,0];
 	_civ setPos _pos;
@@ -107,7 +107,7 @@ if (alive _civ) then {
 			_player removeAction _loadIndex;
 		}
 		else {
-			hint "No vehicle near"
+			["No vehicle near"] call TREND_fnc_notify;
 		};
 	},nil,9];
 	_player setVariable ["loadActionIndex",_iLoadActionIndex];
@@ -117,7 +117,7 @@ if (alive _civ) then {
 
 }
 else {
-	hint "It's too late. this guy is dead";
+	["It's too late. this guy is dead"] call TREND_fnc_notify;
 };
 
 true;

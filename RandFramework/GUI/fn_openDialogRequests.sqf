@@ -111,7 +111,7 @@ _btnSelectUnit ctrlAddEventHandler ["ButtonClick", {
 				_tombStone = selectRandom TREND_TombStones createVehicle TREND_GraveYardPos;
 				_tombStone setDir TREND_GraveYardDirection;
 				_tombStone setVariable ["Message", format[localize "STR_TRGM2_RecruiteInf_KIA",name (_this select 0)],true];
-				_tombStone addAction [localize "STR_TRGM2_RecruiteInf_Read",{hint format["%1",(_this select 0) getVariable "Message"]}];
+				_tombStone addAction [localize "STR_TRGM2_RecruiteInf_Read",{[format["%1",(_this select 0) getVariable "Message"]] call TREND_fnc_notify;}];
 				[0.2, format[localize "STR_TRGM2_RecruiteInf_KIA",name (_this select 0)]] spawn TREND_fnc_AdjustBadPoints;
 			}];
 
@@ -151,7 +151,7 @@ _btnSelectVehicle ctrlAddEventHandler ["ButtonClick", {
 			if (_safePos isEqualTo getPos player) then {
 				_safePos = [getPos player, 20,150,25,0,0.30,0,[],[getPos player,getPos player],_classToSpawn] call TREND_fnc_findSafePos; // find a valid pos
 			};
-			if (_safePos isEqualTo getPos player) exitWith {hint "No safe location nearby to create vehicle!"};
+			if (_safePos isEqualTo getPos player) exitWith {["No safe location nearby to create vehicle!"] call TREND_fnc_notify;};
 			player setPos _safePos;
 			private _SpawnedVeh = createVehicle [_classToSpawn, _safePos vectorAdd [0,0,250], [], 0, "NONE"];
 			_SpawnedVeh allowdamage false;

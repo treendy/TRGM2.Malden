@@ -15,7 +15,7 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc
 		if (!(["InfSide0"] call FHQ_fnc_ttAreTasksCompleted)) then {
 			sName = format["InfSide%1",0]; //zero because we only ever have the UAV option on the main objective
 			[sName, "failed"] remoteExec ["FHQ_fnc_ttSetTaskState", 0];
-			{hint (localize "STR_TRGM2_UAV_HTV_DEAD");} remoteExec ["call", 0];
+			{[(localize "STR_TRGM2_UAV_HTV_DEAD")] call TREND_fnc_notify;} remoteExec ["call", 0];
 		};
 		[HQMan,(localize "STR_TRGM2_UAV_Fail")] remoteExecCall ["sideChat",0,false];
 

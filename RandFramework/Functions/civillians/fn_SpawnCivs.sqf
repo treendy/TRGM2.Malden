@@ -110,7 +110,7 @@ while {_iCount <= _unitCount} do
 
 		}
 		catch {
-			hint format ["Script issue: %1",selectRandom _allBuildingPos2];
+			[format ["Script issue: %1",selectRandom _allBuildingPos2]] call TREND_fnc_notify;
 		};
 		//_wp1 = _group addWaypoint [_wp1Pos, 0];
 

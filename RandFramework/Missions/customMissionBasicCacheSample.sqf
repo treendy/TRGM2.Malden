@@ -55,7 +55,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_objVehicle = selectRandom sideResarchTruck createVehicle [0,0,500];
 	_objVehicle setPosATL getPosATL _nearestRoad;
 	[_objVehicle, [localize "STR_TRGM2_startInfMission_MissionTitle2_Button",{_this spawn TREND_fnc_downloadResearchData;},[_iTaskIndex,_bCreateTask]]] remoteExec ["addAction", 0, true];
-	//hint format["TEST: %1 - %2 - %3", _centralAO_x,_centralAO_y,_roadSearchRange]; sleep 5;
+	//[format["TEST: %1 - %2 - %3", _centralAO_x,_centralAO_y,_roadSearchRange]] call TREND_fnc_notify; sleep 5;
 	if (count _roadConnectedTo > 0) then {
 		_connectedRoad = _roadConnectedTo select 0;
 		_direction = [_nearestRoad, _connectedRoad] call BIS_fnc_DirTo;

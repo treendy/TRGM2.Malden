@@ -13,7 +13,7 @@ else {
 		_xLocPos = locationPosition _x;
 		if (_xLocPos distance _posOfAO > 950) then {
 			_eventLocationPos = _xLocPos;
-			//hint str(_xLocPos distance _posOfAO);
+			//[str(_xLocPos distance _posOfAO)] call TREND_fnc_notify;
 		};
 	} forEach _nearLocations;
 
@@ -38,10 +38,10 @@ else {
 if (isNil("_eventLocationPos")) then {_eventType == 2};
 
 
-//(call sTeamleader)
-//(call sRifleman)
-//(call sMachineGunMan)
-//(call sTank3Tank)
+//(call sTeamleaderToUse)
+//(call sRiflemanToUse)
+//(call sMachineGunManToUse)
+//(call sTank3TankToUse)
 
 //TankorAPC
 //(call FriendlyCheckpointUnits)
@@ -162,7 +162,7 @@ TREND_WarEventActive = true;
 
 		if (_diceRoll == 1) then {_sleep = 10+random 5};
 		if (_diceRoll > 6) then {_sleep = 0.5+random 1};
-		//hint str(_sleep);
+		//[str(_sleep)] call TREND_fnc_notify;
 
 		sleep _sleep;
 	  };

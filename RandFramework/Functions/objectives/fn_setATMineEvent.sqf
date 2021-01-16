@@ -65,10 +65,10 @@ if (_currentATFieldPos select 0 != 0) then {
 		[_guardUnit1, ["Ask if needs assistance",{
 			_guardUnit1 = _this select 0;
 			if (alive _guardUnit1) then {
-				hint "We are stranded in the middle of an AT mine area.  please help move this car ovrt 100 meters in any direction from here!"
+				["We are stranded in the middle of an AT mine area.  please help move this car ovrt 100 meters in any direction from here!"] call TREND_fnc_notify;
 			}
 			else {
-				hint "Is there a reason you are trying to talk to a dead guy??"
+				["Is there a reason you are trying to talk to a dead guy??"] call TREND_fnc_notify;
 			}
 		},[_guardUnit1]]] remoteExec ["addAction", 0, true];
 

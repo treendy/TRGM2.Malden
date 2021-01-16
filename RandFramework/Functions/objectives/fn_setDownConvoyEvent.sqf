@@ -8,7 +8,7 @@ fnc_AddToDirection = {
 	params ["_origDirection","_addToDirection"];
 
 	_iResult = _origDirection + _addToDirection;
-	//hint format["result:%1",_iResult];
+	//[format["result:%1",_iResult]] call TREND_fnc_notify;
 	//sleep 2;
 	if (_iResult > 360) then {
 		_iResult = _iResult - 360;
@@ -48,11 +48,11 @@ if (count _nearestRoads > 0) then {
 	_iteration = 1;
 
 	while {_iteration <= 3} do {
-		//hint str(_iteration);
+		//[str(_iteration)] call TREND_fnc_notify;
 		if (_iteration == 2) then {
 			_thisAreaRange = 50;
 		};
-		//hint str(_thisAreaRange);
+		//[str(_thisAreaRange)] call TREND_fnc_notify;
 
 		_nearestRoads = _eventLocationPos nearRoads _thisAreaRange;
 
@@ -62,7 +62,7 @@ if (count _nearestRoads > 0) then {
 
 		_connectedRoad = nil;
 		_direction = nil;
-		//hint "2";
+		//["2"] call TREND_fnc_notify;
 		//sleep 1;
 
 		_PosFound = false;
@@ -83,7 +83,7 @@ if (count _nearestRoads > 0) then {
 				_iAttemptLimit = _iAttemptLimit - 1;
 			};
 		};
-	//hint format["A: %1 - %2",_iteration,_eventLocationPos];
+	//[format["A: %1 - %2",_iteration,_eventLocationPos]] call TREND_fnc_notify;
 		if (_PosFound) then {
 
 			_roadBlockPos =  getPos _nearestRoad;
@@ -167,7 +167,7 @@ if (count _nearestRoads > 0) then {
 			//_mainVehDirection is direction of first veh
 			//use these to lay down guys, cones, rubbish, barriers, lights etc...
 
-			//hint str(_backOfVehArea);
+			//[str(_backOfVehArea)] call TREND_fnc_notify;
 			_group = createGroup civilian;
 			_downedCiv = _group createUnit [selectRandom (call FriendlyCheckpointUnits),_backOfVehArea,[],0,"NONE"];
 			_downedCiv setDamage 0.8;
@@ -248,7 +248,7 @@ if (count _nearestRoads > 0) then {
 				_downedCiv2 playmove "Acts_CivilTalking_2";
 				_downedCiv2 disableAI "anim";
 				_downedCiv2 addEventHandler ["killed", {_this spawn TREND_fnc_CivKilled;}]; //ParamedicKilled
-				[_downedCiv2, ["Ask if needs assistance",{hint "We need to get our wounded out of here, help us get these guys back to base!!"},[_downedCiv2]]] remoteExec ["addAction", 0, true];
+				[_downedCiv2, ["Ask if needs assistance",{["We need to get our wounded out of here, help us get these guys back to base!!"] call TREND_fnc_notify;},[_downedCiv2]]] remoteExec ["addAction", 0, true];
 				_directionFromMed2ToCiv2 = [_downedCivMedic2, _downedCiv2] call BIS_fnc_DirTo;
 				_downedCivMedic2 setDir _directionFromMed2ToCiv2;
 				_directionFromCiv2ToMed2 = [_downedCiv2, _downedCivMedic2] call BIS_fnc_DirTo;
@@ -293,7 +293,7 @@ if (count _nearestRoads > 0) then {
 
 
 			_buildings = nearestObjects [_vehPos, TREND_BasicBuildings, 100];
-			//hint str(count _buildings);
+			//[str(count _buildings)] call TREND_fnc_notify;
 			if (count _buildings < 5 && _iteration == 1) then {
 				_car1 = createVehicle [selectRandom _vehs, _flatPos, [], 0, "CAN_COLLIDE"];
 				_car1 setDamage [1,false];

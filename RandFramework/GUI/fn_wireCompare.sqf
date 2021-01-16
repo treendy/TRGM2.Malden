@@ -27,11 +27,11 @@ if (_compare) then {
 	//DEFUSED = true;
 	playSound "button_close";
 	_thisBomb setVariable ["_wireCut",true,true];
-	hint "Timer activated";
+	["Timer activated"] call TREND_fnc_notify;
 	sleep 1;
 	_countDown = 10;
 	while {_countDown > 0 && !(_thisBomb getVariable ["isDefused",false])} do {
-		hint format[localize "STR_TRGM2_BombCountdown",_countDown];
+		[format[localize "STR_TRGM2_BombCountdown",_countDown]] call TREND_fnc_notify;
 		_countDown = _countDown - 1;
 		sleep 1;
 	};

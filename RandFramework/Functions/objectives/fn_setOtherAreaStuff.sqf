@@ -42,19 +42,19 @@ if (count _TowersNear > 0) then {
 
 				_DiamPatrolGroupTower = createGroup east;
 					if (random 1 < .50) then {
-						(call sAAMan) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower];
+						(call sAAManToUse) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower];
 						_iHasAA = 1;
 					}
 					else {
-						(call sATMan) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower];
+						(call sATManToUse) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower];
 						_iHasAT = 1;
 					};
 
-				(call sRifleman) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower];
-				if (random 1 < .50) then {(call sRifleman) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
-				if (random 1 < .50) then {(call sRifleman) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
-				if (random 1 < .50) then {(call sRifleman) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
-				if (random 1 < .50) then {(call sRifleman) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
+				(call sRiflemanToUse) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower];
+				if (random 1 < .50) then {(call sRiflemanToUse) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
+				if (random 1 < .50) then {(call sRiflemanToUse) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
+				if (random 1 < .50) then {(call sRiflemanToUse) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
+				if (random 1 < .50) then {(call sRiflemanToUse) createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
 
 				_wp1Tower = _DiamPatrolGroupTower addWaypoint [_wp1PosTower, 0];
 				_wp2Tower = _DiamPatrolGroupTower addWaypoint [_wp2PosTower, 0];

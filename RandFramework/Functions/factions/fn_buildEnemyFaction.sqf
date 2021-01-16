@@ -365,14 +365,18 @@ TREND_GuerPlanes =  _guerplanes; publicVariable "TREND_GuerPlanes";
 TREND_GuerBoats =  _guerboats; publicVariable "TREND_GuerBoats";
 TREND_GuerMortars = _guermortars; publicVariable "TREND_GuerMortars";
 
-sRiflemanMilitia	  = { _unit = "I_G_Soldier_F"; if (count TREND_GuerRiflemen > 0) then { _unit = selectRandom TREND_GuerRiflemen; }; _unit; };
-sTeamleaderMilitia	  = { _unit = "I_G_Soldier_SL_F"; if (count TREND_GuerLeaders > 0) then { _unit = selectRandom TREND_GuerLeaders; }; _unit; };
-sATManMilitia		  = { _unit = "I_G_Soldier_LAT_F"; if (count TREND_GuerATSoldiers > 0) then { _unit = selectRandom TREND_GuerATSoldiers; }; _unit; };
-sAAManMilitia		  = { _unit = "I_G_Soldier_LAT_F"; if (count TREND_GuerAASoldiers > 0) then { _unit = selectRandom TREND_GuerAASoldiers; }; _unit; };
-sEngineerMilitia	  = { _unit = "I_G_engineer_F"; if (count TREND_GuerEngineers > 0) then { _unit = selectRandom TREND_GuerEngineers; }; _unit; };
-sGrenadierMilitia	  = { _unit = "I_G_Soldier_GL_F"; if (count TREND_GuerGrenadiers > 0) then { _unit = selectRandom TREND_GuerGrenadiers; }; _unit; };
-sMedicMilitia		  = { _unit = "I_G_medic_F"; if (count TREND_GuerMedics > 0) then { _unit = selectRandom TREND_GuerMedics; }; _unit; };
-sMachineGunManMilitia = { _unit = "I_G_Soldier_AR_F"; if (count TREND_GuerAutoriflemen > 0) then { _unit = selectRandom TREND_GuerAutoriflemen; }; _unit; };
+sRiflemanMilitia 		= { _unit = "I_G_Soldier_F"; if (count TREND_GuerRiflemen > 0) then { _unit = selectRandom TREND_GuerRiflemen; }; _unit; };
+sTeamleaderMilitia 		= { _unit = "I_G_Soldier_SL_F"; if (count TREND_GuerLeaders > 0) then { _unit = selectRandom TREND_GuerLeaders; }; _unit; };
+sATManMilitia 			= { _unit = "I_G_Soldier_LAT_F"; if (count TREND_GuerATSoldiers > 0) then { _unit = selectRandom TREND_GuerATSoldiers; }; _unit; };
+sAAManMilitia 			= { _unit = "I_G_Soldier_LAT_F"; if (count TREND_GuerAASoldiers > 0) then { _unit = selectRandom TREND_GuerAASoldiers; }; _unit; };
+sEngineerMilitia 		= { _unit = "I_G_Engineer_F"; if (count TREND_GuerEngineers > 0) then { _unit = selectRandom TREND_GuerEngineers; }; _unit; };
+sGrenadierMilitia 		= { _unit = "I_G_Soldier_GL_F"; if (count TREND_GuerGrenadiers > 0) then { _unit = selectRandom TREND_GuerGrenadiers; }; _unit; };
+sMedicMilitia 			= { _unit = "I_G_Medic_F"; if (count TREND_GuerMedics > 0) then { _unit = selectRandom TREND_GuerMedics; }; _unit; };
+sMachineGunManMilitia 	= { _unit = "I_G_Soldier_AR_F"; if (count TREND_GuerAutoriflemen > 0) then { _unit = selectRandom TREND_GuerAutoriflemen; }; _unit; };
+sSniperMilitia 			= { _unit = "I_G_Soldier_M_F"; if (count TREND_GuerSnipers > 0) then { _unit = selectRandom TREND_GuerSnipers; }; _unit; };
+sExpSpecMilitia 		= { _unit = "I_G_Soldier_Exp_F"; if (count TREND_GuerExpSpecs > 0) then { _unit = selectRandom TREND_GuerExpSpecs; }; _unit; };
+sEnemyHeliPilotMilitia 	= { _unit = "I_helipilot_F"; if (count TREND_GuerPilots > 0) then { _unit = selectRandom TREND_GuerPilots; }; _unit; };
+
 sTank1ArmedCarMilitia = { _veh = "I_C_Offroad_02_LMG_F"; if (count TREND_GuerArmedCars > 0) then { _veh = selectRandom TREND_GuerArmedCars; }; _veh; };
 sTank2APCMilitia 	  = { _veh = "I_E_APC_tracked_03_cannon_F"; if (count TREND_GuerAPCs > 0) then { _veh = selectRandom TREND_GuerAPCs; }; _veh; };
 sTank3TankMilitia	  = { _veh = "I_LT_01_AT_F"; if (count TREND_GuerTanks > 0) then { _veh = selectRandom TREND_GuerTanks; }; _veh; };

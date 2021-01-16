@@ -143,8 +143,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 	_mainHVT setVariable ["taskStatus","",true];
 
-	[_mainHVT, ["This is our target!","{hint ""This is our target"" }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
-	[_guardUnit3, ["This is our friendly agent!","{hint ""This is our target"" }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
+	[_mainHVT, ["This is our target!","{[""This is our target""] call TREND_fnc_notify; }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
+	[_guardUnit3, ["This is our friendly agent!","{[""This is our target""] call TREND_fnc_notify; }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 
 
 	sleep 1;
@@ -163,22 +163,23 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 		waitUntil { sleep 10; _playersInAO = false; { if (_thisMeetingPos distance _x < 2000) exitWith { _playersInAO = true; }; } forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits}); _playersInAO; };
 
-		_iWait = 420 + floor(random 300);
-		//_iWait = 20;
+		_iWait = (420 * (_iTaskIndex + 1)) + floor(random 300);
 		sleep floor(random 120);
 		_sMessageOne = format["%1 is due to arrive in the area at %2",name _thisMainHVT, (daytime  + (_iWait/3600) call BIS_fnc_timeToString)];
 		[[west, "HQ"],_sMessageOne] remoteExec ["sideChat", 0];
 		[_sMessageOne] remoteExecCall ["Hint", 0];
 
-		[time + _iWait] spawn {
-			_endTime = _this select 0;
+		[_iWait, _iTaskIndex] spawn {
+			params ["_duration", "_taskIndex"];
+			_endTime = _duration + time;
 			while {_endTime - time >= 0} do {
 				_color = "#45f442";//green
 				_timeLeft = _endTime - time;
 				if (_timeLeft < 16) then {_color = "#eef441";};//yellow
 				if (_timeLeft < 6) then {_color = "#ff0000";};//red
 				if (_timeLeft < 0) exitWith {};
-				[parseText format ["Time Until HVT is in AO:<br/><t color='%1'>--- %2 ---</t>", _color, [(_timeLeft/3600),"HH:MM:SS"] call BIS_fnc_timeToString]] remoteExec ["hintSilent"];
+				_content = parseText format ["Time Until HVT is in AO: <t color='%1'>--- %2 ---</t>", _color, [(_timeLeft/3600),"HH:MM:SS"] call BIS_fnc_timeToString];
+				[[_content, _duration + 1, _taskIndex, _taskIndex], {_this spawn TREND_fnc_handleNotification}] remoteExec ["call"]; // After the first run, this will only update the text for the notification with index = _taskIndex
 			};
 		};
 
@@ -309,7 +310,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		};
 
 
-		//hint "waypoint wait";
+		//["waypoint wait"] call TREND_fnc_notify;
 		_bWalkEnded = false;
 		while {!_bWalkEnded} do {
 			_distanceFromMeeting = (_thisMainHVT distance _thisGuardUnit1);
@@ -325,7 +326,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			};
 			sleep 0.5;
 		};
-		//hint "waypoint wait ended";
+		//["waypoint wait ended"] call TREND_fnc_notify;
 
        //waitUntil {sleep 1; (currentWaypoint group _mainHVT) == 9 };
        //waitUntil {sleep 1; speed _objMan == 0};
@@ -413,7 +414,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 		sleep 120;
 		if (alive(_thisMainHVT)) then {
-			hint "He got away!";
+			["He got away!"] call TREND_fnc_notify;
 			_thisMainHVT setVariable ["taskStatus","ESCAPED",true];
 		};
 		sleep 5;
@@ -454,14 +455,14 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 	if (!_bCreateTask) then {
 		_sAliveCheck = format["%1 getVariable [""taskStatus"",""""] == ""KILLED"" ",_sTargetName];
-		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Killed HVT at meeting""] spawn TREND_fnc_AdjustMaxBadPoints; Hint (""HVT Killed, rep increased""); TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
+		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Killed HVT at meeting""] spawn TREND_fnc_AdjustMaxBadPoints; [(""HVT Killed, rep increased"")] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
 
 		_sAliveCheck2 = format["%1 getVariable [""taskStatus"",""""] == ""KILLED""",_sTargetName2];
-		_customTaskFailed setTriggerStatements [_sAliveCheck2, " [0.8, ""our agent was killed!!!""] spawn TREND_fnc_AdjustBadPoints; Hint (""You killed our agent! Rep lowered""); TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
+		_customTaskFailed setTriggerStatements [_sAliveCheck2, " [0.8, ""our agent was killed!!!""] spawn TREND_fnc_AdjustBadPoints; [(""You killed our agent! Rep lowered"")] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
 
 		//decided not to adjust rep if he escapes when no task cretaed, as this is means it's an optional task
 		//_sAliveCheck3 = format["""%1"" == ""ESCAPED"" ",_taskState];
-		//_customTaskEscaped setTriggerStatements [_sAliveCheck3, " [0.8, ""He got away!!!""] spawn TREND_fnc_AdjustBadPoints; Hint (""HVT Escaped""); TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
+		//_customTaskEscaped setTriggerStatements [_sAliveCheck3, " [0.8, ""He got away!!!""] spawn TREND_fnc_AdjustBadPoints; [(""HVT Escaped"")] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
 	}
 	else {
 		_sAliveCheck = format["(%1 getVariable [""taskStatus"",""""] == ""KILLED"" || (%1 getVariable [""taskStatus"",""""] == ""DOCTAKEN"")) && !([""InfSide%2""] call FHQ_fnc_ttAreTasksCompleted)",_sTargetName,_iTaskIndex];

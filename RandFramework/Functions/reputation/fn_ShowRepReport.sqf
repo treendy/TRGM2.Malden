@@ -7,7 +7,7 @@ if (_fullRep) then {
 	_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);
 	_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;
 
-	hint parseText format[localize "STR_TRGM2_TRGMInitPlayerLocal_FullReputationReport",_iPointsToAdd,TREND_BadPoints, TREND_MaxBadPoints, TREND_MaxBadPoints - TREND_BadPoints, TREND_BadPointsReason]
+	[parseText format[localize "STR_TRGM2_TRGMInitPlayerLocal_FullReputationReport",_iPointsToAdd,TREND_BadPoints, TREND_MaxBadPoints, TREND_MaxBadPoints - TREND_BadPoints, TREND_BadPointsReason]] call TREND_fnc_notify;
 } else {
 	_totalRep = [TREND_MaxBadPoints - TREND_BadPoints,1] call BIS_fnc_cutDecimals;
 	_sRankIcon = "";
@@ -20,7 +20,7 @@ if (_fullRep) then {
 	_sRankMessage = "<t color='#00ff00'>" + (localize "STR_TRGM2_ShowRepReport_Message1") + " </t><br /><br />" + _sRankIcon + "<br /><br />" + (localize "STR_TRGM2_ShowRepReport_Message2") + "<br /><br />";
 
 	_sRankMessage = _sRankMessage +  format[localize "STR_TRGM2_ShowRepReport_TotalMessage",_totalRep, TREND_BadPointsReason];
-	hint parseText _sRankMessage;
+	[parseText _sRankMessage] call TREND_fnc_notify;
 };
 
 true;

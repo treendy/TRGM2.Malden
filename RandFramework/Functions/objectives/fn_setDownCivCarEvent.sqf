@@ -5,7 +5,7 @@ fnc_AddToDirection = {
 	params ["_origDirection","_addToDirection"];
 
 	_iResult = _origDirection + _addToDirection;
-	//hint format["result:%1",_iResult];
+	//[format["result:%1",_iResult]] call TREND_fnc_notify;
 	//sleep 2;
 	if (_iResult > 360) then {
 		_iResult = _iResult - 360;
@@ -61,7 +61,7 @@ if (count _nearestRoads > 0) then {
 			_iAttemptLimit = _iAttemptLimit - 1;
 		};
 	};
-//hint format["A: %1 - %2",_iteration,_eventLocationPos];
+//[format["A: %1 - %2",_iteration,_eventLocationPos]] call TREND_fnc_notify;
 	if (_PosFound) then {
 
 
@@ -129,7 +129,7 @@ if (count _nearestRoads > 0) then {
 		//_mainVehDirection is direction of first veh
 		//use these to lay down guys, cones, rubbish, barriers, lights etc...
 
-		//hint str(_backOfVehArea);
+		//[str(_backOfVehArea)] call TREND_fnc_notify;
 		_group = createGroup civilian;
 		_downedCiv = _group createUnit [selectRandom sCivilian,_backOfVehArea,[],0,"NONE"];
 		[_downedCiv, "Acts_CivilShocked_1"] remoteExec ["switchMove", 0];
@@ -142,10 +142,10 @@ if (count _nearestRoads > 0) then {
 		[_downedCiv, ["Ask if needs assistance",{
 			_downedCiv = _this select 0;
 			if (alive _downedCiv) then {
-				hint "Please help, my car has broken down, i need to get home to my family!"
+				["Please help, my car has broken down, i need to get home to my family!"] call TREND_fnc_notify;
 			}
 			else {
-				hint "Is there a reason you are trying to talk to a dead guy??"
+				["Is there a reason you are trying to talk to a dead guy??"] call TREND_fnc_notify;
 			}
 		},[_downedCiv]]] remoteExec ["addAction", 0, true];
 

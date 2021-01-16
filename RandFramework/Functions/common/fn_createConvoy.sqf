@@ -112,7 +112,7 @@ if !(_hvtUnitClass isEqualTo "") then {
 	};
 } forEach (_finalGroup - [_hvtVehicle]);
 
-
+private _finalwp = [0,0,0];
 if (!_noWaypoints) then {
 	if !(_wpPosArray isEqualTo []) then {
 		{
@@ -129,7 +129,7 @@ if (!_noWaypoints) then {
 
 	_aslPos = [_endPos select 0, _endPos select 1, getTerrainHeightASL [_endPos select 0, _endPos select 1]];
 	_aglPos = ASLToAGL _aslPos;
-	private _finalwp = _group addWaypoint [_aglPos, 0];
+	_finalwp = _group addWaypoint [_aglPos, 0];
 	_finalwp setWaypointType (["GETOUT", "MOVE"] select (_cycleMode));
 	_finalwp setWaypointCompletionRadius 25;
 	_finalwp setwaypointCombatMode "GREEN";

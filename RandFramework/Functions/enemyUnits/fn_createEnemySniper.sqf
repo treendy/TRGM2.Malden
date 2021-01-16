@@ -10,19 +10,19 @@ _maxRange = 800;
 _minRange = 600;
 _minHeight = 20;
 
-_spawnedUnit = ((createGroup east) createUnit [(call sSniper), [-135,-253,0], [], 10, "NONE"]);
-_spawnedTempTarget = ((createGroup east) createUnit [(call sSniper), _targetPos, [], 10, "NONE"]);
+_spawnedUnit = ((createGroup east) createUnit [(call sSniperToUse), [-135,-253,0], [], 10, "NONE"]);
+_spawnedTempTarget = ((createGroup east) createUnit [(call sSniperToUse), _targetPos, [], 10, "NONE"]);
 
 for "_i" from 1 to 20 do {
 	if (!_foundPlace) then {
-		//hint str(_i);
+		//[str(_i)] call TREND_fnc_notify;
 		TestTestTargetPos = str(_targetPos);
 		//_pos = [_targetPos, _maxRange, 200, _minHeight, _targetPos] call TREND_fnc_findOverwatchOverride;
 		_pos = [_targetPos, _maxRange, 200, _minHeight, _targetPos] call TREND_fnc_findOverwatchOverride;
 		//_pos = [_targetPos, _maxRange, 200, _minHeight, _targetPos] call BIS_fnc_findOverwatch;
 		_spawnedUnit setPos _pos;
 		_direction = [getpos _spawnedUnit, _targetPos] call BIS_fnc_DirTo;
-		//hint str(_direction);
+		//[str(_direction)] call TREND_fnc_notify;
 		_spawnedUnit setDir _direction;
 		_spawnedUnit setFormDir _direction;
 		_spawnedUnit setUnitPos selectRandom ["MIDDLE","DOWN"];
@@ -55,13 +55,13 @@ for "_i" from 1 to 20 do {
 				_minHeight = _minHeight - 1;
 				_maxRange = _maxRange - 10;
 				_minRange = _minRange - 45;
-				//hint str( _minRange);
+				//[str( _minRange)] call TREND_fnc_notify;
 			};
 			//deleteVehicle _spawnedUnit;
 			//deleteVehicle _spawnedTempTarget
 		};
 	};
-	//hint str(_cansee);
+	//[str(_cansee)] call TREND_fnc_notify;
 };
 deleteVehicle _spawnedTempTarget;
 

@@ -95,6 +95,31 @@ class Params
 
 class RscTitles
 {
+	class TREND_notifications
+	{
+		idd = 9009;
+		name = "TREND_notifications";
+		duration = 1e+007;
+		movingEnable = 0;
+		fadein = 0;
+		fadeout = 0;
+
+		onLoad = "uiNamespace setVariable [""TREND_notifications_disp"", _this select 0]";
+		onUnload = "uiNamespace setVariable [""TREND_notifications_disp"", nil]";
+
+		class controls {
+
+			class MessageContainer: RscControlsGroupNoScrollbars
+			{
+				idc = 9010;
+				x = 0.8220 * safezoneW + safezoneX;
+				y = 0.0960 * safezoneH + safezoneY;
+				w = 0.1700 * safezoneW;
+				h = 0.8875 * safezoneH;
+				class controls {};
+			};
+		};
+	};
 	class Download_Data
 	{
 		idd = 9090;

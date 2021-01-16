@@ -7,13 +7,13 @@ _flatPos = [getPos _target, 5, 10, 5, 2, 0.5, 0,[],[[0,0,0],[0,0,0]], _dingy] ca
 if (str(_flatPos) == "[0,0,0]") then {
 	_flatPos = [getPos _target, 5, 8, 5, 0, 0.5, 0,[],[[0,0,0],[0,0,0]], _dingy] call TREND_fnc_findSafePos;
 	if (str(_flatPos) == "[0,0,0]") then {
-		hint (localize "STR_TRGM2_UnloadDingy_NoArea");
+		[(localize "STR_TRGM2_UnloadDingy_NoArea")] call TREND_fnc_notify;
 		deleteVehicle _dingy;
 	}
 	else {
 		_dingy setPos _flatPos;
 		[_dingy, [format [localize "STR_TRGM2_UnloadDingy_push", getText (configFile >> "CfgVehicles" >> (typeOf _dingy) >> "displayName")],{_this spawn TREND_fnc_PushObject;}, [], -99, false, false, "", "_this == player && count crew _target isEqualTo 0"]] remoteExec ["addAction", 0];
-		hint (localize "STR_TRGM2_UnloadDingy_DingyUnloaded");
+		[(localize "STR_TRGM2_UnloadDingy_DingyUnloaded")] call TREND_fnc_notify;
 		_target removeAction _id;
 	};
 
@@ -21,9 +21,9 @@ if (str(_flatPos) == "[0,0,0]") then {
 else {
 	_dingy setPos _flatPos;
 	[_dingy, [format [localize "STR_TRGM2_UnloadDingy_push", getText (configFile >> "CfgVehicles" >> (typeOf _dingy) >> "displayName")],{_this spawn TREND_fnc_PushObject;}, [], -99, false, false, "", "_this == player && count crew _target isEqualTo 0"]] remoteExec ["addAction", 0];
-	hint (localize "STR_TRGM2_UnloadDingy_DingyUnloadedWater");
+	[(localize "STR_TRGM2_UnloadDingy_DingyUnloadedWater")] call TREND_fnc_notify;
 	_target removeAction _id;
 };
 
-//hint str(_flatPos);
+//[str(_flatPos)] call TREND_fnc_notify;
 

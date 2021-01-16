@@ -51,11 +51,11 @@ TREND_TimeSinceLastSpottedAction = time; publicVariable "TREND_TimeSinceLastSpot
 _maxPatrolSearch = 2000;
 
 _SpottedUnitCount = { _x distance _SpottedUnit < 200 } count units group _SpottedUnit;
-//if (TREND_bDebugMode) then {hint format["pre first spotted count check: %1",_SpottedUnitCount];};
+//if (TREND_bDebugMode) then {[format["pre first spotted count check: %1",_SpottedUnitCount]] call TREND_fnc_notify;};
 _AlivePlayerCount = { alive _x } count allplayers;
-//hint "a";
+//["a"] call TREND_fnc_notify;
 if (_SpottedUnitCount > 0) then {
-//hint "d";
+//["d"] call TREND_fnc_notify;
 	//========First take care of additional support (reinforcements, air to air/ground support etc... based on the type of threat the enemy have spotted)
 	_bAllowPatrolChange = true;
 	_bAllowNextMortarRounds = true;
@@ -86,7 +86,7 @@ if (_SpottedUnitCount > 0) then {
 	_currentAODetail = nil;
 	//TREND_AODetails = [[AOIndex,InfSpottedCount,VehSpottedCount,AirSpottedCount,bScoutCalled, patrolMoveCounter,MortarAllowedCount]]
 	{
-		//HINT format["HERE: %1, %2", _x select 0,_iTaskIndex];
+		//[format["HERE: %1, %2", _x select 0,_iTaskIndex]] call TREND_fnc_notify;
 		if (_x select 0 == _iTaskIndex) then {
 			_currentAODetail = _x;
 			_PatrolMoveCount = (_x select 5);
@@ -221,10 +221,10 @@ if (_SpottedUnitCount > 0) then {
 		if ((vehicle _SpottedUnit isKindOf "Car") && _bAllowPatrolChange) then {
 			if  ((_SpottedUnitCount > 0)) then {
 				_nearestATs = nearestObjects [_SpottedUnitPos, [(call sATMan),(call sATManMilitia)], _maxPatrolSearch];
-				if (TREND_bDebugMode) then {hint format["AT pre count check: %1",count _nearestATs]; sleep 2;};
+				if (TREND_bDebugMode) then {[format["AT pre count check: %1",count _nearestATs]] call TREND_fnc_notify; sleep 2;};
 				if (count _nearestATs > 0) then {
 
-					if (TREND_bDebugMode) then {hint "for than zero - count _nearestATs"; sleep 2;};
+					if (TREND_bDebugMode) then {["for than zero - count _nearestATs"] call TREND_fnc_notify; sleep 2;};
 					_nearestTL = _nearestATs select 0;
 					while {(count (waypoints group _nearestTL)) > 0} do {
 						deleteWaypoint ((waypoints group _nearestTL) select 0);
@@ -268,7 +268,7 @@ if (_SpottedUnitCount > 0) then {
 
 		//mortar script
 		if  ((_SpottedUnitCount > 0) && _bAllowNextMortarRounds && !TREND_bMortarFiring) then {
-			//hint format["eee:%1",str(_currentAODetail)];
+			//[format["eee:%1",str(_currentAODetail)]] call TREND_fnc_notify;
 			_bFiredMortar = false;
 			_currentAODetail set [6,1];  //commence counting now fired... when reach zero again, we will wait until round fired again
 			_nearestMortars = nearestObjects [_SpottedUnitPos,(call sMortar) + (call sMortarMilitia),_maxPatrolSearch];
@@ -296,10 +296,10 @@ if (_SpottedUnitCount > 0) then {
 						if (!_SpotterFound && (getPos _SpottedUnit distance getPos _x) > 55 && side _x == East) then {
 
 							_cansee = [objNull, "VIEW"] checkVisibility [eyePos _x, eyePos _SpottedUnit];
-							if (TREND_bDebugMode) then {hint format["POW4 %1",_cansee];};
+							if (TREND_bDebugMode) then {[format["POW4 %1",_cansee]] call TREND_fnc_notify;};
 							sleep 0.6;
 							if (_cansee > 0.2) then {
-								//hint "POW2 POW POW POW";
+								//["POW2 POW POW POW"] call TREND_fnc_notify;
 								sleep 3;
 								//Set animation, or view binocs and face player
 								_SpotterFound = true;
@@ -310,7 +310,7 @@ if (_SpottedUnitCount > 0) then {
 									_test setMarkerShape "ICON";
 									_test setMarkerType "hd_dot";
 									_test setMarkerText "SPOTTER";
-									//hint "POW POW POW POW";
+									//["POW POW POW POW"] call TREND_fnc_notify;
 								};
 
 							};
@@ -319,19 +319,19 @@ if (_SpottedUnitCount > 0) then {
 
 				} forEach _menNear;
 				if (_SpotterFound) then {
-					if (TREND_bDebugMode) then {hint "SPOTTER FOUND"; sleep 2;};
+					if (TREND_bDebugMode) then {["SPOTTER FOUND"] call TREND_fnc_notify; sleep 2;};
 					_Spotter call BIS_fnc_ambientAnim__terminate;
 					_Spotter playMoveNow "Acts_listeningToRadio_loop";
 					_Spotter disableAI "anim";
 					_startPos = getPos _SpottedUnit;
-					//if (TREND_bDebugMode) then {hint format["spottedStartPos: %1",str(_startPos)];};
+					//if (TREND_bDebugMode) then {[format["spottedStartPos: %1",str(_startPos)]] call TREND_fnc_notify;};
 					sleep 7;
 					if (alive(_Spotter)) then {
 						_Spotter enableAI "anim";
 						_Spotter playMoveNow "Acts_listeningToRadio_out";
 						_endPos = getPos _SpottedUnit;
 						_dDistance = _startPos distance _endPos;
-						//if (TREND_bDebugMode) then {hint format["spottedEndPos: %1 - Distance:%2 - PlayersNear:%3 - Chance:%4",str(_endPos), str(_dDistance),str(_nearplayercount),str(_ChancesOfFireMortar)];};
+						//if (TREND_bDebugMode) then {[format["spottedEndPos: %1 - Distance:%2 - PlayersNear:%3 - Chance:%4",str(_endPos), str(_dDistance),str(_nearplayercount),str(_ChancesOfFireMortar)]] call TREND_fnc_notify;};
 						if (_dDistance < 7 && _bAllowMortar) then {
 							_nearestMortar = _nearestMortars select 0;
 							_Ammo = nil;
@@ -390,18 +390,18 @@ if (_SpottedUnitCount > 0) then {
 				_EnemyBaseChopperWP1 setWaypointStatements ["true", "(vehicle this) LAND 'LAND';"];
 			};
 
-			//if (TREND_bDebugMode) then {hint format["inFirstGenericIf: %1",_AlivePlayerCount > 7]; sleep 1;};
+			//if (TREND_bDebugMode) then {[format["inFirstGenericIf: %1",_AlivePlayerCount > 7]] call TREND_fnc_notify; sleep 1;};
 
 			if  ((_SpottedUnitCount > 0)) then {
-				//if (TREND_bDebugMode) then {hint format["inSecondGenericIf: %1",_AlivePlayerCount > 7]; sleep 2;};
+				//if (TREND_bDebugMode) then {[format["inSecondGenericIf: %1",_AlivePlayerCount > 7]] call TREND_fnc_notify; sleep 2;};
 
 
 				//if (TREND_bDebugMode) then {sleep 2};
 				_nearestTLs = nearestObjects [_SpottedUnitPos, [(call sTeamleader),(call sTeamleaderMilitia)], _maxPatrolSearch];
-				//if (TREND_bDebugMode) then {hint format["pre count check: %1",count _nearestTLs]; sleep 2;};
+				//if (TREND_bDebugMode) then {[format["pre count check: %1",count _nearestTLs]] call TREND_fnc_notify; sleep 2;};
 				if (count _nearestTLs > 0) then {
 
-					//if (TREND_bDebugMode) then {hint "for than zero - count _nearestTLs"; sleep 2;};
+					//if (TREND_bDebugMode) then {["for than zero - count _nearestTLs"] call TREND_fnc_notify; sleep 2;};
 					_nearestTL = _nearestTLs select 0;
 					while {(count (waypoints group _nearestTL)) > 0} do {
 						deleteWaypoint ((waypoints group _nearestTL) select 0);

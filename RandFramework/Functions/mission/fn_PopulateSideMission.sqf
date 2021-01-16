@@ -307,7 +307,7 @@ if (!_bFriendlyInsurgents) then {
 		if (_minimission) then {_chanceOfVeh = .15;};
 		//if main, spawn 1 or two, and also, spawn 2 or three in larger radius
 		if (random 1 < _chanceOfVeh || _selectRandomW) then {
-			//hint format["AAALoc:%1",sTank1ToUse];
+			//[format["AAALoc:%1",sTank1ToUse]] call TREND_fnc_notify;
 			//sleep 3;
 
 				_flatPos = nil;
@@ -343,7 +343,7 @@ if (!_bFriendlyInsurgents) then {
 		};
 		if (!_minimission) then {
 			if (_bIsMainObjective || _selectRandomW) then {
-				//hint format["AAALoc:%1",sTank1ToUse];
+				//[format["AAALoc:%1",sTank1ToUse]] call TREND_fnc_notify;
 				//sleep 3;
 
 					_flatPos = nil;
@@ -375,7 +375,7 @@ if (!_bFriendlyInsurgents) then {
 
 
 		if (_bIsMainObjective || _selectRandomW) then {
-			//hint format["AAALoc:%1",sTank1ToUse];
+			//[format["AAALoc:%1",sTank1ToUse]] call TREND_fnc_notify;
 			//sleep 3;
 			if (!_minimission || (_minimission && _selectRandomW)) then {
 				_flatPos = nil;
@@ -730,14 +730,14 @@ if (!_bFriendlyInsurgents) then {
 						_BaseChopperGroup = createGroup TREND_EnemySide;
 						_EnemyBaseChopper = selectRandom (call EnemyBaseChoppers) createVehicle getPosATL TREND_baseHeliPad;
 						_EnemyBaseChopper setDir direction TREND_baseHeliPad;
-						(call sEnemyHeliPilot) createUnit [[(getPos TREND_baseHeliPad select 0)+10,(getPos TREND_baseHeliPad select 1)+10], _BaseChopperGroup];
-						(call sEnemyHeliPilot) createUnit [[(getPos TREND_baseHeliPad select 0)+11,(getPos TREND_baseHeliPad select 1)+10], _BaseChopperGroup];
+						(call sEnemyHeliPilotToUse) createUnit [[(getPos TREND_baseHeliPad select 0)+10,(getPos TREND_baseHeliPad select 1)+10], _BaseChopperGroup];
+						(call sEnemyHeliPilotToUse) createUnit [[(getPos TREND_baseHeliPad select 0)+11,(getPos TREND_baseHeliPad select 1)+10], _BaseChopperGroup];
 						{
 							[_x,"STAND","ASIS"] call BIS_fnc_ambientAnimCombat;
 						} forEach units _BaseChopperGroup;
 
 						//EnemyBaseChopperPilot = getNEAREST (call sEnemyHeliPilot) to chopper
-						_EnemyBaseChopperPilots = nearestObjects [getPos TREND_baseHeliPad, [(call sEnemyHeliPilot)], 250];
+						_EnemyBaseChopperPilots = nearestObjects [getPos TREND_baseHeliPad, [(call sEnemyHeliPilotToUse)], 250];
 						TREND_EnemyBaseChopperPilot =  _EnemyBaseChopperPilots select 0; publicVariable "TREND_EnemyBaseChopperPilot";
 						// _BaseChopperGroup
 

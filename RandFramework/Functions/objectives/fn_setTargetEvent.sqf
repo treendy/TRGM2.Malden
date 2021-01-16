@@ -8,7 +8,7 @@ fnc_AddToDirection = {
 	params ["_origDirection","_addToDirection"];
 
 	_iResult = _origDirection + _addToDirection;
-	//hint format["result:%1",_iResult];
+	//[format["result:%1",_iResult]] call TREND_fnc_notify;
 	//sleep 2;
 	if (_iResult > 360) then {
 		_iResult = _iResult - 360;
@@ -68,7 +68,7 @@ if (!_isCache && count _nearestRoads > 0) then {
 				_iAttemptLimit = _iAttemptLimit - 1;
 			};
 		};
-	//hint format["A: %1 - %2",_iteration,_eventLocationPos];
+	//[format["A: %1 - %2",_iteration,_eventLocationPos]] call TREND_fnc_notify;
 		if (_PosFound) then {
 			_objectiveCreated = true;
 

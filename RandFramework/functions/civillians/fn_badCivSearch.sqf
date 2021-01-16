@@ -4,7 +4,7 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc
 _badCiv disableAI "MOVE"; // disable movement during search
 
 _hintText = selectRandom [localize "STR_TRGM2_civillians_fnbadCivSearch_IsArmed1",localize "STR_TRGM2_civillians_fnbadCivSearch_IsArmed2",localize "STR_TRGM2_civillians_fnbadCivSearch_IsArmed3"];
-hint _hintText;
+[_hintText] call TREND_fnc_notify;
 
 sleep 3; // wait a few seconds to allow the player to react
 

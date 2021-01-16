@@ -130,7 +130,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_mainHVT setVariable [_sTargetName, _mainHVT, true];
 		missionNamespace setVariable [_sTargetName, _mainHVT];
 		_mainHVT setVariable ["taskStatus","",true];
-		[_mainHVT, ["This is our target!","{hint ""This is our target"" }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
+		[_mainHVT, ["This is our target!","{[""This is our target""] call TREND_fnc_notify; }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 		_mainHVT setCaptive true;
 		removeAllWeapons _mainHVT;
 
@@ -139,7 +139,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			_sTargetName2 = format["objInformant2_%1",_thisiTaskIndex];
 			_guardUnit3 setVariable [_sTargetName2, _guardUnit3, true];
 			missionNamespace setVariable [_sTargetName2, _guardUnit3];
-			[_guardUnit3, ["This is our friendly agent!","{hint ""This is our friendly agent!"" }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
+			[_guardUnit3, ["This is our friendly agent!","{[""This is our friendly agent!""] call TREND_fnc_notify; }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 			_guardUnit3 setCaptive true;
 			removeAllWeapons _guardUnit3;
 		};
@@ -160,21 +160,23 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		waitUntil {sleep 2; TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_PlayersHaveLeftStartingArea};
 
 		if (!TREND_bDebugMode) then {
-			_iWait = 420 + floor(random 300);
+			_iWait = (420 * (_thisiTaskIndex + 1)) + floor(random 300);
 			sleep floor(random 120);
 			_sMessageOne = format["The convoy is due to depart at %1", (daytime  + (_iWait/3600) call BIS_fnc_timeToString)];
 			[[west, "HQ"],_sMessageOne] remoteExec ["sideChat", 0];
 			[_sMessageOne] remoteExecCall ["Hint", 0];
 
-			[time + _iWait] spawn {
-				_endTime = _this select 0;
+			[_iWait, _thisiTaskIndex] spawn {
+				params ["_duration", "_taskIndex"];
+				_endTime = _duration + time;
 				while {_endTime - time >= 0} do {
 					_color = "#45f442";//green
 					_timeLeft = _endTime - time;
 					if (_timeLeft < 16) then {_color = "#eef441";};//yellow
 					if (_timeLeft < 6) then {_color = "#ff0000";};//red
 					if (_timeLeft < 0) exitWith {};
-					[parseText format ["Time Until Convoy Departs:<br/><t color='%1'>--- %2 ---</t>", _color, [(_timeLeft/3600),"HH:MM:SS"] call BIS_fnc_timeToString]] remoteExec ["hintSilent"];
+					_content = parseText format ["<t size='0.90'>Time Until Convoy Departs: <t color='%1'>--- %2 ---</t></t>", _color, [(_timeLeft/3600),"HH:MM:SS"] call BIS_fnc_timeToString];
+					[[_content, _duration + 1, _taskIndex, _taskIndex], {_this spawn TREND_fnc_handleNotification}] remoteExec ["call"]; // After the first run, this will only update the text for the notification with index = _taskIndex
 				};
 			};
 

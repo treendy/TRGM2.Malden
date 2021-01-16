@@ -24,7 +24,7 @@ if (side _caller == west) then {
 			[sName, "succeeded"] remoteExec ["FHQ_fnc_ttsetTaskState", 0];
 		}
 		else {
-			hint "He is dead you muppet!";
+			["He is dead you muppet!"] call TREND_fnc_notify;
 			sName = format["InfSide%1",_iSelected];
 			[sName, "failed"] remoteExec ["FHQ_fnc_ttsetTaskState", 0];
 		};
@@ -33,7 +33,7 @@ if (side _caller == west) then {
 
 		_ballowSearch = true;
 
-		hint "You start to talk to the informant...";
+		["You start to talk to the informant..."] call TREND_fnc_notify;
 		if (alive _thisCiv) then {
 			//increased chance of results
 			_searchChance = [true,false];
@@ -53,7 +53,7 @@ if (side _caller == west) then {
 
 		}
 		else {
-			hint "He is dead you muppet!";
+			["He is dead you muppet!"] call TREND_fnc_notify;
 			_ballowSearch = false;
 		};
 

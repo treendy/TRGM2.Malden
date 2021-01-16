@@ -340,7 +340,7 @@ if (isServer) then {
 			};
 		} forEach _ObjectPairs;
 		if (_errorMessage != "") then {
-			hint _errorMessage;
+			[_errorMessage] call TREND_fnc_notify;
 			sleep 3;
 		};
 	};
@@ -394,12 +394,12 @@ if (TREND_iMissionSetup == 5 && isMultiplayer && str player == "sl") then {
 		[laptop1, [localize "STR_TRGM2_TRGMInitPlayerLocal_SaveGlobal",{[2,true] spawn TREND_fnc_ServerSave;}]] remoteExec ["addaction"];
 	};
 	if (TREND_SaveType == 1) then {
-		[(localize "STR_TRGM2_ServerSave_Save1")] remoteExec ["hint"];
-		[laptop1, [localize "STR_TRGM2_ServerSave_SaveLocal",{hint (localize "STR_TRGM2_ServerSave_SaveHint")}]] remoteExec ["addaction"];
+		[(localize "STR_TRGM2_ServerSave_Save1")] call TREND_fnc_notify;
+		[laptop1, [localize "STR_TRGM2_ServerSave_SaveLocal",{[(localize "STR_TRGM2_ServerSave_SaveHint")] call TREND_fnc_notify}]] remoteExec ["addaction"];
 	};
 	if (TREND_SaveType == 2) then {
-		[(localize "STR_TRGM2_ServerSave_Save2")] remoteExec ["hint"];
-		[laptop1, [localize "STR_TRGM2_ServerSave_SaveGlobal",{hint (localize "STR_TRGM2_ServerSave_SaveHint2")}]] remoteExec ["addaction"];
+		[(localize "STR_TRGM2_ServerSave_Save2")] call TREND_fnc_notify;
+		[laptop1, [localize "STR_TRGM2_ServerSave_SaveGlobal",{[(localize "STR_TRGM2_ServerSave_SaveHint2")] call TREND_fnc_notify}]] remoteExec ["addaction"];
 	};
 };
 [endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {[true] spawn TREND_fnc_ShowRepReport;}]] remoteExec ["addAction"];

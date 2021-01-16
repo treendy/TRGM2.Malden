@@ -9,7 +9,7 @@ if (side player == civilian) then {
 	4 enableChannel false;
 	5 enableChannel false;
 
-	//hint "CC";
+	//["CC"] call TREND_fnc_notify;
 
 	//player removeAllActions;
 
@@ -29,13 +29,13 @@ if (side player == civilian) then {
 	[player, true] remoteExec ["hideObjectGlobal", 2];
 	while {(alive(player))} do
 	{
-		//hint format["speed:%1",speed player];
+		//[format["speed:%1",speed player]] call TREND_fnc_notify;
 		player enableFatigue false;
 		player enableStamina false;
 		removeAllWeapons player;
 
 		if (speed player > 16) then {
-			//hint "test2";
+			//["test2"] call TREND_fnc_notify;
 			if (player getVariable ["fastRun",false]) then {
 				player setAnimSpeedCoef 6;
 				player allowDamage false;

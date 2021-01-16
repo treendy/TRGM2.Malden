@@ -5,7 +5,7 @@ if (_fnc_scriptName != _fnc_scriptNameParent) then { //Reduce RPT Spam for this 
 
 _currentManPos = getPos _objMan;
 
-//hint _objManName;
+//[_objManName] call TREND_fnc_notify;
 //sleep 2;
 _MoveType = selectRandom ["Man","OpenArea"];
 _WalkToPos = getPos _objMan;
@@ -23,7 +23,7 @@ if (_MoveType == "Man") then {
 		_tempMenArray = _nearMen;
 		_ItemsToRemove = [_objMan];
 		_tempArrayToUse = _tempMenArray - _ItemsToRemove;
-		//hint format["ArrayToUse: %1",_tempArrayToUse];
+		//[format["ArrayToUse: %1",_tempArrayToUse]] call TREND_fnc_notify;
 		//sleep 3;
 		_WalkToPos = getPos (selectRandom _tempArrayToUse);
 
@@ -31,7 +31,7 @@ if (_MoveType == "Man") then {
 
 };
 
-//hint format["walkto8:%1 - _MoveType: %2 - currentManPos: %3",_WalkToPos,_MoveType,_currentManPos];
+//[format["walkto8:%1 - _MoveType: %2 - currentManPos: %3",_WalkToPos,_MoveType,_currentManPos]] call TREND_fnc_notify;
 
 //_objMan switchMove "";
 _objMan doMove (_WalkToPos);

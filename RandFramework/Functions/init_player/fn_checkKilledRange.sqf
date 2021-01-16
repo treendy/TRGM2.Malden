@@ -6,7 +6,7 @@ while {true} do {
 			if (getPlayerUID player == _x select 0) then {
 				//_forEachIndex
 				if (player distance (_x select 1) < TREND_KilledZoneRadius) then {
-					hint (localize "STR_TRGM2_TRGMInitPlayerLocal_WarningArea");
+					[(localize "STR_TRGM2_TRGMInitPlayerLocal_WarningArea")] call TREND_fnc_notify;
 					if (player distance (_x select 1) < TREND_KilledZoneInnerRadius) then {
 						cutText [localize "STR_TRGM2_TRGMInitPlayerLocal_Transfering","BLACK FADED", 0];
 						sleep 1;

@@ -112,7 +112,7 @@ if (!_airEscort) then {
 				_mrkcustomSteps setMarkerType "hd_dot";
 				_mrkcustomSteps setMarkerText ("Step " + str(_stepDistLeft));
 				sleep 0.1;
-				hint str(_iSaftyCount);
+				[str(_iSaftyCount)] call TREND_fnc_notify;
 			};
 
 			if (_stepDistToAO < 1000) then {
@@ -159,7 +159,7 @@ _flyToLZ setWaypointBehaviour "CARELESS";
 _flyToLZ setWaypointCombatMode "BLUE";
 _flyToLZ setWaypointCompletionRadius 100;
 if (_emergencyLand) then {
-	_flyToLZ setWaypointStatements ["true", "(vehicle this) land 'GET IN'; (vehicle this) setVariable [""landingInProgress"",true,true]; Hint ""LANDING!!!"""];
+	_flyToLZ setWaypointStatements ["true", "(vehicle this) land 'GET IN'; (vehicle this) setVariable [""landingInProgress"",true,true]; [""LANDING!!!""] call TREND_fnc_notify;"];
 }
 else {
 	_flyToLZ setWaypointStatements ["true", "(vehicle this) land 'GET IN'; (vehicle this) setVariable [""landingInProgress"",true,true]"];
