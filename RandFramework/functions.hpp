@@ -28,6 +28,7 @@ class TREND {
         class GeneralPlayerLoop {};
         class InSafeZone {};
         class introCamera {};
+        class mainInitLocal {};
         class MissionOverAnimation {};
         class MissionSelectLoop {};
         class OnlyAllowDirectMapDraw {};

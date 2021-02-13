@@ -80,6 +80,7 @@ if (isNil "TREND_OfficerImage")      then { TREND_OfficerImage = "<img image='Ra
 if (isNil "TREND_WeaponDealerImage") then { TREND_WeaponDealerImage = "<img image='RandFramework\Media\WeaponDealers2.jpg' size='1' />"; publicVariable "TREND_WeaponDealerImage"; };
 
 
+if (isNil "TREND_AllInitScriptsFinished")                  then {TREND_AllInitScriptsFinished = false;                      publicVariable "TREND_AllInitScriptsFinished";};
 if (isNil "TREND_AOCampOnlyAmmoBox")                       then {TREND_AOCampOnlyAmmoBox = false;                           publicVariable "TREND_AOCampOnlyAmmoBox";};
 //TREND_AODetails = [[AOIndex,InfSpottedCount,VehSpottedCount,AirSpottedCount,bScoutCalled,patrolMoveCounter]]
 //example TREND_AODetails [[1,0,0,0,False,0],[2,0,0,0,True,0]]

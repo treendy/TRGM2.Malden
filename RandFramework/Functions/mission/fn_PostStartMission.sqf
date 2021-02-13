@@ -203,5 +203,6 @@ sleep 1;
 player doFollow player;
 
 "Mission setup finished!" call TREND_fnc_log;
+TREND_AllInitScriptsFinished = true; publicVariable "TREND_AllInitScriptsFinished";
 
 true;

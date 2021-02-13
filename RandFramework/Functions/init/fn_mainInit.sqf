@@ -402,7 +402,9 @@ if (TREND_iMissionSetup == 5 && isMultiplayer && str player == "sl") then {
 		[laptop1, [localize "STR_TRGM2_ServerSave_SaveGlobal",{[(localize "STR_TRGM2_ServerSave_SaveHint2")] call TREND_fnc_notify}]] remoteExec ["addaction"];
 	};
 };
+
 [endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {[true] spawn TREND_fnc_ShowRepReport;}]] remoteExec ["addAction"];
+[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_EndMission",{_this spawn TREND_fnc_attemptEndMission;}]] remoteExec ["addAction", 0];
 
 [format["Mission Core: %1", "PostCustomObjectSet"], true] call TREND_fnc_log;
 sleep _coreCountSleep;
@@ -690,5 +692,11 @@ if (_iEnemyFlashLightOption isEqualTo 1) then {
 };
 
 [format["Mission Core: %1", "Main Init Complete"], true] call TREND_fnc_log;
+sleep _coreCountSleep;
+
+// if (hasInterface) then {
+// 	waitUntil { TREND_AllInitScriptsFinished; };
+// 	[] spawn TREND_fnc_introCamera;
+// };
 
 true;

@@ -107,11 +107,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	};
 
 	_blackListPositions = [];
+	_firstTargetName = format["objInformant0_%1", _iTaskIndex];
 	for [{private _i = 0}, {_i < selectRandom[2,3,4]}, {_i = _i + 1}] do {
 		private _returnArr = [_iTaskIndex, _i, _vehicleType, _centralAO_x, _centralAO_y, _blackListPositions] call TREND_fnc_addTruckToDestroy;
 		_returnArr params ["_sTargetName", "_aBlacklistPos"];
 		if (!isNil "_sTargetName") then {
 			sAliveCheck = sAliveCheck + format[" && !alive(%1)", _sTargetName];
+			if (_i == 0) then {_firstTargetName = _sTargetName};
 		};
 		if (!isNil "_aBlacklistPos" && {!(_aBlacklistPos isEqualTo [])}) then {
 			_blackListPositions pushBack [_aBlacklistPos, 50];
@@ -122,11 +124,11 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_triggerTruckClear = createTrigger ["EmptyDetector", [0,0]];
 	_triggerTruckClear setVariable ["DelMeOnNewCampaignDay",true];
 	if (!_bCreateTask) then {
-		_triggerTruckComplete = format["[1, %1] spawn TREND_fnc_AdjustMaxBadPoints; [%2] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant0_%3] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", _repReasonOnComplete, _hintStrOnComplete, _iTaskIndex];
+		_triggerTruckComplete = format["[1, %1] spawn TREND_fnc_AdjustMaxBadPoints; [%2] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos %4] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", _repReasonOnComplete, _hintStrOnComplete, _iTaskIndex, _firstTargetName];
 		_triggerTruckClear setTriggerStatements [sAliveCheck, _triggerTruckComplete, ""];
 	}
 	else {
-		_triggerTruckComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant0_%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", _iTaskIndex];
+		_triggerTruckComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos %2] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", _iTaskIndex, _firstTargetName];
 		_triggerTruckClear setTriggerStatements [sAliveCheck, _triggerTruckComplete, ""];
 
 	};

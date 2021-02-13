@@ -733,6 +733,7 @@ TREND_fnc_PopulateLoadingWait = {
 	sleep 10;
 	TREND_PopulateLoadingWait_percentage = nil; publicVariable "TREND_PopulateLoadingWait_percentage";
 	TREND_MissionLoaded =  true; publicVariable "TREND_MissionLoaded";
+	TREND_AllInitScriptsFinished = true; publicVariable "TREND_AllInitScriptsFinished";
 };
 [] spawn TREND_fnc_PopulateLoadingWait;
 
