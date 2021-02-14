@@ -1,8 +1,4 @@
 "Init.sqf" call TREND_fnc_log;
-if (isNil "TREND_debugMessages") then {TREND_debugMessages = ""; publicVariable "TREND_debugMessages";};
-"TREND_debugMessages" addPublicVariableEventHandler {
-	format ["%1 has been updated to: %2", _this select 0, _this select 1] call TREND_fnc_log;
-};
 
 call TREND_fnc_initGlobalVars;
 

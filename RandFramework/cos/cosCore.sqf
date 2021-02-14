@@ -6,9 +6,6 @@ _pos = (_this select 1);
 //Hint format["TESTTEST2: %1", _pos];
 //sleep 3;
 
-if (isNil "TREND_bAndSoItBegins") then { TREND_bAndSoItBegins = false; publicVariable "TREND_bAndSoItBegins"; };
-if (isNil "TREND_CustomObjectsSet") then { TREND_CustomObjectsSet = false; publicVariable "TREND_CustomObjectsSet"; };
-
 waitUntil {sleep 2; TREND_bAndSoItBegins && TREND_CustomObjectsSet};
 
 if (!TREND_MissionLoaded) exitWith {};
@@ -17,7 +14,6 @@ if (!TREND_MissionLoaded) exitWith {};
 
 _mainObjPos = TREND_ObjectivePossitions select 0;
 _mrkHQPos = getMarkerPos "mrkHQ";
-if (isNil "TREND_MissionLoaded") then { TREND_MissionLoaded =   false; publicVariable "TREND_MissionLoaded"; };
 if (_pos distance _mainObjPos < 1500) exitWith {};
 if (_pos distance _mrkHQPos < 1500) exitWith {};
 

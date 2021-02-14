@@ -9,8 +9,6 @@ params [
 ];
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
-if (isNil "TREND_OccupiedHousesPos") then { TREND_OccupiedHousesPos =   []; publicVariable "TREND_OccupiedHousesPos"; };
-
 _dAngleAdustPerLoop = 0;
 _bHasVehicle = false;
 
@@ -96,7 +94,6 @@ if (_sideType == 4) then { //if mission is informat, then dont be walkig around
 	_InformantObject setPosATL (selectRandom _allpositionsMainBuiding);
 };
 
-if (isNil "TREND_AllowAOFires") then { TREND_AllowAOFires =   true; publicVariable "TREND_AllowAOFires"; };
 //if (true) then {
 if (TREND_AllowAOFires && _selectRandomW && !_bThisMissionCivsOnly) then {
 	//"test_EmptyObjectForFireBig" createVehicle position board2;
@@ -180,7 +177,6 @@ if (!_bFriendlyInsurgents) then {
 		_bHasPatrols = false;
 		if (_bIsMainObjective) then {_bHasPatrols = true};
 
-		if (isNil "TREND_PatrolType") then { TREND_PatrolType =   0; publicVariable "TREND_PatrolType"; };
 		_bSmallerAllOverPatrols = random 1 < .50 || TREND_PatrolType == 1 || TREND_PatrolType == 2; //if single mission and random 50/50, or if forced by custom mission
 
 		if (_minimission) then {

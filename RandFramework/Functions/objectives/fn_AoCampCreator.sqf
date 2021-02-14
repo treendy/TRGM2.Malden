@@ -41,6 +41,7 @@ if (isServer) then {
 	["Mission Setup: 5", true] call TREND_fnc_log;
 
 	TREND_AOCampPos = _flatPos;
+	publicVariable "TREND_AOCampPos";
 	_markerFastResponseStart = createMarker ["mrkFastResponseStart", _flatPos];
 	_markerFastResponseStart setMarkerShape "ICON";
 

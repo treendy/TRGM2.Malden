@@ -1,7 +1,6 @@
 
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 _isCampaign = (TREND_iMissionParamType == 5);
-if (isNil "TREND_CoreCompleted") then { TREND_CoreCompleted =   false; publicVariable "TREND_CoreCompleted"; };
 
 waituntil {sleep 2; TREND_CoreCompleted};
 
@@ -91,12 +90,6 @@ if (TREND_MaxBadPoints >= 10) then {
 else {
 	titleText ["", "BLACK IN", 5];
 	//titleText [format["Day %1 - %2.\nObjective: %3\nLocation: %4",TREND_iCampaignDay,_time24,TREND_CurrentZeroMissionTitle,_locationText], "BLACK IN", 5];
-};
-
-
-if (isNil "TREND_NewMissionMusic") then {
-	TREND_NewMissionMusic = selectRandom TREND_ThemeAndIntroMusic;
-	publicVariable "TREND_NewMissionMusic";
 };
 
 ace_hearing_disableVolumeUpdate = true;

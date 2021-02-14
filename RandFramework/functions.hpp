@@ -63,6 +63,7 @@ class TREND {
         class convoy{};
         class createConvoy{};
         class debugDotMarker {};
+        class deleteTrash {};
         class enemyAirSupport{};
         class fireAOFlares{};
         class fireIllumFlares{};

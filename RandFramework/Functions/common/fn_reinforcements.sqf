@@ -48,15 +48,10 @@ if ((_LZMrk select 0) isEqualTo 0 && (_LZMrk select 1) isEqualTo 0) exitWith {};
 
 if (!isServer) exitWith {};
 
-if (isNil "TREND_ReinforcementsCalled") then {TREND_ReinforcementsCalled = 0; publicVariable "TREND_ReinforcementsCalled";};
-
 sleep(_AdditionalUnitCreationDelay);
 
 if (TREND_ReinforcementsCalled > 4) exitWith {};
 TREND_ReinforcementsCalled = TREND_ReinforcementsCalled + 1; publicVariable "TREND_ReinforcementsCalled";
-
-if (isNil "TREND_TimeLastReinforcementsCalled") then {TREND_TimeLastReinforcementsCalled = time; publicVariable "TREND_TimeLastReinforcementsCalled";};
-if (isNil "TREND_TimeSinceAdditionalReinforcementsCalled") then {TREND_TimeSinceAdditionalReinforcementsCalled = time; publicVariable "TREND_TimeSinceAdditionalReinforcementsCalled";};
 
 if (_useStandardDelay && {(time - TREND_TimeLastReinforcementsCalled) < (call TREND_GetSpottedDelay)}) exitWith {};
 if (!_useStandardDelay && {(time - TREND_TimeSinceAdditionalReinforcementsCalled) < (call TREND_GetSpottedDelay * 1.5)}) exitWith {}; //Using 1.5 multiplier for the delay so the main and additional triggers don't fire at the same time.
@@ -161,34 +156,6 @@ if (_debugMode) then {player globalChat format ["Helicopter Total Crew Count: %1
 //Enable body deletion if the _bodyDelete parameter is passed as true
 if (_bodyDelete) then {
 	{_x addMPEventhandler ["MPKilled",{[(_this select 0)] spawn TREND_fnc_deleteTrash}]} forEach crew (_helo select 0) + [(_helo select 0)];
-		if (isNil "TREND_bodyDeleteInit") then {
-			TREND_bodyDeleteInit = 1;
-
-				TREND_fnc_deleteTrash = {
-					sleep 60;
-					hideBody (_this select 0);
-					sleep 5;
-					deleteVehicle (_this select 0);
-				};
-		};
-};
-
-if (isNil "TREND_debugInit") then {
-	TREND_debugInit = 1;
-	if (_debugMode) then {
-		["Teleport_ID", "onMapSingleClick", "TREND_fnc_teleport"] call BIS_fnc_addStackedEventHandler;
-
-		TREND_fnc_teleport = {
-			player setPos _pos;
-			{
-				_grpPos = [player, 10 + (random 15), random 360] call BIS_fnc_relPos;
-				_x setPosATL _grpPos;
-			} forEach units (group player);
-			hintSilent format ["Moved to grid %1", mapGridPosition player];
-		};
-
-	};
-
 };
 
 //Find a flat position around the LZ marker & create an HPad there.

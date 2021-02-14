@@ -35,11 +35,6 @@ fnc_AddToDirection = {
 	_iResult;
 };
 
-if (isNil "TREND_CheckPointAreas") then { TREND_CheckPointAreas =   []; publicVariable "TREND_CheckPointAreas"; };
-if (isNil "TREND_SentryAreas") then { TREND_SentryAreas =   []; publicVariable "TREND_SentryAreas"; };
-if (isNil "TREND_ISUNSUNG") then { TREND_ISUNSUNG =   false; publicVariable "TREND_ISUNSUNG"; };
-
-
 //{deleteVehicle _x} forEach nearestObjects [player, ["all"], 200];
 
 

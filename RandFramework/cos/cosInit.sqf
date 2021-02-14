@@ -18,11 +18,6 @@ if (isnil "SERVER") then {Hint "You must ADD a object named SERVER";Player Sidec
 if (isServer) then {
 IF (!isnil ("COScomplete")) then {Hint "Check your call. COS was called twice!";}else{
 
-if (isNil "TREND_bAndSoItBegins") then { TREND_bAndSoItBegins =   false; publicVariable "TREND_bAndSoItBegins"; };
-if (isNil "TREND_CustomObjectsSet") then { TREND_CustomObjectsSet =   false; publicVariable "TREND_CustomObjectsSet"; };
-if (isNil "TREND_MissionParamsSet") then { TREND_MissionParamsSet =   false; publicVariable "TREND_MissionParamsSet"; };
-if (isNil "TREND_IsFullMap") then { TREND_IsFullMap =   false; publicVariable "TREND_IsFullMap"; };
-
 waitUntil {sleep 2; TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_MissionParamsSet};
 
 if (TREND_IsFullMap) Then {

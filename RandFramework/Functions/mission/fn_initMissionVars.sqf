@@ -2,8 +2,6 @@
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 bDebugging = false;
 
-if (isNil "TREND_ToUseMilitia_Side") then {TREND_ToUseMilitia_Side = false; publicVariable "TREND_ToUseMilitia_Side";};
-
 sRiflemanToUse = 		{ if (TREND_ToUseMilitia_Side) exitWith {(call sRiflemanMilitia);}; 		(call sRifleman); };
 sTeamleaderToUse = 		{ if (TREND_ToUseMilitia_Side) exitWith {(call sTeamleaderMilitia);}; 		(call sTeamleader); };
 sATManToUse = 			{ if (TREND_ToUseMilitia_Side) exitWith {(call sATManMilitia);}; 			(call sATMan); };
