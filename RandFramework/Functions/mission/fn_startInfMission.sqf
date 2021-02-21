@@ -249,14 +249,24 @@ switch (TREND_iMissionSetup) do {
 //HERE.... two objectives at one AO : as above, but also... randomo chance of third mission (inttel or mission)
 
 if (!(isNil "IsTraining")) then {
-		_ThisTaskTypes = [12,8,3];
-		_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-		_MarkerTypes = ["mil_objective","mil_objective","mil_objective"];
-		_CreateTasks = [true,true,true];
-		_SamePrevAOStats = [false,false,false];
-		_bSideMissionsCivOnly = [false,false,false];
-		TREND_MaxBadPoints = 100;
+	_ThisTaskTypes = [12,8,3];
+	_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+	_MarkerTypes = ["mil_objective","mil_objective","mil_objective"];
+	_CreateTasks = [true,true,true];
+	_SamePrevAOStats = [false,false,false];
+	_bSideMissionsCivOnly = [false,false,false];
+	TREND_MaxBadPoints = 100;
 };
+
+if (TREND_bDebugMode) then {
+	_ThisTaskTypes = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
+	_IsMainObjs = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+	_MarkerTypes = ["mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective"];
+	_CreateTasks = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
+	_SamePrevAOStats = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+	_bSideMissionsCivOnly = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+	TREND_MaxBadPoints = 100;
+}
 
 TREND_MissionParamsSet =  true; publicVariable "TREND_MissionParamsSet";
 
