@@ -266,7 +266,7 @@ if (TREND_bDebugMode) then {
 	_SamePrevAOStats = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
 	_bSideMissionsCivOnly = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
 	TREND_MaxBadPoints = 100;
-}
+};
 
 TREND_MissionParamsSet =  true; publicVariable "TREND_MissionParamsSet";
 
