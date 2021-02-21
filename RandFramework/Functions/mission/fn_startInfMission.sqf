@@ -326,111 +326,122 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 			#include "..\..\Missions\hackDataMission.sqf"; //Hack Data
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
+			_args = ["Hacked data, reputation increased", 1, "Hacked data"];
 		};
 		case 2: {
 			#include "..\..\Missions\stealDataFromResearchVehMission.sqf"; //Steal data from research vehicle
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
+			_args = ["Data secured, reputation increased", 1, "Downloaded research data"];
 		};
 		case 3: {
 			#include "..\..\Missions\destroyVehiclesMission.sqf"; //Destroy ammo trucks
 			[localize "STR_TRGM2_startInfMission_MissionTitle3"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
-			_args = [selectRandom (call sideAmmoTruck), "Destroyed ammo trucks", localize "STR_TRGM2_startInfMission_MissionTitle3_Destory", [localize "STR_TRGM2_startInfMission_MissionTitle3_Desc"]];
+			_args = [localize "STR_TRGM2_startInfMission_MissionTitle3_Destory", 1, "Destroyed ammo trucks", selectRandom (call sideAmmoTruck), [localize "STR_TRGM2_startInfMission_MissionTitle3_Desc"]];
 		};
 		case 4: {
 			#include "..\..\Missions\hvtMission.sqf" //Speak with informant
 			[localize "STR_TRGM2_startInfMission_MissionTitle4"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
-			_args = [selectRandom InformantClasses, Civilian, "SPEAK", "", localize "STR_TRGM2_startInfMission_MissionTitle8_Button2", "", "", [(localize "STR_TRGM2_startInfMission_MissionTitle4_Desc") + TREND_InformantImage]];
+			_args = ["", 0, "", selectRandom InformantClasses, Civilian, "SPEAK", "", localize "STR_TRGM2_startInfMission_MissionTitle8_Button2", [(localize "STR_TRGM2_startInfMission_MissionTitle4_Desc") + TREND_InformantImage]];
 		};
 		case 5: {
 			#include "..\..\Missions\hvtMission.sqf" //interrogate officer
 			[localize "STR_TRGM2_startInfMission_MissionTitle5"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
-			_args = [selectRandom InterogateOfficerClasses, TREND_EnemySide, "INTERROGATE", localize "STR_TRGM2_startInfMission_MissionTitle8_Button", localize "STR_TRGM2_startInfMission_MissionTitle8_Button2", "", "", [(localize "STR_TRGM2_startInfMission_MissionTitle5_Desc") + TREND_OfficerImage]];
+			_args = ["", 0, "", selectRandom InterogateOfficerClasses, TREND_EnemySide, "INTERROGATE", localize "STR_TRGM2_startInfMission_MissionTitle8_Button", localize "STR_TRGM2_startInfMission_MissionTitle8_Button2", [(localize "STR_TRGM2_startInfMission_MissionTitle5_Desc") + TREND_OfficerImage]];
 		};
 		case 6: {
 			#include "..\..\Missions\bugRadioMission.sqf"; //Transmit Enemy Comms to HQ
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
+			_args = ["Bugged radio, reputation increased.", 0.5, "Bugged radio"];
 		};
 		case 7: {
 			#include "..\..\Missions\hvtMission.sqf" //Eliminate Officer   -   gain 1 point if side, if main, need to id him before complete
 			[localize "STR_TRGM2_startInfMission_MissionTitle7"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
-			_args = [selectRandom InterogateOfficerClasses, TREND_EnemySide, "KILL", localize "STR_TRGM2_startInfMission_MissionTitle8_Button", "", localize "STR_TRGM2_startInfMission_MissionTitle8_Eliminated", "HVT Killed", [(localize "STR_TRGM2_startInfMission_MissionTitle7_Desc") + (["", localize "STR_TRGM2_startInfMission_MissionTitle8_MustSearch"] select (_bIsMainObjective)) + TREND_OfficerImage]];
+			_args = [localize "STR_TRGM2_startInfMission_MissionTitle8_Eliminated", 1, "HVT Killed", selectRandom InterogateOfficerClasses, TREND_EnemySide, "KILL", localize "STR_TRGM2_startInfMission_MissionTitle8_Button", "", [(localize "STR_TRGM2_startInfMission_MissionTitle7_Desc") + (["", localize "STR_TRGM2_startInfMission_MissionTitle8_MustSearch"] select (_bIsMainObjective)) + TREND_OfficerImage]];
 		};
 		case 8: {
 			#include "..\..\Missions\hvtMission.sqf" //Assasinate weapon dealer   -   gain 1 point if side, no intel from him... if main need to id him before complete
 			[localize "STR_TRGM2_startInfMission_MissionTitle8"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
-			_args = [selectRandom WeaponDealerClasses, Civilian, "KILL", localize "STR_TRGM2_startInfMission_MissionTitle8_Button", "", localize "STR_TRGM2_startInfMission_MissionTitle8_Eliminated", "HVT Killed", [(localize "STR_TRGM2_startInfMission_MissionTitle8_Desc") + (["", localize "STR_TRGM2_startInfMission_MissionTitle8_MustSearch"] select (_bIsMainObjective)) + TREND_WeaponDealerImage]];
+			_args = [localize "STR_TRGM2_startInfMission_MissionTitle8_Eliminated", 1, "HVT Killed", selectRandom WeaponDealerClasses, Civilian, "KILL", localize "STR_TRGM2_startInfMission_MissionTitle8_Button", "", [(localize "STR_TRGM2_startInfMission_MissionTitle8_Desc") + (["", localize "STR_TRGM2_startInfMission_MissionTitle8_MustSearch"] select (_bIsMainObjective)) + TREND_WeaponDealerImage]];
 		};
 		case 9: {
 			#include "..\..\Missions\destroyVehiclesMission.sqf"; //Destroy AAA vehicles
 			[localize "STR_TRGM2_startInfMission_MissionTitle9"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
-			_args = [selectRandom (call DestroyAAAVeh), "Destroyed AAA", localize "STR_TRGM2_startInfMission_MissionTitle9_Destory", [localize "STR_TRGM2_startInfMission_MissionTitle9_Desc"]];
+			_args = [localize "STR_TRGM2_startInfMission_MissionTitle9_Destory", 1, "Destroyed AAA", selectRandom (call DestroyAAAVeh), [localize "STR_TRGM2_startInfMission_MissionTitle9_Desc"]];
 		};
 		case 10: {
 			#include "..\..\Missions\destroyVehiclesMission.sqf"; //Destroy Artillery vehicles
 			[localize "STR_TRGM2_startInfMission_MissionTitle10"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
-			_args = [selectRandom (call sArtilleryVeh), "Destroyed Artillery", localize "STR_TRGM2_startInfMission_MissionTitle10_Destory", [localize "STR_TRGM2_startInfMission_MissionTitle10_Desc"]];
+			_args = [localize "STR_TRGM2_startInfMission_MissionTitle10_Destory", 1, "Destroyed Artillery", selectRandom (call sArtilleryVeh), [localize "STR_TRGM2_startInfMission_MissionTitle10_Desc"]];
 		};
 		case 11: {
 			#include "..\..\Missions\hvtMission.sqf" //Rescue POW
 			[localize "STR_TRGM2_Rescue_POW"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
-			_args = [selectRandom FriendlyVictims, TREND_FriendlySide, "RESCUE", "", "", "", "Rescued a POW", ["We need you to locate and rescue our POW, the enemy are trying to gain valuable information from our guy!"]];
+			_args = ["Rescued a POW, reputation increased.", 1, "Rescued a POW", selectRandom FriendlyVictims, TREND_FriendlySide, "RESCUE", "", "", ["We need you to locate and rescue our POW, the enemy are trying to gain valuable information from our guy!"]];
 		};
 		case 12: {
 			#include "..\..\Missions\hvtMission.sqf"; //Rescue Reporter
 			[localize "STR_TRGM2_Rescue_Reporter"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
-			_args = [selectRandom Reporters, Civilian, "RESCUE", "", "", "", "Rescued a Reporter", ["We need you to locate and rescue a reporter!"]];
+			_args = ["Rescued a Reporter, reputation increased.", 1, "Rescued a Reporter", selectRandom Reporters, Civilian, "RESCUE", "", "", ["We need you to locate and rescue a reporter!"]];
 		};
 		case 13: {
 			#include "..\..\Missions\defuseIEDsMission.sqf"; //defuse 3 IEDs
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
+			_args = ["Defused IEDs, reputation increased.", 1, "Defused IEDs"];
 		};
 		case 14: {
 			#include "..\..\Missions\bombDisposalMission.sqf"; //defuse 3 IEDs
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
+			_args = ["Defused Bomb, reputation increased.", 1, "Defused Bomb"];
 		};
 		case 15: {
 			#include "..\..\Missions\searchAndDestroyMission.sqf"; //Search and Destroy
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
+			_args = ["Targets destoryed, reputation increased.", 1, "Targets destoryed"];
 		};
 		case 16: {
 			#include "..\..\Missions\destroyCacheMission.sqf"; //Destroy Cache
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
+			_args = ["Cache destoryed, reputation increased.", 1, "Cache destoryed"];
 		};
 		case 17:  {
 			#include "..\..\Missions\secureAndResupplyMission.sqf"; //Secure and Resupply
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
+			_args = ["Area Cleared, reputation increased.", 1, "Area Cleared"];
 		};
 		case 18:  {
 			#include "..\..\Missions\meetingAssassinationMission.sqf"; //Meeting Assassination
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
+			_args = ["HVT assassinated, reputation increased.", 1, "HVT assassinated"];
 		};
 		case 19:  {
 			#include "..\..\Missions\ambushConvoyMission.sqf"; //Ambush Convoy
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
+			_args = ["Convoy eliminated, reputation increased.", 1, "Convoy eliminated"];
 		};
 		case 99999: {
 			//[format["pre: %1",_RequiresNearbyRoad]] call TREND_fnc_notify; sleep 2;
 			//#include "..\..\CustomMission\customMission.sqf"; //Custom Mission
 			//call fnc_CustomVars;
 			//[format["post: %1",_RequiresNearbyRoad]] call TREND_fnc_notify; sleep 2;
+			//_args = ["Objective completed, reputation increased.", 1, "Objective completed"];
 		};
 		default { };
 	};
@@ -548,7 +559,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 					//###################################### CUSTOM MISSION ######################################
 					["Mission Setup: 8-0-10", true] call TREND_fnc_log;
 					if (_iThisTaskType == 99999 || _bNewTaskSetup) then {
-						[_MarkerType,_infBuilding,_inf1X,_inf1Y,_roadSearchRange, _bCreateTask, _iTaskIndex, _bIsMainObjective, _args] call fnc_CustomMission;
+						[_MarkerType, _infBuilding, _inf1X, _inf1Y, _roadSearchRange, _bCreateTask, _iTaskIndex, _bIsMainObjective, _args] call fnc_CustomMission;
 					};
 					//############################################################################################
 					["Mission Setup: 8-2", true] call TREND_fnc_log;

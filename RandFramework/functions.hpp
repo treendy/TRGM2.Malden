@@ -145,7 +145,6 @@ class TREND {
         class AoCampCreator {};
         class bugRadio1{};
         class commsBlocked{};
-        class downloadResearchData{};
         class hackIntel1{};
         class OccupyHouses{};
         class setATMineEvent{};
@@ -159,6 +158,7 @@ class TREND {
         class setOtherAreaStuff{};
         class setTargetEvent{};
         class SpeakToFriendlyCheckpoint{};
+        class updateTask{};
     };
 
     class location {
@@ -201,7 +201,6 @@ class TREND {
         class badCivTurnHostile{};
         class badReb{};
         class CivKilled{};
-        class IdentifyHVT{};
         class InsKilled{};
         class InterrogateOfficer{};
         class ParamedicKilled{};

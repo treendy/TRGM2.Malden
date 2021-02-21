@@ -35,6 +35,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in fnc_CustomVars)
 	 * _bCreateTask 			: DO NOT EDIT THIS VALUE (this is determined by the player, if the player selected to play a hidden mission, the task is not created!)
 	 * _iTaskIndex 				: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the index of the task used to determine mission/task completion!)
+	 * _bIsMainObjective 		: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the boolean if the mission is a Heavy or Standard mission!)
 	 * _args 					: These are additional arguments that might be required for the mission, for an example, see the Destroy Vehicles Mission.
 	 * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	*/
@@ -142,6 +143,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	missionNamespace setVariable [_sTargetName2, _guardUnit3];
 
 	_mainHVT setVariable ["taskStatus","",true];
+	_mainHVT setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 
 	[_mainHVT, ["This is our target!","{[""This is our target""] call TREND_fnc_notify; }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 	[_guardUnit3, ["This is our friendly agent!","{[""This is our target""] call TREND_fnc_notify; }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
@@ -455,28 +457,21 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 	if (!_bCreateTask) then {
 		_sAliveCheck = format["%1 getVariable [""taskStatus"",""""] == ""KILLED"" ",_sTargetName];
-		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Killed HVT at meeting""] spawn TREND_fnc_AdjustMaxBadPoints; [(""HVT Killed, rep increased"")] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
+		_customTaskClear setTriggerStatements [_sAliveCheck, "[_mainHVT, ""succeeded"", ""Killed HVT at meeting"", ""HVT Killed, rep increased""] spawn TREND_fnc_updateTask;", ""];
 
 		_sAliveCheck2 = format["%1 getVariable [""taskStatus"",""""] == ""KILLED""",_sTargetName2];
-		_customTaskFailed setTriggerStatements [_sAliveCheck2, " [0.8, ""our agent was killed!!!""] spawn TREND_fnc_AdjustBadPoints; [(""You killed our agent! Rep lowered"")] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
+		_customTaskFailed setTriggerStatements [_sAliveCheck2, "[_mainHVT, ""failed"", ""Our agent was killed!!!"", ""You killed our agent! Rep lowered"", 0.8] spawn TREND_fnc_updateTask;", ""];
 
-		//decided not to adjust rep if he escapes when no task cretaed, as this is means it's an optional task
-		//_sAliveCheck3 = format["""%1"" == ""ESCAPED"" ",_taskState];
-		//_customTaskEscaped setTriggerStatements [_sAliveCheck3, " [0.8, ""He got away!!!""] spawn TREND_fnc_AdjustBadPoints; [(""HVT Escaped"")] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
 	}
 	else {
 		_sAliveCheck = format["(%1 getVariable [""taskStatus"",""""] == ""KILLED"" || (%1 getVariable [""taskStatus"",""""] == ""DOCTAKEN"")) && !([""InfSide%2""] call FHQ_fnc_ttAreTasksCompleted)",_sTargetName,_iTaskIndex];
-		//TESTTEST = _sAliveCheck;
-		//"objInformant0 getVariable [""taskStatus"",""""] == ""KILLED"" && !([""InfSide0""] call FHQ_fnc_ttAreTasksCompleted)"
-		_sTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";",_iTaskIndex];
-		_customTaskClear setTriggerStatements [_sAliveCheck, _sTaskComplete, ""];
+		_customTaskClear setTriggerStatements [_sAliveCheck, "[_mainHVT, ""succeeded"", ""Killed HVT in Convoy"", ""HVT Killed, rep increased""] spawn TREND_fnc_updateTask;", ""];
+
 		_sAliveCheck2 = format["(%1 getVariable [""taskStatus"",""""] == ""KILLED"")",_sTargetName2];
-		_sTaskFail = format["[""InfSide%1"", ""failed""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";",_iTaskIndex];
-		_customTaskFailed setTriggerStatements [_sAliveCheck2, _sTaskFail, ""];
+		_customTaskFailed setTriggerStatements [_sAliveCheck2, "[_mainHVT, ""failed"", ""Our agent was killed!!!"", ""You killed our agent! Rep lowered"", 0.8] spawn TREND_fnc_updateTask;", ""];
 
 		_sAliveCheck3 = format["%1 getVariable [""taskStatus"",""""] == ""ESCAPED"" ",_sTargetName];
-		_sTaskFail2 = format["[""InfSide%1"", ""failed""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";",_iTaskIndex];
-		_customTaskEscaped setTriggerStatements [_sAliveCheck3, _sTaskFail2, ""];
+		_customTaskEscaped setTriggerStatements [_sAliveCheck3, "[_mainHVT, ""failed"", ""HVT Escaped"", ""HVT Escaped, rep lowered"", 1] spawn TREND_fnc_updateTask;", ""];
 	};
 
 	_MissionTitle = format["Meeting Assassination: %1",name(_mainHVT)];	//you can adjust this here to change what shows as marker and task text

@@ -30,6 +30,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in fnc_CustomVars)
 	 * _bCreateTask 			: DO NOT EDIT THIS VALUE (this is determined by the player, if the player selected to play a hidden mission, the task is not created!)
 	 * _iTaskIndex 				: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the index of the task used to determine mission/task completion!)
+	 * _bIsMainObjective 		: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the boolean if the mission is a Heavy or Standard mission!)
 	 * _args 					: These are additional arguments that might be required for the mission, for an example, see the Destroy Vehicles Mission.
 	 * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	*/
@@ -63,6 +64,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_target1 = createVehicle [_targetToUse,[0,0,0],[],0,"NONE"];
 	_sTargetName1 = format["objInformant%1",_iTaskIndex];
 	_target1 setVariable [_sTargetName1, _target1, true];
+	_target1 setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 	missionNamespace setVariable [_sTargetName1, _target1];
 	[_mainObjPos,100,true,true,_target1, _isCache] spawn TREND_fnc_setTargetEvent;
 
@@ -71,34 +73,27 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	if (_isCache2) then {
 		_targetToUse2 = selectRandom _targetCaches;
 	};
-	_IED2 = createVehicle [_targetToUse2,[-25,-25,0],[],0,"NONE"];
+	_target2 = createVehicle [_targetToUse2,[-25,-25,0],[],0,"NONE"];
 	_sTargetName2 = format["objInformant2_%1",_iTaskIndex];
-	_IED2 setVariable [_sTargetName2, _IED2, true];
-	missionNamespace setVariable [_sTargetName2, _IED2];
-	[_mainObjPos,_spacingBetweenTargets,true,true,_IED2, _isCache2] spawn TREND_fnc_setTargetEvent;
+	_target2 setVariable [_sTargetName2, _target2, true];
+	missionNamespace setVariable [_sTargetName2, _target2];
+	[_mainObjPos,_spacingBetweenTargets,true,true,_target2, _isCache2] spawn TREND_fnc_setTargetEvent;
 
 	_targetToUse3 = selectRandom _targetVehs;
 	_isCache3 = true;
 	if (_isCache3) then {
 		_targetToUse3 = selectRandom _targetCaches;
 	};
-	_IED3 = createVehicle [_targetToUse3,[-50,-50,0],[],0,"NONE"];
+	_target3 = createVehicle [_targetToUse3,[-50,-50,0],[],0,"NONE"];
 	_sTargetName3 = format["objInformant3_%1",_iTaskIndex];
-	_IED3 setVariable [_sTargetName3, _IED3, true];
-	missionNamespace setVariable [_sTargetName3, _IED3];
-	[_mainObjPos,_spacingBetweenTargets,true,true,_IED3, _isCache3] spawn TREND_fnc_setTargetEvent;
+	_target3 setVariable [_sTargetName3, _target3, true];
+	missionNamespace setVariable [_sTargetName3, _target3];
+	[_mainObjPos,_spacingBetweenTargets,true,true,_target3, _isCache3] spawn TREND_fnc_setTargetEvent;
 
-	_customTaskClear = nil;
-	_customTaskClear = createTrigger ["EmptyDetector", [0,0]];
-	_customTaskClear setVariable ["DelMeOnNewCampaignDay",true];
 
-	_sAliveCheck = format["!alive %1 && !alive %2 && !alive %3 && !([""InfSide%4""] call FHQ_fnc_ttAreTasksCompleted)",_sTargetName1,_sTargetName2,_sTargetName3,_iTaskIndex];
-
-	if (!_bCreateTask) then {
-		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Targets Destroyed""] spawn TREND_fnc_AdjustMaxBadPoints; [(""Targets Destroyed, Rep increased"")] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
-	}
-	else {
-		_sTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";",_iTaskIndex];
-		_customTaskClear setTriggerStatements [_sAliveCheck, _sTaskComplete, ""];
+	_allTargets = [_target1, _target2, _target3];
+	[] spawn {
+		waitUntil { ({!alive _x} count _allTargets) isEqualTo (count _allTargets); };
+		_target1 spawn TREND_fnc_updateTask;
 	};
 };

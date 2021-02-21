@@ -41,6 +41,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in fnc_CustomVars)
 	 * _bCreateTask 			: DO NOT EDIT THIS VALUE (this is determined by the player, if the player selected to play a hidden mission, the task is not created!)
 	 * _iTaskIndex 				: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the index of the task used to determine mission/task completion!)
+	 * _bIsMainObjective 		: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the boolean if the mission is a Heavy or Standard mission!)
 	 * _args 					: These are additional arguments that might be required for the mission, for an example, see the Destroy Vehicles Mission.
 	 * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	*/
@@ -57,7 +58,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_objRadio1 setPosATL (selectRandom _allpositionsRadio1);
 
 	_objRadio1 setVariable ["taskIndex", _iTaskIndex, true];
-	_objRadio1 setVariable ["CreateTask", _bCreateTask, true];
+	_objRadio1 setVariable ["createTask", _bCreateTask, true];
+	_objRadio1 setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 
 	[_objRadio1, [localize "STR_TRGM2_startInfMission_MissionTitle6_Button", {_this spawn TREND_fnc_downloadData;}, [localize "STR_TRGM2_downloadData_title", true, "TREND_fnc_bugRadio1", [_iTaskIndex, _bCreateTask]], 0, true, true, "", "_this == player"]] remoteExec ["addAction", 0, true];
 

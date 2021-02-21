@@ -35,6 +35,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in fnc_CustomVars)
 	 * _bCreateTask 			: DO NOT EDIT THIS VALUE (this is determined by the player, if the player selected to play a hidden mission, the task is not created!)
 	 * _iTaskIndex 				: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the index of the task used to determine mission/task completion!)
+	 * _bIsMainObjective 		: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the boolean if the mission is a Heavy or Standard mission!)
 	 * _args 					: These are additional arguments that might be required for the mission, for an example, see the Destroy Vehicles Mission.
 	 * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	*/
@@ -231,6 +232,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			_guardUnit3 addEventHandler ["Killed", {(_this select 0) setVariable ["taskStatus","KILLED",true] }];
 		};
 
+		_mainHVT setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 		[_mainHVT, _thisiTaskIndex, _thisbIsMainObjective] spawn {
 			_thisHVT = _this select 0;
 			_thisTaskIndex = _this select 1;
@@ -274,28 +276,21 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 		if (!_thisbCreateTask) then {
 			_sAliveCheck = format["%1 getVariable [""taskStatus"",""""] == ""KILLED"" ", _sTargetName];
-			_sClearedStatement = format["[1, ""Killed HVT in Convoy""] spawn TREND_fnc_AdjustMaxBadPoints; [""HVT Killed, rep increased""] remoteExec [""Hint""]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", _thisiTaskIndex];
-
 			_sAliveCheck2 = format["%1 getVariable [""taskStatus"",""""] == ""KILLED""", _sTargetName2];
-			_sFailedStatement = format["[0.8, ""Our agent was killed!!!""] spawn TREND_fnc_AdjustBadPoints; [""You killed our agent! Rep lowered""] remoteExec [""Hint""]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", _thisiTaskIndex];
-
-			_customTaskClear setTriggerStatements [_sAliveCheck, _sClearedStatement, ""];
+			_customTaskClear setTriggerStatements [_sAliveCheck, "[_mainHVT, ""succeeded"", ""Killed HVT in Convoy"", ""HVT Killed, rep increased""] spawn TREND_fnc_updateTask;", ""];
 			if (_thishasInformant) then {
-				_customTaskFailed setTriggerStatements [_sAliveCheck2, _sFailedStatement, ""];
+				_customTaskFailed setTriggerStatements [_sAliveCheck2, "[_mainHVT, ""failed"", ""Our agent was killed!!!"", ""You killed our agent! Rep lowered"", 0.8] spawn TREND_fnc_updateTask;", ""];
 			};
 		} else {
 			_sAliveCheck = format["(%1 getVariable [""taskStatus"",""""] == ""KILLED"" || (%1 getVariable [""taskStatus"",""""] == ""DOCTAKEN"")) && !([""InfSide%2""] call FHQ_fnc_ttAreTasksCompleted)", _sTargetName, _thisiTaskIndex];
-			_sClearedStatement = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", _thisiTaskIndex];
 			_sAliveCheck2 = format["(%1 getVariable [""taskStatus"",""""] == ""KILLED"")", _sTargetName2];
-			_sFailedStatement = format["[""InfSide%1"", ""failed""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", _thisiTaskIndex];
 			_sAliveCheck3 = format["%1 getVariable [""taskStatus"",""""] == ""ESCAPED"" ", _sTargetName];
-			_sEscapedStatement = format["[""InfSide%1"", ""failed""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", _thisiTaskIndex];
 
-			_customTaskClear setTriggerStatements [_sAliveCheck, _sClearedStatement, ""];
+			_customTaskClear setTriggerStatements [_sAliveCheck, "[_mainHVT, ""succeeded"", ""Killed HVT in Convoy"", ""HVT Killed, rep increased""] spawn TREND_fnc_updateTask;", ""];
 			if (_thishasInformant) then {
-				_customTaskFailed setTriggerStatements [_sAliveCheck2, _sFailedStatement, ""];
+				_customTaskFailed setTriggerStatements [_sAliveCheck2, "[_mainHVT, ""failed"", ""Our agent was killed!!!"", ""You killed our agent! Rep lowered"", 0.8] spawn TREND_fnc_updateTask;", ""];
 			};
-			_customTaskEscaped setTriggerStatements [_sAliveCheck3, _sEscapedStatement, ""];
+			_customTaskEscaped setTriggerStatements [_sAliveCheck3, "[_mainHVT, ""failed"", ""HVT Escaped"", ""HVT Escaped, rep lowered"", 1] spawn TREND_fnc_updateTask;", ""];
 		};
 	};
 

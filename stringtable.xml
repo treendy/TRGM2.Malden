@@ -2107,8 +2107,8 @@
                 <Korean>5시간 동안 계속</Korean>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_ScriptsUsed">
-                <Original>RickOShay's Dust Storm Script&lt;br/&gt;Psycho's A3 Wounding System&lt;br/&gt;Alias's Monsoon, Blizzard, and Ambient Battle Scripts&lt;br/&gt;Modified Notification System by NumbNutsJunior aka Pizza Man</Original>
-                <English>RickOShay's Dust Storm Script&lt;br/&gt;Psycho's A3 Wounding System&lt;br/&gt;Alias's Monsoon, Blizzard, and Ambient Battle Scripts&lt;br/&gt;Modified Notification System by NumbNutsJunior aka Pizza Man</English>
+                <Original>RickOShay's Dust Storm Script&lt;br/&gt;Psycho's A3 Wounding System&lt;br/&gt;Alias's Monsoon, Blizzard, and Ambient Battle Scripts&lt;br/&gt;Modified Notification System by NumbNutsJunior aka Pizza Man&lt;br/&gt;Jonas Aschenbrenner's Dictionaries</Original>
+                <English>RickOShay's Dust Storm Script&lt;br/&gt;Psycho's A3 Wounding System&lt;br/&gt;Alias's Monsoon, Blizzard, and Ambient Battle Scripts&lt;br/&gt;Modified Notification System by NumbNutsJunior aka Pizza Man&lt;br/&gt;Jonas Aschenbrenner's Dictionaries</English>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions1">
                 <Original>This is the default mission type.  There will be one main objective that is occupied by a heavy enemy army.\n\nYou will also have two optional mini missions, these mini missions will either give you intel on the main AO, or will help increase your reputation depending on the mission type.</Original>

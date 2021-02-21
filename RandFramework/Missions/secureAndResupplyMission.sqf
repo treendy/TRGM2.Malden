@@ -30,14 +30,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in fnc_CustomVars)
 	 * _bCreateTask 			: DO NOT EDIT THIS VALUE (this is determined by the player, if the player selected to play a hidden mission, the task is not created!)
 	 * _iTaskIndex 				: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the index of the task used to determine mission/task completion!)
+	 * _bIsMainObjective 		: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the boolean if the mission is a Heavy or Standard mission!)
 	 * _args 					: These are additional arguments that might be required for the mission, for an example, see the Destroy Vehicles Mission.
 	 * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	*/
 	params ["_markerType","_objectiveMainBuilding","_centralAO_x","_centralAO_y","_roadSearchRange", "_bCreateTask", "_iTaskIndex", "_bIsMainObjective", ["_args", []]];
 	if (_markerType != "empty") then { _markerType = "hd_objective"; }; // Set marker type here...
 
-
-    //_MissionTitle = format["Meeting Assassination: %1",name(_mainHVT)];	//you can adjust this here to change what shows as marker and task text
     _sTaskDescription = selectRandom[localize "STR_TRGM2_ClearAreaMissionDescription"]; //adjust this based on veh? and man? if van then if car then?
 
     _mainObjPos = getPos _objectiveMainBuilding;
@@ -68,6 +67,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
     _flag setflagAnimationPhase 1;
     _flag setFlagTexture "\A3\Data_F\Flags\flag_red_CO.paa";
     _flag setVariable["TREND_flagSide", east, true];
+    _flag setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 
     //attach hold action to lowerflag and call supplydrop
     [
@@ -349,13 +349,5 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
     _customTaskClear setVariable["DelMeOnNewCampaignDay", true, true];
 
     _sTaskCheck = format["missionNamespace getVariable ['SupplyDropped_%1', 0] == 2 && !(['InfSide%1'] call FHQ_fnc_ttAreTasksCompleted)", _iTaskIndex];
-
-    if (!_bCreateTask) then {
-        _sTaskComplete = format["[1, 'Area Cleared'] spawn TREND_fnc_AdjustMaxBadPoints; [('Area Cleared, Rep increased')] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1 ] call BIS_fnc_nearestPosition); publicVariable 'TREND_ClearedPositions';", _iTaskIndex];
-        _customTaskClear setTriggerStatements[_sTaskCheck, _sTaskComplete, ""];
-    }
-    else {
-        _sTaskComplete = format["['InfSide%1', 'succeeded'] remoteExec ['FHQ_fnc_ttSetTaskState', 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable 'TREND_ClearedPositions';", _iTaskIndex];
-        _customTaskClear setTriggerStatements[_sTaskCheck, _sTaskComplete, ""];
-    };
+    _customTaskClear setTriggerStatements[_sTaskCheck, "[_flag] spawn TREND_fnc_updateTask;", ""];
 };

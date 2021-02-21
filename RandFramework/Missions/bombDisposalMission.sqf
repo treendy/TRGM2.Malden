@@ -30,6 +30,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in fnc_CustomVars)
 	 * _bCreateTask 			: DO NOT EDIT THIS VALUE (this is determined by the player, if the player selected to play a hidden mission, the task is not created!)
 	 * _iTaskIndex 				: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the index of the task used to determine mission/task completion!)
+	 * _bIsMainObjective 		: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the boolean if the mission is a Heavy or Standard mission!)
 	 * _args 					: These are additional arguments that might be required for the mission, for an example, see the Destroy Vehicles Mission.
 	 * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	*/
@@ -54,6 +55,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_objBomb1 setVariable [_sBomb1Name, _objBomb1, true];
 	missionNamespace setVariable [_sBomb1Name, _objBomb1];
 	_objBomb1 setPosATL (selectRandom _allpositionsBomb1);
+
+	_objBomb1 setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 
 	_objBomb1 setVariable ["missionBombCODE",_missionBombCODE,true];
 	_objBomb1 setVariable ["missionBombWire",_missionBombWire,true];
@@ -164,15 +167,12 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_sAliveCheck = format["%1 getVariable ['isDefused',false] && !([""InfSide%2""] call FHQ_fnc_ttAreTasksCompleted)",_sBomb1Name,_iTaskIndex];
 
 	if (!_bCreateTask) then {
-		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Defused Bomb""] spawn TREND_fnc_AdjustMaxBadPoints; [(""Defused IEDs, Rep increased"")] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objBomb" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", ""];
+		_customTaskClear setTriggerStatements [_sAliveCheck, "[_objBomb1] spawn TREND_fnc_updateTask;", ""];
 	}
 	else {
 		_sFailCheck = format["!alive %1 && !([""InfSide%2""] call FHQ_fnc_ttAreTasksCompleted)",_sBomb1Name,_iTaskIndex];
-		_sTaskFail = format["[""InfSide%1"", ""failed""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objBomb%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";",_iTaskIndex];
-		_customTaskFail setTriggerStatements [_sFailCheck, _sTaskFail, ""];
-
-		_sTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objBomb%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";",_iTaskIndex];
-		_customTaskClear setTriggerStatements [_sAliveCheck, _sTaskComplete, ""];
+		_customTaskFail setTriggerStatements [_sFailCheck, "[_objBomb1, ""failed""] spawn TREND_fnc_updateTask;", ""];
+		_customTaskClear setTriggerStatements [_sAliveCheck, "[_objBomb1] spawn TREND_fnc_updateTask;", ""];
 	};
 
 };

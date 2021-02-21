@@ -41,13 +41,14 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in fnc_CustomVars)
 	 * _bCreateTask 			: DO NOT EDIT THIS VALUE (this is determined by the player, if the player selected to play a hidden mission, the task is not created!)
 	 * _iTaskIndex 				: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the index of the task used to determine mission/task completion!)
+	 * _bIsMainObjective 		: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the boolean if the mission is a Heavy or Standard mission!)
 	 * _args 					: These are additional arguments that might be required for the mission, for an example, see the Destroy Vehicles Mission.
 	 * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	*/
 	params ["_markerType","_objectiveMainBuilding","_centralAO_x","_centralAO_y","_roadSearchRange", "_bCreateTask", "_iTaskIndex", "_bIsMainObjective", ["_args", []]];
 	if (_markerType != "empty") then { _markerType = "hd_unknown"; }; // Set marker type here...
 
-	_args params ["_infClassToUse", "_sideToUse", "_hvtType", "_searchText", "_getIntelText", "_repReasonOnComplete", "_hintStrOnComplete", "_missionDescriptions"];
+	_args params ["_repReasonOnComplete", "_repAmountOnComplete", "_hintStrOnComplete", "_infClassToUse", "_sideToUse", "_hvtType", "_searchText", "_getIntelText", "_missionDescriptions"];
 
 	// HVT Types: "RESCUE", "KILL", "INTERROGATE", or "SPEAK"
 	//###################################### HVT(s) ######################################
@@ -64,7 +65,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_objInformant setVariable [_sInformant1Name, _objInformant, true];
 	_objInformant setVariable ["taskIndex",_iTaskIndex, true];
 	_objInformant setVariable ["HVTType",_hvtType,true];
-	_objInformant setVariable ["CreateTask",_bCreateTask,true];
+	_objInformant setVariable ["createTask",_bCreateTask,true];
+	_objInformant setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 	missionNamespace setVariable [_sInformant1Name, _objInformant];
 	sleep 0.2;
 	_MissionTitle = _MissionTitle + ": " + name _objInformant;
@@ -130,7 +132,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	if (!(_hvtType isEqualTo "INTERROGATE")) then {
 		//pass in false so we know to just hint if this was our guy or not (just in case player wants to be sure before moving to next objective)
 		//only need to search if its a kill objective... if for example its "interogate officer", there will already be an action to get intel
-		[_objInformant, [_searchText, {_this spawn TREND_fnc_IdentifyHVT;}, [_iTaskIndex,false], 10, true, true, "", "_this distance _target < 3"]] remoteExec ["addAction", 0, true];
+		[_objInformant, [_searchText, {_this spawn TREND_fnc_updateTask;}, [_iTaskIndex,false], 10, true, true, "", "_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 	};
 
 	if (_hvtType isEqualTo "INTERROGATE" || _hvtType isEqualTo "KILL") then { //if interrogate or kill task
@@ -166,20 +168,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		if (_bIsMainObjective) then {
 			//if interrogate or kill, and is a main objective, then complete task when searched
 			//its only the main objective that we require the player to get to the body... otherwise, can kill him from a distance
-			[_objInformant, [_searchText, {_this spawn TREND_fnc_IdentifyHVT;}, [], 10, true, true, "", "_this distance _target < 3"]] remoteExec ["addAction", 0, true];
+			[_objInformant, [_searchText, {_this spawn TREND_fnc_updateTask;}, [], 10, true, true, "", "_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 		};
 
 		if (!_bIsMainObjective && _hvtType isEqualTo "KILL") then {
-			_trgKill = createTrigger ["EmptyDetector", [0,0]];
-			_trgKill setTriggerArea [0, 0, 0, false];
-			_trgKill setVariable ["DelMeOnNewCampaignDay",true];
-			if (!_bCreateTask) then {
-				_sKillTaskComplete = format["[1, %1] spawn TREND_fnc_AdjustMaxBadPoints; [%2] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%3] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", _repReasonOnComplete, _hintStrOnComplete, _iTaskIndex];
-				_trgKill setTriggerStatements [format["!alive(%1)",_sInformant1Name], _sKillTaskComplete, ""];
-			}
-			else {
-				_sKillTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";",_iTaskIndex];
-				_trgKill setTriggerStatements [format["!alive(%1) && !([""InfSide%2""] call FHQ_fnc_ttAreTasksCompleted)",_sInformant1Name,_iTaskIndex], _sKillTaskComplete, ""];
+			[] spawn {
+				waitUntil { !alive(_objInformant) };
+				_objInformant spawn TREND_fnc_updateTask;
 			};
 		};
 	}
@@ -202,8 +197,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 				_civ = _this select 0;
 				_player = _this select 1;
 				[_civ, _player] spawn TREND_fnc_CarryAndJoinWounded;
-				TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, _player] call BIS_fnc_nearestPosition);
-				publicVariable "TREND_ClearedPositions";
 			}]] remoteExecCall ["addAction", 0];
 
 			[_objInformant,["Join Group",{
@@ -215,42 +208,26 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 				_civ enableAI "anim";
 				_civ setCaptive false;
 				addSwitchableUnit _civ;
-				_taskIndex = _civ getVariable ["taskIndex",-1];
-				TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos _civ] call BIS_fnc_nearestPosition);
-				publicVariable "TREND_ClearedPositions";
 			}]] remoteExecCall ["addAction", 0];
 
 			TREND_fnc_POWCheck = {
-				_objManName = _this select 0;
-				_bCreateTask = _this select 1;
-				_iTaskIndex = _this select 2;
-				_repReason = _this select 3;
-				_objMan = missionNamespace getVariable _objManName;
+				_objMan = _this select 0;
 				_doLoop = true;
 				while {_doLoop} do {
 					if (!alive(_objMan)) then {
 						_doLoop = false;
-						_sName = format["InfSide%1",_iTaskIndex];
-						[_sName, "failed"] remoteExec ["FHQ_fnc_ttSetTaskState", 0, true];
+						[_objMan, "failed"] call TREND_fnc_updateTask;
 					};
 					if (_objMan distance (getMarkerPos "mrkHQ") < 500 || vehicle _objMan distance (getMarkerPos "mrkHQ") < 500) then {
 						_doLoop = false;
-						if (!_bCreateTask) then {
-							[0.2, _repReason] spawn TREND_fnc_AdjustMaxBadPoints;
-							[_objMan] join grpNull;
-							deleteVehicle _objMan;
-						}
-						else {
-							_sName = format["InfSide%1",_iTaskIndex];
-							[_sName, "succeeded"] remoteExec ["FHQ_fnc_ttSetTaskState", 0, true];
-							[_objMan] join grpNull;
-							deleteVehicle _objMan;
-						};
+						_objMan call TREND_fnc_updateTask;
+						[_objMan] join grpNull;
+						deleteVehicle _objMan;
 
 					};
 				};
 			};
-			[_sInformant1Name,_bCreateTask,_iTaskIndex,_repReasonOnComplete] spawn TREND_fnc_POWCheck;
+			[_objInformant] spawn TREND_fnc_POWCheck;
 		};
 	};
 	_sTaskDescription = selectRandom _missionDescriptions;

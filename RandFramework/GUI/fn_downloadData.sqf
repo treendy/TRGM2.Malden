@@ -72,4 +72,4 @@
 			_callbackArgs spawn (missionNamespace getVariable _callback);
 		};
 	};
-}] remoteExec ["spawn", -2];
+}] remoteExec ["spawn"];

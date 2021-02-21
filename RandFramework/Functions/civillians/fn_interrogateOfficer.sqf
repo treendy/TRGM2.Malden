@@ -6,7 +6,7 @@ if (isNil "_iSelected") then {
 	_iSelected = _thisCiv getVariable "taskIndex";
 };
 if (isNil "_bCreateTask") then {
-	_bCreateTask = _thisCiv getVariable "CreateTask";
+	_bCreateTask = _thisCiv getVariable "createTask";
 };
 
 if (side _caller == west) then {

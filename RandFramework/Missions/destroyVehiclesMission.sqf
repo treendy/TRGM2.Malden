@@ -41,6 +41,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in fnc_CustomVars)
 	 * _bCreateTask 			: DO NOT EDIT THIS VALUE (this is determined by the player, if the player selected to play a hidden mission, the task is not created!)
 	 * _iTaskIndex 				: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the index of the task used to determine mission/task completion!)
+	 * _bIsMainObjective 		: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the boolean if the mission is a Heavy or Standard mission!)
 	 * _args 					: These are additional arguments that might be required for the mission, for an example, see the Destroy Vehicles Mission.
 	 * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	*/
@@ -51,7 +52,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	["Mission Setup: 8-0-6", true] call TREND_fnc_log;
 
 	sAliveCheck = format["!([""InfSide%1""] call FHQ_fnc_ttAreTasksCompleted)", _iTaskIndex];
-	_args params ["_vehicleType", "_repReasonOnComplete", "_hintStrOnComplete", "_missionDescriptions"];
+	_args params ["_hintStrOnComplete", "_repAmountOnComplete", "_repReasonOnComplete", "_vehicleType", "_missionDescriptions"];
 
 	TREND_fnc_addTruckToDestroy = {
 		params ["_taskIndex", "_targetIndex", "_truckType", "_inf1X", "_inf1Y", "_blackListPos"];
@@ -101,36 +102,36 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 				[_objVehicle] spawn TREND_fnc_ArtiFireLoop1;
 			};
 
-			[_sTargetName, _flatPos];
+			[_sTargetName, _flatPos, _objVehicle];
 		};
 		[nil, nil];
 	};
 
 	_blackListPositions = [];
 	_firstTargetName = format["objInformant0_%1", _iTaskIndex];
+	_firstTarget = null;
+	_allTargets = [];
 	for [{private _i = 0}, {_i < selectRandom[2,3,4]}, {_i = _i + 1}] do {
 		private _returnArr = [_iTaskIndex, _i, _vehicleType, _centralAO_x, _centralAO_y, _blackListPositions] call TREND_fnc_addTruckToDestroy;
-		_returnArr params ["_sTargetName", "_aBlacklistPos"];
+		_returnArr params ["_sTargetName", "_aBlacklistPos", "_objVehicle"];
 		if (!isNil "_sTargetName") then {
 			sAliveCheck = sAliveCheck + format[" && !alive(%1)", _sTargetName];
-			if (_i == 0) then {_firstTargetName = _sTargetName};
+			_allTargets pushBack _objVehicle;
+			if (_i == 0) then {
+				_firstTargetName = _sTargetName;
+				_firstTarget = _objVehicle;
+				_firstTarget setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
+			};
 		};
 		if (!isNil "_aBlacklistPos" && {!(_aBlacklistPos isEqualTo [])}) then {
 			_blackListPositions pushBack [_aBlacklistPos, 50];
 		};
 	};
 
-	_triggerTruckClear = nil;
-	_triggerTruckClear = createTrigger ["EmptyDetector", [0,0]];
-	_triggerTruckClear setVariable ["DelMeOnNewCampaignDay",true];
-	if (!_bCreateTask) then {
-		_triggerTruckComplete = format["[1, %1] spawn TREND_fnc_AdjustMaxBadPoints; [%2] call TREND_fnc_notify; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos %4] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", _repReasonOnComplete, _hintStrOnComplete, _iTaskIndex, _firstTargetName];
-		_triggerTruckClear setTriggerStatements [sAliveCheck, _triggerTruckComplete, ""];
-	}
-	else {
-		_triggerTruckComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_fnc_ttSetTaskState"", 0]; TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, getPos %2] call BIS_fnc_nearestPosition); publicVariable ""TREND_ClearedPositions"";", _iTaskIndex, _firstTargetName];
-		_triggerTruckClear setTriggerStatements [sAliveCheck, _triggerTruckComplete, ""];
-
+	[] spawn {
+		waitUntil { ({!alive(_x)} count _allTargets) isEqualTo (count _allTargets); };
+		_firstTarget spawn TREND_fnc_updateTask;
 	};
+
 	_sTaskDescription = selectRandom _missionDescriptions;
 };
