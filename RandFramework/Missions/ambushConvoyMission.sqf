@@ -45,12 +45,12 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	private _hasInformant = random 1 < .50;
 
 	[_hasInformant, _markerType, _objectiveMainBuilding, _centralAO_x, _centralAO_y, _roadSearchRange, _bCreateTask, _iTaskIndex, _bIsMainObjective, _args] spawn {
-		params ["_thishasInformant", "_thismarkerType","_thisobjectiveMainBuilding","_thiscentralAO_x","_thiscentralAO_y","_thisroadSearchRange", "_thisbCreateTask", "_thisiTaskIndex", "_thisbIsMainObjective", ["_thisargs", []]];
+		params ["_hasInformant", "_markerType","_objectiveMainBuilding","_centralAO_x","_centralAO_y","_roadSearchRange", "_bCreateTask", "_iTaskIndex", "_bIsMainObjective", ["_args", []]];
 
 		_poshVehPos = nil;
 		_nearestRoad = nil;
 		_direction = nil;
-		_nearestRoad = [getPos _thisobjectiveMainBuilding, _thisroadSearchRange, []] call BIS_fnc_nearestRoad;
+		_nearestRoad = [getPos _objectiveMainBuilding, _roadSearchRange, []] call BIS_fnc_nearestRoad;
 		_roadConnectedTo = roadsConnectedTo _nearestRoad;
 		if (count _roadConnectedTo > 0) then {
 			_connectedRoad = _roadConnectedTo select 0;
@@ -59,15 +59,15 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		}
 		else {
 			_flatPos = nil;
-			_flatPos = [getPos _thisobjectiveMainBuilding, 10, 100, 10, 0, 0.3, 0,[],[getPos _thisobjectiveMainBuilding,getPos _thisobjectiveMainBuilding]] call TREND_fnc_findSafePos;
+			_flatPos = [getPos _objectiveMainBuilding, 10, 100, 10, 0, 0.3, 0,[],[getPos _objectiveMainBuilding,getPos _objectiveMainBuilding]] call TREND_fnc_findSafePos;
 			_poshVehPos = _flatPos;
 		};
 
 		_convoyStartPosition = [0,0,0];
 		while {_convoyStartPosition select 0 isEqualTo 0 && _convoyStartPosition select 1 isEqualTo 0} do {
-			_convoyStartPosition = [[[getPos _thisobjectiveMainBuilding, 3000]], ["water"], {isOnRoad _this && ((getPos _thisobjectiveMainBuilding) distance _this) > 2000}] call BIS_fnc_randomPos;
+			_convoyStartPosition = [[[getPos _objectiveMainBuilding, 3000]], ["water"], {isOnRoad _this && ((getPos _objectiveMainBuilding) distance _this) > 2000}] call BIS_fnc_randomPos;
 		};
-		_convoyNearestRoad = [_convoyStartPosition, _thisroadSearchRange, []] call BIS_fnc_nearestRoad;
+		_convoyNearestRoad = [_convoyStartPosition, _roadSearchRange, []] call BIS_fnc_nearestRoad;
 		_convoyRoadsConnected = roadsConnectedTo _convoyNearestRoad;
 		if (count _convoyRoadsConnected > 0) then {
 			_convoyConnectedRoad = _convoyRoadsConnected select 0;
@@ -94,7 +94,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			if (_forEachIndex mod 25 isEqualTo 0) then {
 				private _stopPosition = _x;
 				_convoyStopPositons pushBack _stopPosition;
-				private _stopMarker = createMarker [format["ConvoyStop%1_%2",count _convoyStopPositons,_thisiTaskIndex], _stopPosition];
+				private _stopMarker = createMarker [format["ConvoyStop%1_%2",count _convoyStopPositons,_iTaskIndex], _stopPosition];
 				_stopMarker setMarkerShape "ICON";
 				_stopMarker setMarkerType "mil_marker";
 				_stopMarker setMarkerText format["Convoy Stop %1", count _convoyStopPositons];
@@ -127,22 +127,23 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		] call TREND_fnc_createConvoy;
 		_convoyArr params ["_hvtGroup", "_convoyVehicles", "_hvtVehicle", "_mainHVT", "_finalwp"];
 
-		_sTargetName = format["objInformant%1",_thisiTaskIndex]; //ignore that it is "objInformant", all objectives have this name, do not change this!
+		_sTargetName = format["objInformant%1",_iTaskIndex]; //ignore that it is "objInformant", all objectives have this name, do not change this!
 		_mainHVT setVariable [_sTargetName, _mainHVT, true];
 		missionNamespace setVariable [_sTargetName, _mainHVT];
-		_mainHVT setVariable ["taskStatus","",true];
 		[_mainHVT, ["This is our target!","{[""This is our target""] call TREND_fnc_notify; }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 		_mainHVT setCaptive true;
 		removeAllWeapons _mainHVT;
 
-		if (_thishasInformant) then {
-			_guardUnit3 = selectRandom ((crew vehicle _mainHVT - [_mainHVT, driver vehicle _mainHVT]) select {typeOf(_x) in (InformantClasses + InterogateOfficerClasses + WeaponDealerClasses)});
-			_sTargetName2 = format["objInformant2_%1",_thisiTaskIndex];
+		_guardUnit3 = selectRandom ((crew vehicle _mainHVT - [_mainHVT, driver vehicle _mainHVT]) select {typeOf(_x) in (InformantClasses + InterogateOfficerClasses + WeaponDealerClasses)});
+		if (!isNil "_guardUnit3") then {
+			_sTargetName2 = format["objInformant2_%1",_iTaskIndex];
 			_guardUnit3 setVariable [_sTargetName2, _guardUnit3, true];
 			missionNamespace setVariable [_sTargetName2, _guardUnit3];
-			[_guardUnit3, ["This is our friendly agent!","{[""This is our friendly agent!""] call TREND_fnc_notify; }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
-			_guardUnit3 setCaptive true;
-			removeAllWeapons _guardUnit3;
+			if (_hasInformant) then {
+				[_guardUnit3, ["This is our friendly agent!","{[""This is our friendly agent!""] call TREND_fnc_notify; }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
+				_guardUnit3 setCaptive true;
+				removeAllWeapons _guardUnit3;
+			};
 		};
 
 		{
@@ -161,13 +162,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		waitUntil {sleep 2; TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_PlayersHaveLeftStartingArea};
 
 		if (!TREND_bDebugMode) then {
-			_iWait = (420 * (_thisiTaskIndex + 1)) + floor(random 300);
+			_iWait = (420 * (_iTaskIndex + 1)) + floor(random 300);
 			sleep floor(random 120);
 			_sMessageOne = format["The convoy is due to depart at %1", (daytime  + (_iWait/3600) call BIS_fnc_timeToString)];
 			[[west, "HQ"],_sMessageOne] remoteExec ["sideChat", 0];
-			[_sMessageOne] remoteExecCall ["Hint", 0];
+			[_sMessageOne] call TREND_fnc_notifyGlobal;
 
-			[_iWait, _thisiTaskIndex] spawn {
+			[_iWait, _iTaskIndex] spawn {
 				params ["_duration", "_taskIndex"];
 				_endTime = _duration + time;
 				while {_endTime - time >= 0} do {
@@ -199,98 +200,70 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 		_sMessageTwo = format["%1 is in the area and on way to AO (position is tracked and marked on map",name _mainHVT];
 		[[west, "HQ"],_sMessageTwo] remoteExec ["sideChat", 0];
-		[_sMessageTwo] remoteExecCall ["Hint", 0];
+		[_sMessageTwo] call TREND_fnc_notifyGlobal;
 
 		_mrkMeetingHVTMarker = nil;
-		_mrkMeetingHVTMarker = createMarker [format["HVT%1",_thisiTaskIndex], getPos _hvtVehicle];
+		_mrkMeetingHVTMarker = createMarker [format["HVT%1",_iTaskIndex], getPos _hvtVehicle];
 		_mrkMeetingHVTMarker setMarkerShape "ICON";
 		_mrkMeetingHVTMarker setMarkerType "o_inf";
 		_mrkMeetingHVTMarker setMarkerText format["HVT %1",name(_mainHVT)];
 		[_mainHVT, _hvtVehicle,_mrkMeetingHVTMarker] spawn {
-			_thismainHVT = _this select 0;
-			_thisHvtVehicle = _this select 1;
-			_thisMrkMeetingHVTMarker = _this select 2;
-			while {alive _thisHvtVehicle && alive _thismainHVT} do {
-				_thisMrkMeetingHVTMarker setMarkerPos (getPos _thisHvtVehicle);
+			_mainHVT = _this select 0;
+			_hvtVehicle = _this select 1;
+			_mrkMeetingHVTMarker = _this select 2;
+			while {alive _hvtVehicle && alive _mainHVT} do {
+				_mrkMeetingHVTMarker setMarkerPos (getPos _hvtVehicle);
 				sleep 5;
 			};
 		};
 
-		if (_thishasInformant) then {
+		if (_hasInformant && !isNil "_guardUnit3") then {
 			[_guardUnit3] spawn {
-				_thisGuardUnit3 = _this select 0;
-				waitUntil { sleep 2; vehicle _thisGuardUnit3 == _thisGuardUnit3; };
-				_thisGuardUnit3 switchMove "Acts_JetsCrewaidLCrouch_in";
-				_thisGuardUnit3 disableAI "anim";
+				_guardUnit3 = _this select 0;
+				waitUntil { sleep 2; vehicle _guardUnit3 == _guardUnit3; };
+				_guardUnit3 switchMove "Acts_JetsCrewaidLCrouch_in";
+				_guardUnit3 disableAI "anim";
 				sleep 2.2;
-				_thisGuardUnit3 switchMove "Acts_JetsCrewaidLCrouch_out";
-				_thisGuardUnit3 enableAI "anim";
+				_guardUnit3 switchMove "Acts_JetsCrewaidLCrouch_out";
+				_guardUnit3 enableAI "anim";
 				sleep 3;
-				_thisGuardUnit3 switchMove "";
-				_thisGuardUnit3 call BIS_fnc_ambientAnim__terminate;
+				_guardUnit3 switchMove "";
+				_guardUnit3 call BIS_fnc_ambientAnim__terminate;
 			};
-			_guardUnit3 addEventHandler ["Killed", {(_this select 0) setVariable ["taskStatus","KILLED",true] }];
+			_guardUnit3 setVariable ["MainObjective", _mainHVT, true];
+			_guardUnit3 addEventHandler ["Killed", {[((_this select 0) getVariable "MainObjective"), "failed", "Our agent was killed!!!", "You killed our agent! Rep lowered", 0.8] spawn TREND_fnc_updateTask; }];
 		};
 
 		_mainHVT setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
-		[_mainHVT, _thisiTaskIndex, _thisbIsMainObjective] spawn {
-			_thisHVT = _this select 0;
-			_thisTaskIndex = _this select 1;
-			_thisIsMainObjective = _this select 2;
-			while {alive _thisHVT} do {
-				_thisHVTTrigger = _thisHVT getVariable "TREND_hvtTrigger";
-				if (!isNil "_thisHVTTrigger") then {
-					deleteVehicle _thisHVTTrigger;
+		[_mainHVT, _iTaskIndex, _bIsMainObjective] spawn {
+			_mainHVT = _this select 0;
+			_iTaskIndex = _this select 1;
+			_bIsMainObjective = _this select 2;
+			while {alive _mainHVT} do {
+				_mainHVTTrigger = _mainHVT getVariable "TREND_hvtTrigger";
+				if (!isNil "_mainHVTTrigger") then {
+					deleteVehicle _mainHVTTrigger;
 				};
-				_thisHVTTrigger = nil;
-				_thisHVTTrigger = createTrigger ["EmptyDetector", getPos _thisHVT];
-				_thisHVTTrigger setVariable ["DelMeOnNewCampaignDay",true];
-				_thisHVTTrigger setTriggerArea [1250, 1250, 0, false];
-				_thisHVTTrigger setTriggerActivation [TREND_FriendlySideString, format["%1 D", TREND_EnemySideString], true];
-				_thisHVTTrigger setTriggerStatements ["this && {(time - TREND_TimeSinceLastSpottedAction) > (call TREND_GetSpottedDelay)}", format["nul = [%1, %2, %3, thisTrigger, thisList] spawn TREND_fnc_CallNearbyPatrol;",getPos _mainHVT,_thisTaskIndex, _thisIsMainObjective], ""];
-				_thisHVT setVariable ["TREND_hvtTrigger", _thisHVTTrigger, true];
+				_mainHVTTrigger = nil;
+				_mainHVTTrigger = createTrigger ["EmptyDetector", getPos _mainHVT];
+				_mainHVTTrigger setVariable ["DelMeOnNewCampaignDay",true];
+				_mainHVTTrigger setTriggerArea [1250, 1250, 0, false];
+				_mainHVTTrigger setTriggerActivation [TREND_FriendlySideString, format["%1 D", TREND_EnemySideString], true];
+				_mainHVTTrigger setTriggerStatements ["this && {(time - TREND_TimeSinceLastSpottedAction) > (call TREND_GetSpottedDelay)}", format["nul = [%1, %2, %3, thisTrigger, thisList] spawn TREND_fnc_CallNearbyPatrol;",getPos _mainHVT,_iTaskIndex, _bIsMainObjective], ""];
+				_mainHVT setVariable ["TREND_hvtTrigger", _mainHVTTrigger, true];
 				sleep 30;
 			};
-			_thisHVTTrigger = _thisHVT getVariable "TREND_hvtTrigger";
-			if (!isNil "_thisHVTTrigger") then {
-				deleteVehicle _thisHVTTrigger;
+			_mainHVTTrigger = _mainHVT getVariable "TREND_hvtTrigger";
+			if (!isNil "_mainHVTTrigger") then {
+				deleteVehicle _mainHVTTrigger;
 			};
 		};
 
-		if (_thisbIsMainObjective) then { //if mainobjective (i.e. heavy mission or final campaign mission) we will require team to get document from corpse
-			[_mainHVT, ["Take document",{(_this select 0) setVariable ["taskStatus","DOCTAKEN",true]},[_thisiTaskIndex,_thisbCreateTask],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
+		if (_bIsMainObjective) then { //if mainobjective (i.e. heavy mission or final campaign mission) we will require team to get document from corpse
+			[_mainHVT, ["Take document",{(_this select 0) spawn TREND_fnc_updateTask;},[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 		}
 		else { //if single mission or side then we can pass this task as soon as HVT is killed
-			_mainHVT addEventHandler ["Killed", {(_this select 0) setVariable ["taskStatus","KILLED",true]; }];
-		};
-
-		_customTaskClear = nil;
-		_customTaskClear = createTrigger ["EmptyDetector", [0,0]];
-		_customTaskClear setVariable ["DelMeOnNewCampaignDay",true];
-		_customTaskFailed = nil;
-		_customTaskFailed = createTrigger ["EmptyDetector", [0,0]];
-		_customTaskFailed setVariable ["DelMeOnNewCampaignDay",true];
-		_customTaskEscaped = nil;
-		_customTaskEscaped = createTrigger ["EmptyDetector", [0,0]];
-		_customTaskEscaped setVariable ["DelMeOnNewCampaignDay",true];
-
-		if (!_thisbCreateTask) then {
-			_sAliveCheck = format["%1 getVariable [""taskStatus"",""""] == ""KILLED"" ", _sTargetName];
-			_sAliveCheck2 = format["%1 getVariable [""taskStatus"",""""] == ""KILLED""", _sTargetName2];
-			_customTaskClear setTriggerStatements [_sAliveCheck, "[_mainHVT, ""succeeded"", ""Killed HVT in Convoy"", ""HVT Killed, rep increased""] spawn TREND_fnc_updateTask;", ""];
-			if (_thishasInformant) then {
-				_customTaskFailed setTriggerStatements [_sAliveCheck2, "[_mainHVT, ""failed"", ""Our agent was killed!!!"", ""You killed our agent! Rep lowered"", 0.8] spawn TREND_fnc_updateTask;", ""];
-			};
-		} else {
-			_sAliveCheck = format["(%1 getVariable [""taskStatus"",""""] == ""KILLED"" || (%1 getVariable [""taskStatus"",""""] == ""DOCTAKEN"")) && !([""InfSide%2""] call FHQ_fnc_ttAreTasksCompleted)", _sTargetName, _thisiTaskIndex];
-			_sAliveCheck2 = format["(%1 getVariable [""taskStatus"",""""] == ""KILLED"")", _sTargetName2];
-			_sAliveCheck3 = format["%1 getVariable [""taskStatus"",""""] == ""ESCAPED"" ", _sTargetName];
-
-			_customTaskClear setTriggerStatements [_sAliveCheck, "[_mainHVT, ""succeeded"", ""Killed HVT in Convoy"", ""HVT Killed, rep increased""] spawn TREND_fnc_updateTask;", ""];
-			if (_thishasInformant) then {
-				_customTaskFailed setTriggerStatements [_sAliveCheck2, "[_mainHVT, ""failed"", ""Our agent was killed!!!"", ""You killed our agent! Rep lowered"", 0.8] spawn TREND_fnc_updateTask;", ""];
-			};
-			_customTaskEscaped setTriggerStatements [_sAliveCheck3, "[_mainHVT, ""failed"", ""HVT Escaped"", ""HVT Escaped, rep lowered"", 1] spawn TREND_fnc_updateTask;", ""];
+			_mainHVT addEventHandler ["Killed", {(_this select 0) spawn TREND_fnc_updateTask;}];
 		};
 	};
 
@@ -306,13 +279,3 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	};
 	_sTaskDescription = _sTaskDescription + "<br /><br />TIP: Shoot the driver to make the convoy stop and everyone get out of the vehicle.";
 };
-
-//TEST ON SERVER!!!!!
-//DONE//option for sneaky requirement !!! if they are in combat mode or enemy have spotted any players, they will run to meeting, smoke will be popped too, adn will run to choppper after meeting
-//DONE//it doesnt matter who is in front when hvt leaves chopper, the hvt or agent could be either one 50/50
-
-//write desciption for mission!!! include details of signal and hvt talking, be sneaky, etc...
-
-//convoy mission??? (foot patrol or vehicle patrol)
-//ADD THE talkinga nimation to the guys walking around at checkpont... and the HVT too
-//animate guys at sentry with tent.... sitting, chiling, situps etc... (terminate ani if in combat mode)

@@ -254,7 +254,7 @@ if (count _nearestRoads > 0) then {
 						//_downedCiv assignAsDriver _mainVeh;
 						//[_downedCiv] orderGetIn true;
 
-			  			["Thank you for your help my friend"] remoteExecCall ["Hint", 0];
+			  			["Thank you for your help my friend"] call TREND_fnc_notifyGlobal;
 			  			[_downedCiv] remoteExecCall ["removeAllActions", 0];
 						[_group,"LIMITED"] remoteExecCall ["setSpeedMode", 0];
 						[_downedCiv,_mainVeh] remoteExecCall ["assignAsDriver", 0];

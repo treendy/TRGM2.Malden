@@ -92,8 +92,9 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 
 	_allTargets = [_target1, _target2, _target3];
-	[] spawn {
+	[_allTargets] spawn {
+		_allTargets = _this select 0;
 		waitUntil { ({!alive _x} count _allTargets) isEqualTo (count _allTargets); };
-		_target1 spawn TREND_fnc_updateTask;
+		[_allTargets select 0] spawn TREND_fnc_updateTask;
 	};
 };

@@ -78,8 +78,9 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	[_mainObjPos,_spacingBetweenTargets,true,true,_IED3,_IEDType] spawn TREND_fnc_setIEDEvent;
 
 	_allIEDs = [_IED1, _IED2, _IED3];
-	[] spawn {
+	[_allIEDs] spawn {
+		_allIEDs = _this select 0;
 		waitUntil { ({_x getVariable ["isDefused", false]} count _allIEDs) isEqualTo (count _allIEDs); };
-		_IED1 spawn TREND_fnc_updateTask;
+		[_allIEDs select 0] spawn TREND_fnc_updateTask;
 	};
 };

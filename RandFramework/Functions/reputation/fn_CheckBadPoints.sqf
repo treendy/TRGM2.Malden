@@ -78,7 +78,7 @@ while {true} do {
 				["MISSION_COMPLETE"] remoteExec ["TREND_fnc_SetMissionBoardOptions",0,true];
 			};
 
-			[parseText _sRankMessage] remoteExec ["Hint", 0, true];
+			[parseText _sRankMessage] call TREND_fnc_notifyGlobal;
 		};
 	};
 

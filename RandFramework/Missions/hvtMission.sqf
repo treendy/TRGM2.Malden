@@ -172,7 +172,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		};
 
 		if (!_bIsMainObjective && _hvtType isEqualTo "KILL") then {
-			[] spawn {
+			[_objInformant] spawn {
+				_objInformant = _this select 0;
 				waitUntil { !alive(_objInformant) };
 				_objInformant spawn TREND_fnc_updateTask;
 			};

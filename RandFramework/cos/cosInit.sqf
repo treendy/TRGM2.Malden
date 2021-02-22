@@ -18,7 +18,9 @@ if (isnil "SERVER") then {Hint "You must ADD a object named SERVER";Player Sidec
 if (isServer) then {
 IF (!isnil ("COScomplete")) then {Hint "Check your call. COS was called twice!";}else{
 
-waitUntil {sleep 2; TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_MissionParamsSet};
+[] call TREND_fnc_initGlobalVars;
+
+waitUntil {sleep 2; (TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_MissionParamsSet);};
 
 if (TREND_IsFullMap) Then {
 

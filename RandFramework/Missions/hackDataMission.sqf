@@ -69,7 +69,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 	_objLaptop1 setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 
-	[_objLaptop1, [localize "STR_TRGM2_startInfMission_MissionTitle1", {_this spawn TREND_fnc_downloadData;}, [localize "STR_TRGM2_downloadData_title", true, "TREND_fnc_hackIntel1", [_iTaskIndex, _bCreateTask]], 0, true, true, "", "_this == player"]] remoteExec ["addAction", 0, true];
+	[_objLaptop1, [localize "STR_TRGM2_startInfMission_MissionTitle1", {_this spawn TREND_fnc_downloadData;}, [localize "STR_TRGM2_downloadData_title", true, "TREND_fnc_hackIntel1", []], 0, true, true, "", "_this == player"]] remoteExec ["addAction", 0, true];
 
 	_sTaskDescription = selectRandom[localize "STR_TRGM2_startInfMission_MissionTitle1_Desc1", localize "STR_TRGM2_startInfMission_MissionTitle1_Desc2"];
 };

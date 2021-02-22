@@ -55,7 +55,7 @@ if (side _caller == west) then {
 		for [{private _i = 0;}, {_i < 3;}, {_i = _i + 1;}] do {
 			if (getMarkerType format["mrkMainObjective%1", _i] == "empty") then {
 				format["mrkMainObjective%1", _i] setMarkerType "mil_unknown";
-				["Map updated with main AO location"] remoteExec ["hint", 0, true];
+				["Map updated with main AO location"] call TREND_fnc_notifyGlobal;
 			} else {
 				if (alive _thisCiv) then {
 					[TREND_IntelShownType,"IntOfficer"] spawn TREND_fnc_showIntel;

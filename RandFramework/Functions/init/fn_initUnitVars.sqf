@@ -287,6 +287,7 @@ TREND_MissionParamTypesValues = [0,6,8,1,2,3,9,4,7,10,11,12,5]; publicVariable "
 // 16 = Destroy Cache
 // 17 = Secure and Supply
 // 18 = Meeting Assassination
+// 19 = Convoy Ambush
 // 99999 = CustomMission
 
 /*

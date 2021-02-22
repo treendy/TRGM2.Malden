@@ -36,7 +36,7 @@ if (_bAllow) then {
 	_iCurrentTaskCount = 0;
 	while {_iCurrentTaskCount < count TREND_ActiveTasks} do {
 		if (!(TREND_ActiveTasks call FHQ_fnc_ttAreTasksCompleted)) then {
-			[TREND_ActiveTasks select _iCurrentTaskCount, "failed"] call FHQ_fnc_ttSetTaskState;
+			[TREND_ActiveTasks select _iCurrentTaskCount, "canceled"] call FHQ_fnc_ttSetTaskState;
 			_iCurrentTaskCount = _iCurrentTaskCount + 1;
 		};
 	};

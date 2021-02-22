@@ -77,7 +77,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 				TREND_fnc_AAARadioLoop1 = {
 					_object = _this select 0;
 					_bPlay = true;
-					while {_bPlay && !isNil(_object)} do {
+					while {_bPlay && !isNil "_object"} do {
 						if (!alive _object) then {_bPlay = false};
 						playSound3D ["A3\Sounds_F\sfx\radio\" + selectRandom TREND_EnemyRadioSounds + ".wss", _object, false, getPosASL _object, 0.5, 1, 0];
 						sleep selectRandom [10,15,20,30];
@@ -128,7 +128,9 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		};
 	};
 
-	[] spawn {
+	[_allTargets, _firstTarget] spawn {
+		_allTargets = _this select 0;
+		_firstTarget = _this select 1;
 		waitUntil { ({!alive(_x)} count _allTargets) isEqualTo (count _allTargets); };
 		_firstTarget spawn TREND_fnc_updateTask;
 	};

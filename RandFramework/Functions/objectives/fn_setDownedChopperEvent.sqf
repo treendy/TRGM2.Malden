@@ -207,7 +207,7 @@ if (str(_flatPos) != "[0,0,0]") then {
 		};
 		if (_downedCiv distance (getMarkerPos "mrkHQ") < 300) then {
 			_doLoop = false;
-			[_completedMessage] remoteExecCall ["Hint", 0];
+			[_completedMessage] call TREND_fnc_notifyGlobal;
 			[0.3, _PointsAdjustMessage] spawn TREND_fnc_AdjustMaxBadPoints;
 			[_downedCiv] join grpNull;
 			deleteVehicle _downedCiv;

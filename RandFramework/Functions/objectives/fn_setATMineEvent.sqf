@@ -126,7 +126,7 @@ if (_currentATFieldPos select 0 != 0) then {
 				  	};
 				  	if (_bWaveDone) then {
 				  		if ((_mainVeh distance _guardUnit1) > 100) then {
-				  			["Thank you for your help"] remoteExecCall ["Hint", 0];
+				  			["Thank you for your help"] call TREND_fnc_notifyGlobal;
 				  			[_guardUnit1] remoteExecCall ["removeAllActions", 0];
 				  			[0.2, "Helped a stranded friendly"] spawn TREND_fnc_AdjustMaxBadPoints;
 				  			_bWaiting = false;

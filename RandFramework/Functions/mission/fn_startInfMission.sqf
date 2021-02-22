@@ -259,12 +259,12 @@ if (!(isNil "IsTraining")) then {
 };
 
 if (TREND_bDebugMode) then {
-	_ThisTaskTypes = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
-	_IsMainObjs = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-	_MarkerTypes = ["mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective","mil_objective"];
-	_CreateTasks = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
-	_SamePrevAOStats = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
-	_bSideMissionsCivOnly = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+	_ThisTaskTypes = [18,19];
+	_IsMainObjs = _ThisTaskTypes apply {true;}; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+	_MarkerTypes = _ThisTaskTypes apply {"mil_objective";};
+	_CreateTasks = _ThisTaskTypes apply {true;};
+	_SamePrevAOStats = _ThisTaskTypes apply {false;};
+	_bSideMissionsCivOnly = _ThisTaskTypes apply {false;};
 	TREND_MaxBadPoints = 100;
 };
 

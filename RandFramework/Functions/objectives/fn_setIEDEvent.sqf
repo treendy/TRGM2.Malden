@@ -187,13 +187,13 @@ if (count _nearestRoads > 0) then {
 										sleep 1;
 										_thisVeh setVariable ["isDefused",true, true];
 										sleep 4;
-										[localize "STR_TRGM2_IEDOneWay"] remoteExecCall ["Hint", 0];
+										[localize "STR_TRGM2_IEDOneWay"] call TREND_fnc_notifyGlobal;
 									}
 									else {
 										_thisVeh setVariable ["isDefused",true, true];
 										[0.2, localize "STR_TRGM2_IEDDefused"] spawn TREND_fnc_AdjustMaxBadPoints;
 										removeAllActions _thisVeh;
-										[localize "STR_TRGM2_IEDDefused"] remoteExecCall ["Hint", 0];
+										[localize "STR_TRGM2_IEDDefused"] call TREND_fnc_notifyGlobal;
 									}
 								},				// Code executed on completion
 								{},													// Code executed on interrupted
@@ -293,7 +293,7 @@ if (count _nearestRoads > 0) then {
 									_li_aaa = _type createVehicle (getPos _mainVeh);
 									_li_aaa setDamage 1;
 									_mainVeh setVariable ["isDefused",true, true];
-									[localize "STR_TRGM2_IEDOmteresting"] remoteExecCall ["Hint", 0];
+									[localize "STR_TRGM2_IEDOmteresting"] call TREND_fnc_notifyGlobal;
 								};
 							};
 							if (!_bWaiting) exitWith {true};

@@ -54,10 +54,9 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 	[_mainObjPos,100,true,true,_target1, _isCache] spawn TREND_fnc_setTargetEvent;
 
-	_customTaskClear = nil;
-	_customTaskClear = createTrigger ["EmptyDetector", [0,0]];
-	_customTaskClear setVariable ["DelMeOnNewCampaignDay",true];
-
-	_sAliveCheck = format["!alive %1 && !([""InfSide%2""] call FHQ_fnc_ttAreTasksCompleted)",_sTargetName1,_iTaskIndex];
-	_customTaskClear setTriggerStatements [_sAliveCheck, "[_target1] spawn TREND_fnc_updateTask;", ""];
+	[_target1] spawn {
+		_target1 = _this select 0;
+		waitUntil { !alive _target1; };
+		[_target1] spawn TREND_fnc_updateTask;
+	};
 };

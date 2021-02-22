@@ -134,7 +134,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true] spawn TREND_fnc_reinforcements;
         sleep 10;
 
-        { hint(format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]); } remoteExec["call", 0];
+        (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]) call TREND_fnc_notifyGlobal;
         [300, _iTaskIndex] spawn {
             params ["_duration", "_taskIndex"];
 			_endTime = _duration + time;
@@ -149,7 +149,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
             };
         };
         sleep 300; //wait 5 mins before supply drop in area
-        { hint(localize "STR_TRGM2_SupplyChopperInbound"); } remoteExec["call", 0];
+        (localize "STR_TRGM2_SupplyChopperInbound") call TREND_fnc_notifyGlobal;
 
         TREND_dropCrate = false;
         publicVariable "TREND_dropCrate";
@@ -245,7 +245,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true] spawn TREND_fnc_reinforcements;
         sleep 10;
 
-        { hint(format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]); } remoteExec["call", 0];
+        (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]) call TREND_fnc_notifyGlobal;
         [300, _iTaskIndex] spawn {
             params ["_duration", "_taskIndex"];
 			_endTime = _duration + time;
@@ -260,7 +260,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
             };
         };
         sleep 300; //wait 5 mins before supply drop in area
-        { hint(localize "STR_TRGM2_SupplyChopperInbound"); } remoteExec["call", 0];
+        (localize "STR_TRGM2_SupplyChopperInbound") call TREND_fnc_notifyGlobal;
 
         _heloGroup = createGroup west;
         _spawnPos = _flag getRelPos[3000, random 360];
@@ -342,12 +342,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         }
         forEach crew(vehicle airDropHelo2) + [vehicle airDropHelo2];
         missionNamespace setVariable[format["SupplyDropped_%1", _iTaskIndex], 2, true];
+        [_flag] spawn TREND_fnc_updateTask;
     };
-
-    _customTaskClear = nil;
-    _customTaskClear = createTrigger["EmptyDetector", [0, 0]];
-    _customTaskClear setVariable["DelMeOnNewCampaignDay", true, true];
-
-    _sTaskCheck = format["missionNamespace getVariable ['SupplyDropped_%1', 0] == 2 && !(['InfSide%1'] call FHQ_fnc_ttAreTasksCompleted)", _iTaskIndex];
-    _customTaskClear setTriggerStatements[_sTaskCheck, "[_flag] spawn TREND_fnc_updateTask;", ""];
 };

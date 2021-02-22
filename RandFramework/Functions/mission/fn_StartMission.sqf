@@ -98,6 +98,9 @@ if (_bAllowStart) then {
 					_isZeuzModule = false;
 					if (["ModuleCurator", str(TypeOf (_x))] call BIS_fnc_inString) then {_isZeuzModule = true;};
 					if (["Zeus", str(_x)] call BIS_fnc_inString) then {_isZeuzModule = true;};
+					if !(isNil {_x getVariable "ObjectiveParams"}) then {
+						[_x, "canceled"] call TREND_fnc_updateTask;
+					};
 					if (!_isZeuzModule && !(_x getVariable ["IsFRT",false]) && !(_x getVariable ["DontDelete",false])) then {
 						deleteVehicle _x;
 					};

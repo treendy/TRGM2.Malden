@@ -17,25 +17,7 @@ if (TREND_iStartLocation == 1) then {
 };
 if (_bMoveToAO) then {
 	call TREND_fnc_AoCampCreator;
-}
-else {
-	/*TREND_fnc_PopulateLoadingWait = {
-		["Populating AO please wait..."] call TREND_fnc_notify;
-		_percentage = 0;
-		while {_percentage < 100} do {
-			[format["Populating AO please wait... Percentage: %1", _percentage]] remoteExecCall ["Hint", 0];
-			//[format["Populating AO please wait... %1 %", _percentage]] call TREND_fnc_notify;
-			_percentage = _percentage + 1;
-			sleep 0.2;
-		};
-		[""] remoteExecCall ["Hint", 0];
-		TREND_MissionLoaded =  true; publicVariable "TREND_MissionLoaded";
-	};
-	[_sTargetName] spawn TREND_fnc_PopulateLoadingWait;*/
 };
-
-
-
 
 
 
@@ -96,6 +78,7 @@ ace_hearing_disableVolumeUpdate = true;
 
 playMusic "";
 0 fadeMusic 1;
+if (isNil "TREND_NewMissionMusic") then {TREND_NewMissionMusic = selectRandom TREND_ThemeAndIntroMusic; publicVariable "TREND_NewMissionMusic";};
 playMusic TREND_NewMissionMusic;
 format["StartMission Music: %1", TREND_NewMissionMusic] call TREND_fnc_log;
 

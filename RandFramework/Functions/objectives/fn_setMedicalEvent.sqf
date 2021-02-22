@@ -291,7 +291,7 @@ if (isnil "fncMedicalParamedicLight") then {
 					//{"ACE_bloodIV" == _x} count (itemcargo cursorTarget)
 					//[format["TEST: %1", _AceItemCount]] call TREND_fnc_notify;
 					if (_VanillaItemCount >= requiredItemsCount || _AceItemCount >= requiredItemsCount) then {
-						["Thank you, this should help us get things under control"] remoteExecCall ["Hint", 0];
+						["Thank you, this should help us get things under control"] call TREND_fnc_notifyGlobal;
 						_completed = true;
 						removeAllActions _downedCivMedic;
 						[0.3, "Assited with medical emergency"] spawn TREND_fnc_AdjustMaxBadPoints;

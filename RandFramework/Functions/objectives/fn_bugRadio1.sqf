@@ -1,8 +1,8 @@
 params ["_radio","_caller","_id","_args"];
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
-private _iSelected = _radio getVariable "taskIndex";
-private _bCreateTask = _radio getVariable "createTask";
+private _objParams = _radio getVariable "ObjectiveParams";
+_objParams params ["_markerType","_objectiveMainBuilding","_centralAO_x","_centralAO_y","_roadSearchRange", "_bCreateTask", "_iTaskIndex", "_bIsMainObjective", ["_args", []]];
 
 if (side _caller == west && !_bCreateTask) then {
 	["HQ are listening in, stand by..."] call TREND_fnc_notifyGlobal;
@@ -15,5 +15,8 @@ if (side _caller == west && !_bCreateTask) then {
 			[TREND_IntelShownType,"BugRadio"] spawn TREND_fnc_showIntel;
 		};
 	};
-	_radio spawn TREND_fnc_updateTask;
 };
+
+[_radio] spawn TREND_fnc_updateTask;
+
+true;

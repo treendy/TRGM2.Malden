@@ -57,7 +57,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_objVehicle setPosATL getPosATL _nearestRoad;
 
 	_objVehicle setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
-	[_objVehicle, [localize "STR_TRGM2_startInfMission_MissionTitle2_Button", {_this spawn TREND_fnc_downloadData;}, [localize "STR_TRGM2_downloadData_title", true, "TREND_fnc_updateTask", [_iTaskIndex, _bCreateTask]], 0, true, true, "", "_this == player"]] remoteExec ["addAction", 0, true];
+	[_objVehicle, [localize "STR_TRGM2_startInfMission_MissionTitle2_Button", {_this spawn TREND_fnc_downloadData;}, [localize "STR_TRGM2_downloadData_title", true, "TREND_fnc_updateTask", []], 0, true, true, "", "_this == player"]] remoteExec ["addAction", 0, true];
 
 	if (count _roadConnectedTo > 0) then {
 		_connectedRoad = _roadConnectedTo select 0;

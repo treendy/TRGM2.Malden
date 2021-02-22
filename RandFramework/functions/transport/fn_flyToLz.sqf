@@ -38,6 +38,10 @@ if (!alive _vehicle) then {
 	breakOut "FlyTo";
 };
 
+units (group driver _vehicle) doFollow leader (group driver _vehicle);
+{
+	_x enableSimulation true;
+} forEach units group driver _vehicle;
 _vehicle setFuel 1;
 
 //cleanup possible prevoius prevoious

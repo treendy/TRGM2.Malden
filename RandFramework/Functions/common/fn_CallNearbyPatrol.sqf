@@ -296,7 +296,7 @@ if (_SpottedUnitCount > 0) then {
 						if (!_SpotterFound && (getPos _SpottedUnit distance getPos _x) > 55 && side _x == East) then {
 
 							_cansee = [objNull, "VIEW"] checkVisibility [eyePos _x, eyePos _SpottedUnit];
-							if (TREND_bDebugMode) then {[format["POW4 %1",_cansee]] call TREND_fnc_notify;};
+							// if (TREND_bDebugMode) then {[format["POW4 %1",_cansee]] call TREND_fnc_notify;};
 							sleep 0.6;
 							if (_cansee > 0.2) then {
 								//["POW2 POW POW POW"] call TREND_fnc_notify;

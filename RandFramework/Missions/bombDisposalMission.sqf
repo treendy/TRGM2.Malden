@@ -156,23 +156,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		};
 	};
 
-	_customTaskClear = nil;
-	_customTaskClear = createTrigger ["EmptyDetector", [0,0]];
-	_customTaskClear setVariable ["DelMeOnNewCampaignDay",true];
-
-	_customTaskFail = nil;
-	_customTaskFail = createTrigger ["EmptyDetector", [0,0]];
-	_customTaskFail setVariable ["DelMeOnNewCampaignDay",true];
-
-	_sAliveCheck = format["%1 getVariable ['isDefused',false] && !([""InfSide%2""] call FHQ_fnc_ttAreTasksCompleted)",_sBomb1Name,_iTaskIndex];
-
-	if (!_bCreateTask) then {
-		_customTaskClear setTriggerStatements [_sAliveCheck, "[_objBomb1] spawn TREND_fnc_updateTask;", ""];
-	}
-	else {
-		_sFailCheck = format["!alive %1 && !([""InfSide%2""] call FHQ_fnc_ttAreTasksCompleted)",_sBomb1Name,_iTaskIndex];
-		_customTaskFail setTriggerStatements [_sFailCheck, "[_objBomb1, ""failed""] spawn TREND_fnc_updateTask;", ""];
-		_customTaskClear setTriggerStatements [_sAliveCheck, "[_objBomb1] spawn TREND_fnc_updateTask;", ""];
+	[_objBomb1] spawn {
+		_objBomb1 = _this select 0;
+		waitUntil { _objBomb1 getVariable ["isDefused",false] || !alive _objBomb1; };
+		if (!alive _objBomb1) then {
+			[_objBomb1, "failed"] spawn TREND_fnc_updateTask;
+		} else {
+			[_objBomb1] spawn TREND_fnc_updateTask;
+		};
 	};
-
 };

@@ -1,4 +1,4 @@
-params ["_thisLaptop", "_caller", "_args"];
+params ["_thisLaptop", "_caller", "_id", "_args"];
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 private _objParams = _thisLaptop getVariable "ObjectiveParams";

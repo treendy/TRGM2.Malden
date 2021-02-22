@@ -221,7 +221,7 @@ if (count _nearestRoads > 0) then {
 					};
 					if (_downedCiv distance (getMarkerPos "mrkHQ") < 500) then {
 						_doLoop = false;
-						["Wounded unit returned to base"] remoteExecCall ["Hint", 0];
+						["Wounded unit returned to base"] call TREND_fnc_notifyGlobal;
 						[0.1, format["Brought wounded %1 to base",name _downedCiv]] spawn TREND_fnc_AdjustMaxBadPoints;
 						[_downedCiv] join grpNull;
 						deleteVehicle _downedCiv;
