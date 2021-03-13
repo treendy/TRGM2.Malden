@@ -1,12 +1,36 @@
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 private _enemyFactionIndex = TREND_AdvancedSettings select TREND_ADVSET_ENEMY_FACTIONS_IDX;
-(TREND_EastFactionData select _enemyFactionIndex) params ["_eastClassName", "_eastDisplayName"];
+(TREND_AllFactionData select _enemyFactionIndex) params ["_eastClassName", "_eastDisplayName"];
 
 
 private _eastUnitData = [_eastClassName, _eastDisplayName] call TREND_fnc_getUnitDataByFaction;
 private _eastVehData = [_eastClassName, _eastDisplayName] call TREND_fnc_getVehicleDataByFaction;
 
+if ("gm_fc_DK" isEqualTo _eastClassName || "gm_fc_GE" isEqualTo _eastClassName) then {
+	_eastUnitData append (["gm_fc_GE_bgs","West Germany (Borderguards)"] call TREND_fnc_getUnitDataByFaction);
+	_eastVehData append (["gm_fc_GE_bgs","West Germany (Borderguards)"] call TREND_fnc_getVehicleDataByFaction);
+};
+if ("gm_fc_DK" isEqualTo _eastClassName || "gm_fc_GE_bgs" isEqualTo _eastClassName) then {
+	_eastUnitData append (["gm_fc_GE","West Germany"] call TREND_fnc_getUnitDataByFaction);
+	_eastVehData append (["gm_fc_GE","West Germany"] call TREND_fnc_getVehicleDataByFaction);
+};
+if (["rhs_faction_usarmy", _eastClassName] call BIS_fnc_inString || ["rhs_faction_usmc", _eastClassName] call BIS_fnc_inString || "rhs_faction_socom" isEqualTo _eastClassName) then {
+	_eastUnitData append (["rhs_faction_usaf", "USA (USAF)"] call TREND_fnc_getUnitDataByFaction);
+	_eastUnitData append (["rhs_faction_usn","USA (Navy)"] call TREND_fnc_getUnitDataByFaction);
+	_eastVehData append (["rhs_faction_usaf", "USA (USAF)"] call TREND_fnc_getVehicleDataByFaction);
+	_eastVehData append (["rhs_faction_usn","USA (Navy)"] call TREND_fnc_getVehicleDataByFaction);
+};
+if ("rhs_faction_socom" isEqualTo _eastClassName) then {
+	_eastUnitData append (["rhs_faction_usarmy_wd","USA (Army - W)"] call TREND_fnc_getUnitDataByFaction);
+	_eastVehData append (["rhs_faction_usarmy_wd","USA (Army - W)"] call TREND_fnc_getVehicleDataByFaction);
+};
+if ("rhsgref_faction_cdf_ground_b" isEqualTo _eastClassName) then {
+	_eastUnitData append (["rhsgref_faction_cdf_air_b","CDF (Air Forces)"] call TREND_fnc_getUnitDataByFaction);
+	_eastUnitData append (["rhsgref_faction_cdf_ng_b","CDF (National Guard)"] call TREND_fnc_getUnitDataByFaction);
+	_eastVehData append (["rhsgref_faction_cdf_air_b","CDF (Air Forces)"] call TREND_fnc_getVehicleDataByFaction);
+	_eastVehData append (["rhsgref_faction_cdf_ng_b","CDF (National Guard)"] call TREND_fnc_getVehicleDataByFaction);
+};
 if (["CSAT", _eastDisplayName] call BIS_fnc_inString) then {
 	_eastUnitData append (["OPF_V_F","Viper"] call TREND_fnc_getUnitDataByFaction);
 	_eastVehData append (["OPF_V_F","Viper"] call TREND_fnc_getVehicleDataByFaction);
@@ -111,7 +135,16 @@ if (["rhs_faction", _eastClassName] call BIS_fnc_inString) then {
 		default { };
 	};
 };
-
+if ("rhsgref_faction_cdf_ground" isEqualTo _eastClassName) then {
+	_eastUnitData append (["rhsgref_faction_cdf_air","CDF (Air Forces)"] call TREND_fnc_getUnitDataByFaction);
+	_eastUnitData append (["rhsgref_faction_cdf_ng","CDF (National Guard)"] call TREND_fnc_getUnitDataByFaction);
+	_eastVehData append (["rhsgref_faction_cdf_air","CDF (Air Forces)"] call TREND_fnc_getVehicleDataByFaction);
+	_eastVehData append (["rhsgref_faction_cdf_ng","CDF (National Guard)"] call TREND_fnc_getVehicleDataByFaction);
+};
+if ("rhssaf_faction_army" isEqualTo _eastClassName) then {
+	_eastUnitData append (["rhssaf_faction_airforce","SAF (RVIPVO)"] call TREND_fnc_getUnitDataByFaction);
+	_eastVehData append (["rhssaf_faction_airforce","SAF (RVIPVO)"] call TREND_fnc_getVehicleDataByFaction);
+};
 
 _riflemen = []; _leaders = []; _atsoldiers = []; _aasoldiers = []; _engineers = []; _grenadiers = []; _medics = []; _autoriflemen = []; _snipers = []; _explosiveSpecs = []; _pilots = []; _uavOperators = [];
 {
@@ -245,12 +278,140 @@ EnemyBaseChoppers		 = { _veh = ["O_Heli_Light_02_unarmed_F"]; if (count TREND_Ea
 
 
 private _guerFactionIndex = TREND_AdvancedSettings select TREND_ADVSET_MILITIA_FACTIONS_IDX;
-(TREND_GuerFactionData select _guerFactionIndex) params ["_guerClassName", "_guerDisplayName"];
+(TREND_AllFactionData select _guerFactionIndex) params ["_guerClassName", "_guerDisplayName"];
 
 
 private _guerUnitData = [_guerClassName, _guerDisplayName] call TREND_fnc_getUnitDataByFaction;
 private _guerVehData = [_guerClassName, _guerDisplayName] call TREND_fnc_getVehicleDataByFaction;
 
+if ("gm_fc_DK" isEqualTo _guerClassName || "gm_fc_GE" isEqualTo _guerClassName) then {
+	_guerUnitData append (["gm_fc_GE_bgs","West Germany (Borderguards)"] call TREND_fnc_getUnitDataByFaction);
+	_guerVehData append (["gm_fc_GE_bgs","West Germany (Borderguards)"] call TREND_fnc_getVehicleDataByFaction);
+};
+if ("gm_fc_DK" isEqualTo _guerClassName || "gm_fc_GE_bgs" isEqualTo _guerClassName) then {
+	_guerUnitData append (["gm_fc_GE","West Germany"] call TREND_fnc_getUnitDataByFaction);
+	_guerVehData append (["gm_fc_GE","West Germany"] call TREND_fnc_getVehicleDataByFaction);
+};
+if (["rhs_faction_usarmy", _guerClassName] call BIS_fnc_inString || ["rhs_faction_usmc", _guerClassName] call BIS_fnc_inString || "rhs_faction_socom" isEqualTo _guerClassName) then {
+	_guerUnitData append (["rhs_faction_usaf", "USA (USAF)"] call TREND_fnc_getUnitDataByFaction);
+	_guerUnitData append (["rhs_faction_usn","USA (Navy)"] call TREND_fnc_getUnitDataByFaction);
+	_guerVehData append (["rhs_faction_usaf", "USA (USAF)"] call TREND_fnc_getVehicleDataByFaction);
+	_guerVehData append (["rhs_faction_usn","USA (Navy)"] call TREND_fnc_getVehicleDataByFaction);
+};
+if ("rhs_faction_socom" isEqualTo _guerClassName) then {
+	_guerUnitData append (["rhs_faction_usarmy_wd","USA (Army - W)"] call TREND_fnc_getUnitDataByFaction);
+	_guerVehData append (["rhs_faction_usarmy_wd","USA (Army - W)"] call TREND_fnc_getVehicleDataByFaction);
+};
+if ("rhsgref_faction_cdf_ground_b" isEqualTo _guerClassName) then {
+	_guerUnitData append (["rhsgref_faction_cdf_air_b","CDF (Air Forces)"] call TREND_fnc_getUnitDataByFaction);
+	_guerUnitData append (["rhsgref_faction_cdf_ng_b","CDF (National Guard)"] call TREND_fnc_getUnitDataByFaction);
+	_guerVehData append (["rhsgref_faction_cdf_air_b","CDF (Air Forces)"] call TREND_fnc_getVehicleDataByFaction);
+	_guerVehData append (["rhsgref_faction_cdf_ng_b","CDF (National Guard)"] call TREND_fnc_getVehicleDataByFaction);
+};
+if (["CSAT", _guerDisplayName] call BIS_fnc_inString) then {
+	_guerUnitData append (["OPF_V_F","Viper"] call TREND_fnc_getUnitDataByFaction);
+	_guerVehData append (["OPF_V_F","Viper"] call TREND_fnc_getVehicleDataByFaction);
+};
+if (["TEC_CSAT", _guerClassName] call BIS_fnc_inString) then {
+	_guerUnitData append (["TEC_CSAT_Navy","CSAT (Iran, Navy)"] call TREND_fnc_getUnitDataByFaction);
+	_guerVehData append (["TEC_CSAT_Navy","CSAT (Iran, Navy)"] call TREND_fnc_getVehicleDataByFaction);
+	if ("TEC_CSAT_SOF" isEqualTo _guerClassName) then {
+		_guerUnitData append (["TEC_CSAT","CSAT (Iran, Arid)"] call TREND_fnc_getUnitDataByFaction);
+		_guerVehData append (["TEC_CSAT_Navy","CSAT (Iran, Navy)"] call TREND_fnc_getVehicleDataByFaction);
+	};
+};
+if ("gm_fc_PL" isEqualTo _guerClassName || "gm_fc_GC" isEqualTo _guerClassName) then {
+	_guerUnitData append (["gm_fc_GC_bgs","East Germany (Borderguards)"] call TREND_fnc_getUnitDataByFaction);
+	_guerVehData append (["gm_fc_GC_bgs","East Germany (Borderguards)"] call TREND_fnc_getVehicleDataByFaction);
+};
+if ("gm_fc_PL" isEqualTo _guerClassName || "gm_fc_GC_bgs" isEqualTo _guerClassName) then {
+	_guerUnitData append (["gm_fc_GC","East Germany"] call TREND_fnc_getUnitDataByFaction);
+	_guerVehData append (["gm_fc_GC_bgs","East Germany (Borderguards)"] call TREND_fnc_getVehicleDataByFaction);
+};
+if ("rhssaf_faction_army_opfor" isEqualTo _guerClassName) then {
+	_guerUnitData append (["rhssaf_faction_airforce_opfor","SAF (RVIPVO)"] call TREND_fnc_getUnitDataByFaction);
+	_guerVehData append (["gm_fc_GC_bgs","East Germany (Borderguards)"] call TREND_fnc_getVehicleDataByFaction);
+};
+if (["rhs_faction", _guerClassName] call BIS_fnc_inString) then {
+	switch (_guerClassName) do {
+		case "rhs_faction_msv": {
+			_guerUnitData append (["rhs_faction_rva","Russia (RVA)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_vvs_c","Russia (VVS - Camo)"] call TREND_fnc_getUnitDataByFaction);
+
+			_guerVehData append (["rhs_faction_rva","Russia (RVA)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_vvs_c","Russia (VVS - Camo)"] call TREND_fnc_getVehicleDataByFaction);
+		};
+		case "rhs_faction_vdv": {
+			_guerUnitData append (["rhs_faction_rva","Russia (RVA)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_vvs_c","Russia (VVS - Camo)"] call TREND_fnc_getUnitDataByFaction);
+
+			_guerVehData append (["rhs_faction_rva","Russia (RVA)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_vvs_c","Russia (VVS - Camo)"] call TREND_fnc_getVehicleDataByFaction);
+		};
+		case "rhs_faction_vmf": {
+			_guerUnitData append (["rhs_faction_msv","Russia (MSV)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_vvs_c","Russia (VVS - Camo)"] call TREND_fnc_getUnitDataByFaction);
+
+			_guerVehData append (["rhs_faction_msv","Russia (MSV)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_vvs_c","Russia (VVS - Camo)"] call TREND_fnc_getVehicleDataByFaction);
+		};
+		case "rhs_faction_vv": {
+			_guerUnitData append (["rhs_faction_rva","Russia (RVA)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_vvs","Russia (VVS - Grey)"] call TREND_fnc_getUnitDataByFaction);
+
+			_guerVehData append (["rhs_faction_rva","Russia (RVA)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_vvs","Russia (VVS - Grey)"] call TREND_fnc_getVehicleDataByFaction);
+		};
+		case "rhs_faction_rva": {
+			_guerUnitData append (["rhs_faction_msv","Russia (MSV)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getUnitDataByFaction);
+			_guerUnitData append (["rhs_faction_vvs_c","Russia (VVS - Camo)"] call TREND_fnc_getUnitDataByFaction);
+
+			_guerVehData append (["rhs_faction_msv","Russia (MSV)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getVehicleDataByFaction);
+			_guerVehData append (["rhs_faction_vvs_c","Russia (VVS - Camo)"] call TREND_fnc_getVehicleDataByFaction);
+		};
+		default { };
+	};
+};
 if ("rhsgref_faction_cdf_ground" isEqualTo _guerClassName) then {
 	_guerUnitData append (["rhsgref_faction_cdf_air","CDF (Air Forces)"] call TREND_fnc_getUnitDataByFaction);
 	_guerUnitData append (["rhsgref_faction_cdf_ng","CDF (National Guard)"] call TREND_fnc_getUnitDataByFaction);

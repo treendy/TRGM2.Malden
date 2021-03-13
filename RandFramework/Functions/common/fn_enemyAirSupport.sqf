@@ -30,8 +30,9 @@ if (isServer) then {
 	//[format ["AirType: %1",_AirVehicle]] call TREND_fnc_notify;
 	sleep 1;
 
-	_airSup1Array = [call TREND_GetReinforceStartPos, 45, _AirVehicle, _groupp1] call Bis_fnc_spawnvehicle;
-	_enemyAirSup1 = _airSup1Array select 0;
+	_enemyAirSup1 = createVehicle [_AirVehicle, call TREND_GetReinforceStartPos, [], 0, "NONE"];
+	createVehicleCrew _enemyAirSup1;
+	crew vehicle _enemyAirSup1 joinSilent _groupp1;
 	_enemyAirSup1 flyInHeight 40;
 	_enemyAirSup1 setVehicleAmmo 1;
 

@@ -285,7 +285,6 @@ if (!_bFriendlyInsurgents) then {
 
 			_flatPos = _sidePos;
 			_flatPos = [_sidePos , 10, 200, 8, 0, 0.5, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]],[_sidePos,_sidePos]] call TREND_fnc_findSafePos;
-			//[_flatPos,  (floor random 300), selectRandom[(call sMortarToUse)], createGroup _InsurgentSide] call BIS_fnc_spawnVehicle;
 			[_flatPos,  (floor random 300), selectRandom (call sMortarToUse), createGroup _InsurgentSide] call BIS_fnc_spawnVehicle;
 
 			if (TREND_bDebugMode) then {

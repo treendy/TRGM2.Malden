@@ -89,7 +89,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			(group _thisInformant) setBehaviour "ALERT";
 			_thisInformant switchMove "";
 			_ThisHVTType = _thisInformant getVariable ["HVTType","SPEAK"];
-			if (!isPlayer _thisShooter && _ThisHVTType == "INTERROGATE") then {
+			if (!isPlayer _thisShooter && {_ThisHVTType == "INTERROGATE" || _ThisHVTType == "SPEAK"}) then {
 				_thisInformant disableAI "anim";
 				_thisInformant switchMove "Acts_CivilInjuredLegs_1";
 				_thisInformant disableAI "anim";
@@ -132,7 +132,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	if (!(_hvtType isEqualTo "INTERROGATE")) then {
 		//pass in false so we know to just hint if this was our guy or not (just in case player wants to be sure before moving to next objective)
 		//only need to search if its a kill objective... if for example its "interogate officer", there will already be an action to get intel
-		[_objInformant, [_searchText, {_this spawn TREND_fnc_updateTask;}, [_iTaskIndex,false], 10, true, true, "", "_this distance _target < 3"]] remoteExec ["addAction", 0, true];
+		[_objInformant, [_searchText, {[_this select 0] spawn TREND_fnc_updateTask;}, [], 10, true, true, "", "_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 	};
 
 	if (_hvtType isEqualTo "INTERROGATE" || _hvtType isEqualTo "KILL") then { //if interrogate or kill task
@@ -168,7 +168,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		if (_bIsMainObjective) then {
 			//if interrogate or kill, and is a main objective, then complete task when searched
 			//its only the main objective that we require the player to get to the body... otherwise, can kill him from a distance
-			[_objInformant, [_searchText, {_this spawn TREND_fnc_updateTask;}, [], 10, true, true, "", "_this distance _target < 3"]] remoteExec ["addAction", 0, true];
+			[_objInformant, [_searchText, {[_this select 0] spawn TREND_fnc_updateTask;}, [], 10, true, true, "", "_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 		};
 
 		if (!_bIsMainObjective && _hvtType isEqualTo "KILL") then {
@@ -181,6 +181,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	}
 	else {
 		if (_hvtType isEqualTo "SPEAK") then {
+			_objInformant setCaptive true;
 			[_objInformant, [_getIntelText,{_this spawn TREND_fnc_SpeakInformant;},[],1,false,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 		};
 		if (_hvtType isEqualTo "RESCUE") then { //pow or reporter

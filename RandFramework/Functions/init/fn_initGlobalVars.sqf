@@ -14,6 +14,7 @@ if (!isNil "laptop1")                     then { TREND_NeededObjectsAvailable = 
 TREND_WestFactionData =  [WEST] call TREND_fnc_getFactionDataBySide; publicVariable "TREND_WestFactionData";
 TREND_EastFactionData =  [EAST] call TREND_fnc_getFactionDataBySide; publicVariable "TREND_EastFactionData";
 TREND_GuerFactionData =  [INDEPENDENT] call TREND_fnc_getFactionDataBySide; publicVariable "TREND_GuerFactionData";
+TREND_AllFactionData = TREND_WestFactionData + TREND_EastFactionData + TREND_GuerFactionData; publicVariable "TREND_AllFactionData";
 
 if ((["CustomMission", 0] call BIS_fnc_getParamValue) isEqualTo 1) then {
 	call compile preprocessFileLineNumbers "CustomMission\TRGMSetDefaultMissionSetupVars.sqf";

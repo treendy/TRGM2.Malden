@@ -94,8 +94,7 @@ switch (_side) do {
 		_infgrp createUnit [(call fMedic),         [0,0], [], 5, "NONE"]; sleep(_AdditionalUnitCreationDelay);
 		_infgrp createUnit [(call fRifleman),      [0,0], [], 5, "NONE"]; sleep(_AdditionalUnitCreationDelay);
 		_infgrp createUnit [(call fMachineGunMan), [0,0], [], 5, "NONE"]; sleep(_AdditionalUnitCreationDelay);
-
-		_helo = [_spawnMrk, _spawnMrk getDir _spawnMrk, (call ReinforceVehicleFriendly), _side] call BIS_FNC_spawnVehicle;
+		_helo = createVehicle [(call ReinforceVehicleFriendly), _spawnMrk, [], 0, "FLY"];
 	};
 	case EAST : {
 		_infgrp = createGroup EAST;
@@ -105,8 +104,7 @@ switch (_side) do {
 		_infgrp createUnit [(call sMedic),         [0,0], [], 5, "NONE"]; sleep(_AdditionalUnitCreationDelay);
 		_infgrp createUnit [(call sRifleman),      [0,0], [], 5, "NONE"]; sleep(_AdditionalUnitCreationDelay);
 		_infgrp createUnit [(call sMachineGunMan), [0,0], [], 5, "NONE"]; sleep(_AdditionalUnitCreationDelay);
-
-		_helo = [_spawnMrk, _spawnMrk getDir _spawnMrk, (call ReinforceVehicle), _side] call BIS_FNC_spawnVehicle;
+		_helo = createVehicle [(call ReinforceVehicle), _spawnMrk, [], 0, "FLY"];
 	};
 	case INDEPENDENT : {
 		_infgrp = createGroup INDEPENDENT;
@@ -116,8 +114,7 @@ switch (_side) do {
 		_infgrp createUnit [(call sMedicMilitia),         [0,0], [], 5, "NONE"]; sleep(_AdditionalUnitCreationDelay);
 		_infgrp createUnit [(call sRiflemanMilitia),      [0,0], [], 5, "NONE"]; sleep(_AdditionalUnitCreationDelay);
 		_infgrp createUnit [(call sMachineGunManMilitia), [0,0], [], 5, "NONE"]; sleep(_AdditionalUnitCreationDelay);
-
-		_helo = [_spawnMrk, _spawnMrk getDir _spawnMrk, (call ReinforceVehicleMilitia), _side] call BIS_FNC_spawnVehicle;
+		_helo = createVehicle [(call ReinforceVehicleMilitia), _spawnMrk, [], 0, "FLY"];
 	};
 };
 

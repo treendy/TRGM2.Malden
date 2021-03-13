@@ -215,12 +215,14 @@ if (isServer) then {
 	private _airTransClassName = selectRandom ((call SupplySupportChopperOptions) select {_x call TREND_fnc_isTransport});
 	if (!isNil "chopper1" && {_airTransClassName != typeOf chopper1}) then {
 		{deleteVehicle _x;} forEach crew chopper1 + [chopper1];
-		private _chopper1Arr = [getPos heliPad1, 0, _airTransClassName, WEST] call BIS_fnc_spawnVehicle;
-		chopper1 = _chopper1Arr select 0;
+		chopper1 = createVehicle [_airTransClassName, getPos heliPad1, [], 0, "NONE"];
+		createVehicleCrew chopper1;
+		crew vehicle chopper1 joinSilent createGroup WEST;
 		chopper1 setVehicleVarName "chopper1";
 		publicVariable "chopper1";
 		chopper1 allowDamage false;
 		chopper1 setPos getPos heliPad1;
+		chopper1 setVelocity [0, 0, 0];
 		chopper1 setdamage 0;
 		chopper1 engineOn false;
 		chopper1 lockDriver true;
@@ -236,18 +238,21 @@ if (isServer) then {
 		publicVariable "chopper1D";
 		private _totalTurrets = [_airTransClassName, true] call BIS_fnc_allTurrets;
 		{chopper1 lockTurret [_x, true]} forEach _totalTurrets;
-		{ doStop _x; } forEach (_chopper1Arr select 1);
+		{ doStop _x; } forEach crew chopper1;
+		chopper1 setPos getPos heliPad1;
 	};
 
 	private _airSupClassName = selectRandom (call FriendlyChopper);
 	if (!isNil "chopper2" && {_airSupClassName != typeOf chopper2}) then {
 		{deleteVehicle _x;} forEach crew chopper2 + [chopper2];
-		private _chopper2Arr = [getPos airSupportHeliPad, 0, _airSupClassName, WEST] call BIS_fnc_spawnVehicle;
-		chopper2 = _chopper2Arr select 0;
+		chopper2 = createVehicle [_airSupClassName, getPos airSupportHeliPad, [], 0, "NONE"];
+		createVehicleCrew chopper2;
+		crew vehicle chopper2 joinSilent createGroup WEST;
 		chopper2 setVehicleVarName "chopper2";
 		publicVariable "chopper2";
 		chopper2 allowDamage false;
 		chopper2 setPos getPos airSupportHeliPad;
+		chopper2 setVelocity [0, 0, 0];
 		chopper2 setdamage 0;
 		chopper2 engineOn false;
 		chopper2 lockDriver true;
@@ -256,7 +261,8 @@ if (isServer) then {
 		publicVariable "chopper2D";
 		private _totalTurrets = [_airSupClassName, true] call BIS_fnc_allTurrets;
 		{chopper2 lockTurret [_x, true]} forEach _totalTurrets;
-		{ doStop _x; } forEach (_chopper2Arr select 1);
+		{ doStop _x; } forEach crew chopper2;
+		chopper2 setPos getPos airSupportHeliPad;
 		chopper2 allowDamage true;
 	};
 
@@ -265,7 +271,7 @@ if (isServer) then {
 		if (isClass(configFile >> "CfgVehicles" >> typeOf _x) && {_x isKindOf "LandVehicle" || _x isKindOf "Air" || _x isKindOf "Ship"}) then {
 			_faction = getText(configFile >> "CfgVehicles" >> typeOf _x >> "faction");
 			_friendlyFactionIndex = TREND_AdvancedSettings select TREND_ADVSET_FRIENDLY_FACTIONS_IDX;
-			_westFaction = (TREND_WestFactionData select _friendlyFactionIndex) select 0;
+			_westFaction = (TREND_AllFactionData select _friendlyFactionIndex) select 0;
 			if ((crew _x) isEqualTo [] && {getNumber(configFile >> "CfgFactionClasses" >> _faction >> "side") isEqualTo 1 && {_faction != _westFaction}}) then {
 				_newVehClass = [_x, WEST] call TREND_fnc_getFactionVehicle;
 				if (!isNil "_newVehClass") then {
@@ -388,7 +394,7 @@ waitUntil {TREND_CustomObjectsSet};
 [endMissionBoard] remoteExec ["removeAllActions"];
 [endMissionBoard2] remoteExec ["removeAllActions"];
 
-if (TREND_iMissionSetup == 5 && isMultiplayer && str player == "sl") then {
+if (TREND_iMissionSetup == 5 && isMultiplayer && isServer) then {
 	if (TREND_SaveType == 0) then {
 		[laptop1, [localize "STR_TRGM2_TRGMInitPlayerLocal_SaveLocal",{[1,true] spawn TREND_fnc_ServerSave;}]] remoteExec ["addaction"];
 		[laptop1, [localize "STR_TRGM2_TRGMInitPlayerLocal_SaveGlobal",{[2,true] spawn TREND_fnc_ServerSave;}]] remoteExec ["addaction"];

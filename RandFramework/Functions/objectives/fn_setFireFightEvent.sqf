@@ -184,25 +184,31 @@ TREND_WarEventActive = true;
 		_pos = _eventLocationPos getPos [3000,random 360];//random 360 and 3 clicks out and no playable units within 2 clicks
 		_pos = [_pos select 0,_pos select 1, 365];
 		_dir = [_pos, _eventLocationPos] call BIS_fnc_DirTo;//dir from pos to _eventLocationPos
-		_WarzoneGroupp1 = createGroup west;
-		_WarZoneAir1 = [_pos, _dir, _AirToUse, _WarzoneGroupp1] call Bis_fnc_spawnvehicle;
-		(_WarZoneAir1 select 0) flyInHeight 45;
-		(_WarZoneAir1 select 0) setBehaviour "CARELESS";
-		(_WarZoneAir1 select 0) setSpeedMode "FULL";
-		(_WarZoneAir1 select 0) doMove (_pos getPos [60000,_dir]);
-		(_WarZoneAir1 select 0) setCaptive _bSetCaptive;
+		_WarzoneGroupp1 = createGroup WEST;
+		_WarZoneAir1 = createVehicle [_AirToUse, _pos, [], 0, "FLY"];
+		_WarZoneAir1 setDir _dir;
+	    createVehicleCrew _WarZoneAir1;
+	    crew vehicle _WarZoneAir1 joinSilent _WarzoneGroupp1;
+		_WarZoneAir1 flyInHeight 45;
+		_WarZoneAir1 setBehaviour "CARELESS";
+		_WarZoneAir1 setSpeedMode "FULL";
+		_WarZoneAir1 doMove (_pos getPos [60000,_dir]);
+		_WarZoneAir1 setCaptive _bSetCaptive;
 		_WarZoneAir2 = nil;
 		if (_NoOfVeh > 1) then {
 			_pos2 = _pos getPos [30,random 360];
-			_WarZoneAir2 = [_pos2, _dir, _AirToUse, _WarzoneGroupp1] call Bis_fnc_spawnvehicle;
-			(_WarZoneAir2 select 0) flyInHeight 45;
-			(_WarZoneAir2 select 0) setBehaviour "CARELESS";
-			(_WarZoneAir2 select 0) setSpeedMode "FULL";
-			(_WarZoneAir2 select 0) doMove (_pos getPos [60000,_dir]);
-			(_WarZoneAir2 select 0) setCaptive _bSetCaptive;
+			_WarZoneAir2 = createVehicle [_AirToUse, _pos2, [], 0, "FLY"];
+			_WarZoneAir2 setDir _dir;
+			createVehicleCrew _WarZoneAir2;
+			crew vehicle _WarZoneAir2 joinSilent _WarzoneGroupp1;
+			_WarZoneAir2 flyInHeight 45;
+			_WarZoneAir2 setBehaviour "CARELESS";
+			_WarZoneAir2 setSpeedMode "FULL";
+			_WarZoneAir2 doMove (_pos getPos [60000,_dir]);
+			_WarZoneAir2 setCaptive _bSetCaptive;
 		};
 
-		[(_WarZoneAir1 select 0),_eventLocationPos] spawn {
+		[_WarZoneAir1,_eventLocationPos] spawn {
 			_veh = _this select 0;
 			_eventLocationPos = _this select 1;
 			while {alive _veh} do {
@@ -215,7 +221,7 @@ TREND_WarEventActive = true;
 		};
 
 		if (_NoOfVeh > 1) then {
-			[(_WarZoneAir2 select 0),_eventLocationPos] spawn {
+			[_WarZoneAir2,_eventLocationPos] spawn {
 				_veh = _this select 0;
 				_eventLocationPos = _this select 1;
 				while {alive _veh} do {

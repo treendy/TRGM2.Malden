@@ -158,11 +158,10 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         private _heloGroup = createGroup west;
         private _spawnPos = _flag getRelPos[3000, random 360];
         private _exitPos = _flag getRelPos[25000, random 360];
-        private _airDropHeloArray = [
-            [(_spawnPos select 0), (_spawnPos select 1)], 45, _airToUse, _heloGroup
-        ] call BIS_fnc_spawnvehicle;
-        airDropHelo1 = _airDropHeloArray select 0;
 
+        airDropHelo1 = createVehicle [_airToUse, [(_spawnPos select 0), (_spawnPos select 1)], [], 0, "FLY"];
+	    createVehicleCrew airDropHelo1;
+	    crew vehicle airDropHelo1 joinSilent _heloGroup;
         airDropHelo1 flyInHeight 40;
         airDropHelo1 allowDamage false;
         airDropHelo1 enableAttack false;
@@ -265,10 +264,9 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         _heloGroup = createGroup west;
         _spawnPos = _flag getRelPos[3000, random 360];
         _exitPos = _flag getRelPos[25000, random 360];
-        _airDropHeloArray = [
-            [(_spawnPos select 0), (_spawnPos select 1)], 45, _airToUse, _heloGroup
-        ] call BIS_fnc_spawnvehicle;
-        airDropHelo2 = _airDropHeloArray select 0;
+        airDropHelo1 = createVehicle [_airToUse, [(_spawnPos select 0), (_spawnPos select 1)], [], 0, "FLY"];
+	    createVehicleCrew airDropHelo1;
+	    crew vehicle airDropHelo1 joinSilent _heloGroup;
 
         airDropHelo2 flyInHeight 40;
         airDropHelo2 allowDamage false;

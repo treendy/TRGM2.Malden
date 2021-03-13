@@ -142,24 +142,24 @@ if (isServer && {_useCustomMission}) then {
 	{
 		switch (_forEachIndex) do {
 			case 6: { //TREND_ADVSET_ENEMY_FACTIONS_IDX
-				for "_i" from 0 to (count TREND_EastFactionData - 1) do {
-					(TREND_EastFactionData select _i) params ["_className", "_displayName"];
+				for "_i" from 0 to (count TREND_AllFactionData - 1) do {
+					(TREND_AllFactionData select _i) params ["_className", "_displayName"];
 					if (_className == _x) then {
 						TREND_AdvancedSettings pushBack _i;
 					};
 				};
 			};
 			case 7: { //TREND_ADVSET_MILITIA_FACTIONS_IDX
-				for "_i" from 0 to (count TREND_GuerFactionData - 1) do {
-					(TREND_GuerFactionData select _i) params ["_className", "_displayName"];
+				for "_i" from 0 to (count TREND_AllFactionData - 1) do {
+					(TREND_AllFactionData select _i) params ["_className", "_displayName"];
 					if (_className == _x) then {
 						TREND_AdvancedSettings pushBack _i;
 					};
 				};
 			};
 			case 8: { //TREND_ADVSET_FRIENDLY_FACTIONS_IDX
-				for "_i" from 0 to (count TREND_WestFactionData - 1) do {
-					(TREND_WestFactionData select _i) params ["_className", "_displayName"];
+				for "_i" from 0 to (count TREND_AllFactionData - 1) do {
+					(TREND_AllFactionData select _i) params ["_className", "_displayName"];
 					if (_className == _x) then {
 						TREND_AdvancedSettings pushBack _i;
 					};

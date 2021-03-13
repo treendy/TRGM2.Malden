@@ -118,19 +118,21 @@ private _helo_spawn = {
 	private _safePos = [[_newx, _newy, _newz], sizeOf "Land_Cargo_HQ_V1_F", ((2 * sizeOf "Land_Cargo_HQ_V1_F") + sizeOf _name), sizeOf _name, 0, 0.2, 0, TREND_spawnedObjectsArray, [[_newx, _newy],[_newx, _newy]], _name] call TREND_fnc_findSafePos; // find a valid pos
 
 	[_safePos, sizeOf _name] call TREND_fnc_hideTerrainObjects;
-	private _heloArray = [_safePos, 0, _name, WEST] call BIS_fnc_spawnVehicle;
-	(_heloArray select 0) allowDamage false;
-	(_heloArray select 0) setpos _safePos;
-	(_heloArray select 0) setVelocity [0,0,0];
-	(_heloArray select 0) setPosASL [getPosASL (_heloArray select 0) select 0, getPosASL (_heloArray select 0) select 1, getTerrainHeightASL getPosASL (_heloArray select 0)];
-	(_heloArray select 0) setdamage 0;
-	(_heloArray select 0) engineOn false;
-	(_heloArray select 0) lockDriver true;
+	private _helo = createVehicle [_name, _safePos, [], 0, "NONE"];
+	createVehicleCrew _helo;
+	crew vehicle _helo joinSilent createGroup WEST;
+	_helo allowDamage false;
+	_helo setpos _safePos;
+	_helo setVelocity [0,0,0];
+	_helo setPosASL [getPosASL _helo select 0, getPosASL _helo select 1, getTerrainHeightASL getPosASL _helo];
+	_helo setdamage 0;
+	_helo engineOn false;
+	_helo lockDriver true;
 	private _totalTurrets = [_name, true] call BIS_fnc_allTurrets;
-	{(_heloArray select 0) lockTurret [_x, true]} forEach _totalTurrets;
-	{ doStop _x; } forEach (_heloArray select 1);
-	TREND_spawnedObjectsArray pushBack [getPos (_heloArray select 0), sizeOf _name];
-	_heloArray;
+	{_helo lockTurret [_x, true]} forEach _totalTurrets;
+	{ doStop _x; } forEach crew _helo;
+	TREND_spawnedObjectsArray pushBack [getPos _helo, sizeOf _name];
+	_helo;
 };
 
 private _lightPositions = [[5.5,-5.5,0], [-5.5,3.5,0], [5.5,3.5,0], [-5.5,-5.5,0], [-2.75,-2.75,0], [-2.75,2.75,0], [2.75,2.75,0], [2.75,2.75,1]];
@@ -183,8 +185,7 @@ sleep 5;
 _repairBuilding = ["Land_RepairDepot_01_tan_F", _HQpos, [20,20,0]] call _building_spawn;
 sleep 5;
 
-_chopper1Arr = ["B_Heli_Transport_03_unarmed_F", _HQpos, [-50,-50,0]] call _helo_spawn;
-chopper1 = _chopper1Arr select 0;
+chopper1 = ["B_Heli_Transport_03_unarmed_F", _HQpos, [-50,-50,0]] call _helo_spawn;
 chopper1 setVehicleVarName "chopper1";
 publicVariable "chopper1";
 chopper1D = driver chopper1;
@@ -210,8 +211,7 @@ transportChopper = createMarker ["transportChopper", getPos chopper1];
 publicVariable "transportChopper";
 sleep 5;
 
-_chopper2Arr = ["B_Heli_Attack_01_dynamicLoadout_F", _HQpos, [50,50,0]] call _helo_spawn;
-chopper2 = _chopper2Arr select 0;
+chopper2 = ["B_Heli_Attack_01_dynamicLoadout_F", _HQpos, [50,50,0]] call _helo_spawn;
 chopper2 setVehicleVarName "chopper2";
 publicVariable "chopper2";
 chopper2D = driver chopper2;

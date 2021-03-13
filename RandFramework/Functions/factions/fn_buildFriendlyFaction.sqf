@@ -1,7 +1,7 @@
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 private _friendlyFactionIndex = TREND_AdvancedSettings select TREND_ADVSET_FRIENDLY_FACTIONS_IDX;
-(TREND_WestFactionData select _friendlyFactionIndex) params ["_westClassName", "_westDisplayName"];
+(TREND_AllFactionData select _friendlyFactionIndex) params ["_westClassName", "_westDisplayName"];
 
 
 private _westUnitData = [_westClassName, _westDisplayName] call TREND_fnc_getUnitDataByFaction;
@@ -30,6 +30,120 @@ if ("rhsgref_faction_cdf_ground_b" isEqualTo _westClassName) then {
 	_westUnitData append (["rhsgref_faction_cdf_ng_b","CDF (National Guard)"] call TREND_fnc_getUnitDataByFaction);
 	_westVehData append (["rhsgref_faction_cdf_air_b","CDF (Air Forces)"] call TREND_fnc_getVehicleDataByFaction);
 	_westVehData append (["rhsgref_faction_cdf_ng_b","CDF (National Guard)"] call TREND_fnc_getVehicleDataByFaction);
+};
+if (["CSAT", _westDisplayName] call BIS_fnc_inString) then {
+	_westUnitData append (["OPF_V_F","Viper"] call TREND_fnc_getUnitDataByFaction);
+	_westVehData append (["OPF_V_F","Viper"] call TREND_fnc_getVehicleDataByFaction);
+};
+if (["TEC_CSAT", _westClassName] call BIS_fnc_inString) then {
+	_westUnitData append (["TEC_CSAT_Navy","CSAT (Iran, Navy)"] call TREND_fnc_getUnitDataByFaction);
+	_westVehData append (["TEC_CSAT_Navy","CSAT (Iran, Navy)"] call TREND_fnc_getVehicleDataByFaction);
+	if ("TEC_CSAT_SOF" isEqualTo _westClassName) then {
+		_westUnitData append (["TEC_CSAT","CSAT (Iran, Arid)"] call TREND_fnc_getUnitDataByFaction);
+		_westVehData append (["TEC_CSAT_Navy","CSAT (Iran, Navy)"] call TREND_fnc_getVehicleDataByFaction);
+	};
+};
+if ("gm_fc_PL" isEqualTo _westClassName || "gm_fc_GC" isEqualTo _westClassName) then {
+	_westUnitData append (["gm_fc_GC_bgs","East Germany (Borderguards)"] call TREND_fnc_getUnitDataByFaction);
+	_westVehData append (["gm_fc_GC_bgs","East Germany (Borderguards)"] call TREND_fnc_getVehicleDataByFaction);
+};
+if ("gm_fc_PL" isEqualTo _westClassName || "gm_fc_GC_bgs" isEqualTo _westClassName) then {
+	_westUnitData append (["gm_fc_GC","East Germany"] call TREND_fnc_getUnitDataByFaction);
+	_westVehData append (["gm_fc_GC_bgs","East Germany (Borderguards)"] call TREND_fnc_getVehicleDataByFaction);
+};
+if ("rhssaf_faction_army_opfor" isEqualTo _westClassName) then {
+	_westUnitData append (["rhssaf_faction_airforce_opfor","SAF (RVIPVO)"] call TREND_fnc_getUnitDataByFaction);
+	_westVehData append (["gm_fc_GC_bgs","East Germany (Borderguards)"] call TREND_fnc_getVehicleDataByFaction);
+};
+if (["rhs_faction", _westClassName] call BIS_fnc_inString) then {
+	switch (_westClassName) do {
+		case "rhs_faction_msv": {
+			_westUnitData append (["rhs_faction_rva","Russia (RVA)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_vvs_c","Russia (VVS - Camo)"] call TREND_fnc_getUnitDataByFaction);
+
+			_westVehData append (["rhs_faction_rva","Russia (RVA)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_vvs_c","Russia (VVS - Camo)"] call TREND_fnc_getVehicleDataByFaction);
+		};
+		case "rhs_faction_vdv": {
+			_westUnitData append (["rhs_faction_rva","Russia (RVA)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_vvs_c","Russia (VVS - Camo)"] call TREND_fnc_getUnitDataByFaction);
+
+			_westVehData append (["rhs_faction_rva","Russia (RVA)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_vvs_c","Russia (VVS - Camo)"] call TREND_fnc_getVehicleDataByFaction);
+		};
+		case "rhs_faction_vmf": {
+			_westUnitData append (["rhs_faction_msv","Russia (MSV)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_vvs_c","Russia (VVS - Camo)"] call TREND_fnc_getUnitDataByFaction);
+
+			_westVehData append (["rhs_faction_msv","Russia (MSV)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_vvs_c","Russia (VVS - Camo)"] call TREND_fnc_getVehicleDataByFaction);
+		};
+		case "rhs_faction_vv": {
+			_westUnitData append (["rhs_faction_rva","Russia (RVA)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_vvs","Russia (VVS - Grey)"] call TREND_fnc_getUnitDataByFaction);
+
+			_westVehData append (["rhs_faction_rva","Russia (RVA)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_vvs","Russia (VVS - Grey)"] call TREND_fnc_getVehicleDataByFaction);
+		};
+		case "rhs_faction_rva": {
+			_westUnitData append (["rhs_faction_msv","Russia (MSV)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getUnitDataByFaction);
+			_westUnitData append (["rhs_faction_vvs_c","Russia (VVS - Camo)"] call TREND_fnc_getUnitDataByFaction);
+
+			_westVehData append (["rhs_faction_msv","Russia (MSV)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_vpvo","Russia (VPVO)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_vmf","Russia (VMF)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_tv","Russia (TV)"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["OPF_R_F","Spetsnaz"] call TREND_fnc_getVehicleDataByFaction);
+			_westVehData append (["rhs_faction_vvs_c","Russia (VVS - Camo)"] call TREND_fnc_getVehicleDataByFaction);
+		};
+		default { };
+	};
+};
+if ("rhsgref_faction_cdf_ground" isEqualTo _westClassName) then {
+	_westUnitData append (["rhsgref_faction_cdf_air","CDF (Air Forces)"] call TREND_fnc_getUnitDataByFaction);
+	_westUnitData append (["rhsgref_faction_cdf_ng","CDF (National Guard)"] call TREND_fnc_getUnitDataByFaction);
+	_westVehData append (["rhsgref_faction_cdf_air","CDF (Air Forces)"] call TREND_fnc_getVehicleDataByFaction);
+	_westVehData append (["rhsgref_faction_cdf_ng","CDF (National Guard)"] call TREND_fnc_getVehicleDataByFaction);
+};
+if ("rhssaf_faction_army" isEqualTo _westClassName) then {
+	_westUnitData append (["rhssaf_faction_airforce","SAF (RVIPVO)"] call TREND_fnc_getUnitDataByFaction);
+	_westVehData append (["rhssaf_faction_airforce","SAF (RVIPVO)"] call TREND_fnc_getVehicleDataByFaction);
 };
 
 _riflemen = []; _leaders = []; _atsoldiers = []; _aasoldiers = []; _engineers = []; _grenadiers = []; _medics = []; _autoriflemen = []; _snipers = []; _explosiveSpecs = []; _pilots = []; _uavOperators = [];

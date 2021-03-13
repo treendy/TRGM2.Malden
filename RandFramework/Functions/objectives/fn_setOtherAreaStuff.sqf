@@ -7,22 +7,34 @@ _mainObjPos = TREND_ObjectivePossitions select 0;
 ["Mission Events: Comms 10", true] call TREND_fnc_log;
 
 //Check if radio tower is near
-_TowersNear = nearestObjects [_mainObjPos, TREND_TowerBuildings, TREND_TowerRadius];
+_Towers = nearestObjects [_mainObjPos, TREND_TowerBuildings, TREND_TowerRadius];
+_Towers = _Towers + nearestTerrainObjects [_mainObjPos, ["TRANSMITTER"], TREND_TowerRadius, false];
+_TowersNear = [];
+{
+	if !(typeOf _x isEqualTo "") then {
+		_TowersNear pushBackUnique _x;
+	}
+} forEach _Towers;
 
 ["Mission Events: Comms 9", true] call TREND_fnc_log;
 if (count _TowersNear > 0) then {
-	{
-		[_x, [localize "STR_TRGM2_TRENDfncsetOtherAreaStuff_CheckEnemyComms",{_this spawn TREND_fnc_checkForComms;},[_x]]] remoteExec ["addAction", 0, true];
-	} forEach _TowersNear;
 	["Mission Events: Comms 8", true] call TREND_fnc_log;
-	TREND_TowerBuild = _TowersNear select 0;
+	TREND_TowerBuild = selectRandom _TowersNear;
+	publicVariable "TREND_TowerBuild";
+	[TREND_TowerBuild, [localize "STR_TRGM2_TRENDfncsetOtherAreaStuff_CheckEnemyComms",{_this spawn TREND_fnc_checkForComms;},[TREND_TowerBuild]]] remoteExec ["addAction", 0, true];
 	TREND_TowerClassName = typeOf TREND_TowerBuild;
 	publicVariable "TREND_TowerBuild";
 	_TowerX = position TREND_TowerBuild select 0;
 	_TowerY = position TREND_TowerBuild select 1;
 	_distanceHQ = getMarkerPos "mrkHQ" distance [_TowerX, _TowerY];
+
+	_towerMarkrer = createMarker [format["_markerEnemyComms%1",(floor(random 360))], [_TowerX, _TowerY]];
+	_towerMarkrer setMarkerShape "ICON";
+	_towerMarkrer setMarkerType "hd_unknown";
+	_towerMarkrer setMarkerText "Intel";
+
 	["Mission Events: Comms 7", true] call TREND_fnc_log;
-	if (_distanceHQ > 1400) then {
+	if (_distanceHQ > TREND_SideMissionMinDistFromBase) then {
 		TREND_bHasCommsTower =  true; publicVariable "TREND_bHasCommsTower";
 		TREND_CommsTowerPos =  [_TowerX, _TowerY]; publicVariable "TREND_CommsTowerPos";
 		if (true) then {
@@ -83,8 +95,6 @@ if (count _TowersNear > 0) then {
 			_sTriggerString = "!alive(nearestObject [[" + _sSTringPos + "], '" + TREND_TowerClassName + "'])";
 
 			_trg setTriggerStatements [_sTriggerString, "TREND_bCommsBlocked = true; publicVariable ""TREND_bCommsBlocked""; [this] spawn TREND_fnc_commsBlocked;", ""];
-
-			publicVariable "TowerBuild";
 			["Mission Events: Comms 2", true] call TREND_fnc_log;
 		};
 		["Mission Events: Comms 1", true] call TREND_fnc_log;

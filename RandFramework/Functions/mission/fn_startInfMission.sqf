@@ -470,6 +470,14 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 	//orangestest*/
 
 	//kill leader (he will run away in car to AO)    ::   save stranded guys    ::
+
+	_allLocationTypes = [];
+	"_allLocationTypes pushBack configName _x" configClasses (configFile >> "CfgLocationTypes");
+	_allLocations = nearestLocations [(getMarkerPos "mrkHQ"), _allLocationTypes, 25000];
+	_allLocationPositions = _allLocations apply {[locationPosition _x select 0, locationPosition _x select 1]};
+	_allLocationPositions = _allLocationPositions select {((getMarkerPos "mrkHQ") distance _x) > TREND_SideMissionMinDistFromBase};
+	_allLocationPositions = _allLocationPositions select {count nearestObjects [_x, TREND_BasicBuildings, 200] > 0};
+
 	["Mission Setup: 10", true] call TREND_fnc_log;
 	_attempts = 0;
 	while {!_bInfor1Found} do {
@@ -478,9 +486,10 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 		_markerInformant1 = nil;
 
 		if (!_SamePrevAO || {_bUserDefinedAO || {_attempts > 100}}) then {
-			_randInfor1X = 0 + (floor random 25000);
-			_randInfor1Y = 0 + (floor random 25000);
-			_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], TREND_BasicBuildings, 200] select {!((_x buildingPos -1) isEqualTo [])};
+			_randLocation = if !(isNil "_allLocationPositions") then {selectRandom _allLocationPositions} else {[0 + (floor random 25000), 0 + (floor random 25000)]};
+			_randInfor1X = _randLocation select 0;
+			_randInfor1Y = _randLocation select 1;
+			_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], TREND_BasicBuildings, 200*_attempts] select {!((_x buildingPos -1) isEqualTo [])};
 
 			if (_iTaskIndex == 0 && {!_bIsCampaign && {!(isNil "TREND_Mission1Loc")}}) then {
 				_randInfor1X = TREND_Mission1Loc select 0;
