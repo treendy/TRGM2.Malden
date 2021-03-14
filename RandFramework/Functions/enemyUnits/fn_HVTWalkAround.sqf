@@ -11,12 +11,12 @@ _MoveType = selectRandom ["Man","OpenArea"];
 _WalkToPos = getPos _objMan;
 
 //sleep 3;
-if (_MoveType == "OpenArea") then {
+if (_MoveType isEqualTo "OpenArea") then {
 	_flatPos = nil;
 	_flatPos = [_thisInitPos , 10, _walkRadius, 7, 0, 0.5, 0,[[_currentManPos,10]],[_thisInitPos,_thisInitPos]] call BIS_fnc_findSafePos;
 	_WalkToPos = _flatPos;
 };
-if (_MoveType == "Man") then {
+if (_MoveType isEqualTo "Man") then {
 	_nearMen = nearestObjects [_thisInitPos, ["man"], _walkRadius];
 	if (count _nearMen > 1) then { //more than one, because we dont want to count our target guy!
 		//HERE set array then remove our guy from the array
@@ -38,14 +38,14 @@ _objMan doMove (_WalkToPos);
 
 sleep 2;
 
-waitUntil {sleep 1; speed _objMan == 0};
-_nearMen = (nearestObjects [_thisInitPos, ["man"], 7]) select {side _x == side _objMan};
+waitUntil {sleep 1; speed _objMan isEqualTo 0};
+_nearMen = (nearestObjects [_thisInitPos, ["man"], 7]) select {side _x isEqualTo side _objMan};
 _animType = selectRandom [2,3,4];
 if (count _nearMen > 1) then {
 	_animType = selectRandom [1,2,3,4];
 };
 
-if (alive(_objMan) && {behaviour _objMan == "SAFE"}) then {
+if (alive(_objMan) && {behaviour _objMan isEqualTo "SAFE"}) then {
 	switch (_animType) do {
 		case 1: { //SALUTE
 			_nearMan = _nearMen select 0;

@@ -30,7 +30,7 @@ if (TREND_ForceMissionSetup) then {
 }
 else {
 
-	if (_SaveType == 0) then {
+	if (_SaveType isEqualTo 0) then {
 
 		_ctrlItem = (findDisplay 5000) displayCtrl 5500;
 		TREND_iMissionParamType = TREND_MissionParamTypesValues select lbCurSel _ctrlItem;
@@ -109,10 +109,10 @@ else {
 	sleep 0.1;
 
 	_LoadVersion = "";
-	if (_SaveType == 1) then {
+	if (_SaveType isEqualTo 1) then {
 		_LoadVersion = worldName;
 	};
-	if (_SaveType == 2) then {
+	if (_SaveType isEqualTo 2) then {
 		_LoadVersion = "GLOBAL";
 	};
 
@@ -129,7 +129,7 @@ else {
 		} remoteExec ["call", 2]; //Save this to server only
 		sleep 0.1;
 
-		if (count TREND_SavedData == 0) then {
+		if (count TREND_SavedData isEqualTo 0) then {
 			_ctrl = (findDisplay 5000) displayCtrl 5001;
 			_ctrl ctrlSetText (localize "STR_TRGM2_SetParamsAndBegin_ErrorMsg_NoData");
 		}

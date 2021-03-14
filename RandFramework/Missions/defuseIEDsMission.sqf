@@ -38,10 +38,10 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	if (_markerType != "empty") then { _markerType = "hd_unknown"; }; // Set marker type here...
 
 	_compactIedTargets = false;
-	if (TREND_AdvancedSettings select TREND_ADVSET_IEDTARGET_COMPACT_SPACING_IDX == 1) then {
+	if (TREND_AdvancedSettings select TREND_ADVSET_IEDTARGET_COMPACT_SPACING_IDX isEqualTo 1) then {
 		_compactIedTargets = true;
 	};
-	if (TREND_AdvancedSettings select TREND_ADVSET_IEDTARGET_COMPACT_SPACING_IDX == 0) then {
+	if (TREND_AdvancedSettings select TREND_ADVSET_IEDTARGET_COMPACT_SPACING_IDX isEqualTo 0) then {
 		_compactIedTargets = random 1 < .50;
 	};
 
@@ -55,14 +55,15 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 	_IEDType = selectRandom ["CAR","RUBBLE"];
 	_ieds = nil;
-	If (_IEDType == "CAR") then {_ieds = CivCars;};
-	If (_IEDType == "RUBBLE") then {_ieds = TREND_IEDFakeClassNames;};
+	If (_IEDType isEqualTo "CAR") then {_ieds = CivCars;};
+	If (_IEDType isEqualTo "RUBBLE") then {_ieds = TREND_IEDFakeClassNames;};
 
 	_IED1 = createVehicle [selectRandom _ieds,[0,0,0],[],0,"NONE"];
 	_sTargetName1 = format["objInformant%1",_iTaskIndex];
 	_IED1 setVariable [_sTargetName1, _IED1, true];
 	missionNamespace setVariable [_sTargetName1, _IED1];
 	_IED1 setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
+	missionNamespace setVariable [format ["missionObjectiveParams%1", _iTaskIndex], [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 	[_mainObjPos,100,true,true,_IED1,_IEDType] spawn TREND_fnc_setIEDEvent;
 
 	_IED2 = createVehicle [selectRandom _ieds,[-25,-25,0],[],0,"NONE"];

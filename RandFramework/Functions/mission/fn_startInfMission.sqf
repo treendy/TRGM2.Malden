@@ -300,7 +300,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 	_bSideMissionsCivOnlyToUse = _bSideMissionsCivOnly select TREND_InfTaskCount;
 	_hideTitleAndDesc = false;
 
-	if (_MarkerTypes select 0 == "empty") then {
+	if (_MarkerTypes select 0 isEqualTo "empty") then {
 		TREND_MainIsHidden =  true; publicVariable "TREND_MainIsHidden";
 	}
 	else {
@@ -458,13 +458,13 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 
 	_bUserDefinedAO = false;
 	///*orangestest
-	if (_iTaskIndex == 0 && {!isNil "TREND_Mission1Loc"}) then {
+	if (_iTaskIndex isEqualTo 0 && {!isNil "TREND_Mission1Loc"}) then {
 		_bUserDefinedAO = true;
 	};
-	if (_iTaskIndex == 1 && {!isNil "TREND_Mission2Loc"}) then {
+	if (_iTaskIndex isEqualTo 1 && {!isNil "TREND_Mission2Loc"}) then {
 		_bUserDefinedAO = true;
 	};
-	if (_iTaskIndex == 2 && {!isNil "TREND_Mission3Loc"}) then {
+	if (_iTaskIndex isEqualTo 2 && {!isNil "TREND_Mission3Loc"}) then {
 		_bUserDefinedAO = true;
 	};
 	//orangestest*/
@@ -491,21 +491,21 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 			_randInfor1Y = _randLocation select 1;
 			_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], TREND_BasicBuildings, 200*_attempts] select {!((_x buildingPos -1) isEqualTo [])};
 
-			if (_iTaskIndex == 0 && {!_bIsCampaign && {!(isNil "TREND_Mission1Loc")}}) then {
+			if (_iTaskIndex isEqualTo 0 && {!_bIsCampaign && {!(isNil "TREND_Mission1Loc")}}) then {
 				_randInfor1X = TREND_Mission1Loc select 0;
 				_randInfor1Y = TREND_Mission1Loc select 1;
 				_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], TREND_BasicBuildings, 50*_attempts] select {!((_x buildingPos -1) isEqualTo [])};
 				if (_attempts > 100) then {[format["Still no location found after %1 attempts!",_attempts]] call TREND_fnc_notify;}
 			};
 
-			if (_iTaskIndex == 1 && {!_bIsCampaign && {!(isNil "TREND_Mission2Loc")}}) then {
+			if (_iTaskIndex isEqualTo 1 && {!_bIsCampaign && {!(isNil "TREND_Mission2Loc")}}) then {
 				_randInfor1X = TREND_Mission2Loc select 0;
 				_randInfor1Y = TREND_Mission2Loc select 1;
 				_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], TREND_BasicBuildings, 50*_attempts] select {!((_x buildingPos -1) isEqualTo [])};
 				if (_attempts > 100) then {[format["Still no location found after %1 attempts!",_attempts]] call TREND_fnc_notify;}
 			};
 
-			if (_iTaskIndex == 2 && {!_bIsCampaign && {!(isNil "TREND_Mission3Loc")}}) then {
+			if (_iTaskIndex isEqualTo 2 && {!_bIsCampaign && {!(isNil "TREND_Mission3Loc")}}) then {
 				_randInfor1X = TREND_Mission3Loc select 0;
 				_randInfor1Y = TREND_Mission3Loc select 1;
 				_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], TREND_BasicBuildings, 50*_attempts] select {!((_x buildingPos -1) isEqualTo [])};
@@ -538,7 +538,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 
 				_nearestRoads = nil;
 				{
-					if (_x == 99999 || _bNewTaskSetup) then {
+					if (_x isEqualTo 99999 || _bNewTaskSetup) then {
 						_bCustomRequiredPass = true;
 						if (_CustomMissionEnabled || _bNewTaskSetup) then {
 							_bCustomRequiredPass = [_infBuilding,_inf1X,_inf1Y] call fnc_CustomRequired;
@@ -550,7 +550,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 
 					_nearestRoads = [_inf1X,_inf1Y] nearRoads _roadSearchRange;
 					if (_RequiresNearbyRoad) then {
-						if (count _nearestRoads == 0) then {
+						if (count _nearestRoads isEqualTo 0) then {
 							_bInfor1Found = false;
 						};
 					};
@@ -560,14 +560,14 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 				if (_bInfor1Found) then {
 					TREND_ObjectivePossitions pushBack [_inf1X,_inf1Y];
 					publicVariable "TREND_ObjectivePossitions";
-					if (_MarkerType == "empty") then {
+					if (_MarkerType isEqualTo "empty") then {
 						TREND_HiddenPossitions pushBack [_inf1X,_inf1Y];
 						publicVariable "TREND_HiddenPossitions";
 						_hideTitleAndDesc = true;
 					};
 					_sTaskDescription = "";
 					if (TREND_ISUNSUNG) then {
-						if (_iThisTaskType == 6) then {
+						if (_iThisTaskType isEqualTo 6) then {
 							_radio = selectRandom ["uns_radio2_transitor_NVA","uns_radio2_transitor_NVA"] createVehicle (selectRandom (_infBuilding buildingPos -1));
 						}
 						else {
@@ -577,7 +577,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 					};
 					//###################################### CUSTOM MISSION ######################################
 					["Mission Setup: 8-0-10", true] call TREND_fnc_log;
-					if (_iThisTaskType == 99999 || _bNewTaskSetup) then {
+					if (_iThisTaskType isEqualTo 99999 || _bNewTaskSetup) then {
 						[_MarkerType, _infBuilding, _inf1X, _inf1Y, _roadSearchRange, _bCreateTask, _iTaskIndex, _bIsMainObjective, _args] call fnc_CustomMission;
 					};
 					//############################################################################################
@@ -619,7 +619,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 					if (_iTaskIndex > 0) then {
 						_sPrevMrkName = format["%1%2",_mrkPrefix,_iTaskIndex-1];
 						_sCurrMrkName = format["%1%2",_mrkPrefix,_iTaskIndex];
-						if (str(getMarkerPos _sCurrMrkName) == str(getMarkerPos _sPrevMrkName)) then {
+						if (str(getMarkerPos _sCurrMrkName) isEqualTo str(getMarkerPos _sPrevMrkName)) then {
 							_bIsSameMrkPos = true;
 							_sPrevMrkName setMarkerText format["%1 / %2",MarkerText _sPrevMrkName,_MissionTitle];
 						};
@@ -639,7 +639,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 						};
 					};
 
-					if (_iTaskIndex == 0 && TREND_iMissionParamType != 5) then {_allowFriendlyIns = false};
+					if (_iTaskIndex isEqualTo 0 && TREND_iMissionParamType != 5) then {_allowFriendlyIns = false};
 
 					if (_bSideMissionsCivOnlyToUse && !_bCreateTask) then {
 						TREND_ClearedPositions pushBack [_inf1X,_inf1Y];
@@ -691,7 +691,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 		["Mission Setup: 8-1", true] call TREND_fnc_log;
 	};
 
-	if (TREND_InfTaskCount == 0) then {
+	if (TREND_InfTaskCount isEqualTo 0) then {
 		TREND_CurrentZeroMissionTitle = _MissionTitle; //curently only used for campaign
 		if (TREND_MainMissionTitle != "") then {TREND_CurrentZeroMissionTitle = TREND_MainMissionTitle};
 		publicVariable "TREND_CurrentZeroMissionTitle";
@@ -709,7 +709,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 _trgComplete = createTrigger ["EmptyDetector", [0,0]];
 _trgComplete setVariable ["DelMeOnNewCampaignDay",true];
 _trgComplete setTriggerArea [0, 0, 0, false];
-if (TREND_iMissionParamType == 5) then {
+if (TREND_iMissionParamType isEqualTo 5) then {
 	_totalRep = [TREND_MaxBadPoints - TREND_BadPoints,1] call BIS_fnc_cutDecimals;
 
 	if (_totalRep >= 10 && TREND_FinalMissionStarted) then {
@@ -725,12 +725,12 @@ else {
 	//_trgComplete setTriggerStatements ["TREND_ActiveTasks call FHQ_fnc_ttAreTasksCompleted;", "", ""]; //not sure why this is here... commented out on 5th Jan 2018... delete of no issues sinse
 
 	//If not campaign and rep is disabled, then we will not fail the mission if rep low, but will be a task to keep rep above average
-	if (TREND_iMissionParamRepOption == 0) then {
+	if (TREND_iMissionParamRepOption isEqualTo 0) then {
 		//CREATE TASK HERE... we fail it in mainInit.sqf when checking rep points
 		[TREND_FriendlySide, ["tskKeepAboveAverage",localize "STR_TRGM2_startInfMission_HoldReputation_Desc",localize "STR_TRGM2_startInfMission_HoldReputation_Title",""]] call FHQ_fnc_ttAddTasks;
 		["tskKeepAboveAverage", "created"] call FHQ_fnc_ttSetTaskState;
 	};
-	if (TREND_iMissionParamRepOption == 1) then {
+	if (TREND_iMissionParamRepOption isEqualTo 1) then {
 		//CREATE TASK HERE... we fail it in mainInit.sqf when checking rep points
 		[TREND_FriendlySide, ["tskKeepAboveAverage",localize "STR_TRGM2_startInfMission_HoldReputation_Desc",localize "STR_TRGM2_startInfMission_HoldReputation_Title2",""]] call FHQ_fnc_ttAddTasks;
 		["tskKeepAboveAverage", "created"] call FHQ_fnc_ttSetTaskState;

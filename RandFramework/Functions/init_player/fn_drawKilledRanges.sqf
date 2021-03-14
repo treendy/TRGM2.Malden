@@ -1,7 +1,7 @@
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 if (getPlayerUID player in TREND_KilledPlayers) then {
 	{
-		if (getPlayerUID player == TREND_KilledPlayers select _forEachIndex) then {
+		if (getPlayerUID player isEqualTo TREND_KilledPlayers select _forEachIndex) then {
 			//draw marker at TREND_KilledPositions select _forEachIndex
 			_color = "ColorBlack";
 			_mrkPos = createMarkerLocal [format["mrkNoGoA%1",_forEachIndex], _x select 1];

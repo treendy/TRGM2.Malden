@@ -20,7 +20,7 @@ if (_currentATFieldPos select 0 != 0) then {
 		_randomPos = [_xPos+(random 200),_yPos+(random 200),0];
 //APERSMine ATMine
 		_objMine = createMine [selectRandom["ATMine"], _randomPos, [], 0];
-		if ("TEST" == "FALSE") then {
+		if ("TEST" isEqualTo "FALSE") then {
 			_markerstrcache = createMarker [format ["CacheLoc%1",_iCountMines],_randomPos];
 			_markerstrcache setMarkerShape "ICON";
 			_markerstrcache setMarkerType "hd_dot";

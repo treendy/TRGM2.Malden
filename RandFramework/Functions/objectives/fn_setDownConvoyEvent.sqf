@@ -49,7 +49,7 @@ if (count _nearestRoads > 0) then {
 
 	while {_iteration <= 3} do {
 		//[str(_iteration)] call TREND_fnc_notify;
-		if (_iteration == 2) then {
+		if (_iteration isEqualTo 2) then {
 			_thisAreaRange = 50;
 		};
 		//[str(_thisAreaRange)] call TREND_fnc_notify;
@@ -101,7 +101,7 @@ if (count _nearestRoads > 0) then {
 				["Door_1_source",1,"Door_2_source",0,"Door_3_source",0,"Door_4_source",1,"Hide_Door_1_source",0,"Hide_Door_2_source",0,"Hide_Door_3_source",0,"Hide_Door_4_source",0,"lights_em_hide",1,"ladder_hide",1,"spare_tyre_holder_hide",1,"spare_tyre_hide",1,"reflective_tape_hide",0,"roof_rack_hide",0,"LED_lights_hide",0,"sidesteps_hide",0,"rearsteps_hide",0,"side_protective_frame_hide",1,"front_protective_frame_hide",1,"beacon_front_hide",0,"beacon_rear_hide",0]
 			] call BIS_fnc_initVehicle;
 
-			if (_iteration == 1) then {
+			if (_iteration isEqualTo 1) then {
 				[_mainVeh] spawn {
 					_mainVeh = _this select 0;
 					while{ (alive _mainVeh)} do {
@@ -235,7 +235,7 @@ if (count _nearestRoads > 0) then {
 
 			_Crater = createVehicle ["Crater", _backOfVehArea, [], 20, "CAN_COLLIDE"];
 
-			if (_iteration == 1) then {
+			if (_iteration isEqualTo 1) then {
 
 				_downedCivMedic2 = _group createUnit [selectRandom (call FriendlyCheckpointUnits),_backOfVehArea,[],8,"NONE"];
 				_downedCivMedic2 playmove "Acts_CivilListening_2";
@@ -256,13 +256,13 @@ if (count _nearestRoads > 0) then {
 
 				/*[_downedCiv2] spawn {
 					_downedCiv2 = _this select 0;
-					waitUntil {sleep 2; behaviour _downedCiv2 == "combat"};
+					waitUntil {sleep 2; behaviour _downedCiv2 isEqualTo "combat"};
 					_downedCiv2 call BIS_fnc_ambientAnim__terminate;
 				};*/
 
 
 			};
-			if (_iteration == 2) then {
+			if (_iteration isEqualTo 2) then {
 
 
 				_downedCiv3 = _group createUnit [selectRandom (call FriendlyCheckpointUnits),_backOfVehArea,[],25,"NONE"];
@@ -294,7 +294,7 @@ if (count _nearestRoads > 0) then {
 
 			_buildings = nearestObjects [_vehPos, TREND_BasicBuildings, 100];
 			//[str(count _buildings)] call TREND_fnc_notify;
-			if (count _buildings < 5 && _iteration == 1) then {
+			if (count _buildings < 5 && _iteration isEqualTo 1) then {
 				_car1 = createVehicle [selectRandom _vehs, _flatPos, [], 0, "CAN_COLLIDE"];
 				_car1 setDamage [1,false];
 				_car1 setDir (floor(random 360));

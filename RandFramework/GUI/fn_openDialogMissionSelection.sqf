@@ -48,7 +48,7 @@ if (isNil "TREND_InitialLoadedPreviousSettings" && !TREND_ForceMissionSetup) the
 		TREND_AdvancedSettings pushBack (TREND_DefaultEnemyFactionValue select 0);
 	};
 
-	if (TREND_AdvancedSettings select 6 == 0) then { //we had an issue with some being set to zero (due to a bad published version, this makes sure any zeros are adjusted to correct id)
+	if (TREND_AdvancedSettings select 6 isEqualTo 0) then { //we had an issue with some being set to zero (due to a bad published version, this makes sure any zeros are adjusted to correct id)
 		TREND_AdvancedSettings set [6,TREND_DefaultEnemyFactionValue select 0];
 	};
 
@@ -115,14 +115,14 @@ if (!isNull (findDisplay 6000)) then {
 		TREND_debugMessages = TREND_debugMessages + "\n\n" + str(lbCurSel _ctrlItem);
 		publicVariable "TREND_debugMessages";
 		_value = nil;
-		if (_lnpCtrlType == "RscCombo") then {
+		if (_lnpCtrlType isEqualTo "RscCombo") then {
 			TREND_debugMessages = TREND_debugMessages + "\n\nHERE80:" + str(lbCurSel _ctrlItem);
 			_value = _ThisControlOptions select ([lbCurSel _ctrlItem, 0] select (lbCurSel _ctrlItem isEqualTo -1));
 		};
-		if (_lnpCtrlType == "RscEdit") then {
+		if (_lnpCtrlType isEqualTo "RscEdit") then {
 			_value = ctrlText _ThisControlIDX;
 		};
-		if (_lnpCtrlType == "RscXSliderH") then {
+		if (_lnpCtrlType isEqualTo "RscXSliderH") then {
 			_value = sliderPosition _ThisControlIDX;
 		};
 		TREND_AdvancedSettings pushBack _value;

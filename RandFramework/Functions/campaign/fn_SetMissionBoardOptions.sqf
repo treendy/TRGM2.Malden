@@ -54,13 +54,13 @@ switch (_option) do {
 // 		[_x, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitEngineer",{_this spawn TREND_fnc_RecruiteInf;},[TREND_CampaignRecruitUnitEngineer,"Engineer"]]] remoteExec ["addAction", 0];
 // 		[_x, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitExplosive",{_this spawn TREND_fnc_RecruiteInf;},[TREND_CampaignRecruitUnitExplosiveSpecialist,"ExplosiveSpecialist"]]] remoteExec ["addAction", 0];
 // 		[_x, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitMedic",{_this spawn TREND_fnc_RecruiteInf;},[TREND_CampaignRecruitUnitMedic,"Medic"]]] remoteExec ["addAction", 0];
-// 		if (_dCurrentRep == 3) then {
+// 		if (_dCurrentRep isEqualTo 3) then {
 // 			[_x, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAutomaticRiflemanS",{_this spawn TREND_fnc_RecruiteInf;},[TREND_CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
 // 		};
 // 		if (_dCurrentRep > 3) then {
 // 			[_x, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitAutomaticRifleman",{_this spawn TREND_fnc_RecruiteInf;},[TREND_CampaignRecruitUnitAuto,"Autorifleman"]]] remoteExec ["addAction", 0];
 // 		};
-// 		if (_dCurrentRep == 5) then {
+// 		if (_dCurrentRep isEqualTo 5) then {
 // 			[_x, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSniperS",{_this spawn TREND_fnc_RecruiteInf;},[TREND_CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
 // 			[_x, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSpotterS",{_this spawn TREND_fnc_RecruiteInf;},[TREND_CampaignRecruitUnitSpotter,"Spotter"]]] remoteExec ["addAction", 0];
 // 		};
@@ -69,7 +69,7 @@ switch (_option) do {
 // 			[_x, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSniper",{_this spawn TREND_fnc_RecruiteInf;},[TREND_CampaignRecruitUnitSniper,"Sniper"]]] remoteExec ["addAction", 0];
 // 			[_x, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitSpotter",{_this spawn TREND_fnc_RecruiteInf;},[TREND_CampaignRecruitUnitSpotter,"Spotter"]]] remoteExec ["addAction", 0];
 // 		};
-// 		if (_dCurrentRep == 7) then {
+// 		if (_dCurrentRep isEqualTo 7) then {
 // 			[_x, [localize "STR_TRGM2_SetMissionBoardOptions_RecruitUAVS",{_this spawn TREND_fnc_RecruiteInf;},[TREND_CampaignRecruitUnitUAV,"UAVOperator"]]] remoteExec ["addAction", 0];
 // 		};
 // 		if (_dCurrentRep > 7) then {

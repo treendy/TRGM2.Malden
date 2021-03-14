@@ -21,7 +21,7 @@ if ((!isNull TREND_AdminPlayer && str player isEqualTo "sl") || (TREND_AdminPlay
 			if (TREND_MapClicked isEqualTo 1) then { // player has clicked the map
 				_foundPickupPos = [TREND_ClickedPos, 0,50,25,0,0.15,0,[],[[0,0,0],[0,0,0]]] call TREND_fnc_findSafePos; // find a valid pos
 				_nearRoad = [_foundPickupPos,20] call BIS_fnc_nearestRoad;
-				if ((!isNull _nearRoad) || (0 == _foundPickupPos select 0 && 0 == _foundPickupPos select 1) || (TREND_ClickedPos isEqualTo _foundPickupPos)) then {
+				if ((!isNull _nearRoad) || (0 isEqualTo _foundPickupPos select 0 && 0 isEqualTo _foundPickupPos select 1) || (TREND_ClickedPos isEqualTo _foundPickupPos)) then {
 					// INVALID POS
 					TREND_MapClicked = false;
 					hintC (localize "STR_TRGM2_InitClickInvalidPos");

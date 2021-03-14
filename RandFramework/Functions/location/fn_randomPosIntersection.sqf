@@ -33,7 +33,7 @@ private _positions = [[0,0],[0,0]];
 	switch (true) do
 	{
 		//trigger
-		case (typeName _x == "OBJECT") :
+		case (typeName _x isEqualTo "OBJECT") :
 		{
 			if(triggerArea _x select 0 != triggerArea _x select 1) then
 			{
@@ -43,7 +43,7 @@ private _positions = [[0,0],[0,0]];
 			_radii set [_forEachIndex, triggerArea _x select 0];
 			_positions set [_forEachIndex, getPos _x];
 		};
-		case (typeName _x == "STRING") :
+		case (typeName _x isEqualTo "STRING") :
 		{
 			if(getmarkersize _x select 0 != getmarkersize _x select 1) then
 			{
@@ -53,11 +53,11 @@ private _positions = [[0,0],[0,0]];
 			_radii set [_forEachIndex, getmarkersize _x select 0];
 			_positions set [_forEachIndex, getmarkerpos _x];
 		};
-		case (typeName _x == "ARRAY") :
+		case (typeName _x isEqualTo "ARRAY") :
 		{
 			_radii set [_forEachIndex, _x select 1];
 
-			if(typeName (_x select 0) == "ARRAY") then
+			if(typeName (_x select 0) isEqualTo "ARRAY") then
 			{
 				_positions set [_forEachIndex, _x select 0];
 			}
@@ -165,7 +165,7 @@ switch (true) do
 	};
 
 	//1 intersection point
-	case (_d == _r1 + _r2) :
+	case (_d isEqualTo _r1 + _r2) :
 	{
 		//1 intersection point
 

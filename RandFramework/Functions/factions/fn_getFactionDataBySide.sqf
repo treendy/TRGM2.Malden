@@ -14,7 +14,7 @@ for "_i" from 0 to (count _configPath - 1) do {
 	private _element = _configPath select _i;
 
 	if (isClass _element) then {
-		if ((getNumber(_element >> "side")) == _sideNum) then {
+		if ((getNumber(_element >> "side")) isEqualTo _sideNum) then {
 			_factionConfigPaths pushBackUnique _element;
 		};
 	};
@@ -24,8 +24,8 @@ private _factions = [];
 
 {
 	private _faction = (configName _x);
-	private _hasMan = count ("((getNumber(_x >> 'scope') == 2) && {(getNumber(_x >> 'side') == _sideNum) && {(getText(_x >> 'faction') == _faction) && {(configName(_x) isKindOf 'Man')}}})" configClasses (configFile >> "CfgVehicles")) > 0;
-	private _hasCar = count ("((getNumber(_x >> 'scope') == 2) && {(getNumber(_x >> 'side') == _sideNum) && {(getText(_x >> 'faction') == _faction) && {(configName(_x) isKindOf 'Car')}}})" configClasses (configFile >> "CfgVehicles")) > 0;
+	private _hasMan = count ("((getNumber(_x >> 'scope') isEqualTo 2) && {(getNumber(_x >> 'side') isEqualTo _sideNum) && {(getText(_x >> 'faction') isEqualTo _faction) && {(configName(_x) isKindOf 'Man')}}})" configClasses (configFile >> "CfgVehicles")) > 0;
+	private _hasCar = count ("((getNumber(_x >> 'scope') isEqualTo 2) && {(getNumber(_x >> 'side') isEqualTo _sideNum) && {(getText(_x >> 'faction') isEqualTo _faction) && {(configName(_x) isKindOf 'Car')}}})" configClasses (configFile >> "CfgVehicles")) > 0;
 	if (_hasMan && _hasCar) then {
 		_factions pushBack [(configName _x), getText(_x >> "displayName")];
 	};

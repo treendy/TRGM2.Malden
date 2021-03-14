@@ -114,18 +114,18 @@ _lblctrlTitle ctrlCommit 0;
 
 	_display ctrlCreate [_lnpCtrlType, _InpCtrlID];
 	_inpctrl = _display displayCtrl _InpCtrlID;
-	_inpctrl ctrlSetPosition [_inpXPos, _ctrlYPos,[_ctrlWidth, .75*_ctrlWidth] select (_lnpCtrlType == "RscXSliderH"),_ctrlHeight];
+	_inpctrl ctrlSetPosition [_inpXPos, _ctrlYPos,[_ctrlWidth, .75*_ctrlWidth] select (_lnpCtrlType isEqualTo "RscXSliderH"),_ctrlHeight];
 
-	if (_lnpCtrlType == "RscCombo") then {
+	if (_lnpCtrlType isEqualTo "RscCombo") then {
 		{
 			_inpctrl lbAdd _x;
 		} forEach _Options;
 		_inpctrl lbSetCurSel (_Values find (TREND_AdvancedSettings select _forEachIndex));
 	};
-	if (_lnpCtrlType == "RscEdit") then {
+	if (_lnpCtrlType isEqualTo "RscEdit") then {
 		_inpctrl ctrlSetText (TREND_AdvancedSettings select _forEachIndex);
 	};
-	if (_lnpCtrlType == "RscXSliderH") then {
+	if (_lnpCtrlType isEqualTo "RscXSliderH") then {
 		_inpctrl sliderSetRange [_Options, _Values];
 		_inpctrl sliderSetSpeed [(_Values / _Options), 1];
 		_inpctrl sliderSetPosition (TREND_AdvancedSettings select _forEachIndex);

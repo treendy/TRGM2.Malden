@@ -7,10 +7,10 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc
 
 //sInitialSLPlayerID
 _SaveVersion = "";
-if (_SaveType == 1) then {
+if (_SaveType isEqualTo 1) then {
 	_SaveVersion = worldName;
 };
-if (_SaveType == 2) then {
+if (_SaveType isEqualTo 2) then {
 	_SaveVersion = "GLOBAL";
 };
 
@@ -46,7 +46,7 @@ if (_SaveVersion != "") then {
 
 	TREND_laptop1 remoteExec ["removeAllActions"];
 
-	if (TREND_SaveType == 1) then {
+	if (TREND_SaveType isEqualTo 1) then {
 		if (_IsFirstSave) then {[(localize "STR_TRGM2_ServerSave_Save1")] call TREND_fnc_notify;};
 		[TREND_laptop1, [localize "STR_TRGM2_ServerSave_SaveLocal",{[(localize "STR_TRGM2_ServerSave_SaveHint")] call TREND_fnc_notify}]] remoteExec ["addAction", 0];
 

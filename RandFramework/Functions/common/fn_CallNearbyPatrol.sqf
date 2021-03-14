@@ -21,7 +21,7 @@ format["Spotted: %1", _thisThisList] call TREND_fnc_log;
 if (TREND_FireFlares) then {
 	//gives 3 second delay before firing up flare, and also, will wait 10 seconds before firing up more
 	TREND_FlareCounter = TREND_FlareCounter - 1;
-	if (TREND_FlareCounter == 10) then {
+	if (TREND_FlareCounter isEqualTo 10) then {
 		_centPos = _FirstPos;
 		_FirstFlarePos = _centPos getPos [(floor random 150),(floor random 360)];
 		_SecondFlarePos = _centPos getPos [(floor random 150),(floor random 360)];
@@ -30,7 +30,7 @@ if (TREND_FireFlares) then {
 		[_SecondFlarePos] spawn TREND_fnc_fireAOFlares;
 
 	};
-	if (TREND_FlareCounter == 0) then {
+	if (TREND_FlareCounter isEqualTo 0) then {
 		TREND_FlareCounter = 30;
 	};
 };
@@ -87,7 +87,7 @@ if (_SpottedUnitCount > 0) then {
 	//TREND_AODetails = [[AOIndex,InfSpottedCount,VehSpottedCount,AirSpottedCount,bScoutCalled, patrolMoveCounter,MortarAllowedCount]]
 	{
 		//[format["HERE: %1, %2", _x select 0,_iTaskIndex]] call TREND_fnc_notify;
-		if (_x select 0 == _iTaskIndex) then {
+		if (_x select 0 isEqualTo _iTaskIndex) then {
 			_currentAODetail = _x;
 			_PatrolMoveCount = (_x select 5);
 			if (_PatrolMoveCount > 0) then {
@@ -98,7 +98,7 @@ if (_SpottedUnitCount > 0) then {
 			};
 			_PatrolMoveCount = _PatrolMoveCount + 1;
 			_x set [5,_PatrolMoveCount];
-			if (_PatrolMoveCount == _PatrolMoveMaxCount) then {
+			if (_PatrolMoveCount isEqualTo _PatrolMoveMaxCount) then {
 				_x set [5,0];
 			};
 
@@ -123,7 +123,7 @@ if (_SpottedUnitCount > 0) then {
 				if (_x select 1 > -1) then {
 					_InfCount = (_x select 1) + 1;
 					_x set [1,_InfCount];
-					if (_InfCount == _InfMaxCount) then {
+					if (_InfCount isEqualTo _InfMaxCount) then {
 						if (!(_x select 4)) then { //if scount not called in this AO
 							_x set [4,True];
 							_x set [1,0];
@@ -143,7 +143,7 @@ if (_SpottedUnitCount > 0) then {
 				if (_x select 2 > -1) then {
 					_TankCount = (_x select 2) + 1;
 					_x set [2,_TankCount];
-					if (_TankCount == _TankMaxCount) then {
+					if (_TankCount isEqualTo _TankMaxCount) then {
 						_bTankSpottedAction = true;
 						_x set [2,-1];
 					};
@@ -153,7 +153,7 @@ if (_SpottedUnitCount > 0) then {
 				if (_x select 3 > -1) then {
 					_AirCount = (_x select 3) + 1;
 					_x set [3,_AirCount];
-					if (_AirCount == _AirMaxCount) then {
+					if (_AirCount isEqualTo _AirMaxCount) then {
 						_bAirSpottedAction = true;
 						_x set [3,-1];
 					};
@@ -289,11 +289,11 @@ if (_SpottedUnitCount > 0) then {
 				_SpotterFound = false;
 				_Spotter = nil;
 				{
-					if ((getPos _SpottedUnit distance getPos _x) < 55 && side _x == east) then {
+					if ((getPos _SpottedUnit distance getPos _x) < 55 && side _x isEqualTo east) then {
 						_bAllowMortar = false; //enemy units are too close to spotted unit to call mortar
 					}
 					else {
-						if (!_SpotterFound && (getPos _SpottedUnit distance getPos _x) > 55 && side _x == East) then {
+						if (!_SpotterFound && (getPos _SpottedUnit distance getPos _x) > 55 && side _x isEqualTo East) then {
 
 							_cansee = [objNull, "VIEW"] checkVisibility [eyePos _x, eyePos _SpottedUnit];
 							// if (TREND_bDebugMode) then {[format["POW4 %1",_cansee]] call TREND_fnc_notify;};

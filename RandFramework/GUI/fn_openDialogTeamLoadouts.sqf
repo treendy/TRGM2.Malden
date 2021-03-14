@@ -26,14 +26,14 @@ if (!isNull (findDisplay 6000)) then {
 		TREND_debugMessages = TREND_debugMessages + "\n\n" + str(lbCurSel _ctrlItem);
 		publicVariable "TREND_debugMessages";
 		_value = nil;
-		if (_lnpCtrlType == "RscCombo") then {
+		if (_lnpCtrlType isEqualTo "RscCombo") then {
 			TREND_debugMessages = TREND_debugMessages + "\n\nHERE:" + str(lbCurSel _ctrlItem);
 			_value = _ThisControlOptions select (lbCurSel _ctrlItem);
 		};
-		if (_lnpCtrlType == "RscEdit") then {
+		if (_lnpCtrlType isEqualTo "RscEdit") then {
 			_value = ctrlText _ThisControlIDX;
 		};
-		if (_lnpCtrlType == "RscXSliderH") then {
+		if (_lnpCtrlType isEqualTo "RscXSliderH") then {
 			_value = sliderPosition _ThisControlIDX;
 		};
 		TREND_AdvancedSettings pushBack _value;
@@ -97,7 +97,7 @@ _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {
 			_RoleDetails = _TempLoadoutData splitString ":";
 			_roleType = _RoleDetails select 0;
 			_loadoutoptions = (_RoleDetails select 1) splitString ";";
-			if (count _loadoutoptions == 0) then {
+			if (count _loadoutoptions isEqualTo 0) then {
 				_errorMessage = localize "STR_TRGM2_openDialogTeamLoadouts_ErrorMsg_SetNotCorrectly";
 			};
 

@@ -1,10 +1,10 @@
 params ["_AllowedIntelToShow", "_FoundViaType"];
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
-if (side player == west) then {
+if (side player isEqualTo west) then {
 	_IntelToShow = 0;
 	_iAttemptCount = 0;
-	while {_IntelToShow == 0 && _iAttemptCount < 100} do {
+	while {_IntelToShow isEqualTo 0 && _iAttemptCount < 100} do {
 		_iAttemptCount = _iAttemptCount + 1;
 		_IntelToShow = selectRandom _AllowedIntelToShow;
 		if (_IntelToShow in TREND_IntelFound) then {_IntelToShow = 0};
@@ -14,14 +14,14 @@ if (side player == west) then {
 	TREND_TempIntelShowPos =  ""; publicVariable "TREND_TempIntelShowPos";
 
 
-	if (_FoundViaType == "CommsTower") then {
+	if (_FoundViaType isEqualTo "CommsTower") then {
 		[(localize "STR_TRGM2_PickingUpComms")] call TREND_fnc_notify;
 		sleep 4;
 	};
 
 
 
-	if (_IntelToShow == 0) then { //Nothing found
+	if (_IntelToShow isEqualTo 0) then { //Nothing found
 		[(localize "STR_TRGM2_showIntel_NoIntel")] call TREND_fnc_notify;
 	}
 	else {
@@ -29,12 +29,12 @@ if (side player == west) then {
 		publicVariable "TREND_IntelFound";
 	};
 
-	if (_IntelToShow == 1) then { //Mortor team location
+	if (_IntelToShow isEqualTo 1) then { //Mortor team location
 		{
 			TREND_TempIntelShowPos = nearestObjects [TREND_ObjectivePossitions select 0,(call sMortar) + (call sMortarMilitia),3000];
 			publicVariable "TREND_TempIntelShowPos";
 		} remoteExec ["call", 2];
-		waitUntil {sleep 2; typeName TREND_TempIntelShowPos == "ARRAY"};
+		waitUntil {sleep 2; typeName TREND_TempIntelShowPos isEqualTo "ARRAY"};
 		_iCount = count TREND_TempIntelShowPos;
 		if (_iCount > 0) then {
 			{
@@ -50,12 +50,12 @@ if (side player == west) then {
 			[(localize "STR_TRGM2_showIntel_MortarMapNoUpdate")] call TREND_fnc_notify;
 		};
 	};
-	if (_IntelToShow == 2) then { //AAA team location
+	if (_IntelToShow isEqualTo 2) then { //AAA team location
 		{
 			TREND_TempIntelShowPos = nearestObjects [TREND_ObjectivePossitions select 0,[(call sAAAVeh)] + [(call sAAAVehMilitia)] + (call DestroyAAAVeh),3000];
 			publicVariable "TREND_TempIntelShowPos";
 		} remoteExec ["call", 2];
-		waitUntil {sleep 2; typeName TREND_TempIntelShowPos == "ARRAY"};
+		waitUntil {sleep 2; typeName TREND_TempIntelShowPos isEqualTo "ARRAY"};
 		_iCount = count TREND_TempIntelShowPos;
 		_iStep = 0;
 		if (_iCount > 0) then {
@@ -73,7 +73,7 @@ if (side player == west) then {
 			[(localize "STR_TRGM2_showIntel_AAAMapNoUpdate")] call TREND_fnc_notify;
 		};
 	};
-	if (_IntelToShow == 3) then { //Comms tower location
+	if (_IntelToShow isEqualTo 3) then { //Comms tower location
 		if (TREND_bHasCommsTower) then {
 			_test = nil;
 			_test = createMarker ["CommsIntelAAA1", TREND_CommsTowerPos];
@@ -86,7 +86,7 @@ if (side player == west) then {
 			[(localize "STR_TRGM2_showIntel_CommsTowerMapNoUpdate")] call TREND_fnc_notify;
 		};
 	};
-	if (_IntelToShow == 4) then { //All checkpoints
+	if (_IntelToShow isEqualTo 4) then { //All checkpoints
 		_bFoundcheckpoints = false;
 		{
 			_distanceToCheckPoint = (_x select 0) distance (TREND_ObjectivePossitions select 0);
@@ -108,8 +108,8 @@ if (side player == west) then {
 		};
 
 	};
-	if (_IntelToShow == 5) then { //AT Mine field
-		if (count TREND_ATFieldPos == 0) then {
+	if (_IntelToShow isEqualTo 5) then { //AT Mine field
+		if (count TREND_ATFieldPos isEqualTo 0) then {
 			[(localize "STR_TRGM2_showIntel_NoATArea")] call TREND_fnc_notify;
 		}
 		else {

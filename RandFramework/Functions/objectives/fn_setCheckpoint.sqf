@@ -59,7 +59,7 @@ if (_thisRoadOnly) then {
 	while {!_PosFound && _iAttemptLimit > 0 && count _nearestRoads > 0} do {
 		_nearestRoad = selectRandom _nearestRoads;
 		_roadConnectedTo = roadsConnectedTo _nearestRoad;
-		if (count _roadConnectedTo == 2) then {
+		if (count _roadConnectedTo isEqualTo 2) then {
 
 
 			_connectedRoad = _roadConnectedTo select 0;
@@ -167,23 +167,23 @@ if (_PosFound) then {
 		_roadBlockSidePos = _flatPos;
 		_allRoadsNear = _flatPos nearRoads 500;
 		_nearestHouseCount = count(nearestObjects [_flatPos, ["building"],400]);
-		if (count _allRoadsNear == 0 && _nearestHouseCount == 0) then {_NoRoadsOrBuildingsNear = true;};
+		if (count _allRoadsNear isEqualTo 0 && _nearestHouseCount isEqualTo 0) then {_NoRoadsOrBuildingsNear = true;};
 	};
 
-	if (_thisIsCheckPoint && _thisSide == east) then {
+	if (_thisIsCheckPoint && _thisSide isEqualTo east) then {
 		//TREND_CheckPointAreas
 		TREND_CheckPointAreas = TREND_CheckPointAreas + [[_roadBlockPos,_thisAreaAroundCheckpointSpacing]]; //the ,_thisAreaAroundCheckpointSpacing is for when we use TREND_fnc_findSafePos to make sure no other road block is within 100 meters
 		publicVariable "TREND_CheckPointAreas";
 	}
 	else {
-		if (_thisSide == east) then {
+		if (_thisSide isEqualTo east) then {
 		//TREND_SentryAreas
 			TREND_SentryAreas = TREND_SentryAreas + [[_roadBlockPos,_thisAreaAroundCheckpointSpacing]];
 			publicVariable "TREND_SentryAreas"
 		};
 	};
 
-	if (_thisSide == west) then {
+	if (_thisSide isEqualTo west) then {
 		TREND_friendlySentryCheckpointPos = TREND_friendlySentryCheckpointPos + [_roadBlockPos];
 		publicVariable "TREND_friendlySentryCheckpointPos";
 	};
@@ -209,25 +209,25 @@ if (_PosFound) then {
 		_iBarricadeType = "NONE";
 	};
 
-	if (_iBarricadeType == "HIGH") then {
+	if (_iBarricadeType isEqualTo "HIGH") then {
 		_initItem = selectRandom _RoadSideBarricadesHigh createVehicle _roadBlockSidePos;
 		_initItem setDir ([_direction,180] call fnc_AddToDirection);
 	};
-	if (_iBarricadeType == "FULL") then {
+	if (_iBarricadeType isEqualTo "FULL") then {
 		_initItem = selectRandom _FullRoadBarricades createVehicle _roadBlockPos;
 		_initItem setDir ([_direction,180] call fnc_AddToDirection);
 	};
-	if (_iBarricadeType == "LOW") then {
+	if (_iBarricadeType isEqualTo "LOW") then {
 		_initItem = selectRandom _RoadSideBarricadesLow createVehicle _roadBlockSidePos;
 		_initItem setDir ([_direction,180] call fnc_AddToDirection);
 
-		if (_thisSide == east && _AllowTurrent) then {
+		if (_thisSide isEqualTo east && _AllowTurrent) then {
 			_NearTurret1 = createVehicle [selectRandom (call CheckPointTurret), _initItem getPos [1,_direction+180], [], 0, "CAN_COLLIDE"];
 			_NearTurret1 setDir (_direction);
 			createVehicleCrew _NearTurret1;
 		};
 	};
-	if (_iBarricadeType == "NONE") then {  //if none, then either use flag or defensive object
+	if (_iBarricadeType isEqualTo "NONE") then {  //if none, then either use flag or defensive object
 		//FlagCarrierTakistan_EP1, FlagCarrierTKMilitia_EP1
 		if (!(isOnRoad _roadBlockSidePos) && random 1 < .50) then {
 			_initItem = selectRandom _DefensiveObjects createVehicle _roadBlockSidePos;
@@ -246,7 +246,7 @@ if (_PosFound) then {
 				_thisSide = _this select 1;
 				while {alive(_initItem)} do {
 					_soundToPlay = selectRandom TREND_EnemyRadioSounds;
-					if (_thisSide == west) then {_soundToPlay = selectRandom TREND_FriendlyRadioSounds};
+					if (_thisSide isEqualTo west) then {_soundToPlay = selectRandom TREND_FriendlyRadioSounds};
 					playSound3D ["A3\Sounds_F\sfx\radio\" + _soundToPlay + ".wss",_initItem,false,getPosASL _initItem,0.5,1,0];
 					sleep selectRandom [10,15,20,30];
 				};
@@ -256,7 +256,7 @@ if (_PosFound) then {
 
 	_bHasParkedCar = false;
 	_ParkedCar = nil;
-	if (_AllowVeh && (random 1 < .75 || _thisSide == west)) then {
+	if (_AllowVeh && (random 1 < .75 || _thisSide isEqualTo west)) then {
 		_behindBlockPos = _initItem getPos [10,([_direction,180] call fnc_AddToDirection)];
 		_flatPos = nil;
 		_flatPos = [_behindBlockPos , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos],selectRandom _thisScoutVehicles] call TREND_fnc_findSafePos;
@@ -309,7 +309,7 @@ if (_PosFound) then {
 			_flatPos = nil;
 			_flatPos = [_behindBlockPos2 , 0, 5, 7, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call TREND_fnc_findSafePos;
 			_radio = nil;
-			if (_thisSide == west) then {
+			if (_thisSide isEqualTo west) then {
 				_radio = selectRandom ["uns_radio2_radio","uns_radio2_transitor","uns_radio2_transitor02"] createVehicle _flatPos;
 			}
 			else {
@@ -394,7 +394,7 @@ if (_PosFound) then {
 	_guardUnit5 = _group4 createUnit [_sUnitType,_pos5,[],0,"NONE"];
 	_guardUnit5 setVariable [_sCheckpointGuyName, _guardUnit5, true];
 	missionNamespace setVariable [_sCheckpointGuyName, _guardUnit5];
-	if (_thisSide == west) then {
+	if (_thisSide isEqualTo west) then {
 		_isHiddenObj = false;
 		_mainAOPos = TREND_ObjectivePossitions select 0;
 		if (! isNil "_mainAOPos") then {
@@ -404,7 +404,7 @@ if (_PosFound) then {
 		};
 
 		if (!_isHiddenObj) then {
-			[_guardUnit5, [localize "STR_TRGM2_setCheckpoint_Ask", {_this spawn TREND_fnc_SpeakToFriendlyCheckpoint;}, [_pos5], 0, true, true, "", "_this == player"]] remoteExec ["addAction", 0, true];
+			[_guardUnit5, [localize "STR_TRGM2_setCheckpoint_Ask", {_this spawn TREND_fnc_SpeakToFriendlyCheckpoint;}, [_pos5], 0, true, true, "", "_this isEqualTo player"]] remoteExec ["addAction", 0, true];
 			if (random 1 < .66) then {
 				_test = nil;
 				_test = createMarker [format["MrkFriendCheckpoint%1%2",_roadBlockPos select 0, _roadBlockPos select 1], _roadBlockPos];
@@ -422,7 +422,7 @@ if (_PosFound) then {
 		group _objMan setSpeedMode "LIMITED";
 		group _objMan setBehaviour "SAFE";
 
-		while {alive(_objMan) && {behaviour _objMan == "SAFE"}} do {
+		while {alive(_objMan) && {behaviour _objMan isEqualTo "SAFE"}} do {
 			[_objManName,_thisInitPos,_objMan,35] spawn TREND_fnc_HVTWalkAround;
 			sleep 2;
 			waitUntil {sleep 1; speed _objMan < 0.5};

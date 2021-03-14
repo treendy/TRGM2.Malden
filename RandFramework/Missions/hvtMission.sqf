@@ -54,7 +54,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	//###################################### HVT(s) ######################################
 	["Mission Setup: 8-4", true] call TREND_fnc_log;
 	_allpositions = _objectiveMainBuilding buildingPos -1;
-	if (TREND_InfTaskCount == 0) then {
+	if (TREND_InfTaskCount isEqualTo 0) then {
 		TREND_AllowUAVLocateHelp =  true; publicVariable "TREND_AllowUAVLocateHelp";
 	};
 
@@ -67,6 +67,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_objInformant setVariable ["HVTType",_hvtType,true];
 	_objInformant setVariable ["createTask",_bCreateTask,true];
 	_objInformant setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
+	missionNamespace setVariable [format ["missionObjectiveParams%1", _iTaskIndex], [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 	missionNamespace setVariable [_sInformant1Name, _objInformant];
 	sleep 0.2;
 	_MissionTitle = _MissionTitle + ": " + name _objInformant;
@@ -74,7 +75,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_initPos = selectRandom _allpositions;
 	_flatPosInform = nil;
 	_flatPosInform = [_initPos, 10, 75, 7, 0, 0.5, 0, [], [_initPos,_initPos], _objInformant] call TREND_fnc_findSafePos;
-	if (count _flatPosInform == 3) then { //if pos is [x,y] instead of [x,y,z] then dont setPosATL!
+	if (count _flatPosInform isEqualTo 3) then { //if pos is [x,y] instead of [x,y,z] then dont setPosATL!
 		_objInformant setPosATL (_flatPosInform);
 	} else {
 		_objInformant setPos (_flatPosInform);
@@ -83,13 +84,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	[_objInformant, ["HitPart", {
 		(_this select 0) params ["_thisInformant", "_thisShooter", "_projectile", "_position", "_velocity", "_selection", "_ammo", "_vector", "_radius", "_surfaceType", "_isDirect"];
 		_hitLocation = _selection select 0;
-		if (side (_thisShooter) == TREND_FriendlySide && alive(_thisInformant)) then {
+		if (side (_thisShooter) isEqualTo TREND_FriendlySide && alive(_thisInformant)) then {
 			_thisInformant allowDamage true;
 			_bDone = false;
 			(group _thisInformant) setBehaviour "ALERT";
 			_thisInformant switchMove "";
 			_ThisHVTType = _thisInformant getVariable ["HVTType","SPEAK"];
-			if (!isPlayer _thisShooter && {_ThisHVTType == "INTERROGATE" || _ThisHVTType == "SPEAK"}) then {
+			if (!isPlayer _thisShooter && {_ThisHVTType isEqualTo "INTERROGATE" || _ThisHVTType isEqualTo "SPEAK"}) then {
 				_thisInformant disableAI "anim";
 				_thisInformant switchMove "Acts_CivilInjuredLegs_1";
 				_thisInformant disableAI "anim";
@@ -156,7 +157,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			group _objMan setBehaviour "SAFE";
 			sleep 5; //allow five seconds for any scripts to be run on officer before he moves e.g. if set as hostage when friendly rebels)
 
-			while {alive(_objMan) && {behaviour _objMan == "SAFE"}} do {
+			while {alive(_objMan) && {behaviour _objMan isEqualTo "SAFE"}} do {
 				[_objManName,_thisInitPos,_objMan,75] spawn TREND_fnc_HVTWalkAround;
 				sleep 2;
 				waitUntil {sleep 1; speed _objMan < 0.5};

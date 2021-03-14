@@ -41,7 +41,7 @@ if (_center isEqualto [0, 0, 0]) exitwith {
     ([])
 };
 
-if ((count _units == 0) || {
+if ((count _units isEqualTo 0) || {
     isNull (_units select 0)
 }) exitwith {
     // player sideChat str "Zen_Occupy House Error : No units given.";
@@ -66,7 +66,7 @@ _Zen_insertionsort = {
     _comparator = _this select 1;
     _count = count _array - 1;
 
-    if (count _array == 0) exitwith {};
+    if (count _array isEqualTo 0) exitwith {};
     for "_i" from 1 to _count step 1 do {
         scopeName "forI";
         _element = _array select _i;
@@ -113,7 +113,7 @@ if (_buildingradius < 0) then {
     _buildingsArray = _buildingsArray0 arrayintersect _buildingsArray1;
 };
 
-if (count _buildingsArray == 0) exitwith {
+if (count _buildingsArray isEqualTo 0) exitwith {
     player sideChat str "Zen_Occupy House Error : No buildings found.";
     diag_log "Zen_Occupy House Error : No buildings found.";
     ([])
@@ -158,7 +158,7 @@ scopeName "for";
 _building = _buildingsArray select (_j mod (count _buildingsArray));
 _posArray = _buildingPosArray select (_j mod (count _buildingPosArray));
 
-if (count _posArray == 0) then {
+if (count _posArray isEqualTo 0) then {
     _buildingsArray deleteAt (_j mod (count _buildingsArray));
     _buildingPosArray deleteAt (_j mod (count _buildingPosArray));
 };
@@ -239,7 +239,7 @@ while {(count _posArray) > 0} do {
                                             _stances = _this select 1;
                                             _dude removeAllEventHandlers "firedNear";
                                             while {alive _dude} do {
-                                                if ((unitPos _dude) == (_stances select 0)) then {
+                                                if ((unitPos _dude) isEqualTo (_stances select 0)) then {
                                                     _dude setunitPos (_stances select 1);
                                                 } else {
                                                     _dude setunitPos (_stances select 0);
@@ -257,7 +257,7 @@ while {(count _posArray) > 0} do {
                                             _stances = _this select 1;
                                             _dude removeAllEventHandlers "firedNear";
                                             while {alive _dude} do {
-                                                if ((unitPos _dude) == (_stances select 0)) then {
+                                                if ((unitPos _dude) isEqualTo (_stances select 0)) then {
                                                     _dude setunitPos (_stances select 1);
                                                 } else {
                                                     _dude setunitPos (_stances select 0);

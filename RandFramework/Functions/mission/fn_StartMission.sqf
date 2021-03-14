@@ -1,11 +1,11 @@
 
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
-_isCampaign = (TREND_iMissionParamType == 5);
+_isCampaign = (TREND_iMissionParamType isEqualTo 5);
 
 
 _mrkHQPos = getMarkerPos "mrkHQ";
 _AOCampPos = getPos endMissionBoard2;
-bAllAtBase2 = ({(alive _x)&&((_x distance _mrkHQPos < 500)||(_x distance _AOCampPos < 500))} count (call BIS_fnc_listPlayers))==({ (alive _x) } count (call BIS_fnc_listPlayers));
+bAllAtBase2 = ({(alive _x)&&((_x distance _mrkHQPos < 500)||(_x distance _AOCampPos < 500))} count (call BIS_fnc_listPlayers)) isEqualTo ({ (alive _x) } count (call BIS_fnc_listPlayers));
 
 
 
@@ -164,7 +164,7 @@ if (_bAllowStart) then {
 		{[(localize "STR_TRGM2_StartMission_Hint")] call TREND_fnc_notify;} remoteExec ["call", 0];
 	};
 
-	if (TREND_iMissionParamType == 5) then {
+	if (TREND_iMissionParamType isEqualTo 5) then {
 		call TREND_fnc_PostStartMission;
 	};
 

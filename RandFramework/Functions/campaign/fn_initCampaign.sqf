@@ -12,7 +12,7 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc
 
 
 
-if (TREND_SaveType == 0) then {
+if (TREND_SaveType isEqualTo 0) then {
 	["INIT"] remoteExec ["TREND_fnc_SetMissionBoardOptions",0,true];
 	TREND_MaxBadPoints =  1; publicVariable "TREND_MaxBadPoints";
 }

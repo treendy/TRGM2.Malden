@@ -212,15 +212,44 @@ _btnselectUnit ctrlAddEventHandler ["ButtonClick", {
                     if ((toLower (gettext (configFile >> 'cfgvehicles' >> (typeOf _spawnedVeh) >> 'vehicleClass')) isEqualto 'static')) then {
                         [_spawnedVeh, [format [localize "str_TRGM2_UnloadDingy_push", gettext (configFile >> "Cfgvehicles" >> (typeOf _spawnedVeh) >> "displayname")], {
                             _this spawn TREND_fnc_PushObject;
-                        }, [], -99, false, false, "", "_this == player && count crew _target isEqualto 0"]] remoteExec ["addAction", 0];
+                        }, [], -99, false, false, "", "_this isEqualTo player && count crew _target isEqualto 0"]] remoteExec ["addAction", 0];
                     } else {
                         // if not a turret, allow an inflatable boat to be unloaded.
                         [_spawnedVeh, [localize "str_TRGM2_startinfMission_UnloadDingy", {
                             _this spawn TREND_fnc_UnloadDingy;
-                        }, [], -99, false, false, "", "_this == player && count crew _target isEqualto 0"]] remoteExec ["addAction", 0];
+                        }, [], -99, false, false, "", "_this isEqualTo player && count crew _target isEqualto 0"]] remoteExec ["addAction", 0];
                         [_spawnedVeh, (units group _caller)] call TREND_fnc_initammoBox;
                     };
-                    ["Open", _spawnedVeh] spawn TREND_fnc_openvehicleCustomizationdialog;
+
+                    _data = [];
+                    _vehicleFaction = faction _spawnedVeh;
+                    {
+                        _items = [];
+                        {
+                            _configName = configname _x;
+                            _displayName = gettext (_x >> "displayName");
+                            _factions = getarray (_x >> "factions");
+                            if (count _factions isEqualTo 0) then {_factions = [_vehicleFaction];};
+                            if (
+                                _displayName != ""
+                                &&
+                                {getnumber (_x >> "scope") > 1 || !isnumber (_x >> "scope")}
+                                &&
+                                {{_x isEqualTo _vehicleFaction} count _factions > 0}
+                            ) then {
+                                _items pushback [_x,_displayName];
+                            };
+                        } foreach (configproperties [_x,"isclass _x",true]);
+                        _data pushback _items;
+                    } foreach [
+                        configfile >> "cfgvehicles" >> typeof _spawnedVeh >> "animationSources",
+                        configfile >> "cfgvehicles" >> typeof _spawnedVeh >> "textureSources"
+                    ];
+
+                    if (count _data > 0) then {
+                        ["Open", _spawnedVeh] spawn TREND_fnc_openvehicleCustomizationdialog;
+                    };
+
                 }, [_spawnedVeh], 5, true, true];
 
                 if (call TREND_vehiclesRequireRep) then {

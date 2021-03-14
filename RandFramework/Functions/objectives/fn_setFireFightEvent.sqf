@@ -35,7 +35,7 @@ else {
 	};
 };
 
-if (isNil("_eventLocationPos")) then {_eventType == 2};
+if (isNil("_eventLocationPos")) then {_eventType = 2};
 
 
 //(call sTeamleaderToUse)
@@ -50,7 +50,7 @@ if (isNil("_eventLocationPos")) then {_eventType == 2};
 
 TREND_WarzonePos = _eventLocationPos;
 
-if (_eventType == 1 || _eventType == 3 || _eventType == 4) then {
+if (_eventType isEqualTo 1 || _eventType isEqualTo 3 || _eventType isEqualTo 4) then {
 	_mrkEnemy = createMarker ["mrkWarzoneEnemy", _eventLocationPos];
 	_mrkEnemy setMarkerText "!!WARNING!! KEEP CLEAR";
 	_mrkEnemy setMarkerShape "ICON";
@@ -71,7 +71,7 @@ _objPos = _eventLocationPos getPos [100 * sqrt random 1, random 360];
 //_Obj1 = "land_helipadempty_f" createVehicle _objPos;
 //nul = [_Obj1] execVM "RandFramework\Alias\ALambientbattle\alias_flaks.sqf";
 
-/*if (random 1 < .50 || _eventType == 1 || _eventType == 4) then {
+/*if (random 1 < .50 || _eventType isEqualTo 1 || _eventType isEqualTo 4) then {
 	_objPos = _eventLocationPos getPos [100 * sqrt random 1, random 360];
 	_Obj8  = "land_helipadempty_f" createVehicle _objPos;
 	null = [_Obj8,false] execVM "RandFramework\Alias\ALambientbattle\aaa_search_light.sqf";
@@ -80,7 +80,7 @@ _objPos = _eventLocationPos getPos [100 * sqrt random 1, random 360];
 	_Obj9  = "land_helipadempty_f" createVehicle _objPos;
 	null = [_Obj9,false] execVM "RandFramework\Alias\ALambientbattle\aaa_search_light.sqf";
 };*/
-if (random 1 < .50 || _eventType == 1 || _eventType == 4) then {
+if (random 1 < .50 || _eventType isEqualTo 1 || _eventType isEqualTo 4) then {
 	_flatPos1 =  _eventLocationPos getPos [100 * sqrt random 1, random 360];
 	_flatPos1 = [_eventLocationPos , 0, 100, 8, 0, 0.5, 0,[],[_flatPos1,_flatPos1]] call TREND_fnc_findSafePos;
 	tracer1 setPos _flatPos1;
@@ -101,7 +101,7 @@ if (random 1 < .50 || _eventType == 1 || _eventType == 4) then {
 
 _mainAOPos = TREND_ObjectivePossitions select 0;
 
-if (_eventType == 1 || _eventType == 2) then {
+if (_eventType isEqualTo 1 || _eventType isEqualTo 2) then {
 	//_objPos = _mainAOPos getPos [100 * sqrt random 1, random 360];
 	//_Obj10  = "land_helipadempty_f" createVehicle _objPos;
 	//nul = [_Obj10] execVM "RandFramework\Alias\ALambientbattle\alias_flaks.sqf";
@@ -160,7 +160,7 @@ TREND_WarEventActive = true;
 		_sleep = 1+(random 6);
 		_diceRoll = floor(random 12)+1;
 
-		if (_diceRoll == 1) then {_sleep = 10+random 5};
+		if (_diceRoll isEqualTo 1) then {_sleep = 10+random 5};
 		if (_diceRoll > 6) then {_sleep = 0.5+random 1};
 		//[str(_sleep)] call TREND_fnc_notify;
 

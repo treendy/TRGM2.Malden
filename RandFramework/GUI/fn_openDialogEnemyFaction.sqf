@@ -26,14 +26,14 @@ if (!isNull (findDisplay 6000)) then {
 		TREND_debugMessages = TREND_debugMessages + "\n\n" + str(lbCurSel _ctrlItem);
 		publicVariable "TREND_debugMessages";
 		_value = nil;
-		if (_lnpCtrlType == "RscCombo") then {
+		if (_lnpCtrlType isEqualTo "RscCombo") then {
 			TREND_debugMessages = TREND_debugMessages + "\n\nHERE:" + str(lbCurSel _ctrlItem);
 			_value = _ThisControlOptions select (lbCurSel _ctrlItem);
 		};
-		if (_lnpCtrlType == "RscEdit") then {
+		if (_lnpCtrlType isEqualTo "RscEdit") then {
 			_value = ctrlText _ThisControlIDX;
 		};
-		if (_lnpCtrlType == "RscXSliderH") then {
+		if (_lnpCtrlType isEqualTo "RscXSliderH") then {
 			_value = sliderPosition _ThisControlIDX;
 		};
 		TREND_AdvancedSettings pushBack _value;
@@ -105,7 +105,7 @@ _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {
  			 		_class = _class select 0;
 				};
 				_classArray = [];
-				if (typeName _class == "ARRAY") then {
+				if (typeName _class isEqualTo "ARRAY") then {
 					_classArray = _class;
 				}
 				else {

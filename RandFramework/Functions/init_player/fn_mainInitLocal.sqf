@@ -1,7 +1,7 @@
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
 waitUntil {!isNull player};
-waitUntil {player == player};
+waitUntil {player isEqualTo player};
 
 sleep 5;
 
@@ -136,7 +136,7 @@ TREND_fnc_BasicInitAndRespawn = {
 	};
 
 	TREND_iAllowGPS = ("OUT_par_AllowGPS" call BIS_fnc_getParamValue);
-	if (TREND_iAllowGPS == 0) then {
+	if (TREND_iAllowGPS isEqualTo 0) then {
 		showGPS false;
 	};
 
@@ -168,25 +168,25 @@ if (!isNil("_isAceRespawnWithGear")) then {
 };
 
 _iEnableGroupManagement = TREND_AdvancedSettings select TREND_ADVSET_GROUP_MANAGE_IDX;
-if (_iEnableGroupManagement == 1) then {
+if (_iEnableGroupManagement isEqualTo 1) then {
 	["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;//Exec on client
 };
 
 [] spawn TREND_fnc_InitPostStarted;
 player addEventHandler ["Respawn", { [] spawn TREND_fnc_InitPostStarted; }];
 
-if (TREND_AdvancedSettings select TREND_ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
+if (TREND_AdvancedSettings select TREND_ADVSET_VIRTUAL_ARSENAL_IDX isEqualTo 1) then {
 	box1 addAction [localize "STR_TRGM2_startInfMission_VirtualArsenal", {["Open",true] spawn BIS_fnc_arsenal}];
 };
 
 TREND_bCirclesOfDeath = false;
 TREND_iCirclesOfDeath = 0; //("TREND_par_CirclesOfDeath" call BIS_fnc_getParamValue);
-if (TREND_iCirclesOfDeath == 1) then {
+if (TREND_iCirclesOfDeath isEqualTo 1) then {
 	TREND_bCirclesOfDeath = true;
 };
 
 TREND_iMissionSetup = TREND_iMissionParamType;
-if (TREND_iMissionSetup == 12 || TREND_iMissionSetup == 20) then {
+if (TREND_iMissionSetup isEqualTo 12 || TREND_iMissionSetup isEqualTo 20) then {
 	//training
 	[player, 100] call BIS_fnc_respawnTickets;
 
@@ -209,7 +209,7 @@ else {
 	_iRespawnTimer = TREND_AdvancedSettings select TREND_ADVSET_RESPAWN_TIMER_IDX;
 	setPlayerRespawnTime _iRespawnTimer;
 
-	//if (TREND_iMissionSetup == 5 && !isMultiplayer) then {
+	//if (TREND_iMissionSetup isEqualTo 5 && !isMultiplayer) then {
 	//	[player, 999] call BIS_fnc_respawnTickets;
 	//	TREND_debugMessages = TREND_debugMessages + "\n" + "999 respawn tickets"
 	//}
@@ -244,7 +244,7 @@ if (TREND_bCirclesOfDeath) then {
 
 };
 
-// if (TREND_sArmaGroup == "TCF" && isMultiplayer) then {
+// if (TREND_sArmaGroup isEqualTo "TCF" && isMultiplayer) then {
 // 	//_handle=createdialog "DialogMessAround";
 // 	//titleText ["!!!WARNING!!!\n\nPoint system in place\n\nDO NOT mess around at base\n\nONLY fly if you know AFM, or are being trained.\n\nDestroying vehicles will mark points and ruin the experience for others!!!", "PLAIN"];
 // };

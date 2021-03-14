@@ -220,7 +220,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		if (_hasInformant && !isNil "_guardUnit3") then {
 			[_guardUnit3] spawn {
 				_guardUnit3 = _this select 0;
-				waitUntil { sleep 2; vehicle _guardUnit3 == _guardUnit3; };
+				waitUntil { sleep 2; vehicle _guardUnit3 isEqualTo _guardUnit3; };
 				_guardUnit3 switchMove "Acts_JetsCrewaidLCrouch_in";
 				_guardUnit3 disableAI "anim";
 				sleep 2.2;
@@ -235,6 +235,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		};
 
 		_mainHVT setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
+		missionNamespace setVariable [format ["missionObjectiveParams%1", _iTaskIndex], [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 		[_mainHVT, _iTaskIndex, _bIsMainObjective] spawn {
 			_mainHVT = _this select 0;
 			_iTaskIndex = _this select 1;

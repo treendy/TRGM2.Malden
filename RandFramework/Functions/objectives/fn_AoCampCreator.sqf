@@ -17,7 +17,7 @@ if (isServer) then {
 	_flatPos = nil;
 	if (isNil "TREND_AOCampLocation") then {
 		_flatPos = [_mainAOPos , 1300, 1700, 8, 0, 0.3, 0,TREND_AreasBlackList,[TREND_HQPos,TREND_HQPos]] call TREND_fnc_findSafePos;
-		if (str(_flatPos) == "[0,0,0]") then {_flatPos = [_mainAOPos , 1300, 2000, 8, 0, 0.4, 0,TREND_AreasBlackList,[TREND_HQPos,TREND_HQPos]] call TREND_fnc_findSafePos;};
+		if (str(_flatPos) isEqualTo "[0,0,0]") then {_flatPos = [_mainAOPos , 1300, 2000, 8, 0, 0.4, 0,TREND_AreasBlackList,[TREND_HQPos,TREND_HQPos]] call TREND_fnc_findSafePos;};
 	//"Marker1" setMarkerPos _flatPos;
 	}
 	else {
@@ -92,7 +92,7 @@ if (isServer) then {
 
 
 
-		if (TREND_iMissionParamType == 5) then {
+		if (TREND_iMissionParamType isEqualTo 5) then {
 			_flatPos4b = nil;
 			_flatPos4b = [_flatPosCampFire , 5, 10, 3, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos],endMissionBoard2] call TREND_fnc_findSafePos;
 			endMissionBoard2 setPos _flatPos4b;
@@ -135,7 +135,7 @@ if (isServer) then {
 
 	["Mission Setup: 4", true] call TREND_fnc_log;
 	sleep 1;
-	if (TREND_AdvancedSettings select TREND_ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
+	if (TREND_AdvancedSettings select TREND_ADVSET_VIRTUAL_ARSENAL_IDX isEqualTo 1) then {
 		//_AmmoBox1 addAction [localize "STR_TRGM2_startInfMission_VirtualArsenal", {["Open",true] spawn BIS_fnc_arsenal}];
 		[_AmmoBox1, [localize "STR_TRGM2_startInfMission_VirtualArsenal",{["Open",true] spawn BIS_fnc_arsenal}]] remoteExec ["addAction", 0];
 	};

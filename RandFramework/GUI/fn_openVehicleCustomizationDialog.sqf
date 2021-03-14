@@ -30,10 +30,10 @@ _this = [_this,1,[]] call BIS_fnc_param;
 private _fnc_compareTextures =
 {
 	params ["_vehtex", "_cfgtex"];
-	if (_cfgtex isEqualTo "") exitWith { true }; // empty/absent config texture == any texture
+	if (_cfgtex isEqualTo "") exitWith { true }; // empty/absent config texture isEqualTo any texture
 	if (_vehtex find "\" != 0) then {_vehtex = "\" + _vehtex};
 	if (_cfgtex find "\" != 0) then {_cfgtex = "\" + _cfgtex};
-	_vehtex == _cfgtex
+	_vehtex isEqualTo _cfgtex
 };
 
 private _checkboxTextures =
@@ -304,13 +304,13 @@ switch _mode do {
 				_configName = configname _x;
 				_displayName = gettext (_x >> "displayName");
 				_factions = getarray (_x >> "factions");
-				if (count _factions == 0) then {_factions = [_centerFaction];};
+				if (count _factions isEqualTo 0) then {_factions = [_centerFaction];};
 				if (
 					_displayName != ""
 					&&
 					{getnumber (_x >> "scope") > 1 || !isnumber (_x >> "scope")}
 					&&
-					{{_x == _centerFaction} count _factions > 0}
+					{{_x isEqualTo _centerFaction} count _factions > 0}
 				) then {
 					_items pushback [_x,_displayName];
 				};
@@ -341,7 +341,7 @@ switch _mode do {
 				_configName = configname (_x select 0);
 				_displayName = _x select 1;
 				_addToList = true;
-				if (_idc == 0) then {
+				if (_idc isEqualTo 0) then {
 					private _checkCfg = (configfile >> "cfgvehicles" >> typeof _center >> "AnimationSources" >> _configName);
 					_addToList = ((getNumber(_checkCfg >> "initPhase") != 1) && !(isText(_checkCfg >> "onPhaseChanged")));
 				};
@@ -349,7 +349,7 @@ switch _mode do {
 					_lbAdd = _ctrlList lbadd _displayName;
 					_ctrlList lbsetdata [_lbAdd,_configName];
 					_ctrlList lbsettooltip [_lbAdd,_displayName];
-					if (_idc == 0) then
+					if (_idc isEqualTo 0) then
 					{
 						_ctrlList lbsetpicture [_lbAdd,_checkboxTextures select ((_center animationphase _configName) max 0)];
 					}
@@ -374,7 +374,7 @@ switch _mode do {
 			lbsort _ctrlList;
 
 			_ctrlListDisabled = _display displayctrl (860 + _idc);
-			_ctrlListDisabled ctrlshow (lbsize _ctrlList == 0);
+			_ctrlListDisabled ctrlshow (lbsize _ctrlList isEqualTo 0);
 		} foreach _data;
 	};
 
@@ -474,11 +474,11 @@ switch _mode do {
 		_key = _this select 1;
 
 		//--- Deselect
-		if ({count _x > 0} count TREND_vehicleButtons == 0) then {
+		if ({count _x > 0} count TREND_vehicleButtons isEqualTo 0) then {
 
 			//--- When interface is hidden, reveal it
 			_shown = ctrlshown (_display displayctrl 44046);
-			if (!_shown || _key == 1) exitwith {['buttonInterface',[_display]] call TREND_fnc_openVehicleCustomizationDialog;};
+			if (!_shown || _key isEqualTo 1) exitwith {['buttonInterface',[_display]] call TREND_fnc_openVehicleCustomizationDialog;};
 
 			{
 				_idc = _x;
@@ -542,7 +542,7 @@ switch _mode do {
 
 		{
 			_idc = _x;
-			_active = _idc == _index;
+			_active = _idc isEqualTo _index;
 
 			{
 				_ctrlList = _display displayctrl (_x + _idc);
@@ -619,7 +619,7 @@ switch _mode do {
 			_textures = "";
 			_animations = [];
 			for "_i" from 0 to (lbsize _ctrlListTextures - 1) do {
-				if ((_ctrlListTextures lbpicture _i) == (_checkboxTextures select 1)) exitwith {_textures = [_ctrlListTextures lbdata _i, 1];};
+				if ((_ctrlListTextures lbpicture _i) isEqualTo (_checkboxTextures select 1)) exitwith {_textures = [_ctrlListTextures lbdata _i, 1];};
 			};
 			for "_i" from 0 to (lbsize _ctrlListAnimations - 1) do {
 				_animations pushback (_ctrlListAnimations lbdata _i);

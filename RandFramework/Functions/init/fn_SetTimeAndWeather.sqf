@@ -39,7 +39,7 @@ if (!TREND_UseEditorWeather && isServer) then {
 		0 setFog (_fog);
 	}
 	else {
-		_BrightestNightDate = [2033, 2, 12]; //This date is a night with the moon phase == 1 (i.e. super moon), note that it is different than real life.
+		_BrightestNightDate = [2033, 2, 12]; //This date is a night with the moon phase isEqualTo 1 (i.e. super moon), note that it is different than real life.
 		_BrightestNightDate params ["_year", "_month", "_day"];
 		TREND_arrayTime params ["_hour", "_min"];
 		[[_year, _month, _day, _hour, _min], {params ["_year", "_month", "_day", "_hour", "_min"]; setDate [_year, _month, _day, _hour, _min]}] remoteExec ["call",0,true];

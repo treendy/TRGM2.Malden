@@ -394,16 +394,16 @@ waitUntil {TREND_CustomObjectsSet};
 [endMissionBoard] remoteExec ["removeAllActions"];
 [endMissionBoard2] remoteExec ["removeAllActions"];
 
-if (TREND_iMissionSetup == 5 && isMultiplayer && isServer) then {
-	if (TREND_SaveType == 0) then {
+if (TREND_iMissionSetup isEqualTo 5 && isMultiplayer && isServer) then {
+	if (TREND_SaveType isEqualTo 0) then {
 		[laptop1, [localize "STR_TRGM2_TRGMInitPlayerLocal_SaveLocal",{[1,true] spawn TREND_fnc_ServerSave;}]] remoteExec ["addaction"];
 		[laptop1, [localize "STR_TRGM2_TRGMInitPlayerLocal_SaveGlobal",{[2,true] spawn TREND_fnc_ServerSave;}]] remoteExec ["addaction"];
 	};
-	if (TREND_SaveType == 1) then {
+	if (TREND_SaveType isEqualTo 1) then {
 		[(localize "STR_TRGM2_ServerSave_Save1")] call TREND_fnc_notify;
 		[laptop1, [localize "STR_TRGM2_ServerSave_SaveLocal",{[(localize "STR_TRGM2_ServerSave_SaveHint")] call TREND_fnc_notify}]] remoteExec ["addaction"];
 	};
-	if (TREND_SaveType == 2) then {
+	if (TREND_SaveType isEqualTo 2) then {
 		[(localize "STR_TRGM2_ServerSave_Save2")] call TREND_fnc_notify;
 		[laptop1, [localize "STR_TRGM2_ServerSave_SaveGlobal",{[(localize "STR_TRGM2_ServerSave_SaveHint2")] call TREND_fnc_notify}]] remoteExec ["addaction"];
 	};

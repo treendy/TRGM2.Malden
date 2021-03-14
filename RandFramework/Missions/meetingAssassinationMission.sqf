@@ -109,6 +109,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_mainHVT setVariable [_sTargetName, _mainHVT, true];
 	missionNamespace setVariable [_sTargetName, _mainHVT];
 	_mainHVT setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
+	missionNamespace setVariable [format ["missionObjectiveParams%1", _iTaskIndex], [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 
 	[_mainHVT, ["This is our target!","{[""This is our target""] call TREND_fnc_notify; }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 
@@ -277,9 +278,9 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 				sleep 5; //give him some time to get as close to the meeting guy as possible
 				_bWalkEnded = true;
 			};
-			if (speed _mainHVT == 0) then {
+			if (speed _mainHVT isEqualTo 0) then {
 				sleep 2;
-				if (speed _mainHVT == 0) then {
+				if (speed _mainHVT isEqualTo 0) then {
 					_bWalkEnded = true; //if he has stopped walking, wait a second and see if he is still not walking
 				};
 			};
@@ -287,8 +288,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		};
 		//["waypoint wait ended"] call TREND_fnc_notify;
 
-       //waitUntil {sleep 1; (currentWaypoint group _mainHVT) == 9 };
-       //waitUntil {sleep 1; speed _objMan == 0};
+       //waitUntil {sleep 1; (currentWaypoint group _mainHVT) isEqualTo 9 };
+       //waitUntil {sleep 1; speed _objMan isEqualTo 0};
 
 		_hvtGroup setBehaviour "SAFE";
 		_hvtGuardGroup setBehaviour "SAFE";
@@ -296,7 +297,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
        		_guardUnit1 = _this select 1;
        		_doLoop = true;
        		while {_doLoop} do {
-       			if (behaviour (_this select 0) == "combat" || !alive(_this select 0) || (TREND_TimeSinceLastSpottedAction > (call TREND_GetSpottedDelay))) then { //TREND_TimeSinceLastSpottedAction : is set to current time when it is called, cooldown is choosen in adv mission settings
+       			if (behaviour (_this select 0) isEqualTo "combat" || !alive(_this select 0) || (TREND_TimeSinceLastSpottedAction > (call TREND_GetSpottedDelay))) then { //TREND_TimeSinceLastSpottedAction : is set to current time when it is called, cooldown is choosen in adv mission settings
 	       			(_this select 0) call BIS_fnc_ambientAnim__terminate;
 					(_this select 0) enableAI "anim";
 					group (_this select 0) setSpeedMode "FULL";
@@ -313,7 +314,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			_guardUnit1 = _this select 1;
        		_doLoop = true;
        		while {_doLoop} do {
-       			if (behaviour (_this select 0) == "combat" || !alive(_this select 0) || (TREND_TimeSinceLastSpottedAction > (call TREND_GetSpottedDelay))) then {
+       			if (behaviour (_this select 0) isEqualTo "combat" || !alive(_this select 0) || (TREND_TimeSinceLastSpottedAction > (call TREND_GetSpottedDelay))) then {
 	       			(_this select 0) call BIS_fnc_ambientAnim__terminate;
 					(_this select 0) enableAI "anim";
 					group (_this select 0) setSpeedMode "FULL";

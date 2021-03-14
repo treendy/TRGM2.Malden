@@ -1,7 +1,7 @@
 params ["_thisCheckpointUnit", "_caller", "_id", "_thisArrayParams"];
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
-if (side _caller == west) then {
+if (side _caller isEqualTo west) then {
 
 	_CheckpointPos = _thisArrayParams select 0;
 

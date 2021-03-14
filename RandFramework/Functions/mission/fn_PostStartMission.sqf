@@ -1,6 +1,6 @@
 
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
-_isCampaign = (TREND_iMissionParamType == 5);
+_isCampaign = (TREND_iMissionParamType isEqualTo 5);
 
 waituntil {sleep 2; TREND_CoreCompleted};
 
@@ -9,10 +9,10 @@ sleep 2;
 
 
 _bMoveToAO = false;
-if (TREND_iStartLocation == 2) then {
+if (TREND_iStartLocation isEqualTo 2) then {
 	_bMoveToAO = random 1 < .50;
 };
-if (TREND_iStartLocation == 1) then {
+if (TREND_iStartLocation isEqualTo 1) then {
 	_bMoveToAO = true;
 };
 if (_bMoveToAO) then {
@@ -37,10 +37,10 @@ _strHour = str(_hour);
 _strMinute = str(_minute);
 _lenHour = count (_strHour);
 _lenMin = count (_strMinute);
-if (_lenHour == 1) then {
+if (_lenHour isEqualTo 1) then {
 	_strHour = format["0%1",_strHour];
 };
-if (_lenMin == 1) then {
+if (_lenMin isEqualTo 1) then {
 	_strMinute = format["0%1",_strMinute];
 };
 _time24 = text format ["%1:%2",_strHour,_strMinute];

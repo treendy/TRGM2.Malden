@@ -10,7 +10,7 @@
 
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 if (isDedicated) exitWith {};
-if (player != player) then {waitUntil {sleep 2; player == player};};
+if (player != player) then {waitUntil {sleep 2; player isEqualTo player};};
 
 // Figures out how zoomed in you are (KillzoneKid is Awesome)
 KK_fnc_getZoom = {
@@ -31,7 +31,7 @@ KK_fnc_getZoom = {
     waitUntil {
     sleep 2;
     // Adds Effects When NV Enabled
-    ((vehicle player) == player) && ((currentVisionMode player) == 1)};
+    ((vehicle player) isEqualTo player) && ((currentVisionMode player) isEqualTo 1)};
 
     // Effects below. If you wanna know what this stuff means so you can change the effects, go to https://community.bistudio.com/wiki/Post_process_effects
     // Effect modifiers that change based on range like overall blur and film grain size are further down

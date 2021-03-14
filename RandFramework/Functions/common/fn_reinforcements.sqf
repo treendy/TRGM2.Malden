@@ -209,7 +209,7 @@ if (!_paraDrop) then {
 	_heloWp setWaypointBehaviour "CARELESS";
 	_heloWp setWaypointCombatMode "BLUE";
 	_heloWp setWaypointSpeed "FULL";
-	if (_spawnMrk select 2 == 0) then {
+	if (_spawnMrk select 2 isEqualTo 0) then {
 		//_heloWp setWaypointStatements ["true", "[""hmmmm""] call TREND_fnc_notify; {this spawn {unAssignVehicle _x; _x action [""eject"", vehicle _x]; sleep 0.5;} forEach crew vehicle _this;"}];
 		_heloWp setWaypointStatements ["true", "{unAssignVehicle _x; _x action [""eject"", vehicle _x]; sleep 0.5;} forEach crew vehicle this;"];
 		//_heloWp setWaypointStatements ["true", "[""hmmmm""] call TREND_fnc_notify; {unAssignVehicle _x; _x action [""eject"", vehicle _x]; sleep 0.5;} forEach crew vehicle this;"];
@@ -221,10 +221,10 @@ if (!_paraDrop) then {
 
 	//wait until the helicopter is touching the ground before ejecting the cargo
 
-	if (_spawnMrk select 2 == 0) then {
+	if (_spawnMrk select 2 isEqualTo 0) then {
 		//[format["test3: %1 - %2",currentWaypoint _infgrp,fuel _helo]] call TREND_fnc_notify;
 
-		//waitUntil {fuel _helo == 0};
+		//waitUntil {fuel _helo isEqualTo 0};
 
 		//["test2"] call TREND_fnc_notify;
 	}
@@ -235,7 +235,7 @@ if (!_paraDrop) then {
 
 	//["a"] call TREND_fnc_notify;
 	//wait Until the infantry group is no longer in the helicopter before assigning a new WP to the helicopter
-	waitUntil {sleep 2; {!alive _x || !(_x in (_helo select 0))} count (units _infGrp) == count (units _infGrp)};
+	waitUntil {sleep 2; {!alive _x || !(_x in (_helo select 0))} count (units _infGrp) isEqualTo count (units _infGrp)};
 		if (_debugMode) then {player globalChat format ["Helo Cargo Count: %1", {alive _x && (_x in (_helo select 0))} count (units _infGrp)];};
 			_heloWp = _heloCrew addWaypoint [[0,0,0], 0];
 			_heloWp setWaypointType "MOVE";
@@ -268,7 +268,7 @@ if (!_paraDrop) then {
 };
 
 //wait until cargo is empty & if _sadMode is passed as true, then add a SAD WP on the nearest enemy.. else, go into patrol mode
-	waitUntil {sleep 2; {!alive _x || !(_x in (_helo select 0))} count (units _infGrp) == count (units _infGrp)};
+	waitUntil {sleep 2; {!alive _x || !(_x in (_helo select 0))} count (units _infGrp) isEqualTo count (units _infGrp)};
 	if (_debugMode) then {
 		{deleteMarker _x;} forEach [_mrkLZ, _mrkPos];
 	};
@@ -319,7 +319,7 @@ if (_sadMode) then {
 // Cycle mode gets a bit too intense for most situations, commenting out to avoid usage...
 // IF _cycleMode is passed as true, then re-run the function (this function!), else do nothing.
 // if (_cycleMode) then {
-// 	waitUntil {{alive _x} count units _infgrp + [(_helo select 0)] == 0};
+// 	waitUntil {{alive _x} count units _infgrp + [(_helo select 0)] isEqualTo 0};
 // 	if (_debugMode) then {
 // 		player globalChat "Patrol and helicopter dead";
 // 		{deleteMarker _x;} forEach [_mrkHelo, _mrkinf, _mrkTarget];

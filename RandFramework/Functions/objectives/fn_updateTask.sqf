@@ -10,14 +10,29 @@ if !(_missionStatus in ["succeeded", "failed", "canceled"]) then {
 	_repAmountOnFail = 0;
 };
 
-private _objParams = _missionObjective getVariable "ObjectiveParams";
+_objParams = [];
+
+switch (typeName _missionObjective) do {
+	case "SCALAR": {
+		_objParams = missionNamespace getVariable (format ["missionObjectiveParams%1", _missionObjective]);
+	};
+	case "STRING": {
+		_objParams = missionNamespace getVariable _missionObjective;
+	};
+	case "OBJECT": {
+		_objParams = _missionObjective getVariable "ObjectiveParams";
+		[_missionObjective] remoteExec ["removeAllActions", 0, true];
+	};
+	default {};
+};
+
+if (_objParams isEqualTo []) exitWith {};
+
 _objParams params ["_markerType","_objectiveMainBuilding","_centralAO_x","_centralAO_y","_roadSearchRange", "_bCreateTask", "_iTaskIndex", "_bIsMainObjective", ["_args", []]];
 _args params ["_hintStrOnComplete", ["_repAmountOnComplete", 0], ["_repReasonOnComplete", ""]];
 
 TREND_ClearedPositions pushBack [_centralAO_x, _centralAO_y];
 publicVariable "TREND_ClearedPositions";
-
-[_missionObjective] remoteExec ["removeAllActions", 0, true];
 
 if (!_bCreateTask) then {
 	if (_repAmountOnComplete > 0 && _repAmountOnFail isEqualTo 0) then {

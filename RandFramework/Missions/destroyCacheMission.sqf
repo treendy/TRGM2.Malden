@@ -50,6 +50,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_sTargetName1 = format["objInformant%1",_iTaskIndex];
 	_target1 setVariable [_sTargetName1, _target1, true];
 	_target1 setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
+	missionNamespace setVariable [format ["missionObjectiveParams%1", _iTaskIndex], [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 	missionNamespace setVariable [_sTargetName1, _target1];
 
 	[_mainObjPos,100,true,true,_target1, _isCache] spawn TREND_fnc_setTargetEvent;

@@ -60,7 +60,7 @@ waitUntil { _handle; };
 "Marker1" setMarkerTextLocal (localize "STR_TRGM2_Init_MarkerText_HQ"); //Head Quarters marker localize
 "transportChopper" setMarkerTextLocal (localize "STR_TRGM2_Init_MarkerText_TransportChopper"); //Transport Chopper marker localize
 
-[laptop1, ["Request Units/Vehicles", {player call TREND_fnc_openDialogRequests;}, [], 0, true, true, "", "_this == player"]] remoteExec ["addAction", 0, true];
+[laptop1, ["Request Units/Vehicles", {player call TREND_fnc_openDialogRequests;}, [], 0, true, true, "", "_this isEqualTo player"]] remoteExec ["addAction", 0, true];
 
 [] spawn TREND_fnc_mainInit;
 

@@ -32,7 +32,7 @@ publicVariable "respawn_west_HQ";
 TREND_trg_baseArea = createTrigger["EmptyDetector",_HQpos];
 TREND_trg_baseArea setVehicleVarName "TREND_trg_baseArea";
 TREND_trg_baseArea setTriggerArea[300,300,0,false];
-TREND_trg_baseArea setTriggerStatements["({ (alive _x)&&(_x inArea TREND_trg_baseArea) } count (call BIS_fnc_listPlayers))==({ (alive _x) } count (call BIS_fnc_listPlayers))", "bAllAtBase = true;publicVariable 'bAllAtBase';", "bAllAtBase = false;publicVariable 'bAllAtBase';"];
+TREND_trg_baseArea setTriggerStatements["({ (alive _x)&&(_x inArea TREND_trg_baseArea) } count (call BIS_fnc_listPlayers)) isEqualTo ({ (alive _x) } count (call BIS_fnc_listPlayers))", "bAllAtBase = true;publicVariable 'bAllAtBase';", "bAllAtBase = false;publicVariable 'bAllAtBase';"];
 publicVariable "TREND_trg_baseArea";
 
 opforPresentAtBaseTrigger = createTrigger["EmptyDetector",_HQpos];
@@ -161,7 +161,7 @@ publicVariable "baseRadio";
 endMissionBoard = ["MapBoard_seismic_F", _HQpos, [-3.5,2.8,0.6]] call _object_spawn;
 endMissionBoard setdir 315;
 endMissionBoard setVehicleVarName "endMissionBoard";
-[endMissionBoard, ["End Mission", "[] remoteExec [""TREND_fnc_endMission""];", [], 0, true, true, "", "_this == player && leader group _this == _this"]] remoteExec ["addAction", 0, true];
+[endMissionBoard, ["End Mission", "[] remoteExec [""TREND_fnc_endMission""];", [], 0, true, true, "", "_this isEqualTo player && leader group _this isEqualTo _this"]] remoteExec ["addAction", 0, true];
 publicVariable "endMissionBoard";
 
 endMissionBoard2 = createVehicle ["MapBoard_seismic_F",[0,0,0],[],0,"CAN_COLLIDE"];
@@ -169,7 +169,7 @@ endMissionBoard2 setPos [0,0,0];
 endMissionBoard2 enableSimulation false;
 endMissionBoard2 allowdamage false;
 endMissionBoard2 setVehicleVarName "endMissionBoard2";
-[endMissionBoard2, ["End Mission", "[] remoteExec [""TREND_fnc_endMission""];", [], 0, true, true, "", "_this == player && leader group _this == _this"]] remoteExec ["addAction", 0, true];
+[endMissionBoard2, ["End Mission", "[] remoteExec [""TREND_fnc_endMission""];", [], 0, true, true, "", "_this isEqualTo player && leader group _this isEqualTo _this"]] remoteExec ["addAction", 0, true];
 publicVariable "endMissionBoard2";
 
 box1 = ["B_CargoNet_01_ammo_F", _HQpos, [4,1.5,0.6]] call _object_spawn;

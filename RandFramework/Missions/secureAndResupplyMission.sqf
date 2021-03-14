@@ -68,6 +68,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
     _flag setFlagTexture "\A3\Data_F\Flags\flag_red_CO.paa";
     _flag setVariable["TREND_flagSide", east, true];
     _flag setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
+    missionNamespace setVariable [format ["missionObjectiveParams%1", _iTaskIndex], [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 
     //attach hold action to lowerflag and call supplydrop
     [
@@ -86,7 +87,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
                     if ((_this select 1) < 0.5) then {
                         (_this select 0) setFlagAnimationPhase(1 - (2 * (_this select 1)));
                     } else {
-                        if ((_this select 1) == 0.5) then {
+                        if ((_this select 1) isEqualTo 0.5) then {
                             (_this select 0) setFlagTexture "\A3\Data_F\Flags\flag_blue_CO.paa"
                         };
                         (_this select 0) setFlagAnimationPhase((2 * (_this select 1)) - 1);

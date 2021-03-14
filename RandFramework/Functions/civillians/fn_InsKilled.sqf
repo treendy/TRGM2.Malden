@@ -6,7 +6,7 @@ publicVariable "TREND_debugMessages";
 
 sleep 3;
 
-if (side _killer == west && str(_killed) != str(_killer)) then {
+if (side _killer isEqualTo west && str(_killed) != str(_killer)) then {
 	[0.2,format[localize "STR_TRGM2_InsKilled_RebelKilled", name _killer]] spawn TREND_fnc_AdjustBadPoints;
 
 	_nearestunits = nearestObjects [getPos _killed,["Man","Car","Tank"],2000];

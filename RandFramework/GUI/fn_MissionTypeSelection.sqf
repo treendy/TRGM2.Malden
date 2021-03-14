@@ -53,7 +53,7 @@ _ctrl ctrlSetText format["%1",TREND_MissionTypeDescriptions select _selectedInde
 if (isNil "TREND_AllowMissionTypeCampaign") then { TREND_AllowMissionTypeCampaign =   false; publicVariable "TREND_AllowMissionTypeCampaign"; };
 _selectedTypeID = TREND_MissionParamTypesValues select _selectedIndex;
 
-if (_selectedTypeID == 5) then {
+if (_selectedTypeID isEqualTo 5) then {
 	if (!TREND_AllowMissionTypeCampaign) then {
 		_ctrlTypes = (findDisplay 5000) displayCtrl 5104;
 		_ctrlTypes ctrlEnable false;
@@ -75,7 +75,7 @@ else {
 	_ctrlWeather ctrlEnable true;
 };
 
-if (_selectedTypeID == 0 || _selectedTypeID == 6 || _selectedTypeID == 4 || _selectedTypeID == 7 || _selectedTypeID == 8 || _selectedTypeID == 9 || _selectedTypeID == 11 || _selectedTypeID == 12) then {
+if (_selectedTypeID isEqualTo 0 || _selectedTypeID isEqualTo 6 || _selectedTypeID isEqualTo 4 || _selectedTypeID isEqualTo 7 || _selectedTypeID isEqualTo 8 || _selectedTypeID isEqualTo 9 || _selectedTypeID isEqualTo 11 || _selectedTypeID isEqualTo 12) then {
 	if (isNull((findDisplay 5000) displayCtrl 7001)) then {
 		_display ctrlCreate ["RscCombo", 7001];
 		_inpctrl1 = _display displayCtrl 7001;
@@ -103,7 +103,7 @@ if (_selectedTypeID == 0 || _selectedTypeID == 6 || _selectedTypeID == 4 || _sel
 		_ctrlTypes2 lbSetCurSel (TREND_MissionParamObjectivesValues find TREND_iMissionParamObjective3);
 	};
 
-	if (_selectedTypeID == 8 || _selectedTypeID == 9) then {
+	if (_selectedTypeID isEqualTo 8 || _selectedTypeID isEqualTo 9) then {
 		if (!isNull((findDisplay 5000) displayCtrl 7002)) then {
 			ctrlDelete ((findDisplay 5000) displayCtrl 7002);
 			TREND_iMissionParamObjective3 = 0;

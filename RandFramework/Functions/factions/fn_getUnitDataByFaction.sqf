@@ -29,7 +29,7 @@ for "_i" from 0 to (count _configPath - 1) do {
 	private _element = _configPath select _i;
 
 	if (isclass _element) then {
-		if ((getText(_element >> "faction")) == _factionClassName && {(getnumber(_element >> "scope")) == 2 && {(configname _element) isKindOf "Man" && {!((configname _element) isKindOf "OPTRE_Spartan2_Soldier_Base")}}}) then {
+		if ((getText(_element >> "faction")) isEqualTo _factionClassName && {(getnumber(_element >> "scope")) isEqualTo 2 && {(configname _element) isKindOf "Man" && {!((configname _element) isKindOf "OPTRE_Spartan2_Soldier_Base")}}}) then {
 			_unitConfigPaths pushbackunique _element;
 		};
 	};

@@ -157,7 +157,7 @@ publicVariable "TREND_manualCampPlacement";
 //0 = no, 1 = guarantee revive, 2 = realistic revive, 3 = realistic revive (only medics can revive)
 
 if (isNil "TREND_iUseRevive") then { TREND_iUseRevive =  0; publicVariable "TREND_iUseRevive"; };
-if (TREND_iUseRevive == 0) then {
+if (TREND_iUseRevive isEqualTo 0) then {
 	TREND_bUseRevive = false; publicVariable "TREND_bUseRevive";
 }
 else
@@ -199,7 +199,7 @@ if (isNil "TREND_arrayTime")                                      then { TREND_a
 
 /////// Minefield settings ///////
 if (isNil "TREND_iAllowMineField")                                then { TREND_iAllowMineField =  0; publicVariable "TREND_iAllowMineField"; };
-TREND_AllowMineField = (TREND_iAllowMineField == 1); publicVariable "TREND_AllowMineField";
+TREND_AllowMineField = (TREND_iAllowMineField isEqualTo 1); publicVariable "TREND_AllowMineField";
 
 /////// Civ/Ins settings ///////
 if (isNil "TREND_iBuildingCountToAllowCivsAndFriendlyInformants") then { TREND_iBuildingCountToAllowCivsAndFriendlyInformants =  10; publicVariable "TREND_iBuildingCountToAllowCivsAndFriendlyInformants"; };

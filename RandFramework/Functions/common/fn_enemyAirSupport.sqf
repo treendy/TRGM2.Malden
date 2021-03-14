@@ -17,13 +17,13 @@ if (isServer) then {
 	_groupp1 = createGroup east;
 
 	_AirVehicle = nil;
-	if (_IsAirType == 1) then {
+	if (_IsAirType isEqualTo 1) then {
 		_AirVehicle = selectRandom (call EnemyAirToAirSupports);
 	};
-	if (_IsAirType == 2) then {
+	if (_IsAirType isEqualTo 2) then {
 		_AirVehicle = selectRandom (call EnemyAirToGroundSupports);
 	};
-	if (_IsAirType == 3) then {
+	if (_IsAirType isEqualTo 3) then {
 		_AirVehicle = selectRandom (call EnemyAirScout);
 	};
 
@@ -46,7 +46,7 @@ if (isServer) then {
 	sleep 1;
 
 	_iFlyRange = 1000;
-	if (_IsAirType == 3) then {_iFlyRange = 300;};
+	if (_IsAirType isEqualTo 3) then {_iFlyRange = 300;};
 	_v1wp1 = _groupp1 addWaypoint [_SpottedPos, 0];
 	_v1wp2 = _groupp1 addWaypoint [[(_SpottedPos select 0) + _iFlyRange,(_SpottedPos select 1) + _iFlyRange], 0];
 	_v1wp3 = _groupp1 addWaypoint [[(_SpottedPos select 0) + _iFlyRange,(_SpottedPos select 1) - _iFlyRange], 0];

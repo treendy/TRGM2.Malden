@@ -82,7 +82,7 @@ _iteration = 1;
 
 while {_iteration <= 2} do {
 	//[str(_iteration)] call TREND_fnc_notify;
-	if (_iteration == 2) then {
+	if (_iteration isEqualTo 2) then {
 		_thisAreaRange = 50;
 	};
 	//[str(_thisAreaRange)] call TREND_fnc_notify;
@@ -133,7 +133,7 @@ while {_iteration <= 2} do {
 			["Door_1_source",1,"Door_2_source",0,"Door_3_source",0,"Door_4_source",1,"Hide_Door_1_source",0,"Hide_Door_2_source",0,"Hide_Door_3_source",0,"Hide_Door_4_source",0,"lights_em_hide",1,"ladder_hide",1,"spare_tyre_holder_hide",1,"spare_tyre_hide",1,"reflective_tape_hide",0,"roof_rack_hide",0,"LED_lights_hide",0,"sidesteps_hide",0,"rearsteps_hide",0,"side_protective_frame_hide",1,"front_protective_frame_hide",1,"beacon_front_hide",0,"beacon_rear_hide",0]
 		] call BIS_fnc_initVehicle;
 
-		if (_iteration == 1) then {
+		if (_iteration isEqualTo 1) then {
 			[_mainVeh] spawn {
 				_mainVeh = _this select 0;
 				while{ (alive _mainVeh)} do {
@@ -277,7 +277,7 @@ if (isnil "fncMedicalParamedicLight") then {
 
 		[_downedCivMedic] remoteExec ["fncMedicalParamedicLight", 0, true];
 
-		if (_iteration == 1) then {
+		if (_iteration isEqualTo 1) then {
 			[_downedCivMedic, ["Ask if needs assistance",{[format["Please can you supply us with %1 * %2.  Place them in this vehicle!",requiredItemsCount,RequestedMedicalItemName]] call TREND_fnc_notify;},[_downedCivMedic]]] remoteExec ["addAction", 0, true];
 			//_downedCivMedic addAction ["Ask if needs assistance",{[format["Please can you supply us with %1 * %2.  Place them in this vehicle!",requiredItemsCount,RequestedMedicalItemName]] call TREND_fnc_notify;}];
 			//_RequestedMedicalItem = "Item_FirstAidKit";
@@ -286,9 +286,9 @@ if (isnil "fncMedicalParamedicLight") then {
 				_downedCivMedic = _this select 1;
 				_completed = false;
 				while{(alive _mainVeh && !_completed)} do {
-					_VanillaItemCount = {RequestedMedicalItem == _x} count (itemcargo _mainVeh);
-					_AceItemCount = {RequestedMedicalItem == _x} count (itemcargo _mainVeh);
-					//{"ACE_bloodIV" == _x} count (itemcargo cursorTarget)
+					_VanillaItemCount = {RequestedMedicalItem isEqualTo _x} count (itemcargo _mainVeh);
+					_AceItemCount = {RequestedMedicalItem isEqualTo _x} count (itemcargo _mainVeh);
+					//{"ACE_bloodIV" isEqualTo _x} count (itemcargo cursorTarget)
 					//[format["TEST: %1", _AceItemCount]] call TREND_fnc_notify;
 					if (_VanillaItemCount >= requiredItemsCount || _AceItemCount >= requiredItemsCount) then {
 						["Thank you, this should help us get things under control"] call TREND_fnc_notifyGlobal;
@@ -318,7 +318,7 @@ if (isnil "fncMedicalParamedicLight") then {
 			_directionFromCiv2ToMed2 = [_downedCiv2, _downedCivMedic2] call BIS_fnc_DirTo;
 			_downedCiv2 setDir _directionFromCiv2ToMed2;
 		};
-		if (_iteration == 2) then {
+		if (_iteration isEqualTo 2) then {
 			_downedCiv2 = _group createUnit [selectRandom sCivilian,_backOfVehArea,[],8,"NONE"];
 			_downedCiv2 playmove "Acts_CivilHiding_2";
 			_downedCiv2 disableAI "anim";
@@ -371,7 +371,7 @@ if (isnil "fncMedicalParamedicLight") then {
 
 		_buildings = nearestObjects [_vehPos, TREND_BasicBuildings, 100];
 		//[str(count _buildings)] call TREND_fnc_notify;
-		if (count _buildings < 5 && _iteration == 1) then {
+		if (count _buildings < 5 && _iteration isEqualTo 1) then {
 			_car1 = createVehicle [selectRandom CivCars, _flatPos, [], 0, "CAN_COLLIDE"];
 			_car1 setDamage [1,false];
 			_car1 setDir (floor(random 360));
@@ -379,7 +379,7 @@ if (isnil "fncMedicalParamedicLight") then {
 
 		};
 
-		if (_iteration == 1 && random 1 < .50) then {
+		if (_iteration isEqualTo 1 && random 1 < .50) then {
 			_flatPosPolice1 = nil;
 			_flatPosPolice1 = [_vehPos , 30, 50, 10, 0, 0.5, 0,[],[[0,0,0],[0,0,0]],selectRandom PoliceVehicles] call TREND_fnc_findSafePos;
 			_carPolice = createVehicle [selectRandom PoliceVehicles, _flatPosPolice1, [], 0, "NONE"];
@@ -395,7 +395,7 @@ if (isnil "fncMedicalParamedicLight") then {
 		//TREND_Cones
 		//Paramedics
 		//"MedicalGarbage_01_Bandage_F" createVehicle getpos player;
-		if (_iteration == 1) then {
+		if (_iteration isEqualTo 1) then {
 			_sidePos = getPos _mainVeh;
 			_iCount = selectRandom[0,0,0,0,1];
 			//_iCount = 1;

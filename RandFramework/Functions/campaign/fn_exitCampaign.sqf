@@ -31,7 +31,7 @@ if (isMultiplayer) then {
 if (_bAllow) then {
 	_mrkHQPos = getMarkerPos "mrkHQ";
 	_AOCampPos = getPos endMissionBoard2;
-	bAllAtBase2 = ({(alive _x)&&((_x distance _mrkHQPos < 500)||(_x distance _AOCampPos < 500))} count (call BIS_fnc_listPlayers))==({ (alive _x) } count (call BIS_fnc_listPlayers));
+	bAllAtBase2 = ({(alive _x)&&((_x distance _mrkHQPos < 500)||(_x distance _AOCampPos < 500))} count (call BIS_fnc_listPlayers)) isEqualTo ({ (alive _x) } count (call BIS_fnc_listPlayers));
 
 	if (TREND_SaveType != 0) then {
 		[TREND_SaveType,false] spawn TREND_fnc_ServerSave;

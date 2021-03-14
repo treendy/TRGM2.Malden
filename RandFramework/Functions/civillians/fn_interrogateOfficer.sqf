@@ -9,7 +9,7 @@ if (isNil "_bCreateTask") then {
 	_bCreateTask = _thisCiv getVariable "createTask";
 };
 
-if (side _caller == west) then {
+if (side _caller isEqualTo west) then {
 
 	//TREND_ClearedPositions pushBack (TREND_ObjectivePossitions select _iSelected);
 	TREND_ClearedPositions pushBack ([TREND_ObjectivePossitions, _caller] call BIS_fnc_nearestPosition);
@@ -53,7 +53,7 @@ if (side _caller == west) then {
 		removeAllActions _thisCiv;
 
 		for [{private _i = 0;}, {_i < 3;}, {_i = _i + 1;}] do {
-			if (getMarkerType format["mrkMainObjective%1", _i] == "empty") then {
+			if (getMarkerType format["mrkMainObjective%1", _i] isEqualTo "empty") then {
 				format["mrkMainObjective%1", _i] setMarkerType "mil_unknown";
 				["Map updated with main AO location"] call TREND_fnc_notifyGlobal;
 			} else {

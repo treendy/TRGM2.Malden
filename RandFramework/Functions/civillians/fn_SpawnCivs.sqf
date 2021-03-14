@@ -85,7 +85,7 @@ while {_iCount <= _unitCount} do
 		_wayPosInit = selectRandom _allBuildingPos;
 		if (!isNil "_wayPosInit") then {
 			_sCivClass = sCivilian;
-			if (typeName _sCivClass == "ARRAY") then {
+			if (typeName _sCivClass isEqualTo "ARRAY") then {
 				_sCivClass = selectRandom sCivilian;
 			};
 			_sCivClass createUnit [_wayPosInit, _sideCivGroup, _sInitString];
@@ -116,7 +116,7 @@ while {_iCount <= _unitCount} do
 
 		[_sideCivGroup, _iCountWaypoints] setWaypointSpeed "LIMITED";
 		[_sideCivGroup, _iCountWaypoints] setWaypointBehaviour "SAFE";
-		if (_iCountWaypoints == 4) then{[_sideCivGroup, 8] setWaypointType "CYCLE";};
+		if (_iCountWaypoints isEqualTo 4) then{[_sideCivGroup, 8] setWaypointType "CYCLE";};
 		_iCountWaypoints = _iCountWaypoints + 1;
 	};
 	_sideCivGroup setBehaviour "SAFE";

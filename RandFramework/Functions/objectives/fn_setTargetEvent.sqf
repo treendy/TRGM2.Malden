@@ -356,7 +356,7 @@ if (!_objectiveCreated) then {
 
 	_NoRoadsOrBuildingsNear = false;
 	_nearestHouseCount = count(nearestObjects [_posObj, ["building"],400]);
-	if (_nearestHouseCount == 0) then {_NoRoadsOrBuildingsNear = true;};
+	if (_nearestHouseCount isEqualTo 0) then {_NoRoadsOrBuildingsNear = true;};
 
 	if (_NoRoadsOrBuildingsNear) then {
 		_centerPos = _mainVeh getPos [ (random 150) , (random 360) ];

@@ -117,10 +117,11 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		if (!isNil "_sTargetName") then {
 			sAliveCheck = sAliveCheck + format[" && !alive(%1)", _sTargetName];
 			_allTargets pushBack _objVehicle;
-			if (_i == 0) then {
+			if (_i isEqualTo 0) then {
 				_firstTargetName = _sTargetName;
 				_firstTarget = _objVehicle;
 				_firstTarget setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
+				missionNamespace setVariable [format ["missionObjectiveParams%1", _iTaskIndex], [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 			};
 		};
 		if (!isNil "_aBlacklistPos" && {!(_aBlacklistPos isEqualTo [])}) then {

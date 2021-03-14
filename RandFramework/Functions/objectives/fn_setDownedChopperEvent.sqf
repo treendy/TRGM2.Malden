@@ -6,19 +6,19 @@ _completedMessage = "";
 _PointsAdjustMessage = "";
 _sVictim = nil;
 _sVictimVeh = nil;
-if (_iVictimType == 1) then {
+if (_iVictimType isEqualTo 1) then {
 	_sVictim = selectRandom Reporters;
 	_sVictimVeh = selectRandom ReporterChoppers;
 	_completedMessage = "The stranded reporter has returned to base in one piece!, well done!";
 	_PointsAdjustMessage = "Reporter rescued";
 };
-if (_iVictimType == 2) then {
+if (_iVictimType isEqualTo 2) then {
 	_sVictim = selectRandom Paramedics;
 	_sVictimVeh = selectRandom AirAmbulances;
 	_completedMessage = "The stranded medic has returned to base in one piece!, well done!";
 	_PointsAdjustMessage = "Paramedic rescued";
 };
-if (_iVictimType == 3) then {
+if (_iVictimType isEqualTo 3) then {
 	_sVictim = selectRandom FriendlyVictims;
 	_sVictimVeh = selectRandom FriendlyVictimVehs;
 	_completedMessage = "Our stranded guy has returned to base in one piece!, well done!";

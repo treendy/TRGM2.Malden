@@ -258,12 +258,12 @@ if (TREND_IsFullMap) then {
 	[_mainObjPos,2000,false,false,nil,nil,true] spawn TREND_fnc_setIEDEvent;
 	[_mainObjPos,2000,false,false,nil,nil,true] spawn TREND_fnc_setIEDEvent;
 
-	if (_mapSizeTxt == "MEDIUM" || _mapSizeTxt == "LARGE") then {
+	if (_mapSizeTxt isEqualTo "MEDIUM" || _mapSizeTxt isEqualTo "LARGE") then {
 		[_mainObjPos,2000,false,false,nil,nil,true] spawn TREND_fnc_setIEDEvent;
 		[_mainObjPos,2000,false,false,nil,nil,true] spawn TREND_fnc_setIEDEvent;
 		[_mainObjPos,true] spawn TREND_fnc_setATMineEvent;
 	};
-	if (_mapSizeTxt == "LARGE") then {
+	if (_mapSizeTxt isEqualTo "LARGE") then {
 		[_mainObjPos,true] spawn TREND_fnc_setDownCivCarEvent;
 		[_mainObjPos,true] spawn TREND_fnc_setDownedChopperEvent;
 		[_mainObjPos,2000,false,false,nil,nil,true] spawn TREND_fnc_setIEDEvent;

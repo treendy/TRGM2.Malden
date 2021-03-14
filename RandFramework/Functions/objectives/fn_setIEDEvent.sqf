@@ -6,8 +6,8 @@ if (isNil "_IEDType") then {
 	_IEDType = selectRandom ["CAR","CAR","RUBBLE"];
 };
 _ieds = nil;
-If (_IEDType == "CAR") then {_ieds = CivCars;};
-If (_IEDType == "RUBBLE") then {_ieds = TREND_IEDFakeClassNames;};
+If (_IEDType isEqualTo "CAR") then {_ieds = CivCars;};
+If (_IEDType isEqualTo "RUBBLE") then {_ieds = TREND_IEDFakeClassNames;};
 
 
 fnc_AddToDirection = {
@@ -28,7 +28,7 @@ fnc_AddToDirection = {
 
 
 _nearestRoads = _posOfAO nearRoads _roadRange;
-if ((!(isNil "IsTraining") || _isFullMap) && _roadRange == 2000) then {
+if ((!(isNil "IsTraining") || _isFullMap) && _roadRange isEqualTo 2000) then {
 	_nearestRoads = _posOfAO nearRoads 30000;
 };
 
@@ -125,7 +125,7 @@ if (count _nearestRoads > 0) then {
 					_thisVeh = _this select 0;
 					_IEDType = (_this select 3) select 1;
 					_alarmActive = _thisVeh getVariable ["alarmActive",false];
-					if (floor (random 30) == 0 && _IEDType == "CAR" && !_alarmActive) then {
+					if (floor (random 30) isEqualTo 0 && _IEDType isEqualTo "CAR" && !_alarmActive) then {
 						[_thisVeh] spawn {
 							_thisVeh = _this select 0;
 							_thisVeh setVariable ["alarmActive",true, true];
@@ -251,7 +251,7 @@ if (count _nearestRoads > 0) then {
 						if (!isOnRoad _randomPos) then {
 							//APERSMine ATMine
 							_objMine = createMine [selectRandom["APERSMine"], _randomPos, [], 0];
-							if ("TEST" == "FALSE") then {
+							if ("TEST" isEqualTo "FALSE") then {
 								_markerstrcache = createMarker [format ["IEDMineLoc%1",floor random 999999],_randomPos];
 								_markerstrcache setMarkerShape "ICON";
 								_markerstrcache setMarkerType "hd_dot";

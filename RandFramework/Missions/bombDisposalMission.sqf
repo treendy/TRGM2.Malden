@@ -57,6 +57,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_objBomb1 setPosATL (selectRandom _allpositionsBomb1);
 
 	_objBomb1 setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
+	missionNamespace setVariable [format ["missionObjectiveParams%1", _iTaskIndex], [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 
 	_objBomb1 setVariable ["missionBombCODE",_missionBombCODE,true];
 	_objBomb1 setVariable ["missionBombWire",_missionBombWire,true];
@@ -81,13 +82,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 	_objInformant = createGroup Civilian createUnit [selectRandom InformantClasses,[-200,-200,0],[],0,"NONE"];
 	_buildings = nil;
-	if (_iTaskIndex == 0 && !isNil "TREND_Mission1SubLoc") then {
+	if (_iTaskIndex isEqualTo 0 && !isNil "TREND_Mission1SubLoc") then {
 		_buildings = nearestObjects [TREND_Mission1SubLoc, TREND_BasicBuildings, 100];
 	};
-	if (_iTaskIndex == 1 && !isNil "TREND_Mission2SubLoc") then {
+	if (_iTaskIndex isEqualTo 1 && !isNil "TREND_Mission2SubLoc") then {
 		_buildings = nearestObjects [TREND_Mission2SubLoc, TREND_BasicBuildings, 100];
 	};
-	if (_iTaskIndex == 2 && !isNil "TREND_Mission3SubLoc") then {
+	if (_iTaskIndex isEqualTo 2 && !isNil "TREND_Mission3SubLoc") then {
 		_buildings = nearestObjects [TREND_Mission3SubLoc, TREND_BasicBuildings, 100];
 	};
 	if (isNil "_buildings") then {

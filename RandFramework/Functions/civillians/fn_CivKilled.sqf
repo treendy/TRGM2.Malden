@@ -6,7 +6,7 @@ if (!(_aceSource isEqualTo objNull)) then {
 	_killer = _aceSource;
 };
 
-if (side _killer == west && str(_killed) != str(_killer)) then {
+if (side _killer isEqualTo west && str(_killed) != str(_killer)) then {
 	TREND_bCivKilled =  true; publicVariable "TREND_bCivKilled";
 
 	TREND_CivDeathCount = TREND_CivDeathCount + 1;

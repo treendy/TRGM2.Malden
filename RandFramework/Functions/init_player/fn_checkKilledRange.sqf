@@ -1,9 +1,9 @@
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 //loop here, sleep 5 (doesnt need to be too fast looping!!)
 while {true} do {
-	if (getPlayerUID player in TREND_KilledPlayers && (vehicle player == player) && alive(player)) then {
+	if (getPlayerUID player in TREND_KilledPlayers && (vehicle player isEqualTo player) && alive(player)) then {
 		{
-			if (getPlayerUID player == _x select 0) then {
+			if (getPlayerUID player isEqualTo _x select 0) then {
 				//_forEachIndex
 				if (player distance (_x select 1) < TREND_KilledZoneRadius) then {
 					[(localize "STR_TRGM2_TRGMInitPlayerLocal_WarningArea")] call TREND_fnc_notify;

@@ -6,9 +6,9 @@ _objParams params ["_markerType","_objectiveMainBuilding","_centralAO_x","_centr
 
 [_thisLaptop] call TREND_fnc_updateTask;
 
-if (side _caller == west && !_bCreateTask) then {
+if (side _caller isEqualTo west && !_bCreateTask) then {
 	for [{private _i = 0;}, {_i < 3;}, {_i = _i + 1;}] do {
-		if (getMarkerType format["mrkMainObjective%1", _i] == "empty") then {
+		if (getMarkerType format["mrkMainObjective%1", _i] isEqualTo "empty") then {
 			format["mrkMainObjective%1", _i] setMarkerType "mil_unknown";
 			["Map updated with main AO location"] spawn TREND_fnc_notifyGlobal;
 		} else {

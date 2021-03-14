@@ -38,11 +38,11 @@ if (_baseReturnAllowed && _pos distance2D _baseLZPos <= _baseRadius) then {
 	_safeLandingZonePosition = [_pos , 0, 50, 20, 0, 0.3, 0,[],[[0,0,0],[0,0,0]],_vehicle] call TREND_fnc_findSafePos;
 
 	//if no zone found within 50 meters of selected pos, then search wider
-	if (_safeLandingZonePosition select 0 == 0) then { // no safe zone found
+	if (_safeLandingZonePosition select 0 isEqualTo 0) then { // no safe zone found
 		_safeLandingZonePosition = [_pos , 0, 200, 20, 0, 0.3, 0,[],[[0,0,0],[0,0,0]],_vehicle] call TREND_fnc_findSafePos;
 	};
 
-	if (_safeLandingZonePosition select 0 == 0) then { // no safe zone found
+	if (_safeLandingZonePosition select 0 isEqualTo 0) then { // no safe zone found
 		[(localize "STR_TRGM2_transport_fnselectLzOnMapClick_LessBuildUp")] call TREND_fnc_notify;
 	} else {
 		call _resetMapState;

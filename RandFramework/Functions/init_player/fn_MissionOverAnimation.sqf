@@ -7,7 +7,7 @@ while {!_bEnd} do {
 	_bMissionEnded = false;
 	_bAnyPlayersInAOAndAlive = false;
 
-	if (TREND_iMissionSetup == 5) then {
+	if (TREND_iMissionSetup isEqualTo 5) then {
 		_dCurrentRep = [TREND_MaxBadPoints - TREND_BadPoints,1] call BIS_fnc_cutDecimals;
 		if (TREND_ActiveTasks call FHQ_fnc_ttAreTasksCompleted && _dCurrentRep >= 10 && TREND_FinalMissionStarted) then {_bMissionEnded = true};
 	}
@@ -42,7 +42,7 @@ while {!_bEnd} do {
 		_iCount = 0;
 		{
 			_iCount = _iCount + 1;
-			if (_iCount == count allPlayers) then {
+			if (_iCount isEqualTo count allPlayers) then {
 				_stars = _stars + name _x; // format [_stars,name _x, "|%2"];
 			}
 			else {

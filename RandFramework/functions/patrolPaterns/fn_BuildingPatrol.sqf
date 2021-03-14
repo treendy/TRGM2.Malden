@@ -47,7 +47,7 @@ while {_iCountWaypoints <= _buildingCount} do
 
 	[_group, _iCountWaypoints] setWaypointSpeed "LIMITED";
 	[_group, _iCountWaypoints] setWaypointBehaviour "SAFE";
-	if (_iCountWaypoints == _buildingCount) then{[_group, 8] setWaypointType "CYCLE";};
+	if (_iCountWaypoints isEqualTo _buildingCount) then{[_group, 8] setWaypointType "CYCLE";};
 	_iCountWaypoints = _iCountWaypoints + 1;
 };
 _group setBehaviour "SAFE";

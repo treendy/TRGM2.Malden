@@ -76,7 +76,7 @@ if (_foundPlace) then {
 		_distance = _distance ^2;
 
 		_enemies = allUnits select {
-			side _x == west AND {_x distancesqr _spawnedUnit < _distance} AND {
+			side _x isEqualTo west AND {_x distancesqr _spawnedUnit < _distance} AND {
 			acos ([sin _eyedir, cos _eyedir, 0] vectorCos [sin (_spawnedUnit getDir _x), cos (_spawnedUnit getDir _x), 0]) <= _fov/2}
 		};
 		_enemies apply {_spawnedUnit reveal [_x,4]};

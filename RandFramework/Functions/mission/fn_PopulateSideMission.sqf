@@ -72,7 +72,7 @@ else {
 	publicVariable "TREND_ClearedPositions";
 };
 
-if ((_sideType == 7 || _sideType == 5) && _bFriendlyInsurgents) then { //if mission is kill officer or kill officer and in fridnldy area then make him prisoner
+if ((_sideType isEqualTo 7 || _sideType isEqualTo 5) && _bFriendlyInsurgents) then { //if mission is kill officer or kill officer and in fridnldy area then make him prisoner
 	sOfficerName = format["objInformant%1",_iTaskIndex];
 	_officerObject = missionNamespace getVariable [sOfficerName , objNull];
 	_officerObject disableAI "anim";
@@ -85,7 +85,7 @@ if ((_sideType == 7 || _sideType == 5) && _bFriendlyInsurgents) then { //if miss
 	_officerObject setPosATL (selectRandom _allpositionsMainBuiding);
 	removeAllWeapons _officerObject;
 };
-if (_sideType == 4) then { //if mission is informat, then dont be walkig around
+if (_sideType isEqualTo 4) then { //if mission is informat, then dont be walkig around
 	sInformantName = format["objInformant%1",_iTaskIndex];
 	_InformantObject = missionNamespace getVariable [sInformantName , objNull];
 	_InformantObject setVariable ["StopWalkScript", true];
@@ -157,10 +157,10 @@ if (!_bFriendlyInsurgents) then {
 	if (!_bThisMissionCivsOnly) then {
 
 		_minimission = false;
-		if (TREND_AdvancedSettings select TREND_ADVSET_MINIMISSIONS_IDX == 1) then {
+		if (TREND_AdvancedSettings select TREND_ADVSET_MINIMISSIONS_IDX isEqualTo 1) then {
 			_minimission = true;
 		};
-		if (TREND_AdvancedSettings select TREND_ADVSET_MINIMISSIONS_IDX == 0) then {
+		if (TREND_AdvancedSettings select TREND_ADVSET_MINIMISSIONS_IDX isEqualTo 0) then {
 			_minimission = random 1 < .50;
 		};
 
@@ -177,7 +177,7 @@ if (!_bFriendlyInsurgents) then {
 		_bHasPatrols = false;
 		if (_bIsMainObjective) then {_bHasPatrols = true};
 
-		_bSmallerAllOverPatrols = random 1 < .50 || TREND_PatrolType == 1 || TREND_PatrolType == 2; //if single mission and random 50/50, or if forced by custom mission
+		_bSmallerAllOverPatrols = random 1 < .50 || TREND_PatrolType isEqualTo 1 || TREND_PatrolType isEqualTo 2; //if single mission and random 50/50, or if forced by custom mission
 
 		if (_minimission) then {
 			if (random 1 < .50) then {
@@ -193,7 +193,7 @@ if (!_bFriendlyInsurgents) then {
 			if (_bSmallerAllOverPatrols) then {
 				_bHasPatrols = true;
 				_patrolUnitCounts = [2,3];
-				if (TREND_PatrolType == 2) then {
+				if (TREND_PatrolType isEqualTo 2) then {
 					_patrolUnitCounts = [4,4,4,4,4,4,5,5,5,5,5,5];
 				};
 
@@ -708,7 +708,7 @@ if (!_bFriendlyInsurgents) then {
 							group _objMan setSpeedMode "LIMITED";
 							group _objMan setBehaviour "SAFE";
 
-							while {alive(_objMan) && {behaviour _objMan == "SAFE"}} do {
+							while {alive(_objMan) && {behaviour _objMan isEqualTo "SAFE"}} do {
 								[_objManName,_thisInitPos,_objMan,35] spawn TREND_fnc_HVTWalkAround;
 								sleep 2;
 								waitUntil {sleep 1; speed _objMan < 0.5};
@@ -860,7 +860,7 @@ if (_selectRandomW) then {
 			_objIED1 = selectRandom TREND_IEDClassNames createVehicle _flatPos;
 			_IEDCount = _IEDCount + 1;
 		};
-		//if (random 1 < .25 || _LoopMax == _high) then {
+		//if (random 1 < .25 || _LoopMax isEqualTo _high) then {
 		//	_objIED1b = selectRandom TREND_IEDFakeClassNames createVehicle _flatPos;
 		//	_objIED1b setPos _flatPos;
 		//};
@@ -886,7 +886,7 @@ if (_selectRandomW || _bThisMissionCivsOnly) then {
 
 
 //Spawn AT Mine on road if not vehicles and hack data mission
-if (_sideType == 1 && random 1 < .50) then {
+if (_sideType isEqualTo 1 && random 1 < .50) then {
 
 	_nearestRoad = [[_inf1X,_inf1Y], 100, []] call BIS_fnc_nearestRoad;
 	if (isNil "_nearestRoad") then {

@@ -1,6 +1,6 @@
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 
-if (side player == civilian) then {
+if (side player isEqualTo civilian) then {
 
 	0 enableChannel false;
 	1 enableChannel false;
@@ -51,7 +51,7 @@ if (side player == civilian) then {
 
 };
 
-if (TREND_iAllowNVG == 2) then {
+if (TREND_iAllowNVG isEqualTo 2) then {
 	call TREND_fnc_NVscript;
 };
 
@@ -62,6 +62,6 @@ _trg setTriggerStatements["this", "[player] spawn TREND_fnc_fireIllumFlares;", "
 
 // I don't know if this is required anymore since MainInit remoteExec's this...
 // _iSandStormOption = [2, call TREND_sandStormOption] select (call TREND_WeatherOption < 11);
-// if (_iSandStormOption == 3) then { //5 hours non stop
+// if (_iSandStormOption isEqualTo 3) then { //5 hours non stop
 // 	nul = [18030,false] execVM "RandFramework\RikoSandStorm\ROSSandstorm.sqf";
 // };
