@@ -60,6 +60,7 @@ jobs:
         
       - name: Pack mission files to PBOs
         run: |
+          $makePboExe = "$($Env:GITHUB_WORKSPACE)\Pbo-Tools\MakePbo.exe"
           $templateFolder = "$($Env:GITHUB_WORKSPACE)\Mission-Templates"
           $missionFolders = Get-ChildItem -Path "$templateFolder" -Directory
           New-Item -Path "$($Env:GITHUB_WORKSPACE)\Publish\" -ItemType Directory
@@ -69,8 +70,7 @@ jobs:
               {
                   Try
                   {
-                    cd "$($Env:GITHUB_WORKSPACE)\Pbo-Tools\"
-                    .\MakePbo.exe -P -B -A -X="none" "$folder"
+                    & $makePboExe -P -B -A -X="none" "$folder"
                     Copy-Item -Path "$folder.pbo" -Destination "$($Env:GITHUB_WORKSPACE)\Publish\$($folder.Name).pbo"
                   }
                   Catch
