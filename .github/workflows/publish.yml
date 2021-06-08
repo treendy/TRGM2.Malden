@@ -27,8 +27,8 @@ jobs:
 
       - name: Copy mission files to templates
         run: |
-          $mainFolder = "$GITHUB_WORKSPACE"
-          $templateFolder = "$GITHUB_WORKSPACE\Mission-Templates"
+          $mainFolder = "$($Env:GITHUB_WORKSPACE)"
+          $templateFolder = "$($Env:GITHUB_WORKSPACE)\Mission-Templates"
           $unwantedFoldersAndFiles = @("mission.sqm", ".vscode", ".github", ".git", ".gitignore", "Mission-Templates", "Pbo-Tools")
           $mainFiles = Get-ChildItem -Path "$mainFolder" | Where-Object { $_.Name -notin $unwantedFoldersAndFiles }
           $missionFolders = Get-ChildItem -Path "$templateFolder" -Directory
@@ -60,17 +60,17 @@ jobs:
         
       - name: Pack mission files to PBOs
         run: |
-          $templateFolder = "$GITHUB_WORKSPACE\Mission-Templates"
+          $templateFolder = "$($Env:GITHUB_WORKSPACE)\Mission-Templates"
           $missionFolders = Get-ChildItem -Path "$templateFolder" -Directory
-          New-Item -Path "$GITHUB_WORKSPACE\Publish\" -ItemType Directory
+          New-Item -Path "$($Env:GITHUB_WORKSPACE)\Publish\" -ItemType Directory
           if ($missionFolders.Count -gt 0)
           {
               ForEach ($folder in $missionFolders)
               {
                   Try
                   {
-                    & "$GITHUB_WORKSPACE\Pbo-Tools\MakePbo.exe" -P -B -A -X="none" "$folder"
-                    Copy-Item -Path "$folder.pbo" -Destination "$GITHUB_WORKSPACE\Publish\$($folder.Name).pbo"
+                    & "$($Env:GITHUB_WORKSPACE)\Pbo-Tools\MakePbo.exe" -P -B -A -X="none" "$folder"
+                    Copy-Item -Path "$folder.pbo" -Destination "$($Env:GITHUB_WORKSPACE)\Publish\$($folder.Name).pbo"
                   }
                   Catch
                   {
@@ -85,4 +85,4 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: TRGM2-Missions
-          path: "$GITHUB_WORKSPACE/Mission-Templates/"
+          path: "$($Env:GITHUB_WORKSPACE)/Mission-Templates/"
