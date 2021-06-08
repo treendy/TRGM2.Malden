@@ -116,5 +116,7 @@ jobs:
           rm -rf "$GITHUB_WORKSPACE/.github"
           rm "$GITHUB_WORKSPACE/.gitignore"
 
-      - name: Validate with SQFLint
-        uses: arma-actions/sqflint@v1.0
+      - uses: arma-actions/sqflint@v1.0
+        name: Validate with SQFLint
+        with:
+          args: --exit w --directory $GITHUB_WORKSPACE
