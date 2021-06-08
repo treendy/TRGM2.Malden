@@ -56,7 +56,7 @@ jobs:
                   Write-Output "-----------------------------------------------------"
               }
           }
-        shell: pwsh
+        shell: powershell
         
       - name: Pack mission files to PBOs
         run: |
@@ -81,7 +81,7 @@ jobs:
                   }
               }
           }
-        shell: pwsh
+        shell: powershell
       
       - uses: actions/upload-artifact@v2
         with:
