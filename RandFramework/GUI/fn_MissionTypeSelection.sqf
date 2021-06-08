@@ -24,12 +24,12 @@ _selectedIndex = _thisThis select 1;
 #define UI_GRID_Y		(safezoneY)
 #define UI_GRID_W		(safezoneW / 40)
 #define UI_GRID_H		(safezoneH / 25)
-#define UI_GRID_WAbs	(safezoneW)
-#define UI_GRID_HAbs	(safezoneH)
-#define MissionListX 	(15.46 * UI_GRID_W + UI_GRID_X)
-#define MissionListY 	(13.6 * UI_GRID_H + UI_GRID_Y)
-#define MissionListW 	(6.18854 * UI_GRID_W)
-#define MissionListH 	(0.54988 * UI_GRID_H)
+#define UI_GRID_WABS	(safezoneW)
+#define UI_GRID_HABS	(safezoneH)
+#define MISSIONLISTX 	(15.46 * UI_GRID_W + UI_GRID_X)
+#define MISSIONLISTY 	(13.6 * UI_GRID_H + UI_GRID_Y)
+#define MISSIONLISTW 	(6.18854 * UI_GRID_W)
+#define MISSIONLISTH 	(0.54988 * UI_GRID_H)
 
 if (isNil "TREND_iMissionParamObjective2") then { TREND_iMissionParamObjective2 =   0; publicVariable "TREND_iMissionParamObjective2"; };
 if (isNil "TREND_iMissionParamObjective3") then { TREND_iMissionParamObjective3 =   0; publicVariable "TREND_iMissionParamObjective3"; };
@@ -80,7 +80,7 @@ if (_selectedTypeID isEqualTo 0 || _selectedTypeID isEqualTo 6 || _selectedTypeI
 		_display ctrlCreate ["RscCombo", 7001];
 		_inpctrl1 = _display displayCtrl 7001;
 		_inpctrl1 ctrlSetTextColor [1, 1, 0, 1];
-		_inpctrl1 ctrlSetPosition [MissionListX+MissionListW, MissionListY,MissionListW/2,MissionListH];
+		_inpctrl1 ctrlSetPosition [MISSIONLISTX+MISSIONLISTW, MISSIONLISTY,MISSIONLISTW/2,MISSIONLISTH];
 		_inpctrl1 ctrlCommit 0;
 		_ctrlTypes1 = (findDisplay 5000) displayCtrl 7001;
 		_optionTypes = TREND_MissionParamObjectives;
@@ -93,7 +93,7 @@ if (_selectedTypeID isEqualTo 0 || _selectedTypeID isEqualTo 6 || _selectedTypeI
 		_display ctrlCreate ["RscCombo", 7002];
 		_inpctrl2 = _display displayCtrl 7002;
 		_inpctrl2 ctrlSetTextColor [1, 1, 0, 1];
-		_inpctrl2 ctrlSetPosition [MissionListX+MissionListW+(MissionListW/2), MissionListY,MissionListW/2,MissionListH];
+		_inpctrl2 ctrlSetPosition [MISSIONLISTX+MISSIONLISTW+(MISSIONLISTW/2), MISSIONLISTY,MISSIONLISTW/2,MISSIONLISTH];
 		_inpctrl2 ctrlCommit 0;
 		_ctrlTypes2 = (findDisplay 5000) displayCtrl 7002;
 		_optionTypes = TREND_MissionParamObjectives;

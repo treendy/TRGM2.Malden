@@ -12,7 +12,6 @@
             text = "";
             sizeEx = 0;
             lineSpacing = 0;
-            access = 0;
             type = 0;
             style = 0;
             size = 1;
@@ -30,7 +29,6 @@
             font = "PuristaMedium";
             sizeEx = "1 / 40 / (getResolution select 5)";
             lineSpacing = 0;
-            access = 0;
             type = 0;
             style = 2;
             size = 1;

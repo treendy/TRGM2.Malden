@@ -1,0 +1,88 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Publish
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the refactor branch
+  push:
+    branches: [ refactor ]
+  pull_request:
+    branches: [ refactor ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Copy mission files to templates
+        run: |
+          $mainFolder = "$GITHUB_WORKSPACE"
+          $templateFolder = "$GITHUB_WORKSPACE\Mission-Templates"
+          $unwantedFoldersAndFiles = @("mission.sqm", ".vscode", ".github", ".git", ".gitignore", "Mission-Templates", "Pbo-Tools")
+          $mainFiles = Get-ChildItem -Path "$mainFolder" | Where-Object { $_.Name -notin $unwantedFoldersAndFiles }
+          $missionFolders = Get-ChildItem -Path "$templateFolder" -Directory
+          if ($missionFolders.Count -gt 0)
+          {
+              ForEach ($folder in $missionFolders)
+              {
+                  Write-Output "-----------------------------------------------------"
+                  Write-Output "Mission Folder: $folder"
+                  Write-Output "-----------------------------------------------------"
+                  ForEach ($file in $mainFiles)
+                  {
+                      Try
+                      {
+                          Copy-Item -Path "$($file.Fullname)" -Destination "$folder\$($file.Name)" -Recurse -Force
+                          Write-Output "    $($file.Name) --> $folder\$($file.Name)"
+                      }
+                      Catch
+                      {
+                          $ErrorMessage = $_ | Out-String
+                          Write-Output "The following error occured while copying files for $($file.Name) from Main Mission to Template Mission:"
+                          Write-Output $ErrorMessage
+                      }
+                  }
+                  Write-Output "-----------------------------------------------------"
+              }
+          }
+        shell: pwsh
+        
+      - name: Pack mission files to PBOs
+        run: |
+          $templateFolder = "$GITHUB_WORKSPACE\Mission-Templates"
+          $missionFolders = Get-ChildItem -Path "$templateFolder" -Directory
+          New-Item -Path "$GITHUB_WORKSPACE\Publish\" -ItemType Directory
+          if ($missionFolders.Count -gt 0)
+          {
+              ForEach ($folder in $missionFolders)
+              {
+                  Try
+                  {
+                    & "$GITHUB_WORKSPACE\Pbo-Tools\MakePbo.exe" -P -B -A -X="none" "$folder"
+                    Copy-Item -Path "$folder.pbo" -Destination "$GITHUB_WORKSPACE\Publish\$($folder.Name).pbo"
+                  }
+                  Catch
+                  {
+                      $ErrorMessage = $_ | Out-String
+                      Write-Output "The following error occured while packing $($folder.Name):"
+                      Write-Output $ErrorMessage
+                  }
+              }
+          }
+        shell: pwsh
+      
+      - uses: actions/upload-artifact@v2
+        with:
+          name: TRGM2-Missions
+          path: "$GITHUB_WORKSPACE/Mission-Templates/"

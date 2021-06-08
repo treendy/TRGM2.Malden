@@ -4,16 +4,16 @@
 #define UI_GRID_Y	(safezoneY)
 #define UI_GRID_W	(safezoneW / 40)
 #define UI_GRID_H	(safezoneH / 25)
-#define UI_GRID_WAbs	(safezoneW)
-#define UI_GRID_HAbs	(safezoneH)
+#define UI_GRID_WABS	(safezoneW)
+#define UI_GRID_HABS	(safezoneH)
 
-#define SliderTimeX (15.46 * UI_GRID_W + UI_GRID_X)
-#define SliderTimeY (16.07 * UI_GRID_H + UI_GRID_Y)
-#define SliderTimeW (6.18854 * UI_GRID_W)
-#define SliderTimeH (0.54988 * UI_GRID_H)
+#define SLIDERTIMEX (15.46 * UI_GRID_W + UI_GRID_X)
+#define SLIDERTIMEY (16.07 * UI_GRID_H + UI_GRID_Y)
+#define SLIDERTIMEW (6.18854 * UI_GRID_W)
+#define SLIDERTIMEH (0.54988 * UI_GRID_H)
 
-#define OneThirdSliderTimeW SliderTimeW / 3
-#define TwoThirdSliderTimeW OneThirdSliderTimeW * 2
+#define ONETHIRDSLIDERTIMEW SLIDERTIMEW / 3
+#define TWOTHIRDSLIDERTIMEW ONETHIRDSLIDERTIMEW * 2
 
 class Trend_DialogSetupParams
 	{
@@ -107,60 +107,60 @@ class Trend_DialogSetupParams
 			idc = -1;
 			text = "\a3\3DEN\Data\Attributes\SliderTimeDay\night_ca.paa";
 			colorText[] = {1,1,1,0.60000002};
-			x = SliderTimeX + OneThirdSliderTimeW - (SliderTimeH / 2) + SliderTimeH + SliderTimeH - (3 * SliderTimeH / 16);
-			y = SliderTimeY;
-			w = SliderTimeH;
-			h = SliderTimeH;
+			x = SLIDERTIMEX + ONETHIRDSLIDERTIMEW - (SLIDERTIMEH / 2) + SLIDERTIMEH + SLIDERTIMEH - (3 * SLIDERTIMEH / 16);
+			y = SLIDERTIMEY;
+			w = SLIDERTIMEH;
+			h = SLIDERTIMEH;
 		};
 		class PreviewNight2: ctrlStaticPicture
 		{
 			idc = -1;
 			text = "\a3\3DEN\Data\Attributes\SliderTimeDay\night_ca.paa";
 			colorText[] = {1,1,1,0.60000002};
-			x = SliderTimeX + OneThirdSliderTimeW - (SliderTimeH / 2) - SliderTimeH - SliderTimeH + (3 * SliderTimeH / 16);
-			y = SliderTimeY;
-			w = SliderTimeH;
-			h = SliderTimeH;
+			x = SLIDERTIMEX + ONETHIRDSLIDERTIMEW - (SLIDERTIMEH / 2) - SLIDERTIMEH - SLIDERTIMEH + (3 * SLIDERTIMEH / 16);
+			y = SLIDERTIMEY;
+			w = SLIDERTIMEH;
+			h = SLIDERTIMEH;
 		};
 		class PreviewDay: ctrlStaticPicture
 		{
 			idc = -1;
 			text = "\a3\3DEN\Data\Attributes\SliderTimeDay\day_ca.paa";
 			colorText[] = {1,1,1,0.60000002};
-			x = SliderTimeX + OneThirdSliderTimeW - (SliderTimeH / 2);
-			y = SliderTimeY;
-			w = SliderTimeH;
-			h = SliderTimeH;
+			x = SLIDERTIMEX + ONETHIRDSLIDERTIMEW - (SLIDERTIMEH / 2);
+			y = SLIDERTIMEY;
+			w = SLIDERTIMEH;
+			h = SLIDERTIMEH;
 		};
 		class PreviewSunrise: ctrlStaticPicture
 		{
 			idc = -1;
 			text = "\a3\3DEN\Data\Attributes\SliderTimeDay\sunrise_ca.paa";
 			colorText[] = {1,1,1,0.60000002};
-			x = SliderTimeX + OneThirdSliderTimeW - (SliderTimeH / 2) - SliderTimeH;
-			y = SliderTimeY;
-			w = SliderTimeH;
-			h = SliderTimeH;
+			x = SLIDERTIMEX + ONETHIRDSLIDERTIMEW - (SLIDERTIMEH / 2) - SLIDERTIMEH;
+			y = SLIDERTIMEY;
+			w = SLIDERTIMEH;
+			h = SLIDERTIMEH;
 		};
 		class PreviewSunset: ctrlStaticPicture
 		{
 			idc = -1;
 			text = "\a3\3DEN\Data\Attributes\SliderTimeDay\sunset_ca.paa";
 			colorText[] = {1,1,1,0.60000002};
-			x = SliderTimeX + OneThirdSliderTimeW - (SliderTimeH / 2) + SliderTimeH;
-			y = SliderTimeY;
-			w = SliderTimeH;
-			h = SliderTimeH;
+			x = SLIDERTIMEX + ONETHIRDSLIDERTIMEW - (SLIDERTIMEH / 2) + SLIDERTIMEH;
+			y = SLIDERTIMEY;
+			w = SLIDERTIMEH;
+			h = SLIDERTIMEH;
 		};
 		class Sun_2114: ctrlStaticPicture
 		{
 			idc = -1;
 			text = "\a3\3DEN\Data\Attributes\SliderTimeDay\sun_ca.paa";
 			colorText[] = {1,1,1,0.60000002};
-			x = SliderTimeX + OneThirdSliderTimeW - (SliderTimeH / 2);
-			y = SliderTimeY;
-			w = SliderTimeH;
-			h = SliderTimeH;
+			x = SLIDERTIMEX + ONETHIRDSLIDERTIMEW - (SLIDERTIMEH / 2);
+			y = SLIDERTIMEY;
+			w = SLIDERTIMEH;
+			h = SLIDERTIMEH;
 		};
 		class Value_2114: RscXSliderH
 		{
@@ -173,10 +173,10 @@ class Trend_DialogSetupParams
 			thumb = "\a3\3DEN\Data\Attributes\SliderTimeDay\thumb_ca.paa";
 			color[] = {1,1,1,0.6};
 
-			x = SliderTimeX;
-			y = SliderTimeY;
-			w = TwoThirdSliderTimeW;
-			h = SliderTimeH;
+			x = SLIDERTIMEX;
+			y = SLIDERTIMEY;
+			w = TWOTHIRDSLIDERTIMEW;
+			h = SLIDERTIMEH;
 			colorActive[] = {1,1,1,1};
 
 			onSliderPosChanged="[_this select 0, _this select 1, ""Slider""] call TREND_fnc_timeSliderOnChange; false;";
@@ -184,10 +184,10 @@ class Trend_DialogSetupParams
 		class Frame_2114: ctrlStaticFrame
 		{
 			idc = -1;
-			x = SliderTimeX + TwoThirdSliderTimeW;
-			y = SliderTimeY;
-			w = OneThirdSliderTimeW;
-			h = SliderTimeH;
+			x = SLIDERTIMEX + TWOTHIRDSLIDERTIMEW;
+			y = SLIDERTIMEY;
+			w = ONETHIRDSLIDERTIMEW;
+			h = SLIDERTIMEH;
 			colorText[] = {1,1,1,1};
 			colorBackground[] = {0,0,0,0};
 			sizeEx = GUI_TEXT_SIZE_MEDIUM;
@@ -197,10 +197,10 @@ class Trend_DialogSetupParams
 			idc = 5116;
 			text = "00"; //--- ToDo: Localize;
 			style = "0x02 + 0x200";
-			x = SliderTimeX + TwoThirdSliderTimeW;
-			y = SliderTimeY;
-			w = OneThirdSliderTimeW / 3;
-			h = SliderTimeH;
+			x = SLIDERTIMEX + TWOTHIRDSLIDERTIMEW;
+			y = SLIDERTIMEY;
+			w = ONETHIRDSLIDERTIMEW / 3;
+			h = SLIDERTIMEH;
 			colorText[] = {1,1,1,1};
 			colorBackground[] = {0,0,0,0};
 			tooltip = $STR_3DEN_Attributes_SliderTime_Hour_tooltip; //--- ToDo: Localize;
@@ -212,10 +212,10 @@ class Trend_DialogSetupParams
 		{
 			idc = 5117;
 			text = "00"; //--- ToDo: Localize;
-			x = SliderTimeX + TwoThirdSliderTimeW + (OneThirdSliderTimeW / 3);
-			y = SliderTimeY;
-			w = OneThirdSliderTimeW / 3;
-			h = SliderTimeH;
+			x = SLIDERTIMEX + TWOTHIRDSLIDERTIMEW + (ONETHIRDSLIDERTIMEW / 3);
+			y = SLIDERTIMEY;
+			w = ONETHIRDSLIDERTIMEW / 3;
+			h = SLIDERTIMEH;
 			colorText[] = {1,1,1,1};
 			colorBackground[] = {0,0,0,0};
 			tooltip = $STR_3DEN_Attributes_SliderTime_Minute_tooltip; //--- ToDo: Localize;
@@ -225,10 +225,10 @@ class Trend_DialogSetupParams
 		{
 			idc = 5118;
 			text = "00"; //--- ToDo: Localize;
-			x = SliderTimeX + TwoThirdSliderTimeW + (OneThirdSliderTimeW / 3) * 2;
-			y = SliderTimeY;
-			w = OneThirdSliderTimeW / 3;
-			h = SliderTimeH;
+			x = SLIDERTIMEX + TWOTHIRDSLIDERTIMEW + (ONETHIRDSLIDERTIMEW / 3) * 2;
+			y = SLIDERTIMEY;
+			w = ONETHIRDSLIDERTIMEW / 3;
+			h = SLIDERTIMEH;
 			colorText[] = {1,1,1,1};
 			colorBackground[] = {0,0,0,0};
 			tooltip = $STR_3DEN_Attributes_SliderTime_Second_tooltip; //--- ToDo: Localize;
@@ -239,10 +239,10 @@ class Trend_DialogSetupParams
 			idc = -1;
 			text = "  :  :  "; //--- ToDo: Localize;
 			style = 2;
-			x = SliderTimeX + TwoThirdSliderTimeW;
-			y = SliderTimeY;
-			w = OneThirdSliderTimeW;
-			h = SliderTimeH;
+			x = SLIDERTIMEX + TWOTHIRDSLIDERTIMEW;
+			y = SLIDERTIMEY;
+			w = ONETHIRDSLIDERTIMEW;
+			h = SLIDERTIMEH;
 			colorText[] = {1,1,1,1};
 			colorBackground[] = {0,0,0,0.5};
 			sizeEx = GUI_TEXT_SIZE_MEDIUM;

@@ -18,7 +18,7 @@
 // Return: Array of objects, the units that were not garrisoned
 
 #define EYE_HEIGHT 1.53
-#define CHECK_distance 5
+#define CHECK_DISTANCE 5
 #define FOV_ANGLE 10
 #define ROOF_CHECK 4
 #define ROOF_EDGE 2
@@ -173,10 +173,10 @@ while {(count _posArray) > 0} do {
 
     _startangle = (round random 10) * (round random 36);
     for "_i" from _startangle to (_startangle + 350) step 10 do {
-        _checkPos = [_housePos, CHECK_distance, (90 - _i), (_housePos select 2)] call _Zen_Extendposition;
+        _checkPos = [_housePos, CHECK_DISTANCE, (90 - _i), (_housePos select 2)] call _Zen_Extendposition;
         if !(lineIntersects [_checkPos, [_checkPos select 0, _checkPos select 1, (_checkPos select 2) + 25], objNull, objNull]) then {
             if !(lineIntersects [_housePos, _checkPos, objNull, objNull]) then {
-                _checkPos = [_housePos, CHECK_distance, (90 - _i), (_housePos select 2) + (CHECK_distance * tan FOV_ANGLE)] call _Zen_Extendposition;
+                _checkPos = [_housePos, CHECK_DISTANCE, (90 - _i), (_housePos select 2) + (CHECK_DISTANCE * tan FOV_ANGLE)] call _Zen_Extendposition;
                 if !(lineIntersects [_housePos, _checkPos, objNull, objNull]) then {
                     _hitcount = 0;
                     for "_k" from 30 to 360 step 30 do {
@@ -217,7 +217,7 @@ while {(count _posArray) > 0} do {
                             if (!(_isRoof) || {
                                 _edge
                             }) then {
-                                (_units select _unitindex) doWatch ([_housePos, CHECK_distance, (90 - _i), (_housePos select 2) - (getTerrainHeightASL _housePos)] call _Zen_Extendposition);
+                                (_units select _unitindex) doWatch ([_housePos, CHECK_DISTANCE, (90 - _i), (_housePos select 2) - (getTerrainHeightASL _housePos)] call _Zen_Extendposition);
 
                                 (_units select _unitindex) disableAI "TARGET";
                                 if (_domove) then {

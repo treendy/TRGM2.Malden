@@ -39,7 +39,6 @@ class CfgFunctions {
 	#ifndef AIS_Core_Progress_BarDlg
 		#include "AIS\cfgFunctions.hpp"
 	#endif
-	#include "dictionary\dictionaryFunctions.hpp"
 };
 #ifndef AIS_Core_Progress_BarDlg
 	#include "AIS\Effects\BarDlg.hpp"
