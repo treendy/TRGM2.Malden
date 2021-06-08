@@ -60,10 +60,10 @@ jobs:
 
       - name: Pack mission files to PBOs
         run: |
-          $PATH = [Environment]::GetEnvironmentVariable("PATH")
           $PboTools = "$($Env:GITHUB_WORKSPACE)\Pbo-Tools\"
-          [Environment]::SetEnvironmentVariable("PATH", "$PboTools;$PATH")
-          Write-Output "$($env:Path)"
+          Copy-Item -Path $PboTools -Destination "C:\Pbo-Tools"
+          [Environment]::SetEnvironmentVariable("PATH", "$PATH;C:\Pbo-Tools")
+          Write-Output "$(Get-ChildItem -Path "C:\Pbo-Tools")"
           $templateFolder = "$($Env:GITHUB_WORKSPACE)\Mission-Templates"
           $missionFolders = Get-ChildItem -Path "$templateFolder" -Directory
           New-Item -Path "$($Env:GITHUB_WORKSPACE)\Publish\" -ItemType Directory
