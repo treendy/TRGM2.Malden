@@ -2,7 +2,7 @@
 
 name: Publish
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the refactor branch
   push:
@@ -57,11 +57,12 @@ jobs:
               }
           }
         shell: pwsh
-        
+
       - name: Pack mission files to PBOs
         run: |
-          $makePboExe = "$($Env:GITHUB_WORKSPACE)\Pbo-Tools\MakePbo.exe"
-          Write-Output $makePboExe
+          $PATH = [Environment]::GetEnvironmentVariable("PATH")
+          $PboTools = "$($Env:GITHUB_WORKSPACE)\Pbo-Tools\"
+          [Environment]::SetEnvironmentVariable("PATH", "$PboTools;$PATH")
           $templateFolder = "$($Env:GITHUB_WORKSPACE)\Mission-Templates"
           $missionFolders = Get-ChildItem -Path "$templateFolder" -Directory
           New-Item -Path "$($Env:GITHUB_WORKSPACE)\Publish\" -ItemType Directory
@@ -71,8 +72,7 @@ jobs:
               {
                   Try
                   {
-                    Write-Output "`"$makePboExe`" -P -B -A -X=`"none`" `"$folder`""
-                    & "$makePboExe" -P -B -A -X="none" "$folder"
+                    MakePbo -P -B -A -X="none" "$folder"
                     Copy-Item -Path "$folder.pbo" -Destination "$($Env:GITHUB_WORKSPACE)\Publish\$($folder.Name).pbo"
                   }
                   Catch
@@ -84,7 +84,7 @@ jobs:
               }
           }
         shell: pwsh
-      
+
       - uses: actions/upload-artifact@v2
         with:
           name: TRGM2-Missions
