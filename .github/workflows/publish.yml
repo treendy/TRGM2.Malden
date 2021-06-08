@@ -56,11 +56,12 @@ jobs:
                   Write-Output "-----------------------------------------------------"
               }
           }
-        shell: powershell
+        shell: pwsh
         
       - name: Pack mission files to PBOs
         run: |
           $makePboExe = "$($Env:GITHUB_WORKSPACE)\Pbo-Tools\MakePbo.exe"
+          echo $makePboExe
           $templateFolder = "$($Env:GITHUB_WORKSPACE)\Mission-Templates"
           $missionFolders = Get-ChildItem -Path "$templateFolder" -Directory
           New-Item -Path "$($Env:GITHUB_WORKSPACE)\Publish\" -ItemType Directory
@@ -81,7 +82,7 @@ jobs:
                   }
               }
           }
-        shell: powershell
+        shell: pwsh
       
       - uses: actions/upload-artifact@v2
         with:
