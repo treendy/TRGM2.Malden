@@ -135,9 +135,9 @@ any= [_LineThree,_LineFour]spawn BIS_fnc_infotext;
 sleep 3;
 titleCut ["", "BLACK out", 5];
 
-8 fadeMusic 0;
+getNumber(configfile >> "CfgMusic" >> TREND_NewMissionMusic >> "duration") fadeMusic 0;
 [] spawn {
-	sleep 8;
+	sleep getNumber(configfile >> "CfgMusic" >> TREND_NewMissionMusic >> "duration");
 	ace_hearing_disableVolumeUpdate = false;
 	playMusic "";
 };

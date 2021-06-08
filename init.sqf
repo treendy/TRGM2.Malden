@@ -1,6 +1,7 @@
 "Init.sqf" call TREND_fnc_log;
 
 call TREND_fnc_initGlobalVars;
+[] remoteExec ["TREND_fnc_initGlobalVars"];
 
 waitUntil { TREND_playerIsChoosingHQpos || TREND_NeededObjectsAvailable; };
 
@@ -62,6 +63,6 @@ waitUntil { _handle; };
 
 [laptop1, ["Request Units/Vehicles", {player call TREND_fnc_openDialogRequests;}, [], 0, true, true, "", "_this isEqualTo player"]] remoteExec ["addAction", 0, true];
 
-[] spawn TREND_fnc_mainInit;
-
+[] remoteExec ["TREND_fnc_mainInit"];
+[] remoteExec ["TREND_fnc_mainInitLocal"];
 true;

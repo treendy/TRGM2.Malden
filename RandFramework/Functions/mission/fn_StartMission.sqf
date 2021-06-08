@@ -165,7 +165,7 @@ if (_bAllowStart) then {
 	};
 
 	if (TREND_iMissionParamType isEqualTo 5) then {
-		call TREND_fnc_PostStartMission;
+		[] remoteExec ["TREND_fnc_PostStartMission"];
 	};
 
 };

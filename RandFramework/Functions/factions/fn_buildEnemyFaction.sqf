@@ -190,28 +190,34 @@ _unarmedcars = []; _armedcars = []; _trucks = []; _apcs = []; _tanks = []; _arti
 		if (["GMG", _dispName] call BIS_fnc_inString || ["Quadbike", _className] call BIS_fnc_inString || ["Designator", _className] call BIS_fnc_inString || ["Radar", _className] call BIS_fnc_inString || ["SAM", _className] call BIS_fnc_inString) then {
 			// Do nothing for these vehs. (Currently removing most "GMG" type vehs, since they are usually OP for small units)
 		} else {
+			if (" (" in _category) then {
+				_category = (_category splitString " (") select 0
+			};
 			if (_calloutName isEqualTo "mortar") then {
 				_mortars pushBackUnique _className;
 			} else {
 				switch (_category) do {
-					case "Turrets": 	{ _turrets pushBackUnique _className; };
-					case "Boats": 		{ _boats pushBackUnique _className; };
-					case "Boat": 		{ _boats pushBackUnique _className; };
-					case "Artillery": 	{ _artillery pushBackUnique _className; };
-					case "Anti-Air": 	{ _antiair pushBackUnique _className; };
-					case "Planes": 		{ _planes pushBackUnique _className; };
-					case "Plane": 		{ _planes pushBackUnique _className; };
-					case "APCs": 		{ _apcs pushBackUnique _className; };
-					case "APC": 		{ _apcs pushBackUnique _className; };
-					case "IFV": 		{ _apcs pushBackUnique _className; };
-					case "Tanks": 		{ _tanks pushBackUnique _className; };
-					case "Tank": 		{ _tanks pushBackUnique _className; };
-					case "Helicopters": { if (_isArmed && !_isTransport) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
-					case "Helicopter": 	{ if (_isArmed && !_isTransport) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
-					case "Cars": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
-					case "Car": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
-					case "MRAP": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
-					case "Truck": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Turrets": 	  { _turrets pushBackUnique _className; };
+					case "Boats": 		  { _boats pushBackUnique _className; };
+					case "Boat": 		  { _boats pushBackUnique _className; };
+					case "Artillery": 	  { _artillery pushBackUnique _className; };
+					case "Anti-Air": 	  { _antiair pushBackUnique _className; };
+					case "Anti-aircraft": { _antiair pushBackUnique _className; };
+					case "Planes": 		  { _planes pushBackUnique _className; };
+					case "Plane": 		  { _planes pushBackUnique _className; };
+					case "APCs": 		  { _apcs pushBackUnique _className; };
+					case "APC": 		  { _apcs pushBackUnique _className; };
+					case "IFV": 		  { _apcs pushBackUnique _className; };
+					case "Tanks": 		  { _tanks pushBackUnique _className; };
+					case "Tank": 		  { _tanks pushBackUnique _className; };
+					case "Helicopters":   { if (_isArmed && !_isTransport) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
+					case "Helicopter": 	  { if (_isArmed && !_isTransport) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
+					case "Cars": 		  { if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Car": 		  { if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Bikes":         { if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "MRAP": 		  { if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Truck": 		  { if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Trucks": 		  { if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
 					default { };
 				};
 			};
@@ -468,28 +474,34 @@ _unarmedcars = []; _armedcars = []; _trucks = []; _apcs = []; _tanks = []; _arti
 		if (["GMG", _dispName] call BIS_fnc_inString || ["Quadbike", _className] call BIS_fnc_inString || ["Designator", _className] call BIS_fnc_inString || ["Radar", _className] call BIS_fnc_inString || ["SAM", _className] call BIS_fnc_inString) then {
 			// Do nothing for these vehs. (Currently removing most "GMG" type vehs, since they are usually OP for small units)
 		} else {
+			if (" (" in _category) then {
+				_category = (_category splitString " (") select 0
+			};
 			if (_calloutName isEqualTo "mortar") then {
 				_mortars pushBackUnique _className;
 			} else {
 				switch (_category) do {
-					case "Turrets": 	{ _turrets pushBackUnique _className; };
-					case "Boats": 		{ _boats pushBackUnique _className; };
-					case "Boat": 		{ _boats pushBackUnique _className; };
-					case "Artillery": 	{ _artillery pushBackUnique _className; };
-					case "Anti-Air": 	{ _antiair pushBackUnique _className; };
-					case "Planes": 		{ _planes pushBackUnique _className; };
-					case "Plane": 		{ _planes pushBackUnique _className; };
-					case "APCs": 		{ _apcs pushBackUnique _className; };
-					case "APC": 		{ _apcs pushBackUnique _className; };
-					case "IFV": 		{ _apcs pushBackUnique _className; };
-					case "Tanks": 		{ _tanks pushBackUnique _className; };
-					case "Tank": 		{ _tanks pushBackUnique _className; };
-					case "Helicopters": { if (_isArmed && !_isTransport) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
-					case "Helicopter": 	{ if (_isArmed && !_isTransport) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
-					case "Cars": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
-					case "Car": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
-					case "MRAP": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
-					case "Truck": 		{ if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Turrets": 	  { _turrets pushBackUnique _className; };
+					case "Boats": 		  { _boats pushBackUnique _className; };
+					case "Boat": 		  { _boats pushBackUnique _className; };
+					case "Artillery": 	  { _artillery pushBackUnique _className; };
+					case "Anti-Air": 	  { _antiair pushBackUnique _className; };
+					case "Anti-aircraft": { _antiair pushBackUnique _className; };
+					case "Planes": 		  { _planes pushBackUnique _className; };
+					case "Plane": 		  { _planes pushBackUnique _className; };
+					case "APCs": 		  { _apcs pushBackUnique _className; };
+					case "APC": 		  { _apcs pushBackUnique _className; };
+					case "IFV": 		  { _apcs pushBackUnique _className; };
+					case "Tanks": 		  { _tanks pushBackUnique _className; };
+					case "Tank": 		  { _tanks pushBackUnique _className; };
+					case "Helicopters":   { if (_isArmed && !_isTransport) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
+					case "Helicopter": 	  { if (_isArmed && !_isTransport) then { _armedhelicopters pushBackUnique _className; } else { _unarmedhelicopters pushBackUnique _className; }; };
+					case "Cars": 		  { if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Car": 		  { if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Bikes":         { if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "MRAP": 		  { if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Truck": 		  { if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
+					case "Trucks": 		  { if (_isArmed && !_isTransport) then { _armedcars pushBackUnique _className; } else { if (_isTransport) then { _trucks pushBackUnique _className; } else { _unarmedcars pushBackUnique _className; }; }; };
 					default { };
 				};
 			};
