@@ -111,12 +111,11 @@ jobs:
       - name: Remove non-mission files
         run: |
           function Remove-FileSystemItem {
-            [CmdletBinding(SupportsShouldProcess, ConfirmImpact='Medium', DefaultParameterSetName='Path', PositionalBinding=$false)]
             param(
-              [Parameter(ParameterSetName='Path', Mandatory, Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+              [Parameter(ParameterSetName = 'Path', Mandatory, Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
               [string[]] $Path
               ,
-              [Parameter(ParameterSetName='Literalpath', ValueFromPipelineByPropertyName)]
+              [Parameter(ParameterSetName = 'Literalpath', ValueFromPipelineByPropertyName)]
               [Alias('PSPath')]
               [string[]] $LiteralPath
               ,
@@ -124,7 +123,7 @@ jobs:
             )
             begin {
               # !! Workaround for https://github.com/PowerShell/PowerShell/issues/1759
-              if ($ErrorActionPreference -eq [System.Management.Automation.ActionPreference]::Ignore) { $ErrorActionPreference = 'Ignore'}
+              if ($ErrorActionPreference -eq [System.Management.Automation.ActionPreference]::Ignore) { $ErrorActionPreference = 'Ignore' }
               $targetPath = ''
               $yesToAll = $noToAll = $false
               function trimTrailingPathSep([string] $itemPath) {
@@ -150,48 +149,54 @@ jobs:
                 [IO.File]::Delete($tempPath)
               }
               function syncRemoveDir([string] $dirPath, [switch] $recursing) {
-                  if (-not $recursing) { $dirPathParent = [IO.Path]::GetDirectoryName($dirPath) }
-                  # Clear the ReadOnly attribute, if present.
-                  # Note: [IO.File]::*Attributes() is also used for *directories*; [IO.Directory] doesn't have attribute-related methods.
-                  if (($attribs = [IO.File]::GetAttributes($dirPath)) -band [System.IO.FileAttributes]::ReadOnly) {
-                    [IO.File]::SetAttributes($dirPath, $attribs -band -bnot [System.IO.FileAttributes]::ReadOnly)
+                if (-not $recursing) { $dirPathParent = [IO.Path]::GetDirectoryName($dirPath) }
+                # Clear the ReadOnly attribute, if present.
+                # Note: [IO.File]::*Attributes() is also used for *directories*; [IO.Directory] doesn't have attribute-related methods.
+                if (($attribs = [IO.File]::GetAttributes($dirPath)) -band [System.IO.FileAttributes]::ReadOnly) {
+                  [IO.File]::SetAttributes($dirPath, $attribs -band -bnot [System.IO.FileAttributes]::ReadOnly)
+                }
+                # Remove all children synchronously.
+                $isFirstChild = $true
+                foreach ($item in [IO.directory]::EnumerateFileSystemEntries($dirPath)) {
+                  if (-not $recursing -and -not $Recurse -and $isFirstChild) {
+                    # If -Recurse wasn't specified, prompt for nonempty dirs.
+                    $isFirstChild = $false
+                    # Note: If -Confirm was also passed, this prompt is displayed *in addition*, after the standard $PSCmdlet.ShouldProcess() prompt.
+                    #       While Remove-Item also prompts twice in this scenario, it shows the has-children prompt *first*.
+                    if (-not $PSCmdlet.ShouldContinue("The item at '$dirPath' has children and the -Recurse switch was not specified. If you continue, all children will be removed with the item. Are you sure you want to continue?", 'Confirm', ([ref] $yesToAll), ([ref] $noToAll))) { return }
                   }
-                  # Remove all children synchronously.
-                  $isFirstChild = $true
-                  foreach ($item in [IO.directory]::EnumerateFileSystemEntries($dirPath)) {
-                    if (-not $recursing -and -not $Recurse -and $isFirstChild) { # If -Recurse wasn't specified, prompt for nonempty dirs.
-                      $isFirstChild = $false
-                      # Note: If -Confirm was also passed, this prompt is displayed *in addition*, after the standard $PSCmdlet.ShouldProcess() prompt.
-                      #       While Remove-Item also prompts twice in this scenario, it shows the has-children prompt *first*.
-                      if (-not $PSCmdlet.ShouldContinue("The item at '$dirPath' has children and the -Recurse switch was not specified. If you continue, all children will be removed with the item. Are you sure you want to continue?", 'Confirm', ([ref] $yesToAll), ([ref] $noToAll))) { return }
-                    }
-                    $itemPath = [IO.Path]::Combine($dirPath, $item)
-                    ([ref] $targetPath).Value = $itemPath
-                    if ([IO.Directory]::Exists($itemPath)) {
-                      syncremoveDir $itemPath -recursing
-                    } else {
-                      syncremoveFile $itemPath $dirPathParent
-                    }
+                  $itemPath = [IO.Path]::Combine($dirPath, $item)
+                  ([ref] $targetPath).Value = $itemPath
+                  if ([IO.Directory]::Exists($itemPath)) {
+                    syncremoveDir $itemPath -recursing
                   }
-                  # Finally, remove the directory itself synchronously.
-                  ([ref] $targetPath).Value = $dirPath
-                  $tempPath = getTempPathOnSameVolume $dirPath $dirPathParent
-                  [IO.Directory]::Move($dirPath, $tempPath)
-                  [IO.Directory]::Delete($tempPath)
+                  else {
+                    syncremoveFile $itemPath $dirPathParent
+                  }
+                }
+                # Finally, remove the directory itself synchronously.
+                ([ref] $targetPath).Value = $dirPath
+                $tempPath = getTempPathOnSameVolume $dirPath $dirPathParent
+                [IO.Directory]::Move($dirPath, $tempPath)
+                [IO.Directory]::Delete($tempPath)
               }
             }
             process {
               $isLiteral = $PSCmdlet.ParameterSetName -eq 'LiteralPath'
-              if ($env:OS -ne 'Windows_NT') { # Unix: simply pass through to Remove-Item, which on Unix works reliably and synchronously
+              if ($env:OS -ne 'Windows_NT') {
+                # Unix: simply pass through to Remove-Item, which on Unix works reliably and synchronously
                 Remove-Item @PSBoundParameters
-              } else { # Windows: use synchronous custom implementation
+              }
+              else {
+                # Windows: use synchronous custom implementation
                 foreach ($rawPath in ($Path, $LiteralPath)[$isLiteral]) {
                   # Resolve the paths to full, filesystem-native paths.
                   try {
                     # !! Convert-Path does find hidden items via *literal* paths, but not via *wildcards* - and it has no -Force switch (yet)
                     # !! See https://github.com/PowerShell/PowerShell/issues/6501
-                    $resolvedPaths = if ($isLiteral) { Convert-Path -ErrorAction Stop -LiteralPath $rawPath } else { Convert-Path -ErrorAction Stop -path $rawPath}
-                  } catch {
+                    $resolvedPaths = if ($isLiteral) { Convert-Path -ErrorAction Stop -LiteralPath $rawPath } else { Convert-Path -ErrorAction Stop -path $rawPath }
+                  }
+                  catch {
                     Write-Error $_ # relay error, but in the name of this function
                     continue
                   }
@@ -200,25 +205,32 @@ jobs:
                     foreach ($resolvedPath in $resolvedPaths) {
                       # -WhatIf and -Confirm support.
                       if (-not $PSCmdlet.ShouldProcess($resolvedPath)) { continue }
-                      if ($isDir = [IO.Directory]::Exists($resolvedPath)) { # dir.
+                      if ($isDir = [IO.Directory]::Exists($resolvedPath)) {
+                        # dir.
                         # !! A trailing '\' or '/' causes directory removal to fail ("in use"), so we trim it first.
                         syncRemoveDir (trimTrailingPathSep $resolvedPath)
-                      } elseif ([IO.File]::Exists($resolvedPath)) { # file
+                      }
+                      elseif ([IO.File]::Exists($resolvedPath)) {
+                        # file
                         syncRemoveFile $resolvedPath
-                      } else {
+                      }
+                      else {
                         Throw "Not a file-system path or no longer extant: $resolvedPath"
                       }
                     }
-                  } catch {
+                  }
+                  catch {
                     if ($isDir) {
                       $exc = $_.Exception
                       if ($exc.InnerException) { $exc = $exc.InnerException }
                       if ($targetPath -eq $resolvedPath) {
                         Write-Error "Removal of directory '$resolvedPath' failed: $exc"
-                      } else {
+                      }
+                      else {
                         Write-Error "Removal of directory '$resolvedPath' failed, because its content could not be (fully) removed: $targetPath`: $exc"
                       }
-                    } else {
+                    }
+                    else {
                       Write-Error $_  # relay error, but in the name of this function
                     }
                     continue
