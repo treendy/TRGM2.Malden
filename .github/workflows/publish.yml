@@ -71,6 +71,8 @@ jobs:
 
       - name: Pack mission files to PBOs
         run: |
+          $workingDir = Get-ChildItem -Path "$(Get-Location)"
+          Write-Output $workingDir
           $templateFolder = "$($Env:GITHUB_WORKSPACE)\Mission-Templates"
           $missionFolders = Get-ChildItem -Path "$templateFolder" -Directory
           New-Item -Path "$($Env:GITHUB_WORKSPACE)\Publish\" -ItemType Directory
