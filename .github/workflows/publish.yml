@@ -96,4 +96,5 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: TRGM2-Missions
-          path: "$($Env:GITHUB_WORKSPACE)/Mission-Templates/"
+          path: ${{ github.workspace }}/Mission-Templates/**/*
+          if-no-files-found: error
