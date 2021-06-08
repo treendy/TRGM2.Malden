@@ -63,6 +63,7 @@ jobs:
           $PATH = [Environment]::GetEnvironmentVariable("PATH")
           $PboTools = "$($Env:GITHUB_WORKSPACE)\Pbo-Tools\"
           [Environment]::SetEnvironmentVariable("PATH", "$PboTools;$PATH")
+          Write-Output [Environment]::GetEnvironmentVariable("PATH")
           $templateFolder = "$($Env:GITHUB_WORKSPACE)\Mission-Templates"
           $missionFolders = Get-ChildItem -Path "$templateFolder" -Directory
           New-Item -Path "$($Env:GITHUB_WORKSPACE)\Publish\" -ItemType Directory
