@@ -119,4 +119,4 @@ jobs:
       - uses: arma-actions/sqflint@v1.0
         name: Validate with SQFLint
         with:
-          args: --exit w --directory $GITHUB_WORKSPACE
+          args: --exit w --directory $GITHUB_WORKSPACE --exclude AIS,fhqtt
