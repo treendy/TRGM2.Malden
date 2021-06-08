@@ -66,6 +66,8 @@ jobs:
 
       - name: Add PboTools to path
         run: echo "##[add-path]C:\Pbo-Tools"
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
       - name: Pack mission files to PBOs
         run: |
