@@ -110,11 +110,11 @@ jobs:
 
       - name: Remove non-mission files
         run: |
-          rm -rf  "$($Env:GITHUB_WORKSPACE)\Mission-Templates"
-          rm -rf  "$($Env:GITHUB_WORKSPACE)\Pbo-Tools"
-          rm -rf  "$($Env:GITHUB_WORKSPACE)\.git"
-          rm -rf  "$($Env:GITHUB_WORKSPACE)\.github"
-          rm "$($Env:GITHUB_WORKSPACE)\.gitignore"
+          rm -rf "$GITHUB_WORKSPACE/Mission-Templates"
+          rm -rf "$GITHUB_WORKSPACE/Pbo-Tools"
+          rm -rf "$GITHUB_WORKSPACE/.git"
+          rm -rf "$GITHUB_WORKSPACE/.github"
+          rm "$GITHUB_WORKSPACE/.gitignore"
 
       - name: Validate with SQFLint
         uses: arma-actions/sqflint@v1.0
