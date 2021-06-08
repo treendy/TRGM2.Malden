@@ -58,16 +58,16 @@ jobs:
           }
         shell: pwsh
 
-      - name: Copy PboTools to C drive
+      - name: Copy PboTools to working directory
         run: |
           $PboTools = "$($Env:GITHUB_WORKSPACE)\Pbo-Tools\"
-          Copy-Item -Path $PboTools -Destination "C:\Pbo-Tools"
+          $WorkingDirectory = Get-Location
+          $PboToolsFiles = Get-ChildItem -Path "$PboTools"
+          ForEach ($file in $PboToolsFiles)
+          {
+            Copy-Item -Path "$PboTools\$($file.Name)" -Destination "$WorkingDirectory"
+          }
         shell: pwsh
-
-      - name: Add PboTools to path
-        run: echo "##[add-path]C:\Pbo-Tools"
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
       - name: Pack mission files to PBOs
         run: |
