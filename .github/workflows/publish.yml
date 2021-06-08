@@ -97,5 +97,5 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: TRGM2-Missions
-          path: ${{ github.workspace }}/Mission-Templates/**/*.pbo
+          path: ${{ github.workspace }}/Publish/**/*
           if-no-files-found: error
