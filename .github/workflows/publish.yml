@@ -58,21 +58,20 @@ jobs:
           }
         shell: pwsh
 
-      - name: Copy PboTools to working directory
+      - name: Install Mikero Tools
         run: |
           $PboTools = "$($Env:GITHUB_WORKSPACE)\Pbo-Tools\"
-          $WorkingDirectory = Get-Location
-          $PboToolsFiles = Get-ChildItem -Path "$PboTools"
-          ForEach ($file in $PboToolsFiles)
-          {
-            Copy-Item -Path "$PboTools\$($file.Name)" -Destination "$WorkingDirectory"
+          Get-ChildItem "$PboTools" | ForEach-Object {
+            echo "Installing $_"
+            Start-Process -Wait $_.FullName "/S"
           }
+          echo "Updating environment variables"
+          echo "C:\Program Files (x86)\Mikero\DePboTools\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
         shell: pwsh
 
       - name: Pack mission files to PBOs
         run: |
-          $workingDir = Get-ChildItem -Path "$(Get-Location)"
-          Write-Output $workingDir
+          Get-Command makepbo
           $templateFolder = "$($Env:GITHUB_WORKSPACE)\Mission-Templates"
           $missionFolders = Get-ChildItem -Path "$templateFolder" -Directory
           New-Item -Path "$($Env:GITHUB_WORKSPACE)\Publish\" -ItemType Directory
@@ -82,7 +81,7 @@ jobs:
               {
                   Try
                   {
-                    .\MakePbo.exe -P -B -A -X="none" "$folder"
+                    makepbo -P -B -A -X="none" "$folder"
                     Copy-Item -Path "$folder.pbo" -Destination "$($Env:GITHUB_WORKSPACE)\Publish\$($folder.Name).pbo"
                   }
                   Catch
