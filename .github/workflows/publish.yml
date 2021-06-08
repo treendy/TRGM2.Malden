@@ -67,6 +67,7 @@ jobs:
       - name: Add PboTools to path
         run: |
           echo "C:\Pbo-Tools" >> $GITHUB_PATH
+          echo "$PATH"
 
       - name: Pack mission files to PBOs
         run: |
