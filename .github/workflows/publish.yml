@@ -58,12 +58,18 @@ jobs:
           }
         shell: pwsh
 
-      - name: Pack mission files to PBOs
+      - name: Copy PboTools to C drive
         run: |
           $PboTools = "$($Env:GITHUB_WORKSPACE)\Pbo-Tools\"
           Copy-Item -Path $PboTools -Destination "C:\Pbo-Tools"
-          [Environment]::SetEnvironmentVariable("PATH", "$PATH;C:\Pbo-Tools")
-          Write-Output "$(Get-ChildItem -Path "C:\Pbo-Tools")"
+        shell: pwsh
+
+      - name: Add PboTools to path
+        run: |
+          echo "C:\Pbo-Tools" >> $GITHUB_PATH
+
+      - name: Pack mission files to PBOs
+        run: |
           $templateFolder = "$($Env:GITHUB_WORKSPACE)\Mission-Templates"
           $missionFolders = Get-ChildItem -Path "$templateFolder" -Directory
           New-Item -Path "$($Env:GITHUB_WORKSPACE)\Publish\" -ItemType Directory
