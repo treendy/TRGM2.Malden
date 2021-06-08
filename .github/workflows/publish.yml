@@ -80,7 +80,7 @@ jobs:
               {
                   Try
                   {
-                    MakePbo -P -B -A -X="none" "$folder"
+                    .\MakePbo.exe -P -B -A -X="none" "$folder"
                     Copy-Item -Path "$folder.pbo" -Destination "$($Env:GITHUB_WORKSPACE)\Publish\$($folder.Name).pbo"
                   }
                   Catch
