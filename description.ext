@@ -1,11 +1,11 @@
 
-author = "Treendy, Refactored by TheAce0296";
-OnLoadName = "TRGM 2.1";
-OnLoadmission = "TRGM 2.1";
+author = "Treendy, Redux by TheAce0296";
+OnLoadName = "TRGM Redux";
+OnLoadmission = "TRGM Redux";
 OnLoadIntro = $STR_TRGM2_Description_OnLoadIntro;
-loadScreen = "TRGM2OverviewPic2.jpg";
+loadScreen = "TRGMReduxBanner.jpg";
 overviewText = $STR_TRGM2_Description_overviewText;
-overviewPicture = "TRGM2OverviewPic2.jpg";
+overviewPicture = "TRGMReduxBanner.jpg";
 
 // Disable these for public release
 enableDebugConsole = 1;

@@ -34,7 +34,7 @@ while {!_bEnd} do {
 		playMusic selectRandom TREND_ThemeAndIntroMusic;
 		//[format["InitPlayer Music: %1",TREND_ThemeAndIntroMusic]] call TREND_fnc_notify;
 		sleep 8;
-		["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>TRGM 2</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TRGM2Title" + "</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText;
+		["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>TRGM Redux</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TRGM2Title" + "</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText;
 		sleep 10;
 		["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>" + (TREND_AdvancedSettings select TREND_ADVSET_GROUP_NAME_IDX) + "</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'><br />" + localize "STR_TRGM2_TRGMInitPlayerLocal_RTBDebreif" + "</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText;
 		sleep 10;

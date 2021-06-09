@@ -61,7 +61,7 @@ if (_isHiddenObj) then {
 };
 
 if (!_isCampaign) then {
-	_LineOne = "TRGM 2"
+	_LineOne = "TRGM Redux"
 };
 
 if (TREND_MaxBadPoints >= 10) then {

@@ -46,7 +46,7 @@ if !(player getVariable ["TREND_localInitOccured", false]) then {
 	waitUntil {TREND_bOptionsSet};
 
 	txt5Layer = "txt5" call BIS_fnc_rscLayer;
-	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>";
+	_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM Redux</t>";
 	[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
 
 

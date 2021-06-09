@@ -54,7 +54,7 @@ waitUntil { _handle; };
       ["", ""],
       ["", ""],
    {true},
-      [(localize "STR_TRGM2_Init_TRGM2Engine"), (localize "STR_TRGM2_Init_Credits"), "Treendy, Refactored by TheAce0296"],
+      [(localize "STR_TRGM2_Init_TRGM2Engine"), (localize "STR_TRGM2_Init_Credits"), "Treendy, Redux by TheAce0296"],
       [(localize "STR_TRGM2_Init_TRGM2Engine"), (localize "STR_TRGM2_Init_ScriptsUsed"), localize "STR_TRGM2_TRGMSetUnitGlobalVars_ScriptsUsed"]
 ] call FHQ_fnc_ttAddBriefing;
 
