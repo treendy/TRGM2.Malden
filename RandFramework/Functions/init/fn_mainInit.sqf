@@ -208,11 +208,12 @@ if (!(player getVariable ["TREND_globalInitOccured", false]) || isServer) then {
 		[format["Mission Core: %1", "FriendlyGlobalVarsSet"], true] call TREND_fnc_log;
 		sleep _coreCountSleep;
 
-		// #include "..\CustomMission\TRGMSetEnemyFaction.sqf"; //if _useCustomEnemyFaction set to true within this sqf, will overright the above enemy faction data
+		#include "..\..\..\..\CustomMission\TRGMSetEnemyFaction.sqf"; //if TREND_useCustomEnemyFaction set to true within this sqf, will overright the above enemy faction data
+		#include "..\..\..\..\CustomMission\TRGMSetMilitiaFaction.sqf"; //if TREND_useCustomMilitiaFaction set to true within this sqf, will overright the above enemy faction data
 		[format["Mission Core: %1", "EnemyFactionSet"], true] call TREND_fnc_log;
 		sleep _coreCountSleep;
 
-		// #include "..\CustomMission\TRGMSetFriendlyLoadouts.sqf"; //as above, but for _useCustomFriendlyLoadouts
+		#include "..\..\..\..\CustomMission\TRGMSetFriendlyFaction.sqf"; //if TREND_useCustomFriendlyFaction set to true within this sqf, will overright the above enemy faction data
 		[format["Mission Core: %1", "FriendlyLoadoutSet"], true] call TREND_fnc_log;
 		sleep _coreCountSleep;
 

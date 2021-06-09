@@ -77,6 +77,7 @@ class TREND {
         class PushObject{};
         class reinforcements{};
         class setLoadout {};
+        class setCustomLoadout {};
         class setMilitiaSkill {};
         class showIntel{};
         class UnloadDingy{};

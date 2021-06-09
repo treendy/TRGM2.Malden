@@ -89,4 +89,8 @@ if (isNil "_className" ||isNil "_dispName" || isNil "_icon" || isNil "_calloutNa
 	};
 };
 
+if (TREND_useCustomFriendlyFaction || TREND_useCustomEnemyFaction || TREND_useCustomMilitiaFaction) exitWith {
+	[_unit] call TREND_fnc_setCustomLoadout;
+};
+
 true;

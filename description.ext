@@ -31,6 +31,7 @@ class Header
 	MaxPlayers = 35;
 };
 
+#include "CustomMission\CustomFriendlyLoadouts.hpp"
 #include "RandFramework\GUI\dialogs.hpp"
 
 class CfgFunctions {
@@ -70,6 +71,30 @@ class Params
 	class CustomMission
 	{
 		title = "Enable Custom Mission (Disables mission setup dialog, mission is set up using 'CustomMission/TRGMSetDefaultMissionSetupVars.sqf')"; // Param name visible in the list
+		values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
+		texts[] = {"Disable","Enable"}; // Description of each selectable item
+		default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
+		// Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
+	};
+	class CustomFriendlyFaction
+	{
+		title = "Enable Custom Friendly Faction (Overrides Faction selected in mission set up)"; // Param name visible in the list
+		values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
+		texts[] = {"Disable","Enable"}; // Description of each selectable item
+		default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
+		// Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
+	};
+	class CustomEnemyFaction
+	{
+		title = "Enable Custom Enemy Faction (Overrides Faction selected in mission set up)"; // Param name visible in the list
+		values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
+		texts[] = {"Disable","Enable"}; // Description of each selectable item
+		default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
+		// Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
+	};
+	class CustomMilitiaFaction
+	{
+		title = "Enable Custom Militia Faction (Overrides Faction selected in mission set up)"; // Param name visible in the list
 		values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
 		texts[] = {"Disable","Enable"}; // Description of each selectable item
 		default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
