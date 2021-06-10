@@ -8,7 +8,7 @@ if (_isAdmin && isNull TREND_AdminPlayer) then {
 	TREND_AdminPlayer = player; publicVariable "TREND_AdminPlayer";
 };
 
-if ((!isNull TREND_AdminPlayer && str player isEqualTo "sl") || (TREND_AdminPlayer isEqualTo player)) then {
+if ((!isNull TREND_AdminPlayer && (str player isEqualTo "sl")) || (TREND_AdminPlayer isEqualTo player)) then {
 	if (!TREND_HQPosFound) then {
 		TREND_playerIsChoosingHQpos = true; publicVariable "TREND_playerIsChoosingHQpos";
 		TREND_MapClicked = 0; publicVariable "TREND_MapClicked";
@@ -21,7 +21,7 @@ if ((!isNull TREND_AdminPlayer && str player isEqualTo "sl") || (TREND_AdminPlay
 			if (TREND_MapClicked isEqualTo 1) then { // player has clicked the map
 				_foundPickupPos = [TREND_ClickedPos, 0,50,25,0,0.15,0,[],[[0,0,0],[0,0,0]]] call TREND_fnc_findSafePos; // find a valid pos
 				_nearRoad = [_foundPickupPos,20] call BIS_fnc_nearestRoad;
-				if ((!isNull _nearRoad) || (0 isEqualTo _foundPickupPos select 0 && 0 isEqualTo _foundPickupPos select 1) || (TREND_ClickedPos isEqualTo _foundPickupPos)) then {
+				if ((!isNull _nearRoad) || ((0 isEqualTo (_foundPickupPos select 0)) && (0 isEqualTo (_foundPickupPos select 1))) || (TREND_ClickedPos isEqualTo _foundPickupPos)) then {
 					// INVALID POS
 					TREND_MapClicked = false;
 					hintC (localize "STR_TRGM2_InitClickInvalidPos");
@@ -35,7 +35,7 @@ if ((!isNull TREND_AdminPlayer && str player isEqualTo "sl") || (TREND_AdminPlay
 					_HQPosMarker  setMarkerSize [5,5];
 					_HQPosMarker  setMarkerColor "ColorGreen";
 					_HQPosMarker  setMarkerText "HQ Location";
-					waitUntil { sleep 1; (TREND_MapClicked isEqualTo 2 || !visibleMap); };
+					waitUntil { sleep 1; ((TREND_MapClicked isEqualTo 2) || !visibleMap); };
 					deleteMarker _HQPosMarker;
 					if (TREND_MapClicked isEqualTo 2) then {
 						TREND_MapClicked = 0; publicVariable "TREND_MapClicked";
