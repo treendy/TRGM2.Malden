@@ -7,6 +7,6 @@ if (isMultiplayer && (leader (group player)) != player) then {
 };
 
 if (_bAllowEnd) then {
-	//[(localize "STR_TRGM2_attemptendmission_Ending")] call TREND_fnc_notify;
+	[(localize "STR_TRGM2_attemptendmission_Ending")] call TREND_fnc_notify;
 	[] spawn TREND_fnc_endMission;
 };

@@ -183,39 +183,40 @@ if (!(player getVariable ["TREND_globalInitOccured", false]) || isServer) then {
 
 	waitUntil {TREND_bAndSoItBegins};
 
-	private _coreCountSleep = 0.1;
+	TREND_PopulateLoadingWait_percentage = 0; publicVariable "TREND_PopulateLoadingWait_percentage";
+
 	[format["Mission Core: %1", "Init"], true] call TREND_fnc_log;
-	sleep _coreCountSleep;
+	[3.3] call TREND_fnc_PopulateLoadingWait;
 
 	if (isServer && TREND_AdvancedSettings select TREND_ADVSET_GROUP_MANAGE_IDX isEqualTo 1) then {
 		["Initialize"] call BIS_fnc_dynamicGroups;//Exec on Server
 	};
 
 	format["Mission Core: %1", "GroupManagementSet"] call TREND_fnc_log;
-	sleep _coreCountSleep;
+	[3.3] call TREND_fnc_PopulateLoadingWait;
 
 	call TREND_fnc_initUnitVars;
 
 	[format["Mission Core: %1", "GlobalVarsSet"], true] call TREND_fnc_log;
-	sleep _coreCountSleep;
+	[3.3] call TREND_fnc_PopulateLoadingWait;
 
 	if (isServer) then {
 		call TREND_fnc_buildEnemyFaction;
 		[format["Mission Core: %1", "EnemyGlobalVarsSet"], true] call TREND_fnc_log;
-		sleep _coreCountSleep;
+		[3.3] call TREND_fnc_PopulateLoadingWait;
 
 		call TREND_fnc_buildFriendlyFaction;
 		[format["Mission Core: %1", "FriendlyGlobalVarsSet"], true] call TREND_fnc_log;
-		sleep _coreCountSleep;
+		[3.3] call TREND_fnc_PopulateLoadingWait;
 
 		#include "..\..\..\CustomMission\TRGMSetEnemyFaction.sqf"; //if TREND_useCustomEnemyFaction set to true within this sqf, will overright the above enemy faction data
 		#include "..\..\..\CustomMission\TRGMSetMilitiaFaction.sqf"; //if TREND_useCustomMilitiaFaction set to true within this sqf, will overright the above enemy faction data
 		[format["Mission Core: %1", "EnemyFactionSet"], true] call TREND_fnc_log;
-		sleep _coreCountSleep;
+		[3.3] call TREND_fnc_PopulateLoadingWait;
 
 		#include "..\..\..\CustomMission\TRGMSetFriendlyFaction.sqf"; //if TREND_useCustomFriendlyFaction set to true within this sqf, will overright the above enemy faction data
 		[format["Mission Core: %1", "FriendlyLoadoutSet"], true] call TREND_fnc_log;
-		sleep _coreCountSleep;
+		[3.3] call TREND_fnc_PopulateLoadingWait;
 
 		/*Fix any changed types	 */
 		if (typeName sCivilian != "ARRAY") then {sCivilian = [sCivilian]};
@@ -305,72 +306,24 @@ if (!(player getVariable ["TREND_globalInitOccured", false]) || isServer) then {
 
 		[TREND_transportHelosToGetActions] call TREND_fnc_addTransportActions;
 		[format["Mission Core: %1", "TransportScriptRun"], true] call TREND_fnc_log;
-		sleep _coreCountSleep;
+		[3.3] call TREND_fnc_PopulateLoadingWait;
 
 		TREND_CustomObjectsSet = true; publicVariable "TREND_CustomObjectsSet";
 		// call compile preprocessFileLineNumbers "RandFramework\setFriendlyObjects.sqf";
 		[format["Mission Core: %1", "FriendlyObjectsSet"], true] call TREND_fnc_log;
-		sleep _coreCountSleep;
+		[3.3] call TREND_fnc_PopulateLoadingWait;
 
-	/*
-		if (TREND_EnemyFactionData != "") then {
-			_errorMessage = "";
-			_ObjectPairs = TREND_EnemyFactionData splitString ";";
-			{
-				_fullObj = _x;
-				_pair = _x splitString "=";
-				_title = str(((_pair select 0) splitString " ") select 0);
-				_class = (_pair select 1 splitString """");
-
-				if (!isNil("_class") && !isNil("_title")) then {
-					if (count _class > 1) then {
-						_class = _class select 1;
-					}
-					else {
-						_class = _class select 0;
-					};
-					_classArray = [];
-					if (typeName _class isEqualTo "ARRAY") then {
-						_classArray = _class;
-					}
-					else {
-						_classArray = [_class];
-					};
-
-					{
-						_className = _x;
-						if (str(_className) != "") then {
-							if (isClass (configFile >> "CfgVehicles" >> _className)) then {
-								call compile _fullObj;
-							}
-							else {
-								_errorMessage = _errorMessage + format[localize "STR_TRGM2_mainInit_ErrorClassExist",_fullObj,_x];
-							};
-						}
-						else {
-							_errorMessage = _errorMessage + format[localize "STR_TRGM2_mainInit_ErrorClassEmpty",_fullObj,_x];
-						};
-
-					} forEach _classArray;
-				};
-			} forEach _ObjectPairs;
-			if (_errorMessage != "") then {
-				[_errorMessage] call TREND_fnc_notify;
-				sleep 3;
-			};
-		};
-	*/
 		[format["Mission Core: %1", "EnemyFactionDataProcessed"], true] call TREND_fnc_log;
-		sleep _coreCountSleep;
+		[3.3] call TREND_fnc_PopulateLoadingWait;
 
 		_isAceRespawnWithGear = false;
 		if (call TREND_fnc_isCbaLoaded) then {
-		// check for ACE respawn with gear setting
-		_isAceRespawnWithGear = "ace_respawn_savePreDeathGear" call CBA_settings_fnc_get;
+			// check for ACE respawn with gear setting
+			_isAceRespawnWithGear = "ace_respawn_savePreDeathGear" call CBA_settings_fnc_get;
 		};
 
 		[format["Mission Core: %1", "savePreDeathGear"], true] call TREND_fnc_log;
-		sleep _coreCountSleep;
+		[3.3] call TREND_fnc_PopulateLoadingWait;
 		if (/*TREND_LoadoutData != "" || TREND_LoadoutDataDefault != ""*/true) then {
 			{
 				if (!isPlayer _x) then {
@@ -386,17 +339,17 @@ if (!(player getVariable ["TREND_globalInitOccured", false]) || isServer) then {
 			} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 		};
 		[format["Mission Core: %1", "setLoadout ran"], true] call TREND_fnc_log;
-		sleep _coreCountSleep;
+		[3.3] call TREND_fnc_PopulateLoadingWait;
 
 		box1 allowDamage false;
 		[box1, (if (isMultiplayer) then {playableUnits} else {switchableUnits})] call TREND_fnc_initAmmoBox;
 
 		[format["Mission Core: %1", "boxCargo set"], true] call TREND_fnc_log;
-		sleep _coreCountSleep;
+		[3.3] call TREND_fnc_PopulateLoadingWait;
 	};
 
 	[format["Mission Core: %1", "PreCustomObjectSet"], true] call TREND_fnc_log;
-	sleep _coreCountSleep;
+	[3.3] call TREND_fnc_PopulateLoadingWait;
 
 	waitUntil {TREND_CustomObjectsSet};
 
@@ -422,7 +375,7 @@ if (!(player getVariable ["TREND_globalInitOccured", false]) || isServer) then {
 	[endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_EndMission",{_this spawn TREND_fnc_attemptEndMission;}]] remoteExec ["addAction", 0];
 
 	[format["Mission Core: %1", "PostCustomObjectSet"], true] call TREND_fnc_log;
-	sleep _coreCountSleep;
+	[3.3] call TREND_fnc_PopulateLoadingWait;
 
 	if (TREND_iUseRevive > 0 && {isNil "AIS_MOD_ENABLED"}) then {
 		call AIS_Core_fnc_preInit;
@@ -432,7 +385,7 @@ if (!(player getVariable ["TREND_globalInitOccured", false]) || isServer) then {
 
 
 	[format["Mission Core: %1", "AIS Script Run"], true] call TREND_fnc_log;
-	sleep _coreCountSleep;
+	[3.3] call TREND_fnc_PopulateLoadingWait;
 
 
 	// Place in unit init to have them deleted in MP: this setVariable ["MP_ONLY", true, true];
@@ -445,17 +398,17 @@ if (!(player getVariable ["TREND_globalInitOccured", false]) || isServer) then {
 	};
 
 	[format["Mission Core: %1", "DeleteMpOnlyVehicles"], true] call TREND_fnc_log;
-	sleep _coreCountSleep;
+	[3.3] call TREND_fnc_PopulateLoadingWait;
 
 
 	player doFollow player;
 
 
 	[format["Mission Core: %1", "DoFollowRun"], true] call TREND_fnc_log;
-	sleep _coreCountSleep;
+	[3.3] call TREND_fnc_PopulateLoadingWait;
 
 	[format["Mission Core: %1", "CoreFinished"], true] call TREND_fnc_log;
-	sleep _coreCountSleep;
+	[3.3] call TREND_fnc_PopulateLoadingWait;
 
 	TREND_CoreCompleted = true; publicVariable "TREND_CoreCompleted";
 
@@ -468,25 +421,25 @@ if (!(player getVariable ["TREND_globalInitOccured", false]) || isServer) then {
 		call TREND_fnc_StartMission;
 	};
 	[format["Mission Core: %1", "InitCampaign/StartMission ran"], true] call TREND_fnc_log;
-	sleep _coreCountSleep;
+	[3.3] call TREND_fnc_PopulateLoadingWait;
 
 	waitUntil {TREND_MissionLoaded};
 
 	[format["Mission Core: %1", "TREND_MissionLoaded true"], true] call TREND_fnc_log;
-	sleep _coreCountSleep;
+	[3.3] call TREND_fnc_PopulateLoadingWait;
 
 	[] spawn TREND_fnc_CheckBadPoints;
 	player addEventHandler ["Respawn", { [] spawn TREND_fnc_CheckBadPoints; }];
 
 	[format["Mission Core: %1", "BadPointsSet"], true] call TREND_fnc_log;
-	sleep _coreCountSleep;
+	[3.3] call TREND_fnc_PopulateLoadingWait;
 
 	if (isServer) then {
 		{
 			_x setVariable ["DontDelete",true];
 		} forEach nearestObjects [getMarkerPos "mrkHQ", ["all"], 2000];
 		[format["Mission Core: %1", "DontDeleteSet"], true] call TREND_fnc_log;
-		sleep _coreCountSleep;
+		[3.3] call TREND_fnc_PopulateLoadingWait;
 
 		if (isMultiplayer && {!(TREND_iMissionParamType isEqualTo 5)}) then {
 			TREND_fnc_CheckAnyPlayersAlive = {
@@ -520,7 +473,7 @@ if (!(player getVariable ["TREND_globalInitOccured", false]) || isServer) then {
 		};
 
 		[format["Mission Core: %1", "NonAliveEndCheckRunning"], true] call TREND_fnc_log;
-		sleep _coreCountSleep;
+		[3.3] call TREND_fnc_PopulateLoadingWait;
 
 		if (TREND_iAllowNVG isEqualTo 0) then {
 			{
@@ -531,7 +484,7 @@ if (!(player getVariable ["TREND_globalInitOccured", false]) || isServer) then {
 			} forEach allUnits;
 		};
 		[format["Mission Core: %1", "NVGStateSet"], true] call TREND_fnc_log;
-		sleep _coreCountSleep;
+		[3.3] call TREND_fnc_PopulateLoadingWait;
 
 		TREND_fnc_PlayBaseRadioEffect = {
 			format["%1 called by %2", "TREND_fnc_PlayBaseRadioEffect", "TREND_fnc_mainInit"] call TREND_fnc_log;
@@ -542,7 +495,7 @@ if (!(player getVariable ["TREND_globalInitOccured", false]) || isServer) then {
 		};
 		[] spawn TREND_fnc_PlayBaseRadioEffect;
 		[format["Mission Core: %1", "PlayBaseRadioEffect"], true] call TREND_fnc_log;
-		sleep _coreCountSleep;
+		[3.3] call TREND_fnc_PopulateLoadingWait;
 
 		TREND_fnc_WeatherAffectsAI = {
 			format["%1 called by %2", "TREND_fnc_WeatherAffectsAI", "TREND_fnc_mainInit"] call TREND_fnc_log;
@@ -575,7 +528,7 @@ if (!(player getVariable ["TREND_globalInitOccured", false]) || isServer) then {
 		};
 		[] spawn TREND_fnc_WeatherAffectsAI;
 
-		sleep _coreCountSleep;
+		[3.3] call TREND_fnc_PopulateLoadingWait;
 
 		TREND_fnc_SandStormEffect = {
 			format["%1 called by %2", "TREND_fnc_SandStormEffect", "TREND_fnc_mainInit"] call TREND_fnc_log;
@@ -681,14 +634,14 @@ if (!(player getVariable ["TREND_globalInitOccured", false]) || isServer) then {
 	[] spawn TREND_fnc_animateAnimals;
 
 	[format["Mission Core: %1", "AnimalStateSet"], true] call TREND_fnc_log;
-	sleep _coreCountSleep;
+	[3.3] call TREND_fnc_PopulateLoadingWait;
 
 	if (TREND_iMissionParamType != 5) then {
 		[] remoteExec ["TREND_fnc_PostStartMission"];
 	};
 
 	[format["Mission Core: %1", "RunFlashLightState"], true] call TREND_fnc_log;
-	sleep _coreCountSleep;
+	[3.3] call TREND_fnc_PopulateLoadingWait;
 
 	_iEnemyFlashLightOption = TREND_AdvancedSettings select TREND_ADVSET_SELECT_ENEMY_FLASHLIGHTS_IDX;
 	if (_iEnemyFlashLightOption isEqualTo 0) then {_iEnemyFlashLightOption = selectRandom [1,2]}; //1=yes, 2=no
@@ -707,7 +660,8 @@ if (!(player getVariable ["TREND_globalInitOccured", false]) || isServer) then {
 	};
 
 	[format["Mission Core: %1", "Main Init Complete"], true] call TREND_fnc_log;
-	sleep _coreCountSleep;
+	[] call TREND_fnc_PopulateLoadingWait;
+	TREND_AllInitScriptsFinished = true; publicVariable "TREND_AllInitScriptsFinished";
 
 	// if (hasInterface) then {
 	// 	waitUntil { TREND_AllInitScriptsFinished; };

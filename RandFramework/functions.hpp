@@ -17,6 +17,7 @@ class TREND {
         class InitPostStarted {};
         class initUnitVars {};
         class mainInit {};
+        class populateLoadingWait {};
         class ServerSave {};
         class SetTimeAndWeather {};
     };
@@ -38,12 +39,13 @@ class TREND {
 
     class factions {
         file = "RandFramework\Functions\factions";
+        class appendAdditonalFactionData {};
         class buildEnemyFaction {};
         class buildFriendlyFaction {};
         class getFactionDataBySide {};
-        // class getUnitArraysFromUnitData {}; // These were not returning their values when called for some reason, instead they are hard-coded for now in the buildXFaction functions.
+        class getUnitArraysFromUnitData {};
         class getUnitDataByFaction {};
-        // class getVehicleArraysFromVehData {}; // These were not returning their values when called for some reason, instead they are hard-coded for now in the buildXFaction functions.
+        class getVehicleArraysFromVehData {};
         class getVehicleDataByFaction {};
         class isAmmo {};
         class isArmed {};

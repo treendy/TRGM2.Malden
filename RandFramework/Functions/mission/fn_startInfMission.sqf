@@ -752,35 +752,18 @@ else {
 ["Mission Setup: 2", true] call TREND_fnc_log;
 
 
-TREND_fnc_PopulateLoadingWait = {
-	TREND_PopulateLoadingWait_percentage = 0; publicVariable "TREND_PopulateLoadingWait_percentage";
-	while {TREND_PopulateLoadingWait_percentage < 100} do {
-		[format["Populating AO please wait... %1 percent", TREND_PopulateLoadingWait_percentage], {TREND_PopulateLoadingWait_percentage < 100}, 100] call TREND_fnc_notifyGlobal;
-		TREND_PopulateLoadingWait_percentage = TREND_PopulateLoadingWait_percentage + 1;
-		publicVariable "TREND_PopulateLoadingWait_percentage";
-		sleep 0.1;
-	};
-	sleep 10;
-	TREND_PopulateLoadingWait_percentage = nil; publicVariable "TREND_PopulateLoadingWait_percentage";
-	TREND_MissionLoaded =  true; publicVariable "TREND_MissionLoaded";
-	TREND_AllInitScriptsFinished = true; publicVariable "TREND_AllInitScriptsFinished";
-};
-[] spawn TREND_fnc_PopulateLoadingWait;
-
-
-
 ["Mission Setup: 1", true] call TREND_fnc_log;
 
 
 publicVariable "TREND_debugMessages";
 
-[(localize "STR_TRGM2_startInfMission_SoItBegin")] call TREND_fnc_notify;
+// [(localize "STR_TRGM2_startInfMission_SoItBegin")] call TREND_fnc_notify;
 
 ///*orangestest
 [] remoteExec ["TREND_fnc_animateAnimals",0,true];
 //orangestest*/
 
-
+TREND_MissionLoaded = true; publicVariable "TREND_MissionLoaded";
 
 ["Mission Setup: 0", true] call TREND_fnc_log;
 true;

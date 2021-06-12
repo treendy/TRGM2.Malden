@@ -123,7 +123,7 @@ _btnselectUnit ctrlAddEventHandler ["ButtonClick", {
                     [0.2, format[localize "str_TRGM2_Recruiteinf_KIA", name (_this select 0)]] spawn TREND_fnc_AdjustBadPoints;
                 }];
 
-                if (TREND_bUseRevive || !isnil "AIS_mod_ENABLED") then {
+                if (TREND_bUseRevive || !isNil "AIS_mod_ENABLED") then {
                     [_spawnedUnit] call AIS_System_fnc_loadAIS;
                 };
                 titleText[localize "str_TRGM2_opendialogRequests_unitspawned", "PLAin"];

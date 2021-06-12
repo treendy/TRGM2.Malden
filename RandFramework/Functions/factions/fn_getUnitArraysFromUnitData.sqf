@@ -62,4 +62,5 @@ _riflemen = []; _leaders = []; _atsoldiers = []; _aasoldiers = []; _engineers = 
 	};
 } forEach _unitData;
 
-[_riflemen, _leaders, _atsoldiers, _aasoldiers, _engineers, _grenadiers, _medics, _autoriflemen, _snipers, _explosiveSpecs, _pilots, _uavOperators];
+private _unitArray = [_riflemen, _leaders, _atsoldiers, _aasoldiers, _engineers, _grenadiers, _medics, _autoriflemen, _snipers, _explosiveSpecs, _pilots, _uavOperators];
+_unitArray;

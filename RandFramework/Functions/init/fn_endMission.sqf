@@ -4,6 +4,12 @@ _mrkHQPos = getMarkerPos "mrkHQ";
 _AOCampPos = getPos endMissionBoard2;
 bAllAtBase2 = ({(alive _x)&&((_x distance _mrkHQPos < 500)||(_x distance _AOCampPos < 500))} count (call BIS_fnc_listPlayers)) isEqualTo ({ (alive _x) } count (call BIS_fnc_listPlayers));
 
+if !(TREND_ActiveTasks call FHQ_fnc_ttAreTasksCompleted) then {
+	{
+		[_x, "canceled"] call FHQ_fnc_ttSetTaskState;
+	} forEach TREND_ActiveTasks select {!([_x] call FHQ_fnc_ttAreTasksCompleted)};
+};
+
 //bAllAtBase2 replaces bAllAtBase (bAllAtBase2 covers units withing range of AO Camp too)
 if (bAllAtBase2 && TREND_ActiveTasks call FHQ_fnc_ttAreTasksCompleted) then {
 	["DeBrief", "succeeded"] call FHQ_fnc_ttsetTaskState;

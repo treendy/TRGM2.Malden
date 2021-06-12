@@ -92,7 +92,7 @@ if !(isNull _ctrlGroup) then {
         if (isNull _textControl) exitWith {};
 
         private _endTime = time + _duration;
-        waitUntil { if ((isNull _textControl) || (time >= _endTime) || !(call _condition)) exitWith {true}; false; };
+        waitUntil { if ((isNull _textControl) || (time > _endTime) || !(call _condition)) exitWith {true}; false; };
 
         [ctrlParentControlsGroup _textControl] call TREND_fnc_deleteNotification;
     };
