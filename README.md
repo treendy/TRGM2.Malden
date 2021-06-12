@@ -3,4 +3,4 @@
 ![TRGM Redux](TRGMReduxLogo.png)
 WIP rework of the original TRGM2.
 
-# [Beta Release](https://github.com/theace0296/TRGM2.Malden/releases/tag/v3.0.0-beta)
+# [Beta Release](https://github.com/theace0296/TRGM2.Malden/releases/latest)
