@@ -30,9 +30,7 @@ addons[]=
 	"A3_Structures_F_Mil_Helipads",
 	"A3_Structures_F_EPC_Civ_InfoBoards",
 	"A3_Air_F_Beta_Heli_Transport_01",
-	"UH80SFX",
 	"A3_Air_F_Beta_Heli_Attack_01",
-	"AH99SFX",
 	"A3_Air_F_Jets_Plane_Fighter_01",
 	"A3_Soft_F_Exp_LSV_01",
 	"A3_Air_F_Heli_Heli_Transport_03",
@@ -47,7 +45,6 @@ addons[]=
 	"A3_Props_F_Orange_Humanitarian_Supplies",
 	"A3_Air_F_Heli_Light_01",
 	"A3_Air_F_EPC_Plane_CAS_01",
-	"A164SFX",
 	"A3_Structures_F_EPC_Items_Electronics",
 	"gm_weapons_rifles_mp5",
 	"gm_weapons_attachments_optics_feroz24",
@@ -71,16 +68,10 @@ addons[]=
 	"A3_Weapons_F_Pistols_P07",
 	"A3_Characters_F_Heads",
 	"A3_Characters_F_Orange_Facewear",
-	"CSAT_Eyewear",
 	"A3_Sounds_F",
 	"A3_Sounds_F_Enoch",
 	"A3_Weapons_F_Mark",
 	"A3_Drones_F_Weapons_F_Gamma_Items",
-	"TAC_VESTS_B",
-	"TAC_VESTS_S",
-	"TAC_VESTS_US",
-	"TAC_VESTS_Z2",
-	"TAC_VESTS",
 	"A3_Characters_F_Mark",
 	"A3_Weapons_F_LongRangeRifles_M320",
 	"A3_Weapons_F_Mark_LongRangeRifles_M320_Camo",
@@ -178,11 +169,6 @@ class AddonsMetaData
 			className="UH80SFX";
 			name="UH80SFX";
 			author="Aaren";
-		};
-		class Item6
-		{
-			className="AH99SFX";
-			name="AH99SFX";
 		};
 		class Item7
 		{

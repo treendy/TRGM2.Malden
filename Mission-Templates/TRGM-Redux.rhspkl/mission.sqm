@@ -6,10 +6,7 @@ class EditorData
 	scaleGridStep=1;
 	autoGroupingDist=10;
 	toggles=1;
-	mods[]=
-	{
-		"3denEnhanced"
-	};
+	mods[]={};
 	class ItemIDProvider
 	{
 		nextID=144;
@@ -31,9 +28,7 @@ addons[]=
 	"A3_Structures_F_Mil_Helipads",
 	"A3_Structures_F_EPC_Civ_InfoBoards",
 	"A3_Air_F_Beta_Heli_Transport_01",
-	"UH80SFX",
 	"A3_Air_F_Beta_Heli_Attack_01",
-	"AH99SFX",
 	"A3_Air_F_Jets_Plane_Fighter_01",
 	"A3_Soft_F_Exp_LSV_01",
 	"A3_Air_F_Heli_Heli_Transport_03",
@@ -50,15 +45,12 @@ addons[]=
 	"A3_Props_F_Orange_Humanitarian_Supplies",
 	"A3_Air_F_Heli_Light_01",
 	"A3_Air_F_Exp_Plane_Civil_01",
-	"A164SFX",
 	"A3_Air_F_EPC_Plane_CAS_01",
 	"A3_Structures_F_EPC_Items_Electronics",
 	"A3_Weapons_F_Rifles_MX",
 	"A3_Weapons_F_Acc",
 	"A3_Weapons_F",
 	"A3_Weapons_F_Pistols_P07",
-	"DSA_Spooks",
-	"CSAT_Eyewear",
 	"A3_Weapons_F_Items",
 	"A3_Characters_F_Mark",
 	"A3_Sounds_F",
@@ -69,11 +61,6 @@ addons[]=
 	"A3_Characters_F_Orange_Facewear",
 	"A3_Weapons_F_Mark",
 	"A3_Drones_F_Weapons_F_Gamma_Items",
-	"TAC_VESTS_B",
-	"TAC_VESTS_S",
-	"TAC_VESTS_US",
-	"TAC_VESTS_Z2",
-	"TAC_VESTS",
 	"A3_Weapons_F_LongRangeRifles_M320",
 	"A3_Weapons_F_Mark_LongRangeRifles_M320_Camo",
 	"A3_Data_F_Exp_A_Virtual",
@@ -122,16 +109,6 @@ class AddonsMetaData
 			name="Arma 3 Beta - Aircraft";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
-		};
-		class Item5
-		{
-			className="UH80SFX";
-			name="UH80SFX";
-		};
-		class Item6
-		{
-			className="AH99SFX";
-			name="AH99SFX";
 		};
 		class Item7
 		{
@@ -210,11 +187,6 @@ class AddonsMetaData
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item18
-		{
-			className="A164SFX";
-			name="A164SFX";
-		};
 		class Item19
 		{
 			className="A3_Air_F_EPC";
@@ -228,17 +200,6 @@ class AddonsMetaData
 			name="Arma 3 Alpha - Weapons and Accessories";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
-		};
-		class Item21
-		{
-			className="DSA_Spooks";
-			name="Drongo's Spooks and Anomalies";
-			author="Drongo";
-		};
-		class Item22
-		{
-			className="CSAT_Eyewear";
-			name="CSAT_Eyewear";
 		};
 		class Item23
 		{
@@ -288,31 +249,6 @@ class AddonsMetaData
 			name="Arma 3 Beta - Drones";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
-		};
-		class Item30
-		{
-			className="TAC_VESTS_B";
-			name="TAC_VESTS_B";
-		};
-		class Item31
-		{
-			className="TAC_VESTS_S";
-			name="TAC_VESTS_S";
-		};
-		class Item32
-		{
-			className="TAC_VESTS_US";
-			name="TAC_VESTS_US";
-		};
-		class Item33
-		{
-			className="TAC_VESTS_Z2";
-			name="TAC_VESTS_Z2";
-		};
-		class Item34
-		{
-			className="TAC_VESTS";
-			name="TAC_VESTS";
 		};
 		class Item35
 		{

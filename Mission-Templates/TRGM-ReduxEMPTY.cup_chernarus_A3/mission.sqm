@@ -6,10 +6,7 @@ class EditorData
 	scaleGridStep=1;
 	autoGroupingDist=10;
 	toggles=1;
-	mods[]=
-	{
-		"3denEnhanced"
-	};
+	mods[]={};
 	class ItemIDProvider
 	{
 		nextID=4102;
@@ -39,8 +36,6 @@ addons[]=
 	"A3_Weapons_F_Acc",
 	"A3_Weapons_F",
 	"A3_Weapons_F_Pistols_P07",
-	"DSA_Spooks",
-	"CSAT_Eyewear",
 	"A3_Weapons_F_Items",
 	"A3_Characters_F_Mark",
 	"A3_Sounds_F",
@@ -51,11 +46,6 @@ addons[]=
 	"A3_Characters_F_Orange_Facewear",
 	"A3_Weapons_F_Mark",
 	"A3_Drones_F_Weapons_F_Gamma_Items",
-	"TAC_VESTS_B",
-	"TAC_VESTS_S",
-	"TAC_VESTS_US",
-	"TAC_VESTS_Z2",
-	"TAC_VESTS",
 	"A3_Weapons_F_LongRangeRifles_M320",
 	"A3_Weapons_F_Mark_LongRangeRifles_M320_Camo",
 	"A3_Data_F_Exp_A_Virtual"
