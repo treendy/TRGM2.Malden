@@ -17,10 +17,11 @@ _this select 6 <bool> - Cycle Mode: (True = ON, False = OFF)
 _this select 7 <bool> - Paradrop: (True = Enabled, False = Disabled)
 _this select 8 <bool> - Debug Mode: (True = Enabled, False = Disabled)
 _this select 8 <bool> - Use standard reinforcements delay: (True = Use alternate delay, False = Use standard delay)
+_this select 9 <bool> - No delay: (True = Call immediately, False = Use delay)
 
 Usage:
-_nul = [SIDE, "string", "string", number, bool, bool, bool, bool, bool, bool] spawn TREND_fnc_reinforcements; >>
-_nul = [EAST, "spawnMrk", "LZMrk", 2, true, true, true, true, false, false] spawn TREND_fnc_reinforcements; <<
+_nul = [SIDE, "string", "string", number, bool, bool, bool, bool, bool, bool, bool] spawn TREND_fnc_reinforcements; >>
+_nul = [EAST, "spawnMrk", "LZMrk", 2, true, true, true, true, false, false, false] spawn TREND_fnc_reinforcements; <<
 
  ---------------------------------------------------------------------------------------------------------*/
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
@@ -41,7 +42,8 @@ params [
 	["_cycleMode", false],
 	["_paraDrop", false],
 	["_debugMode", false],
-	["_useStandardDelay", true]
+	["_useStandardDelay", true],
+	["_noDelay", false]
 ];
 
 if ((_LZMrk select 0) isEqualTo 0 && (_LZMrk select 1) isEqualTo 0) exitWith {};
@@ -53,15 +55,17 @@ sleep(_AdditionalUnitCreationDelay);
 if (TREND_ReinforcementsCalled > 4) exitWith {};
 TREND_ReinforcementsCalled = TREND_ReinforcementsCalled + 1; publicVariable "TREND_ReinforcementsCalled";
 
-if (_useStandardDelay && {(time - TREND_TimeLastReinforcementsCalled) < (call TREND_GetSpottedDelay)}) exitWith {};
-if (!_useStandardDelay && {(time - TREND_TimeSinceAdditionalReinforcementsCalled) < (call TREND_GetSpottedDelay * 1.5)}) exitWith {}; //Using 1.5 multiplier for the delay so the main and additional triggers don't fire at the same time.
+if !(_noDelay) then {
+	if (_useStandardDelay && {(time - TREND_TimeLastReinforcementsCalled) < (call TREND_GetSpottedDelay)}) exitWith {};
+	if (!_useStandardDelay && {(time - TREND_TimeSinceAdditionalReinforcementsCalled) < (call TREND_GetSpottedDelay * 1.5)}) exitWith {}; //Using 1.5 multiplier for the delay so the main and additional triggers don't fire at the same time.
 
-if (_useStandardDelay) then {
-	TREND_TimeLastReinforcementsCalled = time;
-	publicVariable "TREND_TimeLastReinforcementsCalled";
-} else {
-	TREND_TimeSinceAdditionalReinforcementsCalled = time;
-	publicVariable "TREND_TimeSinceAdditionalReinforcementsCalled";
+	if (_useStandardDelay) then {
+		TREND_TimeLastReinforcementsCalled = time;
+		publicVariable "TREND_TimeLastReinforcementsCalled";
+	} else {
+		TREND_TimeSinceAdditionalReinforcementsCalled = time;
+		publicVariable "TREND_TimeSinceAdditionalReinforcementsCalled";
+	};
 };
 
 _heloCrew = createGroup _side;

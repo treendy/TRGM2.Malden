@@ -1,5 +1,6 @@
 /////// Debug Mode ///////
 TREND_bDebugMode = [false, true] select ((["DebugMode", 0] call BIS_fnc_getParamValue) isEqualTo 1);
+TREND_bDebugMode = true; // Remove later
 publicVariable "TREND_bDebugMode";
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
 

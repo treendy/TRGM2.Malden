@@ -113,40 +113,38 @@ if !(player getVariable ["TREND_localInitOccured", false]) then {
 		TREND_bAndSoItBegins = true; publicVariable "TREND_bAndSoItBegins";
 	};
 
-	/*
-	TREND_fnc_BasicInitAndRespawn = {
-		"TREND_fnc_BasicInitAndRespawn called" call TREND_fnc_log;
+	// TREND_fnc_BasicInitAndRespawn = {
+	// 	"TREND_fnc_BasicInitAndRespawn called" call TREND_fnc_log;
 
-		if (isMultiplayer) then
-		{
-			waitUntil {!(isNull (findDisplay 46))};
+	// 	if (isMultiplayer) then
+	// 	{
+	// 		waitUntil {!(isNull (findDisplay 46))};
 
-			player setspeaker "NoVoice";
-			//ShowRad = showRadio false;
-			//EnabRad = enableRadio false;
-			player disableConversation true;
+	// 		player setspeaker "NoVoice";
+	// 		//ShowRad = showRadio false;
+	// 		//EnabRad = enableRadio false;
+	// 		player disableConversation true;
 
-			player addEventHandler
-			[
-			"respawn",
-				{
-				player setspeaker "NoVoice";
-				//ShowRad = showRadio false;
-				//EnabRad = enableRadio false;
-				player disableConversation true
-				}
-			];
-		};
+	// 		player addEventHandler
+	// 		[
+	// 		"respawn",
+	// 			{
+	// 			player setspeaker "NoVoice";
+	// 			//ShowRad = showRadio false;
+	// 			//EnabRad = enableRadio false;
+	// 			player disableConversation true
+	// 			}
+	// 		];
+	// 	};
 
-		TREND_iAllowGPS = ("OUT_par_AllowGPS" call BIS_fnc_getParamValue);
-		if (TREND_iAllowGPS isEqualTo 0) then {
-			showGPS false;
-		};
+	// 	TREND_iAllowGPS = ("OUT_par_AllowGPS" call BIS_fnc_getParamValue);
+	// 	if (TREND_iAllowGPS isEqualTo 0) then {
+	// 		showGPS false;
+	// 	};
 
-	};
-	[] spawn TREND_fnc_BasicInitAndRespawn;
-	player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInitAndRespawn; }];
-	*/
+	// };
+	// [] spawn TREND_fnc_BasicInitAndRespawn;
+	// player addEventHandler ["Respawn", { [] spawn TREND_fnc_BasicInitAndRespawn; }];
 
 	waitUntil {TREND_bAndSoItBegins && TREND_CustomObjectsSet};
 

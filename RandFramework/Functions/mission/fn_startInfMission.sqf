@@ -278,6 +278,16 @@ _randInfor1X = nil;
 _randInfor1Y = nil;
 _buildings = nil;
 
+["Mission Setup: Gatherthing map info", true] call TREND_fnc_log;
+
+TREND_allLocationTypes = [];
+"TREND_allLocationTypes pushBack configName _x" configClasses (configFile >> "CfgLocationTypes");
+publicVariable "TREND_allLocationTypes";
+TREND_allLocations = nearestLocations [(getMarkerPos "mrkHQ"), TREND_allLocationTypes, 25000];
+publicVariable "TREND_allLocations";
+
+["Mission Setup: Map info collected", true] call TREND_fnc_log;
+
 ["Mission Setup: 12.5", true] call TREND_fnc_log;
 
 while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
@@ -333,125 +343,165 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 
 	switch (_iThisTaskType) do {
 		case 1: {
+			["Mission Setup: Init Hack Data", true] call TREND_fnc_log;
 			#include "..\..\Missions\hackDataMission.sqf"; //Hack Data
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = ["Hacked data, reputation increased", 1, "Hacked data"];
+			["Mission Setup: Generating Hack Data", true] call TREND_fnc_log;
 		};
 		case 2: {
+			["Mission Setup: Init Steal data from research vehicle", true] call TREND_fnc_log;
 			#include "..\..\Missions\stealDataFromResearchVehMission.sqf"; //Steal data from research vehicle
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = ["Data secured, reputation increased", 1, "Downloaded research data"];
+			["Mission Setup: Generating Steal data from research vehicle", true] call TREND_fnc_log;
 		};
 		case 3: {
+			["Mission Setup: Init Destroy ammo trucks", true] call TREND_fnc_log;
 			#include "..\..\Missions\destroyVehiclesMission.sqf"; //Destroy ammo trucks
 			[localize "STR_TRGM2_startInfMission_MissionTitle3"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = [localize "STR_TRGM2_startInfMission_MissionTitle3_Destory", 1, "Destroyed ammo trucks", selectRandom (call sideAmmoTruck), [localize "STR_TRGM2_startInfMission_MissionTitle3_Desc"]];
+			["Mission Setup: Generating Destroy ammo trucks", true] call TREND_fnc_log;
 		};
 		case 4: {
+			["Mission Setup: Init Speak with informant", true] call TREND_fnc_log;
 			#include "..\..\Missions\hvtMission.sqf" //Speak with informant
 			[localize "STR_TRGM2_startInfMission_MissionTitle4"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = ["", 0, "", selectRandom InformantClasses, Civilian, "SPEAK", "", localize "STR_TRGM2_startInfMission_MissionTitle8_Button2", [(localize "STR_TRGM2_startInfMission_MissionTitle4_Desc") + TREND_InformantImage]];
+			["Mission Setup: Generating Speak with informant", true] call TREND_fnc_log;
 		};
 		case 5: {
-			#include "..\..\Missions\hvtMission.sqf" //interrogate officer
+			["Mission Setup: Init Interrogate officer", true] call TREND_fnc_log;
+			#include "..\..\Missions\hvtMission.sqf" //Interrogate officer
 			[localize "STR_TRGM2_startInfMission_MissionTitle5"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = ["", 0, "", selectRandom InterogateOfficerClasses, TREND_EnemySide, "INTERROGATE", localize "STR_TRGM2_startInfMission_MissionTitle8_Button", localize "STR_TRGM2_startInfMission_MissionTitle8_Button2", [(localize "STR_TRGM2_startInfMission_MissionTitle5_Desc") + TREND_OfficerImage]];
+			["Mission Setup: Generating Interrogate officer", true] call TREND_fnc_log;
 		};
 		case 6: {
+			["Mission Setup: Init Transmit Enemy Comms to HQ", true] call TREND_fnc_log;
 			#include "..\..\Missions\bugRadioMission.sqf"; //Transmit Enemy Comms to HQ
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = ["Bugged radio, reputation increased.", 0.5, "Bugged radio"];
+			["Mission Setup: Generating Transmit Enemy Comms to HQ", true] call TREND_fnc_log;
 		};
 		case 7: {
+			["Mission Setup: Init Eliminate Officer", true] call TREND_fnc_log;
 			#include "..\..\Missions\hvtMission.sqf" //Eliminate Officer   -   gain 1 point if side, if main, need to id him before complete
 			[localize "STR_TRGM2_startInfMission_MissionTitle7"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = [localize "STR_TRGM2_startInfMission_MissionTitle8_Eliminated", 1, "HVT Killed", selectRandom InterogateOfficerClasses, TREND_EnemySide, "KILL", localize "STR_TRGM2_startInfMission_MissionTitle8_Button", "", [(localize "STR_TRGM2_startInfMission_MissionTitle7_Desc") + (["", localize "STR_TRGM2_startInfMission_MissionTitle8_MustSearch"] select (_bIsMainObjective)) + TREND_OfficerImage]];
+			["Mission Setup: Generating Eliminate Officer", true] call TREND_fnc_log;
 		};
 		case 8: {
+			["Mission Setup: Init Assasinate weapon dealer", true] call TREND_fnc_log;
 			#include "..\..\Missions\hvtMission.sqf" //Assasinate weapon dealer   -   gain 1 point if side, no intel from him... if main need to id him before complete
 			[localize "STR_TRGM2_startInfMission_MissionTitle8"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = [localize "STR_TRGM2_startInfMission_MissionTitle8_Eliminated", 1, "HVT Killed", selectRandom WeaponDealerClasses, Civilian, "KILL", localize "STR_TRGM2_startInfMission_MissionTitle8_Button", "", [(localize "STR_TRGM2_startInfMission_MissionTitle8_Desc") + (["", localize "STR_TRGM2_startInfMission_MissionTitle8_MustSearch"] select (_bIsMainObjective)) + TREND_WeaponDealerImage]];
+			["Mission Setup: Generating Assasinate weapon dealer", true] call TREND_fnc_log;
 		};
 		case 9: {
+			["Mission Setup: Init Destroy AAA vehicles", true] call TREND_fnc_log;
 			#include "..\..\Missions\destroyVehiclesMission.sqf"; //Destroy AAA vehicles
 			[localize "STR_TRGM2_startInfMission_MissionTitle9"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = [localize "STR_TRGM2_startInfMission_MissionTitle9_Destory", 1, "Destroyed AAA", selectRandom (call DestroyAAAVeh), [localize "STR_TRGM2_startInfMission_MissionTitle9_Desc"]];
+			["Mission Setup: Generating Destroy AAA vehicles", true] call TREND_fnc_log;
 		};
 		case 10: {
+			["Mission Setup: Init Destroy Artillery vehicles", true] call TREND_fnc_log;
 			#include "..\..\Missions\destroyVehiclesMission.sqf"; //Destroy Artillery vehicles
 			[localize "STR_TRGM2_startInfMission_MissionTitle10"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = [localize "STR_TRGM2_startInfMission_MissionTitle10_Destory", 1, "Destroyed Artillery", selectRandom (call sArtilleryVeh), [localize "STR_TRGM2_startInfMission_MissionTitle10_Desc"]];
+			["Mission Setup: Generating Destroy Artillery vehicles", true] call TREND_fnc_log;
 		};
 		case 11: {
+			["Mission Setup: Init Rescue POW", true] call TREND_fnc_log;
 			#include "..\..\Missions\hvtMission.sqf" //Rescue POW
 			[localize "STR_TRGM2_Rescue_POW"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = ["Rescued a POW, reputation increased.", 1, "Rescued a POW", selectRandom FriendlyVictims, TREND_FriendlySide, "RESCUE", "", "", ["We need you to locate and rescue our POW, the enemy are trying to gain valuable information from our guy!"]];
+			["Mission Setup: Generating Rescue POW", true] call TREND_fnc_log;
 		};
 		case 12: {
+			["Mission Setup: Init Rescue Reporter", true] call TREND_fnc_log;
 			#include "..\..\Missions\hvtMission.sqf"; //Rescue Reporter
 			[localize "STR_TRGM2_Rescue_Reporter"] call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = ["Rescued a Reporter, reputation increased.", 1, "Rescued a Reporter", selectRandom Reporters, Civilian, "RESCUE", "", "", ["We need you to locate and rescue a reporter!"]];
+			["Mission Setup: Generating Rescue Reporter", true] call TREND_fnc_log;
 		};
 		case 13: {
-			#include "..\..\Missions\defuseIEDsMission.sqf"; //defuse 3 IEDs
+			["Mission Setup: Init Defuse 3 IEDs", true] call TREND_fnc_log;
+			#include "..\..\Missions\defuseIEDsMission.sqf"; //Defuse 3 IEDs
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = ["Defused IEDs, reputation increased.", 1, "Defused IEDs"];
+			["Mission Setup: Generating Defuse 3 IEDs", true] call TREND_fnc_log;
 		};
 		case 14: {
-			#include "..\..\Missions\bombDisposalMission.sqf"; //defuse 3 IEDs
+			["Mission Setup: Init Defuse Bomb", true] call TREND_fnc_log;
+			#include "..\..\Missions\bombDisposalMission.sqf"; //Defuse Bomb
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = ["Defused Bomb, reputation increased.", 1, "Defused Bomb"];
+			["Mission Setup: Generating Defuse Bomb", true] call TREND_fnc_log;
 		};
 		case 15: {
+			["Mission Setup: Init Search and Destroy", true] call TREND_fnc_log;
 			#include "..\..\Missions\searchAndDestroyMission.sqf"; //Search and Destroy
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = ["Targets destoryed, reputation increased.", 1, "Targets destoryed"];
+			["Mission Setup: Generating Search and Destroy", true] call TREND_fnc_log;
 		};
 		case 16: {
+			["Mission Setup: Init Destroy Cache", true] call TREND_fnc_log;
 			#include "..\..\Missions\destroyCacheMission.sqf"; //Destroy Cache
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = ["Cache destoryed, reputation increased.", 1, "Cache destoryed"];
+			["Mission Setup: Generating Destroy Cache", true] call TREND_fnc_log;
 		};
 		case 17:  {
+			["Mission Setup: Init Secure and Resupply", true] call TREND_fnc_log;
 			#include "..\..\Missions\secureAndResupplyMission.sqf"; //Secure and Resupply
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = ["Area Cleared, reputation increased.", 1, "Area Cleared"];
+			["Mission Setup: Generating Secure and Resupply", true] call TREND_fnc_log;
 		};
 		case 18:  {
+			["Mission Setup: Init Meeting Assassination", true] call TREND_fnc_log;
 			#include "..\..\Missions\meetingAssassinationMission.sqf"; //Meeting Assassination
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = ["HVT assassinated, reputation increased.", 1, "HVT assassinated"];
+			["Mission Setup: Generating Meeting Assassination", true] call TREND_fnc_log;
 		};
 		case 19:  {
+			["Mission Setup: Init Ambush Convoy", true] call TREND_fnc_log;
 			#include "..\..\Missions\ambushConvoyMission.sqf"; //Ambush Convoy
 			call fnc_CustomVars;
 			_bNewTaskSetup = true;
 			_args = ["Convoy eliminated, reputation increased.", 1, "Convoy eliminated"];
+			["Mission Setup: Generating Ambush Convoy", true] call TREND_fnc_log;
 		};
 		case 99999: {
+			["Mission Setup: Init Custom Mission", true] call TREND_fnc_log;
 			//[format["pre: %1",_RequiresNearbyRoad]] call TREND_fnc_notify; sleep 2;
 			//#include "..\..\CustomMission\customMission.sqf"; //Custom Mission
 			//call fnc_CustomVars;
 			//[format["post: %1",_RequiresNearbyRoad]] call TREND_fnc_notify; sleep 2;
 			//_args = ["Objective completed, reputation increased.", 1, "Objective completed"];
+			["Mission Setup: Generating Custom Mission", true] call TREND_fnc_log;
 		};
 		default { };
 	};
@@ -467,16 +517,18 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 	if (_iTaskIndex isEqualTo 2 && {!isNil "TREND_Mission3Loc"}) then {
 		_bUserDefinedAO = true;
 	};
+	[format ["Mission Setup: Task: %1", _iTaskIndex], true] call TREND_fnc_log;
 	//orangestest*/
 
 	//kill leader (he will run away in car to AO)    ::   save stranded guys    ::
 
-	_allLocationTypes = [];
-	"_allLocationTypes pushBack configName _x" configClasses (configFile >> "CfgLocationTypes");
-	_allLocations = nearestLocations [(getMarkerPos "mrkHQ"), _allLocationTypes, 25000];
-	_allLocationPositions = _allLocations apply {[locationPosition _x select 0, locationPosition _x select 1]};
-	_allLocationPositions = _allLocationPositions select {((getMarkerPos "mrkHQ") distance _x) > TREND_SideMissionMinDistFromBase};
-	_allLocationPositions = _allLocationPositions select {count nearestObjects [_x, TREND_BasicBuildings, 200] > 0};
+	["Mission Setup: Getting potential locations", true] call TREND_fnc_log;
+
+	TREND_allLocationPositions = TREND_allLocations apply {[locationPosition _x select 0, locationPosition _x select 1]};
+	TREND_allLocationPositions = TREND_allLocationPositions select {((getMarkerPos "mrkHQ") distance _x) > TREND_SideMissionMinDistFromBase};
+	TREND_allLocationPositions = TREND_allLocationPositions select {count nearestObjects [_x, TREND_BasicBuildings, 200] > 0};
+
+	["Mission Setup: Locations found", true] call TREND_fnc_log;
 
 	["Mission Setup: 10", true] call TREND_fnc_log;
 	_attempts = 0;
@@ -486,7 +538,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 		_markerInformant1 = nil;
 
 		if (!_SamePrevAO || {_bUserDefinedAO || {_attempts > 100}}) then {
-			_randLocation = if !(isNil "_allLocationPositions") then {selectRandom _allLocationPositions} else {[0 + (floor random 25000), 0 + (floor random 25000)]};
+			_randLocation = if !(isNil "TREND_allLocationPositions") then {selectRandom TREND_allLocationPositions} else {[0 + (floor random 25000), 0 + (floor random 25000)]};
 			_randInfor1X = _randLocation select 0;
 			_randInfor1Y = _randLocation select 1;
 			_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], TREND_BasicBuildings, 200*_attempts] select {!((_x buildingPos -1) isEqualTo [])};
@@ -517,6 +569,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 		_playerSelectedAo = call TREND_manualAOPlacement;
 
 		if ((_isPosFarEnoughFromHq || _playerSelectedAo) && {(count _buildings) > 0}) then {
+			["Mission Setup: Task location found", true] call TREND_fnc_log;
 			_bInfor1Found = true;
 			_infBuilding = selectRandom _buildings;
 			_infBuilding setDamage 0;
@@ -578,6 +631,7 @@ while {(TREND_InfTaskCount < count _ThisTaskTypes)} do {
 					//###################################### CUSTOM MISSION ######################################
 					["Mission Setup: 8-0-10", true] call TREND_fnc_log;
 					if (_iThisTaskType isEqualTo 99999 || _bNewTaskSetup) then {
+						["Mission Setup: Generating mission", true] call TREND_fnc_log;
 						[_MarkerType, _infBuilding, _inf1X, _inf1Y, _roadSearchRange, _bCreateTask, _iTaskIndex, _bIsMainObjective, _args] call fnc_CustomMission;
 					};
 					//############################################################################################
@@ -756,8 +810,9 @@ else {
 
 
 publicVariable "TREND_debugMessages";
+[TREND_debugMessages, true] call TREND_fnc_log;
 
-// [(localize "STR_TRGM2_startInfMission_SoItBegin")] call TREND_fnc_notify;
+[(localize "STR_TRGM2_startInfMission_SoItBegin")] call TREND_fnc_notify;
 
 ///*orangestest
 [] remoteExec ["TREND_fnc_animateAnimals",0,true];

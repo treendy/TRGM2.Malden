@@ -104,7 +104,7 @@ TREND_AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex(z
 	[ADVCTRLIDC(TREND_ADVSET_IEDTARGET_COMPACT_SPACING_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_IedTargetCompact","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvIedTargetCompact"],
 	[ADVCTRLIDC(TREND_ADVSET_HIGHER_ENEMY_COUNT_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_MoreEnemies","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],2,localize "STR_TRGM2_Tooltip_AdvMoreEnemies"],
 	[ADVCTRLIDC(TREND_ADVSET_LARGE_PATROLS_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_LargePatrols","RscCombo",[localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",localize "STR_TRGM2_TRGMInitPlayerLocal_Enable",localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"],[0,1,2],1,localize "STR_TRGM2_Tooltip_AdvLargePatrols"],
-	[ADVCTRLIDC(TREND_ADVSET_TIME_BETWEEN_SPOTTED_ACTIONS_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_TimeBetweenSpotted","RscXSliderH",60,600,300,localize "STR_TRGM2_Tooltip_TimeBetweenSpotted"],
+	[ADVCTRLIDC(TREND_ADVSET_TIME_BETWEEN_SPOTTED_ACTIONS_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_TimeBetweenSpotted","RscXSliderH",600,1800,1200,localize "STR_TRGM2_Tooltip_TimeBetweenSpotted"],
 	[ADVCTRLIDC(TREND_ADVSET_VEHICLE_SPAWNING_REQ_REP_IDX), localize "STR_TRGM2_TRGMSetUnitGlobalVars_VehicleReqRep","RscCombo",[localize "STR_TRGM2_TRGMInitPlayerLocal_Disable", localize "STR_TRGM2_TRGMInitPlayerLocal_Enable"],[0,1],0,localize "STR_TRGM2_Tooltip_AdvVehicleReqRep"]
 ];
 publicVariable "TREND_AdvControls";
@@ -357,7 +357,7 @@ TREND_ThemeAndIntroMusic                = ["LeadTrack01_F_Curator","Fallout","Wa
 if (1227700 in (getDLCs 1)) then {
 	TREND_ThemeAndIntroMusic = TREND_ThemeAndIntroMusic + ["vn_blues_for_suzy", "vn_dont_cry_baby", "vn_drafted", "vn_fire_in_the_sky_demo", "vn_freedom_bird", "vn_jungle_boots", "vn_kitty_bar_blues", "vn_route9", "vn_tequila_highway", "vn_there_it_is", "vn_trippin", "vn_unsung_heroes", "vn_up_here_looking_down", "vn_voodoo_girl"];
 	if (getNumber(configfile >> "CfgPatches" >> "theace" >> "appId") isEqualTo 1161041) then {
-		TREND_ThemeAndIntroMusic = TREND_ThemeAndIntroMusic + ["fortunate_son"];
+		TREND_ThemeAndIntroMusic = TREND_ThemeAndIntroMusic + ["fortunate_son", "ride_of_the_valkyries"];
 	};
 };
 publicVariable "TREND_ThemeAndIntroMusic";

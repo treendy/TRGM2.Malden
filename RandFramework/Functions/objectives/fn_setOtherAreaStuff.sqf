@@ -21,7 +21,7 @@ if (count _TowersNear > 0) then {
 	["Mission Events: Comms 8", true] call TREND_fnc_log;
 	TREND_TowerBuild = selectRandom _TowersNear;
 	publicVariable "TREND_TowerBuild";
-	[TREND_TowerBuild, [localize "STR_TRGM2_TRENDfncsetOtherAreaStuff_CheckEnemyComms",{_this spawn TREND_fnc_checkForComms;},[TREND_TowerBuild]]] remoteExec ["addAction", 0, true];
+	[TREND_TowerBuild, [localize "STR_TRGM2_TRENDfncsetOtherAreaStuff_CheckEnemyComms",{[TREND_IntelShownType, "CommsTower"] spawn TREND_fnc_showIntel;},[TREND_TowerBuild]]] remoteExec ["addAction", 0, true];
 	TREND_TowerClassName = typeOf TREND_TowerBuild;
 	publicVariable "TREND_TowerBuild";
 	_TowerX = position TREND_TowerBuild select 0;

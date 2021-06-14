@@ -130,9 +130,9 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
             };
         };
 
-        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true] spawn TREND_fnc_reinforcements;
+        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true, true] spawn TREND_fnc_reinforcements;
         sleep 10;
-        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true] spawn TREND_fnc_reinforcements;
+        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true, true] spawn TREND_fnc_reinforcements;
         sleep 10;
 
         (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]) call TREND_fnc_notifyGlobal;
@@ -240,9 +240,9 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
             sleep 2;
             !TREND_dropCrate;
         };
-        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true] spawn TREND_fnc_reinforcements;
+        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true, true] spawn TREND_fnc_reinforcements;
         sleep 10;
-        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true] spawn TREND_fnc_reinforcements;
+        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true, true] spawn TREND_fnc_reinforcements;
         sleep 10;
 
         (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]) call TREND_fnc_notifyGlobal;

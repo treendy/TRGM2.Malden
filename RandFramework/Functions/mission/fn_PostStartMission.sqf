@@ -19,7 +19,7 @@ if (_bMoveToAO) then {
 	call TREND_fnc_AoCampCreator;
 };
 
-
+TREND_MissionLoaded = true; publicVariable "TREND_MissionLoaded";
 
 _isHiddenObj = false;
 _mainAOPos = TREND_ObjectivePossitions select 0;

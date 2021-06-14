@@ -191,7 +191,7 @@ if (isServer) then {
 	sleep 1;
 	//*/
 
-	TREND_MissionLoaded =  true; publicVariable "TREND_MissionLoaded";
+	// TREND_MissionLoaded =  true; publicVariable "TREND_MissionLoaded";
 
 	["Mission Setup: 3", true] call TREND_fnc_log;
 	[""] remoteExecCall ["Hint", 0];
