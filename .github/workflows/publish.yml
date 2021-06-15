@@ -96,7 +96,7 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: TRGM2-Missions
+          name: TRGM-Redux-Missions
           path: ${{ github.workspace }}/Publish/**/*
           if-no-files-found: error
   lint:
