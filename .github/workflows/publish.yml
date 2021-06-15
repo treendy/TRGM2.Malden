@@ -16,8 +16,6 @@ jobs:
       run: python3 Tools/sqf_validator.py
     - name: Validate Config
       run: python3 Tools/config_style_checker.py
-    - name: Check for BOM
-      uses: arma-actions/bom-check@v1
 
   lint:
     runs-on: ubuntu-latest
