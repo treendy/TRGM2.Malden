@@ -99,23 +99,23 @@ jobs:
           name: TRGM-Redux-Missions
           path: ${{ github.workspace }}/Publish/**/*
           if-no-files-found: error
-  lint:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+  # lint:
+  #   # The type of runner that the job will run on
+  #   runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+  #   # Steps represent a sequence of tasks that will be executed as part of the job
+  #   steps:
+  #     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+  #     - uses: actions/checkout@v2
 
-      - name: Remove non-mission files
-        run: |
-          rm -rf "$GITHUB_WORKSPACE/Mission-Templates"
-          rm -rf "$GITHUB_WORKSPACE/Pbo-Tools"
-          rm -rf "$GITHUB_WORKSPACE/.git"
-          rm -rf "$GITHUB_WORKSPACE/.github"
+  #     - name: Remove non-mission files
+  #       run: |
+  #         rm -rf "$GITHUB_WORKSPACE/Mission-Templates"
+  #         rm -rf "$GITHUB_WORKSPACE/Pbo-Tools"
+  #         rm -rf "$GITHUB_WORKSPACE/.git"
+  #         rm -rf "$GITHUB_WORKSPACE/.github"
 
-      - uses: arma-actions/sqflint@v1.0
-        name: Validate with SQFLint
-        with:
-          args: --exit w --directory $GITHUB_WORKSPACE
+  #     - uses: arma-actions/sqflint@v1.0
+  #       name: Validate with SQFLint
+  #       with:
+  #         args: --exit w --directory $GITHUB_WORKSPACE
