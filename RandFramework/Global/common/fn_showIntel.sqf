@@ -30,10 +30,10 @@ if (side player isEqualTo west) then {
     };
 
     if (_IntelToShow isEqualTo 1) then { //Mortor team location
-        {
+        [[], {
             TRGM_VAR_TempIntelShowPos = nearestObjects [TRGM_VAR_ObjectivePossitions select 0,(call sMortar) + (call sMortarMilitia),3000];
             publicVariable "TRGM_VAR_TempIntelShowPos";
-        } remoteExec ["call", 2];
+        }] remoteExec ["call", 2];
         waitUntil {sleep 2; typeName TRGM_VAR_TempIntelShowPos isEqualTo "ARRAY"};
         _iCount = count TRGM_VAR_TempIntelShowPos;
         if (_iCount > 0) then {
@@ -51,10 +51,10 @@ if (side player isEqualTo west) then {
         };
     };
     if (_IntelToShow isEqualTo 2) then { //AAA team location
-        {
+        [[], {
             TRGM_VAR_TempIntelShowPos = nearestObjects [TRGM_VAR_ObjectivePossitions select 0,[(call sAAAVeh)] + [(call sAAAVehMilitia)] + (call DestroyAAAVeh),3000];
             publicVariable "TRGM_VAR_TempIntelShowPos";
-        } remoteExec ["call", 2];
+        }] remoteExec ["call", 2];
         waitUntil {sleep 2; typeName TRGM_VAR_TempIntelShowPos isEqualTo "ARRAY"};
         _iCount = count TRGM_VAR_TempIntelShowPos;
         _iStep = 0;

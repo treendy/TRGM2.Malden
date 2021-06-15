@@ -1,5 +1,5 @@
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOBAL_fnc_log;
-{
+[[], {
 
     [HQMan,localize "STR_TRGM2_callUAVFindObjective_UAVInbound"] remoteExecCall ["sideChat",0,false];
     sleep 10;
@@ -15,7 +15,7 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOB
         if (!(["InfSide0"] call FHQ_fnc_ttAreTasksCompleted)) then {
             sName = format["InfSide%1",0]; //zero because we only ever have the UAV option on the main objective
             [sName, "failed"] remoteExec ["FHQ_fnc_ttSetTaskState", 0];
-            {[(localize "STR_TRGM2_UAV_HTV_DEAD")] call TRGM_GLOBAL_fnc_notify;} remoteExec ["call", 0];
+            [[], {[(localize "STR_TRGM2_UAV_HTV_DEAD")] call TRGM_GLOBAL_fnc_notify;}] remoteExec ["call", 0];
         };
         [HQMan,(localize "STR_TRGM2_UAV_Fail")] remoteExecCall ["sideChat",0,false];
 
@@ -33,6 +33,6 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOB
     };
 
 
-} remoteExec ["spawn", 2];
+}] remoteExec ["spawn", 2];
 
 true;

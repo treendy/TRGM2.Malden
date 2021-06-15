@@ -161,7 +161,7 @@ if (_bAllowStart) then {
 
     }
     else {
-        {[(localize "STR_TRGM2_StartMission_Hint")] call TRGM_GLOBAL_fnc_notify;} remoteExec ["call", 0];
+        [(localize "STR_TRGM2_StartMission_Hint")] remoteExec ["TRGM_GLOBAL_fnc_notify", 0];
     };
 
     if (TRGM_VAR_iMissionParamType isEqualTo 5) then {

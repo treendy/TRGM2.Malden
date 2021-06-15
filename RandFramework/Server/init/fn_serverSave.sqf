@@ -21,7 +21,7 @@ if (_SaveVersion != "") then {
     TRGM_VAR_SaveTypeString =  _SaveVersion; publicVariable "TRGM_VAR_SaveTypeString";
 
     sleep 0.1;
-    {
+    [[], {
         _saveData = [
             TRGM_VAR_iMissionParamType,
             TRGM_VAR_iMissionParamObjective,
@@ -41,7 +41,7 @@ if (_SaveVersion != "") then {
         ];
         profileNamespace setVariable [TRGM_VAR_sInitialSLPlayerID + ":" + TRGM_VAR_SaveTypeString,_saveData];
         saveProfileNamespace;
-    } remoteExec ["call", 2]; //Save this to server only
+    }] remoteExec ["call", 2]; //Save this to server only
 
 
     TRGM_VAR_laptop1 remoteExec ["removeAllActions"];

@@ -122,11 +122,11 @@ else {
     if (_LoadVersion != "") then {
         TRGM_VAR_SaveTypeString =  _LoadVersion; publicVariable "TRGM_VAR_SaveTypeString";
         sleep 0.1;
-        {
+        [[], {
             TRGM_VAR_SavedData = profileNamespace getVariable [TRGM_VAR_sInitialSLPlayerID + ":" + TRGM_VAR_SaveTypeString,[]]; //Get this from server only, but use player ID!!!
             publicVariable "TRGM_VAR_SavedData";
             //_ctrl ctrlSetText "SavedData: " + SavedData;
-        } remoteExec ["call", 2]; //Save this to server only
+        }] remoteExec ["call", 2]; //Save this to server only
         sleep 0.1;
 
         if (count TRGM_VAR_SavedData isEqualTo 0) then {

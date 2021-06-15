@@ -75,10 +75,7 @@ if (_foundPlace) then {
         if (_eyedir < 0) then {_eyedir = 360 + _eyedir};
         _distance = _distance ^2;
 
-        _enemies = allUnits select {
-            side _x isEqualTo west AND {_x distancesqr _spawnedUnit < _distance} AND {
-            acos ([sin _eyedir, cos _eyedir, 0] vectorCos [sin (_spawnedUnit getDir _x), cos (_spawnedUnit getDir _x), 0]) <= _fov/2}
-        };
+        _enemies = allUnits select {{side _x isEqualTo west} && {_x distancesqr _spawnedUnit < _distance} && {acos ([sin _eyedir, cos _eyedir, 0] vectorCos [sin (_spawnedUnit getDir _x), cos (_spawnedUnit getDir _x), 0]) <= _fov/2}};
         _enemies apply {_spawnedUnit reveal [_x,4]};
         TRGM_VAR_SniperRevialTotal = count _enemies;
         //consider loop through _enemies, and confirm sniper has Line of sight, before revealing
