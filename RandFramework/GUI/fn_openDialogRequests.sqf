@@ -21,57 +21,52 @@ if (player != _player) exitwith {};
 
 private _dCurrentRep = [TRGM_VAR_maxBadPoints - TRGM_VAR_BadPoints, 1] call BIS_fnc_cutDecimals;
 private _unitMap = [
-    ["Riflemen", TRGM_VAR_WestRiflemen, TRGM_VAR_WestRiflemen apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
-    ["AT Soldiers", TRGM_VAR_WestATSoldiers, TRGM_VAR_WestATSoldiers apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
-    ["AA Soldiers", TRGM_VAR_WestAASoldiers, TRGM_VAR_WestAASoldiers apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
-    ["Engineers", TRGM_VAR_WestEngineers, TRGM_VAR_WestEngineers apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
-    ["Medics", TRGM_VAR_WestMedics, TRGM_VAR_WestMedics apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
-    ["Explosive Specialists", TRGM_VAR_WestExpSpecs, TRGM_VAR_WestExpSpecs apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]
+    [localize "STR_TRGM2_openDialogRequests_Riflemen", TRGM_VAR_WestRiflemen, TRGM_VAR_WestRiflemen apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
+    [localize "STR_TRGM2_openDialogRequests_ATSoldiers", TRGM_VAR_WestATSoldiers, TRGM_VAR_WestATSoldiers apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
+    [localize "STR_TRGM2_openDialogRequests_AASoldiers", TRGM_VAR_WestAASoldiers, TRGM_VAR_WestAASoldiers apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
+    [localize "STR_TRGM2_openDialogRequests_Engineers", TRGM_VAR_WestEngineers, TRGM_VAR_WestEngineers apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
+    [localize "STR_TRGM2_openDialogRequests_Medics", TRGM_VAR_WestMedics, TRGM_VAR_WestMedics apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
+    [localize "STR_TRGM2_openDialogRequests_ExplosiveSpecialists", TRGM_VAR_WestExpSpecs, TRGM_VAR_WestExpSpecs apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]
 ];
 
 if (_dCurrentRep >= 3) then {
-    _unitMap append [["Autoriflemen", TRGM_VAR_WestAutoriflemen, TRGM_VAR_WestAutoriflemen apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]];
-    _unitMap append [["Grenadiers", TRGM_VAR_WestGrenadiers, TRGM_VAR_WestGrenadiers apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]]
+    _unitMap append [[localize "STR_TRGM2_openDialogRequests_Autoriflemen", TRGM_VAR_WestAutoriflemen, TRGM_VAR_WestAutoriflemen apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]];
+    _unitMap append [[localize "STR_TRGM2_openDialogRequests_Grenadiers", TRGM_VAR_WestGrenadiers, TRGM_VAR_WestGrenadiers apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]]
 };
 if (_dCurrentRep >= 5) then {
-    _unitMap append [["Snipers", TRGM_VAR_WestSnipers, TRGM_VAR_WestSnipers apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]];
+    _unitMap append [[localize "STR_TRGM2_openDialogRequests_Snipers", TRGM_VAR_WestSnipers, TRGM_VAR_WestSnipers apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]];
 };
 if (_dCurrentRep >= 7) then {
-    _unitMap append [["UAV Operators", TRGM_VAR_WestUAVOps, TRGM_VAR_WestUAVOps apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]];
+    _unitMap append [[localize "STR_TRGM2_openDialogRequests_UAVOperators", TRGM_VAR_WestUAVOps, TRGM_VAR_WestUAVOps apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]];
 };
+
 TRGM_VAR_RecruitUnitMap = _unitMap;
 publicVariable "TRGM_VAR_RecruitUnitMap";
 
-private _vehArray = TRGM_VAR_westUnarmedCars;
-_vehArray append TRGM_VAR_westUnarmedHelos;
-_vehArray append TRGM_VAR_westTurrets;
-_vehArray append TRGM_VAR_westBoats;
-if (_dCurrentRep >= 3 || {
-    !(call TRGM_GETTER_fnc_bVehiclesRequireRep)
-}) then {
-    _vehArray append TRGM_VAR_westArmedCars;
-    _vehArray append TRGM_VAR_westAPCs;
+private _vehMap = [
+    [localize "STR_TRGM2_openDialogRequests_Unarmedcarstrucks", TRGM_VAR_WestUnarmedCars, TRGM_VAR_WestUnarmedCars apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
+    [localize "STR_TRGM2_openDialogRequests_Unarmedhelicopters", TRGM_VAR_WestUnarmedHelos, TRGM_VAR_WestUnarmedHelos apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
+    [localize "STR_TRGM2_openDialogRequests_Turrets", TRGM_VAR_WestTurrets, TRGM_VAR_WestTurrets apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
+    [localize "STR_TRGM2_openDialogRequests_Boats", TRGM_VAR_WestBoats, TRGM_VAR_WestBoats apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]
+];
+
+if (_dCurrentRep >= 3 || {!(call TRGM_GETTER_fnc_bVehiclesRequireRep)}) then {
+    _vehMap append [[localize "STR_TRGM2_openDialogRequests_Armedcarstrucks", TRGM_VAR_WestArmedCars, TRGM_VAR_WestArmedCars apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]];
+    _vehMap append [[localize "STR_TRGM2_openDialogRequests_APCs", TRGM_VAR_WestAPCs, TRGM_VAR_WestAPCs apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]]
 };
-if (_dCurrentRep >= 5 || {
-    !(call TRGM_GETTER_fnc_bVehiclesRequireRep)
-}) then {
-    _vehArray append TRGM_VAR_westtanks;
-    _vehArray append TRGM_VAR_westArmedHelos;
+if (_dCurrentRep >= 5 || {!(call TRGM_GETTER_fnc_bVehiclesRequireRep)}) then {
+    _vehMap append [[localize "STR_TRGM2_openDialogRequests_Tanks", TRGM_VAR_WestTanks, TRGM_VAR_WestTanks apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]];
+    _vehMap append [[localize "STR_TRGM2_openDialogRequests_Armedhelicopters", TRGM_VAR_WestArmedHelos, TRGM_VAR_WestArmedHelos apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]];
 };
-if (_dCurrentRep >= 7 || {
-    !(call TRGM_GETTER_fnc_bVehiclesRequireRep)
-}) then {
-    _vehArray append TRGM_VAR_westArtillery;
-    _vehArray append TRGM_VAR_westantiAir;
-    _vehArray append TRGM_VAR_westPlanes;
+if (_dCurrentRep >= 7 || {!(call TRGM_GETTER_fnc_bVehiclesRequireRep)}) then {
+    _vehMap append [[localize "STR_TRGM2_openDialogRequests_Artillery", TRGM_VAR_WestArtillery, TRGM_VAR_WestArtillery apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]];
+    _vehMap append [[localize "STR_TRGM2_openDialogRequests_Antiair", TRGM_VAR_WestAntiAir, TRGM_VAR_WestAntiAir apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]];
+    _vehMap append [[localize "STR_TRGM2_openDialogRequests_Planes", TRGM_VAR_WestPlanes, TRGM_VAR_WestPlanes apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]];
 };
-TRGM_VAR_spawnVehArray = _vehArray arrayintersect _vehArray;
-TRGM_VAR_spawnVehArraytext = [];
-{
-    private _dispname = gettext(configFile >> "Cfgvehicles" >> _x >> "displayname");
-    TRGM_VAR_spawnVehArraytext pushBack _dispname;
-} forEach TRGM_VAR_spawnVehArray;
-publicVariable "TRGM_VAR_spawnVehArraytext";
+
+TRGM_VAR_RecruitVehicleMap = _vehMap;
+publicVariable "TRGM_VAR_RecruitVehicleMap";
+
 
 createdialog "TRGM_VAR_dialogRequests";
 waitUntil {
@@ -80,11 +75,8 @@ waitUntil {
 
 _display = findDisplay 8000;
 
-_display ctrlCreate ["RscCombo", 8007];
-_cboselectUnit = _display displayCtrl 8007;
 _display ctrlCreate ["RscCombo", 8011];
 _cboselectUnitClass = _display displayCtrl 8011;
-
 _cboselectUnitClass ctrlsetPosition [0.365954 * safeZoneW + safeZoneX, 0.412003 * safeZoneH + safeZoneY, 0.123734 * safeZoneW, 0.0329991 * safeZoneH];
 {
     private _unitClassName = _x select 0;
@@ -93,15 +85,17 @@ _cboselectUnitClass ctrlsetPosition [0.365954 * safeZoneW + safeZoneX, 0.412003 
 _cboselectUnitClass lbsetCurSel 0;
 _cboselectUnitClass ctrlCommit 0;
 _cboselectUnitClass ctrlsettooltip localize "STR_TRGM2_openDialogRequests_RequestUnitClassDefault";
-_cboselectUnitClass ctrlAddEventHandler ["onLBSelChanged", {
+_cboselectUnitClass ctrlAddEventHandler ["LBSelChanged", {
     params ["_control", "_selectedIndex"];
-    lbClear _cboselectUnit;
+    lbClear 8007;
     {
-        _cboselectUnit lbAdd _x;
+        lbAdd [8007, _x];
     } forEach ((TRGM_VAR_RecruitUnitMap select _selectedIndex) select 2);
+    lbsetCurSel [8007, 0];
 }];
 
-
+_display ctrlCreate ["RscCombo", 8007];
+_cboselectUnit = _display displayCtrl 8007;
 _cboselectUnit ctrlsetPosition [0.365954 * safeZoneW + safeZoneX, 0.412003 * safeZoneH + safeZoneY + (1.5 * (0.0329991 * safeZoneH)), 0.123734 * safeZoneW, 0.0329991 * safeZoneH];
 {
     _cboselectUnit lbAdd _x;
@@ -153,12 +147,31 @@ _btnselectUnit ctrlAddEventHandler ["ButtonClick", {
     false;
 }];
 
+_display ctrlCreate ["RscCombo", 8013];
+_cboselectVehicleClass = _display displayCtrl 8013;
+_cboselectVehicleClass ctrlsetPosition [0.520622 * safeZoneW + safeZoneX, 0.412003 * safeZoneH + safeZoneY, 0.123734 * safeZoneW, 0.0329991 * safeZoneH];
+{
+    private _vehicleClassName = _x select 0;
+    _cboselectVehicleClass lbAdd _vehicleClassName;
+} forEach TRGM_VAR_RecruitVehicleMap;
+_cboselectVehicleClass lbsetCurSel 0;
+_cboselectVehicleClass ctrlCommit 0;
+_cboselectVehicleClass ctrlsettooltip localize "STR_TRGM2_openDialogRequests_RequestVehicleClassDefault";
+_cboselectVehicleClass ctrlAddEventHandler ["LBSelChanged", {
+    params ["_control", "_selectedIndex"];
+    lbClear 8009;
+    {
+        lbAdd [8009, _x];
+    } forEach ((TRGM_VAR_RecruitVehicleMap select _selectedIndex) select 2);
+    lbsetCurSel [8009, 0];
+}];
+
 _display ctrlCreate ["RscCombo", 8009];
 _cboselectvehicle = _display displayCtrl 8009;
-_cboselectvehicle ctrlsetPosition [0.520622 * safeZoneW + safeZoneX, 0.412003 * safeZoneH + safeZoneY, 0.123734 * safeZoneW, 0.0329991 * safeZoneH];
+_cboselectvehicle ctrlsetPosition [0.520622 * safeZoneW + safeZoneX, 0.412003 * safeZoneH + safeZoneY + (1.5 * (0.0329991 * safeZoneH)), 0.123734 * safeZoneW, 0.0329991 * safeZoneH];
 {
     _cboselectvehicle lbAdd _x;
-} forEach TRGM_VAR_spawnVehArraytext;
+} forEach ((TRGM_VAR_RecruitVehicleMap select 0) select 2);
 _cboselectvehicle lbsetCurSel 0;
 _cboselectvehicle ctrlCommit 0;
 _cboselectvehicle ctrlsettooltip localize "str_TRGM2_opendialogRequests_Requestvehicledefault";
@@ -166,13 +179,14 @@ _cboselectvehicle ctrlsettooltip localize "str_TRGM2_opendialogRequests_Requestv
 _btnselectvehicle = _display displayCtrl 8005;
 _btnselectvehicle ctrlAddEventHandler ["ButtonClick", {
     params ["_control"];
-    private _index = lbCurSel 8009;
-    private _vehClass = TRGM_VAR_spawnVehArray select _index;
+    private _classIndex = lbCurSel 8013;
+    private _vehIndex = lbCurSel 8009;
+    private _vehClassName = ((TRGM_VAR_RecruitVehicleMap select _classIndex) select 1) select _vehIndex;
     _currentSpentPoints = call TRGM_GLOBAL_fnc_countSpentPoints;
     if (!(call TRGM_GETTER_fnc_bVehiclesRequireRep) || {
         _currentSpentPoints < (TRGM_VAR_maxBadPoints - TRGM_VAR_BadPoints + 1)
     }) then {
-        [_vehClass] spawn {
+        [_vehClassName] spawn {
             params ["_classtospawn"];
             private _safePos = [getPos player, 20, 100, 25, 0, 0.15, 0, [], [getPos player, getPos player], _classtospawn] call TRGM_GLOBAL_fnc_findSafePos;
             // find a valid pos

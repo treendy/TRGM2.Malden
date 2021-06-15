@@ -3905,6 +3905,11 @@
                 <English>Select a Unit</English>
             </Key>
 
+            <Key ID="STR_TRGM2_openDialogRequests_RequestVehicleClassDefault">
+                <Original>Select a vehicle class</Original>
+                <English>Select a vehicle class</English>
+            </Key>
+
             <Key ID="STR_TRGM2_openDialogRequests_RequestVehicleDefault">
                 <Original>Select a Vehicle</Original>
                 <English>Select a Vehicle</English>
@@ -3928,6 +3933,111 @@
             <Key ID="STR_TRGM2_openDialogRequests_VehicleRelease">
                 <Original>RELEASE %1</Original>
                 <English>RELEASE %1</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_Riflemen">
+                <Original>Riflemen</Original>
+                <English>Riflemen</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_ATSoldiers">
+                <Original>AT Soldiers</Original>
+                <English>AT Soldiers</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_AASoldiers">
+                <Original>AA Soldiers</Original>
+                <English>AA Soldiers</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_Engineers">
+                <Original>Engineers</Original>
+                <English>Engineers</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_Medics">
+                <Original>Medics</Original>
+                <English>Medics</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_ExplosiveSpecialists">
+                <Original>Explosive Specialists</Original>
+                <English>Explosive Specialists</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_Autoriflemen">
+                <Original>Autoriflemen</Original>
+                <English>Autoriflemen</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_Grenadiers">
+                <Original>Grenadiers</Original>
+                <English>Grenadiers</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_Snipers">
+                <Original>Snipers</Original>
+                <English>Snipers</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_UAVOperators">
+                <Original>UAV Operators</Original>
+                <English>UAV Operators</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_Unarmedcarstrucks">
+                <Original>Unarmed cars/trucks</Original>
+                <English>Unarmed cars/trucks</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_Unarmedhelicopters">
+                <Original>Unarmed helicopters</Original>
+                <English>Unarmed helicopters</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_Turrets">
+                <Original>Turrets</Original>
+                <English>Turrets</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_Boats">
+                <Original>Boats</Original>
+                <English>Boats</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_Armedcarstrucks">
+                <Original>Armed cars/trucks</Original>
+                <English>Armed cars/trucks</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_APCs">
+                <Original>APCs</Original>
+                <English>APCs</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_Tanks">
+                <Original>Tanks</Original>
+                <English>Tanks</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_Armedhelicopters">
+                <Original>Armed helicopters</Original>
+                <English>Armed helicopters</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_Artillery">
+                <Original>Artillery</Original>
+                <English>Artillery</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_Antiair">
+                <Original>Anti-air</Original>
+                <English>Anti-air</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_Planes">
+                <Original>Planes</Original>
+                <English>Planes</English>
             </Key>
 
             <Key ID="STR_TRGM2_downloadData_title">

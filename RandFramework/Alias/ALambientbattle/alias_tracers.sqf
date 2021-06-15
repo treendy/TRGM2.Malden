@@ -21,4 +21,4 @@ while {al_tracer} do {
 };
 
 // color = "red", "green", "white"
-[[[_main_tracer_object,_color],"RandFramework\Alias\ALambientbattle\alias_tracers_effect.sqf"],"BIS_fnc_execVM",true,false] spawn BIS_fnc_MP;
+[[_main_tracer_object,_color],"RandFramework\Alias\ALambientbattle\alias_tracers_effect.sqf"] remoteExec ["BIS_fnc_execVM", 0, true];

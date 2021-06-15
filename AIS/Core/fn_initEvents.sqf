@@ -41,7 +41,7 @@ AIS_Core_eachFrameHandlerId = addMissionEventHandler ["EachFrame", {
     } forEach _onEachFrameHandler;
 
 
-    // Execute the exec next frame functions (from CBA)
+    // Execute the execc next frame functions (from CBA)
     if (count AIS_nextFrameBufferA > 0) then {
         {
             (_x select 0) call (_x select 1);

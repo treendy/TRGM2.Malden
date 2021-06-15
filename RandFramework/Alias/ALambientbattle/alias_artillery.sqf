@@ -30,6 +30,6 @@ while {(al_art) and (!isNull _main_art_object)} do {
     _yy     = (getpos _main_art_object select 1)+_dire;
     _rel_Pos= [_xx, _yy, 0];
     _art_object setPos _rel_Pos;
-[[[_art_object],"RandFramework\Alias\ALambientbattle\alias_art_effect.sqf"],"BIS_fnc_execVM",true,false] spawn BIS_fnc_MP;
+    [[_art_object],"RandFramework\Alias\ALambientbattle\alias_art_effect.sqf"] remoteExec ["BIS_fnc_execVM", 0, true];
     sleep random 2;
 };
