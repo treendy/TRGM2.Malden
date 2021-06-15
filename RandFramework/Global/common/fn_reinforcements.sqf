@@ -261,7 +261,7 @@ if (!_paraDrop) then {
 	_heloWp setWaypointBehaviour "CARELESS";
 	_heloWp setWaypointCombatMode "BLUE";
 	_heloWp setWaypointSpeed "FULL";
-	_heloWp setWaypointStatements ["true", "nul = [assignedCargo (vehicle this)] spawn TRGM_GLOBAL_fnc_paraDrop;"];
+	_heloWp setWaypointStatements ["true", "nul = [assignedCargo (vehicle this)] spawn TRGM_GLOBAL_fnc_para;"];
 
 	_heloWp = _heloCrew addWaypoint [[0,0,0], 0];
 	_heloWp setWaypointType "MOVE";

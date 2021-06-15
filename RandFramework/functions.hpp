@@ -123,6 +123,7 @@ class TRGM_GLOBAL {
         class isAceLoaded {};
         class isCbaLoaded {};
         class nvScript {};
+        class para {};
         class paraDrop {};
         class pushObject {};
         class reinforcements {};

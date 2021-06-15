@@ -1,4 +1,4 @@
-params ["_units", []];
+params [["_units", []]];
 
 if (!(_units isEqualType []) && {!(_units isEqualTypeAll objNull)}) exitWith {};
 
