@@ -1,13 +1,13 @@
 ﻿/*
  * Author: Psycho
- 
+
  * Check if uncoscious Unit can load in a vehicle..
- 
+
  * Arguments:
-	0: Vehicle (Object)
- 
+    0: Vehicle (Object)
+
  * Return value:
-	Bool
+    Bool
  */
 
 private _targetVehicle = _this;

@@ -8,8 +8,8 @@ private ["_search_object"];
 if (!isServer) exitWith {};
 
 
-_search_object	= _this select 0;
-_enable_sound	= _this select 1;
+_search_object    = _this select 0;
+_enable_sound    = _this select 1;
 
 _search_object setVariable ["is_ON",true,true];
 

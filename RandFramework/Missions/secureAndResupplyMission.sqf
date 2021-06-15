@@ -20,22 +20,22 @@ MISSION_fnc_CustomVars = { //This is called before the mission function is calle
 };
 
 MISSION_fnc_CustomMission = { //This function is the main script for your mission, some if the parameters passed in must not be changed!!!
-	/*
-	 * Parameter Descriptions
-	 * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	 * _markerType 				: The marker type to be used, you can set the type of marker below, but if the player has selected to hide mission locations, then your marker will not show.
-	 * _objectiveMainBuilding 	: DO NOT EDIT THIS VALUE (this is the main building location selected within your AO)
-	 * _centralAO_x 			: DO NOT EDIT THIS VALUE (this is the X coord of the AO)
-	 * _centralAO_y 			: DO NOT EDIT THIS VALUE (this is the Y coord of the AO)
-	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in MISSION_fnc_CustomVars)
-	 * _bCreateTask 			: DO NOT EDIT THIS VALUE (this is determined by the player, if the player selected to play a hidden mission, the task is not created!)
-	 * _iTaskIndex 				: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the index of the task used to determine mission/task completion!)
-	 * _bIsMainObjective 		: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the boolean if the mission is a Heavy or Standard mission!)
-	 * _args 					: These are additional arguments that might be required for the mission, for an example, see the Destroy Vehicles Mission.
-	 * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	*/
-	params ["_markerType","_objectiveMainBuilding","_centralAO_x","_centralAO_y","_roadSearchRange", "_bCreateTask", "_iTaskIndex", "_bIsMainObjective", ["_args", []]];
-	if (_markerType != "empty") then { _markerType = "hd_objective"; }; // Set marker type here...
+    /*
+     * Parameter Descriptions
+     * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     * _markerType                 : The marker type to be used, you can set the type of marker below, but if the player has selected to hide mission locations, then your marker will not show.
+     * _objectiveMainBuilding     : DO NOT EDIT THIS VALUE (this is the main building location selected within your AO)
+     * _centralAO_x             : DO NOT EDIT THIS VALUE (this is the X coord of the AO)
+     * _centralAO_y             : DO NOT EDIT THIS VALUE (this is the Y coord of the AO)
+     * _roadSearchRange         : DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in MISSION_fnc_CustomVars)
+     * _bCreateTask             : DO NOT EDIT THIS VALUE (this is determined by the player, if the player selected to play a hidden mission, the task is not created!)
+     * _iTaskIndex                 : DO NOT EDIT THIS VALUE (this is determined by the engine, and is the index of the task used to determine mission/task completion!)
+     * _bIsMainObjective         : DO NOT EDIT THIS VALUE (this is determined by the engine, and is the boolean if the mission is a Heavy or Standard mission!)
+     * _args                     : These are additional arguments that might be required for the mission, for an example, see the Destroy Vehicles Mission.
+     * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    */
+    params ["_markerType","_objectiveMainBuilding","_centralAO_x","_centralAO_y","_roadSearchRange", "_bCreateTask", "_iTaskIndex", "_bIsMainObjective", ["_args", []]];
+    if (_markerType != "empty") then { _markerType = "hd_objective"; }; // Set marker type here...
 
     _sTaskDescription = selectRandom[localize "STR_TRGM2_ClearAreaMissionDescription"]; //adjust this based on veh? and man? if van then if car then?
 
@@ -138,7 +138,7 @@ MISSION_fnc_CustomMission = { //This function is the main script for your missio
         (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]) call TRGM_GLOBAL_fnc_notifyGlobal;
         [300, _iTaskIndex] spawn {
             params ["_duration", "_taskIndex"];
-			_endTime = _duration + time;
+            _endTime = _duration + time;
             while {_endTime - time >= 0} do {
                 _color = "#45f442";//green
                 _timeLeft = _endTime - time;
@@ -161,8 +161,8 @@ MISSION_fnc_CustomMission = { //This function is the main script for your missio
         private _exitPos = _flag getRelPos[25000, random 360];
 
         airDropHelo1 = createVehicle [_airToUse, [(_spawnPos select 0), (_spawnPos select 1)], [], 0, "FLY"];
-	    createVehicleCrew airDropHelo1;
-	    crew vehicle airDropHelo1 joinSilent _heloGroup;
+        createVehicleCrew airDropHelo1;
+        crew vehicle airDropHelo1 joinSilent _heloGroup;
         airDropHelo1 flyInHeight 40;
         airDropHelo1 allowDamage false;
         airDropHelo1 enableAttack false;
@@ -248,7 +248,7 @@ MISSION_fnc_CustomMission = { //This function is the main script for your missio
         (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]) call TRGM_GLOBAL_fnc_notifyGlobal;
         [300, _iTaskIndex] spawn {
             params ["_duration", "_taskIndex"];
-			_endTime = _duration + time;
+            _endTime = _duration + time;
             while {_endTime - time >= 0} do {
                 _color = "#45f442";//green
                 _timeLeft = _endTime - time;
@@ -266,8 +266,8 @@ MISSION_fnc_CustomMission = { //This function is the main script for your missio
         _spawnPos = _flag getRelPos[3000, random 360];
         _exitPos = _flag getRelPos[25000, random 360];
         airDropHelo1 = createVehicle [_airToUse, [(_spawnPos select 0), (_spawnPos select 1)], [], 0, "FLY"];
-	    createVehicleCrew airDropHelo1;
-	    crew vehicle airDropHelo1 joinSilent _heloGroup;
+        createVehicleCrew airDropHelo1;
+        crew vehicle airDropHelo1 joinSilent _heloGroup;
 
         airDropHelo2 flyInHeight 40;
         airDropHelo2 allowDamage false;

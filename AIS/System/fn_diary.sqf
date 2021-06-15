@@ -4,16 +4,16 @@
  * Diary entry.
 
  * Arguments:
-	-
+    -
 
  * Return value:
-	Bool
+    Bool
  */
 
 private _who_can_revive = switch (AIS_MEDICAL_EDUCATION) do {
-	case (0) : {localize "STR_TRGM2_fndiary_EDUCATION0"};
-	case (1) : {localize "STR_TRGM2_fndiary_EDUCATION1"};
-	case (2) : {localize "STR_TRGM2_fndiary_EDUCATION2"};
+    case (0) : {localize "STR_TRGM2_fndiary_EDUCATION0"};
+    case (1) : {localize "STR_TRGM2_fndiary_EDUCATION1"};
+    case (2) : {localize "STR_TRGM2_fndiary_EDUCATION2"};
 };
 private _revive_guaranty = if (AIS_REVIVE_GUARANTY) then {localize "STR_TRGM2_fndiary_NoInstantDeath"} else {localize "STR_TRGM2_fndiary_InstantDeath"};
 private _revive_heal = if (AIS_REVIVE_HEAL) then {localize "STR_TRGM2_fndiary_TotalHeal"} else {localize "STR_TRGM2_fndiary_SepHeal"};

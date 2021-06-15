@@ -1,14 +1,14 @@
 ﻿/*
  * Author: Psycho
- 
+
  * give back the last damage of the specific body part
- 
+
  * Arguments:
-	0: Unit (Object)
-	1: hitPartIndex (Number)
- 
+    0: Unit (Object)
+    1: hitPartIndex (Number)
+
  * Return value:
-	damage
+    damage
  */
 
 params ["_unit", "_hitPartIndex"];

@@ -1,14 +1,14 @@
 ﻿/*
  * Author: Psycho
- 
+
  * Calculate the time till the unit will die (Revive-Time) and control the injury-effects.
- 
+
  * Arguments:
-	0: Unit (Object)
-	1: Killer (Object)
- 
+    0: Unit (Object)
+    1: Killer (Object)
+
  * Return value:
-	-
+    -
 */
 params ["_unit"];
 if (!local _unit) exitWith {};
@@ -20,13 +20,13 @@ if (!local _unit) exitWith {};
 // shacking gun
 addCamShake [15, 999, 0.7];
 
-//if (tcb_ais_bloodParticle) then {[_unit] call tcb_fnc_setBleeding};		// not implemented yet
+//if (tcb_ais_bloodParticle) then {[_unit] call tcb_fnc_setBleeding};        // not implemented yet
 
 // get the revive time
 _revive_time = [_unit] call AIS_System_fnc_calculateLifeTime;
 _unit setBleedingRemaining _revive_time;
 
-// no reset of this variable until the unit fall in a completely new unconsciou state. 
+// no reset of this variable until the unit fall in a completely new unconsciou state.
 ais_start_unc_time = diag_tickTime;
 
 // start the timer and the visula effetcs

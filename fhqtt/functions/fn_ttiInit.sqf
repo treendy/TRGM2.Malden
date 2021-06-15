@@ -10,8 +10,8 @@ if (isClass (configfile >> "CfgAddons" >> "PreloadAddons" >> "A3")) then {
 
 if (isServer) then
 {
-	FHQ_TTI_BriefingList = [];
-  	FHQ_TTI_TaskList = [];
+    FHQ_TTI_BriefingList = [];
+      FHQ_TTI_TaskList = [];
 };
 
 if (!isDedicated) then
@@ -26,26 +26,26 @@ if (!isDedicated) then
     [] spawn
     {
         // Wait for join in progress
-      	waitUntil {!isNil {player}};
-       	waitUntil {!isNull player};
+          waitUntil {!isNil {player}};
+           waitUntil {!isNull player};
 
 
         /* Wait until briefing is ready (on server).
          * Note that we spawn this code, to cope with the possibility of having no briefing at all
          */
         [] spawn {
-        	waitUntil {!isNil "FHQ_TTI_briefing"};
-        	FHQ_TTI_BriefingList call FHQ_fnc_ttiUpdateBriefingList;
-			"FHQ_TTI_BriefingList" addPublicVariableEventHandler {(_this select 1) call FHQ_fnc_ttiUpdateBriefingList};
-		};
+            waitUntil {!isNil "FHQ_TTI_briefing"};
+            FHQ_TTI_BriefingList call FHQ_fnc_ttiUpdateBriefingList;
+            "FHQ_TTI_BriefingList" addPublicVariableEventHandler {(_this select 1) call FHQ_fnc_ttiUpdateBriefingList};
+        };
 
         // Wait until the task list is ready (on server)
         waitUntil {!isNil "FHQ_TTI_tasks"};
-		FHQ_TTI_TaskList call FHQ_fnc_ttiUpdateTaskList;
-		"FHQ_TTI_TaskList" addPublicVariableEventHandler {(_this select 1) call FHQ_fnc_ttiUpdateTaskList};
+        FHQ_TTI_TaskList call FHQ_fnc_ttiUpdateTaskList;
+        "FHQ_TTI_TaskList" addPublicVariableEventHandler {(_this select 1) call FHQ_fnc_ttiUpdateTaskList};
 
-		FHQ_TTI_supressTaskHints = false;
-	};
+        FHQ_TTI_supressTaskHints = false;
+    };
 };
 
 true;

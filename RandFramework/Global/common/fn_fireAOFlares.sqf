@@ -15,50 +15,50 @@ _flare1 setVelocity [0,0,-10];
 _al_flare_light = "#lightpoint" createVehicle getPosATL _flare1;
 
 TRGM_PUBLIC_fnc_setFlareLightStuff = {
-	_al_flare_light = _this select 0;
-	_flare1 = _this select 1;
-	//[str(_al_flare_light)] call TRGM_GLOBAL_fnc_notify;
-	_al_flare_intensity = 3;
-	_al_flare_range = 1000;
+    _al_flare_light = _this select 0;
+    _flare1 = _this select 1;
+    //[str(_al_flare_light)] call TRGM_GLOBAL_fnc_notify;
+    _al_flare_intensity = 3;
+    _al_flare_range = 1000;
 
-	_al_color_flare = [1,1,1];
-	_flare_brig = _al_flare_intensity;
+    _al_color_flare = [1,1,1];
+    _flare_brig = _al_flare_intensity;
 
-	sleep 3;
+    sleep 3;
 
-	_al_flare_light setLightAmbient _al_color_flare;
-	_al_flare_light setLightColor _al_color_flare;
-	_al_flare_light setLightIntensity _al_flare_intensity;
-	_al_flare_light setLightUseFlare true;
-	_al_flare_light setLightFlareSize 10;
-	_al_flare_light setLightFlareMaxDistance 2000;
-	_al_flare_light setLightAttenuation [/*start*/ _al_flare_range, /*constant*/1, /*linear*/ 100, /*quadratic*/ 0, /*hardlimitstart*/50,/* hardlimitend*/_al_flare_range-10];
-	_al_flare_light setLightDayLight true;
+    _al_flare_light setLightAmbient _al_color_flare;
+    _al_flare_light setLightColor _al_color_flare;
+    _al_flare_light setLightIntensity _al_flare_intensity;
+    _al_flare_light setLightUseFlare true;
+    _al_flare_light setLightFlareSize 10;
+    _al_flare_light setLightFlareMaxDistance 2000;
+    _al_flare_light setLightAttenuation [/*start*/ _al_flare_range, /*constant*/1, /*linear*/ 100, /*quadratic*/ 0, /*hardlimitstart*/50,/* hardlimitend*/_al_flare_range-10];
+    _al_flare_light setLightDayLight true;
 
-	// lumina intermitent 23
+    // lumina intermitent 23
 
-	_inter_flare = 0;
-	while {_inter_flare<21} do {
-		_int_mic = 0.05 + random 0.1;
-		sleep _int_mic;
-		_flare_brig = _al_flare_intensity+random 1;
-		_al_flare_light setLightIntensity _flare_brig;
-		_inter_flare = _inter_flare + _int_mic;
-		_al_flare_light setpos (getPosATL _flare1);
-	};
+    _inter_flare = 0;
+    while {_inter_flare<21} do {
+        _int_mic = 0.05 + random 0.1;
+        sleep _int_mic;
+        _flare_brig = _al_flare_intensity+random 1;
+        _al_flare_light setLightIntensity _flare_brig;
+        _inter_flare = _inter_flare + _int_mic;
+        _al_flare_light setpos (getPosATL _flare1);
+    };
 
-	_int_mic = 3;
+    _int_mic = 3;
 
-//	["scade"] call TRGM_GLOBAL_fnc_notify;
+//    ["scade"] call TRGM_GLOBAL_fnc_notify;
 
-	while {_int_mic>0} do {
-		_flare_brig = _flare_brig - 10;
-		_al_flare_light setLightIntensity _flare_brig;
-		_int_mic = _int_mic-0.03;
-		sleep 0.01;
-	};
-//	["DOne"] call TRGM_GLOBAL_fnc_notify;
-	deleteVehicle _al_flare_light;
+    while {_int_mic>0} do {
+        _flare_brig = _flare_brig - 10;
+        _al_flare_light setLightIntensity _flare_brig;
+        _int_mic = _int_mic-0.03;
+        sleep 0.01;
+    };
+//    ["DOne"] call TRGM_GLOBAL_fnc_notify;
+    deleteVehicle _al_flare_light;
 };
 publicVariable "TRGM_PUBLIC_fnc_setFlareLightStuff";
 

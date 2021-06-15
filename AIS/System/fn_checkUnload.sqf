@@ -1,18 +1,18 @@
 ﻿/*
-	* Author: psycho
- 
-	* Check if a unit can be unload from a vehicle at the actual situation
- 
-	* Arguments:
-		0: Unit (Object)
+    * Author: psycho
 
-	* Example:
-		[player] call AIS_System_fnc_checkUnload;
- 
-	* Return value:
-		Bool
+    * Check if a unit can be unload from a vehicle at the actual situation
+
+    * Arguments:
+        0: Unit (Object)
+
+    * Example:
+        [player] call AIS_System_fnc_checkUnload;
+
+    * Return value:
+        Bool
 */
- 
+
 params ["_unit"];
 private _vehicle = vehicle _unit;
 

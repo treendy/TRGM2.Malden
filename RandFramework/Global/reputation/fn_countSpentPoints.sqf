@@ -5,11 +5,11 @@ _SpentCount = 0;
 {
    if ((side _x) isEqualTo West) then
    {
-   		//_SpawnedUnit setVariable ["RepCost", 1];
-   		_var = _x getVariable "RepCost";
-   		if (!(isNil "_var")) then {
-   			_SpentCount = _SpentCount + _var;
-   		};
+           //_SpawnedUnit setVariable ["RepCost", 1];
+           _var = _x getVariable "RepCost";
+           if (!(isNil "_var")) then {
+               _SpentCount = _SpentCount + _var;
+           };
    };
 } forEach allUnits + TRGM_VAR_SpawnedVehicles;
 _SpentCount

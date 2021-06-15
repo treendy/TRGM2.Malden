@@ -1,10 +1,10 @@
-#define FHQ_TTIF_TASKNAME	0
-#define FHQ_TTIF_TASKDESC	1
-#define FHQ_TTIF_TASKTITLE	2
-#define FHQ_TTIF_TASKWP		3
-#define FHQ_TTIF_TASKTARGET	4
-#define FHQ_TTIF_TASKSTATE	5
-#define FHQ_TTIF_TASKTYPE	6
+#define FHQ_TTIF_TASKNAME    0
+#define FHQ_TTIF_TASKDESC    1
+#define FHQ_TTIF_TASKTITLE    2
+#define FHQ_TTIF_TASKWP        3
+#define FHQ_TTIF_TASKTARGET    4
+#define FHQ_TTIF_TASKSTATE    5
+#define FHQ_TTIF_TASKTYPE    6
 
 /* Might not be present */
 private _res = "";
@@ -18,10 +18,10 @@ if (_num > 4) then {
     private _type = _this select (_num - 1);
 
     if (typename _type == "STRING") then {
-  		if (!(_type call FHQ_fnc_ttiIsTaskState) and (_type find "#" != 0) and (_type find "@" != 0)) then {
-        	/* Last element is a string, but no position, and no state, so it must be a type */
-            _res = _type;  
-        };  
+          if (!(_type call FHQ_fnc_ttiIsTaskState) and (_type find "#" != 0) and (_type find "@" != 0)) then {
+            /* Last element is a string, but no position, and no state, so it must be a type */
+            _res = _type;
+        };
     };
 };
 

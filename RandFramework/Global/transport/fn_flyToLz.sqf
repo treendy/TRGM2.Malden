@@ -1,10 +1,10 @@
-/* 	Script starting here  */
+/*     Script starting here  */
 scopeName "FlyTo";
 
 params [
-	"_destinationPosition",
-	["_vehicle", objNull],
-	["_isPickup", false]
+    "_destinationPosition",
+    ["_vehicle", objNull],
+    ["_isPickup", false]
 ];
 format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOBAL_fnc_log;
 
@@ -12,22 +12,22 @@ _radius = 900;
 _airEscort = false;
 _isHiddenObj = false;
 //{
-//		if ((_x distance2D _destinationPosition) < _radius) then {
-//			_airEscort = true;
-//		};
+//        if ((_x distance2D _destinationPosition) < _radius) then {
+//            _airEscort = true;
+//        };
 //} forEach TRGM_VAR_ClearedPositions;
 
 _mainAOPos = TRGM_VAR_ObjectivePossitions select 0;
 if (! isNil "_mainAOPos") then {
-	if (_mainAOPos in TRGM_VAR_ClearedPositions  && (_mainAOPos distance2D _destinationPosition) < _radius) then {
-		_airEscort = true;
-	};
+    if (_mainAOPos in TRGM_VAR_ClearedPositions  && (_mainAOPos distance2D _destinationPosition) < _radius) then {
+        _airEscort = true;
+    };
 };
 
 if (! isNil "_mainAOPos") then {
-	if (_mainAOPos in TRGM_VAR_HiddenPossitions ) then {
-		_isHiddenObj = true;
-	};
+    if (_mainAOPos in TRGM_VAR_HiddenPossitions ) then {
+        _isHiddenObj = true;
+    };
 };
 
 
@@ -35,12 +35,12 @@ if (! isNil "_mainAOPos") then {
 //TRGM_VAR_ObjectivePossitions
 
 if (!alive _vehicle) then {
-	breakOut "FlyTo";
+    breakOut "FlyTo";
 };
 
 units (group driver _vehicle) doFollow leader (group driver _vehicle);
 {
-	_x enableSimulation true;
+    _x enableSimulation true;
 } forEach units group driver _vehicle;
 _vehicle setFuel 1;
 
@@ -59,10 +59,10 @@ _vehicle setVariable ["missionNr", _thisMissionNr, true];
 _thisMission = [_vehicle,_thisMissionNr];
 
 _cleanupMission = {
-	params ["_mission"];
+    params ["_mission"];
 
-	_markerName = str(_mission select 0) + "LZ" + str(_mission select 1);
-	deleteMarker _markerName;
+    _markerName = str(_mission select 0) + "LZ" + str(_mission select 1);
+    deleteMarker _markerName;
 };
 
 _vehicle setVariable ["targetPos",_destinationPosition,true];
@@ -84,7 +84,7 @@ _heliPad = "Land_HelipadEmpty_F" createVehicle _destinationPosition; // invisibl
 _vehicle setVariable ["targetPad",_heliPad,true];
 
 {
-	deleteWaypoint _x
+    deleteWaypoint _x
 } foreach waypoints group _driver;
 
 _vehicle setVariable ["landingInProgress",false,true];
@@ -93,67 +93,67 @@ _emergencyLand = false;
 _waypointIndex = 0;
 /* Set Waypoint,Takeoff */
 if (!_airEscort) then {
-	_iSaftyCount = 500;
-	_bHalfWayWaypoint = false;
-	_DirAtoB = [getPos _vehicle, _destinationPosition] call BIS_fnc_DirTo;
-	_AvoidZonePos = TRGM_VAR_ObjectivePossitions select 0;
+    _iSaftyCount = 500;
+    _bHalfWayWaypoint = false;
+    _DirAtoB = [getPos _vehicle, _destinationPosition] call BIS_fnc_DirTo;
+    _AvoidZonePos = TRGM_VAR_ObjectivePossitions select 0;
 
-	if (! isNil "_AvoidZonePos" ) then {
-		_stepPos = getPos _vehicle;
-		_stepDistLeft = _vehicle distance _destinationPosition;
-		_bEndSteps = false;
-		while {!_bEndSteps && _iSaftyCount > 0} do {
-			_iSaftyCount = _iSaftyCount - 1;
-			_stepPos = _stepPos getPos [100,_DirAtoB];
-			_stepDistToAO = _stepPos distance _AvoidZonePos;
-			_stepDistLeft = _stepPos distance _destinationPosition;
+    if (! isNil "_AvoidZonePos" ) then {
+        _stepPos = getPos _vehicle;
+        _stepDistLeft = _vehicle distance _destinationPosition;
+        _bEndSteps = false;
+        while {!_bEndSteps && _iSaftyCount > 0} do {
+            _iSaftyCount = _iSaftyCount - 1;
+            _stepPos = _stepPos getPos [100,_DirAtoB];
+            _stepDistToAO = _stepPos distance _AvoidZonePos;
+            _stepDistLeft = _stepPos distance _destinationPosition;
 
-			if (false) then {
-				_markerNameSteps = str(_vehicle) + "Step_" + str(500 - _iSaftyCount);
-				_mrkcustomSteps = createMarker [_markerNameSteps, _stepPos];
-				_mrkcustomSteps setMarkerShape "ICON";
-				_mrkcustomSteps setMarkerSize [1,1];
-				_mrkcustomSteps setMarkerType "hd_dot";
-				_mrkcustomSteps setMarkerText ("Step " + str(_stepDistLeft));
-				sleep 0.1;
-				[str(_iSaftyCount)] call TRGM_GLOBAL_fnc_notify;
-			};
+            if (false) then {
+                _markerNameSteps = str(_vehicle) + "Step_" + str(500 - _iSaftyCount);
+                _mrkcustomSteps = createMarker [_markerNameSteps, _stepPos];
+                _mrkcustomSteps setMarkerShape "ICON";
+                _mrkcustomSteps setMarkerSize [1,1];
+                _mrkcustomSteps setMarkerType "hd_dot";
+                _mrkcustomSteps setMarkerText ("Step " + str(_stepDistLeft));
+                sleep 0.1;
+                [str(_iSaftyCount)] call TRGM_GLOBAL_fnc_notify;
+            };
 
-			if (_stepDistToAO < 1000) then {
-				if (_isHiddenObj) then {
-					_bEndSteps = true;
-					_destinationPosition = _stepPos;
-					_emergencyLand = true;
-				}
-				else {
-					_bEndSteps = true;
-					_divertDirectionA = ([_DirAtoB,80] call TRGM_GLOBAL_fnc_addToDirection);
-					_newPosA = _AvoidZonePos getPos [2000,_divertDirectionA];
-					_divertDirectionB = ([_DirAtoB,-80] call TRGM_GLOBAL_fnc_addToDirection);
-					_newPosB = _AvoidZonePos getPos [2000,_divertDirectionB];
-					_totalDistA = (_vehicle distance _newPosA) + (_newPosA distance _destinationPosition);
-					_totalDistB = (_vehicle distance _newPosB) + (_newPosB distance _destinationPosition);
-					_newPos = nil;
-					if (_totalDistA < _totalDistB) then {
-						_newPos = _newPosA;
-					}
-					else {
-						_newPos = _newPosB;
-					};
-					_waypointIndex = _waypointIndex + 1;
-					_flyToLZMid = group _driver addWaypoint [_newPos,0,0];
-					_flyToLZMid setWaypointType "MOVE";
-					_flyToLZMid setWaypointSpeed "FULL";
-					_flyToLZMid setWaypointBehaviour "CARELESS";
-					_flyToLZMid setWaypointCombatMode "BLUE";
-					_flyToLZMid setWaypointCompletionRadius 1000;
-				};
-			};
-			if (_stepDistLeft < 300) then {
-				_bEndSteps = true;
-			};
-		};
-	}
+            if (_stepDistToAO < 1000) then {
+                if (_isHiddenObj) then {
+                    _bEndSteps = true;
+                    _destinationPosition = _stepPos;
+                    _emergencyLand = true;
+                }
+                else {
+                    _bEndSteps = true;
+                    _divertDirectionA = ([_DirAtoB,80] call TRGM_GLOBAL_fnc_addToDirection);
+                    _newPosA = _AvoidZonePos getPos [2000,_divertDirectionA];
+                    _divertDirectionB = ([_DirAtoB,-80] call TRGM_GLOBAL_fnc_addToDirection);
+                    _newPosB = _AvoidZonePos getPos [2000,_divertDirectionB];
+                    _totalDistA = (_vehicle distance _newPosA) + (_newPosA distance _destinationPosition);
+                    _totalDistB = (_vehicle distance _newPosB) + (_newPosB distance _destinationPosition);
+                    _newPos = nil;
+                    if (_totalDistA < _totalDistB) then {
+                        _newPos = _newPosA;
+                    }
+                    else {
+                        _newPos = _newPosB;
+                    };
+                    _waypointIndex = _waypointIndex + 1;
+                    _flyToLZMid = group _driver addWaypoint [_newPos,0,0];
+                    _flyToLZMid setWaypointType "MOVE";
+                    _flyToLZMid setWaypointSpeed "FULL";
+                    _flyToLZMid setWaypointBehaviour "CARELESS";
+                    _flyToLZMid setWaypointCombatMode "BLUE";
+                    _flyToLZMid setWaypointCompletionRadius 1000;
+                };
+            };
+            if (_stepDistLeft < 300) then {
+                _bEndSteps = true;
+            };
+        };
+    }
 };
 
 _flyToLZ = group _driver addWaypoint [_destinationPosition,0,_waypointIndex];
@@ -163,61 +163,61 @@ _flyToLZ setWaypointBehaviour "CARELESS";
 _flyToLZ setWaypointCombatMode "BLUE";
 _flyToLZ setWaypointCompletionRadius 100;
 if (_emergencyLand) then {
-	_flyToLZ setWaypointStatements ["true", "(vehicle this) land 'GET IN'; (vehicle this) setVariable [""landingInProgress"",true,true]; [""LANDING!!!""] call TRGM_GLOBAL_fnc_notify;"];
+    _flyToLZ setWaypointStatements ["true", "(vehicle this) land 'GET IN'; (vehicle this) setVariable [""landingInProgress"",true,true]; [""LANDING!!!""] call TRGM_GLOBAL_fnc_notify;"];
 }
 else {
-	_flyToLZ setWaypointStatements ["true", "(vehicle this) land 'GET IN'; (vehicle this) setVariable [""landingInProgress"",true,true]"];
+    _flyToLZ setWaypointStatements ["true", "(vehicle this) land 'GET IN'; (vehicle this) setVariable [""landingInProgress"",true,true]"];
 };
 
 //also, further above, set AOISHIDDEN
 
 if (_airEscort) then {
-	_escortPilot = driver chopper2;
-	{
-		deleteWaypoint _x
-	} foreach waypoints group _escortPilot;
-	_escortFlyToLZ = group _escortPilot addWaypoint [_destinationPosition,0,0];
-	_escortFlyToLZ setWaypointBehaviour "AWARE";
-	_escortFlyToLZ setWaypointCombatMode "RED";
-	_escortFlyToLZ setWaypointType "LOITER";
-	_escortFlyToLZ setWaypointLoiterType "CIRCLE";
-	_escortFlyToLZ setWaypointSpeed "FULL";
+    _escortPilot = driver chopper2;
+    {
+        deleteWaypoint _x
+    } foreach waypoints group _escortPilot;
+    _escortFlyToLZ = group _escortPilot addWaypoint [_destinationPosition,0,0];
+    _escortFlyToLZ setWaypointBehaviour "AWARE";
+    _escortFlyToLZ setWaypointCombatMode "RED";
+    _escortFlyToLZ setWaypointType "LOITER";
+    _escortFlyToLZ setWaypointLoiterType "CIRCLE";
+    _escortFlyToLZ setWaypointSpeed "FULL";
 };
 
 
 if (!([_vehicle] call TRGM_GLOBAL_fnc_helicopterIsFlying)) then {
-	_locationText = [position _vehicle,true] call TRGM_GLOBAL_fnc_getLocationName;
-	_text = format [localize "STR_TRGM2_transport_fnflyToLz_ClearTakeoff", [_vehicle] call TRGM_GLOBAL_fnc_getTransportName,_locationText];
-	[_text] call TRGM_GLOBAL_fnc_commsHQ;
+    _locationText = [position _vehicle,true] call TRGM_GLOBAL_fnc_getLocationName;
+    _text = format [localize "STR_TRGM2_transport_fnflyToLz_ClearTakeoff", [_vehicle] call TRGM_GLOBAL_fnc_getTransportName,_locationText];
+    [_text] call TRGM_GLOBAL_fnc_commsHQ;
 };
 
 if (!([_vehicle] call TRGM_GLOBAL_fnc_helicopterIsFlying)) then {
-	waitUntil {sleep 2; (!([_vehicle] call TRGM_GLOBAL_fnc_helicopterIsFlying)) || !(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive)};
-	if (!(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive)) then {
-		[_thisMission] call _cleanupMission;
-		breakOut "FlyTo";
-	};
-	sleep 2;
+    waitUntil {sleep 2; (!([_vehicle] call TRGM_GLOBAL_fnc_helicopterIsFlying)) || !(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive)};
+    if (!(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive)) then {
+        [_thisMission] call _cleanupMission;
+        breakOut "FlyTo";
+    };
+    sleep 2;
 
-	[_vehicle,localize "STR_TRGM2_transport_fnflyToLz_OffWeGo"] call TRGM_GLOBAL_fnc_commsPilotToVehicle;
+    [_vehicle,localize "STR_TRGM2_transport_fnflyToLz_OffWeGo"] call TRGM_GLOBAL_fnc_commsPilotToVehicle;
 } else {
-	[_vehicle,localize "STR_TRGM2_transport_fnflyToLz_Diverting"]call TRGM_GLOBAL_fnc_commsPilotToVehicle;
+    [_vehicle,localize "STR_TRGM2_transport_fnflyToLz_Diverting"]call TRGM_GLOBAL_fnc_commsPilotToVehicle;
 };
 
 /* Landing done **/
 
 waitUntil { sleep 2; ((_vehicle getVariable ["landingInProgress",false]) || !(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive)); };
 if (!(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive)) then {
-	_vehicle land "NONE";
-	[_thisMission] call _cleanupMission;
-	breakOut "FlyTo";
+    _vehicle land "NONE";
+    [_thisMission] call _cleanupMission;
+    breakOut "FlyTo";
 };
 
 waitUntil { sleep 2; ((!([_vehicle] call TRGM_GLOBAL_fnc_helicopterIsFlying)) || {!canMove _vehicle} || !(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive)); };
 if (!(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive)) then {
-	_vehicle land "NONE";
-	[_thisMission] call _cleanupMission;
-	breakOut "FlyTo";
+    _vehicle land "NONE";
+    [_thisMission] call _cleanupMission;
+    breakOut "FlyTo";
 ;
 };
 
@@ -225,14 +225,14 @@ sleep 2;
 
 /* Post landing,cleanup */
 {
-	deleteWaypoint _x
+    deleteWaypoint _x
 } foreach waypoints _driver;
 
 if (!_isPickup) then {
-	[_vehicle, localize "STR_TRGM2_transport_fnflyToLz_ReachLZ_Out"] call TRGM_GLOBAL_fnc_commsPilotToVehicle;
+    [_vehicle, localize "STR_TRGM2_transport_fnflyToLz_ReachLZ_Out"] call TRGM_GLOBAL_fnc_commsPilotToVehicle;
 }
 else {
-	[driver _vehicle,localize "STR_TRGM2_transport_fnflyToLz_ReachLZ_In"] call TRGM_GLOBAL_fnc_commsSide;
+    [driver _vehicle,localize "STR_TRGM2_transport_fnflyToLz_ReachLZ_In"] call TRGM_GLOBAL_fnc_commsSide;
 };
 
 
@@ -241,30 +241,30 @@ sleep 5;
 /* wait for empty helicopter */
 
 if (!_isPickup) then {
-	waitUntil { sleep 2; ([_vehicle] call TRGM_GLOBAL_fnc_isOnlyBoardCrewOnboard) || !(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive) }; // helicopter empty except pilot + crew
+    waitUntil { sleep 2; ([_vehicle] call TRGM_GLOBAL_fnc_isOnlyBoardCrewOnboard) || !(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive) }; // helicopter empty except pilot + crew
 
-	if (!(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive)) then {
-		_vehicle land "NONE";
-		[_thisMission] call _cleanupMission;
-		breakOut "FlyTo";
-	};
-	/* RTB */
-	[_vehicle,_thisMission] spawn TRGM_GLOBAL_fnc_flyToBase;
+    if (!(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive)) then {
+        _vehicle land "NONE";
+        [_thisMission] call _cleanupMission;
+        breakOut "FlyTo";
+    };
+    /* RTB */
+    [_vehicle,_thisMission] spawn TRGM_GLOBAL_fnc_flyToBase;
 }
 else {
-	waitUntil { sleep 2; !([_vehicle] call TRGM_GLOBAL_fnc_isOnlyBoardCrewOnboard) || !(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive) }; // helicopter has passengers (not just pilot + crew)
-	if (!(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive)) then {
-		_vehicle land "NONE";
-		[_thisMission] call _cleanupMission;
-		breakOut "FlyTo";
-	};
-	if (!(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive)) then {
-		/* RTB */
-		[_vehicle,_thisMission] spawn TRGM_GLOBAL_fnc_flyToBase;
-	}
-	else {
-		[_vehicle, localize "STR_TRGM2_transport_fnflyToLz_WelcomeAboard"] call TRGM_GLOBAL_fnc_commsPilotToVehicle;
-	};
+    waitUntil { sleep 2; !([_vehicle] call TRGM_GLOBAL_fnc_isOnlyBoardCrewOnboard) || !(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive) }; // helicopter has passengers (not just pilot + crew)
+    if (!(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive)) then {
+        _vehicle land "NONE";
+        [_thisMission] call _cleanupMission;
+        breakOut "FlyTo";
+    };
+    if (!(_thisMission call TRGM_GLOBAL_fnc_checkMissionIdActive)) then {
+        /* RTB */
+        [_vehicle,_thisMission] spawn TRGM_GLOBAL_fnc_flyToBase;
+    }
+    else {
+        [_vehicle, localize "STR_TRGM2_transport_fnflyToLz_WelcomeAboard"] call TRGM_GLOBAL_fnc_commsPilotToVehicle;
+    };
 };
 
 sleep 4;

@@ -7,16 +7,16 @@ publicVariable "TRGM_VAR_debugMessages";
 sleep 3;
 
 if (side _killer isEqualTo west && str(_killed) != str(_killer)) then {
-	[0.2,format[localize "STR_TRGM2_InsKilled_RebelKilled", name _killer]] spawn TRGM_GLOBAL_fnc_adjustBadPoints;
+    [0.2,format[localize "STR_TRGM2_InsKilled_RebelKilled", name _killer]] spawn TRGM_GLOBAL_fnc_adjustBadPoints;
 
-	_nearestunits = nearestObjects [getPos _killed,["Man","Car","Tank"],2000];
-	_grpName = createGroup east;
-	{
-		_isRebel = _x getVariable ["IsRebel", false];
-		if (_isRebel) then {
-			[_x] joinSilent _grpName;
-		};
-	} forEach _nearestunits;
+    _nearestunits = nearestObjects [getPos _killed,["Man","Car","Tank"],2000];
+    _grpName = createGroup east;
+    {
+        _isRebel = _x getVariable ["IsRebel", false];
+        if (_isRebel) then {
+            [_x] joinSilent _grpName;
+        };
+    } forEach _nearestunits;
 };
 
 true;

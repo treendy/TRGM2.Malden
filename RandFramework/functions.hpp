@@ -249,44 +249,44 @@ class TRGM_CLIENT {
 
 class MISSIONS {
     class main {
-		class ambushConvoyMission {
-			file = "RandFramework\Missions\ambushConvoyMission.sqf";
-		};
-		class bombDisposalMission {
-			file = "RandFramework\Missions\bombDisposalMission.sqf";
-		};
-		class bugRadioMission {
-			file = "RandFramework\Missions\bugRadioMission.sqf";
-		};
-		class customMissionBasicCacheSample {
-			file = "RandFramework\Missions\customMissionBasicCacheSample.sqf";
-		};
-		class defuseIEDsMission {
-			file = "RandFramework\Missions\defuseIEDsMission.sqf";
-		};
-		class destroyCacheMission {
-			file = "RandFramework\Missions\destroyCacheMission.sqf";
-		};
-		class destroyVehiclesMission {
-			file = "RandFramework\Missions\destroyVehiclesMission.sqf";
-		};
-		class hackDataMission {
-			file = "RandFramework\Missions\hackDataMission.sqf";
-		};
-		class hvtMission {
-			file = "RandFramework\Missions\hvtMission.sqf";
-		};
-		class meetingAssassinationMission {
-			file = "RandFramework\Missions\meetingAssassinationMission.sqf";
-		};
-		class searchAndDestroyMission {
-			file = "RandFramework\Missions\searchAndDestroyMission.sqf";
-		};
-		class secureAndResupplyMission {
-			file = "RandFramework\Missions\secureAndResupplyMission.sqf";
-		};
-		class stealDataFromResearchVehMission {
-			file = "RandFramework\Missions\stealDataFromResearchVehMission.sqf";
-		};
+        class ambushConvoyMission {
+            file = "RandFramework\Missions\ambushConvoyMission.sqf";
+        };
+        class bombDisposalMission {
+            file = "RandFramework\Missions\bombDisposalMission.sqf";
+        };
+        class bugRadioMission {
+            file = "RandFramework\Missions\bugRadioMission.sqf";
+        };
+        class customMissionBasicCacheSample {
+            file = "RandFramework\Missions\customMissionBasicCacheSample.sqf";
+        };
+        class defuseIEDsMission {
+            file = "RandFramework\Missions\defuseIEDsMission.sqf";
+        };
+        class destroyCacheMission {
+            file = "RandFramework\Missions\destroyCacheMission.sqf";
+        };
+        class destroyVehiclesMission {
+            file = "RandFramework\Missions\destroyVehiclesMission.sqf";
+        };
+        class hackDataMission {
+            file = "RandFramework\Missions\hackDataMission.sqf";
+        };
+        class hvtMission {
+            file = "RandFramework\Missions\hvtMission.sqf";
+        };
+        class meetingAssassinationMission {
+            file = "RandFramework\Missions\meetingAssassinationMission.sqf";
+        };
+        class searchAndDestroyMission {
+            file = "RandFramework\Missions\searchAndDestroyMission.sqf";
+        };
+        class secureAndResupplyMission {
+            file = "RandFramework\Missions\secureAndResupplyMission.sqf";
+        };
+        class stealDataFromResearchVehMission {
+            file = "RandFramework\Missions\stealDataFromResearchVehMission.sqf";
+        };
     };
 };

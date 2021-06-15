@@ -79,65 +79,65 @@ HQMan switchMove "acts_StandingSpeakingUnarmed";
 publicVariable "HQMan";
 
 private _object_spawn = {
-	params ["_name", "_center", "_offset", ["_enableSim", false]];
-	private _newx = (_center select 0) + (_offset select 0);
-	private _newy = (_center select 1) + (_offset select 1);
-	private _newz = (_offset select 2);
+    params ["_name", "_center", "_offset", ["_enableSim", false]];
+    private _newx = (_center select 0) + (_offset select 0);
+    private _newy = (_center select 1) + (_offset select 1);
+    private _newz = (_offset select 2);
 
-	[[_newx, _newy, _newz], sizeOf _name] call TRGM_GLOBAL_fnc_hideTerrainObjects;
-	private _object = createVehicle [_name, [0,0,0], [], 0, "NONE"];
-	_object allowdamage false;
-	_object enableSimulation _enableSim;
-	_object setpos [_newx, _newy, _newz];
-	_object setdamage 0;
-	TRGM_VAR_spawnedObjectsArray pushBack [getPos _object, sizeOf _name];
-	_object;
+    [[_newx, _newy, _newz], sizeOf _name] call TRGM_GLOBAL_fnc_hideTerrainObjects;
+    private _object = createVehicle [_name, [0,0,0], [], 0, "NONE"];
+    _object allowdamage false;
+    _object enableSimulation _enableSim;
+    _object setpos [_newx, _newy, _newz];
+    _object setdamage 0;
+    TRGM_VAR_spawnedObjectsArray pushBack [getPos _object, sizeOf _name];
+    _object;
 };
 
 private _building_spawn = {
-	params ["_name", "_center", "_offset"];
-	private _newx = (_center select 0) + (_offset select 0);
-	private _newy = (_center select 1) + (_offset select 1);
-	private _newz = (_offset select 2);
-	private _safePos = [[_newx, _newy, _newz], sizeOf "Land_Cargo_HQ_V1_F", (sizeOf "Land_Cargo_HQ_V1_F" + sizeOf _name), sizeOf _name, 0, 0.2, 0, TRGM_VAR_spawnedObjectsArray, [[_newx, _newy],[_newx, _newy]], _name] call TRGM_GLOBAL_fnc_findSafePos; // find a valid pos
+    params ["_name", "_center", "_offset"];
+    private _newx = (_center select 0) + (_offset select 0);
+    private _newy = (_center select 1) + (_offset select 1);
+    private _newz = (_offset select 2);
+    private _safePos = [[_newx, _newy, _newz], sizeOf "Land_Cargo_HQ_V1_F", (sizeOf "Land_Cargo_HQ_V1_F" + sizeOf _name), sizeOf _name, 0, 0.2, 0, TRGM_VAR_spawnedObjectsArray, [[_newx, _newy],[_newx, _newy]], _name] call TRGM_GLOBAL_fnc_findSafePos; // find a valid pos
 
-	[_safePos, sizeOf _name] call TRGM_GLOBAL_fnc_hideTerrainObjects;
-	private _building = createVehicle [_name, [0,0,0], [], 0, "NONE"];
-	_building allowdamage false;
-	_building setpos _safePos;
-	_building setdamage 0;
-	TRGM_VAR_spawnedObjectsArray pushBack [getPos _building, sizeOf _name];
-	_building;
+    [_safePos, sizeOf _name] call TRGM_GLOBAL_fnc_hideTerrainObjects;
+    private _building = createVehicle [_name, [0,0,0], [], 0, "NONE"];
+    _building allowdamage false;
+    _building setpos _safePos;
+    _building setdamage 0;
+    TRGM_VAR_spawnedObjectsArray pushBack [getPos _building, sizeOf _name];
+    _building;
 };
 
 private _helo_spawn = {
-	params ["_name", "_center", "_offset"];
-	private _newx = (_center select 0) + (_offset select 0);
-	private _newy = (_center select 1) + (_offset select 1);
-	private _newz = (_offset select 2);
-	private _safePos = [[_newx, _newy, _newz], sizeOf "Land_Cargo_HQ_V1_F", ((2 * sizeOf "Land_Cargo_HQ_V1_F") + sizeOf _name), sizeOf _name, 0, 0.2, 0, TRGM_VAR_spawnedObjectsArray, [[_newx, _newy],[_newx, _newy]], _name] call TRGM_GLOBAL_fnc_findSafePos; // find a valid pos
+    params ["_name", "_center", "_offset"];
+    private _newx = (_center select 0) + (_offset select 0);
+    private _newy = (_center select 1) + (_offset select 1);
+    private _newz = (_offset select 2);
+    private _safePos = [[_newx, _newy, _newz], sizeOf "Land_Cargo_HQ_V1_F", ((2 * sizeOf "Land_Cargo_HQ_V1_F") + sizeOf _name), sizeOf _name, 0, 0.2, 0, TRGM_VAR_spawnedObjectsArray, [[_newx, _newy],[_newx, _newy]], _name] call TRGM_GLOBAL_fnc_findSafePos; // find a valid pos
 
-	[_safePos, sizeOf _name] call TRGM_GLOBAL_fnc_hideTerrainObjects;
-	private _helo = createVehicle [_name, _safePos, [], 0, "NONE"];
-	createVehicleCrew _helo;
-	crew vehicle _helo joinSilent createGroup WEST;
-	_helo allowDamage false;
-	_helo setpos _safePos;
-	_helo setVelocity [0,0,0];
-	_helo setPosASL [getPosASL _helo select 0, getPosASL _helo select 1, getTerrainHeightASL getPosASL _helo];
-	_helo setdamage 0;
-	_helo engineOn false;
-	_helo lockDriver true;
-	private _totalTurrets = [_name, true] call BIS_fnc_allTurrets;
-	{_helo lockTurret [_x, true]} forEach _totalTurrets;
-	{ doStop _x; } forEach crew _helo;
-	TRGM_VAR_spawnedObjectsArray pushBack [getPos _helo, sizeOf _name];
-	_helo;
+    [_safePos, sizeOf _name] call TRGM_GLOBAL_fnc_hideTerrainObjects;
+    private _helo = createVehicle [_name, _safePos, [], 0, "NONE"];
+    createVehicleCrew _helo;
+    crew vehicle _helo joinSilent createGroup WEST;
+    _helo allowDamage false;
+    _helo setpos _safePos;
+    _helo setVelocity [0,0,0];
+    _helo setPosASL [getPosASL _helo select 0, getPosASL _helo select 1, getTerrainHeightASL getPosASL _helo];
+    _helo setdamage 0;
+    _helo engineOn false;
+    _helo lockDriver true;
+    private _totalTurrets = [_name, true] call BIS_fnc_allTurrets;
+    {_helo lockTurret [_x, true]} forEach _totalTurrets;
+    { doStop _x; } forEach crew _helo;
+    TRGM_VAR_spawnedObjectsArray pushBack [getPos _helo, sizeOf _name];
+    _helo;
 };
 
 private _lightPositions = [[5.5,-5.5,0], [-5.5,3.5,0], [5.5,3.5,0], [-5.5,-5.5,0], [-2.75,-2.75,0], [-2.75,2.75,0], [2.75,2.75,0], [2.75,2.75,1]];
 {
-	["Land_Camping_Light_F", _HQpos, _x, true] call _object_spawn;
+    ["Land_Camping_Light_F", _HQpos, _x, true] call _object_spawn;
 } forEach _lightPositions;
 
 terminal1 = ["Land_DataTerminal_01_F", _HQpos, [-1.1,2.7,0.6]] call _object_spawn;
@@ -295,9 +295,9 @@ SupProArti setVariable ['BIS_SUPP_cooldown',0,true];
 SupProArti setvariable ["BIS_fnc_initModules_disableAutoActivation",true];
 publicVariable "SupProArti";
 
-chopper1 synchronizeObjectsAdd [supReqTrans]; 		supReqTrans synchronizeObjectsAdd [chopper1];
-supReqAirSup synchronizeObjectsAdd [supReqAir]; 	supReqAir synchronizeObjectsAdd [supReqAirSup];
+chopper1 synchronizeObjectsAdd [supReqTrans];         supReqTrans synchronizeObjectsAdd [chopper1];
+supReqAirSup synchronizeObjectsAdd [supReqAir];     supReqAir synchronizeObjectsAdd [supReqAirSup];
 supReqSupDrop synchronizeObjectsAdd [supReqSupply]; supReqSupply synchronizeObjectsAdd [supReqSupDrop];
-SupProArti synchronizeObjectsAdd [supReq]; 			supReq synchronizeObjectsAdd [SupProArti];
+SupProArti synchronizeObjectsAdd [supReq];             supReq synchronizeObjectsAdd [SupProArti];
 
 TRGM_VAR_NeededObjectsAvailable = true; publicVariable "TRGM_VAR_NeededObjectsAvailable";

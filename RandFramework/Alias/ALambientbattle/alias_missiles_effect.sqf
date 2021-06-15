@@ -12,14 +12,14 @@ if ((player distance _miss_object_name)>100) then {
 
 _li = "#lightpoint" createVehiclelocal (getPos _al_rocket);
 _li setLightBrightness 100;
-_li setLightAttenuation [/*start*/ 5, /*constant*/0, /*linear*/ 100, /*quadratic*/ 2000, /*hardlimitstart*/200,/* hardlimitend*/500]; 
+_li setLightAttenuation [/*start*/ 5, /*constant*/0, /*linear*/ 100, /*quadratic*/ 2000, /*hardlimitstart*/200,/* hardlimitend*/500];
 _li setLightUseFlare true;
 _li setLightFlareSize 1;
-_li setLightFlareMaxDistance 2000;	
+_li setLightFlareMaxDistance 2000;
 _li setLightAmbient[1,0.7,0];
 _li setLightColor[1,1,1];
 _li lightAttachObject [_al_rocket, [0,0,-3]];
-	
+
 _al_rocket say3d [_sunetr,2500];
 
 // Smoke
@@ -30,9 +30,9 @@ _ps1 setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 2+
 _ps1 setDropInterval 0.002;
 
 _al_rocket setVelocity [0,0,200];
-	
+
 sleep 5+random 3;
-deleteVehicle _ps1;	
+deleteVehicle _ps1;
 deletevehicle _li;
 _al_rocket setPosATL getPosATL _miss_object_name;
 };

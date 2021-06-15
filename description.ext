@@ -26,9 +26,9 @@ respawnTemplates[] = {"Tickets","Spectator","MenuPosition"};
 
 class Header
 {
-	gameType = Coop;
-	minPlayers = 5;
-	MaxPlayers = 35;
+    gameType = Coop;
+    minPlayers = 5;
+    MaxPlayers = 35;
 };
 
 #include "CustomMission\CustomFriendlyLoadouts.hpp"
@@ -37,228 +37,228 @@ class Header
 #include "RandFramework\GUI\dialogs.hpp"
 
 class CfgFunctions {
-	#include "fhqtt\functions.hpp"
-	#include "RandFramework\functions.hpp"
-	class CUSTOM_MISSION {
-		class mission {
-			class SetDefaultMissionSetupVars {
-				file = "CustomMission\SetDefaultMissionSetupVars.sqf";
-			};
-		};
+    #include "fhqtt\functions.hpp"
+    #include "RandFramework\functions.hpp"
+    class CUSTOM_MISSION {
+        class mission {
+            class SetDefaultMissionSetupVars {
+                file = "CustomMission\SetDefaultMissionSetupVars.sqf";
+            };
+        };
 
-		class factions {
-			class SetFriendlyFaction {
-				file = "CustomMission\SetFriendlyFaction.sqf";
-			};
-			class SetEnemyFaction {
-				file = "CustomMission\SetEnemyFaction.sqf";
-			};
-			class SetMilitiaFaction {
-				file = "CustomMission\SetMilitiaFaction.sqf";
-			};
-		};
-	};
-	#ifndef AIS_Core_Progress_BarDlg
-		#include "AIS\cfgFunctions.hpp"
-	#endif
+        class factions {
+            class SetFriendlyFaction {
+                file = "CustomMission\SetFriendlyFaction.sqf";
+            };
+            class SetEnemyFaction {
+                file = "CustomMission\SetEnemyFaction.sqf";
+            };
+            class SetMilitiaFaction {
+                file = "CustomMission\SetMilitiaFaction.sqf";
+            };
+        };
+    };
+    #ifndef AIS_Core_Progress_BarDlg
+        #include "AIS\cfgFunctions.hpp"
+    #endif
 };
 #ifndef AIS_Core_Progress_BarDlg
-	#include "AIS\Effects\BarDlg.hpp"
+    #include "AIS\Effects\BarDlg.hpp"
 #endif
 
 class CfgDebriefing
 {
-	#include "RandFramework\cfgDebriefing.hpp"
+    #include "RandFramework\cfgDebriefing.hpp"
 };
 
 class CfgMusic
 {
-	#include "RandFramework\Sounds\cfgMusic.hpp"
+    #include "RandFramework\Sounds\cfgMusic.hpp"
 };
 
 class CfgSounds
 {
-	#include "RandFramework\Sounds\cfgSounds.hpp"
-	#include "RandFramework\Alias\cfgSounds.hpp"
+    #include "RandFramework\Sounds\cfgSounds.hpp"
+    #include "RandFramework\Alias\cfgSounds.hpp"
 };
 
 class CfgRadio
 {
-	#include "RandFramework\Sounds\cfgRadio.hpp"
+    #include "RandFramework\Sounds\cfgRadio.hpp"
 };
 
 class Params
 {
-	class CustomMission
-	{
-		title = "Enable Custom Mission (Disables mission setup dialog, mission is set up using 'CustomMission/TRGMSetDefaultMissionSetupVars.sqf')"; // Param name visible in the list
-		values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
-		texts[] = {"Disable","Enable"}; // Description of each selectable item
-		default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
-		// Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
-	};
-	class CustomFriendlyFaction
-	{
-		title = "Enable Custom Friendly Faction (Overrides Faction selected in mission set up)"; // Param name visible in the list
-		values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
-		texts[] = {"Disable","Enable"}; // Description of each selectable item
-		default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
-		// Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
-	};
-	class CustomEnemyFaction
-	{
-		title = "Enable Custom Enemy Faction (Overrides Faction selected in mission set up)"; // Param name visible in the list
-		values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
-		texts[] = {"Disable","Enable"}; // Description of each selectable item
-		default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
-		// Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
-	};
-	class CustomMilitiaFaction
-	{
-		title = "Enable Custom Militia Faction (Overrides Faction selected in mission set up)"; // Param name visible in the list
-		values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
-		texts[] = {"Disable","Enable"}; // Description of each selectable item
-		default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
-		// Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
-	};
-	class DebugMode
-	{
-		title = "Enable Debugging Mode"; // Param name visible in the list
-		values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
-		texts[] = {"Disable","Enable"}; // Description of each selectable item
-		default = 1; // Default value; must be listed in 'values' array, otherwise 0 is used
-		// Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
-	};
-	class ResetMissionSettings
-	{
-		title = "Reset all saved mission settings to default values"; // Param name visible in the list
-		values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
-		texts[] = {"Disable","Enable"}; // Description of each selectable item
-		default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
-		// Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
-	};
+    class CustomMission
+    {
+        title = "Enable Custom Mission (Disables mission setup dialog, mission is set up using 'CustomMission/TRGMSetDefaultMissionSetupVars.sqf')"; // Param name visible in the list
+        values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
+        texts[] = {"Disable","Enable"}; // Description of each selectable item
+        default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
+        // Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
+    };
+    class CustomFriendlyFaction
+    {
+        title = "Enable Custom Friendly Faction (Overrides Faction selected in mission set up)"; // Param name visible in the list
+        values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
+        texts[] = {"Disable","Enable"}; // Description of each selectable item
+        default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
+        // Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
+    };
+    class CustomEnemyFaction
+    {
+        title = "Enable Custom Enemy Faction (Overrides Faction selected in mission set up)"; // Param name visible in the list
+        values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
+        texts[] = {"Disable","Enable"}; // Description of each selectable item
+        default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
+        // Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
+    };
+    class CustomMilitiaFaction
+    {
+        title = "Enable Custom Militia Faction (Overrides Faction selected in mission set up)"; // Param name visible in the list
+        values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
+        texts[] = {"Disable","Enable"}; // Description of each selectable item
+        default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
+        // Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
+    };
+    class DebugMode
+    {
+        title = "Enable Debugging Mode"; // Param name visible in the list
+        values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
+        texts[] = {"Disable","Enable"}; // Description of each selectable item
+        default = 1; // Default value; must be listed in 'values' array, otherwise 0 is used
+        // Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
+    };
+    class ResetMissionSettings
+    {
+        title = "Reset all saved mission settings to default values"; // Param name visible in the list
+        values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
+        texts[] = {"Disable","Enable"}; // Description of each selectable item
+        default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
+        // Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
+    };
 };
 
 class RscTitles
 {
-	class TRGM_VAR_notifications
-	{
-		idd = 9009;
-		name = "TRGM_VAR_notifications";
-		duration = 1e+007;
-		movingEnable = 0;
-		fadein = 0;
-		fadeout = 0;
+    class TRGM_VAR_notifications
+    {
+        idd = 9009;
+        name = "TRGM_VAR_notifications";
+        duration = 1e+007;
+        movingEnable = 0;
+        fadein = 0;
+        fadeout = 0;
 
-		onLoad = "uiNamespace setVariable [""TRGM_VAR_notifications_disp"", _this select 0]";
-		onUnload = "uiNamespace setVariable [""TRGM_VAR_notifications_disp"", nil]";
+        onLoad = "uiNamespace setVariable [""TRGM_VAR_notifications_disp"", _this select 0]";
+        onUnload = "uiNamespace setVariable [""TRGM_VAR_notifications_disp"", nil]";
 
-		class controls {
+        class controls {
 
-			class MessageContainer: RscControlsGroupNoScrollbars
-			{
-				idc = 9010;
-				x = 0.8220 * safezoneW + safezoneX;
-				y = 0.0960 * safezoneH + safezoneY;
-				w = 0.1700 * safezoneW;
-				h = 0.8875 * safezoneH;
-				class controls {};
-			};
-		};
-	};
-	class Download_Data
-	{
-		idd = 9090;
-		movingEnable = 0;
-		onLoad = "uiNamespace setVariable [""disp_downloadingData"", (_this select 0)];";
-		onUnLoad = "uiNamespace setVariable [""disp_downloadingData"", displayNull];";
-		duration = 1e011;
-		class controls
-		{
-			class download : RscControlsGroupNoScrollbars
-			{
-				idc = 100;
-				x = "safeZoneX + 0 * (((safezoneW / safezoneH) min 1.2) / 40) + 0.1 * (((safezoneW / safezoneH) min 1.2) / 40)";
-				y = "8.7 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) + (safezoneY + safezoneH - (((safezoneW / safezoneH) min 1.2) / 1.2))";
-				w = "15.4 * (((safezoneW / safezoneH) min 1.2) / 40)";
-				h = "3 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-				class controls
-				{
-					class downloadContent : RscText
-					{
-						idc = 100;
-						x = "0 * (((safezoneW / safezoneH) min 1.2) / 40)";
-						y = "1.2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						w = "15.4 * (((safezoneW / safezoneH) min 1.2) / 40)";
-						h = "1.8 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						colorBackground[] = {0.30000001, 0.30000001, 0.30000001, 0.69999999};
-					};
-					class downloadTitle : RscText
-					{
-						idc = 200;
-						x = "0 * (((safezoneW / safezoneH) min 1.2) / 40)";
-						y = "0 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						w = "15.4 * (((safezoneW / safezoneH) min 1.2) / 40)";
-						h = "1.2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						sizeEx = "1.15 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						text = "";
-						shadow = 0;
-						colorBackground[] = {0, 0, 0, 0.69999999};
-					};
-					class multiplier : RscText
-					{
-						idc = 300;
-						x = "0 * (((safezoneW / safezoneH) min 1.2) / 40)";
-						y = "1.2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						w = "2.1 * (((safezoneW / safezoneH) min 1.2) / 40)";
-						h = "1.8 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						sizeEx = "1.1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						style = 2;
-						text = "";
-						colorText[] = {1, 1, 1, 0.5};
-						colorBackground[] = {0, 0, 0, 0.69999999};
-					};
-					class progressBar : RscProgress
-					{
-						idc = 400;
-						x = "2.1 * (((safezoneW / safezoneH) min 1.2) / 40)";
-						y = "1.2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						w = "11.1339 * (((safezoneW / safezoneH) min 1.2) / 40)";
-						h = "1.775 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						colorBackground[] = {0.80000001, 0.5, 0, 0.69999999};
-					};
-					class downloadSpeed : RscText
-					{
-						idc = 500;
-						x = "3.4 * (((safezoneW / safezoneH) min 1.2) / 40)";
-						y = "1.3 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						w = "8.5 * (((safezoneW / safezoneH) min 1.2) / 40)";
-						h = "1.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						sizeEx = "1.1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						style = 2;
-						text = "";
-						colorText[] = {1, 1, 1, 0.69999999};
-					};
-					class rangeBackground : RscText
-					{
-						idc = 600;
-						x = "13.2 * (((safezoneW / safezoneH) min 1.2) / 40)";
-						y = "1.2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						w = "2.2 * (((safezoneW / safezoneH) min 1.2) / 40)";
-						h = "1.8 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						colorBackground[] = {0, 0, 0, 0.5};
-					};
-					class Range : RscPictureKeepAspect
-					{
-						idc = 700;
-						x = "13.2 * (((safezoneW / safezoneH) min 1.2) / 40)";
-						y = "1.2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						w = "2.2 * (((safezoneW / safezoneH) min 1.2) / 40)";
-						h = "1.8 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-						text = "";
-					};
-				};
-			};
-		};
-	};
+            class MessageContainer: RscControlsGroupNoScrollbars
+            {
+                idc = 9010;
+                x = 0.8220 * safezoneW + safezoneX;
+                y = 0.0960 * safezoneH + safezoneY;
+                w = 0.1700 * safezoneW;
+                h = 0.8875 * safezoneH;
+                class controls {};
+            };
+        };
+    };
+    class Download_Data
+    {
+        idd = 9090;
+        movingEnable = 0;
+        onLoad = "uiNamespace setVariable [""disp_downloadingData"", (_this select 0)];";
+        onUnLoad = "uiNamespace setVariable [""disp_downloadingData"", displayNull];";
+        duration = 1e011;
+        class controls
+        {
+            class download : RscControlsGroupNoScrollbars
+            {
+                idc = 100;
+                x = "safeZoneX + 0 * (((safezoneW / safezoneH) min 1.2) / 40) + 0.1 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                y = "8.7 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) + (safezoneY + safezoneH - (((safezoneW / safezoneH) min 1.2) / 1.2))";
+                w = "15.4 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                h = "3 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                class controls
+                {
+                    class downloadContent : RscText
+                    {
+                        idc = 100;
+                        x = "0 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                        y = "1.2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        w = "15.4 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                        h = "1.8 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        colorBackground[] = {0.30000001, 0.30000001, 0.30000001, 0.69999999};
+                    };
+                    class downloadTitle : RscText
+                    {
+                        idc = 200;
+                        x = "0 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                        y = "0 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        w = "15.4 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                        h = "1.2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        sizeEx = "1.15 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        text = "";
+                        shadow = 0;
+                        colorBackground[] = {0, 0, 0, 0.69999999};
+                    };
+                    class multiplier : RscText
+                    {
+                        idc = 300;
+                        x = "0 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                        y = "1.2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        w = "2.1 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                        h = "1.8 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        sizeEx = "1.1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        style = 2;
+                        text = "";
+                        colorText[] = {1, 1, 1, 0.5};
+                        colorBackground[] = {0, 0, 0, 0.69999999};
+                    };
+                    class progressBar : RscProgress
+                    {
+                        idc = 400;
+                        x = "2.1 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                        y = "1.2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        w = "11.1339 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                        h = "1.775 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        colorBackground[] = {0.80000001, 0.5, 0, 0.69999999};
+                    };
+                    class downloadSpeed : RscText
+                    {
+                        idc = 500;
+                        x = "3.4 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                        y = "1.3 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        w = "8.5 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                        h = "1.5 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        sizeEx = "1.1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        style = 2;
+                        text = "";
+                        colorText[] = {1, 1, 1, 0.69999999};
+                    };
+                    class rangeBackground : RscText
+                    {
+                        idc = 600;
+                        x = "13.2 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                        y = "1.2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        w = "2.2 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                        h = "1.8 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        colorBackground[] = {0, 0, 0, 0.5};
+                    };
+                    class Range : RscPictureKeepAspect
+                    {
+                        idc = 700;
+                        x = "13.2 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                        y = "1.2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        w = "2.2 * (((safezoneW / safezoneH) min 1.2) / 40)";
+                        h = "1.8 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+                        text = "";
+                    };
+                };
+            };
+        };
+    };
 };

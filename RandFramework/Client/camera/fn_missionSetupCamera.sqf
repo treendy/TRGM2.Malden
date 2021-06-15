@@ -3,7 +3,7 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOB
 showCinemaBorder true;
 _centerPos = getArray (configfile >> "CfgWorlds" >> worldName >> "centerPosition");
 if !(isNil "TRGM_VAR_CustomCenterPos") then {
-	_centerPos = TRGM_VAR_CustomCenterPos;
+    _centerPos = TRGM_VAR_CustomCenterPos;
 };
 
 _pos1 = (_centerPos getPos [(floor(random 5000))+50, (floor(random 360))]);

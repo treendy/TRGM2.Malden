@@ -9,7 +9,7 @@ sleep random [1,2.5,5]; //to increase the chance of not fireing at same time! (n
 
 
 if (isNil { TRGM_Logic getVariable "PointsUpdating" }) then {
-	TRGM_Logic setVariable ["PointsUpdating", false, true];
+    TRGM_Logic setVariable ["PointsUpdating", false, true];
 };
 
 waitUntil {sleep 2; !(TRGM_Logic getVariable "PointsUpdating")};
@@ -20,13 +20,13 @@ params ["_pointsToAdd","_message"];
 _totalRep = [TRGM_VAR_MaxBadPoints - TRGM_VAR_BadPoints,1] call BIS_fnc_cutDecimals;
 
 if (_totalRep > 0) then {
-	TRGM_VAR_BadPoints = TRGM_VAR_BadPoints + _pointsToAdd;
-	if (TRGM_VAR_BadPoints > TRGM_VAR_MaxBadPoints) then {
-		TRGM_VAR_BadPoints = TRGM_VAR_MaxBadPoints;
-	};
-	publicVariable "TRGM_VAR_BadPoints";
-	TRGM_VAR_BadPointsReason = TRGM_VAR_BadPointsReason + format["<br /><t color='#ff0000'>%1 (-%2)</t>",_message,_pointsToAdd];
-	publicVariable "TRGM_VAR_BadPointsReason";
+    TRGM_VAR_BadPoints = TRGM_VAR_BadPoints + _pointsToAdd;
+    if (TRGM_VAR_BadPoints > TRGM_VAR_MaxBadPoints) then {
+        TRGM_VAR_BadPoints = TRGM_VAR_MaxBadPoints;
+    };
+    publicVariable "TRGM_VAR_BadPoints";
+    TRGM_VAR_BadPointsReason = TRGM_VAR_BadPointsReason + format["<br /><t color='#ff0000'>%1 (-%2)</t>",_message,_pointsToAdd];
+    publicVariable "TRGM_VAR_BadPointsReason";
 };
 
 TRGM_Logic setVariable ["PointsUpdating", false, true];

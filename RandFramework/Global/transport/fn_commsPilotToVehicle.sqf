@@ -3,9 +3,9 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOB
 
 _playersInVehicle = [];
 {
-	if (isPlayer _x) then {
-		_playersInVehicle pushBack _x;
-	}
+    if (isPlayer _x) then {
+        _playersInVehicle pushBack _x;
+    }
 } forEach crew _vehicle;
 
 [_vehicle,_text] remoteExecCall ["vehicleChat",_playersInVehicle ,false];

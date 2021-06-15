@@ -19,48 +19,48 @@ TRGM_VAR_SpotterAttemptCount = 0; publicVariable "TRGM_VAR_SpotterAttemptCount";
 TRGM_VAR_friendlySentryCheckpointPos = []; publicVariable "TRGM_VAR_friendlySentryCheckpointPos";
 
 if (isNil "tracer1") then {
-	tracer1 = (group (missionNamespace getvariable ["BIS_functions_mainscope",objnull])) createUnit ["ModuleTracers_F",[0,0,0],[],0,"CAN_COLLIDE"];
-	tracer1 setVehicleVarName "tracer1";
-	tracer1 setVariable ['Side',"0",true];
-	tracer1 setVariable ['Min',"10",true];
-	tracer1 setVariable ['Max',"20",true];
-	tracer1 setVariable ['Weapon',"",true];
-	tracer1 setVariable ['Magazine',"",true];
-	tracer1 setVariable ['Target',"",true];
-	tracer1 setvariable ["BIS_fnc_initModules_disableAutoActivation",true];
+    tracer1 = (group (missionNamespace getvariable ["BIS_functions_mainscope",objnull])) createUnit ["ModuleTracers_F",[0,0,0],[],0,"CAN_COLLIDE"];
+    tracer1 setVehicleVarName "tracer1";
+    tracer1 setVariable ['Side',"0",true];
+    tracer1 setVariable ['Min',"10",true];
+    tracer1 setVariable ['Max',"20",true];
+    tracer1 setVariable ['Weapon',"",true];
+    tracer1 setVariable ['Magazine',"",true];
+    tracer1 setVariable ['Target',"",true];
+    tracer1 setvariable ["BIS_fnc_initModules_disableAutoActivation",true];
 };
 if (isNil "tracer2") then {
-	tracer2 = (group (missionNamespace getvariable ["BIS_functions_mainscope",objnull])) createUnit ["ModuleTracers_F",[0,0,0],[],0,"CAN_COLLIDE"];
-	tracer2 setVehicleVarName "tracer2";
-	tracer2 setVariable ['Side',"2",true];
-	tracer2 setVariable ['Min',"10",true];
-	tracer2 setVariable ['Max',"20",true];
-	tracer2 setVariable ['Weapon',"",true];
-	tracer2 setVariable ['Magazine',"",true];
-	tracer2 setVariable ['Target',"",true];
-	tracer2 setvariable ["BIS_fnc_initModules_disableAutoActivation",true];
+    tracer2 = (group (missionNamespace getvariable ["BIS_functions_mainscope",objnull])) createUnit ["ModuleTracers_F",[0,0,0],[],0,"CAN_COLLIDE"];
+    tracer2 setVehicleVarName "tracer2";
+    tracer2 setVariable ['Side',"2",true];
+    tracer2 setVariable ['Min',"10",true];
+    tracer2 setVariable ['Max',"20",true];
+    tracer2 setVariable ['Weapon',"",true];
+    tracer2 setVariable ['Magazine',"",true];
+    tracer2 setVariable ['Target',"",true];
+    tracer2 setvariable ["BIS_fnc_initModules_disableAutoActivation",true];
 };
 if (isNil "tracer3") then {
-	tracer3 = (group (missionNamespace getvariable ["BIS_functions_mainscope",objnull])) createUnit ["ModuleTracers_F",[0,0,0],[],0,"CAN_COLLIDE"];
-	tracer3 setVehicleVarName "tracer3";
-	tracer3 setVariable ['Side',"0",true];
-	tracer3 setVariable ['Min',"10",true];
-	tracer3 setVariable ['Max',"20",true];
-	tracer3 setVariable ['Weapon',"",true];
-	tracer3 setVariable ['Magazine',"",true];
-	tracer3 setVariable ['Target',"",true];
-	tracer3 setvariable ["BIS_fnc_initModules_disableAutoActivation",true];
+    tracer3 = (group (missionNamespace getvariable ["BIS_functions_mainscope",objnull])) createUnit ["ModuleTracers_F",[0,0,0],[],0,"CAN_COLLIDE"];
+    tracer3 setVehicleVarName "tracer3";
+    tracer3 setVariable ['Side',"0",true];
+    tracer3 setVariable ['Min',"10",true];
+    tracer3 setVariable ['Max',"20",true];
+    tracer3 setVariable ['Weapon',"",true];
+    tracer3 setVariable ['Magazine',"",true];
+    tracer3 setVariable ['Target',"",true];
+    tracer3 setvariable ["BIS_fnc_initModules_disableAutoActivation",true];
 };
 if (isNil "tracer4") then {
-	tracer4 = (group (missionNamespace getvariable ["BIS_functions_mainscope",objnull])) createUnit ["ModuleTracers_F",[0,0,0],[],0,"CAN_COLLIDE"];
-	tracer4 setVehicleVarName "tracer4";
-	tracer4 setVariable ['Side',"0",true];
-	tracer4 setVariable ['Min',"10",true];
-	tracer4 setVariable ['Max',"20",true];
-	tracer4 setVariable ['Weapon',"",true];
-	tracer4 setVariable ['Magazine',"",true];
-	tracer4 setVariable ['Target',"",true];
-	tracer4 setvariable ["BIS_fnc_initModules_disableAutoActivation",true];
+    tracer4 = (group (missionNamespace getvariable ["BIS_functions_mainscope",objnull])) createUnit ["ModuleTracers_F",[0,0,0],[],0,"CAN_COLLIDE"];
+    tracer4 setVehicleVarName "tracer4";
+    tracer4 setVariable ['Side',"0",true];
+    tracer4 setVariable ['Min',"10",true];
+    tracer4 setVariable ['Max',"20",true];
+    tracer4 setVariable ['Weapon',"",true];
+    tracer4 setVariable ['Magazine',"",true];
+    tracer4 setVariable ['Target',"",true];
+    tracer4 setvariable ["BIS_fnc_initModules_disableAutoActivation",true];
 };
 tracer1 setPos [99999,99999];
 tracer2 setPos [99999,99999];
@@ -95,7 +95,7 @@ TRGM_VAR_PopulateLoadingWait_percentage = 0; publicVariable "TRGM_VAR_PopulateLo
 [3.3] call TRGM_GLOBAL_fnc_populateLoadingWait;
 
 if (TRGM_VAR_AdvancedSettings select TRGM_VAR_ADVSET_GROUP_MANAGE_IDX isEqualTo 1) then {
-	["Initialize"] call BIS_fnc_dynamicGroups;//Exec on Server
+    ["Initialize"] call BIS_fnc_dynamicGroups;//Exec on Server
 };
 
 format["Mission Core: %1", "GroupManagementSet"] call TRGM_GLOBAL_fnc_log;
@@ -129,84 +129,84 @@ if (typeName sCivilian != "ARRAY") then {sCivilian = [sCivilian]};
 
 private _airTransClassName = selectRandom ((call SupplySupportChopperOptions) select {_x call TRGM_GLOBAL_fnc_isTransport});
 if (!isNil "chopper1" && {_airTransClassName != typeOf chopper1}) then {
-	{deleteVehicle _x;} forEach crew chopper1 + [chopper1];
-	chopper1 = createVehicle [_airTransClassName, getPos heliPad1, [], 0, "NONE"];
-	createVehicleCrew chopper1;
-	crew vehicle chopper1 joinSilent createGroup WEST;
-	chopper1 setVehicleVarName "chopper1";
-	publicVariable "chopper1";
-	chopper1 allowDamage false;
-	chopper1 setPos getPos heliPad1;
-	chopper1 setVelocity [0, 0, 0];
-	chopper1 setdamage 0;
-	chopper1 engineOn false;
-	chopper1 lockDriver true;
-	chopper1D = driver chopper1;
-	chopper1D setVehicleVarName "chopper1D";
-	chopper1D allowDamage false;
-	chopper1D setCaptive true;
-	chopper1D disableAI "AUTOTARGET";
-	chopper1D disableAI "TARGET";
-	chopper1D disableAI "SUPPRESSION";
-	chopper1D disableAI "AUTOCOMBAT";
-	chopper1D setBehaviour "CARELESS";
-	publicVariable "chopper1D";
-	private _totalTurrets = [_airTransClassName, true] call BIS_fnc_allTurrets;
-	{chopper1 lockTurret [_x, true]} forEach _totalTurrets;
-	{ doStop _x; } forEach crew chopper1;
-	chopper1 setPos getPos heliPad1;
+    {deleteVehicle _x;} forEach crew chopper1 + [chopper1];
+    chopper1 = createVehicle [_airTransClassName, getPos heliPad1, [], 0, "NONE"];
+    createVehicleCrew chopper1;
+    crew vehicle chopper1 joinSilent createGroup WEST;
+    chopper1 setVehicleVarName "chopper1";
+    publicVariable "chopper1";
+    chopper1 allowDamage false;
+    chopper1 setPos getPos heliPad1;
+    chopper1 setVelocity [0, 0, 0];
+    chopper1 setdamage 0;
+    chopper1 engineOn false;
+    chopper1 lockDriver true;
+    chopper1D = driver chopper1;
+    chopper1D setVehicleVarName "chopper1D";
+    chopper1D allowDamage false;
+    chopper1D setCaptive true;
+    chopper1D disableAI "AUTOTARGET";
+    chopper1D disableAI "TARGET";
+    chopper1D disableAI "SUPPRESSION";
+    chopper1D disableAI "AUTOCOMBAT";
+    chopper1D setBehaviour "CARELESS";
+    publicVariable "chopper1D";
+    private _totalTurrets = [_airTransClassName, true] call BIS_fnc_allTurrets;
+    {chopper1 lockTurret [_x, true]} forEach _totalTurrets;
+    { doStop _x; } forEach crew chopper1;
+    chopper1 setPos getPos heliPad1;
 };
 
 private _airSupClassName = selectRandom (call FriendlyChopper);
 if (!isNil "chopper2" && {_airSupClassName != typeOf chopper2}) then {
-	{deleteVehicle _x;} forEach crew chopper2 + [chopper2];
-	chopper2 = createVehicle [_airSupClassName, getPos airSupportHeliPad, [], 0, "NONE"];
-	createVehicleCrew chopper2;
-	crew vehicle chopper2 joinSilent createGroup WEST;
-	chopper2 setVehicleVarName "chopper2";
-	publicVariable "chopper2";
-	chopper2 allowDamage false;
-	chopper2 setPos getPos airSupportHeliPad;
-	chopper2 setVelocity [0, 0, 0];
-	chopper2 setdamage 0;
-	chopper2 engineOn false;
-	chopper2 lockDriver true;
-	chopper2D = driver chopper2;
-	chopper2D setVehicleVarName "chopper2D";
-	publicVariable "chopper2D";
-	private _totalTurrets = [_airSupClassName, true] call BIS_fnc_allTurrets;
-	{chopper2 lockTurret [_x, true]} forEach _totalTurrets;
-	{ doStop _x; } forEach crew chopper2;
-	chopper2 setPos getPos airSupportHeliPad;
-	chopper2 allowDamage true;
+    {deleteVehicle _x;} forEach crew chopper2 + [chopper2];
+    chopper2 = createVehicle [_airSupClassName, getPos airSupportHeliPad, [], 0, "NONE"];
+    createVehicleCrew chopper2;
+    crew vehicle chopper2 joinSilent createGroup WEST;
+    chopper2 setVehicleVarName "chopper2";
+    publicVariable "chopper2";
+    chopper2 allowDamage false;
+    chopper2 setPos getPos airSupportHeliPad;
+    chopper2 setVelocity [0, 0, 0];
+    chopper2 setdamage 0;
+    chopper2 engineOn false;
+    chopper2 lockDriver true;
+    chopper2D = driver chopper2;
+    chopper2D setVehicleVarName "chopper2D";
+    publicVariable "chopper2D";
+    private _totalTurrets = [_airSupClassName, true] call BIS_fnc_allTurrets;
+    {chopper2 lockTurret [_x, true]} forEach _totalTurrets;
+    { doStop _x; } forEach crew chopper2;
+    chopper2 setPos getPos airSupportHeliPad;
+    chopper2 allowDamage true;
 };
 
 TRGM_VAR_transportHelosToGetActions = [];
 {
-	if (isClass(configFile >> "CfgVehicles" >> typeOf _x) && {_x isKindOf "LandVehicle" || _x isKindOf "Air" || _x isKindOf "Ship"}) then {
-		_faction = getText(configFile >> "CfgVehicles" >> typeOf _x >> "faction");
-		_friendlyFactionIndex = TRGM_VAR_AdvancedSettings select TRGM_VAR_ADVSET_FRIENDLY_FACTIONS_IDX;
-		_westFaction = (TRGM_VAR_AllFactionData select _friendlyFactionIndex) select 0;
-		if ((crew _x) isEqualTo [] && {getNumber(configFile >> "CfgFactionClasses" >> _faction >> "side") isEqualTo 1 && {_faction != _westFaction}}) then {
-			_newVehClass = [_x, WEST] call TRGM_GLOBAL_fnc_getFactionVehicle;
-			if (!isNil "_newVehClass") then {
-				private _pos = getPosATL _x;
-				private _dir = getDir _x;
-				deleteVehicle _x;
-				sleep 0.01;
-				private _newVeh = createVehicle [_newVehClass, _pos, [], 0, "NONE"];
-				_newVeh setDir _dir;
-				_newVeh allowDamage false;
-				_newVeh setPos (_pos vectorAdd [0,0,0.1]);
-				_newVeh allowDamage true;
-			};
+    if (isClass(configFile >> "CfgVehicles" >> typeOf _x) && {_x isKindOf "LandVehicle" || _x isKindOf "Air" || _x isKindOf "Ship"}) then {
+        _faction = getText(configFile >> "CfgVehicles" >> typeOf _x >> "faction");
+        _friendlyFactionIndex = TRGM_VAR_AdvancedSettings select TRGM_VAR_ADVSET_FRIENDLY_FACTIONS_IDX;
+        _westFaction = (TRGM_VAR_AllFactionData select _friendlyFactionIndex) select 0;
+        if ((crew _x) isEqualTo [] && {getNumber(configFile >> "CfgFactionClasses" >> _faction >> "side") isEqualTo 1 && {_faction != _westFaction}}) then {
+            _newVehClass = [_x, WEST] call TRGM_GLOBAL_fnc_getFactionVehicle;
+            if (!isNil "_newVehClass") then {
+                private _pos = getPosATL _x;
+                private _dir = getDir _x;
+                deleteVehicle _x;
+                sleep 0.01;
+                private _newVeh = createVehicle [_newVehClass, _pos, [], 0, "NONE"];
+                _newVeh setDir _dir;
+                _newVeh allowDamage false;
+                _newVeh setPos (_pos vectorAdd [0,0,0.1]);
+                _newVeh allowDamage true;
+            };
 
-		};
-	};
+        };
+    };
 
-	if ((count crew _x) > 0 && {isClass(configFile >> "CfgVehicles" >> typeOf _x) && {_x isKindOf "Air" && {_x call TRGM_GLOBAL_fnc_isTransport}}}) then {
-		TRGM_VAR_transportHelosToGetActions pushBackUnique _x;
-	};
+    if ((count crew _x) > 0 && {isClass(configFile >> "CfgVehicles" >> typeOf _x) && {_x isKindOf "Air" && {_x call TRGM_GLOBAL_fnc_isTransport}}}) then {
+        TRGM_VAR_transportHelosToGetActions pushBackUnique _x;
+    };
 } forEach vehicles;
 
 [TRGM_VAR_transportHelosToGetActions] call TRGM_GLOBAL_fnc_addTransportActions;
@@ -223,22 +223,22 @@ TRGM_VAR_CustomObjectsSet = true; publicVariable "TRGM_VAR_CustomObjectsSet";
 
 _isAceRespawnWithGear = false;
 if (call TRGM_GLOBAL_fnc_isCbaLoaded) then {
-	// check for ACE respawn with gear setting
-	_isAceRespawnWithGear = "ace_respawn_savePreDeathGear" call CBA_settings_fnc_get;
+    // check for ACE respawn with gear setting
+    _isAceRespawnWithGear = "ace_respawn_savePreDeathGear" call CBA_settings_fnc_get;
 };
 
 [format["Mission Core: %1", "savePreDeathGear"], true] call TRGM_GLOBAL_fnc_log;
 [3.3] call TRGM_GLOBAL_fnc_populateLoadingWait;
 {
-	if (!isPlayer _x) then {
-		_handle = [_x] call TRGM_GLOBAL_fnc_setLoadout;
-		waitUntil {_handle};
-		if (!isNil("_isAceRespawnWithGear")) then {
-			if (!_isAceRespawnWithGear) then {
-				_x addEventHandler ["Respawn", { [_this select 0] call TRGM_GLOBAL_fnc_setLoadout; }];
-			};
-		};
-	};
+    if (!isPlayer _x) then {
+        _handle = [_x] call TRGM_GLOBAL_fnc_setLoadout;
+        waitUntil {_handle};
+        if (!isNil("_isAceRespawnWithGear")) then {
+            if (!_isAceRespawnWithGear) then {
+                _x addEventHandler ["Respawn", { [_this select 0] call TRGM_GLOBAL_fnc_setLoadout; }];
+            };
+        };
+    };
 } forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 [format["Mission Core: %1", "setLoadout ran"], true] call TRGM_GLOBAL_fnc_log;
 [3.3] call TRGM_GLOBAL_fnc_populateLoadingWait;
@@ -258,18 +258,18 @@ waitUntil { TRGM_VAR_CustomObjectsSet };
 [endMissionBoard2] remoteExec ["removeAllActions"];
 
 if (TRGM_VAR_iMissionSetup isEqualTo 5 && isMultiplayer && isServer) then {
-	if (TRGM_VAR_SaveType isEqualTo 0) then {
-		[laptop1, [localize "STR_TRGM2_TRGMInitPlayerLocal_SaveLocal",{[1,true] spawn TRGM_SERVER_fnc_serverSave;}]] remoteExec ["addaction"];
-		[laptop1, [localize "STR_TRGM2_TRGMInitPlayerLocal_SaveGlobal",{[2,true] spawn TRGM_SERVER_fnc_serverSave;}]] remoteExec ["addaction"];
-	};
-	if (TRGM_VAR_SaveType isEqualTo 1) then {
-		[(localize "STR_TRGM2_ServerSave_Save1")] call TRGM_GLOBAL_fnc_notify;
-		[laptop1, [localize "STR_TRGM2_ServerSave_SaveLocal",{[(localize "STR_TRGM2_ServerSave_SaveHint")] call TRGM_GLOBAL_fnc_notify}]] remoteExec ["addaction"];
-	};
-	if (TRGM_VAR_SaveType isEqualTo 2) then {
-		[(localize "STR_TRGM2_ServerSave_Save2")] call TRGM_GLOBAL_fnc_notify;
-		[laptop1, [localize "STR_TRGM2_ServerSave_SaveGlobal",{[(localize "STR_TRGM2_ServerSave_SaveHint2")] call TRGM_GLOBAL_fnc_notify}]] remoteExec ["addaction"];
-	};
+    if (TRGM_VAR_SaveType isEqualTo 0) then {
+        [laptop1, [localize "STR_TRGM2_TRGMInitPlayerLocal_SaveLocal",{[1,true] spawn TRGM_SERVER_fnc_serverSave;}]] remoteExec ["addaction"];
+        [laptop1, [localize "STR_TRGM2_TRGMInitPlayerLocal_SaveGlobal",{[2,true] spawn TRGM_SERVER_fnc_serverSave;}]] remoteExec ["addaction"];
+    };
+    if (TRGM_VAR_SaveType isEqualTo 1) then {
+        [(localize "STR_TRGM2_ServerSave_Save1")] call TRGM_GLOBAL_fnc_notify;
+        [laptop1, [localize "STR_TRGM2_ServerSave_SaveLocal",{[(localize "STR_TRGM2_ServerSave_SaveHint")] call TRGM_GLOBAL_fnc_notify}]] remoteExec ["addaction"];
+    };
+    if (TRGM_VAR_SaveType isEqualTo 2) then {
+        [(localize "STR_TRGM2_ServerSave_Save2")] call TRGM_GLOBAL_fnc_notify;
+        [laptop1, [localize "STR_TRGM2_ServerSave_SaveGlobal",{[(localize "STR_TRGM2_ServerSave_SaveHint2")] call TRGM_GLOBAL_fnc_notify}]] remoteExec ["addaction"];
+    };
 };
 
 [endMissionBoard, [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {[true] spawn TRGM_GLOBAL_fnc_showRepReport;}]] remoteExec ["addAction"];
@@ -279,9 +279,9 @@ if (TRGM_VAR_iMissionSetup isEqualTo 5 && isMultiplayer && isServer) then {
 [3.3] call TRGM_GLOBAL_fnc_populateLoadingWait;
 
 if (TRGM_VAR_iUseRevive > 0 && {isNil "AIS_MOD_ENABLED"}) then {
-	call AIS_Core_fnc_preInit;
-	call AIS_Core_fnc_postInit;
-	call AIS_System_fnc_postInit;
+    call AIS_Core_fnc_preInit;
+    call AIS_Core_fnc_postInit;
+    call AIS_System_fnc_postInit;
 };
 
 [format["Mission Core: %1", "AIS Script Run"], true] call TRGM_GLOBAL_fnc_log;
@@ -290,11 +290,11 @@ if (TRGM_VAR_iUseRevive > 0 && {isNil "AIS_MOD_ENABLED"}) then {
 
 // Place in unit init to have them deleted in MP: this setVariable ["MP_ONLY", true, true];
 if (!isMultiplayer) then {
-	{
-		if (_x getVariable ["MP_ONLY",false] && !isNil "_x") then {
-			deleteVehicle _x;
-		};
-	} forEach allUnits;
+    {
+        if (_x getVariable ["MP_ONLY",false] && !isNil "_x") then {
+            deleteVehicle _x;
+        };
+    } forEach allUnits;
 };
 
 [format["Mission Core: %1", "DeleteMpOnlyVehicles"], true] call TRGM_GLOBAL_fnc_log;
@@ -309,12 +309,12 @@ if (!isMultiplayer) then {
 TRGM_VAR_CoreCompleted = true; publicVariable "TRGM_VAR_CoreCompleted";
 
 if (TRGM_VAR_iMissionParamType isEqualTo 5) then {
-	if (isServer) then {
-		call TRGM_SERVER_fnc_initCampaign;
-	};
+    if (isServer) then {
+        call TRGM_SERVER_fnc_initCampaign;
+    };
 }
 else {
-	call TRGM_SERVER_fnc_startMission;
+    call TRGM_SERVER_fnc_startMission;
 };
 [format["Mission Core: %1", "InitCampaign/StartMission ran"], true] call TRGM_GLOBAL_fnc_log;
 [3.3] call TRGM_GLOBAL_fnc_populateLoadingWait;
@@ -328,25 +328,25 @@ waitUntil { TRGM_VAR_MissionLoaded; };
 [3.3] call TRGM_GLOBAL_fnc_populateLoadingWait;
 
 {
-	_x setVariable ["DontDelete",true];
+    _x setVariable ["DontDelete",true];
 } forEach nearestObjects [getMarkerPos "mrkHQ", ["all"], 2000];
 [format["Mission Core: %1", "DontDeleteSet"], true] call TRGM_GLOBAL_fnc_log;
 [3.3] call TRGM_GLOBAL_fnc_populateLoadingWait;
 
 if (isMultiplayer && {!(TRGM_VAR_iMissionParamType isEqualTo 5)}) then {
-	[] spawn TRGM_SERVER_fnc_checkAnyPlayersAlive;
+    [] spawn TRGM_SERVER_fnc_checkAnyPlayersAlive;
 };
 
 [format["Mission Core: %1", "NonAliveEndCheckRunning"], true] call TRGM_GLOBAL_fnc_log;
 [3.3] call TRGM_GLOBAL_fnc_populateLoadingWait;
 
 if (TRGM_VAR_iAllowNVG isEqualTo 0) then {
-	{
-		_unit = _x;
-		_unit addPrimaryWeaponItem "acc_flashlight";
-		_unit enableGunLights "forceOn";
-		{_unit unassignItem _x; _unit removeItem _x;} forEach TRGM_VAR_aNVClassNames;
-	} forEach allUnits;
+    {
+        _unit = _x;
+        _unit addPrimaryWeaponItem "acc_flashlight";
+        _unit enableGunLights "forceOn";
+        {_unit unassignItem _x; _unit removeItem _x;} forEach TRGM_VAR_aNVClassNames;
+    } forEach allUnits;
 };
 [format["Mission Core: %1", "NVGStateSet"], true] call TRGM_GLOBAL_fnc_log;
 [3.3] call TRGM_GLOBAL_fnc_populateLoadingWait;
@@ -367,7 +367,7 @@ if (TRGM_VAR_iAllowNVG isEqualTo 0) then {
 [3.3] call TRGM_GLOBAL_fnc_populateLoadingWait;
 
 if (TRGM_VAR_iMissionParamType != 5) then {
-	[] remoteExec ["TRGM_SERVER_fnc_postStartMission"];
+    [] remoteExec ["TRGM_SERVER_fnc_postStartMission"];
 };
 
 [format["Mission Core: %1", "RunFlashLightState"], true] call TRGM_GLOBAL_fnc_log;
@@ -376,17 +376,17 @@ if (TRGM_VAR_iMissionParamType != 5) then {
 _iEnemyFlashLightOption = TRGM_VAR_AdvancedSettings select TRGM_VAR_ADVSET_SELECT_ENEMY_FLASHLIGHTS_IDX;
 if (_iEnemyFlashLightOption isEqualTo 0) then {_iEnemyFlashLightOption = selectRandom [1,2]}; //1=yes, 2=no
 if (_iEnemyFlashLightOption isEqualTo 1) then {
-	{
-		if ((side _x) isEqualTo East) then
-		{
-			if (isNil { _x getVariable "ambushUnit" }) then {
-				_unit = _x;
-				_unit addPrimaryWeaponItem "acc_flashlight";
-				_unit enableGunLights "forceOn";
-				{_unit unassignItem _x; _unit removeItem _x;} forEach TRGM_VAR_aNVClassNames;
-			};
-		};
-	} forEach allUnits;
+    {
+        if ((side _x) isEqualTo East) then
+        {
+            if (isNil { _x getVariable "ambushUnit" }) then {
+                _unit = _x;
+                _unit addPrimaryWeaponItem "acc_flashlight";
+                _unit enableGunLights "forceOn";
+                {_unit unassignItem _x; _unit removeItem _x;} forEach TRGM_VAR_aNVClassNames;
+            };
+        };
+    } forEach allUnits;
 };
 
 [format["Mission Core: %1", "Main Init Complete"], true] call TRGM_GLOBAL_fnc_log;

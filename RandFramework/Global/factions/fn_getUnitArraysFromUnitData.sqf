@@ -33,33 +33,33 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOB
 
 _riflemen = []; _leaders = []; _atsoldiers = []; _aasoldiers = []; _engineers = []; _grenadiers = []; _medics = []; _autoriflemen = []; _snipers = []; _explosiveSpecs = []; _pilots = []; _uavOperators = [];
 {
-	_x params ["_className", "_dispName", "_icon", "_calloutName", ["_isMedic", 0], ["_isEngineer", 0], ["_isExpSpecialist", 0], ["_isUAVHacker", 0]];
-	if (isNil "_className" ||isNil "_dispName" || isNil "_icon" || isNil "_calloutName") then {
+    _x params ["_className", "_dispName", "_icon", "_calloutName", ["_isMedic", 0], ["_isEngineer", 0], ["_isExpSpecialist", 0], ["_isUAVHacker", 0]];
+    if (isNil "_className" ||isNil "_dispName" || isNil "_icon" || isNil "_calloutName") then {
 
-	} else {
-		if (["Ass.", _dispName] call BIS_fnc_inString || ["Asst", _dispName] call BIS_fnc_inString || ["Assi", _dispName] call BIS_fnc_inString || ["Story", _dispName] call BIS_fnc_inString || ["Support", _className] call BIS_fnc_inString || ["Crew", _className] call BIS_fnc_inString) then {
-			// Do nothing for these units. (Currently removing any "assistant", "crew", and "support" type units, since they are generally redundant)
-		} else {
-			switch (_icon) do {
-				case "iconManEngineer":	 { _engineers pushBackUnique _className; };
-				case "iconManMedic": 	 { _medics pushBackUnique _className; };
-				case "iconManExplosive": { _explosiveSpecs pushBackUnique _className; };
-				case "iconManLeader":	 { _leaders pushBackUnique _className; };
-				case "iconManOfficer":	 { _leaders pushBackUnique _className; };
-				case "iconManMG":		 { _autoriflemen pushBackUnique _className; };
-				case "iconManAT":		 { if (["AA", _dispName, true] call BIS_fnc_inString || ["AA", _className] call BIS_fnc_inString) then { _aasoldiers pushBackUnique _className; } else { _atsoldiers pushBackUnique _className; }; };
-				default {
-					if (_isEngineer isEqualTo 1) then { _engineers pushBackUnique _className; };
-					if (_isMedic isEqualTo 1) then { _medics pushBackUnique _className; };
-					if (_isExpSpecialist isEqualTo 1) then { _explosiveSpecs pushBackUnique _className; };
-					if (_isUAVHacker isEqualTo 1) then { _uavOperators pushBackUnique _className; };
-					if (["Auto", _dispName, true] call BIS_fnc_inString || ["Machine", _dispName, true] call BIS_fnc_inString) then { _autoriflemen pushBackUnique _className; };
-					if (_calloutName isEqualTo "AT soldier") then { if (["AA", _dispName, true] call BIS_fnc_inString || ["AA", _className] call BIS_fnc_inString) then { _aasoldiers pushBackUnique _className; } else { _atsoldiers pushBackUnique _className; }; };
-					if ((_icon isEqualTo "iconMan")) then { if (_calloutName isEqualTo "sniper") then { _snipers pushBackUnique _className; } else { if (["Grenadier", _dispName] call BIS_fnc_inString || ["Grenadier", _className] call BIS_fnc_inString) then { _grenadiers pushBackUnique _className; } else { if (["Pilot", _dispName] call BIS_fnc_inString || ["Pilot", _className] call BIS_fnc_inString) then { _pilots pushBackUnique _className; } else { _riflemen pushBackUnique _className; }; }; }; };
-				};
-			};
-		};
-	};
+    } else {
+        if (["Ass.", _dispName] call BIS_fnc_inString || ["Asst", _dispName] call BIS_fnc_inString || ["Assi", _dispName] call BIS_fnc_inString || ["Story", _dispName] call BIS_fnc_inString || ["Support", _className] call BIS_fnc_inString || ["Crew", _className] call BIS_fnc_inString) then {
+            // Do nothing for these units. (Currently removing any "assistant", "crew", and "support" type units, since they are generally redundant)
+        } else {
+            switch (_icon) do {
+                case "iconManEngineer":     { _engineers pushBackUnique _className; };
+                case "iconManMedic":      { _medics pushBackUnique _className; };
+                case "iconManExplosive": { _explosiveSpecs pushBackUnique _className; };
+                case "iconManLeader":     { _leaders pushBackUnique _className; };
+                case "iconManOfficer":     { _leaders pushBackUnique _className; };
+                case "iconManMG":         { _autoriflemen pushBackUnique _className; };
+                case "iconManAT":         { if (["AA", _dispName, true] call BIS_fnc_inString || ["AA", _className] call BIS_fnc_inString) then { _aasoldiers pushBackUnique _className; } else { _atsoldiers pushBackUnique _className; }; };
+                default {
+                    if (_isEngineer isEqualTo 1) then { _engineers pushBackUnique _className; };
+                    if (_isMedic isEqualTo 1) then { _medics pushBackUnique _className; };
+                    if (_isExpSpecialist isEqualTo 1) then { _explosiveSpecs pushBackUnique _className; };
+                    if (_isUAVHacker isEqualTo 1) then { _uavOperators pushBackUnique _className; };
+                    if (["Auto", _dispName, true] call BIS_fnc_inString || ["Machine", _dispName, true] call BIS_fnc_inString) then { _autoriflemen pushBackUnique _className; };
+                    if (_calloutName isEqualTo "AT soldier") then { if (["AA", _dispName, true] call BIS_fnc_inString || ["AA", _className] call BIS_fnc_inString) then { _aasoldiers pushBackUnique _className; } else { _atsoldiers pushBackUnique _className; }; };
+                    if ((_icon isEqualTo "iconMan")) then { if (_calloutName isEqualTo "sniper") then { _snipers pushBackUnique _className; } else { if (["Grenadier", _dispName] call BIS_fnc_inString || ["Grenadier", _className] call BIS_fnc_inString) then { _grenadiers pushBackUnique _className; } else { if (["Pilot", _dispName] call BIS_fnc_inString || ["Pilot", _className] call BIS_fnc_inString) then { _pilots pushBackUnique _className; } else { _riflemen pushBackUnique _className; }; }; }; };
+                };
+            };
+        };
+    };
 } forEach _unitData;
 
 private _unitArray = [_riflemen, _leaders, _atsoldiers, _aasoldiers, _engineers, _grenadiers, _medics, _autoriflemen, _snipers, _explosiveSpecs, _pilots, _uavOperators];

@@ -22,7 +22,7 @@ switch (typename _filter) do
     case "OBJECT":
     {
         // Result is only the array containing the object
-       	_outputArray = [_filter];
+           _outputArray = [_filter];
     };
     case "SIDE":
     {

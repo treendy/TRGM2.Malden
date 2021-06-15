@@ -10,17 +10,17 @@ if ((player distance _art_object_name)>500) then {
 _range_art= random 500;
 _big = random 10;
 if (_big>9) then {
-	_range_art= 2000;	
-	//enableCamShake true;
-	//addCamShake [0.5, 10, 35];
-	sleep 1+random 1;
-	enableCamShake false;};
+    _range_art= 2000;
+    //enableCamShake true;
+    //addCamShake [0.5, 10, 35];
+    sleep 1+random 1;
+    enableCamShake false;};
 
-//	sunet
+//    sunet
 if (!al_art_sunet_play) then {
-	_art_object_name say3d ["expozie",2500];	
-	al_art_sunet_play = true;
-	publicVariable "al_art_sunet_play";
+    _art_object_name say3d ["expozie",2500];
+    al_art_sunet_play = true;
+    publicVariable "al_art_sunet_play";
 };
 
 _fum = "#particlesource" createVehicleLocal getpos _art_object_name;
@@ -32,12 +32,12 @@ _fum setDropInterval 0.05;
 _intens_li = 500+random 500;
 
 _li_art = "#lightpoint" createVehicleLocal getpos _art_object_name;
-_li_art setLightAttenuation [/*start*/ _range_art, /*constant*/50+random 100, /*linear*/ 50, /*quadratic*/ 0, /*hardlimitstart*/random 5,_range_art];  
+_li_art setLightAttenuation [/*start*/ _range_art, /*constant*/50+random 100, /*linear*/ 50, /*quadratic*/ 0, /*hardlimitstart*/random 5,_range_art];
 _li_art setLightIntensity _intens_li;
-_li_art setLightDayLight true;	
+_li_art setLightDayLight true;
 _li_art setLightUseFlare true;
 _li_art setLightFlareSize 30;
-_li_art setLightFlareMaxDistance 2000;	
+_li_art setLightFlareMaxDistance 2000;
 _li_art setLightAmbient[1, 0.5, 0];
 _li_art setLightColor[1, 0.5, 0];
 

@@ -26,23 +26,23 @@ private _configPath = (configFile >> "CfgVehicles");
 
 for "_i" from 0 to (count _configPath - 1) do {
 
-	private _element = _configPath select _i;
+    private _element = _configPath select _i;
 
-	if (isclass _element) then {
-		if ((getText(_element >> "faction")) isEqualTo _factionClassName && {(getnumber(_element >> "scope")) isEqualTo 2 && {(configname _element) isKindOf "Man" && {!((configname _element) isKindOf "OPTRE_Spartan2_Soldier_Base")}}}) then {
-			_unitConfigPaths pushbackunique _element;
-		};
-	};
+    if (isclass _element) then {
+        if ((getText(_element >> "faction")) isEqualTo _factionClassName && {(getnumber(_element >> "scope")) isEqualTo 2 && {(configname _element) isKindOf "Man" && {!((configname _element) isKindOf "OPTRE_Spartan2_Soldier_Base")}}}) then {
+            _unitConfigPaths pushbackunique _element;
+        };
+    };
 };
 
 private _units = [];
 
 {
-	// We are using "icon" instead of "role" because the icon is better for determining unit role, since, for example, RHS doesn't correctly label the unit role.
-	// Also, discard VR, Unarmed, and Survivor units
-	if (getText(_x >> "icon") != "iconManVirtual" && {!(["VR ", getText(_x >> "displayName"), true] call BIS_fnc_inString) && {!(["unarmed", getText(_x >> "displayName")] call BIS_fnc_inString) && {!(["survivor", getText(_x >> "displayName")] call BIS_fnc_inString)}}}) then {
-		_units pushBack [(configname _x), getText(_x >> "displayName"), getText(_x >> "icon"), getText(_x >> "textSingular"), getNumber(_x >> "attendant"), getNumber(_x >> "engineer"), getNumber(_x >> "canDeactivateMines"), getNumber(_x >> "uavHacker")];
-	};
+    // We are using "icon" instead of "role" because the icon is better for determining unit role, since, for example, RHS doesn't correctly label the unit role.
+    // Also, discard VR, Unarmed, and Survivor units
+    if (getText(_x >> "icon") != "iconManVirtual" && {!(["VR ", getText(_x >> "displayName"), true] call BIS_fnc_inString) && {!(["unarmed", getText(_x >> "displayName")] call BIS_fnc_inString) && {!(["survivor", getText(_x >> "displayName")] call BIS_fnc_inString)}}}) then {
+        _units pushBack [(configname _x), getText(_x >> "displayName"), getText(_x >> "icon"), getText(_x >> "textSingular"), getNumber(_x >> "attendant"), getNumber(_x >> "engineer"), getNumber(_x >> "canDeactivateMines"), getNumber(_x >> "uavHacker")];
+    };
 } forEach _unitConfigPaths;
 
 _units;

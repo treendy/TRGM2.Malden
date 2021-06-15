@@ -5,8 +5,8 @@ call TRGM_GLOBAL_fnc_initGlobalVars;
 waitUntil { TRGM_VAR_playerIsChoosingHQpos || TRGM_VAR_NeededObjectsAvailable; };
 
 if (isServer && !TRGM_VAR_NeededObjectsAvailable) then {
-	waitUntil { TRGM_VAR_HQPosFound };
-	_handle = [TRGM_VAR_foundHQPos] spawn TRGM_SERVER_fnc_createNeededObjects;
+    waitUntil { TRGM_VAR_HQPosFound };
+    _handle = [TRGM_VAR_foundHQPos] spawn TRGM_SERVER_fnc_createNeededObjects;
    waitUntil {scriptDone _handle};
 
    { [[_x], {(_this select 0) allowDamage false}] remoteExec ["call", _x]; } forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
@@ -33,7 +33,7 @@ if (isServer && !TRGM_VAR_NeededObjectsAvailable) then {
 };
 
 if (isServer) then {
-	TRGM_VAR_FirstSpottedHasHappend = false; publicVariable "TRGM_VAR_FirstSpottedHasHappend";
+    TRGM_VAR_FirstSpottedHasHappend = false; publicVariable "TRGM_VAR_FirstSpottedHasHappend";
 };
 
 tf_give_personal_radio_to_regular_soldier = true; publicVariable "tf_give_personal_radio_to_regular_soldier";

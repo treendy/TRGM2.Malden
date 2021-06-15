@@ -7,9 +7,9 @@ if (isDedicated || !hasInterface) exitWith {};
 disableSerialization;
 
 for "_i" from 0 to 1 step 0 do {
-	if ((uiNamespace getVariable ["TRGM_VAR_notifications_active", scriptNull]) isEqualTo _thisScript) exitWith {};
-	waitUntil {uiSleep 0.025; (scriptDone (uiNamespace getVariable ["TRGM_VAR_notifications_active", scriptNull]))};
-	uiNamespace setVariable ["TRGM_VAR_notifications_active", _thisScript];
+    if ((uiNamespace getVariable ["TRGM_VAR_notifications_active", scriptNull]) isEqualTo _thisScript) exitWith {};
+    waitUntil {uiSleep 0.025; (scriptDone (uiNamespace getVariable ["TRGM_VAR_notifications_active", scriptNull]))};
+    uiNamespace setVariable ["TRGM_VAR_notifications_active", _thisScript];
 };
 
 private _notificationList = uiNamespace getVariable ["TRGM_VAR_notifications_list", []];

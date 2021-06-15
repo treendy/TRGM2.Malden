@@ -3,18 +3,18 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOB
 
 if (side _caller isEqualTo west) then {
 
-	_CheckpointPos = _thisArrayParams select 0;
+    _CheckpointPos = _thisArrayParams select 0;
 
-	[_thisCheckpointUnit] remoteExec ["removeAllActions", 0, true];
+    [_thisCheckpointUnit] remoteExec ["removeAllActions", 0, true];
 
 
-	if (alive _thisCheckpointUnit) then {
-		[TRGM_VAR_IntelShownType,"TalkFriendCheckPoint"] spawn TRGM_GLOBAL_fnc_showIntel;
+    if (alive _thisCheckpointUnit) then {
+        [TRGM_VAR_IntelShownType,"TalkFriendCheckPoint"] spawn TRGM_GLOBAL_fnc_showIntel;
 
-	}
-	else {
-		["He doesnt seem to be saying much at this time"] call TRGM_GLOBAL_fnc_notify;
-	};
+    }
+    else {
+        ["He doesnt seem to be saying much at this time"] call TRGM_GLOBAL_fnc_notify;
+    };
 
 
 };

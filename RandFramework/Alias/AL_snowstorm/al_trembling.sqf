@@ -23,60 +23,60 @@ enableCamShake true;
 
 ["FilmGrain",2000] spawn
 {
-	params ["_name","_priority","_effect","_handle"];
-	while {_handle = ppEffectCreate [_name, _priority];	_handle < 0} do {_priority = _priority + 1};
-	_handle ppEffectEnable true;
-	for "_i" from 0 to 0.1 step 0.01 do
-	{
-		_handle ppEffectAdjust [_i,1,5,0.5,0.3,0];
-		sleep 0.3;
-		//hint str _i;
-		_handle ppEffectCommit 0;
-	};
-	sleep 5;
-	_i=0.1;
-	//systemChat "grain";
-	while {_i>0} do
-	{
-		_i = _i-0.01;
-		_handle ppEffectAdjust [_i,1,5,0.5,0.3,0];
-		//hint str _i;
-		sleep 0.5;
-		_handle ppEffectCommit 0;
-	};
-	//systemChat "distruge grain";
-	_handle ppEffectEnable false;
-	ppEffectDestroy _handle;
+    params ["_name","_priority","_effect","_handle"];
+    while {_handle = ppEffectCreate [_name, _priority];    _handle < 0} do {_priority = _priority + 1};
+    _handle ppEffectEnable true;
+    for "_i" from 0 to 0.1 step 0.01 do
+    {
+        _handle ppEffectAdjust [_i,1,5,0.5,0.3,0];
+        sleep 0.3;
+        //hint str _i;
+        _handle ppEffectCommit 0;
+    };
+    sleep 5;
+    _i=0.1;
+    //systemChat "grain";
+    while {_i>0} do
+    {
+        _i = _i-0.01;
+        _handle ppEffectAdjust [_i,1,5,0.5,0.3,0];
+        //hint str _i;
+        sleep 0.5;
+        _handle ppEffectCommit 0;
+    };
+    //systemChat "distruge grain";
+    _handle ppEffectEnable false;
+    ppEffectDestroy _handle;
 };
 if (goggles player=="") then
 {
-	["RadialBlur",100,[0.11,1,0.33,0.16]] spawn
-	{
-		params ["_name", "_priority", "_effect", "_handle"];
-		while {	_handle = ppEffectCreate [_name, _priority];_handle < 0} do {_priority = _priority + 1};
-		sleep 2;
-		call BIS_fnc_fatigueEffect;
-		_handle ppEffectEnable true;
-		_handle ppEffectAdjust _effect;
-		_handle ppEffectCommit 4;
-		waitUntil {ppEffectCommitted _handle};
-		call BIS_fnc_fatigueEffect;
-		//systemChat "admire effect for a sec";
-		_i = 0.11;
-		sleep 2;
-		while {_i>0} do
-		{
-			_i = _i-0.01;
-			_handle ppEffectAdjust [_i,1,0.33,0.16];
-			//hint str _i;
-			sleep 0.5;
-			_handle ppEffectCommit 0;
-		};
-		//sleep 4;
-		//systemChat "effect distrus";
-		_handle ppEffectEnable false;
-		ppEffectDestroy _handle;
-	};
+    ["RadialBlur",100,[0.11,1,0.33,0.16]] spawn
+    {
+        params ["_name", "_priority", "_effect", "_handle"];
+        while {    _handle = ppEffectCreate [_name, _priority];_handle < 0} do {_priority = _priority + 1};
+        sleep 2;
+        call BIS_fnc_fatigueEffect;
+        _handle ppEffectEnable true;
+        _handle ppEffectAdjust _effect;
+        _handle ppEffectCommit 4;
+        waitUntil {ppEffectCommitted _handle};
+        call BIS_fnc_fatigueEffect;
+        //systemChat "admire effect for a sec";
+        _i = 0.11;
+        sleep 2;
+        while {_i>0} do
+        {
+            _i = _i-0.01;
+            _handle ppEffectAdjust [_i,1,0.33,0.16];
+            //hint str _i;
+            sleep 0.5;
+            _handle ppEffectCommit 0;
+        };
+        //sleep 4;
+        //systemChat "effect distrus";
+        _handle ppEffectEnable false;
+        ppEffectDestroy _handle;
+    };
 };
 
 sleep 1;

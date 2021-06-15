@@ -8,59 +8,59 @@ format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOB
 //sInitialSLPlayerID
 _SaveVersion = "";
 if (_SaveType isEqualTo 1) then {
-	_SaveVersion = worldName;
+    _SaveVersion = worldName;
 };
 if (_SaveType isEqualTo 2) then {
-	_SaveVersion = "GLOBAL";
+    _SaveVersion = "GLOBAL";
 };
 
 
 if (_SaveVersion != "") then {
-	//sInitialSLPlayerID
-	TRGM_VAR_SaveType =  _SaveType; publicVariable "TRGM_VAR_SaveType";
-	TRGM_VAR_SaveTypeString =  _SaveVersion; publicVariable "TRGM_VAR_SaveTypeString";
+    //sInitialSLPlayerID
+    TRGM_VAR_SaveType =  _SaveType; publicVariable "TRGM_VAR_SaveType";
+    TRGM_VAR_SaveTypeString =  _SaveVersion; publicVariable "TRGM_VAR_SaveTypeString";
 
-	sleep 0.1;
-	{
-		_saveData = [
-			TRGM_VAR_iMissionParamType,
-			TRGM_VAR_iMissionParamObjective,
-			TRGM_VAR_iAllowNVG,
-			TRGM_VAR_iMissionParamRepOption,
-			TRGM_VAR_iWeather,
-			TRGM_VAR_iUseRevive,
-			TRGM_VAR_iStartLocation,
-			TRGM_VAR_BadPoints,
-			TRGM_VAR_MaxBadPoints,
-			TRGM_VAR_BadPointsReason,
-			TRGM_VAR_iCampaignDay,
-			TRGM_VAR_AdvancedSettings,
-			TRGM_VAR_EnemyFactionData,
-			TRGM_VAR_LoadoutData,
-			TRGM_VAR_arrayTime
-		];
-		profileNamespace setVariable [TRGM_VAR_sInitialSLPlayerID + ":" + TRGM_VAR_SaveTypeString,_saveData];
-		saveProfileNamespace;
-	} remoteExec ["call", 2]; //Save this to server only
+    sleep 0.1;
+    {
+        _saveData = [
+            TRGM_VAR_iMissionParamType,
+            TRGM_VAR_iMissionParamObjective,
+            TRGM_VAR_iAllowNVG,
+            TRGM_VAR_iMissionParamRepOption,
+            TRGM_VAR_iWeather,
+            TRGM_VAR_iUseRevive,
+            TRGM_VAR_iStartLocation,
+            TRGM_VAR_BadPoints,
+            TRGM_VAR_MaxBadPoints,
+            TRGM_VAR_BadPointsReason,
+            TRGM_VAR_iCampaignDay,
+            TRGM_VAR_AdvancedSettings,
+            TRGM_VAR_EnemyFactionData,
+            TRGM_VAR_LoadoutData,
+            TRGM_VAR_arrayTime
+        ];
+        profileNamespace setVariable [TRGM_VAR_sInitialSLPlayerID + ":" + TRGM_VAR_SaveTypeString,_saveData];
+        saveProfileNamespace;
+    } remoteExec ["call", 2]; //Save this to server only
 
 
-	TRGM_VAR_laptop1 remoteExec ["removeAllActions"];
+    TRGM_VAR_laptop1 remoteExec ["removeAllActions"];
 
-	if (TRGM_VAR_SaveType isEqualTo 1) then {
-		if (_IsFirstSave) then {[(localize "STR_TRGM2_ServerSave_Save1")] call TRGM_GLOBAL_fnc_notify;};
-		[TRGM_VAR_laptop1, [localize "STR_TRGM2_ServerSave_SaveLocal",{[(localize "STR_TRGM2_ServerSave_SaveHint")] call TRGM_GLOBAL_fnc_notify}]] remoteExec ["addAction", 0];
+    if (TRGM_VAR_SaveType isEqualTo 1) then {
+        if (_IsFirstSave) then {[(localize "STR_TRGM2_ServerSave_Save1")] call TRGM_GLOBAL_fnc_notify;};
+        [TRGM_VAR_laptop1, [localize "STR_TRGM2_ServerSave_SaveLocal",{[(localize "STR_TRGM2_ServerSave_SaveHint")] call TRGM_GLOBAL_fnc_notify}]] remoteExec ["addAction", 0];
 
-	}
-	else {
-		if (_IsFirstSave) then {[(localize "STR_TRGM2_ServerSave_Save2")] call TRGM_GLOBAL_fnc_notify;};
-		TRGM_VAR_laptop1 addAction [localize "STR_TRGM2_ServerSave_SaveGlobal",{[(localize "STR_TRGM2_ServerSave_SaveHint")] call TRGM_GLOBAL_fnc_notify}];
-	};
+    }
+    else {
+        if (_IsFirstSave) then {[(localize "STR_TRGM2_ServerSave_Save2")] call TRGM_GLOBAL_fnc_notify;};
+        TRGM_VAR_laptop1 addAction [localize "STR_TRGM2_ServerSave_SaveGlobal",{[(localize "STR_TRGM2_ServerSave_SaveHint")] call TRGM_GLOBAL_fnc_notify}];
+    };
 
-	true;
+    true;
 }
 else {
-	[(localize "STR_TRGM2_ServerSave_SaveError")] call TRGM_GLOBAL_fnc_notify;
-	false;
+    [(localize "STR_TRGM2_ServerSave_SaveError")] call TRGM_GLOBAL_fnc_notify;
+    false;
 };
 
 false;

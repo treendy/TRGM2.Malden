@@ -38,7 +38,7 @@ if ((count _notificationList) >= 1) then {
 
 private _index = _notificationList findIf {(_x select 1) isEqualTo _ctrlGroup};
 if !(_index isEqualTo -1) then {
-	_notificationList deleteAt _index;
-	uiNamespace setVariable ["TRGM_VAR_notifications_list", _notificationList];
+    _notificationList deleteAt _index;
+    uiNamespace setVariable ["TRGM_VAR_notifications_list", _notificationList];
 };
 if (!isNull _ctrlGroup) then {ctrlDelete _ctrlGroup};

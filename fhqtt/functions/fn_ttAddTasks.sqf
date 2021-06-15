@@ -18,7 +18,7 @@
  *   task waypoint is shown on the map an the 3d view. Objects that move also move
  *   the waypoint marker.
  * o _initialState is the initial state of the task ("succeeded", "failed", "canceled",
- * 	 "created", or "assigned"). By default, if _initialState is ommited, the state is set
+ *      "created", or "assigned"). By default, if _initialState is ommited, the state is set
  *   to "created". If set to "assigned", the task is also automatically assigned to everyone
  *   that knows about it.
  *
@@ -30,7 +30,7 @@
  *         ["taskCAS", "Fly around", "Fly around", "CAS"],
  *         ["taskRetreat1", "Return to LZ", "Return to LZ", "RETREAT", getMarkerPos "markLZ"],
  *     "BLU_G_F",
- *    	   ["taskSecret", "Secret: Betray NATO for whatever reason", "Secret: Betray NATO", ""],
+ *           ["taskSecret", "Secret: Betray NATO for whatever reason", "Secret: Betray NATO", ""],
  *         [["taskSecret1", "taskSecret"], "Because they are idiots", "Idiots", ""],
  *         [["taskSecret2", "taskSecret"], "Because I am evil", "Evil", ""]
  * ] call FHQ_fnc_ttAddTasks;
@@ -48,21 +48,21 @@ if (isServer) then {
     /* Note: Server only code. Briefing entries must be added on the server, not on an
      * individual client
      */
-	private _i = 0;
-   	for [{_i = 0}, {_i < count _this}, {_i = _i + 1}] do {
+    private _i = 0;
+       for [{_i = 0}, {_i < count _this}, {_i = _i + 1}] do {
 
-      	private _current = _this select _i;
+          private _current = _this select _i;
         if (_current call FHQ_fnc_ttiIsFilter) then {
             /* Must be a filter */
             _currentFilter = nil;
             _currentFilter = _current;
-		} else {
+        } else {
             /* Task entry.
              * Check if the task already exists. If not, construct a full
              * task entry with all redundant information filled in for easier
              * access later on
              */
-           	private _name = _current call FHQ_fnc_ttiGetTaskName;
+               private _name = _current call FHQ_fnc_ttiGetTaskName;
             if (([FHQ_TTI_TaskList, _name] call FHQ_fnc_ttiTaskExists) == -1) then {
                 private _newTask =
                            [_current call FHQ_fnc_ttiGetTaskId,
@@ -73,16 +73,16 @@ if (isServer) then {
                             _current call FHQ_fnc_ttiGetTaskState,
                             _current call FHQ_fnc_ttiGetTaskType];
                 FHQ_TTI_TaskList = FHQ_TTI_TaskList + [[_currentFilter, _newTask]];
-			};
-		};
+            };
+        };
     };
 
 
     publicVariable "FHQ_TTI_TaskList";
     if (!isDedicated) then {
-   		FHQ_TTI_TaskList call FHQ_fnc_ttiUpdateTaskList;
-  	};
+           FHQ_TTI_TaskList call FHQ_fnc_ttiUpdateTaskList;
+      };
 
-   	FHQ_TTI_tasks = true;
-   	publicVariable "FHQ_TTI_tasks";
+       FHQ_TTI_tasks = true;
+       publicVariable "FHQ_TTI_tasks";
 };

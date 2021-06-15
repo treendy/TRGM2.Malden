@@ -1,13 +1,13 @@
 ﻿/*
  * Author: Psycho
- 
+
  * Set the unit to the real dead. (overall damage == 1)
- 
+
  * Arguments:
-	0: Unit (Object)
- 
+    0: Unit (Object)
+
  * Return value:
-	-
+    -
  */
 
 params ["_unit"];
@@ -19,8 +19,8 @@ _unit setVariable ["AIS_UnitIsDead", true];
 
 // unit is dragged. So the dragger have to call the release function.
 if (!(isNull (_unit getVariable ["ais_DragDrop_Player", objNull]))) then {
-	_dragger = _unit getVariable ["ais_DragDrop_Player", objNull];
-	[_unit] remoteExecCall ["AIS_System_fnc_release", _dragger, false];
+    _dragger = _unit getVariable ["ais_DragDrop_Player", objNull];
+    [_unit] remoteExecCall ["AIS_System_fnc_release", _dragger, false];
 };
 
 _unit call AIS_System_fnc_restoreFaks;

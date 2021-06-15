@@ -1,14 +1,14 @@
 /* Tova's Simple Comvoy Script */
 
 params [
-	"_convoyGroup",
-	["_convoySpeed", 50],
+    "_convoyGroup",
+    ["_convoySpeed", 50],
     ["_convoySeparation", 50],
     ["_pushThrough", true]
 ];
 if (_pushThrough) then {
     _convoyGroup enableAttack!(_pushThrough);
-	{
+    {
         (vehicle _x) setUnloadInCombat[false, false];
     } forEach(units _convoyGroup);
 };
@@ -29,7 +29,7 @@ while { sleep 5; true } do {
         };
     } forEach(units _convoyGroup) - (crew(vehicle(leader _convoyGroup))) - allPlayers;
 
-	{
+    {
         (vehicle _x) setConvoySeparation _convoySeparation;
     } forEach(units _convoyGroup);
 };

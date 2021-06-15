@@ -8,9 +8,9 @@ for "_i" from 0 to count _unitTaskList - 1 do
     _current = _unitTaskList select _i;
 
     if (count _current == 2) then {
-  		_checkName = (_current select 1) call FHQ_fnc_ttiGetTaskName;	// Server list
-	} else {
-        _checkName = (_current select 2);							// Client list
+          _checkName = (_current select 1) call FHQ_fnc_ttiGetTaskName;    // Server list
+    } else {
+        _checkName = (_current select 2);                            // Client list
     };
     if (_checkName == _name) exitWith {
         _res = _i;

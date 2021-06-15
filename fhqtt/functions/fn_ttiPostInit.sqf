@@ -25,14 +25,14 @@ for [{_i = 0}, {_i < count _briefings}, {_i = _i + 1}] do
 
     private _units = [];
 
-	{
+    {
         if (tolower(_id) == tolower(_x getVariable ["FHQ_tt_UnitBriefing", ""])) then {
             _units = _units + [_x];
         };
     } foreach _playable;
 
     if (count _units != 0) then {
-    	([_units] + _entry) call FHQ_fnc_ttAddBriefing;
+        ([_units] + _entry) call FHQ_fnc_ttAddBriefing;
     };
 };
 
@@ -50,7 +50,7 @@ for [{_i = 0}, {_i < count _tasks}, {_i = _i + 1}] do
     } foreach _playable;
 
     if (count _units != 0) then {
-		([_units] + [_entry]) call FHQ_fnc_ttAddTasks;
+        ([_units] + [_entry]) call FHQ_fnc_ttAddTasks;
     };
 };
 

@@ -12,25 +12,25 @@ _AODistance = _unit distance _mainAOPos;
 _chanceOfBad = [false,false,false,false,false,false,false,false,false,true];
 
 if (_AODistance<4000) then {
-	_distanceFromAO = "MED";
-	_chanceOfBad = [false,false,false,false,false,false,false,true];
+    _distanceFromAO = "MED";
+    _chanceOfBad = [false,false,false,false,false,false,false,true];
 };
 if (_AODistance<1500) then {
-	_distanceFromAO = "CLOSE";
-	_chanceOfBad = [false,false,false,false,false,true];
+    _distanceFromAO = "CLOSE";
+    _chanceOfBad = [false,false,false,false,false,true];
 };
 if (_AODistance<500) then {
-	_distanceFromAO = "VERYCLOSE";
-	_chanceOfBad = [false,false,false,false,true];
+    _distanceFromAO = "VERYCLOSE";
+    _chanceOfBad = [false,false,false,false,true];
 };
 
 _isBad = selectRandom _chanceOfBad;
 
 //add this in once tested against brads EOS version
 //if (!_isBad) then {
-//	_unit addEventHandler ["killed", {_this spawn TRGM_SERVER_fnc_CivKilled;}];
+//    _unit addEventHandler ["killed", {_this spawn TRGM_SERVER_fnc_CivKilled;}];
 //};
 
 if (isserver) then {
-	_unit spawn TRGM_SERVER_fnc_BadCiv;
+    _unit spawn TRGM_SERVER_fnc_BadCiv;
 };

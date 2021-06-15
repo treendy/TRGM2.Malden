@@ -53,22 +53,22 @@ if (isServer) then {
 
     for [{_i = 0}, {_i < count _this}, {_i = _i + 1}] do {
 
-    	_current = _this select _i;
+        _current = _this select _i;
 
         if (_current call FHQ_fnc_ttiIsFilter) then {
             _currentFilter = nil;
             _currentFilter = _current;
         } else {
-			/* It's a briefing entry. */
+            /* It's a briefing entry. */
             [_currentFilter, _current] call FHQ_fnc_ttiAddBriefingEntry;
         };
-	};
+    };
 
-	publicVariable "FHQ_TTI_BriefingList";
+    publicVariable "FHQ_TTI_BriefingList";
     if (!isDedicated) then {
-   		FHQ_TTI_BriefingList call FHQ_fnc_ttiUpdateBriefingList;
-   	};
+           FHQ_TTI_BriefingList call FHQ_fnc_ttiUpdateBriefingList;
+       };
 
-   	FHQ_TTI_briefing = true;
-   	publicVariable "FHQ_TTI_briefing";
+       FHQ_TTI_briefing = true;
+       publicVariable "FHQ_TTI_briefing";
 };
