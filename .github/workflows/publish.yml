@@ -1,30 +1,37 @@
-# This is a basic workflow to help you get started with Actions
+name: Test-And-Build
 
-name: Publish
-
-# Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the refactor branch
   push:
     branches: [ refactor ]
   pull_request:
-    branches: [ refactor ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  pack:
-    # The type of runner that the job will run on
-    runs-on: windows-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  validate:
+    runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+    - name: Checkout the source code
+      uses: actions/checkout@master
+    - name: Validate SQF
+      run: python3 tools/sqf_validator.py
+    - name: Validate Config
+      run: python3 tools/config_style_checker.py
+    - name: Check for BOM
+      uses: arma-actions/bom-check@v1
 
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the source code
+      uses: actions/checkout@master
+    - name: Lint (sqflint)
+      uses: arma-actions/sqflint@master
+      continue-on-error: true
+
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
       - name: Copy mission files to templates
         run: |
           $mainFolder = "$($Env:GITHUB_WORKSPACE)"
@@ -99,23 +106,3 @@ jobs:
           name: TRGM-Redux-Missions
           path: ${{ github.workspace }}/Publish/**/*
           if-no-files-found: error
-  # lint:
-  #   # The type of runner that the job will run on
-  #   runs-on: ubuntu-latest
-
-  #   # Steps represent a sequence of tasks that will be executed as part of the job
-  #   steps:
-  #     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-  #     - uses: actions/checkout@v2
-
-  #     - name: Remove non-mission files
-  #       run: |
-  #         rm -rf "$GITHUB_WORKSPACE/Mission-Templates"
-  #         rm -rf "$GITHUB_WORKSPACE/Pbo-Tools"
-  #         rm -rf "$GITHUB_WORKSPACE/.git"
-  #         rm -rf "$GITHUB_WORKSPACE/.github"
-
-  #     - uses: arma-actions/sqflint@v1.0
-  #       name: Validate with SQFLint
-  #       with:
-  #         args: --exit w --directory $GITHUB_WORKSPACE
