@@ -1,12 +1,12 @@
 /* Internal function */
 
 private ["_unitsArray", "_outputArray"];
-    
+
 _filter = [_this, 0] call BIS_fnc_param;
-_unitsArray = [_this, 1, (if (isMultiplayer) then {playableUnits} else {switchableUnits})] call BIS_fnc_param; 
+_unitsArray = [_this, 1, (if (isMultiplayer) then {playableUnits} else {switchableUnits})] call BIS_fnc_param;
 
 _outputArray = [];
-    
+
 switch (typename _filter) do
 {
     case "CODE":
@@ -38,7 +38,7 @@ switch (typename _filter) do
     {
         // Result is the input
         _outputArray = _filter;
-    }
+    };
 };
-    
+
 _outputArray;

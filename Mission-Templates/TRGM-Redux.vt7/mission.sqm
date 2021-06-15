@@ -8,18 +8,14 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=311;
-	};
-	class LayerIndexProvider
-	{
-		nextID=1;
+		nextID=308;
 	};
 	class Camera
 	{
-		pos[]={15453.97,22.880653,16650.35};
-		dir[]={0.71725667,-0.59068149,-0.3696979};
-		up[]={0.52504569,0.80689692,-0.27062619};
-		aside[]={-0.45816061,-4.2410102e-007,-0.88888717};
+		pos[]={15403.229,59.68631,16673.402};
+		dir[]={0.79877293,-0.58558267,-0.13817717};
+		up[]={0.57701892,0.81060505,-0.099816851};
+		aside[]={-0.17045672,-3.9352744e-007,-0.98538125};
 	};
 };
 binarizationWanted=0;
@@ -46,8 +42,6 @@ addons[]=
 	"A3_Sounds_F_Enoch",
 	"A3_Weapons_F_Explosives",
 	"A3_Weapons_F_Orange",
-	"rhsusf_c_troops",
-	"rhsusf_c_weapons",
 	"A3_Characters_F_Heads",
 	"A3_Characters_F_Orange_Facewear",
 	"A3_Weapons_F_Mark",
@@ -67,7 +61,6 @@ addons[]=
 	"A3_Structures_F_EPA_Items_Medical",
 	"A3_Structures_F_Heli_Items_Luggage",
 	"A3_Structures_F_Tank_Decals_Horizontal",
-	"MH9SFX",
 	"A3_Air_F_Beta_Heli_Attack_01",
 	"A3_Air_F_Heli_Heli_Transport_03",
 	"A3_Soft_F_Exp_LSV_01",
@@ -82,7 +75,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=40;
+		items=29;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -148,199 +141,138 @@ class AddonsMetaData
 		};
 		class Item9
 		{
-			className="CSAT_Eyewear";
-			name="CSAT_Eyewear";
-		};
-		class Item10
-		{
 			className="A3_Characters_F_Mark";
 			name="Arma 3 Marksmen - Characters and Clothing";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item11
+		class Item10
 		{
 			className="A3_Sounds_F";
 			name="Arma 3 - Sound Effects";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item12
+		class Item11
 		{
 			className="A3_Sounds_F_Enoch";
-			name="Arma 3 Contact Platform - Sound Effects";
+			name="Arma 3 Enoch - Sound Effects";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item13
+		class Item12
 		{
 			className="A3_Weapons_F_Orange";
 			name="Arma 3 Orange - Weapons and Accessories";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item14
-		{
-			className="rhsusf_c_troops";
-			name="RHSUSF Infantry & Equipment";
-			author="Red Hammer Studios";
-			url="http://www.rhsmods.org/";
-		};
-		class Item15
-		{
-			className="rhsusf_c_weapons";
-			name="RHSUSF Weapons & Accessories";
-			author="Red Hammer Studios";
-			url="http://www.rhsmods.org/";
-		};
-		class Item16
+		class Item13
 		{
 			className="A3_Characters_F_Orange";
 			name="Arma 3 Orange - Characters and Clothing";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item17
+		class Item14
 		{
 			className="A3_Weapons_F_Mark";
 			name="Arma 3 Marksmen - Weapons and Accessories";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item18
+		class Item15
 		{
 			className="A3_Drones_F";
 			name="Arma 3 Beta - Drones";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item19
-		{
-			className="TAC_VESTS_B";
-			name="TAC_VESTS_B";
-		};
-		class Item20
-		{
-			className="TAC_VESTS_S";
-			name="TAC_VESTS_S";
-		};
-		class Item21
-		{
-			className="TAC_VESTS_US";
-			name="TAC_VESTS_US";
-		};
-		class Item22
-		{
-			className="TAC_VESTS_Z2";
-			name="TAC_VESTS_Z2";
-		};
-		class Item23
-		{
-			className="TAC_VESTS";
-			name="TAC_VESTS";
-		};
-		class Item24
+		class Item16
 		{
 			className="A3_Data_F_Exp_A";
 			name="Arma 3 Nexus Update - Main Configuration";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item25
+		class Item17
 		{
 			className="A3_Props_F_Exp";
 			name="Arma 3 Apex - Decorative and Mission Objects";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item26
+		class Item18
 		{
 			className="A3_Supplies_F_Heli";
 			name="Arma 3 Helicopters - Ammoboxes and Supplies";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item27
+		class Item19
 		{
 			className="A3_Structures_F_Ind";
 			name="Arma 3 - Industrial Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item28
+		class Item20
 		{
 			className="A3_Structures_F";
 			name="Arma 3 - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item29
+		class Item21
 		{
 			className="A3_Structures_F_Heli";
 			name="Arma 3 Helicopters - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item30
+		class Item22
 		{
 			className="A3_Structures_F_EPA";
 			name="Arma 3 Survive Episode - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item31
+		class Item23
 		{
 			className="A3_Structures_F_Tank";
 			name="Arma 3 Tank - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item32
-		{
-			className="MH9SFX";
-			name="MH9SFX";
-			author="Aaren";
-		};
-		class Item33
+		class Item24
 		{
 			className="A3_Air_F_Beta";
 			name="Arma 3 Beta - Aircraft";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item34
-		{
-			className="AH99SFX";
-			name="AH99SFX";
-		};
-		class Item35
+		class Item25
 		{
 			className="A3_Air_F_Heli";
 			name="Arma 3 Helicopters - Aircraft";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item36
+		class Item26
 		{
 			className="A3_Soft_F";
 			name="Arma 3 Alpha - Unarmored Land Vehicles";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item37
+		class Item27
 		{
 			className="A3_Armor_F_Beta";
 			name="Arma 3 Beta - Armored Land Vehicles";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item38
-		{
-			className="UH80SFX";
-			name="UH80SFX";
-			author="Aaren";
-		};
-		class Item39
+		class Item28
 		{
 			className="A3_Ui_F";
 			name="Arma 3 - User Interface";
@@ -353,52 +285,6 @@ randomSeed=3115363;
 class ScenarioData
 {
 	author="treendy";
-};
-class CustomAttributes
-{
-	class Category0
-	{
-		name="HNEG_emed_ped_session";
-		class Attribute0
-		{
-			property="HNEG_emed_ped_sessionRUN";
-			expression="false";
-			class Value
-			{
-				class data
-				{
-					class type
-					{
-						type[]=
-						{
-							"SCALAR"
-						};
-					};
-					value=1;
-				};
-			};
-		};
-		class Attribute1
-		{
-			property="HNEG_emed_ped_sessionATTNOTOOL";
-			expression="false";
-			class Value
-			{
-				class data
-				{
-					class type
-					{
-						type[]=
-						{
-							"SCALAR"
-						};
-					};
-					value=0;
-				};
-			};
-		};
-		nAttributes=2;
-	};
 };
 class Mission
 {
@@ -424,7 +310,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=148;
+		items=147;
 		class Item0
 		{
 			dataType="Group";
@@ -524,6 +410,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(car1)}";
+				onActivation="call{[0.5,""Vehicle destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -542,6 +429,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(tank1)}";
+				onActivation="call{[1,""Tank destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -669,6 +557,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(mediChop1)}";
+				onActivation="call{[1,""Medical chopper destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -945,7 +834,7 @@ class Mission
 			side="West";
 			class Entities
 			{
-				items=8;
+				items=7;
 				class Item0
 				{
 					dataType="Object";
@@ -1659,312 +1548,6 @@ class Mission
 							};
 						};
 						nAttributes=2;
-					};
-				};
-				class Item7
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={15479.044,8.5914392,16645.609};
-						angles[]={-0,1.5707964,0};
-					};
-					side="West";
-					flags=4;
-					class Attributes
-					{
-						skill=1;
-						init="call{this setVariable [""UnitRole"",""Autorifleman""];}";
-						name="k1_8";
-						isPlayable=1;
-						reportRemoteTargets=1;
-						receiveRemoteTargets=1;
-						reportOwnPosition=1;
-						class Inventory
-						{
-							class primaryWeapon
-							{
-								name="rhs_weap_m249_pip_S_para";
-								optics="rhsusf_acc_ELCAN_ard";
-								muzzle="rhsusf_acc_SF3P556";
-								flashlight="rhsusf_acc_anpeq15side_bk";
-								underBarrel="rhsusf_acc_grip4_bipod";
-								class primaryMuzzleMag
-								{
-									name="rhsusf_200Rnd_556x45_box";
-									ammoLeft=200;
-								};
-							};
-							class handgun
-							{
-								name="rhsusf_weap_m9";
-								class primaryMuzzleMag
-								{
-									name="rhsusf_mag_15Rnd_9x19_JHP";
-									ammoLeft=15;
-								};
-							};
-							class binocular
-							{
-								name="Rangefinder";
-							};
-							class uniform
-							{
-								typeName="rhs_uniform_acu_oefcp";
-								isBackpack=0;
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=5;
-									};
-								};
-							};
-							class vest
-							{
-								typeName="rhsusf_iotv_ocp_SAW";
-								isBackpack=0;
-								class MagazineCargo
-								{
-									items=2;
-									class Item0
-									{
-										name="rhsusf_100Rnd_556x45_M995_soft_pouch_coyote";
-										count=5;
-										ammoLeft=100;
-									};
-									class Item1
-									{
-										name="rhsusf_mag_15Rnd_9x19_JHP";
-										count=2;
-										ammoLeft=15;
-									};
-								};
-							};
-							class backpack
-							{
-								typeName="rhsusf_assault_eagleaiii_ocp";
-								isBackpack=1;
-								class MagazineCargo
-								{
-									items=3;
-									class Item0
-									{
-										name="rhsusf_100Rnd_556x45_M995_soft_pouch_coyote";
-										count=3;
-										ammoLeft=100;
-									};
-									class Item1
-									{
-										name="rhs_mag_an_m8hc";
-										count=5;
-										ammoLeft=1;
-									};
-									class Item2
-									{
-										name="rhs_mag_m67";
-										count=3;
-										ammoLeft=1;
-									};
-								};
-								class ItemCargo
-								{
-									items=1;
-									class Item0
-									{
-										name="FirstAidKit";
-										count=10;
-									};
-								};
-							};
-							map="ItemMap";
-							compass="ItemCompass";
-							watch="Itemwatch";
-							radio="ItemRadio";
-							gps="ItemGPS";
-							goggles="rhs_ess_black";
-							hmd="NVGoggles_OPFOR";
-							headgear="rhsusf_ach_helmet_headset_ocp_alt";
-						};
-					};
-					id=310;
-					type="rhsusf_army_ocp_autorifleman";
-					class CustomAttributes
-					{
-						class Attribute0
-						{
-							property="HNEG_emed_emtrDieout3ID";
-							expression="false";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
-									value="0";
-								};
-							};
-						};
-						class Attribute1
-						{
-							property="HNEG_emed_emtrDieout4ID";
-							expression="false";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
-									value="0";
-								};
-							};
-						};
-						class Attribute2
-						{
-							property="HNEG_emed_aedInit";
-							expression=" if (!is3DEN) then { _this call compile _value; }; ";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
-									value="true";
-								};
-							};
-						};
-						class Attribute3
-						{
-							property="pitch";
-							expression="_this setpitch _value;";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"SCALAR"
-										};
-									};
-									value=0.97000003;
-								};
-							};
-						};
-						class Attribute4
-						{
-							property="speaker";
-							expression="_this setspeaker _value;";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
-									value="Male04ENG";
-								};
-							};
-						};
-						class Attribute5
-						{
-							property="HNEG_emed_emtrDieout1ID";
-							expression="false";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
-									value="0";
-								};
-							};
-						};
-						class Attribute6
-						{
-							property="HNEG_emed_emitterInit";
-							expression=" if (!is3DEN) then { _this call compile _value; }; ";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
-									value="true";
-								};
-							};
-						};
-						class Attribute7
-						{
-							property="HNEG_emed_emtrDieout2ID";
-							expression="false";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
-									value="0";
-								};
-							};
-						};
-						class Attribute8
-						{
-							property="enableStamina";
-							expression="_this enablestamina _value;";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"BOOL"
-										};
-									};
-									value=0;
-								};
-							};
-						};
-						nAttributes=9;
 					};
 				};
 			};
@@ -6582,6 +6165,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(chin1)}";
+				onActivation="call{[1,""Large transport chopper destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -6719,6 +6303,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(airSup2)}";
+				onActivation="call{[2,""Air support destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -6737,6 +6322,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(airSup1)}";
+				onActivation="call{[2,""Air support destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -9016,12 +8602,6 @@ class Mission
 			type="Empty";
 			angle=278.92432;
 			id=307;
-		};
-		class Item147
-		{
-			dataType="Layer";
-			name="_Units";
-			id=308;
 		};
 	};
 	class Connections

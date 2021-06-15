@@ -878,7 +878,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(chin1)}";
-				onActivation="";
+				onActivation="call{[1,""Large transport chopper destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -897,7 +897,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(airSup1)}";
-				onActivation="";
+				onActivation="call{[2,""Air support destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -925,7 +925,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(car1)}";
-				onActivation="";
+				onActivation="call{[0.5,""Vehicle destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -1075,7 +1075,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(tank1)}";
-				onActivation="";
+				onActivation="call{[1,""Tank destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -1267,7 +1267,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(mediChop1)}";
-				onActivation="";
+				onActivation="call{[1,""Medical chopper destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -6174,7 +6174,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(airSup2)}";
-				onActivation="";
+				onActivation="call{[2,""Air support destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
