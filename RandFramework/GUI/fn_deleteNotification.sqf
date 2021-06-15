@@ -1,14 +1,14 @@
 // Removes a notification from the list of notifications
 
-if (isNull (uiNamespace getVariable ["TREND_notifications_disp", displayNull])) exitWith {};
+if (isNull (uiNamespace getVariable ["TRGM_VAR_notifications_disp", displayNull])) exitWith {};
 params[["_ctrlGroup", controlNull, [controlNull]]];
 
 disableSerialization;
 
 for "_i" from 0 to 1 step 0 do {
-    if ((uiNamespace getVariable ["TREND_notifications_active", scriptNull]) isEqualTo _thisScript) exitWith {};
-    waitUntil {uiSleep 0.025; (scriptDone (uiNamespace getVariable ["TREND_notifications_active", scriptNull]))};
-    uiNamespace setVariable ["TREND_notifications_active", _thisScript];
+    if ((uiNamespace getVariable ["TRGM_VAR_notifications_active", scriptNull]) isEqualTo _thisScript) exitWith {};
+    waitUntil {uiSleep 0.025; (scriptDone (uiNamespace getVariable ["TRGM_VAR_notifications_active", scriptNull]))};
+    uiNamespace setVariable ["TRGM_VAR_notifications_active", _thisScript];
 };
 
 if (isNull _ctrlGroup) exitWith {};
@@ -17,7 +17,7 @@ _ctrlGroup ctrlSetFade 1;
 _ctrlGroup ctrlCommit 0.20;
 waitUntil {ctrlCommitted _ctrlGroup};
 
-private _notificationList = uiNamespace getVariable ["TREND_notifications_list", []];
+private _notificationList = uiNamespace getVariable ["TRGM_VAR_notifications_list", []];
 private _index = _notificationList findIf {(_x select 1) isEqualTo _ctrlGroup};
 if (_index isEqualTo -1) exitWith {false};
 {
@@ -39,6 +39,6 @@ if ((count _notificationList) >= 1) then {
 private _index = _notificationList findIf {(_x select 1) isEqualTo _ctrlGroup};
 if !(_index isEqualTo -1) then {
 	_notificationList deleteAt _index;
-	uiNamespace setVariable ["TREND_notifications_list", _notificationList];
+	uiNamespace setVariable ["TRGM_VAR_notifications_list", _notificationList];
 };
 if (!isNull _ctrlGroup) then {ctrlDelete _ctrlGroup};

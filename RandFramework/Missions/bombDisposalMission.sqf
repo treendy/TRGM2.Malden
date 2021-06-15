@@ -2,7 +2,7 @@
 
 //MISSION 14: Bomb Defusal
 
-fnc_CustomRequired = { //used to set any required details for the AO (example, a wide open space or factory nearby)... if this is not found in AO, the engine will scrap the area and loop around again with a different location
+MISSION_fnc_CustomRequired = { //used to set any required details for the AO (example, a wide open space or factory nearby)... if this is not found in AO, the engine will scrap the area and loop around again with a different location
 //be careful about using this, some maps may not have what you require, so the engine will never satisfy the requirements here (example, if no airports are on a map and that is what you require)
 	_objectiveMainBuilding = _this select 0;
 	_centralAO_x = _this select 1;
@@ -12,14 +12,14 @@ fnc_CustomRequired = { //used to set any required details for the AO (example, a
 	_result; //return value
 };
 
-fnc_CustomVars = { //This is called before the mission function is called below, and the variables below can be adjusted for your mission
+MISSION_fnc_CustomVars = { //This is called before the mission function is called below, and the variables below can be adjusted for your mission
 	_RequiresNearbyRoad = false;
 	_roadSearchRange = 100; //this is how far out the engine will check to make sure a road is within range (if your objective requires a nearby road)
 	_allowFriendlyIns = true;
 	_MissionTitle = localize "STR_TRGM2_BombMissionTitle"; //this is what shows in dialog mission selection
 };
 
-fnc_CustomMission = { //This function is the main script for your mission, some if the parameters passed in must not be changed!!!
+MISSION_fnc_CustomMission = { //This function is the main script for your mission, some if the parameters passed in must not be changed!!!
 	/*
 	 * Parameter Descriptions
 	 * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	 * _objectiveMainBuilding 	: DO NOT EDIT THIS VALUE (this is the main building location selected within your AO)
 	 * _centralAO_x 			: DO NOT EDIT THIS VALUE (this is the X coord of the AO)
 	 * _centralAO_y 			: DO NOT EDIT THIS VALUE (this is the Y coord of the AO)
-	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in fnc_CustomVars)
+	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in MISSION_fnc_CustomVars)
 	 * _bCreateTask 			: DO NOT EDIT THIS VALUE (this is determined by the player, if the player selected to play a hidden mission, the task is not created!)
 	 * _iTaskIndex 				: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the index of the task used to determine mission/task completion!)
 	 * _bIsMainObjective 		: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the boolean if the mission is a Heavy or Standard mission!)
@@ -76,23 +76,23 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	[_objBomb1, [localize "STR_TRGM2_BombMissionReadSerialAction",{
 		_thisPlayer = _this select 1;
 		_bombSerialNumber = (_this select 3) select 0;
-		[format[localize "STR_TRGM2_BombSerialNo",_bombSerialNumber]] call TREND_fnc_notify;
+		[format[localize "STR_TRGM2_BombSerialNo",_bombSerialNumber]] call TRGM_GLOBAL_fnc_notify;
 	},[_bombSerialNumber]]]; remoteExec ["addAction", 0, true];
 
 
 	_objInformant = createGroup Civilian createUnit [selectRandom InformantClasses,[-200,-200,0],[],0,"NONE"];
 	_buildings = nil;
-	if (_iTaskIndex isEqualTo 0 && !isNil "TREND_Mission1SubLoc") then {
-		_buildings = nearestObjects [TREND_Mission1SubLoc, TREND_BasicBuildings, 100];
+	if (_iTaskIndex isEqualTo 0 && !isNil "TRGM_VAR_Mission1SubLoc") then {
+		_buildings = nearestObjects [TRGM_VAR_Mission1SubLoc, TRGM_VAR_BasicBuildings, 100];
 	};
-	if (_iTaskIndex isEqualTo 1 && !isNil "TREND_Mission2SubLoc") then {
-		_buildings = nearestObjects [TREND_Mission2SubLoc, TREND_BasicBuildings, 100];
+	if (_iTaskIndex isEqualTo 1 && !isNil "TRGM_VAR_Mission2SubLoc") then {
+		_buildings = nearestObjects [TRGM_VAR_Mission2SubLoc, TRGM_VAR_BasicBuildings, 100];
 	};
-	if (_iTaskIndex isEqualTo 2 && !isNil "TREND_Mission3SubLoc") then {
-		_buildings = nearestObjects [TREND_Mission3SubLoc, TREND_BasicBuildings, 100];
+	if (_iTaskIndex isEqualTo 2 && !isNil "TRGM_VAR_Mission3SubLoc") then {
+		_buildings = nearestObjects [TRGM_VAR_Mission3SubLoc, TRGM_VAR_BasicBuildings, 100];
 	};
 	if (isNil "_buildings") then {
-		_buildings = nearestObjects [[_centralAO_x,_centralAO_y], TREND_BasicBuildings, 1800];
+		_buildings = nearestObjects [[_centralAO_x,_centralAO_y], TRGM_VAR_BasicBuildings, 1800];
 	};
 
 
@@ -113,7 +113,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	};
 	if (!_bBuildingFound) then {
 		//didnt find a building with enough space... so have the guy outside
-		_flatPosInf = [getPos _infBuilding , 0, 50, 5, 0, 0.5, 0,[],[getPos _infBuilding,getPos _infBuilding], _objInformant] call TREND_fnc_findSafePos;
+		_flatPosInf = [getPos _infBuilding , 0, 50, 5, 0, 0.5, 0,[],[getPos _infBuilding,getPos _infBuilding], _objInformant] call TRGM_GLOBAL_fnc_findSafePos;
 		_objInformant setPos (_flatPosInf);
 	};
 
@@ -124,10 +124,10 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_missionBombWire = (_this select 3) select 1;
 		_missionBombCODE = (_this select 3) select 2;
 		if (alive _thisInformant) then {
-			[format[localize "STR_TRGM2_BombNiceToMeet",name(_thisPlayer),_bombSerialNumber,_missionBombWire,_missionBombCODE]] call TREND_fnc_notify;
+			[format[localize "STR_TRGM2_BombNiceToMeet",name(_thisPlayer),_bombSerialNumber,_missionBombWire,_missionBombCODE]] call TRGM_GLOBAL_fnc_notify;
 		}
 		else{
-			[format[localize "STR_TRGM2_BombPsst",name(_thisPlayer)]] call TREND_fnc_notify;
+			[format[localize "STR_TRGM2_BombPsst",name(_thisPlayer)]] call TRGM_GLOBAL_fnc_notify;
 		};
 	},[_bombSerialNumber,_missionBombWire,_missionBombCODE]]] remoteExec ["addAction", 0, true];
 
@@ -141,7 +141,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			_thisAreaRange = 20;
 			_checkPointGuidePos = getPos _objInformant;
 			_flatPosSentry = nil;
-			_flatPosSentry = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TREND_BaseAreaRange]] + TREND_CheckPointAreas + TREND_SentryAreas,[_checkPointGuidePos,_checkPointGuidePos]] call TREND_fnc_findSafePos;
+			_flatPosSentry = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", TRGM_VAR_BaseAreaRange]] + TRGM_VAR_CheckPointAreas + TRGM_VAR_SentryAreas,[_checkPointGuidePos,_checkPointGuidePos]] call TRGM_GLOBAL_fnc_findSafePos;
 			if (_flatPosSentry select 0 > 0) then {
 				_thisPosAreaOfCheckpoint = _flatPosSentry;
 				_thisRoadOnly = false;
@@ -149,11 +149,11 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 				_thisUnitTypes = [(call sRiflemanToUse), (call sRiflemanToUse),(call sRiflemanToUse),(call sMachineGunManToUse), (call sEngineerToUse), (call sGrenadierToUse), (call sMedicToUse),(call sAAManToUse),(call sATManToUse)];
 				_thisAllowBarakade = false;
 				_thisIsDirectionAwayFromAO = true;
-				[_checkPointGuidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,(call UnarmedScoutVehicles),100] spawn TREND_fnc_setCheckpoint;
+				[_checkPointGuidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,(call UnarmedScoutVehicles),100] spawn TRGM_SERVER_fnc_setCheckpoint;
 			};
 		}
 		else {
-			[getPos _objInformant,200,250] spawn TREND_fnc_createWaitingAmbush;
+			[getPos _objInformant,200,250] spawn TRGM_SERVER_fnc_createWaitingAmbush;
 		};
 	};
 
@@ -161,9 +161,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_objBomb1 = _this select 0;
 		waitUntil { _objBomb1 getVariable ["isDefused",false] || !alive _objBomb1; };
 		if (!alive _objBomb1) then {
-			[_objBomb1, "failed"] spawn TREND_fnc_updateTask;
+			[_objBomb1, "failed"] spawn TRGM_SERVER_fnc_updateTask;
 		} else {
-			[_objBomb1] spawn TREND_fnc_updateTask;
+			[_objBomb1] spawn TRGM_SERVER_fnc_updateTask;
 		};
 	};
 };
+
+publicVariable "MISSION_fnc_CustomRequired";
+publicVariable "MISSION_fnc_CustomVars";
+publicVariable "MISSION_fnc_CustomMission";

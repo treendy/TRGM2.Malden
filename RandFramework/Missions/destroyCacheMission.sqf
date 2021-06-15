@@ -2,7 +2,7 @@
 
 //MISSION 16: Destroy Cache
 
-fnc_CustomRequired = { //used to set any required details for the AO (example, a wide open space or factory nearby)... if this is not found in AO, the engine will scrap the area and loop around again with a different location
+MISSION_fnc_CustomRequired = { //used to set any required details for the AO (example, a wide open space or factory nearby)... if this is not found in AO, the engine will scrap the area and loop around again with a different location
 //be careful about using this, some maps may not have what you require, so the engine will never satisfy the requirements here (example, if no airports are on a map and that is what you require)
 	_objectiveMainBuilding = _this select 0;
 	_centralAO_x = _this select 1;
@@ -12,14 +12,14 @@ fnc_CustomRequired = { //used to set any required details for the AO (example, a
 	_result; //return value
 };
 
-fnc_CustomVars = { //This is called before the mission function is called below, and the variables below can be adjusted for your mission
+MISSION_fnc_CustomVars = { //This is called before the mission function is called below, and the variables below can be adjusted for your mission
 	_RequiresNearbyRoad = false;
 	_roadSearchRange = 100; //this is how far out the engine will check to make sure a road is within range (if your objective requires a nearby road)
 	_allowFriendlyIns = false;
 	_MissionTitle = localize "STR_TRGM2_CacheMissionTitle"; //this is what shows in dialog mission selection
 };
 
-fnc_CustomMission = { //This function is the main script for your mission, some if the parameters passed in must not be changed!!!
+MISSION_fnc_CustomMission = { //This function is the main script for your mission, some if the parameters passed in must not be changed!!!
 	/*
 	 * Parameter Descriptions
 	 * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	 * _objectiveMainBuilding 	: DO NOT EDIT THIS VALUE (this is the main building location selected within your AO)
 	 * _centralAO_x 			: DO NOT EDIT THIS VALUE (this is the X coord of the AO)
 	 * _centralAO_y 			: DO NOT EDIT THIS VALUE (this is the Y coord of the AO)
-	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in fnc_CustomVars)
+	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in MISSION_fnc_CustomVars)
 	 * _bCreateTask 			: DO NOT EDIT THIS VALUE (this is determined by the player, if the player selected to play a hidden mission, the task is not created!)
 	 * _iTaskIndex 				: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the index of the task used to determine mission/task completion!)
 	 * _bIsMainObjective 		: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the boolean if the mission is a Heavy or Standard mission!)
@@ -53,11 +53,15 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	missionNamespace setVariable [format ["missionObjectiveParams%1", _iTaskIndex], [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 	missionNamespace setVariable [_sTargetName1, _target1];
 
-	[_mainObjPos,100,true,true,_target1, _isCache] spawn TREND_fnc_setTargetEvent;
+	[_mainObjPos,100,true,true,_target1, _isCache] spawn TRGM_SERVER_fnc_setTargetEvent;
 
 	[_target1] spawn {
 		_target1 = _this select 0;
 		waitUntil { !alive _target1; };
-		[_target1] spawn TREND_fnc_updateTask;
+		[_target1] spawn TRGM_SERVER_fnc_updateTask;
 	};
 };
+
+publicVariable "MISSION_fnc_CustomRequired";
+publicVariable "MISSION_fnc_CustomVars";
+publicVariable "MISSION_fnc_CustomMission";

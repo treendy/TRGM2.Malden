@@ -2,7 +2,7 @@
 
 //MISSION 17: Secure and resupply area
 
-fnc_CustomRequired = { //used to set any required details for the AO (example, a wide open space or factory nearby)... if this is not found in AO, the engine will scrap the area and loop around again with a different location
+MISSION_fnc_CustomRequired = { //used to set any required details for the AO (example, a wide open space or factory nearby)... if this is not found in AO, the engine will scrap the area and loop around again with a different location
     //be careful about using this, some maps may not have what you require, so the engine will never satisfy the requirements here (example, if no airports are on a map and that is what you require)
     _objectiveMainBuilding = _this select 0;
     _centralAO_x = _this select 1;
@@ -12,14 +12,14 @@ fnc_CustomRequired = { //used to set any required details for the AO (example, a
     _result; //return value
 };
 
-fnc_CustomVars = { //This is called before the mission function is called below, and the variables below can be adjusted for your mission
+MISSION_fnc_CustomVars = { //This is called before the mission function is called below, and the variables below can be adjusted for your mission
     _RequiresNearbyRoad = false;
     _roadSearchRange = 100; //this is how far out the engine will check to make sure a road is within range (if your objective requires a nearby road)
     _allowFriendlyIns = false;
     _MissionTitle = localize "STR_TRGM2_ClearAreaMissionTitle"; //this is what shows in dialog mission selection
 };
 
-fnc_CustomMission = { //This function is the main script for your mission, some if the parameters passed in must not be changed!!!
+MISSION_fnc_CustomMission = { //This function is the main script for your mission, some if the parameters passed in must not be changed!!!
 	/*
 	 * Parameter Descriptions
 	 * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	 * _objectiveMainBuilding 	: DO NOT EDIT THIS VALUE (this is the main building location selected within your AO)
 	 * _centralAO_x 			: DO NOT EDIT THIS VALUE (this is the X coord of the AO)
 	 * _centralAO_y 			: DO NOT EDIT THIS VALUE (this is the Y coord of the AO)
-	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in fnc_CustomVars)
+	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in MISSION_fnc_CustomVars)
 	 * _bCreateTask 			: DO NOT EDIT THIS VALUE (this is determined by the player, if the player selected to play a hidden mission, the task is not created!)
 	 * _iTaskIndex 				: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the index of the task used to determine mission/task completion!)
 	 * _bIsMainObjective 		: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the boolean if the mission is a Heavy or Standard mission!)
@@ -46,8 +46,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
     _checkPointGuidePos = _mainObjPos;
     _flatPos = _mainObjPos;
     _flatPos = [_checkPointGuidePos, 0, 50, 10, 0, 0.2, 0, [
-        [getMarkerPos "mrkHQ", TREND_BaseAreaRange]
-    ] + TREND_CheckPointAreas + TREND_SentryAreas, [_mainObjPos, _mainObjPos]] call TREND_fnc_findSafePos;
+        [getMarkerPos "mrkHQ", TRGM_VAR_BaseAreaRange]
+    ] + TRGM_VAR_CheckPointAreas + TRGM_VAR_SentryAreas, [_mainObjPos, _mainObjPos]] call TRGM_GLOBAL_fnc_findSafePos;
     if (_flatPos select 0 > 0) then {
         _thisPosAreaOfCheckpoint = _flatPos;
         _thisRoadOnly = true;
@@ -55,7 +55,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         _thisUnitTypes = [(call sRifleman), (call sRifleman), (call sRifleman), (call sMachineGunMan), (call sEngineer), (call sEngineer), (call sMedic), (call sAAMan)];
         _thisAllowBarakade = true;
         _thisIsDirectionAwayFromAO = true;
-        [_mainObjPos, _thisPosAreaOfCheckpoint, _thisAreaRange, _thisRoadOnly, _thisSide, _thisUnitTypes, _thisAllowBarakade, _thisIsDirectionAwayFromAO, false, (call UnarmedScoutVehicles), 50] spawn TREND_fnc_setCheckpoint;
+        [_mainObjPos, _thisPosAreaOfCheckpoint, _thisAreaRange, _thisRoadOnly, _thisSide, _thisUnitTypes, _thisAllowBarakade, _thisIsDirectionAwayFromAO, false, (call UnarmedScoutVehicles), 50] spawn TRGM_SERVER_fnc_setCheckpoint;
     };
 
     //create flag and give its id
@@ -66,7 +66,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
     missionNamespace setVariable[_flagName, _flag, true];
     _flag setflagAnimationPhase 1;
     _flag setFlagTexture "\A3\Data_F\Flags\flag_red_CO.paa";
-    _flag setVariable["TREND_flagSide", east, true];
+    _flag setVariable["TRGM_VAR_flagSide", east, true];
     _flag setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
     missionNamespace setVariable [format ["missionObjectiveParams%1", _iTaskIndex], [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
 
@@ -76,7 +76,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         localize "STR_TRGM2_FlagLowerCallSupply", // Title of the action
         "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_unbind_ca.paa", // Idle icon shown on screen
         "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_unbind_ca.paa", // Progress icon shown on screen
-        "_this distance _target < 35 && _target getVariable [""TREND_flagSide"", east] != west", // Condition for the action to be shown
+        "_this distance _target < 35 && _target getVariable [""TRGM_VAR_flagSide"", east] != west", // Condition for the action to be shown
         "_caller distance _target < 35", // Condition for the action to progress
         {}, // Code executed when action starts
         {
@@ -99,13 +99,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
             params ["_flag", "_caller", "_actionId", "_arguments"];
             _arguments
             params ["_iTaskIndex"];
-            _flag setVariable["TREND_flagSide", west, true];
+            _flag setVariable["TRGM_VAR_flagSide", west, true];
             _flag setVariable["Lowered", true, true];
         }, // Code executed on completion
         {
             params ["_flag", "_caller", "_actionId", "_arguments"];
             _flag setFlagAnimationPhase 1;
-            _side = _flag setVariable["TREND_flagSide", east, true];
+            _side = _flag setVariable["TRGM_VAR_flagSide", east, true];
             _flag setFlagTexture "\A3\Data_F\Flags\flag_red_CO.paa";
         }, // Code executed on interrupted
         [_iTaskIndex], // Arguments passed to the scripts as _this select 3
@@ -125,17 +125,17 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         [_flag] spawn {
             private _thisFlag = _this select 0;
             while {missionNamespace getVariable['SupplyDropped_%1', 0] < 2} do {
-                [true, getPos _thisFlag] spawn TREND_fnc_alertNearbyUnits;
+                [true, getPos _thisFlag] spawn TRGM_SERVER_fnc_alertNearbyUnits;
                 sleep 60;
             };
         };
 
-        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true, true] spawn TREND_fnc_reinforcements;
+        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true, true] spawn TRGM_GLOBAL_fnc_reinforcements;
         sleep 10;
-        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true, true] spawn TREND_fnc_reinforcements;
+        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true, true] spawn TRGM_GLOBAL_fnc_reinforcements;
         sleep 10;
 
-        (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]) call TREND_fnc_notifyGlobal;
+        (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]) call TRGM_GLOBAL_fnc_notifyGlobal;
         [300, _iTaskIndex] spawn {
             params ["_duration", "_taskIndex"];
 			_endTime = _duration + time;
@@ -146,14 +146,14 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
                 if (_timeLeft < 6) then {_color = "#ff0000";};//red
                 if (_timeLeft < 0) exitWith {};
                 _content = parseText format ["Time Until Supplies Drop: <t color='%1'>--- %2 ---</t>", _color, [(_timeLeft/3600),"HH:MM:SS"] call BIS_fnc_timeToString];
-                [[_content, _duration + 1, _taskIndex, _taskIndex], {_this spawn TREND_fnc_handleNotification}] remoteExec ["call"]; // After the first run, this will only update the text for the notification with index = _taskIndex
+                [[_content, _duration + 1, _taskIndex, _taskIndex], {_this spawn TRGM_GUI_fnc_handleNotification}] remoteExec ["call"]; // After the first run, this will only update the text for the notification with index = _taskIndex
             };
         };
         sleep 300; //wait 5 mins before supply drop in area
-        (localize "STR_TRGM2_SupplyChopperInbound") call TREND_fnc_notifyGlobal;
+        (localize "STR_TRGM2_SupplyChopperInbound") call TRGM_GLOBAL_fnc_notifyGlobal;
 
-        TREND_dropCrate = false;
-        publicVariable "TREND_dropCrate";
+        TRGM_VAR_dropCrate = false;
+        publicVariable "TRGM_VAR_dropCrate";
 
         private _airToUse = selectRandom(call SupplySupportChopperOptions);
         private _heloGroup = createGroup west;
@@ -183,12 +183,12 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         [_heloGroup, 1] setWaypointSpeed "FULL";
 
         private _v1wp3 = _heloGroup addWaypoint[[(_exitPos select 0), (_exitPos select 1)], 0];
-        [_heloGroup, 2] setWaypointStatements["true", "airDropHelo1 flyInHeight 200; TREND_dropCrate = true; publicVariable ""TREND_dropCrate"";"];
+        [_heloGroup, 2] setWaypointStatements["true", "airDropHelo1 flyInHeight 200; TRGM_VAR_dropCrate = true; publicVariable ""TRGM_VAR_dropCrate"";"];
         [_heloGroup, 2] setWaypointSpeed "FULL";
 
         waitUntil {
             sleep 2;
-            TREND_dropCrate;
+            TRGM_VAR_dropCrate;
         };
         sleep 1;
 
@@ -224,13 +224,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         sleep 0.1;
         private _supplyObject = "B_supplyCrate_f"
         createVehicle _finalPos;
-        [_supplyObject, (units group player)] call TREND_fnc_initAmmoBox;
+        [_supplyObject, (units group player)] call TRGM_GLOBAL_fnc_initAmmoBox;
         _supplyObject allowDamage false;
         _supplyObject setPosATL _finalPos;
         _supplyObject setVectorUp surfaceNormal position _supplyObject;
         _supplyObject allowDamage true;
-        TREND_dropCrate = false;
-        publicVariable "TREND_dropCrate"; {
+        TRGM_VAR_dropCrate = false;
+        publicVariable "TRGM_VAR_dropCrate"; {
             deleteVehicle _x;
         }
         forEach crew(vehicle airDropHelo1) + [vehicle airDropHelo1];
@@ -238,14 +238,14 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
         waitUntil {
             sleep 2;
-            !TREND_dropCrate;
+            !TRGM_VAR_dropCrate;
         };
-        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true, true] spawn TREND_fnc_reinforcements;
+        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true, true] spawn TRGM_GLOBAL_fnc_reinforcements;
         sleep 10;
-        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true, true] spawn TREND_fnc_reinforcements;
+        [EAST, _flag getRelPos[5000, random 360], getPos _flag, 3, true, false, false, false, false, true, true] spawn TRGM_GLOBAL_fnc_reinforcements;
         sleep 10;
 
-        (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]) call TREND_fnc_notifyGlobal;
+        (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "5:00"]) call TRGM_GLOBAL_fnc_notifyGlobal;
         [300, _iTaskIndex] spawn {
             params ["_duration", "_taskIndex"];
 			_endTime = _duration + time;
@@ -256,11 +256,11 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
                 if (_timeLeft < 6) then {_color = "#ff0000";};//red
                 if (_timeLeft < 0) exitWith {};
                 _content = parseText format ["Time Until Supplies Drop: <t color='%1'>--- %2 ---</t>", _color, [(_timeLeft/3600),"HH:MM:SS"] call BIS_fnc_timeToString];
-                [[_content, _duration + 1, _taskIndex, _taskIndex], {_this spawn TREND_fnc_handleNotification}] remoteExec ["call"]; // After the first run, this will only update the text for the notification with index = _taskIndex
+                [[_content, _duration + 1, _taskIndex, _taskIndex], {_this spawn TRGM_GUI_fnc_handleNotification}] remoteExec ["call"]; // After the first run, this will only update the text for the notification with index = _taskIndex
             };
         };
         sleep 300; //wait 5 mins before supply drop in area
-        (localize "STR_TRGM2_SupplyChopperInbound") call TREND_fnc_notifyGlobal;
+        (localize "STR_TRGM2_SupplyChopperInbound") call TRGM_GLOBAL_fnc_notifyGlobal;
 
         _heloGroup = createGroup west;
         _spawnPos = _flag getRelPos[3000, random 360];
@@ -289,12 +289,12 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         [_heloGroup, 1] setWaypointSpeed "FULL";
 
         _v1wp3 = _heloGroup addWaypoint[[(_exitPos select 0), (_exitPos select 1)], 0];
-        [_heloGroup, 2] setWaypointStatements["true", "airDropHelo2 flyInHeight 200; TREND_dropCrate = true; publicVariable ""TREND_dropCrate"";"];
+        [_heloGroup, 2] setWaypointStatements["true", "airDropHelo2 flyInHeight 200; TRGM_VAR_dropCrate = true; publicVariable ""TRGM_VAR_dropCrate"";"];
         [_heloGroup, 2] setWaypointSpeed "FULL";
 
         waitUntil {
             sleep 2;
-            TREND_dropCrate;
+            TRGM_VAR_dropCrate;
         };
         sleep 1;
 
@@ -330,17 +330,21 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
         sleep 0.1;
         _supplyObject = "B_supplyCrate_f"
         createVehicle _finalPos;
-        [_supplyObject, (units group player)] call TREND_fnc_initAmmoBox;
+        [_supplyObject, (units group player)] call TRGM_GLOBAL_fnc_initAmmoBox;
         _supplyObject allowDamage false;
         _supplyObject setPosATL _finalPos;
         _supplyObject setVectorUp surfaceNormal position _supplyObject;
         _supplyObject allowDamage true;
-        TREND_dropCrate = false;
-        publicVariable "TREND_dropCrate"; {
+        TRGM_VAR_dropCrate = false;
+        publicVariable "TRGM_VAR_dropCrate"; {
             deleteVehicle _x;
         }
         forEach crew(vehicle airDropHelo2) + [vehicle airDropHelo2];
         missionNamespace setVariable[format["SupplyDropped_%1", _iTaskIndex], 2, true];
-        [_flag] spawn TREND_fnc_updateTask;
+        [_flag] spawn TRGM_SERVER_fnc_updateTask;
     };
 };
+
+publicVariable "MISSION_fnc_CustomRequired";
+publicVariable "MISSION_fnc_CustomVars";
+publicVariable "MISSION_fnc_CustomMission";

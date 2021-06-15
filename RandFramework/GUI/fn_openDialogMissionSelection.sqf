@@ -9,114 +9,114 @@
  * true <BOOL>
  *
  * Example:
- * [] spawn TREND_fnc_openDialogMissionSelection
+ * [] spawn TRGM_GUI_fnc_openDialogMissionSelection
  */
 
 disableSerialization;
 
-format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOBAL_fnc_log;
 //profileNamespace setVariable [worldname + ":PreviousSettings",Nil];
 
-if (isNil "TREND_InitialLoadedPreviousSettings" && !TREND_ForceMissionSetup) then {
-	TREND_InitialLoadedPreviousSettings = profileNamespace getVariable [worldname + ":PreviousSettings",Nil]; //Get this from server only, but use player ID!!!
-	if (!isNil "TREND_InitialLoadedPreviousSettings" && {count TREND_InitialLoadedPreviousSettings > 0 && {((["ResetMissionSettings", 0] call BIS_fnc_getParamValue) isEqualTo 0)}}) then {
-		TREND_iMissionParamType =  TREND_InitialLoadedPreviousSettings select 0; publicVariable "TREND_iMissionParamType";
-			//TREND_iMissionParamObjective =  TREND_InitialLoadedPreviousSettings select 1; publicVariable "TREND_iMissionParamObjective";
-			TREND_iAllowNVG =  TREND_InitialLoadedPreviousSettings select 2; publicVariable "TREND_iAllowNVG";
-			TREND_iMissionParamRepOption =  TREND_InitialLoadedPreviousSettings select 3; publicVariable "TREND_iMissionParamRepOption";
-			TREND_iWeather =  TREND_InitialLoadedPreviousSettings select 4; publicVariable "TREND_iWeather";
-			TREND_arrayTime = TREND_InitialLoadedPreviousSettings select 10; publicVariable "TREND_arrayTime";
-			if (isNil "TREND_arrayTime") then { TREND_arrayTime =  [8, 15]; publicVariable "TREND_arrayTime"; };
-			TREND_iUseRevive =  TREND_InitialLoadedPreviousSettings select 5; publicVariable "TREND_iUseRevive";
-			TREND_iStartLocation =  TREND_InitialLoadedPreviousSettings select 6; publicVariable "TREND_iStartLocation";
+if (isNil "TRGM_VAR_InitialLoadedPreviousSettings" && !TRGM_VAR_ForceMissionSetup) then {
+	TRGM_VAR_InitialLoadedPreviousSettings = profileNamespace getVariable [worldname + ":PreviousSettings",Nil]; //Get this from server only, but use player ID!!!
+	if (!isNil "TRGM_VAR_InitialLoadedPreviousSettings" && {count TRGM_VAR_InitialLoadedPreviousSettings > 0 && {((["ResetMissionSettings", 0] call BIS_fnc_getParamValue) isEqualTo 0)}}) then {
+		TRGM_VAR_iMissionParamType =  TRGM_VAR_InitialLoadedPreviousSettings select 0; publicVariable "TRGM_VAR_iMissionParamType";
+			//TRGM_VAR_iMissionParamObjective =  TRGM_VAR_InitialLoadedPreviousSettings select 1; publicVariable "TRGM_VAR_iMissionParamObjective";
+			TRGM_VAR_iAllowNVG =  TRGM_VAR_InitialLoadedPreviousSettings select 2; publicVariable "TRGM_VAR_iAllowNVG";
+			TRGM_VAR_iMissionParamRepOption =  TRGM_VAR_InitialLoadedPreviousSettings select 3; publicVariable "TRGM_VAR_iMissionParamRepOption";
+			TRGM_VAR_iWeather =  TRGM_VAR_InitialLoadedPreviousSettings select 4; publicVariable "TRGM_VAR_iWeather";
+			TRGM_VAR_arrayTime = TRGM_VAR_InitialLoadedPreviousSettings select 10; publicVariable "TRGM_VAR_arrayTime";
+			if (isNil "TRGM_VAR_arrayTime") then { TRGM_VAR_arrayTime =  [8, 15]; publicVariable "TRGM_VAR_arrayTime"; };
+			TRGM_VAR_iUseRevive =  TRGM_VAR_InitialLoadedPreviousSettings select 5; publicVariable "TRGM_VAR_iUseRevive";
+			TRGM_VAR_iStartLocation =  TRGM_VAR_InitialLoadedPreviousSettings select 6; publicVariable "TRGM_VAR_iStartLocation";
 
-			TREND_AdvancedSettings =  TREND_InitialLoadedPreviousSettings select 7; publicVariable "TREND_AdvancedSettings";
-			if (isNil "TREND_AdvancedSettings") then { TREND_AdvancedSettings =   TREND_DefaultAdvancedSettings; publicVariable "TREND_AdvancedSettings"; };
+			TRGM_VAR_AdvancedSettings =  TRGM_VAR_InitialLoadedPreviousSettings select 7; publicVariable "TRGM_VAR_AdvancedSettings";
+			if (isNil "TRGM_VAR_AdvancedSettings") then { TRGM_VAR_AdvancedSettings =   TRGM_VAR_DefaultAdvancedSettings; publicVariable "TRGM_VAR_AdvancedSettings"; };
 
-			TREND_EnemyFactionData =  TREND_InitialLoadedPreviousSettings select 8; publicVariable "TREND_EnemyFactionData";
-			if (isNil "TREND_EnemyFactionData") then { TREND_EnemyFactionData =   ""; publicVariable "TREND_EnemyFactionData"; };
+			TRGM_VAR_EnemyFactionData =  TRGM_VAR_InitialLoadedPreviousSettings select 8; publicVariable "TRGM_VAR_EnemyFactionData";
+			if (isNil "TRGM_VAR_EnemyFactionData") then { TRGM_VAR_EnemyFactionData =   ""; publicVariable "TRGM_VAR_EnemyFactionData"; };
 
-			TREND_LoadoutData =  TREND_InitialLoadedPreviousSettings select 9; publicVariable "TREND_InitialLoadedPreviousSettings";
-			if (isNil "TREND_LoadoutData") then { TREND_LoadoutData =   ""; publicVariable "TREND_LoadoutData"; };
+			TRGM_VAR_LoadoutData =  TRGM_VAR_InitialLoadedPreviousSettings select 9; publicVariable "TRGM_VAR_InitialLoadedPreviousSettings";
+			if (isNil "TRGM_VAR_LoadoutData") then { TRGM_VAR_LoadoutData =   ""; publicVariable "TRGM_VAR_LoadoutData"; };
 	};
 
-	if (count TREND_AdvancedSettings < 6) then {
-		TREND_AdvancedSettings pushBack 10;
+	if (count TRGM_VAR_AdvancedSettings < 6) then {
+		TRGM_VAR_AdvancedSettings pushBack 10;
 	};
 
-	if (count TREND_AdvancedSettings < 7) then {
-		TREND_AdvancedSettings pushBack (TREND_DefaultEnemyFactionValue select 0);
+	if (count TRGM_VAR_AdvancedSettings < 7) then {
+		TRGM_VAR_AdvancedSettings pushBack (TRGM_VAR_DefaultEnemyFactionValue select 0);
 	};
 
-	if (TREND_AdvancedSettings select 6 isEqualTo 0) then { //we had an issue with some being set to zero (due to a bad published version, this makes sure any zeros are adjusted to correct id)
-		TREND_AdvancedSettings set [6,TREND_DefaultEnemyFactionValue select 0];
+	if (TRGM_VAR_AdvancedSettings select 6 isEqualTo 0) then { //we had an issue with some being set to zero (due to a bad published version, this makes sure any zeros are adjusted to correct id)
+		TRGM_VAR_AdvancedSettings set [6,TRGM_VAR_DefaultEnemyFactionValue select 0];
 	};
 
-	if (count TREND_AdvancedSettings < 8) then {
-		TREND_AdvancedSettings pushBack (TREND_DefaultMilitiaFactionValue select 0);
+	if (count TRGM_VAR_AdvancedSettings < 8) then {
+		TRGM_VAR_AdvancedSettings pushBack (TRGM_VAR_DefaultMilitiaFactionValue select 0);
 	};
 
-	if (count TREND_AdvancedSettings < 9) then {
-		TREND_AdvancedSettings pushBack (TREND_DefaultFriendlyFactionValue select 0);
+	if (count TRGM_VAR_AdvancedSettings < 9) then {
+		TRGM_VAR_AdvancedSettings pushBack (TRGM_VAR_DefaultFriendlyFactionValue select 0);
 	};
 
-	if !(TREND_AdvancedSettings select 6 in TREND_DefaultEnemyFactionArray) then {
+	if !(TRGM_VAR_AdvancedSettings select 6 in TRGM_VAR_DefaultEnemyFactionArray) then {
 		_bFound = false;
 		{
-			if (!_bFound && _x in TREND_DefaultEnemyFactionArray) then {
+			if (!_bFound && _x in TRGM_VAR_DefaultEnemyFactionArray) then {
 				_bFound = true;
-				TREND_AdvancedSettings set [6,_x];
+				TRGM_VAR_AdvancedSettings set [6,_x];
 			};
-		} forEach TREND_DefaultEnemyFactionValue;
+		} forEach TRGM_VAR_DefaultEnemyFactionValue;
 	};
 
-	if !(TREND_AdvancedSettings select 7 in TREND_DefaultMilitiaFactionArray) then {
+	if !(TRGM_VAR_AdvancedSettings select 7 in TRGM_VAR_DefaultMilitiaFactionArray) then {
 		_bFound = false;
 		{
-			if (!_bFound && _x in TREND_DefaultMilitiaFactionArray) then {
+			if (!_bFound && _x in TRGM_VAR_DefaultMilitiaFactionArray) then {
 				_bFound = true;
-				TREND_AdvancedSettings set [7,_x];
+				TRGM_VAR_AdvancedSettings set [7,_x];
 			};
-		} forEach TREND_DefaultMilitiaFactionValue;
+		} forEach TRGM_VAR_DefaultMilitiaFactionValue;
 	};
 
-	if !(TREND_AdvancedSettings select 8 in TREND_DefaultFriendlyFactionArray) then {
+	if !(TRGM_VAR_AdvancedSettings select 8 in TRGM_VAR_DefaultFriendlyFactionArray) then {
 		_bFound = false;
 		{
-			if (!_bFound && _x in TREND_DefaultFriendlyFactionArray) then {
+			if (!_bFound && _x in TRGM_VAR_DefaultFriendlyFactionArray) then {
 				_bFound = true;
-				TREND_AdvancedSettings set [8,_x];
+				TRGM_VAR_AdvancedSettings set [8,_x];
 			};
-		} forEach TREND_DefaultFriendlyFactionValue;
+		} forEach TRGM_VAR_DefaultFriendlyFactionValue;
 	};
 
-	for [{private _i = 9}, {_i < count TREND_DefaultAdvancedSettings}, {_i = _i + 1}] do {
-		if (count TREND_AdvancedSettings < (_i + 1)) then {
-			TREND_AdvancedSettings pushBack (TREND_DefaultAdvancedSettings select _i);
+	for [{private _i = 9}, {_i < count TRGM_VAR_DefaultAdvancedSettings}, {_i = _i + 1}] do {
+		if (count TRGM_VAR_AdvancedSettings < (_i + 1)) then {
+			TRGM_VAR_AdvancedSettings pushBack (TRGM_VAR_DefaultAdvancedSettings select _i);
 		};
 	};
 
 	if (isClass(configFile >> "CfgPatches" >> "ace_medical")) then {
-		if (TREND_iUseRevive != 0) then { //Ace is active, so need to make sure "no revive" is selected
-			TREND_iUseRevive =  0; publicVariable "TREND_iUseRevive";
+		if (TRGM_VAR_iUseRevive != 0) then { //Ace is active, so need to make sure "no revive" is selected
+			TRGM_VAR_iUseRevive =  0; publicVariable "TRGM_VAR_iUseRevive";
 		};
 	};
-	TREND_InitialLoadedPreviousSettings = []; // no longer Nil, so will not reload our previously saved data and change any current changes
+	TRGM_VAR_InitialLoadedPreviousSettings = []; // no longer Nil, so will not reload our previously saved data and change any current changes
 };
 
 if (!isNull (findDisplay 6000)) then {
-	TREND_AdvancedSettings = [];
+	TRGM_VAR_AdvancedSettings = [];
 	{
 		_CurrentControl = _x;
 		_lnpCtrlType = _x select 2;
 		_ThisControlOptions = (_x select 4);
 		_ThisControlIDX = (_x select 0) + 1;
 		_ctrlItem = (findDisplay 6000) displayCtrl _ThisControlIDX;
-		TREND_debugMessages = TREND_debugMessages + "\n\n" + str(lbCurSel _ctrlItem);
-		publicVariable "TREND_debugMessages";
+		TRGM_VAR_debugMessages = TRGM_VAR_debugMessages + "\n\n" + str(lbCurSel _ctrlItem);
+		publicVariable "TRGM_VAR_debugMessages";
 		_value = nil;
 		if (_lnpCtrlType isEqualTo "RscCombo") then {
-			TREND_debugMessages = TREND_debugMessages + "\n\nHERE80:" + str(lbCurSel _ctrlItem);
+			TRGM_VAR_debugMessages = TRGM_VAR_debugMessages + "\n\nHERE80:" + str(lbCurSel _ctrlItem);
 			_value = _ThisControlOptions select ([lbCurSel _ctrlItem, 0] select (lbCurSel _ctrlItem isEqualTo -1));
 		};
 		if (_lnpCtrlType isEqualTo "RscEdit") then {
@@ -125,85 +125,85 @@ if (!isNull (findDisplay 6000)) then {
 		if (_lnpCtrlType isEqualTo "RscXSliderH") then {
 			_value = sliderPosition _ThisControlIDX;
 		};
-		TREND_AdvancedSettings pushBack _value;
-	} forEach TREND_AdvControls;
-	publicVariable "TREND_AdvancedSettings";
+		TRGM_VAR_AdvancedSettings pushBack _value;
+	} forEach TRGM_VAR_AdvControls;
+	publicVariable "TRGM_VAR_AdvancedSettings";
 
 	//_ctrlItem = (findDisplay 6000) displayCtrl 5500;
-	//TREND_iMissionParamType = TREND_MissionParamTypesValues select lbCurSel _ctrlItem;
-	//publicVariable "TREND_iMissionParamType";
+	//TRGM_VAR_iMissionParamType = TRGM_VAR_MissionParamTypesValues select lbCurSel _ctrlItem;
+	//publicVariable "TRGM_VAR_iMissionParamType";
 };
 
 closedialog 0;
 
 sleep 0.1;
 
-if (isNil "TREND_ForceMissionSetup") then { TREND_ForceMissionSetup =   false; publicVariable "TREND_ForceMissionSetup"; };
-if (TREND_ForceMissionSetup) then {
-	[_this] spawn TREND_fnc_SetParamsAndBegin;
+if (isNil "TRGM_VAR_ForceMissionSetup") then { TRGM_VAR_ForceMissionSetup =   false; publicVariable "TRGM_VAR_ForceMissionSetup"; };
+if (TRGM_VAR_ForceMissionSetup) then {
+	[_this] spawn TRGM_GUI_fnc_setParamsAndBegin;
 }
 else {
-	createDialog "Trend_DialogSetupParams";
+	createDialog "TRGM_VAR_DialogSetupParams";
 	waitUntil {!isNull (findDisplay 5000);};
-	//["opening 2dialogB"] call TREND_fnc_notify;
+	//["opening 2dialogB"] call TRGM_GLOBAL_fnc_notify;
 
 	_ctrlItem = (findDisplay 5000) displayCtrl 5500;
-	_optionItem = TREND_MissionParamTypes;
+	_optionItem = TRGM_VAR_MissionParamTypes;
 	{
 		_ctrlItem lbAdd _x;
 	} forEach _optionItem;
 
 	_ctrlTypes = (findDisplay 5000) displayCtrl 5104;
-	_optionTypes = TREND_MissionParamObjectives;
+	_optionTypes = TRGM_VAR_MissionParamObjectives;
 	{
 		_ctrlTypes lbAdd _x;
 	} forEach _optionTypes;
 
 	_ctrlNVG = (findDisplay 5000) displayCtrl 5102;
-	_optionNVG = TREND_MissionParamNVGOptions;
+	_optionNVG = TRGM_VAR_MissionParamNVGOptions;
 	{
 		_ctrlNVG lbAdd _x;
 	} forEach _optionNVG;
 
 	_ctrlRep = (findDisplay 5000) displayCtrl 5100;
-	_optionRep = TREND_MissionParamRepOptions;
+	_optionRep = TRGM_VAR_MissionParamRepOptions;
 	{
 		_ctrlRep lbAdd _x;
 	} forEach _optionRep;
 
 	_ctrlWeather = (findDisplay 5000) displayCtrl 5101;
-	_optionWeathers = TREND_MissionParamWeatherOptions;
+	_optionWeathers = TRGM_VAR_MissionParamWeatherOptions;
 	{
 		_ctrlWeather lbAdd _x;
 	} forEach _optionWeathers;
 
 	_ctrlRevive = (findDisplay 5000) displayCtrl 5103;
-	_optionRevive = TREND_MissionParamReviveOptions;
+	_optionRevive = TRGM_VAR_MissionParamReviveOptions;
 	{
 		_ctrlRevive lbAdd _x;
 	} forEach _optionRevive;
 
 	_ctrlLocation = (findDisplay 5000) displayCtrl 2105;
-	_optionLocation = TREND_MissionParamLocationOptions;
+	_optionLocation = TRGM_VAR_MissionParamLocationOptions;
 	{
 		_ctrlLocation lbAdd _x;
 	} forEach _optionLocation;
 
-	_ctrlItem lbSetCurSel (TREND_MissionParamTypesValues find TREND_iMissionParamType);
-	_ctrlTypes lbSetCurSel (TREND_MissionParamObjectivesValues find TREND_iMissionParamObjective);
-	_ctrlRep lbSetCurSel (TREND_MissionParamRepOptionsValues find TREND_iMissionParamRepOption);
-	_ctrlWeather lbSetCurSel (TREND_MissionParamWeatherOptionsValues find TREND_iWeather);
-	_ctrlNVG lbSetCurSel (TREND_MissionParamNVGOptionsValues find TREND_iAllowNVG);
-	_ctrlRevive lbSetCurSel (TREND_MissionParamReviveOptionsValues find TREND_iUseRevive);
+	_ctrlItem lbSetCurSel (TRGM_VAR_MissionParamTypesValues find TRGM_VAR_iMissionParamType);
+	_ctrlTypes lbSetCurSel (TRGM_VAR_MissionParamObjectivesValues find TRGM_VAR_iMissionParamObjective);
+	_ctrlRep lbSetCurSel (TRGM_VAR_MissionParamRepOptionsValues find TRGM_VAR_iMissionParamRepOption);
+	_ctrlWeather lbSetCurSel (TRGM_VAR_MissionParamWeatherOptionsValues find TRGM_VAR_iWeather);
+	_ctrlNVG lbSetCurSel (TRGM_VAR_MissionParamNVGOptionsValues find TRGM_VAR_iAllowNVG);
+	_ctrlRevive lbSetCurSel (TRGM_VAR_MissionParamReviveOptionsValues find TRGM_VAR_iUseRevive);
 	if (isClass(configFile >> "CfgPatches" >> "ace_medical")) then {
 		_ctrlRevive ctrlEnable false;
 	};
-	_ctrlLocation lbSetCurSel (TREND_MissionParamLocationOptionsValues find TREND_iStartLocation);
+	_ctrlLocation lbSetCurSel (TRGM_VAR_MissionParamLocationOptionsValues find TRGM_VAR_iStartLocation);
 
-	if ([8, 15] isEqualTo TREND_arrayTime) then {
-		[nil, [date select 3, date select 4], "Init"] call TREND_fnc_timeSliderOnChange;
+	if ([8, 15] isEqualTo TRGM_VAR_arrayTime) then {
+		[nil, [date select 3, date select 4], "Init"] call TRGM_GUI_fnc_timeSliderOnChange;
 	} else {
-		[nil, TREND_arrayTime, "Init"] call TREND_fnc_timeSliderOnChange;
+		[nil, TRGM_VAR_arrayTime, "Init"] call TRGM_GUI_fnc_timeSliderOnChange;
 	};
 
 };

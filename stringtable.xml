@@ -288,7 +288,7 @@
                 <Spanish>Carga de cuerda auxiliar: Iniciada</Spanish>
                 <Korean>보조 운반 장치: 초기화</Korean>
             </Key>
-            <Key ID="STR_TRGM2_bugRadio1_HQLisen">
+            <Key ID="STR_TRGM2_bugRadio_HQLisen">
                 <Original>HQ are listening in, stand by...</Original>
                 <English>HQ are listening in, stand by...</English>
                 <Chinese>總部正在收聽，請稍待...</Chinese>
@@ -296,7 +296,7 @@
                 <Spanish>CG está a la escucha, mantenga...</Spanish>
                 <Korean>본부에서 듣고, 대기 중...</Korean>
             </Key>
-            <Key ID="STR_TRGM2_bugRadio1_MapUpdated">
+            <Key ID="STR_TRGM2_bugRadio_MapUpdated">
                 <Original>Map updated with main AO location</Original>
                 <English>Map updated with main AO location</English>
                 <Chinese>地圖標記已更新，請查閱行動區域</Chinese>
@@ -1008,12 +1008,8 @@
                 <Korean>&lt;t color='#ff1111'&gt;가상 무기고&lt;/t&gt;</Korean>
             </Key>
             <Key ID="STR_TRGM2_startInfMission_SoItBegin">
-                <Original>And so it begins!</Original>
-                <English>And so it begins!</English>
-                <Chinese>就這麼開始了!</Chinese>
-                <Chinesesimp>就这么开始了!</Chinesesimp>
-                <Spanish>Y así comienza!</Spanish>
-                <Korean>시작되었습니다!</Korean>
+                <Original>Mission set up complete!</Original>
+                <English>Mission set up complete!</English>
             </Key>
             <Key ID="STR_TRGM2_SupplyDropVehInit_Hint">
                 <Original>Supply drop requested</Original>
@@ -2107,8 +2103,8 @@
                 <Korean>5시간 동안 계속</Korean>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_ScriptsUsed">
-                <Original>RickOShay's Dust Storm Script&lt;br/&gt;Psycho's A3 Wounding System&lt;br/&gt;Alias's Monsoon, Blizzard, and Ambient Battle Scripts&lt;br/&gt;Modified Notification System by NumbNutsJunior aka Pizza Man&lt;br/&gt;Jonas Aschenbrenner's Dictionaries</Original>
-                <English>RickOShay's Dust Storm Script&lt;br/&gt;Psycho's A3 Wounding System&lt;br/&gt;Alias's Monsoon, Blizzard, and Ambient Battle Scripts&lt;br/&gt;Modified Notification System by NumbNutsJunior aka Pizza Man&lt;br/&gt;Jonas Aschenbrenner's Dictionaries</English>
+                <Original>RickOShay's Dust Storm Script&lt;br/&gt;Psycho's A3 Wounding System&lt;br/&gt;Alias's Monsoon, Blizzard, and Ambient Battle Scripts&lt;br/&gt;Modified Notification System by NumbNutsJunior aka Pizza Man</Original>
+                <English>RickOShay's Dust Storm Script&lt;br/&gt;Psycho's A3 Wounding System&lt;br/&gt;Alias's Monsoon, Blizzard, and Ambient Battle Scripts&lt;br/&gt;Modified Notification System by NumbNutsJunior aka Pizza Man</English>
             </Key>
             <Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MissionTypeDescriptions1">
                 <Original>This is the default mission type.  There will be one main objective that is occupied by a heavy enemy army.\n\nYou will also have two optional mini missions, these mini missions will either give you intel on the main AO, or will help increase your reputation depending on the mission type.</Original>
@@ -3897,6 +3893,11 @@
             <Key ID="STR_TRGM2_openDialogRequests_RequestVehicle">
                 <Original>Request Vehicle</Original>
                 <English>Request Vehicle</English>
+            </Key>
+
+            <Key ID="STR_TRGM2_openDialogRequests_RequestUnitClassDefault">
+                <Original>Select a unit class</Original>
+                <English>Select a unit class</English>
             </Key>
 
             <Key ID="STR_TRGM2_openDialogRequests_RequestUnitDefault">

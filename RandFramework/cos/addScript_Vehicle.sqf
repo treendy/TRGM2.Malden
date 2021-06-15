@@ -105,7 +105,7 @@ _IEDType = "CAR";
 									}
 									else {
 										_thisVeh setVariable ["isDefused",true, true];
-										[0.2, localize "STR_TRGM2_IEDDefused"] spawn TREND_fnc_AdjustMaxBadPoints;
+										[0.2, localize "STR_TRGM2_IEDDefused"] spawn TRGM_GLOBAL_fnc_AdjustMaxBadPoints;
 										removeAllActions _thisVeh;
 										[localize "STR_TRGM2_IEDDefused"] remoteExecCall ["Hint", 0];
 									}

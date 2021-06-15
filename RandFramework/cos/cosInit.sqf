@@ -18,11 +18,11 @@ if (isnil "SERVER") then {Hint "You must ADD a object named SERVER";Player Sidec
 if (isServer) then {
 IF (!isnil ("COScomplete")) then {Hint "Check your call. COS was called twice!";}else{
 
-[] call TREND_fnc_initGlobalVars;
+[] call TRGM_GLOBAL_fnc_initGlobalVars;
 
-waitUntil {sleep 2; (TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_MissionParamsSet);};
+waitUntil {sleep 2; (TRGM_VAR_bAndSoItBegins && TRGM_VAR_CustomObjectsSet && TRGM_VAR_MissionParamsSet);};
 
-if (TREND_IsFullMap) Then {
+if (TRGM_VAR_IsFullMap) Then {
 
 COS_distance=400;//Set spawn distance
 _aerielActivation=false;// Set if flying units can activate civilian Zones

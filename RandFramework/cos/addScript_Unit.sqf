@@ -5,7 +5,7 @@ _unit = unit. Refer to Unit as _unit.
 
 _unit =(_this select 0);
 
-_mainAOPos = TREND_ObjectivePossitions select 0;
+_mainAOPos = TRGM_VAR_ObjectivePossitions select 0;
 _distanceFromAO = "FAR"; //4000+=FAR; 1500-3999=MED, 500-1499=CLOSE; 0-499=VERYCLOSE
 _AODirection = [_unit, _mainAOPos] call BIS_fnc_DirTo;
 _AODistance = _unit distance _mainAOPos;
@@ -27,10 +27,10 @@ if (_AODistance<500) then {
 _isBad = selectRandom _chanceOfBad;
 
 if (!_isBad) then {
-	_unit addEventHandler ["killed", {_this spawn TREND_fnc_CivKilled;}];
+	_unit addEventHandler ["killed", {_this spawn TRGM_SERVER_fnc_CivKilled;}];
 }
 else {
-	_unit spawn TREND_fnc_BadCiv;
+	_unit spawn TRGM_SERVER_fnc_BadCiv;
 };
 
 
@@ -60,8 +60,8 @@ else {
 		_distanceFromAO = (_this select 3) select 0;
 		_AODirection = (_this select 3) select 1;
 
-		_locationText = [TREND_ObjectivePossitions select 0] call TREND_fnc_getLocationName;
-		_locationDirection = format [localize "STR_TRGM2_location_fngetLocationName_DirOfName",[_AODirection,true] call TREND_fnc_directionToText," Here"];
+		_locationText = [TRGM_VAR_ObjectivePossitions select 0] call TRGM_GLOBAL_fnc_getLocationName;
+		_locationDirection = format [localize "STR_TRGM2_location_fngetLocationName_DirOfName",[_AODirection,true] call TRGM_GLOBAL_fnc_directionToText," Here"];
 
 		_potentialIntel = format["%1: I dont have anything of interest to tell you", name _thisUnit];
 
@@ -78,7 +78,7 @@ else {
 		};
 		if (_distanceFromAO == "CLOSE") then {
 			if (random 1 < .50) then {
-				_potentialIntel = format["After talking to %1, you discover our Objective is: %2", name _thisUnit, TREND_CurrentZeroMissionTitle];
+				_potentialIntel = format["After talking to %1, you discover our Objective is: %2", name _thisUnit, TRGM_VAR_CurrentZeroMissionTitle];
 			};
 			if (random 1 < .25) then {
 				_potentialIntel = format["After talking to %2, you discover something is happening close to the %1",_locationDirection, name _thisUnit];
@@ -86,7 +86,7 @@ else {
 		};
 		if (_distanceFromAO == "VERYCLOSE") then {
 			if (true) then {
-				_potentialIntel = format["After talking to %1, you discover our objective is: %2", name _thisUnit, TREND_CurrentZeroMissionTitle];
+				_potentialIntel = format["After talking to %1, you discover our objective is: %2", name _thisUnit, TRGM_VAR_CurrentZeroMissionTitle];
 			};
 			if (random 1 < .50) then {
 				_potentialIntel = format["After talking to %0, you discover something is happening very close to the %1",_locationDirection, name _thisUnit];

@@ -12,11 +12,11 @@
  * true <BOOL>
  *
  * Example:
- * [_this] spawn TREND_fnc_MissionTypeSelection
+ * [_this] spawn TRGM_GUI_fnc_missionTypeSelection
  */
 disableSerialization;
 
-format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOBAL_fnc_log;
 _thisThis = _this select 0;
 _selectedIndex = _thisThis select 1;
 
@@ -31,30 +31,30 @@ _selectedIndex = _thisThis select 1;
 #define MISSIONLISTW 	(6.18854 * UI_GRID_W)
 #define MISSIONLISTH 	(0.54988 * UI_GRID_H)
 
-if (isNil "TREND_iMissionParamObjective2") then { TREND_iMissionParamObjective2 =   0; publicVariable "TREND_iMissionParamObjective2"; };
-if (isNil "TREND_iMissionParamObjective3") then { TREND_iMissionParamObjective3 =   0; publicVariable "TREND_iMissionParamObjective3"; };
+if (isNil "TRGM_VAR_iMissionParamObjective2") then { TRGM_VAR_iMissionParamObjective2 =   0; publicVariable "TRGM_VAR_iMissionParamObjective2"; };
+if (isNil "TRGM_VAR_iMissionParamObjective3") then { TRGM_VAR_iMissionParamObjective3 =   0; publicVariable "TRGM_VAR_iMissionParamObjective3"; };
 
 if (!isNull((findDisplay 5000) displayCtrl 7001)) then {
 	_ctrlTypes1 = (findDisplay 5000) displayCtrl 7001;
-	TREND_iMissionParamObjective2 = TREND_MissionParamObjectivesValues select lbCurSel _ctrlTypes1;
-	publicVariable "TREND_iMissionParamObjective2";
+	TRGM_VAR_iMissionParamObjective2 = TRGM_VAR_MissionParamObjectivesValues select lbCurSel _ctrlTypes1;
+	publicVariable "TRGM_VAR_iMissionParamObjective2";
 };
 if (!isNull((findDisplay 5000) displayCtrl 7002)) then {
 	_ctrlTypes2 = (findDisplay 5000) displayCtrl 7002;
-	TREND_iMissionParamObjective3 = TREND_MissionParamObjectivesValues select lbCurSel _ctrlTypes2;
-	publicVariable "TREND_iMissionParamObjective3";
+	TRGM_VAR_iMissionParamObjective3 = TRGM_VAR_MissionParamObjectivesValues select lbCurSel _ctrlTypes2;
+	publicVariable "TRGM_VAR_iMissionParamObjective3";
 };
 
 _display = findDisplay 5000;
 _ctrl = (findDisplay 5000) displayCtrl 5001;
-_ctrl ctrlSetText format["%1",TREND_MissionTypeDescriptions select _selectedIndex]; // for Displays
+_ctrl ctrlSetText format["%1",TRGM_VAR_MissionTypeDescriptions select _selectedIndex]; // for Displays
 
 
-if (isNil "TREND_AllowMissionTypeCampaign") then { TREND_AllowMissionTypeCampaign =   false; publicVariable "TREND_AllowMissionTypeCampaign"; };
-_selectedTypeID = TREND_MissionParamTypesValues select _selectedIndex;
+if (isNil "TRGM_VAR_AllowMissionTypeCampaign") then { TRGM_VAR_AllowMissionTypeCampaign =   false; publicVariable "TRGM_VAR_AllowMissionTypeCampaign"; };
+_selectedTypeID = TRGM_VAR_MissionParamTypesValues select _selectedIndex;
 
 if (_selectedTypeID isEqualTo 5) then {
-	if (!TREND_AllowMissionTypeCampaign) then {
+	if (!TRGM_VAR_AllowMissionTypeCampaign) then {
 		_ctrlTypes = (findDisplay 5000) displayCtrl 5104;
 		_ctrlTypes ctrlEnable false;
 		_ctrlTypes lbSetCurSel (0);
@@ -83,11 +83,11 @@ if (_selectedTypeID isEqualTo 0 || _selectedTypeID isEqualTo 6 || _selectedTypeI
 		_inpctrl1 ctrlSetPosition [MISSIONLISTX+MISSIONLISTW, MISSIONLISTY,MISSIONLISTW/2,MISSIONLISTH];
 		_inpctrl1 ctrlCommit 0;
 		_ctrlTypes1 = (findDisplay 5000) displayCtrl 7001;
-		_optionTypes = TREND_MissionParamObjectives;
+		_optionTypes = TRGM_VAR_MissionParamObjectives;
 		{
 			_ctrlTypes1 lbAdd _x;
 		} forEach _optionTypes;
-		_ctrlTypes1 lbSetCurSel (TREND_MissionParamObjectivesValues find TREND_iMissionParamObjective2);
+		_ctrlTypes1 lbSetCurSel (TRGM_VAR_MissionParamObjectivesValues find TRGM_VAR_iMissionParamObjective2);
 	};
 	if (isNull((findDisplay 5000) displayCtrl 7002)) then {
 		_display ctrlCreate ["RscCombo", 7002];
@@ -96,28 +96,28 @@ if (_selectedTypeID isEqualTo 0 || _selectedTypeID isEqualTo 6 || _selectedTypeI
 		_inpctrl2 ctrlSetPosition [MISSIONLISTX+MISSIONLISTW+(MISSIONLISTW/2), MISSIONLISTY,MISSIONLISTW/2,MISSIONLISTH];
 		_inpctrl2 ctrlCommit 0;
 		_ctrlTypes2 = (findDisplay 5000) displayCtrl 7002;
-		_optionTypes = TREND_MissionParamObjectives;
+		_optionTypes = TRGM_VAR_MissionParamObjectives;
 		{
 			_ctrlTypes2 lbAdd _x;
 		} forEach _optionTypes;
-		_ctrlTypes2 lbSetCurSel (TREND_MissionParamObjectivesValues find TREND_iMissionParamObjective3);
+		_ctrlTypes2 lbSetCurSel (TRGM_VAR_MissionParamObjectivesValues find TRGM_VAR_iMissionParamObjective3);
 	};
 
 	if (_selectedTypeID isEqualTo 8 || _selectedTypeID isEqualTo 9) then {
 		if (!isNull((findDisplay 5000) displayCtrl 7002)) then {
 			ctrlDelete ((findDisplay 5000) displayCtrl 7002);
-			TREND_iMissionParamObjective3 = 0;
+			TRGM_VAR_iMissionParamObjective3 = 0;
 		};
 	};
 }
 else {
 	if (!isNull((findDisplay 5000) displayCtrl 7001)) then {
 		ctrlDelete ((findDisplay 5000) displayCtrl 7001);
-		TREND_iMissionParamObjective2 = 0;
+		TRGM_VAR_iMissionParamObjective2 = 0;
 	};
 	if (!isNull((findDisplay 5000) displayCtrl 7002)) then {
 		ctrlDelete ((findDisplay 5000) displayCtrl 7002);
-		TREND_iMissionParamObjective3 = 0;
+		TRGM_VAR_iMissionParamObjective3 = 0;
 	};
 };
 

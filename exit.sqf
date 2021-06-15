@@ -1,7 +1,7 @@
 
-"Exit.sqf" call TREND_fnc_log;
-if (TREND_SaveType != 0) then {
-	[TREND_SaveType,false] spawn TREND_fnc_ServerSave;
+"Exit.sqf" call TRGM_GLOBAL_fnc_log;
+if (TRGM_VAR_SaveType != 0) then {
+	[TRGM_VAR_SaveType,false] spawn TRGM_GLOBAL_fnc_serverSave;
 };
 
 

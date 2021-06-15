@@ -12,7 +12,7 @@
 
 // Debug - disable hint debug
 _test = true;
-format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOBAL_fnc_log;
 
 _dur = _this select 0;
 _isSmallEffect = _this select 1;
@@ -110,7 +110,7 @@ if (!_isSmallEffect) then {
 // Adjust camshake and sound volume if player in building or vehicle
 [_endtime] spawn {
     _endtime = _this select 0;
-    While {time < _endtime + 35 && !TREND_ForceEndSandStorm} do {
+    While {time < _endtime + 35 && !TRGM_VAR_ForceEndSandStorm} do {
  // extra time added due to fadeout time
             _building = nearestObject [player, "HouseBase"];
             _relPos = _building worldToModel (getPosATL player);
@@ -198,7 +198,7 @@ while {time < _future} do {
 };
 
 // Add Color correction
-if (!TREND_IsSnowMap) then {
+if (!TRGM_VAR_IsSnowMap) then {
     if (_test) then {hint "Start color correction";};
     _hndl1 = ppEffectCreate ["colorCorrections", 1550];
     _hndl1 ppEffectEnable true;
@@ -215,7 +215,7 @@ if (!TREND_IsSnowMap) then {
 
     // Modify Color correction and dust
     if (_test) then {hint "Start modify CC and alpha";};
-    While {time < _endtime && !TREND_ForceEndSandStorm} do {
+    While {time < _endtime && !TRGM_VAR_ForceEndSandStorm} do {
         _hndl1 ppEffectAdjust [0.6 + (overcast/3), 1, 0.05, [0.7, 0.66, 0.6, 0.1 + random 0.4], [0.6 + random 0.1, 0.66, 0.6, 0.1 + random 0.4], [0.6 + random 0.1, 0.66, 0.6, 0.1 + random 0.4]];
         _hndl1 ppEffectCommit 3 + (floor random 2);
 
@@ -251,7 +251,7 @@ if (!TREND_IsSnowMap) then {
     };
 }
 else {
-    While {time < _endtime && !TREND_ForceEndSandStorm} do {
+    While {time < _endtime && !TRGM_VAR_ForceEndSandStorm} do {
         sleep 5;
     }
 };

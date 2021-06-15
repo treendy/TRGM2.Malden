@@ -14,7 +14,7 @@
  * nil
  *
  * Example:
- * ["Open", vehicle player] spawn TREND_fnc_openVehicleCustomizationDialog
+ * ["Open", vehicle player] spawn TRGM_GUI_fnc_openVehicleCustomizationDialog
  */
 #define FADE_DELAY	0.15
 
@@ -46,13 +46,13 @@ private _checkboxTextures =
 ///////////////////////////////////////////////////////////////////////////////////////////
 if (_mode isEqualTo "draw3D") exitWith
 {
-	private _display = uiNamespace getVariable ["TREND_vehicleDisplay", findDisplay 8080];
+	private _display = uiNamespace getVariable ["TRGM_VAR_vehicleDisplay", findDisplay 8080];
 
-	private _cam = uiNamespace getvariable ["TREND_vehicleCam", objnull];
-	private _center = uiNamespace getvariable ["TREND_vehicleCenter", player];
-	private _target = uiNamespace getvariable ["TREND_vehicleTarget", player];
+	private _cam = uiNamespace getvariable ["TRGM_VAR_vehicleCam", objnull];
+	private _center = uiNamespace getvariable ["TRGM_VAR_vehicleCenter", player];
+	private _target = uiNamespace getvariable ["TRGM_VAR_vehicleTarget", player];
 
-	TREND_vehicleCamPos params ["_dis", "_dirH", "_dirV", "_targetPos"];
+	TRGM_VAR_vehicleCamPos params ["_dis", "_dirH", "_dirV", "_targetPos"];
 
 	[_target, [_dirH + 180, -_dirV, 0]] call BIS_fnc_setObjectRotation;
 	_target attachTo [_center, _targetPos, ""]; //--- Reattach for smooth movement
@@ -72,13 +72,13 @@ if (_mode isEqualTo "draw3D") exitWith
 if (_mode isEqualTo "Mouse") exitwith
 {
 	params ["_ctrl", "_mX", "_mY"];
-	private _cam = uiNamespace getvariable ["TREND_vehicleCam", objnull];
-	private _center = uiNamespace getvariable ["TREND_vehicleCenter", player];
-	private _target = uiNamespace getvariable ["TREND_vehicleTarget", player];
+	private _cam = uiNamespace getvariable ["TRGM_VAR_vehicleCam", objnull];
+	private _center = uiNamespace getvariable ["TRGM_VAR_vehicleCenter", player];
+	private _target = uiNamespace getvariable ["TRGM_VAR_vehicleTarget", player];
 
-	TREND_vehicleCamPos params ["_dis", "_dirH", "_dirV", "_targetPos"];
+	TRGM_VAR_vehicleCamPos params ["_dis", "_dirH", "_dirV", "_targetPos"];
 
-	TREND_vehicleButtons params ["_LMB", "_RMB"];
+	TRGM_VAR_vehicleButtons params ["_LMB", "_RMB"];
 
 	if (isnull _ctrl) then { _LMB = [0,0] }; //--- Init
 
@@ -86,7 +86,7 @@ if (_mode isEqualTo "Mouse") exitwith
 	{
 		_LMB params ["_cX", "_cY"];
 
-		TREND_vehicleButtons set [0, [_mX, _mY]];
+		TRGM_VAR_vehicleButtons set [0, [_mX, _mY]];
 
 		(boundingboxreal _center) params ["_minBox", "_maxBox"];
 		private _centerSizeBottom = _minBox select 2;
@@ -99,7 +99,7 @@ if (_mode isEqualTo "Mouse") exitwith
 		_targetPos = [0,0,0] getPos [([0,0,0] distance2D _targetPos) min _centerSize, [0,0,0] getDir _targetPos];
 		_targetPos set [2, _z max ((_minBox select 2) + 0.2)];
 
-		TREND_vehicleCamPos set [3, _targetPos];
+		TRGM_VAR_vehicleCamPos set [3, _targetPos];
 	};
 
 	if (count _RMB > 0) then
@@ -113,18 +113,18 @@ if (_mode isEqualTo "Mouse") exitwith
 		_targetPos = [0,0,0] getPos [[0,0,0] distance2D _targetPos, ([0,0,0] getDir _targetPos) - _dX * 180];
 		_targetPos set [2, _z];
 
-		TREND_vehicleCamPos set [1, (_dirH - _dX * 180) % 360];
-		TREND_vehicleCamPos set [2, (_dirV - _dY * 100) max -89 min 89];
-		TREND_vehicleCamPos set [3, _targetPos];
-		TREND_vehicleButtons set [1, [_mX,_mY]];
+		TRGM_VAR_vehicleCamPos set [1, (_dirH - _dX * 180) % 360];
+		TRGM_VAR_vehicleCamPos set [2, (_dirV - _dY * 100) max -89 min 89];
+		TRGM_VAR_vehicleCamPos set [3, _targetPos];
+		TRGM_VAR_vehicleButtons set [1, [_mX,_mY]];
 	};
 
-	if (isnull _ctrl) then { TREND_vehicleButtons = [[],[]]; };
+	if (isnull _ctrl) then { TRGM_VAR_vehicleButtons = [[],[]]; };
 
 	//--- Terminate when unit is dead
 	if (!alive _center || isnull _center) then
 	{
-		["Exit",[]] call TREND_fnc_openVehicleCustomizationDialog;
+		["Exit",[]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;
 	};
 };
 
@@ -135,12 +135,12 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "Open": {
 		params ["_center"];
-		if !(isnull (uinamespace getvariable ["TREND_vehicleCam", objnull])) exitwith { "Vehicle customization is already running" call TREND_fnc_log };
+		if !(isnull (uinamespace getvariable ["TRGM_VAR_vehicleCam", objnull])) exitwith { "Vehicle customization is already running" call TRGM_GLOBAL_fnc_log };
 		["BIS_fnc_arsenal"] call BIS_fnc_startLoadingScreen;
 		_displayMission = call BIS_fnc_displayMission;
-		_display = _displayMission createDisplay "Trend_DialogRequests_VehicleCustomization";
-		uiNamespace setVariable ["TREND_vehicleDisplay", _display];
-		uiNamespace setVariable ["TREND_vehicleCenter", _center];
+		_display = _displayMission createDisplay "TRGM_VAR_DialogRequests_VehicleCustomization";
+		uiNamespace setVariable ["TRGM_VAR_vehicleDisplay", _display];
+		uiNamespace setVariable ["TRGM_VAR_vehicleCenter", _center];
 
 		_display displayAddEventHandler ["KeyDown", {
 			params ["_display", "_key", "_shift", "_ctrl", "_alt"];
@@ -150,16 +150,16 @@ switch _mode do {
 				//Esc key
 				case 1:
 				{
-					["buttonClose", [_display]] call TREND_fnc_openVehicleCustomizationDialog;
+					["buttonClose", [_display]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;
 					_handled = true;
 				};
 			};
 			_handled;
 		}];
 
-		["InitGUI",[_display]] call TREND_fnc_openVehicleCustomizationDialog;
-		["Preload"] call TREND_fnc_openVehicleCustomizationDialog;
-		["ListAdd",[_display]] call TREND_fnc_openVehicleCustomizationDialog;
+		["InitGUI",[_display]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;
+		["Preload"] call TRGM_GUI_fnc_openVehicleCustomizationDialog;
+		["ListAdd",[_display]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;
 
 		["BIS_fnc_arsenal"] call BIS_fnc_endLoadingScreen;
 	};
@@ -167,29 +167,29 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "InitGUI":
 	{
-		_display = uiNamespace getVariable ["TREND_vehicleDisplay", findDisplay 8080];
+		_display = uiNamespace getVariable ["TRGM_VAR_vehicleDisplay", findDisplay 8080];
 
-		TREND_vehicleButtons = [[],[]];
+		TRGM_VAR_vehicleButtons = [[],[]];
 
-		private _center = uiNamespace getvariable ["TREND_vehicleCenter", player];
+		private _center = uiNamespace getvariable ["TRGM_VAR_vehicleCenter", player];
 		_center hideObject false;
 		cuttext ["","plain"];
 		showcommandingmenu "";
 
 		//--- Force internal view to enable consistent screen blurring. Restore the original view after closing Arsenal.
-		uiNamespace setVariable ["TREND_playerBaseView", cameraview];
+		uiNamespace setVariable ["TRGM_VAR_playerBaseView", cameraview];
 		player switchcamera "internal";
 
 		showhud false;
 
-		_display displayaddeventhandler ["mousebuttondown","['MouseButtonDown',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
-		_display displayaddeventhandler ["mousebuttonup","['MouseButtonUp',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
+		_display displayaddeventhandler ["mousebuttondown","['MouseButtonDown',_this] call TRGM_GUI_fnc_openVehicleCustomizationDialog;"];
+		_display displayaddeventhandler ["mousebuttonup","['MouseButtonUp',_this] call TRGM_GUI_fnc_openVehicleCustomizationDialog;"];
 
 		_ctrlMouseArea = _display displayctrl 899;
-		_ctrlMouseArea ctrladdeventhandler ["mousemoving","['Mouse',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
-		_ctrlMouseArea ctrladdeventhandler ["mouseholding","['Mouse',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
-		_ctrlMouseArea ctrladdeventhandler ["mousebuttonclick","['TabDeselect',[ctrlparent (_this select 0),_this select 1]] call TREND_fnc_openVehicleCustomizationDialog;"];
-		_ctrlMouseArea ctrladdeventhandler ["mousezchanged","['MouseZChanged',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
+		_ctrlMouseArea ctrladdeventhandler ["mousemoving","['Mouse',_this] call TRGM_GUI_fnc_openVehicleCustomizationDialog;"];
+		_ctrlMouseArea ctrladdeventhandler ["mouseholding","['Mouse',_this] call TRGM_GUI_fnc_openVehicleCustomizationDialog;"];
+		_ctrlMouseArea ctrladdeventhandler ["mousebuttonclick","['TabDeselect',[ctrlparent (_this select 0),_this select 1]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;"];
+		_ctrlMouseArea ctrladdeventhandler ["mousezchanged","['MouseZChanged',_this] call TRGM_GUI_fnc_openVehicleCustomizationDialog;"];
 		ctrlsetfocus _ctrlMouseArea;
 
 		_ctrlMouseBlock = _display displayctrl 898;
@@ -202,13 +202,13 @@ switch _mode do {
 
 		//--- UI event handlers
 		_ctrlButtonInterface = _display displayctrl 44151;
-		_ctrlButtonInterface ctrladdeventhandler ["buttonclick","['buttonInterface',[ctrlparent (_this select 0)]] call TREND_fnc_openVehicleCustomizationDialog;"];
+		_ctrlButtonInterface ctrladdeventhandler ["buttonclick","['buttonInterface',[ctrlparent (_this select 0)]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;"];
 
 		_ctrlButtonOK = _display displayctrl 44346;
-		_ctrlButtonOK ctrladdeventhandler ["buttonclick","['buttonOK',[ctrlparent (_this select 0),'init']] call TREND_fnc_openVehicleCustomizationDialog;"];
+		_ctrlButtonOK ctrladdeventhandler ["buttonclick","['buttonOK',[ctrlparent (_this select 0),'init']] call TRGM_GUI_fnc_openVehicleCustomizationDialog;"];
 
 		_ctrlArrowLeft = _display displayctrl 992;
-		_ctrlArrowLeft ctrladdeventhandler ["buttonclick","['buttonCargo',[ctrlparent (_this select 0),-1]] call TREND_fnc_openVehicleCustomizationDialog;"];
+		_ctrlArrowLeft ctrladdeventhandler ["buttonclick","['buttonCargo',[ctrlparent (_this select 0),-1]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;"];
 
 		//--- Menus
 		_ctrlIcon = _display displayctrl 930;
@@ -229,8 +229,8 @@ switch _mode do {
 				_idc = _x;
 				_ctrlTab = _display displayctrl (930 + _idc);
 
-				_ctrlTab ctrladdeventhandler ["buttonclick",format ["['TabSelectLeft',[ctrlparent (_this select 0),%1]] call TREND_fnc_openVehicleCustomizationDialog;",_idc]];
-				_ctrlTab ctrladdeventhandler ["mousezchanged","['MouseZChanged',_this] call TREND_fnc_openVehicleCustomizationDialog;"];
+				_ctrlTab ctrladdeventhandler ["buttonclick",format ["['TabSelectLeft',[ctrlparent (_this select 0),%1]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;",_idc]];
+				_ctrlTab ctrladdeventhandler ["mousezchanged","['MouseZChanged',_this] call TRGM_GUI_fnc_openVehicleCustomizationDialog;"];
 
 				_ctrlList = _display displayctrl (960 + _idc);
 				_ctrlList ctrlenable false;
@@ -238,7 +238,7 @@ switch _mode do {
 				_ctrlList ctrlsetfontheight (_gridH * 0.8);
 				_ctrlList ctrlcommit 0;
 
-				_ctrlList ctrladdeventhandler ["lbselchanged",format ["['SelectItem',[ctrlparent (_this select 0),(_this select 0),%1]] call TREND_fnc_openVehicleCustomizationDialog;",_idc]];
+				_ctrlList ctrladdeventhandler ["lbselchanged",format ["['SelectItem',[ctrlparent (_this select 0),(_this select 0),%1]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;",_idc]];
 
 				_ctrlListDisabled = _display displayctrl (860 + _idc);
 				_ctrlListDisabled ctrlenable false;
@@ -246,11 +246,11 @@ switch _mode do {
 			foreach [0,1];
 		};
 
-		['TabDeselect',[_display,-1]] call TREND_fnc_openVehicleCustomizationDialog;
-		['SelectItem',[_display,controlnull,-1]] call TREND_fnc_openVehicleCustomizationDialog;
+		['TabDeselect',[_display,-1]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;
+		['SelectItem',[_display,controlnull,-1]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;
 
 		_ctrlButtonClose = _display displayctrl 44448;
-		_ctrlButtonClose ctrladdeventhandler ["buttonclick","['buttonClose',[ctrlparent (_this select 0)]] spawn TREND_fnc_openVehicleCustomizationDialog; true"];
+		_ctrlButtonClose ctrladdeventhandler ["buttonclick","['buttonClose',[ctrlparent (_this select 0)]] spawn TRGM_GUI_fnc_openVehicleCustomizationDialog; true"];
 
 		{
 			_ctrl = _display displayctrl _x;
@@ -265,13 +265,13 @@ switch _mode do {
 		_ctrlSpace ctrlcommit 0;
 
 		//--- Camera init
-		TREND_vehicleCamPos = [5,0,0,[0,0,0.85]];
+		TRGM_VAR_vehicleCamPos = [5,0,0,[0,0,0.85]];
 
 		private _posCenter = getPosASLVisual _center;
 
 		private _target = createAgent ["Logic", _posCenter, [], 0, "none"];
-		_target attachTo [_center, TREND_vehicleCamPos select 3, ""];
-		uiNamespace setVariable ["TREND_vehicleTarget", _target];
+		_target attachTo [_center, TRGM_VAR_vehicleCamPos select 3, ""];
+		uiNamespace setVariable ["TRGM_VAR_vehicleTarget", _target];
 
 		private _cam = "camera" camCreate _posCenter;
 		//_cam setPosASL _posCenter;
@@ -281,13 +281,13 @@ switch _mode do {
 		_cam camCommitPrepared 0;
 		//cameraEffectEnableHUD true;
 		showCinemaBorder false;
-		uiNamespace setVariable ["TREND_vehicleCam", _cam];
+		uiNamespace setVariable ["TRGM_VAR_vehicleCam", _cam];
 		["#(argb,8,8,3)color(0,0,0,1)",false,nil,0,[0,0.5]] call BIS_fnc_textTiles;
 
 		//--- Camera reset
-		["Mouse", [controlnull, 0, 0]] call TREND_fnc_openVehicleCustomizationDialog;
-		_draw3D = addMissionEventHandler ["draw3D", { ["draw3D"] call TREND_fnc_openVehicleCustomizationDialog; }];
-		uiNamespace setVariable ["TREND_vehicleDraw3D", _draw3D];
+		["Mouse", [controlnull, 0, 0]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;
+		_draw3D = addMissionEventHandler ["draw3D", { ["draw3D"] call TRGM_GUI_fnc_openVehicleCustomizationDialog; }];
+		uiNamespace setVariable ["TRGM_VAR_vehicleDraw3D", _draw3D];
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -296,7 +296,7 @@ switch _mode do {
 		["bis_fnc_garage_preload"] call BIS_fnc_startLoadingScreen;
 		private ["_data"];
 		_data = [];
-		_center = (uiNamespace getVariable ["TREND_vehicleCenter", player]);
+		_center = (uiNamespace getVariable ["TRGM_VAR_vehicleCenter", player]);
 		_centerFaction = faction _center;
 		{
 			_items = [];
@@ -321,16 +321,16 @@ switch _mode do {
 			configfile >> "cfgvehicles" >> typeof _center >> "textureSources"
 		];
 
-		uiNamespace setVariable ["TREND_vehicleData",_data];
+		uiNamespace setVariable ["TRGM_VAR_vehicleData",_data];
 		["bis_fnc_garage_preload"] call BIS_fnc_endLoadingScreen;
 		true
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "ListAdd": {
-		_display = uiNamespace getVariable ["TREND_vehicleDisplay", findDisplay 8080];
-		_data = uiNamespace getVariable "TREND_vehicleData";
-		_center = uiNamespace getVariable ["TREND_vehicleCenter", player];
+		_display = uiNamespace getVariable ["TRGM_VAR_vehicleDisplay", findDisplay 8080];
+		_data = uiNamespace getVariable "TRGM_VAR_vehicleData";
+		_center = uiNamespace getVariable ["TRGM_VAR_vehicleCenter", player];
 		_centerTextures = getobjecttextures _center;
 		_ctrlList = controlnull;
 		{
@@ -385,28 +385,28 @@ switch _mode do {
 			[missionnamespace,"garageClosed",[displaynull,false]] call BIS_fnc_callScriptedEventHandler;
 		};
 
-		removeMissionEventHandler ["draw3D", (uiNamespace getVariable "TREND_vehicleDraw3D")];
+		removeMissionEventHandler ["draw3D", (uiNamespace getVariable "TRGM_VAR_vehicleDraw3D")];
 
-		private _cam = uinamespace getvariable ["TREND_vehicleCam", objnull];
-		private _target = uinamespace getvariable ["TREND_vehicleTarget", player];
+		private _cam = uinamespace getvariable ["TRGM_VAR_vehicleCam", objnull];
+		private _target = uinamespace getvariable ["TRGM_VAR_vehicleTarget", player];
 		_camData = [getPosASLVisual _cam,(getPosASLVisual _cam) vectorfromto (getPosASLVisual _target)];
 		_cam cameraeffect ["terminate","back"];
 		camdestroy _cam;
 
-		private _center = uinamespace getvariable ["TREND_vehicleCenter", player];
+		private _center = uinamespace getvariable ["TRGM_VAR_vehicleCenter", player];
 
 		//--- Restore original camera view
-		player switchcamera (uiNamespace getVariable "TREND_playerBaseView");
+		player switchcamera (uiNamespace getVariable "TRGM_VAR_playerBaseView");
 		showhud true;
 
 		// exit
-		TREND_vehicleCamPos = nil;
-		uiNamespace setvariable ["TREND_vehicleCam", nil];
+		TRGM_VAR_vehicleCamPos = nil;
+		uiNamespace setvariable ["TRGM_VAR_vehicleCam", nil];
 
-		deletevehicle (uiNamespace getvariable ["TREND_vehicleTarget", objnull]);
+		deletevehicle (uiNamespace getvariable ["TRGM_VAR_vehicleTarget", objnull]);
 
-		uiNamespace setVariable ["TREND_vehicleTarget", nil];
-		uiNamespace setVariable ["TREND_vehicleCenter", nil];
+		uiNamespace setVariable ["TRGM_VAR_vehicleTarget", nil];
+		uiNamespace setVariable ["TRGM_VAR_vehicleCenter", nil];
 
 		if !(isnull curatorcamera) then {
 			curatorcamera setPosASL (_camData select 0);
@@ -418,36 +418,36 @@ switch _mode do {
 			[missionnamespace,"arsenalClosed",[displaynull,false]] call BIS_fnc_callScriptedEventHandler;
 		};
 
-		uiNamespace setVariable ["TREND_vehicleDisplay", nil];
+		uiNamespace setVariable ["TRGM_VAR_vehicleDisplay", nil];
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "MouseButtonDown": {
-		TREND_vehicleButtons set [_this select 1, [_this select 2, _this select 3]];
+		TRGM_VAR_vehicleButtons set [_this select 1, [_this select 2, _this select 3]];
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "MouseButtonUp": {
-		TREND_vehicleButtons set [_this select 1,[]];
+		TRGM_VAR_vehicleButtons set [_this select 1,[]];
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "MouseZChanged":
 	{
-		private _cam = uinamespace getvariable ["TREND_vehicleCam", objnull];
-		private _center = uinamespace getvariable ["TREND_vehicleCenter", player];
-		private _target = uinamespace getvariable ["TREND_vehicleTarget", player];
+		private _cam = uinamespace getvariable ["TRGM_VAR_vehicleCam", objnull];
+		private _center = uinamespace getvariable ["TRGM_VAR_vehicleCenter", player];
+		private _target = uinamespace getvariable ["TRGM_VAR_vehicleTarget", player];
 
 		private _disMax = (boundingboxreal _center select 0 vectordistance (boundingboxreal _center select 1)) * 1.5;
-		private _dis = TREND_vehicleCamPos select 0;
+		private _dis = TRGM_VAR_vehicleCamPos select 0;
 		_dis = _dis - ((_this select 1) / 10);
 		_dis = _dis max (_disMax * 0.15) min _disMax;
-		TREND_vehicleCamPos set [0, _dis];
+		TRGM_VAR_vehicleCamPos set [0, _dis];
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "buttonInterface": {
-		_display = uiNamespace getVariable ["TREND_vehicleDisplay", findDisplay 8080];
+		_display = uiNamespace getVariable ["TRGM_VAR_vehicleDisplay", findDisplay 8080];
 		_show = !ctrlshown (_display displayctrl 44046);
 		{
 			_tab = _x;
@@ -470,15 +470,15 @@ switch _mode do {
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "TabDeselect": {
-		_display = uiNamespace getVariable ["TREND_vehicleDisplay", findDisplay 8080];
+		_display = uiNamespace getVariable ["TRGM_VAR_vehicleDisplay", findDisplay 8080];
 		_key = _this select 1;
 
 		//--- Deselect
-		if ({count _x > 0} count TREND_vehicleButtons isEqualTo 0) then {
+		if ({count _x > 0} count TRGM_VAR_vehicleButtons isEqualTo 0) then {
 
 			//--- When interface is hidden, reveal it
 			_shown = ctrlshown (_display displayctrl 44046);
-			if (!_shown || _key isEqualTo 1) exitwith {['buttonInterface',[_display]] call TREND_fnc_openVehicleCustomizationDialog;};
+			if (!_shown || _key isEqualTo 1) exitwith {['buttonInterface',[_display]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;};
 
 			{
 				_idc = _x;
@@ -507,24 +507,24 @@ switch _mode do {
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "buttonOK": {
-		_display = uiNamespace getVariable ["TREND_vehicleDisplay", findDisplay 8080];
+		_display = uiNamespace getVariable ["TRGM_VAR_vehicleDisplay", findDisplay 8080];
 		_display closeDisplay 1;
 		["#(argb,8,8,3)color(0,0,0,1)",false,nil,0,[0,0.5]] call BIS_fnc_textTiles;
-		["Exit",[]] call TREND_fnc_openVehicleCustomizationDialog;
+		["Exit",[]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "buttonClose": {
-		_display = uiNamespace getVariable ["TREND_vehicleDisplay", findDisplay 8080];
+		_display = uiNamespace getVariable ["TRGM_VAR_vehicleDisplay", findDisplay 8080];
 		_display closeDisplay 2;
 		["#(argb,8,8,3)color(0,0,0,1)",false,nil,0,[0,0.5]] call BIS_fnc_textTiles;
-		["Exit",[]] call TREND_fnc_openVehicleCustomizationDialog;
+		["Exit",[]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "buttonCargo": {
-		_center = (uiNamespace getvariable ["TREND_vehicleCenter", player]);
-		_display = uiNamespace getVariable ["TREND_vehicleDisplay", findDisplay 8080];
+		_center = (uiNamespace getvariable ["TRGM_VAR_vehicleCenter", player]);
+		_display = uiNamespace getVariable ["TRGM_VAR_vehicleDisplay", findDisplay 8080];
 		_add = _this select 1;
 
 		_selected = -1;
@@ -536,9 +536,9 @@ switch _mode do {
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "TabSelectLeft": {
-		_display = uiNamespace getVariable ["TREND_vehicleDisplay", findDisplay 8080];
+		_display = uiNamespace getVariable ["TRGM_VAR_vehicleDisplay", findDisplay 8080];
 		_index = _this select 1;
-		_center = (uiNamespace getvariable ["TREND_vehicleCenter", player]);
+		_center = (uiNamespace getvariable ["TRGM_VAR_vehicleCenter", player]);
 
 		{
 			_idc = _x;
@@ -570,10 +570,10 @@ switch _mode do {
 				_ctrlLineTabLeft ctrlcommit 0;
 				ctrlsetfocus _ctrlList;
 				if (_idc != 0) then { //--- Don't select animation, it would inverse the state
-					['SelectItem',[_display,_display displayctrl (960 + _idc),_idc]] call TREND_fnc_openVehicleCustomizationDialog;
+					['SelectItem',[_display,_display displayctrl (960 + _idc),_idc]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;
 				};
 			} else {
-				if ((_center getVariable "TREND_vehicleIDC") != _idc) then {_ctrlList lbsetcursel -1;};
+				if ((_center getVariable "TRGM_VAR_vehicleIDC") != _idc) then {_ctrlList lbsetcursel -1;};
 			};
 		} foreach [0,1];
 
@@ -587,14 +587,14 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "SelectItem": {
 		private ["_ctrlList","_index","_cursel"];
-		_display = uiNamespace getVariable ["TREND_vehicleDisplay", findDisplay 8080];
+		_display = uiNamespace getVariable ["TRGM_VAR_vehicleDisplay", findDisplay 8080];
 		_ctrlList = _this select 1;
 		_idc = _this select 2;
 		_cursel = lbcursel _ctrlList;
 		if (_cursel < 0) exitwith {};
 		_index = _ctrlList lbvalue _cursel;
 
-		_center = (uiNamespace getvariable ["TREND_vehicleCenter", player]);
+		_center = (uiNamespace getvariable ["TRGM_VAR_vehicleCenter", player]);
 		_initVehicle = false;
 
 		switch _idc do {
@@ -628,15 +628,15 @@ switch _mode do {
 			[_center,_textures,_animations,true] remoteExecCall ["BIS_fnc_initVehicle", 0, true];
 		};
 
-		["SetAnimationStatus",[_display]] call TREND_fnc_openVehicleCustomizationDialog;
-		["SetTextureStatus",[_display]] call TREND_fnc_openVehicleCustomizationDialog;
+		["SetAnimationStatus",[_display]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;
+		["SetTextureStatus",[_display]] call TRGM_GUI_fnc_openVehicleCustomizationDialog;
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "SetAnimationStatus":
 	{
-		_display = uiNamespace getVariable ["TREND_vehicleDisplay", findDisplay 8080];
-		_center = (uiNamespace getvariable ["TREND_vehicleCenter", player]);
+		_display = uiNamespace getVariable ["TRGM_VAR_vehicleDisplay", findDisplay 8080];
+		_center = (uiNamespace getvariable ["TRGM_VAR_vehicleCenter", player]);
 		_ctrlListAnimations = _display displayctrl (960 + 0);
 		for "_i" from 0 to (lbsize _ctrlListAnimations - 1) do {
 			_selected = _center animationphase (_ctrlListAnimations lbdata _i);
@@ -647,8 +647,8 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "SetTextureStatus":
 	{
-		private _display = uiNamespace getVariable ["TREND_vehicleDisplay", findDisplay 8080];
-		private _center = (uiNamespace getvariable ["TREND_vehicleCenter", player]);
+		private _display = uiNamespace getVariable ["TRGM_VAR_vehicleDisplay", findDisplay 8080];
+		private _center = (uiNamespace getvariable ["TRGM_VAR_vehicleCenter", player]);
 		private _ctrlListTextures = _display displayctrl (960 + 1);
 		private _centerTextures = getObjectTextures _center;
 
@@ -658,14 +658,14 @@ switch _mode do {
 
 			private _configTextures = getarray (_cfg >> "textures");
 			private _decals = getarray (_cfg >> "decals");
-			private _selected =
-			({
+			private _selected = ({
 				if !(_forEachIndex in _decals || { [_x, _configTextures param [_forEachIndex, ""]] call _fnc_compareTextures }) exitWith { false };
 				true
-			}
-			forEach _centerTextures);
+			} forEach _centerTextures);
 
 			_ctrlListTextures lbsetpicture [_i,_checkboxTextures select _selected];
 		};
 	};
 };
+
+true;

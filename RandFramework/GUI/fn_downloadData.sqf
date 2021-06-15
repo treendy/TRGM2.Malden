@@ -1,5 +1,5 @@
 /*
-[OBJECT, ["DOWNLOAD DATA", { _this spawn TREND_fnc_downloadData; }, ["Downloading data from terminal...", "FUNCTION", true, ["This is an array of arguments for the callback!"]], 0, true, true, "", "_this isEqualTo player"]] remoteExec ["addAction", 0, true];
+[OBJECT, ["DOWNLOAD DATA", { _this spawn TRGM_GUI_fnc_downloadData; }, ["Downloading data from terminal...", "FUNCTION", true, ["This is an array of arguments for the callback!"]], 0, true, true, "", "_this isEqualTo player"]] remoteExec ["addAction", 0, true];
 */
 
 [[_this select 0, _this select 1, _this select 2, _this select 3], {

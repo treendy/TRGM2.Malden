@@ -32,11 +32,32 @@ class Header
 };
 
 #include "CustomMission\CustomFriendlyLoadouts.hpp"
+#include "CustomMission\CustomEnemyLoadouts.hpp"
+#include "CustomMission\CustomMilitiaLoadouts.hpp"
 #include "RandFramework\GUI\dialogs.hpp"
 
 class CfgFunctions {
 	#include "fhqtt\functions.hpp"
 	#include "RandFramework\functions.hpp"
+	class CUSTOM_MISSION {
+		class mission {
+			class SetDefaultMissionSetupVars {
+				file = "CustomMission\SetDefaultMissionSetupVars.sqf";
+			};
+		};
+
+		class factions {
+			class SetFriendlyFaction {
+				file = "CustomMission\SetFriendlyFaction.sqf";
+			};
+			class SetEnemyFaction {
+				file = "CustomMission\SetEnemyFaction.sqf";
+			};
+			class SetMilitiaFaction {
+				file = "CustomMission\SetMilitiaFaction.sqf";
+			};
+		};
+	};
 	#ifndef AIS_Core_Progress_BarDlg
 		#include "AIS\cfgFunctions.hpp"
 	#endif
@@ -105,7 +126,7 @@ class Params
 		title = "Enable Debugging Mode"; // Param name visible in the list
 		values[] = {0,1}; // Values; must be integers; has to have the same number of elements as 'texts'
 		texts[] = {"Disable","Enable"}; // Description of each selectable item
-		default = 0; // Default value; must be listed in 'values' array, otherwise 0 is used
+		default = 1; // Default value; must be listed in 'values' array, otherwise 0 is used
 		// Default values that are not whole numbers do not work. Param will default to 0 (or 1 if defined)
 	};
 	class ResetMissionSettings
@@ -120,17 +141,17 @@ class Params
 
 class RscTitles
 {
-	class TREND_notifications
+	class TRGM_VAR_notifications
 	{
 		idd = 9009;
-		name = "TREND_notifications";
+		name = "TRGM_VAR_notifications";
 		duration = 1e+007;
 		movingEnable = 0;
 		fadein = 0;
 		fadeout = 0;
 
-		onLoad = "uiNamespace setVariable [""TREND_notifications_disp"", _this select 0]";
-		onUnload = "uiNamespace setVariable [""TREND_notifications_disp"", nil]";
+		onLoad = "uiNamespace setVariable [""TRGM_VAR_notifications_disp"", _this select 0]";
+		onUnload = "uiNamespace setVariable [""TRGM_VAR_notifications_disp"", nil]";
 
 		class controls {
 

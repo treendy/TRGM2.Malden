@@ -9,74 +9,71 @@
 * true <BOOL>
 *
 * Example:
-* player call TREND_fnc_opendialogRequests
+* player call TRGM_GUI_fnc_openDialogRequests
 */
 
 disableSerialization;
 
-format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOBAL_fnc_log;
 params [["_player", objNull, [objNull]]];
 
 if (player != _player) exitwith {};
 
-private _dCurrentRep = [TREND_maxBadPoints - TREND_BadPoints, 1] call BIS_fnc_cutDecimals;
-private _unitArray = TREND_westriflemen;
-_unitArray append TREND_westATSoldiers;
-_unitArray append TREND_westAASoldiers;
-_unitArray append TREND_westEngineers;
-_unitArray append TREND_westMedics;
-_unitArray append TREND_westexpSpecs;
+private _dCurrentRep = [TRGM_VAR_maxBadPoints - TRGM_VAR_BadPoints, 1] call BIS_fnc_cutDecimals;
+private _unitMap = [
+    ["Riflemen", TRGM_VAR_WestRiflemen, TRGM_VAR_WestRiflemen apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
+    ["AT Soldiers", TRGM_VAR_WestATSoldiers, TRGM_VAR_WestATSoldiers apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
+    ["AA Soldiers", TRGM_VAR_WestAASoldiers, TRGM_VAR_WestAASoldiers apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
+    ["Engineers", TRGM_VAR_WestEngineers, TRGM_VAR_WestEngineers apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
+    ["Medics", TRGM_VAR_WestMedics, TRGM_VAR_WestMedics apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }],
+    ["Explosive Specialists", TRGM_VAR_WestExpSpecs, TRGM_VAR_WestExpSpecs apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]
+];
+
 if (_dCurrentRep >= 3) then {
-    _unitArray append TREND_westAutoriflemen;
-    _unitArray append TREND_westgrenadiers;
+    _unitMap append [["Autoriflemen", TRGM_VAR_WestAutoriflemen, TRGM_VAR_WestAutoriflemen apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]];
+    _unitMap append [["Grenadiers", TRGM_VAR_WestGrenadiers, TRGM_VAR_WestGrenadiers apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]]
 };
 if (_dCurrentRep >= 5) then {
-    _unitArray append TREND_westSnipers;
+    _unitMap append [["Snipers", TRGM_VAR_WestSnipers, TRGM_VAR_WestSnipers apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]];
 };
 if (_dCurrentRep >= 7) then {
-    _unitArray append TREND_westUAVOps;
+    _unitMap append [["UAV Operators", TRGM_VAR_WestUAVOps, TRGM_VAR_WestUAVOps apply { getText(configFile >> "Cfgvehicles" >> _x >> "displayname"); }]];
 };
-TREND_RecruitUnitArray = _unitArray arrayintersect _unitArray;
-publicVariable "TREND_RecruitUnitArray";
-TREND_RecruitUnitArraytext = [];
-{
-    private _dispname = gettext(configFile >> "Cfgvehicles" >> _x >> "displayname");
-    TREND_RecruitUnitArraytext pushBack _dispname;
-} forEach TREND_RecruitUnitArray;
-publicVariable "TREND_RecruitUnitArraytext";
+TRGM_VAR_RecruitUnitMap = _unitMap;
+publicVariable "TRGM_VAR_RecruitUnitMap";
 
-private _vehArray = TREND_westUnarmedCars;
-_vehArray append TREND_westUnarmedHelos;
-_vehArray append TREND_westTurrets;
-_vehArray append TREND_westBoats;
+private _vehArray = TRGM_VAR_westUnarmedCars;
+_vehArray append TRGM_VAR_westUnarmedHelos;
+_vehArray append TRGM_VAR_westTurrets;
+_vehArray append TRGM_VAR_westBoats;
 if (_dCurrentRep >= 3 || {
-    !(call TREND_vehiclesRequireRep)
+    !(call TRGM_GETTER_fnc_bVehiclesRequireRep)
 }) then {
-    _vehArray append TREND_westArmedCars;
-    _vehArray append TREND_westAPCs;
+    _vehArray append TRGM_VAR_westArmedCars;
+    _vehArray append TRGM_VAR_westAPCs;
 };
 if (_dCurrentRep >= 5 || {
-    !(call TREND_vehiclesRequireRep)
+    !(call TRGM_GETTER_fnc_bVehiclesRequireRep)
 }) then {
-    _vehArray append TREND_westtanks;
-    _vehArray append TREND_westArmedHelos;
+    _vehArray append TRGM_VAR_westtanks;
+    _vehArray append TRGM_VAR_westArmedHelos;
 };
 if (_dCurrentRep >= 7 || {
-    !(call TREND_vehiclesRequireRep)
+    !(call TRGM_GETTER_fnc_bVehiclesRequireRep)
 }) then {
-    _vehArray append TREND_westArtillery;
-    _vehArray append TREND_westantiAir;
-    _vehArray append TREND_westPlanes;
+    _vehArray append TRGM_VAR_westArtillery;
+    _vehArray append TRGM_VAR_westantiAir;
+    _vehArray append TRGM_VAR_westPlanes;
 };
-TREND_spawnVehArray = _vehArray arrayintersect _vehArray;
-TREND_spawnVehArraytext = [];
+TRGM_VAR_spawnVehArray = _vehArray arrayintersect _vehArray;
+TRGM_VAR_spawnVehArraytext = [];
 {
     private _dispname = gettext(configFile >> "Cfgvehicles" >> _x >> "displayname");
-    TREND_spawnVehArraytext pushBack _dispname;
-} forEach TREND_spawnVehArray;
-publicVariable "TREND_spawnVehArraytext";
+    TRGM_VAR_spawnVehArraytext pushBack _dispname;
+} forEach TRGM_VAR_spawnVehArray;
+publicVariable "TRGM_VAR_spawnVehArraytext";
 
-createdialog "Trend_dialogRequests";
+createdialog "TRGM_VAR_dialogRequests";
 waitUntil {
     !isNull (findDisplay 8000);
 };
@@ -85,190 +82,211 @@ _display = findDisplay 8000;
 
 _display ctrlCreate ["RscCombo", 8007];
 _cboselectUnit = _display displayCtrl 8007;
-_cboselectUnit ctrlsetPosition [0.365954 * safeZoneW + safeZoneX, 0.412003 * safeZoneH + safeZoneY, 0.123734 * safeZoneW, 0.0329991 * safeZoneH];
+_display ctrlCreate ["RscCombo", 8011];
+_cboselectUnitClass = _display displayCtrl 8011;
+
+_cboselectUnitClass ctrlsetPosition [0.365954 * safeZoneW + safeZoneX, 0.412003 * safeZoneH + safeZoneY, 0.123734 * safeZoneW, 0.0329991 * safeZoneH];
+{
+    private _unitClassName = _x select 0;
+    _cboselectUnitClass lbAdd _unitClassName;
+} forEach TRGM_VAR_RecruitUnitMap;
+_cboselectUnitClass lbsetCurSel 0;
+_cboselectUnitClass ctrlCommit 0;
+_cboselectUnitClass ctrlsettooltip localize "STR_TRGM2_openDialogRequests_RequestUnitClassDefault";
+_cboselectUnitClass ctrlAddEventHandler ["onLBSelChanged", {
+    params ["_control", "_selectedIndex"];
+    lbClear _cboselectUnit;
+    {
+        _cboselectUnit lbAdd _x;
+    } forEach ((TRGM_VAR_RecruitUnitMap select _selectedIndex) select 2);
+}];
+
+
+_cboselectUnit ctrlsetPosition [0.365954 * safeZoneW + safeZoneX, 0.412003 * safeZoneH + safeZoneY + (1.5 * (0.0329991 * safeZoneH)), 0.123734 * safeZoneW, 0.0329991 * safeZoneH];
 {
     _cboselectUnit lbAdd _x;
-} forEach TREND_RecruitUnitArraytext;
+} forEach ((TRGM_VAR_RecruitUnitMap select 0) select 2);
 _cboselectUnit lbsetCurSel 0;
 _cboselectUnit ctrlCommit 0;
 _cboselectUnit ctrlsettooltip localize "str_TRGM2_opendialogRequests_RequestUnitdefault";
 
+
 _btnselectUnit = _display displayCtrl 8003;
 _btnselectUnit ctrlAddEventHandler ["ButtonClick", {
     params ["_control"];
-    private _index = lbCurSel 8007;
-    private _unitClass = TREND_RecruitUnitArray select _index;
+    private _classIndex = lbCurSel 8011;
+    private _unitIndex = lbCurSel 8007;
+    private _unitClassName = ((TRGM_VAR_RecruitUnitMap select _classIndex) select 1) select _unitIndex;
 
     if (player != leader group player) then {
         titleText[localize "str_TRGM2_opendialogRequests_notgroupleader", "PLAin"];
     } else {
-        _currentSpentPoints = call TREND_fnc_countSpentPoints;
-        if (_currentSpentPoints < (TREND_maxBadPoints - TREND_BadPoints + 1)) then {
-            private _spawnedUnit = (group player createUnit [_unitClass, getPos player, [], 10, "NONE"]);
+        _currentSpentPoints = call TRGM_GLOBAL_fnc_countSpentPoints;
+        if (_currentSpentPoints < (TRGM_VAR_maxBadPoints - TRGM_VAR_BadPoints + 1)) then {
+            private _spawnedUnit = (group player createUnit [_unitClassName, getPos player, [], 10, "NONE"]);
             addswitchableUnit _spawnedUnit;
             player doFollow player;
             _spawnedUnit setVariable ["Repcost", 0.5, true];
             _spawnedUnit setVariable ["IsFRT", true, true];
 
-            [box1, [_spawnedUnit]] call TREND_fnc_initammoBox;
+            [box1, [_spawnedUnit]] call TRGM_GLOBAL_fnc_initAmmoBox;
 
-            _spawnedUnit addEventHandler ["killed",
-                {
-                    _tombStone = selectRandom TREND_tombStones createvehicle TREND_GraveYardPos;
-                    _tombStone setDir TREND_GraveYarddirection;
-                    _tombStone setVariable ["Message", format[localize "str_TRGM2_Recruiteinf_KIA", name (_this select 0)], true];
-                    _tombStone addAction [localize "str_TRGM2_Recruiteinf_Read", {
-                        [format["%1", (_this select 0) getVariable "Message"]] call TREND_fnc_notify;
-                    }];
-                    [0.2, format[localize "str_TRGM2_Recruiteinf_KIA", name (_this select 0)]] spawn TREND_fnc_AdjustBadPoints;
+            _spawnedUnit addEventHandler ["killed", {
+                _tombStone = selectRandom TRGM_VAR_tombStones createvehicle TRGM_VAR_GraveYardPos;
+                _tombStone setDir TRGM_VAR_GraveYarddirection;
+                _tombStone setVariable ["Message", format[localize "str_TRGM2_Recruiteinf_KIA", name (_this select 0)], true];
+                _tombStone addAction [localize "str_TRGM2_Recruiteinf_Read", {
+                    [format["%1", (_this select 0) getVariable "Message"]] call TRGM_GLOBAL_fnc_notify;
                 }];
+                [0.2, format[localize "str_TRGM2_Recruiteinf_KIA", name (_this select 0)]] spawn TRGM_GLOBAL_fnc_adjustBadPoints;
+            }];
 
-                if (TREND_bUseRevive || !isNil "AIS_mod_ENABLED") then {
-                    [_spawnedUnit] call AIS_System_fnc_loadAIS;
-                };
-                titleText[localize "str_TRGM2_opendialogRequests_unitspawned", "PLAin"];
-            } else {
-                titleText [localize "str_TRGM2_Recruiteinf_MoreReputation", "PLAin"];
+            if (TRGM_VAR_bUseRevive || !isNil "AIS_mod_ENABLED") then {
+                [_spawnedUnit] call AIS_System_fnc_loadAIS;
             };
+            titleText[localize "str_TRGM2_opendialogRequests_unitspawned", "PLAin"];
+        } else {
+            titleText [localize "str_TRGM2_Recruiteinf_MoreReputation", "PLAin"];
         };
-        closedialog 0;
-        false;
-    }];
+    };
+    closedialog 0;
+    false;
+}];
 
-    _display ctrlCreate ["RscCombo", 8009];
-    _cboselectvehicle = _display displayCtrl 8009;
-    _cboselectvehicle ctrlsetPosition [0.520622 * safeZoneW + safeZoneX, 0.412003 * safeZoneH + safeZoneY, 0.123734 * safeZoneW, 0.0329991 * safeZoneH];
-    {
-        _cboselectvehicle lbAdd _x;
-    } forEach TREND_spawnVehArraytext;
-    _cboselectvehicle lbsetCurSel 0;
-    _cboselectvehicle ctrlCommit 0;
-    _cboselectvehicle ctrlsettooltip localize "str_TRGM2_opendialogRequests_Requestvehicledefault";
+_display ctrlCreate ["RscCombo", 8009];
+_cboselectvehicle = _display displayCtrl 8009;
+_cboselectvehicle ctrlsetPosition [0.520622 * safeZoneW + safeZoneX, 0.412003 * safeZoneH + safeZoneY, 0.123734 * safeZoneW, 0.0329991 * safeZoneH];
+{
+    _cboselectvehicle lbAdd _x;
+} forEach TRGM_VAR_spawnVehArraytext;
+_cboselectvehicle lbsetCurSel 0;
+_cboselectvehicle ctrlCommit 0;
+_cboselectvehicle ctrlsettooltip localize "str_TRGM2_opendialogRequests_Requestvehicledefault";
 
-    _btnselectvehicle = _display displayCtrl 8005;
-    _btnselectvehicle ctrlAddEventHandler ["ButtonClick", {
-        params ["_control"];
-        private _index = lbCurSel 8009;
-        private _vehClass = TREND_spawnVehArray select _index;
-        _currentSpentPoints = call TREND_fnc_countSpentPoints;
-        if (!(call TREND_vehiclesRequireRep) || {
-            _currentSpentPoints < (TREND_maxBadPoints - TREND_BadPoints + 1)
-        }) then {
-            [_vehClass] spawn {
-                params ["_classtospawn"];
-                private _safePos = [getPos player, 20, 100, 25, 0, 0.15, 0, [], [getPos player, getPos player], _classtospawn] call TREND_fnc_findSafePos;
+_btnselectvehicle = _display displayCtrl 8005;
+_btnselectvehicle ctrlAddEventHandler ["ButtonClick", {
+    params ["_control"];
+    private _index = lbCurSel 8009;
+    private _vehClass = TRGM_VAR_spawnVehArray select _index;
+    _currentSpentPoints = call TRGM_GLOBAL_fnc_countSpentPoints;
+    if (!(call TRGM_GETTER_fnc_bVehiclesRequireRep) || {
+        _currentSpentPoints < (TRGM_VAR_maxBadPoints - TRGM_VAR_BadPoints + 1)
+    }) then {
+        [_vehClass] spawn {
+            params ["_classtospawn"];
+            private _safePos = [getPos player, 20, 100, 25, 0, 0.15, 0, [], [getPos player, getPos player], _classtospawn] call TRGM_GLOBAL_fnc_findSafePos;
+            // find a valid pos
+            if (_safePos isEqualto getPos player) then {
+                _safePos = [getPos player, 20, 150, 25, 0, 0.30, 0, [], [getPos player, getPos player], _classtospawn] call TRGM_GLOBAL_fnc_findSafePos;
                 // find a valid pos
-                if (_safePos isEqualto getPos player) then {
-                    _safePos = [getPos player, 20, 150, 25, 0, 0.30, 0, [], [getPos player, getPos player], _classtospawn] call TREND_fnc_findSafePos;
-                    // find a valid pos
-                };
-                if (_safePos isEqualto getPos player) exitwith {
-                    ["No safe location nearby to create vehicle!"] call TREND_fnc_notify;
-                };
-                player setPos _safePos;
-                private _spawnedVeh = createvehicle [_classtospawn, _safePos vectorAdd [0, 0, 250], [], 0, "NONE"];
-                _spawnedVeh allowdamage false;
-                _spawnedVeh setDamage 0;
+            };
+            if (_safePos isEqualto getPos player) exitwith {
+                ["No safe location nearby to create vehicle!"] call TRGM_GLOBAL_fnc_notify;
+            };
+            player setPos _safePos;
+            private _spawnedVeh = createvehicle [_classtospawn, _safePos vectorAdd [0, 0, 250], [], 0, "NONE"];
+            _spawnedVeh allowdamage false;
+            _spawnedVeh setDamage 0;
 
-                private _largeObjectCorrection = if (((boundingBoxReal _spawnedVeh select 1 select 1) - (boundingBoxReal _spawnedVeh select 0 select 1)) != 0 && {
-                    ((boundingBoxReal _spawnedVeh select 1 select 0) - (boundingBoxReal _spawnedVeh select 0 select 0)) > 3.2 &&
-                    ((boundingBoxReal _spawnedVeh select 1 select 0) - (boundingBoxReal _spawnedVeh select 0 select 0)) / ((boundingBoxReal _spawnedVeh select 1 select 1) - (boundingBoxReal _spawnedVeh select 0 select 1)) > 1.25
-                })
-                then {
-                    90;
+            private _largeObjectCorrection = if (((boundingBoxReal _spawnedVeh select 1 select 1) - (boundingBoxReal _spawnedVeh select 0 select 1)) != 0 && {
+                ((boundingBoxReal _spawnedVeh select 1 select 0) - (boundingBoxReal _spawnedVeh select 0 select 0)) > 3.2 &&
+                ((boundingBoxReal _spawnedVeh select 1 select 0) - (boundingBoxReal _spawnedVeh select 0 select 0)) / ((boundingBoxReal _spawnedVeh select 1 select 1) - (boundingBoxReal _spawnedVeh select 0 select 1)) > 1.25
+            })
+            then {
+                90;
+            } else {
+                0;
+            };
+
+            private _attachPos = [
+                (boundingCenter _spawnedVeh select 0) * cos _largeObjectCorrection - (boundingCenter _spawnedVeh select 1) * sin _largeObjectCorrection,
+                ((-(boundingBoxReal _spawnedVeh select 0 select 0) * sin _largeObjectCorrection) max (-(boundingBoxReal _spawnedVeh select 1 select 0) * sin _largeObjectCorrection)) + ((-(boundingBoxReal _spawnedVeh select 0 select 1) * cos _largeObjectCorrection) max (-(boundingBoxReal _spawnedVeh select 1 select 1) * cos _largeObjectCorrection)) + 2 + 0.3 * (((boundingBoxReal _spawnedVeh select 1 select 1)-(boundingBoxReal _spawnedVeh select 0 select 1)) * abs sin _largeObjectCorrection + ((boundingBoxReal _spawnedVeh select 1 select 0)-(boundingBoxReal _spawnedVeh select 0 select 0)) * abs cos _largeObjectCorrection),
+                -(boundingBoxReal _spawnedVeh select 0 select 2)
+            ];
+
+            if (!local _spawnedVeh) then {
+                private _makelocalStarttime = time;
+                _spawnedVeh setowner (owner player);
+                waitUntil {
+                    local _spawnedVeh || time > _makelocalStarttime + 1.5
+                };
+            };
+
+            sleep 0.5;
+
+            _spawnedVeh setPos _safePos;
+            _spawnedVeh attachto [player, _attachPos, "head"];
+
+            _actionReleaseObject = player addAction [format [localize "str_TRGM2_opendialogRequests_vehicleRelease", gettext (configFile >> "Cfgvehicles" >> _classtospawn >> "displayname")], {
+                params ["_target", "_caller", "_actionId", "_arguments"];
+                _arguments params ["_spawnedVeh"];
+                detach _spawnedVeh;
+                _spawnedVeh setPos [getPos _spawnedVeh select 0, getPos _spawnedVeh select 1];
+                _spawnedVeh setvectorUp surfaceNormal position _spawnedVeh;
+                _spawnedVeh allowdamage true;
+                _target removeAction _actionId;
+
+                // if turret, allow it to be moved by player | todo: Storage system for statics...
+                if ((toLower (gettext (configFile >> 'cfgvehicles' >> (typeOf _spawnedVeh) >> 'vehicleClass')) isEqualto 'static')) then {
+                    [_spawnedVeh, [format [localize "str_TRGM2_UnloadDingy_push", gettext (configFile >> "Cfgvehicles" >> (typeOf _spawnedVeh) >> "displayname")], {
+                        _this spawn TRGM_GLOBAL_fnc_pushObject;
+                    }, [], -99, false, false, "", "_this isEqualTo player && count crew _target isEqualto 0"]] remoteExec ["addAction", 0];
                 } else {
-                    0;
+                    // if not a turret, allow an inflatable boat to be unloaded.
+                    [_spawnedVeh, [localize "str_TRGM2_startinfMission_UnloadDingy", {
+                        _this spawn TRGM_GLOBAL_fnc_unloadDingy;
+                    }, [], -99, false, false, "", "_this isEqualTo player && count crew _target isEqualto 0"]] remoteExec ["addAction", 0];
+                    [_spawnedVeh, (units group _caller)] call TRGM_GLOBAL_fnc_initAmmoBox;
                 };
 
-                private _attachPos = [
-                    (boundingCenter _spawnedVeh select 0) * cos _largeObjectCorrection - (boundingCenter _spawnedVeh select 1) * sin _largeObjectCorrection,
-                    ((-(boundingBoxReal _spawnedVeh select 0 select 0) * sin _largeObjectCorrection) max (-(boundingBoxReal _spawnedVeh select 1 select 0) * sin _largeObjectCorrection)) + ((-(boundingBoxReal _spawnedVeh select 0 select 1) * cos _largeObjectCorrection) max (-(boundingBoxReal _spawnedVeh select 1 select 1) * cos _largeObjectCorrection)) + 2 + 0.3 * (((boundingBoxReal _spawnedVeh select 1 select 1)-(boundingBoxReal _spawnedVeh select 0 select 1)) * abs sin _largeObjectCorrection + ((boundingBoxReal _spawnedVeh select 1 select 0)-(boundingBoxReal _spawnedVeh select 0 select 0)) * abs cos _largeObjectCorrection),
-                    -(boundingBoxReal _spawnedVeh select 0 select 2)
+                _data = [];
+                _vehicleFaction = faction _spawnedVeh;
+                {
+                    _items = [];
+                    {
+                        _configName = configname _x;
+                        _displayName = gettext (_x >> "displayName");
+                        _factions = getarray (_x >> "factions");
+                        if (count _factions isEqualTo 0) then {_factions = [_vehicleFaction];};
+                        if (
+                            _displayName != ""
+                            &&
+                            {getnumber (_x >> "scope") > 1 || !isnumber (_x >> "scope")}
+                            &&
+                            {{_x isEqualTo _vehicleFaction} count _factions > 0}
+                        ) then {
+                            _items pushback [_x,_displayName];
+                        };
+                    } foreach (configproperties [_x,"isclass _x",true]);
+                    _data pushback _items;
+                } foreach [
+                    configfile >> "cfgvehicles" >> typeof _spawnedVeh >> "animationSources",
+                    configfile >> "cfgvehicles" >> typeof _spawnedVeh >> "textureSources"
                 ];
 
-                if (!local _spawnedVeh) then {
-                    private _makelocalStarttime = time;
-                    _spawnedVeh setowner (owner player);
-                    waitUntil {
-                        local _spawnedVeh || time > _makelocalStarttime + 1.5
-                    };
+                if (count _data > 0) then {
+                    ["Open", _spawnedVeh] spawn TRGM_GUI_fnc_openVehicleCustomizationDialog;
                 };
 
-                sleep 0.5;
+            }, [_spawnedVeh], 5, true, true];
 
-                _spawnedVeh setPos _safePos;
-                _spawnedVeh attachto [player, _attachPos, "head"];
-
-                _actionReleaseObject = player addAction [format [localize "str_TRGM2_opendialogRequests_vehicleRelease", gettext (configFile >> "Cfgvehicles" >> _classtospawn >> "displayname")], {
-                    params ["_target", "_caller", "_actionId", "_arguments"];
-                    _arguments params ["_spawnedVeh"];
-                    detach _spawnedVeh;
-                    _spawnedVeh setPos [getPos _spawnedVeh select 0, getPos _spawnedVeh select 1];
-                    _spawnedVeh setvectorUp surfaceNormal position _spawnedVeh;
-                    _spawnedVeh allowdamage true;
-                    _target removeAction _actionId;
-
-                    // if turret, allow it to be moved by player | todo: Storage system for statics...
-                    if ((toLower (gettext (configFile >> 'cfgvehicles' >> (typeOf _spawnedVeh) >> 'vehicleClass')) isEqualto 'static')) then {
-                        [_spawnedVeh, [format [localize "str_TRGM2_UnloadDingy_push", gettext (configFile >> "Cfgvehicles" >> (typeOf _spawnedVeh) >> "displayname")], {
-                            _this spawn TREND_fnc_PushObject;
-                        }, [], -99, false, false, "", "_this isEqualTo player && count crew _target isEqualto 0"]] remoteExec ["addAction", 0];
-                    } else {
-                        // if not a turret, allow an inflatable boat to be unloaded.
-                        [_spawnedVeh, [localize "str_TRGM2_startinfMission_UnloadDingy", {
-                            _this spawn TREND_fnc_UnloadDingy;
-                        }, [], -99, false, false, "", "_this isEqualTo player && count crew _target isEqualto 0"]] remoteExec ["addAction", 0];
-                        [_spawnedVeh, (units group _caller)] call TREND_fnc_initammoBox;
-                    };
-
-                    _data = [];
-                    _vehicleFaction = faction _spawnedVeh;
-                    {
-                        _items = [];
-                        {
-                            _configName = configname _x;
-                            _displayName = gettext (_x >> "displayName");
-                            _factions = getarray (_x >> "factions");
-                            if (count _factions isEqualTo 0) then {_factions = [_vehicleFaction];};
-                            if (
-                                _displayName != ""
-                                &&
-                                {getnumber (_x >> "scope") > 1 || !isnumber (_x >> "scope")}
-                                &&
-                                {{_x isEqualTo _vehicleFaction} count _factions > 0}
-                            ) then {
-                                _items pushback [_x,_displayName];
-                            };
-                        } foreach (configproperties [_x,"isclass _x",true]);
-                        _data pushback _items;
-                    } foreach [
-                        configfile >> "cfgvehicles" >> typeof _spawnedVeh >> "animationSources",
-                        configfile >> "cfgvehicles" >> typeof _spawnedVeh >> "textureSources"
-                    ];
-
-                    if (count _data > 0) then {
-                        ["Open", _spawnedVeh] spawn TREND_fnc_openvehicleCustomizationdialog;
-                    };
-
-                }, [_spawnedVeh], 5, true, true];
-
-                if (call TREND_vehiclesRequireRep) then {
-                    TREND_SpawnedVehicles pushBack _spawnedVeh;
-                    publicVariable "TREND_SpawnedVehicles";
-                    _spawnedVeh addEventHandler ["Killed", {
-                        params ["_unit", "_killer", "_instigator", "_useEffects"];
-                        [1, format[localize "str_TRGM2_spawnvehicles_KIA", name _unit]] spawn TREND_fnc_AdjustBadPoints;
-                    }];
-                };
-
-                titleText[localize "str_TRGM2_opendialogRequests_vehiclespawned", "PLAin"];
+            if (call TRGM_GETTER_fnc_bVehiclesRequireRep) then {
+                TRGM_VAR_SpawnedVehicles pushBack _spawnedVeh;
+                publicVariable "TRGM_VAR_SpawnedVehicles";
+                _spawnedVeh addEventHandler ["Killed", {
+                    params ["_unit", "_killer", "_instigator", "_useEffects"];
+                    [1, format[localize "str_TRGM2_spawnvehicles_KIA", name _unit]] spawn TRGM_GLOBAL_fnc_adjustBadPoints;
+                }];
             };
-        } else {
-            titleText [localize "str_TRGM2_spawnvehicles_MoreReputation", "PLAin"];
+
+            titleText[localize "str_TRGM2_opendialogRequests_vehiclespawned", "PLAin"];
         };
+    } else {
+        titleText [localize "str_TRGM2_spawnvehicles_MoreReputation", "PLAin"];
+    };
 
-        closedialog 0;
-        false;
-    }];
+    closedialog 0;
+    false;
+}];
 
-    true;
+true;

@@ -5,7 +5,7 @@ _unit = unit. Refer to Unit as _unit.
 
 _unit =(_this select 0);
 
-_mainAOPos = TREND_ObjectivePossitions select 0;
+_mainAOPos = TRGM_VAR_ObjectivePossitions select 0;
 _distanceFromAO = "FAR"; //4000+=FAR; 1500-3999=MED, 500-1499=CLOSE; 0-499=VERYCLOSE
 _AODirection = [_unit, _mainAOPos] call BIS_fnc_DirTo;
 _AODistance = _unit distance _mainAOPos;
@@ -28,9 +28,9 @@ _isBad = selectRandom _chanceOfBad;
 
 //add this in once tested against brads EOS version
 //if (!_isBad) then {
-//	_unit addEventHandler ["killed", {_this spawn TREND_fnc_CivKilled;}];
+//	_unit addEventHandler ["killed", {_this spawn TRGM_SERVER_fnc_CivKilled;}];
 //};
 
 if (isserver) then {
-	_unit spawn TREND_fnc_BadCiv;
+	_unit spawn TRGM_SERVER_fnc_BadCiv;
 };

@@ -14,11 +14,11 @@
  * true <BOOL>
  *
  * Example:
- * [nil, [8, 15], "Init"] call TREND_fnc_timeSliderOnChange;
+ * [nil, [8, 15], "Init"] call TRGM_GUI_fnc_timeSliderOnChange;
  */
 
 disableSerialization;
-format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOBAL_fnc_log;
 
 params ["_ctrl", "_newvalue", "_ctrlStr"];
 
@@ -57,7 +57,7 @@ switch (_ctrlStr) do {
 		_ctrlSecond ctrlSetText _textSecond;
 		_value = (round (_valueHour) + round (_valueMinute) / 60 + round (_valueSecond) / 3600) * 3600;
 		_ctrlSlider sliderSetPosition (_value / 3600);
-		TREND_arrayTime = [_valueHour, _valueMinute]; publicVariable "TREND_arrayTime";
+		TRGM_VAR_arrayTime = [_valueHour, _valueMinute]; publicVariable "TRGM_VAR_arrayTime";
 	};
 	default {};
 };

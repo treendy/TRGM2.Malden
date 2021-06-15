@@ -1,48 +1,145 @@
-class TREND {
+class TRGM_SERVER {
+    class init {
+        file = "RandFramework\Server\init";
+        class checkAnyPlayersAlive {};
+        class createNeededObjects {};
+        class initUnitVars {};
+        class main {};
+        class playBaseRadioEffect {};
+        class sandStormEffect {};
+        class serverSave {};
+        class setTimeAndWeather {};
+        class weatherAffectsAI {};
+    };
+
+    class campaign {
+        file = "RandFramework\Server\campaign";
+        class initCampaign {};
+        class exitCampaign {};
+        class recruiteInf {};
+        class setMissionBoardOptions {};
+        class turnInMission {};
+    };
+
+    class mission {
+        file = "RandFramework\Server\mission";
+        class attemptEndMission {};
+        class finalSetupCleaner {};
+        class initMissionVars {};
+        class populateSideMission {};
+        class postStartMission {};
+        class quitMission {};
+        class startInfMission {};
+        class startMission {};
+        class startMissionPreCheck {};
+        class endMission {};
+    };
+
+    class objectives {
+        file = "RandFramework\Server\objectives";
+        class aoCampCreator {};
+        class bugRadio {};
+        class commsBlocked {};
+        class hackIntel {};
+        class occupyHouses {};
+        class setATMineEvent {};
+        class setCheckpoint {};
+        class setDownCivCarEvent {};
+        class setDownConvoyEvent {};
+        class setDownedChopperEvent {};
+        class setFireFightEvent {};
+        class setIEDEvent {};
+        class setMedicalEvent {};
+        class setOtherAreaStuff {};
+        class setTargetEvent {};
+        class speakToFriendlyCheckpoint {};
+        class updateTask {};
+    };
+
+    class units {
+        file = "RandFramework\Server\units";
+        class alertNearbyUnits {};
+        class backForthPatrol {};
+        class badCiv {};
+        class badCivAddSearchAction {};
+        class badCivApplyAssingnedArmament {};
+        class badCivInitialize {};
+        class badCivLoop {};
+        class badCivRemoveSearchAction {};
+        class badCivSearch {};
+        class badCivTurnHostile {};
+        class badReb {};
+        class buildingPatrol {};
+        class civKilled {};
+        class createEnemySniper {};
+        class createUnit {};
+        class createWaitingAmbush {};
+        class createWaitingSuicideBomber {};
+        class findOverwatchOverride {};
+        class hvtWalkAround {};
+        class insKilled {};
+        class interrogateOfficer {};
+        class paramedicKilled {};
+        class radiusPatrol {};
+        class searchGoodCiv {};
+        class spawnCivs {};
+        class spawnPatrolUnit {};
+        class speakInformant {};
+        class talkRebLead {};
+        class zenOccupyHouse {};
+    };
+};
+
+class TRGM_GLOBAL {
+    class init {
+        file = "RandFramework\Global\init";
+        class initGlobalVars {};
+    };
 
     class logging {
-        file = "RandFramework\Functions\logging";
+        file = "RandFramework\Global\logging";
         class log {};
         class notify {};
         class notifyGlobal {};
-    };
-
-    class init {
-        file = "RandFramework\Functions\init";
-        class attemptEndMission {};
-        class createNeededObjects {};
-        class endMission {};
-        class findValidHQPosition {};
-        class initGlobalVars {};
-        class InitPostStarted {};
-        class initUnitVars {};
-        class mainInit {};
         class populateLoadingWait {};
-        class ServerSave {};
-        class SetTimeAndWeather {};
     };
 
-    class init_player {
-        file = "RandFramework\Functions\init_player";
-        class checkKilledRange {};
-        class drawKilledRanges {};
-        class GeneralPlayerLoop {};
-        class InSafeZone {};
-        class introCamera {};
-        class mainInitLocal {};
-        class MissionOverAnimation {};
-        class MissionSelectLoop {};
-        class OnlyAllowDirectMapDraw {};
-        class setNVG {};
-        class startingMove {};
+    class common {
+        file = "RandFramework\Global\common";
+        class addPlayerActionPersistent {};
+        class animateAnimals {};
+        class callNearbyPatrol {};
+        class callUAVFindObjective {};
+        class carryAndJoinWounded {};
+        class convoy {};
+        class createConvoy {};
+        class debugDotMarker {};
+        class deleteTrash {};
+        class enemyAirSupport {};
+        class fireAOFlares {};
+        class fireIllumFlares {};
+        class hideTerrainObjects {};
+        class initAmmoBox {};
+        class isAceLoaded {};
+        class isCbaLoaded {};
+        class nvScript {};
+        class paraDrop {};
+        class pushObject {};
+        class reinforcements {};
+        class setLoadout {};
+        class setCustomLoadout {};
+        class setMilitiaSkill {};
+        class showIntel {};
+        class unloadDingy {};
     };
 
     class factions {
-        file = "RandFramework\Functions\factions";
+        file = "RandFramework\Global\factions";
         class appendAdditonalFactionData {};
         class buildEnemyFaction {};
         class buildFriendlyFaction {};
         class getFactionDataBySide {};
+        class getFactionVehicle {};
         class getUnitArraysFromUnitData {};
         class getUnitDataByFaction {};
         class getVehicleArraysFromVehData {};
@@ -52,185 +149,143 @@ class TREND {
         class isFuel {};
         class isMedical {};
         class isRepair {};
-        class isTransport{};
-    };
-
-    class common {
-        file = "RandFramework\functions\common";
-        class addPlayerActionPersistent {};
-        class animateAnimals{};
-        class CallNearbyPatrol{};
-        class callUAVFindObjective{};
-        class CarryAndJoinWounded{};
-        class convoy{};
-        class createConvoy{};
-        class debugDotMarker {};
-        class deleteTrash {};
-        class enemyAirSupport{};
-        class fireAOFlares{};
-        class fireIllumFlares{};
-        class getFactionVehicle{};
-        class hideTerrainObjects{};
-        class initAmmoBox{};
-        class isAceLoaded {};
-        class isCbaLoaded {};
-        class NVscript{};
-        class paraDrop{};
-        class PushObject{};
-        class reinforcements{};
-        class setLoadout {};
-        class setCustomLoadout {};
-        class setMilitiaSkill {};
-        class showIntel{};
-        class UnloadDingy{};
-    };
-
-    class supports {
-        file = "RandFramework\functions\supports";
-        class AirSupportRequested{};
-        class SupplyDropCrateInit{};
-        class SupplyDropVehInit{};
-        class SupportArtiRequested{};
-    };
-
-    class gui {
-        file = "RandFramework\GUI";
-        class codeCompare{};
-        class createNotification{};
-        class deleteNotification{};
-        class downloadData{};
-        class handleNotification{};
-        class initNotifications {};
-        class MissionTypeSelection{};
-        class openDialogAdvancedMissionSettings{};
-        class openDialogEnemyFaction{};
-        class openDialogMissionSelection{};
-        class openDialogRequests{};
-        class openDialogTeamLoadouts{};
-        class openVehicleCustomizationDialog{};
-        class SetParamsAndBegin{};
-        class timeSliderOnChange{};
-        class wireCompare{};
-    };
-
-    class campaign {
-        file = "RandFramework\functions\campaign";
-        class initCampaign {};
-        class exitCampaign {};
-        class RecruiteInf {};
-        class SetMissionBoardOptions {};
-        class TurnInMission {};
-    };
-
-    class mission {
-        file = "RandFramework\functions\mission";
-        class FinalSetupCleaner{};
-        class initMissionVars {};
-        class PopulateSideMission{};
-        class PostStartMission {};
-        class QuitMission {};
-        class startInfMission {};
-        class StartMission {};
-        class StartMissionPreCheck {};
-    };
-
-    class reputation {
-        file = "RandFramework\functions\reputation";
-        class AdjustBadPoints{};
-        class AdjustMaxBadPoints{};
-        class CheckBadPoints{};
-        class CountSpentPoints {};
-        class ShowRepReport {};
-    };
-
-    class objectives {
-        file = "RandFramework\functions\objectives";
-        class AoCampCreator {};
-        class bugRadio1{};
-        class commsBlocked{};
-        class hackIntel1{};
-        class OccupyHouses{};
-        class setATMineEvent{};
-        class setCheckpoint {};
-        class setDownCivCarEvent{};
-        class setDownConvoyEvent{};
-        class setDownedChopperEvent{};
-        class setFireFightEvent{};
-        class setIEDEvent{};
-        class setMedicalEvent{};
-        class setOtherAreaStuff{};
-        class setTargetEvent{};
-        class SpeakToFriendlyCheckpoint{};
-        class updateTask{};
+        class isTransport {};
     };
 
     class location {
-        file = "RandFramework\functions\location";
-        class AddToDirection {}; //Can add degrees to direction to calcuate final direction
+        file = "RandFramework\Global\location";
+        class addToDirection {}; //Can add degrees to direction to calcuate final direction
         class directionToText {};
-        class findSafePos{};
+        class findSafePos {};
         class getLocationName {};
-        class randomPosIntersection{};
+        class randomPosIntersection {};
     };
 
-    class transport { // CATEGORY
-        file = "RandFramework\functions\transport";
-        class addTransportActions{};
-        class addTransportActionsPlayer{};
-        class addTransportActionsVehicle{};
+    class reputation {
+        file = "RandFramework\Global\reputation";
+        class adjustBadPoints {};
+        class adjustMaxBadPoints {};
+        class checkBadPoints {};
+        class countSpentPoints {};
+        class showRepReport {};
+    };
+
+    class transport {
+        file = "RandFramework\Global\transport";
+        class addTransportActions {};
+        class addTransportActionsPlayer {};
+        class addTransportActionsVehicle {};
         class checkMissionIdActive {};
-        class commsHQ{};
-        class commsPilotToVehicle{};
-        class commsSide{};
-        class flyToBase{};
-        class flyToLz{};
-        class getTransportName{};
-        class helicopterIsFlying{};
+        class commsHQ {};
+        class commsPilotToVehicle {};
+        class commsSide {};
+        class flyToBase {};
+        class flyToLz {};
+        class getTransportName {};
+        class helicopterIsFlying {};
         class isOnlyBoardCrewOnboard {};
-        class selectLZ{};
-        class selectLzCreateBolckedAreaMarker{};
-        class selectLzOnMapClick{};
+        class selectLz {};
+        class selectLzCreateBolckedAreaMarker {};
+        class selectLzOnMapClick {};
+    };
+};
+
+class TRGM_GUI {
+    class gui {
+        file = "RandFramework\GUI";
+        class codeCompare {};
+        class createNotification {};
+        class deleteNotification {};
+        class downloadData {};
+        class handleNotification {};
+        class initNotifications {};
+        class missionTypeSelection {};
+        class openDialogAdvancedMissionSettings {};
+        class openDialogEnemyFaction {};
+        class openDialogMissionSelection {};
+        class openDialogRequests {};
+        class openDialogTeamLoadouts {};
+        class openVehicleCustomizationDialog {};
+        class setParamsAndBegin {};
+        class timeSliderOnChange {};
+        class wireCompare {};
+    };
+};
+
+class TRGM_CLIENT {
+    class init {
+        file = "RandFramework\Client\init";
+        class checkKilledRange {};
+        class drawKilledRanges {};
+        class generalPlayerLoop {};
+        class inSafeZone {};
+        class findValidHQPosition {};
+        class main {};
+        class missionSelectLoop {};
+        class onlyAllowDirectMapDraw {};
+        class playerScripts {};
+        class setNVG {};
+        class startingMove {};
     };
 
-    class civillians { // CATEGORY
-        file = "RandFramework\functions\civillians";
-        class badCiv{};
-        class badCivAddSearchAction{};
-        class badCivApplyAssingnedArmament{};
-        class badCivInitialize{};
-        class badCivLoop{};
-        class badCivRemoveSearchAction{};
-        class badCivSearch{};
-        class badCivTurnHostile{};
-        class badReb{};
-        class CivKilled{};
-        class InsKilled{};
-        class InterrogateOfficer{};
-        class ParamedicKilled{};
-        class SearchGoodCiv{};
-        class SpawnCivs {};
-        class SpeakInformant{};
-        class TalkRebLead{};
+    class camera {
+        file = "RandFramework\Client\camera";
+        class endCamera {};
+        class introCamera {};
+        class missionOverAnimation {};
+        class missionSetupCamera {};
     };
 
-    class enemyUnits {
-        file = "RandFramework\functions\enemyUnits";
-        class alertNearbyUnits {};
-        class createEnemySniper {};
-        class CreateUnit{};
-        class createWaitingAmbush{};
-        class createWaitingSuicideBomber{};
-        class findOverwatchOverride {};
-        class HVTWalkAround {};
-        class SpawnPatrolUnit{};
-        class Zen_OccupyHouse {};
+    class supports {
+        file = "RandFramework\Client\supports";
+        class airSupportRequested {};
+        class supplyDropCrateInit {};
+        class supplyDropVehInit {};
+        class supportArtiRequested {};
+        class transferProviders {};
     };
+};
 
-    class patrolPaterns {
-        file = "RandFramework\functions\patrolPaterns";
-        class BackForthPatrol{};
-        class BuildingPatrol{};
-        class RadiusPatrol{};
+class MISSIONS {
+    class main {
+		class ambushConvoyMission {
+			file = "RandFramework\Missions\ambushConvoyMission.sqf";
+		};
+		class bombDisposalMission {
+			file = "RandFramework\Missions\bombDisposalMission.sqf";
+		};
+		class bugRadioMission {
+			file = "RandFramework\Missions\bugRadioMission.sqf";
+		};
+		class customMissionBasicCacheSample {
+			file = "RandFramework\Missions\customMissionBasicCacheSample.sqf";
+		};
+		class defuseIEDsMission {
+			file = "RandFramework\Missions\defuseIEDsMission.sqf";
+		};
+		class destroyCacheMission {
+			file = "RandFramework\Missions\destroyCacheMission.sqf";
+		};
+		class destroyVehiclesMission {
+			file = "RandFramework\Missions\destroyVehiclesMission.sqf";
+		};
+		class hackDataMission {
+			file = "RandFramework\Missions\hackDataMission.sqf";
+		};
+		class hvtMission {
+			file = "RandFramework\Missions\hvtMission.sqf";
+		};
+		class meetingAssassinationMission {
+			file = "RandFramework\Missions\meetingAssassinationMission.sqf";
+		};
+		class searchAndDestroyMission {
+			file = "RandFramework\Missions\searchAndDestroyMission.sqf";
+		};
+		class secureAndResupplyMission {
+			file = "RandFramework\Missions\secureAndResupplyMission.sqf";
+		};
+		class stealDataFromResearchVehMission {
+			file = "RandFramework\Missions\stealDataFromResearchVehMission.sqf";
+		};
     };
-
 };

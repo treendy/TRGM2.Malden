@@ -11,11 +11,11 @@
  * true <BOOL>
  *
  * Example:
- * ['BLUE'] spawn TREND_fnc_wireCompare
+ * ['BLUE'] spawn TRGM_GUI_fnc_wireCompare
  */
 
 params ["_cutWire"];
-format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOBAL_fnc_log;
 
 _thisBomb = player getVariable ["missionBomb",nil];
 _wire = _thisBomb getVariable ["missionBombWire","NONE"];
@@ -27,11 +27,11 @@ if (_compare) then {
 	//DEFUSED = true;
 	playSound "button_close";
 	_thisBomb setVariable ["_wireCut",true,true];
-	["Timer activated"] call TREND_fnc_notify;
+	["Timer activated"] call TRGM_GLOBAL_fnc_notify;
 	sleep 1;
 	_countDown = 10;
 	while {_countDown > 0 && !(_thisBomb getVariable ["isDefused",false])} do {
-		[format[localize "STR_TRGM2_BombCountdown",_countDown]] call TREND_fnc_notify;
+		[format[localize "STR_TRGM2_BombCountdown",_countDown]] call TRGM_GLOBAL_fnc_notify;
 		_countDown = _countDown - 1;
 		sleep 1;
 	};

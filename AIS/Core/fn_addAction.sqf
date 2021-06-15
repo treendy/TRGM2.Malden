@@ -25,7 +25,7 @@
 	["Hint Hello!", "Man", 3, "true", { hint format ["Hello %1", name (_this select 0)]; }] call AIS_Core_fnc_addAction;
 */
 
-if (TREND_iUseRevive != 0 && isNil "AIS_MOD_ENABLED") then {
+if (TRGM_VAR_iUseRevive != 0 && isNil "AIS_MOD_ENABLED") then {
 
 	params ["_text", "_onObject", "_distance", "_condition", "_callback", ["_args", []], ["_formated", "", [""]]];
 

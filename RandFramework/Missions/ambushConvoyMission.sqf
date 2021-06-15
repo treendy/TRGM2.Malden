@@ -1,6 +1,6 @@
 //These are only ever called by the server!
 
-fnc_CustomRequired = { //used to set any required details for the AO (example, a wide open space or factory nearby)... if this is not found in AO, the engine will scrap the area and loop around again with a different location
+MISSION_fnc_CustomRequired = { //used to set any required details for the AO (example, a wide open space or factory nearby)... if this is not found in AO, the engine will scrap the area and loop around again with a different location
 //be careful about using this, some maps may not have what you require, so the engine will never satisfy the requirements here (example, if no airports are on a map and that is what you require)
 	_objectiveMainBuilding = _this select 0;
 	_centralAO_x = _this select 1;
@@ -9,14 +9,14 @@ fnc_CustomRequired = { //used to set any required details for the AO (example, a
 	_result = false;
 
 	_flatPos = nil;
-	_flatPos = [[_centralAO_x,_centralAO_y,0] , 10, 150, 10, 0, 0.3, 0,[],[[_centralAO_x,_centralAO_y],[_centralAO_x,_centralAO_y]]] call TREND_fnc_findSafePos;
+	_flatPos = [[_centralAO_x,_centralAO_y,0] , 10, 150, 10, 0, 0.3, 0,[],[[_centralAO_x,_centralAO_y],[_centralAO_x,_centralAO_y]]] call TRGM_GLOBAL_fnc_findSafePos;
 
 	if ((_flatPos select 0) > 0) then {_result = true};
 	//flatPosDebug = _flatPos;
 	_result; //return value
 };
 
-fnc_CustomVars = { //This is called before the mission function is called below, and the variables below can be adjusted for your mission
+MISSION_fnc_CustomVars = { //This is called before the mission function is called below, and the variables below can be adjusted for your mission
 	_CustomMissionEnabled = true; //set this to true to allow this mission to show in the mission selection dialog
 	_RequiresNearbyRoad = true;
 	_roadSearchRange = 20; //this is how far out the engine will check to make sure a road is within range (if your objective requires a nearby road)
@@ -24,7 +24,7 @@ fnc_CustomVars = { //This is called before the mission function is called below,
 	_MissionTitle = "Ambush Convoy"; //this is what shows in dialog mission selection
 };
 
-fnc_CustomMission = { //This function is the main script for your mission, some if the parameters passed in must not be changed!!!
+MISSION_fnc_CustomMission = { //This function is the main script for your mission, some if the parameters passed in must not be changed!!!
 	/*
 	 * Parameter Descriptions
 	 * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	 * _objectiveMainBuilding 	: DO NOT EDIT THIS VALUE (this is the main building location selected within your AO)
 	 * _centralAO_x 			: DO NOT EDIT THIS VALUE (this is the X coord of the AO)
 	 * _centralAO_y 			: DO NOT EDIT THIS VALUE (this is the Y coord of the AO)
-	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in fnc_CustomVars)
+	 * _roadSearchRange 		: DO NOT EDIT THIS VALUE (this is the search range for a valid road, set previously in MISSION_fnc_CustomVars)
 	 * _bCreateTask 			: DO NOT EDIT THIS VALUE (this is determined by the player, if the player selected to play a hidden mission, the task is not created!)
 	 * _iTaskIndex 				: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the index of the task used to determine mission/task completion!)
 	 * _bIsMainObjective 		: DO NOT EDIT THIS VALUE (this is determined by the engine, and is the boolean if the mission is a Heavy or Standard mission!)
@@ -59,7 +59,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		}
 		else {
 			_flatPos = nil;
-			_flatPos = [getPos _objectiveMainBuilding, 10, 100, 10, 0, 0.3, 0,[],[getPos _objectiveMainBuilding,getPos _objectiveMainBuilding]] call TREND_fnc_findSafePos;
+			_flatPos = [getPos _objectiveMainBuilding, 10, 100, 10, 0, 0.3, 0,[],[getPos _objectiveMainBuilding,getPos _objectiveMainBuilding]] call TRGM_GLOBAL_fnc_findSafePos;
 			_poshVehPos = _flatPos;
 		};
 
@@ -76,7 +76,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		}
 		else {
 			_flatPos = nil;
-			_flatPos = [_convoyStartPosition, 10, 100, 10, 0, 0.3, 0,[],[_convoyStartPosition,_convoyStartPosition]] call TREND_fnc_findSafePos;
+			_flatPos = [_convoyStartPosition, 10, 100, 10, 0, 0.3, 0,[],[_convoyStartPosition,_convoyStartPosition]] call TRGM_GLOBAL_fnc_findSafePos;
 			_convoyStartPosition = _flatPos;
 		};
 
@@ -124,13 +124,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			_convoySpeed, // Top speed of the convoy
 			_convoySeperation, // Distance between convoy vehicles
 			_pushThrough // Whether the convoy should stop driving if they encounter contact
-		] call TREND_fnc_createConvoy;
+		] call TRGM_GLOBAL_fnc_createConvoy;
 		_convoyArr params ["_hvtGroup", "_convoyVehicles", "_hvtVehicle", "_mainHVT", "_finalwp"];
 
 		_sTargetName = format["objInformant%1",_iTaskIndex]; //ignore that it is "objInformant", all objectives have this name, do not change this!
 		_mainHVT setVariable [_sTargetName, _mainHVT, true];
 		missionNamespace setVariable [_sTargetName, _mainHVT];
-		[_mainHVT, ["This is our target!","{[""This is our target""] call TREND_fnc_notify; }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
+		[_mainHVT, ["This is our target!","{[""This is our target""] call TRGM_GLOBAL_fnc_notify; }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 		_mainHVT setCaptive true;
 		removeAllWeapons _mainHVT;
 
@@ -140,7 +140,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			_guardUnit3 setVariable [_sTargetName2, _guardUnit3, true];
 			missionNamespace setVariable [_sTargetName2, _guardUnit3];
 			if (_hasInformant) then {
-				[_guardUnit3, ["This is our friendly agent!","{[""This is our friendly agent!""] call TREND_fnc_notify; }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
+				[_guardUnit3, ["This is our friendly agent!","{[""This is our friendly agent!""] call TRGM_GLOBAL_fnc_notify; }",[],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 				_guardUnit3 setCaptive true;
 				removeAllWeapons _guardUnit3;
 			};
@@ -159,14 +159,14 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			_x allowDamage false;
 		} forEach _convoyVehicles;
 
-		waitUntil {sleep 2; TREND_bAndSoItBegins && TREND_CustomObjectsSet && TREND_PlayersHaveLeftStartingArea};
+		waitUntil {sleep 2; TRGM_VAR_bAndSoItBegins && TRGM_VAR_CustomObjectsSet && TRGM_VAR_PlayersHaveLeftStartingArea};
 
-		if (!TREND_bDebugMode) then {
+		if (!TRGM_VAR_bDebugMode) then {
 			_iWait = (420 * (_iTaskIndex + 1)) + floor(random 300);
 			sleep floor(random 120);
 			_sMessageOne = format["The convoy is due to depart at %1", (daytime  + (_iWait/3600) call BIS_fnc_timeToString)];
 			[[west, "HQ"],_sMessageOne] remoteExec ["sideChat", 0];
-			[_sMessageOne] call TREND_fnc_notifyGlobal;
+			[_sMessageOne] call TRGM_GLOBAL_fnc_notifyGlobal;
 
 			[_iWait, _iTaskIndex] spawn {
 				params ["_duration", "_taskIndex"];
@@ -178,7 +178,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 					if (_timeLeft < 6) then {_color = "#ff0000";};//red
 					if (_timeLeft < 0) exitWith {};
 					_content = parseText format ["<t size='0.90'>Time Until Convoy Departs: <t color='%1'>--- %2 ---</t></t>", _color, [(_timeLeft/3600),"HH:MM:SS"] call BIS_fnc_timeToString];
-					[[_content, _duration + 1, _taskIndex, _taskIndex], {_this spawn TREND_fnc_handleNotification}] remoteExec ["call"]; // After the first run, this will only update the text for the notification with index = _taskIndex
+					[[_content, _duration + 1, _taskIndex, _taskIndex], {_this spawn TRGM_GUI_fnc_handleNotification}] remoteExec ["call"]; // After the first run, this will only update the text for the notification with index = _taskIndex
 				};
 			};
 
@@ -200,7 +200,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 		_sMessageTwo = format["%1 is in the area and on way to AO (position is tracked and marked on map",name _mainHVT];
 		[[west, "HQ"],_sMessageTwo] remoteExec ["sideChat", 0];
-		[_sMessageTwo] call TREND_fnc_notifyGlobal;
+		[_sMessageTwo] call TRGM_GLOBAL_fnc_notifyGlobal;
 
 		_mrkMeetingHVTMarker = nil;
 		_mrkMeetingHVTMarker = createMarker [format["HVT%1",_iTaskIndex], getPos _hvtVehicle];
@@ -231,7 +231,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 				_guardUnit3 call BIS_fnc_ambientAnim__terminate;
 			};
 			_guardUnit3 setVariable ["MainObjective", _mainHVT, true];
-			_guardUnit3 addEventHandler ["Killed", {[((_this select 0) getVariable "MainObjective"), "failed", "Our agent was killed!!!", "You killed our agent! Rep lowered", 0.8] spawn TREND_fnc_updateTask; }];
+			_guardUnit3 addEventHandler ["Killed", {[((_this select 0) getVariable "MainObjective"), "failed", "Our agent was killed!!!", "You killed our agent! Rep lowered", 0.8] spawn TRGM_SERVER_fnc_updateTask; }];
 		};
 
 		_mainHVT setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
@@ -241,7 +241,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			_iTaskIndex = _this select 1;
 			_bIsMainObjective = _this select 2;
 			while {alive _mainHVT} do {
-				_mainHVTTrigger = _mainHVT getVariable "TREND_hvtTrigger";
+				_mainHVTTrigger = _mainHVT getVariable "TRGM_VAR_hvtTrigger";
 				if (!isNil "_mainHVTTrigger") then {
 					deleteVehicle _mainHVTTrigger;
 				};
@@ -249,22 +249,22 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 				_mainHVTTrigger = createTrigger ["EmptyDetector", getPos _mainHVT];
 				_mainHVTTrigger setVariable ["DelMeOnNewCampaignDay",true];
 				_mainHVTTrigger setTriggerArea [1250, 1250, 0, false];
-				_mainHVTTrigger setTriggerActivation [TREND_FriendlySideString, format["%1 D", TREND_EnemySideString], true];
-				_mainHVTTrigger setTriggerStatements ["this && {(time - TREND_TimeSinceLastSpottedAction) > (call TREND_GetSpottedDelay)}", format["nul = [%1, %2, %3, thisTrigger, thisList] spawn TREND_fnc_CallNearbyPatrol;",getPos _mainHVT,_iTaskIndex, _bIsMainObjective], ""];
-				_mainHVT setVariable ["TREND_hvtTrigger", _mainHVTTrigger, true];
+				_mainHVTTrigger setTriggerActivation [TRGM_VAR_FriendlySideString, format["%1 D", TRGM_VAR_EnemySideString], true];
+				_mainHVTTrigger setTriggerStatements ["this && {(time - TRGM_VAR_TimeSinceLastSpottedAction) > (call TRGM_GETTER_fnc_iGetSpottedDelay)}", format["nul = [%1, %2, %3, thisTrigger, thisList] spawn TRGM_GLOBAL_fnc_callNearbyPatrol;",getPos _mainHVT,_iTaskIndex, _bIsMainObjective], ""];
+				_mainHVT setVariable ["TRGM_VAR_hvtTrigger", _mainHVTTrigger, true];
 				sleep 30;
 			};
-			_mainHVTTrigger = _mainHVT getVariable "TREND_hvtTrigger";
+			_mainHVTTrigger = _mainHVT getVariable "TRGM_VAR_hvtTrigger";
 			if (!isNil "_mainHVTTrigger") then {
 				deleteVehicle _mainHVTTrigger;
 			};
 		};
 
 		if (_bIsMainObjective) then { //if mainobjective (i.e. heavy mission or final campaign mission) we will require team to get document from corpse
-			[_mainHVT, ["Take document",{(_this select 0) spawn TREND_fnc_updateTask;},[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
+			[_mainHVT, ["Take document",{(_this select 0) spawn TRGM_SERVER_fnc_updateTask;},[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 		}
 		else { //if single mission or side then we can pass this task as soon as HVT is killed
-			_mainHVT addEventHandler ["Killed", {(_this select 0) spawn TREND_fnc_updateTask;}];
+			_mainHVT addEventHandler ["Killed", {(_this select 0) spawn TRGM_SERVER_fnc_updateTask;}];
 		};
 	};
 
@@ -280,3 +280,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	};
 	_sTaskDescription = _sTaskDescription + "<br /><br />TIP: Shoot the driver to make the convoy stop and everyone get out of the vehicle.";
 };
+
+publicVariable "MISSION_fnc_CustomRequired";
+publicVariable "MISSION_fnc_CustomVars";
+publicVariable "MISSION_fnc_CustomMission";

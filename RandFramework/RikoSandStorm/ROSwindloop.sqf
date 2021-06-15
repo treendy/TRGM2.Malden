@@ -1,5 +1,5 @@
 // Requires ROSsandstorm.sqf by RickOShay
-format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOBAL_fnc_log;
 
 _dur = _this select 0;
 _endtime = (_this select 1) - 30;

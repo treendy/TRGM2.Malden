@@ -8,26 +8,26 @@
  * true <BOOL>
  *
  * Example:
- * [] spawn TREND_fnc_openDialogTeamLoadouts
+ * [] spawn TRGM_GUI_fnc_openDialogTeamLoadouts
  */
 
 disableSerialization;
 
-format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOBAL_fnc_log;
 
 if (!isNull (findDisplay 6000)) then {
-	TREND_AdvancedSettings = [];
+	TRGM_VAR_AdvancedSettings = [];
 	{
 		_CurrentControl = _x;
 		_lnpCtrlType = _x select 2;
 		_ThisControlOptions = (_x select 4);
 		_ThisControlIDX = (_x select 0) + 1;
 		_ctrlItem = (findDisplay 6000) displayCtrl _ThisControlIDX;
-		TREND_debugMessages = TREND_debugMessages + "\n\n" + str(lbCurSel _ctrlItem);
-		publicVariable "TREND_debugMessages";
+		TRGM_VAR_debugMessages = TRGM_VAR_debugMessages + "\n\n" + str(lbCurSel _ctrlItem);
+		publicVariable "TRGM_VAR_debugMessages";
 		_value = nil;
 		if (_lnpCtrlType isEqualTo "RscCombo") then {
-			TREND_debugMessages = TREND_debugMessages + "\n\nHERE:" + str(lbCurSel _ctrlItem);
+			TRGM_VAR_debugMessages = TRGM_VAR_debugMessages + "\n\nHERE:" + str(lbCurSel _ctrlItem);
 			_value = _ThisControlOptions select (lbCurSel _ctrlItem);
 		};
 		if (_lnpCtrlType isEqualTo "RscEdit") then {
@@ -36,22 +36,22 @@ if (!isNull (findDisplay 6000)) then {
 		if (_lnpCtrlType isEqualTo "RscXSliderH") then {
 			_value = sliderPosition _ThisControlIDX;
 		};
-		TREND_AdvancedSettings pushBack _value;
-	} forEach TREND_AdvControls;
-	publicVariable "TREND_AdvancedSettings";
+		TRGM_VAR_AdvancedSettings pushBack _value;
+	} forEach TRGM_VAR_AdvControls;
+	publicVariable "TRGM_VAR_AdvancedSettings";
 
 	//_ctrlItem = (findDisplay 6000) displayCtrl 5500;
-	//TREND_iMissionParamType = TREND_MissionParamTypesValues select lbCurSel _ctrlItem;
-	//publicVariable "TREND_iMissionParamType";
+	//TRGM_VAR_iMissionParamType = TRGM_VAR_MissionParamTypesValues select lbCurSel _ctrlItem;
+	//publicVariable "TRGM_VAR_iMissionParamType";
 };
 
-//["opening 2dialogA"] call TREND_fnc_notify;
+//["opening 2dialogA"] call TRGM_GLOBAL_fnc_notify;
 
 closedialog 0;
 
 sleep 0.1;
 
-createDialog "Trend_DialogSetupEnemyFaction";
+createDialog "TRGM_VAR_DialogSetupEnemyFaction";
 waitUntil {!isNull (findDisplay 7000);};
 
 _display = findDisplay 7000;
@@ -67,7 +67,7 @@ _display ctrlCreate ["RscEditMulti", 7998];
 _lblctrlData = _display displayCtrl 7998;
 _lblctrlData ctrlSetPosition [0.3 * safezoneW + safezoneX, (0.30 + 0) * safezoneH + safezoneY,0.18 * safezoneW,0.40 * safezoneH];
 _lblctrlData ctrlCommit 0;
-ctrlSetText [7998,  TREND_LoadoutData];
+ctrlSetText [7998,  TRGM_VAR_LoadoutData];
 
 
 _display ctrlCreate ["RscTextMulti", 7996];
@@ -106,13 +106,13 @@ _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {
 			ctrlSetText [7996,  _errorMessage];
 		}
 		else {
-			TREND_LoadoutData = _TempLoadoutData;
-			[] spawn TREND_fnc_openDialogAdvancedMissionSettings; false;
+			TRGM_VAR_LoadoutData = _TempLoadoutData;
+			[] spawn TRGM_GUI_fnc_openDialogAdvancedMissionSettings; false;
 		};
 	}
 	else {
-		TREND_LoadoutData = "";
-		[] spawn TREND_fnc_openDialogAdvancedMissionSettings; false;
+		TRGM_VAR_LoadoutData = "";
+		[] spawn TRGM_GUI_fnc_openDialogAdvancedMissionSettings; false;
 	};
 }];
 _btnSetEnemyFaction ctrlCommit 0;

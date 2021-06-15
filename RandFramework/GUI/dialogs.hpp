@@ -15,7 +15,7 @@
 #define ONETHIRDSLIDERTIMEW SLIDERTIMEW / 3
 #define TWOTHIRDSLIDERTIMEW ONETHIRDSLIDERTIMEW * 2
 
-class Trend_DialogSetupParams
+class TRGM_VAR_DialogSetupParams
 	{
 	idd = 5000;
 	movingEnabled = false;
@@ -28,7 +28,7 @@ class Trend_DialogSetupParams
 		class RscListbox_1500: RscListBox
 		{
 			idc = 5500;
-			onLBSelChanged = "[_this] spawn TREND_fnc_MissionTypeSelection; false; ";
+			onLBSelChanged = "[_this] spawn TRGM_GUI_fnc_missionTypeSelection; false; ";
 
 			x = 11.96 * UI_GRID_W + UI_GRID_X;
 			y = 7.28 * UI_GRID_H + UI_GRID_Y;
@@ -179,7 +179,7 @@ class Trend_DialogSetupParams
 			h = SLIDERTIMEH;
 			colorActive[] = {1,1,1,1};
 
-			onSliderPosChanged="[_this select 0, _this select 1, ""Slider""] call TREND_fnc_timeSliderOnChange; false;";
+			onSliderPosChanged="[_this select 0, _this select 1, ""Slider""] call TRGM_GUI_fnc_timeSliderOnChange; false;";
 		};
 		class Frame_2114: ctrlStaticFrame
 		{
@@ -206,7 +206,7 @@ class Trend_DialogSetupParams
 			tooltip = $STR_3DEN_Attributes_SliderTime_Hour_tooltip; //--- ToDo: Localize;
 			sizeEx = GUI_TEXT_SIZE_MEDIUM;
 			font = "EtelkaMonospacePro";
-			onKillFocus = "[_this, nil, ""Edit""] call TREND_fnc_timeSliderOnChange; false;";
+			onKillFocus = "[_this, nil, ""Edit""] call TRGM_GUI_fnc_timeSliderOnChange; false;";
 		};
 		class Minute_2114: Hour_2114
 		{
@@ -315,7 +315,7 @@ class Trend_DialogSetupParams
 		class RscButton_1600: RscButton
 		{
 			idc = 5600;
-			action = "[_this] spawn TREND_fnc_SetParamsAndBegin; false";
+			action = "[_this] spawn TRGM_GUI_fnc_setParamsAndBegin; false";
 
 			text = $STR_TRGM2_dialogs_Begin; //--- ToDo: Localize;
 			x = 23.3 * UI_GRID_W + UI_GRID_X;
@@ -328,7 +328,7 @@ class Trend_DialogSetupParams
 		class btnAdvanced: RscButton
 		{
 			idc = 1603;
-			action = "[] spawn TREND_fnc_openDialogAdvancedMissionSettings; false";
+			action = "[] spawn TRGM_GUI_fnc_openDialogAdvancedMissionSettings; false";
 
 			text = $STR_TRGM2_dialogs_AdvOpt; //--- ToDo: Localize;
 			x = 23.3 * UI_GRID_W + UI_GRID_X;
@@ -430,7 +430,7 @@ class Trend_DialogSetupParams
 		class btnLoadLocalSave: RscButton
 		{
 			idc = 1601;
-			action = "[_this,1] spawn TREND_fnc_SetParamsAndBegin; false";
+			action = "[_this,1] spawn TRGM_GUI_fnc_setParamsAndBegin; false";
 
 			text = $STR_TRGM2_dialogs_LoadLocal; //--- ToDo: Localize;
 			x = 23.3 * UI_GRID_W + UI_GRID_X;
@@ -444,7 +444,7 @@ class Trend_DialogSetupParams
 		class btnLoadglobalSave: RscButton
 		{
 			idc = 1602;
-			action = "[_this,2] spawn TREND_fnc_SetParamsAndBegin; false";
+			action = "[_this,2] spawn TRGM_GUI_fnc_setParamsAndBegin; false";
 
 			text = $STR_TRGM2_dialogs_LoadGlobal; //--- ToDo: Localize;
 			x = 23.3 * UI_GRID_W + UI_GRID_X;
@@ -474,7 +474,7 @@ class Trend_DialogSetupParams
 
 
 
-class Trend_DialogSetupParamsAdvanced
+class TRGM_VAR_DialogSetupParamsAdvanced
 	{
 	idd = 6000;
 	movingEnabled = false;
@@ -517,7 +517,7 @@ class Trend_DialogSetupParamsAdvanced
 			h = 0.022 * safezoneH;
 			colorBackground[] = {0,1,0,1};
 			colorActive[] = {0,1,0,1};
-			action = "[] spawn TREND_fnc_openDialogMissionSelection; false";
+			action = "[] spawn TRGM_GUI_fnc_openDialogMissionSelection; false";
 		};
 
 
@@ -533,7 +533,7 @@ class Trend_DialogSetupParamsAdvanced
 };
 
 
-class Trend_DialogRequests
+class TRGM_VAR_DialogRequests
 {
 	idd = 8000;
 	movingEnabled = false;
@@ -558,7 +558,7 @@ class Trend_DialogRequests
 			idc = 8003;
 			text = $STR_TRGM2_openDialogRequests_RequestUnit;
 			x = 0.365954 * safezoneW + safezoneX;
-			y = 0.478001 * safezoneH + safezoneY;
+			y = 0.533006 * safezoneH + safezoneY;
 			w = 0.123734 * safezoneW;
 			h = 0.0549984 * safezoneH;
 			colorBackground[] = {0,1,0,1};
@@ -569,7 +569,7 @@ class Trend_DialogRequests
 			idc = 8005;
 			text = $STR_TRGM2_openDialogRequests_RequestVehicle;
 			x = 0.520622 * safezoneW + safezoneX;
-			y = 0.478001 * safezoneH + safezoneY;
+			y = 0.533006 * safezoneH + safezoneY;
 			w = 0.123734 * safezoneW;
 			h = 0.0549984 * safezoneH;
 			colorBackground[] = {0,1,0,1};
@@ -601,7 +601,7 @@ class Trend_DialogRequests
 	};
 };
 
-class Trend_DialogRequests_VehicleCustomization
+class TRGM_VAR_DialogRequests_VehicleCustomization
 {
 	idd = 8080;
 	enableSimulation = 1;
@@ -903,7 +903,7 @@ class Trend_DialogRequests_VehicleCustomization
 
 
 
-class Trend_DialogSetupEnemyFaction
+class TRGM_VAR_DialogSetupEnemyFaction
 	{
 	idd = 7000;
 	movingEnabled = false;
@@ -946,7 +946,7 @@ class Trend_DialogSetupEnemyFaction
 			h = 0.022 * safezoneH;
 			colorBackground[] = {1,0,0,1};
 			colorActive[] = {1,0,0,1};
-			action = "[] spawn TREND_fnc_openDialogAdvancedMissionSettings; false";
+			action = "[] spawn TRGM_GUI_fnc_openDialogAdvancedMissionSettings; false";
 		};
 
 
@@ -1212,7 +1212,7 @@ class KeypadDefuse
 			offsetPressedX = 0.002;
 			offsetPressedY = 0.002;
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "[CODEINPUT] spawn TREND_fnc_codeCompare; ";
+			onMouseButtonDown = "[CODEINPUT] spawn TRGM_GUI_fnc_codeCompare; ";
 		};
 		class Bclear: RscButton
 		{
@@ -1259,7 +1259,7 @@ class KeypadDefuse
 			h = 0.033 * safezoneH;
 			colorBackground[] = {0,0,1,1};
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'wire_cut'; ['BLUE'] spawn TREND_fnc_wireCompare";
+			onMouseButtonDown = "playSound 'wire_cut'; ['BLUE'] spawn TRGM_GUI_fnc_wireCompare";
 		};
 		class Bwhite: RscButton
 		{
@@ -1270,7 +1270,7 @@ class KeypadDefuse
 			h = 0.033 * safezoneH;
 			colorBackground[] = {1,1,1,1};
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'wire_cut'; ['WHITE'] spawn TREND_fnc_wireCompare";
+			onMouseButtonDown = "playSound 'wire_cut'; ['WHITE'] spawn TRGM_GUI_fnc_wireCompare";
 		};
 		class Byellow: RscButton
 		{
@@ -1281,7 +1281,7 @@ class KeypadDefuse
 			h = 0.033 * safezoneH;
 			colorBackground[] = {1,1,0,1};
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'wire_cut'; ['YELLOW'] spawn TREND_fnc_wireCompare";
+			onMouseButtonDown = "playSound 'wire_cut'; ['YELLOW'] spawn TRGM_GUI_fnc_wireCompare";
 		};
 		class Bgreen: RscButton
 		{
@@ -1292,7 +1292,7 @@ class KeypadDefuse
 			h = 0.033 * safezoneH;
 			colorBackground[] = {0,1,0,1};
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'wire_cut'; ['GREEN'] spawn TREND_fnc_wireCompare";
+			onMouseButtonDown = "playSound 'wire_cut'; ['GREEN'] spawn TRGM_GUI_fnc_wireCompare";
 		};
 		class NumberDisplay: RscStructuredText
 		{

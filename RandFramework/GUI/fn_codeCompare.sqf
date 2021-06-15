@@ -11,10 +11,10 @@
  * true <BOOL>
  *
  * Example:
- * [CODEINPUT] spawn TREND_fnc_codeCompare
+ * [CODEINPUT] spawn TRGM_GUI_fnc_codeCompare
  */
 params ["_inputCode"];
-format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TREND_fnc_log;
+format["%1 called by %2", _fnc_scriptName, _fnc_scriptNameParent] call TRGM_GLOBAL_fnc_log;
 
 _thisBomb = player getVariable["missionBomb", nil];
 _code = _thisBomb getVariable["missionBombCODE", "NONE"];
