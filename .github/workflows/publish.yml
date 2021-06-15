@@ -24,6 +24,8 @@ jobs:
       uses: actions/checkout@master
     - name: Lint (sqflint)
       uses: arma-actions/sqflint@master
+      with:
+          args: --exit w --directory $GITHUB_WORKSPACE
       continue-on-error: true
 
   build:
