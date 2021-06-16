@@ -4,7 +4,7 @@ if (TRGM_VAR_OverrideMissionSetup) then {
     TRGM_VAR_MainMissionTitle = "The Mission of DOOOOM";
 };
 
-if (isServer && {TRGM_VAR_OverrideMissionSetup}}) then {
+if (isServer && {TRGM_VAR_OverrideMissionSetup}) then {
 
     /*
     0=Heavy Mission (with two optional sides)
