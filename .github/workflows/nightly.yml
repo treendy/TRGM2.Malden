@@ -17,7 +17,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
+
       - name: Copy mission files to templates
         run: |
           $mainFolder = "$($Env:GITHUB_WORKSPACE)"
@@ -93,8 +93,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: https://uploads.github.com/repos/theace0296/TRGM2.Malden/releases/44676339/assets{?name,label}
-          release_id: 44676339
+          upload_url: https://uploads.github.com/repos/theace0296/TRGM2.Malden/releases/44698931/assets{?name,label}
+          release_id: 44698931
           asset_path: ./TRGM-Redux-Nightly.zip
           asset_name: TRGM-Redux-Nightly-$$.zip
           asset_content_type: application/zip
