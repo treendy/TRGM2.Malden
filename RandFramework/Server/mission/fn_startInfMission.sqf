@@ -12,10 +12,6 @@ TRGM_Logic setVariable ["DeathRunning", false, true];
 TRGM_Logic setVariable ["PointsUpdating", false, true];
 
 
-//TRGM_VAR_debugMessages = "";
-//publicVariable "TRGM_VAR_debugMessages";
-
-
 ["Mission Setup: 14.5", true] call TRGM_GLOBAL_fnc_log;
 
 _ThisTaskTypes = nil;
@@ -495,11 +491,9 @@ while {(TRGM_VAR_InfTaskCount < count _ThisTaskTypes)} do {
         };
         case 99999: {
             ["Mission Setup: Init Custom Mission", true] call TRGM_GLOBAL_fnc_log;
-            //[format["pre: %1",_RequiresNearbyRoad]] call TRGM_GLOBAL_fnc_notify; sleep 2;
-            //#include "..\..\CustomMission\customMission.sqf"; //Custom Mission
-            //call MISSION_fnc_CustomVars;
-            //[format["post: %1",_RequiresNearbyRoad]] call TRGM_GLOBAL_fnc_notify; sleep 2;
-            //_args = ["Objective completed, reputation increased.", 1, "Objective completed"];
+            call CUSTOM_MISSION_fnc_CustomMission; //Custom Mission
+            call MISSION_fnc_CustomVars;
+            _args = ["Objective completed, reputation increased.", 1, "Objective completed"];
             ["Mission Setup: Generating Custom Mission", true] call TRGM_GLOBAL_fnc_log;
         };
         default { };

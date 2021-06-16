@@ -5,14 +5,6 @@ TRGM_VAR_DefaultEnemyFactionValue    = [2]; publicVariable "TRGM_VAR_DefaultEnem
 TRGM_VAR_DefaultMilitiaFactionValue  = [1]; publicVariable "TRGM_VAR_DefaultMilitiaFactionValue";  //default to AAF
 TRGM_VAR_DefaultFriendlyFactionValue = [1]; publicVariable "TRGM_VAR_DefaultFriendlyFactionValue"; //default to NATO
 
-/////// Custom Mission Init ///////
-// _CustomMissionEnabled = (["CustomMission", 0] call BIS_fnc_getParamValue) isEqualTo 1;
-// _MissionTitle         = "";
-// if (_CustomMissionEnabled) then {
-//     call compile preprocessFileLineNumbers "CustomMission\customMission.sqf";
-// };
-// call MISSION_fnc_CustomVars;
-
 /////// Set up faction arrays ///////
 // TRGM_VAR_WestFactionData --- Initialized in initGlobalVars
 // TRGM_VAR_EastFactionData --- Initialized in initGlobalVars
@@ -327,10 +319,11 @@ TRGM_VAR_MissionParamObjectivesValues pushBack 18;
 TRGM_VAR_MissionParamObjectives       pushBack "Ambush Convoy";
 TRGM_VAR_MissionParamObjectivesValues pushBack 19;
 
-// if (_CustomMissionEnabled) then {
-//     TRGM_VAR_MissionParamObjectives       pushBack _MissionTitle;
-//     TRGM_VAR_MissionParamObjectivesValues pushBack 99999;
-// };
+if (TRGM_VAR_UseCustomMission) then {
+    private _MissionTitle = [] call CUSTOM_MISSION_fnc_CustomMission;
+    TRGM_VAR_MissionParamObjectives       pushBack _MissionTitle;
+    TRGM_VAR_MissionParamObjectivesValues pushBack 99999;
+};
 
 publicVariable "TRGM_VAR_MissionParamObjectives";
 publicVariable "TRGM_VAR_MissionParamObjectivesValues";

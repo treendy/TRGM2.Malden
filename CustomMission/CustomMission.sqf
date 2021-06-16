@@ -1,22 +1,34 @@
 //These are only ever called by the server!
 
-//MISSION 16: Destroy Cache
-
+//useful variables
+//base location
+//mission task locations
+//friendly AO camp location
+//checkpoint locations and sentry postions
+//cleared locations (i.e. AOs that had a task completed)
 MISSION_fnc_CustomRequired = { //used to set any required details for the AO (example, a wide open space or factory nearby)... if this is not found in AO, the engine will scrap the area and loop around again with a different location
 //be careful about using this, some maps may not have what you require, so the engine will never satisfy the requirements here (example, if no airports are on a map and that is what you require)
     _objectiveMainBuilding = _this select 0;
     _centralAO_x = _this select 1;
     _centralAO_y = _this select 2;
 
-    _result = true; //always returing true, because we have in custom vars "_RequiresNearbyRoad" which will take care of our checks
+    _result = false;
+
+    _flatPos = nil;
+    _flatPos = [[_centralAO_x,_centralAO_y,0] , 10, 150, 10, 0, 0.3, 0,[],[[_centralAO_x,_centralAO_y],[_centralAO_x,_centralAO_y]]] call TRGM_GLOBAL_fnc_findSafePos;
+
+    if ((_flatPos select 0) > 0) then {_result = true};
+    //flatPosDebug = _flatPos;
     _result; //return value
 };
 
 MISSION_fnc_CustomVars = { //This is called before the mission function is called below, and the variables below can be adjusted for your mission
-    _RequiresNearbyRoad = false;
-    _roadSearchRange = 100; //this is how far out the engine will check to make sure a road is within range (if your objective requires a nearby road)
+    _CustomMissionEnabled = true; //set this to true to allow this mission to show in the mission selection dialog
+    _RequiresNearbyRoad = true;
+    _roadSearchRange = 250; //this is how far out the engine will check to make sure a road is within range (if your objective requires a nearby road)
+    _MissionTitle = "Meeting Assassination";
     _allowFriendlyIns = false;
-    _MissionTitle = localize "STR_TRGM2_CacheMissionTitle"; //this is what shows in dialog mission selection
+    [_CustomMissionEnabled, _MissionTitle]; // DO NOT REMOVE THIS RETURN (this allows your Custom Mission to appear in the Mission Selection dialog)
 };
 
 MISSION_fnc_CustomMission = { //This function is the main script for your mission, some if the parameters passed in must not be changed!!!
@@ -35,30 +47,26 @@ MISSION_fnc_CustomMission = { //This function is the main script for your missio
      * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     */
     params ["_markerType","_objectiveMainBuilding","_centralAO_x","_centralAO_y","_roadSearchRange", "_bCreateTask", "_iTaskIndex", "_bIsMainObjective", ["_args", []]];
+
     if (_markerType != "empty") then { _markerType = "hd_unknown"; }; // Set marker type here...
 
-    //_MissionTitle = format["Meeting Assassination: %1",name(_mainHVT)];    //you can adjust this here to change what shows as marker and task text
-    _sTaskDescription = selectRandom[localize "STR_TRGM2_CacheMissionDescription"]; //adjust this based on veh? and man? if van then if car then?
+    _nearestRoad = nil;
+    _nearestRoad = [[_centralAO_x,_centralAO_y], _roadSearchRange, []] call BIS_fnc_nearestRoad;
+    _roadConnectedTo = nil;
+    _roadConnectedTo = roadsConnectedTo _nearestRoad;
+    _objVehicle = selectRandom sideResarchTruck createVehicle [0,0,500];
+    _objVehicle setPosATL getPosATL _nearestRoad;
 
-    _mainObjPos = getPos _objectiveMainBuilding;
-
-    _targetToUse = selectRandom TargetCaches;
-    _isCache = true;
-
-    _target1 = createVehicle [_targetToUse,[0,0,0],[],0,"NONE"];
-    _sTargetName1 = format["objInformant%1",_iTaskIndex];
-    _target1 setVariable [_sTargetName1, _target1, true];
-    _target1 setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
+    _objVehicle setVariable ["ObjectiveParams", [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
     missionNamespace setVariable [format ["missionObjectiveParams%1", _iTaskIndex], [_markerType,_objectiveMainBuilding,_centralAO_x,_centralAO_y,_roadSearchRange,_bCreateTask,_iTaskIndex,_bIsMainObjective,_args]];
-    missionNamespace setVariable [_sTargetName1, _target1];
+    [_objVehicle, [localize "STR_TRGM2_startInfMission_MissionTitle2_Button", {_this spawn TRGM_GUI_fnc_downloadData;}, [localize "STR_TRGM2_downloadData_title", true, "TRGM_SERVER_fnc_updateTask", []], 0, true, true, "", "_this isEqualTo player"]] remoteExec ["addAction", 0, true];
 
-    [_mainObjPos,100,true,true,_target1, _isCache] spawn TRGM_SERVER_fnc_setTargetEvent;
-
-    [_target1] spawn {
-        _target1 = _this select 0;
-        waitUntil { !alive _target1; };
-        [_target1] spawn TRGM_SERVER_fnc_updateTask;
+    if (count _roadConnectedTo > 0) then {
+        _connectedRoad = _roadConnectedTo select 0;
+        _direction = [_nearestRoad, _connectedRoad] call BIS_fnc_DirTo;
+        _objVehicle setDir (_direction);
     };
+    _sTaskDescription = selectRandom["steal research data from bob","John has data, steal it!"];
 };
 
 publicVariable "MISSION_fnc_CustomRequired";

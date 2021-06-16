@@ -1,24 +1,23 @@
-
-_useCustomMission = (["CustomMission", 0] call BIS_fnc_getParamValue) isEqualTo 1;
-if (_useCustomMission) then {
-    TRGM_VAR_ForceMissionSetup = true; //will mean the main player will not see an mission setup dialog, and will force the settings you have selected below.
+if (TRGM_VAR_OverrideMissionSetup) then {
+    TRGM_VAR_ForceMissionSetup = false; // a value of 'true' means the main player will not see an mission setup dialog, and will force the settings you have selected below.
+    TRGM_VAR_UseCustomMission = false; // a value of 'true' enables the use of the Custom Mission (value 99999) below.
     TRGM_VAR_MainMissionTitle = "The Mission of DOOOOM";
 };
 
-if (isServer && {_useCustomMission}) then {
+if (isServer && {TRGM_VAR_OverrideMissionSetup}}) then {
 
     /*
-        0=Heavy Mission (with two optional sides)
-        6=Heavy Mission (two hidden optional sides)
-        8=Heavy Mission (two objectives at AO, chance of side)
-        1=Heavy Mission (Intel required for AO Location)
-        2=Heavy Mission Only
-        3=Single Mission
-        9=Single Mission (two objectives at AO, chance of side)
-        4=Three Missions
-        7=Three Hidden Missions
-        10=Heavy Mission, hidden location and type
-        5=Campaign
+    0=Heavy Mission (with two optional sides)
+    6=Heavy Mission (two hidden optional sides)
+    8=Heavy Mission (two objectives at AO, chance of side)
+    1=Heavy Mission (Intel required for AO Location)
+    2=Heavy Mission Only
+    3=Single Mission
+    9=Single Mission (two objectives at AO, chance of side)
+    4=Three Missions
+    7=Three Hidden Missions
+    10=Heavy Mission, hidden location and type
+    5=Campaign
     */
     TRGM_VAR_iMissionParamType = 3;
 
@@ -40,7 +39,7 @@ if (isServer && {_useCustomMission}) then {
     14 = defuse bomb
     15 = Search and destroy (three targets)
     16 = Destroy Cache
-    99999 = meeting assasination
+    99999 = Custom Mission - MUST BE ENABLED VIA 'Enable Custom Mission' parameter in lobby OR 'TRGM_VAR_UseCustomMission' must be set to TRUE above!
     */
     TRGM_VAR_iMissionParamObjective = 3;
     //TRGM_VAR_iMissionParamObjective2 = 13;
@@ -90,10 +89,10 @@ if (isServer && {_useCustomMission}) then {
         0,                     //Allow Support Options
         1,                     //Respawn ticket count (set to 1 for no respawn)
         1,                     //Allow map drawing in direct channel only (Setting to zero will all map drawing in all channels)
-        10,                 //Respawn timer
-        "OPF_F",             //EnemyFaction | Vanilla Examples: OPF_F=CSAT,  OPF_T_F=CSAT (Pacific),  OPF_G_F=FIA | RHS Examples: rhs_faction_msv=Russia (MSV), rhs_faction_vdv=Russia (VDV)
+        10,                    //Respawn timer
+        "OPF_F",               //EnemyFaction | Vanilla Examples: OPF_F=CSAT,  OPF_T_F=CSAT (Pacific),  OPF_G_F=FIA | RHS Examples: rhs_faction_msv=Russia (MSV), rhs_faction_vdv=Russia (VDV)
         "IND_G_F",             //MilitiaFaction | Vanilla Examples: IND_F=AAF,  IND_G_F=FIA,  3=FIA | RHS Examples: rhsgref_faction_cdf_ground=CDF Ground Forces
-        "BLU_F",             //FriendlyFaction | Vanilla Examples: BLU_F=NATO, BLU_T_F=NATO (Pacific), BLU_G_F=FIA | RHS Examples: rhs_faction_usarmy_d=US Army D, rhs_faction_usmc_wd=USMC WD
+        "BLU_F",               //FriendlyFaction | Vanilla Examples: BLU_F=NATO, BLU_T_F=NATO (Pacific), BLU_G_F=FIA | RHS Examples: rhs_faction_usarmy_d=US Army D, rhs_faction_usmc_wd=USMC WD
         2,                     //Sandstorm option (0=Random, 1=Always, 2=Never, 3=NonStop)
         0,                     //Enable Group Manager
         0,                     //allow to select AO position (pointless if ForceMissionSetup is set to false above)
@@ -103,13 +102,14 @@ if (isServer && {_useCustomMission}) then {
         0,                     //Compact Target/Ied Missions
         0,                     //Harder mission (beta)
         0,                     //Large patrols
-        0                     // Vehicle spawning requires rep points
+        0                      // Vehicle spawning requires rep points
     ];
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Do not change anything under here!
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     publicVariable "TRGM_VAR_ForceMissionSetup";
+    publicVariable "TRGM_VAR_UseCustomMission";
     publicVariable "TRGM_VAR_MainMissionTitle";
     publicVariable "TRGM_VAR_iMissionParamType";
     publicVariable "TRGM_VAR_iMissionParamObjective";

@@ -1,0 +1,53 @@
+{
+    "sqflint.descriptionFiles": [
+        "functions.hpp",
+        "dialogs.hpp",
+        "defines.hpp",
+        "cfgDebriefing.hpp",
+        "cfgSounds.hpp",
+        "cfgMusic.hpp",
+        "cfgRadio.hpp",
+    ],
+    "sqflint.exclude": [
+        ".vscode",
+        ".github",
+        ".git",
+        "Tools",
+        "Pbo-Tools",
+        "Mission-Templates",
+        "mission.sqm",
+    ],
+    "sqflint.ignoredVariables": [
+        "_fnc_scriptName",
+        "_fnc_scriptNameParent",
+    ],
+    "sqflint.checkPaths": true,
+    "sqflint.contextSeparation": true,
+    "sqflint.indexWorkspace": true,
+    "sqflint.indexWorkspaceTwice": true,
+    "sqflint.discoverDescriptionFiles": true,
+    "sqflint.includePrefixes": {},
+    "sqflint.warnings": false,
+    "sqf.enableCBA": true,
+    "sqf.enableACE3": true,
+    "sqf.maxNumberOfProblems": 10000,
+    "[ext]": {
+      "editor.formatOnPaste": true,
+      "editor.quickSuggestions": true,
+      "editor.tabSize": 4,
+      "editor.insertSpaces": true,
+      "editor.detectIndentation": true,
+      "editor.trimAutoWhitespace": true,
+      "editor.autoClosingBrackets": "always"
+    },
+    "[sqf]": {
+      "editor.codeActionsOnSave": { "source.fixAll": true, "source.organizeImports": true },
+      "editor.quickSuggestions": true,
+      "editor.tabSize": 4,
+      "editor.insertSpaces": true,
+      "editor.detectIndentation": true,
+      "editor.trimAutoWhitespace": true,
+      "editor.autoClosingBrackets": "always",
+      "editor.defaultFormatter": "Smith.sqf-formatter"
+    },
+}

@@ -258,9 +258,6 @@ class MISSIONS {
         class bugRadioMission {
             file = "RandFramework\Missions\bugRadioMission.sqf";
         };
-        class customMissionBasicCacheSample {
-            file = "RandFramework\Missions\customMissionBasicCacheSample.sqf";
-        };
         class defuseIEDsMission {
             file = "RandFramework\Missions\defuseIEDsMission.sqf";
         };
