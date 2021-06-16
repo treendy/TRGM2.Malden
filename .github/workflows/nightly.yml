@@ -1,0 +1,101 @@
+name: Nighlty Publish
+
+on:
+  push:
+    branches: [ refactor ]
+  schedule:
+    - cron: '0 2 * * *' # run at 2 AM UTC
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  nightly:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      - name: Copy mission files to templates
+        run: |
+          $mainFolder = "$($Env:GITHUB_WORKSPACE)"
+          $templateFolder = "$($Env:GITHUB_WORKSPACE)\Mission-Templates"
+          $unwantedFoldersAndFiles = @("mission.sqm", ".vscode", ".github", ".git", ".gitignore", "Mission-Templates", "Pbo-Tools")
+          $mainFiles = Get-ChildItem -Path "$mainFolder" | Where-Object { $_.Name -notin $unwantedFoldersAndFiles }
+          $missionFolders = Get-ChildItem -Path "$templateFolder" -Directory
+          if ($missionFolders.Count -gt 0)
+          {
+              ForEach ($folder in $missionFolders)
+              {
+                  Write-Output "-----------------------------------------------------"
+                  Write-Output "Mission Folder: $folder"
+                  Write-Output "-----------------------------------------------------"
+                  ForEach ($file in $mainFiles)
+                  {
+                      Try
+                      {
+                          Copy-Item -Path "$($file.Fullname)" -Destination "$folder\$($file.Name)" -Recurse -Force
+                          Write-Output "    $($file.Name) --> $folder\$($file.Name)"
+                      }
+                      Catch
+                      {
+                          $ErrorMessage = $_ | Out-String
+                          Write-Output "The following error occured while copying files for $($file.Name) from Main Mission to Template Mission:"
+                          Write-Output $ErrorMessage
+                      }
+                  }
+                  Write-Output "-----------------------------------------------------"
+              }
+          }
+        shell: pwsh
+
+      - name: Install Mikero Tools
+        run: |
+          $PboTools = "$($Env:GITHUB_WORKSPACE)\Pbo-Tools\"
+          Get-ChildItem "$PboTools" | ForEach-Object {
+            echo "Installing $_"
+            Start-Process -Wait $_.FullName "/S"
+          }
+          echo "Updating environment variables"
+          echo "C:\Program Files (x86)\Mikero\DePboTools\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        shell: pwsh
+
+      - name: Pack mission files to PBOs
+        run: |
+          Get-Command makepbo
+          $templateFolder = "$($Env:GITHUB_WORKSPACE)\Mission-Templates"
+          $missionFolders = Get-ChildItem -Path "$templateFolder" -Directory
+          New-Item -Path "$($Env:GITHUB_WORKSPACE)\Publish\" -ItemType Directory
+          if ($missionFolders.Count -gt 0)
+          {
+              ForEach ($folder in $missionFolders)
+              {
+                  Try
+                  {
+                    makepbo -P -B -A -X="none" "$folder"
+                    Copy-Item -Path "$folder.pbo" -Destination "$($Env:GITHUB_WORKSPACE)\Publish\$($folder.Name).pbo"
+                  }
+                  Catch
+                  {
+                      $ErrorMessage = $_ | Out-String
+                      Write-Output "The following error occured while packing $($folder.Name):"
+                      Write-Output $ErrorMessage
+                  }
+              }
+              Compress-Archive -Path "$($Env:GITHUB_WORKSPACE)\Publish\*.*" -DestinationPath "$($Env:GITHUB_WORKSPACE)\TRGM-Redux-Nightly.zip"
+          }
+        shell: pwsh
+
+      - name: Deploy Nighlty Release
+        uses: WebFreak001/deploy-nightly@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: https://uploads.github.com/repos/theace0296/TRGM2.Malden/releases/44676339/assets{?name,label}
+          release_id: 44676339
+          asset_path: ./TRGM-Redux-Nightly.zip
+          asset_name: TRGM-Redux-Nightly-$$.zip
+          asset_content_type: application/zip
+          max_releases: 1
