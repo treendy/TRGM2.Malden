@@ -5,6 +5,9 @@
 
 _mainObjPos = ObjectivePossitions select 0;
 
+if (count ObjectivePossitions > 1 && selectRandom [true,true,false]) then {
+	[] execVM "RandFramework\AoToAoPatrol.sqf";
+};
 
 {systemChat "Mission Events: Comms 10";} remoteExec ["bis_fnc_call", 0];
 
@@ -135,8 +138,15 @@ else {
 	};	
 
 {systemChat "Loading Events : 14";} remoteExec ["bis_fnc_call", 0];
-	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos,1900,false,false,nil, true] execVM "RandFramework\setTargetEvent.sqf";
+	if (selectRandom ChanceOfOccurance || !isNil("ForceCacheTargetEventLoc")) then {
+		if (!isNil("ForceCacheTargetEventLoc")) then {
+			[ForceCacheTargetEventLoc,100,false,false,nil,true,false,true] execVM "RandFramework\setTargetEvent.sqf";
+		}
+		else {
+			[_mainObjPos,1900,false,false,nil, true] execVM "RandFramework\setTargetEvent.sqf";
+		};
+
+		
 		sleep 1;
 	};	
 
@@ -179,9 +189,14 @@ else {
 		sleep 1;
 	};
 {systemChat "Loading Events : 8";} remoteExec ["bis_fnc_call", 0];
-	if (selectRandom ChanceOfOccurance) then {
+	if (selectRandom ChanceOfOccurance || !isNil("ForceDownedChopperEventLoc")) then {
 	//if (true) then {
-		[_mainObjPos] execVM "RandFramework\setDownedChopperEvent.sqf";
+		if (!isNil("ForceDownedChopperEventLoc")) then {
+			[ForceDownedChopperEventLoc,false,ForceDownedChopperEventLoc] execVM "RandFramework\setDownedChopperEvent.sqf";
+		}
+		else {
+			[_mainObjPos] execVM "RandFramework\setDownedChopperEvent.sqf";
+		};
 		sleep 1;
 	};		
 {systemChat "Loading Events : 7";} remoteExec ["bis_fnc_call", 0];

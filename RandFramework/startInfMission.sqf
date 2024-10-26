@@ -775,6 +775,17 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									_objInformant setVariable [_sInformant1Name, _objInformant, true];
 									_objInformant setVariable [_sInformant1Name, _objInformant, true];
 									_objInformant setVariable ["taskIndex",_iTaskIndex, true];
+
+									if (!isNil("ObjPeople")) then { //_iTaskIndex										
+										if (_iTaskIndex < count ObjPeople) then {
+											_objPeopleName = ObjPeople select _iTaskIndex;
+											_objPeopleName = _objPeopleName splitString "_" joinString " "; 
+											//_objPeopleName = _objPeopleName splitString "_" joinString " "; 
+											[_objInformant, "", "", -1, _objPeopleName] call BIS_fnc_setIdentity;
+											_objInformant setName _objPeopleName;											
+										};
+									};
+
 									missionNamespace setVariable [_sInformant1Name, _objInformant];
 									sleep 0.2;
 									_MissionTitle = _MissionTitle + ": " + name _objInformant;

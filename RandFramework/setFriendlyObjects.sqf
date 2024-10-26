@@ -36,7 +36,7 @@ if (_MergedLoudoutData != "") then {
 					};
 					if (!(_name in _tempAddedObjects)) then {
 						_tempAddedObjects pushBack _name;
-						switch (_name) do {
+						switch (_name) do {							
 							case "AirSupport1" : {			
 								_pos = getPosATL airSup1;
 								_dir = getDir airSup1;
@@ -101,6 +101,7 @@ if (_MergedLoudoutData != "") then {
 								medTruck allowDamage false;
 								medTruck setPos (_pos vectorAdd [0,0,0.1]);
 								MedicalTruck = _object;
+								medTruck setVariable ["ace_medical_isMedicalFacility", true, true];
 							};
 							case "MedicalChopper" : {			
 								_pos = getPosATL mediChop1;
@@ -111,6 +112,7 @@ if (_MergedLoudoutData != "") then {
 								mediChop1 setDir _dir;
 								mediChop1 allowDamage false;
 								mediChop1 setPos (_pos vectorAdd [0,0,0.1]);
+								mediChop1 setVariable ["ace_medical_isMedicalFacility", true, true];
 							};
 							case "LargeTransportChopper" : {			
 								_pos = getPosATL chin1;
@@ -282,6 +284,10 @@ if (_MergedLoudoutData != "") then {
 							};
 							case "FriendlyChopper" : {
 								FriendlyChopper = _object;
+							};
+							case "ObjPeople" : {
+								ObjPeople = _object;
+								publicVariable "ObjPeople";
 							};
 							
 						};

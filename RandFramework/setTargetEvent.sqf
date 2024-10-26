@@ -1,5 +1,5 @@
 
-params ["_posOfAO",["_roadRange",2000],["_showMarker",false],["_forceTrap",false],["_objTarget",nil],["_isCache",false],["_isMainTask",false]];
+params ["_posOfAO",["_roadRange",2000],["_showMarker",false],["_forceTrap",false],["_objTarget",nil],["_isCache",false],["_isMainTask",false],["_isForcedPos",false]];
 
 _ieds = CivCars;
 
@@ -184,6 +184,7 @@ if (_isCache) then {
 		_infBuilding = selectRandom _buildings;
 		_eventLocationPos = getPos _infBuilding;
 		_farEnoughFromAo = _eventLocationPos distance _posOfAO > 500;
+		if (_isForcedPos) then {_farEnoughFromAo = true};
 		_farEnoughFromWarzone = true;
 		if (!isNil "WarzonePos") then {_farEnoughFromWarzone = (_eventLocationPos distance WarzonePos > 500)};
 		if (_isMainTask || (_farEnoughFromWarzone && _farEnoughFromAo)) then {_eventPosFound = true;};		
@@ -199,7 +200,7 @@ if (_isCache) then {
 	_inf1X = position _infBuilding select 0;
 	_inf1Y = position _infBuilding select 1;
 
-	if (count _allBuildingPos > 2) then {
+	if (count _allBuildingPos > 2 || _isForcedPos) then {
 		_objectiveCreated = true;
 		_mainVeh = nil;
 		if (isNil "_objTarget") then {
