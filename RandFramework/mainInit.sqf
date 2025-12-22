@@ -1,4 +1,5 @@
 #include "..\CustomMission\TRGMSetDefaultMissionSetupVars.sqf";
+#include "..\CustomMission\TRGMAISkillSettings.sqf";
 #include "..\setUnitGlobalVars.sqf";
 
 //call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetDefaultUnitGlobalVars.sqf";
@@ -870,22 +871,14 @@ if (isServer) then {
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.01];
-					_x setskill ["aimingShake",0.01];
-					_x setskill ["aimingSpeed",0.01];
-					_x setskill ["spotDistance",0.01];
-					_x setskill ["spotTime",0.01];
+					[_x, TRGM_AI_Skill_SandstormSevere] call TRGM_fnc_applyAISkills;
 				};
 			} forEach allUnits;
 			sleep SandStormTimer;
 			//reset enemy skill
 			{
 				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.15];
-					_x setskill ["aimingShake",0.1];
-					_x setskill ["aimingSpeed",0.2];
-					_x setskill ["spotDistance",0.5];
-					_x setskill ["spotTime",0.5];
+					[_x, TRGM_AI_Skill_SandstormRecovery] call TRGM_fnc_applyAISkills;
 				};
 			} forEach allUnits;
 		};
@@ -900,22 +893,14 @@ if (isServer) then {
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.01];
-					_x setskill ["aimingShake",0.01];
-					_x setskill ["aimingSpeed",0.01];
-					_x setskill ["spotDistance",0.01];
-					_x setskill ["spotTime",0.01];
+					[_x, TRGM_AI_Skill_SandstormSevere] call TRGM_fnc_applyAISkills;
 				};
 			} forEach allUnits;
 			sleep SandStormTimer;
 			//reset enemy skill
 			{
 				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.15];
-					_x setskill ["aimingShake",0.1];
-					_x setskill ["aimingSpeed",0.2];
-					_x setskill ["spotDistance",0.5];
-					_x setskill ["spotTime",0.5];
+					[_x, TRGM_AI_Skill_SandstormRecovery] call TRGM_fnc_applyAISkills;
 				};
 			} forEach allUnits;
 		};
@@ -927,22 +912,14 @@ if (isServer) then {
 			//Set enemy skill
 			{
 				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.01];
-					_x setskill ["aimingShake",0.01];
-					_x setskill ["aimingSpeed",0.01];
-					_x setskill ["spotDistance",0.01];
-					_x setskill ["spotTime",0.01];
+					[_x, TRGM_AI_Skill_SandstormSevere] call TRGM_fnc_applyAISkills;
 				};
 			} forEach allUnits;
 			sleep 18030;
 			//reset enemy skill
 			{
 				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.15];
-					_x setskill ["aimingShake",0.1];
-					_x setskill ["aimingSpeed",0.2];
-					_x setskill ["spotDistance",0.5];
-					_x setskill ["spotTime",0.5];
+					[_x, TRGM_AI_Skill_SandstormRecovery] call TRGM_fnc_applyAISkills;
 				};
 			} forEach allUnits;
 			//reset enemy skill

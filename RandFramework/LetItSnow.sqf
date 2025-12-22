@@ -20,16 +20,7 @@ if (bIsSnow) then {
 		
 		{
 			if ((side _x) == EnemySide) then {
-				//_x setSkill ["general",1];
-				_x setSkill ["aimingAccuracy",0.1];
-				_x setSkill ["aimingShake",0.2];
-				_x setSkill ["aimingSpeed",0.4];
-				_x setSkill ["endurance",0.1];
-				_x setSkill ["spotDistance",0.1];
-				_x setSkill ["spotTime",0.1];
-				_x setSkill ["courage",1];
-				_x setSkill ["reloadspeed",0.1];
-				_x setSkill ["commanding",0.5];
+				[_x, TRGM_AI_Skill_AdverseWeather] call TRGM_fnc_applyAISkills;
 			};
 		} forEach allUnits;
 		

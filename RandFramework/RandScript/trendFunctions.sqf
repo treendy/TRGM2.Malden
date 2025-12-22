@@ -441,18 +441,7 @@ TREND_fnc_PopulateSideMission = {
 						_flatPos = [_sidePos , 10, 200, 4, 0, 0.5, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 						_AAAGroup = createGroup _InsurgentSide;
 						[_flatPos,  (floor random 300), sAAAVehToUse, _AAAGroup] call bis_fnc_spawnvehicle;
-						{
-							_x setskill ["aimingAccuracy",1];
-							_x setskill ["aimingShake",1];
-							_x setskill ["aimingSpeed",1];
-							_x setskill ["spotDistance",1];
-							_x setskill ["spotTime",0.7];
-							_x setskill ["courage",1];
-							_x setskill ["commanding",0.9];
-							_x setskill ["general",1];
-							_x setskill ["endurance",1.0];
-							_x setskill ["reloadSpeed",0.5];
-						} forEach units _AAAGroup;
+						[_AAAGroup, TRGM_AI_Skill_AAA] call TRGM_fnc_applyAISkillsToGroup;
 					};
 				};
 			};
