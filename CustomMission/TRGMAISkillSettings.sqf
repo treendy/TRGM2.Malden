@@ -159,17 +159,44 @@ if (isServer) then {
 	TRGM_fnc_applyAISkills = {
 		params ["_unit", "_skillProfile"];
 		
+		// Validate parameters
 		if (isNil "_unit" || isNil "_skillProfile") exitWith {
-			diag_log "TRGM AI Skills: Invalid parameters";
+			diag_log "TRGM AI Skills: Invalid parameters - unit or skillProfile is nil";
+			false
+		};
+		
+		if (typeName _unit != "OBJECT") exitWith {
+			diag_log format ["TRGM AI Skills: Invalid unit type: %1", typeName _unit];
+			false
+		};
+		
+		if (typeName _skillProfile != "ARRAY") exitWith {
+			diag_log format ["TRGM AI Skills: Invalid skillProfile type: %1", typeName _skillProfile];
+			false
 		};
 		
 		if (!alive _unit) exitWith {
 			diag_log "TRGM AI Skills: Unit is not alive";
+			false
 		};
 		
+		// Apply skills with error handling
 		{
-			_unit setSkill _x;
+			_skillName = _x select 0;
+			_skillValue = _x select 1;
+			
+			if (typeName _skillName == "STRING" && typeName _skillValue == "SCALAR") then {
+				if (_skillValue >= 0 && _skillValue <= 1) then {
+					_unit setSkill [_skillName, _skillValue];
+				} else {
+					diag_log format ["TRGM AI Skills: Skill value out of range (0-1): %1 = %2", _skillName, _skillValue];
+				};
+			} else {
+				diag_log format ["TRGM AI Skills: Invalid skill format: %1", _x];
+			};
 		} forEach _skillProfile;
+		
+		true
 	};
 	publicVariable "TRGM_fnc_applyAISkills";
 
@@ -179,13 +206,28 @@ if (isServer) then {
 	TRGM_fnc_applyAISkillsToGroup = {
 		params ["_group", "_skillProfile"];
 		
+		// Validate parameters
 		if (isNil "_group" || isNil "_skillProfile") exitWith {
-			diag_log "TRGM AI Skills: Invalid parameters for group";
+			diag_log "TRGM AI Skills: Invalid parameters for group - group or skillProfile is nil";
+			false
 		};
 		
+		if (typeName _group != "GROUP") exitWith {
+			diag_log format ["TRGM AI Skills: Invalid group type: %1", typeName _group];
+			false
+		};
+		
+		if (typeName _skillProfile != "ARRAY") exitWith {
+			diag_log format ["TRGM AI Skills: Invalid skillProfile type for group: %1", typeName _skillProfile];
+			false
+		};
+		
+		// Apply to all units in group
 		{
 			[_x, _skillProfile] call TRGM_fnc_applyAISkills;
 		} forEach units _group;
+		
+		true
 	};
 	publicVariable "TRGM_fnc_applyAISkillsToGroup";
 
