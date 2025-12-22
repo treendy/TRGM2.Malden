@@ -182,17 +182,18 @@ if (isServer) then {
 		
 		// Apply skills with error handling
 		{
-			_skillName = _x select 0;
-			_skillValue = _x select 1;
-			
-			if (typeName _skillName == "STRING" && typeName _skillValue == "SCALAR") then {
-				if (_skillValue >= 0 && _skillValue <= 1) then {
-					_unit setSkill [_skillName, _skillValue];
-				} else {
-					diag_log format ["TRGM AI Skills: Skill value out of range (0-1): %1 = %2", _skillName, _skillValue];
-				};
+			if (!(_x params ["_skillName", "_skillValue"])) then {
+				diag_log format ["TRGM AI Skills: Invalid skill entry format: %1", _x];
 			} else {
-				diag_log format ["TRGM AI Skills: Invalid skill format: %1", _x];
+				if (typeName _skillName == "STRING" && typeName _skillValue == "SCALAR") then {
+					if (_skillValue >= 0 && _skillValue <= 1) then {
+						_unit setSkill [_skillName, _skillValue];
+					} else {
+						diag_log format ["TRGM AI Skills: Skill value out of range (0-1): %1 = %2", _skillName, _skillValue];
+					};
+				} else {
+					diag_log format ["TRGM AI Skills: Invalid skill types - name: %1, value: %2", typeName _skillName, typeName _skillValue];
+				};
 			};
 		} forEach _skillProfile;
 		
