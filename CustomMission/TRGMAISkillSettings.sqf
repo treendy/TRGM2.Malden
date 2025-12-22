@@ -115,6 +115,44 @@ if (isServer) then {
 	];
 	publicVariable "TRGM_AI_Skill_AdverseWeather";
 
+	// SANDSTORM SEVERE CONDITIONS
+	// Used for: AI during severe sandstorm with near-zero visibility
+	TRGM_AI_Skill_SandstormSevere = [
+		["aimingAccuracy", 0.01],
+		["aimingShake", 0.01],
+		["aimingSpeed", 0.01],
+		["spotDistance", 0.01],
+		["spotTime", 0.01]
+	];
+	publicVariable "TRGM_AI_Skill_SandstormSevere";
+
+	// SANDSTORM RECOVERY
+	// Used for: AI skill restoration after sandstorm subsides
+	TRGM_AI_Skill_SandstormRecovery = [
+		["aimingAccuracy", 0.15],
+		["aimingShake", 0.1],
+		["aimingSpeed", 0.2],
+		["spotDistance", 0.5],
+		["spotTime", 0.5]
+	];
+	publicVariable "TRGM_AI_Skill_SandstormRecovery";
+
+	// AAA CREW (Anti-Aircraft Artillery)
+	// Used for: AAA vehicle crews who need excellent spotting and accuracy
+	TRGM_AI_Skill_AAA = [
+		["general", 1],
+		["aimingAccuracy", 1],
+		["aimingShake", 1],
+		["aimingSpeed", 1],
+		["spotDistance", 1],
+		["spotTime", 0.7],
+		["courage", 1],
+		["commanding", 0.9],
+		["endurance", 1.0],
+		["reloadSpeed", 0.5]
+	];
+	publicVariable "TRGM_AI_Skill_AAA";
+
 	// Function to apply AI skills to a unit
 	// Usage: [unit, skillProfile] call TRGM_fnc_applyAISkills
 	// Example: [enemyUnit, TRGM_AI_Skill_Veteran] call TRGM_fnc_applyAISkills
