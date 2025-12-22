@@ -1,4 +1,5 @@
 #include "..\CustomMission\TRGMSetDefaultMissionSetupVars.sqf";
+#include "..\CustomMission\TRGMAISkillSettings.sqf";
 #include "..\setUnitGlobalVars.sqf";
 
 //call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetDefaultUnitGlobalVars.sqf";

@@ -85,73 +85,26 @@ _nul = [EAST, "spawnMrk", "LZMrk", 2, true, true, true, true, false] spawn TAG_f
 		player globalChat format ["Cargo Group: %1", _infGrp];
 	};
 
-	//Set the infantry groups skill levels
+	//Set the infantry groups skill levels using centralized AI skill configuration
 	switch (_skill) do 
 	{   case 1 : 
 		{
-			{
-				_x setSkill ["general",1];
-				_x setSkill ["aimingAccuracy",0.2];
-				_x setSkill ["aimingShake",0.2];
-				_x setSkill ["aimingSpeed",0.7];
-				_x setSkill ["endurance",0.1];
-				_x setSkill ["spotDistance",0.1];
-				_x setSkill ["spotTime",0.1];
-				_x setSkill ["courage",1];
-				_x setSkill ["reloadspeed",0.1];
-				_x setSkill ["commanding",0.5];
-			} forEach units _infGrp;
-	
+			[_infGrp, TRGM_AI_Skill_Militia] call TRGM_fnc_applyAISkillsToGroup;
 		};
 	
 		case 2 : 
 		{
-			{
-				_x setSkill ["general",1];
-				_x setSkill ["aimingAccuracy",0.3];
-				_x setSkill ["aimingShake",0.3];
-				_x setSkill ["aimingSpeed",0.7];
-				_x setSkill ["endurance",0.2];
-				_x setSkill ["spotDistance",0.2];
-				_x setSkill ["spotTime",0.2];
-				_x setSkill ["courage",1];
-				_x setSkill ["reloadspeed",0.2];
-				_x setSkill ["commanding",0.75];
-			} forEach units _infGrp;
-	
+			[_infGrp, TRGM_AI_Skill_Regular] call TRGM_fnc_applyAISkillsToGroup;
 		};
 	
 		case 3 : 
 		{
-			{
-				_x setSkill ["general",1];
-				_x setSkill ["aimingAccuracy",0.3];
-				_x setSkill ["aimingShake",0.4];
-				_x setSkill ["aimingSpeed",1];
-				_x setSkill ["endurance",0.5];
-				_x setSkill ["spotDistance",0.3];
-				_x setSkill ["spotTime",0.3];
-				_x setSkill ["courage",1];
-				_x setSkill ["reloadspeed",0.75];
-				_x setSkill ["commanding",1];
-			} forEach units _infGrp;
-	
+			[_infGrp, TRGM_AI_Skill_Veteran] call TRGM_fnc_applyAISkillsToGroup;
 		};
 	
 		case 4 : 
 		{
-			{
-				_x setSkill ["general",1];
-				_x setSkill ["aimingAccuracy",0.4];
-				_x setSkill ["aimingShake",0.5];
-				_x setSkill ["aimingSpeed",1];
-				_x setSkill ["endurance",0.5];
-				_x setSkill ["spotDistance",0.5];
-				_x setSkill ["spotTime",0.5];
-				_x setSkill ["courage",1];
-				_x setSkill ["reloadspeed",1];
-				_x setSkill ["commanding",1];
-			} forEach units _infGrp;
+			[_infGrp, TRGM_AI_Skill_Elite] call TRGM_fnc_applyAISkillsToGroup;
 		};
 	};
 

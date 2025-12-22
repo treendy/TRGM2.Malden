@@ -1,0 +1,154 @@
+/*
+	TRGM AI Skill Configuration System
+	
+	This file contains centralized AI skill settings for different agent types.
+	Modify these values to adjust AI behavior across the mission.
+	
+	Skill values range from 0 to 1:
+	- aimingAccuracy: How accurate AI aiming is
+	- aimingShake: How much the AI's aim shakes
+	- aimingSpeed: How quickly AI aims
+	- spotDistance: How far AI can spot enemies
+	- spotTime: How quickly AI spots enemies
+	- courage: AI's tendency to stay in combat vs retreat
+	- reloadSpeed: How quickly AI reloads
+	- commanding: AI's effectiveness as a leader
+	- general: Overall AI effectiveness
+	- endurance: AI's stamina and fatigue resistance
+*/
+
+// Define global AI skill configurations
+if (isServer) then {
+
+	// MILITIA/LOW SKILL AGENTS (Skill Level 1)
+	// Used for: Basic militia, low-threat enemies
+	TRGM_AI_Skill_Militia = [
+		["general", 1],
+		["aimingAccuracy", 0.2],
+		["aimingShake", 0.2],
+		["aimingSpeed", 0.7],
+		["endurance", 0.1],
+		["spotDistance", 0.1],
+		["spotTime", 0.1],
+		["courage", 1],
+		["reloadSpeed", 0.1],
+		["commanding", 0.5]
+	];
+	publicVariable "TRGM_AI_Skill_Militia";
+
+	// REGULAR FORCES (Skill Level 2)
+	// Used for: Standard enemy reinforcements
+	TRGM_AI_Skill_Regular = [
+		["general", 1],
+		["aimingAccuracy", 0.3],
+		["aimingShake", 0.3],
+		["aimingSpeed", 0.7],
+		["endurance", 0.2],
+		["spotDistance", 0.2],
+		["spotTime", 0.2],
+		["courage", 1],
+		["reloadSpeed", 0.2],
+		["commanding", 0.75]
+	];
+	publicVariable "TRGM_AI_Skill_Regular";
+
+	// VETERAN FORCES (Skill Level 3)
+	// Used for: Experienced enemy units
+	TRGM_AI_Skill_Veteran = [
+		["general", 1],
+		["aimingAccuracy", 0.3],
+		["aimingShake", 0.4],
+		["aimingSpeed", 1],
+		["endurance", 0.5],
+		["spotDistance", 0.3],
+		["spotTime", 0.3],
+		["courage", 1],
+		["reloadSpeed", 0.75],
+		["commanding", 1]
+	];
+	publicVariable "TRGM_AI_Skill_Veteran";
+
+	// ELITE FORCES (Skill Level 4)
+	// Used for: Elite enemy units, special forces
+	TRGM_AI_Skill_Elite = [
+		["general", 1],
+		["aimingAccuracy", 0.4],
+		["aimingShake", 0.5],
+		["aimingSpeed", 1],
+		["endurance", 0.5],
+		["spotDistance", 0.5],
+		["spotTime", 0.5],
+		["courage", 1],
+		["reloadSpeed", 1],
+		["commanding", 1]
+	];
+	publicVariable "TRGM_AI_Skill_Elite";
+
+	// SNIPER SPECIALIST
+	// Used for: Enemy snipers
+	TRGM_AI_Skill_Sniper = [
+		["general", 1],
+		["aimingAccuracy", 0.8],
+		["aimingShake", 0.2],
+		["aimingSpeed", 0.2],
+		["spotDistance", 1],
+		["spotTime", 1],
+		["courage", 1],
+		["reloadSpeed", 0.5],
+		["commanding", 1],
+		["endurance", 1]
+	];
+	publicVariable "TRGM_AI_Skill_Sniper";
+
+	// ADVERSE WEATHER CONDITIONS (Snow/Sandstorm)
+	// Used for: AI operating in harsh weather conditions
+	TRGM_AI_Skill_AdverseWeather = [
+		["aimingAccuracy", 0.1],
+		["aimingShake", 0.2],
+		["aimingSpeed", 0.4],
+		["endurance", 0.1],
+		["spotDistance", 0.1],
+		["spotTime", 0.1],
+		["courage", 1],
+		["reloadSpeed", 0.1],
+		["commanding", 0.5]
+	];
+	publicVariable "TRGM_AI_Skill_AdverseWeather";
+
+	// Function to apply AI skills to a unit
+	// Usage: [unit, skillProfile] call TRGM_fnc_applyAISkills
+	// Example: [enemyUnit, TRGM_AI_Skill_Veteran] call TRGM_fnc_applyAISkills
+	TRGM_fnc_applyAISkills = {
+		params ["_unit", "_skillProfile"];
+		
+		if (isNil "_unit" || isNil "_skillProfile") exitWith {
+			diag_log "TRGM AI Skills: Invalid parameters";
+		};
+		
+		if (!alive _unit) exitWith {
+			diag_log "TRGM AI Skills: Unit is not alive";
+		};
+		
+		{
+			_unit setSkill _x;
+		} forEach _skillProfile;
+	};
+	publicVariable "TRGM_fnc_applyAISkills";
+
+	// Function to apply skills to all units in a group
+	// Usage: [group, skillProfile] call TRGM_fnc_applyAISkillsToGroup
+	// Example: [enemyGroup, TRGM_AI_Skill_Regular] call TRGM_fnc_applyAISkillsToGroup
+	TRGM_fnc_applyAISkillsToGroup = {
+		params ["_group", "_skillProfile"];
+		
+		if (isNil "_group" || isNil "_skillProfile") exitWith {
+			diag_log "TRGM AI Skills: Invalid parameters for group";
+		};
+		
+		{
+			[_x, _skillProfile] call TRGM_fnc_applyAISkills;
+		} forEach units _group;
+	};
+	publicVariable "TRGM_fnc_applyAISkillsToGroup";
+
+};

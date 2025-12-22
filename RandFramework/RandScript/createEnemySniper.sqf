@@ -45,14 +45,7 @@ for "_i" from 1 to 20 do {
 		//player setDir _direction2;
 		if (_cansee > 0) then {
 			_foundPlace = true;
-			_spawnedUnit setskill ["aimingAccuracy",0.8];
-			_spawnedUnit setskill ["commanding",1];
-			_spawnedUnit setskill ["aimingShake",0.2];
-			_spawnedUnit setskill ["aimingSpeed",0.2];
-			_spawnedUnit setskill ["spotDistance",1];
-			_spawnedUnit setskill ["spotTime",1];
-			_spawnedUnit setskill ["endurance",1];
-			_spawnedUnit setskill ["general",1];
+			[_spawnedUnit, TRGM_AI_Skill_Sniper] call TRGM_fnc_applyAISkills;
 			group _spawnedUnit setCombatMode "RED";	
 			//[format["mrkSniper%1", time, str(getpos _spawnedUnit select 0)],  position _spawnedUnit, "ICON", "ColorGreen", [0.5,0.5], "SNIPER"] call AIS_Core_fnc_createLocalMarker;
 			SniperCount = SniperCount + 1;
