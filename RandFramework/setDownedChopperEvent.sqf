@@ -23,7 +23,7 @@ if (_iVictimType == 3) then {
 };
 
 
-params ["_mainObjPos",["_isFullMap",false]];
+params ["_mainObjPos",["_isFullMap",false],["_forcedPos",nil]];
 
 _bloodPools = ["BloodPool_01_Large_New_F","BloodSplatter_01_Large_New_F"];
 
@@ -39,6 +39,10 @@ if (!(isNil "IsTraining") || _isFullMap) then {
 		_thisDownedChopperCenter = getPos (selectRandom _nearestRoads);
 		_flatPos = [_thisDownedChopperCenter , 100, 2000, 1, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 	};
+};
+
+if (!(isNil "_forcedPos")) then {
+	_flatPos = _forcedPos;
 };
 
 
