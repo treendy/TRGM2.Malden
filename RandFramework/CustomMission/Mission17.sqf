@@ -51,6 +51,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		[_mainObjPos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,50] spawn TRGM_fnc_setCheckpoint;
 	};
 	
+	if (_flatPos select 0 == 0) then {_flatPos = _mainObjPos;}; //no flat area found, put the flag at the objective
 	//create flag and give its id
 	_flag = selectRandom EnemyFlags createVehicle _flatPos;
 	_flagName = format["ObjFlag%1",_iTaskIndex];

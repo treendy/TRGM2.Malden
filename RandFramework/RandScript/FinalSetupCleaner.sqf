@@ -21,7 +21,8 @@
 } forEach friendlySentryCheckpointPos;
 
 //check AO camp pos, any enemy units within 150meters, delete
-if (iStartLocation == 1) then {//move to ao camp
+params [["_bMovedToAO",false]];
+if (_bMovedToAO) then {//players were moved to the ao camp
 	{
 		if ((side _x == east)) then {
 			deleteVehicle _x;

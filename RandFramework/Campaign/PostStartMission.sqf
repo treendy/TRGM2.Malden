@@ -143,7 +143,7 @@ _isHiddenObj = false;
 
 		if (bDebugMode) then {["FinalCleanup"] remoteExec ["systemChat", 0];};
 		if (isServer) then {
-			call compile preprocessFileLineNumbers "RandFramework\RandScript\FinalSetupCleaner.sqf";
+			[_bMoveToAO] call compile preprocessFileLineNumbers "RandFramework\RandScript\FinalSetupCleaner.sqf";
 		};
 
 		sleep 2;

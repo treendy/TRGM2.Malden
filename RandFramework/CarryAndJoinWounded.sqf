@@ -42,7 +42,7 @@ if (alive _civ) then {
 					};
 				} forEach attachedObjects _player;
 			};
-			if (!(alive _civ)) then {
+			if (!(alive _civ) || attachedTo _civ != _player) then { //dead, dropped or loaded into a vehicle
 				_doLoop = false;
 			};
 

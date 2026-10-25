@@ -13,6 +13,9 @@ _nearestRoads = _posOfAO nearRoads _roadRange;
 if ((!(isNil "IsTraining") || _isFullMap) && _roadRange == 2000) then {
 	_nearestRoads = _posOfAO nearRoads 30000;		
 };
+if (count _nearestRoads == 0 && !isNil "_objIED") then {
+	_nearestRoads = _posOfAO nearRoads 1000; //a mission IED must be placed somewhere, or its objective can never be completed
+};
 
 if (count _nearestRoads > 0) then {	
 
@@ -24,6 +27,9 @@ if (count _nearestRoads > 0) then {
 			_eventLocationPos = getPos (selectRandom _nearestRoads);
 			if (_eventLocationPos distance WarzonePos > 500) then {_eventPosFound = true;};
 			_iAttemptLimit = _iAttemptLimit - 1;
+		};
+		if (!_eventPosFound && !isNil "_objIED") then {
+			_eventLocationPos = getPos (selectRandom _nearestRoads); //mission IED: near the warzone is better than [0,0,0]
 		};
 	}
 	else {
@@ -37,6 +43,9 @@ if (count _nearestRoads > 0) then {
 			_bIsTrap = true;
 		};
 		_roadInfo = [_eventLocationPos, 50, 5] call TRGM_fnc_findRoadWithDirection;
+		if (count _roadInfo == 0 && !isNil "_objIED") then {
+			_roadInfo = [(_eventLocationPos nearRoads 50) select 0, random 360]; //dead end road, still place the mission IED
+		};
 		if (count _roadInfo > 0) then {
 			_roadInfo params ["_nearestRoad","_direction"];
 

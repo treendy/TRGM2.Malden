@@ -196,7 +196,7 @@ _nul = [EAST, "spawnMrk", "LZMrk", 2, true, true, true, true, false] spawn TAG_f
 		_heloWp setWaypointSpeed "FULL";
 		if (_spawnMrk select 2 == 0) then {
 			//_heloWp setWaypointStatements ["true", "hint ""hmmmm""; {this spawn {unAssignVehicle _x; _x action [""eject"", vehicle _x]; sleep 0.5;} forEach crew vehicle _this;"}];
-			_heloWp setWaypointStatements ["true", "{unAssignVehicle _x; _x action [""eject"", vehicle _x]; sleep 0.5;} forEach crew vehicle this;"];
+			_heloWp setWaypointStatements ["true", "(crew vehicle this - units group this) spawn {{unAssignVehicle _x; _x action [""eject"", vehicle _x]; sleep 0.5;} forEach _this;};"]; //waypoint statements are unscheduled, so the sleep needs a spawn; the pilots stay in
 			//_heloWp setWaypointStatements ["true", "hint ""hmmmm""; {unAssignVehicle _x; _x action [""eject"", vehicle _x]; sleep 0.5;} forEach crew vehicle this;"];
 		}
 		else {

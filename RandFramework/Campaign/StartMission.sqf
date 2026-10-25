@@ -53,6 +53,7 @@ if (isServer && _isCampaign) then {
 			tracer4 setPos [99999,99999];
 
 			ATFieldPos = [];
+			publicVariable "ATFieldPos";
 
 			{
 				_y = _x;

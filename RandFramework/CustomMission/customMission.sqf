@@ -292,6 +292,7 @@ sleep 9;
 					sleep 20;
        			};
        			if (!alive(_this select 0)) then {_doLoop = false};
+       			sleep 1;
        		}
        		
 		};
@@ -309,6 +310,7 @@ sleep 9;
 					sleep 20;
        			};
        			if (!alive(_this select 0)) then {_doLoop = false};
+       			sleep 1;
        		}
 		};
 

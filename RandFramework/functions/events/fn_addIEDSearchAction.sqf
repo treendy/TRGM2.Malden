@@ -51,6 +51,7 @@ params ["_veh", "_bIsTrap", ["_IEDType", "CAR"]];
 						_thisVeh = _this select 0;
 						_thisPlayer = _this select 1;
 						_bIsTrap = (_this select 3) select 0;
+						if (_thisVeh getVariable ["isDefused",false]) exitWith {}; //someone else already dealt with it
 						if ((_thisPlayer getVariable ["UnitRole",""]) != "Engineer" && selectRandom[true,false,false,false]) then {
 							hint localize "STR_TRGM2_IEDOhOh";
 							sleep 1;
@@ -70,7 +71,7 @@ params ["_veh", "_bIsTrap", ["_IEDType", "CAR"]];
 						else {
 							_thisVeh setVariable ["isDefused",true, true];
 							[0.2, localize "STR_TRGM2_IEDDefused"] call TRGM_fnc_adjustMaxBadPoints;	
-							removeAllActions _thisVeh;
+							[_thisVeh] remoteExec ["removeAllActions", 0, _thisVeh];
 							[localize "STR_TRGM2_IEDDefused"] remoteExecCall ["Hint", 0];
 						}
 					},				// Code executed on completion
