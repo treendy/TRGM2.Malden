@@ -244,6 +244,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 				_progress = (_progress max _debugSetTo) min 100;
 				missionNamespace setVariable [_sDebugSetVar, -1];
 				missionNamespace setVariable [_progressVar, _progress, true];
+				[[_progress], {systemChat format["Mission Events: Comms uplink test hook moved the bar to %1%2", round (_this select 0), "%"];}] remoteExec ["bis_fnc_call", 0];
 			};
 
 			private _livingPlayers = (allPlayers - entities "HeadlessClient_F") select {alive _x};
