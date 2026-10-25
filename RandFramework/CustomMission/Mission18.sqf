@@ -98,9 +98,9 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	missionNamespace setVariable [format["CommsTowerDone%1",_iTaskIndex], false, true];
 
 	//activation action: added to every player (and JIP) like the "Call Transport" actions, with a distance check to the tower.
-	//(an action attached to the tower object itself did not show in the scroll menu for this tall tower)
+	//(flat distance is used: the tower's own position is high up the structure, so a 3D distance fails from the ground)
 	missionNamespace setVariable [format["CommsTowerObj%1",_iTaskIndex], _tower, true];
-	private _sShowCondition = format["!(missionNamespace getVariable ['CommsTowerActive%1', false]) && {!isNull (missionNamespace getVariable ['CommsTowerObj%1', objNull]) && {_this distance (missionNamespace getVariable ['CommsTowerObj%1', objNull]) < 10}}", _iTaskIndex];
+	private _sShowCondition = format["!(missionNamespace getVariable ['CommsTowerActive%1', false]) && {!isNull (missionNamespace getVariable ['CommsTowerObj%1', objNull]) && {_this distance2D (missionNamespace getVariable ['CommsTowerObj%1', objNull]) < 10}}", _iTaskIndex];
 	private _activateAction = [
 		localize "STR_TRGM2_CommsTowerActivate",
 		{
@@ -114,33 +114,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_sShowCondition
 	];
 	[_activateAction] remoteExec ["TRGM_fnc_addPlayerActionPersistent", 0, true];
-
-	//TEMPORARY TEST: the same hold action, attached to a small crate next to the tower (the way the IED actions are), to see whether the action only fails because the tower is big
-	private _testCrate = createVehicle ["B_supplyCrate_F", _tower getPos [5, random 360], [], 0, "CAN_COLLIDE"];
-	clearWeaponCargoGlobal _testCrate;
-	clearItemCargoGlobal _testCrate;
-	clearBackpackCargoGlobal _testCrate;
-	clearMagazineCargoGlobal _testCrate;
-	_testCrate allowDamage false;
-	[
-		_testCrate,										// Object the action is attached to
-		"Activate comms uplink (TEST crate)",				// Title of the action
-		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_hack_ca.paa",	// Idle icon shown on screen
-		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_hack_ca.paa",	// Progress icon shown on screen
-		format["_this distance _target < 10 && !(missionNamespace getVariable ['CommsTowerActive%1', false])", _iTaskIndex],	// Condition for the action to be shown
-		"_caller distance _target < 10",					// Condition for the action to progress
-		{},											// Code executed when action starts
-		{},											// Code executed on every progress tick
-		{
-			missionNamespace setVariable [format["CommsTowerActive%1", (_this select 3) select 0], true, true];
-		},											// Code executed on completion
-		{},											// Code executed on interrupted
-		[_iTaskIndex],									// Arguments passed to the scripts as _this select 3
-		6,												// Action duration [s]
-		100,											// Priority
-		true,											// Remove on completion
-		false											// Show in unconscious state
-	] remoteExec ["BIS_fnc_holdActionAdd", 0, _testCrate];	// MP compatible implementation
 
 	//setup message in the same style as the other "Mission Events" messages, so a tester can find the tower
 	[[mapGridPosition _towerPos], {systemChat format["Mission Events: Comms tower objective at grid %1", _this select 0];}] remoteExec ["bis_fnc_call", 0];
@@ -207,8 +180,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 				_failed = true;
 			}
 			else {
-				//only fills while a living player is within 10m of the tower
-				private _isPaused = count (_livingPlayers select {_x distance _tower < 10}) == 0;
+				//only fills while a living player is within 10m (on the ground) of the tower
+				private _isPaused = count (_livingPlayers select {_x distance2D _tower < 10}) == 0;
 				if (!_isPaused) then {
 					_progress = (_progress + (100 / _fullTimeSeconds)) min 100;
 					missionNamespace setVariable [_progressVar, _progress, true];
