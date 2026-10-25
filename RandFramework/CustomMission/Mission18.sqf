@@ -115,6 +115,33 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	];
 	[_activateAction] remoteExec ["TRGM_fnc_addPlayerActionPersistent", 0, true];
 
+	//TEMPORARY TEST: the same hold action, attached to a small crate next to the tower (the way the IED actions are), to see whether the action only fails because the tower is big
+	private _testCrate = createVehicle ["B_supplyCrate_F", _tower getPos [5, random 360], [], 0, "CAN_COLLIDE"];
+	clearWeaponCargoGlobal _testCrate;
+	clearItemCargoGlobal _testCrate;
+	clearBackpackCargoGlobal _testCrate;
+	clearMagazineCargoGlobal _testCrate;
+	_testCrate allowDamage false;
+	[
+		_testCrate,										// Object the action is attached to
+		"Activate comms uplink (TEST crate)",				// Title of the action
+		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_hack_ca.paa",	// Idle icon shown on screen
+		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_hack_ca.paa",	// Progress icon shown on screen
+		format["_this distance _target < 10 && !(missionNamespace getVariable ['CommsTowerActive%1', false])", _iTaskIndex],	// Condition for the action to be shown
+		"_caller distance _target < 10",					// Condition for the action to progress
+		{},											// Code executed when action starts
+		{},											// Code executed on every progress tick
+		{
+			missionNamespace setVariable [format["CommsTowerActive%1", (_this select 3) select 0], true, true];
+		},											// Code executed on completion
+		{},											// Code executed on interrupted
+		[_iTaskIndex],									// Arguments passed to the scripts as _this select 3
+		6,												// Action duration [s]
+		100,											// Priority
+		true,											// Remove on completion
+		false											// Show in unconscious state
+	] remoteExec ["BIS_fnc_holdActionAdd", 0, _testCrate];	// MP compatible implementation
+
 	//setup message in the same style as the other "Mission Events" messages, so a tester can find the tower
 	[[mapGridPosition _towerPos], {systemChat format["Mission Events: Comms tower objective at grid %1", _this select 0];}] remoteExec ["bis_fnc_call", 0];
 
