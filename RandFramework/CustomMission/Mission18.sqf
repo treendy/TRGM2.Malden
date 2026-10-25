@@ -1,7 +1,7 @@
 //These are only ever called by the server!
 
 //MISSION 18: Secure Comms Tower
-//A comms tower is spawned on high, flat, dry ground within about 350m of the AO building and becomes the centre of the AO. Players activate an uplink at it, then must keep at least one player within 10m of it until the progress bar reaches 100% (5 minutes).
+//A comms tower is spawned on high, flat, dry ground within about 200m of the AO building and becomes the centre of the AO. Players activate an uplink at it, then must keep at least one player within 10m of it until the progress bar reaches 100% (5 minutes).
 //The enemy is called to the tower as soon as the uplink starts. If all players die before 100% the mission fails.
 //Once the bar is full, friendly jets fly an airstrike pass past the tower (effect only).
 
@@ -41,7 +41,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	private _spawnTowerPos = [];
 	private _bestHeight = -100000;
 	for "_i" from 1 to 80 do {
-		private _candidate = _mainObjPos getPos [50 + random 300, random 360];
+		private _candidate = _mainObjPos getPos [40 + random 160, random 360];
 		private _isGood = !(surfaceIsWater _candidate)
 			&& {(getMarkerPos "mrkHQ") distance2D _candidate > BaseAreaRange}
 			&& {((surfaceNormal _candidate) select 2) > 0.97}
@@ -73,9 +73,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	if (isNil "ObjectiveCommsTowers") then {ObjectiveCommsTowers = [];};
 	ObjectiveCommsTowers pushBack _tower;
 
-	//make the tower the centre of the AO instead of the building the engine picked: the engine's own AO marker, patrols and sentries are all placed from _inf1X/_inf1Y (shared with the caller)
-	_inf1X = _towerPos select 0;
-	_inf1Y = _towerPos select 1;
+	//make the tower the centre of the AO instead of the building the engine picked: startInfMission.sqf reads this and uses it for the AO marker, patrols and sentries
+	missionNamespace setVariable [format["CustomMissionAoPos%1",_iTaskIndex], [_towerPos select 0, _towerPos select 1]];
 	private _oldAoPos = [_centralAO_x, _centralAO_y];
 	private _newAoPos = [_towerPos select 0, _towerPos select 1];
 	private _aoIndex = ObjectivePossitions find _oldAoPos;
@@ -139,7 +138,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	] remoteExec ["bis_fnc_call", 0, format["CommsTowerAction%1", _iTaskIndex]];
 
 	//setup message in the same style as the other "Mission Events" messages, so a tester can find the tower
-	[[mapGridPosition _towerPos], {systemChat format["Mission Events: Comms tower objective at grid %1", _this select 0];}] remoteExec ["bis_fnc_call", 0];
+	[[mapGridPosition _towerPos, round (_mainObjPos distance2D _towerPos)], {systemChat format["Mission Events: Comms tower objective at grid %1 (AO centred on it, %2m from the original AO building)", _this select 0, _this select 1];}] remoteExec ["bis_fnc_call", 0];
 
 	//trigger only exists so this mission stops running if the campaign day is reset (same cleanup flag the other missions use)
 	private _lifeTrigger = createTrigger ["EmptyDetector", [0,0]];

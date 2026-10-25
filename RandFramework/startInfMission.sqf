@@ -482,6 +482,13 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 								{systemChat "Mission Setup: 8-0-10";} remoteExec ["bis_fnc_call", 0];
 								if (_iThisTaskType == 99999 || _bNewTaskSetup) then {
 									[_MarkerType,_infBuilding,_inf1X,_inf1Y,_roadSearchRange, _bCreateTask, _iTaskIndex, _bIsMainObjective] call fnc_CustomMission;		
+									//a custom mission can move the AO centre (Secure Comms Tower centres it on the tower it spawns), so the marker, patrols and sentries follow it
+									_customAoPos = missionNamespace getVariable [format["CustomMissionAoPos%1",_iTaskIndex], []];
+									missionNamespace setVariable [format["CustomMissionAoPos%1",_iTaskIndex], []];
+									if (count _customAoPos == 2) then {
+										_inf1X = _customAoPos select 0;
+										_inf1Y = _customAoPos select 1;
+									};
 								};
 								//###################################### Hack Data ###################
 								{systemChat "Mission Setup: 8-0-9";} remoteExec ["bis_fnc_call", 0];
