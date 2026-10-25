@@ -97,23 +97,46 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	missionNamespace setVariable [format["CommsTowerPaused%1",_iTaskIndex], false, true];
 	missionNamespace setVariable [format["CommsTowerDone%1",_iTaskIndex], false, true];
 
-	//activation action: added to every player (and JIP) like the "Call Transport" actions, with a distance check to the tower.
-	//(flat distance is used: the tower's own position is high up the structure, so a 3D distance fails from the ground)
+	//activation hold action (same hold action as the IED actions, with the progress ring), added to every player and JIP player.
+	//It is attached to the player with a flat distance check to the tower: the tower's own position is high up the structure, and a tall object is awkward to aim an action at.
 	missionNamespace setVariable [format["CommsTowerObj%1",_iTaskIndex], _tower, true];
-	private _sShowCondition = format["!(missionNamespace getVariable ['CommsTowerActive%1', false]) && {!isNull (missionNamespace getVariable ['CommsTowerObj%1', objNull]) && {_this distance2D (missionNamespace getVariable ['CommsTowerObj%1', objNull]) < 10}}", _iTaskIndex];
-	private _activateAction = [
-		localize "STR_TRGM2_CommsTowerActivate",
-		{
-			missionNamespace setVariable [format["CommsTowerActive%1", (_this select 3) select 0], true, true];
-		},
+	[
 		[_iTaskIndex],
-		100,
-		true,
-		true,
-		"",
-		_sShowCondition
-	];
-	[_activateAction] remoteExec ["TRGM_fnc_addPlayerActionPersistent", 0, true];
+		{
+			params ["_iTaskIndex"];
+			if (!hasInterface) exitWith {};
+			[_iTaskIndex] spawn {
+				params ["_iTaskIndex"];
+				waitUntil {!isNull player};
+				private _sAddActionVar = format["CommsTowerAddAction%1", _iTaskIndex];
+				missionNamespace setVariable [_sAddActionVar, {
+					params ["_iTaskIndex"];
+					[
+						player,											// Object the action is attached to
+						localize "STR_TRGM2_CommsTowerActivate",				// Title of the action
+						"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_hack_ca.paa",	// Idle icon shown on screen
+						"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_hack_ca.paa",	// Progress icon shown on screen
+						format["!(missionNamespace getVariable ['CommsTowerActive%1', false]) && {!isNull (missionNamespace getVariable ['CommsTowerObj%1', objNull]) && {_this distance2D (missionNamespace getVariable ['CommsTowerObj%1', objNull]) < 10}}", _iTaskIndex],	// Condition for the action to be shown
+						format["_caller distance2D (missionNamespace getVariable ['CommsTowerObj%1', objNull]) < 10", _iTaskIndex],	// Condition for the action to progress
+						{},											// Code executed when action starts
+						{},											// Code executed on every progress tick
+						{
+							missionNamespace setVariable [format["CommsTowerActive%1", (_this select 3) select 0], true, true];
+						},											// Code executed on completion
+						{},											// Code executed on interrupted
+						[_iTaskIndex],									// Arguments passed to the scripts as _this select 3
+						6,												// Action duration [s]
+						100,											// Priority
+						false,											// Remove on completion
+						false											// Show in unconscious state
+					] call BIS_fnc_holdActionAdd;
+				}];
+				[_iTaskIndex] call (missionNamespace getVariable _sAddActionVar);
+				//a respawned player is a new unit, so add the action again
+				player addEventHandler ["Respawn", format["[%1] call %2;", _iTaskIndex, _sAddActionVar]];
+			};
+		}
+	] remoteExec ["bis_fnc_call", 0, format["CommsTowerAction%1", _iTaskIndex]];
 
 	//setup message in the same style as the other "Mission Events" messages, so a tester can find the tower
 	[[mapGridPosition _towerPos], {systemChat format["Mission Events: Comms tower objective at grid %1", _this select 0];}] remoteExec ["bis_fnc_call", 0];
