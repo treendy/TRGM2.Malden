@@ -38,7 +38,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	private _mainObjPos = getPos _objectiveMainBuilding;
 
 	//spawn the comms tower right next to the AO building the engine picked, so the AO is centred on the tower
-	private _spawnTowerPos = [_mainObjPos, 15, 80, 12, 0, 0.15, 0, [[getMarkerPos "mrkHQ", BaseAreaRange]] + CheckPointAreas + SentryAreas, [[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+	private _spawnTowerPos = [_mainObjPos, 15, 80, 12, 0, 0.15, 2, [[getMarkerPos "mrkHQ", BaseAreaRange]] + CheckPointAreas + SentryAreas, [[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 	if (_spawnTowerPos select 0 <= 0 || {surfaceIsWater _spawnTowerPos}) then {
 		_spawnTowerPos = _mainObjPos getPos [30, random 360];
 		if (surfaceIsWater _spawnTowerPos) then {_spawnTowerPos = _mainObjPos;};
@@ -77,26 +77,26 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	missionNamespace setVariable [format["CommsTowerPaused%1",_iTaskIndex], false, true];
 	missionNamespace setVariable [format["CommsTowerDone%1",_iTaskIndex], false, true];
 
-	//activation action on the tower (same hold action method as the IED search/defuse actions)
-	[
-		_tower,											// Object the action is attached to
-		localize "STR_TRGM2_CommsTowerActivate",				// Title of the action
-		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_hack_ca.paa",	// Idle icon shown on screen
-		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_hack_ca.paa",	// Progress icon shown on screen
-		format["_this distance _target < 10 && !(missionNamespace getVariable ['CommsTowerActive%1', false])", _iTaskIndex],	// Condition for the action to be shown
-		"_caller distance _target < 10",					// Condition for the action to progress
-		{},												// Code executed when action starts
-		{},												// Code executed on every progress tick
+	//activation action: added to every player (and JIP) like the "Call Transport" actions, with a distance check to the tower.
+	//(an action attached to the tower object itself did not show in the scroll menu for this tall tower)
+	missionNamespace setVariable [format["CommsTowerObj%1",_iTaskIndex], _tower, true];
+	private _sShowCondition = format["!(missionNamespace getVariable ['CommsTowerActive%1', false]) && {!isNull (missionNamespace getVariable ['CommsTowerObj%1', objNull]) && {_this distance (missionNamespace getVariable ['CommsTowerObj%1', objNull]) < 10}}", _iTaskIndex];
+	private _activateAction = [
+		localize "STR_TRGM2_CommsTowerActivate",
 		{
 			missionNamespace setVariable [format["CommsTowerActive%1", (_this select 3) select 0], true, true];
-		},												// Code executed on completion
-		{},												// Code executed on interrupted
-		[_iTaskIndex],									// Arguments passed to the scripts as _this select 3
-		6,												// Action duration [s]
-		100,											// Priority
-		true,											// Remove on completion
-		false											// Show in unconscious state
-	] remoteExec ["BIS_fnc_holdActionAdd", 0, _tower];	// MP compatible implementation
+		},
+		[_iTaskIndex],
+		100,
+		true,
+		true,
+		"",
+		_sShowCondition
+	];
+	[_activateAction] remoteExec ["TRGM_fnc_addPlayerActionPersistent", 0, true];
+
+	//setup message in the same style as the other "Mission Events" messages, so a tester can find the tower
+	[[mapGridPosition _towerPos], {systemChat format["Mission Events: Comms tower objective at grid %1", _this select 0];}] remoteExec ["bis_fnc_call", 0];
 
 	//trigger only exists so this mission stops running if the campaign day is reset (same cleanup flag the other missions use)
 	private _lifeTrigger = createTrigger ["EmptyDetector", [0,0]];
