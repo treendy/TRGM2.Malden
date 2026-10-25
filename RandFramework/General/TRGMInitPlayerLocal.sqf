@@ -185,7 +185,7 @@ TREND_fnc_InitPostStarted = {
 		[] execvm "RandFramework\InitCameraMan.sqf";
 	};
 
-	if (iMissionSetup == 5 && isMultiplayer && str player == "sl") then {
+	if (iMissionParamType == 5 && isMultiplayer && str player == "sl") then {
 			if (SaveType == 0) then {
 				laptop1 addaction [localize "STR_TRGM2_TRGMInitPlayerLocal_SaveLocal",{[1,true] execVM "RandFramework\Campaign\ServerSave.sqf";}];
 				laptop1 addaction [localize "STR_TRGM2_TRGMInitPlayerLocal_SaveGlobal",{[2,true] execVM "RandFramework\Campaign\ServerSave.sqf";}];

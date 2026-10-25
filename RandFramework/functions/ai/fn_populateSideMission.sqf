@@ -596,7 +596,7 @@ if (selectRandom [true,true,true,false] || _bThisMissionCivsOnly) then {
 if (_sideType == 1 && selectRandom[true,false]) then {
 
 	_nearestRoad = [[_inf1X,_inf1Y], 100, []] call BIS_fnc_nearestRoad;
-	if (!isNil "_nearestRoad") then {
+	if (!isNil "_nearestRoad" && {!isNull _nearestRoad}) then { //BIS_fnc_nearestRoad returns objNull when nothing is found
 		_roadConnectedTo = roadsConnectedTo _nearestRoad;
 		if (count _roadConnectedTo > 0) then {
 			selectRandom ATMinesClassNames createVehicle getPosATL _nearestRoad;

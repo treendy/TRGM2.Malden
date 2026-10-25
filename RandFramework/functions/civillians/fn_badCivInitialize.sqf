@@ -54,4 +54,4 @@ _thisCiv setVariable ["armament",_armament , true];
 
 [_thisCiv] spawn TRGM_fnc_badCivLoop;
 
-[_thisCiv] remoteExec ["TRGM_fnc_badCivAddSearchAction",[0, -2] select isMultiplayer,true];
+[_thisCiv] remoteExec ["TRGM_fnc_badCivAddSearchAction",0,true];

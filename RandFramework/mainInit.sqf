@@ -147,10 +147,7 @@ if (!isDedicated) then {
 	waitUntil {!isNull player};
 
 	TransferProviders = {
-		if !([] call TRGM_fnc_isCbaLoaded) then {
-			[[chopper1]] call TRGM_fnc_addTransportActions;
-		};
-
+		//(the transport call action is re-added on respawn by TRGM_fnc_addPlayerActionPersistent)
 		_oldUnit = _this select 0;
 		_oldProviders = _oldUnit getVariable ["BIS_SUPP_allProviderModules",[]];
 		_HQ = _oldUnit getVariable ["BIS_SUPP_HQ",nil];
@@ -204,9 +201,11 @@ if (!isMultiplayer) then {
 	};
 };
 
-_isAdmin = (!isMultiplayer || isMultiplayer && !isDedicated && isServer || isMultiplayer && !isServer && (call BIS_fnc_admin) != 0);
-if (!isDedicated && _isAdmin) then {
+//whoever chose the options (admin, host, or the SL fallback in TRGMInitPlayerLocal) does the AO selection and starts the mission
+if (!isDedicated) then {
 	waitUntil {sleep 0.5; bOptionsSet};
+};
+if (!isDedicated && !isNil "TRGM_iSetOptions") then {
 	if (iMissionParamType != 5) then {	//if isCampaign, dont allow to select AO
 		if (AdvancedSettings select ADVSET_SELECT_AO_IDX == 1) then {
 			titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED"];
@@ -291,6 +290,9 @@ if (isServer) then {
 	if (typeName sCivilian != "ARRAY") then {sCivilian = [sCivilian]};
 	/*end */
 
+
+	//enemy classes that clients need for intel (showIntel), the rest of the faction data is only used on the server
+	{publicVariable _x;} forEach ["sMortar","sMortarMilitia","sAAAVeh","sAAAVehMilitia","DestroyAAAVeh"];
 
 	CustomObjectsSet = true;
 	publicVariable "CustomObjectsSet";
@@ -612,8 +614,7 @@ if (iAllowNVG == 0) then {
 			sleep SandStormTimer;
 			[false] call TRGM_fnc_setEnemySandstormSkill;
 		};
-		if (_iSandStormOption == 3) then { //5 hours non stop
-			[[18030,false],"RandFramework\RikoSandStorm\ROSsandstorm.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		if (_iSandStormOption == 3) then { //5 hours non stop (each client starts the storm effect itself in TRGMInitPlayerLocal, which also covers JIP)
 			[true] call TRGM_fnc_setEnemySandstormSkill;
 			sleep 18030;
 			[false] call TRGM_fnc_setEnemySandstormSkill;
@@ -640,7 +641,7 @@ CoreCompleted = true;
 publicVariable "CoreCompleted";
 
 if (iMissionParamType != 5) then {
-	call compile preprocessFileLineNumbers  "RandFramework\Campaign\PostStartMission.sqf";
+	["initial"] call compile preprocessFileLineNumbers  "RandFramework\Campaign\PostStartMission.sqf";
 };
 
 

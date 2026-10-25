@@ -76,8 +76,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			_flagName = format["ObjFlag%1",_iTaskIndex];			
 			_newFlag = createVehicle ["FlagPole_F", _pos, [], 0, "CAN_COLLIDE"];
 			_newFlag setVariable [_flagName, _newFlag, true];
-			missionNamespace setVariable [_flagName, _newFlag];
-			_newFlag setVariable ["Lowered",true];			
+			missionNamespace setVariable [_flagName, _newFlag, true]; //this runs on the player who lowered the flag, the server's trigger needs the new flag too
+			_newFlag setVariable ["Lowered",true,true];			
 			
 			[
 				[_newFlag],
@@ -193,5 +193,5 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 
 	_customTaskClearCondition = format["ObjFlag%1 getVariable [""SupplyDropped"", false]",_iTaskIndex];
-	[_customTaskClearCondition, _iTaskIndex, _bCreateTask, "Area Cleared", "Area Cleared, Rep increased"] call TRGM_fnc_createObjectiveClearedTrigger;
+	[_customTaskClearCondition, _iTaskIndex, _bCreateTask, "Area Cleared", "Area Cleared, Rep increased", 1, "TRGM_fnc_adjustMaxBadPoints", "succeeded", "ObjFlag"] call TRGM_fnc_createObjectiveClearedTrigger;
 };

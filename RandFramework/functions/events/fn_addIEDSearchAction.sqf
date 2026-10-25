@@ -32,7 +32,7 @@ params ["_veh", "_bIsTrap", ["_IEDType", "CAR"]];
 		_thisVeh = _this select 0;
 		_thisPlayer = _this select 1;
 		_bIsTrap = (_this select 3) select 0;
-		if (_thisPlayer getVariable "unitrole" != "Engineer" && selectRandom[true,true,true,false,false]) then {
+		if ((_thisPlayer getVariable ["UnitRole",""]) != "Engineer" && selectRandom[true,true,true,false,false]) then {
 			hint localize "STR_TRGM2_IEDSearchFailed";						
 		}
 		else {
@@ -51,7 +51,7 @@ params ["_veh", "_bIsTrap", ["_IEDType", "CAR"]];
 						_thisVeh = _this select 0;
 						_thisPlayer = _this select 1;
 						_bIsTrap = (_this select 3) select 0;
-						if (_thisPlayer getVariable "unitrole" != "Engineer" && selectRandom[true,false,false,false]) then {
+						if ((_thisPlayer getVariable ["UnitRole",""]) != "Engineer" && selectRandom[true,false,false,false]) then {
 							hint localize "STR_TRGM2_IEDOhOh";
 							sleep 1;
 							{

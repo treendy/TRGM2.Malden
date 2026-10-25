@@ -1,21 +1,12 @@
 #include "..\..\setUnitGlobalVars.sqf"; //this can be replayed for joining players before init.sqf has run, so make sure the globals exist (guarded, only runs once)
 
+params [["_startId","initial"]];
 _isCampaign = (iMissionParamType == 5);
 
+//in a campaign StartMissionPreCheck.sqf has already checked everyone is at base with the tasks done
+if (true) then {
 
-_mrkHQPos = getMarkerPos "mrkHQ";
-_AOCampPos = getPos endMissionBoard2;
-bAllAtBase2 = ({(alive _x)&&((_x distance _mrkHQPos < 500)||(_x distance _AOCampPos < 500))} count (call BIS_fnc_listPlayers))==({ (alive _x) } count (call BIS_fnc_listPlayers));
-
-
-//Need to move the below to function that fires for player who called addAction, then inside that function can call StartMission for all
-//Also... in this extra file, we can set a publicVariable for "IntroPlayed=false", then after played set IntroPlayed=true... so will only play when mission starts or next mission picked
-_bAllowStart = true;
-
-
-if (_bAllowStart) then {
-
-	if ((bAllAtBase2 && ActiveTasks call FHQ_TT_areTasksCompleted) || !_isCampaign) then {
+	if (true) then {
 
 
 		player allowdamage false;
@@ -143,14 +134,10 @@ if (isServer && _isCampaign) then {
 			call compile preprocessFileLineNumbers  "RandFramework\startInfMission.sqf";
 		};
 
-	}
-	else {
-
-		hint (localize "STR_TRGM2_StartMission_Hint"); //this script already runs on every machine
 	};
 
 	if (iMissionParamType == 5) then {
-		call compile preprocessFileLineNumbers  "RandFramework\Campaign\PostStartMission.sqf";
+		[_startId] call compile preprocessFileLineNumbers  "RandFramework\Campaign\PostStartMission.sqf";
 	};
 
 };

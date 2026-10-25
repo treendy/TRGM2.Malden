@@ -1,3 +1,4 @@
+		params [["_startId","initial"]];
 		_isCampaign = (iMissionParamType == 5);
 		if isNil("CoreCompleted") then {
 			CoreCompleted = false;
@@ -9,16 +10,23 @@
 		sleep 2;
 
 
-_bMoveToAO = false;
-		if (iStartLocation == 2) then {
-			_bMoveToAO = selectRandom [true,false];
+		//the server decides if players start at an AO camp (and creates it), everyone else waits for that decision
+		if (isServer) then {
+			private _bServerMoveToAO = false;
+			if (iStartLocation == 2) then {
+				_bServerMoveToAO = selectRandom [true,false];
+			};
+			if (iStartLocation == 1) then {
+				_bServerMoveToAO = true;
+			};
+			if (_bServerMoveToAO) then {
+				call compile preprocessFileLineNumbers "RandFramework\functions\missionSetup\AoCampCreator.sqf";
+			};
+			TRGM_postStartInfo = [_startId, _bServerMoveToAO, if (isNil "AOCampPos") then {[0,0,0]} else {AOCampPos}];
+			publicVariable "TRGM_postStartInfo";
 		};
-		if (iStartLocation == 1) then {
-			_bMoveToAO = true;
-		};
-		if (_bMoveToAO) then {
-			call compile preprocessFileLineNumbers "RandFramework\functions\missionSetup\AoCampCreator.sqf";
-		};
+		waitUntil {sleep 0.2; !isNil "TRGM_postStartInfo" && {(TRGM_postStartInfo select 0) isEqualTo _startId}};
+		TRGM_postStartInfo params ["", "_bMoveToAO", "_aoCampPos"];
 
 
 _isHiddenObj = false;
@@ -94,8 +102,8 @@ _isHiddenObj = false;
 		_pos1 = nil;
 		_pos2 = nil;
 		if (_bMoveToAO) then {
-			_pos1 = (AOCampPos getPos [(floor(random 100))+50, (floor(random 360))]);
-			_pos2 = (AOCampPos getPos [(floor(random 100))+50, (floor(random 360))]);		
+			_pos1 = (_aoCampPos getPos [(floor(random 100))+50, (floor(random 360))]);
+			_pos2 = (_aoCampPos getPos [(floor(random 100))+50, (floor(random 360))]);		
 		}
 		else {
 			_pos1 = (player getPos [(floor(random 100))+50, (floor(random 360))]);
@@ -110,7 +118,7 @@ _isHiddenObj = false;
 
 		_camera camPreparePos _pos2;
 		if (_bMoveToAO) then {
-			_camera camPrepareTarget AOCampPos;	
+			_camera camPrepareTarget _aoCampPos;	
 		}
 		else {
 			_camera camPrepareTarget player;
@@ -134,17 +142,18 @@ _isHiddenObj = false;
 
 
 		if (bDebugMode) then {["FinalCleanup"] remoteExec ["systemChat", 0];};
-		call compile preprocessFileLineNumbers "RandFramework\RandScript\FinalSetupCleaner.sqf";
+		if (isServer) then {
+			call compile preprocessFileLineNumbers "RandFramework\RandScript\FinalSetupCleaner.sqf";
+		};
 
 		sleep 2;
 		
-		if (_bMoveToAO) then {
-			//AOCampPos
+		if (_bMoveToAO && isServer) then { //setPos is global, so only the server moves the group
 			if (!isnil "sl") then {
-				sl setPos AOCampPos;
+				sl setPos _aoCampPos;
 				if (bDebugMode) then {["Moving Players"] remoteExec ["systemChat", 0];};
 				sleep 1;
-				{_x setpos AOCampPos} forEach units group sl;
+				{_x setpos _aoCampPos} forEach units group sl;
 			};
 		};
 

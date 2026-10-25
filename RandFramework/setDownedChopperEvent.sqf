@@ -66,7 +66,7 @@ if (str(_flatPos) != "[0,0,0]") then {
 		_civ removeAction 0; 
 		_civ switchMove "Acts_ExecutionVictim_Unbow"; 
 		_civ enableAI "anim";
-	}]] remoteExecCall ["addAction", 0]; 
+	}]] remoteExec ["addAction", 0, true]; //JIP so joining players get it too 
 
 	[_downedCiv, ["Talk to wounded guy",{hint "Please get me back to base!!"},[_downedCiv]]] remoteExec ["addAction", 0, true];
 
@@ -74,7 +74,7 @@ if (str(_flatPos) != "[0,0,0]") then {
 		_civ=_this select 0; 
 		_player=_this select 1;
 		[_civ, _player] execVM "RandFramework\CarryAndJoinWounded.sqf";				
-	}]] remoteExecCall ["addAction", 0]; 
+	}]] remoteExec ["addAction", 0, true]; //JIP so joining players get it too 
 
 	[_downedCiv] spawn TRGM_fnc_eventFlareLoop;
 

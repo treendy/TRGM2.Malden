@@ -10,6 +10,7 @@ if (!(isNil "IsTraining") || _isFullMap) then {
 if (_currentATFieldPos select 0 != 0) then {
 
 	ATFieldPos pushBack _currentATFieldPos;
+	publicVariable "ATFieldPos"; //clients read it for intel
 
 	_iCountMines = 0;
 	while {_iCountMines < 50} do {

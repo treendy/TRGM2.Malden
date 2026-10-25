@@ -49,7 +49,7 @@ while {_iCount <= _unitCount} do
 			_SpawnedRifleman = (_sideCivGroup createUnit [sRiflemanFriendInsurg, _wayPosInit, [], 10, "NONE"]);
 			[_SpawnedRifleman] joinSilent (_sideCivGroup);
 			if (!_bRebelLeaderPicked) then {
-				_SpawnedRifleman addaction [localize "STR_TRGM2_trendFunctions_TalkToLeader","RandFramework\TalkRebLead.sqf"];
+				[_SpawnedRifleman, [localize "STR_TRGM2_trendFunctions_TalkToLeader","RandFramework\TalkRebLead.sqf"]] remoteExec ["addAction", 0, true]; //this runs on the server, players need the action
 				_SpawnedRifleman addEventHandler ["killed", {_this spawn TRGM_fnc_InsKilled;}];
 				removeHeadgear _SpawnedRifleman;
 				_bRebelLeaderPicked = true;

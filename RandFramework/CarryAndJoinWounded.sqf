@@ -43,7 +43,7 @@ if (alive _civ) then {
 				} forEach attachedObjects _player;
 			};
 			if (!(alive _civ)) then {
-				_doLoop
+				_doLoop = false;
 			};
 
 		};

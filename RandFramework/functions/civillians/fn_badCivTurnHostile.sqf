@@ -16,7 +16,7 @@ if (!(_badCiv getVariable ["isHostile",false])) then {
 	_badCiv allowFleeing 0;
 
 	//remove search Civ action
-	[_badCiv] remoteExec ["TRGM_fnc_badCivRemoveSearchAction",[0, -2] select isMultiplayer,true];
+	[_badCiv] remoteExec ["TRGM_fnc_badCivRemoveSearchAction",0,true];
 };
 
 if (!isNull _target) then {

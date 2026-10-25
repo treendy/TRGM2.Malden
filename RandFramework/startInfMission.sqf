@@ -5,7 +5,6 @@ if (bDebugMode) then {["Mission Setup: 16"] remoteExec ["systemChat", 0];};
 //This is only ever called on server!!!!
 if (bDebugMode) then {["Mission Setup: 15"] remoteExec ["systemChat", 0];};
 
-TRGM_Logic setVariable ["DeathRunning", false, true];
 
 
 if (bDebugMode) then {["Mission Setup: 14.5"] remoteExec ["systemChat", 0];};
@@ -475,7 +474,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 									_objVehicle2 = _truckType createVehicle [20,20,500];
 									_objVehicle2 setVariable [_sTargetName2, _objVehicle2, true];
 									missionNamespace setVariable [_sTargetName2, _objVehicle2];
-									if (isNil "_nearestRoad2") then {
+									if (isNil "_nearestRoad2" || {isNull _nearestRoad2}) then { //BIS_fnc_nearestRoad returns objNull when nothing is found
 										_flatPos = nil;
 										_flatPos = [[_inf1X,_inf1Y,0] , 10, 40, 7, 0, 0.5, 0,[],[[_inf1X,_inf1Y,0],[_inf1X,_inf1Y,0]]] call BIS_fnc_findSafePos;
 										_objVehicle2 setPos _flatPos;
@@ -566,7 +565,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 											_player=_this select 1;
 											[_civ, _player] execVM "RandFramework\CarryAndJoinWounded.sqf";		
 											[[ObjectivePossitions, _player] call BIS_fnc_nearestPosition] call TRGM_fnc_addClearedPosition;
-										}]] remoteExecCall ["addAction", 0];
+										}]] remoteExec ["addAction", 0, true]; //JIP so joining players get it too
 									}; 
 									_initPos = selectRandom _allpositionsLaptop1;
 									_flatPosInform = nil;
@@ -584,52 +583,8 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 
 									[_objInformant, ["HitPart",
 										{
-											_thisInformant = ((_this select 0) select 0);
-											_thisShooter =((_this select 0) select 1);
-											_hitLocation = ((_this select 0) select 5) select 0;
-											if (bDebugMode) then {hint format["ARHH2:%1",_hitLocation];};
-											if (side (_thisShooter) == West && alive(_thisInformant)) then {
-												_thisInformant allowDamage true;
-												_bDone = false;
-												group _thisInformant setBehaviour "ALERT";
-												_thisInformant switchMove "";
-												_ThisTaskType = _thisInformant getVariable ["TaskType",0];
-												if (!isPlayer _thisShooter && _ThisTaskType == 5) then {
-													_thisInformant disableAI "anim";
-													_thisInformant switchMove "Acts_CivilInjuredLegs_1";
-													_thisInformant disableAI "anim";
-													_thisInformant setHit ['legs',1];
-													_thisInformant setCaptive true;
-												}
-												else {
-													if (_hitLocation == "head" || _hitLocation == "neck" || _hitLocation == "spine1" || _hitLocation == "spine2" || _hitLocation == "spine3" || _hitLocation == "body" ) then {
-														_thisInformant setDamage 1;
-														_bDone = true;
-													};
-													if (_hitLocation == "leftleg" || _hitLocation == "rightleg" || _hitLocation == "rightupleg" || _hitLocation == "leftupleg") then {
-														_ThisTaskType = _thisInformant getVariable ["TaskType",0];
-														if (_ThisTaskType == 5) then {
-															_thisInformant disableAI "anim";
-															_thisInformant switchMove "Acts_CivilInjuredLegs_1";
-															_thisInformant disableAI "anim";
-															_thisInformant setHit ['legs',1];
-															_thisInformant setVariable ["StopWalkScript", true, true];
-															_thisInformant setCaptive true;
-															removeAllWeapons _thisInformant;
-														}
-														else {
-															_thisInformant setHit ['legs',1];
-														};
-														_bDone = true;
-													};
-
-
-													if (!_bDone) then {
-														_thisInformant setDamage 0.8;
-													};
-												};
-											};
-
+											if (bDebugMode) then {hint format["ARHH2:%1",((_this select 0) select 5) select 0];};
+											[(_this select 0) select 0, (_this select 0) select 1, ((_this select 0) select 5) select 0] call TRGM_fnc_hvtHit;
 										}
 									]] remoteExec ["addEventHandler", 0, true];
 
@@ -696,7 +651,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 													addSwitchableUnit _civ;
 													_taskIndex = _civ getVariable ["taskIndex",-1];
 													[[ObjectivePossitions, getPos _civ] call BIS_fnc_nearestPosition] call TRGM_fnc_addClearedPosition;
-											}]] remoteExecCall ["addAction", 0];
+											}]] remoteExec ["addAction", 0, true]; //JIP so joining players get it too
 
 											TREND_fnc_POWCheck = {		
 												_objManName = _this select 0;

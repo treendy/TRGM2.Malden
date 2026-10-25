@@ -27,6 +27,7 @@ else {
 		saveProfileNamespace;
 
 	
+		TRGM_iSetOptions = true; //local: this machine chose the options, so mainInit here does the AO selection and starts the mission
 		bOptionsSet = true;
 		publicVariable 'bOptionsSet';
 		closedialog 0;
@@ -50,11 +51,14 @@ if (_LoadVersion != "") then {
 		SaveTypeString = _LoadVersion;
 		publicVariable "SaveTypeString";
 		sleep 0.1;
+		SavedData = nil; //so we can wait for the server's answer (and don't use the result of an earlier click)
 		{
 			SavedData = profileNamespace getVariable [sInitialSLPlayerID + ":" + SaveTypeString,[]]; //Get this from server only, but use player ID!!!
 			publicVariable "SavedData";
 		} remoteExec ["bis_fnc_call", 2]; //Save this to server only
-		sleep 0.1;
+		_timeOut = diag_tickTime + 10;
+		waitUntil {sleep 0.1; !isNil "SavedData" || diag_tickTime > _timeOut};
+		if (isNil "SavedData") then {SavedData = [];};
 
 		if (count SavedData == 0) then {
 			_ctrl = (findDisplay 5000) displayCtrl 5001;
@@ -87,7 +91,11 @@ if (_LoadVersion != "") then {
 			publicVariable "iCampaignDay";
 
 			if (count SavedData > 11) then { //12 values, 11 indexes (savedData 11 is the 12th value)
-				AdvancedSettings = SavedData select 11;
+				AdvancedSettings = +(SavedData select 11);
+				//saves from older versions have fewer advanced settings, fill the rest with the defaults
+				while {count AdvancedSettings < count DefaultAdvancedSettings} do {
+					AdvancedSettings pushBack (DefaultAdvancedSettings select (count AdvancedSettings));
+				};
 				publicVariable "AdvancedSettings";
 			};
 			if (count SavedData > 12) then {

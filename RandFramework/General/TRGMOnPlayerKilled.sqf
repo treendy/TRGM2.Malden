@@ -1,14 +1,6 @@
-
-debugMessages = debugMessages + "Player Killed";
-debugMessages = debugMessages + format["KILLED: %1", name player];
-debugMessages = debugMessages + format["KILLED Distance: %1", player distance getMarkerPos "MrkHQ"];
-
 if (bDebugMode) then {hint format["KILLED!: %1", player distance getMarkerPos "MrkHQ"]; sleep 3;};
 
 if (player distance getMarkerPos "MrkHQ" > SaveZoneRadius) then {
-	waitUntil {!(TRGM_Logic getVariable "DeathRunning")};
-	TRGM_Logic setVariable ["DeathRunning", true, true];
-
 	_killer = _this select 1;
 
 	_aceSource = player getVariable ["ace_medical_lastDamageSource", objNull];
@@ -16,13 +8,8 @@ if (player distance getMarkerPos "MrkHQ" > SaveZoneRadius) then {
 		_killer = _aceSource;
 	};
 
-	debugMessages = debugMessages + format["KILLED OUTSIDE SAFEZONE, SIDE: %1 - VEHICLE: %2 - PlayerObject: %3", side _killer,vehicle player, player];
 	if (_killer != player) then {
-		debugMessages = debugMessages + format["KILLER IS NOT THE PLAYER, Killer: %1 - %2", _killer, name _killer];
-		KilledPlayers pushBack getPlayerUID player;
-		KilledPositions pushBack [getPlayerUID player,getPos Player];
-		publicVariable "KilledPlayers";
-		publicVariable "KilledPositions";
+		[getPlayerUID player, getPos player] call TRGM_fnc_recordPlayerDeath;
 
 		_iPointsToAdd = 0.2;
 		if (iMissionParamType != 5) then { //if not campaign, then work out how many rep points team gain when a player is killed
@@ -39,9 +26,4 @@ if (player distance getMarkerPos "MrkHQ" > SaveZoneRadius) then {
 		_tombStone setVariable ["Message", format[localize "STR_TRGM2_RecruiteInf_KIA",name player],true];
 		[_tombStone, [localize "STR_TRGM2_RecruiteInf_Read","hint format['%1',(_this select 0) getVariable 'Message']"]] remoteExec ["addAction", 0, true];
 	};
-
-	TRGM_Logic setVariable ["DeathRunning", false, true];
 };
-
-
-publicVariable "debugMessages";

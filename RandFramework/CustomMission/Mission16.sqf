@@ -47,6 +47,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	[_mainObjPos,100,true,true,_target1, _isCache] spawn TRGM_fnc_setTargetEvent;
 
 
-	_sAliveCheck = format["!alive %1 && !([""InfSide%4""] call FHQ_TT_areTasksCompleted)",_sTargetName1,_iTaskIndex];
+	_sAliveCheck = format["!alive %1 && !([""InfSide%2""] call FHQ_TT_areTasksCompleted)",_sTargetName1,_iTaskIndex];
 	[_sAliveCheck, _iTaskIndex, _bCreateTask, "Cache Destroyed", "Cache Destroyed, Rep increased"] call TRGM_fnc_createObjectiveClearedTrigger;
 };

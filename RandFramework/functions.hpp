@@ -15,6 +15,7 @@ class TRGM   { // TAG
         class nextMarkerId {};
         class medicalFlashLights {};
         class getWeatherOptions {};
+        class recordPlayerDeath {};
         class adjustBadPoints {};
         class adjustMaxBadPoints {};
         class radioChatterLoop {};
@@ -111,6 +112,7 @@ class TRGM   { // TAG
         class isPlayerAllowedToLead {};
         class resetTransportChoppers {};
         class showLayerText {};
+        class hvtHit {};
     };
 
     class ai {

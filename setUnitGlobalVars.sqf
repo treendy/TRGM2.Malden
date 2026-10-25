@@ -1,5 +1,10 @@
-//Sets up all the global unit/mission variables, it is included from init.sqf and initPlayerLocal.sqf but only needs to run once per machine
-if (isNil "TRGM_unitGlobalVarsSet") then {
+//Sets up all the global unit/mission variables, it is included from init.sqf, initPlayerLocal.sqf and scripts that can be replayed for JIP, but only needs to run once per machine
+//(if another script is already running it, wait for that to finish instead)
+if (!isNil "TRGM_unitGlobalVarsSet") then {
+	waitUntil {TRGM_unitGlobalVarsSet};
+}
+else {
+	TRGM_unitGlobalVarsSet = false;
 
 	//DefaultEnemyFactionValue = [1];//No longer use these... was having issue with naked players and no enemy... may be one day will improve this and add in again (orignally this was to allow maps like Kunduz default to cup takistan militia if available, if not it should go to next available value)
 	//DefaultFriendlyFactionValue = [1]; //same reason as above

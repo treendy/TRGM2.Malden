@@ -71,7 +71,7 @@ if (count _nearestRoads > 0) then {
 				_civ=_this select 0; 
 				_player=_this select 1;
 				[_civ, _player] execVM "RandFramework\CarryAndJoinWounded.sqf";				
-			}]] remoteExecCall ["addAction", 0]; 
+			}]] remoteExec ["addAction", 0, true]; //JIP so joining players get it too 
 			[_downedCiv] spawn {
 				_downedCiv = _this select 0;
 				_doLoop = true;

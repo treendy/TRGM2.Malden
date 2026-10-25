@@ -20,6 +20,7 @@ fnc_CustomVars = { //This is called before the mission function is called below,
 };
 
 fnc_CustomMission = { //This function is the main script for your mission, some if the parameters passed in must not be changed!!!
+	private ["_buildings","_infBuilding","_allBuildingPos","_flatPosInf"]; //this is called from startInfMission, which has its own _buildings / _infBuilding
 	_markerType = _this select 0;
 	_objectiveMainBuilding = _this select 1; //DO NOT EDIT THIS VALUE (this is the main building location selected within your AO)
 	_centralAO_x = _this select 2; //DO NOT EDIT THIS VALUE
@@ -58,6 +59,7 @@ _missionBombWire = ["BLUE", "WHITE", "YELLOW", "GREEN"] call bis_fnc_selectRando
 		_thisPlayer = _this select 1;
 		_thisBomb = (_this select 3) select 0;
 		_thisPlayer setVariable ["missionBomb",_thisBomb];
+		CODEINPUT = []; //start with an empty code (digits typed last time would be prepended)
 		createDialog 'KeypadDefuse';
 	},[_objBomb1]]] remoteExec ["addAction", 0, true];
 

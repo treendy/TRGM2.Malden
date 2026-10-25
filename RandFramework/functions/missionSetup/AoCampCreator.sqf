@@ -64,8 +64,8 @@ if (isServer) then {
 			_Tent2 = "Land_TentA_F" createVehicle _flatPos2;
 			_Tent2 setDir (floor(random 360));
 
-			[_Tent1, [localize "STR_TRGM2_startInfMission_RemoveVehicleFromTent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}]] remoteExec ["addAction", 0];
-			[_Tent2, [localize "STR_TRGM2_startInfMission_RemoveVehicleFromTent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}]] remoteExec ["addAction", 0];
+			[_Tent1, [localize "STR_TRGM2_startInfMission_RemoveVehicleFromTent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}]] remoteExec ["addAction", 0, true];
+			[_Tent2, [localize "STR_TRGM2_startInfMission_RemoveVehicleFromTent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}]] remoteExec ["addAction", 0, true];
 
 			_flatPos4 = nil;
 			_flatPos4 = [_flatPosCampFire , 5, 10, 5, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
@@ -99,8 +99,8 @@ if (iMissionParamType == 5) then {
 		_car1 allowDamage true;
 		_car2 allowDamage true;
 
-		[_car1, [localize "STR_TRGM2_startInfMission_UnloadDingy","RandFramework\UnloadDingy.sqf"]] remoteExec ["addAction", 0];
-		[_car2, [localize "STR_TRGM2_startInfMission_UnloadDingy","RandFramework\UnloadDingy.sqf"]] remoteExec ["addAction", 0];
+		[_car1, [localize "STR_TRGM2_startInfMission_UnloadDingy","RandFramework\UnloadDingy.sqf"]] remoteExec ["addAction", 0, true];
+		[_car2, [localize "STR_TRGM2_startInfMission_UnloadDingy","RandFramework\UnloadDingy.sqf"]] remoteExec ["addAction", 0, true];
 		[_car1,FastResponseCarItems] call bis_fnc_initAmmoBox;
 		[_car2,FastResponseCarItems] call bis_fnc_initAmmoBox;
 	};
@@ -133,7 +133,7 @@ if (iMissionParamType == 5) then {
 	if (bDebugMode) then {["Mission Setup: 4"] remoteExec ["systemChat", 0];};
 	sleep 1;
 	if (AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
-		[_AmmoBox1, [localize "STR_TRGM2_startInfMission_VirtualArsenal",{["Open",true] spawn BIS_fnc_arsenal}]] remoteExec ["addAction", 0];
+		[_AmmoBox1, [localize "STR_TRGM2_startInfMission_VirtualArsenal",{["Open",true] spawn BIS_fnc_arsenal}]] remoteExec ["addAction", 0, true];
 	};
 
 	if (ISUNSUNG) then {

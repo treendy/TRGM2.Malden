@@ -32,7 +32,7 @@ if (_currentSpentPoints < (MaxBadPoints - BadPoints + 1)) then {
 			_tombStone = selectRandom TombStones createVehicle GraveYardPos;
 			_tombStone setDir GraveYardDirection;
 			_tombStone setVariable ["Message", format[localize "STR_TRGM2_RecruiteInf_KIA",name (_this select 0)],true];
-			_tombStone addAction [localize "STR_TRGM2_RecruiteInf_Read",{hint format["%1",(_this select 0) getVariable "Message"]}];
+			[_tombStone, [localize "STR_TRGM2_RecruiteInf_Read",{hint format["%1",(_this select 0) getVariable "Message"]}]] remoteExec ["addAction", 0, true];
 			[0.2, format[localize "STR_TRGM2_RecruiteInf_KIA",name (_this select 0)]] call TRGM_fnc_adjustBadPoints;
 		}];
 	//spawn tombstone with name on it
