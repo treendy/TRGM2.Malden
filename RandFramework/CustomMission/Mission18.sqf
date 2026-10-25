@@ -1,7 +1,7 @@
 //These are only ever called by the server!
 
 //MISSION 18: Secure Comms Tower
-//A comms tower is spawned next to the AO building. Players activate an uplink at it, then must keep at least one player within 10m of it until the progress bar reaches 100% (5 minutes).
+//A comms tower is spawned next to the AO building and becomes the centre of the AO. Players activate an uplink at it, then must keep at least one player within 10m of it until the progress bar reaches 100% (5 minutes).
 //The enemy is called to the tower as soon as the uplink starts. If all players die before 100% the mission fails.
 //Once the bar is full, friendly jets fly an airstrike pass past the tower (effect only).
 
@@ -49,12 +49,26 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 	missionNamespace setVariable [format["objInformant%1",_iTaskIndex], _tower];
 
-	if (_markerType != "empty") then {
-		private _sMarkerName = format["CommsTowerMarker%1",_iTaskIndex];
-		createMarker [_sMarkerName, _towerPos];
-		_sMarkerName setMarkerShape "ICON";
-		_sMarkerName setMarkerType _markerType;
-		_sMarkerName setMarkerText (localize "STR_TRGM2_CommsTowerMarkerText");
+	//this tower is the objective, so keep it out of the "check enemy comms" intel feature (see TREND_fnc_setOtherAreaStuff.sqf)
+	if (isNil "ObjectiveCommsTowers") then {ObjectiveCommsTowers = [];};
+	ObjectiveCommsTowers pushBack _tower;
+
+	//make the tower the centre of the AO instead of the building the engine picked: the engine's own AO marker, patrols and sentries are all placed from _inf1X/_inf1Y (shared with the caller)
+	_inf1X = _towerPos select 0;
+	_inf1Y = _towerPos select 1;
+	private _oldAoPos = [_centralAO_x, _centralAO_y];
+	private _newAoPos = [_towerPos select 0, _towerPos select 1];
+	private _aoIndex = ObjectivePossitions find _oldAoPos;
+	if (_aoIndex >= 0) then {
+		ObjectivePossitions set [_aoIndex, _newAoPos];
+		publicVariable "ObjectivePossitions";
+	};
+	if (!isNil "HiddenPossitions") then {
+		private _hiddenIndex = HiddenPossitions find _oldAoPos;
+		if (_hiddenIndex >= 0) then {
+			HiddenPossitions set [_hiddenIndex, _newAoPos];
+			publicVariable "HiddenPossitions";
+		};
 	};
 
 	//shared state, public so every client can read it for the progress bar

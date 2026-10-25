@@ -16,6 +16,10 @@ if (count ObjectivePossitions > 1 && selectRandom [true,true,false]) then {
 //_TowerBuilding = selectRandom TowerBuildings;
 _TowersNear = nearestObjects [_mainObjPos, TowerBuildings, TowerRadius];
 
+//towers that are a mission objective (Secure Comms Tower) are not part of the intel feature
+if (isNil "ObjectiveCommsTowers") then {ObjectiveCommsTowers = [];};
+_TowersNear = _TowersNear select {!(_x in ObjectiveCommsTowers)};
+
 
 
 {systemChat "Mission Events: Comms 9";} remoteExec ["bis_fnc_call", 0];
