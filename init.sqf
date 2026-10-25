@@ -2,6 +2,9 @@
 #include "setUnitGlobalVars.sqf";
 
 
+call compile preprocessFileLineNumbers "version.sqf";
+diag_log format["TRGM2 version %1", TRGM_Version];
+
 if (isServer) then {
 	FirstSpottedHasHappend = false;
 	publicVariable "FirstSpottedHasHappend";

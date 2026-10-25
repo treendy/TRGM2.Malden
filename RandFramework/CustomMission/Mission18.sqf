@@ -77,37 +77,26 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	missionNamespace setVariable [format["CommsTowerPaused%1",_iTaskIndex], false, true];
 	missionNamespace setVariable [format["CommsTowerDone%1",_iTaskIndex], false, true];
 
-	//activation action on the tower, added on every client (and JIP) so text is shown in each player's language
-	//(the tower is found again on each client by position/class, as a map tower can't be passed across the network as an object)
+	//activation action on the tower (same hold action method as the IED search/defuse actions)
 	[
-		[_towerPos, typeOf _tower, _iTaskIndex],
+		_tower,											// Object the action is attached to
+		localize "STR_TRGM2_CommsTowerActivate",				// Title of the action
+		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_hack_ca.paa",	// Idle icon shown on screen
+		"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_hack_ca.paa",	// Progress icon shown on screen
+		format["_this distance _target < 10 && !(missionNamespace getVariable ['CommsTowerActive%1', false])", _iTaskIndex],	// Condition for the action to be shown
+		"_caller distance _target < 10",					// Condition for the action to progress
+		{},												// Code executed when action starts
+		{},												// Code executed on every progress tick
 		{
-			params ["_towerPos","_towerClass","_iTaskIndex"];
-			if (!hasInterface) exitWith {};
-			private _towersFound = nearestObjects [_towerPos, [_towerClass], 30];
-			if (count _towersFound == 0) exitWith {};
-			[
-				_towersFound select 0,
-				localize "STR_TRGM2_CommsTowerActivate",
-				"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_hack_ca.paa",
-				"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_hack_ca.paa",
-				format["_this distance _target < 10 && !(missionNamespace getVariable ['CommsTowerActive%1', false])", _iTaskIndex],
-				"_caller distance _target < 10",
-				{},
-				{},
-				{
-					params ["_target","_caller","_actionId","_args"];
-					missionNamespace setVariable [format["CommsTowerActive%1", _args select 0], true, true];
-				},
-				{},
-				[_iTaskIndex],
-				6,
-				100,
-				true,
-				false
-			] call BIS_fnc_holdActionAdd;
-		}
-	] remoteExec ["bis_fnc_call", 0, format["CommsTowerAction%1",_iTaskIndex]];
+			missionNamespace setVariable [format["CommsTowerActive%1", (_this select 3) select 0], true, true];
+		},												// Code executed on completion
+		{},												// Code executed on interrupted
+		[_iTaskIndex],									// Arguments passed to the scripts as _this select 3
+		6,												// Action duration [s]
+		100,											// Priority
+		true,											// Remove on completion
+		false											// Show in unconscious state
+	] remoteExec ["BIS_fnc_holdActionAdd", 0, _tower];	// MP compatible implementation
 
 	//trigger only exists so this mission stops running if the campaign day is reset (same cleanup flag the other missions use)
 	private _lifeTrigger = createTrigger ["EmptyDetector", [0,0]];

@@ -3918,6 +3918,14 @@
                 <Spanish>Torre de comunicaciones</Spanish>
                 <Korean>통신탑</Korean>
             </Key>
+            <Key ID="STR_TRGM2_Version">
+                <Original>TRGM2 version %1</Original>
+                <English>TRGM2 version %1</English>
+                <Chinese>TRGM2 版本：%1</Chinese>
+                <Chinesesimp>TRGM2 版本：%1</Chinesesimp>
+                <Spanish>Versión de TRGM2: %1</Spanish>
+                <Korean>TRGM2 버전: %1</Korean>
+            </Key>
 
 
 
