@@ -2088,14 +2088,6 @@
                 <Spanish>Clima</Spanish>
                 <Korean>날씨</Korean>
             </Key>
-            <Key ID="STR_TRGM2_dialogs_Details">
-                <Original>Details about it here</Original>
-                <English>Details about it here</English>
-                <Chinese>它的細節在這裡</Chinese>
-                <Chinesesimp>它的细节在这里</Chinesesimp>
-                <Spanish>Detalles sobre eso aquí</Spanish>
-                <Korean>상세 설정은 여기에</Korean>
-            </Key>
             <Key ID="STR_TRGM2_dialogs_HardcoreReputation">
                 <Original>Hardcore Reputation</Original>
                 <English>Hardcore Reputation</English>
@@ -2127,14 +2119,6 @@
                 <Chinesesimp>开始</Chinesesimp>
                 <Spanish>Comenzar</Spanish>
                 <Korean>시작</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_dialogs_AdvOpt">
-                <Original>Advanced Options</Original>
-                <English>Advanced Options</English>
-                <Chinese>進階選項</Chinese>
-                <Chinesesimp>进阶选项</Chinesesimp>
-                <Spanish>Opciones Avanzadas</Spanish>
-                <Korean>고급 설정</Korean>
             </Key>
             <Key ID="STR_TRGM2_dialogs_Objective">
                 <Original>Objective</Original>
@@ -2207,14 +2191,6 @@
                 <Chinesesimp>返回</Chinesesimp>
                 <Spanish>Volver</Spanish>
                 <Korean>뒤로</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_openDialogAdvancedMissionSettings_AdvOpt">
-                <Original>Advanced Options (more options soon!)</Original>
-                <English>Advanced Options (more options soon!)</English>
-                <Chinese>進階選項 (更多選項將慢慢加入!)</Chinese>
-                <Chinesesimp>进阶选项 (更多选项将慢慢加入!)</Chinesesimp>
-                <Spanish>Opciones Avanzadas (más opciones próximamente!)</Spanish>
-                <Korean>고급 설정(더 많은 설정 제공 예정!)</Korean>
             </Key>
             <Key ID="STR_TRGM2_openDialogAdvancedMissionSettings_CustomEnemy">
                 <Original>Custom Enemy Classnames</Original>
@@ -3313,6 +3289,128 @@
 
 
 
+        </Container>
+        <Container name="MissionSetup">
+            <Key ID="STR_TRGM2_Setup_Title">
+                <Original>MISSION SETUP</Original>
+                <English>MISSION SETUP</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_QuickOp">
+                <Original>QUICK OP</Original>
+                <English>QUICK OP</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_Campaign">
+                <Original>CAMPAIGN</Original>
+                <English>CAMPAIGN</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_Operation">
+                <Original>OPERATION</Original>
+                <English>OPERATION</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_Assault">
+                <Original>Assault - heavy AO</Original>
+                <English>Assault - heavy AO</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_Patrol">
+                <Original>Patrol - light ops</Original>
+                <English>Patrol - light ops</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_SideOps">
+                <Original>SIDE OPS</Original>
+                <English>SIDE OPS</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_None">
+                <Original>None</Original>
+                <English>None</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_Two">
+                <Original>Two</Original>
+                <English>Two</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_Objectives">
+                <Original>OBJECTIVES</Original>
+                <English>OBJECTIVES</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_One">
+                <Original>One</Original>
+                <English>One</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_Three">
+                <Original>Three</Original>
+                <English>Three</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_Intel">
+                <Original>INTEL</Original>
+                <English>INTEL</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_AllMarked">
+                <Original>All marked</Original>
+                <English>All marked</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_SideOpsHidden">
+                <Original>Side ops hidden</Original>
+                <English>Side ops hidden</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_FindAO">
+                <Original>Find AO via intel</Original>
+                <English>Find AO via intel</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_FullMap">
+                <Original>Hidden, full map</Original>
+                <English>Hidden, full map</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_Hidden">
+                <Original>Hidden</Original>
+                <English>Hidden</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_TwoObjectives">
+                <Original>Two objectives in the AO</Original>
+                <English>Two objectives in the AO</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_ObjectiveMainSides">
+                <Original>OBJECTIVE  (main / side op 1 / side op 2)</Original>
+                <English>OBJECTIVE  (main / side op 1 / side op 2)</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_ObjectiveList">
+                <Original>OBJECTIVES</Original>
+                <English>OBJECTIVES</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_Briefing">
+                <Original>BRIEFING PREVIEW</Original>
+                <English>BRIEFING PREVIEW</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_Conditions">
+                <Original>CONDITIONS</Original>
+                <English>CONDITIONS</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_MoreSettings">
+                <Original>More settings...</Original>
+                <English>More settings...</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_MoreTitle">
+                <Original>MORE SETTINGS</Original>
+                <English>MORE SETTINGS</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_GroupFactions">
+                <Original>FACTIONS &amp; LOADOUTS</Original>
+                <English>FACTIONS &amp; LOADOUTS</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_GroupRespawn">
+                <Original>RESPAWN</Original>
+                <English>RESPAWN</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_GroupSupport">
+                <Original>SUPPORT &amp; MAP</Original>
+                <English>SUPPORT &amp; MAP</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_GroupWorld">
+                <Original>WORLD &amp; ENEMY</Original>
+                <English>WORLD &amp; ENEMY</English>
+            </Key>
+            <Key ID="STR_TRGM2_Setup_HoverHelp">
+                <Original>Hover a setting for help</Original>
+                <English>Hover a setting for help</English>
+            </Key>
         </Container>
     </Package>
 </Project>

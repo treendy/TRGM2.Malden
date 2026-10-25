@@ -1582,3 +1582,34 @@ class RscControlsGroup
 	shadow = 0;
 	style = 16;
 };
+
+class RscToolbox
+{
+	deletable = 0;
+	fade = 0;
+	access = 0;
+	idc = -1;
+	type = CT_TOOLBOX;
+	style = ST_CENTER;
+	x = 0;
+	y = 0;
+	w = 0.3;
+	h = 0.025;
+	rows = 1;
+	columns = 2;
+	strings[] = {};
+	colorText[] = {0.9,0.88,0.82,1};
+	color[] = {0.9,0.88,0.82,1};
+	colorTextSelect[] = {0.08,0.08,0.07,1};
+	colorSelect[] = {0.08,0.08,0.07,1};
+	colorTextDisable[] = {0.4,0.4,0.4,1};
+	colorDisable[] = {0.4,0.4,0.4,1};
+	colorBackground[] = {0.17,0.17,0.15,1};
+	colorSelectedBg[] = {0.85,0.65,0.13,1};
+	shadow = 0;
+	font = "RobotoCondensed";
+	sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
+	tooltipColorText[] = {1,1,1,1};
+	tooltipColorBox[] = {1,1,1,1};
+	tooltipColorShade[] = {0,0,0,0.65};
+};

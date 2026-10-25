@@ -113,17 +113,20 @@ else {
 	createDialog "Trend_DialogSetupParams";
 	waitUntil {!isNull (findDisplay 5000);};
 
+	if (isNil "iMissionParamObjective2") then {iMissionParamObjective2 = 0;};
+	if (isNil "iMissionParamObjective3") then {iMissionParamObjective3 = 0;};
+
 	//[idc, options, values, current value]
 	private _combos = [
-		[5500, MissionParamTypes, MissionParamTypesValues, iMissionParamType],
 		[5104, MissionParamObjectives, MissionParamObjectivesValues, iMissionParamObjective],
+		[7001, MissionParamObjectives, MissionParamObjectivesValues, iMissionParamObjective2],
+		[7002, MissionParamObjectives, MissionParamObjectivesValues, iMissionParamObjective3],
 		[5100, MissionParamRepOptions, MissionParamRepOptionsValues, iMissionParamRepOption],
 		[5101, MissionParamWeatherOptions, MissionParamWeatherOptionsValues, iWeather],
 		[5102, MissionParamNVGOptions, MissionParamNVGOptionsValues, iAllowNVG],
 		[5103, MissionParamReviveOptions, MissionParamReviveOptionsValues, iUseRevive],
 		[2105, MissionParamLocationOptions, MissionParamLocationOptionsValues, iStartLocation]
 	];
-	//fill every combo first, then select (selecting the mission type runs MissionTypeSelection.sqf, which uses the other combos)
 	{
 		_x params ["_idc", "_options"];
 		private _ctrl = (findDisplay 5000) displayCtrl _idc;
@@ -133,8 +136,12 @@ else {
 	} forEach _combos;
 	{
 		_x params ["_idc", "", "_values", "_current"];
-		((findDisplay 5000) displayCtrl _idc) lbSetCurSel (_values find _current);
+		((findDisplay 5000) displayCtrl _idc) lbSetCurSel ((_values find _current) max 0);
 	} forEach _combos;
+
+	//set the operation / side ops / intel choices from the mission type and lay out the page
+	TRGM_setupUpdating = nil;
+	[true] call TRGM_fnc_missionSetupUpdate;
 	if (isClass(configFile >> "CfgPatches" >> "ace_medical")) then {
 		((findDisplay 5000) displayCtrl 5103) ctrlEnable false;
 	};

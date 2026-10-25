@@ -1,378 +1,629 @@
+//shared look of the mission setup dialogs: flat dark panel with a light header (replaces the tablet picture)
+class TRGM_RscPanel: RscText
+{
+	colorBackground[] = {0.09,0.09,0.08,0.94};
+};
+class TRGM_RscPanelHeader: RscText
+{
+	colorBackground[] = {0.87,0.85,0.79,1};
+};
+class TRGM_RscPanelBox: RscText
+{
+	colorBackground[] = {0.15,0.15,0.13,1};
+};
+class TRGM_RscAccent: RscText
+{
+	colorBackground[] = {0.85,0.65,0.13,1};
+};
+class TRGM_RscDivider: RscText
+{
+	colorBackground[] = {1,1,1,0.12};
+};
+class TRGM_RscLogo: RscPicture
+{
+	style = ST_PICTURE + ST_KEEP_ASPECT_RATIO;
+	text = "RandFramework\Media\TRGM7.paa";
+};
+class TRGM_RscTitle: RscText
+{
+	style = ST_VCENTER;
+	colorText[] = {0.12,0.12,0.11,1};
+	shadow = 0;
+	font = "PuristaMedium";
+	sizeEx = "0.0315 * safezoneH";
+};
+class TRGM_RscSection: RscText
+{
+	colorText[] = {0.68,0.66,0.6,1};
+	shadow = 0;
+	font = "PuristaMedium";
+	sizeEx = "0.0139 * safezoneH";
+};
+class TRGM_RscLabel: RscText
+{
+	colorText[] = {0.9,0.88,0.82,1};
+	shadow = 0;
+	sizeEx = "0.0185 * safezoneH";
+};
+class TRGM_RscHint: RscText
+{
+	colorText[] = {0.6,0.58,0.53,1};
+	shadow = 0;
+	sizeEx = "0.0148 * safezoneH";
+};
+class TRGM_RscButton: RscButton
+{
+	colorText[] = {0.9,0.88,0.82,1};
+	colorBackground[] = {0.2,0.2,0.18,1};
+	colorBackgroundActive[] = {0.3,0.3,0.27,1};
+	colorFocused[] = {0.2,0.2,0.18,1};
+	shadow = 0;
+	sizeEx = "0.0194 * safezoneH";
+};
+class TRGM_RscButtonGold: TRGM_RscButton
+{
+	colorText[] = {0.08,0.08,0.07,1};
+	colorBackground[] = {0.85,0.65,0.13,1};
+	colorBackgroundActive[] = {0.95,0.75,0.2,1};
+	colorFocused[] = {0.85,0.65,0.13,1};
+	font = "PuristaMedium";
+	sizeEx = "0.0296 * safezoneH";
+};
+//font sizes are a share of the screen height (like the positions), so the layout looks the same at every interface size
+class TRGM_RscCombo: RscCombo
+{
+	sizeEx = "0.0176 * safezoneH";
+	wholeHeight = "0.3 * safezoneH";
+};
+class TRGM_RscEdit: RscEdit
+{
+	sizeEx = "0.0176 * safezoneH";
+};
+class TRGM_RscStructuredText: RscStructuredText
+{
+	size = "0.0148 * safezoneH";
+};
+class TRGM_RscScrollGroup: RscControlsGroup
+{
+	class VScrollbar: VScrollbar
+	{
+		color[] = {0.85,0.65,0.13,0.8};
+		width = 0.012;
+		autoScrollEnabled = 0;
+	};
+};
+class TRGM_RscToolbox: RscToolbox
+{
+	sizeEx = "0.0185 * safezoneH";
+	onToolBoxSelChanged = "[] call TRGM_fnc_missionSetupUpdate; false";
+};
 
 class Trend_DialogSetupParams
-	{
+{
 	idd = 5000;
 	movingEnabled = false;
 
 	class controls {
-
-		////////////////////////////////////////////////////////
-		// GUI EDITOR OUTPUT START (by treendy, v1.063, #Nazety)
-		////////////////////////////////////////////////////////
-
-		//class RscPicture_1201: RscPicture
-		//{
-		//	idc = 1201;
-		//	text = "RandFramework\Media\table1.paa";
-		//	x = 0.226718 * safezoneW + safezoneX;
-		//	y = 0.0446 * safezoneH + safezoneY;
-		//	w = 0.531094 * safezoneW;
-		//	h = 0.935 * safezoneH;
-		//};
-
-		//class IGUIBack_2200: IGUIBack
-		//{
-		//	idc = 5200;
-		//	x = 0.29375 * safezoneW + safezoneX;
-		//	y = 0.225 * safezoneH + safezoneY;
-		//	w = 0.4125 * safezoneW;
-		//	h = 0.55 * safezoneH;
-		//};
-
-		class RscListbox_1500: RscListbox
+		class PanelBack: TRGM_RscPanel
 		{
-			idc = 5500;
-			x = 0.298873 * safezoneW + safezoneX;
-			y = 0.315236 * safezoneH + safezoneY;
-			w = 0.180498 * safezoneW;
-			h = 0.239952 * safezoneH;
-			onLBSelChanged = "[_this] execVM 'RandFramework\GUI\MissionTypeSelection.sqf'; false; ";
+			idc = -1;
+			x = 0.2500 * safezoneW + safezoneX;
+			y = 0.2185 * safezoneH + safezoneY;
+			w = 0.5000 * safezoneW;
+			h = 0.6426 * safezoneH;
 		};
-
-		class RscCombo_2100: RscCombo
+		class PanelHeader: TRGM_RscPanelHeader
 		{
-			idc = 5100;
-			text = $STR_TRGM2_dialogs_Weather; //--- ToDo: Localize;
-			x = 0.381406 * safezoneW + safezoneX;
-			y = 0.59681 * safezoneH + safezoneY;
-			w = 0.154713 * safezoneW;
-			h = 0.0219952 * safezoneH;
+			idc = -1;
+			x = 0.2500 * safezoneW + safezoneX;
+			y = 0.1389 * safezoneH + safezoneY;
+			w = 0.5000 * safezoneW;
+			h = 0.0796 * safezoneH;
 		};
-		class RscText_1001: RscText
-		{
-			idc = 5001;
-			style = ST_MULTI;
-			lineSpacing = 1;
-			text = $STR_TRGM2_dialogs_Details; //--- ToDo: Localize;
-			x = 0.489686 * safezoneW + safezoneX;
-			y = 0.317436 * safezoneH + safezoneY;
-			w = 0.211441 * safezoneW;
-			h = 0.241947 * safezoneH;
-		};
-		class RscText_1004: RscText
-		{
-			idc = 5004;
-			text = $STR_TRGM2_dialogs_HardcoreReputation; //--- ToDo: Localize;
-			x = 0.302 * safezoneW + safezoneX;
-			y = 0.596807 * safezoneH + safezoneY;
-			w = 0.0773437 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {0.85,0.4,0,1};
-		};
-		class RscText_1005: RscText
-		{
-			idc = 5005;
-			text = $STR_TRGM2_dialogs_Weather; //--- ToDo: Localize;
-			x = 0.302 * safezoneW + safezoneX;
-			y = 0.627606 * safezoneH + safezoneY;
-			w = 0.0773437 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {0.85,0.4,0,1};
-		};
-		class RscCombo_2101: RscCombo
-		{
-			idc = 5101;
-			text = $STR_TRGM2_dialogs_Weather; //--- ToDo: Localize;
-			x = 0.381406 * safezoneW + safezoneX;
-			y = 0.62981 * safezoneH + safezoneY;
-			w = 0.154713 * safezoneW;
-			h = 0.0219952 * safezoneH;
-		};
-		class RscCombo_2102: RscCombo
-		{
-			idc = 5102;
-			text = $STR_TRGM2_dialogs_Weather; //--- ToDo: Localize;
-			x = 0.381406 * safezoneW + safezoneX;
-			y = 0.662803 * safezoneH + safezoneY;
-			w = 0.154713 * safezoneW;
-			h = 0.0219952 * safezoneH;
-		};
-		class RscText_1006: RscText
-		{
-			idc = 5006;
-			text = $STR_TRGM2_dialogs_NVG; //--- ToDo: Localize;
-			x = 0.302 * safezoneW + safezoneX;
-			y = 0.660603 * safezoneH + safezoneY;
-			w = 0.0773437 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {0.85,0.4,0,1};
-		};
-		class RscText_1007: RscText
-		{
-			idc = 5007;
-			text = $STR_TRGM2_dialogs_Revive; //--- ToDo: Localize;
-			x = 0.303031 * safezoneW + safezoneX;
-			y = 0.693606 * safezoneH + safezoneY;
-			w = 0.0773437 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {0.85,0.4,0,1};
-		};
-		class RscCombo_2103: RscCombo
-		{
-			idc = 5103;
-			text = $STR_TRGM2_dialogs_Weather; //--- ToDo: Localize;
-			x = 0.381406 * safezoneW + safezoneX;
-			y = 0.69581 * safezoneH + safezoneY;
-			w = 0.154713 * safezoneW;
-			h = 0.0219952 * safezoneH;
-		};
-		class RscButton_1600: RscButton
-		{
-			idc = 5600;
-			text = $STR_TRGM2_dialogs_Begin; //--- ToDo: Localize;
-			x = 0.582514 * safezoneW + safezoneX;
-			y = 0.642969 * safezoneH + safezoneY;
-			w = 0.103142 * safezoneW;
-			h = 0.0989783 * safezoneH;
-			colorBackground[] = {0.85,0.4,0,1};
-			colorActive[] = {0.85,0.4,0,1};
-			action = "[_this] execVM 'RandFramework\GUI\SetParamsAndBegin.sqf'; false";
-		};
-
-		class btnAdvanced: RscButton
-		{
-			idc = 1603;
-			text = $STR_TRGM2_dialogs_AdvOpt; //--- ToDo: Localize;
-			x = 0.582514 * safezoneW + safezoneX;
-			y = 0.7442 * safezoneH + safezoneY;
-			w = 0.103142 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorBackground[] = {0.85,0.4,0,1};
-			colorActive[] = {0.85,0.4,0,1};
-			action = "[] execVM 'RandFramework\GUI\openDialogAdvancedMissionSettings.sqf'; false";
-		};
-
-
-		//class RscText_1000: RscText
-		//{
-		//	idc = 5033;
-		//	text = "Select your options"; //--- ToDo: Localize;
-		//	x = 0.298824 * safezoneW + safezoneX;
-		//	y = 0.236 * safezoneH + safezoneY;
-		//	w = 0.175341 * safezoneW;
-		//	h = 0.0659856 * safezoneH;
-		//	colorText[] = {0.85,0.4,0,1};
-		//};
-		class RscText_1002: RscText
-		{
-			idc = 5002;
-			text = $STR_TRGM2_dialogs_Objective; //--- ToDo: Localize;
-			x = 0.301968 * safezoneW + safezoneX;
-			y = 0.561583 * safezoneH + safezoneY;
-			w = 0.0773437 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {0.85,0.4,0,1};
-		};
-		class RscCombo_2104: RscCombo
-		{
-			idc = 5104;
-			text = $STR_TRGM2_dialogs_Weather; //--- ToDo: Localize;
-			x = 0.381387 * safezoneW + safezoneX;
-			y = 0.561583 * safezoneH + safezoneY;
-			w = 0.154713 * safezoneW;
-			h = 0.0219952 * safezoneH;
-		};
-		class RscText_1003: RscText
-		{
-			idc = 5003;
-			text = ""; //--- ToDo: Localize;
-			x = 0.538171 * safezoneW + safezoneX;
-			y = 0.5616 * safezoneH + safezoneY;
-			w = 0.0154751 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {1,1,1,1};
-		};
-		class RscText_1008: RscText
-		{
-			idc = 5008;
-			text = "[?]"; //--- ToDo: Localize;
-			x = 0.538171 * safezoneW + safezoneX;
-			y = 0.5946 * safezoneH + safezoneY;
-			w = 0.0154751 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {1,1,1,1};
-			tooltip = $STR_TRGM2_dialogs_HardcoreReputation_HelpText; //--- ToDo: Localize;
-		};
-		class RscText_1009: RscText
-		{
-			idc = 5009;
-			text = ""; //--- ToDo: Localize;
-			x = 0.538171 * safezoneW + safezoneX;
-			y = 0.6276 * safezoneH + safezoneY;
-			w = 0.0154751 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {1,1,1,1};
-		};
-		class RscText_1010: RscText
-		{
-			idc = 5010;
-			text = ""; //--- ToDo: Localize;
-			x = 0.538171 * safezoneW + safezoneX;
-			y = 0.6606 * safezoneH + safezoneY;
-			w = 0.0154751 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {1,1,1,1};
-		};
-		class RscText_1011: RscText
-		{
-			idc = 5011;
-			text = ""; //--- ToDo: Localize;
-			x = 0.538171 * safezoneW + safezoneX;
-			y = 0.6936 * safezoneH + safezoneY;
-			w = 0.0154751 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {1,1,1,1};
-		};
-		class RscPicture_1200: RscPicture
+		class Logo: TRGM_RscLogo
 		{
 			idc = 5201;
-			text = "RandFramework\Media\TRGM7.paa";
-			x = 0.536108 * safezoneW + safezoneX;
-			y = 0.159 * safezoneH + safezoneY;
-			w = 0.165067 * safezoneW;
-			h = 0.242 * safezoneH;
+			x = 0.2552 * safezoneW + safezoneX;
+			y = 0.1000 * safezoneH + safezoneY;
+			w = 0.1042 * safezoneW;
+			h = 0.1574 * safezoneH;
 		};
-
-		class RscText_1012: RscText
+		class Title: TRGM_RscTitle
+		{
+			idc = -1;
+			x = 0.3490 * safezoneW + safezoneX;
+			y = 0.1574 * safezoneH + safezoneY;
+			w = 0.2188 * safezoneW;
+			h = 0.0426 * safezoneH;
+			text = $STR_TRGM2_Setup_Title;
+		};
+		class tbMode: TRGM_RscToolbox
+		{
+			idc = 5910;
+			x = 0.5823 * safezoneW + safezoneX;
+			y = 0.1574 * safezoneH + safezoneY;
+			w = 0.1594 * safezoneW;
+			h = 0.0426 * safezoneH;
+			strings[] = {$STR_TRGM2_Setup_QuickOp,$STR_TRGM2_Setup_Campaign};
+			colorBackground[] = {0.75,0.73,0.67,1};
+			colorText[] = {0.12,0.12,0.11,1};
+			colorSelectedBg[] = {0.12,0.12,0.11,1};
+			colorTextSelect[] = {0.85,0.65,0.13,1};
+			colorSelect[] = {0.85,0.65,0.13,1};
+			font = "PuristaMedium";
+		};
+		class lblOperation: TRGM_RscSection
+		{
+			idc = 5920;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.2389 * safezoneH + safezoneY;
+			w = 0.2135 * safezoneW;
+			h = 0.0204 * safezoneH;
+			text = $STR_TRGM2_Setup_Operation;
+		};
+		class tbOperation: TRGM_RscToolbox
+		{
+			idc = 5911;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.2630 * safezoneH + safezoneY;
+			w = 0.2135 * safezoneW;
+			h = 0.0370 * safezoneH;
+			strings[] = {$STR_TRGM2_Setup_Assault,$STR_TRGM2_Setup_Patrol};
+		};
+		class lblSideOps: TRGM_RscSection
+		{
+			idc = 5921;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.3148 * safezoneH + safezoneY;
+			w = 0.2135 * safezoneW;
+			h = 0.0204 * safezoneH;
+			text = $STR_TRGM2_Setup_SideOps;
+		};
+		class tbAssaultSideOps: TRGM_RscToolbox
+		{
+			idc = 5912;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.3389 * safezoneH + safezoneY;
+			w = 0.2135 * safezoneW;
+			h = 0.0370 * safezoneH;
+			strings[] = {$STR_TRGM2_Setup_None,$STR_TRGM2_Setup_Two};
+		};
+		class tbPatrolObjectives: TRGM_RscToolbox
+		{
+			idc = 5913;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.3389 * safezoneH + safezoneY;
+			w = 0.2135 * safezoneW;
+			h = 0.0370 * safezoneH;
+			strings[] = {$STR_TRGM2_Setup_One,$STR_TRGM2_Setup_Three};
+		};
+		class lblIntel: TRGM_RscSection
+		{
+			idc = 5922;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.3907 * safezoneH + safezoneY;
+			w = 0.2135 * safezoneW;
+			h = 0.0204 * safezoneH;
+			text = $STR_TRGM2_Setup_Intel;
+		};
+		class tbAssaultIntel: TRGM_RscToolbox
+		{
+			idc = 5914;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.4148 * safezoneH + safezoneY;
+			w = 0.2135 * safezoneW;
+			h = 0.0778 * safezoneH;
+			rows = 2;
+			columns = 2;
+			strings[] = {$STR_TRGM2_Setup_AllMarked,$STR_TRGM2_Setup_SideOpsHidden,$STR_TRGM2_Setup_FindAO,$STR_TRGM2_Setup_FullMap};
+		};
+		class tbPatrolIntel: TRGM_RscToolbox
+		{
+			idc = 5915;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.4148 * safezoneH + safezoneY;
+			w = 0.2135 * safezoneW;
+			h = 0.0370 * safezoneH;
+			strings[] = {$STR_TRGM2_Setup_AllMarked,$STR_TRGM2_Setup_Hidden};
+		};
+		class cbTwoObjectives: RscCheckBox
+		{
+			idc = 5916;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.5074 * safezoneH + safezoneY;
+			w = 0.0135 * safezoneW;
+			h = 0.0241 * safezoneH;
+			onCheckedChanged = "[] call TRGM_fnc_missionSetupUpdate; false";
+		};
+		class lblTwoObjectives: TRGM_RscLabel
+		{
+			idc = 5917;
+			x = 0.2833 * safezoneW + safezoneX;
+			y = 0.5074 * safezoneH + safezoneY;
+			w = 0.1958 * safezoneW;
+			h = 0.0241 * safezoneH;
+			text = $STR_TRGM2_Setup_TwoObjectives;
+		};
+		class lblObjective: TRGM_RscSection
+		{
+			idc = 5002;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.5463 * safezoneH + safezoneY;
+			w = 0.2135 * safezoneW;
+			h = 0.0204 * safezoneH;
+			text = $STR_TRGM2_dialogs_Objective;
+		};
+		class cbObjective1: TRGM_RscCombo
+		{
+			idc = 5104;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.5704 * safezoneH + safezoneY;
+			w = 0.2135 * safezoneW;
+			h = 0.0278 * safezoneH;
+		};
+		class cbObjective2: TRGM_RscCombo
+		{
+			idc = 7001;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.5704 * safezoneH + safezoneY;
+			w = 0.2135 * safezoneW;
+			h = 0.0278 * safezoneH;
+		};
+		class cbObjective3: TRGM_RscCombo
+		{
+			idc = 7002;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.5704 * safezoneH + safezoneY;
+			w = 0.2135 * safezoneW;
+			h = 0.0278 * safezoneH;
+		};
+		class BriefingBack: TRGM_RscPanelBox
+		{
+			idc = -1;
+			x = 0.4948 * safezoneW + safezoneX;
+			y = 0.2389 * safezoneH + safezoneY;
+			w = 0.2396 * safezoneW;
+			h = 0.3593 * safezoneH;
+		};
+		class BriefingAccent: TRGM_RscAccent
+		{
+			idc = -1;
+			x = 0.4948 * safezoneW + safezoneX;
+			y = 0.2389 * safezoneH + safezoneY;
+			w = 0.0021 * safezoneW;
+			h = 0.3593 * safezoneH;
+		};
+		class lblBriefing: TRGM_RscSection
+		{
+			idc = -1;
+			x = 0.5073 * safezoneW + safezoneX;
+			y = 0.2537 * safezoneH + safezoneY;
+			w = 0.2146 * safezoneW;
+			h = 0.0204 * safezoneH;
+			text = $STR_TRGM2_Setup_Briefing;
+		};
+		class txtBriefingTitle: TRGM_RscTitle
+		{
+			idc = 5932;
+			x = 0.5073 * safezoneW + safezoneX;
+			y = 0.2778 * safezoneH + safezoneY;
+			w = 0.2146 * safezoneW;
+			h = 0.0593 * safezoneH;
+			style = ST_MULTI;
+			lineSpacing = 1;
+			colorText[] = {0.95,0.93,0.87,1};
+			sizeEx = "0.0241 * safezoneH";
+		};
+		class grpBriefing: TRGM_RscScrollGroup
+		{
+			idc = 5935;
+			x = 0.5073 * safezoneW + safezoneX;
+			y = 0.3444 * safezoneH + safezoneY;
+			w = 0.2146 * safezoneW;
+			h = 0.2426 * safezoneH;
+			class controls
+			{
+				class txtBriefing: TRGM_RscLabel
+				{
+					idc = 5001;
+					x = 0;
+					y = 0;
+					w = "0.2146 * safezoneW - 0.02";
+					h = "0.2426 * safezoneH";
+					style = ST_MULTI;
+					lineSpacing = 1;
+					colorText[] = {0.8,0.78,0.72,1};
+					sizeEx = "0.0167 * safezoneH";
+				};
+			};
+		};
+		class Divider: TRGM_RscDivider
+		{
+			idc = -1;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.6148 * safezoneH + safezoneY;
+			w = 0.4688 * safezoneW;
+			h = 0.0019 * safezoneH;
+		};
+		class lblConditions: TRGM_RscSection
+		{
+			idc = -1;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.6259 * safezoneH + safezoneY;
+			w = 0.2083 * safezoneW;
+			h = 0.0204 * safezoneH;
+			text = $STR_TRGM2_Setup_Conditions;
+		};
+		class lblCondition0: TRGM_RscHint
+		{
+			idc = 5005;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.6500 * safezoneH + safezoneY;
+			w = 0.0885 * safezoneW;
+			h = 0.0204 * safezoneH;
+			text = $STR_TRGM2_dialogs_Weather;
+		};
+		class cbCondition0: TRGM_RscCombo
+		{
+			idc = 5101;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.6722 * safezoneH + safezoneY;
+			w = 0.0885 * safezoneW;
+			h = 0.0278 * safezoneH;
+		};
+		class lblCondition1: TRGM_RscHint
+		{
+			idc = 5006;
+			x = 0.3604 * safezoneW + safezoneX;
+			y = 0.6500 * safezoneH + safezoneY;
+			w = 0.0885 * safezoneW;
+			h = 0.0204 * safezoneH;
+			text = $STR_TRGM2_dialogs_NVG;
+		};
+		class cbCondition1: TRGM_RscCombo
+		{
+			idc = 5102;
+			x = 0.3604 * safezoneW + safezoneX;
+			y = 0.6722 * safezoneH + safezoneY;
+			w = 0.0885 * safezoneW;
+			h = 0.0278 * safezoneH;
+		};
+		class lblCondition2: TRGM_RscHint
+		{
+			idc = 5007;
+			x = 0.4552 * safezoneW + safezoneX;
+			y = 0.6500 * safezoneH + safezoneY;
+			w = 0.0885 * safezoneW;
+			h = 0.0204 * safezoneH;
+			text = $STR_TRGM2_dialogs_Revive;
+		};
+		class cbCondition2: TRGM_RscCombo
+		{
+			idc = 5103;
+			x = 0.4552 * safezoneW + safezoneX;
+			y = 0.6722 * safezoneH + safezoneY;
+			w = 0.0885 * safezoneW;
+			h = 0.0278 * safezoneH;
+		};
+		class lblCondition3: TRGM_RscHint
 		{
 			idc = 1012;
-			text = $STR_TRGM2_dialogs_StartLocation; //--- ToDo: Localize;
-			x = 0.304062 * safezoneW + safezoneX;
-			y = 0.7266 * safezoneH + safezoneY;
-			w = 0.0773437 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {0.85,0.4,0,1};
+			x = 0.5500 * safezoneW + safezoneX;
+			y = 0.6500 * safezoneH + safezoneY;
+			w = 0.0885 * safezoneW;
+			h = 0.0204 * safezoneH;
+			text = $STR_TRGM2_dialogs_StartLocation;
+			tooltip = $STR_TRGM2_dialogs_StartLocation_HelpText;
 		};
-		class RscCombo_2105: RscCombo
+		class cbCondition3: TRGM_RscCombo
 		{
 			idc = 2105;
-			text = $STR_TRGM2_dialogs_Weather; //--- ToDo: Localize;
-			x = 0.381406 * safezoneW + safezoneX;
-			y = 0.7288 * safezoneH + safezoneY;
-			w = 0.154713 * safezoneW;
-			h = 0.0219952 * safezoneH;
+			x = 0.5500 * safezoneW + safezoneX;
+			y = 0.6722 * safezoneH + safezoneY;
+			w = 0.0885 * safezoneW;
+			h = 0.0278 * safezoneH;
+			tooltip = $STR_TRGM2_dialogs_StartLocation_HelpText;
 		};
-		class RscText_1013: RscText
+		class lblCondition4: TRGM_RscHint
 		{
-			idc = 1013;
-			text = "[?]"; //--- ToDo: Localize;
-			x = 0.538156 * safezoneW + safezoneX;
-			y = 0.7288 * safezoneH + safezoneY;
-			w = 0.0154751 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorText[] = {1,1,1,1};
-			tooltip = $STR_TRGM2_dialogs_StartLocation_HelpText; //--- ToDo: Localize;
+			idc = 5004;
+			x = 0.6448 * safezoneW + safezoneX;
+			y = 0.6500 * safezoneH + safezoneY;
+			w = 0.0885 * safezoneW;
+			h = 0.0204 * safezoneH;
+			text = $STR_TRGM2_dialogs_HardcoreReputation;
+			tooltip = $STR_TRGM2_dialogs_HardcoreReputation_HelpText;
 		};
-
-		class btnLoadLocalSave: RscButton
+		class cbCondition4: TRGM_RscCombo
+		{
+			idc = 5100;
+			x = 0.6448 * safezoneW + safezoneX;
+			y = 0.6722 * safezoneH + safezoneY;
+			w = 0.0885 * safezoneW;
+			h = 0.0278 * safezoneH;
+			tooltip = $STR_TRGM2_dialogs_HardcoreReputation_HelpText;
+		};
+		class btnAdvanced: TRGM_RscButton
+		{
+			idc = 1603;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.7685 * safezoneH + safezoneY;
+			w = 0.1198 * safezoneW;
+			h = 0.0519 * safezoneH;
+			text = $STR_TRGM2_Setup_MoreSettings;
+			action = "[] execVM 'RandFramework\GUI\openDialogAdvancedMissionSettings.sqf'; false";
+		};
+		class btnLoadLocalSave: TRGM_RscButton
 		{
 			idc = 1601;
-			text = $STR_TRGM2_dialogs_LoadLocal; //--- ToDo: Localize;
-			x = 0.5825 * safezoneW + safezoneX;
-			y = 0.566 * safezoneH + safezoneY;
-			w = 0.103125 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorBackground[] = {0.85,0.4,0,1};
-			colorActive[] = {0.85,0.4,0,1};
-			tooltip = $STR_TRGM2_dialogs_LoadLocal_HelpText; //--- ToDo: Localize;
+			x = 0.3958 * safezoneW + safezoneX;
+			y = 0.7685 * safezoneH + safezoneY;
+			w = 0.1146 * safezoneW;
+			h = 0.0241 * safezoneH;
+			text = $STR_TRGM2_dialogs_LoadLocal;
+			tooltip = $STR_TRGM2_dialogs_LoadLocal_HelpText;
 			action = "[_this,1] execVM 'RandFramework\GUI\SetParamsAndBegin.sqf'; false";
 		};
-		class btnLoadglobalSave: RscButton
+		class btnLoadglobalSave: TRGM_RscButton
 		{
 			idc = 1602;
-			text = $STR_TRGM2_dialogs_LoadGlobal; //--- ToDo: Localize;
-			x = 0.5825 * safezoneW + safezoneX;
-			y = 0.599 * safezoneH + safezoneY;
-			w = 0.103125 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorBackground[] = {0.85,0.4,0,1};
-			colorActive[] = {0.85,0.4,0,1};
-			tooltip = $STR_TRGM2_dialogs_LoadGlobal_HelpText; //--- ToDo: Localize;
+			x = 0.3958 * safezoneW + safezoneX;
+			y = 0.7963 * safezoneH + safezoneY;
+			w = 0.1146 * safezoneW;
+			h = 0.0241 * safezoneH;
+			text = $STR_TRGM2_dialogs_LoadGlobal;
+			tooltip = $STR_TRGM2_dialogs_LoadGlobal_HelpText;
 			action = "[_this,2] execVM 'RandFramework\GUI\SetParamsAndBegin.sqf'; false";
 		};
-
-
-
-
-		////////////////////////////////////////////////////////
-		// GUI EDITOR OUTPUT END
-		////////////////////////////////////////////////////////
-
-
-
+		class txtWebsite: TRGM_RscStructuredText
+		{
+			idc = 7003;
+			x = 0.3958 * safezoneW + safezoneX;
+			y = 0.8259 * safezoneH + safezoneY;
+			w = 0.2083 * safezoneW;
+			h = 0.0241 * safezoneH;
+			text = "<t color='#99958a'><a href='http://www.trgm2.com'>trgm2.com</a> - help, features and donations</t>";
+		};
+		class btnBegin: TRGM_RscButtonGold
+		{
+			idc = 5600;
+			x = 0.6094 * safezoneW + safezoneX;
+			y = 0.7685 * safezoneH + safezoneY;
+			w = 0.1250 * safezoneW;
+			h = 0.0648 * safezoneH;
+			text = $STR_TRGM2_dialogs_Begin;
+			action = "[_this] execVM 'RandFramework\GUI\SetParamsAndBegin.sqf'; false";
+		};
 	};
 };
 
 
-
 class Trend_DialogSetupParamsAdvanced
-	{
+{
 	idd = 6000;
 	movingEnabled = false;
 
 	class controls {
-
-		////////////////////////////////////////////////////////
-		// GUI EDITOR OUTPUT START (by treendy, v1.063, #Nazety)
-		////////////////////////////////////////////////////////
-
-		class RscPicture_6901: RscPicture
+		class PanelBack: TRGM_RscPanel
 		{
-			idc = 6901;
-			text = "RandFramework\Media\table1.paa";
-			x = 0.226718 * safezoneW + safezoneX;
-			y = 0.0446 * safezoneH + safezoneY;
-			w = 0.531094 * safezoneW;
-			h = 0.935 * safezoneH;
+			idc = -1;
+			x = 0.2500 * safezoneW + safezoneX;
+			y = 0.2185 * safezoneH + safezoneY;
+			w = 0.5000 * safezoneW;
+			h = 0.6426 * safezoneH;
 		};
-
-		//class RscText_6933: RscText
-		//{
-		//	idc = 6933;
-		//	text = "Advanced Options"; //--- ToDo: Localize;
-		//	x = 0.298 * safezoneW + safezoneX;
-		//	y = 0.236 * safezoneH + safezoneY;
-		//	w = 0.175341 * safezoneW;
-		//	h = 0.0659856 * safezoneH;
-		//	colorText[] = {0,1,0,1};
-		//};
-
-
-		class btnAdvanced: RscButton
+		class PanelHeader: TRGM_RscPanelHeader
+		{
+			idc = -1;
+			x = 0.2500 * safezoneW + safezoneX;
+			y = 0.1389 * safezoneH + safezoneY;
+			w = 0.5000 * safezoneW;
+			h = 0.0796 * safezoneH;
+		};
+		class Logo: TRGM_RscLogo
+		{
+			idc = 5201;
+			x = 0.2552 * safezoneW + safezoneX;
+			y = 0.1000 * safezoneH + safezoneY;
+			w = 0.1042 * safezoneW;
+			h = 0.1574 * safezoneH;
+		};
+		class Title: TRGM_RscTitle
+		{
+			idc = -1;
+			x = 0.3490 * safezoneW + safezoneX;
+			y = 0.1574 * safezoneH + safezoneY;
+			w = 0.2188 * safezoneW;
+			h = 0.0426 * safezoneH;
+			text = $STR_TRGM2_Setup_MoreTitle;
+		};
+		class btnCustomEnemy: TRGM_RscButton
+		{
+			idc = 6998;
+			x = 0.5417 * safezoneW + safezoneX;
+			y = 0.1574 * safezoneH + safezoneY;
+			w = 0.0990 * safezoneW;
+			h = 0.0426 * safezoneH;
+			text = $STR_TRGM2_openDialogAdvancedMissionSettings_CustomEnemy;
+			action = "[] call TRGM_fnc_readAdvancedSettings; [] execVM 'RandFramework\GUI\openDialogEnemyFaction.sqf'; false";
+		};
+		class btnCustomLoadouts: TRGM_RscButton
+		{
+			idc = 6997;
+			x = 0.6427 * safezoneW + safezoneX;
+			y = 0.1574 * safezoneH + safezoneY;
+			w = 0.0990 * safezoneW;
+			h = 0.0426 * safezoneH;
+			text = $STR_TRGM2_openDialogAdvancedMissionSettings_CustomLoadouts;
+			action = "[] call TRGM_fnc_readAdvancedSettings; [] execVM 'RandFramework\GUI\openDialogTeamLoadouts.sqf'; false";
+		};
+		class lblGroupFactions: TRGM_RscSection
+		{
+			idc = -1;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.2389 * safezoneH + safezoneY;
+			w = 0.2188 * safezoneW;
+			h = 0.0204 * safezoneH;
+			text = $STR_TRGM2_Setup_GroupFactions;
+		};
+		class lblGroupRespawn: TRGM_RscSection
+		{
+			idc = -1;
+			x = 0.5052 * safezoneW + safezoneX;
+			y = 0.2389 * safezoneH + safezoneY;
+			w = 0.2188 * safezoneW;
+			h = 0.0204 * safezoneH;
+			text = $STR_TRGM2_Setup_GroupRespawn;
+		};
+		class lblGroupSupport: TRGM_RscSection
+		{
+			idc = -1;
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.4889 * safezoneH + safezoneY;
+			w = 0.2188 * safezoneW;
+			h = 0.0204 * safezoneH;
+			text = $STR_TRGM2_Setup_GroupSupport;
+		};
+		class lblGroupWorld: TRGM_RscSection
+		{
+			idc = -1;
+			x = 0.5052 * safezoneW + safezoneX;
+			y = 0.4889 * safezoneH + safezoneY;
+			w = 0.2188 * safezoneW;
+			h = 0.0204 * safezoneH;
+			text = $STR_TRGM2_Setup_GroupWorld;
+		};
+		class btnBack: TRGM_RscButton
 		{
 			idc = 6903;
-			text = $STR_TRGM2_dialogs_Back; //--- ToDo: Localize;
-			x = 0.608281 * safezoneW + safezoneX;
-			y = 0.7442 * safezoneH + safezoneY;
-			w = 0.0773437 * safezoneW;
-			h = 0.022 * safezoneH;
-			colorBackground[] = {0,1,0,1};
-			colorActive[] = {0,1,0,1};
+			x = 0.2656 * safezoneW + safezoneX;
+			y = 0.7685 * safezoneH + safezoneY;
+			w = 0.1198 * safezoneW;
+			h = 0.0519 * safezoneH;
+			text = $STR_TRGM2_dialogs_Back;
 			action = "[] execVM 'RandFramework\GUI\openDialogMissionSelection.sqf'; false";
 		};
-
-
-
-
-		////////////////////////////////////////////////////////
-		// GUI EDITOR OUTPUT END
-		////////////////////////////////////////////////////////
-
-
-
+		class lblHoverHelp: TRGM_RscHint
+		{
+			idc = -1;
+			x = 0.3958 * safezoneW + safezoneX;
+			y = 0.7824 * safezoneH + safezoneY;
+			w = 0.1979 * safezoneW;
+			h = 0.0241 * safezoneH;
+			text = $STR_TRGM2_Setup_HoverHelp;
+		};
+		class btnBegin: TRGM_RscButtonGold
+		{
+			idc = 6904;
+			x = 0.6094 * safezoneW + safezoneX;
+			y = 0.7685 * safezoneH + safezoneY;
+			w = 0.1250 * safezoneW;
+			h = 0.0648 * safezoneH;
+			text = $STR_TRGM2_dialogs_Begin;
+			action = "[] call TRGM_fnc_readAdvancedSettings; [_this] execVM 'RandFramework\GUI\SetParamsAndBegin.sqf'; false";
+		};
 	};
 };
-
 
 
 class Trend_DialogSetupEnemyFaction
@@ -386,14 +637,29 @@ class Trend_DialogSetupEnemyFaction
 		// GUI EDITOR OUTPUT START (by treendy, v1.063, #Nazety)
 		////////////////////////////////////////////////////////
 
-		class RscPicture_7901: RscPicture
+		class PanelBack: TRGM_RscPanel
 		{
 			idc = 7901;
-			text = "RandFramework\Media\table1.paa";
-			x = 0.226718 * safezoneW + safezoneX;
-			y = 0.0446 * safezoneH + safezoneY;
-			w = 0.531094 * safezoneW;
-			h = 0.935 * safezoneH;
+			x = 0.2500 * safezoneW + safezoneX;
+			y = 0.2185 * safezoneH + safezoneY;
+			w = 0.5000 * safezoneW;
+			h = 0.6426 * safezoneH;
+		};
+		class PanelHeader: TRGM_RscPanelHeader
+		{
+			idc = -1;
+			x = 0.2500 * safezoneW + safezoneX;
+			y = 0.1389 * safezoneH + safezoneY;
+			w = 0.5000 * safezoneW;
+			h = 0.0796 * safezoneH;
+		};
+		class Logo: TRGM_RscLogo
+		{
+			idc = -1;
+			x = 0.2552 * safezoneW + safezoneX;
+			y = 0.1000 * safezoneH + safezoneY;
+			w = 0.1042 * safezoneW;
+			h = 0.1574 * safezoneH;
 		};
 
 		//class RscText_6933: RscText

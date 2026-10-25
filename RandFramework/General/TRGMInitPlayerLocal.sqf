@@ -49,8 +49,10 @@ CODEINPUT = [];
 		};
 		while {!bAndSoItBegins} do {
 			//someone else (admin or SL) already chose the options: close our copy of the setup dialog so it can't overwrite them
-			if (bOptionsSet && isNil "TRGM_iSetOptions" && !isNull (findDisplay 5000)) then {
-				(findDisplay 5000) closeDisplay 2;
+			if (bOptionsSet && isNil "TRGM_iSetOptions") then {
+				{
+					if (!isNull (findDisplay _x)) then {(findDisplay _x) closeDisplay 2;};
+				} forEach [5000, 6000, 7000]; //setup page, more settings, custom data editor
 			};
 
 			_isAdmin = (!isMultiplayer || isMultiplayer && !isDedicated && isServer || isMultiplayer && !isServer && (call BIS_fnc_admin) != 0);

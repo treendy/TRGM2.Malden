@@ -137,6 +137,7 @@ class TRGM   { // TAG
     //scripts that are run many times, precompiled instead of execVM
     class scripts {
         class setCheckpoint { file = "RandFramework\setCheckpoint.sqf"; };
+        class missionSetupUpdate { file = "RandFramework\GUI\missionSetupUpdate.sqf"; };
         class setIEDEvent { file = "RandFramework\setIEDEvent.sqf"; };
         class CivKilled { file = "RandFramework\CivKilled.sqf"; };
         class showIntel { file = "RandFramework\showIntel.sqf"; };
