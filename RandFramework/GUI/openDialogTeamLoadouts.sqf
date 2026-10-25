@@ -51,9 +51,11 @@ _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {
 		_errorMessage = "";
 		_Roles = _TempLoadoutData splitString "#";
 		{
-			_RoleDetails = _TempLoadoutData splitString ":";
-			_roleType = _RoleDetails select 0;
-			_loadoutoptions = (_RoleDetails select 1) splitString ";";
+			_RoleDetails = _x splitString ":";
+			_loadoutoptions = [];
+			if (count _RoleDetails > 1) then {
+				_loadoutoptions = (_RoleDetails select 1) splitString ";";
+			};
 			if (count _loadoutoptions == 0) then {
 				_errorMessage = localize "STR_TRGM2_openDialogTeamLoadouts_ErrorMsg_SetNotCorrectly";
 			};

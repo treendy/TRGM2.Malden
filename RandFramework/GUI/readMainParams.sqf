@@ -7,7 +7,8 @@ private _display = findDisplay 5000;
 if (!_bObjectivesOnly) then {
 	{
 		_x params ["_idc", "_varName", "_values"];
-		missionNamespace setVariable [_varName, _values select lbCurSel (_display displayCtrl _idc)];
+		//nothing selected (e.g. a saved value that is no longer in the list): use the first option
+		missionNamespace setVariable [_varName, _values select ((lbCurSel (_display displayCtrl _idc)) max 0)];
 		publicVariable _varName;
 	} forEach [
 		[5500, "iMissionParamType", MissionParamTypesValues],
@@ -24,7 +25,7 @@ if (!_bObjectivesOnly) then {
 {
 	_x params ["_idc", "_varName"];
 	if (!isNull (_display displayCtrl _idc)) then {
-		missionNamespace setVariable [_varName, MissionParamObjectivesValues select lbCurSel (_display displayCtrl _idc)];
+		missionNamespace setVariable [_varName, MissionParamObjectivesValues select ((lbCurSel (_display displayCtrl _idc)) max 0)];
 		publicVariable _varName;
 	};
 } forEach [[7001, "iMissionParamObjective2"], [7002, "iMissionParamObjective3"]];

@@ -147,7 +147,10 @@ if (!isDedicated) then {
 	waitUntil {!isNull player};
 
 	TransferProviders = {
-		//(the transport call action is re-added on respawn by TRGM_fnc_addPlayerActionPersistent)
+		//re-add the transport call action to the new unit (CBA player actions follow the player by themselves)
+		if !([] call TRGM_fnc_isCbaLoaded) then {
+			{player addAction _x;} forEach (missionNamespace getVariable ["TRGM_persistentPlayerActions",[]]);
+		};
 		_oldUnit = _this select 0;
 		_oldProviders = _oldUnit getVariable ["BIS_SUPP_allProviderModules",[]];
 		_HQ = _oldUnit getVariable ["BIS_SUPP_HQ",nil];
@@ -291,9 +294,6 @@ if (isServer) then {
 	/*end */
 
 
-	//enemy classes that clients need for intel (showIntel), the rest of the faction data is only used on the server
-	{publicVariable _x;} forEach ["sMortar","sMortarMilitia","sAAAVeh","sAAAVehMilitia","DestroyAAAVeh"];
-
 	CustomObjectsSet = true;
 	publicVariable "CustomObjectsSet";
 	call compile preprocessFileLineNumbers "RandFramework\setFriendlyObjects.sqf";
@@ -348,6 +348,9 @@ if (isServer) then {
 		};
 	};
 	if (bDebugMode) then {[format["Mission Core: %1", "EnemyFactionDataProcessed"]] remoteExec ["systemChat", 0];};
+
+	//enemy classes that clients need for intel (showIntel), sent after any custom enemy faction data has been applied. The rest of the faction data is only used on the server
+	{publicVariable _x;} forEach ["sMortar","sMortarMilitia","sAAAVeh","sAAAVehMilitia","DestroyAAAVeh"];
 	sleep _coreCountSleep;
 
         _isAceRespawnWithGear = false;
@@ -615,6 +618,9 @@ if (iAllowNVG == 0) then {
 			[false] call TRGM_fnc_setEnemySandstormSkill;
 		};
 		if (_iSandStormOption == 3) then { //5 hours non stop (each client starts the storm effect itself in TRGMInitPlayerLocal, which also covers JIP)
+			if (isDedicated) then { //the storm script also has server parts (fog, time multiplier)
+				[18030,false] execVM "RandFramework\RikoSandStorm\ROSsandstorm.sqf";
+			};
 			[true] call TRGM_fnc_setEnemySandstormSkill;
 			sleep 18030;
 			[false] call TRGM_fnc_setEnemySandstormSkill;
