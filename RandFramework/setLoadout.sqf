@@ -8,14 +8,11 @@ _unitVarType = _unit getVariable ["UnitRole",""];
 _tempMergedLoadoutData = LoadoutDataDefault + "#" + LoadoutData;
 
 
-
 _chrLineBreak = "
 "; // <<< no idea how to find the ascii or char value that i can use to split a string on line breaks... this works for now
 _chrTab = "	";
 
-//hint _unitVarType;
 if (_tempMergedLoadoutData != "" && _unitVarType !="") then {
-	//hint "test3";
 	_errorMessage = "";
 	_Roles = _tempMergedLoadoutData splitString "#";
 	{
@@ -25,8 +22,6 @@ if (_tempMergedLoadoutData != "" && _unitVarType !="") then {
 		_roleType = _roleType splitString _chrLineBreak joinString ""; 		
 		_roleType = _roleType splitString _chrTab joinString ""; 		
 		
-		//hint str(_roleType + " " + _unitVarType);
-		//sleep 0.5;
 		if (_roleType == _unitVarType) then {
 			_loadoutoptions = (_RoleDetails select 1) splitString ";";
 			removeAllWeapons _unit;
@@ -38,11 +33,8 @@ if (_tempMergedLoadoutData != "" && _unitVarType !="") then {
 			removeBackpack _unit;
 			removeHeadgear _unit;
 			removeGoggles _unit;
-			//sleep 2;
 			{
 				_line = _x splitString "=";
-				//hint str(_line);
-				//sleep 0.5;
 				_command = _line select 0;
 				_object = _line select 1;
 
@@ -53,12 +45,7 @@ if (_tempMergedLoadoutData != "" && _unitVarType !="") then {
 					_object = _object splitString " " joinString ""; 
 					_object = _object splitString _chrLineBreak joinString ""; 		
 					_object = _object splitString _chrTab joinString ""; 	
-					//_object = str(_object);
 
-					//hint _command;
-					//sleep 0.5;
-					//hint format ["%1 - %2",_command,_object];
-					//sleep 1;
 					switch (_command) do {
 						case "forceAddUniform" : {							
 							_unit forceAddUniform _object;
@@ -112,6 +99,5 @@ if (_tempMergedLoadoutData != "" && _unitVarType !="") then {
 		hint  _errorMessage;
 	};
 };
-
 
 

@@ -34,15 +34,11 @@ if (player distance getMarkerPos "MrkHQ" > SaveZoneRadius) then {
 		};
 
 		[_iPointsToAdd,format[localize "STR_TRGM2_TRGMOnPlayerKilled_Killed", name player]] execVM "RandFramework\AdjustBadPoints.sqf";
-		//[_iPointsToAdd,format["Player was killed", name player]] execVM "RandFramework\AdjustBadPoints.sqf";
-		//badPoints = badPoints + 0.2; publicVariable "badPoints"
 
 		_tombStone = selectRandom TombStones createVehicle GraveYardPos;
 		_tombStone setDir GraveYardDirection;
 		_tombStone setVariable ["Message", format[localize "STR_TRGM2_RecruiteInf_KIA",name player],true];
-		//_tombStone addAction ["Read",{hint format["%1",(_this select 0) getVariable "Message"]}];
 		[[_tombStone, [localize "STR_TRGM2_RecruiteInf_Read","hint format['%1',(_this select 0) getVariable 'Message']"]],"addAction",true,true] call BIS_fnc_MP;
-		//[0.2, format["KIA: %1",name (_this select 0)]] execVM "RandFramework\AdjustBadPoints.sqf";
 	};
 
 	TRGM_Logic setVariable ["DeathRunning", false, true];

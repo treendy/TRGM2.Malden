@@ -6,9 +6,6 @@
 4 enableChannel false;
 5 enableChannel false;
 
-//hint "CC";
-
-//player removeAllActions;
 
 player setVariable ["tf_unable_to_use_radio", true];
 player setVariable ["tf_globalVolume", 0];
@@ -26,13 +23,11 @@ player addaction ["Toggle Fast Run",{
 [player, true] remoteExec ["hideObjectGlobal", 2];
 while {(alive(player))} do
 {
-	//hint format["speed:%1",speed player];
 	player enableFatigue false;
 	player enableStamina false;
 	removeAllWeapons player;
 	
 	if (speed player > 16) then {
-		//hint "test2";
 		if (player getVariable ["fastRun",false]) then {
 			player setAnimSpeedCoef 6;
 			player allowDamage false;

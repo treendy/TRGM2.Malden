@@ -1,13 +1,3 @@
-/*
-
-Hint "Populating AO222 please wait...";
-_percentage = 0;
-while {_percentage < 100} do {
-	Hint format["Populating AO please wait... %1 %", _percentage];
-	_percentage = _percentage + 1;
-	sleep 0.2;
-};
-*/
 if (isServer) then {
 
 	_mainAOPos = ObjectivePossitions select 0;
@@ -17,7 +7,6 @@ if (isServer) then {
 	if (isNil "AOCampLocation") then {
 		_flatPos = [_mainAOPos , 1300, 1700, 8, 0, 0.3, 0,AreasBlackList,[HQPos,HQPos]] call BIS_fnc_findSafePos;
 		if (str(_flatPos) == "[0,0,0]") then {_flatPos = [_mainAOPos , 1300, 2000, 8, 0, 0.4, 0,AreasBlackList,[HQPos,HQPos]] call BIS_fnc_findSafePos;};
-	//"Marker1" setMarkerPos _flatPos;
 	}
 	else {
 		_flatPos = AOCampLocation;
@@ -55,8 +44,6 @@ if (isServer) then {
 	};
 
 	_markerFastResponseStart setMarkerText (localize "STR_TRGM2_startInfMission_KiloCamp");
-	//k1Car1 setPos _flatPos;
-	//k1Car2 setPos _flatPos;
 
 	_behindBlockPos = _flatPos;
 	_flatPosCampFire = _behindBlockPos;
@@ -79,8 +66,6 @@ if (isServer) then {
 
 			[_Tent1, [localize "STR_TRGM2_startInfMission_RemoveVehicleFromTent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}]] remoteExec ["addAction", 0];
 			[_Tent2, [localize "STR_TRGM2_startInfMission_RemoveVehicleFromTent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}]] remoteExec ["addAction", 0];
-			//_Tent1 addAction [localize "STR_TRGM2_startInfMission_RemoveVehicleFromTent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}];
-			//_Tent2 addAction [localize "STR_TRGM2_startInfMission_RemoveVehicleFromTent",{_veh = selectRandom SmallTransportVehicle createVehicle (getPos (_this select 0));}];
 
 			_flatPos4 = nil;
 			_flatPos4 = [_flatPosCampFire , 5, 10, 5, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
@@ -89,8 +74,7 @@ if (isServer) then {
 		};
 
 
-
-		if (iMissionParamType == 5) then {
+if (iMissionParamType == 5) then {
 			_flatPos4b = nil;
 			_flatPos4b = [_flatPosCampFire , 5, 10, 3, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
 			endMissionBoard2 setPos _flatPos4b;
@@ -101,14 +85,12 @@ if (isServer) then {
 
 		_flatPos5 = nil;
 		_flatPos5 = [_flatPosCampFire, 12, 30, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-		//_car1 = selectRandom FriendlyFastResponseVehicles createVehicle _flatPos5;
 		_car1 = createVehicle [selectRandom FriendlyFastResponseVehicles, _flatPos5, [], 50, "NONE"];
 		_car1 allowDamage false;
 		_car1 setDir (floor(random 360));
 
 		_flatPos6 = nil;
 		_flatPos6 = [_flatPosCampFire, 12, 30, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-		//_car2 = selectRandom FriendlyFastResponseVehicles createVehicle _flatPos6;
 		_car2 = createVehicle [selectRandom FriendlyFastResponseVehicles, _flatPos5, [], 50, "NONE"];
 		_car2 allowDamage false;
 		_car2 setDir (floor(random 360));
@@ -151,7 +133,6 @@ if (isServer) then {
 	{systemChat "Mission Setup: 4";} remoteExec ["bis_fnc_call", 0];
 	sleep 1;
 	if (AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
-		//_AmmoBox1 addAction [localize "STR_TRGM2_startInfMission_VirtualArsenal", {["Open",true] spawn BIS_fnc_arsenal}];
 		[_AmmoBox1, [localize "STR_TRGM2_startInfMission_VirtualArsenal",{["Open",true] spawn BIS_fnc_arsenal}]] remoteExec ["addAction", 0];
 	};
 
@@ -162,7 +143,6 @@ if (isServer) then {
 	{systemChat "Mission Setup: 3.7";} remoteExec ["bis_fnc_call", 0];
 	sleep 1;
 
-	//sl setPos [7772.8,20744.6,0];
 	/*HERE WHY THIS CAUSE MASSIVE SLOWDOWN??????????????????????????????????????? */
 	_flatPosUnits = _flatPosCampFire;
 	{systemChat "Mission Setup: 3.5";} remoteExec ["bis_fnc_call", 0];
@@ -173,42 +153,8 @@ if (isServer) then {
 	{systemChat "Mission Setup: 3.3";} remoteExec ["bis_fnc_call", 0];
 	sleep 1;
 
-	/* HERE ... why when this is uncommented does it cause slowdown?????
-	//try create seperate file, and run this manually after fully loaded???
 
-	//AOCampPos
-	if (!isnil "sl") then {sl setPos _flatPosUnits};
-	{systemChat "Mission Setup: 3.1.7";} remoteExec ["bis_fnc_call", 0];
-	sleep 1;
-
-	if (!isnil "k1_2") then {k1_2 setPos _flatPosUnits};
-	{systemChat "Mission Setup: 3.1.6";} remoteExec ["bis_fnc_call", 0];
-	sleep 1;
-
-	if (!isnil "k1_3") then {k1_3  setPos _flatPosUnits};
-	{systemChat "Mission Setup: 3.1.5";} remoteExec ["bis_fnc_call", 0];
-	sleep 1;
-
-	if (!isnil "k1_4") then {k1_4  setPos _flatPosUnits};
-	{systemChat "Mission Setup: 3.1.4";} remoteExec ["bis_fnc_call", 0];
-	sleep 1;
-
-	if (!isnil "k1_5") then {k1_5  setPos _flatPosUnits};
-	{systemChat "Mission Setup: 3.1.3";} remoteExec ["bis_fnc_call", 0];
-	sleep 1;
-
-	if (!isnil "k1_6") then {k1_6  setPos _flatPosUnits};
-	{systemChat "Mission Setup: 3.1.2";} remoteExec ["bis_fnc_call", 0];
-	sleep 1;
-
-	if (!isnil "k1_7") then {k1_7  setPos _flatPosUnits};
-	{systemChat "Mission Setup: 3.1.1";} remoteExec ["bis_fnc_call", 0];
-	sleep 1;
-	//*/
-
-
-
-	MissionLoaded = true;
+MissionLoaded = true;
 	publicVariable "MissionLoaded";
 
 	{systemChat "Mission Setup: 3";} remoteExec ["bis_fnc_call", 0];

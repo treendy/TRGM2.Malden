@@ -8,7 +8,6 @@ _compare = [_wire, _cutWire] call BIS_fnc_areEqual;
 
 if (_compare) then {
 	cutText ["Wire cut", "PLAIN DOWN"];
-	//DEFUSED = true;
 	playSound "button_close";
 	_thisBomb setVariable ["_wireCut",true,true];
 	hint "Timer activated";
@@ -21,7 +20,6 @@ if (_compare) then {
 	};
 	if (!(_thisBomb getVariable ["isDefused",false])) then {
 		cutText [localize "STR_TRGM2_IEDOhOh", "PLAIN DOWN"];
-		//ARMED = true;
 		playSound "button_wrong";
 		sleep 1;
 		_BOOM = "Bomb_03_F" createVehicleLocal (getPos _thisBomb);
@@ -32,7 +30,6 @@ if (_compare) then {
 
 } else {
 	cutText [localize "STR_TRGM2_IEDOhOh", "PLAIN DOWN"];
-	//ARMED = true;
 	playSound "button_wrong";
 	sleep 1;
 	_BOOM = "Bomb_03_F" createVehicleLocal (getPos _thisBomb);

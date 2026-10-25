@@ -9,7 +9,6 @@ _isWireCut = _thisBomb getVariable ["_wireCut",false];
 
 if (_compare && _isWireCut) then {
 	cutText [localize "STR_TRGM2_BombCodeEntered", "PLAIN DOWN"];
-	//DEFUSED = true;
 	playSound "button_close";
 	_thisBomb setVariable ["_codeEntered",true,true];
 	_thisBomb setVariable ["isDefused",true,true];
@@ -17,7 +16,6 @@ if (_compare && _isWireCut) then {
 	closeDialog 0;
 } else {
 	cutText [localize "STR_TRGM2_IEDOhOh", "PLAIN DOWN"];
-	//ARMED = true;
 	playSound "button_wrong";
 	sleep 1;
 	_BOOM = "Bomb_03_F" createVehicleLocal (getPos _thisBomb);

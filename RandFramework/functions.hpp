@@ -6,7 +6,6 @@ class TRGM   { // TAG
         class isAceLoaded {};
         class isCbaLoaded {};
 
-        class setMilitiaSkill {};
         class debugDotMarker {};
         class CountSpentPoints {};
         class AddToDirection {}; //Can add degrees to direction to calcuate final direction

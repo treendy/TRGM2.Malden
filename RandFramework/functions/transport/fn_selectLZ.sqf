@@ -8,7 +8,6 @@ _markers = [];
 _baseRadius = 500;
 
 
-
 //vehicle setUnitPos
 // set base LZ for the way back.
 if (objNull isEqualTo (_vehicle getVariable ["baseLZ", objNull])) then {
@@ -20,8 +19,6 @@ if (objNull isEqualTo (_vehicle getVariable ["baseLZ", objNull])) then {
 
 	_vehicle setVariable ["baseLZ", position _vehicle, true];
 };
-
-
 
 
 // Objective Zones
@@ -47,7 +44,6 @@ if (!([_vehicle] call TRGM_fnc_helicopterIsFlying)) then {
 		_markers pushBack ([_vehiclePositon,_minimumDistance , "ColorWhite" ] call TRGM_fnc_selectLzCreateBolckedAreaMarker);
 	};
 };
-
 
 
 [_vehicle, _redZonePositions, _vehiclePositon,_baseLZPos, _radius,_minimumDistance, _markers,_baseRadius,_baseReturnAllowed,_isPickup] onMapSingleClick TRGM_fnc_selectLZOnMapClick;

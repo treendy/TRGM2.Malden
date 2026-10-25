@@ -75,55 +75,13 @@ class CfgDebriefing
 
 
 
-//class CfgSounds
-//{
-//	sounds[] = {};
-//
-//	class MKY_Blizzard
-//	{
-//		name = "";
-//		sound[] = {"\RandFramework\MKY\sounds\m0nkey_blizzard.ogg", db+10, 1.0};
-//		titles[] = {0,""};
-//	};
-//
-//};
 
 
-class CfgMusic
-{
-  	tracks[]=
-  	{
-      		spotted, takiIntro, end
-  	};
-
-	class spotted
-  	{
-      		name = "spotted";
-      		sound[] = {"sound\spotted.ogg", db+8, 1.0};
-  	};
-    	class takiIntro
-  	{
-      		name = "takiIntro";
-      		sound[] = {"sound\takiIntro.OGG", db+8, 1.0};
-  	};
-    	class end
-  	{
-      		name = "end";
-      		sound[] = {"sound\end.OGG", db+8, 1.0};
-  	};
-
-};
 
 
 
 class CfgSounds
 {
-	class uragan_1
-	{
-		name = "uragan_1";
-		sound[] = {"\sound\uragan_1.ogg", db+10, 1};
-		titles[] = {1, ""};
-	};
 	class sswindloop {
 		name="sswindloop";
 		sound[]={\RandFramework\Sounds\sswindloop.ogg, 1,1};
@@ -147,78 +105,6 @@ class CfgSounds
 		sound[]={\RandFramework\Sounds\sswarning.ogg, 5,1};
 		titles[] = {};
 	};
-	class expozie
-	{
-		name = "expozie"; // Name for mission editor
-		sound[] = {\RandFramework\Alias\Sound\expozie.ogg, db+20, 1.0};
-		titles[] = {0, ""};	
-	};		
-	class bariera_1
-	{
-		name = "bariera_1"; // Name for mission editor
-		sound[] = {\RandFramework\Alias\Sound\bariera_1.ogg, db+15, 1.0};
-		titles[] = {0, ""};	
-	};	
-	class bariera_2
-	{
-		name = "bariera_2"; // Name for mission editor
-		sound[] = {\RandFramework\Alias\Sound\bariera_2.ogg, db+15, 1.0};
-		titles[] = {0, ""};	
-	};	
-	class bariera_3
-	{
-		name = "bariera_3"; // Name for mission editor
-		sound[] = {\RandFramework\Alias\Sound\bariera_3.ogg, db+15, 1.0};
-		titles[] = {0, ""};	
-	};	
-	class bariera_4
-	{
-		name = "bariera_4"; // Name for mission editor
-		sound[] = {\RandFramework\Alias\Sound\bariera_4.ogg, db+15, 1.0};
-		titles[] = {0, ""};	
-	};	
-	class bariera_5
-	{
-		name = "bariera_5"; // Name for mission editor
-		sound[] = {\RandFramework\Alias\Sound\bariera_5.ogg, db+15, 1.0};
-		titles[] = {0, ""};	
-	};	
-	class ground_air
-	{
-		name = "ground_air"; // Name for mission editor
-		sound[] = {\RandFramework\Alias\Sound\ground_air.ogg, db+15, 1.0};
-		titles[] = {0, ""};	
-	};
-	class roc_1
-	{
-		name = "roc_1"; // Name for mission editor
-		sound[] = {\RandFramework\Alias\Sound\roc_1.ogg, db+10, 1.0};
-		titles[] = {0, ""};	
-	};	
-	class roc_2
-	{
-		name = "roc_2"; // Name for mission editor
-		sound[] = {\RandFramework\Alias\Sound\roc_2.ogg, db+10, 1.0};
-		titles[] = {0, ""};	
-	};		
-	class roc_3
-	{
-		name = "roc_3"; // Name for mission editor
-		sound[] = {\RandFramework\Alias\Sound\roc_3.ogg, db+10, 1.0};
-		titles[] = {0, ""};	
-	};		
-	class roc_4
-	{
-		name = "roc_4"; // Name for mission editor
-		sound[] = {\RandFramework\Alias\Sound\roc_4.ogg, db+10, 1.0};
-		titles[] = {0, ""};	
-	};
-	class alarma_aeriana_scurt
-	{
-		name = "alarma_aeriana_scurt"; // Name for mission editor
-		sound[] = {\RandFramework\Alias\Sound\alarma_aeriana_scurt.ogg, db+10, 1.0};
-		titles[] = {0, ""};	
-	};	
 	#include "RandFramework\Sounds\cfgSounds.hpp"
 
 };

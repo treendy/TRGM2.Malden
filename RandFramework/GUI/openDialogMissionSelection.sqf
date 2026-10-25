@@ -1,7 +1,6 @@
 #include "..\..\setUnitGlobalVars.sqf";
 disableSerialization;
 
-//profileNamespace setVariable [worldname + ":PreviousSettings",Nil];
 
 if (isNil "InitialLoadedPreviousSettings" && !ForceMissionSetup) then {
 	InitialLoadedPreviousSettings = profileNamespace getVariable [worldname + ":PreviousSettings",Nil]; //Get this from server only, but use player ID!!!
@@ -9,8 +8,6 @@ if (isNil "InitialLoadedPreviousSettings" && !ForceMissionSetup) then {
 		if (count InitialLoadedPreviousSettings > 0) then {
 			iMissionParamType = InitialLoadedPreviousSettings select 0;
 			publicVariable "iMissionParamType";
-			//iMissionParamObjective = InitialLoadedPreviousSettings select 1;
-			//publicVariable "iMissionParamObjective";		
 			iAllowNVG = InitialLoadedPreviousSettings select 2;
 			publicVariable "iAllowNVG";	
 			iMissionParamRepOption =  InitialLoadedPreviousSettings select 3;
@@ -122,9 +119,6 @@ if (!isNull (findDisplay 6000)) then {
 	} forEach AdvControls;
 	publicVariable "AdvancedSettings";
 
-	//_ctrlItem = (findDisplay 6000) displayCtrl 5500;
-	//iMissionParamType = MissionParamTypesValues select lbCurSel _ctrlItem;
-	//publicVariable "iMissionParamType";
 };
 
 closedialog 0;
@@ -141,7 +135,6 @@ if (ForceMissionSetup) then {
 else {
 	createDialog "Trend_DialogSetupParams";
 	waitUntil {!isNull (findDisplay 5000);};
-	//hint "opening 2dialogB";
 
 	_ctrlItem = (findDisplay 5000) displayCtrl 5500;
 	_optionItem = MissionParamTypes;

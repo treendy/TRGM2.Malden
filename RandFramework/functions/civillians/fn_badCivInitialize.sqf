@@ -51,7 +51,6 @@ _wheights = [];
 
 _armament = (_possibleArmaments selectRandomWeighted _wheights) select 1;
 _thisCiv setVariable ["armament",_armament , true];
-// to retrieve the armament use: (_civ getVariable "armament") params ["_gun","_magazine","_amount"];
 
 [_thisCiv] spawn TRGM_fnc_badCivLoop;
 

@@ -12,7 +12,6 @@ fnc_CustomRequired = { //used to set any required details for the AO (example, a
 	_flatPos = [[_centralAO_x,_centralAO_y,0] , 10, 150, 10, 0, 0.3, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 
 	if ((_flatPos select 0) > 0) then {_result = true};
-	//flatPosDebug = _flatPos;
 	_result; //return value
 };
 
@@ -66,16 +65,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	};
 
 	_firstGuardClass = selectRandom _HVTGuys;
-	//_HVTGuys = _HVTGuys - InterogateOfficerClasses;
 	_HVTGuys = _HVTGuys - [_firstGuardClass];
 	_mainHVTClass = selectRandom _HVTGuys;
 	_HVTGuys = _HVTGuys - [_mainHVTClass];
 	_mainHVTGuardClass = selectRandom _HVTGuys;
 
-	//TESTTEST = format ["TEST_ %1 - %2",_poshVehPos,getPosATL _objectiveMainBuilding];
 	if ((_poshVehPos distance _objectiveMainBuilding) < 100) then {		
 		_objVehicle = selectRandom _meetingVehs createVehicle _poshVehPos;
-		//_objVehicle setPos _poshVehPos;
 		if (!isNil "_direction") then {
 			_objVehicle setDir (_direction);
 		};
@@ -99,26 +95,11 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 	//AidlPercMstpSnonWnonDnon_G03
 
-	//hvtLzPosDebut = _hvtLzPos;
-	//HVTChopperDebugLandedTest = (createGroup east) createUnit [selectRandom HVTChoppers,_hvtLzPos,[],5,"NONE"];
-	//HVTChopperDebugLandedTest = selectRandom HVTChoppers createVehicle _hvtLzPos;
-	//if airfield nearby, then will have HVT fly in plane (70% chance of it being a plane)
-	//HVTChopperDebugLandedTest = createVehicle [selectRandom HVTChoppers, _hvtLzPos, [], 50, "NONE"];
 
 	_mainHVT = nil;
 	_guardUnit3 = nil;
 	_hvtGroup = createGroup east;
 	_hvtGuardGroup = createGroup east;
-	//if (selectRandom [true,false]) then { //so 50/50 who is leader, so we will have no idea which of these guys is our agent and which is the target!
-	//	_mainHVT = _hvtGroup createUnit [_mainHVTClass,[-500,-500,0],[],20,"NONE"];
-	//	sleep 0.1;
-	//	_guardUnit3 = _hvtGuardGroup createUnit [_mainHVTGuardClass,[-500,-500,0],[],20,"NONE"];
-	//}
-	//else {
-	//	_guardUnit3 = _hvtGuardGroup createUnit [_mainHVTGuardClass,[-500,-500,0],[],20,"NONE"];
-	//	sleep 0.1;
-	//	_mainHVT = _hvtGroup createUnit [_mainHVTClass,[-500,-500,0],[],20,"NONE"];
-	//};		
 
 	_mainHVT = _hvtGroup createUnit [_mainHVTClass,[-500,-500,0],[],20,"NONE"];
 	sleep 0.1;
@@ -153,10 +134,8 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_iTaskIndex = _this select 7;
 
 		waitUntil {sleep 0.5; bAndSoItBegins && CustomObjectsSet && PlayersHaveLeftStartingArea};
-		//["debug: wait started"] remoteExecCall ["Hint", 0];
 
 		_iWait = 420 + floor(random 300);
-		//_iWait = 20;
 		sleep floor(random 120);
 		_sMessageOne = format["%1 is due to arrive in the area at %2",name _thisMainHVT, (daytime  + (_iWait/3600) call BIS_fnc_timeToString)];
 		[[west, "HQ"],_sMessageOne] remoteExec ["sideChat", 0];
@@ -176,16 +155,11 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_hvtChopper setVariable [_sTargetNameHeli, _hvtChopper, true];
 		missionNamespace setVariable [_sTargetNameHeli, _hvtChopper];
 
-		//_hvtChopper allowDamage false;
 
-		
-
-		_thisMainHVT assignAsDriver _hvtChopper;
+_thisMainHVT assignAsDriver _hvtChopper;
 		_thisMainHVT moveInDriver _hvtChopper;
 
 		_thisGuardUnit3 moveInAny _hvtChopper;
-		//_thisGuardUnit3 moveInCargo _hvtChopper;
-		//_thisGuardUnit3 assignAsCargo _hvtChopper;
 
 		_thisGuardUnit3 disableAI "MOVE"; //for some reason, sometimes this guy will just stay in the water???
      	_thisGuardUnit3 disableAI "FSM";
@@ -204,12 +178,9 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 				_thisMainHVT moveInDriver _hvtChopper;
 				sleep 1;
 				_thisGuardUnit3 moveInAny _hvtChopper;
-				//_thisGuardUnit3 moveInCargo _hvtChopper;
-				//_thisGuardUnit3 assignAsCargo _hvtChopper;
 				sleep 2;
 			};
 		};
-		//["debug: should all be in"] remoteExecCall ["Hint", 0];
 
 		_thisMainHVT allowDamage true;
 		_thisGuardUnit3 allowDamage true;
@@ -266,16 +237,13 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
    		};     
        
        waitUntil {sleep 1; (currentWaypoint group _thisMainHVT) >= 6 };
-       //sleep 5;
       	_hvtGroup setSpeedMode "LIMITED";
       	_hvtGroup setBehaviour "CARELESS";
 		_hvtGuardGroup setSpeedMode "LIMITED";
       	_hvtGuardGroup setBehaviour "CARELESS";
-     	
-     	
 
 
-		sleep 9;
+sleep 9;
 		if selectRandom [true]  then {
 			[_thisGuardUnit3] spawn {
 				_thisGuardUnit3 = _this select 0;
@@ -291,7 +259,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		};
 		
 				
-		//hint "waypoint wait";
 		_bWalkEnded = false;
 		while {!_bWalkEnded} do {
 			_distanceFromMeeting = (_thisMainHVT distance _thisGuardUnit1);
@@ -307,10 +274,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			};
 			sleep 0.5;
 		};
-		//hint "waypoint wait ended";
        
-       //waitUntil {sleep 1; (currentWaypoint group _mainHVT) == 9 };
-       //waitUntil {sleep 1; speed _objMan == 0};
 		
 		_hvtGroup setBehaviour "SAFE";
 		_hvtGuardGroup setBehaviour "SAFE";
@@ -406,27 +370,19 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		if (!isTouchingGround _hvtChopper) then {deletevehicle _hvtChopper;};
 	};
 
-//[0.2,format["Paramedic Killed by %1", name _killer]] execVM "RandFramework\AdjustBadPoints.sqf";
-//AdjustMaxBadPoints << increase max bad poins which increases our rep
 
-
-
-	_guardUnit3 addEventHandler ["Killed", {(_this select 0) setVariable ["taskStatus","KILLED",true] }];
+_guardUnit3 addEventHandler ["Killed", {(_this select 0) setVariable ["taskStatus","KILLED",true] }];
 
 	if (_bIsMainObjective) then { //if mainobjective (i.e. heavy mission or final campaign mission) we will require team to get document from corpse
-		//[[_mainHVT, ["Take document","{(_this select 0) setVariable [""taskStatus"",""DOCTAKEN"",true] }",[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
 		[[_mainHVT, ["Take document",{(_this select 0) setVariable ["taskStatus","DOCTAKEN",true]},[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
-		//[[objInformant0, ["Take document9",{(_this select 0) setVariable ["taskStatus","DOCTAKEN",true]},[2,true],10,true,true,""]],"addAction",true,true] call BIS_fnc_MP;
 	}
 	else { //if single mission or side then we can pass this task as soon as HVT is killed
 		_mainHVT addEventHandler ["Killed", {(_this select 0) setVariable ["taskStatus","KILLED",true] }];
 	};
 
-	//waitUntil {((_mainHVT getVariable ["taskStatus",false]) != "" || !alive(_mainHVT))};
 
 	//sleep 1; //give enough time for variable to be set against mainHVT if he was killed (i check if he is alive too, as if for some reason this unit is deleted and no variable set against him, i will need to make sure these waituntil loops are not just hanging around the entire mission)
 
-	//_taskState = _thisMainHVT getVariable ["taskStatus",""];
 
 	_customTaskClear = nil;
 	_customTaskClear = createTrigger ["EmptyDetector", [0,0]];
@@ -445,14 +401,9 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_sAliveCheck2 = format["%1 getVariable [""taskStatus"",""""] == ""KILLED""",_sTargetName2];
 		_customTaskFailed setTriggerStatements [_sAliveCheck2, " [0.8, ""our agent was killed!!!""] execVM ""RandFramework\AdjustBadPoints.sqf""; Hint (""You killed our agent! Rep lowered""); ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
 
-		//decided not to adjust rep if he escapes when no task cretaed, as this is means it's an optional task
-		//_sAliveCheck3 = format["""%1"" == ""ESCAPED"" ",_taskState];
-		//_customTaskEscaped setTriggerStatements [_sAliveCheck3, " [0.8, ""He got away!!!""] execVM ""RandFramework\AdjustBadPoints.sqf""; Hint (""HVT Escaped""); ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
 	}
 	else {
 		_sAliveCheck = format["(%1 getVariable [""taskStatus"",""""] == ""KILLED"" || (%1 getVariable [""taskStatus"",""""] == ""DOCTAKEN"")) && !([""InfSide%2""] call FHQ_TT_areTasksCompleted)",_sTargetName,_iTaskIndex];
-		//TESTTEST = _sAliveCheck;
-		//"objInformant0 getVariable [""taskStatus"",""""] == ""KILLED"" && !([""InfSide0""] call FHQ_TT_areTasksCompleted)"
 		_sTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
 		_customTaskClear setTriggerStatements [_sAliveCheck, _sTaskComplete, ""];	
 

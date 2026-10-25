@@ -31,4 +31,3 @@ publicVariable "tf_no_auto_long_range_radio";
 
 
 execVM "RandFramework\mainInit.sqf";
-//call compile preprocessFileLineNumbers "RandFramework\mainInit.sqf";

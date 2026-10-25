@@ -8,30 +8,16 @@ if (alive _civ) then {
 	  [_x, "Acts_CivilListening_2"] remoteExec ["switchMove", 0];
 	  detach _x;
 	} forEach attachedObjects _civ;
-	//_civ setUnconscious true;
 
 
 	_civ disableAI "anim";  
 	_civ disableAI "MOVE"; 
 
-/*
-	_civ attachTo [_player, [0.5,0,0]];
-	_civ setDir 180;
-	[_civ] spawn {_this select 0 switchMove ""; [_this select 0, "grabCarried"] remoteExec ["playActionNow", 0, false]};
-	sleep 4;
-	[_player] spawn {_this select 0 switchMove "AcinPknlMstpSnonWnonDnon_AcinPercMrunSnonWnonDnon"; };
-*/
-	//_civ switchMove "";
-	//sleep 0.1;
-	//hint "AAAAA";
 	disableUserInput true;
 	_pos = _player ModelToWorld [0,1.8,0];
 	_civ setPos _pos;
-	//_civ attachTo [_player, [-0.6, 0.28, -0.05]];
 	_civ attachTo [_player, [0.5,0,0]];
 	[_civ, 180] remoteExec ["setDir", 0, false];
-	//_civ attachTo [_player, [0.5,0,0]];
-	//_civ setDir 180;
 	[_civ] spawn {_this select 0 switchMove ""; [_this select 0, "grabCarried"] remoteExec ["playActionNow", 0, false]};
 	sleep 4;
 	[_player] spawn {_this select 0 switchMove "AcinPknlMstpSnonWnonDnon_AcinPercMrunSnonWnonDnon"; };
@@ -63,52 +49,8 @@ if (alive _civ) then {
 		};
 	};
 
-/*
-	[_civ,_player] spawn {
 
-		_target = _this select 0;
-		_unit = _this select 1;
-		detach _unit;
-		detach _target;
-		
-		_pos = _unit ModelToWorld [0,1.8,0];
-		_target setPos _pos;
-		[_target, "grabCarried"] remoteExec ["playActionNow", 0, false];
-		disableUserInput true;
-		sleep 2.5;
-		if (!isPlayer _target) then {_target disableAI "ANIM"};
-		[_unit, "grabCarry"] remoteExec ["playActionNow", 0, false];
-		_unit playActionNow "grabCarry";
-		disableUserInput false;
-		disableUserInput true;
-		disableUserInput false;
-		
-		_target attachTo [_unit, [-0.6, 0.28, -0.05]];
-		[_target, 0] remoteExec ["setDir", 0, false];
-
-		_doLoop = true;
-		while {_doLoop} do {
-			sleep 0.1;
-			if (!(alive _unit)) then {
-				_doLoop = false;
-				[_unit, ""] remoteExec ["switchMove", 0, false];
-				{
-					if ( _x isKindOf "Man") then {
-				  		[_x, "Acts_CivilInjuredGeneral_1"] remoteExec ["switchMove", 0];
-				  		detach _x;
-					};
-				} forEach attachedObjects _player;
-			};
-
-		};
-
-		
-	};
-*/
-
-
-
-	_iDropActionIndex = _player addAction ["drop", {
+_iDropActionIndex = _player addAction ["drop", {
 		_player=_this select 0;
 		{
 			if ( _x isKindOf "Man") then {
@@ -155,8 +97,6 @@ if (alive _civ) then {
 	},nil,9];
 	_player setVariable ["loadActionIndex",_iLoadActionIndex];
 
-
-	
 
 }
 else 

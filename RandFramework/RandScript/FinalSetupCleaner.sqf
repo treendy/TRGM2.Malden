@@ -23,10 +23,8 @@
 //check AO camp pos, any enemy units within 150meters, delete
 if (iStartLocation == 1) then {//move to ao camp
 	{
-		//if (_y distance getPos _x > PunishmentRadius) then {
 		if ((side _x == east)) then {
 			deleteVehicle _x;
 		};
-		//};
 	} forEach nearestObjects [AOCampPos, ["Man","Car","Tank"], 100];
 };

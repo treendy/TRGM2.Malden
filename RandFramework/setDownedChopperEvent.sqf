@@ -30,7 +30,6 @@ _bloodPools = ["BloodPool_01_Large_New_F","BloodSplatter_01_Large_New_F"];
 //use IDAP with police car???
 
 
-
 _flatPos = [0,0,0];
 _flatPos = [_mainObjPos , 200, 2000, 1, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 if (!(isNil "IsTraining") || _isFullMap) then {
@@ -108,30 +107,12 @@ if (str(_flatPos) != "[0,0,0]") then {
 		_civ enableAI "anim";
 	}]] remoteExecCall ["addAction", 0]; 
 
-	//[box1,["hello",
-	//	{
 
-
-	//	}
-	//]] remoteExecCall ["addAction", 2]; 
-
-
-	//!!!!!CAn i use this to say3d?????
-	//	[_downedCiv, ["Join Group", {}]] remoteExec ["addAction", -2, _downedCiv];
-	//	[_downedCiv, ["Fortunateson"]] remoteExec ["say3d", -2, _downedCiv];
-	//	[_downedCiv, "Fortunateson"] remoteExec ["say3d", -2, _downedCiv];
-
-	_downedCiv setDamage 0.8;
+_downedCiv setDamage 0.8;
 	_downedCiv setHitPointDamage ["hitLegs", 1];
-	//if (selectRandom[true,false] && !_HasEnemy) then {
 		[_downedCiv, "Acts_CivilInjuredGeneral_1"] remoteExec ["switchMove", 0];
-	//}
-	//else {
-	//	[_downedCiv, "Acts_ExecutionVictim_Loop"] remoteExec ["switchMove", 0];
-	//};
 	
 
-	//_downedCiv playMoveNow "Acts_CivilInjuredGeneral_1"; //"AinjPpneMstpSnonWrflDnon";
 	_downedCiv disableAI "anim";  
 	_downedCivDirection = (floor(random 360));
 	_downedCiv setDir (_downedCivDirection);
@@ -155,11 +136,9 @@ if (str(_flatPos) != "[0,0,0]") then {
 	[_downedCiv] spawn {
 		_downedCiv = _this select 0;
 		while{ (alive _downedCiv)} do {
-			//_downedCiv say3D selectRandom WoundedSounds;
 			_woundedSound = selectRandom WoundedSounds;
 			[_downedCiv,_woundedSound] remoteExecCall ["say3D", [0,-2] select isDedicated];
 			
-			//_downedCiv say3D selectRandom WoundedSounds;
 			sleep selectRandom [2,2.5,3];
 		}
 		
@@ -173,7 +152,6 @@ if (str(_flatPos) != "[0,0,0]") then {
 			_flareposY = getPos _downedCiv select 1;
 			_flare1 = "F_40mm_red" createvehicle [_flareposX+20,_flareposY+20, 250]; _flare1 setVelocity [0,0,-10];
 
-			//_downedCiv say3D selectRandom WoundedSounds;
 			sleep selectRandom [600];
 		}
 		
@@ -188,7 +166,6 @@ if (str(_flatPos) != "[0,0,0]") then {
 	}	
 	else {	
 		if (selectRandom[true,false,false,false]) then {
-		//if (selectRandom[true]) then {
 			_markerEventMedi = createMarker [format["_markerEventRescue%1",(call TRGM_fnc_nextMarkerId)], getPos _downedCiv];
 			_markerEventMedi setMarkerShape "ICON";
 			_markerEventMedi setMarkerType "hd_dot";

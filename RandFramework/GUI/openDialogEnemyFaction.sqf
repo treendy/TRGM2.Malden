@@ -24,12 +24,8 @@ if (!isNull (findDisplay 6000)) then {
 	} forEach AdvControls;
 	publicVariable "AdvancedSettings";
 
-	//_ctrlItem = (findDisplay 6000) displayCtrl 5500;
-	//iMissionParamType = MissionParamTypesValues select lbCurSel _ctrlItem;
-	//publicVariable "iMissionParamType";
 };
 
-//hint "opening 2dialogA";
 
 closedialog 0;
 
@@ -101,10 +97,7 @@ _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {
 				{
 					_className = _x;
 					if (str(_className) != "") then {
-						if (isClass (configFile >> "CfgVehicles" >> _className)) then {
-							//call compile _fullObj;
-						}
-						else {
+						if (!isClass (configFile >> "CfgVehicles" >> _className)) then {
 							_errorMessage = _errorMessage + format[localize "STR_TRGM2_openDialogEnemyFaction_ErrorMsg_NotExist",_fullObj,_x];
 						};
 					}

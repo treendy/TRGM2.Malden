@@ -3,11 +3,9 @@ _params params ["_iSelected","_bCreateTask"];
 
 if (side player == west) then {
 
-	//ClearedPositions pushBack (ObjectivePossitions select _iSelected);
 	ClearedPositions pushBack ([ObjectivePossitions, player] call BIS_fnc_nearestPosition);
 	publicVariable "ClearedPositions";
 
-	//removeAllActions _thisCiv;
 	[_thisCiv] remoteExec ["removeAllActions", 0, true];
 
 	if (_bCreateTask) then {
@@ -15,14 +13,10 @@ if (side player == west) then {
 			sName = format["InfSide%1",_iSelected];
 			[sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0];	
 			_thisCiv switchMove "Acts_ExecutionVictim_Loop"; 
-			//_thisCiv disableAI "anim";
 		}
 		else {
 			//fail task
 			hint "He is dead you muppet!";
-			//badPoints = badPoints + 10;
-			//publicVariable "badPoints";
-			//[format["InfSide%1",_iSelected], "failed"] call FHQ_TT_setTaskState;
 			sName = format["InfSide%1",_iSelected];
 			[sName, "failed"] remoteExec ["FHQ_TT_setTaskState", 0];	
 		};

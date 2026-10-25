@@ -13,8 +13,6 @@ fnc_AddToDirection = {
 	params ["_origDirection","_addToDirection"];
 
 	_iResult = _origDirection + _addToDirection;
-	//hint format["result:%1",_iResult];
-	//sleep 2;
 	if (_iResult > 360) then {
 		_iResult = _iResult - 360;
 	};
@@ -53,7 +51,6 @@ if (count _nearestRoads > 0) then {
 		if (_forceTrap) then {
 			_bIsTrap = true;
 		};
-		//_bIsTrap = true;
 		_bHasHidingAmbush = false;		
 		_thisAreaRange = 50;
 		_nearestRoads = _eventLocationPos nearRoads _thisAreaRange;
@@ -78,7 +75,6 @@ if (count _nearestRoads > 0) then {
 				_iAttemptLimit = _iAttemptLimit - 1;
 			};
 		};
-	//hint format["A: %1 - %2",_iteration,_eventLocationPos];
 		if (_PosFound) then {
 
 			
@@ -94,7 +90,6 @@ if (count _nearestRoads > 0) then {
 				_mainVeh setPos _roadBlockSidePos;
 			};
 			_mainVeh setVariable ["isDefused",false];
-			//_mainVeh setVehicleLock "LOCKED";
 			_mainVehDirection =  ([_direction,(selectRandom[0,-10,10])] call fnc_AddToDirection);
 			_mainVeh setDir _mainVehDirection;
 			clearItemCargoGlobal _mainVeh;		
@@ -231,71 +226,6 @@ if (count _nearestRoads > 0) then {
 					[_eventLocationPos] execVM "RandFramework\RandScript\createEnemySniper.sqf";
 				};
 
-				/*
-				if (selectRandom[true,false]) then {
-					_targetPos = [_targetPos select 0, _targetPos select 1, 0]; //round (_targetPos select 2)];
-
-					_spawnedUnit = nil;
-					_foundPlace = false;
-
-					_maxRange = 800;
-					_minRange = 600;
-					_minHeight = 20;
-
-					_civToUse = selectRandom sCivilian;
-					_spawnedUnit = ((createGroup east) createUnit [_civToUse, [-135,-253,0], [], 10, "NONE"]);
-					_spawnedTempTarget = ((createGroup east) createUnit [_civToUse, _targetPos, [], 10, "NONE"]);
-
-					for "_i" from 1 to 20 do {
-						if (!_foundPlace) then {
-							//hint str(_i);
-							TestTestTargetPos = str(_targetPos);
-							//_pos = [_targetPos, _maxRange, 200, _minHeight, _targetPos] execVM "RandFramework\RandScript\findOverwatchOverride.sqf";
-							_pos = [_targetPos, _maxRange, 200, _minHeight, _targetPos] call compile preprocessFileLineNumbers "RandFramework\RandScript\findOverwatchOverride.sqf";
-							//_pos = [_targetPos, _maxRange, 200, _minHeight, _targetPos] call BIS_fnc_findOverwatch;
-							_spawnedUnit setPos _pos;
-							_direction = [getpos _spawnedUnit, _targetPos] call BIS_fnc_DirTo;
-							//hint str(_direction);
-							_spawnedUnit setDir _direction;
-							_spawnedUnit setFormDir _direction;
-							_spawnedUnit setUnitPos selectRandom ["MIDDLE"];
-							
-							//_lodPos = [_targetPos select 0, _targetPos select 1, (_targetPos select 2) + 20];
-							//Sign_Arrow_Large_Green_F
-							//_defi = "Sign_Arrow_Large_Green_F" createVehicle _lodPos;
-							_cansee = [objNull, "VIEW"] checkVisibility [eyePos _spawnedUnit, eyePos _spawnedTempTarget];
-							_direction2 = [getpos player, getpos _spawnedUnit] call BIS_fnc_DirTo;
-							//player setpos _pos;
-							//player setDir _direction2;
-							if (_cansee > 0) then {
-								_foundPlace = true;
-								_spawnedUnit addWeapon "Binocular";
-								_spawnedUnit selectWeapon "Binoculars";
-								//[format["mrkSniper%1", time, str(getpos _spawnedUnit select 0)],  position _spawnedUnit, "ICON", "ColorGreen", [0.5,0.5], "SNIPER"] call AIS_Core_fnc_createLocalMarker;
-								SpotterCount = SpotterCount + 1;
-							}
-							else {
-								//[format["mrkSniper%1", time, str(getpos _spawnedUnit select 0)],  position _spawnedUnit, "ICON", "ColorRed", [0.5,0.5], "SNIPER"] call AIS_Core_fnc_createLocalMarker;
-								SpotterAttemptCount = SpotterAttemptCount + 1;
-								if (_i < 11) then {
-									_minHeight = _minHeight - 1;
-									_maxRange = _maxRange - 10;
-									_minRange = _minRange - 45;
-									//hint str( _minRange);
-								};
-								//deleteVehicle _spawnedUnit;
-								//deleteVehicle _spawnedTempTarget
-							};
-						};
-						//hint str(_cansee);
-					};
-					deleteVehicle _spawnedTempTarget;
-
-					if (!_foundPlace) then {
-						deleteVehicle _spawnedUnit;
-					};
-				};
-				*/
 				_allowAPTraps = true;
 				_mainVehPos = getPos _mainVeh;
 				{
@@ -315,7 +245,7 @@ if (count _nearestRoads > 0) then {
 						if (!isOnRoad _randomPos) then {
 							//APERSMine ATMine
 							_objMine = createMine [selectRandom["APERSMine"], _randomPos, [], 0];
-							if ("TEST" == "FALSE") then {
+							if (bDebugMode) then { //show mine positions when debugging
 								_markerstrcache = createMarker [format ["IEDMineLoc%1",floor random 999999],_randomPos];
 								_markerstrcache setMarkerShape "ICON";
 								_markerstrcache setMarkerType "hd_dot";
@@ -328,8 +258,6 @@ if (count _nearestRoads > 0) then {
 			};
 
 
-			//set veh damage;
-			//if (selectRandom[true,false]) then {_mainVeh setHit ["engine",0.75];};
 			_mainVeh setFuel 0;
 			if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_1_steering",1];};
 			if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_2_steering",1];};
@@ -349,35 +277,6 @@ if (count _nearestRoads > 0) then {
 			  	if (_bIsTrap) then {
 			  		//LandVehicle
 			  		if (alive _mainVeh) then {
-				  		/*_nearUnits = nearestObjects [(_roadBlockSidePos), ["Man"], 10];
-				  		{
-							if ((_x in switchableUnits || _x in playableUnits) && (alive _mainVeh)) then {
-								_bWaiting = false;
-								hint localize "STR_TRGM2_IEDOhOh";
-								sleep 1;
-								playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_mainVeh,false,getPosASL _mainVeh,0.5,1.5,0];
-								sleep 0.6;
-								playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_mainVeh,false,getPosASL _mainVeh,0.5,1.5,0];
-								sleep 0.5;
-								playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_mainVeh,false,getPosASL _mainVeh,0.5,1.5,0];
-								sleep 0.4;
-								playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_mainVeh,false,getPosASL _mainVeh,0.5,1.5,0];
-								sleep 0.3;
-								playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_mainVeh,false,getPosASL _mainVeh,0.5,1.5,0];
-								sleep 0.2;
-								playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_mainVeh,false,getPosASL _mainVeh,0.5,1.5,0];
-								sleep 0.1;
-								playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_mainVeh,false,getPosASL _mainVeh,0.5,1.5,0];
-								sleep 1.5;
-								//do boooooom!!!!
-								_type = selectRandom ["Bomb_03_F","Missile_AA_04_F","M_Mo_82mm_AT_LG","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo"];
-								_li_aaa = _type createVehicle (getPos _mainVeh);
-								_li_aaa setDamage 1;
-								_mainVeh setVariable ["isDefused",true, true];
-								[localize "STR_TRGM2_IEDOmteresting"] remoteExecCall ["Hint", 0];
-							};
-							if (!_bWaiting) exitWith {true};
-						} forEach _nearUnits;*/
 						_nearUnits = nearestObjects [(_roadBlockSidePos), ["LandVehicle"], 10];
 						{
 							if (((driver _x) in switchableUnits || (driver _x) in playableUnits) && (alive _mainVeh)) then {

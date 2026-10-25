@@ -8,10 +8,8 @@ _bCreateTask = _params select 1;
 
 if (side player == west) then {
 
-	//ClearedPositions pushBack (ObjectivePossitions select _iSelected);
 	ClearedPositions pushBack ([ObjectivePossitions, player] call BIS_fnc_nearestPosition);
 	publicVariable "ClearedPositions";
-	//removeAllActions _thisCiv;
 	[_thisCiv] remoteExec ["removeAllActions", 0, true];
 
 

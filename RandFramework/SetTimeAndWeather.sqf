@@ -9,8 +9,6 @@ if (isNil "UseEditorWeather") then {
 };
 
 
-
-
 fnc_fullMoonDates = 
 {
 	private _year = param [0, 2035];
@@ -41,7 +39,6 @@ fnc_fullMoonDates =
 };
 
 MoonNight =  selectRandom (2035 call fnc_fullMoonDates);
-
 
 
 if (!UseEditorWeather && isServer) then {
@@ -115,10 +112,8 @@ if (!UseEditorWeather && isServer) then {
 				null = [220,5000,false] execvm "AL_storm\al_monsoon.sqf";   
 		 	};		
 		};
-	    	
 
 
-
-	forceWeatherChange;
+forceWeatherChange;
 	    
 };    

@@ -10,11 +10,6 @@ params [
 _radius = 900;
 _airEscort = false;
 _isHiddenObj = false;
-//{
-//		if ((_x distance2D _destinationPosition) < _radius) then {
-//			_airEscort = true;
-//		};
-//} forEach ClearedPositions;
 
 _mainAOPos = ObjectivePossitions select 0;
 if (! isNil "_mainAOPos") then {
@@ -30,7 +25,6 @@ if (! isNil "_mainAOPos") then {
 };
 
 
-
 //ObjectivePossitions
 
 if (!alive _vehicle) then {
@@ -42,7 +36,6 @@ _vehicle setFuel 1;
 //cleanup possible prevoius prevoious
 deleteVehicle (_vehicle getVariable ["targetPad", objNull]);
 deleteMarker (_vehicle getVariable ["lzMarker",""]);
-
 
 
 /** New Tranport Mission starts here **/

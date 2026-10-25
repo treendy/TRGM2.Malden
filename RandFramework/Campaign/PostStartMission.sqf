@@ -9,8 +9,7 @@
 		sleep 2;
 
 
-
-		_bMoveToAO = false;
+_bMoveToAO = false;
 		if (iStartLocation == 2) then {
 			_bMoveToAO = selectRandom [true,false];
 		};
@@ -19,31 +18,10 @@
 		};
 		if (_bMoveToAO) then {
 			call compile preprocessFileLineNumbers "RandFramework\functions\MissionSetup\AoCampCreator.sqf";
-			//[] execVM "RandFramework\functions\MissionSetup\AoCampCreator.sqf";
-		}
-		else {
-			/*TREND_fnc_PopulateLoadingWait = {
-				Hint "Populating AO please wait...";
-				_percentage = 0;
-				while {_percentage < 100} do {
-					[format["Populating AO please wait... Percentage: %1", _percentage]] remoteExecCall ["Hint", 0];
-					//Hint format["Populating AO please wait... %1 %", _percentage];
-					_percentage = _percentage + 1;
-					sleep 0.2;
-				};
-				[""] remoteExecCall ["Hint", 0];
-				MissionLoaded = true;
-				publicVariable "MissionLoaded";
-			};
-			[_sTargetName] spawn TREND_fnc_PopulateLoadingWait;*/
 		};
 
 
-
-
-
-
-		_isHiddenObj = false;
+_isHiddenObj = false;
 		_mainAOPos = ObjectivePossitions select 0;
 		if (! isNil "_mainAOPos") then {
 			if (_mainAOPos in HiddenPossitions ) then {
@@ -92,11 +70,9 @@
 		if ((MaxBadPoints - BadPoints) >= 10) then {
 			titleText ["", "BLACK IN", 5];
 			_LineTwo = (localize "STR_TRGM2_StartMission_Final") + CurrentZeroMissionTitle;
-			//titleText [format["Day %1 - %2\nFinal Objective: %3\nLocation: %4",iCampaignDay,_time24,CurrentZeroMissionTitle,_locationText], "BLACK IN", 5];
 		}
 		else {
 			titleText ["", "BLACK IN", 5];
-			//titleText [format["Day %1 - %2.\nObjective: %3\nLocation: %4",iCampaignDay,_time24,CurrentZeroMissionTitle,_locationText], "BLACK IN", 5];
 		};
 
 
@@ -190,10 +166,7 @@
 		};
 
 
-
-
-
-		titleCut ["", "BLACK in", 5];
+titleCut ["", "BLACK in", 5];
 		_camera cameraEffect ["Terminate","back"];
 		sleep 10;
 

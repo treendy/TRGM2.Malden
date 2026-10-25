@@ -1,4 +1,3 @@
-//if (isServer) then {
 
 	_Pos = _this select 0;
 
@@ -17,7 +16,6 @@
 	TREND_fnc_SetFlareLightStuff = {
 		_al_flare_light = _this select 0;
 		_flare1 = _this select 1;
-		//hint str(_al_flare_light);
 		_al_flare_intensity = 3;
 		_al_flare_range = 1000;
 
@@ -49,7 +47,6 @@
 
 		_int_mic = 3;
 
-	//	hint "scade";
 
 		while {_int_mic>0} do {
 			_flare_brig = _flare_brig - 10;
@@ -57,14 +54,10 @@
 			_int_mic = _int_mic-0.03;
 			sleep 0.01;
 		};
-	//	hint "DOne";
 		deleteVehicle _al_flare_light;
 	};
 	publicVariable "TREND_fnc_SetFlareLightStuff";
 
-	
-	//{[_al_flare_light] spawn TREND_fnc_SetFlareLightStuff;} remoteExec ["bis_fnc_call", 0];
 
-	[_al_flare_light, _flare1] remoteExec ["TREND_fnc_SetFlareLightStuff", 0];
+[_al_flare_light, _flare1] remoteExec ["TREND_fnc_SetFlareLightStuff", 0];
 
-//};

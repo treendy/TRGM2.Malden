@@ -7,8 +7,6 @@ fnc_AddToDirection = {
 	params ["_origDirection","_addToDirection"];
 
 	_iResult = _origDirection + _addToDirection;
-	//hint format["result:%1",_iResult];
-	//sleep 2;
 	if (_iResult > 360) then {
 		_iResult = _iResult - 360;
 	};
@@ -23,7 +21,6 @@ _objectiveCreated = false;
 
 _nearestRoads = _posOfAO nearRoads _roadRange;
 
-//TARGETTEST = format["here333: %1", str(_isCache)];
 
 if (!_isCache && count _nearestRoads > 0) then {	
 
@@ -67,7 +64,6 @@ if (!_isCache && count _nearestRoads > 0) then {
 				_iAttemptLimit = _iAttemptLimit - 1;
 			};
 		};
-	//hint format["A: %1 - %2",_iteration,_eventLocationPos];
 		if (_PosFound) then {
 			_objectiveCreated = true;
 			
@@ -82,7 +78,6 @@ if (!_isCache && count _nearestRoads > 0) then {
 				_mainVeh = _objTarget;
 				_mainVeh setPos _roadBlockSidePos;
 			};
-			//_mainVeh setVehicleLock "LOCKED";
 			_mainVehDirection =  ([_direction,(selectRandom[0,-10,10])] call fnc_AddToDirection);
 			_mainVeh setDir _mainVehDirection;
 			clearItemCargoGlobal _mainVeh;		
@@ -128,8 +123,7 @@ if (!_isCache && count _nearestRoads > 0) then {
 			_spawnedUnitTarget2 setFormDir _directionTarget2;
 
 
-
-			_thisAreaRange = 20;
+_thisAreaRange = 20;
 			_flatPos = nil;
 			_flatPos = [_posOfTarget , 0, 20, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]] + CheckPointAreas + SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 			if (_flatPos select 0 > 0) then {
@@ -148,35 +142,17 @@ if (!_isCache && count _nearestRoads > 0) then {
 		//HERE 23_09_2019 : look at SetIEDEvent, or startInfMission line 541 (where we create triggers for ammotrucks)
 		//need to get this to give rep points if not a main mission
 		//and nothing, if is main mission (as the mission setup file (mission15.sqf) will check if these three are alive)
-		/*
-		_trg = createTrigger ["EmptyDetector", position _mainVeh];
-		_trg setVariable ["DelMeOnNewCampaignDay",true];
-		_trg setTriggerArea [100, 100, 0, false];
-		_sSTringPos = format["%1,%2", position _mainVeh select 0, position _mainVeh select 1];
-		_sTriggerString = "!alive(nearestObject [[" + _sSTringPos + "], '" + TowerClassName + "'])";
-
-		_trg setTriggerStatements [_sTriggerString, "bCommsBlocked = true; publicVariable ""bCommsBlocked""; [this] execVM ""RandFramework\RandScript\commsBlocked.sqf"";", ""];
-		*/
 
 
-
-
-		}
-		else {
-		}	
-	}
-	else {
-
+};
 	};
 };
-
 
 
 if (_isCache) then {
 
 	_buildings = nearestObjects [_posOfAO, BasicBuildings, _roadRange];
 	_infBuilding = selectRandom _buildings;
-	//TARGETTEST = "here";
 	_eventPosFound = false;
 	_iAttemptLimit = 15;		
 	while {!_eventPosFound && _iAttemptLimit > 0} do {
@@ -189,10 +165,8 @@ if (_isCache) then {
 		if (_isMainTask || (_farEnoughFromWarzone && _farEnoughFromAo)) then {_eventPosFound = true;};		
 	};	
 	if (!_eventPosFound) then {
-		//TARGETTEST = "oh crap";
 		_infBuilding = selectRandom _buildings;
 	};
-	//TARGETTEST = format["%1 : %2",TARGETTEST,_iAttemptLimit];
 
 	_infBuilding setDamage 0;
 	_allBuildingPos = _infBuilding buildingPos -1;
@@ -261,8 +235,6 @@ if (_isCache) then {
 			} forEach _checkedPositions;
 			_checkedPositions pushBack _newPos;
 			if (_allowed) then {
-				//_doLoop = false;
-				//one group for all door guards (instead of a group each), PATH disabled so they hold their door
 				if (isNull _doorGuardGroup) then {_doorGuardGroup = createGroup east;};
 				_spawnedUnit2 = (_doorGuardGroup createUnit [sRiflemanToUse, _newPos, [], 0, "NONE"]);
 				_spawnedUnit2 disableAI "PATH";
@@ -341,8 +313,7 @@ if (!_objectiveCreated) then {
 	};
 
 
-
-	if (selectRandom[true,false,false]) then {
+if (selectRandom[true,false,false]) then {
 		[_posObj] execVM "RandFramework\RandScript\createEnemySniper.sqf";
 	};
 

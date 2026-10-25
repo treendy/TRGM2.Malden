@@ -6,8 +6,6 @@ AirSupportOptions=["B_Plane_CAS_01_dynamicLoadout_F"];
 ArtiSupportOptions=["B_MBT_01_arty_F"];
 
 
-
-
 FriendlyVictims = ["B_Soldier_unarmed_F"];
 FriendlyVictimVehs = ["Land_Wreck_Slammer_F","Land_Wreck_Heli_Attack_01_F","Land_HistoricalPlaneWreck_03_F"];
 Paramedics = ["C_Man_Paramedic_01_F"];

@@ -1,8 +1,6 @@
-//example: [0.3, _PointsAdjustMessage] execVM "RandFramework\AdjustMaxBadPoints.sqf";
 
 #include "../setUnitGlobalVars.sqf";
 
-//if (bDebugMode) then {hint format["Points adjusting: %1", TRGM_Logic getVariable "PointsUpdating"]};
 
 sleep random [1,2.5,5]; //to increase the chance of not fireing at same time! (not convinsed that the "PointsUpdating" variable actually helped)
 

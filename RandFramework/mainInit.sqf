@@ -1,7 +1,6 @@
 #include "..\CustomMission\TRGMSetDefaultMissionSetupVars.sqf";
 #include "..\setUnitGlobalVars.sqf";
 
-//call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetDefaultUnitGlobalVars.sqf";
 
 civilian setFriend [east, 1];
 
@@ -294,10 +293,6 @@ Donations : www.trgm2.com</font>
 If you really want to, you can make a donation via my site www.trgm2.com (paypal link at top right of site).  I would also love to dedicate more time to the TRGM2 engine, making updates, fixes and new features, so would love to take some time off work to spend full days on my engine : )"]]; 
 
 
-//hintSilent parseText "<t size='1.25' font='Zeppelin33' color='#ff0000'>test lives remaining.</t><a href='http://arma3.com'>A3</a>";
-
-
-
 if (isServer) then { //adjust weather here so intro animation is different everytime
 		[true] execVM "RandFramework\SetTimeAndWeather.sqf";
 };
@@ -323,7 +318,6 @@ _camera camPrepareFOV 0.4;
 _camera camCommitPrepared 600;
 
 
-
 _trgRatingAdjust = createTrigger ["EmptyDetector", [0,0]];
 _trgRatingAdjust setTriggerArea [0, 0, 0, false];
 _trgRatingAdjust setTriggerStatements ["((rating player) < 0)", "player addRating -(rating player)", ""];
@@ -336,7 +330,6 @@ if (!isDedicated) then {
 		if !([] call TRGM_fnc_isCbaLoaded) then {
 			[[chopper1]] call TRGM_fnc_addTransportActions;
 		};
-		//player addAction [localize "STR_TRGM2_TRGMInitPlayerLocal_CallHeliTransport","[chopper1,true] spawn TRGM_fnc_selectLZ",0,0];	
 
 		_oldUnit = _this select 0;
 		_oldProviders = _oldUnit getVariable ["BIS_SUPP_allProviderModules",[]];
@@ -378,7 +371,6 @@ if (!isDedicated) then {
 		while {true} do {
 			waitUntil {sleep 0.5; _unit != player };
 			group player selectLeader player;
-			//hintSilent " Player has changed";
 			[_unit] call TransferProviders;
 			_unit = player;
 		};
@@ -414,27 +406,21 @@ if (!isDedicated && _isAdmin) then {
 			onMapSingleClick "Mission1Loc = _pos; publicVariable 'Mission1Loc'; openMap false; onMapSingleClick '';true;";
 			sleep 1;
 			waitUntil {!visibleMap};
-			//if (!isNil("mrkAoSelect1")) then {
 				["mrkAoSelect1",  Mission1Loc, "ICON", "ColorRed", [1,1], "AO 1"] call AIS_Core_fnc_createLocalMarker;
-			//};
 			if (iMissionParamType == 0 || iMissionParamType == 4) then {
 				titleText[localize "STR_TRGM2_tele_SelectPositionAO2", "PLAIN"];
 				openMap true;
 				onMapSingleClick "Mission2Loc = _pos; publicVariable 'Mission2Loc'; openMap false; onMapSingleClick '';true;";
 				sleep 1;
 				waitUntil {!visibleMap};
-				//if (!isNil("mrkAoSelect2")) then {
 					["mrkAoSelect2",  Mission2Loc, "ICON", "ColorRed", [1,1], "AO 2"] call AIS_Core_fnc_createLocalMarker;
-				//};		
 
 				titleText[localize "STR_TRGM2_tele_SelectPositionAO3", "PLAIN"];
 				openMap true;
 				onMapSingleClick "Mission3Loc = _pos; publicVariable 'Mission3Loc'; openMap false; onMapSingleClick '';true;";
 				sleep 1;
 				waitUntil {!visibleMap};
-				//if (!isNil("mrkAoSelect3")) then {
 					["mrkAoSelect3",  Mission3Loc, "ICON", "ColorRed", [1,1], "AO 3"] call AIS_Core_fnc_createLocalMarker;
-				//};
 			};
 			if (getMarkerColor "mrkAoSelect1" != "") then {deleteMarker "mrkAoSelect1";};
 			if (getMarkerColor "mrkAoSelect2" != "") then {deleteMarker "mrkAoSelect2";};
@@ -459,15 +445,12 @@ if (!isDedicated && _isAdmin) then {
 };
 
 
-
-
 waitUntil {sleep 0.5; bAndSoItBegins};
 
 Private _coreCountSleep = 0.1;
 
 systemChat format["Mission Core: %1", "Init"];
 sleep _coreCountSleep;
-
 
 
 if (isServer) then {
@@ -489,10 +472,6 @@ if (!isDedicated) then {
 systemChat format["Mission Core: %1", "CameraTerminated"];
 sleep _coreCountSleep;
 
-
-
-
-//#include "RandFramework\General\TRGMSetEnemyUnitGlobalVars.sqf";
 
 call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetDefaultUnitGlobalVars.sqf";
 
@@ -587,7 +566,6 @@ if (isServer) then {
 	sleep _coreCountSleep;
 	if (LoadoutData != "" || LoadoutDataDefault != "") then {
 		{
-			//_x setVariable ["UnitRole",_unitRole];
 			_handle = [_x] execVM "RandFramework\setLoadout.sqf";
 			waitUntil {scriptDone _handle};
 			if (!isNil("_isAceRespawnWithGear")) then {
@@ -650,7 +628,6 @@ systemChat format["Mission Core: %1", "AIS Script Run"];
 sleep _coreCountSleep;
 
 
-//this setVariable ["MP_ONLY", true, true];
 if (!isMultiplayer) then {
 	{
 		if (_x getVariable ["MP_ONLY",false]) then {
@@ -664,7 +641,6 @@ sleep _coreCountSleep;
 
 
 player doFollow player;
-
 
 
 systemChat format["Mission Core: %1", "DoFollowRun"];
@@ -769,10 +745,7 @@ TREND_fnc_CheckBadPoints = {
 				if ((ActiveTasks call FHQ_TT_areTasksCompleted)) then { //if rank changed and tasks completed, then if now rank 5, need to reset board to show "Start final mission", otherwise, make sure shows "start next mission"
 					[["MISSION_COMPLETE"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,"TRGM_missionBoardOptions"];
 				};
-				//hint parseText _sRankMessage;
 				[parseText _sRankMessage] remoteExec ["Hint", 0, true];
-				//hintSilent parseText format["<t size='1.25' font='Zeppelin33' color='#ff0000'>%1 lives remaining.</t><a href='http://arma3.com'>A3</a>%2", 12, _sRankMessage];
-				//[format["Points have been marked against your team. Current points: %1 out of %2\n\nREASONS SO FAR: \n%3",BadPoints, MaxBadPoints, BadPointsReason]] remoteExec ["Hint", 0, true];
 			};
 		};
 
@@ -787,7 +760,6 @@ TREND_fnc_CheckBadPoints = {
 player addEventHandler ["Respawn", { [] spawn TREND_fnc_CheckBadPoints; }];
 systemChat format["Mission Core: %1", "BadPointsSet"];
 sleep _coreCountSleep;
-
 
 
 if (isServer) then {
@@ -830,9 +802,8 @@ if (isServer) then {
 	 {systemChat format["Mission Core: %1", "NonAliveEndCheckRunning"];} remoteExec ["bis_fnc_call", 0];
 	sleep _coreCountSleep;
 
-	
 
-	if (iAllowNVG == 0) then {
+if (iAllowNVG == 0) then {
 		{
 			 _x addPrimaryWeaponItem "acc_flashlight";
 			 _x enableGunLights "forceOn";
@@ -963,9 +934,7 @@ sleep _coreCountSleep;
 	waitUntil {player == player};
 	waitUntil {time > 10};
 	[[],"RandFramework\animateAnimals.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
-	//hint "PING";
  };
-
 
 
 systemChat format["Mission Core: %1", "CoreFinished"];

@@ -117,6 +117,4 @@ if (!isMultiplayer) then {
 	_ctrlLoadGlobal = (findDisplay 5000) displayCtrl 1602;
 	_ctrlLoadLocal  ctrlShow false;
 	_ctrlLoadGlobal  ctrlShow false;
-	//ctrlDelete _ctrlLoadLocal;
-	//ctrlDelete _ctrlLoadGlobal;
 };

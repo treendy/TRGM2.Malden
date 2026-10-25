@@ -1,7 +1,6 @@
 #include "../../setUnitGlobalVars.sqf";
 #include "trendFunctions.sqf";
 
-///*orangestest
 
 _mainObjPos = ObjectivePossitions select 0;
 
@@ -14,13 +13,11 @@ _mainObjPos = ObjectivePossitions select 0;
 _TowersNear = nearestObjects [_mainObjPos, TowerBuildings, TowerRadius];
 
 
-
 {systemChat "Mission Events: Comms 9";} remoteExec ["bis_fnc_call", 0];
 {
 	[[_x, [localize "STR_TRGM2_TRENDfncsetOtherAreaStuff_CheckEnemyComms","RandFramework\checkForComms.sqf",[_x]]],"addAction",true,true] call BIS_fnc_MP;
 } forEach _TowersNear;
 if (count _TowersNear > 0) then {
-//if (!(isNull _pepe)) then {
 	{systemChat "Mission Events: Comms 8";} remoteExec ["bis_fnc_call", 0];
 	TowerBuild = _TowersNear select 0;
 	TowerClassName = typeOf TowerBuild;
@@ -104,7 +101,6 @@ if (count _TowersNear > 0) then {
 {systemChat "Mission Events: CommsEND";} remoteExec ["bis_fnc_call", 0];
 
 
-
 if (!(isNil "IsTraining")) then {
 	[_mainObjPos] execVM "RandFramework\setMedicalEvent.sqf";
 	[_mainObjPos] execVM "RandFramework\setMedicalEvent.sqf";
@@ -142,28 +138,23 @@ else {
 
 {systemChat "Loading Events : 13";} remoteExec ["bis_fnc_call", 0];
 	if (selectRandom ChanceOfOccurance) then {
-	//if (true) then {
 		[_mainObjPos] execVM "RandFramework\setATMineEvent.sqf";
 		sleep 1;
 	};
 
 {systemChat "Loading Events : 12";} remoteExec ["bis_fnc_call", 0];
 	if (selectRandom ChanceOfOccurance) then {
-	//if (true) then {
 		[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
 		sleep 1;
 	};	
 
 {systemChat "Loading Events : 11";} remoteExec ["bis_fnc_call", 0];
 	if (selectRandom ChanceOfOccurance) then {
-	//if (true) then {
 		[_mainObjPos] execVM "RandFramework\setATMineEvent.sqf";
 		sleep 1;
 	};
 {systemChat "Loading Events : 10";} remoteExec ["bis_fnc_call", 0];
 	if (selectRandom ChanceOfOccurance || !isNil("ForceWarZoneLoc")) then {
-	//if (true) then {
-		//_eventType = selectRandom[4]; //1=fullWar  2=AOOnly  3=WarzoneOnly  4=warzoneOnlyFullWar (only set to warzone now... was strange over AO... maybe at some point in future can stop flak when player near AO)
 		if (!isNil("ForceWarZoneLoc")) then {
 			[ForceWarZoneLoc,4] execVM "RandFramework\setFireFightEvent.sqf";
 		}
@@ -174,30 +165,25 @@ else {
 	};
 {systemChat "Loading Events : 9";} remoteExec ["bis_fnc_call", 0];
 	if (selectRandom ChanceOfOccurance) then {
-	//if (true) then {
 		[_mainObjPos] execVM "RandFramework\setMedicalEvent.sqf";
 		sleep 1;
 	};
 {systemChat "Loading Events : 8";} remoteExec ["bis_fnc_call", 0];
 	if (selectRandom ChanceOfOccurance) then {
-	//if (true) then {
 		[_mainObjPos] execVM "RandFramework\setDownedChopperEvent.sqf";
 		sleep 1;
 	};		
 {systemChat "Loading Events : 7";} remoteExec ["bis_fnc_call", 0];
 	if (selectRandom ChanceOfOccurance) then {
-	//if (true) then {
 		[_mainObjPos] execVM "RandFramework\setDownConvoyEvent.sqf";
 		sleep 1;
 	};		
 {systemChat "Loading Events : 6";} remoteExec ["bis_fnc_call", 0];
 	if (selectRandom ChanceOfOccurance) then {
-	//if (true) then {
 		[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
 		sleep 1;
 	};	
 
-	
 
 //these are more likely to show (instead of using ChanceOfOccurance), as a lot of times, these are not a trap, just an empty vehicle or a pile of rubbish
 {systemChat "Loading Events : 5";} remoteExec ["bis_fnc_call", 0];
@@ -230,9 +216,6 @@ else {
 		[_mainObjPos] execVM "RandFramework\setIEDEvent.sqf";
 		sleep 1;
 	};
-
-
-	
 
 
 {systemChat "Loading Events : END";} remoteExec ["bis_fnc_call", 0];
@@ -278,5 +261,3 @@ if (IsFullMap) then {
 // if player is notificed, then have tracking on convey and show on map (important, as if it gets stuck, player will be waiting for nothing)
 
 
-
-//orangestest*/

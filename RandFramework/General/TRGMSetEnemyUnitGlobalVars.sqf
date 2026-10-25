@@ -13,7 +13,6 @@ sTank3Tank = "O_T_MBT_02_cannon_ghex_F";
 sAAAVeh = "O_T_APC_Tracked_02_AA_ghex_F";
 sMortar = ["O_Mortar_01_F"];
 sSniper = "O_T_Sniper_F";
-//sCivilian = ["C_man_polo_1_F"];
 sArtilleryVeh = "O_T_MBT_02_arty_ghex_F";
 sBoatUnit = "O_T_Boat_Armed_01_hmg_F";		
 sExpSpec = "O_T_Soldier_Exp_F"; 		
@@ -68,65 +67,9 @@ EnemyFlags = ["Flag_CSAT_F"];
 //DEFAULTS (over written below)
 
 
-
-
-
-
 switch (AdvancedSettings select ADVSET_ENEMY_FACTIONS_IDX) do {
 	case 1 : {
-
-sTeamleader = "O_T_Soldier_TL_F";
-sRifleman = "O_T_Soldier_F";
-sATMan = "O_T_Soldier_LAT_F";
-sAAMan = "O_T_Soldier_AA_F";
-sAmmobearer = "O_T_Soldier_A_F";
-sGrenadier = "O_T_Soldier_GL_F";
-sMedic = "O_T_Medic_F";
-sMachineGunMan = "O_T_Soldier_AR_F";
-sTank1ArmedCar = "O_T_LSV_02_armed_F";
-sTank2APC = "O_T_APC_Wheeled_02_rcws_ghex_F";
-sTank3Tank = "O_T_MBT_02_cannon_ghex_F";
-sAAAVeh = "O_T_APC_Tracked_02_AA_ghex_F";
-sMortar = ["O_Mortar_01_F"];
-sSniper = "O_T_Sniper_F";
-//sCivilian = ["C_man_polo_1_F"];
-sArtilleryVeh = "O_T_MBT_02_arty_ghex_F";
-sBoatUnit = "O_T_Boat_Armed_01_hmg_F";		
-sExpSpec = "O_T_Soldier_Exp_F"; 		
-
-sTeamleaderMilitia = "O_G_Soldier_TL_F";
-sRiflemanMilitia = "O_G_Soldier_F";
-sATManMilitia = "O_G_Soldier_LAT_F";
-sAAManMilitia = "O_G_Soldier_LAT_F";	
-sAmmobearerMilitia = "O_G_Soldier_A_F";
-sGrenadierMilitia = "O_G_Soldier_GL_F";
-sMedicMilitia = "O_G_medic_F";
-sMachineGunManMilitia = "O_G_Soldier_AR_F";
-sTank1ArmedCarMilitia = "O_G_Offroad_01_armed_F";
-sTank2APCMilitia = "O_G_Offroad_01_armed_F";
-sTank3TankMilitia = "O_G_Offroad_01_armed_F";
-sAAAVehMilitia = "";
-sMortarMilitia = ["O_G_Mortar_01_F"];
-
-InformantClasses = ["C_Orestes","C_Nikos"];
-InterogateOfficerClasses = ["O_T_Officer_F"];
-WeaponDealerClasses = ["C_Nikos_aged","C_man_hunter_1_F"];
-sideResarchTruck = ["O_Truck_03_device_F"];
-SideRadioClassNames = ["Land_PortableGenerator_01_F"];
-sideAmmoTruck = ["O_Truck_03_ammo_F"];
-DestroyAAAVeh = ["O_T_APC_Tracked_02_AA_ghex_F"];
-
-sRiflemanFriendInsurg = "B_G_Soldier_F";
-
-ReinforceVehicle = "O_T_VTOL_02_infantry_F";
-EnemyAirToAirSupports = ["O_Plane_Fighter_02_F"];
-EnemyAirToGroundSupports = ["O_Plane_CAS_02_dynamicLoadout_F","O_Plane_CAS_02_F","O_T_VTOL_02_infantry_F","O_Heli_Attack_02_dynamicLoadout_F"]; //This would normally be a chopper
-EnemyAirScout = ["O_UAV_02_dynamicLoadout_F"];
-
-UnarmedScoutVehicles = ["O_MRAP_02_F","O_G_Offroad_01_F","O_G_Van_01_transport_F","O_G_Van_02_vehicle_F"];
-EnemyBaseChoppers = ["O_T_VTOL_02_infantry_F"];
-sEnemyHeliPilot = "O_helipilot_F";
-CheckPointTurret = ["O_HMG_01_high_F"];
+		//uses the defaults above
 	};
 	case 2 : {
 
@@ -144,7 +87,6 @@ CheckPointTurret = ["O_HMG_01_high_F"];
 		sAAAVeh = "O_T_APC_Tracked_02_AA_ghex_F";
 		sMortar = ["O_Mortar_01_F"];
 		sSniper = "O_T_Sniper_F";
-		//sCivilian = ["C_man_polo_1_F"];
 		sArtilleryVeh = "O_T_MBT_02_arty_ghex_F";
 		sBoatUnit = "O_T_Boat_Armed_01_hmg_F";		
 		sExpSpec = "O_T_Soldier_Exp_F"; 		
@@ -199,7 +141,6 @@ CheckPointTurret = ["O_HMG_01_high_F"];
 		sAAAVeh = "";
 		sMortar = ["O_G_Mortar_01_F"];
 		sSniper = "O_G_Sharpshooter_F";
-		//sCivilian = ["C_man_polo_1_F"];
 		sArtilleryVeh = "O_T_MBT_02_arty_ghex_F";
 		sBoatUnit = "Land_HelipadEmpty_F";		
 		sExpSpec = "O_G_Soldier_F"; 		
@@ -258,7 +199,6 @@ sTank3Tank = "rhs_t72ba_tv";
 sAAAVeh = "rhs_zsu234_aa";    
 sMortar = ["rhs_2b14_82mm_msv"];
 sSniper = "rhs_mvd_izlom_marksman";
-//sCivilian = ["C_man_polo_1_F"];
 sArtilleryVeh = "RHS_BM21_MSV_01";
 sBoatUnit = "Land_HelipadEmpty_F";		
 sExpSpec = "rhs_msv_emr_engineer"; 		
@@ -296,7 +236,6 @@ UnarmedScoutVehicles = ["rhs_tigr_msv","rhs_uaz_open_MSV_01","RHS_UAZ_MSV_01"];
 
 EnemyBaseChoppers = ["RHS_Ka52_vvs"];
 sEnemyHeliPilot = "rhs_pilot_combat_heli";
-//HVTChoppers = ["C_Heli_Light_01_civil_F","RHS_Mi8amt_civilian"];
 CheckPointTurret = ["rhs_KORD_high_MSV"];
 
 TargetVehicles = ["RHS_Ural_Fuel_MSV_01","rhs_9k79"];
@@ -361,12 +300,9 @@ sEnemyHeliPilot = "CUP_O_TK_Pilot";
 
 CivCars = ["CUP_C_Volha_Limo_TKCIV","CUP_C_Lada_GreenTK_CIV","CUP_C_S1203_CIV","CUP_C_Ikarus_TKC"];
 HVTCars = ["CUP_C_SUV_TK","CUP_C_SUV_TK","CUP_C_Volha_Limo_TKCIV","CUP_C_Lada_TK2_CIV","CUP_C_SUV_CIV","CUP_C_Golf4_kitty_Civ"];
-//HVTChoppers = ["C_Heli_Light_01_civil_F","CUP_C_Mi17_Civilian_RU"];
 
 
-
-
-	};	
+};	
 
 
 case 6 : {
@@ -426,7 +362,6 @@ sEnemyHeliPilot = "CUP_O_TK_Pilot";
 
 CivCars = ["CUP_C_Volha_Limo_TKCIV","CUP_C_Lada_GreenTK_CIV","CUP_C_S1203_CIV","CUP_C_Ikarus_TKC"];
 HVTCars = ["CUP_C_SUV_TK","CUP_C_SUV_TK","CUP_C_Volha_Limo_TKCIV","CUP_C_Lada_TK2_CIV","CUP_C_SUV_CIV","CUP_C_Golf4_kitty_Civ"];
-//HVTChoppers = ["C_Heli_Light_01_civil_F","CUP_C_Mi17_Civilian_RU"];
 
 	};	
 
@@ -488,7 +423,6 @@ sEnemyHeliPilot = "CUP_O_TK_Pilot";
 
 CivCars = ["CUP_C_Volha_Limo_TKCIV","CUP_C_Lada_GreenTK_CIV","CUP_C_S1203_CIV","CUP_C_Ikarus_TKC"];
 HVTCars = ["CUP_C_SUV_TK","CUP_C_SUV_TK","CUP_C_Volha_Limo_TKCIV","CUP_C_Lada_TK2_CIV","CUP_C_SUV_CIV","CUP_C_Golf4_kitty_Civ"];
-//HVTChoppers = ["C_Heli_Light_01_civil_F","CUP_C_Mi17_Civilian_RU"];
 
 	};	
 
@@ -546,16 +480,12 @@ UnarmedScoutVehicles = ["rhsgref_ins_uaz","rhsgref_ins_uaz_open"];
 
 EnemyBaseChoppers = ["RHS_Ka52_vvs"];
 sEnemyHeliPilot = "rhsgref_ins_pilot";
-//HVTChoppers = ["C_Heli_Light_01_civil_F","RHS_Mi8amt_civilian"];
 
-//CivCars = ["CUP_C_Volha_Limo_TKCIV","CUP_C_Lada_GreenTK_CIV","CUP_C_S1203_CIV","CUP_C_Ikarus_TKC"];
 CheckPointTurret = ["rhs_KORD_high_MSV"];
 
 TargetVehicles = ["RHS_Ural_Fuel_MSV_01","rhs_9k79"];
 
 	};	
-
-
 
 
 case 9 : { //Unsung : VC 40th Battalion only
@@ -614,10 +544,8 @@ UnarmedScoutVehicles = ["uns_nvatruck_open","uns_nvatruck_open"];
 EnemyBaseChoppers = ["uns_Mi8TV_VPAF_MG"];
 sEnemyHeliPilot = "uns_nvaf_pilot2";
 
-//CivCars = ["CUP_C_Volha_Limo_TKCIV","CUP_C_Lada_GreenTK_CIV","CUP_C_S1203_CIV","CUP_C_Ikarus_TKC"];
 
 	};	
-
 
 
 case 10 : { //GM Winter
@@ -638,7 +566,6 @@ case 10 : { //GM Winter
 	sAAAVeh = "gm_gc_army_zsu234v1";
 	sMortar = ["gm_gc_army_fagot_launcher_tripod"];
 	sSniper = "gm_gc_army_engineer_mpiaks74n_80_win";
-	//sCivilian = ["C_man_polo_1_F"];
 	sArtilleryVeh = "I_Truck_02_MRL_F";
 	sBoatUnit = "O_Boat_Transport_01_F";		
 	sExpSpec = "gm_gc_army_demolition_mpiaks74n_80_win"; 		

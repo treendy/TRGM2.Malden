@@ -1,6 +1,5 @@
 params ["_triggerArea",["_nearestAmbush", 50],["_furthestAmbush",150]];
 
-//_triggerArea = _this select 0;
 
 _bAllowAmbush = true;
 if (!isNil "AOCampPos") then {

@@ -1795,8 +1795,7 @@ FriendlyJet = [""CUP_B_F35B_BAF"",""CUP_B_F35B_BAF""];
 FriendlyChopper = [""CUP_B_AH1_DL_BAF"",""CUP_B_AW159_Unarmed_RN_Blackcat"",""CUP_B_CH47F_VIV_GB""];
 
 
-
-		"};
+"};
 	case 6 : {
 		LoadoutDataDefault = "
 			#

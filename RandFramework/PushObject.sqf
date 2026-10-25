@@ -8,5 +8,4 @@ else {
 	_Object setPos _newPos;
 };
 
-//hint str(count crew _Object);
 

@@ -21,8 +21,7 @@ if (side player == west) then {
 	};
 
 
-
-	if (_IntelToShow == 0) then { //Nothing found
+if (_IntelToShow == 0) then { //Nothing found
 		hint (localize "STR_TRGM2_showIntel_NoIntel");
 	}
 	else {

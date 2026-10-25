@@ -84,18 +84,14 @@ else {
 		_LoadVersion = "GLOBAL";
 	};
 
-	//_ctrl = (findDisplay 5000) displayCtrl 5001;
-	//_ctrl ctrlSetText "test: " + sInitialSLPlayerID + ":" + _LoadVersion;
 
-
-	if (_LoadVersion != "") then {
+if (_LoadVersion != "") then {
 		SaveTypeString = _LoadVersion;
 		publicVariable "SaveTypeString";
 		sleep 0.1;
 		{
 			SavedData = profileNamespace getVariable [sInitialSLPlayerID + ":" + SaveTypeString,[]]; //Get this from server only, but use player ID!!!
 			publicVariable "SavedData";
-			//_ctrl ctrlSetText "SavedData: " + SavedData;
 		} remoteExec ["bis_fnc_call", 2]; //Save this to server only
 		sleep 0.1;
 

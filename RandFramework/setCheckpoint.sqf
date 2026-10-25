@@ -22,8 +22,6 @@ fnc_AddToDirection = {
 	params ["_origDirection","_addToDirection"];
 
 	_iResult = _origDirection + _addToDirection;
-	//hint format["result:%1",_iResult];
-	//sleep 2;
 	if (_iResult > 360) then {
 		_iResult = _iResult - 360;
 	};
@@ -48,12 +46,6 @@ if (isNil "ISUNSUNG") then {
 };
 
 
-
-
-//{deleteVehicle _x} forEach nearestObjects [player, ["all"], 200];
-
-
-
 _startPos = _thisPosAreaOfCheckpoint;
 _nearestRoads = _startPos nearRoads _thisAreaRange;
 
@@ -63,8 +55,6 @@ _roadConnectedTo = nil;
 
 _connectedRoad = nil;
 _direction = nil;
-//hint "2";
-//sleep 1;
 
 _PosFound = false;
 _iAttemptLimit = 5;
@@ -109,12 +99,7 @@ if (_thisRoadOnly) then {
 			};
 
 
-
-			//hint format["AOAwayDir:%1 - dir1:%2 - dir2:%3  \nDif1:%4 - dif2:%5",_generalDirection,_direction1,_direction2,_dif1,_dif2];
-			//sleep 5;
-
-
-			if (_dif1 < _dif2) then {
+if (_dif1 < _dif2) then {
 				_direction = _direction1
 			}
 			else {
@@ -124,8 +109,6 @@ if (_thisRoadOnly) then {
 
 		}
 		else {
-			//run loop again
-			//Hint "Too many roads";
 
 			_iAttemptLimit = _iAttemptLimit - 1;
 		};
@@ -145,15 +128,12 @@ if (!_thisRoadOnly || !_PosFound) then {
 	};
 	_direction = ([_generalDirection,_dirAdd] call fnc_AddToDirection);
 	_PosFound = true;
-	//hint format["DIR:%1",_direction];
-	//sleep 3;
 };
 
 if (_PosFound) then {
 
 
-
-	if (!_thisIsDirectionAwayFromAO) then {
+if (!_thisIsDirectionAwayFromAO) then {
 		_direction = ([_direction,180] call fnc_AddToDirection);
 	};
 	_RoadSideBarricadesHigh = ["Land_Barricade_01_4m_F"];
@@ -203,16 +183,12 @@ if (_PosFound) then {
 	};
 
 
-
-	_slope = abs(((getTerrainHeightASL _roadBlockSidePos)) - ((getTerrainHeightASL  _roadBlockPos)));
+_slope = abs(((getTerrainHeightASL _roadBlockSidePos)) - ((getTerrainHeightASL  _roadBlockPos)));
 	if (_slope > 0.6) then {
 		_iBarricadeType = "FULL"; //if slope too much, then bunker and other barricades on side of road will have gap on one side
 	};
 
 	_nearestHouseObjectDist = (nearestObject [_roadBlockSidePos, "building"]) distance _roadBlockSidePos;
-	//_nearestWallObjectDist = (nearestObject [_roadBlockSidePos, "wall"]) distance _roadBlockSidePos;
-	//hint format["nearestWallObjectDist: %1",_nearestHouseObjectDist];
-	//sleep 2;
 	if (_nearestHouseObjectDist < 10) then {
 		_iBarricadeType = "FULL"; //if slope too much, then bunker and other barricades on side of road will have gap on one side
 	};
@@ -335,7 +311,6 @@ if (_PosFound) then {
 	};
 
 
-	//_pos1 = _initItem getPos [3,100];
 	_pos1 = _initItem getPos [3,([_direction,100] call fnc_AddToDirection)];
 
 	_pos2 = _initItem getPos [4,([_direction,80] call fnc_AddToDirection)];
@@ -347,13 +322,11 @@ if (_PosFound) then {
 	doStop [_guardUnit1];
 	_guardUnit1 setDir (_direction);
  	if (_AllowAnimation) then {[_guardUnit1,"WATCH","ASIS"] call BIS_fnc_ambientAnimCombat;};
-	//hint "HMM2";
 	if (selectRandom [true,true,false]) then {
 		_sUnitType = selectRandom _thisUnitTypes;
 		_guardUnit2 = _group createUnit [_sUnitType,_pos2,[],0,"NONE"];
 		doStop [_guardUnit2];
 		_guardUnit2 setDir (_direction);
-		//[_guardUnit2,"STAND","ASIS"] call BIS_fnc_ambientAnimCombat;
 	}
 	else {
 		_pos3 = [_behindBlockPos2 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call BIS_fnc_findSafePos;
@@ -379,9 +352,7 @@ if (_PosFound) then {
 		_guardUnit4 setDir (_chatDir2);
 
 
-		//[_guardUnit3,"STAND","ASIS"] call BIS_fnc_ambientAnimCombat;
-
-		if (_AllowAnimation) then {
+if (_AllowAnimation) then {
 			if (!_bHasParkedCar) then {
 				[_guardUnit4,"STAND_IA","ASIS"] call BIS_fnc_ambientAnimCombat;
 			}

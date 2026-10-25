@@ -20,5 +20,4 @@ else {
 	hint (localize "STR_TRGM2_UnloadDingy_DingyUnloadedWater");
 };
 
-//hint str(_flatPos);
 

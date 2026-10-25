@@ -15,13 +15,8 @@ if (isNil "FireFlares") then {
 		FireFlares = selectRandom[true,false];
 };
 
-//hint format["THIS: \nTHISLIST: %1",str(_thisThisList)];
-//sleep 10;
 _MainObjectivePos = ObjectivePossitions select 0;
 
-//hint format["Spotted2: %1",_this select 1];
-
-//if (bDebugMode) then {hint "spotted init";};
 
 if (isServer && count _thisThisList > 0) then {
 //9062.48,9828.87
@@ -42,7 +37,6 @@ if (isServer && count _thisThisList > 0) then {
 		};
 	};
 
-	//[_SpottedUnitPos, 1] execVM "RandFramework\RandScript\enemyAirSupport.sqf";
 
 	_SpottedUnit = _thisThisList select 0;
 	if (isPlayer _SpottedUnit) then {
@@ -60,17 +54,10 @@ if (isServer && count _thisThisList > 0) then {
 
 		_maxPatrolSearch = 2000;
 
-		
-	
-		//_SpottedUnitCount = count _thisThisList;
-		//_SpottedUnitCount = FriendlySide countSide nearestObjects [_SpottedUnitPos, [sTeamleader], 250];
-		_SpottedUnitCount = {_x distance _SpottedUnit < 200} count units group _SpottedUnit;
-		//if (bDebugMode) then {hint format["pre first spotted count check: %1",_SpottedUnitCount];};
+
+_SpottedUnitCount = {_x distance _SpottedUnit < 200} count units group _SpottedUnit;
 		_AlivePlayerCount = {alive _x} count allplayers;
-		//hint "a";
 		if (_SpottedUnitCount > 0) then {
-		//hint "d";
-			//========First take care of additional support (reinforcements, air to air/ground support etc... based on the type of threat the enemy have spotted)
 			_bAllowPatrolChange = true;
 			_bAllowNextMortarRounds = true;
 			_PatrolMoveCount = 0;
@@ -100,7 +87,6 @@ if (isServer && count _thisThisList > 0) then {
 			_currentAODetail = nil;
 			//AODetails = [[AOIndex,InfSpottedCount,VehSpottedCount,AirSpottedCount,bScoutCalled, patrolMoveCounter,MortarAllowedCount]]
 			{
-				//HINT format["HERE: %1, %2", _x select 0,_iSideIndex];
 				if (_x select 0 == _iSideIndex) then {
 					_currentAODetail = _x;
 					_PatrolMoveCount = (_x select 5);
@@ -180,21 +166,8 @@ if (isServer && count _thisThisList > 0) then {
 			if (!(isNil "_currentAODetail")) then {
 				sleep 5; //wait 5 seconds before enemy react
 
-				//if (_SpottedUnit distance _MainObjectivePos < 300 && !(vehicle _SpottedUnit isKindOf "Air")) then {
-				//	if (!ParaDropped) then {
-				//
-				//		[EAST, ReinforceStartPos1, _MainObjectivePos, 3, true, false, false, false, false] execVM "RandFramework\reinforcements.sqf";	
-				//		if (bAllowLargerPatrols) then { 
-				//			sleep 3;
-				//			[EAST, ReinforceStartPos1, _MainObjectivePos, 3, true, false, false, false, false] execVM "RandFramework\reinforcements.sqf";	
-				//		};
-				//		ParaDropped = true;
-				//		publicVariable "ParaDropped";
-				//	};
-				//};	
 
-			
-				if (_bInfSpottedAction) then {
+if (_bInfSpottedAction) then {
 						if (_bIsMainObjective) then {
 							[EAST, ReinforceStartPos1, _MainObjectivePos, 3, true, false, false, false, false] execVM "RandFramework\reinforcements.sqf";	
 							if (bAllowLargerPatrols) then { 
@@ -293,7 +266,6 @@ if (isServer && count _thisThisList > 0) then {
 				
 				//mortar script
 				if  ((_SpottedUnitCount > 0) && _bAllowNextMortarRounds && !bMortarFiring) then {
-					//hint format["eee:%1",str(_currentAODetail)];
 					_bFiredMortar = false;
 					_currentAODetail set [6,1];  //commence counting now fired... when reach zero again, we will wait until round fired again
 					_nearestMortars = nearestObjects [_SpottedUnitPos,sMortar + sMortarMilitia,_maxPatrolSearch];
@@ -324,7 +296,6 @@ if (isServer && count _thisThisList > 0) then {
 									if (bDebugMode) then {hint format["POW4 %1",_cansee];};
 									sleep 0.6;
 									if (_cansee > 0.2) then {
-										//hint "POW2 POW POW POW";
 										sleep 3;
 										//Set animation, or view binocs and face player
 										_SpotterFound = true;
@@ -335,7 +306,6 @@ if (isServer && count _thisThisList > 0) then {
 											_test setMarkerShape "ICON";  
 											_test setMarkerType "hd_dot";  
 											_test setMarkerText "SPOTTER"; 
-											//hint "POW POW POW POW";
 										};
 										
 									};
@@ -349,14 +319,12 @@ if (isServer && count _thisThisList > 0) then {
 							_Spotter playMoveNow "Acts_listeningToRadio_loop";
 							_Spotter disableAI "anim";
 							_startPos = getPos _SpottedUnit;
-							//if (bDebugMode) then {hint format["spottedStartPos: %1",str(_startPos)];};
 							sleep 7;
 							if (alive(_Spotter)) then {
 								_Spotter enableAI "anim";
 								_Spotter playMoveNow "Acts_listeningToRadio_out";
 								_endPos = getPos _SpottedUnit;
 								_dDistance = _startPos distance _endPos;
-								//if (bDebugMode) then {hint format["spottedEndPos: %1 - Distance:%2 - PlayersNear:%3 - Chance:%4",str(_endPos), str(_dDistance),str(_nearplayercount),str(_ChancesOfFireMortar)];};
 								if (_dDistance < 7 && _bAllowMortar) then {
 									_nearestMortar = _nearestMortars select 0;
 									_Ammo = nil;
@@ -415,18 +383,13 @@ if (isServer && count _thisThisList > 0) then {
 						_EnemyBaseChopperWP1 setWaypointStatements ["true", "(vehicle this) LAND 'LAND';"];
 					};
 
-					//if (bDebugMode) then {hint format["inFirstGenericIf: %1",_AlivePlayerCount > 7]; sleep 1;};
 				
 					if  ((_SpottedUnitCount > 0)) then {
-						//if (bDebugMode) then {hint format["inSecondGenericIf: %1",_AlivePlayerCount > 7]; sleep 2;};
 
 						
-						//if (bDebugMode) then {sleep 2};
 						_nearestTLs = nearestObjects [_SpottedUnitPos, [sTeamleader,sTeamleaderMilitia], _maxPatrolSearch];
-						//if (bDebugMode) then {hint format["pre count check: %1",count _nearestTLs]; sleep 2;};
 						if (count _nearestTLs > 0) then {
 				
-							//if (bDebugMode) then {hint "for than zero - count _nearestTLs"; sleep 2;};
 							_nearestTL = _nearestTLs select 0;
 							while {(count (waypoints group _nearestTL)) > 0} do {
 								deleteWaypoint ((waypoints group _nearestTL) select 0);
@@ -449,7 +412,6 @@ if (isServer && count _thisThisList > 0) then {
 							group _nearestTL setSpeedMode "FULL";
 						};
 
-						//_flare1 = "F_40mm_White" createVehicle getPos _nearestTL;
 
 						if (selectRandom[true,false]) then {
 				
@@ -470,9 +432,8 @@ if (isServer && count _thisThisList > 0) then {
 
 					};
 
-				
 
-					_anyTLsCheckAlive = nearestObjects [_SpottedUnitPos, [sTeamleader,sTeamleaderMilitia], 3000];
+_anyTLsCheckAlive = nearestObjects [_SpottedUnitPos, [sTeamleader,sTeamleaderMilitia], 3000];
 					{
 						if (!(alive _x)) then {
 							deleteVehicle _x;

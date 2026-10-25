@@ -50,63 +50,55 @@ CODEINPUT = [];
 		};
 		while {!bAndSoItBegins} do {
 
-			if ("NEWWAY" == "NEWWAY") then {			
 
-				_isAdmin = (!isMultiplayer || isMultiplayer && !isDedicated && isServer || isMultiplayer && !isServer && (call BIS_fnc_admin) != 0);
+			_isAdmin = (!isMultiplayer || isMultiplayer && !isDedicated && isServer || isMultiplayer && !isServer && (call BIS_fnc_admin) != 0);
 
-				if (_isAdmin) then {
-					if (!IsAdminPlayerAvailable) then {
-						IsAdminPlayerAvailable = true;
-						publicVariable "IsAdminPlayerAvailable";
-					};
-					if  (!dialog) then {
-						//[] spawn {
-							sleep 1.5;
-							if  (!dialog && !bOptionsSet) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
-								[] execVM "RandFramework\GUI\openDialogMissionSelection.sqf";
-								//_actChooseMission = endMissionBoard addaction ["Select Mission Params", "RandFramework\GUI\openDialogMissionSelection.sqf"];
-							};
-						//};
-					};
-					sleep 0.5;
+			if (_isAdmin) then {
+				if (!IsAdminPlayerAvailable) then {
+					IsAdminPlayerAvailable = true;
+					publicVariable "IsAdminPlayerAvailable";
+				};
+				if  (!dialog) then {
+						sleep 1.5;
+						if  (!dialog && !bOptionsSet) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
+							[] execVM "RandFramework\GUI\openDialogMissionSelection.sqf";
+						};
+				};
+				sleep 0.5;
+			}
+			else {
+				if (!bOptionsSet) then {
+					txt1Layer = "txt1" call BIS_fnc_rscLayer;
+					_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + "Admin" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
+					[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
 				}
 				else {
-					if (!bOptionsSet) then {
-						txt1Layer = "txt1" call BIS_fnc_rscLayer;
-						_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + "Admin" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
-						[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
-					}
-					else {
-						txt1Layer = "txt1" call BIS_fnc_rscLayer;
-						_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + "Admin" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3" + "</t>";
-						[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
-					};
-					txt5Layer = "txt5" call BIS_fnc_rscLayer;
-					_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>";
-					[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
-
-
-					txt51Layer = "txt51" call BIS_fnc_rscLayer;
-					_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic" + "</t>";
-					[_texta, 0, 0.280, 7, 1,0,txt51Layer] spawn BIS_fnc_dynamicText;
-					
-					
-					sleep 5;
-
+					txt1Layer = "txt1" call BIS_fnc_rscLayer;
+					_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + "Admin" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3" + "</t>";
+					[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
 				};
+				txt5Layer = "txt5" call BIS_fnc_rscLayer;
+				_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>";
+				[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+
+
+				txt51Layer = "txt51" call BIS_fnc_rscLayer;
+				_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic" + "</t>";
+				[_texta, 0, 0.280, 7, 1,0,txt51Layer] spawn BIS_fnc_dynamicText;
+				
+				
+				sleep 5;
+
 			};
 
 			//if 5 seconds have passed, and no admin player has joined, will default to using SL
 			if (!IsAdminPlayerAvailable) then {
 				if (str player == "sl") then {
 					if  (!dialog) then {
-						//[] spawn {
 							sleep 1.5;
 							if  (!dialog && !bOptionsSet) then { //seemed to show dialog twice... so havce added delay and double check its still not showing
 								[] execVM "RandFramework\GUI\openDialogMissionSelection.sqf";
-								//_actChooseMission = endMissionBoard addaction ["Select Mission Params", "RandFramework\GUI\openDialogMissionSelection.sqf"];
 							};
-						//};
 					};
 					sleep 0.5;
 				}
@@ -151,7 +143,6 @@ CODEINPUT = [];
 		};
 	};
 	[] spawn TREND_fnc_MissionSelectLoop;
-
 
 
 TREND_fnc_BasicInitAndRespawn = {
@@ -208,17 +199,6 @@ if (_iEnableGroupManagement == 1) then {
 	["InitializePlayer", [player]] call BIS_fnc_dynamicGroups;//Exec on client
 };
 
-if (bUseRevive) then {
-
-	// TcB AIS Wounding System --------------------------------------------------------------------------
-	//if (!isDedicated) then {
-	//	TCB_AIS_PATH = "ais_injury\";
-	//	{[_x] call compile preprocessFile (TCB_AIS_PATH+"init_ais.sqf")} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});		// execute for every playable unit
-	//};
-	// --------------------------------------------------------------------------------------------------------------
-};
-
-
 
 TREND_fnc_InitPostStarted = {	
 
@@ -261,8 +241,6 @@ if (AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
 };
 
 
-
-
 bCirclesOfDeath = false;
 iCirclesOfDeath = 0; //("TREND_par_CirclesOfDeath" call BIS_fnc_getParamValue);
 if (iCirclesOfDeath == 1) then {
@@ -293,13 +271,6 @@ else {
 	_iRespawnTimer = AdvancedSettings select ADVSET_RESPAWN_TIMER_IDX;
 	setPlayerRespawnTime _iRespawnTimer;
 
-	//if (iMissionSetup == 5 && !isMultiplayer) then {
-	//	[player, 999] call BIS_fnc_respawnTickets;
-	//	debugMessages = debugMessages + "\n" + "999 respawn tickets"
-	//}
-	//else {
-	//	[player, 1] call BIS_fnc_respawnTickets;
-	//};
 };
 
 
@@ -308,14 +279,12 @@ TREND_fnc_GetAnimalsMoving = {
 };
 [] spawn TREND_fnc_GetAnimalsMoving;
 
-//[player, supReq] call BIS_fnc_addSupportLink;
 if (leader (group (vehicle player)) == player) then {
 	_trg = createTrigger["EmptyDetector",getPos player];
 	_trg setTriggerActivation["ALPHA",  "PRESENT",true];
 	_trg setTriggerText "illuminate your position for 5 mins (eta 60 seconds)";
 	_trg setTriggerStatements["this", "[player] execVM ""RandFramework\RandScript\fireIllumFlares.sqf"";", ""];
 
-	//_trgCustomAIScript setTriggerStatements ["hint 'test'", format["nul = [this, thisList, %1, %2, %3] execVM ""RandFramework\RandScript\TREND_fnc_CallNearbyPatrol.sqf"";",str(_sidePos),_iSideIndex, _bIsMainObjective], ""];
 };
 
 
@@ -331,19 +300,10 @@ TREND_fnc_GeneralPlayerLoop = {
 						player setVariable ["calUAVActionID",_actionID];
 					};
 				};
-				//else {
-				//	if ((Player getVariable ["calUAVActionID", -1]) != -1) then {
-				//		player removeAction (Player getVariable ["calUAVActionID", -1]);
-				//		player setVariable ["calUAVActionID", nil];
-				//		hint "UAV no longer available";
-				//	};
-				//};
 			};
 
 
-			
-
-			if (leader (group (vehicle player)) == player && AdvancedSettings select ADVSET_SUPPORT_OPTION_IDX == 1) then {
+if (leader (group (vehicle player)) == player && AdvancedSettings select ADVSET_SUPPORT_OPTION_IDX == 1) then {
 				if (iMissionSetup == 5) then {
 					if (isNil "CampaignInitiated") then {
 						CampaignInitiated = false;
@@ -352,20 +312,15 @@ TREND_fnc_GeneralPlayerLoop = {
 					if (CampaignInitiated) then {
 
 						_dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
-						//TESTTEST = format["A:%1 - B:%2 - C:%3",MaxBadPoints,BadPoints,_dCurrentRep];
-						//hint TESTTEST;
 						if (_dCurrentRep >= 1) then {
-							//hint "hmm2";
 							[player, supReqSupply] call BIS_fnc_addSupportLink;
 							sleep 1;
 						};
 						if (_dCurrentRep >= 3) then {
-							//hint "hmm2";
 							[player, supReq] call BIS_fnc_addSupportLink;
 							sleep 1;
 						};
 						if (_dCurrentRep >= 7) then {
-							//hint "hmm3";
 							[player, supReqAir] call BIS_fnc_addSupportLink;
 							sleep 1;
 						};
@@ -387,11 +342,9 @@ TREND_fnc_GeneralPlayerLoop = {
 [] spawn TREND_fnc_GeneralPlayerLoop;
 
 
-
 TREND_fnc_OnlyAllowDirectMapDraw = {
 	while {isMultiplayer && (AdvancedSettings select ADVSET_MAP_DRAW_DIRECT_ONLY_IDX == 1)} do {
 		{
-			//WaitUntil {count allMapMarkers > 0};
 	   		_sTest = _x splitString "/";
 			if (count _sTest > 2) then {
 		 		if (str(_sTest select 2) != str("5")) then {
@@ -411,11 +364,7 @@ TREND_fnc_InSafeZone = {
 	};
 
 	while {true} do {
-		if (getMarkerPos "mrkHQ" distance player < PunishmentRadius) then {
-			//if (!bDebugMode) then { player allowDamage false};
-		}
-		else {
-			//if (!bDebugMode) then { player allowDamage true;};
+		if (getMarkerPos "mrkHQ" distance player >= PunishmentRadius) then {
 			if (!PlayersHaveLeftStartingArea) then {
 				PlayersHaveLeftStartingArea = true;
 				publicVariable "PlayersHaveLeftStartingArea";
@@ -437,17 +386,6 @@ TREND_fnc_setNVG = {
 };
 [] spawn TREND_fnc_setNVG;
 player addEventHandler ["Respawn", { [] spawn TREND_fnc_setNVG; }];
-
-
-
-
-
-
-
-
-
-
-
 
 
 if (bCirclesOfDeath) then {
@@ -476,8 +414,7 @@ if (bCirclesOfDeath) then {
 	[] spawn TREND_fnc_checkKilledRange;
 
 
-
-	TREND_fnc_drawKilledRanges = {
+TREND_fnc_drawKilledRanges = {
 		if (getPlayerUID player in KilledPlayers) then {
 			{
 				if (getPlayerUID player == _x select 0) then {
@@ -504,20 +441,6 @@ if (bCirclesOfDeath) then {
 	player addEventHandler ["Respawn", { [] spawn TREND_fnc_drawKilledRanges; }];
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 TOUR_fnc_startingMove = {
@@ -558,20 +481,6 @@ camDestroy _cam;
 cutText ["","BLACK IN",3];
 
 
-//sleep 0.1;
-//doStop player;
-//waitUntil {!isNull player};
-//waitUntil {player == player};
-//[[player],"TOUR_fnc_startingMove",true] spawn BIS_fnc_MP;
-
-
-
-if (sArmaGroup == "TCF" && isMultiplayer) then {
-	//_handle=createdialog "DialogMessAround";
-	//titleText ["!!!WARNING!!!\n\nPoint system in place\n\nDO NOT mess around at base\n\nONLY fly if you know AFM, or are being trained.\n\nDestroying vehicles will mark points and ruin the experience for others!!!", "PLAIN"];
-};
-
-
 TREND_fnc_MissionOverAnimation = {
 	sleep 60;
 	_bEnd = false;
@@ -605,7 +514,6 @@ TREND_fnc_MissionOverAnimation = {
 			playMusic "";
 			0 fadeMusic 1;
 			playMusic selectRandom ThemeAndIntroMusic;
-			//Hint format["InitPlayer Music: %1",ThemeAndIntroMusic];
 			sleep 8;
 			["<t font='PuristaMedium' align='center' size='2.9' color='#ffffff'>TRGM 2</t><br/><t font='PuristaMedium' align='center' size='1' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TRGM2Title" + "</t>",-1,0.2,6,1,0,789] spawn BIS_fnc_dynamicText;
 			sleep 10;
@@ -637,8 +545,5 @@ TREND_fnc_MissionOverAnimation = {
 	};
 };
 [] spawn TREND_fnc_MissionOverAnimation;
-
-
-
 
 

@@ -53,7 +53,6 @@ if (!isNull (findDisplay 5000)) then {
 	
 };
 
-//hint "opening 2dialogA";
 
 closedialog 0;
 
@@ -85,10 +84,6 @@ _btnSetEnemyFaction ctrlCommit 0;
 ctrlSetText [6997,  localize "STR_TRGM2_openDialogAdvancedMissionSettings_CustomLoadouts"];
 _btnSetEnemyFaction ctrlAddEventHandler ["ButtonClick", {[] execVM 'RandFramework\GUI\openDialogTeamLoadouts.sqf'; false}];
 
-
-
-
-//colorText[] = {0,1,0,1};
 
 _lblctrlTitle ctrlCommit 0;
 
@@ -147,7 +142,6 @@ if (LoadoutData != "") then {
 
 	_lblctrlWarn2 ctrlCommit 0;
 };
-
 
 
 //AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX

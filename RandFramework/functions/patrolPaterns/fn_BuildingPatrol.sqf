@@ -42,7 +42,6 @@ while {_iCountWaypoints <= _buildingCount} do
 	catch {
 		hint format ["Script issue: %1",selectRandom _allBuildingPos2];
 	};
-	//_wp1 = _group addWaypoint [_wp1Pos, 0];
 
 	[_group, _iCountWaypoints] setWaypointSpeed "LIMITED";
 	[_group, _iCountWaypoints] setWaypointBehaviour "SAFE";

@@ -1,7 +1,3 @@
-//BasicBuildings = ["Land_LightHouse_F","Land_Lighthouse_small_F","Land_Metal_Shed_F","Land_Offices_01_V1_F","Land_Slum_House01_F","Land_Slum_House02_F","Land_Slum_House03_F","Land_Unfinished_Building_01_F","Land_Unfinished_Building_02_F","Land_d_House_Big_01_V1_F","Land_d_House_Big_02_V1_F","Land_d_House_Small_02_V1_F","Land_d_Stone_HouseBig_V1_F","Land_d_Stone_HouseSmall_V1_F","Land_d_Stone_Shed_V1_F","Land_dp_mainFactory_F","Land_i_House_Big_01_V1_F","Land_i_House_Big_01_V2_F","Land_i_House_Big_01_V3_F","Land_i_House_Big_02_V1_F","Land_i_House_Big_02_V2_F","Land_i_House_Big_02_V3_F","Land_i_House_Small_01_V1_F","Land_i_House_Small_01_V2_F","Land_i_House_Small_01_V3_F","Land_i_House_Small_02_V1_F","Land_i_House_Small_02_V2_F","Land_i_House_Small_02_V3_F","Land_i_House_Small_03_V1_F","Land_i_Stone_HouseBig_V1_F","Land_i_Stone_HouseBig_V2_F","Land_i_Stone_HouseBig_V3_F","Land_i_Stone_HouseSmall_V1_F","Land_i_Stone_HouseSmall_V2_F","Land_i_Stone_HouseSmall_V3_F","Land_u_House_Big_01_V1_F","Land_u_House_Big_02_V1_F","Land_u_House_Small_01_V1_F","Land_u_House_Small_02_V1_F","Land_cargo_house_slum_F","Land_jbad_House_1_old","Land_jbad_House_3_old","Land_jbad_House_4_old","Land_jbad_House_6_old","Land_jbad_House_7_old","Land_jbad_House_8_old","Land_jbad_House_9_old","Land_lbad_House_c_1_v2","Land_jbad_House_c_11","Land_jbad_House_c_1","Land_jbad_House_c_2","Land_jbad_House_c_3","Land_jbad_House_c_4","Land_jbad_House_c_5","Land_jbad_House_c_5_v1","Land_jbad_House_c_5_v2","Land_jbad_House_c_5_v3","Land_jbad_House_1","Land_jbad_House_3","Land_jbad_House_5","Land_jbad_House_6","Land_jbad_House_7","Land_jbad_House_8","Land_jbad_House2_basehide","Land_House_C_5_EP1","Land_House_C_5_V1_EP1","Land_House_C_5_V2_EP1","Land_House_C_5_V3_EP1","Land_House_C_12_EP1","Land_House_K_1_EP1","Land_House_K_3_EP1","Land_House_K_5_EP1","Land_House_L_8_EP1","Land_House_K_6_EP1","Land_House_K_7_EP1","Land_House_K_8_EP1","Land_House_L_1_EP1","Land_House_L_4_EP1","Land_House_L_6_EP1","Land_House_L_7_EP1","Land_House_L_8_EP1","Land_jbad_House_1_old","Land_jbad_House_3_old","Land_jbad_House_4_old","Land_jbad_House_6_old","Land_jbad_House_7_old","Land_jbad_House_8_old","Land_jbad_House_9_old","Land_lbad_House_c_1_v2","Land_jbad_House_c_11","Land_jbad_House_c_1","Land_jbad_House_c_2","Land_jbad_House_c_3","Land_jbad_House_c_4","Land_jbad_House_c_5","Land_jbad_House_c_5_v1","Land_jbad_House_c_5_v2","Land_jbad_House_c_5_v3","Land_jbad_House_1","Land_jbad_House_3","Land_jbad_House_5","Land_jbad_House_6","Land_jbad_House_7","Land_jbad_House_8","Land_jbad_House2_basehide","Land_Shed_02_F","Land_House_Small_02_F","Land_House_Small_03_F","Land_House_Small_04_F","Land_House_Small_05_F","Land_House_Small_06_F","Land_House_Big_01_F","Land_House_Big_02_F","Land_House_Big_03_F","Land_House_Big_05_F","Land_Shed_05_F","Land_Shed_06_F","Land_Shed_07_F","Land_Addon_04_F","Land_Shop_City_03_F","Land_Shop_City_05_F","Land_Shop_City_06_F","Land_Shop_City_07_F","Land_House_Big_04_F","Land_House_Native_01_F","Land_House_Native_02_F","Land_House_Native_03_F","Land_House_Native_04_F","Land_House_Native_05_F","Land_House_Native_06_F","Land_blud_hut1","Land_blud_hut2","Land_blud_hut3","Land_blud_hut4","Land_blud_hut5","Land_blud_hut6","Land_blud_hut7","Land_blud_hut8","Land_MBG_GER_RHUS_5","Land_MBG_ATC_Base","Land_MBG_GER_RHUS_2","Land_MBG_GER_HUS_1","Land_MBG_ATC_Segment","Land_MBG_GER_RHUS_1","Land_MBG_GER_HUS_2","Land_MBG_GER_RHUS_3","Land_MBG_GER_RHUS_4","Objects17","Objects18","Objects19","Objects21","Objects22","Objects23","Land_deox_House_A1","Land_deox_House_A2","Land_deox_House_B1","Land_deox_House_B2","Land_deox_House_C1","Land_deox_House_C2","Land_deox_House_D_L1","Land_deox_House_D_L2","Land_deox_House_D_L3","Land_deox_House_D_L4","Land_deox_House_D_M1","Land_deox_House_D_M2","Land_deox_House_D_M3","Land_deox_House_D_M4","Land_deox_House_D_R1","Land_deox_House_D_R3","MBG_Killhouse_3_InEditor","MBG_Killhouse_4_InEditor","MBG_Killhouse_5_InEditor","MBG_Killhouse_2_InEditor","MBG_Killhouse_5_InEditor","MBG_Killhouse_1_InEditor","land_Objects101","land_Objects77","jbad_House_c_1","jbad_House_c_1_v2","jbad_House_c_10","jbad_House_c_11","jbad_House_c_12","jbad_House_c_2","jbad_House_c_3","jbad_House_c_4","jbad_House_c_5","jbad_House_c_5_v1","jbad_House_c_5_v2","jbad_House_c_5_v3","jbad_House_c_9","jbad_dum_istan2","jbad_dum_istan4","Jbad_A_Villa","jbad_House_3_old_h","Jbad_A_BuildingWIP","Jbad_Ind_Workshop01_L","Jbad_A_Stationhouse","Jbad_Mil_Barracks","Jbad_Mil_ControlTower","Jbad_Mil_Guardhouse","Jbad_Mil_House","jbad_mosque_big_addon","jbad_mosque_big_hq","Jbad_A_Mosque_small_1","Land_Jbad_A_Mosque_small_1","Jbad_A_Mosque_small_2"];	
-//sCivilian = ["C_man_polo_1_F"];
-//FriendlyRadioSounds = ["ambient_radio3","ambient_radio4","ambient_radio5","ambient_radio6","ambient_radio7","ambient_radio9","ambient_radio14","ambient_radio17","ambient_radio19","ambient_radio21","ambient_radio22","ambient_radio23","ambient_radio25","ambient_radio26","ambient_radio27","ambient_radio28","ambient_radio29","ambient_radio30"];
-//hint "A";
 
 _posOfAO =  _this select 0;
 _eventType = _this select 1; //1=fullWar  2=AOOnly  3=WarzoneOnly 4=warzoneOnlyFullWar
@@ -17,7 +13,6 @@ else {
 		_xLocPos = locationPosition _x;
 		if (_xLocPos distance _posOfAO > 950) then {
 			_eventLocationPos = _xLocPos;
-			//hint str(_xLocPos distance _posOfAO);
 		};
 	} forEach _nearLocations;
 
@@ -50,7 +45,6 @@ if (isNil("_eventLocationPos")) exitWith {}; //no suitable location found for th
 //TankorAPC
 //FriendlyCheckpointUnits
 
-//TESTTESTeventLocationPos = _eventLocationPos;
 
 WarzonePos = _eventLocationPos;
 
@@ -72,18 +66,7 @@ if (_eventType == 1 || _eventType == 3 || _eventType == 4) then {
 
 
 _objPos = _eventLocationPos getPos [100 * sqrt random 1, random 360];
-//_Obj1 = "land_helipadempty_f" createVehicle _objPos;
-//nul = [_Obj1] execVM "RandFramework\Alias\ALambientbattle\alias_flaks.sqf"; 
 
-/*if (selectRandom[true,false] || _eventType == 1 || _eventType == 4) then {
-	_objPos = _eventLocationPos getPos [100 * sqrt random 1, random 360];
-	_Obj8  = "land_helipadempty_f" createVehicle _objPos;
-	null = [_Obj8,false] execVM "RandFramework\Alias\ALambientbattle\aaa_search_light.sqf";
-
-	_objPos = _eventLocationPos getPos [100 * sqrt random 1, random 360];
-	_Obj9  = "land_helipadempty_f" createVehicle _objPos;
-	null = [_Obj9,false] execVM "RandFramework\Alias\ALambientbattle\aaa_search_light.sqf";	
-};*/
 if (selectRandom[true,false] || _eventType == 1 || _eventType == 4) then {
 	_flatPos1 =  _eventLocationPos getPos [100 * sqrt random 1, random 360];
 	_flatPos1 = [_eventLocationPos , 0, 100, 8, 0, 0.5, 0,[],[_flatPos1,_flatPos1]] call BIS_fnc_findSafePos;
@@ -105,27 +88,6 @@ if (selectRandom[true,false] || _eventType == 1 || _eventType == 4) then {
 
 _mainAOPos = ObjectivePossitions select 0;
 
-if (_eventType == 1 || _eventType == 2) then {
-	//_objPos = _mainAOPos getPos [100 * sqrt random 1, random 360];
-	//_Obj10  = "land_helipadempty_f" createVehicle _objPos;
-	//nul = [_Obj10] execVM "RandFramework\Alias\ALambientbattle\alias_flaks.sqf"; 
-};
-
-/*
-WarColor = ppEffectCreate ["colorCorrections", 1550];
-//WarColor ppEffectAdjust [1, 0.8, -0.001, [0.0, 0.0, 0.0, 0.0], [0.8*2, 0.5*2, 0.0, 0.7], [0.9, 0.9, 0.9, 0.0]];  
-WarColor ppEffectAdjust [1, 0.8, -0.001, [0.0, 0.0, 0.0, 0.0], [0.8*2, 0.5*2, 0.0, 0.92], [0.9, 0.9, 0.9, 0.0]];   
-WarColor ppEffectCommit 0;
-WarColor ppEffectCommit 0;
-
-WarGrain = ppEffectCreate ["FilmGrain", 2050];
-WarGrain ppEffectEnable true; 
-WarGrain ppEffectAdjust [0.02, 1, 1, 0.1, 1, false];
-WarGrain ppEffectCommit 0;
-
-WarColor ppEffectEnable true;
-WarGrain ppEffectEnable true;
-*/
 
 WarEventActive = true;
 
@@ -167,7 +129,6 @@ WarEventActive = true;
 
 		if (_diceRoll == 1) then {_sleep = 10+random 5};
 		if (_diceRoll > 6) then {_sleep = 0.5+random 1};
-		//hint str(_sleep);
 
 		sleep _sleep;
 	  };
@@ -243,19 +204,5 @@ WarEventActive = true;
 		
 	};
 };
-
-
-
-/*
-{nul = [99999,true] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
-*/
-
-/*
- 	WarColor ppEffectEnable false;
- 	ppEffectDestroy WarColor;
-
-    WarGrain ppEffectEnable false;
-    ppEffectDestroy WarGrain;
-*/
 
 

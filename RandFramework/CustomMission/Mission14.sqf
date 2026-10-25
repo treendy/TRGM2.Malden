@@ -31,9 +31,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	if (_markerType != "empty") then { _markerType = "hd_unknown"; }; //You can set the type of marker here, but if the player has selected to hide mission locations, then your marker will not show
 
 
-//DEFUSED = false;
-//ARMED = false;
-
 _missionBombCODE = [(round(random 9)), (round(random 9)), (round(random 9)), (round(random 9))]; //4 digit code can be more or less
 _missionBombWire = ["BLUE", "WHITE", "YELLOW", "GREEN"] call bis_fnc_selectRandom;
 
@@ -85,10 +82,9 @@ _missionBombWire = ["BLUE", "WHITE", "YELLOW", "GREEN"] call bis_fnc_selectRando
 	if (isNil "_buildings") then {
 		_buildings = nearestObjects [[_centralAO_x,_centralAO_y], BasicBuildings, 1800];
 	};
-	
-	
 
-	_infBuilding = nil;
+
+_infBuilding = nil;
 	_attemptLimit = 5;
 	_bBuildingFound = false;
 	while {!_bBuildingFound && _attemptLimit > 0} do {

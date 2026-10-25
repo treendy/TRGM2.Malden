@@ -1,11 +1,7 @@
-//#include "RandFramework\CustomMission\customMission.sqf";
 
 //hardcoded for now... see notes in root setunitglobalvars.sqf (main git/malden version of this sqf!)
 DefaultEnemyFactionValue = [3]; //default to FIA
 DefaultFriendlyFactionValue = [1]; //default to NATO
-
-
-
 
 
 _CustomMissionEnabled = false;
@@ -30,7 +26,6 @@ if ((1.04222e+006 in (getDLCs 1))) then {
 
 };
 
-//[(configFile >> "CfgPatches"),1, true, true ] call BIS_fnc_returnChildren;
 if ((isClass(configFile >> "CfgPatches" >> "rhs_main")) &&
 		isClass(configFile >> "CfgPatches" >> "rhsusf_main") &&
 		isClass(configFile >> "CfgPatches" >> "rhsgref_main")) then {
@@ -135,15 +130,8 @@ AdvControls = [ //IDX,Title,Type,Options,OptionValues,DefaultOptionIndex(zero ba
 DefaultAdvancedSettings = [0,"Tactical Cannon Fodder",1,1,1,10,DefaultEnemyFactionValue select 0,DefaultFriendlyFactionValue select 0,DefaultSandStormOption,0,0,0,0,2,2];
 
 
-/*DONT FORGET TO ADD THIS TO openDialogMissionselection.sqf 
-if (count AdvancedSettings < 14) then {
-	AdvancedSettings pushBack (DefaultAdvancedSettings select 13);
-};
-*/
-
 //0 = no, 1 = guarantee revive, 2 = realistic revive, 3 = realistic revive (only medics can revive)
 
-//iUseRevive = ("OUT_par_UseRevive" call BIS_fnc_getParamValue);
 if (isNil "iUseRevive") then {
 	iUseRevive = 0;
 	publicVariable "iUseRevive";
@@ -157,9 +145,6 @@ else
 };
 
 
-
-
-
 BasicBuildings = ["Land_LightHouse_F","Land_Lighthouse_small_F","Land_Metal_Shed_F","Land_Offices_01_V1_F","Land_Slum_House01_F","Land_Slum_House02_F","Land_Slum_House03_F","Land_Unfinished_Building_01_F","Land_Unfinished_Building_02_F","Land_d_House_Big_01_V1_F","Land_d_House_Big_02_V1_F","Land_d_House_Small_02_V1_F","Land_d_Stone_HouseBig_V1_F","Land_d_Stone_HouseSmall_V1_F","Land_d_Stone_Shed_V1_F","Land_dp_mainFactory_F","Land_i_House_Big_01_V1_F","Land_i_House_Big_01_V2_F","Land_i_House_Big_01_V3_F","Land_i_House_Big_02_V1_F","Land_i_House_Big_02_V2_F","Land_i_House_Big_02_V3_F","Land_i_House_Small_01_V1_F","Land_i_House_Small_01_V2_F","Land_i_House_Small_01_V3_F","Land_i_House_Small_02_V1_F","Land_i_House_Small_02_V2_F","Land_i_House_Small_02_V3_F","Land_i_House_Small_03_V1_F","Land_i_Stone_HouseBig_V1_F","Land_i_Stone_HouseBig_V2_F","Land_i_Stone_HouseBig_V3_F","Land_i_Stone_HouseSmall_V1_F","Land_i_Stone_HouseSmall_V2_F","Land_i_Stone_HouseSmall_V3_F","Land_u_House_Big_01_V1_F","Land_u_House_Big_02_V1_F","Land_u_House_Small_01_V1_F","Land_u_House_Small_02_V1_F","Land_cargo_house_slum_F","Land_jbad_House_1_old","Land_jbad_House_3_old","Land_jbad_House_4_old","Land_jbad_House_6_old","Land_jbad_House_7_old","Land_jbad_House_8_old","Land_jbad_House_9_old","Land_lbad_House_c_1_v2","Land_jbad_House_c_11","Land_jbad_House_c_1","Land_jbad_House_c_2","Land_jbad_House_c_3","Land_jbad_House_c_4","Land_jbad_House_c_5","Land_jbad_House_c_5_v1","Land_jbad_House_c_5_v2","Land_jbad_House_c_5_v3","Land_jbad_House_1","Land_jbad_House_3","Land_jbad_House_5","Land_jbad_House_6","Land_jbad_House_7","Land_jbad_House_8","Land_jbad_House2_basehide","Land_House_C_5_EP1","Land_House_C_5_V1_EP1","Land_House_C_5_V2_EP1","Land_House_C_5_V3_EP1","Land_House_C_12_EP1","Land_House_K_1_EP1","Land_House_K_3_EP1","Land_House_K_5_EP1","Land_House_L_8_EP1","Land_House_K_6_EP1","Land_House_K_7_EP1","Land_House_K_8_EP1","Land_House_L_1_EP1","Land_House_L_4_EP1","Land_House_L_6_EP1","Land_House_L_7_EP1","Land_House_L_8_EP1","Land_jbad_House_1_old","Land_jbad_House_3_old","Land_jbad_House_4_old","Land_jbad_House_6_old","Land_jbad_House_7_old","Land_jbad_House_8_old","Land_jbad_House_9_old","Land_lbad_House_c_1_v2","Land_jbad_House_c_11","Land_jbad_House_c_1","Land_jbad_House_c_2","Land_jbad_House_c_3","Land_jbad_House_c_4","Land_jbad_House_c_5","Land_jbad_House_c_5_v1","Land_jbad_House_c_5_v2","Land_jbad_House_c_5_v3","Land_jbad_House_1","Land_jbad_House_3","Land_jbad_House_5","Land_jbad_House_6","Land_jbad_House_7","Land_jbad_House_8","Land_jbad_House2_basehide","Land_Shed_02_F","Land_House_Small_02_F","Land_House_Small_03_F","Land_House_Small_04_F","Land_House_Small_05_F","Land_House_Small_06_F","Land_House_Big_01_F","Land_House_Big_02_F","Land_House_Big_03_F","Land_House_Big_05_F","Land_Shed_05_F","Land_Shed_06_F","Land_Shed_07_F","Land_Addon_04_F","Land_Shop_City_03_F","Land_Shop_City_05_F","Land_Shop_City_06_F","Land_Shop_City_07_F","Land_House_Big_04_F","Land_House_Native_01_F","Land_House_Native_02_F","Land_House_Native_03_F","Land_House_Native_04_F","Land_House_Native_05_F","Land_House_Native_06_F","Land_blud_hut1","Land_blud_hut2","Land_blud_hut3","Land_blud_hut4","Land_blud_hut5","Land_blud_hut6","Land_blud_hut7","Land_blud_hut8","Land_MBG_GER_RHUS_5","Land_MBG_ATC_Base","Land_MBG_GER_RHUS_2","Land_MBG_GER_HUS_1","Land_MBG_ATC_Segment","Land_MBG_GER_RHUS_1","Land_MBG_GER_HUS_2","Land_MBG_GER_RHUS_3","Land_MBG_GER_RHUS_4","Objects17","Objects18","Objects19","Objects21","Objects22","Objects23","Land_deox_House_A1","Land_deox_House_A2","Land_deox_House_B1","Land_deox_House_B2","Land_deox_House_C1","Land_deox_House_C2","Land_deox_House_D_L1","Land_deox_House_D_L2","Land_deox_House_D_L3","Land_deox_House_D_L4","Land_deox_House_D_M1","Land_deox_House_D_M2","Land_deox_House_D_M3","Land_deox_House_D_M4","Land_deox_House_D_R1","Land_deox_House_D_R3","MBG_Killhouse_3_InEditor","MBG_Killhouse_4_InEditor","MBG_Killhouse_5_InEditor","MBG_Killhouse_2_InEditor","MBG_Killhouse_5_InEditor","MBG_Killhouse_1_InEditor","land_Objects101","land_Objects77","jbad_House_c_1","jbad_House_c_1_v2","jbad_House_c_10","jbad_House_c_11","jbad_House_c_12","jbad_House_c_2","jbad_House_c_3","jbad_House_c_4","jbad_House_c_5","jbad_House_c_5_v1","jbad_House_c_5_v2","jbad_House_c_5_v3","jbad_House_c_9","jbad_dum_istan2","jbad_dum_istan4","Jbad_A_Villa","jbad_House_3_old_h","Jbad_A_BuildingWIP","Jbad_Ind_Workshop01_L","Jbad_A_Stationhouse","Jbad_Mil_Barracks","Jbad_Mil_ControlTower","Jbad_Mil_Guardhouse","Jbad_Mil_House","jbad_mosque_big_addon","jbad_mosque_big_hq","Jbad_A_Mosque_small_1","Land_Jbad_A_Mosque_small_1","Jbad_A_Mosque_small_2","Land_HouseV_1I4","Land_HouseV2_02_Interier","Land_HouseV2_02_Interier_dam","Land_HouseV2_04_interier","Land_HouseV2_04_interier_dam","Land_Farm_Cowshed_a","Land_Farm_Cowshed_a_dam","Land_Farm_Cowshed_b","Land_Farm_Cowshed_b_dam","Land_Farm_Cowshed_c","Land_Farm_Cowshed_c_dam","Land_Barn_W_01","Land_Barn_W_01_dam","Land_Barn_W_02","Land_Shed_wooden","Land_Church_05R","Land_Church_03","Land_Church_03_dam","Land_Ind_Vysypka","Land_A_Castle_Bergfrit","Land_A_Castle_Bergfrit_dam","Land_A_Castle_Donjon","Land_A_Castle_Donjon_dam","Land_R_HouseV2_02","Land_R_HouseV2_04","Land_A_Office01","Land_A_Office02","Land_A_Pub_01","Land_HouseB_Tenement","Land_raz_hut04","Land_raz_hut07","LAND_uns_hut12","Land_raz_hut06","Land_raz_hut05","Land_raz_hut02","Land_raz_hut01","land_indo_hut_2","land_indo_hut_1","LAND_uns_covering2","Land_raz_hut08","Land_raz_hut03","LAND_uns_covering1","csj_temple1","LAND_CSJ_village6","LAND_CSJ_village5","LAND_csj_village8","LAND_CSJ_riverhut4","LAND_CSJ_riverhut3","LAND_CSJ_village7","LAND_CSJ_village4","LAND_CSJ_village1","LAND_CSJ_village2","LAND_CSJ_village3","LAND_CSJ_riverhut1","LAND_CSJ_riverhut1","LAND_CSJ_hut06","LAND_CSJ_hut05","Land_MBG_Hut_C","Land_MBG_Hut_B","LAND_csj_hut02","LAND_CSJ_hut07","LAND_csj_hut01","LAND_uns_hut08","Land_MBG_Hut_A","LAND_CSJ_Yard5","LAND_CSJ_Yard3","LAND_CSJ_Yard2","LAND_CSJ_Yard1","LAND_CSJ_Yard_pen1","LAND_CSJ_Yard_penGate","LAND_CSJ_Yard4","csj_shelter01","LAND_uns_hut2","LAND_uns_hut1","LAND_uns_hutraised1","LAND_uns_hutraised2","LAND_uns_platform1","LAND_uns_platform1fishnets","LAND_uns_platform1shelter2","LAND_uns_platform1shelter1","LAND_uns_villstorage_shelter","Land_WX_building001","Land_WX_building002","Land_wx_jap_headquarters","concretecover","Land_A_Office01_EP1","Land_dum_istan3_hromada2","Land_Farm_Cowshed_a","Land_Farm_Cowshed_b","Land_Farm_Cowshed_c","Land_Ind_Garage01","Land_House_C_10_dam_EP1","Land_House_C_10_EP1","Land_House_C_11_EP1_base","Land_House_C_11_EP1","Land_House_C_12_EP1","Land_House_C_12_EP1_base","Land_House_C_2_EP1","Land_House_C_4_EP1","Land_House_C_5_V1_EP1","Land_Shed_M01","Land_Shed_M03","Land_Shed_W01","Land_Shed_W02","Land_Shed_W03","Land_Shed_W4","Land_Shed_wooden","Land_i_Stone_Shed_01_b_raw_F","Land_i_Stone_Shed_01_b_raw_F","Land_House_K_2_basehide_EP1","Land_WW2_Countryside_House_2_Damaged","Land_WW2_Corner_House_2e_4_Damaged","Land_WW2_Central_3e_1_Damaged","Land_WW2_Admin_Damaged","Land_WW2_Dlc1_House_1floor_Pol","Land_i_House_Big_02_b_blue_F","Land_i_House_Big_02_b_pink_F","Land_i_House_Big_02_b_whiteblue_F","Land_i_House_Big_02_b_white_F","Land_i_House_Big_02_b_brown_F","Land_i_House_Big_02_b_yellow_F","Land_i_House_Big_01_b_blue_F","Land_i_House_Big_01_b_pink_F","Land_i_House_Big_01_b_whiteblue_F","Land_i_House_Big_01_b_white_F","Land_i_House_Big_01_b_brown_F","Land_i_House_Big_01_b_yellow_F","Land_i_Shop_02_b_blue_F","Land_i_Shop_02_b_pink_F","Land_i_Shop_02_b_whiteblue_F","Land_i_Shop_02_b_white_F","Land_i_Shop_02_b_brown_F","Land_i_Shop_02_b_yellow_F","Land_Barn_01_brown_F","Land_Barn_01_grey_F","Land_i_House_Small_01_b_blue_F","Land_i_House_Small_01_b_pink_F","Land_i_House_Small_02_b_blue_F","Land_i_House_Small_02_b_pink_F","Land_i_House_Small_02_b_whiteblue_F","Land_i_House_Small_02_b_white_F","Land_i_House_Small_02_b_brown_F","Land_i_House_Small_02_b_yellow_F","Land_i_House_Small_02_c_blue_F","Land_i_House_Small_02_c_pink_F","Land_i_House_Small_02_c_whiteblue_F","Land_i_House_Small_02_c_white_F","Land_i_House_Small_02_c_brown_F","Land_i_House_Small_02_c_yellow_F","Land_i_House_Small_01_b_whiteblue_F","Land_i_House_Small_01_b_white_F","Land_i_House_Small_01_b_brown_F","Land_i_House_Small_01_b_yellow_F","Land_i_Addon_02_b_white_F","Land_Shed_08_brown_F","Land_Shed_08_grey_F","Land_i_Stone_House_Big_01_b_clay_F","Land_i_Stone_Shed_01_b_clay_F","Land_i_Stone_Shed_01_b_raw_F","Land_i_Stone_Shed_01_b_white_F","Land_i_Stone_Shed_01_c_clay_F","Land_i_Stone_Shed_01_c_raw_F","Land_i_Stone_Shed_01_c_white_F","Land_i_Stone_Shed_V2_F","Land_u_House_Small_02_V1_F","Land_u_Barracks_V2_F","Land_i_Barracks_V1_F","Land_i_Barracks_V2_F","land_gm_euro_office_02_win","land_gm_euro_church_01_win","land_gm_euro_church_02_win","land_gm_euro_fuelstation_01_w_win","land_gm_euro_fuelstation_02_win","land_gm_euro_mine_01_win","land_gm_euro_office_01_win","land_gm_euro_pub_01_win","land_gm_euro_office_03_win","land_gm_euro_pub_02_win","land_gm_euro_shop_01_w_win","land_gm_euro_shop_02_e_win","land_gm_euro_shop_02_w_win","land_gm_euro_house_04_d_win","land_gm_euro_house_04_e_win","land_gm_euro_house_04_w_win","land_gm_euro_house_03_e_win","land_gm_euro_house_03_w_win","land_gm_euro_house_11_d_win","land_gm_euro_house_11_e_win","land_gm_euro_house_11_w_win","land_gm_euro_house_02_d_win","land_gm_euro_house_02_e_win","land_gm_euro_house_02_w_win","land_gm_euro_house_06_w_win","land_gm_euro_house_06_d_win","land_gm_euro_house_06_e_win","land_gm_euro_house_09_d_win","land_gm_euro_house_09_e_win","land_gm_euro_house_09_w_win","land_gm_euro_house_10_w_win","land_gm_euro_house_10_d_win","land_gm_euro_house_10_e_win","land_gm_euro_house_12_d_win","land_gm_euro_house_12_e_win","land_gm_euro_house_12_w_win","land_gm_euro_house_07_d_win","land_gm_euro_house_07_e_win","land_gm_euro_house_07_w_win","land_gm_euro_house_01_w_win","land_gm_euro_house_01_d_win","land_gm_euro_house_01_e_win","land_gm_euro_house_05_d_win","land_gm_euro_house_05_e_win","land_gm_euro_house_05_w_win","land_gm_euro_house_13_w_win","land_gm_euro_house_13_d_win","land_gm_euro_house_13_e_win","land_gm_euro_house_08_w_win","land_gm_euro_house_08_d_win","land_gm_euro_house_08_e_win","land_gm_euro_shed_04_win","land_gm_euro_shed_01_win","land_gm_euro_shed_03_win","land_gm_euro_shed_05_win","land_gm_euro_farmhouse_02_win","land_gm_euro_farmhouse_03_win","land_gm_euro_farmhouse_01_win","land_gm_euro_factory_01_02_win","land_gm_euro_factory_01_01_win","land_gm_euro_barracks_02_win","land_gm_euro_barracks_01_win"];
 BasicBuildings = BasicBuildings + ["Land_Barn_04_ruins_F","Land_ConnectorTent_01_white_cross_F","Land_DeconTent_01_white_F","Land_DeconTent_01_yellow_F","Land_DeconTent_01_IDAP_F","Land_ConnectorTent_01_AAF_closed_F","Land_ConnectorTent_01_AAF_cross_F","Land_ConnectorTent_01_AAF_open_F","Land_DeconTent_01_AAF_F","Land_Dome_Small_WIP2_F","Land_Dome_Small_WIP_F","Land_MedicalTent_01_aaf_generic_inner_F","Land_Barn_02_F","Land_Barn_04_F","Land_Barn_03_large_F","Land_Barn_03_small_F","Land_Cowshed_01_A_F","Land_Cowshed_01_C_F","Land_CastleRuins_01_bastion_F","Land_CementWorks_01_brick_F","Land_CementWorks_01_grey_F","Land_Factory_02_F","Land_GarageRow_01_large_F","Land_GarageRow_01_small_F","Land_GarageOffice_01_F","Land_Sawmill_01_F","Land_IndustrialShed_01_F","Land_i_Shed_Ind_old_F","Land_Workshop_05_F","Land_Workshop_05_grey_F","Land_Workshop_03_grey_F","Land_Workshop_04_grey_F","Land_Workshop_01_F","Land_Workshop_02_F","Land_ControlTower_02_F","Land_Barracks_06_F","Land_Barracks_02_F","Land_Barracks_03_F","Land_Barracks_04_F","Land_ControlTower_01_F","Land_Radar_01_kitchen_F","Land_Radar_01_HQ_F","Land_Church_04_lightblue_F","Land_Church_04_small_lightblue_F","Land_Church_04_red_F","Land_Church_04_red_damaged_F","Land_OrthodoxChurch_02_F","Land_OrthodoxChurch_03_F","Land_Church_05_F","Land_House_1B01_F","Land_House_2B01_F","Land_House_2B02_F","Land_House_2B03_F","Land_House_2B04_F","Land_Camp_House_01_brown_F","Land_VillageStore_01_F","Land_HealthCenter_01_F","Land_PoliceStation_01_F","Land_House_1W01_F","Land_House_1W10_F","Land_House_1W11_F","Land_House_1W12_F","Land_House_1W13_F","Land_House_1W02_F","Land_House_1W03_F","Land_House_1W04_F","Land_House_1W05_F","Land_House_1W06_F","Land_House_1W07_F","Land_House_1W08_F","Land_House_1W09_F","Land_House_2W01_F","Land_House_2W02_F","Land_House_2W03_F","Land_House_2W04_F","Land_House_2W05_F","Land_Shed_14_F","Land_Shed_10_F","Land_Shed_09_F"];
 BasicBuildings = BasicBuildings + ["rso_apartmentcomplex","rso_apartmentcomplex_wip","rso_apartmentcomplex4","rso_apartmentcomplex5","rso_big","rso_big_b","rso_big_c","rso_big_d","rso_big_e","rso_big_f","rso_block1","rso_complex1","rso_complex2","rso_complex3","rso_complex4","rso_complex5","rso_complex6","rso_complex7","rso_complex9","rso_construct1","rso_construct2","rso_construct3","rso_construct4","rso_corner1","rso_corner2","rso_cornershop1","rso_h1","rso_h10","rso_h11","rso_h12","rso_h13","rso_h14","rso_h15","rso_h16","rso_h17","rso_h18","rso_h19","rso_h2","rso_h20","rso_h21","rso_h3","rso_h4","rso_h5","rso_h6","rso_h7","rso_h8","rso_h9","rso_house_big1","rso_hut1","rso_hut2","rso_hut3","rso_hut4","rso_hut_invert1","rso_long1","rso_mosque1","rso_shop1","rso_shop2","rso_shop3","rso_shop3b","rso_shop4","rso_store1","rso_stores2","rso_stores3"];
@@ -169,14 +154,11 @@ MilBuildings = MilBuildings + ["Land_DeerStand_01_F","Land_DeerStand_02_F","Land
 TowerBuildings = ["Land_TTowerBig_2_F","Land_TTowerBig_1_F (towertest)","land_Objects96","Land_wx_radiomast","LAND_uns_signaltower","rso_radiomast"];//,"Land_TTowerSmall_2_F","Land_TTowerSmall_1_F"];  //these small towers are too small for Altis or Malden.. looks strange if this is the comms tower and nearby is a massive unused tower
 
 
-
-
 sBreifing = "";
 sAltisRegainEngine = "";
 sScriptsUsed = localize "STR_TRGM2_TRGMSetUnitGlobalVars_ScriptsUsed";
 
 
-//iWeather = ("OUT_par_WeatherAndTimeConditions" call BIS_fnc_getParamValue);
 if (isNil "iWeather") then {
 	iWeather = 1;
 	publicVariable "iWeather";
@@ -265,7 +247,6 @@ MissionParamTypesValues = [0,6,8,1,2,3,9,4,7,10,5];
 //13=Defuse IEDs  14=BombMission 15=TargetMission  16=Destroy Cache  17=Secure and Supply
 //SideMissionTasks = [17];
 SideMissionTasks = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,99999];
-//MainMissionTasks = [17];
 MainMissionTasks = [1,2,3,6,7,8,9,10,11,12,13,14,15,16,17,99999];
 MissionsThatHaveIntel = [1,4,5,6];
 
@@ -273,12 +254,6 @@ MissionParamObjectives = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Random",loca
 MissionParamObjectivesValues = [0,1,2,3,4,5,6,7,8,9,10,11,12];
 
 //add new misions below, but also add to the SideMissionTasks,  MainMissionTasks or MissionsThatHaveIntel above (othrwise, wont be included in random selction or campaign)
-/*ALSO,add the below to startInfMission.sqf
-	if (_iThisTaskType == 16) then {
-		#include "..\RandFramework\CustomMission\Mission16.sqf"; //Search and Destroy
-		[] call fnc_CustomVars;
-	};	
-*/
 MissionParamObjectives pushBack "Defuse IEDs"; 
 MissionParamObjectivesValues pushBack 13; 
 
@@ -298,9 +273,6 @@ if (_CustomMissionEnabled) then {
 	MissionParamObjectives pushBack _MissionTitle; 
 	MissionParamObjectivesValues pushBack 99999; 
 };
-
-
-
 
 
 MissionParamRepOptions = [localize "STR_TRGM2_TRGMInitPlayerLocal_Enable", localize "STR_TRGM2_TRGMInitPlayerLocal_Disable"];
@@ -333,23 +305,13 @@ if (!isNil "TopLeftPos") then {
 };
 
 
-
-
-
-
-
-
-
 /*=================================================================================================================================================================*/
 /*==============================NOTE : all below are better to set in mission unique gobalVars file, they are only here as default=================================*/
 /*=================================================================================================================================================================*/
 
 
-
-
 EnemyRadioSounds = ["ambient_radio2","ambient_radio8","ambient_radio10","ambient_radio11","ambient_radio12","ambient_radio13","ambient_radio15","ambient_radio16","ambient_radio18","ambient_radio20","ambient_radio24"];
 FriendlyRadioSounds = ["ambient_radio3","ambient_radio4","ambient_radio5","ambient_radio6","ambient_radio7","ambient_radio9","ambient_radio14","ambient_radio17","ambient_radio19","ambient_radio21","ambient_radio22","ambient_radio23","ambient_radio25","ambient_radio26","ambient_radio27","ambient_radio28","ambient_radio29","ambient_radio30"];
-
 
 
 MedicalMessItems = ["MedicalGarbage_01_1x1_v1_F","MedicalGarbage_01_1x1_v2_F","MedicalGarbage_01_1x1_v3_F","MedicalGarbage_01_3x3_v1_F","MedicalGarbage_01_3x3_v2_F","MedicalGarbage_01_5x5_v1_F"];
@@ -393,8 +355,6 @@ Cones = ["RoadCone_F"];
 
 
 	/*Consider thees three variables...allow set content of crate!!!*/
-	//InitialBoxItems=[[[["hgun_P07_F","hgun_P07_khk_F","hgun_P07_snds_F","arifle_MX_F","arifle_MX_khk_F","arifle_MXC_F","arifle_MXC_Black_F","arifle_MXC_khk_F","arifle_MXM_F","arifle_MXM_Black_F","arifle_MXM_khk_F"],[50,50,50,50,50,50,50,50,50,50,50]],[["APERSBoundingMine_Range_Mag","APERSTripMine_Wire_Mag","ATMine_Range_Mag","DemoCharge_Remote_Mag","SatchelCharge_Remote_Mag","10Rnd_338_Mag","130Rnd_338_Mag","10Rnd_127x54_Mag","200Rnd_556x45_Box_Tracer_F","20Rnd_650x39_Cased_Mag_F","100Rnd_65x39_caseless_mag","100Rnd_65x39_caseless_mag_Tracer","200Rnd_65x39_cased_Box","200Rnd_65x39_cased_Box_Tracer","30Rnd_65x39_caseless_mag","30Rnd_65x39_caseless_mag_Tracer","150Rnd_762x54_Box_Tracer","10Rnd_762x54_Mag","150Rnd_762x54_Box","20Rnd_762x51_Mag","10Rnd_9x21_Mag","16Rnd_9x21_green_Mag","10Rnd_93x64_DMR_05_Mag","150Rnd_93x64_Mag","16Rnd_9x21_Mag","30Rnd_9x21_Mag","RPG7_F","RPG32_HE_F","RPG32_F","Titan_AA","Titan_AP","Titan_AT"],[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50]],[["ItemCompass","ItemMap","ItemWatch","optic_Hamr","optic_Hamr_khk_F"],[50,50,50,50,50]],[[],[]]],false];
-	//InitialBoxItemsWithAce=[[[["ACE_VMH3","ACE_VMM3","hgun_P07_F","hgun_P07_khk_F","hgun_P07_snds_F","arifle_MX_F","arifle_MX_khk_F","arifle_MXC_F","arifle_MXC_Black_F","arifle_MXC_khk_F","arifle_MXM_F","arifle_MXM_Black_F","arifle_MXM_khk_F"],[50,50,50,50,50,50,50,50,50,50,50,50,50]],[["APERSBoundingMine_Range_Mag","APERSTripMine_Wire_Mag","ATMine_Range_Mag","DemoCharge_Remote_Mag","SatchelCharge_Remote_Mag","ACE_10Rnd_338_300gr_HPBT_Mag","ACE_10Rnd_338_API526_Mag","10Rnd_338_Mag","130Rnd_338_Mag","10Rnd_127x54_Mag","150Rnd_556x45_Drum_Mag_F","150Rnd_556x45_Drum_Mag_Tracer_F","200Rnd_556x45_Box_Red_F","200Rnd_556x45_Box_F","200Rnd_556x45_Box_Tracer_Red_F","200Rnd_556x45_Box_Tracer_F","20Rnd_650x39_Cased_Mag_F","100Rnd_65x39_caseless_mag","ACE_100Rnd_65x39_caseless_mag_Tracer_Dim","100Rnd_65x39_caseless_mag_Tracer","200Rnd_65x39_cased_Box","200Rnd_65x39_cased_Box_Tracer","ACE_200Rnd_65x39_cased_Box_Tracer_Dim","30Rnd_65x39_caseless_mag","ACE_30Rnd_65x39_caseless_mag_Tracer_Dim","30Rnd_65x39_caseless_mag_Tracer","ACE_20Rnd_65_Creedmor_mag","ACE_20Rnd_65x47_Scenar_mag","150Rnd_762x54_Box_Tracer","10Rnd_762x54_Mag","150Rnd_762x54_Box","20Rnd_762x51_Mag","ACE_20Rnd_762x67_Berger_Hybrid_OTM_Mag","ACE_20Rnd_762x51_M118LR_Mag","ACE_20Rnd_762x51_M993_AP_Mag","ACE_20Rnd_762x67_Mk248_Mod_0_Mag","ACE_20Rnd_762x67_Mk248_Mod_1_Mag","ACE_20Rnd_762x51_Mk316_Mod_0_Mag","ACE_20Rnd_762x51_Mk319_Mod_0_Mag","ACE_20Rnd_762x51_Mag_SD","ACE_20Rnd_762x51_Mag_Tracer_Dim","ACE_20Rnd_762x51_Mag_Tracer","ACE_10Rnd_762x54_Tracer_mag","10Rnd_9x21_Mag","16Rnd_9x21_green_Mag","10Rnd_93x64_DMR_05_Mag","150Rnd_93x64_Mag","16Rnd_9x21_Mag","30Rnd_9x21_Mag","RPG7_F","RPG32_HE_F","RPG32_F","Titan_AA","Titan_AP","Titan_AT"],[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50]],[["ACE_RangeTable_82mm","ACE_adenosine","ACE_ATragMX","ACE_atropine","ACE_Banana","ACE_fieldDressing","ACE_elasticBandage","ACE_quikclot","ACE_bloodIV","ACE_bloodIV_250","ACE_bloodIV_500","ACE_bodyBag","ACE_CableTie","ItemCompass","ACE_DAGR","ACE_DefusalKit","ACE_EarPlugs","ACE_EntrenchingTool","ACE_epinephrine","ACE_Flashlight_MX991","ACE_Kestrel4500","ACE_Flashlight_KSF1","ACE_M26_Clacker","ACE_Clacker","ACE_Flashlight_XL50","ItemMap","ACE_MapTools","ACE_microDAGR","ACE_morphine","ACE_packingBandage","ACE_personalAidKit","ACE_plasmaIV","ACE_plasmaIV_250","ACE_plasmaIV_500","ACE_RangeCard","ACE_salineIV","ACE_salineIV_250","ACE_salineIV_500","ACE_Sandbag_empty","ACE_Tripod","ACE_surgicalKit","ACE_tourniquet","ACE_VectorDay","ItemWatch","ACE_wirecutter","optic_Hamr","ACE_optic_Hamr_2D","optic_Hamr_khk_F","ACE_optic_Hamr_PIP","tf_anprc152","tf_anprc154"],[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50]],[["tf_rt1523g","tf_rt1523g_big"],[50,50]]],false];
 
 	InitialBoxItems=[[[[],[]],[["SmokeShellBlue","SmokeShellGreen","SmokeShellOrange","SmokeShellRed","SmokeShell"],[20,20,20,20,20]],[["ItemCompass","ItemMap","ItemWatch"],[5,5,5]],[[],[]]],false];
 	InitialBoxItemsWithAce=[[[["ACE_VMH3","ACE_VMM3"],[5,5]],[["DemoCharge_Remote_Mag","SatchelCharge_Remote_Mag","SmokeShellGreen","SmokeShellOrange","SmokeShellRed","SmokeShell"],[5,5,20,20,20,20,20]],[["ACE_RangeTable_82mm","ACE_adenosine","ACE_ATragMX","ACE_atropine","ACE_Banana","ACE_fieldDressing","ACE_elasticBandage","ACE_quikclot","ACE_bloodIV","ACE_bloodIV_250","ACE_bloodIV_500","ACE_bodyBag","ACE_CableTie","ItemCompass","ACE_DAGR","ACE_DefusalKit","ACE_EarPlugs","ACE_EntrenchingTool","ACE_epinephrine","ACE_Flashlight_MX991","ACE_Kestrel4500","ACE_Flashlight_KSF1","ACE_M26_Clacker","ACE_Clacker","ACE_Flashlight_XL50","ItemMap","ACE_MapTools","ACE_microDAGR","ACE_morphine","ACE_packingBandage","ACE_personalAidKit","ACE_plasmaIV","ACE_plasmaIV_250","ACE_plasmaIV_500","ACE_RangeCard","ACE_salineIV","ACE_salineIV_250","ACE_salineIV_500","ACE_Sandbag_empty","ACE_Tripod","ACE_surgicalKit","ACE_tourniquet","ACE_VectorDay","ItemWatch","ACE_wirecutter","tf_anprc152","tf_anprc154"],[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50]],[["tf_rt1523g","tf_rt1523g_big"],[3,3]]],false];

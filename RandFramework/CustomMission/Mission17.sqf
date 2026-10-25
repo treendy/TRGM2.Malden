@@ -83,14 +83,12 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 				[_newFlag],
 				{
 					{				
-						//hint str(_this);	
 						_flag = _this select 0;
 						_pos = getPos _flag;
 						_group = _x;
 						if (side _group == east) then {
 							_groupLeader = leader _group;
 							if ((getPos _groupLeader) distance _pos < 1500) then {
-								//doStop (_units select _unitIndex);
 								{
 									_unit = _x;
 									_unit setCombatMode "RED";
@@ -107,7 +105,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			] remoteExec ["bis_fnc_call", 2];
 
 
-			//{hint (format[localize "STR_TRGM2_MinUntilSupplyChopperInArea", "4:00"]);} remoteExec ["bis_fnc_call", 0];
 			sleep 240; //wait 4 mins before supply drop in area
 			{hint (localize "STR_TRGM2_SupplyChopperInbound");} remoteExec ["bis_fnc_call", 0];
 

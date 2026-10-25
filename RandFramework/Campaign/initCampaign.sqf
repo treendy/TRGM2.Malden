@@ -5,10 +5,6 @@
 //			- show label on screen as fade in "Day 2 : 18:46 PM - Destroy Cache near XXX"
 //	- option to request asset or recrute unit
 //	- if 10 rep, then the mission to load will be a main mission, with 2 optional sides for intel only!  (may have to be negative 10??? instead of rewritig the rep stuff)
-	
-
-
-
 
 
 if (SaveType == 0) then {
@@ -33,6 +29,5 @@ publicVariable "CampaignInitiated";
 
 
 //hint "go to the board to get started"
-
 
 

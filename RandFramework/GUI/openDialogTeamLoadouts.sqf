@@ -24,12 +24,8 @@ if (!isNull (findDisplay 6000)) then {
 	} forEach AdvControls;
 	publicVariable "AdvancedSettings";
 
-	//_ctrlItem = (findDisplay 6000) displayCtrl 5500;
-	//iMissionParamType = MissionParamTypesValues select lbCurSel _ctrlItem;
-	//publicVariable "iMissionParamType";
 };
 
-//hint "opening 2dialogA";
 
 closedialog 0;
 

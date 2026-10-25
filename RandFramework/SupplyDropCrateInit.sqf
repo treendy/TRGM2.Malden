@@ -1,5 +1,3 @@
-//hint str(_this);
-//sleep 2;
 
 _thisBox = _this select 0;
 

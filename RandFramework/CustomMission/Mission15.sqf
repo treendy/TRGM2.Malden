@@ -83,8 +83,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	[_mainObjPos,_spacingBetweenTargets,true,true,_IED3, _isCache3] execVM "RandFramework\setTargetEvent.sqf";
 
 
-
-	_customTaskClear = nil;
+_customTaskClear = nil;
 	_customTaskClear = createTrigger ["EmptyDetector", [0,0]];
 	_customTaskClear setVariable ["DelMeOnNewCampaignDay",true];
 	
