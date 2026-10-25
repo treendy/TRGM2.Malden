@@ -5,6 +5,6 @@ params ["_pos"];
 private _missionConfigPath = str missionConfigFile;
 private _sirenPath = (_missionConfigPath select [0, count _missionConfigPath - 15]) + "RandFramework\Sounds\Siren.ogg";
 for "_i" from 1 to 5 do {
-	playSound3D [_sirenPath, nil, false, _pos, 1.5, 1, 0];
+	playSound3D [_sirenPath, objNull, false, _pos, 1.5, 1, 0];
 	sleep 40;
 };

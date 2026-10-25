@@ -1,9 +1,10 @@
 #include "..\..\setUnitGlobalVars.sqf"; //this can be replayed for joining players before init.sqf has run, so make sure the globals exist (guarded, only runs once)
 //Runs on every client (remoteExec'd with JIP id "TRGM_missionBoardOptions", so only the latest state is replayed for JIP players)
 //and sets up the actions on the two mission boards locally
-if (!hasInterface) exitWith {};
-
 params ["_option"];
+TRGM_missionBoardState = _option; //also kept on a dedicated server, so mainInit knows which board is showing
+
+if (!hasInterface) exitWith {};
 
 _dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
 

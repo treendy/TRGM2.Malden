@@ -10,8 +10,8 @@ if (alive _civ) then {
 	} forEach attachedObjects _civ;
 
 
-	_civ disableAI "anim";  
-	_civ disableAI "MOVE"; 
+	[_civ, "ANIM"] remoteExec ["disableAI", _civ]; //AI commands only work where the unit is local (the server for spawned civs)
+	[_civ, "MOVE"] remoteExec ["disableAI", _civ];
 
 	disableUserInput true;
 	_pos = _player ModelToWorld [0,1.8,0];
@@ -73,10 +73,10 @@ _iDropActionIndex = _player addAction ["drop", {
 			{
 				if ( _x isKindOf "Man") then {
 			  		detach _x;
-			  		_x enableAI "anim";  
-			  		_x setHitPointDamage ["hitLegs", 1];
+			  		[_x, "ANIM"] remoteExec ["enableAI", _x];
+			  		[_x, "MOVE"] remoteExec ["enableAI", _x];
+			  		[_x, ["hitLegs", 1]] remoteExec ["setHitPointDamage", _x];
 			  		[_x] join (group _player);
-					_x enableAI "MOVE"; 
 					[_x, ""] remoteExec ["switchMove", 0, false];
 					sleep 1;
 					[_x, (_nearestVeh select 0)] remoteExec ["moveInCargo", 0, false];

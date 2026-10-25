@@ -520,7 +520,9 @@ TREND_fnc_CheckBadPoints = {
 					_sRankMessage = "<t color='#00ff00'>" + localize "STR_TRGM2_mainInit_ReputationIncreased" + "</t><br /><br />" + _sRankIcon + "<br /><br />" + localize "STR_TRGM2_mainInit_ReputationText";
 				};
 
-				if ((ActiveTasks call FHQ_TT_areTasksCompleted)) then { //if rank changed and tasks completed, then if now rank 5, need to reset board to show "Start final mission", otherwise, make sure shows "start next mission"
+				//if rank changed and tasks completed, then if now rank 5, need to reset board to show "Start final mission", otherwise, make sure shows "start next mission"
+				//(only when the board already shows the mission complete options: ActiveTasks is briefly empty while a new mission is being generated)
+				if (missionNamespace getVariable ["TRGM_missionBoardState",""] == "MISSION_COMPLETE" && {ActiveTasks call FHQ_TT_areTasksCompleted}) then {
 					[["MISSION_COMPLETE"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,"TRGM_missionBoardOptions"];
 				};
 				[parseText _sRankMessage] remoteExec ["Hint", 0];

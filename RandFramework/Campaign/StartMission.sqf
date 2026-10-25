@@ -16,6 +16,7 @@ if (true) then {
 
 		if (_isCampaign) then {
 			if (isServer) then {
+				TRGM_missionBoardState = "NEW_MISSION"; //right away, the board script below runs a moment later
 				[["NEW_MISSION"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,"TRGM_missionBoardOptions"];
 			};
 			if ((Player getVariable ["calUAVActionID", -1]) != -1) then {

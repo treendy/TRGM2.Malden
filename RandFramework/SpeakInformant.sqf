@@ -14,9 +14,9 @@ if (side player == FriendlySide) then {
 	else {
 		hint "You start to talk to the informant...";
 
-		_thisCiv disableAI "move";
+		[_thisCiv, "MOVE"] remoteExec ["disableAI", _thisCiv]; //AI commands only work where the unit is local (the server for spawned civs)
 		sleep 3;
-		_thisCiv enableAI "move";
+		[_thisCiv, "MOVE"] remoteExec ["enableAI", _thisCiv];
 
 		if (alive _thisCiv) then {
 			if (!([] call TRGM_fnc_revealMainObjective)) then {

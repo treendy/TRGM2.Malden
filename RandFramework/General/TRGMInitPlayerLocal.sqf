@@ -199,8 +199,9 @@ TREND_fnc_InitPostStarted = {
 		[] execVM "RandFramework\NVscript.sqf";
 	};
 
-	//in a campaign SetMissionBoardOptions.sqf adds this (it rebuilds the board actions every mission)
+	//in a campaign SetMissionBoardOptions.sqf adds these (it rebuilds the board actions every mission)
 	if (iMissionParamType != 5) then {
+		endMissionBoard addaction [localize "STR_TRGM2_SetMissionBoardOptions_EndMission", "RandFramework\attemptendmission.sqf"];
 		endMissionBoard addaction [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format[localize "STR_TRGM2_TRGMInitPlayerLocal_FullReputationReport",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
 	};
 
