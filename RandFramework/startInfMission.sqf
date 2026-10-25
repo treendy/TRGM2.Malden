@@ -488,6 +488,7 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									if (count _customAoPos == 2) then {
 										_inf1X = _customAoPos select 0;
 										_inf1Y = _customAoPos select 1;
+										missionNamespace setVariable [format["CustomMissionAoDebug%1",_iTaskIndex], format["engine hook applied: _inf1X/_inf1Y now [%1,%2] (AO marker, patrols and sentries are placed from these)", round _inf1X, round _inf1Y]];
 									};
 								};
 								//###################################### Hack Data ###################

@@ -1,7 +1,7 @@
 //These are only ever called by the server!
 
 //MISSION 18: Secure Comms Tower
-//A comms tower is spawned on high, flat, dry ground within about 200m of the AO building and becomes the centre of the AO. Players activate an uplink at it, then must keep at least one player within 10m of it until the progress bar reaches 100% (5 minutes).
+//A comms tower is spawned on high, flat, dry ground within about 350m of the AO building and becomes the centre of the AO. Players activate an uplink at it, then must keep at least one player within 10m of it until the progress bar reaches 100% (5 minutes).
 //The enemy is called to the tower as soon as the uplink starts. If all players die before 100% the mission fails.
 //Once the bar is full, friendly jets fly an airstrike pass past the tower (effect only).
 
@@ -40,8 +40,10 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	//find a sensible place for a comms tower near the AO building: dry, flat, clear of trees/buildings/roads and well away from the shore, taking the highest ground found
 	private _spawnTowerPos = [];
 	private _bestHeight = -100000;
+	private _validCount = 0;
+	private _usedFallback = false;
 	for "_i" from 1 to 80 do {
-		private _candidate = _mainObjPos getPos [40 + random 160, random 360];
+		private _candidate = _mainObjPos getPos [50 + random 300, random 360];
 		private _isGood = !(surfaceIsWater _candidate)
 			&& {(getMarkerPos "mrkHQ") distance2D _candidate > BaseAreaRange}
 			&& {((surfaceNormal _candidate) select 2) > 0.97}
@@ -49,14 +51,18 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			&& {count nearestTerrainObjects [_candidate, ["TREE","SMALL TREE","BUSH","BUILDING","HOUSE","ROCK","ROCKS","WALL","FENCE","ROAD","MAIN ROAD","TRACK"], 10] == 0};
 		if (_isGood) then {
 			private _nearWater = ([40,80] findIf {private _dist = _x; [0,45,90,135,180,225,270,315] findIf {surfaceIsWater (_candidate getPos [_dist, _x])} > -1}) > -1;
-			if (!_nearWater && {(getTerrainHeightASL _candidate) > _bestHeight}) then {
-				_bestHeight = getTerrainHeightASL _candidate;
-				_spawnTowerPos = _candidate;
+			if (!_nearWater) then {
+				_validCount = _validCount + 1;
+				if ((getTerrainHeightASL _candidate) > _bestHeight) then {
+					_bestHeight = getTerrainHeightASL _candidate;
+					_spawnTowerPos = _candidate;
+				};
 			};
 		};
 	};
 	//nothing suitable found, so use the engine's general flat position search around the building
 	if (count _spawnTowerPos == 0) then {
+		_usedFallback = true;
 		_spawnTowerPos = [_mainObjPos, 15, 80, 12, 0, 0.15, 2, [[getMarkerPos "mrkHQ", BaseAreaRange]] + CheckPointAreas + SentryAreas, [[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 		if (_spawnTowerPos select 0 <= 0 || {surfaceIsWater _spawnTowerPos}) then {
 			_spawnTowerPos = _mainObjPos getPos [30, random 360];
@@ -139,6 +145,39 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 	//setup message in the same style as the other "Mission Events" messages, so a tester can find the tower
 	[[mapGridPosition _towerPos, round (_mainObjPos distance2D _towerPos)], {systemChat format["Mission Events: Comms tower objective at grid %1 (AO centred on it, %2m from the original AO building)", _this select 0, _this select 1];}] remoteExec ["bis_fnc_call", 0];
+
+	//debug text for testers: in the debug console run   copyToClipboard TRGM_Mission18Debug   and send the result
+	private _sDebugBase = format["v%1 | original AO building at grid %2 %3 | tower at grid %4 %5, %6m from the building, %7m ASL",
+		missionNamespace getVariable ["TRGM_Version","?"], mapGridPosition _mainObjPos, [round (_mainObjPos select 0), round (_mainObjPos select 1)],
+		mapGridPosition _towerPos, [round (_towerPos select 0), round (_towerPos select 1)], round (_mainObjPos distance2D _towerPos), round (getTerrainHeightASL _towerPos)];
+	_sDebugBase = _sDebugBase + format[" | valid tower spots %1 of 80, fallback used %2 | AO centre sent to engine %3",
+		_validCount, _usedFallback, missionNamespace getVariable [format["CustomMissionAoPos%1",_iTaskIndex], []]];
+	[_iTaskIndex, _sDebugBase] call TRGM_fnc_mission18DebugSet;
+
+	//a while later, record what the engine did with the AO centre and how far the enemy groups really are from the tower and from the original building
+	[_iTaskIndex, _towerPos, _mainObjPos, _sDebugBase] spawn {
+		params ["_iTaskIndex","_towerPos","_mainObjPos","_sDebugBase"];
+		sleep 90;
+		private _enemyPositions = ((allGroups select {side _x == east && {count units _x > 0}}) apply {getPos leader _x});
+		private _fnc_countWithin = {
+			params ["_centre","_range"];
+			{_x distance2D _centre < _range} count _enemyPositions
+		};
+		private _markerName = ["mrkMainObjective","Informant"] apply {format["%1%2",_x,_iTaskIndex]};
+		private _markerPos = [];
+		{if (markerType _x != "") exitWith {_markerPos = getMarkerPos _x;};} forEach _markerName;
+		private _sMore = format[" | engine: %1 | ObjectivePossitions %2 | AO marker at %3 (%4m from tower)",
+			missionNamespace getVariable [format["CustomMissionAoDebug%1",_iTaskIndex], "hook did NOT apply"],
+			ObjectivePossitions apply {[round (_x select 0), round (_x select 1)]},
+			_markerPos apply {round _x}, if (count _markerPos > 1) then {round (_markerPos distance2D _towerPos)} else {"?"}];
+		_sMore = _sMore + format[" | enemy groups total %1; within 300/600/1000/2000m of the TOWER: %2/%3/%4/%5",
+			count _enemyPositions,
+			[_towerPos,300] call _fnc_countWithin, [_towerPos,600] call _fnc_countWithin, [_towerPos,1000] call _fnc_countWithin, [_towerPos,2000] call _fnc_countWithin];
+		_sMore = _sMore + format[" | within 300/600/1000/2000m of the ORIGINAL BUILDING: %1/%2/%3/%4",
+			[_mainObjPos,300] call _fnc_countWithin, [_mainObjPos,600] call _fnc_countWithin, [_mainObjPos,1000] call _fnc_countWithin, [_mainObjPos,2000] call _fnc_countWithin];
+		[_iTaskIndex, _sDebugBase + _sMore] call TRGM_fnc_mission18DebugSet;
+		[[], {systemChat "Mission Events: Mission 18 debug ready - in the debug console run: copyToClipboard TRGM_Mission18Debug";}] remoteExec ["bis_fnc_call", 0];
+	};
 
 	//trigger only exists so this mission stops running if the campaign day is reset (same cleanup flag the other missions use)
 	private _lifeTrigger = createTrigger ["EmptyDetector", [0,0]];

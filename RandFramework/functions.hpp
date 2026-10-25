@@ -62,6 +62,11 @@ class TRGM   { // TAG
         class badCivRemoveSearchAction{};
     };
 
+    class missionSetup {
+        file = "RandFramework\functions\missionSetup";
+        class mission18DebugSet{};
+    };
+
     class enemyUnits {
         file = "RandFramework\functions\enemyUnits";
         class CreateUnit{};
