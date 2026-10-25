@@ -1,5 +1,5 @@
 //Mission setup dialog (display 5000): turns the operation / side ops / intel / two objectives choices into one of the
-//mission types (iMissionParamType) and updates the page to match. Called by every choice's event handler (unscheduled).
+//mission types (TRGM_setupMissionType, which readMainParams copies to iMissionParamType) and updates the page to match. Called by every choice's event handler (unscheduled).
 //_fromType: set the choices from iMissionParamType first (used when the dialog opens)
 params [["_fromType", false]];
 
@@ -47,6 +47,9 @@ else {
 	//the choice the player just made wins, the others are adjusted so the combination is a real mission type
 	_state params ["", "_operation", "_assaultSideOps", "_assaultIntel", "_patrolObjectives", "_patrolIntel", "_twoObjectives"];
 	private _changed = {!((_state select _this) isEqualTo (_old select _this))};
+	if ((1 call _changed) && _twoObjectives) then { //the checkbox is shared by both operations: make the other rows fit it
+		if (_operation == 0) then {_state set [2, 1]; _state set [3, 0];} else {_state set [4, 0]; _state set [5, 0];};
+	};
 	if (_operation == 0) then {
 		if (2 call _changed) then {
 			if (_assaultSideOps == 0 && _assaultIntel in [1,2]) then {_state set [3, 0];}; //hidden side ops / intel from side ops need side ops
@@ -77,8 +80,8 @@ _state params ["_mode", "_operation", "_assaultSideOps", "_assaultIntel", "_patr
 } forEach [[_ctrlMode,_mode],[_ctrlOperation,_operation],[_ctrlAssaultSideOps,_assaultSideOps],[_ctrlAssaultIntel,_assaultIntel],[_ctrlPatrolObjectives,_patrolObjectives],[_ctrlPatrolIntel,_patrolIntel]];
 if !((cbChecked _ctrlTwoObjectives) isEqualTo _twoObjectives) then {_ctrlTwoObjectives cbSetChecked _twoObjectives;};
 
-//the mission type these choices make
-iMissionParamType = call {
+//the mission type these choices make (kept local until Begin / More settings, see readMainParams: other machines may still have this dialog open)
+private _type = call {
 	if (_mode == 1) exitWith {5};
 	if (_operation == 0) exitWith {
 		if (_twoObjectives) exitWith {8};
@@ -87,6 +90,7 @@ iMissionParamType = call {
 	if (_twoObjectives) exitWith {9};
 	[[3,3],[4,7]] select _patrolObjectives select _patrolIntel
 };
+TRGM_setupMissionType = _type;
 
 //only show the rows for the chosen operation (none for a campaign)
 private _isQuickOp = _mode == 0;
@@ -102,7 +106,7 @@ private _isQuickOp = _mode == 0;
 } forEach [_ctrlTwoObjectives, _display displayCtrl 5917];
 
 //briefing preview
-private _typeIndex = MissionParamTypesValues find iMissionParamType;
+private _typeIndex = MissionParamTypesValues find _type;
 (_display displayCtrl 5932) ctrlSetText (MissionParamTypes select _typeIndex);
 private _ctrlDescription = _display displayCtrl 5001; //inside a scrolling group: make it as tall as its text
 _ctrlDescription ctrlSetText (MissionTypeDescriptions select _typeIndex);
@@ -112,8 +116,8 @@ _ctrlDescription ctrlCommit 0;
 
 //objective combos: side op objectives for assaults with side ops, the other objectives for patrols with more than one
 private _objectiveCount = call {
-	if (iMissionParamType in [0,6,4,7]) exitWith {3};
-	if (iMissionParamType in [8,9]) exitWith {2};
+	if (_type in [0,4,7]) exitWith {3};
+	if (_type in [6,8,9]) exitWith {2}; //type 6: both hidden side ops use the 2nd objective
 	1
 };
 private _objectiveCtrls = [_display displayCtrl 5104, _display displayCtrl 7001, _display displayCtrl 7002];
@@ -133,7 +137,8 @@ private _objW = (_objFullW - (_objectiveCount - 1) * _objGap) / _objectiveCount;
 	_x ctrlCommit 0;
 } forEach _objectiveCtrls;
 _ctrlObjectiveLabel ctrlSetText (call {
-	if (iMissionParamType in [0,6]) exitWith {localize "STR_TRGM2_Setup_ObjectiveMainSides"};
+	if (_type == 0) exitWith {localize "STR_TRGM2_Setup_ObjectiveMainSides"};
+	if (_type == 6) exitWith {localize "STR_TRGM2_Setup_ObjectiveMainSide"};
 	if (_objectiveCount > 1) exitWith {localize "STR_TRGM2_Setup_ObjectiveList"};
 	toUpper localize "STR_TRGM2_dialogs_Objective"
 });
@@ -143,7 +148,7 @@ if (isNil "AllowMissionTypeCampaign") then {AllowMissionTypeCampaign = false;};
 private _ctrlObjective = _objectiveCtrls select 0;
 private _ctrlRep = _display displayCtrl 5100;
 private _ctrlWeather = _display displayCtrl 5101;
-if (iMissionParamType == 5) then {
+if (_type == 5) then {
 	if (!AllowMissionTypeCampaign) then {
 		_ctrlObjective ctrlEnable false;
 		_ctrlObjective lbSetCurSel 0;

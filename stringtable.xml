@@ -3371,6 +3371,10 @@
                 <Original>OBJECTIVE  (main / side op 1 / side op 2)</Original>
                 <English>OBJECTIVE  (main / side op 1 / side op 2)</English>
             </Key>
+            <Key ID="STR_TRGM2_Setup_ObjectiveMainSide">
+                <Original>OBJECTIVE  (main / side ops)</Original>
+                <English>OBJECTIVE  (main / side ops)</English>
+            </Key>
             <Key ID="STR_TRGM2_Setup_ObjectiveList">
                 <Original>OBJECTIVES</Original>
                 <English>OBJECTIVES</English>

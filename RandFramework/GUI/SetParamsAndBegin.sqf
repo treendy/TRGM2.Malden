@@ -80,6 +80,10 @@ if (_LoadVersion != "") then {
 			publicVariable "iUseRevive";
 			iStartLocation = SavedData select 6;
 			publicVariable "iStartLocation";
+			iMissionParamObjective2 = 0; //not saved, and a campaign uses it for its side task (may be left over from the setup page)
+			publicVariable "iMissionParamObjective2";
+			iMissionParamObjective3 = 0;
+			publicVariable "iMissionParamObjective3";
 
 			BadPoints = SavedData select 7;
 			MaxBadPoints = SavedData select 8;

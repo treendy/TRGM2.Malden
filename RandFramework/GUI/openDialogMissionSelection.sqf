@@ -141,7 +141,7 @@ else {
 
 	//set the operation / side ops / intel choices from the mission type and lay out the page
 	TRGM_setupUpdating = nil;
-	[true] call TRGM_fnc_missionSetupUpdate;
+	isNil {[true] call TRGM_fnc_missionSetupUpdate}; //unscheduled, so a click can't land half way through
 	if (isClass(configFile >> "CfgPatches" >> "ace_medical")) then {
 		((findDisplay 5000) displayCtrl 5103) ctrlEnable false;
 	};

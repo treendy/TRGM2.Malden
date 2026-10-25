@@ -5,6 +5,7 @@ private _display = findDisplay 5000;
 if (isNull _display) exitWith {};
 
 //the mission type is worked out from the operation / side ops / intel choices by TRGM_fnc_missionSetupUpdate
+if (!isNil "TRGM_setupMissionType") then {iMissionParamType = TRGM_setupMissionType;};
 publicVariable "iMissionParamType";
 
 {
