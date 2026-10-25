@@ -45,7 +45,7 @@ CODEINPUT = [];
 		sleep 3;
 		if (!bAndSoItBegins) then {
 			playMusic IntroMusic;
-			{systemChat format["SelectLoop Music: %1", IntroMusic ];} remoteExec ["bis_fnc_call", 0];
+			if (bDebugMode) then {[format["SelectLoop Music: %1", IntroMusic ]] remoteExec ["systemChat", 0];};
 		};
 		while {!bAndSoItBegins} do {
 
@@ -461,7 +461,7 @@ sleep 0.1;
 doStop player;
 
 ////INITIATE ANIMATION OVER NETWORK
-[[player],"TOUR_fnc_startingMove",true] spawn BIS_fnc_MP;
+[player] remoteExec ["TOUR_fnc_startingMove", 0];
 
 ////WAIT A SECOND
 sleep 1;

@@ -86,7 +86,7 @@ _isHiddenObj = false;
 		playMusic "";
 		0 fadeMusic 1;
 		playMusic NewMissionMusic;
-		{systemChat format["StartMission Music: %1", NewMissionMusic];} remoteExec ["bis_fnc_call", 0];
+		if (bDebugMode) then {[format["StartMission Music: %1", NewMissionMusic]] remoteExec ["systemChat", 0];};
 
 		txt1Layer = "txt1" call BIS_fnc_rscLayer;
 		txt2Layer = "txt2" call BIS_fnc_rscLayer;
@@ -150,7 +150,7 @@ _isHiddenObj = false;
 		sleep 3;
 
 
-		{systemChat "FinalCleanup";} remoteExec ["bis_fnc_call", 0];
+		if (bDebugMode) then {["FinalCleanup"] remoteExec ["systemChat", 0];};
 		call compile preprocessFileLineNumbers "RandFramework\RandScript\FinalSetupCleaner.sqf";
 
 		sleep 2;
@@ -159,7 +159,7 @@ _isHiddenObj = false;
 			//AOCampPos
 			if (!isnil "sl") then {
 				sl setPos AOCampPos;
-				{systemChat "Moving Players";} remoteExec ["bis_fnc_call", 0];
+				if (bDebugMode) then {["Moving Players"] remoteExec ["systemChat", 0];};
 				sleep 1;
 				{_x setpos AOCampPos} forEach units group sl;
 			};

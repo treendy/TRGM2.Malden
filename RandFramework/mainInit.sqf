@@ -479,19 +479,19 @@ sleep _coreCountSleep;
 
 if (isServer) then {	
 	call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetEnemyUnitGlobalVars.sqf";
-	{systemChat format["Mission Core: %1", "EnemyGlobalVarsSet"];} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {[format["Mission Core: %1", "EnemyGlobalVarsSet"]] remoteExec ["systemChat", 0];};
 	sleep _coreCountSleep;
 
 	call compile preprocessFileLineNumbers "RandFramework\General\TRGMSetFriendlyLoutoutsGlobalVars.sqf";
-	{systemChat format["Mission Core: %1", "FriendlyGlobalVarsSet"];} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {[format["Mission Core: %1", "FriendlyGlobalVarsSet"]] remoteExec ["systemChat", 0];};
 	sleep _coreCountSleep;
 
 	#include "..\CustomMission\TRGMSetEnemyFaction.sqf"; //if _useCustomEnemyFaction set to true within this sqf, will overright the above enemy faction data
-	{systemChat format["Mission Core: %1", "EnemyFactionSet"];} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {[format["Mission Core: %1", "EnemyFactionSet"]] remoteExec ["systemChat", 0];};
 	sleep _coreCountSleep;
 	
 	#include "..\CustomMission\TRGMSetFriendlyLoadouts.sqf"; //as above, but for _useCustomFriendlyLoadouts
-	{systemChat format["Mission Core: %1", "FriendlyLoadoutSet"];} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {[format["Mission Core: %1", "FriendlyLoadoutSet"]] remoteExec ["systemChat", 0];};
 	sleep _coreCountSleep;
 
 	/*Fix any changed types	 */
@@ -502,7 +502,7 @@ if (isServer) then {
 	CustomObjectsSet = true;
 	publicVariable "CustomObjectsSet";
 	call compile preprocessFileLineNumbers "RandFramework\setFriendlyObjects.sqf";
-	{systemChat format["Mission Core: %1", "FriendlyObjectsSet"];} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {[format["Mission Core: %1", "FriendlyObjectsSet"]] remoteExec ["systemChat", 0];};
 	sleep _coreCountSleep;
 
 
@@ -552,7 +552,7 @@ if (isServer) then {
 			sleep 3;
 		};
 	};
-	{systemChat format["Mission Core: %1", "EnemyFactionDataProcessed"];} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {[format["Mission Core: %1", "EnemyFactionDataProcessed"]] remoteExec ["systemChat", 0];};
 	sleep _coreCountSleep;
 
         _isAceRespawnWithGear = false;
@@ -561,7 +561,7 @@ if (isServer) then {
   	   _isAceRespawnWithGear = "ace_respawn_savePreDeathGear" call CBA_settings_fnc_get;
 	};
 	
-	{systemChat format["Mission Core: %1", "savePreDeathGear"];} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {[format["Mission Core: %1", "savePreDeathGear"]] remoteExec ["systemChat", 0];};
 	sleep _coreCountSleep;
 	if (LoadoutData != "" || LoadoutDataDefault != "") then {
 		{
@@ -575,7 +575,7 @@ if (isServer) then {
 		} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 		sleep 1;
 	};
-	{systemChat format["Mission Core: %1", "setLoadout ran"];} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {[format["Mission Core: %1", "setLoadout ran"]] remoteExec ["systemChat", 0];};
 	sleep _coreCountSleep;
 
 	if ([] call TRGM_fnc_isAceLoaded) then {
@@ -598,7 +598,7 @@ if (isServer) then {
 		};
 	}  forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 
-	{systemChat format["Mission Core: %1", "boxCargo set"];} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {[format["Mission Core: %1", "boxCargo set"]] remoteExec ["systemChat", 0];};
 	sleep _coreCountSleep;
 
 
@@ -764,7 +764,7 @@ if (isServer) then {
 	{
 		_x setVariable ["DontDelete",true];
 	} forEach nearestObjects [getMarkerPos "mrkHQ", ["all"], 2000];
-	{systemChat format["Mission Core: %1", "DontDeleteSet"];} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {[format["Mission Core: %1", "DontDeleteSet"]] remoteExec ["systemChat", 0];};
 	sleep _coreCountSleep;
 
 	if (isMultiplayer && !(iMissionParamType == 5)) then {
@@ -797,7 +797,7 @@ if (isServer) then {
 		[] spawn TREND_fnc_CheckAnyPlayersAlive;
  	};
 
-	 {systemChat format["Mission Core: %1", "NonAliveEndCheckRunning"];} remoteExec ["bis_fnc_call", 0];
+	 if (bDebugMode) then {[format["Mission Core: %1", "NonAliveEndCheckRunning"]] remoteExec ["systemChat", 0];};
 	sleep _coreCountSleep;
 
 
@@ -812,7 +812,7 @@ if (iAllowNVG == 0) then {
 
 		} forEach allUnits;
 	};
-	{systemChat format["Mission Core: %1", "NVGStateSet"];} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {[format["Mission Core: %1", "NVGStateSet"]] remoteExec ["systemChat", 0];};
 	sleep _coreCountSleep;
 
 	TREND_fnc_PlayBaseRadioEffect = {

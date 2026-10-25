@@ -8,7 +8,7 @@ _veh =(_this select 0);
 _bIsTrap = selectRandom[true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
 _IEDType = "CAR";
 
-[[_veh, ["Tell driver to get out",{
+[_veh, ["Tell driver to get out",{
 			_veh = _this select 0;
 			_unit = driver _veh;
 			if (alive _unit) then {
@@ -23,7 +23,7 @@ _IEDType = "CAR";
 			else {
 				hint "are actually trying to talk to a ghost?"
 			}
-		},[_veh]]],"addAction",true,true] call BIS_fnc_MP;
+		},[_veh]]] remoteExec ["addAction", 0, true];
 
 
 

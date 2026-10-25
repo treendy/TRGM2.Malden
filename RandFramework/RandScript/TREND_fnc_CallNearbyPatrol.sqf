@@ -334,7 +334,7 @@ if (_bInfSpottedAction) then {
 									while {_iFiredCount < _iRoundsToFire} do {
 										_iFiredCount = _iRoundsToFire + 1;
 										_TargetPos = [(_SpottedUnitPos select 0)+(75 * sin floor(random 360)),(_SpottedUnitPos select 1)+(75 * cos floor(random 360))];
-										[[_nearestMortar, [_TargetPos, _Ammo, 1]],"commandArtilleryFire",false,false] call BIS_fnc_MP;
+										[_nearestMortar, [_TargetPos, _Ammo, 1]] remoteExec ["commandArtilleryFire", _nearestMortar];
 										sleep 3;
 									};
 									bMortarFiring = false;

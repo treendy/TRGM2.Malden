@@ -389,7 +389,7 @@ if (_AllowAnimation) then {
 		};
 
 		if (!_isHiddenObj) then {
-			[[_guardUnit5, [localize "STR_TRGM2_setCheckpoint_Ask","RandFramework\SpeakToFriendlyCheckpoint.sqf",[_pos5]]],"addAction",true,true] call BIS_fnc_MP;
+			[_guardUnit5, [localize "STR_TRGM2_setCheckpoint_Ask","RandFramework\SpeakToFriendlyCheckpoint.sqf",[_pos5]]] remoteExec ["addAction", 0, true];
 			if (selectRandom [true,true,false]) then {
 				_test = nil;
 				_test = createMarker [format["MrkFriendCheckpoint%1%2",_roadBlockPos select 0, _roadBlockPos select 1], _roadBlockPos];

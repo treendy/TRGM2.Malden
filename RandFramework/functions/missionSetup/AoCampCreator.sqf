@@ -26,7 +26,7 @@ if (isServer) then {
 		[_flatPos,_flatPos,50,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,FriendlyScoutVehicles,500] execVM "RandFramework\setCheckpoint.sqf";
 	};
 
-	{systemChat "Mission Setup: 5";} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {["Mission Setup: 5"] remoteExec ["systemChat", 0];};
 
 	AOCampPos = _flatPos;
 	_markerFastResponseStart = createMarker ["mrkFastResponseStart", _flatPos];
@@ -130,7 +130,7 @@ if (iMissionParamType == 5) then {
 		};
 	}  forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
 
-	{systemChat "Mission Setup: 4";} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {["Mission Setup: 4"] remoteExec ["systemChat", 0];};
 	sleep 1;
 	if (AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
 		[_AmmoBox1, [localize "STR_TRGM2_startInfMission_VirtualArsenal",{["Open",true] spawn BIS_fnc_arsenal}]] remoteExec ["addAction", 0];
@@ -140,23 +140,23 @@ if (iMissionParamType == 5) then {
 		_radio = selectRandom ["uns_radio2_radio","uns_radio2_transitor","uns_radio2_transitor02"] createVehicle _flatPos7;
 	};
 
-	{systemChat "Mission Setup: 3.7";} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {["Mission Setup: 3.7"] remoteExec ["systemChat", 0];};
 	sleep 1;
 
 	/*HERE WHY THIS CAUSE MASSIVE SLOWDOWN??????????????????????????????????????? */
 	_flatPosUnits = _flatPosCampFire;
-	{systemChat "Mission Setup: 3.5";} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {["Mission Setup: 3.5"] remoteExec ["systemChat", 0];};
 	sleep 1;
 
 	_flatPosUnits = [_flatPosCampFire, 8, 17, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
 
-	{systemChat "Mission Setup: 3.3";} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {["Mission Setup: 3.3"] remoteExec ["systemChat", 0];};
 	sleep 1;
 
 
 MissionLoaded = true;
 	publicVariable "MissionLoaded";
 
-	{systemChat "Mission Setup: 3";} remoteExec ["bis_fnc_call", 0];
+	if (bDebugMode) then {["Mission Setup: 3"] remoteExec ["systemChat", 0];};
 	[""] remoteExecCall ["Hint", 0];
 };

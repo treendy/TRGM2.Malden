@@ -106,7 +106,7 @@ if (!_isCache && count _nearestRoads > 0) then {
 			
 			_posOfTarget = getPos _mainVeh;
 
-			{systemChat "Mission Events: Target 6";} remoteExec ["bis_fnc_call", 0];
+			if (bDebugMode) then {["Mission Events: Target 6"] remoteExec ["systemChat", 0];};
 			
 			if (selectRandom[true,false,false]) then {
 				[_posOfTarget] execVM "RandFramework\RandScript\createEnemySniper.sqf";
@@ -136,7 +136,7 @@ _thisAreaRange = 20;
 				[_posOfTarget,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100,true,selectRandom[false,false,true],false] execVM "RandFramework\setCheckpoint.sqf";
 			};
 
-			{systemChat "Mission Events: Target 4";} remoteExec ["bis_fnc_call", 0];
+			if (bDebugMode) then {["Mission Events: Target 4"] remoteExec ["systemChat", 0];};
 
 		};
 		//HERE 23_09_2019 : look at SetIEDEvent, or startInfMission line 541 (where we create triggers for ammotrucks)

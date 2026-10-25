@@ -1,14 +1,14 @@
-{systemChat "Mission Setup: 16";} remoteExec ["bis_fnc_call", 0];
+if (bDebugMode) then {["Mission Setup: 16"] remoteExec ["systemChat", 0];};
 
 #include "..\RandFramework\RandScript\trendFunctions.sqf";
 
 //This is only ever called on server!!!!
-{systemChat "Mission Setup: 15";} remoteExec ["bis_fnc_call", 0];
+if (bDebugMode) then {["Mission Setup: 15"] remoteExec ["systemChat", 0];};
 
 TRGM_Logic setVariable ["DeathRunning", false, true];
 
 
-{systemChat "Mission Setup: 14.5";} remoteExec ["bis_fnc_call", 0];
+if (bDebugMode) then {["Mission Setup: 14.5"] remoteExec ["systemChat", 0];};
 
 _ThisTaskTypes = nil;
 _IsMainObjs = nil;
@@ -33,7 +33,7 @@ if (iMissionParamObjective3 > 0) then {
 	_SideMissionTasksToUse2 = [iMissionParamObjective3];
 };
 
-{systemChat "Mission Setup: 14";} remoteExec ["bis_fnc_call", 0];
+if (bDebugMode) then {["Mission Setup: 14"] remoteExec ["systemChat", 0];};
 
 iMissionSetup = iMissionParamType;
 if (iMissionSetup == 0) then {
@@ -214,7 +214,7 @@ if (!(isNil "IsTraining")) then {
 MissionParamsSet = true;
 publicVariable "MissionParamsSet";
 
-{systemChat "Mission Setup: 13";} remoteExec ["bis_fnc_call", 0];
+if (bDebugMode) then {["Mission Setup: 13"] remoteExec ["systemChat", 0];};
 
 publicVariable "MaxBadPoints";
 
@@ -222,7 +222,7 @@ _randInfor1X = nil;
 _randInfor1Y = nil;
 _buildings = nil;
 
-{systemChat "Mission Setup: 12.5";} remoteExec ["bis_fnc_call", 0];
+if (bDebugMode) then {["Mission Setup: 12.5"] remoteExec ["systemChat", 0];};
 
 while {(InfTaskCount < count _ThisTaskTypes)} do {
 	_iTaskIndex = 0;
@@ -254,7 +254,7 @@ _bIsMainObjective = _IsMainObjs select InfTaskCount;  //more chance of bad thing
 		publicVariable "MainIsHidden";
 	};
 
-{systemChat "Mission Setup: 12";} remoteExec ["bis_fnc_call", 0];
+if (bDebugMode) then {["Mission Setup: 12"] remoteExec ["systemChat", 0];};
 
 	if (true) then {
 		InfTaskStarted = true;
@@ -275,7 +275,7 @@ _bIsMainObjective = _IsMainObjs select InfTaskCount;  //more chance of bad thing
 				_CustomMissionEnabled = false;
 
 				_bNewTaskSetup = false;
-				{systemChat "Mission Setup: 11";} remoteExec ["bis_fnc_call", 0];
+				if (bDebugMode) then {["Mission Setup: 11"] remoteExec ["systemChat", 0];};
 
 				if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle1"}; //Hack Data
 				if (_iThisTaskType == 2) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle2"}; //Steal data from research vehicle
@@ -331,11 +331,11 @@ _bIsMainObjective = _IsMainObjs select InfTaskCount;  //more chance of bad thing
 				};
 
 				//kill leader (he will run away in car to AO)    ::   save stranded guys    ::      
-				{systemChat "Mission Setup: 10";} remoteExec ["bis_fnc_call", 0];
+				if (bDebugMode) then {["Mission Setup: 10"] remoteExec ["systemChat", 0];};
 				_attempts = 0;
 				while {!_bInfor1Found} do {
 					_attempts = _attempts + 1;
-					{systemChat "Mission Setup: 9";} remoteExec ["bis_fnc_call", 0];
+					if (bDebugMode) then {["Mission Setup: 9"] remoteExec ["systemChat", 0];};
 					_markerInformant1 = nil;
 
 
@@ -431,12 +431,12 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 								};
 								//###################################### CUSTOM MISSION ###################
 				
-								{systemChat "Mission Setup: 8-0-10";} remoteExec ["bis_fnc_call", 0];
+								if (bDebugMode) then {["Mission Setup: 8-0-10"] remoteExec ["systemChat", 0];};
 								if (_iThisTaskType == 99999 || _bNewTaskSetup) then {
 									[_MarkerType,_infBuilding,_inf1X,_inf1Y,_roadSearchRange, _bCreateTask, _iTaskIndex, _bIsMainObjective] call fnc_CustomMission;		
 								};
 								//###################################### Hack Data ###################
-								{systemChat "Mission Setup: 8-0-9";} remoteExec ["bis_fnc_call", 0];
+								if (bDebugMode) then {["Mission Setup: 8-0-9"] remoteExec ["systemChat", 0];};
 								if (_iThisTaskType == 1) then {
 									_allpositionsLaptop1 = _infBuilding buildingPos -1;
 									_sLaptop1Name = format["objLaptop%1",_iTaskIndex];
@@ -452,13 +452,13 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 										missionNamespace setVariable [_sIED1Name, _objIED1];
 										_objIED1 setPosATL (selectRandom _allpositionsLaptop1);
 									};
-									[[_objLaptop1, [localize "STR_TRGM2_startInfMission_MissionTitle1","RandFramework\hackIntel1.sqf",[_iTaskIndex,_bCreateTask]]],"addAction",true,true] call BIS_fnc_MP;
+									[_objLaptop1, [localize "STR_TRGM2_startInfMission_MissionTitle1","RandFramework\hackIntel1.sqf",[_iTaskIndex,_bCreateTask]]] remoteExec ["addAction", 0, true];
 									_sTaskDescription = selectRandom[
 										localize "STR_TRGM2_startInfMission_MissionTitle1_Desc1",
 										localize "STR_TRGM2_startInfMission_MissionTitle1_Desc2"];
 								};
 								//###################################### Steal data from research vehicle ###################
-								{systemChat "Mission Setup: 8-0-8";} remoteExec ["bis_fnc_call", 0];
+								if (bDebugMode) then {["Mission Setup: 8-0-8"] remoteExec ["systemChat", 0];};
 								if (_iThisTaskType == 2) then {
 									if (_MarkerType != "empty") then { _MarkerType = "hd_unknown"; };
 									_nearestRoad = nil;
@@ -467,7 +467,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 									_roadConnectedTo = roadsConnectedTo _nearestRoad;
 									_objVehicle = selectRandom sideResarchTruck createVehicle [0,0,500];
 									_objVehicle setPosATL getPosATL _nearestRoad;
-									[[_objVehicle, [localize "STR_TRGM2_startInfMission_MissionTitle2_Button","RandFramework\downloadResearchData.sqf",[_iTaskIndex,_bCreateTask]]],"addAction",true,true] call BIS_fnc_MP;
+									[_objVehicle, [localize "STR_TRGM2_startInfMission_MissionTitle2_Button","RandFramework\downloadResearchData.sqf",[_iTaskIndex,_bCreateTask]]] remoteExec ["addAction", 0, true];
 									if (count _roadConnectedTo > 0) then {
 										_connectedRoad = _roadConnectedTo select 0;
 										_direction = [_nearestRoad, _connectedRoad] call BIS_fnc_DirTo;
@@ -477,7 +477,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 										localize "STR_TRGM2_startInfMission_MissionTitle2_Desc"];
 								};
 								//###################################### Destroy Ammo Trucks ###################
-								{systemChat "Mission Setup: 8-0-7";} remoteExec ["bis_fnc_call", 0];
+								if (bDebugMode) then {["Mission Setup: 8-0-7"] remoteExec ["systemChat", 0];};
 								if (_iThisTaskType == 3) then {
 									_allowFriendlyIns = false;
 									if (_MarkerType != "empty") then { _MarkerType = "hd_unknown"; };
@@ -538,7 +538,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 								};
 
 								//###################################### Destroy AAA ###################
-								{systemChat "Mission Setup: 8-0-6";} remoteExec ["bis_fnc_call", 0];
+								if (bDebugMode) then {["Mission Setup: 8-0-6"] remoteExec ["systemChat", 0];};
 								if (_iThisTaskType == 9) then {
 									_allowFriendlyIns = false;
 									if (_MarkerType != "empty") then { _MarkerType = "hd_unknown"; };
@@ -559,16 +559,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 									missionNamespace setVariable [_sTargetName, _objVehicle];
 									_objVehicle setPos _flatPos;
 									_objVehicle disableAI "MOVE";
-									TREND_fnc_AAARadioLoop1 = {
-										_radioName = _this select 0;
-										_bPlay = true;
-										while {_bPlay && !isnil(_radioName)} do {
-											if (!alive(call compile _radioName)) then {_bPlay = false};
-											playSound3D ["A3\Sounds_F\sfx\radio\" + selectRandom EnemyRadioSounds + ".wss",call compile _radioName,false,getPosASL call compile _radioName,0.5,1,0];
-											sleep selectRandom [10,15,20,30];
-										};
-									};
-									[_sTargetName] spawn TREND_fnc_AAARadioLoop1;
+									[missionNamespace getVariable _sTargetName] spawn TRGM_fnc_radioChatterLoop;
 
 									_flatPos2 = nil;
 									_flatPos2 = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[[_flatPos,100]],[[_inf1X,_inf1Y,0],[_inf1X,_inf1Y,0]]] call BIS_fnc_findSafePos;
@@ -583,16 +574,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 										missionNamespace setVariable [_sTargetName2, _objVehicle2];
 										_objVehicle2 setPos _flatPos2;
 										_objVehicle2 disableAI "MOVE";
-										TREND_fnc_AAARadioLoop2 = {
-											_radioName = _this select 0;
-											_bPlay = true;
-											while {_bPlay && !isnil(_radioName)} do {
-												if (!alive(call compile _radioName)) then {_bPlay = false};
-												playSound3D ["A3\Sounds_F\sfx\radio\" + selectRandom EnemyRadioSounds + ".wss",call compile _radioName,false,getPosASL call compile _radioName,0.5,1,0];
-											sleep selectRandom [10,15,20,30];
-											};
-										};
-										[_sTargetName2] spawn TREND_fnc_AAARadioLoop2;
+										[missionNamespace getVariable _sTargetName2] spawn TRGM_fnc_radioChatterLoop;
 									};
 
 									_triggerAmmoTruckClear = nil;
@@ -612,7 +594,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 
 								};
 								//###################################### Destroy Arti ###################
-								{systemChat "Mission Setup: 8-0-5";} remoteExec ["bis_fnc_call", 0];
+								if (bDebugMode) then {["Mission Setup: 8-0-5"] remoteExec ["systemChat", 0];};
 								if (_iThisTaskType == 10) then {
 									_allowFriendlyIns = false;
 									if (_MarkerType != "empty") then { _MarkerType = "hd_unknown"; };
@@ -632,18 +614,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 									missionNamespace setVariable [_sTargetName, _objVehicle];
 									_objVehicle setPos _flatPos;
 									_objVehicle disableAI "MOVE";
-									TREND_fnc_ArtiFireLoop1 = {
-											_objVehicle = _this select 0;
-											_Ammo = getArtilleryAmmo [_objVehicle] select 0;
-											while {alive(_objVehicle)} do {
-												_flatPos = nil;
-												_flatPos = [getMarkerPos "mrkHQ", 1000, 1200, 20, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-												[[_objVehicle, 1],"setVehicleAmmo",true,false] call BIS_fnc_MP;
-												[[_objVehicle, [_flatPos, _Ammo, 1]],"commandArtilleryFire",false,false] call BIS_fnc_MP;
-												sleep selectRandom[10,30,60,120,240];
-											};
-										};
-										[_objVehicle] spawn TREND_fnc_ArtiFireLoop1;
+									[_objVehicle] spawn TRGM_fnc_artilleryFireLoop;
 
 									_flatPos2 = nil;
 									_flatPos2 = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[[_flatPos,100]],[[_inf1X,_inf1Y,0],[_inf1X,_inf1Y,0]]] call BIS_fnc_findSafePos;
@@ -658,18 +629,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 										missionNamespace setVariable [_sTargetName2, _objVehicle2];
 										_objVehicle2 setPos _flatPos2;
 										_objVehicle2 disableAI "MOVE";
-										TREND_fnc_ArtiFireLoop2 = {
-											_objVehicle = _this select 0;
-											_Ammo = getArtilleryAmmo [_objVehicle] select 0;
-											while {alive(_objVehicle)} do {
-												_flatPos = nil;
-												_flatPos = [getMarkerPos "mrkHQ", 1000, 1200, 20, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-												[[_objVehicle, 1],"setVehicleAmmo",true,false] call BIS_fnc_MP;
-												[[_objVehicle, [_flatPos, _Ammo, 1]],"commandArtilleryFire",false,false] call BIS_fnc_MP;
-												sleep selectRandom[10,30,60,120,240];
-											};
-										};
-										[_objVehicle2] spawn TREND_fnc_ArtiFireLoop2;
+										[_objVehicle2] spawn TRGM_fnc_artilleryFireLoop;
 									};
 
 									_triggerAmmoTruckClear = nil;
@@ -690,7 +650,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 										localize "STR_TRGM2_startInfMission_MissionTitle10_Desc"];
 								};
 								 //###################################### informant,intorigate officer, weapon dealer or kill officer, POW #########################################
-								 {systemChat "Mission Setup: 8-4";} remoteExec ["bis_fnc_call", 0];
+								 if (bDebugMode) then {["Mission Setup: 8-4"] remoteExec ["systemChat", 0];};
 								if (_iThisTaskType == 4 || _iThisTaskType == 5 || _iThisTaskType == 7 || _iThisTaskType == 8 || _iThisTaskType == 11 || _iThisTaskType == 12) then { //if informant,intorigate officer, weapon dealer or kill officer or rescue POW, rescue reporter
 
 									_allpositionsLaptop1 = _infBuilding buildingPos -1;
@@ -754,7 +714,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 									_objInformant allowDamage false;
 									_objInformant setVariable ["TaskType",_iThisTaskType,true];
 
-									[[_objInformant, ["HitPart",
+									[_objInformant, ["HitPart",
 										{
 											_thisInformant = ((_this select 0) select 0);
 											_thisShooter =((_this select 0) select 1);
@@ -803,18 +763,18 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 											};
 
 										}
-									]],"addEventHandler",true,true] call BIS_fnc_MP;
+									]] remoteExec ["addEventHandler", 0, true];
 
 									if (_bIsMainObjective && (_iThisTaskType == 5 || _iThisTaskType == 8 || _iThisTaskType == 7)) then {
 										//if interrogate officer or kill weapon dealer or eleminate officer and main objective, then complete task when searched
 										//its only the main objectie that we require the player to get to the body... otherwise, can kill him from a distance
-										[[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button","RandFramework\IdentifyHVT.sqf",[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
+										[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button","RandFramework\IdentifyHVT.sqf",[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 									}
 									else {
 										if (!(_iThisTaskType == 5)) then {
 											//pass in false so we know to just hint if this was our guy or not (just in case player wants to be sure before moving to next objective)
 											//only need to search if its a kill objective... if for example its "interogate officer", there will already be an action to get intel
-											[[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button","RandFramework\IdentifyHVT.sqf",[_iTaskIndex,false],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
+											[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button","RandFramework\IdentifyHVT.sqf",[_iTaskIndex,false],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 										};
 									};
 
@@ -828,7 +788,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 											_objInformant addWeapon "SMG_02_F";
 										};
 										if (_iThisTaskType == 5) then {
-											[[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button2","RandFramework\interrogateOfficer.sqf",[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
+											[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button2","RandFramework\interrogateOfficer.sqf",[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 										};
 										if (_iThisTaskType == 5 || _iThisTaskType == 8 || _iThisTaskType == 7) then {
 
@@ -858,7 +818,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 									else {
 
 										if (_iThisTaskType == 4) then {
-											[[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button2","RandFramework\SpeakInformant.sqf",[_iTaskIndex,_bCreateTask],1,false,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
+											[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button2","RandFramework\SpeakInformant.sqf",[_iTaskIndex,_bCreateTask],1,false,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 										};
 										if (_iThisTaskType == 11 || _iThisTaskType == 12) then { //pow or reporter
 											_allowFriendlyIns = false;
@@ -958,7 +918,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 
 								};
 								//####################BUG RADIO##########################
-								{systemChat "Mission Setup: 8-3";} remoteExec ["bis_fnc_call", 0];
+								if (bDebugMode) then {["Mission Setup: 8-3"] remoteExec ["systemChat", 0];};
 								if (_iThisTaskType == 6) then {
 									_allpositionsRadio1 = _infBuilding buildingPos -1;
 									_sRadio1Name = format["objRadio%1",_iTaskIndex];
@@ -967,23 +927,14 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 									missionNamespace setVariable [_sRadio1Name, _objRadio1];
 									_objRadio1 setPosATL (selectRandom _allpositionsRadio1);
 
-									[[_objRadio1, [localize "STR_TRGM2_startInfMission_MissionTitle6_Button","RandFramework\bugRadio1.sqf",[_iTaskIndex,_bCreateTask]]],"addAction",true,true] call BIS_fnc_MP;
+									[_objRadio1, [localize "STR_TRGM2_startInfMission_MissionTitle6_Button","RandFramework\bugRadio1.sqf",[_iTaskIndex,_bCreateTask]]] remoteExec ["addAction", 0, true];
 
-									TREND_fnc_RadioLoop = {
-										_radioName = _this select 0;
-										_bPlay = true;
-										while {_bPlay && !isnil(_radioName)} do {
-											if (!alive(call compile _radioName)) then {_bPlay = false};
-											playSound3D ["A3\Sounds_F\sfx\radio\" + selectRandom EnemyRadioSounds + ".wss",call compile _radioName,false,getPosASL call compile _radioName,0.5,1,0];
-											sleep selectRandom [10,15,20,30];
-										};
-									};
-									[_sRadio1Name] spawn TREND_fnc_RadioLoop;
+									[missionNamespace getVariable _sRadio1Name] spawn TRGM_fnc_radioChatterLoop;
 									_sTaskDescription = selectRandom[
 										(localize "STR_TRGM2_startInfMission_MissionTitle6_Desc")];
 								};
 								//##############################################
-								{systemChat "Mission Setup: 8-2";} remoteExec ["bis_fnc_call", 0];
+								if (bDebugMode) then {["Mission Setup: 8-2"] remoteExec ["systemChat", 0];};
 
 								//custom titles from TRGMSetDefaultMissionSetupVars.sqf (Mission1Title, Mission2Title etc...)
 								_MissionTitle = missionNamespace getVariable [format["Mission%1Title",_iTaskIndex+1], _MissionTitle];
@@ -1085,7 +1036,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 						};
 
 					};
-					{systemChat "Mission Setup: 8-1";} remoteExec ["bis_fnc_call", 0];
+					if (bDebugMode) then {["Mission Setup: 8-1"] remoteExec ["systemChat", 0];};
 				};
 				if (InfTaskCount == 0) then {
 					CurrentZeroMissionTitle = _MissionTitle; //curently only used for campaign
@@ -1095,7 +1046,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 						MainMissionTitle = "Objective Unknown";
 					};
 				};
-				{systemChat "Mission Setup: 8-0";} remoteExec ["bis_fnc_call", 0];
+				if (bDebugMode) then {["Mission Setup: 8-0"] remoteExec ["systemChat", 0];};
 				InfTaskCount = InfTaskCount + 1;
 
 
@@ -1103,7 +1054,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 };
 
 
-{systemChat "Mission Setup: 7";} remoteExec ["bis_fnc_call", 0];
+if (bDebugMode) then {["Mission Setup: 7"] remoteExec ["systemChat", 0];};
 
 _trgComplete = createTrigger ["EmptyDetector", [0,0], false];
 _trgComplete setVariable ["DelMeOnNewCampaignDay",true];
@@ -1137,13 +1088,13 @@ else {
 
 };
 
-{systemChat "Mission Setup: 6";} remoteExec ["bis_fnc_call", 0];
+if (bDebugMode) then {["Mission Setup: 6"] remoteExec ["systemChat", 0];};
 
 
 //now we have all our location positinos, we can set other area stuff
 [] execVM "RandFramework\RandScript\TREND_fnc_setOtherAreaStuff.sqf";
 
-{systemChat "Mission Setup: 2";} remoteExec ["bis_fnc_call", 0];
+if (bDebugMode) then {["Mission Setup: 2"] remoteExec ["systemChat", 0];};
 
 
 TREND_fnc_PopulateLoadingWait = {
@@ -1161,7 +1112,7 @@ TREND_fnc_PopulateLoadingWait = {
 [] spawn TREND_fnc_PopulateLoadingWait;
 
 
-{systemChat "Mission Setup: 1";} remoteExec ["bis_fnc_call", 0];
+if (bDebugMode) then {["Mission Setup: 1"] remoteExec ["systemChat", 0];};
 
 
 publicVariable "debugMessages";
@@ -1171,4 +1122,4 @@ hint (localize "STR_TRGM2_startInfMission_SoItBegin");
 [[],"RandFramework\animateAnimals.sqf"] remoteExec ["BIS_fnc_execVM",0,"TRGM_animateAnimals"]; //ambient animals are local to each client
 
 
-{systemChat "Mission Setup: 0";} remoteExec ["bis_fnc_call", 0];
+if (bDebugMode) then {["Mission Setup: 0"] remoteExec ["systemChat", 0];};

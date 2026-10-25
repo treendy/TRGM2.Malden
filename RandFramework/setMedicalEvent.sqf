@@ -227,7 +227,7 @@ _downedCivMedic = _group createUnit [selectRandom Paramedics,_backOfVehArea,[],0
 		[_downedCivMedic] remoteExec ["fncMedicalParamedicLight", 0, true];
 
 		if (_iteration == 1) then {
-			[[_downedCivMedic, ["Ask if needs assistance",{hint format["Please can you supply us with %1 * %2.  Place them in this vehicle!",requiredItemsCount,RequestedMedicalItemName]},[_downedCivMedic]]],"addAction",true,true] call BIS_fnc_MP;
+			[_downedCivMedic, ["Ask if needs assistance",{hint format["Please can you supply us with %1 * %2.  Place them in this vehicle!",requiredItemsCount,RequestedMedicalItemName]},[_downedCivMedic]]] remoteExec ["addAction", 0, true];
 			[_mainVeh,_downedCivMedic] spawn {
 				_mainVeh = _this select 0;
 				_downedCivMedic = _this select 1;

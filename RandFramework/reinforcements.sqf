@@ -58,7 +58,7 @@ _nul = [EAST, "spawnMrk", "LZMrk", 2, true, true, true, true, false] spawn TAG_f
 	//Side Check to spawn appropriate helicopter & cargo
 	switch (_side) do {
 		case WEST : {
-			_ranGrp = ["BUS_InfSquad","BUS_InfSquad_Weapons"] call BIS_fnc_selectRandom;
+			_ranGrp = selectRandom ["BUS_InfSquad","BUS_InfSquad_Weapons"];
 			_helo = [_spawnMrk, 45, "B_Heli_Transport_01_F", WEST] call BIS_FNC_spawnVehicle;
 			_infgrp = [_spawnMrk, WEST, (configFile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> _ranGrp)] call BIS_fnc_spawnGroup;
 		};
@@ -72,7 +72,7 @@ _nul = [EAST, "spawnMrk", "LZMrk", 2, true, true, true, true, false] spawn TAG_f
 				_helo = [_spawnMrk, 45, ReinforceVehicle, EAST] call BIS_FNC_spawnVehicle;
 		};
 		case RESISTANCE : {
-			_ranGrp = ["HAF_InfSquad","HAF_InfSquad_Weapons"] call BIS_fnc_selectRandom;
+			_ranGrp = selectRandom ["HAF_InfSquad","HAF_InfSquad_Weapons"];
 			_helo = [_spawnMrk, 45, "I_Heli_Transport_02_F", RESISTANCE] call BIS_FNC_spawnVehicle;
 			_infgrp = [_spawnMrk, RESISTANCE, (configFile >> "CfgGroups" >> "Indep" >> "IND_F" >> "Infantry" >> _ranGrp)] call BIS_fnc_spawnGroup;
 		};

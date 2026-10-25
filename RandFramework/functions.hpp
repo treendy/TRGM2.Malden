@@ -17,6 +17,8 @@ class TRGM   { // TAG
         class getWeatherOptions {};
         class adjustBadPoints {};
         class adjustMaxBadPoints {};
+        class radioChatterLoop {};
+        class artilleryFireLoop {};
     };
 
     class location { // CATEGORY

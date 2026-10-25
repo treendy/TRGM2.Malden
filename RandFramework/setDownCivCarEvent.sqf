@@ -129,7 +129,7 @@ if (count _nearestRoads > 0) then {
 		_downedCiv setDir (_downedCivDirection);
 		_downedCiv addEventHandler ["killed", {_this execVM "RandFramework\CivKilled.sqf";}];		
 		
-		[[_downedCiv, ["Ask if needs assistance",{
+		[_downedCiv, ["Ask if needs assistance",{
 			_downedCiv = _this select 0;
 			if (alive _downedCiv) then {
 				hint "Please help, my car has broken down, i need to get home to my family!"
@@ -137,7 +137,7 @@ if (count _nearestRoads > 0) then {
 			else {
 				hint "Is there a reason you are trying to talk to a dead guy??"
 			}
-		},[_downedCiv]]],"addAction",true,true] call BIS_fnc_MP;
+		},[_downedCiv]]] remoteExec ["addAction", 0, true];
 
 		if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_1_steering",1];};
 		if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_2_steering",1];};

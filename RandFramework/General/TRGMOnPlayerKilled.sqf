@@ -37,7 +37,7 @@ if (player distance getMarkerPos "MrkHQ" > SaveZoneRadius) then {
 		_tombStone = selectRandom TombStones createVehicle GraveYardPos;
 		_tombStone setDir GraveYardDirection;
 		_tombStone setVariable ["Message", format[localize "STR_TRGM2_RecruiteInf_KIA",name player],true];
-		[[_tombStone, [localize "STR_TRGM2_RecruiteInf_Read","hint format['%1',(_this select 0) getVariable 'Message']"]],"addAction",true,true] call BIS_fnc_MP;
+		[_tombStone, [localize "STR_TRGM2_RecruiteInf_Read","hint format['%1',(_this select 0) getVariable 'Message']"]] remoteExec ["addAction", 0, true];
 	};
 
 	TRGM_Logic setVariable ["DeathRunning", false, true];
