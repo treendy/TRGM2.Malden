@@ -24,7 +24,7 @@ if (side player == west) then {
 			hint "Map updated with main AO location";
 		}
 		else {
-			[IntelShownType,"BugRadio"] execVM "RandFramework\showIntel.sqf";
+			[IntelShownType,"BugRadio"] spawn TRGM_fnc_showIntel;
 		};
 	};
 };

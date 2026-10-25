@@ -27,7 +27,7 @@ if (_AODistance<500) then {
 _isBad = selectRandom _chanceOfBad;
 
 if (!_isBad) then {
-	_unit addEventHandler ["killed", {_this execVM "RandFramework\CivKilled.sqf";}];
+	_unit addEventHandler ["killed", {_this spawn TRGM_fnc_CivKilled;}];
 }
 else {
 	[_unit] spawn TRGM_fnc_badCivInitialize;

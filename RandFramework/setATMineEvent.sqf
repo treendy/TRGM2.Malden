@@ -31,7 +31,7 @@ if (_currentATFieldPos select 0 != 0) then {
 	};
 
 	if (selectRandom [true,false,false,false,false]) then {
-		[_currentATFieldPos,200,250] execVM "RandFramework\createWaitingAmbush.sqf";
+		[_currentATFieldPos,200,250] spawn TRGM_fnc_createWaitingAmbush;
 	};			
 				
 	if (selectRandom [true,false,false,false,false]) then {			

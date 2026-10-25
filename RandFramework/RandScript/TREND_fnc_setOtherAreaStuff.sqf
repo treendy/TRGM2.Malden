@@ -101,23 +101,23 @@ if (bDebugMode) then {["Mission Events: CommsEND"] remoteExec ["systemChat", 0];
 
 
 if (!(isNil "IsTraining")) then {
-	[_mainObjPos] execVM "RandFramework\setMedicalEvent.sqf";
-	[_mainObjPos] execVM "RandFramework\setMedicalEvent.sqf";
+	[_mainObjPos] spawn TRGM_fnc_setMedicalEvent;
+	[_mainObjPos] spawn TRGM_fnc_setMedicalEvent;
 
-	[_mainObjPos] execVM "RandFramework\setDownedChopperEvent.sqf";
-	[_mainObjPos] execVM "RandFramework\setDownedChopperEvent.sqf";
+	[_mainObjPos] spawn TRGM_fnc_setDownedChopperEvent;
+	[_mainObjPos] spawn TRGM_fnc_setDownedChopperEvent;
 
-	[_mainObjPos] execVM "RandFramework\setDownConvoyEvent.sqf";
-	[_mainObjPos] execVM "RandFramework\setDownConvoyEvent.sqf";
+	[_mainObjPos] spawn TRGM_fnc_setDownConvoyEvent;
+	[_mainObjPos] spawn TRGM_fnc_setDownConvoyEvent;
 
-	[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
-	[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
-	[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
+	[_mainObjPos] spawn TRGM_fnc_setDownCivCarEvent;
+	[_mainObjPos] spawn TRGM_fnc_setDownCivCarEvent;
+	[_mainObjPos] spawn TRGM_fnc_setDownCivCarEvent;
 
-	[_mainObjPos,20000,true,false,nil, true] execVM "RandFramework\setTargetEvent.sqf";
-	[_mainObjPos,20000,true,false,nil, true] execVM "RandFramework\setTargetEvent.sqf";
-	[_mainObjPos,20000,true,false,nil, true] execVM "RandFramework\setTargetEvent.sqf";
-	[_mainObjPos,20000,true,false,nil, true] execVM "RandFramework\setTargetEvent.sqf";
+	[_mainObjPos,20000,true,false,nil, true] spawn TRGM_fnc_setTargetEvent;
+	[_mainObjPos,20000,true,false,nil, true] spawn TRGM_fnc_setTargetEvent;
+	[_mainObjPos,20000,true,false,nil, true] spawn TRGM_fnc_setTargetEvent;
+	[_mainObjPos,20000,true,false,nil, true] spawn TRGM_fnc_setTargetEvent;
 
 }
 else {
@@ -125,61 +125,61 @@ else {
 
 if (bDebugMode) then {["Loading Events : 15"] remoteExec ["systemChat", 0];};
 	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos,1900,false,false,nil, false] execVM "RandFramework\setTargetEvent.sqf";
+		[_mainObjPos,1900,false,false,nil, false] spawn TRGM_fnc_setTargetEvent;
 		sleep 1;
 	};	
 
 if (bDebugMode) then {["Loading Events : 14"] remoteExec ["systemChat", 0];};
 	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos,1900,false,false,nil, true] execVM "RandFramework\setTargetEvent.sqf";
+		[_mainObjPos,1900,false,false,nil, true] spawn TRGM_fnc_setTargetEvent;
 		sleep 1;
 	};	
 
 if (bDebugMode) then {["Loading Events : 13"] remoteExec ["systemChat", 0];};
 	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos] execVM "RandFramework\setATMineEvent.sqf";
+		[_mainObjPos] spawn TRGM_fnc_setATMineEvent;
 		sleep 1;
 	};
 
 if (bDebugMode) then {["Loading Events : 12"] remoteExec ["systemChat", 0];};
 	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
+		[_mainObjPos] spawn TRGM_fnc_setDownCivCarEvent;
 		sleep 1;
 	};	
 
 if (bDebugMode) then {["Loading Events : 11"] remoteExec ["systemChat", 0];};
 	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos] execVM "RandFramework\setATMineEvent.sqf";
+		[_mainObjPos] spawn TRGM_fnc_setATMineEvent;
 		sleep 1;
 	};
 if (bDebugMode) then {["Loading Events : 10"] remoteExec ["systemChat", 0];};
 	if (selectRandom ChanceOfOccurance || !isNil("ForceWarZoneLoc")) then {
 		if (!isNil("ForceWarZoneLoc")) then {
-			[ForceWarZoneLoc,4] execVM "RandFramework\setFireFightEvent.sqf";
+			[ForceWarZoneLoc,4] spawn TRGM_fnc_setFireFightEvent;
 		}
 		else {
-			[_mainObjPos,4] execVM "RandFramework\setFireFightEvent.sqf";
+			[_mainObjPos,4] spawn TRGM_fnc_setFireFightEvent;
 		};
 		sleep 1;
 	};
 if (bDebugMode) then {["Loading Events : 9"] remoteExec ["systemChat", 0];};
 	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos] execVM "RandFramework\setMedicalEvent.sqf";
+		[_mainObjPos] spawn TRGM_fnc_setMedicalEvent;
 		sleep 1;
 	};
 if (bDebugMode) then {["Loading Events : 8"] remoteExec ["systemChat", 0];};
 	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos] execVM "RandFramework\setDownedChopperEvent.sqf";
+		[_mainObjPos] spawn TRGM_fnc_setDownedChopperEvent;
 		sleep 1;
 	};		
 if (bDebugMode) then {["Loading Events : 7"] remoteExec ["systemChat", 0];};
 	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos] execVM "RandFramework\setDownConvoyEvent.sqf";
+		[_mainObjPos] spawn TRGM_fnc_setDownConvoyEvent;
 		sleep 1;
 	};		
 if (bDebugMode) then {["Loading Events : 6"] remoteExec ["systemChat", 0];};
 	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos] execVM "RandFramework\setDownCivCarEvent.sqf";
+		[_mainObjPos] spawn TRGM_fnc_setDownCivCarEvent;
 		sleep 1;
 	};	
 
@@ -187,32 +187,32 @@ if (bDebugMode) then {["Loading Events : 6"] remoteExec ["systemChat", 0];};
 //these are more likely to show (instead of using ChanceOfOccurance), as a lot of times, these are not a trap, just an empty vehicle or a pile of rubbish
 if (bDebugMode) then {["Loading Events : 5"] remoteExec ["systemChat", 0];};
 	if (selectRandom [true,true,false]) then {
-		[_mainObjPos] execVM "RandFramework\setIEDEvent.sqf";
+		[_mainObjPos] spawn TRGM_fnc_setIEDEvent;
 		sleep 1;
 	};
 if (bDebugMode) then {["Loading Events : 4"] remoteExec ["systemChat", 0];};
 	if (selectRandom [true,true,false]) then {
-		[_mainObjPos] execVM "RandFramework\setIEDEvent.sqf";
+		[_mainObjPos] spawn TRGM_fnc_setIEDEvent;
 		sleep 1;
 	};
 if (bDebugMode) then {["Loading Events : 3"] remoteExec ["systemChat", 0];};
 	if (selectRandom [true,true,false]) then {
-		[_mainObjPos] execVM "RandFramework\setIEDEvent.sqf";
+		[_mainObjPos] spawn TRGM_fnc_setIEDEvent;
 		sleep 1;
 	};
 if (bDebugMode) then {["Loading Events : 2"] remoteExec ["systemChat", 0];};
 	if (selectRandom [true,true,false]) then {
-		[_mainObjPos] execVM "RandFramework\setIEDEvent.sqf";
+		[_mainObjPos] spawn TRGM_fnc_setIEDEvent;
 		sleep 1;
 	};
 if (bDebugMode) then {["Loading Events : 1"] remoteExec ["systemChat", 0];};
 	if (selectRandom [true,true,false]) then {
-		[_mainObjPos] execVM "RandFramework\setIEDEvent.sqf";
+		[_mainObjPos] spawn TRGM_fnc_setIEDEvent;
 		sleep 1;
 	};
 if (bDebugMode) then {["Loading Events : 0"] remoteExec ["systemChat", 0];};
 	if (selectRandom [true,true,false]) then {
-		[_mainObjPos] execVM "RandFramework\setIEDEvent.sqf";
+		[_mainObjPos] spawn TRGM_fnc_setIEDEvent;
 		sleep 1;
 	};
 
@@ -235,21 +235,21 @@ if (_mapSize < 10000) then {
 
 if (IsFullMap) then {
 	if (bDebugMode) then {["Loading Full Map Events : BEGIN"] remoteExec ["systemChat", 0];};
-	[_mainObjPos,true] execVM "RandFramework\setDownCivCarEvent.sqf";
-	[_mainObjPos,true] execVM "RandFramework\setDownedChopperEvent.sqf";
-	[_mainObjPos,true] execVM "RandFramework\setATMineEvent.sqf";
-	[_mainObjPos,2000,false,false,nil,nil,true] execVM "RandFramework\setIEDEvent.sqf";
-	[_mainObjPos,2000,false,false,nil,nil,true] execVM "RandFramework\setIEDEvent.sqf";
+	[_mainObjPos,true] spawn TRGM_fnc_setDownCivCarEvent;
+	[_mainObjPos,true] spawn TRGM_fnc_setDownedChopperEvent;
+	[_mainObjPos,true] spawn TRGM_fnc_setATMineEvent;
+	[_mainObjPos,2000,false,false,nil,nil,true] spawn TRGM_fnc_setIEDEvent;
+	[_mainObjPos,2000,false,false,nil,nil,true] spawn TRGM_fnc_setIEDEvent;
 
 	if (_mapSizeTxt == "MEDIUM" || _mapSizeTxt == "LARGE") then {
-		[_mainObjPos,2000,false,false,nil,nil,true] execVM "RandFramework\setIEDEvent.sqf";
-		[_mainObjPos,2000,false,false,nil,nil,true] execVM "RandFramework\setIEDEvent.sqf";
-		[_mainObjPos,true] execVM "RandFramework\setATMineEvent.sqf";
+		[_mainObjPos,2000,false,false,nil,nil,true] spawn TRGM_fnc_setIEDEvent;
+		[_mainObjPos,2000,false,false,nil,nil,true] spawn TRGM_fnc_setIEDEvent;
+		[_mainObjPos,true] spawn TRGM_fnc_setATMineEvent;
 	};
 	if (_mapSizeTxt == "LARGE") then {
-		[_mainObjPos,true] execVM "RandFramework\setDownCivCarEvent.sqf";
-		[_mainObjPos,true] execVM "RandFramework\setDownedChopperEvent.sqf";
-		[_mainObjPos,2000,false,false,nil,nil,true] execVM "RandFramework\setIEDEvent.sqf";
+		[_mainObjPos,true] spawn TRGM_fnc_setDownCivCarEvent;
+		[_mainObjPos,true] spawn TRGM_fnc_setDownedChopperEvent;
+		[_mainObjPos,2000,false,false,nil,nil,true] spawn TRGM_fnc_setIEDEvent;
 	};
 
 	if (bDebugMode) then {["Loading Full Map Events : END"] remoteExec ["systemChat", 0];};

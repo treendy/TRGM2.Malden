@@ -109,7 +109,7 @@ if (!_isCache && count _nearestRoads > 0) then {
 			if (bDebugMode) then {["Mission Events: Target 6"] remoteExec ["systemChat", 0];};
 			
 			if (selectRandom[true,false,false]) then {
-				[_posOfTarget] execVM "RandFramework\RandScript\createEnemySniper.sqf";
+				[_posOfTarget] spawn TRGM_fnc_createEnemySniper;
 			};
 
 			_spawnedUnitTarget1 = ((createGroup east) createUnit [sRiflemanToUse, _posOfTarget, [], 10, "NONE"]);
@@ -133,7 +133,7 @@ _thisAreaRange = 20;
 				_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 				_thisAllowBarakade = true;
 				_thisIsDirectionAwayFromAO = true;
-				[_posOfTarget,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100,true,selectRandom[false,false,true],false] execVM "RandFramework\setCheckpoint.sqf";
+				[_posOfTarget,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100,true,selectRandom[false,false,true],false] spawn TRGM_fnc_setCheckpoint;
 			};
 
 			if (bDebugMode) then {["Mission Events: Target 4"] remoteExec ["systemChat", 0];};
@@ -194,7 +194,7 @@ if (_isCache) then {
 		};		
 
 		if (selectRandom[true,false,false]) then {
-			[_posCache] execVM "RandFramework\RandScript\createEnemySniper.sqf";
+			[_posCache] spawn TRGM_fnc_createEnemySniper;
 		};
 
 		_thisAreaRange = 20;
@@ -207,7 +207,7 @@ if (_isCache) then {
 			_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 			_thisAllowBarakade = false;
 			_thisIsDirectionAwayFromAO = false;
-			[_posCache,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100,true,selectRandom[false,false,true],false] execVM "RandFramework\setCheckpoint.sqf";
+			[_posCache,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100,true,selectRandom[false,false,true],false] spawn TRGM_fnc_setCheckpoint;
 		};
 
 		//two guards at door!!!
@@ -245,11 +245,11 @@ if (_isCache) then {
 		};
 
 		_spawnedUnit3 = ((createGroup east) createUnit [sRiflemanToUse, [-135,-253,0], [], 0, "NONE"]);
-		[getPos _building, [_spawnedUnit3], -1, false, false,false] execVM "RandFramework\Zen_OccupyHouse.sqf";
+		[getPos _building, [_spawnedUnit3], -1, false, false,false] spawn TRGM_fnc_Zen_OccupyHouse;
 
 		if (selectRandom[true,false]) then {
 			_spawnedUnit4 = ((createGroup east) createUnit [sRiflemanToUse, [-135,-253,0], [], 0, "NONE"]);
-			[getPos _building, [_spawnedUnit4], -1, false, false,false] execVM "RandFramework\Zen_OccupyHouse.sqf";
+			[getPos _building, [_spawnedUnit4], -1, false, false,false] spawn TRGM_fnc_Zen_OccupyHouse;
 		};
 	}
 	else {
@@ -309,12 +309,12 @@ if (!_objectiveCreated) then {
 		_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 		_thisAllowBarakade = true;
 		_thisIsDirectionAwayFromAO = true;
-		[_posObj,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100,true,selectRandom[false,false,true],false,true] execVM "RandFramework\setCheckpoint.sqf";
+		[_posObj,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100,true,selectRandom[false,false,true],false,true] spawn TRGM_fnc_setCheckpoint;
 	};
 
 
 if (selectRandom[true,false,false]) then {
-		[_posObj] execVM "RandFramework\RandScript\createEnemySniper.sqf";
+		[_posObj] spawn TRGM_fnc_createEnemySniper;
 	};
 
 	_spawnedUnitTarget1 = ((createGroup east) createUnit [sRiflemanToUse, _posObj, [], 10, "NONE"]);

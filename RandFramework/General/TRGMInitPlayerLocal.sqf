@@ -163,7 +163,7 @@ waitUntil {bAndSoItBegins && CustomObjectsSet};
 
 endMissionBoard removeAction _actChooseMission;
 
-[player] execVM "RandFramework\setLoadout.sqf";
+[player] spawn TRGM_fnc_setLoadout;
 
 _isAceRespawnWithGear = false;
 if ([] call TRGM_fnc_isCbaLoaded) then {
@@ -172,7 +172,7 @@ if ([] call TRGM_fnc_isCbaLoaded) then {
 };
 if (!isNil("_isAceRespawnWithGear")) then {
 	if (!_isAceRespawnWithGear) then {
-		player addEventHandler ["Respawn", { [player] execVM "RandFramework\setLoadout.sqf"; }];
+		player addEventHandler ["Respawn", { [player] spawn TRGM_fnc_setLoadout; }];
 	};
 };
 

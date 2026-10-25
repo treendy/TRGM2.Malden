@@ -48,7 +48,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_thisUnitTypes = [sRifleman, sRifleman,sRifleman,sMachineGunMan, sAmmobearer, sAmmobearer, sMedic,sAAMan];
 		_thisAllowBarakade = selectRandom [true];
 		_thisIsDirectionAwayFromAO = true;
-		[_mainObjPos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,50] execVM "RandFramework\setCheckpoint.sqf";
+		[_mainObjPos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,50] spawn TRGM_fnc_setCheckpoint;
 	};
 	
 	//create flag and give its id

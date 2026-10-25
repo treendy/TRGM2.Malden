@@ -14,7 +14,7 @@ if (_currentSpentPoints < (MaxBadPoints - BadPoints + 1)) then {
 	_SpawnedUnit setVariable ["RepCost", 0.5, true];
 	_SpawnedUnit setVariable ["IsFRT", true, true];
 	_SpawnedUnit setVariable ["UnitRole",_unitRole];
-	[_SpawnedUnit] execVM "RandFramework\setLoadout.sqf";
+	[_SpawnedUnit] spawn TRGM_fnc_setLoadout;
 	sleep 0.5;
 
 	{

@@ -565,11 +565,11 @@ if (isServer) then {
 	sleep _coreCountSleep;
 	if (LoadoutData != "" || LoadoutDataDefault != "") then {
 		{
-			_handle = [_x] execVM "RandFramework\setLoadout.sqf";
+			_handle = [_x] spawn TRGM_fnc_setLoadout;
 			waitUntil {scriptDone _handle};
 			if (!isNil("_isAceRespawnWithGear")) then {
 				if (!_isAceRespawnWithGear) then {
-			   		_x addEventHandler ["Respawn", { [_this select 0] execVM "RandFramework\setLoadout.sqf"; }];
+			   		_x addEventHandler ["Respawn", { [_this select 0] spawn TRGM_fnc_setLoadout; }];
 		        };
 			};
 		} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});

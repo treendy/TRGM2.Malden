@@ -87,16 +87,16 @@ if (count _nearestRoads > 0) then {
 			_expl3 setVectorDirAndUp [[0,0,-1],[0,1,0]];
 
 			if (selectRandom [true,false]) then {
-				[_eventLocationPos] execVM "RandFramework\createWaitingAmbush.sqf";
+				[_eventLocationPos] spawn TRGM_fnc_createWaitingAmbush;
 				if (selectRandom[true,false]) then {
-					[_eventLocationPos] execVM "RandFramework\createWaitingSuicideBomber.sqf";
+					[_eventLocationPos] spawn TRGM_fnc_createWaitingSuicideBomber;
 				};
 			};
 			if (selectRandom [true,false,false]) then {
-				[_eventLocationPos] execVM "RandFramework\createWaitingSuicideBomber.sqf";
+				[_eventLocationPos] spawn TRGM_fnc_createWaitingSuicideBomber;
 			};
 			if (selectRandom[true,false,false]) then {
-				[_eventLocationPos] execVM "RandFramework\RandScript\createEnemySniper.sqf";
+				[_eventLocationPos] spawn TRGM_fnc_createEnemySniper;
 			};
 		};
 
@@ -127,7 +127,7 @@ if (count _nearestRoads > 0) then {
 		_downedCiv disableAI "anim";  
 		_downedCivDirection = (floor(random 360));
 		_downedCiv setDir (_downedCivDirection);
-		_downedCiv addEventHandler ["killed", {_this execVM "RandFramework\CivKilled.sqf";}];		
+		_downedCiv addEventHandler ["killed", {_this spawn TRGM_fnc_CivKilled;}];		
 		
 		[_downedCiv, ["Ask if needs assistance",{
 			_downedCiv = _this select 0;

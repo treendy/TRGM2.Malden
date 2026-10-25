@@ -14,9 +14,9 @@ if (side player == west) then {
 		_thisCiv setDir _azimuth;
 		_thisCiv switchMove "Acts_StandingSpeakingUnarmed";
 		sleep 3;
-		[IntelShownType,"TalkRebLead"] execVM "RandFramework\showIntel.sqf";
+		[IntelShownType,"TalkRebLead"] spawn TRGM_fnc_showIntel;
 		sleep 2;
-		[IntelShownType,"TalkRebLead"] execVM "RandFramework\showIntel.sqf";
+		[IntelShownType,"TalkRebLead"] spawn TRGM_fnc_showIntel;
 		sleep 10;
 		_thisCiv switchMove "";
 		

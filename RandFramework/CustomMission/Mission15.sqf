@@ -58,7 +58,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_sTargetName1 = format["objInformant%1",_iTaskIndex];
 	_target1 setVariable [_sTargetName1, _target1, true];
 	missionNamespace setVariable [_sTargetName1, _target1];
-	[_mainObjPos,100,true,true,_target1, _isCache] execVM "RandFramework\setTargetEvent.sqf";
+	[_mainObjPos,100,true,true,_target1, _isCache] spawn TRGM_fnc_setTargetEvent;
 
 	_targetToUse2 = selectRandom _targetVehs;
 	_isCache2 = selectRandom[false];
@@ -69,7 +69,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_sTargetName2 = format["objInformant2_%1",_iTaskIndex];
 	_IED2 setVariable [_sTargetName2, _IED2, true];
 	missionNamespace setVariable [_sTargetName2, _IED2];
-	[_mainObjPos,_spacingBetweenTargets,true,true,_IED2, _isCache2] execVM "RandFramework\setTargetEvent.sqf";
+	[_mainObjPos,_spacingBetweenTargets,true,true,_IED2, _isCache2] spawn TRGM_fnc_setTargetEvent;
 
 	_targetToUse3 = selectRandom _targetVehs;
 	_isCache3 = selectRandom[true];
@@ -80,7 +80,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_sTargetName3 = format["objInformant3_%1",_iTaskIndex];
 	_IED3 setVariable [_sTargetName3, _IED3, true];
 	missionNamespace setVariable [_sTargetName3, _IED3];
-	[_mainObjPos,_spacingBetweenTargets,true,true,_IED3, _isCache3] execVM "RandFramework\setTargetEvent.sqf";
+	[_mainObjPos,_spacingBetweenTargets,true,true,_IED3, _isCache3] spawn TRGM_fnc_setTargetEvent;
 
 
 _customTaskClear = nil;

@@ -25,7 +25,7 @@ if (side player == west) then {
 				hint (localize "STR_TRGM2_bugRadio1_MapUpdated");
 			}
 			else {
-				[IntelShownType,"HackData"] execVM "RandFramework\showIntel.sqf";
+				[IntelShownType,"HackData"] spawn TRGM_fnc_showIntel;
 			};	
 	};
 };

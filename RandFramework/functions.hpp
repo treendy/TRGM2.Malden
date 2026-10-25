@@ -82,5 +82,31 @@ class TRGM   { // TAG
         class BuildingPatrol{};
         class RadiusPatrol{};
         class offsetPatrol{};
-    }
-};  
+    };
+
+    //scripts that are run many times, precompiled instead of execVM
+    class scripts {
+        class setCheckpoint { file = "RandFramework\setCheckpoint.sqf"; };
+        class setIEDEvent { file = "RandFramework\setIEDEvent.sqf"; };
+        class CivKilled { file = "RandFramework\CivKilled.sqf"; };
+        class showIntel { file = "RandFramework\showIntel.sqf"; };
+        class setTargetEvent { file = "RandFramework\setTargetEvent.sqf"; };
+        class createWaitingSuicideBomber { file = "RandFramework\createWaitingSuicideBomber.sqf"; };
+        class createEnemySniper { file = "RandFramework\RandScript\createEnemySniper.sqf"; };
+        class setDownCivCarEvent { file = "RandFramework\setDownCivCarEvent.sqf"; };
+        class createWaitingAmbush { file = "RandFramework\createWaitingAmbush.sqf"; };
+        class setLoadout { file = "RandFramework\setLoadout.sqf"; };
+        class setDownedChopperEvent { file = "RandFramework\setDownedChopperEvent.sqf"; };
+        class fireAOFlares { file = "RandFramework\RandScript\fireAOFlares.sqf"; };
+        class InsKilled { file = "RandFramework\InsKilled.sqf"; };
+        class setATMineEvent { file = "RandFramework\setATMineEvent.sqf"; };
+        class reinforcements { file = "RandFramework\reinforcements.sqf"; };
+        class Zen_OccupyHouse { file = "RandFramework\Zen_OccupyHouse.sqf"; };
+        class ParamedicKilled { file = "RandFramework\ParamedicKilled.sqf"; };
+        class setMedicalEvent { file = "RandFramework\setMedicalEvent.sqf"; };
+        class setDownConvoyEvent { file = "RandFramework\setDownConvoyEvent.sqf"; };
+        class enemyAirSupport { file = "RandFramework\RandScript\enemyAirSupport.sqf"; };
+        class setFireFightEvent { file = "RandFramework\setFireFightEvent.sqf"; };
+        class BadReb { file = "RandFramework\BadReb.sqf"; };
+    };
+};

@@ -378,7 +378,7 @@ _nul = [EAST, "spawnMrk", "LZMrk", 2, true, true, true, true, false] spawn TAG_f
 			};
 			sleep 10;
 			 if (_debugMode) then {player globalChat "New Reinforcements created";};
-			 [_side, _spawnMrk, _LZMrk, _skill, _sadMode, _bodyDelete, _cycleMode, _paraDrop, _debugMode] execVM "RandFramework\reinforcements.sqf";
+			 [_side, _spawnMrk, _LZMrk, _skill, _sadMode, _bodyDelete, _cycleMode, _paraDrop, _debugMode] spawn TRGM_fnc_reinforcements;
 		};
 
 	// Function End

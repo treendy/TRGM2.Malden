@@ -14,19 +14,19 @@ while {_countSec > 0} do {
 	_yPos = (_pos select 1)-200;
 
 	_randomPos = [_xPos+(random 400),_yPos+(random 400),0];
-	[_randomPos] execVM "RandFramework\RandScript\fireAOFlares.sqf";
+	[_randomPos] spawn TRGM_fnc_fireAOFlares;
 	delaySec = selectRandom[2,3,4,5];
 	_countSec = _countSec - delaySec;
 	sleep delaySec;
 
 	_randomPos = [_xPos+(random 400),_yPos+(random 400),0];
-	[_randomPos] execVM "RandFramework\RandScript\fireAOFlares.sqf";
+	[_randomPos] spawn TRGM_fnc_fireAOFlares;
 	delaySec = selectRandom[2,3,4,5];
 	_countSec = _countSec - delaySec;
 	sleep delaySec;
 
 	_randomPos = [_xPos+(random 400),_yPos+(random 400),0];
-	[_randomPos] execVM "RandFramework\RandScript\fireAOFlares.sqf";
+	[_randomPos] spawn TRGM_fnc_fireAOFlares;
 	delaySec = selectRandom[20,25];
 	_countSec = _countSec - delaySec;
 	sleep delaySec;

@@ -178,7 +178,7 @@ TREND_fnc_PopulateSideMission = {
 
 			systemChat format["InitSniperCreator"];
 			if (selectRandom[true,false]) then {
-				[_sidePos] execVM "RandFramework\RandScript\createEnemySniper.sqf";
+				[_sidePos] spawn TRGM_fnc_createEnemySniper;
 			};
 			systemChat format["EndSniperCreator"];
 			_bHasPatrols = false;
@@ -459,7 +459,7 @@ if (_bIsMainObjective || (selectRandom [true,false])) then {
 						_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 						_thisAllowBarakade = selectRandom [false,true];
 						_thisIsDirectionAwayFromAO = true;
-						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,50] execVM "RandFramework\setCheckpoint.sqf";
+						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,50] spawn TRGM_fnc_setCheckpoint;
 					}
 				};
 			};
@@ -483,7 +483,7 @@ if (_bIsMainObjective || (selectRandom [true,false])) then {
 						_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 						_thisAllowBarakade = selectRandom [false];
 						_thisIsDirectionAwayFromAO = true;
-						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,50] execVM "RandFramework\setCheckpoint.sqf";
+						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,50] spawn TRGM_fnc_setCheckpoint;
 					};
 
 					_iCount = selectRandom [0,1];
@@ -502,7 +502,7 @@ if (_bIsMainObjective || (selectRandom [true,false])) then {
 							_thisUnitTypes = FriendlyCheckpointUnits;
 							_thisAllowBarakade = true;
 							_thisIsDirectionAwayFromAO = false;
-							[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,FriendlyScoutVehicles,500] execVM "RandFramework\setCheckpoint.sqf";
+							[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,FriendlyScoutVehicles,500] spawn TRGM_fnc_setCheckpoint;
 						};
 					};
 				};
@@ -526,7 +526,7 @@ if (_bIsMainObjective || (selectRandom [true,false])) then {
 						_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 						_thisAllowBarakade = selectRandom [false];
 						_thisIsDirectionAwayFromAO = true;
-						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,50] execVM "RandFramework\setCheckpoint.sqf";
+						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,50] spawn TRGM_fnc_setCheckpoint;
 					}
 				};
 
@@ -548,7 +548,7 @@ if (_bIsMainObjective || (selectRandom [true,false])) then {
 						_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 						_thisAllowBarakade = true;
 						_thisIsDirectionAwayFromAO = true;
-						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100] execVM "RandFramework\setCheckpoint.sqf";
+						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100] spawn TRGM_fnc_setCheckpoint;
 					}
 				};
 
@@ -570,7 +570,7 @@ if (_bIsMainObjective || (selectRandom [true,false])) then {
 						_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 						_thisAllowBarakade = true;
 						_thisIsDirectionAwayFromAO = true;
-						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,300] execVM "RandFramework\setCheckpoint.sqf";
+						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,300] spawn TRGM_fnc_setCheckpoint;
 					}
 				};
 
@@ -592,7 +592,7 @@ if (_bIsMainObjective || (selectRandom [true,false])) then {
 						_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 						_thisAllowBarakade = true;
 						_thisIsDirectionAwayFromAO = true;
-						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,500] execVM "RandFramework\setCheckpoint.sqf";
+						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,500] spawn TRGM_fnc_setCheckpoint;
 					}
 				};
 
@@ -614,7 +614,7 @@ if (_bIsMainObjective || (selectRandom [true,false])) then {
 						_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 						_thisAllowBarakade = selectRandom [false];
 						_thisIsDirectionAwayFromAO = true;
-						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,500] execVM "RandFramework\setCheckpoint.sqf";
+						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,500] spawn TRGM_fnc_setCheckpoint;
 					}
 				};
 
@@ -637,7 +637,7 @@ if (_bIsMainObjective || (selectRandom [true,false])) then {
 						_thisUnitTypes = FriendlyCheckpointUnits;
 						_thisAllowBarakade = true;
 						_thisIsDirectionAwayFromAO = false;
-						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,FriendlyScoutVehicles,500] execVM "RandFramework\setCheckpoint.sqf";
+						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,FriendlyScoutVehicles,500] spawn TRGM_fnc_setCheckpoint;
 					};
 				};
 			};
@@ -665,7 +665,7 @@ if (_bIsMainObjective || (selectRandom [true,false])) then {
 						_objMilUnit2 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[-1002,0,0],[],0,"NONE"];
 						_objMilUnit3 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[-1003,0,0],[],0,"NONE"];
 						OccupiedHousesPos = OccupiedHousesPos + [_thisMilBuilPos];
-						_hOccupy = [getPos _x, [_objMilUnit1,_objMilUnit2,_objMilUnit3], -1, true, false,true] execVM "RandFramework\Zen_OccupyHouse.sqf";
+						_hOccupy = [getPos _x, [_objMilUnit1,_objMilUnit2,_objMilUnit3], -1, true, false,true] spawn TRGM_fnc_Zen_OccupyHouse;
 						_occupyTimeout = time + 10;
 						waitUntil {sleep 0.1; scriptDone _hOccupy || time > _occupyTimeout};
 						_objMilUnit1 setUnitPos "up";
@@ -742,7 +742,7 @@ if (_bIsMainObjective || (selectRandom [true,false])) then {
 					_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 					_thisAllowBarakade = true;
 					_thisIsDirectionAwayFromAO = true;
-					[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100] execVM "RandFramework\setCheckpoint.sqf";
+					[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100] spawn TRGM_fnc_setCheckpoint;
 				};
 			};
 			//spawn inner sentry
@@ -761,7 +761,7 @@ if (_bIsMainObjective || (selectRandom [true,false])) then {
 					_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 					_thisAllowBarakade = false;
 					_thisIsDirectionAwayFromAO = true;
-					[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100] execVM "RandFramework\setCheckpoint.sqf";
+					[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100] spawn TRGM_fnc_setCheckpoint;
 				};
 			};
 
@@ -906,7 +906,7 @@ TREND_fnc_SpawnCivs = {
 		if (selectRandom[true,false,false,false,false]) then {
 
 			if (_bIsRebels) then {				
-					_sInitString = "this execVM ""RandFramework\BadReb.sqf"";";		
+					_sInitString = "this spawn TRGM_fnc_BadReb;";		
 
 			}
 			else {
@@ -916,15 +916,15 @@ TREND_fnc_SpawnCivs = {
 		else {
 			if (_bIsRebels) then {
 				if (!_bRebelLeaderPicked) then {
-					_sInitString = "this addaction [localize ""STR_TRGM2_trendFunctions_TalkToLeader"",""RandFramework\TalkRebLead.sqf"", nil,1.5,true,true,"""",""true"",5]; this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; removeHeadgear this;";
+					_sInitString = "this addaction [localize ""STR_TRGM2_trendFunctions_TalkToLeader"",""RandFramework\TalkRebLead.sqf"", nil,1.5,true,true,"""",""true"",5]; this addEventHandler [""killed"", {_this spawn TRGM_fnc_InsKilled;}]; removeHeadgear this;";
 					_bRebelLeaderPicked = true;
 				}
 				else {
-					_sInitString = "this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; removeHeadgear this;Removevest this;";
+					_sInitString = "this addEventHandler [""killed"", {_this spawn TRGM_fnc_InsKilled;}]; removeHeadgear this;Removevest this;";
 				};
 			}
 			else {
-				_sInitString = "this addEventHandler [""killed"", {_this execVM ""RandFramework\CivKilled.sqf"";}]; this addaction [localize ""STR_TRGM2_civillians_fnbadCivAddSearchAction_Button"",""RandFramework\SearchGoodCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; removeHeadgear this;Removevest this;";
+				_sInitString = "this addEventHandler [""killed"", {_this spawn TRGM_fnc_CivKilled;}]; this addaction [localize ""STR_TRGM2_civillians_fnbadCivAddSearchAction_Button"",""RandFramework\SearchGoodCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; removeHeadgear this;Removevest this;";
 			};
 		};
 		_sideCivGroup = nil;
@@ -943,15 +943,15 @@ TREND_fnc_SpawnCivs = {
 				[_SpawnedRifleman] joinSilent (_sideCivGroup);
 				if (!_bRebelLeaderPicked) then {
 					_SpawnedRifleman addaction [localize "STR_TRGM2_trendFunctions_TalkToLeader","RandFramework\TalkRebLead.sqf"];
-					_SpawnedRifleman addEventHandler ["killed", {_this execVM "RandFramework\InsKilled.sqf";}];
+					_SpawnedRifleman addEventHandler ["killed", {_this spawn TRGM_fnc_InsKilled;}];
 					removeHeadgear _SpawnedRifleman;
 					_bRebelLeaderPicked = true;
 				}
 				else {
-					_sInitString = "this addEventHandler [""killed"", {_this execVM ""RandFramework\InsKilled.sqf"";}]; removeHeadgear this;Removevest this;";
-					_SpawnedRifleman addEventHandler ["killed", {_this execVM "RandFramework\InsKilled.sqf";}];
+					_sInitString = "this addEventHandler [""killed"", {_this spawn TRGM_fnc_InsKilled;}]; removeHeadgear this;Removevest this;";
+					_SpawnedRifleman addEventHandler ["killed", {_this spawn TRGM_fnc_InsKilled;}];
 
-					_SpawnedRifleman execVM "RandFramework\BadReb.sqf";
+					_SpawnedRifleman spawn TRGM_fnc_BadReb;
 
 					Removevest _SpawnedRifleman;
 					removeHeadgear _SpawnedRifleman;
@@ -1035,7 +1035,7 @@ if (!_bThisMissionCivsOnly) then {
 				if (selectRandom [true,false]) then {sRiflemanToUse createUnit [position _randBuilding, _thisGroup];};
 
 				_teamLeaderUnit = _thisGroup createUnit [sRiflemanToUse,_randBuildingPos,[],0,"NONE"];
-				[_randBuildingPos, units group _teamLeaderUnit, -1, true, false,true] execVM "RandFramework\Zen_OccupyHouse.sqf";
+				[_randBuildingPos, units group _teamLeaderUnit, -1, true, false,true] spawn TRGM_fnc_Zen_OccupyHouse;
 
 
 _iCountNoOfCPs = selectRandom[0,0,0,0,1];  //number of checkpoints (so high chance of not being any, or one may be near an occupied building)
@@ -1056,7 +1056,7 @@ _iCountNoOfCPs = selectRandom[0,0,0,0,1];  //number of checkpoints (so high chan
 						_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 						_thisAllowBarakade = selectRandom [false];
 						_thisIsDirectionAwayFromAO = true;
-						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,50,false] execVM "RandFramework\setCheckpoint.sqf";
+						[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,false,UnarmedScoutVehicles,50,false] spawn TRGM_fnc_setCheckpoint;
 					}
 				};
 			};

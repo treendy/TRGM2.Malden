@@ -23,7 +23,7 @@ if (isServer) then {
 		_thisUnitTypes = FriendlyCheckpointUnits;
 		_thisAllowBarakade = true;
 		_thisIsDirectionAwayFromAO = false;
-		[_flatPos,_flatPos,50,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,FriendlyScoutVehicles,500] execVM "RandFramework\setCheckpoint.sqf";
+		[_flatPos,_flatPos,50,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,FriendlyScoutVehicles,500] spawn TRGM_fnc_setCheckpoint;
 	};
 
 	if (bDebugMode) then {["Mission Setup: 5"] remoteExec ["systemChat", 0];};

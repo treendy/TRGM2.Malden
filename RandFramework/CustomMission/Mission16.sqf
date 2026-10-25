@@ -44,7 +44,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_target1 setVariable [_sTargetName1, _target1, true];
 	missionNamespace setVariable [_sTargetName1, _target1];
 	
-	[_mainObjPos,100,true,true,_target1, _isCache] execVM "RandFramework\setTargetEvent.sqf";
+	[_mainObjPos,100,true,true,_target1, _isCache] spawn TRGM_fnc_setTargetEvent;
 
 
 _customTaskClear = nil;

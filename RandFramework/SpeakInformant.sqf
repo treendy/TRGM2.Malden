@@ -58,9 +58,9 @@ if (side player == west) then {
 				hint "Map updated with main AO Location";
 			}
 			else {
-				[IntelShownType,"SpeakInform"] execVM "RandFramework\showIntel.sqf";
+				[IntelShownType,"SpeakInform"] spawn TRGM_fnc_showIntel;
 				sleep 5;
-				[IntelShownType,"SpeakInform"] execVM "RandFramework\showIntel.sqf";
+				[IntelShownType,"SpeakInform"] spawn TRGM_fnc_showIntel;
 			};
 			
 		};

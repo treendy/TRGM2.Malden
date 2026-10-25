@@ -55,19 +55,19 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	_sTargetName1 = format["objInformant%1",_iTaskIndex];
 	_IED1 setVariable [_sTargetName1, _IED1, true];
 	missionNamespace setVariable [_sTargetName1, _IED1];
-	[_mainObjPos,100,true,true,_IED1,_IEDType] execVM "RandFramework\setIEDEvent.sqf";
+	[_mainObjPos,100,true,true,_IED1,_IEDType] spawn TRGM_fnc_setIEDEvent;
 
 	_IED2 = createVehicle [selectRandom _ieds,[-25,-25,0],[],0,"NONE"];
 	_sTargetName2 = format["objInformant2_%1",_iTaskIndex];
 	_IED2 setVariable [_sTargetName2, _IED2, true];
 	missionNamespace setVariable [_sTargetName2, _IED2];
-	[_mainObjPos,_spacingBetweenTargets,true,true,_IED2,_IEDType] execVM "RandFramework\setIEDEvent.sqf";
+	[_mainObjPos,_spacingBetweenTargets,true,true,_IED2,_IEDType] spawn TRGM_fnc_setIEDEvent;
 
 	_IED3 = createVehicle [selectRandom _ieds,[-50,-50,0],[],0,"NONE"];
 	_sTargetName3 = format["objInformant3_%1",_iTaskIndex];
 	_IED3 setVariable [_sTargetName3, _IED3, true];
 	missionNamespace setVariable [_sTargetName3, _IED3];
-	[_mainObjPos,_spacingBetweenTargets,true,true,_IED3,_IEDType] execVM "RandFramework\setIEDEvent.sqf";
+	[_mainObjPos,_spacingBetweenTargets,true,true,_IED3,_IEDType] spawn TRGM_fnc_setIEDEvent;
 
 
 _customTaskClear = nil;

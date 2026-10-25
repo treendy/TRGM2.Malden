@@ -216,14 +216,14 @@ if (count _nearestRoads > 0) then {
 			if (_bIsTrap) then {
 				
 				if (selectRandom [true,false,false,false]) then {
-					[_eventLocationPos] execVM "RandFramework\createWaitingAmbush.sqf";
+					[_eventLocationPos] spawn TRGM_fnc_createWaitingAmbush;
 					_bHasHidingAmbush = true;
 				};
 				if (selectRandom[true,false,false,false,false]) then {
-					[_eventLocationPos] execVM "RandFramework\createWaitingSuicideBomber.sqf";
+					[_eventLocationPos] spawn TRGM_fnc_createWaitingSuicideBomber;
 				};
 				if (selectRandom[true,false]) then {
-					[_eventLocationPos] execVM "RandFramework\RandScript\createEnemySniper.sqf";
+					[_eventLocationPos] spawn TRGM_fnc_createEnemySniper;
 				};
 
 				_allowAPTraps = true;

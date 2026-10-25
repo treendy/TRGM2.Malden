@@ -1,5 +1,7 @@
 //if some condition is true, we give this guy a gun and change side
 
+if (!isServer) exitWith {}; //started from the unit's init string, which runs on every machine
+
 _thisCiv = _this; // select 0;
 _bFired = false;
 

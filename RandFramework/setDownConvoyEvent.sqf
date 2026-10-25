@@ -32,13 +32,13 @@ if (count _nearestRoads > 0) then {
 	_eventLocationPos = getPos (selectRandom _nearestRoads);
 
 	if (selectRandom [true,false,false]) then {
-		[_eventLocationPos] execVM "RandFramework\createWaitingAmbush.sqf";
+		[_eventLocationPos] spawn TRGM_fnc_createWaitingAmbush;
 		if (selectRandom[true,false]) then {
-			[_eventLocationPos] execVM "RandFramework\createWaitingSuicideBomber.sqf";
+			[_eventLocationPos] spawn TRGM_fnc_createWaitingSuicideBomber;
 		};
 	};
 	if (selectRandom [true,false,false]) then {
-		[_eventLocationPos] execVM "RandFramework\createWaitingSuicideBomber.sqf";
+		[_eventLocationPos] spawn TRGM_fnc_createWaitingSuicideBomber;
 	};
 
 	_thisAreaRange = 50;
@@ -162,7 +162,7 @@ if (isnil "fncMedicalParamedicLight") then {
 			_downedCiv disableAI "anim";  
 			_downedCivDirection = (floor(random 360));
 			_downedCiv setDir (_downedCivDirection);
-			_downedCiv addEventHandler ["killed", {_this execVM "RandFramework\CivKilled.sqf";}];
+			_downedCiv addEventHandler ["killed", {_this spawn TRGM_fnc_CivKilled;}];
 			_bloodPool1 = createVehicle [selectRandom _bloodPools, getpos _downedCiv, [], 0, "CAN_COLLIDE"];
 			_bloodPool1 setDir (floor(random 360));
 			if (selectRandom[true]) then {
@@ -187,7 +187,7 @@ _downedCivMedic = _group createUnit [selectRandom FriendlyCheckpointUnits,_backO
 			_downedCivMedic disableAI "anim";  
 			_downedCivMedic attachTo [_downedCiv, [0.5,-0.3,-0.1]];
 			_downedCivMedic setDir 270;
-			_downedCivMedic addEventHandler ["killed", {_this execVM "RandFramework\ParamedicKilled.sqf";}]; //ParamedicKilled
+			_downedCivMedic addEventHandler ["killed", {_this spawn TRGM_fnc_ParamedicKilled;}]; //ParamedicKilled
 
 			[_downedCiv,["Carry",{
 				_civ=_this select 0; 
@@ -223,14 +223,14 @@ _downedCivMedic = _group createUnit [selectRandom FriendlyCheckpointUnits,_backO
 				_downedCivMedic2 = _group createUnit [selectRandom FriendlyCheckpointUnits,_backOfVehArea,[],8,"NONE"];
 				_downedCivMedic2 playmove "Acts_CivilListening_2";
 				_downedCivMedic2 disableAI "anim";  
-				_downedCivMedic2 addEventHandler ["killed", {_this execVM "RandFramework\ParamedicKilled.sqf";}]; //ParamedicKilled
+				_downedCivMedic2 addEventHandler ["killed", {_this spawn TRGM_fnc_ParamedicKilled;}]; //ParamedicKilled
 
 				//_RequestedMedicalItems
 
 				_downedCiv2 = _group createUnit [selectRandom FriendlyCheckpointUnits,getpos _downedCivMedic2,[],2,"NONE"];
 				_downedCiv2 playmove "Acts_CivilTalking_2";
 				_downedCiv2 disableAI "anim";  
-				_downedCiv2 addEventHandler ["killed", {_this execVM "RandFramework\CivKilled.sqf";}]; //ParamedicKilled
+				_downedCiv2 addEventHandler ["killed", {_this spawn TRGM_fnc_CivKilled;}]; //ParamedicKilled
 				[_downedCiv2, ["Ask if needs assistance",{hint "We need to get our wounded out of here, help us get these guys back to base!!"},[_downedCiv2]]] remoteExec ["addAction", 0, true];
 				_directionFromMed2ToCiv2 = [_downedCivMedic2, _downedCiv2] call BIS_fnc_DirTo; 
 				_downedCivMedic2 setDir _directionFromMed2ToCiv2;	
@@ -246,7 +246,7 @@ _downedCivMedic = _group createUnit [selectRandom FriendlyCheckpointUnits,_backO
 				_downedCiv3 playmove "Acts_CivilShocked_1";
 				_downedCiv3 disableAI "anim";  
 				_downedCiv3 setDir (floor(random 360));
-				_downedCiv3 addEventHandler ["killed", {_this execVM "RandFramework\CivKilled.sqf";}]; //ParamedicKilled
+				_downedCiv3 addEventHandler ["killed", {_this spawn TRGM_fnc_CivKilled;}]; //ParamedicKilled
 			};
 
 			_rubbish1 = createVehicle [selectRandom MedicalMessItems, getpos _downedCiv, [], 1.5, "CAN_COLLIDE"];

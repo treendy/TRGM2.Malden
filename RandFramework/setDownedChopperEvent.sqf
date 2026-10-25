@@ -50,16 +50,16 @@ if (str(_flatPos) != "[0,0,0]") then {
 
 
 	if (selectRandom [true,false,false,false,false]) then {
-		[_flatPos] execVM "RandFramework\createWaitingAmbush.sqf";
+		[_flatPos] spawn TRGM_fnc_createWaitingAmbush;
 		if (selectRandom[true,false,false,false]) then {
-			[_flatPos] execVM "RandFramework\createWaitingSuicideBomber.sqf";
+			[_flatPos] spawn TRGM_fnc_createWaitingSuicideBomber;
 		};
 	};
 	if (selectRandom [true,false,false,false,false]) then {
-		[_flatPos] execVM "RandFramework\createWaitingSuicideBomber.sqf";
+		[_flatPos] spawn TRGM_fnc_createWaitingSuicideBomber;
 	};
 	if (selectRandom[true,false,false]) then {
-		[_flatPos] execVM "RandFramework\RandScript\createEnemySniper.sqf";
+		[_flatPos] spawn TRGM_fnc_createEnemySniper;
 	};
 
 	_wreck = _sVictimVeh createVehicle _flatPos;	
@@ -87,7 +87,7 @@ if (str(_flatPos) != "[0,0,0]") then {
 			_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 			_thisAllowBarakade = false;
 			_thisIsDirectionAwayFromAO = true;
-			[_flatPos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100] execVM "RandFramework\setCheckpoint.sqf";
+			[_flatPos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100] spawn TRGM_fnc_setCheckpoint;
 		};
 	};
 
@@ -116,7 +116,7 @@ _downedCiv setDamage 0.8;
 	_downedCiv disableAI "anim";  
 	_downedCivDirection = (floor(random 360));
 	_downedCiv setDir (_downedCivDirection);
-	_downedCiv addEventHandler ["killed", {_this execVM "RandFramework\CivKilled.sqf";}];
+	_downedCiv addEventHandler ["killed", {_this spawn TRGM_fnc_CivKilled;}];
 	_bloodPool1 = createVehicle [selectRandom _bloodPools, getpos _downedCiv, [], 0, "CAN_COLLIDE"];
 	_bloodPool1 setDir (floor(random 360));
 	[_downedCiv, ["Talk to wounded guy",{hint "Please get me back to base!!"},[_downedCiv]]] remoteExec ["addAction", 0, true];

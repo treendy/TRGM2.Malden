@@ -45,9 +45,9 @@ if (side player == west) then {
 		else {
 
 			if (alive _thisCiv) then {
-				[IntelShownType,"IntOfficer"] execVM "RandFramework\showIntel.sqf";
+				[IntelShownType,"IntOfficer"] spawn TRGM_fnc_showIntel;
 				sleep 2;
-				[IntelShownType,"IntOfficer"] execVM "RandFramework\showIntel.sqf";
+				[IntelShownType,"IntOfficer"] spawn TRGM_fnc_showIntel;
 			}
 			else {
 				hint (localize "STR_TRGM2_interrogateOfficer_DeadGuy")

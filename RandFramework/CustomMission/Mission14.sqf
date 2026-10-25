@@ -136,11 +136,11 @@ _infBuilding = nil;
 				_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
 				_thisAllowBarakade = false;
 				_thisIsDirectionAwayFromAO = true;
-				[_checkPointGuidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100] execVM "RandFramework\setCheckpoint.sqf";
+				[_checkPointGuidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100] spawn TRGM_fnc_setCheckpoint;
 			};
 		}
 		else {
-			[getPos _objInformant,200,250] execVM "RandFramework\createWaitingAmbush.sqf";
+			[getPos _objInformant,200,250] spawn TRGM_fnc_createWaitingAmbush;
 		};
 	};
 

@@ -10,7 +10,7 @@ if (side player == west) then {
 
 
 	if (alive _thisCheckpointUnit) then {
-		[IntelShownType,"TalkFriendCheckPoint"] execVM "RandFramework\showIntel.sqf";
+		[IntelShownType,"TalkFriendCheckPoint"] spawn TRGM_fnc_showIntel;
 
 	}
 	else {

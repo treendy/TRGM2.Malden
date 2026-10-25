@@ -26,9 +26,9 @@ if (isServer && count _thisThisList > 0) then {
 			_centPos = _FirstPos;
 			_FirstFlarePos = _centPos getPos [(floor random 150),(floor random 360)];
 			_SecondFlarePos = _centPos getPos [(floor random 150),(floor random 360)];
-			[_FirstFlarePos] execVM "RandFramework\RandScript\fireAOFlares.sqf";
+			[_FirstFlarePos] spawn TRGM_fnc_fireAOFlares;
 			sleep 0.5;
-			[_SecondFlarePos] execVM "RandFramework\RandScript\fireAOFlares.sqf";			
+			[_SecondFlarePos] spawn TRGM_fnc_fireAOFlares;			
 
 		};
 		if (FlareCounter == 0) then {
@@ -127,7 +127,7 @@ _SpottedUnitCount = {_x distance _SpottedUnit < 200} count units group _SpottedU
 									_x set [4,True]; 
 									_x set [1,0]; 
 									if ((_bIsMainObjective && selectRandom [true,false]) || (!_bIsMainObjective && selectRandom [true,false,false])) then {
-										[_SpottedUnitPos, 3] execVM "RandFramework\RandScript\enemyAirSupport.sqf";
+										[_SpottedUnitPos, 3] spawn TRGM_fnc_enemyAirSupport;
 									};
 								}
 								else {
@@ -168,22 +168,22 @@ _SpottedUnitCount = {_x distance _SpottedUnit < 200} count units group _SpottedU
 
 if (_bInfSpottedAction) then {
 						if (_bIsMainObjective) then {
-							[EAST, ReinforceStartPos1, _MainObjectivePos, 3, true, false, false, false, false] execVM "RandFramework\reinforcements.sqf";	
+							[EAST, ReinforceStartPos1, _MainObjectivePos, 3, true, false, false, false, false] spawn TRGM_fnc_reinforcements;	
 							if (bAllowLargerPatrols) then { 
 								sleep 3;
-								[EAST, ReinforceStartPos1, _MainObjectivePos, 3, true, false, false, false, false] execVM "RandFramework\reinforcements.sqf";	
+								[EAST, ReinforceStartPos1, _MainObjectivePos, 3, true, false, false, false, false] spawn TRGM_fnc_reinforcements;	
 							};
 							ParaDropped = true;
 							publicVariable "ParaDropped";
 						}
 						else {
-							[EAST, ReinforceStartPos1, _SpottedUnitPos, 3, true, false, false, false, false] execVM "RandFramework\reinforcements.sqf";	
+							[EAST, ReinforceStartPos1, _SpottedUnitPos, 3, true, false, false, false, false] spawn TRGM_fnc_reinforcements;	
 						};
 					
 				};	
 
 				if (_bTankSpottedAction) then {
-					[_SpottedUnitPos, 2] execVM "RandFramework\RandScript\enemyAirSupport.sqf";
+					[_SpottedUnitPos, 2] spawn TRGM_fnc_enemyAirSupport;
 					TREND_fnc_AirSiren = {		
 						_FirstPos = _this select 0;
 						_iLoopSirenCount = 0;
@@ -199,7 +199,7 @@ if (_bInfSpottedAction) then {
 				};
 				
 				if (_bAirSpottedAction) then {
-					[_SpottedUnitPos, 1] execVM "RandFramework\RandScript\enemyAirSupport.sqf";
+					[_SpottedUnitPos, 1] spawn TRGM_fnc_enemyAirSupport;
 					TREND_fnc_AirSiren = {		
 						_FirstPos = _this select 0;
 						_iLoopSirenCount = 0;
