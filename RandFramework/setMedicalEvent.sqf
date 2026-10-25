@@ -238,7 +238,7 @@ _downedCivMedic = _group createUnit [selectRandom Paramedics,_backOfVehArea,[],0
 						["Thank you, this should help us get things under control"] remoteExecCall ["Hint", 0];
 						_completed = true;
 						removeAllActions _downedCivMedic;
-						[0.3, "Assited with medical emergency"] execVM "RandFramework\AdjustMaxBadPoints.sqf";
+						[0.3, "Assited with medical emergency"] call TRGM_fnc_adjustMaxBadPoints;
 					};
 					sleep selectRandom [2];
 				};

@@ -85,11 +85,13 @@ if (isClass(configFile >> "CfgPatches" >> "UK3CB_BAF_Equipment") &&
 
 };
 
-//broadcast once all the DLC/mod factions have been added
-publicVariable "DefaultEnemyFactionArray";
-publicVariable "DefaultEnemyFactionArrayText";
-publicVariable "DefaultFriendlyFactionArray";
-publicVariable "DefaultFriendlyFactionArrayText";
+//broadcast once all the DLC/mod factions have been added (the server's mods decide what is available)
+if (isServer) then {
+	publicVariable "DefaultEnemyFactionArray";
+	publicVariable "DefaultEnemyFactionArrayText";
+	publicVariable "DefaultFriendlyFactionArray";
+	publicVariable "DefaultFriendlyFactionArrayText";
+};
 
 
 //example: AdvancedSettings select ADVSET_ENEMY_FACTIONS_IDX
@@ -134,7 +136,6 @@ DefaultAdvancedSettings = [0,"Tactical Cannon Fodder",1,1,1,10,DefaultEnemyFacti
 
 if (isNil "iUseRevive") then {
 	iUseRevive = 0;
-	publicVariable "iUseRevive";
 };
 if (iUseRevive == 0) then {
 	bUseRevive = false;
@@ -161,20 +162,8 @@ sScriptsUsed = localize "STR_TRGM2_TRGMSetUnitGlobalVars_ScriptsUsed";
 
 if (isNil "iWeather") then {
 	iWeather = 1;
-	publicVariable "iWeather";
 };
-if (iWeather == 1) then {WeatherOptions = [1,1,1,2,2,2,3,3,3,4,5,6,7,7,8,9,10];};
-if (iWeather == 2) then {WeatherOptions = [1];};
-if (iWeather == 3) then {WeatherOptions = [2];};
-if (iWeather == 4) then {WeatherOptions = [3];};
-if (iWeather == 5) then {WeatherOptions = [4]};
-if (iWeather == 6) then {WeatherOptions = [5]};
-if (iWeather == 7) then {WeatherOptions = [6]};
-if (iWeather == 8) then {WeatherOptions = [7]};
-if (iWeather == 9) then {WeatherOptions = [8]};
-if (iWeather == 10) then {WeatherOptions = [9]};
-if (iWeather == 11) then {WeatherOptions = [10]};
-if (iWeather == 12) then {WeatherOptions = [11]};
+WeatherOptions = [iWeather] call TRGM_fnc_getWeatherOptions;
 
 iAllowMineField = 0; //("TREND_par_AllowMineField" call BIS_fnc_getParamValue);
 if (iAllowMineField == 1) then {AllowMineField = True;};

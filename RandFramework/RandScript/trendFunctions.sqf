@@ -1,4 +1,3 @@
-#include "../../setUnitGlobalVars.sqf";
 bDebugging = false;
 
 sTeamleaderToUse = sTeamleader;
@@ -151,7 +150,7 @@ TREND_fnc_PopulateSideMission = {
 	_inf1Y = _sidePos select 1;
 
 	_trgCustomAIScript = nil;
-	_trgCustomAIScript = createTrigger ["EmptyDetector", _sidePos];
+	_trgCustomAIScript = createTrigger ["EmptyDetector", _sidePos, false];
 	_trgCustomAIScript setVariable ["DelMeOnNewCampaignDay",true];
 	_trgCustomAIScript setTriggerArea [1250, 1250, 0, false];
 	_trgCustomAIScript setTriggerActivation [FriendlySideString, format["%1 D", EnemySideString], true];

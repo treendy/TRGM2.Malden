@@ -8,7 +8,7 @@ sleep 3;
 
 if (side _killer == west && _killed != _killer) then {
 
-	[0.2,format[localize "STR_TRGM2_InsKilled_RebelKilled", name _killer]] execVM "RandFramework\AdjustBadPoints.sqf";
+	[0.2,format[localize "STR_TRGM2_InsKilled_RebelKilled", name _killer]] call TRGM_fnc_adjustBadPoints;
 
 	_rebels = allUnits select {(_x getVariable ["IsRebel", false]) && {side _x != east && _x distance _killed < 2000}};
 	if (count _rebels > 0) then {

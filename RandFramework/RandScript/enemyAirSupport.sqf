@@ -1,4 +1,3 @@
-#include "../../setUnitGlobalVars.sqf";
 
 _SpottedPos = _this select 0;
 _IsAirType = _this select 1; // 1=AirToAir, 2=AirToGround, 3=Scout

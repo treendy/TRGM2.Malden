@@ -126,7 +126,7 @@ if (_currentATFieldPos select 0 != 0) then {
 				  		if ((_mainVeh distance _guardUnit1) > 100) then {
 				  			["Thank you for your help"] remoteExecCall ["Hint", 0];
 				  			[_guardUnit1] remoteExecCall ["removeAllActions", 0];	
-				  			[0.2, "Helped a stranded friendly"] execVM "RandFramework\AdjustMaxBadPoints.sqf";	
+				  			[0.2, "Helped a stranded friendly"] call TRGM_fnc_adjustMaxBadPoints;	
 				  			_bWaiting = false;
 				  		};
 				  	};

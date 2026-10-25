@@ -385,21 +385,21 @@ _guardUnit3 addEventHandler ["Killed", {(_this select 0) setVariable ["taskStatu
 
 
 	_customTaskClear = nil;
-	_customTaskClear = createTrigger ["EmptyDetector", [0,0]];
+	_customTaskClear = createTrigger ["EmptyDetector", [0,0], false];
 	_customTaskClear setVariable ["DelMeOnNewCampaignDay",true];
 	_customTaskFailed = nil;
-	_customTaskFailed = createTrigger ["EmptyDetector", [0,0]];
+	_customTaskFailed = createTrigger ["EmptyDetector", [0,0], false];
 	_customTaskFailed setVariable ["DelMeOnNewCampaignDay",true];
 	_customTaskEscaped = nil;
-	_customTaskEscaped = createTrigger ["EmptyDetector", [0,0]];
+	_customTaskEscaped = createTrigger ["EmptyDetector", [0,0], false];
 	_customTaskEscaped setVariable ["DelMeOnNewCampaignDay",true];
 
 	if (!_bCreateTask) then {
 		_sAliveCheck = format["%1 getVariable [""taskStatus"",""""] == ""KILLED"" ",_sTargetName];
-		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Killed HVT at meeting""] execVM ""RandFramework\AdjustMaxBadPoints.sqf""; Hint (""HVT Killed, rep increased""); ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
+		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Killed HVT at meeting""] call TRGM_fnc_adjustMaxBadPoints; [""HVT Killed, rep increased""] remoteExec [""Hint"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
 
 		_sAliveCheck2 = format["%1 getVariable [""taskStatus"",""""] == ""KILLED""",_sTargetName2];
-		_customTaskFailed setTriggerStatements [_sAliveCheck2, " [0.8, ""our agent was killed!!!""] execVM ""RandFramework\AdjustBadPoints.sqf""; Hint (""You killed our agent! Rep lowered""); ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
+		_customTaskFailed setTriggerStatements [_sAliveCheck2, " [0.8, ""our agent was killed!!!""] call TRGM_fnc_adjustBadPoints; [""You killed our agent! Rep lowered""] remoteExec [""Hint"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
 
 	}
 	else {

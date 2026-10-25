@@ -1,4 +1,3 @@
-#include "..\..\setUnitGlobalVars.sqf";
 
 
 _actChooseMission = -1;
@@ -274,13 +273,9 @@ else {
 };
 
 
-TREND_fnc_GetAnimalsMoving = {
-	[] execVM "RandFramework\animateAnimals.sqf";
-};
-[] spawn TREND_fnc_GetAnimalsMoving;
 
 if (leader (group (vehicle player)) == player) then {
-	_trg = createTrigger["EmptyDetector",getPos player];
+	_trg = createTrigger ["EmptyDetector", getPos player, false];
 	_trg setTriggerActivation["ALPHA",  "PRESENT",true];
 	_trg setTriggerText "illuminate your position for 5 mins (eta 60 seconds)";
 	_trg setTriggerStatements["this", "[player] execVM ""RandFramework\RandScript\fireIllumFlares.sqf"";", ""];

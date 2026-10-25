@@ -28,16 +28,14 @@ if (_SaveVersion != "") then {
 	} remoteExec ["bis_fnc_call", 2]; //Save this to server only
 
 
-	laptop1 remoteExec ["removeAllActions"];
-
+	//replace the save actions on the laptop for everyone (JIP id so joining players get the current one)
 	if (SaveType == 1) then {
 		if (_IsFirstSave) then {hint (localize "STR_TRGM2_ServerSave_Save1");};
-		[laptop1, [localize "STR_TRGM2_ServerSave_SaveLocal",{hint (localize "STR_TRGM2_ServerSave_SaveHint")}]] remoteExec ["addAction", 0];
-
+		[laptop1, {removeAllActions _this; _this addAction [localize "STR_TRGM2_ServerSave_SaveLocal",{hint (localize "STR_TRGM2_ServerSave_SaveHint")}];}] remoteExec ["call", 0, "TRGM_laptopSaveActions"];
 	}
 	else {
 		if (_IsFirstSave) then {hint (localize "STR_TRGM2_ServerSave_Save2");};
-		laptop1 addAction [localize "STR_TRGM2_ServerSave_SaveGlobal",{hint (localize "STR_TRGM2_ServerSave_SaveHint")}];
+		[laptop1, {removeAllActions _this; _this addAction [localize "STR_TRGM2_ServerSave_SaveGlobal",{hint (localize "STR_TRGM2_ServerSave_SaveHint")}];}] remoteExec ["call", 0, "TRGM_laptopSaveActions"];
 	};
 
 

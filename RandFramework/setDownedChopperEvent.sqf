@@ -182,7 +182,7 @@ _downedCiv setDamage 0.8;
 		if (_downedCiv distance (getMarkerPos "mrkHQ") < 300) then {
 			_doLoop = false;
 			[_completedMessage] remoteExecCall ["Hint", 0];
-			[0.3, _PointsAdjustMessage] execVM "RandFramework\AdjustMaxBadPoints.sqf";
+			[0.3, _PointsAdjustMessage] call TRGM_fnc_adjustMaxBadPoints;
 			[_downedCiv] join grpNull;
 			deleteVehicle _downedCiv;
 		};

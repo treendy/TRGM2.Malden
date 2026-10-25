@@ -17,5 +17,5 @@ if (side _killer == west && _killed != _killer) then {
 	CivDeathCount = CivDeathCount + 1;
 	publicVariable "CivDeathCount";
 
-	[0.1,format[localize "STR_TRGM2_CivKilled_Text", name _killer]] execVM "RandFramework\AdjustBadPoints.sqf";
+	[0.1,format[localize "STR_TRGM2_CivKilled_Text", name _killer]] call TRGM_fnc_adjustBadPoints;
 };

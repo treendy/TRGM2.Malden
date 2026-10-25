@@ -105,7 +105,7 @@ _IEDType = "CAR";
 									}
 									else {
 										_thisVeh setVariable ["isDefused",true, true];
-										[0.2, localize "STR_TRGM2_IEDDefused"] execVM "RandFramework\AdjustMaxBadPoints.sqf";	
+										[0.2, localize "STR_TRGM2_IEDDefused"] call TRGM_fnc_adjustMaxBadPoints;	
 										removeAllActions _thisVeh;
 										[localize "STR_TRGM2_IEDDefused"] remoteExecCall ["Hint", 0];
 									}

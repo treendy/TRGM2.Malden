@@ -1,4 +1,3 @@
-#include "../../setUnitGlobalVars.sqf";
 
 debugMessages = debugMessages + "Player Killed";
 debugMessages = debugMessages + format["KILLED: %1", name player];
@@ -33,7 +32,7 @@ if (player distance getMarkerPos "MrkHQ" > SaveZoneRadius) then {
 			_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;
 		};
 
-		[_iPointsToAdd,format[localize "STR_TRGM2_TRGMOnPlayerKilled_Killed", name player]] execVM "RandFramework\AdjustBadPoints.sqf";
+		[_iPointsToAdd,format[localize "STR_TRGM2_TRGMOnPlayerKilled_Killed", name player]] call TRGM_fnc_adjustBadPoints;
 
 		_tombStone = selectRandom TombStones createVehicle GraveYardPos;
 		_tombStone setDir GraveYardDirection;

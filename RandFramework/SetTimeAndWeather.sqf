@@ -1,4 +1,3 @@
-#include "..\setUnitGlobalVars.sqf";
 
 params["_isIntro"];
 if (isNil "_isIntro") then {_isIntro = false};
@@ -59,7 +58,7 @@ if (!UseEditorWeather && isServer) then {
 		    _hour = 12;
 		    _min = 0;
 		    
-		    _WeatherOption = selectRandom WeatherOptions;
+		    _WeatherOption = selectRandom ([iWeather] call TRGM_fnc_getWeatherOptions); //iWeather may have been changed in the mission settings dialog
 		    if (_isIntro) then {_WeatherOption = selectRandom [2,8,9,10,11]};
 		    
 		    if (_WeatherOption == 1) then { //Sunny Clear

@@ -1,4 +1,3 @@
-#include "..\..\setUnitGlobalVars.sqf";
 disableSerialization;
 
 _thisThis = _this select 0;

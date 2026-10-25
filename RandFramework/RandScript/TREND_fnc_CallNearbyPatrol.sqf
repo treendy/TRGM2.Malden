@@ -1,4 +1,3 @@
-#include "../../setUnitGlobalVars.sqf";
 
 
 _thisThis = _this select 0;

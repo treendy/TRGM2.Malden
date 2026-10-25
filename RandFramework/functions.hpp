@@ -14,6 +14,9 @@ class TRGM   { // TAG
         class walkingGuyLoop {};
         class nextMarkerId {};
         class medicalFlashLights {};
+        class getWeatherOptions {};
+        class adjustBadPoints {};
+        class adjustMaxBadPoints {};
     };
 
     class location { // CATEGORY

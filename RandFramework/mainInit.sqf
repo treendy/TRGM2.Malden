@@ -1,5 +1,4 @@
 #include "..\CustomMission\TRGMSetDefaultMissionSetupVars.sqf";
-#include "..\setUnitGlobalVars.sqf";
 
 
 civilian setFriend [east, 1];
@@ -318,7 +317,7 @@ _camera camPrepareFOV 0.4;
 _camera camCommitPrepared 600;
 
 
-_trgRatingAdjust = createTrigger ["EmptyDetector", [0,0]];
+_trgRatingAdjust = createTrigger ["EmptyDetector", [0,0], false];
 _trgRatingAdjust setTriggerArea [0, 0, 0, false];
 _trgRatingAdjust setTriggerStatements ["((rating player) < 0)", "player addRating -(rating player)", ""];
 
@@ -745,19 +744,18 @@ TREND_fnc_CheckBadPoints = {
 				if ((ActiveTasks call FHQ_TT_areTasksCompleted)) then { //if rank changed and tasks completed, then if now rank 5, need to reset board to show "Start final mission", otherwise, make sure shows "start next mission"
 					[["MISSION_COMPLETE"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,"TRGM_missionBoardOptions"];
 				};
-				[parseText _sRankMessage] remoteExec ["Hint", 0, true];
+				[parseText _sRankMessage] remoteExec ["Hint", 0];
 			};
 		};
 
-		//show "Current Reputation is X, Goal is X"
-		if (isServer) then {
-			"transportChopper" setMarkerPos getPos chopper1;
-		};
+		"transportChopper" setMarkerPos getPos chopper1;
 		sleep 1;
 	};
 };
-[] spawn TREND_fnc_CheckBadPoints;
-player addEventHandler ["Respawn", { [] spawn TREND_fnc_CheckBadPoints; }];
+//server only, the task states, saves and hints in here are all global
+if (isServer) then {
+	[] spawn TREND_fnc_CheckBadPoints;
+};
 systemChat format["Mission Core: %1", "BadPointsSet"];
 sleep _coreCountSleep;
 
@@ -925,16 +923,9 @@ if (iAllowNVG == 0) then {
 systemChat format["Mission Core: %1", "SandStormStateSet"];
 sleep _coreCountSleep;
 
-[[],"RandFramework\animateAnimals.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
-
 systemChat format["Mission Core: %1", "AnimalStateSet"];
 sleep _coreCountSleep;
 
- if (!isDedicated && (player != player)) then {
-	waitUntil {player == player};
-	waitUntil {time > 10};
-	[[],"RandFramework\animateAnimals.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
- };
 
 
 systemChat format["Mission Core: %1", "CoreFinished"];

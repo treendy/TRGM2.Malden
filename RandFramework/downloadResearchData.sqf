@@ -14,7 +14,7 @@ if (side player == west) then {
 			[sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0];
 		};
 	} else {
-		[1, "Downloaded research data"] execVM "RandFramework\AdjustMaxBadPoints.sqf";
+		[1, "Downloaded research data"] call TRGM_fnc_adjustMaxBadPoints;
 		"Data secured, reputation increased" remoteExecCall	["hint",side _caller];
 	};
 

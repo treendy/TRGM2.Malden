@@ -1,4 +1,3 @@
-#include "..\..\setUnitGlobalVars.sqf";
 disableSerialization;
 
 

@@ -1,13 +1,11 @@
 {systemChat "Mission Setup: 16";} remoteExec ["bis_fnc_call", 0];
 
-#include "..\setUnitGlobalVars.sqf";
 #include "..\RandFramework\RandScript\trendFunctions.sqf";
 
 //This is only ever called on server!!!!
 {systemChat "Mission Setup: 15";} remoteExec ["bis_fnc_call", 0];
 
 TRGM_Logic setVariable ["DeathRunning", false, true];
-TRGM_Logic setVariable ["PointsUpdating", false, true];
 
 
 {systemChat "Mission Setup: 14.5";} remoteExec ["bis_fnc_call", 0];
@@ -523,11 +521,11 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 										};
 									};
 									_triggerAmmoTruckClear = nil;
-									_triggerAmmoTruckClear = createTrigger ["EmptyDetector", [0,0]];
+									_triggerAmmoTruckClear = createTrigger ["EmptyDetector", [0,0], false];
 									_triggerAmmoTruckClear setVariable ["DelMeOnNewCampaignDay",true];
 									if (!_bCreateTask) then {
 
-										_triggerAmmoTruckClear setTriggerStatements [format["!alive(%1) && !alive(%2)",_sTargetName,_sTargetName2], " [1, ""Destroyed ammo trucks""] execVM ""RandFramework\AdjustMaxBadPoints.sqf""; Hint (localize ""STR_TRGM2_startInfMission_MissionTitle3_Destory""); ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
+										_triggerAmmoTruckClear setTriggerStatements [format["!alive(%1) && !alive(%2)",_sTargetName,_sTargetName2], " [1, ""Destroyed ammo trucks""] call TRGM_fnc_adjustMaxBadPoints; [localize ""STR_TRGM2_startInfMission_MissionTitle3_Destory""] remoteExec [""Hint"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
 									}
 									else {
 										//!([InfSide%3] call FHQ_TT_areTasksCompleted)
@@ -598,11 +596,11 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 									};
 
 									_triggerAmmoTruckClear = nil;
-									_triggerAmmoTruckClear = createTrigger ["EmptyDetector", [0,0]];
+									_triggerAmmoTruckClear = createTrigger ["EmptyDetector", [0,0], false];
 									_triggerAmmoTruckClear setVariable ["DelMeOnNewCampaignDay",true];
 									if (!_bCreateTask) then {
 
-										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " [1, ""Destroyed AAA""] execVM ""RandFramework\AdjustMaxBadPoints.sqf""; Hint (localize ""STR_TRGM2_startInfMission_MissionTitle9_Destory""); ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
+										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " [1, ""Destroyed AAA""] call TRGM_fnc_adjustMaxBadPoints; [localize ""STR_TRGM2_startInfMission_MissionTitle9_Destory""] remoteExec [""Hint"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
 									}
 									else {
 										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
@@ -675,11 +673,11 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 									};
 
 									_triggerAmmoTruckClear = nil;
-									_triggerAmmoTruckClear = createTrigger ["EmptyDetector", [0,0]];
+									_triggerAmmoTruckClear = createTrigger ["EmptyDetector", [0,0], false];
 									_triggerAmmoTruckClear setVariable ["DelMeOnNewCampaignDay",true];
 									if (!_bCreateTask) then {
 
-										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " [1, ""Destroyed Artillery""] execVM ""RandFramework\AdjustMaxBadPoints.sqf""; Hint (localize ""STR_TRGM2_startInfMission_MissionTitle10_Destory""); ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
+										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " [1, ""Destroyed Artillery""] call TRGM_fnc_adjustMaxBadPoints; [localize ""STR_TRGM2_startInfMission_MissionTitle10_Destory""] remoteExec [""Hint"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
 									}
 									else {
 										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
@@ -840,12 +838,12 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 											if (!_bIsMainObjective) then {
 												if (_iThisTaskType != 5) then {
 													_trgKillOfficer = nil;
-													_trgKillOfficer = createTrigger ["EmptyDetector", [0,0]];
+													_trgKillOfficer = createTrigger ["EmptyDetector", [0,0], false];
 													_trgKillOfficer setTriggerArea [0, 0, 0, false];
 													_trgKillOfficer setVariable ["DelMeOnNewCampaignDay",true];
 													if (!_bCreateTask) then {
 
-														_trgKillOfficer setTriggerStatements [format["!alive(%1)",_sInformant1Name], " [1, ""HVT Killed""] execVM ""RandFramework\AdjustMaxBadPoints.sqf""; Hint (localize ""STR_TRGM2_startInfMission_MissionTitle8_Eliminated""); ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions""; ", ""];			
+														_trgKillOfficer setTriggerStatements [format["!alive(%1)",_sInformant1Name], " [1, ""HVT Killed""] call TRGM_fnc_adjustMaxBadPoints; [localize ""STR_TRGM2_startInfMission_MissionTitle8_Eliminated""] remoteExec [""Hint"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions""; ", ""];			
 
 													}
 													else {
@@ -904,12 +902,12 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 														_doLoop = false;
 														if (!_bCreateTask) then {
 															if (_iThisTaskType == 11) then {
-																[0.2, "Rescued a POW"] execVM "RandFramework\AdjustMaxBadPoints.sqf";
+																[0.2, "Rescued a POW"] call TRGM_fnc_adjustMaxBadPoints;
 																[_objMan] join grpNull;
 																deleteVehicle _objMan;
 															};
 															if (_iThisTaskType == 12) then {
-																[0.2, "Rescued a Reporter"] execVM "RandFramework\AdjustMaxBadPoints.sqf";
+																[0.2, "Rescued a Reporter"] call TRGM_fnc_adjustMaxBadPoints;
 																[_objMan] join grpNull;
 																deleteVehicle _objMan;
 															};
@@ -1107,7 +1105,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 
 {systemChat "Mission Setup: 7";} remoteExec ["bis_fnc_call", 0];
 
-_trgComplete = createTrigger ["EmptyDetector", [0,0]];
+_trgComplete = createTrigger ["EmptyDetector", [0,0], false];
 _trgComplete setVariable ["DelMeOnNewCampaignDay",true];
 _trgComplete setTriggerArea [0, 0, 0, false];
 if (iMissionParamType == 5) then {
@@ -1119,7 +1117,7 @@ if (iMissionParamType == 5) then {
 
 	}
 	else {
-		_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "hint (localize ""STR_TRGM2_startInfMission_RTBNextMission""); [[""MISSION_COMPLETE""],""RandFramework\Campaign\SetMissionBoardOptions.sqf""] remoteExec [""BIS_fnc_execVM"",0,""TRGM_missionBoardOptions""]; if (ActiveTasks call FHQ_TT_areTasksSuccessful) then {[1, format[localize ""STR_TRGM2_startInfMission_DayComplete"",str(iCampaignDay)]] execVM 'RandFramework\AdjustMaxBadPoints.sqf'}; deletevehicle thisTrigger", ""];
+		_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "[localize ""STR_TRGM2_startInfMission_RTBNextMission""] remoteExec [""Hint"", 0]; [[""MISSION_COMPLETE""],""RandFramework\Campaign\SetMissionBoardOptions.sqf""] remoteExec [""BIS_fnc_execVM"",0,""TRGM_missionBoardOptions""]; if (ActiveTasks call FHQ_TT_areTasksSuccessful) then {[1, format[localize ""STR_TRGM2_startInfMission_DayComplete"",str(iCampaignDay)]] call TRGM_fnc_adjustMaxBadPoints}; deletevehicle thisTrigger", ""];
 	};
 }
 else {
@@ -1170,7 +1168,7 @@ publicVariable "debugMessages";
 
 hint (localize "STR_TRGM2_startInfMission_SoItBegin");
 
-[[],"RandFramework\animateAnimals.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
+[[],"RandFramework\animateAnimals.sqf"] remoteExec ["BIS_fnc_execVM",0,"TRGM_animateAnimals"]; //ambient animals are local to each client
 
 
 {systemChat "Mission Setup: 0";} remoteExec ["bis_fnc_call", 0];

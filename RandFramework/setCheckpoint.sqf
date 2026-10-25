@@ -1,4 +1,3 @@
-#include "../setUnitGlobalVars.sqf";
 
 params [
 	"_thisAOPos",

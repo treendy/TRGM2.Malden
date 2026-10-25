@@ -38,7 +38,7 @@ if (_bAllow) then {
 		};
 	} forEach ActiveTasks;
 	//lower rep
-	[0.3, format[localize "STR_TRGM2_startInfMission_DayTurnedIn",str(iCampaignDay)]] execVM "RandFramework\AdjustBadPoints.sqf";
+	[0.3, format[localize "STR_TRGM2_startInfMission_DayTurnedIn",str(iCampaignDay)]] call TRGM_fnc_adjustBadPoints;
 
 	sleep 3;
 

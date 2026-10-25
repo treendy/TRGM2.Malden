@@ -944,7 +944,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(chin1)}";
-				onActivation="call{[1,""Large transport chopper destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
+				onActivation="call{if (isServer) then {[1,""Large transport chopper destroyed""] call TRGM_fnc_adjustBadPoints;};}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -962,7 +962,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(airSup1)}";
-				onActivation="call{[2,""Air support destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
+				onActivation="call{if (isServer) then {[2,""Air support destroyed""] call TRGM_fnc_adjustBadPoints;};}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -989,7 +989,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(car1)}";
-				onActivation="call{[0.5,""Vehicle destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
+				onActivation="call{if (isServer) then {[0.5,""Vehicle destroyed""] call TRGM_fnc_adjustBadPoints;};}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -1139,7 +1139,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(tank1)}";
-				onActivation="call{[1,""Tank destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
+				onActivation="call{if (isServer) then {[1,""Tank destroyed""] call TRGM_fnc_adjustBadPoints;};}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -1323,7 +1323,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(mediChop1)}";
-				onActivation="call{[1,""Medical chopper destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
+				onActivation="call{if (isServer) then {[1,""Medical chopper destroyed""] call TRGM_fnc_adjustBadPoints;};}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};
@@ -2851,7 +2851,7 @@ class Mission
 			class Attributes
 			{
 				condition="call{!alive(airSup2)}";
-				onActivation="call{[2,""Air support destroyed""] execVM ""RandFramework\AdjustBadPoints.sqf"";}";
+				onActivation="call{if (isServer) then {[2,""Air support destroyed""] call TRGM_fnc_adjustBadPoints;};}";
 				sizeA=0;
 				sizeB=0;
 				timeout[]={1,1,1};

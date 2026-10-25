@@ -205,7 +205,7 @@ _downedCivMedic = _group createUnit [selectRandom FriendlyCheckpointUnits,_backO
 					if (_downedCiv distance (getMarkerPos "mrkHQ") < 500) then {
 						_doLoop = false;
 						["Wounded unit returned to base"] remoteExecCall ["Hint", 0];
-						[0.1, format["Brought wounded %1 to base",name _downedCiv]] execVM "RandFramework\AdjustMaxBadPoints.sqf";
+						[0.1, format["Brought wounded %1 to base",name _downedCiv]] call TRGM_fnc_adjustMaxBadPoints;
 						[_downedCiv] join grpNull;
 						deleteVehicle _downedCiv;
 					};

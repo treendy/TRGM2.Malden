@@ -243,7 +243,7 @@ if (count _nearestRoads > 0) then {
 						[_group,"LIMITED"] remoteExecCall ["setSpeedMode", 0];
 						[_downedCiv,_mainVeh] remoteExecCall ["assignAsDriver", 0];					
 						[[_downedCiv],true] remoteExecCall ["orderGetIn", 0];			
-						[0.2, "Helped a stranded civilian"] execVM "RandFramework\AdjustMaxBadPoints.sqf";
+						[0.2, "Helped a stranded civilian"] call TRGM_fnc_adjustMaxBadPoints;
 						sleep 10;
 						[_downedCiv,(ObjectivePossitions select 0)] remoteExecCall ["doMove", 0];
 					};

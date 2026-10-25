@@ -1,4 +1,3 @@
-#include "..\..\setUnitGlobalVars.sqf";
 
 _isCampaign = (iMissionParamType == 5);
 
@@ -24,7 +23,9 @@ if (_bAllowStart) then {
 		titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED", 5];
 
 		if (_isCampaign) then {
-			[["NEW_MISSION"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,"TRGM_missionBoardOptions"];
+			if (isServer) then {
+				[["NEW_MISSION"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,"TRGM_missionBoardOptions"];
+			};
 			if ((Player getVariable ["calUAVActionID", -1]) != -1) then {
 				player removeAction (Player getVariable ["calUAVActionID", -1]);
 				player setVariable ["calUAVActionID", nil];
@@ -148,7 +149,7 @@ al_aaa = false;
 	}
 	else {
 
-		{hint (localize "STR_TRGM2_StartMission_Hint");} remoteExec ["bis_fnc_call", 0];
+		hint (localize "STR_TRGM2_StartMission_Hint"); //this script already runs on every machine
 	};
 
 	if (iMissionParamType == 5) then {

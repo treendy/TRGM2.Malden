@@ -1,7 +1,6 @@
 params["_thisBeginControl","_SaveType"]; //_SaveType optional, default 0  (1 is local load, 2 is global load)
 if (isNil "_SaveType") then {_SaveType = 0};
 
-#include "..\..\setUnitGlobalVars.sqf";
 disableSerialization;
 
 if (ForceMissionSetup) then {

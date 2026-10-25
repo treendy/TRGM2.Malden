@@ -48,5 +48,5 @@ if (_bAllow) then {
 		deleteWaypoint _x
 	} foreach waypoints group _escortPilot;
 	sleep 0.2;
-	[[],"RandFramework\Campaign\StartMission.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
+	[[],"RandFramework\Campaign\StartMission.sqf"] remoteExec ["BIS_fnc_execVM",0,"TRGM_startMission"]; //JIP id so joining players only replay the latest mission start
 };

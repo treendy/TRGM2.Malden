@@ -1,4 +1,3 @@
-#include "..\..\setUnitGlobalVars.sqf";
 
 params ["_object","_caller","_id","_params"];
 _params params ["_unitClass","_unitRole"];
@@ -34,12 +33,12 @@ if (_currentSpentPoints < (MaxBadPoints - BadPoints + 1)) then {
 			_tombStone setDir GraveYardDirection;
 			_tombStone setVariable ["Message", format[localize "STR_TRGM2_RecruiteInf_KIA",name (_this select 0)],true];
 			_tombStone addAction [localize "STR_TRGM2_RecruiteInf_Read",{hint format["%1",(_this select 0) getVariable "Message"]}];
-			[0.2, format[localize "STR_TRGM2_RecruiteInf_KIA",name (_this select 0)]] execVM "RandFramework\AdjustBadPoints.sqf";
+			[0.2, format[localize "STR_TRGM2_RecruiteInf_KIA",name (_this select 0)]] call TRGM_fnc_adjustBadPoints;
 		}];
 	//spawn tombstone with name on it
 	hint format[localize "STR_TRGM2_RecruiteInf_UnitAdd", name _SpawnedUnit,_currentSpentPoints+0.5,MaxBadPoints - BadPoints + 1];
 
-	if (bUseRevive) then {
+	if (iUseRevive != 0) then {
 				[_SpawnedUnit] call AIS_System_fnc_loadAIS;
 	};
 }
