@@ -194,6 +194,8 @@ TREND_fnc_PopulateSideMission = {
 				PatrolType = 0; //0=default 1=smaller all over
 			};
 			_bSmallerAllOverPatrols = selectRandom [true,false] || PatrolType == 1 || PatrolType == 2; //if single mission and random 50/50, or if forced by custom mission
+			//record what this AO was set up with (read by the Secure Comms Tower debug text)
+			missionNamespace setVariable [format["TRGM_AoPopDebug%1",_iSideIndex], format["main objective %1, mini mission %2, smaller all-over patrols %3, large patrols allowed %4, buildings within 100m %5, enemy side %6", _bIsMainObjective, _minimission, _bSmallerAllOverPatrols, bAllowLargerPatrols, _allBuildingsNearAOCount, _InsurgentSide]];
 			
 			if (_minimission) then {
 				if (selectRandom[true,false]) then {

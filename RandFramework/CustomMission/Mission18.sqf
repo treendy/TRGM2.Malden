@@ -175,6 +175,14 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			[_towerPos,300] call _fnc_countWithin, [_towerPos,600] call _fnc_countWithin, [_towerPos,1000] call _fnc_countWithin, [_towerPos,2000] call _fnc_countWithin];
 		_sMore = _sMore + format[" | within 300/600/1000/2000m of the ORIGINAL BUILDING: %1/%2/%3/%4",
 			[_mainObjPos,300] call _fnc_countWithin, [_mainObjPos,600] call _fnc_countWithin, [_mainObjPos,1000] call _fnc_countWithin, [_mainObjPos,2000] call _fnc_countWithin];
+		_sMore = _sMore + format[" | AO setup: %1", missionNamespace getVariable [format["TRGM_AoPopDebug%1",_iTaskIndex], "not recorded"]];
+		//every enemy group, nearest first: F = on foot, V = in a vehicle, then number of units @ distance from the tower
+		private _groupList = (allGroups select {side _x == east && {count units _x > 0}}) apply {
+			private _leaderDist = (leader _x) distance2D _towerPos;
+			[_leaderDist, format["%1%2@%3m", if (vehicle (leader _x) != leader _x) then {"V"} else {"F"}, count units _x, round _leaderDist]]
+		};
+		_groupList sort true;
+		_sMore = _sMore + format[" | groups nearest first: %1", (_groupList apply {_x select 1}) joinString ", "];
 		[_iTaskIndex, _sDebugBase + _sMore] call TRGM_fnc_mission18DebugSet;
 		[[], {systemChat "Mission Events: Mission 18 debug ready - in the debug console run: copyToClipboard TRGM_Mission18Debug";}] remoteExec ["bis_fnc_call", 0];
 	};
