@@ -1,7 +1,7 @@
 //These are only ever called by the server!
 
 //MISSION 18: Secure Comms Tower
-//A comms tower is spawned next to the AO building and becomes the centre of the AO. Players activate an uplink at it, then must keep at least one player within 10m of it until the progress bar reaches 100% (5 minutes).
+//A comms tower is spawned on high, flat, dry ground within about 350m of the AO building and becomes the centre of the AO. Players activate an uplink at it, then must keep at least one player within 10m of it until the progress bar reaches 100% (5 minutes).
 //The enemy is called to the tower as soon as the uplink starts. If all players die before 100% the mission fails.
 //Once the bar is full, friendly jets fly an airstrike pass past the tower (effect only).
 
@@ -37,11 +37,31 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 	private _mainObjPos = getPos _objectiveMainBuilding;
 
-	//spawn the comms tower right next to the AO building the engine picked, so the AO is centred on the tower
-	private _spawnTowerPos = [_mainObjPos, 15, 80, 12, 0, 0.15, 2, [[getMarkerPos "mrkHQ", BaseAreaRange]] + CheckPointAreas + SentryAreas, [[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-	if (_spawnTowerPos select 0 <= 0 || {surfaceIsWater _spawnTowerPos}) then {
-		_spawnTowerPos = _mainObjPos getPos [30, random 360];
-		if (surfaceIsWater _spawnTowerPos) then {_spawnTowerPos = _mainObjPos;};
+	//find a sensible place for a comms tower near the AO building: dry, flat, clear of trees/buildings/roads and well away from the shore, taking the highest ground found
+	private _spawnTowerPos = [];
+	private _bestHeight = -100000;
+	for "_i" from 1 to 80 do {
+		private _candidate = _mainObjPos getPos [50 + random 300, random 360];
+		private _isGood = !(surfaceIsWater _candidate)
+			&& {(getMarkerPos "mrkHQ") distance2D _candidate > BaseAreaRange}
+			&& {((surfaceNormal _candidate) select 2) > 0.97}
+			&& {count nearestObjects [_candidate, ["Building","House"], 20] == 0}
+			&& {count nearestTerrainObjects [_candidate, ["TREE","SMALL TREE","BUSH","BUILDING","HOUSE","ROCK","ROCKS","WALL","FENCE","ROAD","MAIN ROAD","TRACK"], 10] == 0};
+		if (_isGood) then {
+			private _nearWater = ([40,80] findIf {private _dist = _x; [0,45,90,135,180,225,270,315] findIf {surfaceIsWater (_candidate getPos [_dist, _x])} > -1}) > -1;
+			if (!_nearWater && {(getTerrainHeightASL _candidate) > _bestHeight}) then {
+				_bestHeight = getTerrainHeightASL _candidate;
+				_spawnTowerPos = _candidate;
+			};
+		};
+	};
+	//nothing suitable found, so use the engine's general flat position search around the building
+	if (count _spawnTowerPos == 0) then {
+		_spawnTowerPos = [_mainObjPos, 15, 80, 12, 0, 0.15, 2, [[getMarkerPos "mrkHQ", BaseAreaRange]] + CheckPointAreas + SentryAreas, [[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+		if (_spawnTowerPos select 0 <= 0 || {surfaceIsWater _spawnTowerPos}) then {
+			_spawnTowerPos = _mainObjPos getPos [30, random 360];
+			if (surfaceIsWater _spawnTowerPos) then {_spawnTowerPos = _mainObjPos;};
+		};
 	};
 	private _tower = createVehicle ["Land_TTowerBig_2_F", _spawnTowerPos, [], 0, "CAN_COLLIDE"];
 	_tower setDir (random 360);
