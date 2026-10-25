@@ -236,6 +236,16 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		private _failed = false;
 		while {_progress < 100 && !_failed && !(isNull _lifeTrigger)} do {
 			sleep 1;
+
+			//test hook: lets a tester jump the bar to a value from the debug console (see the console lines in the chat reply / commit message)
+			private _sDebugSetVar = format["CommsTowerDebugSet%1",_iTaskIndex];
+			private _debugSetTo = missionNamespace getVariable [_sDebugSetVar, -1];
+			if (_debugSetTo >= 0) then {
+				_progress = (_progress max _debugSetTo) min 100;
+				missionNamespace setVariable [_sDebugSetVar, -1];
+				missionNamespace setVariable [_progressVar, _progress, true];
+			};
+
 			private _livingPlayers = (allPlayers - entities "HeadlessClient_F") select {alive _x};
 			if (count _livingPlayers == 0) then {
 				_failed = true;
