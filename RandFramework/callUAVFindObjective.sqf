@@ -14,7 +14,7 @@
 		//if task is still active, and teh target is dead, this must mean the task required the target to be alive (otherwise would have completed), so thereofre fail the task
 		if (!(["InfSide0"] call FHQ_TT_areTasksCompleted)) then {
 			["InfSide0", "failed"] remoteExec ["FHQ_TT_setTaskState", 0]; //zero because we only ever have the UAV option on the main objective
-			{hint (localize "STR_TRGM2_UAV_HTV_DEAD");} remoteExec ["bis_fnc_call", 0];
+			[localize "STR_TRGM2_UAV_HTV_DEAD"] remoteExec ["hint", 0];
 		};
 		[HQMan,(localize "STR_TRGM2_UAV_Fail")] remoteExecCall ["sideChat",0,false];
 

@@ -195,39 +195,9 @@ while {_iteration <= 2} do {
 
 		if (_iteration == 1) then {
 			_sidePos = getPos _mainVeh;
-			_iCount = selectRandom[0,0,0,0,1];
-			while {_iCount > 0} do {
-				_thisAreaRange = 100;
-				_checkPointGuidePos = _sidePos;
-				_iCount = _iCount - 1;
-				_flatPos = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]] + CheckPointAreas + SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-				if (_flatPos select 0 > 0) then {
-					_thisPosAreaOfCheckpoint = _flatPos;
-					_thisRoadOnly = true;
-					_thisSide = east; 
-					_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
-					_thisAllowBarakade = true;
-					_thisIsDirectionAwayFromAO = true;
-					[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100] spawn TRGM_fnc_setCheckpoint;
-				};
-			};
+			[_sidePos, selectRandom[0,0,0,0,1], 0, 0, 100, true, east, [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse], true, true, true, UnarmedScoutVehicles, 100, true, true, 50] call TRGM_fnc_spawnCheckpoints;
 			//spawn inner sentry
-			_iCount = selectRandom[0,0,0,0,1];
-			while {_iCount > 0} do {
-				_thisAreaRange = 100;
-				_checkPointGuidePos = _sidePos;
-				_iCount = _iCount - 1;
-				_flatPos = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]] + CheckPointAreas + SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-				if (_flatPos select 0 > 0) then {
-					_thisPosAreaOfCheckpoint = _flatPos;
-					_thisRoadOnly = false;
-					_thisSide = east; 
-					_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
-					_thisAllowBarakade = false;
-					_thisIsDirectionAwayFromAO = true;
-					[_sidePos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100] spawn TRGM_fnc_setCheckpoint;
-				};
-			};
+			[_sidePos, selectRandom[0,0,0,0,1], 0, 0, 100, false, east, [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse], false, true, true, UnarmedScoutVehicles, 100, true, true, 50] call TRGM_fnc_spawnCheckpoints;
 
 		};
 	};

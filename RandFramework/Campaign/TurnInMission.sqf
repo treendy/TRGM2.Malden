@@ -5,7 +5,7 @@ if (_bAllow) then {
 	//Fail current mission
 	{
 		if (!([_x] call FHQ_TT_areTasksCompleted)) then {
-			[_x, "failed"] call FHQ_TT_setTaskState;
+			[_x, "failed"] remoteExec ["FHQ_TT_setTaskState", 2]; //task states can only be changed on the server
 		};
 	} forEach ActiveTasks;
 	//lower rep

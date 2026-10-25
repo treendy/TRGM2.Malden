@@ -5,7 +5,7 @@ bAllAtBase2 = ({(alive _x)&&((_x distance _mrkHQPos < 500)||(_x distance _AOCamp
 
 //bAllAtBase2 replaces bAllAtBase (bAllAtBase2 covers units withing range of AO Camp too)
 if (bAllAtBase2 && ActiveTasks call FHQ_TT_areTasksCompleted) then {
-	["DeBrief", "succeeded"] call FHQ_TT_setTaskState;  	
+	["DeBrief", "succeeded"] remoteExec ["FHQ_TT_setTaskState", 2]; //task states can only be changed on the server (this runs on the player who used the action)  	
 
 	if (iMissionParamType == 5) then {
 		["end1", true, 7] remoteExec ["BIS_fnc_endMission"];

@@ -181,7 +181,7 @@ _roadlist=_roadlist call BIS_fnc_arrayShuffle;
 	server setvariable [_popVar,_information];
 		
 // Create a trigger over town	
-		_trigger = createTrigger ["EmptyDetector",_pos]; 
+		_trigger = createTrigger ["EmptyDetector",_pos,false]; //server only 
 		_trigger setTriggerArea [(COS_distance+_sizeX),(COS_distance+_sizeY),0,FALSE]; 
 		_trigger setTriggerActivation ["ANY","PRESENT",true];
 		_trigger setTriggerTimeout [1, 1, 1, true];
@@ -208,7 +208,7 @@ COScomplete=true;publicvariable "COScomplete";
 // LOCAL SCRIPTS
 waituntil {COScomplete};
 _mkrs=SERVER getvariable "COSmarkers";// Use this to get all town markers
-null=[] execVM "RandFramework\COS\localScript.sqf";// This shows messages for players during multiplayer
+null=[] execVM "RandFramework\cos\localScript.sqf";// This shows messages for players during multiplayer
 
 };
 };

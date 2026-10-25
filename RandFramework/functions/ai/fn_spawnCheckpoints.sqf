@@ -14,8 +14,10 @@ params [
 	"_scoutVehicles",
 	"_spacing",
 	["_allowAnimation", true],
-	["_avoidBase", true]	//also keep away from the base area (mrkHQ)
+	["_avoidBase", true],	//also keep away from the base area (mrkHQ)
+	["_searchRange", -1]	//max distance for the position search if it should differ from _areaRange (-1 = same as _areaRange)
 ];
+if (_searchRange < 0) then {_searchRange = _areaRange;};
 
 for "_i" from 1 to _count do {
 	private _guidePos = _aoPos;
@@ -24,7 +26,7 @@ for "_i" from 1 to _count do {
 	private _blacklist = CheckPointAreas + SentryAreas;
 	if (_avoidBase) then {_blacklist = [[getMarkerPos "mrkHQ", BaseAreaRange]] + _blacklist;};
 
-	private _flatPos = [_guidePos, _minDist, _areaRange, 10, 0, 0.2, 0, _blacklist, [[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+	private _flatPos = [_guidePos, _minDist, _searchRange, 10, 0, 0.2, 0, _blacklist, [[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 	if (_flatPos select 0 > 0) then {
 		private _barricade = _allowBarricade;
 		if (_allowBarricade isEqualType []) then {_barricade = selectRandom _allowBarricade;};

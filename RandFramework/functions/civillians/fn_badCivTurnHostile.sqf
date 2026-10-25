@@ -4,18 +4,20 @@ params ["_badCiv",["_target",objNull]];
 if (!isServer) exitWith {
 	_this remoteExec ["TRGM_fnc_badCivTurnHostile", 2];
 };
-if (_badCiv getVariable ["isHostile",false]) exitWith {};
-_badCiv setVariable ["isHostile",true,true];
+//arm and switch side only once (the search action and the watch loop can both get here)
+if (!(_badCiv getVariable ["isHostile",false])) then {
+	_badCiv setVariable ["isHostile",true,true];
 
-_grpName = createGroup east;
-[_badCiv] joinSilent _grpName;
+	_grpName = createGroup east;
+	[_badCiv] joinSilent _grpName;
 
-[_badCiv] call TRGM_fnc_badCivApplyAssingnedArmament;
+	[_badCiv] call TRGM_fnc_badCivApplyAssingnedArmament;
 
-_badCiv allowFleeing 0;
+	_badCiv allowFleeing 0;
 
-//remove search Civ action
-[_badCiv] remoteExec ["TRGM_fnc_badCivRemoveSearchAction",[0, -2] select isMultiplayer,true];
+	//remove search Civ action
+	[_badCiv] remoteExec ["TRGM_fnc_badCivRemoveSearchAction",[0, -2] select isMultiplayer,true];
+};
 
 if (!isNull _target) then {
 	_badCiv doTarget _target;

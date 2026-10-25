@@ -10,8 +10,6 @@ if (side player == FriendlySide) then {
 	};
 
 
-	TempIntelShowPos = "";
-	publicVariable "TempIntelShowPos";
 
 
 	if (_FoundViaType == "CommsTower") then {
@@ -29,20 +27,15 @@ if (_IntelToShow == 0) then { //Nothing found
 	};
 
 	if (_IntelToShow == 1) then { //Mortor team location
-		{
-    
-			TempIntelShowPos = nearestObjects [ObjectivePossitions select 0,sMortar + sMortarMilitia,3000];
-			publicVariable "TempIntelShowPos";
-		} remoteExec ["bis_fnc_call", 2];
-		waitUntil {typeName TempIntelShowPos == "ARRAY"};
-		_iCount = count TempIntelShowPos;
+		_foundObjs = nearestObjects [ObjectivePossitions select 0,sMortar + sMortarMilitia,3000]; //vehicles exist on every machine, no need to ask the server
+		_iCount = count _foundObjs;
 		if (_iCount > 0) then {
 			{
 				_test = createMarker [format["MrkIntelMortor%1",_forEachIndex], getPos _x];  
 				_test setMarkerShape "ICON";  
 				_test setMarkerType "o_art";  
 				_test setMarkerText "Mortar"; 
-			} forEach TempIntelShowPos;
+			} forEach _foundObjs;
 			Hint (localize "STR_TRGM2_showIntel_MortarMapUpdated");
 		}
 		else {
@@ -50,19 +43,15 @@ if (_IntelToShow == 0) then { //Nothing found
 		};
 	};
 	if (_IntelToShow == 2) then { //AAA team location
-		{
-			TempIntelShowPos = nearestObjects [ObjectivePossitions select 0,[sAAAVeh] + [sAAAVehMilitia] + DestroyAAAVeh,3000];
-			publicVariable "TempIntelShowPos";
-		} remoteExec ["bis_fnc_call", 2];
-		waitUntil {typeName TempIntelShowPos == "ARRAY"};
-		_iCount = count TempIntelShowPos;
+		_foundObjs = nearestObjects [ObjectivePossitions select 0,[sAAAVeh] + [sAAAVehMilitia] + DestroyAAAVeh,3000];
+		_iCount = count _foundObjs;
 		if (_iCount > 0) then {
 			{
 				_test = createMarker [format["MrkIntelAAA%1",_forEachIndex], getPos _x];  
 				_test setMarkerShape "ICON";  
 				_test setMarkerType "o_art";  
 				_test setMarkerText (localize "STR_TRGM2_showIntel_AAAMarker");
-			} forEach TempIntelShowPos;
+			} forEach _foundObjs;
 			Hint (localize "STR_TRGM2_showIntel_AAAMapUpdated");
 		}
 		else {

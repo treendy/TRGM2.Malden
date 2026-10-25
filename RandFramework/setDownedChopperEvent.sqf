@@ -50,22 +50,7 @@ if (str(_flatPos) != "[0,0,0]") then {
 	
 
 	//spawn inner sentry
-	_iCount = selectRandom[0,1,2];
-	while {_iCount > 0} do {
-		_thisAreaRange = 20;
-		_checkPointGuidePos = _flatPos;
-		_iCount = _iCount - 1;
-		_flatPosSentry = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]] + CheckPointAreas + SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-		if (_flatPosSentry select 0 > 0) then {
-			_thisPosAreaOfCheckpoint = _flatPosSentry;
-			_thisRoadOnly = false;
-			_thisSide = east; 
-			_thisUnitTypes = [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse];
-			_thisAllowBarakade = false;
-			_thisIsDirectionAwayFromAO = true;
-			[_flatPos,_thisPosAreaOfCheckpoint,_thisAreaRange,_thisRoadOnly,_thisSide,_thisUnitTypes,_thisAllowBarakade,_thisIsDirectionAwayFromAO,true,UnarmedScoutVehicles,100] spawn TRGM_fnc_setCheckpoint;
-		};
-	};
+	[_flatPos, selectRandom[0,1,2], 0, 0, 20, false, east, [sRiflemanToUse, sRiflemanToUse,sRiflemanToUse,sMachineGunManToUse, sAmmobearerToUse, sGrenadierToUse, sMedicToUse,sAAManToUse,sATManToUse], false, true, true, UnarmedScoutVehicles, 100, true, true, 50] call TRGM_fnc_spawnCheckpoints;
 
 	_flatPos2 = [_flatPos , 10, 25, 3, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 	_group = createGroup civilian; 

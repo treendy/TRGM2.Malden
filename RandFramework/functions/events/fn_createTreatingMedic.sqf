@@ -8,6 +8,6 @@ _medic attachTo [_patient, [0.5,-0.3,-0.1]];
 _medic setDir 270;
 _medic addEventHandler ["killed", {_this spawn TRGM_fnc_ParamedicKilled;}];
 
-[_medic] remoteExec ["TRGM_fnc_medicalParamedicLight", 0, true];
+[_medic] remoteExec ["TRGM_fnc_medicalParamedicLight", 0, _medic]; //JIP id is the medic, so joining players don't get it after he is deleted
 
 _medic

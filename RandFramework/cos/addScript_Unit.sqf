@@ -50,9 +50,7 @@ else {
 					_thisUnit setDir _directionToPlayer;
 					_tempGroup1 = createGroup WEST;
 					{[_x] joinSilent _tempGroup1} forEach (units group _thisUnit);
-					while {(count (waypoints group _thisUnit)) > 0} do {
-						deleteWaypoint ((waypoints group _thisUnit) select 0);
-					};
+					[group _thisUnit] call TRGM_fnc_deleteAllWaypoints;
 				},			// Code executed on every progress tick
 				{
 					_thisUnit = _this select 0;

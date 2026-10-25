@@ -17,7 +17,7 @@ _bMoveToAO = false;
 			_bMoveToAO = true;
 		};
 		if (_bMoveToAO) then {
-			call compile preprocessFileLineNumbers "RandFramework\functions\MissionSetup\AoCampCreator.sqf";
+			call compile preprocessFileLineNumbers "RandFramework\functions\missionSetup\AoCampCreator.sqf";
 		};
 
 

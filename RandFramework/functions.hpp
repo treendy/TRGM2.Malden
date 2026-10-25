@@ -95,6 +95,9 @@ class TRGM   { // TAG
         class createTreatingMedic {};
         class medicalParamedicLight {};
         class eventFlareLoop {};
+        class woundedSoundLoop {};
+        class addIEDSearchAction {};
+        class orderDriverOut {};
     };
 
     class missionSetup {

@@ -3,12 +3,12 @@
 
 civilian setFriend [east, 1];
 
-//global defaults: each is only set (and broadcast) if not already defined
+//global defaults: each is only set if not already defined (every machine sets its own default, only the server broadcasts it)
 {
 	_x params ["_varName", "_defaultValue"];
 	if (isNil _varName) then {
 		missionNamespace setVariable [_varName, _defaultValue];
-		publicVariable _varName;
+		if (isServer) then {publicVariable _varName;};
 	};
 } forEach [
 	["CustomObjectsSet", false],
@@ -607,13 +607,13 @@ if (iAllowNVG == 0) then {
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
 			SandStormTimer = selectRandom [150,390,630];
 			publicVariable "SandStormTimer";
-			{nul = [SandStormTimer,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			[[SandStormTimer,false],"RandFramework\RikoSandStorm\ROSsandstorm.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 			[true] call TRGM_fnc_setEnemySandstormSkill;
 			sleep SandStormTimer;
 			[false] call TRGM_fnc_setEnemySandstormSkill;
 		};
 		if (_iSandStormOption == 3) then { //5 hours non stop
-			{nul = [18030,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
+			[[18030,false],"RandFramework\RikoSandStorm\ROSsandstorm.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 			[true] call TRGM_fnc_setEnemySandstormSkill;
 			sleep 18030;
 			[false] call TRGM_fnc_setEnemySandstormSkill;

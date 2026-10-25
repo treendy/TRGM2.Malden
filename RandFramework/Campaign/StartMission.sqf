@@ -1,3 +1,4 @@
+#include "..\..\setUnitGlobalVars.sqf"; //this can be replayed for joining players before init.sqf has run, so make sure the globals exist (guarded, only runs once)
 
 _isCampaign = (iMissionParamType == 5);
 
@@ -54,10 +55,6 @@ if (isServer && _isCampaign) then {
 			};
 
 
-al_aaa = false;
-			publicVariable "al_aaa";
-			al_search_light = false;
-			publicVariable "al_search_light";
 
 			tracer1 setPos [99999,99999];
 			tracer2 setPos [99999,99999];

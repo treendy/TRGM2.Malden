@@ -17,12 +17,7 @@ private _trialPos = (getPos _bloodPool1) getPos [3,_trialDir];
 private _bloodTrail1 = createVehicle ["BloodTrail_01_New_F", _trialPos, [], 0, "CAN_COLLIDE"];
 _bloodTrail1 setDir _trialDir;
 
-[_downedCiv] spawn {
-	params ["_downedCiv"];
-	while{ (alive _downedCiv)} do {
-		[_downedCiv, selectRandom WoundedSounds] remoteExecCall ["say3D", [0,-2] select isDedicated]; //say3D is local, so play it for every player
-		sleep selectRandom [2,2.5,3];
-	};
-};
+//each client runs its own moaning loop (JIP id is the unit, so the queue entry goes when the unit is deleted)
+[_downedCiv] remoteExec ["TRGM_fnc_woundedSoundLoop", 0, _downedCiv];
 
 _downedCiv

@@ -565,8 +565,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 											_civ=_this select 0; 
 											_player=_this select 1;
 											[_civ, _player] execVM "RandFramework\CarryAndJoinWounded.sqf";		
-											ClearedPositions pushBack ([ObjectivePossitions, _player] call BIS_fnc_nearestPosition);	
-											publicVariable "ClearedPositions";
+											[[ObjectivePossitions, _player] call BIS_fnc_nearestPosition] call TRGM_fnc_addClearedPosition;
 										}]] remoteExecCall ["addAction", 0];
 									}; 
 									_initPos = selectRandom _allpositionsLaptop1;
@@ -696,8 +695,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 													_civ setCaptive false;
 													addSwitchableUnit _civ;
 													_taskIndex = _civ getVariable ["taskIndex",-1];
-													ClearedPositions pushBack ([ObjectivePossitions, getPos _civ] call BIS_fnc_nearestPosition);
-													publicVariable "ClearedPositions";
+													[[ObjectivePossitions, getPos _civ] call BIS_fnc_nearestPosition] call TRGM_fnc_addClearedPosition;
 											}]] remoteExecCall ["addAction", 0];
 
 											TREND_fnc_POWCheck = {		
@@ -712,7 +710,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 													if (!alive(_objMan)) then {
 														_doLoop = false;
 														_sName = format["InfSide%1",_iTaskIndex];
-														[_sName, "failed"] remoteExec ["FHQ_TT_setTaskState", 0, true];
+														[_sName, "failed"] remoteExec ["FHQ_TT_setTaskState", 2];
 													};
 													if (_objMan distance (getMarkerPos "mrkHQ") < 500 || vehicle _objMan distance (getMarkerPos "mrkHQ") < 500) then {
 														_doLoop = false;
@@ -730,7 +728,7 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 														}
 														else {
 															_sName = format["InfSide%1",_iTaskIndex];
-															[_sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0, true];
+															[_sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 2];
 															[_objMan] join grpNull;
 															deleteVehicle _objMan;
 														};

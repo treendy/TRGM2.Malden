@@ -1,5 +1,8 @@
-//Lights up and flickers a flare's #lightpoint, then fades and deletes it (light commands are local, so remoteExec this to every machine)
-params ["_al_flare_light", "_flare1"];
+//Creates a local #lightpoint that follows a flare, flickers, then fades and is deleted (light points are local, so remoteExec this to every machine)
+params ["_flare1"];
+if (!hasInterface) exitWith {};
+
+private _al_flare_light = "#lightpoint" createVehicleLocal getPosATL _flare1;
 
 private _al_flare_intensity = 3;
 private _al_flare_range = 1000;

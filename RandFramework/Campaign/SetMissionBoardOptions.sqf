@@ -1,3 +1,4 @@
+#include "..\..\setUnitGlobalVars.sqf"; //this can be replayed for joining players before init.sqf has run, so make sure the globals exist (guarded, only runs once)
 //Runs on every client (remoteExec'd with JIP id "TRGM_missionBoardOptions", so only the latest state is replayed for JIP players)
 //and sets up the actions on the two mission boards locally
 if (!hasInterface) exitWith {};
@@ -73,14 +74,18 @@ switch (_option) do {
 		};
 		[] call _fnc_addRecruitActions;
 		if (isMultiplayer) then {
-			[localize "STR_TRGM2_SetMissionBoardOptions_EndMission","RandFramework\attemptEndMission.sqf",[],false] call _fnc_addBoardAction;
+			[localize "STR_TRGM2_SetMissionBoardOptions_EndMission","RandFramework\attemptendmission.sqf",[],false] call _fnc_addBoardAction;
 		};
 	};
 	case "CAMPAIGN_END": {
 		[localize "STR_TRGM2_SetMissionBoardOptions_ShowRep","RandFramework\Campaign\ShowRepReport.sqf"] call _fnc_addBoardAction;
-		[localize "STR_TRGM2_SetMissionBoardOptions_EndMission","RandFramework\attemptEndMission.sqf",[],false] call _fnc_addBoardAction;
+		[localize "STR_TRGM2_SetMissionBoardOptions_EndMission","RandFramework\attemptendmission.sqf",[],false] call _fnc_addBoardAction;
 	};
 };
 if (!isMultiplayer) then {
 	[localize "STR_TRGM2_SetMissionBoardOptions_Save", {saveGame}] call _fnc_addBoardAction;
 };
+
+//full reputation report (was added once in initPlayerLocal, but every board refresh removes all actions)
+endMissionBoard addAction [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format[localize "STR_TRGM2_TRGMInitPlayerLocal_FullReputationReport",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
+

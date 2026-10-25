@@ -8,14 +8,12 @@ private _nearUnits = nearestObjects [(getPos _unit), ["Man","Car","Helicopter"],
 		_waved = true;
 		private _target = _x;
 
-		[[_unit,_group],{
-			params ["_unit","_group"];
-			_unit enableAI "anim";
-			_unit switchMove "";
-			_unit setBehaviour "CARELESS";
-			_group setSpeedMode "FULL";
-			_unit setUnitPos "UP";
-		}] remoteExec ["spawn", 0];
+		//AI commands run here (the server owns the unit), only the animation reset needs to be broadcast
+		_unit enableAI "anim";
+		[_unit, ""] remoteExec ["switchMove", 0];
+		_unit setBehaviour "CARELESS";
+		_group setSpeedMode "FULL";
+		_unit setUnitPos "UP";
 
 		private _doWave = false;
 		private _waveDir = 0;

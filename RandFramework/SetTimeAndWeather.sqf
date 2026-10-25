@@ -105,11 +105,6 @@ if (!UseEditorWeather && isServer) then {
 				0 setOvercast 1;
 		    		setDate MoonNight;    
 		 	};
-			if (_WeatherOption == 12) then {  //Monsoon (Day)
-				0 setOvercast 1;
-				setDate Sunny;   
-				null = [220,5000,false] execvm "AL_storm\al_monsoon.sqf";   
-		 	};		
 		};
 
 

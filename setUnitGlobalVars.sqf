@@ -21,13 +21,10 @@ if (isNil "TRGM_unitGlobalVarsSet") then {
 	EnemySide = East;
 	FriendlySideString = "West";
 	EnemySideString = "East";
-	sArmaGroup = "TCF"; //use this to customise code for specific group requiments
 
 
-	bNoVNChance = [false];
 
 	ReinforceStartPos1 = [200,200,0];
-	ReinforceStartPos2 = [100,100,0];
 
 	SideMissionMinDistFromBase = 3000;
 	KilledZoneRadius = 1500;

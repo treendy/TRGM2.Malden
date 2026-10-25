@@ -74,22 +74,6 @@
                 <Spanish>Continuará otro día...</Spanish>
                 <Korean>또 하루 더 계속...</Korean>
             </Key>
-            <Key ID="STR_TRGM2_Description_RadioSubtitle_chopperspotted">
-                <Original>All teams, this is HQ, We are seeing something moveing into your location, possible enemy chopper. out.</Original>
-                <English>All teams, this is HQ, We are seeing something moveing into your location, possible enemy chopper. out.</English>
-                <Chinese>通告所有小隊，這裡是總部，我們發現到有物體正在靠近你們的位置中，推測應為敵人的直升機。完畢。</Chinese>
-                <Chinesesimp>通告所有小队，这里是总部，我们发现到有物体正在靠近你们的位置中，推测应为敌人的直升机。完毕。</Chinesesimp>
-                <Spanish>A todas las unidades, aquí Cuartel General, observamos algo desplazándose a su posición, posiblemente helicóptero enemigo. Corto.</Spanish>
-                <Korean>모든 팀, 여기는 HQ. 우리는 당신의 위치로 움직이는 무언가를 확인했다. 적의 헬기 일 수도 있다. 확인바란다. 이상.</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_Description_RadioSubtitle_FastMoverSpotted">
-                <Original>All teams, this is HQ, We have picked up a fast mover on our radar, moving into the area. out.</Original>
-                <English>All teams, this is HQ, We have picked up a fast mover on our radar, moving into the area. out.</English>
-                <Chinese>通告所有小隊，這裡是總部，我們在雷達上發現一台飛機正在靠近任務區域。完畢。</Chinese>
-                <Chinesesimp>通告所有小队，这里是总部，我们在雷达上发现一台飞机正在靠近任务区域。完毕。</Chinesesimp>
-                <Spanish>A todas las unidades, aquí Cuartel General, hemos captado un movimiento rápido en nuestro radar moviéndose hacia la zona. Corto.</Spanish>
-                <Korean>모든 팀, 여기는 HQ. 우리의 레이더에 빠른 고속체가 그 쪽으로 가는 모습이 포착했다. 확인바란다. 이상.</Korean>
-            </Key>
             <Key ID="STR_TRGM2_Description_RadioSubtitle_EnemyCommsDown">
                 <Original>All team.  This is HQ, good work taking down the enemy comms tower.  We have intel confirming the enemy are trying to figure out how to fix this issue! Out.</Original>
                 <English>All team.  This is HQ, good work taking down the enemy comms tower.  We have intel confirming the enemy are trying to figure out how to fix this issue! Out.</English>
@@ -97,38 +81,6 @@
                 <Chinesesimp>通告所有小队，这里是总部，恭喜你们拿下敌人的通讯塔。根据我们的情报显示，敌人现在正为了这个问题大伤脑筋!完毕。</Chinesesimp>
                 <Spanish>A todas las unidades, aquí Cuartel General, buen trabajo derribando la torre de comunicaciones enemiga. Tenemos información que confirma que el enemigo está tratando de resolverlo! Corto.</Spanish>
                 <Korean>모든 팀, 여기는 HQ. 적의 통신소를 파괴한 것을 축하한다. 현재 적들은 이 문제를 해결하는 방법을 알아 내려고 노력하고 있다는 것을 정보원으로 부터 확인되었다! 이상.</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_Description_RadioSubtitle_EnemyBaseIntel">
-                <Original>This is HQ.  We have gathered the intel found at the enemy base and have managed to locate the exact position of your targets.  Check your map for the red dots for the target locations.</Original>
-                <English>This is HQ.  We have gathered the intel found at the enemy base and have managed to locate the exact position of your targets.  Check your map for the red dots for the target locations.</English>
-                <Chinese>這裡是總部。我們從敵方基地裡的情報整理出你們目標的確切位置。已經在你們的地圖上使用紅色點標記出目標點，請查閱。</Chinese>
-                <Chinesesimp>这里是总部。我们从敌方基地里的情报整理出你们目标的确切位置。已经在你们的地图上使用红色点标记出目标点，请查阅。</Chinesesimp>
-                <Spanish>Aquí Cuartel General. Hemos descifrado la inteligencia encontrada en la base enemiga y hemos conseguio localizar la posición exacta de tus objetivos. Comprueba el mapa, las posiciones de los objetivos se han marcado como puntos rojos.</Spanish>
-                <Korean>여기는 HQ. 우리는 적 기지에서 발견 된 정보를 수집하여 목표물의 정확한 위치를 파악했다. 지도에 표기된 빨간색 점을 확인 바란다.</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_Description_RadioSubtitle_LocationFound">
-                <Original>This is HQ.  We have just had intel of the exact location of one of the objectives, check your map for the red marker near the suspected location.  Out.</Original>
-                <English>This is HQ.  We have just had intel of the exact location of one of the objectives, check your map for the red marker near the suspected location.  Out.</English>
-                <Chinese>這裡是總部。我們剛剛掌握到其中一個目標的確切位置，已經在你們的地圖上使用紅色的標記畫出推定的區域。完畢。</Chinese>
-                <Chinesesimp>这里是总部。我们刚刚掌握到其中一个目标的确切位置，已经在你们的地图上使用红色的标记画出推定的区域。完毕。</Chinesesimp>
-                <Spanish>Aquí Cuartel General. Acabamos de recibir información con la localización exacta de uno de los objetivos, comprueba el mapa, la zona tiene un marcador rojo. Corto.</Spanish>
-                <Korean>여기는 HQ. 우리는 목표 중 한나의 정확한 위치에 대한 정보를 얻었으므로, 의심되는 위치 근처에 빨간색 표시가 지도에 표시되어 있는지 확인바란다. 이상.</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_Description_RadioSubtitle_takeoff">
-                <Original>Pegasus 2-1 you are clear to take off.</Original>
-                <English>Pegasus 2-1 you are clear to take off.</English>
-                <Chinese>飛馬2-1，你們可以起飛了。</Chinese>
-                <Chinesesimp>飞马2-1，你们可以起飞了。</Chinesesimp>
-                <Spanish>Pegasus 2-1, tiene autorización para despegar</Spanish>
-                <Korean>페가수스 2-1, 이륙한다.</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_Description_RadioSubtitle_land">
-                <Original>Pegasus 2-1 landing.</Original>
-                <English>Pegasus 2-1 landing.</English>
-                <Chinese>飛馬2-1正在降落。</Chinese>
-                <Chinesesimp>飞马2-1正在降落。</Chinesesimp>
-                <Spanish>Pegasus 2-1 aterrizando</Spanish>
-                <Korean>페가수스 2-1 착륙</Korean>
             </Key>
         </Container>
         <Container name="Init">
@@ -208,94 +160,6 @@
                 <Spanish>El líder de Kilo-2 debe seleccionar esto</Spanish>
                 <Korean>킬로-2 분대장의 선택이 필요합니다.</Korean>
             </Key>
-            <Key ID="STR_TRGM2_attemptendmission_Ending">
-                <Original>Mission Ending...</Original>
-                <English>Mission Ending...</English>
-                <Chinese>任務結束中...</Chinese>
-                <Chinesesimp>任务结束中...</Chinesesimp>
-                <Spanish>Misión Finalizando...</Spanish>
-                <Korean>임무 종료 중...</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_auxslingloading_Attached">
-                <Original>There is still something attached</Original>
-                <English>There is still something attached</English>
-                <Chinese>仍有些東西被掛載中</Chinese>
-                <Chinesesimp>仍有些东西被挂载中</Chinesesimp>
-                <Spanish>Todavía hay algo enganchado</Spanish>
-                <Korean>아직 첨부 된 것이 있습니다.</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_auxslingloading_NoNear">
-                <Original>no near vehicles</Original>
-                <English>no near vehicles</English>
-                <Chinese>沒有靠近的載具</Chinese>
-                <Chinesesimp>没有靠近的载具</Chinesesimp>
-                <Spanish>No hay vehículos próximos</Spanish>
-                <Korean>근처에 차량 없음</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_auxslingloading_NoValid">
-                <Original>no valid sling targets</Original>
-                <English>no valid sling targets</English>
-                <Chinese>沒有可用的吊掛目標</Chinese>
-                <Chinesesimp>没有可用的吊挂目标</Chinesesimp>
-                <Spanish>No hay ningún objeto enganchable válido</Spanish>
-                <Korean>걸려있는 대상 없음</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_auxslingloading_CantCarry">
-                <Original>can't carry dead objects</Original>
-                <English>can't carry dead objects</English>
-                <Chinese>無法攜帶已經陣亡的目標</Chinese>
-                <Chinesesimp>无法携带已经阵亡的目标</Chinesesimp>
-                <Spanish>No puedes portar objetos muertos</Spanish>
-                <Korean>목표가 사망하여 운송 불가</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_auxslingloading_SlingLoad">
-                <Original>&lt;t color='#FF0000'&gt;Sling Load %1&lt;/t&gt;</Original>
-                <English>&lt;t color='#FF0000'&gt;Sling Load %1&lt;/t&gt;</English>
-                <Chinese>&lt;t color='#FF0000'&gt;吊掛%1&lt;/t&gt;</Chinese>
-                <Chinesesimp>&lt;t color='#FF0000'&gt;吊挂%1&lt;/t&gt;</Chinesesimp>
-                <Spanish>&lt;t color='#FF0000'&gt;Cuerda cargada %1&lt;/t&gt;</Spanish>
-                <Korean>&lt;t color='#FF0000'&gt;짐 묶기 %1&lt;/t&gt;</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_auxslingloading_UnableToSling">
-                <Original>&lt;t color='#FF0000'&gt;Unable to Sling&lt;/t&gt;</Original>
-                <English>&lt;t color='#FF0000'&gt;Unable to Sling&lt;/t&gt;</English>
-                <Chinese>&lt;t color='#FF0000'&gt;無法吊掛&lt;/t&gt;</Chinese>
-                <Chinesesimp>&lt;t color='#FF0000'&gt;无法吊挂&lt;/t&gt;</Chinesesimp>
-                <Spanish>&lt;t color='#FF0000'&gt;Incapaz de cargar&lt;/t&gt;</Spanish>
-                <Korean>&lt;t color='#FF0000'&gt;묶을 수 없음&lt;/t&gt;</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_auxslingloading_Detach">
-                <Original>&lt;t color='#FF0000'&gt;Detach %1&lt;/t&gt;</Original>
-                <English>&lt;t color='#FF0000'&gt;Detach %1&lt;/t&gt;</English>
-                <Chinese>&lt;t color='#FF0000'&gt;卸載%1&lt;/t&gt;</Chinese>
-                <Chinesesimp>&lt;t color='#FF0000'&gt;卸载%1&lt;/t&gt;</Chinesesimp>
-                <Spanish>&lt;t color='#FF0000'&gt;Desenganche %1&lt;/t&gt;</Spanish>
-                <Korean>&lt;t color='#FF0000'&gt;떼어내기 %1&lt;/t&gt;</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_auxslingloading_DetachLoad">
-                <Original>&lt;t color='#FF0000'&gt;Detach Load&lt;/t&gt;</Original>
-                <English>&lt;t color='#FF0000'&gt;Detach Load&lt;/t&gt;</English>
-                <Chinese>&lt;t color='#FF0000'&gt;卸載貨物&lt;/t&gt;</Chinese>
-                <Chinesesimp>&lt;t color='#FF0000'&gt;卸载货物&lt;/t&gt;</Chinesesimp>
-                <Spanish>&lt;t color='#FF0000'&gt;Desenganchar carga&lt;/t&gt;</Spanish>
-                <Korean>&lt;t color='#FF0000'&gt;짐 떼기&lt;/t&gt;</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_auxslingloading_Init">
-                <Original>Auxiliary Sling Loading: Initialized</Original>
-                <English>Auxiliary Sling Loading: Initialized</English>
-                <Chinese>輔助吊掛系統: 初始化完成</Chinese>
-                <Chinesesimp>辅助吊挂系统: 初始化完成</Chinesesimp>
-                <Spanish>Carga de cuerda auxiliar: Iniciada</Spanish>
-                <Korean>보조 운반 장치: 초기화</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_bugRadio1_HQLisen">
-                <Original>HQ are listening in, stand by...</Original>
-                <English>HQ are listening in, stand by...</English>
-                <Chinese>總部正在收聽，請稍待...</Chinese>
-                <Chinesesimp>总部正在收听，请稍待...</Chinesesimp>
-                <Spanish>CG está a la escucha, mantenga...</Spanish>
-                <Korean>본부에서 듣고, 대기 중...</Korean>
-            </Key>
             <Key ID="STR_TRGM2_bugRadio1_MapUpdated">
                 <Original>Map updated with main AO location</Original>
                 <English>Map updated with main AO location</English>
@@ -328,14 +192,6 @@
                 <Spanish>Localización de objetivo de alto valor</Spanish>
                 <Korean>고가치 표적</Korean>
             </Key>
-            <Key ID="STR_TRGM2_checkForComms_GotEnemySignal">
-                <Original>You are picking up enemy comms from this tower!</Original>
-                <English>You are picking up enemy comms from this tower!</English>
-                <Chinese>你正在從這個塔台接收敵人的通訊信號!</Chinese>
-                <Chinesesimp>你正在从这个塔台接收敌人的通讯信号!</Chinesesimp>
-                <Spanish>Estás captando comunicaciones enemigas desde esta torre!</Spanish>
-                <Korean>이 탑에서 적의 통신을 받고 있습니다!</Korean>
-            </Key>
             <Key ID="STR_TRGM2_checkForComms_NoEnemySignal">
                 <Original>Nothing of interest from this tower</Original>
                 <English>Nothing of interest from this tower</English>
@@ -352,38 +208,6 @@
                 <Spanish>Civil abatido por %1</Spanish>
                 <Korean>%1 에 의해 민간인 사망함</Korean>
             </Key>
-            <Key ID="STR_TRGM2_downloadResearchData_DataSecured">
-                <Original>Data secured, reputation increased</Original>
-                <English>Data secured, reputation increased</English>
-                <Chinese>資料確保完成，已提高聲譽</Chinese>
-                <Chinesesimp>资料确保完成，已提高声誉</Chinesesimp>
-                <Spanish>Datos asegurados, reputación aumentada</Spanish>
-                <Korean>데이터가 보안, 명성 증가</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_fireArti_InvalidGrid">
-                <Original>Invalid grid ref, enter 3,4 or 5 digits in each box</Original>
-                <English>Invalid grid ref, enter 3,4 or 5 digits in each box</English>
-                <Chinese>座標格式錯誤，請輸入3、4或5碼的座標格式在欄位中</Chinese>
-                <Chinesesimp>座标格式错误，请输入3、4或5码的座标格式在栏位中</Chinesesimp>
-                <Spanish>Referencia de cuadrícula inválida, introduzca 3, 4 o 5 dígitos por caja</Spanish>
-                <Korean>유효하지 않는 격자 참조, 각 상자에 3,4 자리 또는 5 자리 숫자를 입력하십시오.</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_fireArti_ArtiRequested">
-                <Original>Arti requested\ntarget: %1,%2, \nETA: %3 once round confirmed\nplease stand by</Original>
-                <English>Arti requested\ntarget: %1,%2, \nETA: %3 once round confirmed\nplease stand by</English>
-                <Chinese>已收到火力任務\n目標: %1 %2，\n預計彈著時間: 首發擊發後%3秒\n請稍待</Chinese>
-                <Chinesesimp>已收到火力任务\n目标: %1 %2，\n预计弹着时间: 首发击发后%3秒\n请稍待</Chinesesimp>
-                <Spanish>Artillería solicitada\n\objetivo: %1,%2 \tiempo estimado de llegada: %3 una vez confirmado el disparo\npor favor espere</Spanish>
-                <Korean>화력 지원을 요청\n목표: %1,%2, \n시간: %3 초 남음\n기다려주세요</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_getArtiETA_ETA">
-                <Original>Arti ETA: %1</Original>
-                <English>Arti ETA: %1</English>
-                <Chinese>預計彈著時間: %1</Chinese>
-                <Chinesesimp>预计弹着时间: %1</Chinesesimp>
-                <Spanish>Tiempo estimado de llegada de artillería: %1</Spanish>
-                <Korean>화력지원 예상시간: %1</Korean>
-            </Key>
             <Key ID="STR_TRGM2_IdentifyHVT_Confirmed">
                 <Original>ID confirmed, this is our target!</Original>
                 <English>ID confirmed, this is our target!</English>
@@ -399,22 +223,6 @@
                 <Chinesesimp>友方反抗军已被%1击杀</Chinesesimp>
                 <Spanish>Rebelde aliado abatido por %1</Spanish>
                 <Korean> %1 가 우호적 반란적을 죽임</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_interrogateOfficer_Muppet">
-                <Original>He is dead you muppet!</Original>
-                <English>He is dead you muppet!</English>
-                <Chinese>他已經死了，你這個白癡!</Chinese>
-                <Chinesesimp>他已经死了，你这个白痴!</Chinesesimp>
-                <Spanish>Está muerto, maldita sea!</Spanish>
-                <Korean>젠장, 그는 죽었다!</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_interrogateOfficer_MapIntel">
-                <Original>Map updated with intel found</Original>
-                <English>Map updated with intel found</English>
-                <Chinese>地圖已由被找到的情報所更新</Chinese>
-                <Chinesesimp>地图已由被找到的情报所更新</Chinesesimp>
-                <Spanish>Mapa actualizado con la información encontrada</Spanish>
-                <Korean>지도가 업데이트됨과 함께 정보도 찾음</Korean>
             </Key>
             <Key ID="STR_TRGM2_interrogateOfficer_DeadGuy">
                 <Original>Not quite sure why, but for some reason this dead guy isnt speaking!!!</Original>
@@ -480,30 +288,6 @@
                 <Spanish>Comprueba la pizarra en base para tu informe</Spanish>
                 <Korean>보고를 위해 게시판을 검사하십시오.</Korean>
             </Key>
-            <Key ID="STR_TRGM2_minedetector_MineReportFormat">
-                <Original>Mine = %4\nDistance = %1\nTime Until Next Beep =  %2\nPitch = %3</Original>
-                <English>Mine = %4\nDistance = %1\nTime Until Next Beep =  %2\nPitch = %3</English>
-                <Chinese>地雷 = %4\n距離 = %1\n下個逼逼聲時間 =  %2\n音調 = %3</Chinese>
-                <Chinesesimp>地雷 = %4\n距离 = %1\n下个逼逼声时间 =  %2\n音调 = %3</Chinesesimp>
-                <Spanish>Mina = %4\nDistancia = %1\nTiempo hasta prox. beep = %2\nTono = %3</Spanish>
-                <Korean>지뢰 = %4\n거리 = %1\n다음 신호까지 남은 시간 = %2\각도 = %3</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_minedetector_StopMineDetector">
-                <Original>&lt;t color='#FF0000'&gt;Stop MineDetector&lt;/t&gt;</Original>
-                <English>&lt;t color='#FF0000'&gt;Stop MineDetector&lt;/t&gt;</English>
-                <Chinese>&lt;t color='#FF0000'&gt;停用掃雷器&lt;/t&gt;</Chinese>
-                <Chinesesimp>&lt;t color='#FF0000'&gt;停用扫雷器&lt;/t&gt;</Chinesesimp>
-                <Spanish>&lt;t color='#FF0000'&gt;Detener detector de minas&lt;/t&gt;</Spanish>
-                <Korean>&lt;t color='#FF0000'&gt;지뢰탐지기 중지&lt;/t&gt;</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_minedetector_UseMineDetector">
-                <Original>&lt;t color='#FF0000'&gt;Use MineDetector&lt;/t&gt;</Original>
-                <English>&lt;t color='#FF0000'&gt;Use MineDetector&lt;/t&gt;</English>
-                <Chinese>&lt;t color='#FF0000'&gt;啟動掃雷器&lt;/t&gt;</Chinese>
-                <Chinesesimp>&lt;t color='#FF0000'&gt;启动扫雷器&lt;/t&gt;</Chinesesimp>
-                <Spanish>&lt;t color='#FF0000'&gt;Usar detector de minas&lt;/t&gt;</Spanish>
-                <Korean>&lt;t color='#FF0000'&gt;지뢰탐지기 사용&lt;/t&gt;</Korean>
-            </Key>
             <Key ID="STR_TRGM2_PushObject_PushEmpty">
                 <Original>Vehicle needs to be empty to push</Original>
                 <English>Vehicle needs to be empty to push</English>
@@ -559,14 +343,6 @@
                 <Chinesesimp>没有要回报的情报</Chinesesimp>
                 <Spanish>Sin información que reportar</Spanish>
                 <Korean>보고 할 정보가 없음</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_showIntel_MortarMarker">
-                <Original>Mortar</Original>
-                <English>Mortar</English>
-                <Chinese>迫擊炮</Chinese>
-                <Chinesesimp>迫击炮</Chinesesimp>
-                <Spanish>Mortero</Spanish>
-                <Korean>박격포</Korean>
             </Key>
             <Key ID="STR_TRGM2_showIntel_MortarMapUpdated">
                 <Original>Map updated with enemy mortar possitions (if any 3k within main AO)</Original>
@@ -647,38 +423,6 @@
                 <Chinesesimp>我们并没有任何情报指出在任务区1公里之内有敌方的检查哨</Chinesesimp>
                 <Spanish>No tenemos ninguna información de puntos de control enemigos dentro de un click del área de operaciones principal</Spanish>
                 <Korean>임무 지역 1km 이내에 적의 검문소는 없습니다.</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_simpleEP_PutOn">
-                <Original>&lt;t color='#ffff33'&gt;Put on ear plugs&lt;/t&gt;</Original>
-                <English>&lt;t color='#ffff33'&gt;Put on ear plugs&lt;/t&gt;</English>
-                <Chinese>&lt;t color='#ffff33'&gt;戴上耳塞&lt;/t&gt;</Chinese>
-                <Chinesesimp>&lt;t color='#ffff33'&gt;戴上耳塞&lt;/t&gt;</Chinesesimp>
-                <Spanish>&lt;t color='#ffff33'&gt;Poner tapones de oídos&lt;/t&gt;</Spanish>
-                <Korean>&lt;t color='#ffff33'&gt;귀마개 장착&lt;/t&gt;</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_simpleEP_TakeOff">
-                <Original>&lt;t color='#ffff33'&gt;Take off ear plugs&lt;/t&gt;</Original>
-                <English>&lt;t color='#ffff33'&gt;Take off ear plugs&lt;/t&gt;</English>
-                <Chinese>&lt;t color='#ffff33'&gt;拿下耳塞&lt;/t&gt;</Chinese>
-                <Chinesesimp>&lt;t color='#ffff33'&gt;拿下耳塞&lt;/t&gt;</Chinesesimp>
-                <Spanish>&lt;t color='#ffff33'&gt;Quitar tapones de oídos&lt;/t&gt;</Spanish>
-                <Korean>&lt;t color='#ffff33'&gt;귀마게 해제&lt;/t&gt;</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_SpeakInformant_StartSpeak">
-                <Original>You start to talk to the informant...</Original>
-                <English>You start to talk to the informant...</English>
-                <Chinese>你開始跟線人交談...</Chinese>
-                <Chinesesimp>你开始跟线人交谈...</Chinesesimp>
-                <Spanish>Empiezas a hablar con el informante...</Spanish>
-                <Korean>정보원과 이야기를 시작한다...</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_SpeakToFriendlyCheckpoint_DontTell">
-                <Original>He doesnt seem to be saying much at this time</Original>
-                <English>He doesnt seem to be saying much at this time</English>
-                <Chinese>目前他似乎沒有要說些什麼</Chinese>
-                <Chinesesimp>目前他似乎没有要说些什么</Chinesesimp>
-                <Spanish>No parece que diga mucho en este momento</Spanish>
-                <Korean>현재 그는 말해 줄 것이 없는 것 같다</Korean>
             </Key>
             <Key ID="STR_TRGM2_startInfMission_MissionTitle1">
                 <Original>Hack Data</Original>
@@ -1031,14 +775,6 @@
                 <Spanish>Salva de artillería disparada</Spanish>
                 <Korean>야포 사격 실시</Korean>
             </Key>
-            <Key ID="STR_TRGM2_TalkRebLead_Hint">
-                <Original>This guy doesnt seem to want to speak much in his current state!!!</Original>
-                <English>This guy doesnt seem to want to speak much in his current state!!!</English>
-                <Chinese>在當前的狀況下這個傢伙似乎並不想多說些什麼!!!</Chinese>
-                <Chinesesimp>在当前的状况下这个家伙似乎并不想多说些什么!!!</Chinesesimp>
-                <Spanish>No parece querer hablar mucho en este momento!</Spanish>
-                <Korean>그는 현재 상태를 많이 말하고 싶어하는 것 처럼 보입니다!!</Korean>
-            </Key>
             <Key ID="STR_TRGM2_tele_SelectPosition">
                 <Original>Select Map Position</Original>
                 <English>Select Map Position</English>
@@ -1046,14 +782,6 @@
                 <Chinesesimp>在地图上选择一处位置</Chinesesimp>
                 <Spanish>Selecciona posición en el mapa</Spanish>
                 <Korean>지도 위치 선택</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_telePara_SelectPosition">
-                <Original>Select Paradrop position</Original>
-                <English>Select Paradrop position</English>
-                <Chinese>在地圖上選擇一處要跳傘的位置</Chinese>
-                <Chinesesimp>在地图上选择一处要跳伞的位置</Chinesesimp>
-                <Spanish>Selecciona posición del paracaídas</Spanish>
-                <Korean>투하 위치 선택</Korean>
             </Key>
             <Key ID="STR_TRGM2_UnloadDingy_NoArea">
                 <Original>Not enough room near vehicle to unload!</Original>
@@ -1160,14 +888,6 @@
                 <Chinesesimp>这个任务将储存在当前的地图中。\n\n这个战役将在每次声誉改变时自动储存一次。</Chinesesimp>
                 <Spanish>Esta misión solo se guardará en este mapa.\n\nCada vez que tu reputación se ajuste la partida se guardará automáticamente.</Spanish>
                 <Korean>이 임무는 현재 지도에서만 저장됩니다\n\n명성이 조정 될 때마다 테이터가 자동으로 저장됩니다.</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_ServerSave_SaveHint2">
-                <Original>This mission will save and can be loaded from any map.\n\nEach time your reputation adjusts, the data will save automatically.</Original>
-                <English>This mission will save and can be loaded from any map.\n\nEach time your reputation adjusts, the data will save automatically.</English>
-                <Chinese>這個任務存檔將能用在任何地圖上。\n\n這個戰役將在每次聲譽改變時自動儲存一次。</Chinese>
-                <Chinesesimp>这个任务存档将能用在任何地图上。\n\n这个战役将在每次声誉改变时自动储存一次。</Chinesesimp>
-                <Spanish>Esta misión se guardará y podrá ser cargada en cualquier mapa.\n\nCada vez que tu reputación se ajuste, la partida se guardará automáticamente.</Spanish>
-                <Korean>이 임무는 저장된 모든 지도에서 불러올 수 있습니다.\n\n명성이 조정 될 때마다 테이터가 자동으로 저장됩니다</Korean>
             </Key>
             <Key ID="STR_TRGM2_ServerSave_SaveError">
                 <Original>Problem saving... local or global save not set</Original>
@@ -1408,22 +1128,6 @@
                 <Chinesesimp>总评价: %1 &lt;br/&gt;&lt;br/&gt;最大的原因: &lt;br/&gt;%2</Chinesesimp>
                 <Spanish>REPUTACION TOTAL: %1 &lt;br/&gt;&lt;br/&gt;MOTIVOS: &lt;br/&gt;%2</Spanish>
                 <Korean>종합 평가: %1 &lt;br/&gt;&lt;br/&gt;가장 큰 이유: &lt;br/&gt;%2</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_exitCampaign_RepSaaved">
-                <Original>Your rep and status has been saved.  Current day is ending</Original>
-                <English>Your rep and status has been saved.  Current day is ending</English>
-                <Chinese>你的聲譽與狀態皆已儲存。當前任務即將結束</Chinese>
-                <Chinesesimp>你的声誉与状态皆已储存。当前任务即将结束</Chinesesimp>
-                <Spanish>Tu reputación y estatus se han guardado. El día actual está terminando</Spanish>
-                <Korean>명성과 지위가 저장되었습니다. 현재 작업이 종료됩니다.</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_exitCampaign_CampaignSaaved">
-                <Original>Campaign details saved, however cant end mission, as all players need to be at base!</Original>
-                <English>Campaign details saved, however cant end mission, as all players need to be at base!</English>
-                <Chinese>戰役已存檔，然而還不能結束任務，因為有玩家還沒回到基地裡!</Chinese>
-                <Chinesesimp>战役已存档，然而还不能结束任务，因为有玩家还没回到基地里!</Chinesesimp>
-                <Spanish>Información de la campaña guardada. Sin embargo, no se puede finalizar la misión ya que todos los jugadores deben estar en la base principal!</Spanish>
-                <Korean>모든 플레이어가 본부에 있어야 하며, 캠페인 세부 정보는 저장되지만 임무는 끝낼 수는 없습니다!</Korean>
             </Key>
         </Container>
         <Container name="Functions">
@@ -1873,14 +1577,6 @@
                 <Chinesesimp>可呼叫UAV</Chinesesimp>
                 <Spanish>UAV disponible</Spanish>
                 <Korean>무인기 이용가능</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMInitPlayerLocal_UAVNoAvailable">
-                <Original>UAV no longer available</Original>
-                <English>UAV no longer available</English>
-                <Chinese>已不能再呼叫UAV</Chinese>
-                <Chinesesimp>已不能再呼叫UAV</Chinesesimp>
-                <Spanish>UAV no disponible</Spanish>
-                <Korean>무인기는 더 이상 사용할 수 없습니다.</Korean>
             </Key>
             <Key ID="STR_TRGM2_TRGMInitPlayerLocal_WarningArea">
                 <Original>!!!!!WARNING!!!!! YOU ARE NOT PERMITTED TO ENTER THIS ZONE... TURN AROUND NOW!</Original>
@@ -2350,206 +2046,6 @@
                 <Spanish>Base Principal (CG)</Spanish>
                 <Korean>본부</Korean>
             </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_MissionType">
-                <Original>Mission Type:</Original>
-                <English>Mission Type:</English>
-                <Chinese>任務類型:</Chinese>
-                <Chinesesimp>任务类型:</Chinesesimp>
-                <Spanish>Tipo de Misión:</Spanish>
-                <Korean>임무 유형:</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_MissionType1">
-                <Original>Single random side mission</Original>
-                <English>Single random side mission</English>
-                <Chinese>單個支線任務: 隨機</Chinese>
-                <Chinesesimp>单个支线任务: 随机</Chinesesimp>
-                <Spanish>Unica misión secundaria aleatoria</Spanish>
-                <Korean>단일 무작위 임무</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_MissionType2">
-                <Original>Double side: Random</Original>
-                <English>Double side: Random</English>
-                <Chinese>雙個支線任務: 隨機</Chinese>
-                <Chinesesimp>双个支线任务: 随机</Chinesesimp>
-                <Spanish>Dos misiones secundarias aleatorias</Spanish>
-                <Korean>두 가지 임무: 무작위</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_MissionType3">
-                <Original>Main Mission: Random objective, no intel needed</Original>
-                <English>Main Mission: Random objective, no intel needed</English>
-                <Chinese>主任務: 隨機目標，不需要情報來定位</Chinese>
-                <Chinesesimp>主任务: 随机目标，不需要情报来定位</Chinesesimp>
-                <Spanish>Misión Principal: objetivo aleatorio, sin inteligencia requerida</Spanish>
-                <Korean>주요 임무: 무작위 목표, 위치 파악이 필요없음</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_MissionType4">
-                <Original>Main Mission: Random Objective, intel required for main AO</Original>
-                <English>Main Mission: Random Objective, intel required for main AO</English>
-                <Chinese>主任務: 隨機目標，需要情報來定位主任務區域</Chinese>
-                <Chinesesimp>主任务: 随机目标，需要情报来定位主任务区域</Chinesesimp>
-                <Spanish>Misión Principal: objetivo aleatorio, inteligencia requerida para área de operaciones principal</Spanish>
-                <Korean>주요 임무: 무작위 목표, 위치 파악이 필요함</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_MissionType5">
-                <Original>Training</Original>
-                <English>Training</English>
-                <Chinese>訓練</Chinese>
-                <Chinesesimp>训练</Chinesesimp>
-                <Spanish>Entrenamiento</Spanish>
-                <Korean>연습</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_MissionType6">
-                <Original>single side: Hack Data</Original>
-                <English>single side: Hack Data</English>
-                <Chinese>單個支線任務: 駭取資料</Chinese>
-                <Chinesesimp>单个支线任务: 骇取资料</Chinesesimp>
-                <Spanish>Unica misión secundaria: Hackear Datos</Spanish>
-                <Korean>단일 임무: 데이터 해킹</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_MissionType7">
-                <Original>single side: Speak with Informant</Original>
-                <English>single side: Speak with Informant</English>
-                <Chinese>單個支線任務: 與線人交談</Chinese>
-                <Chinesesimp>单个支线任务: 与线人交谈</Chinesesimp>
-                <Spanish>Unica misión secundaria: Habla con el informante</Spanish>
-                <Korean>단일 임무: 정보원과 대화</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_MissionType8">
-                <Original>single side: Interrogate Officer</Original>
-                <English>single side: Interrogate Officer</English>
-                <Chinese>單個支線任務: 審問軍官</Chinese>
-                <Chinesesimp>单个支线任务: 审问军官</Chinesesimp>
-                <Spanish>Unica misión secundaria: Interroga al oficial</Spanish>
-                <Korean>단일 임무: 지휘관 심문</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_MissionType9">
-                <Original>single side: Bug Radio</Original>
-                <English>single side: Bug Radio</English>
-                <Chinese>單個支線任務: 轉送敵方通訊信號到總部</Chinese>
-                <Chinesesimp>单个支线任务: 转送敌方通讯信号到总部</Chinesesimp>
-                <Spanish>Unica misión secundaria: Intercepta radio</Spanish>
-                <Korean>단일 임무: 적 통신 신호 본부로 전송</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_MissionType10">
-                <Original>Double side: Get code, enter code (coming soon)</Original>
-                <English>Double side: Get code, enter code (coming soon)</English>
-                <Chinese>雙個支線任務: 取得密碼，輸入密碼(即將登場)</Chinese>
-                <Chinesesimp>双个支线任务: 取得密码，输入密码(即将登场)</Chinesesimp>
-                <Spanish>Doble secundaria: consigue el código, introduce el código (próximamente)</Spanish>
-                <Korean>다중 임무 : 비밀번호 탈취 후 입력(곧 제공 예정)</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_MissionType11">
-                <Original>Gather Intel(random) for Main location : Random</Original>
-                <English>Gather Intel(random) for Main location : Random</English>
-                <Chinese>取得情報(隨機)來定位主任務位置: 隨機</Chinese>
-                <Chinesesimp>取得情报(随机)来定位主任务位置: 随机</Chinesesimp>
-                <Spanish>Consigue la información (aleatoria) para la localización del área de operaciones principal: Aleatorio</Spanish>
-                <Korean>주요 임무 위치에서 정보 얻기: 무작위</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_MissionType12">
-                <Original>Gather Intel(random) for Main location : Interrogate Officer</Original>
-                <English>Gather Intel(random) for Main location : Interrogate Officer</English>
-                <Chinese>取得情報(隨機)來定位主任務位置: 審問軍官</Chinese>
-                <Chinesesimp>取得情报(随机)来定位主任务位置: 审问军官</Chinesesimp>
-                <Spanish>Consigue la información (aleatoria) para la localización del área de operaciones principal: Interroga al oficial</Spanish>
-                <Korean>주요 임무 위치에서 정보 얻기: 지휘관 심문</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_MissionType13">
-                <Original>Gather Intel(random) for Main location : Nuke (coming soon)</Original>
-                <English>Gather Intel(random) for Main location : Nuke (coming soon)</English>
-                <Chinese>取得情報(隨機)來定位主任務位置: 核彈(即將登場)</Chinese>
-                <Chinesesimp>取得情报(随机)来定位主任务位置: 核弹(即将登场)</Chinesesimp>
-                <Spanish>Consigue la información (aleatoria) para la localización del área de operaciones principal: Ataque Nuclear (próximamente)</Spanish>
-                <Korean>주요 임무 위치에서 정보 얻기: 핵무기 (곧 제공 예정)</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_MissionType14">
-                <Original>Gather Intel(Radio) for Main location : Interrogate Officer</Original>
-                <English>Gather Intel(Radio) for Main location : Interrogate Officer</English>
-                <Chinese>取得情報(無線電)來定位主任務位置: 審問軍官</Chinese>
-                <Chinesesimp>取得情报(无线电)来定位主任务位置: 审问军官</Chinesesimp>
-                <Spanish>Consigue la información (radio) para la localización del área de operaciones principal: Interroga al oficial</Spanish>
-                <Korean>주요 임무 위치에서 통신 정보 가져오기: 지휘관 심문</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_Parameter_MaxEnemy">
-                <Original>Maximum Enemies:</Original>
-                <English>Maximum Enemies:</English>
-                <Chinese>最大敵人數量:</Chinese>
-                <Chinesesimp>最大敌人数量:</Chinesesimp>
-                <Spanish>Máximos Enemigos:</Spanish>
-                <Korean>최대 적:</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_Parameter_MaxEnemy_True">
-                <Original>True (WARNING ! this will mean some patrols will have around 9 units)</Original>
-                <English>True (WARNING ! this will mean some patrols will have around 9 units)</English>
-                <Chinese>是 (警告! 這將讓敵人巡邏隊的人數上升到9個單位)</Chinese>
-                <Chinesesimp>是 (警告! 这将让敌人巡逻队的人数上升到9个单位)</Chinesesimp>
-                <Spanish>Verdadero (ADVERTENCIA ! esto significa que algunas patrullas tendrán sobre 9 unidades)</Spanish>
-                <Korean>사용 (경고! 일부 순찰대는 약 9명이 활동 할 것입니다)</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_Parameter_True">
-                <Original>True</Original>
-                <English>True</English>
-                <Chinese>是</Chinese>
-                <Chinesesimp>是</Chinesesimp>
-                <Spanish>Verdadero</Spanish>
-                <Korean>사용</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_Parameter_False">
-                <Original>False</Original>
-                <English>False</English>
-                <Chinese>否</Chinese>
-                <Chinesesimp>否</Chinesesimp>
-                <Spanish>Falso</Spanish>
-                <Korean>안함</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_Parameter_WeatherTime">
-                <Original>Weather and Time:</Original>
-                <English>Weather and Time:</English>
-                <Chinese>天氣與時間:</Chinese>
-                <Chinesesimp>天气与时间:</Chinesesimp>
-                <Spanish>Clima y Hora:</Spanish>
-                <Korean>날씨 와 시간:</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_Parameter_GPS">
-                <Original>Allow GPS:</Original>
-                <English>Allow GPS:</English>
-                <Chinese>允許使用GPS:</Chinese>
-                <Chinesesimp>允许使用GPS:</Chinesesimp>
-                <Spanish>Habilitar GPS:</Spanish>
-                <Korean>GPS 사용:</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_Parameter_NVG">
-                <Original>NVG:</Original>
-                <English>NVG:</English>
-                <Chinese>夜視鏡:</Chinese>
-                <Chinesesimp>夜视镜:</Chinesesimp>
-                <Spanish>Gafas de Visión Nocturna:</Spanish>
-                <Korean>야간 투시경: </Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_Parameter_NVG_PoorVis">
-                <Original>NVG with poor visibility</Original>
-                <English>NVG with poor visibility</English>
-                <Chinese>夜視鏡視線不良</Chinese>
-                <Chinesesimp>夜视镜视线不良</Chinesesimp>
-                <Spanish>Visión Nocturna con mala visibilidad</Spanish>
-                <Korean>야간 투시경과 열악한 가시성</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_Parameter_Revive">
-                <Original>Revive options:</Original>
-                <English>Revive options:</English>
-                <Chinese>復甦選項:</Chinese>
-                <Chinesesimp>复苏选项:</Chinesesimp>
-                <Spanish>Opciones de revivir</Spanish>
-                <Korean>소생 옵션:</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRGMdescription_Parameter_AI">
-                <Original>Allow AI insertion and extraction:</Original>
-                <English>Allow AI insertion and extraction:</English>
-                <Chinese>允許AI進入與撤離:</Chinese>
-                <Chinesesimp>允许AI进入与撤离:</Chinesesimp>
-                <Spanish>Permitir inserción y extracción de IA:</Spanish>
-                <Korean>AI 삽입 및 추출 허용:</Korean>
-            </Key>
         </Container>
         <Container name="GUI">
             <Key ID="STR_TRGM2_defines_UNCHECKED">
@@ -2834,22 +2330,6 @@
                 <Spanish>Comprobando comunicaciones enemigas</Spanish>
                 <Korean>적 통신 확인</Korean>
             </Key>
-            <Key ID="STR_TRGM2_TRENDfncsetOtherAreaStuff_MarkerText_Camp">
-                <Original>Camp</Original>
-                <English>Camp</English>
-                <Chinese>營地</Chinese>
-                <Chinesesimp>营地</Chinesesimp>
-                <Spanish>Campamento</Spanish>
-                <Korean>캠프</Korean>
-            </Key>
-            <Key ID="STR_TRGM2_TRENDfncsetOtherAreaStuff_MarkerText_ArmedBoat">
-                <Original>Armed Boat</Original>
-                <English>Armed Boat</English>
-                <Chinese>武裝船隻</Chinese>
-                <Chinesesimp>武装船只</Chinesesimp>
-                <Spanish>Embarcación armada</Spanish>
-                <Korean>무장 보트</Korean>
-            </Key>
             <Key ID="STR_TRGM2_trendFunctions_OccupiedByFriendRebel">
                 <Original>Occupied by friendly rebels</Original>
                 <English>Occupied by friendly rebels</English>
@@ -2865,16 +2345,6 @@
                 <Chinesesimp>与队长交谈</Chinesesimp>
                 <Spanish>Habla con el líder</Spanish>
                 <Korean>지도자와 대화</Korean>
-            </Key>
-        </Container>
-        <Container name="TGM">
-            <Key ID="STR_TRGM2_vehicledrop_spawn_VehicleDrop">
-                <Original>Vehicle Para drop on its way, eta 1 min.</Original>
-                <English>Vehicle Para drop on its way, eta 1 min.</English>
-                <Chinese>載具空投已上路，預計1分鐘內抵達。</Chinese>
-                <Chinesesimp>载具空投已上路，预计1分钟内抵达。</Chinesesimp>
-                <Spanish>Vehículo en paracaídas en camino, tiempo estimado de llegada 1 minuto</Spanish>
-                <Korean>차량은 1분 애내에 도착할 것으로 예상됩니다.</Korean>
             </Key>
         </Container>
     </Package>
@@ -3657,7 +3127,7 @@
             <Key ID="STR_TRGM2_BombPsst">
                 <Original>Psst %1.\n\nThis guy is dead... why are you trying to talk to him? (you will have to guess the code and colour now lol)</Original>
                 <English>Psst %1.\n\nThis guy is dead... why are you trying to talk to him? (you will have to guess the code and colour now lol)</English>
-                <Korean>잠깐! %1.\n그는 이미 죽었다... 당신은 그에게 무엇을 말하려 합니까? (당신은 코드와 색상을 추측해야합니다)</korean>
+                <Korean>잠깐! %1.\n그는 이미 죽었다... 당신은 그에게 무엇을 말하려 합니까? (당신은 코드와 색상을 추측해야합니다)</Korean>
             </Key> 
             <Key ID="STR_TRGM2_BombCountdown">
                 <Original>Countdown: %1</Original>
@@ -3705,8 +3175,6 @@
                 <English>Target</English>
                 <Korean>목표</Korean>
             </Key> 
-
-            </Key>
       		<Key ID="STR_TRGM2_TRGMSetUnitGlobalVars_MainAOSelect">
               <Original>Select main AO Pos</Original>
               <English>Select main AO Pos</English>
@@ -3836,10 +3304,6 @@
                 <English>Lower Flag and call in supply drop</English>
             </Key> 
 
-            <Key ID="STR_TRGM2_MinUntilSupplyChopperInArea">
-                <Original>Minutes until supply chopper in area: %1</Original>
-                <English>Minutes until supply chopper in area: %1</English>
-            </Key> 
 
             <Key ID="STR_TRGM2_SupplyChopperInbound">
                 <Original>supply choppers inbound</Original>

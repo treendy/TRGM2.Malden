@@ -190,24 +190,21 @@ TREND_fnc_InitPostStarted = {
 				laptop1 addaction [localize "STR_TRGM2_TRGMInitPlayerLocal_SaveLocal",{[1,true] execVM "RandFramework\Campaign\ServerSave.sqf";}];
 				laptop1 addaction [localize "STR_TRGM2_TRGMInitPlayerLocal_SaveGlobal",{[2,true] execVM "RandFramework\Campaign\ServerSave.sqf";}];
 			};
-			if (SaveType == 1) then {
-				hint (localize "STR_TRGM2_ServerSave_Save1");
-				laptop1 addAction [localize "STR_TRGM2_ServerSave_SaveLocal",{hint (localize "STR_TRGM2_ServerSave_SaveHint")}];
-			};
-			if (SaveType == 2) then {
-				hint (localize "STR_TRGM2_ServerSave_Save2");
-				laptop1 addAction [localize "STR_TRGM2_ServerSave_SaveGlobal",{hint (localize "STR_TRGM2_ServerSave_SaveHint2")}];
-			};
+			//once saved, the "already saved" laptop action comes from ServerSave.sqf (remoteExec'd with JIP)
 	};
 	if (iAllowNVG == 2) then {
 		[] execVM "RandFramework\NVscript.sqf";
 	};
 
-	endMissionBoard addaction [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format[localize "STR_TRGM2_TRGMInitPlayerLocal_FullReputationReport",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
+	//in a campaign SetMissionBoardOptions.sqf adds this (it rebuilds the board actions every mission)
+	if (iMissionParamType != 5) then {
+		endMissionBoard addaction [localize "STR_TRGM2_SetMissionBoardOptions_ShowRepLong", {_justPlayers = allPlayers - entities "HeadlessClient_F";_iPlayerCount = count _justPlayers;_iPointsToAdd = 3 / ((_iPlayerCount / 3) * 1.8);_iPointsToAdd = [_iPointsToAdd,1] call BIS_fnc_cutDecimals;hint parseText format[localize "STR_TRGM2_TRGMInitPlayerLocal_FullReputationReport",_iPointsToAdd,BadPoints, MaxBadPoints, MaxBadPoints - BadPoints, BadPointsReason]}];
+	};
+
 
 	_iSandStormOption = AdvancedSettings select ADVSET_SANDSTORM_IDX;
 	if (_iSandStormOption == 3) then { //5 hours non stop
-		nul = [18030,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";
+		nul = [18030,false] execvm "RandFramework\RikoSandStorm\ROSsandstorm.sqf";
 	};
 };
 [] spawn TREND_fnc_InitPostStarted;

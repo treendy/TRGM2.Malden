@@ -344,9 +344,7 @@ sleep 9;
 			_thisMainHVT enableAI "anim";
 			_thisMainHVT playMoveNow "Acts_listeningToRadio_out";
 		};
-		while {(count (waypoints _hvtGroup)) > 0} do {
-			deleteWaypoint ((waypoints _hvtGroup) select 0);
-		};
+		[_hvtGroup] call TRGM_fnc_deleteAllWaypoints;
 
 		[_thisGuardUnit3] joinSilent (_hvtGroup);
 

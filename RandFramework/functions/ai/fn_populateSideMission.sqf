@@ -28,7 +28,7 @@ if (!_allowFriendlyIns) then {
 private _bThisMissionCivsOnly = _ForceCivsOnly;
 
 if (_bFriendlyInsurgents) then {
-	[[_sidePos]] call TRGM_fnc_addClearedPosition;
+	[_sidePos] call TRGM_fnc_addClearedPosition; //friendly AO, so not a red zone for transport LZs
 };
 
 if ((_sideType == 7 || _sideType == 5) && _bFriendlyInsurgents) then { //if mission is kill officer or kill officer and in fridnldy area then make him prisoner

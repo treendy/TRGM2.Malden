@@ -237,7 +237,7 @@ null =[_veh] execVM "RandFramework\cos\addScript_Vehicle.sqf";
 
 			
 // Apply Patrol script to all units
-null =[_civilianArray,_PatrolVehArray,_roadPosArray] execVM "RandFramework\cos\CosPatrol.sqf";
+null =[_civilianArray,_PatrolVehArray,_roadPosArray] execVM "RandFramework\cos\cosPatrol.sqf";
 
 if (debugCOS) then {player sidechat  (format ["Roads used:%1. Roads Stored %2",_rdCount,count _roadPosArray])};		
 			

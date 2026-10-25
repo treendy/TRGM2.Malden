@@ -1,6 +1,6 @@
 //Deletes every waypoint of a group
 params ["_group"];
 
-while {(count (waypoints _group)) > 0} do {
-	deleteWaypoint ((waypoints _group) select 0);
+for "_i" from (count waypoints _group) - 1 to 0 step -1 do {
+	deleteWaypoint [_group, _i];
 };

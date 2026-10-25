@@ -484,7 +484,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="call{this addaction [""End Mission"", ""RandFramework\attemptEndMission.sqf""]; bAllAtBase = false; publicVariable ""bAllAtBase"";" \n "}";
+				init="call{this addaction [""End Mission"", ""RandFramework\attemptendmission.sqf""]; bAllAtBase = false; publicVariable ""bAllAtBase"";" \n "}";
 				name="endMissionBoard";
 			};
 			id=7;

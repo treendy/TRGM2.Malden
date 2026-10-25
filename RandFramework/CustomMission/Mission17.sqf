@@ -106,14 +106,9 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 
 
 			sleep 240; //wait 4 mins before supply drop in area
-			{hint (localize "STR_TRGM2_SupplyChopperInbound");} remoteExec ["bis_fnc_call", 0];
+			[localize "STR_TRGM2_SupplyChopperInbound"] remoteExec ["hint", 0];
 
 			//WRITE SCRIPT HERE TO CALL SUPPLYDROP!
-			private _heliclass = "B_Heli_Transport_03_F";
-			private _boxclass = "B_supplyCrate_F";
-			private _chuteType = "B_Parachute_02_F";
-			private _boxCode = compile "null = [_this] spawn fnc_dropboxinit;";
-			private _helistart = getMarkerPos "mrkHQ";// marker where the heli spawns or position array [posX,posY,posZ]
 						
 			//spawn supply chopper
 			_AirToUse = selectRandom SupplySupportChopperOptions;
