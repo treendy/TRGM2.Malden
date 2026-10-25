@@ -1,0 +1,233 @@
+//These are only ever called by the server!
+
+//MISSION 18: Secure Comms Tower
+//A comms tower is spawned next to the AO building. Players activate an uplink at it, then must keep at least one player within 10m of it until the progress bar reaches 100% (5 minutes).
+//The enemy is called to the tower as soon as the uplink starts. If all players die before 100% the mission fails.
+//Once the bar is full, friendly jets fly an airstrike pass past the tower (effect only).
+
+fnc_CustomRequired = { //used to set any required details for the AO (example, a wide open space or factory nearby)... if this is not found in AO, the engine will scrap the area and loop around again with a different location
+//be careful about using this, some maps may not have what you require, so the engine will never satisfy the requirements here (example, if no airports are on a map and that is what you require)
+	_objectiveMainBuilding = _this select 0;
+	_centralAO_x = _this select 1;
+	_centralAO_y = _this select 2;
+
+	_result = true; //always returing true, because if there is no tower near the AO we spawn one
+	_result; //return value
+};
+
+fnc_CustomVars = { //This is called before the mission function is called below, and the variables below can be adjusted for your mission
+	_RequiresNearbyRoad = false;
+	_roadSearchRange = 100; //this is how far out the engine will check to make sure a road is within range (if your objective requires a nearby road)
+	_allowFriendlyIns = false;
+	_MissionTitle = localize "STR_TRGM2_CommsTowerMissionTitle"; //this is what shows in dialog mission selection
+};
+
+fnc_CustomMission = { //This function is the main script for your mission, some if the parameters passed in must not be changed!!!
+	_markerType = _this select 0;
+	_objectiveMainBuilding = _this select 1; //DO NOT EDIT THIS VALUE (this is the main building location selected within your AO)
+	_centralAO_x = _this select 2; //DO NOT EDIT THIS VALUE
+	_centralAO_y = _this select 3; //DO NOT EDIT THIS VALUE
+	_roadSearchRange = _this select 4; //this is past in from the engine, and is the value you set above (DO NOT INREASE THE VALUE ON THIS LINE!!, you can decrease as it will pick a road within your range above)
+	_bCreateTask = _this select 5; //the engine passes this in, it will be set to false for option sides mission, and the action to happen when this mission is complete is set in the lines at the bottom of this file
+	_iTaskIndex = _this select 6; // for the engine, so it knows which index it is working on (do not change this value!!)
+	_bIsMainObjective = _this select 7;
+	if (_markerType != "empty") then { _markerType = "hd_objective"; }; //You can set the type of marker here, but if the player has selected to hide mission locations, then your marker will not show
+
+	_sTaskDescription = selectRandom[localize "STR_TRGM2_CommsTowerMissionDescription"];
+
+	private _mainObjPos = getPos _objectiveMainBuilding;
+
+	//spawn the comms tower right next to the AO building the engine picked, so the AO is centred on the tower
+	private _spawnTowerPos = [_mainObjPos, 15, 80, 12, 0, 0.15, 0, [[getMarkerPos "mrkHQ", BaseAreaRange]] + CheckPointAreas + SentryAreas, [[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+	if (_spawnTowerPos select 0 <= 0 || {surfaceIsWater _spawnTowerPos}) then {
+		_spawnTowerPos = _mainObjPos getPos [30, random 360];
+		if (surfaceIsWater _spawnTowerPos) then {_spawnTowerPos = _mainObjPos;};
+	};
+	private _tower = createVehicle ["Land_TTowerBig_2_F", _spawnTowerPos, [], 0, "CAN_COLLIDE"];
+	_tower setDir (random 360);
+	private _towerPos = getPos _tower;
+
+	missionNamespace setVariable [format["objInformant%1",_iTaskIndex], _tower];
+
+	if (_markerType != "empty") then {
+		private _sMarkerName = format["CommsTowerMarker%1",_iTaskIndex];
+		createMarker [_sMarkerName, _towerPos];
+		_sMarkerName setMarkerShape "ICON";
+		_sMarkerName setMarkerType _markerType;
+		_sMarkerName setMarkerText (localize "STR_TRGM2_CommsTowerMarkerText");
+	};
+
+	//shared state, public so every client can read it for the progress bar
+	missionNamespace setVariable [format["CommsTowerActive%1",_iTaskIndex], false, true];
+	missionNamespace setVariable [format["CommsTowerProgress%1",_iTaskIndex], 0, true];
+	missionNamespace setVariable [format["CommsTowerPaused%1",_iTaskIndex], false, true];
+	missionNamespace setVariable [format["CommsTowerDone%1",_iTaskIndex], false, true];
+
+	//activation action on the tower, added on every client (and JIP) so text is shown in each player's language
+	//(the tower is found again on each client by position/class, as a map tower can't be passed across the network as an object)
+	[
+		[_towerPos, typeOf _tower, _iTaskIndex],
+		{
+			params ["_towerPos","_towerClass","_iTaskIndex"];
+			if (!hasInterface) exitWith {};
+			private _towersFound = nearestObjects [_towerPos, [_towerClass], 30];
+			if (count _towersFound == 0) exitWith {};
+			[
+				_towersFound select 0,
+				localize "STR_TRGM2_CommsTowerActivate",
+				"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_hack_ca.paa",
+				"\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_hack_ca.paa",
+				format["_this distance _target < 10 && !(missionNamespace getVariable ['CommsTowerActive%1', false])", _iTaskIndex],
+				"_caller distance _target < 10",
+				{},
+				{},
+				{
+					params ["_target","_caller","_actionId","_args"];
+					missionNamespace setVariable [format["CommsTowerActive%1", _args select 0], true, true];
+				},
+				{},
+				[_iTaskIndex],
+				6,
+				100,
+				true,
+				false
+			] call BIS_fnc_holdActionAdd;
+		}
+	] remoteExec ["bis_fnc_call", 0, format["CommsTowerAction%1",_iTaskIndex]];
+
+	//trigger only exists so this mission stops running if the campaign day is reset (same cleanup flag the other missions use)
+	private _lifeTrigger = createTrigger ["EmptyDetector", [0,0]];
+	_lifeTrigger setVariable ["DelMeOnNewCampaignDay",true];
+
+	[_tower, _iTaskIndex, _bCreateTask, _lifeTrigger] spawn {
+		params ["_tower","_iTaskIndex","_bCreateTask","_lifeTrigger"];
+
+		private _activeVar = format["CommsTowerActive%1",_iTaskIndex];
+		private _progressVar = format["CommsTowerProgress%1",_iTaskIndex];
+		private _pausedVar = format["CommsTowerPaused%1",_iTaskIndex];
+		private _doneVar = format["CommsTowerDone%1",_iTaskIndex];
+		private _hudJipId = format["CommsTowerHud%1",_iTaskIndex];
+		private _fullTimeSeconds = 300; //5 minutes to fill from 0 to 100%
+
+		waitUntil {sleep 1; isNull _lifeTrigger || {missionNamespace getVariable [_activeVar, false]}};
+		if (isNull _lifeTrigger) exitWith {};
+
+		//enemy reacts as soon as the uplink starts
+		[getPos _tower, 1500] call TRGM_fnc_callEnemiesToPos;
+
+		[["STR_TRGM2_CommsTowerStarted"], {hint localize (_this select 0);}] remoteExec ["bis_fnc_call", 0];
+
+		//progress bar for every player (and JIP) - runs on the clients and reads the public variables above
+		[
+			[_iTaskIndex],
+			{
+				params ["_iTaskIndex"];
+				if (!hasInterface) exitWith {};
+				[_iTaskIndex] spawn {
+					params ["_iTaskIndex"];
+					private _progressVar = format["CommsTowerProgress%1",_iTaskIndex];
+					private _pausedVar = format["CommsTowerPaused%1",_iTaskIndex];
+					private _doneVar = format["CommsTowerDone%1",_iTaskIndex];
+					while {!(missionNamespace getVariable [_doneVar, false])} do {
+						private _progress = floor (missionNamespace getVariable [_progressVar, 0]);
+						private _filled = round (_progress / 5);
+						private _bar = "";
+						for "_i" from 1 to 20 do {
+							_bar = _bar + (if (_i <= _filled) then {"|"} else {"."});
+						};
+						private _text = format["<t size='1.1' color='#ffcc00'>%1</t><br/><t size='1.2' font='EtelkaMonospacePro'>[%2]</t>", format[localize "STR_TRGM2_CommsTowerProgress", _progress], _bar];
+						if (missionNamespace getVariable [_pausedVar, false]) then {
+							_text = _text + format["<br/><t size='0.9' color='#ff5555'>%1</t>", localize "STR_TRGM2_CommsTowerPaused"];
+						};
+						"CommsTowerBar" cutText [_text, "PLAIN DOWN", 0.1, true, true];
+						sleep 0.5;
+					};
+					"CommsTowerBar" cutText ["", "PLAIN"];
+				};
+			}
+		] remoteExec ["bis_fnc_call", 0, _hudJipId];
+
+		private _progress = 0;
+		private _wasPaused = false;
+		private _failed = false;
+		while {_progress < 100 && !_failed && !(isNull _lifeTrigger)} do {
+			sleep 1;
+			private _livingPlayers = (allPlayers - entities "HeadlessClient_F") select {alive _x};
+			if (count _livingPlayers == 0) then {
+				_failed = true;
+			}
+			else {
+				//only fills while a living player is within 10m of the tower
+				private _isPaused = count (_livingPlayers select {_x distance _tower < 10}) == 0;
+				if (!_isPaused) then {
+					_progress = (_progress + (100 / _fullTimeSeconds)) min 100;
+					missionNamespace setVariable [_progressVar, _progress, true];
+				};
+				if (_isPaused != _wasPaused) then {
+					_wasPaused = _isPaused;
+					missionNamespace setVariable [_pausedVar, _isPaused, true];
+				};
+			};
+		};
+
+		missionNamespace setVariable [_doneVar, true, true];
+		[] remoteExec ["", _hudJipId]; //stop JIP players getting the progress bar replayed
+
+		if (_progress >= 100) then {
+			[["STR_TRGM2_CommsTowerComplete"], {hint localize (_this select 0);}] remoteExec ["bis_fnc_call", 0];
+
+			if (_bCreateTask) then {
+				[format["InfSide%1",_iTaskIndex], "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0];
+			}
+			else {
+				[1, localize "STR_TRGM2_CommsTowerMissionTitle"] execVM "RandFramework\AdjustMaxBadPoints.sqf";
+			};
+			ClearedPositions pushBack ([ObjectivePossitions, getPos _tower] call BIS_fnc_nearestPosition);
+			publicVariable "ClearedPositions";
+
+			//airstrike effect: 5 friendly jets fly past the tower from ~2km on one side to ~10km on the other
+			[getPos _tower] spawn {
+				params ["_towerPos"];
+				private _dir = random 360;
+				private _startPos = _towerPos getPos [2000, _dir + 180];
+				private _endPos = _towerPos getPos [10000, _dir];
+				private _jetGroup = createGroup west;
+				for "_i" from 0 to 4 do {
+					private _lateral = (_i - 2) * 250 + (random 100 - 50); //spread the jets out, the middle one passes close to the tower
+					private _back = _i * 150; //stagger them along the track
+					private _spawnPos = (_startPos getPos [_back, _dir + 180]) getPos [_lateral, _dir + 90];
+					_spawnPos set [2, 400];
+					private _moveToPos = _endPos getPos [_lateral, _dir + 90];
+					private _jetData = [_spawnPos, _dir, selectRandom FriendlyJet, _jetGroup] call BIS_fnc_spawnVehicle;
+					private _jet = _jetData select 0;
+					_jet allowDamage false;
+					_jet setCaptive true;
+					{_x allowDamage false; _x setCaptive true;} forEach crew _jet;
+					_jet flyInHeight 350;
+					_jet setBehaviour "CARELESS";
+					_jet setSpeedMode "FULL";
+					_jet doMove _moveToPos;
+
+					[_jet, _moveToPos] spawn {
+						params ["_jet","_moveToPos"];
+						private _timeout = time + 240;
+						waitUntil {sleep 2; isNull _jet || {_jet distance2D _moveToPos < 800} || {time > _timeout}};
+						if (!isNull _jet) then {
+							{deleteVehicle _x;} forEach crew _jet;
+							deleteVehicle _jet;
+						};
+					};
+				};
+			};
+		};
+
+		if (_failed) then {
+			[["STR_TRGM2_CommsTowerFailed"], {hint localize (_this select 0);}] remoteExec ["bis_fnc_call", 0];
+			if (_bCreateTask) then {
+				[format["InfSide%1",_iTaskIndex], "failed"] remoteExec ["FHQ_TT_setTaskState", 0];
+			};
+			ClearedPositions pushBack ([ObjectivePossitions, getPos _tower] call BIS_fnc_nearestPosition);
+			publicVariable "ClearedPositions";
+		};
+	};
+};

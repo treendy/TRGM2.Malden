@@ -3846,6 +3846,79 @@
                 <English>supply choppers inbound</English>
             </Key> 
 
+            <Key ID="STR_TRGM2_CommsTowerMissionTitle">
+                <Original>Secure Comms Tower</Original>
+                <English>Secure Comms Tower</English>
+                <Chinese>保護通訊塔</Chinese>
+                <Chinesesimp>保护通讯塔</Chinesesimp>
+                <Spanish>Asegurar torre de comunicaciones</Spanish>
+                <Korean>통신탑 확보</Korean>
+            </Key>
+            <Key ID="STR_TRGM2_CommsTowerMissionDescription">
+                <Original>Secure the enemy comms tower and hold it while the uplink completes. Stay within 10 meters of the tower, and expect the enemy to converge on your position.</Original>
+                <English>Secure the enemy comms tower and hold it while the uplink completes. Stay within 10 meters of the tower, and expect the enemy to converge on your position.</English>
+                <Chinese>占領敵方通訊塔並堅守，直到上行連結完成。請保持在通訊塔 10 公尺範圍內，並預期敵軍將向你的位置集結。</Chinese>
+                <Chinesesimp>占领敌方通讯塔并坚守，直到上行链路完成。请保持在通讯塔 10 米范围内，并预期敌军将向你的位置集结。</Chinesesimp>
+                <Spanish>Asegura la torre de comunicaciones enemiga y mantenla mientras se completa el enlace. Permanece a menos de 10 metros de la torre y espera que el enemigo converja en tu posición.</Spanish>
+                <Korean>적 통신탑을 확보하고 업링크가 완료될 때까지 유지하십시오. 탑에서 10미터 이내에 머물러야 하며, 적이 당신의 위치로 집결할 것입니다.</Korean>
+            </Key>
+            <Key ID="STR_TRGM2_CommsTowerActivate">
+                <Original>Activate comms uplink</Original>
+                <English>Activate comms uplink</English>
+                <Chinese>啟動通訊上行連結</Chinese>
+                <Chinesesimp>启动通讯上行链路</Chinesesimp>
+                <Spanish>Activar enlace de comunicaciones</Spanish>
+                <Korean>통신 업링크 활성화</Korean>
+            </Key>
+            <Key ID="STR_TRGM2_CommsTowerStarted">
+                <Original>Uplink started. Stay within 10 meters of the tower.</Original>
+                <English>Uplink started. Stay within 10 meters of the tower.</English>
+                <Chinese>上行連結已開始。請保持在通訊塔 10 公尺範圍內。</Chinese>
+                <Chinesesimp>上行链路已开始。请保持在通讯塔 10 米范围内。</Chinesesimp>
+                <Spanish>Enlace iniciado. Permanece a menos de 10 metros de la torre.</Spanish>
+                <Korean>업링크가 시작되었습니다. 탑에서 10미터 이내에 머무르십시오.</Korean>
+            </Key>
+            <Key ID="STR_TRGM2_CommsTowerProgress">
+                <Original>Uplink: %1%</Original>
+                <English>Uplink: %1%</English>
+                <Chinese>上行連結：%1%</Chinese>
+                <Chinesesimp>上行链路：%1%</Chinesesimp>
+                <Spanish>Enlace: %1%</Spanish>
+                <Korean>업링크: %1%</Korean>
+            </Key>
+            <Key ID="STR_TRGM2_CommsTowerPaused">
+                <Original>Uplink paused: get within 10 meters of the tower</Original>
+                <English>Uplink paused: get within 10 meters of the tower</English>
+                <Chinese>上行連結暫停：請進入通訊塔 10 公尺範圍內</Chinese>
+                <Chinesesimp>上行链路暂停：请进入通讯塔 10 米范围内</Chinesesimp>
+                <Spanish>Enlace en pausa: acércate a menos de 10 metros de la torre</Spanish>
+                <Korean>업링크 일시 중지: 탑에서 10미터 이내로 접근하십시오</Korean>
+            </Key>
+            <Key ID="STR_TRGM2_CommsTowerComplete">
+                <Original>Uplink complete. Airstrike inbound.</Original>
+                <English>Uplink complete. Airstrike inbound.</English>
+                <Chinese>上行連結完成。空襲即將到來。</Chinese>
+                <Chinesesimp>上行链路完成。空袭即将到来。</Chinesesimp>
+                <Spanish>Enlace completado. Ataque aéreo en camino.</Spanish>
+                <Korean>업링크 완료. 공습이 접근 중입니다.</Korean>
+            </Key>
+            <Key ID="STR_TRGM2_CommsTowerFailed">
+                <Original>All players down. Uplink failed.</Original>
+                <English>All players down. Uplink failed.</English>
+                <Chinese>所有玩家陣亡。上行連結失敗。</Chinese>
+                <Chinesesimp>所有玩家阵亡。上行链路失败。</Chinesesimp>
+                <Spanish>Todos los jugadores han caído. Enlace fallido.</Spanish>
+                <Korean>모든 플레이어가 쓰러졌습니다. 업링크 실패.</Korean>
+            </Key>
+            <Key ID="STR_TRGM2_CommsTowerMarkerText">
+                <Original>Comms Tower</Original>
+                <English>Comms Tower</English>
+                <Chinese>通訊塔</Chinese>
+                <Chinesesimp>通讯塔</Chinesesimp>
+                <Spanish>Torre de comunicaciones</Spanish>
+                <Korean>통신탑</Korean>
+            </Key>
+
 
 
 

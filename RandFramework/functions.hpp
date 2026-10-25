@@ -66,6 +66,7 @@ class TRGM   { // TAG
         file = "RandFramework\functions\enemyUnits";
         class CreateUnit{};
         class SpawnPatrolUnit{};
+        class callEnemiesToPos{};
     };
 
     class patrolPaterns {
