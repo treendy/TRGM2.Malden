@@ -46,24 +46,32 @@ if (_tempMergedLoadoutData != "" && _unitVarType !="") then {
 					_object = _object splitString _chrLineBreak joinString ""; 		
 					_object = _object splitString _chrTab joinString ""; 	
 
+					//items can have a count, e.g. "addItemToVest=SmokeShell,2;"
+					_itemCount = 1;
+					_objectParts = _object splitString ",";
+					if (count _objectParts == 2) then {
+						_object = _objectParts select 0;
+						_itemCount = parseNumber (_objectParts select 1);
+					};
+
 					switch (_command) do {
 						case "forceAddUniform" : {							
 							_unit forceAddUniform _object;
 						};
 						case "addItemToUniform" : {
-							_unit addItemToUniform _object;
+							for "_i" from 1 to _itemCount do {_unit addItemToUniform _object;};
 						};
 						case "addVest" : {
 							_unit addVest _object;
 						};
 						case "addItemToVest" : {
-							_unit addItemToVest _object;
+							for "_i" from 1 to _itemCount do {_unit addItemToVest _object;};
 						};
 						case "addBackpack" : {
 							_unit addBackpack _object;
 						};
 						case "addItemToBackpack" : {
-							_unit addItemToBackpack _object;
+							for "_i" from 1 to _itemCount do {_unit addItemToBackpack _object;};
 						};
 						case "addHeadgear" : {
 							_unit addHeadgear _object;
