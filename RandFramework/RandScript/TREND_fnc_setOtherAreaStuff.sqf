@@ -1,3 +1,4 @@
+//included only to reset the s*ToUse unit classes (AO population may have switched them to militia) before the events below use them
 #include "trendFunctions.sqf";
 
 
@@ -48,11 +49,9 @@ if (count _TowersNear > 0) then {
 				_DiamPatrolGroupTower = createGroup east;
 					if selectRandom [true,false] then {
 						sAAMan createUnit [[_wayX, _wayY], _DiamPatrolGroupTower];
-						_iHasAA = 1;
 					}
 					else {
 						sATMan createUnit [[_wayX, _wayY], _DiamPatrolGroupTower];
-						_iHasAT = 1;
 					};
 
 				sRifleman createUnit [[_wayX, _wayY], _DiamPatrolGroupTower];
@@ -61,11 +60,11 @@ if (count _TowersNear > 0) then {
 				if selectRandom [true,false] then {sRifleman createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
 				if selectRandom [true,false] then {sRifleman createUnit [[_wayX, _wayY], _DiamPatrolGroupTower]};
 
-				_wp1Tower = _DiamPatrolGroupTower addWaypoint [_wp1PosTower, 0];
-				_wp2Tower = _DiamPatrolGroupTower addWaypoint [_wp2PosTower, 0];
-				_wp3Tower = _DiamPatrolGroupTower addWaypoint [_wp3PosTower, 0];
-				_wp4Tower = _DiamPatrolGroupTower addWaypoint [_wp4PosTower, 0];
-				_wp5Tower = _DiamPatrolGroupTower addWaypoint [_wp5PosTower, 0];
+				_DiamPatrolGroupTower addWaypoint [_wp1PosTower, 0];
+				_DiamPatrolGroupTower addWaypoint [_wp2PosTower, 0];
+				_DiamPatrolGroupTower addWaypoint [_wp3PosTower, 0];
+				_DiamPatrolGroupTower addWaypoint [_wp4PosTower, 0];
+				_DiamPatrolGroupTower addWaypoint [_wp5PosTower, 0];
 				[_DiamPatrolGroupTower, 0] setWaypointSpeed "LIMITED";
 				[_DiamPatrolGroupTower, 0] setWaypointBehaviour "SAFE";
 				[_DiamPatrolGroupTower, 1] setWaypointSpeed "LIMITED";
@@ -123,99 +122,41 @@ if (!(isNil "IsTraining")) then {
 else {
 
 
-if (bDebugMode) then {["Loading Events : 15"] remoteExec ["systemChat", 0];};
-	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos,1900,false,false,nil, false] spawn TRGM_fnc_setTargetEvent;
-		sleep 1;
-	};	
-
-if (bDebugMode) then {["Loading Events : 14"] remoteExec ["systemChat", 0];};
-	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos,1900,false,false,nil, true] spawn TRGM_fnc_setTargetEvent;
-		sleep 1;
-	};	
-
-if (bDebugMode) then {["Loading Events : 13"] remoteExec ["systemChat", 0];};
-	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos] spawn TRGM_fnc_setATMineEvent;
-		sleep 1;
+	//[function, params, chance (selectRandom of it decides if the event is spawned)], debug messages count down from 15 to 0 as before
+	private _fireFightPos = _mainObjPos;
+	private _fireFightChance = ChanceOfOccurance;
+	if (!isNil "ForceWarZoneLoc") then {
+		_fireFightPos = ForceWarZoneLoc;
+		_fireFightChance = [true];
 	};
-
-if (bDebugMode) then {["Loading Events : 12"] remoteExec ["systemChat", 0];};
-	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos] spawn TRGM_fnc_setDownCivCarEvent;
-		sleep 1;
-	};	
-
-if (bDebugMode) then {["Loading Events : 11"] remoteExec ["systemChat", 0];};
-	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos] spawn TRGM_fnc_setATMineEvent;
-		sleep 1;
-	};
-if (bDebugMode) then {["Loading Events : 10"] remoteExec ["systemChat", 0];};
-	if (selectRandom ChanceOfOccurance || !isNil("ForceWarZoneLoc")) then {
-		if (!isNil("ForceWarZoneLoc")) then {
-			[ForceWarZoneLoc,4] spawn TRGM_fnc_setFireFightEvent;
-		}
-		else {
-			[_mainObjPos,4] spawn TRGM_fnc_setFireFightEvent;
+	//these IEDs are more likely to show (instead of using ChanceOfOccurance), as a lot of times, these are not a trap, just an empty vehicle or a pile of rubbish
+	private _iedChance = [true,true,false];
+	private _events = [
+		[TRGM_fnc_setTargetEvent, [_mainObjPos,1900,false,false,nil, false], ChanceOfOccurance],
+		[TRGM_fnc_setTargetEvent, [_mainObjPos,1900,false,false,nil, true], ChanceOfOccurance],
+		[TRGM_fnc_setATMineEvent, [_mainObjPos], ChanceOfOccurance],
+		[TRGM_fnc_setDownCivCarEvent, [_mainObjPos], ChanceOfOccurance],
+		[TRGM_fnc_setATMineEvent, [_mainObjPos], ChanceOfOccurance],
+		[TRGM_fnc_setFireFightEvent, [_fireFightPos,4], _fireFightChance],
+		[TRGM_fnc_setMedicalEvent, [_mainObjPos], ChanceOfOccurance],
+		[TRGM_fnc_setDownedChopperEvent, [_mainObjPos], ChanceOfOccurance],
+		[TRGM_fnc_setDownConvoyEvent, [_mainObjPos], ChanceOfOccurance],
+		[TRGM_fnc_setDownCivCarEvent, [_mainObjPos], ChanceOfOccurance],
+		[TRGM_fnc_setIEDEvent, [_mainObjPos], _iedChance],
+		[TRGM_fnc_setIEDEvent, [_mainObjPos], _iedChance],
+		[TRGM_fnc_setIEDEvent, [_mainObjPos], _iedChance],
+		[TRGM_fnc_setIEDEvent, [_mainObjPos], _iedChance],
+		[TRGM_fnc_setIEDEvent, [_mainObjPos], _iedChance],
+		[TRGM_fnc_setIEDEvent, [_mainObjPos], _iedChance]
+	];
+	{
+		_x params ["_eventFnc", "_eventParams", "_eventChance"];
+		if (bDebugMode) then {[format["Loading Events : %1", (count _events) - 1 - _forEachIndex]] remoteExec ["systemChat", 0];};
+		if (selectRandom _eventChance) then {
+			_eventParams spawn _eventFnc;
+			sleep 1;
 		};
-		sleep 1;
-	};
-if (bDebugMode) then {["Loading Events : 9"] remoteExec ["systemChat", 0];};
-	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos] spawn TRGM_fnc_setMedicalEvent;
-		sleep 1;
-	};
-if (bDebugMode) then {["Loading Events : 8"] remoteExec ["systemChat", 0];};
-	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos] spawn TRGM_fnc_setDownedChopperEvent;
-		sleep 1;
-	};		
-if (bDebugMode) then {["Loading Events : 7"] remoteExec ["systemChat", 0];};
-	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos] spawn TRGM_fnc_setDownConvoyEvent;
-		sleep 1;
-	};		
-if (bDebugMode) then {["Loading Events : 6"] remoteExec ["systemChat", 0];};
-	if (selectRandom ChanceOfOccurance) then {
-		[_mainObjPos] spawn TRGM_fnc_setDownCivCarEvent;
-		sleep 1;
-	};	
-
-
-//these are more likely to show (instead of using ChanceOfOccurance), as a lot of times, these are not a trap, just an empty vehicle or a pile of rubbish
-if (bDebugMode) then {["Loading Events : 5"] remoteExec ["systemChat", 0];};
-	if (selectRandom [true,true,false]) then {
-		[_mainObjPos] spawn TRGM_fnc_setIEDEvent;
-		sleep 1;
-	};
-if (bDebugMode) then {["Loading Events : 4"] remoteExec ["systemChat", 0];};
-	if (selectRandom [true,true,false]) then {
-		[_mainObjPos] spawn TRGM_fnc_setIEDEvent;
-		sleep 1;
-	};
-if (bDebugMode) then {["Loading Events : 3"] remoteExec ["systemChat", 0];};
-	if (selectRandom [true,true,false]) then {
-		[_mainObjPos] spawn TRGM_fnc_setIEDEvent;
-		sleep 1;
-	};
-if (bDebugMode) then {["Loading Events : 2"] remoteExec ["systemChat", 0];};
-	if (selectRandom [true,true,false]) then {
-		[_mainObjPos] spawn TRGM_fnc_setIEDEvent;
-		sleep 1;
-	};
-if (bDebugMode) then {["Loading Events : 1"] remoteExec ["systemChat", 0];};
-	if (selectRandom [true,true,false]) then {
-		[_mainObjPos] spawn TRGM_fnc_setIEDEvent;
-		sleep 1;
-	};
-if (bDebugMode) then {["Loading Events : 0"] remoteExec ["systemChat", 0];};
-	if (selectRandom [true,true,false]) then {
-		[_mainObjPos] spawn TRGM_fnc_setIEDEvent;
-		sleep 1;
-	};
-
+	} forEach _events;
 
 if (bDebugMode) then {["Loading Events : END"] remoteExec ["systemChat", 0];};
 };

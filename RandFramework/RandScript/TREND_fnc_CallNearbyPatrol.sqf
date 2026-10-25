@@ -1,10 +1,5 @@
-
-
-_thisThis = _this select 0;
-_thisThisList = _this select 1;
-_FirstPos = _this select 2;
-_iSideIndex = _this select 3;
-_bIsMainObjective = _this select 4;
+//Run by the AO "spotted" trigger (see TRGM_fnc_populateSideMission): flares, reinforcements, air support, mortars and patrols react to the spotted player
+params ["", "_thisThisList", "_FirstPos", "_iSideIndex", "_bIsMainObjective"]; //[thisTrigger, thisList, AO pos, AO index, is main objective]
 
 
 if (isNil "FlareCounter") then {
@@ -53,9 +48,43 @@ if (isServer && count _thisThisList > 0) then {
 
 		_maxPatrolSearch = 2000;
 
+		//sends the group of _unit to the spotted position, then back to the AO in a cycle
+		private _fnc_sendGroupToSpotted = {
+			params ["_unit"];
+			private _grp = group _unit;
+			[_grp] call TRGM_fnc_deleteAllWaypoints;
+			_grp setCombatMode "RED";
+			_grp setFormation "WEDGE";
+			_grp setSpeedMode "FULL";
+			private _wp = _grp addWaypoint [getPos _unit,0,0];
+			_wp setWaypointType "MOVE";
+			_wp setWaypointSpeed "FULL";
+			_wp setWaypointBehaviour "AWARE";
+			_wp setWaypointFormation "WEDGE";
+			_wp = _grp addWaypoint [_SpottedUnitPos,0,1];
+			_wp setWaypointSpeed "FULL";
+			_wp = _grp addWaypoint [_FirstPos,7,2];
+			_wp setWaypointType "CYCLE";
+			_grp setCombatMode "RED";
+			_grp setFormation "WEDGE";
+			_grp setSpeedMode "FULL";
+		};
 
-_SpottedUnitCount = {_x distance _SpottedUnit < 200} count units group _SpottedUnit;
-		_AlivePlayerCount = {alive _x} count allplayers;
+		//sends a random vehicle of _types within _radius to search and destroy the spotted position
+		private _fnc_sendTankToSpotted = {
+			params ["_types", "_radius"];
+			private _nearestTanks = nearestObjects [_SpottedUnitPos, _types, _radius];
+			if (count _nearestTanks > 0) then {
+				private _grp = group (selectRandom _nearestTanks);
+				[_grp] call TRGM_fnc_deleteAllWaypoints;
+				private _wp = _grp addWaypoint [_SpottedUnitPos,10];
+				_wp setWaypointType "SAD";
+				_wp setWaypointSpeed "FULL";
+				_wp setWaypointBehaviour "AWARE";
+			};
+		};
+
+		_SpottedUnitCount = {_x distance _SpottedUnit < 200} count units group _SpottedUnit;
 		if (_SpottedUnitCount > 0) then {
 			_bAllowPatrolChange = true;
 			_bAllowNextMortarRounds = true;
@@ -184,100 +213,37 @@ if (_bInfSpottedAction) then {
 
 				if (_bTankSpottedAction) then {
 					[_SpottedUnitPos, 2] spawn TRGM_fnc_enemyAirSupport;
-					TREND_fnc_AirSiren = {		
-						_FirstPos = _this select 0;
-						_iLoopSirenCount = 0;
-						while {_iLoopSirenCount < 5} do {
-							_iLoopSirenCount = _iLoopSirenCount + 1;
-							_missiondir = call { private "_arr"; _arr = toArray str missionConfigFile; _arr resize (count _arr - 15); toString _arr };
-							playSound3D [_missiondir + "RandFramework\Sounds\Siren.ogg",nil,false,_FirstPos,1.5,1,0];
-						
-							sleep 40;
-						};
-					};
-					[_FirstPos] spawn TREND_fnc_AirSiren;
+					[_FirstPos] spawn TRGM_fnc_airSiren;
 				};
 				
 				if (_bAirSpottedAction) then {
 					[_SpottedUnitPos, 1] spawn TRGM_fnc_enemyAirSupport;
-					TREND_fnc_AirSiren = {		
-						_FirstPos = _this select 0;
-						_iLoopSirenCount = 0;
-						while {_iLoopSirenCount < 5} do {
-							_iLoopSirenCount = _iLoopSirenCount + 1;
-							_missiondir = call { private "_arr"; _arr = toArray str missionConfigFile; _arr resize (count _arr - 15); toString _arr };
-							playSound3D [_missiondir + "RandFramework\Sounds\Siren.ogg",nil,false,_FirstPos,1.5,1,0];
-						
-							sleep 40;
-						};
-					};
-					[_FirstPos] spawn TREND_fnc_AirSiren;
+					[_FirstPos] spawn TRGM_fnc_airSiren;
 				};	
 			
 				//==============Now the generic spotted action to send a patrol to investigate of they have spotted inf ================================================
 				if ((vehicle _SpottedUnit isKindOf "Car") && _bAllowPatrolChange) then {
-					if  ((_SpottedUnitCount > 0)) then {
-						_nearestATs = nearestObjects [_SpottedUnitPos, [sATMan,sATManMilitia], _maxPatrolSearch];
-						if (bDebugMode) then {hint format["AT pre count check: %1",count _nearestATs]; sleep 2;};
-						if (count _nearestATs > 0) then {
-				
-							if (bDebugMode) then {hint "for than zero - count _nearestATs"; sleep 2;};
-							_nearestTL = _nearestATs select 0;
-							while {(count (waypoints group _nearestTL)) > 0} do {
-								deleteWaypoint ((waypoints group _nearestTL) select 0);
-							};
-
-							group _nearestTL setCombatMode "RED";
-							group _nearestTL setFormation "WEDGE";
-							group _nearestTL setSpeedMode "FULL";
-							_SpottedWP1a = group _nearestTL addWaypoint [getPos _nearestTL,0,0];
-							 _SpottedWP1a setWaypointType "MOVE";
-							_SpottedWP1a setWaypointSpeed "FULL";
-							_SpottedWP1a setWaypointBehaviour "AWARE";	
-							_SpottedWP1a setWaypointFormation "WEDGE";	
-							_SpottedWP1a2 = group _nearestTL addWaypoint [_SpottedUnitPos,0,1];
-							_SpottedWP1a2 setWaypointSpeed "FULL";
-							_SpottedWP1b = group _nearestTL addWaypoint [_FirstPos,7,2];
-							_SpottedWP1b setWaypointType "CYCLE";
-							group _nearestTL setCombatMode "RED";
-							group _nearestTL setFormation "WEDGE";
-							group _nearestTL setSpeedMode "FULL";
-						};
-						if (selectRandom[true,false]) then {
-				
-							_nearestTanks = nearestObjects [_SpottedUnitPos, [sTank3Tank], 4000];
-							if (count _nearestTanks > 0) then {
-								_nearestTank = selectRandom _nearestTanks;
-								_nearestTLTankwPosArray = waypoints group _nearestTank;
-
-								while {(count (waypoints group _nearestTank)) > 0} do {
-									deleteWaypoint ((waypoints group _nearestTank) select 0);
-								};
-								_SpottedWP5a = group _nearestTank addWaypoint [_SpottedUnitPos,10];
-								_SpottedWP5a setWaypointType "SAD";
-								_SpottedWP5a setWaypointSpeed "FULL";
-								_SpottedWP5a setWaypointBehaviour "AWARE";	
-							};
-						};
+					_nearestATs = nearestObjects [_SpottedUnitPos, [sATMan,sATManMilitia], _maxPatrolSearch];
+					if (bDebugMode) then {hint format["AT pre count check: %1",count _nearestATs]; sleep 2;};
+					if (count _nearestATs > 0) then {
+						if (bDebugMode) then {hint "for than zero - count _nearestATs"; sleep 2;};
+						[_nearestATs select 0] call _fnc_sendGroupToSpotted;
+					};
+					if (selectRandom[true,false]) then {
+						[[sTank3Tank], 4000] call _fnc_sendTankToSpotted;
 					};
 				};
 
 				
 				//mortar script
-				if  ((_SpottedUnitCount > 0) && _bAllowNextMortarRounds && !bMortarFiring) then {
+				if (_bAllowNextMortarRounds && !bMortarFiring) then {
 					_bFiredMortar = false;
 					_currentAODetail set [6,1];  //commence counting now fired... when reach zero again, we will wait until round fired again
 					_nearestMortars = nearestObjects [_SpottedUnitPos,sMortar + sMortarMilitia,_maxPatrolSearch];
 					_ChancesOfFireMortar = [true,true,false];
 					_iRoundsToFire = 1;
 					
-					_playerClose = [];
-					{
-						if ((_x distance _SpottedUnit) < 10) then {
-							_playerClose pushback _x;
-						};
-					} foreach allPlayers;
-					_nearplayercount = count _playerClose;
+					_nearplayercount = {(_x distance _SpottedUnit) < 10} count allPlayers;
 					if (_nearplayercount > selectRandom [3,4]) then {_ChancesOfFireMortar = [true]; _iRoundsToFire = 2};
 					if (count _nearestMortars > 0 && speed _SpottedUnit < 1 && selectRandom _ChancesOfFireMortar && _SpottedUnit distance _MainObjectivePos > 200) then {
 						_menNear = (nearestObjects [_SpottedUnit, ["Man"], 1250]) select {side _x == east};
@@ -300,7 +266,6 @@ if (_bInfSpottedAction) then {
 										_SpotterFound = true;
 										_Spotter = _x;
 										if (bDebugMode) then {
-											_test = nil;
 											_test = createMarker [format["SpotterMrk%1%2%3",getPos _x select 0,getPos _x select 1,selectRandom[1,2,3,4,5]], getPos _x];  
 											_test setMarkerShape "ICON";  
 											_test setMarkerType "hd_dot";  
@@ -326,7 +291,6 @@ if (_bInfSpottedAction) then {
 								_dDistance = _startPos distance _endPos;
 								if (_dDistance < 7 && _bAllowMortar) then {
 									_nearestMortar = _nearestMortars select 0;
-									_Ammo = nil;
 									_Ammo = getArtilleryAmmo [_nearestMortar] select 0;
 									bMortarFiring = true;
 									publicVariable "bMortarFiring";
@@ -356,9 +320,7 @@ if (_bInfSpottedAction) then {
 
 					if (bBaseHasChopper && selectRandom [true]) then {
 			
-						while {(count (waypoints group EnemyBaseChopperPilot)) > 0} do {
-							deleteWaypoint ((waypoints group EnemyBaseChopperPilot) select 0);
-						};
+						[group EnemyBaseChopperPilot] call TRGM_fnc_deleteAllWaypoints;
 						//EnemyBaseChopper set waypoint to spotted location then AO then RTB
 						//GETIN NEAREST
 						//EnemyBaseChopperPilot
@@ -383,61 +345,21 @@ if (_bInfSpottedAction) then {
 					};
 
 				
-					if  ((_SpottedUnitCount > 0)) then {
-
-						
-						_nearestTLs = nearestObjects [_SpottedUnitPos, [sTeamleader,sTeamleaderMilitia], _maxPatrolSearch];
-						if (count _nearestTLs > 0) then {
-				
-							_nearestTL = _nearestTLs select 0;
-							while {(count (waypoints group _nearestTL)) > 0} do {
-								deleteWaypoint ((waypoints group _nearestTL) select 0);
-							};
-
-							group _nearestTL setCombatMode "RED";
-							group _nearestTL setFormation "WEDGE";
-							group _nearestTL setSpeedMode "FULL";
-							_SpottedWP1a = group _nearestTL addWaypoint [getPos _nearestTL,0,0];
-							 _SpottedWP1a setWaypointType "MOVE";
-							_SpottedWP1a setWaypointSpeed "FULL";
-							_SpottedWP1a setWaypointBehaviour "AWARE";	
-							_SpottedWP1a setWaypointFormation "WEDGE";	
-							_SpottedWP1a2 = group _nearestTL addWaypoint [_SpottedUnitPos,0,1];
-							_SpottedWP1a2 setWaypointSpeed "FULL";
-							_SpottedWP1b = group _nearestTL addWaypoint [_FirstPos,7,2];
-							_SpottedWP1b setWaypointType "CYCLE";
-							group _nearestTL setCombatMode "RED";
-							group _nearestTL setFormation "WEDGE";
-							group _nearestTL setSpeedMode "FULL";
-						};
-
-
-						if (selectRandom[true,false]) then {
-				
-							_nearestTanks = nearestObjects [_SpottedUnitPos, [sTank1ArmedCar,sTank2APC,sTank3Tank,sTank1ArmedCarMilitia,sTank2APCMilitia,sTank3TankMilitia], 3000];
-							if (count _nearestTanks > 0) then {
-								_nearestTank = selectRandom _nearestTanks;
-								_nearestTLTankwPosArray = waypoints group _nearestTank;
-
-								while {(count (waypoints group _nearestTank)) > 0} do {
-									deleteWaypoint ((waypoints group _nearestTank) select 0);
-								};
-								_SpottedWP5a = group _nearestTank addWaypoint [_SpottedUnitPos,10];
-								_SpottedWP5a setWaypointType "SAD";
-								_SpottedWP5a setWaypointSpeed "FULL";
-								_SpottedWP5a setWaypointBehaviour "AWARE";	
-							};
-						};
-
+					//one scan for both the patrol move (nearest team leader within _maxPatrolSearch) and the dead team leader clean up (3000m), nearestObjects is sorted by distance
+					_nearbyTLs = nearestObjects [_SpottedUnitPos, [sTeamleader,sTeamleaderMilitia], 3000];
+					if (count _nearbyTLs > 0 && {((_nearbyTLs select 0) distance _SpottedUnitPos) <= _maxPatrolSearch}) then {
+						[_nearbyTLs select 0] call _fnc_sendGroupToSpotted;
 					};
 
+					if (selectRandom[true,false]) then {
+						[[sTank1ArmedCar,sTank2APC,sTank3Tank,sTank1ArmedCarMilitia,sTank2APCMilitia,sTank3TankMilitia], 3000] call _fnc_sendTankToSpotted;
+					};
 
-_anyTLsCheckAlive = nearestObjects [_SpottedUnitPos, [sTeamleader,sTeamleaderMilitia], 3000];
 					{
 						if (!(alive _x)) then {
 							deleteVehicle _x;
-						}
-					} forEach _anyTLsCheckAlive;
+						};
+					} forEach _nearbyTLs;
 
 				
 				};

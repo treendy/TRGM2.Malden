@@ -5,12 +5,9 @@ if (isNil "CivDeathCount") then {
 	publicVariable "CivDeathCount";
 };
 
-_aceSource = _killed getVariable ["ace_medical_lastDamageSource", objNull];
-if (!(_aceSource isEqualTo objNull)) then {
-	_killer = _aceSource;
-};
+_killer = [_killed, _killer] call TRGM_fnc_getFriendlyKiller;
 
-if (side _killer == west && _killed != _killer) then {
+if (!isNull _killer) then {
 	bCivKilled = true;
 	publicVariable "bCivKilled";
 

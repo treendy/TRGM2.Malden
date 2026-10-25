@@ -839,12 +839,12 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 									publicVariable "ClearedPositions";
 									_markerInformant1 setMarkerText (localize "STR_TRGM2_startInfMission_markerInformant");
 									if (!_SamePrevAO) then {
-										[[_inf1X,_inf1Y],_iThisTaskType,_infBuilding,_bIsMainObjective, _iTaskIndex, _allowFriendlyIns,true] spawn TREND_fnc_PopulateSideMission;
+										[[_inf1X,_inf1Y],_iThisTaskType,_infBuilding,_bIsMainObjective, _iTaskIndex, _allowFriendlyIns,true] spawn TRGM_fnc_populateSideMission;
 									};
 								}
 								else {
 									if (!_SamePrevAO) then {
-										[[_inf1X,_inf1Y],_iThisTaskType,_infBuilding,_bIsMainObjective, _iTaskIndex, _allowFriendlyIns] spawn TREND_fnc_PopulateSideMission;
+										[[_inf1X,_inf1Y],_iThisTaskType,_infBuilding,_bIsMainObjective, _iTaskIndex, _allowFriendlyIns] spawn TRGM_fnc_populateSideMission;
 									};
 								};
 

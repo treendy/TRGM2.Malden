@@ -1,7 +1,6 @@
-_AllowedIntelToShow = _this Select 0;
-_FoundViaType = _this Select 1;
+params ["_AllowedIntelToShow", "_FoundViaType"];
 
-if (side player == west) then {
+if (side player == FriendlySide) then {
 	_IntelToShow = 0;
 	_iAttemptCount = 0;
 	while {_IntelToShow == 0 && _iAttemptCount < 100} do {
@@ -39,7 +38,6 @@ if (_IntelToShow == 0) then { //Nothing found
 		_iCount = count TempIntelShowPos;
 		if (_iCount > 0) then {
 			{
-				_test = nil;
 				_test = createMarker [format["MrkIntelMortor%1",_forEachIndex], getPos _x];  
 				_test setMarkerShape "ICON";  
 				_test setMarkerType "o_art";  
@@ -58,15 +56,12 @@ if (_IntelToShow == 0) then { //Nothing found
 		} remoteExec ["bis_fnc_call", 2];
 		waitUntil {typeName TempIntelShowPos == "ARRAY"};
 		_iCount = count TempIntelShowPos;
-		_iStep = 0;
 		if (_iCount > 0) then {
 			{
-				_test = nil;
 				_test = createMarker [format["MrkIntelAAA%1",_forEachIndex], getPos _x];  
 				_test setMarkerShape "ICON";  
 				_test setMarkerType "o_art";  
 				_test setMarkerText (localize "STR_TRGM2_showIntel_AAAMarker");
-				_iStep = _iStep + 1;
 			} forEach TempIntelShowPos;
 			Hint (localize "STR_TRGM2_showIntel_AAAMapUpdated");
 		}
@@ -76,7 +71,6 @@ if (_IntelToShow == 0) then { //Nothing found
 	};
 	if (_IntelToShow == 3) then { //Comms tower location
 		if (bHasCommsTower) then {
-			_test = nil;
 			_test = createMarker ["CommsIntelAAA1", CommsTowerPos];  
 			_test setMarkerShape "ICON";  
 			_test setMarkerType "mil_destroy";  
@@ -94,7 +88,6 @@ if (_IntelToShow == 0) then { //Nothing found
 			_checkpointPos = _x select 0;
 			if (_distanceToCheckPoint < 1000) then {
 				_bFoundcheckpoints = true;
-				_test = nil;
 				_test = createMarker [format["MrkIntelCheckpoint%1%2",_checkpointPos select 0, _checkpointPos select 1], _checkpointPos];  
 				_test setMarkerShape "ICON";  
 				_test setMarkerType "o_inf";  
@@ -115,7 +108,6 @@ if (_IntelToShow == 0) then { //Nothing found
 		}
 		else {
 			{
-				_test = nil;
 				_test = createMarker [format["ATIntel%1%2",_x select 0,_x select 1], _x];  
 				_test setMarkerShape "ICON";  
 				_test setMarkerType "mil_warning";  

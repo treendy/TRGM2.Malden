@@ -110,6 +110,25 @@ class TRGM   { // TAG
         class showLayerText {};
     };
 
+    class ai {
+        file = "RandFramework\functions\ai";
+        class populateSideMission {};
+        class spawnCivs {};
+        class occupyHouses {};
+        class spawnCheckpoints {};
+        class deleteAllWaypoints {};
+        class airSiren {};
+        class animateFlareLight {};
+        class getFriendlyKiller {};
+    };
+
+    class intel {
+        file = "RandFramework\functions\intel";
+        class addClearedPosition {};
+        class completeIntelAction {};
+        class revealMainObjective {};
+    };
+
     //scripts that are run many times, precompiled instead of execVM
     class scripts {
         class setCheckpoint { file = "RandFramework\setCheckpoint.sqf"; };
@@ -134,5 +153,7 @@ class TRGM   { // TAG
         class enemyAirSupport { file = "RandFramework\RandScript\enemyAirSupport.sqf"; };
         class setFireFightEvent { file = "RandFramework\setFireFightEvent.sqf"; };
         class BadReb { file = "RandFramework\BadReb.sqf"; };
+        class readMainParams { file = "RandFramework\GUI\readMainParams.sqf"; };
+        class readAdvancedSettings { file = "RandFramework\GUI\readAdvancedSettings.sqf"; };
     };
 };

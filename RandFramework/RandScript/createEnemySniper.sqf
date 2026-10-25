@@ -1,24 +1,19 @@
-
-
-_targetPos = _this select 0;
-
+params ["_targetPos"];
 
 _targetPos = [_targetPos select 0, _targetPos select 1, 0]; //round (_targetPos select 2)];
 
-_spawnedUnit = nil;
 _foundPlace = false;
 
 _maxRange = 800;
-_minRange = 600;
 _minHeight = 20;
+_fnc_findOverwatch = compile preprocessFileLineNumbers "RandFramework\RandScript\findOverwatchOverride.sqf";
 
 _spawnedUnit = ((createGroup east) createUnit [sSniper, [-135,-253,0], [], 10, "NONE"]);
 _spawnedTempTarget = ((createGroup east) createUnit [sSniper, _targetPos, [], 10, "NONE"]);
 
 for "_i" from 1 to 20 do {
 	if (!_foundPlace) then {
-		TestTestTargetPos = str(_targetPos);
-		_pos = [_targetPos, _maxRange, 200, _minHeight, _targetPos] call compile preprocessFileLineNumbers "RandFramework\RandScript\findOverwatchOverride.sqf";
+		_pos = [_targetPos, _maxRange, 200, _minHeight, _targetPos] call _fnc_findOverwatch;
 		_spawnedUnit setPos _pos;
 		_direction = [getpos _spawnedUnit, _targetPos] call BIS_fnc_DirTo;
 		_spawnedUnit setDir _direction;
@@ -26,7 +21,6 @@ for "_i" from 1 to 20 do {
 		_spawnedUnit setUnitPos selectRandom ["MIDDLE","DOWN"];
 		
 		_cansee = [objNull, "VIEW"] checkVisibility [eyePos _spawnedUnit, eyePos _spawnedTempTarget];
-		_direction2 = [getpos player, getpos _spawnedUnit] call BIS_fnc_DirTo;
 		if (_cansee > 0) then {
 			_foundPlace = true;
 			_spawnedUnit setskill ["aimingAccuracy",0.8];
@@ -45,7 +39,6 @@ for "_i" from 1 to 20 do {
 			if (_i < 11) then {
 				_minHeight = _minHeight - 1;
 				_maxRange = _maxRange - 10;
-				_minRange = _minRange - 45;
 			};
 		};
 	};

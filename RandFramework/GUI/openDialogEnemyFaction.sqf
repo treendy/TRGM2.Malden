@@ -1,29 +1,7 @@
 disableSerialization;
 
 
-if (!isNull (findDisplay 6000)) then {
-	AdvancedSettings = [];
-	{
-		_CurrentControl = _x;
-		_lnpCtrlType = _x select 2;
-		_ThisControlOptions = (_x select 4);
-		_ThisControlIDX = (_x select 0) + 1;
-		_ctrlItem = (findDisplay 6000) displayCtrl _ThisControlIDX;
-		debugMessages = debugMessages + "\n\n" + str(lbCurSel _ctrlItem);
-		publicVariable "debugMessages";
-		_value = nil;
-		if (_lnpCtrlType == "RscCombo") then {
-			debugMessages = debugMessages + "\n\nHERE:" + str(lbCurSel _ctrlItem);
-			_value = _ThisControlOptions select (lbCurSel _ctrlItem);
-		};
-		if (_lnpCtrlType == "RscEdit") then {
-			_value = ctrlText _ThisControlIDX;
-		};
-		AdvancedSettings pushBack _value;
-	} forEach AdvControls;
-	publicVariable "AdvancedSettings";
-
-};
+[] call TRGM_fnc_readAdvancedSettings;
 
 
 closedialog 0;

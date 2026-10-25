@@ -1,10 +1,6 @@
+params ["_thisCiv","_thisPlayer"];
 
-
-_thisCiv = _this select 0;
-_thisPlayer = _this select 1;
-
-
-if (side player == west) then {
+if (side player == FriendlySide) then {
 
 	[_thisCiv] remoteExec ["removeAllActions", 0, true];
 
@@ -19,11 +15,9 @@ if (side player == west) then {
 		[IntelShownType,"TalkRebLead"] spawn TRGM_fnc_showIntel;
 		sleep 10;
 		_thisCiv switchMove "";
-		
+
 	}
 	else {
 		hint "This guy doesnt seem to want to speak much in his current state!!!"
 	};
 };
-
-

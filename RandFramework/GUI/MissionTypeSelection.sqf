@@ -13,16 +13,7 @@ if (isNil "iMissionParamObjective3") then {
 	publicVariable "iMissionParamObjective3";
 };
 
-if (!isNull((findDisplay 5000) displayCtrl 7001)) then {
-	_ctrlTypes1 = (findDisplay 5000) displayCtrl 7001;
-	iMissionParamObjective2 = MissionParamObjectivesValues select lbCurSel _ctrlTypes1;
-	publicVariable "iMissionParamObjective2";
-};
-if (!isNull((findDisplay 5000) displayCtrl 7002)) then {
-	_ctrlTypes2 = (findDisplay 5000) displayCtrl 7002;
-	iMissionParamObjective3 = MissionParamObjectivesValues select lbCurSel _ctrlTypes2;
-	publicVariable "iMissionParamObjective3";
-};
+[true] call TRGM_fnc_readMainParams;
 
 _display = findDisplay 5000;
 _ctrl = (findDisplay 5000) displayCtrl 5001;

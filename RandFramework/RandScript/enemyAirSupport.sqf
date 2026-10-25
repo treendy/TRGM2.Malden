@@ -1,19 +1,12 @@
-
-_SpottedPos = _this select 0;
-_IsAirType = _this select 1; // 1=AirToAir, 2=AirToGround, 3=Scout
+//Sends an enemy aircraft from ReinforceStartPos1 to patrol around the spotted position, then return and despawn (server only)
+params ["_SpottedPos", "_IsAirType"]; // _IsAirType: 1=AirToAir, 2=AirToGround, 3=Scout
 
 
 if (isServer) then {
 
-		if (isNil "CalledAirsupportIndex") then {
-			CalledAirsupportIndex = 1;
-			publicVariable "CalledAirsupportIndex";	
-		}
-		else {
-			CalledAirsupportIndex = CalledAirsupportIndex + 1;
-			publicVariable "CalledAirsupportIndex";	
-
-		};
+		if (isNil "CalledAirsupportIndex") then {CalledAirsupportIndex = 0;};
+		CalledAirsupportIndex = CalledAirsupportIndex + 1;
+		publicVariable "CalledAirsupportIndex";
 
 
 _groupp1 = createGroup east;
@@ -47,14 +40,14 @@ _groupp1 = createGroup east;
 
 		_iFlyRange = 1000;
 		if (_IsAirType == 3) then {_iFlyRange = 300;};
-		_v1wp1 = _groupp1 addWaypoint [_SpottedPos, 0];
-		_v1wp2 = _groupp1 addWaypoint [[(_SpottedPos select 0) + _iFlyRange,(_SpottedPos select 1) + _iFlyRange], 0];
-		_v1wp3 = _groupp1 addWaypoint [[(_SpottedPos select 0) + _iFlyRange,(_SpottedPos select 1) - _iFlyRange], 0];
-		_v1wp4 = _groupp1 addWaypoint [[(_SpottedPos select 0) - _iFlyRange,(_SpottedPos select 1) + _iFlyRange], 0];
-		_v1wp5 = _groupp1 addWaypoint [[(_SpottedPos select 0) - _iFlyRange,(_SpottedPos select 1) - _iFlyRange], 0];
-		_v1wp6 = _groupp1 addWaypoint [[(_SpottedPos select 0) + _iFlyRange,(_SpottedPos select 1)], 0];
-		_v1wp7 = _groupp1 addWaypoint [ReinforceStartPos1, 0];
-		_v1wp8 = _groupp1 addWaypoint [ReinforceStartPos1, 0];
+		_groupp1 addWaypoint [_SpottedPos, 0];
+		_groupp1 addWaypoint [[(_SpottedPos select 0) + _iFlyRange,(_SpottedPos select 1) + _iFlyRange], 0];
+		_groupp1 addWaypoint [[(_SpottedPos select 0) + _iFlyRange,(_SpottedPos select 1) - _iFlyRange], 0];
+		_groupp1 addWaypoint [[(_SpottedPos select 0) - _iFlyRange,(_SpottedPos select 1) + _iFlyRange], 0];
+		_groupp1 addWaypoint [[(_SpottedPos select 0) - _iFlyRange,(_SpottedPos select 1) - _iFlyRange], 0];
+		_groupp1 addWaypoint [[(_SpottedPos select 0) + _iFlyRange,(_SpottedPos select 1)], 0];
+		_groupp1 addWaypoint [ReinforceStartPos1, 0];
+		_groupp1 addWaypoint [ReinforceStartPos1, 0];
 		[_groupp1, 0] setWaypointStatements ["true", format["%1 flyInHeight 40;",_sAirName]];
 		[_groupp1, 0] setWaypointSpeed "FULL";
 		[_groupp1, 0] setWaypointBehaviour "SAFE";

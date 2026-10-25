@@ -1,31 +1,13 @@
-_thisLaptop = _this select 0;
-_params = _this select 3;
+params ["_thisLaptop", "_caller", "_id", "_params"];
+_params params ["_iSelected","_bCreateTask"];
 
-_iSelected = _params select 0;
-_bCreateTask = _params select 1;
+if (side player == FriendlySide) then {
 
-if (side player == west) then {
+	[_thisLaptop, _iSelected, _bCreateTask, "succeeded", true, true] call TRGM_fnc_completeIntelAction;
 
-	ClearedPositions pushBack ([ObjectivePossitions, player] call BIS_fnc_nearestPosition);
-	publicVariable "ClearedPositions";
-	
-	[_thisLaptop] remoteExec ["removeAllActions", 0, true];
-
-	if (_bCreateTask) then {
-		sName = format["InfSide%1",_iSelected];
-		if (!([sName] call FHQ_TT_areTasksCompleted)) then {
-			[sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0];
+	if (!_bCreateTask) then {
+		if (!([] call TRGM_fnc_revealMainObjective)) then {
+			[IntelShownType,"HackData"] spawn TRGM_fnc_showIntel;
 		};
-
-
-	} else {
-		
-			if (getMarkerType format["mrkMainObjective%1",0] == "empty") then {
-				format["mrkMainObjective%1",0] setMarkerType "mil_unknown"; //NOTE: hard coded zero as only one main task will exict (currently!)
-				hint (localize "STR_TRGM2_bugRadio1_MapUpdated");
-			}
-			else {
-				[IntelShownType,"HackData"] spawn TRGM_fnc_showIntel;
-			};	
 	};
 };

@@ -1,49 +1,25 @@
 params ["_thisCiv","_thisPlayer","_id","_params"];
 _params params ["_iSelected","_bCreateTask"];
 
-if (side player == west) then {
+if (side player == FriendlySide) then {
 
-	ClearedPositions pushBack ([ObjectivePossitions, player] call BIS_fnc_nearestPosition);
-	publicVariable "ClearedPositions";
-
-	[_thisCiv] remoteExec ["removeAllActions", 0, true];
+	//task fails if he is dead
+	[_thisCiv, _iSelected, _bCreateTask, ["failed","succeeded"] select (alive _thisCiv)] call TRGM_fnc_completeIntelAction;
 
 	if (_bCreateTask) then {
 		if (alive _thisCiv) then {
-			sName = format["InfSide%1",_iSelected];
-			[sName, "succeeded"] remoteExec ["FHQ_TT_setTaskState", 0];	
-			_thisCiv switchMove "Acts_ExecutionVictim_Loop"; 
+			_thisCiv switchMove "Acts_ExecutionVictim_Loop";
 		}
 		else {
-			//fail task
 			hint "He is dead you muppet!";
-			sName = format["InfSide%1",_iSelected];
-			[sName, "failed"] remoteExec ["FHQ_TT_setTaskState", 0];	
 		};
 	}
 	else {
-		_searchChance = [true,false,false,false];
-
 		hint "Map updated with intel found";
-
-
-		if (alive _thisCiv) then {
-			//increased chance of results
-			_searchChance = [true,false];
-		}
-		else {
-			//normal search
-			_searchChance = [true,false,false,false,false];
-		};
 
 		removeAllActions _thisCiv;
 
-		if (getMarkerType format["mrkMainObjective%1",0] == "empty") then {
-			format["mrkMainObjective%1",0] setMarkerType "mil_unknown"; //NOTE: hard coded zero as only one main task will exict (currently!)
-			hint "Map updated with main AO location";
-		}
-		else {
-
+		if (!([] call TRGM_fnc_revealMainObjective)) then {
 			if (alive _thisCiv) then {
 				[IntelShownType,"IntOfficer"] spawn TRGM_fnc_showIntel;
 				sleep 2;
@@ -54,6 +30,4 @@ if (side player == west) then {
 			};
 		};
 	};
-
-
 };

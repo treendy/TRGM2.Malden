@@ -96,29 +96,7 @@ if (isNil "InitialLoadedPreviousSettings" && !ForceMissionSetup) then {
 	InitialLoadedPreviousSettings = []; // no longer Nil, so will not reload our previously saved data and change any current changes
 };
 
-if (!isNull (findDisplay 6000)) then {
-	AdvancedSettings = [];
-	{
-		_CurrentControl = _x;
-		_lnpCtrlType = _x select 2;
-		_ThisControlOptions = (_x select 4);
-		_ThisControlIDX = (_x select 0) + 1;
-		_ctrlItem = (findDisplay 6000) displayCtrl _ThisControlIDX;
-		debugMessages = debugMessages + "\n\n" + str(lbCurSel _ctrlItem);
-		publicVariable "debugMessages";
-		_value = nil;
-		if (_lnpCtrlType == "RscCombo") then {
-			debugMessages = debugMessages + "\n\nHERE80:" + str(lbCurSel _ctrlItem);
-			_value = _ThisControlOptions select (lbCurSel _ctrlItem);
-		};
-		if (_lnpCtrlType == "RscEdit") then {
-			_value = ctrlText _ThisControlIDX;
-		};
-		AdvancedSettings pushBack _value; 
-	} forEach AdvControls;
-	publicVariable "AdvancedSettings";
-
-};
+[] call TRGM_fnc_readAdvancedSettings;
 
 closedialog 0;
 
@@ -135,57 +113,30 @@ else {
 	createDialog "Trend_DialogSetupParams";
 	waitUntil {!isNull (findDisplay 5000);};
 
-	_ctrlItem = (findDisplay 5000) displayCtrl 5500;
-	_optionItem = MissionParamTypes;
+	//[idc, options, values, current value]
+	private _combos = [
+		[5500, MissionParamTypes, MissionParamTypesValues, iMissionParamType],
+		[5104, MissionParamObjectives, MissionParamObjectivesValues, iMissionParamObjective],
+		[5100, MissionParamRepOptions, MissionParamRepOptionsValues, iMissionParamRepOption],
+		[5101, MissionParamWeatherOptions, MissionParamWeatherOptionsValues, iWeather],
+		[5102, MissionParamNVGOptions, MissionParamNVGOptionsValues, iAllowNVG],
+		[5103, MissionParamReviveOptions, MissionParamReviveOptionsValues, iUseRevive],
+		[2105, MissionParamLocationOptions, MissionParamLocationOptionsValues, iStartLocation]
+	];
+	//fill every combo first, then select (selecting the mission type runs MissionTypeSelection.sqf, which uses the other combos)
 	{
-		_ctrlItem lbAdd _x;
-	} forEach _optionItem;
-
-	_ctrlTypes = (findDisplay 5000) displayCtrl 5104;
-	_optionTypes = MissionParamObjectives;
+		_x params ["_idc", "_options"];
+		private _ctrl = (findDisplay 5000) displayCtrl _idc;
+		{
+			_ctrl lbAdd _x;
+		} forEach _options;
+	} forEach _combos;
 	{
-		_ctrlTypes lbAdd _x;
-	} forEach _optionTypes;
-
-	_ctrlNVG = (findDisplay 5000) displayCtrl 5102;
-	_optionNVG = MissionParamNVGOptions;
-	{
-		_ctrlNVG lbAdd _x;
-	} forEach _optionNVG;
-
-	_ctrlRep = (findDisplay 5000) displayCtrl 5100;
-	_optionRep = MissionParamRepOptions;
-	{
-		_ctrlRep lbAdd _x;
-	} forEach _optionRep;
-
-	_ctrlWeather = (findDisplay 5000) displayCtrl 5101;
-	_optionWeathers = MissionParamWeatherOptions;
-	{
-		_ctrlWeather lbAdd _x;
-	} forEach _optionWeathers;
-
-	_ctrlRevive = (findDisplay 5000) displayCtrl 5103;
-	_optionRevive = MissionParamReviveOptions;
-	{
-		_ctrlRevive lbAdd _x;
-	} forEach _optionRevive;
-
-	_ctrlLocation = (findDisplay 5000) displayCtrl 2105;
-	_optionLocation = MissionParamLocationOptions;
-	{
-		_ctrlLocation lbAdd _x;
-	} forEach _optionLocation;
-
-	_ctrlItem lbSetCurSel (MissionParamTypesValues find iMissionParamType);
-	_ctrlTypes lbSetCurSel (MissionParamObjectivesValues find iMissionParamObjective);
-	_ctrlRep lbSetCurSel (MissionParamRepOptionsValues find iMissionParamRepOption);
-	_ctrlWeather lbSetCurSel (MissionParamWeatherOptionsValues find iWeather);
-	_ctrlNVG lbSetCurSel (MissionParamNVGOptionsValues find iAllowNVG);
-	_ctrlRevive lbSetCurSel (MissionParamReviveOptionsValues find iUseRevive);
+		_x params ["_idc", "", "_values", "_current"];
+		((findDisplay 5000) displayCtrl _idc) lbSetCurSel (_values find _current);
+	} forEach _combos;
 	if (isClass(configFile >> "CfgPatches" >> "ace_medical")) then {
-		_ctrlRevive ctrlEnable false;
+		((findDisplay 5000) displayCtrl 5103) ctrlEnable false;
 	};
-	_ctrlLocation lbSetCurSel (MissionParamLocationOptionsValues find iStartLocation);
 };
 
