@@ -97,6 +97,19 @@ class TRGM   { // TAG
         class eventFlareLoop {};
     };
 
+    class missionSetup {
+        file = "RandFramework\functions\missionSetup";
+        class createObjectiveClearedTrigger {};
+        class createObjectiveVehicle {};
+        class getRankFromRep {};
+        class getRankIcon {};
+        class setEnemySandstormSkill {};
+        class selectMapPosition {};
+        class isPlayerAllowedToLead {};
+        class resetTransportChoppers {};
+        class showLayerText {};
+    };
+
     //scripts that are run many times, precompiled instead of execVM
     class scripts {
         class setCheckpoint { file = "RandFramework\setCheckpoint.sqf"; };

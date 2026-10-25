@@ -70,17 +70,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	[_mainObjPos,_spacingBetweenTargets,true,true,_IED3,_IEDType] spawn TRGM_fnc_setIEDEvent;
 
 
-_customTaskClear = nil;
-	_customTaskClear = createTrigger ["EmptyDetector", [0,0], false];
-	_customTaskClear setVariable ["DelMeOnNewCampaignDay",true];
-	
 	_sAliveCheck = format["%1 getVariable ['isDefused',false] && %2 getVariable ['isDefused',false] && %3 getVariable ['isDefused',false] && !([""InfSide%4""] call FHQ_TT_areTasksCompleted)",_sTargetName1,_sTargetName2,_sTargetName3,_iTaskIndex];
-
-	if (!_bCreateTask) then {
-		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Defused IEDs""] call TRGM_fnc_adjustMaxBadPoints; [""Defused IEDs, Rep increased""] remoteExec [""Hint"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
-	}
-	else {		
-		_sTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
-		_customTaskClear setTriggerStatements [_sAliveCheck, _sTaskComplete, ""];	
-	};
+	[_sAliveCheck, _iTaskIndex, _bCreateTask, "Defused IEDs", "Defused IEDs, Rep increased"] call TRGM_fnc_createObjectiveClearedTrigger;
 };

@@ -144,26 +144,11 @@ _infBuilding = nil;
 		};
 	};
 
-	_customTaskClear = nil;
-	_customTaskClear = createTrigger ["EmptyDetector", [0,0], false];
-	_customTaskClear setVariable ["DelMeOnNewCampaignDay",true];
-
-	_customTaskFail = nil;
-	_customTaskFail = createTrigger ["EmptyDetector", [0,0], false];
-	_customTaskFail setVariable ["DelMeOnNewCampaignDay",true];
-	
 	_sAliveCheck = format["%1 getVariable ['isDefused',false] && !([""InfSide%2""] call FHQ_TT_areTasksCompleted)",_sBomb1Name,_iTaskIndex];
-	
-	if (!_bCreateTask) then {
-		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Defused Bomb""] call TRGM_fnc_adjustMaxBadPoints; [""Defused IEDs, Rep increased""] remoteExec [""Hint"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objBomb" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
-	}
-	else {		
+	if (_bCreateTask) then {
 		_sFailCheck = format["!alive %1 && !([""InfSide%2""] call FHQ_TT_areTasksCompleted)",_sBomb1Name,_iTaskIndex];
-		_sTaskFail = format["[""InfSide%1"", ""failed""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objBomb%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
-		_customTaskFail setTriggerStatements [_sFailCheck, _sTaskFail, ""];	
-
-		_sTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objBomb%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
-		_customTaskClear setTriggerStatements [_sAliveCheck, _sTaskComplete, ""];	
+		[_sFailCheck, _iTaskIndex, true, "", "", 1, "", "failed", "objBomb"] call TRGM_fnc_createObjectiveClearedTrigger;
 	};
+	[_sAliveCheck, _iTaskIndex, _bCreateTask, "Defused Bomb", "Defused IEDs, Rep increased", 1, "TRGM_fnc_adjustMaxBadPoints", "succeeded", "objBomb"] call TRGM_fnc_createObjectiveClearedTrigger;
 	
 };

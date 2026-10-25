@@ -3,107 +3,72 @@
 
 civilian setFriend [east, 1];
 
-if (isNil("CustomObjectsSet")) then {
-	CustomObjectsSet = false;
-	publicVariable "CustomObjectsSet";
-};
+//global defaults: each is only set (and broadcast) if not already defined
+{
+	_x params ["_varName", "_defaultValue"];
+	if (isNil _varName) then {
+		missionNamespace setVariable [_varName, _defaultValue];
+		publicVariable _varName;
+	};
+} forEach [
+	["CustomObjectsSet", false],
+	["EnemyFactionData", ""],
+	["LoadoutData", ""],
+	["LoadoutDataDefault", ""],
+	["bBreifingPrepped", false],
+	["BadPoints", 0],
+	["PlayersHaveLeftStartingArea", false],
+	["KilledPlayers", []],
+	["KilledPositions", []],
+	["bBaseHasChopper", false],
+	["BadPointsReason", ""],
+	["InfTaskStarted", false],
+	["InfTaskCount", 0],
+	["ActiveTasks", []],
+	["MaxBadPoints", 11],
+	["ObjectivePossitions", []],
+	["HiddenPossitions", []],
+	["SpottedActiveFinished", true],
+	["bCommsBlocked", false],
+	["ParaDropped", false],
+	["ATFieldPos", []],
+	["AODetails", []], //AODetails = [[AOIndex,InfSpottedCount,VehSpottedCount,AirSpottedCount,bScoutCalled,patrolMoveCounter]], example [[1,0,0,0,False,0],[2,0,0,0,True,0]]
+	["CheckPointAreas", []],
+	["SentryAreas", []],
+	["bMortarFiring", false],
+	["bAndSoItBegins", false],
+	["iMissionParamType", 9],
+	["iMissionParamObjective", 0],
+	["iMissionParamObjective2", 0],
+	["iMissionParamObjective3", 0],
+	["iAllowNVG", 2],
+	["iMissionParamRepOption", 0],
+	["iWeather", 1],
+	["iUseRevive", 0],
+	["iCampaignDay", 0],
+	["CurrentZeroMissionTitle", ""],
+	["debugMessages", ""],
+	["SaveType", 0],
+	["IntelFound", []],
+	["iStartLocation", 2],
+	["ClearedPositions", []],
+	["AllowUAVLocateHelp", false],
+	["EnemyID", 1],
+	["FinalMissionStarted", false],
+	["ForceEndSandStorm", false],
+	["AOCampOnlyAmmoBox", false],
+	["MainMissionTitle", ""],
+	["ForceMissionSetup", false],
+	["IsSnowMap", false],
+	["MissionParamsSet", false],
+	["IsFullMap", false],
+	["bOptionsSet", false],
+	["MissionLoaded", false]
+];
 
-if (isNil("EnemyFactionData")) then {
-	EnemyFactionData = "";
-	publicVariable "EnemyFactionData";
-};
-if (isNil("LoadoutData")) then {
-	LoadoutData = "";
-	publicVariable "LoadoutData";
-};
-if (isNil("LoadoutDataDefault")) then {
-	LoadoutDataDefault = "";
-	publicVariable "LoadoutDataDefault";
-};
-
-if (isNil "bBreifingPrepped") then {
-			bBreifingPrepped = false;
-			publicVariable "bBreifingPrepped";
-};
-if (isNil "BadPoints") then {
-			BadPoints = 0;
-			publicVariable "BadPoints";
-};
-
-if (isNil "PlayersHaveLeftStartingArea") then {
-			PlayersHaveLeftStartingArea = false;
-			publicVariable "PlayersHaveLeftStartingArea";
-};
-
-if (isNil "KilledPlayers") then {
-	KilledPlayers = [];
-	publicVariable "KilledPlayers";
-};
-if (isNil "KilledPositions") then {
-	KilledPositions = [];
-	publicVariable "KilledPositions";
-};
-
-
-if (isNil "bBaseHasChopper") then {
-	bBaseHasChopper = false;
-	publicVariable "bBaseHasChopper";
-};
-
-if (isNil "BadPointsReason") then {
-		BadPointsReason = "";
-		publicVariable "BadPointsReason";
-};
-
-if (isNil "InfTaskStarted") then {
-		InfTaskStarted = false;
-		publicVariable "InfTaskStarted";
-};
-if (isNil "InfTaskCount") then {
-		InfTaskCount = 0;
-		publicVariable "InfTaskCount";
-};
-
-if (isNil "ActiveTasks") then {
-	ActiveTasks = [];
-	publicVariable "ActiveTasks";
-};
-
-if (isNil "MaxBadPoints") then {
-	MaxBadPoints = 11;
-	publicVariable "MaxBadPoints";
-};
-
-
-if (isNil "ObjectivePossitions") then {
-	ObjectivePossitions = [];
-	publicVariable "ObjectivePossitions";
-};
-
-if (isNil "HiddenPossitions") then {
-	HiddenPossitions = [];
-	publicVariable "HiddenPossitions";
-};
-
-if (isNil "SpottedActiveFinished") then {
-	SpottedActiveFinished = true;
-	publicVariable "SpottedActiveFinished";
-};
-if (isNil "bCommsBlocked") then {
-	bCommsBlocked = false;
-	publicVariable "bCommsBlocked";
-};
-if (isNil "bBaseHasChopper") then {
-	bBaseHasChopper = false;
-	publicVariable "bBaseHasChopper";
-};
-if (isNil "ParaDropped") then {
-	ParaDropped = false;
-	publicVariable "ParaDropped";
-};
-if (isNil "ATFieldPos") then {
-	ATFieldPos = [];
-	publicVariable "ATFieldPos";
+if (isNil "AdvancedSettings") then {
+	AdvancedSettings = DefaultAdvancedSettings;
+	publicVariable "AdvancedSettings";
 };
 if (isNil "CommsTowerPos") then {
 	bHasCommsTower = false;
@@ -111,153 +76,9 @@ if (isNil "CommsTowerPos") then {
 	publicVariable "bHasCommsTower";
 	publicVariable "CommsTowerPos";
 };
-if (isNil "AODetails") then {
-	//AODetails = [[AOIndex,InfSpottedCount,VehSpottedCount,AirSpottedCount,bScoutCalled,patrolMoveCounter]]
-	//example AODetails [[1,0,0,0,False,0],[2,0,0,0,True,0]]
-	AODetails = [];
-	publicVariable "AODetails";
-};
-
-if (isNil "CheckPointAreas") then {
-		CheckPointAreas = [];
-		publicVariable "CheckPointAreas";
-};
-if (isNil "SentryAreas") then {
-		SentryAreas = [];
-		publicVariable "SentryAreas";
-};
-if (isNil "bMortarFiring") then {
-	bMortarFiring = false;
-	publicVariable "bMortarFiring";
-};
-
-if (isNil "bAndSoItBegins") then {
-	bAndSoItBegins = false;
-	publicVariable "bAndSoItBegins";
-};
-
-if (isNil "iMissionParamType") then {
-	iMissionParamType = 9;
-	publicVariable "iMissionParamType";
-};
-if (isNil "iMissionParamObjective") then {
-	iMissionParamObjective = 0;
-	publicVariable "iMissionParamObjective";
-};
-if (isNil "iMissionParamObjective2") then {
-	iMissionParamObjective2 = 0;
-	publicVariable "iMissionParamObjective2";
-};
-if (isNil "iMissionParamObjective3") then {
-	iMissionParamObjective3 = 0;
-	publicVariable "iMissionParamObjective3";
-};
-
-if (isNil "iAllowNVG") then {
-	iAllowNVG = 2;
-	publicVariable "iAllowNVG";
-};
-
-if (isNil "iMissionParamRepOption") then {
-	iMissionParamRepOption = 0;
-	publicVariable "iMissionParamRepOption";
-};
-if (isNil "iWeather") then {
-	iWeather = 1;
-	publicVariable "iWeather";
-};
-if (isNil "iUseRevive") then {
-	iUseRevive = 0;
-	publicVariable "iUseRevive";
-};
-if (isNil "iCampaignDay") then {
-	iCampaignDay = 0;
-	publicVariable "iCampaignDay";
-};
-if (isNil "CurrentZeroMissionTitle") then {
-	CurrentZeroMissionTitle = "";
-	publicVariable "CurrentZeroMissionTitle";
-};
-
-if (isNil "debugMessages") then {
-	debugMessages = "";
-	publicVariable "debugMessages";
-};
-
-if (isNil "SaveType") then {
-			SaveType = 0;
-			publicVariable "SaveType";
-};
-if (isNil "IntelFound") then {
-			IntelFound = [];
-			publicVariable "IntelFound";
-};
-if (isNil "iStartLocation") then {
-			iStartLocation = 2;
-			publicVariable "iStartLocation";
-};
-if (isNil "AdvancedSettings") then {
-			AdvancedSettings = DefaultAdvancedSettings;
-			publicVariable "AdvancedSettings";
-
-};
-if (isNil "ClearedPositions") then {
-			ClearedPositions = [];
-			publicVariable "ClearedPositions";
-};
-if (isNil "AllowUAVLocateHelp") then {
-			AllowUAVLocateHelp = false;
-			publicVariable "AllowUAVLocateHelp";
-};
-if (isNil "EnemyID") then {
-			EnemyID = 1;
-			publicVariable "EnemyID";
-};
-if (isNil "FinalMissionStarted") then {
-	FinalMissionStarted = false;
-	publicVariable "FinalMissionStarted";	
-};
 
 if (isNil "ISUNSUNG") then {
 		ISUNSUNG = false;
-};
-if (isNil("ForceEndSandStorm")) then {
-	ForceEndSandStorm = false;
-	publicVariable "ForceEndSandStorm";
-};
-
-
-if (isNil("AOCampOnlyAmmoBox")) then {
-	AOCampOnlyAmmoBox = false;
-	publicVariable "AOCampOnlyAmmoBox";
-};
-if (isNil("MainMissionTitle")) then {
-	MainMissionTitle = "";
-	publicVariable "MainMissionTitle";
-};
-if (isNil("ForceMissionSetup")) then {
-	ForceMissionSetup = false;
-	publicVariable "ForceMissionSetup";
-};
-if (isNil "IsSnowMap") then {
-		IsSnowMap = false;
-		publicVariable "IsSnowMap";
-};
-if (isNil "MissionParamsSet") then {
-	MissionParamsSet = false;
-	publicVariable "MissionParamsSet";
-};
-if (isNil "IsFullMap") then {
-	IsFullMap = false;
-	publicVariable "IsFullMap";
-};
-if (isNil "bOptionsSet") then {
-	bOptionsSet = false;
-	publicVariable "bOptionsSet";
-};
-if (isNil "MissionLoaded") then {
-	MissionLoaded = false;
-	publicVariable "MissionLoaded";
 };
 
 if (isServer) then {
@@ -378,16 +199,9 @@ if (!isDedicated) then {
 };
 
 if (!isMultiplayer) then {
-	deleteVehicle vs1;
-	deleteVehicle vs2;
-	deleteVehicle vs3;
-	deleteVehicle vs4;
-	deleteVehicle vs5;
-	deleteVehicle vs6;
-	deleteVehicle vs7;
-	deleteVehicle vs8;
-	deleteVehicle vs9;
-	deleteVehicle vs10;
+	for "_i" from 1 to 10 do {
+		deleteVehicle (missionNamespace getVariable [format["vs%1",_i], objNull]);
+	};
 };
 
 _isAdmin = (!isMultiplayer || isMultiplayer && !isDedicated && isServer || isMultiplayer && !isServer && (call BIS_fnc_admin) != 0);
@@ -395,45 +209,24 @@ if (!isDedicated && _isAdmin) then {
 	waitUntil {sleep 0.5; bOptionsSet};
 	if (iMissionParamType != 5) then {	//if isCampaign, dont allow to select AO
 		if (AdvancedSettings select ADVSET_SELECT_AO_IDX == 1) then {
-			mrkAoSelect1 = nil;
-			mrkAoSelect2 = nil;
-			mrkAoSelect3 = nil;
 			titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED"];
 			_camera cameraEffect ["Terminate","back"];
-			titleText[localize "STR_TRGM2_tele_SelectPositionAO1", "PLAIN"];
-			openMap true;
-			onMapSingleClick "Mission1Loc = _pos; publicVariable 'Mission1Loc'; openMap false; onMapSingleClick '';true;";
-			sleep 1;
-			waitUntil {!visibleMap};
-				["mrkAoSelect1",  Mission1Loc, "ICON", "ColorRed", [1,1], "AO 1"] call AIS_Core_fnc_createLocalMarker;
-			if (iMissionParamType == 0 || iMissionParamType == 4) then {
-				titleText[localize "STR_TRGM2_tele_SelectPositionAO2", "PLAIN"];
-				openMap true;
-				onMapSingleClick "Mission2Loc = _pos; publicVariable 'Mission2Loc'; openMap false; onMapSingleClick '';true;";
-				sleep 1;
-				waitUntil {!visibleMap};
-					["mrkAoSelect2",  Mission2Loc, "ICON", "ColorRed", [1,1], "AO 2"] call AIS_Core_fnc_createLocalMarker;
-
-				titleText[localize "STR_TRGM2_tele_SelectPositionAO3", "PLAIN"];
-				openMap true;
-				onMapSingleClick "Mission3Loc = _pos; publicVariable 'Mission3Loc'; openMap false; onMapSingleClick '';true;";
-				sleep 1;
-				waitUntil {!visibleMap};
-					["mrkAoSelect3",  Mission3Loc, "ICON", "ColorRed", [1,1], "AO 3"] call AIS_Core_fnc_createLocalMarker;
+			//AO 1 always, AO 2 and 3 only for mission types with three AOs
+			_iAoCount = [1, 3] select (iMissionParamType == 0 || iMissionParamType == 4);
+			for "_i" from 1 to _iAoCount do {
+				_sLocVar = format["Mission%1Loc",_i];
+				[_sLocVar, localize format["STR_TRGM2_tele_SelectPositionAO%1",_i]] call TRGM_fnc_selectMapPosition;
+				[format["mrkAoSelect%1",_i], missionNamespace getVariable _sLocVar, "ICON", "ColorRed", [1,1], format["AO %1",_i]] call AIS_Core_fnc_createLocalMarker;
 			};
-			if (getMarkerColor "mrkAoSelect1" != "") then {deleteMarker "mrkAoSelect1";};
-			if (getMarkerColor "mrkAoSelect2" != "") then {deleteMarker "mrkAoSelect2";};
-			if (getMarkerColor "mrkAoSelect3" != "") then {deleteMarker "mrkAoSelect3";};
+			{
+				if (getMarkerColor _x != "") then {deleteMarker _x;};
+			} forEach ["mrkAoSelect1","mrkAoSelect2","mrkAoSelect3"];
 		};
 
 		if (AdvancedSettings select ADVSET_SELECT_AO_CAMP_IDX == 1 && iStartLocation == 1) then {
 			titleText [localize "STR_TRGM2_mainInit_Loading", "BLACK FADED"];
 			_camera cameraEffect ["Terminate","back"];
-			titleText[localize "STR_TRGM2_tele_SelectPosition_AO_Camp", "PLAIN"];
-			openMap true;
-			onMapSingleClick "AOCampLocation = _pos; publicVariable 'AOCampLocation'; openMap false; onMapSingleClick '';true;";
-			sleep 1;
-			waitUntil {!visibleMap};
+			["AOCampLocation", localize "STR_TRGM2_tele_SelectPosition_AO_Camp"] call TRGM_fnc_selectMapPosition;
 		};
 		
 
@@ -671,22 +464,10 @@ TREND_fnc_CheckBadPoints = {
 	};
 	_lastRepPoints = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
 	_lastBadPoints = BadPoints;
-	_LastRank = 0;
-	if (_lastRepPoints >= 10) then {_LastRank = 5;};
-	if (_lastRepPoints < 10) then {_LastRank = 4;};
-	if (_lastRepPoints < 7) then {_LastRank = 3;};
-	if (_lastRepPoints < 5) then {_LastRank = 2;};
-	if (_lastRepPoints < 3) then {_LastRank = 1;};
-	if (_lastRepPoints < 1) then {_LastRank = 0;};
+	_LastRank = [_lastRepPoints] call TRGM_fnc_getRankFromRep;
 	while {true} do {
 		_dCurrentRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
-		_CurrentRank = _LastRank;
-		if (_dCurrentRep >= 10) then {_CurrentRank = 5;};
-		if (_dCurrentRep < 10) then {_CurrentRank = 4;};
-		if (_dCurrentRep < 7) then {_CurrentRank = 3;};
-		if (_dCurrentRep < 5) then {_CurrentRank = 2;};
-		if (_dCurrentRep < 3) then {_CurrentRank = 1;};
-		if (_dCurrentRep < 1) then {_CurrentRank = 0;};
+		_CurrentRank = [_dCurrentRep] call TRGM_fnc_getRankFromRep;
 		if (_dCurrentRep != _lastRepPoints) then {
 			if (SaveType != 0) then {
 				[SaveType,false] execVM "RandFramework\Campaign\ServerSave.sqf";
@@ -724,16 +505,9 @@ TREND_fnc_CheckBadPoints = {
 			if (_CurrentRank > _LastRank) then {_bRepWorse = false};
 			_LastRank = _CurrentRank;
 			if (iMissionParamType == 5) then {
-				_sRankIcon = "";
 				_sRankMessage = "";
-				//HERE HERE HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				//!!!!!! rank cound go from 2.2 to 3.2 and would not show icon... so need to check if =< 3 and if rank has actually changed!
-				if (_dCurrentRep >= 10) then {_sRankIcon = "<img image='RandFramework\Media\Rank5.jpg' size='3.5' />";};
-				if (_dCurrentRep < 10) then {_sRankIcon = "<img image='RandFramework\Media\Rank4.jpg' size='3.5' />";};
-				if (_dCurrentRep < 7) then {_sRankIcon = "<img image='RandFramework\Media\Rank3.jpg' size='3.5' />";};
-				if (_dCurrentRep < 5) then {_sRankIcon = "<img image='RandFramework\Media\Rank2.jpg' size='3.5' />";};
-				if (_dCurrentRep < 3) then {_sRankIcon = "<img image='RandFramework\Media\Rank1b.jpg' size='3.5' />";};
-				if (_dCurrentRep <= 0) then {_sRankIcon = "<img image='RandFramework\Media\Rank0.jpg' size='3.5' />";};
+				_sRankIcon = [_dCurrentRep] call TRGM_fnc_getRankIcon;
 				if (_bRepWorse) then {
 					_sRankMessage = "<t color='#ff0000'>" + localize "STR_TRGM2_mainInit_ReputationDropped" + "</t><br /><br />" + _sRankIcon + "<br /><br />" + localize "STR_TRGM2_mainInit_ReputationText";
 				}
@@ -826,7 +600,7 @@ if (iAllowNVG == 0) then {
 	TREND_fnc_SandStormEffect = {
 		_iSandStormOption = AdvancedSettings select ADVSET_SANDSTORM_IDX;
 
-		if (_iSandStormOption == 0 && selectRandom[true,false,false,false,false]) then { //Random
+		if ((_iSandStormOption == 0 && selectRandom[true,false,false,false,false]) || _iSandStormOption == 1) then { //0 = Random, 1 = Always
 			StartWhen = selectRandom [990,1290,1710];
 			sleep StartWhen;
 			//work out how to deal with JIP if sandstorm already playing
@@ -834,85 +608,15 @@ if (iAllowNVG == 0) then {
 			SandStormTimer = selectRandom [150,390,630];
 			publicVariable "SandStormTimer";
 			{nul = [SandStormTimer,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
-			//Set enemy skill
-			{
-				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.01];
-					_x setskill ["aimingShake",0.01];
-					_x setskill ["aimingSpeed",0.01];
-					_x setskill ["spotDistance",0.01];
-					_x setskill ["spotTime",0.01];
-				};
-			} forEach allUnits;
+			[true] call TRGM_fnc_setEnemySandstormSkill;
 			sleep SandStormTimer;
-			//reset enemy skill
-			{
-				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.15];
-					_x setskill ["aimingShake",0.1];
-					_x setskill ["aimingSpeed",0.2];
-					_x setskill ["spotDistance",0.5];
-					_x setskill ["spotTime",0.5];
-				};
-			} forEach allUnits;
-		};
-		if (_iSandStormOption == 1) then { //Always
-			StartWhen = selectRandom [990,1290,1710];
-			sleep StartWhen;
-			//work out how to deal with JIP if sandstorm already playing
-			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
-			SandStormTimer = selectRandom [150,390,630];
-			publicVariable "SandStormTimer";
-			{nul = [SandStormTimer,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
-			//Set enemy skill
-			{
-				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.01];
-					_x setskill ["aimingShake",0.01];
-					_x setskill ["aimingSpeed",0.01];
-					_x setskill ["spotDistance",0.01];
-					_x setskill ["spotTime",0.01];
-				};
-			} forEach allUnits;
-			sleep SandStormTimer;
-			//reset enemy skill
-			{
-				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.15];
-					_x setskill ["aimingShake",0.1];
-					_x setskill ["aimingSpeed",0.2];
-					_x setskill ["spotDistance",0.5];
-					_x setskill ["spotTime",0.5];
-				};
-			} forEach allUnits;
+			[false] call TRGM_fnc_setEnemySandstormSkill;
 		};
 		if (_iSandStormOption == 3) then { //5 hours non stop
-			//ok, if something is true, then in here we will start the sand storm and all clients!
-			//work out how to deal with JIP if sandstorm already playing
-			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
 			{nul = [18030,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
-			//Set enemy skill
-			{
-				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.01];
-					_x setskill ["aimingShake",0.01];
-					_x setskill ["aimingSpeed",0.01];
-					_x setskill ["spotDistance",0.01];
-					_x setskill ["spotTime",0.01];
-				};
-			} forEach allUnits;
+			[true] call TRGM_fnc_setEnemySandstormSkill;
 			sleep 18030;
-			//reset enemy skill
-			{
-				if (Side _x == East) then {
-					_x setskill ["aimingAccuracy",0.15];
-					_x setskill ["aimingShake",0.1];
-					_x setskill ["aimingSpeed",0.2];
-					_x setskill ["spotDistance",0.5];
-					_x setskill ["spotTime",0.5];
-				};
-			} forEach allUnits;
-			//reset enemy skill
+			[false] call TRGM_fnc_setEnemySandstormSkill;
 		};
 
 	};

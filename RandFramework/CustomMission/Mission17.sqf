@@ -197,17 +197,6 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 	] remoteExec ["BIS_fnc_holdActionAdd", 0, _flag];	// MP compatible implementation
 
 
-	_customTaskClear = nil;
-	_customTaskClear = createTrigger ["EmptyDetector", [0,0], false];
-	_customTaskClear setVariable ["DelMeOnNewCampaignDay",true];
-	
 	_customTaskClearCondition = format["ObjFlag%1 getVariable [""SupplyDropped"", false]",_iTaskIndex];
-
-	if (!_bCreateTask) then {
-		_customTaskClear setTriggerStatements [_customTaskClearCondition, " [1, ""Area Cleared""] call TRGM_fnc_adjustMaxBadPoints; [""Area Cleared, Rep increased""] remoteExec [""Hint"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
-	}
-	else {		
-		_sTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
-		_customTaskClear setTriggerStatements [_customTaskClearCondition, _sTaskComplete, ""];	
-	};
+	[_customTaskClearCondition, _iTaskIndex, _bCreateTask, "Area Cleared", "Area Cleared, Rep increased"] call TRGM_fnc_createObjectiveClearedTrigger;
 };

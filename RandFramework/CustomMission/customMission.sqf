@@ -384,43 +384,29 @@ _guardUnit3 addEventHandler ["Killed", {(_this select 0) setVariable ["taskStatu
 	//sleep 1; //give enough time for variable to be set against mainHVT if he was killed (i check if he is alive too, as if for some reason this unit is deleted and no variable set against him, i will need to make sure these waituntil loops are not just hanging around the entire mission)
 
 
-	_customTaskClear = nil;
-	_customTaskClear = createTrigger ["EmptyDetector", [0,0], false];
-	_customTaskClear setVariable ["DelMeOnNewCampaignDay",true];
-	_customTaskFailed = nil;
-	_customTaskFailed = createTrigger ["EmptyDetector", [0,0], false];
-	_customTaskFailed setVariable ["DelMeOnNewCampaignDay",true];
-	_customTaskEscaped = nil;
-	_customTaskEscaped = createTrigger ["EmptyDetector", [0,0], false];
-	_customTaskEscaped setVariable ["DelMeOnNewCampaignDay",true];
-
 	if (!_bCreateTask) then {
 		_sAliveCheck = format["%1 getVariable [""taskStatus"",""""] == ""KILLED"" ",_sTargetName];
-		_customTaskClear setTriggerStatements [_sAliveCheck, " [1, ""Killed HVT at meeting""] call TRGM_fnc_adjustMaxBadPoints; [""HVT Killed, rep increased""] remoteExec [""Hint"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
+		[_sAliveCheck, _iTaskIndex, false, "Killed HVT at meeting", "HVT Killed, rep increased"] call TRGM_fnc_createObjectiveClearedTrigger;
 
 		_sAliveCheck2 = format["%1 getVariable [""taskStatus"",""""] == ""KILLED""",_sTargetName2];
-		_customTaskFailed setTriggerStatements [_sAliveCheck2, " [0.8, ""our agent was killed!!!""] call TRGM_fnc_adjustBadPoints; [""You killed our agent! Rep lowered""] remoteExec [""Hint"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
-
+		[_sAliveCheck2, _iTaskIndex, false, "our agent was killed!!!", "You killed our agent! Rep lowered", 0.8, "TRGM_fnc_adjustBadPoints"] call TRGM_fnc_createObjectiveClearedTrigger;
 	}
 	else {
 		_sAliveCheck = format["(%1 getVariable [""taskStatus"",""""] == ""KILLED"" || (%1 getVariable [""taskStatus"",""""] == ""DOCTAKEN"")) && !([""InfSide%2""] call FHQ_TT_areTasksCompleted)",_sTargetName,_iTaskIndex];
-		_sTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
-		_customTaskClear setTriggerStatements [_sAliveCheck, _sTaskComplete, ""];	
+		[_sAliveCheck, _iTaskIndex, true] call TRGM_fnc_createObjectiveClearedTrigger;
 
 		_sAliveCheck2 = format["(%1 getVariable [""taskStatus"",""""] == ""KILLED"")",_sTargetName2];
-		_sTaskFail = format["[""InfSide%1"", ""failed""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
-		_customTaskFailed setTriggerStatements [_sAliveCheck2, _sTaskFail, ""];	
+		[_sAliveCheck2, _iTaskIndex, true, "", "", 1, "", "failed"] call TRGM_fnc_createObjectiveClearedTrigger;
 
 		_sAliveCheck3 = format["%1 getVariable [""taskStatus"",""""] == ""ESCAPED"" ",_sTargetName];
-		_sTaskFail2 = format["[""InfSide%1"", ""failed""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
-		_customTaskEscaped setTriggerStatements [_sAliveCheck3, _sTaskFail2, ""];	
+		[_sAliveCheck3, _iTaskIndex, true, "", "", 1, "", "failed"] call TRGM_fnc_createObjectiveClearedTrigger;
 	};
 
 	_MissionTitle = format["Meeting Assassination: %1",name(_mainHVT)];	//you can adjust this here to change what shows as marker and task text 
 	_sTaskDescription = format[selectRandom["Intel has confirmed that our target %1 is on route to the AO marked on the map","%1 is flying into the area for a short meeting to hand over some documents! We need this HVT terminated!"],name(_mainHVT)]; //adjust this based on veh? and man? if van then if car then?
 		//or just random description that will fit all situations??
 	if (_bIsMainObjective) then {
-		sTaskDescription = _sTaskDescription + "<br /><br />Once killed, search his body for the documents he is carrying!"
+		_sTaskDescription = _sTaskDescription + "<br /><br />Once killed, search his body for the documents he is carrying!"
 	};
 	_sTaskDescription = _sTaskDescription + "<br /><br />!NOTE: we have an under cover agent flying in with our HVT, so watch your fire! Our agent will give a signal (tie his shoelace) to confirm his identity, but if you fail to see that, then you can confirm who the HVT is by who meets up and talks to they guy waiting at the AO.<br />Try not to get spotted before you take out the target, getting spotted will cause the HVT to run to the meeting and will have a smoke shield in place!"
 

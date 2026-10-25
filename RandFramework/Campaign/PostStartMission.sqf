@@ -67,12 +67,9 @@ _isHiddenObj = false;
 			_LineOne = "TRGM 2"
 		};
 
+		titleText ["", "BLACK IN", 5];
 		if ((MaxBadPoints - BadPoints) >= 10) then {
-			titleText ["", "BLACK IN", 5];
 			_LineTwo = (localize "STR_TRGM2_StartMission_Final") + CurrentZeroMissionTitle;
-		}
-		else {
-			titleText ["", "BLACK IN", 5];
 		};
 
 
@@ -88,23 +85,9 @@ _isHiddenObj = false;
 		playMusic NewMissionMusic;
 		if (bDebugMode) then {[format["StartMission Music: %1", NewMissionMusic]] remoteExec ["systemChat", 0];};
 
-		txt1Layer = "txt1" call BIS_fnc_rscLayer;
-		txt2Layer = "txt2" call BIS_fnc_rscLayer;
-
-
-	    _texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.6' color='#ffffff'>" + _LineTwo +"</t>";
-	    [_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
-
-
-		txt5Layer = "txt5" call BIS_fnc_rscLayer;
-		txt6Layer = "txt6" call BIS_fnc_rscLayer;
-
-
-	    _texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + _LineOne +"</t>";
-	    [_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
-
-	    _texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + (AdvancedSettings select ADVSET_GROUP_NAME_IDX) + "</t>";
-	    [_texta, -0, 0.350, 7, 1,0,txt6Layer] spawn BIS_fnc_dynamicText;
+		[_LineTwo, 0.6, 0.220, "txt1"] call TRGM_fnc_showLayerText;
+		[_LineOne, 0.8, 0.150, "txt5"] call TRGM_fnc_showLayerText;
+		[AdvancedSettings select ADVSET_GROUP_NAME_IDX, 0.8, 0.350, "txt6"] call TRGM_fnc_showLayerText;
 
 		showcinemaborder true;
 

@@ -36,115 +36,39 @@ if (iMissionParamObjective3 > 0) then {
 if (bDebugMode) then {["Mission Setup: 14"] remoteExec ["systemChat", 0];};
 
 iMissionSetup = iMissionParamType;
-if (iMissionSetup == 0) then {
-	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
-	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-	_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
-	_CreateTasks = [true,false,false];
-	_SamePrevAOStats = [false,false,false];
-	_bSideMissionsCivOnly = [false,false,false];
-	MaxBadPoints = 1;
-};
-if (iMissionSetup == 1) then {
-	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom MissionsThatHaveIntel,selectRandom MissionsThatHaveIntel];
-	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-	_MarkerTypes = ["empty","hd_dot","hd_dot"];
-	_CreateTasks = [true,false,false];
-	_SamePrevAOStats = [false,false,false];
-	_bSideMissionsCivOnly = [false,false,false];
-	MaxBadPoints = 1;
-};
-if (iMissionSetup == 2) then {
-	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse];
-	_IsMainObjs = [true]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-	_MarkerTypes = ["mil_objective"]; //INFORMANT: changed this back to mil_objective
-	_CreateTasks = [true];
-	_SamePrevAOStats = [false];
-	_bSideMissionsCivOnly = [false];
-	MaxBadPoints = 1;
-};
-
-if (iMissionSetup == 8) then { //Heavy Mission, hidden AO and mission type
-	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,4];
-	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-	_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
-	_CreateTasks = [true,true,false];
-	_SamePrevAOStats = [false,true,false];
-	_bSideMissionsCivOnly = [false,false,true];
-	MaxBadPoints = 1;
-};
-
-if (iMissionSetup == 3) then {
-	if (selectRandom [true,false,false]) then {
-		_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1,4];
-		_IsMainObjs = [false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-		_MarkerTypes = ["mil_objective","hd_dot"];
-		_CreateTasks = [true,false];
-		_SamePrevAOStats = [false,false];
+//_IsMainObjs: if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+switch (iMissionSetup) do {
+	case 0: {
+		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
+		_IsMainObjs = [true,false,false];
+		_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
+		_CreateTasks = [true,false,false];
+		_SamePrevAOStats = [false,false,false];
+		_bSideMissionsCivOnly = [false,false,false];
 		MaxBadPoints = 1;
-		_bSideMissionsCivOnly = [false,true];
-	}
-	else {
-		_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1];
-		_IsMainObjs = [false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-		_MarkerTypes = ["mil_objective"];
+	};
+	case 1: {
+		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom MissionsThatHaveIntel,selectRandom MissionsThatHaveIntel];
+		_IsMainObjs = [true,false,false];
+		_MarkerTypes = ["empty","hd_dot","hd_dot"];
+		_CreateTasks = [true,false,false];
+		_SamePrevAOStats = [false,false,false];
+		_bSideMissionsCivOnly = [false,false,false];
+		MaxBadPoints = 1;
+	};
+	case 2: {
+		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse];
+		_IsMainObjs = [true];
+		_MarkerTypes = ["mil_objective"]; //INFORMANT: changed this back to mil_objective
 		_CreateTasks = [true];
 		_SamePrevAOStats = [false];
 		_bSideMissionsCivOnly = [false];
 		MaxBadPoints = 1;
 	};
-};
-if (iMissionSetup == 9) then { //Heavy Mission (two objectives at AO, chance of side)
-	if (selectRandom[true,false]) then {
-		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1];
-		_IsMainObjs = [false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-		_MarkerTypes = ["mil_objective","hd_dot"];
-		_CreateTasks = [true,true];
-		_SamePrevAOStats = [false,true];
-		_bSideMissionsCivOnly = [false,false];
-		MaxBadPoints = 1;
-	}
-	else {
-		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,4];
-		_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-		_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
-		_CreateTasks = [true,true,false];
-		_SamePrevAOStats = [false,true,false];
-		_bSideMissionsCivOnly = [false,false,true];
-		MaxBadPoints = 1;
-	}
-};
-
-if (iMissionSetup == 4) then {
-	if (iMissionParamObjective > 0) then {
-		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
-	}
-	else {
-		_ThisTaskTypes = [selectRandom SideMissionTasks,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
-	};
-	
-	_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-	_MarkerTypes = ["mil_objective","mil_objective","mil_objective"];
-	_CreateTasks = [true,true,true];
-	_SamePrevAOStats = [false,false,false];
-	_bSideMissionsCivOnly = [false,false,false];
-	MaxBadPoints = 1;
-};
-if (iMissionSetup == 5) then {
-	_totalRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
-	if (_totalRep >= 10) then {
-		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom MissionsThatHaveIntel,selectRandom MissionsThatHaveIntel];
-		_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-		_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
-		_CreateTasks = [true,false,false];
-		_SamePrevAOStats = [false,false,false];
-		_bSideMissionsCivOnly = [false,false,false];
-		_bIsCampaignFinalMission = true;
-	}
-	else {
+	case 3: {
 		if (selectRandom [true,false,false]) then {
 			_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1,4];
-			_IsMainObjs = [false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+			_IsMainObjs = [false,false];
 			_MarkerTypes = ["mil_objective","hd_dot"];
 			_CreateTasks = [true,false];
 			_SamePrevAOStats = [false,false];
@@ -152,50 +76,108 @@ if (iMissionSetup == 5) then {
 		}
 		else {
 			_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1];
-			_IsMainObjs = [false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
+			_IsMainObjs = [false];
 			_MarkerTypes = ["mil_objective"];
 			_CreateTasks = [true];
 			_SamePrevAOStats = [false];
 			_bSideMissionsCivOnly = [false];
 		};
+		MaxBadPoints = 1;
 	};
-	_bIsCampaign = true;
-};
-if (iMissionSetup == 6) then {
-	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse1];
-	_IsMainObjs = [true,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-	_MarkerTypes = ["mil_objective","empty","empty"];
-	_CreateTasks = [true,false,false];
-	_SamePrevAOStats = [false,false,false];
-	_bSideMissionsCivOnly = [false,false,false];
-	MaxBadPoints = 1;
-};
-if (iMissionSetup == 7) then {
-	if (iMissionParamObjective > 0) then {
-		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
-	}
-	else {
-		_ThisTaskTypes = [selectRandom SideMissionTasks,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
+	case 4;
+	case 7: { //7 = as 4 but with hidden markers
+		if (iMissionParamObjective > 0) then {
+			_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
+		}
+		else {
+			_ThisTaskTypes = [selectRandom SideMissionTasks,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse2];
+		};
+		_IsMainObjs = [false,false,false];
+		_MarkerTypes = [["mil_objective","mil_objective","mil_objective"], ["empty","empty","empty"]] select (iMissionSetup == 7);
+		_CreateTasks = [true,true,true];
+		_SamePrevAOStats = [false,false,false];
+		_bSideMissionsCivOnly = [false,false,false];
+		MaxBadPoints = 1;
 	};
-	_IsMainObjs = [false,false,false]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-	_MarkerTypes = ["empty","empty","empty"];
-	_CreateTasks = [true,true,true];
-	_SamePrevAOStats = [false,false,false];
-	_bSideMissionsCivOnly = [false,false,false];
-	MaxBadPoints = 1;
-};
-
-
-if (iMissionSetup == 10) then { //Hidden Full map Heavy Mission 
-	IsFullMap = true;
-	publicVariable "IsFullMap";
-	_ThisTaskTypes = [selectRandom _MainMissionTasksToUse];
-	_IsMainObjs = [true]; //if false, then chacne of no enemu, or civs only etc.... if true, then more chacne of bad shit happening
-	_MarkerTypes = ["empty"];
-	_CreateTasks = [true];
-	_SamePrevAOStats = [false];
-	_bSideMissionsCivOnly = [false];
-	MaxBadPoints = 1;
+	case 5: { //campaign
+		_totalRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
+		if (_totalRep >= 10) then {
+			_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom MissionsThatHaveIntel,selectRandom MissionsThatHaveIntel];
+			_IsMainObjs = [true,false,false];
+			_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
+			_CreateTasks = [true,false,false];
+			_SamePrevAOStats = [false,false,false];
+			_bSideMissionsCivOnly = [false,false,false];
+			_bIsCampaignFinalMission = true;
+		}
+		else {
+			if (selectRandom [true,false,false]) then {
+				_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1,4];
+				_IsMainObjs = [false,false];
+				_MarkerTypes = ["mil_objective","hd_dot"];
+				_CreateTasks = [true,false];
+				_SamePrevAOStats = [false,false];
+				_bSideMissionsCivOnly = [false,true];
+			}
+			else {
+				_ThisTaskTypes = [selectRandom _SideMissionTasksToUse1];
+				_IsMainObjs = [false];
+				_MarkerTypes = ["mil_objective"];
+				_CreateTasks = [true];
+				_SamePrevAOStats = [false];
+				_bSideMissionsCivOnly = [false];
+			};
+		};
+		_bIsCampaign = true;
+	};
+	case 6: {
+		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,selectRandom _SideMissionTasksToUse1];
+		_IsMainObjs = [true,false,false];
+		_MarkerTypes = ["mil_objective","empty","empty"];
+		_CreateTasks = [true,false,false];
+		_SamePrevAOStats = [false,false,false];
+		_bSideMissionsCivOnly = [false,false,false];
+		MaxBadPoints = 1;
+	};
+	case 8: { //Heavy Mission, hidden AO and mission type
+		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,4];
+		_IsMainObjs = [true,false,false];
+		_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
+		_CreateTasks = [true,true,false];
+		_SamePrevAOStats = [false,true,false];
+		_bSideMissionsCivOnly = [false,false,true];
+		MaxBadPoints = 1;
+	};
+	case 9: { //Heavy Mission (two objectives at AO, chance of side)
+		if (selectRandom[true,false]) then {
+			_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1];
+			_IsMainObjs = [false,false];
+			_MarkerTypes = ["mil_objective","hd_dot"];
+			_CreateTasks = [true,true];
+			_SamePrevAOStats = [false,true];
+			_bSideMissionsCivOnly = [false,false];
+		}
+		else {
+			_ThisTaskTypes = [selectRandom _MainMissionTasksToUse,selectRandom _SideMissionTasksToUse1,4];
+			_IsMainObjs = [false,false,false];
+			_MarkerTypes = ["mil_objective","hd_dot","hd_dot"];
+			_CreateTasks = [true,true,false];
+			_SamePrevAOStats = [false,true,false];
+			_bSideMissionsCivOnly = [false,false,true];
+		};
+		MaxBadPoints = 1;
+	};
+	case 10: { //Hidden Full map Heavy Mission
+		IsFullMap = true;
+		publicVariable "IsFullMap";
+		_ThisTaskTypes = [selectRandom _MainMissionTasksToUse];
+		_IsMainObjs = [true];
+		_MarkerTypes = ["empty"];
+		_CreateTasks = [true];
+		_SamePrevAOStats = [false];
+		_bSideMissionsCivOnly = [false];
+		MaxBadPoints = 1;
+	};
 };
 
 
@@ -222,6 +204,23 @@ _randInfor1X = nil;
 _randInfor1Y = nil;
 _buildings = nil;
 
+//mission title string per task type (index = task type, 1..12; custom missions 13+ set their own)
+_MissionTitleKeys = [
+	"",
+	"STR_TRGM2_startInfMission_MissionTitle1", //1 Hack Data
+	"STR_TRGM2_startInfMission_MissionTitle2", //2 Steal data from research vehicle
+	"STR_TRGM2_startInfMission_MissionTitle3", //3 Destroy Ammo Trucks
+	"STR_TRGM2_startInfMission_MissionTitle4", //4 Speak with informant
+	"STR_TRGM2_startInfMission_MissionTitle5", //5 interrogate officer
+	"STR_TRGM2_startInfMission_MissionTitle6", //6 Transmit Enemy Comms to HQ
+	"STR_TRGM2_startInfMission_MissionTitle7", //7 Eliminate Officer   -   gain 1 point if side, if main, need to id him before complete
+	"STR_TRGM2_startInfMission_MissionTitle8", //8 Assasinate weapon dealer   -   gain 1 point if side, no intel from him... if main need to id him before complete
+	"STR_TRGM2_startInfMission_MissionTitle9", //9 Destroy AAA vehicles
+	"STR_TRGM2_startInfMission_MissionTitle10", //10 Destroy Artillery vehicles
+	"STR_TRGM2_Rescue_POW", //11
+	"STR_TRGM2_Rescue_Reporter" //12
+];
+
 if (bDebugMode) then {["Mission Setup: 12.5"] remoteExec ["systemChat", 0];};
 
 while {(InfTaskCount < count _ThisTaskTypes)} do {
@@ -233,7 +232,6 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 		_iTaskIndex = InfTaskCount;
 	};
 
-	_iThisTaskType = nil;
 	_iThisTaskType = _ThisTaskTypes select InfTaskCount;
 
 
@@ -277,18 +275,7 @@ if (bDebugMode) then {["Mission Setup: 12"] remoteExec ["systemChat", 0];};
 				_bNewTaskSetup = false;
 				if (bDebugMode) then {["Mission Setup: 11"] remoteExec ["systemChat", 0];};
 
-				if (_iThisTaskType == 1) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle1"}; //Hack Data
-				if (_iThisTaskType == 2) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle2"}; //Steal data from research vehicle
-				if (_iThisTaskType == 3) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle3"}; //Destroy Ammo Trucks
-				if (_iThisTaskType == 4) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle4"}; //Speak with informant
-				if (_iThisTaskType == 5) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle5"}; //interrogate officer
-				if (_iThisTaskType == 6) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle6"}; //Transmit Enemy Comms to HQ
-				if (_iThisTaskType == 7) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle7"}; //Eliminate Officer   -   gain 1 point if side, if main, need to id him before complete
-				if (_iThisTaskType == 8) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle8"}; //Assasinate weapon dealer   -   gain 1 point if side, no intel from him... if main need to id him before complete
-				if (_iThisTaskType == 9) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle9"}; //Destroy AAA vehicles
-				if (_iThisTaskType == 10) then {_MissionTitle = localize "STR_TRGM2_startInfMission_MissionTitle10"}; //Destroy Artillery vehicles
-				if (_iThisTaskType == 11) then {_MissionTitle = localize "STR_TRGM2_Rescue_POW"}; 
-				if (_iThisTaskType == 12) then {_MissionTitle = localize "STR_TRGM2_Rescue_Reporter"}; 		
+				if (_iThisTaskType >= 1 && _iThisTaskType < count _MissionTitleKeys) then {_MissionTitle = localize (_MissionTitleKeys select _iThisTaskType)};
 				if (_iThisTaskType == 13) then {
 					#include "..\RandFramework\CustomMission\Mission13.sqf"; //defuse 3 IEDs
 					[] call fnc_CustomVars;
@@ -319,16 +306,9 @@ if (bDebugMode) then {["Mission Setup: 12"] remoteExec ["systemChat", 0];};
 				};	
 
 
-				_bUserDefinedAO = false;
-				if (_iTaskIndex == 0 && !isNil "Mission1Loc") then {
-					_bUserDefinedAO = true;
-				};
-				if (_iTaskIndex == 1 && !isNil "Mission2Loc") then {
-					_bUserDefinedAO = true;
-				};
-				if (_iTaskIndex == 2 && !isNil "Mission3Loc") then {
-					_bUserDefinedAO = true;
-				};
+				//user defined AO location for the first three tasks (Mission1Loc..Mission3Loc)
+				_sUserAOLocVar = format["Mission%1Loc",_iTaskIndex+1];
+				_bUserDefinedAO = _iTaskIndex < 3 && {!isNil _sUserAOLocVar};
 
 				//kill leader (he will run away in car to AO)    ::   save stranded guys    ::      
 				if (bDebugMode) then {["Mission Setup: 10"] remoteExec ["systemChat", 0];};
@@ -343,21 +323,10 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 						_randInfor1X = 0 + (floor random 25000);
 						_randInfor1Y = 0 + (floor random 25000);
 						_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], BasicBuildings, 200];
-						if (_iTaskIndex == 0 && !_bIsCampaign && !(isNil "Mission1Loc")) then {
-							_randInfor1X = Mission1Loc select 0;
-							_randInfor1Y = Mission1Loc select 1;							
-							_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], BasicBuildings, 50*_attempts];
-							if (_attempts > 100) then {hint format["Still no location found after %1 attempts!",_attempts]}
-						};
-						if (_iTaskIndex == 1 && !_bIsCampaign && !(isNil "Mission2Loc")) then {
-							_randInfor1X = Mission2Loc select 0;
-							_randInfor1Y = Mission2Loc select 1;							
-							_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], BasicBuildings, 50*_attempts];
-							if (_attempts > 100) then {hint format["Still no location found after %1 attempts!",_attempts]}
-						};
-						if (_iTaskIndex == 2 && !_bIsCampaign && !(isNil "Mission3Loc")) then {
-							_randInfor1X = Mission3Loc select 0;
-							_randInfor1Y = Mission3Loc select 1;							
+						if (_bUserDefinedAO && !_bIsCampaign) then {
+							_userAOLoc = missionNamespace getVariable _sUserAOLocVar;
+							_randInfor1X = _userAOLoc select 0;
+							_randInfor1Y = _userAOLoc select 1;
 							_buildings = nearestObjects [[_randInfor1X,_randInfor1Y], BasicBuildings, 50*_attempts];
 							if (_attempts > 100) then {hint format["Still no location found after %1 attempts!",_attempts]}
 						};
@@ -520,134 +489,47 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 											_objVehicle2 setDir (_direction);
 										};
 									};
-									_triggerAmmoTruckClear = nil;
-									_triggerAmmoTruckClear = createTrigger ["EmptyDetector", [0,0], false];
-									_triggerAmmoTruckClear setVariable ["DelMeOnNewCampaignDay",true];
-									if (!_bCreateTask) then {
-
-										_triggerAmmoTruckClear setTriggerStatements [format["!alive(%1) && !alive(%2)",_sTargetName,_sTargetName2], " [1, ""Destroyed ammo trucks""] call TRGM_fnc_adjustMaxBadPoints; [localize ""STR_TRGM2_startInfMission_MissionTitle3_Destory""] remoteExec [""Hint"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
-									}
-									else {
-										//!([InfSide%3] call FHQ_TT_areTasksCompleted)
-										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
-										_triggerAmmoTruckClear setTriggerStatements [format["!alive(%1) && !alive(%2) && !([""InfSide%3""] call FHQ_TT_areTasksCompleted)",_sTargetName,_sTargetName2,_iTaskIndex], _sKillOfficerTaskComplete, ""];	
-
-									};
+									_sAliveCheck = format["!alive(%1) && !alive(%2)",_sTargetName,_sTargetName2];
+									if (_bCreateTask) then {_sAliveCheck = _sAliveCheck + format[" && !([""InfSide%1""] call FHQ_TT_areTasksCompleted)",_iTaskIndex]};
+									[_sAliveCheck, _iTaskIndex, _bCreateTask, "Destroyed ammo trucks", localize "STR_TRGM2_startInfMission_MissionTitle3_Destory"] call TRGM_fnc_createObjectiveClearedTrigger;
 									_sTaskDescription = selectRandom[
 										localize "STR_TRGM2_startInfMission_MissionTitle3_Desc"];
 								};
 
-								//###################################### Destroy AAA ###################
+								//###################################### Destroy AAA / Destroy Arti ###################
 								if (bDebugMode) then {["Mission Setup: 8-0-6"] remoteExec ["systemChat", 0];};
-								if (_iThisTaskType == 9) then {
-									_allowFriendlyIns = false;
-									if (_MarkerType != "empty") then { _MarkerType = "hd_unknown"; };
-
-									_sTargetName = format["objInformant%1",_iTaskIndex];
-									_sTargetName2 = format["objInformant2_%1",_iTaskIndex];
-									_sTargetName3 = format["objInformant3_%1",_iTaskIndex];
-									_truckType = selectRandom DestroyAAAVeh;
-									sAliveCheck = format["!alive(%1) && !alive(%2) && !([""InfSide%3""] call FHQ_TT_areTasksCompleted)",_sTargetName,_sTargetName2,_iTaskIndex];
-
-									_flatPos = nil;
-									_flatPos = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
-									if (str(_flatPos) == "[0,0,0]") then {_flatPos = [[_inf1X,_inf1Y,0] , 15, 250, 7, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;};
-									_objVehicle = nil;
-									_objVehicle = _truckType createVehicle [0,0,500];
-									_objVehicle setVariable [_sTargetName, _objVehicle, true];
-									createVehicleCrew _objVehicle;
-									missionNamespace setVariable [_sTargetName, _objVehicle];
-									_objVehicle setPos _flatPos;
-									_objVehicle disableAI "MOVE";
-									[missionNamespace getVariable _sTargetName] spawn TRGM_fnc_radioChatterLoop;
-
-									_flatPos2 = nil;
-									_flatPos2 = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[[_flatPos,100]],[[_inf1X,_inf1Y,0],[_inf1X,_inf1Y,0]]] call BIS_fnc_findSafePos;
-									if (str(_flatPos2) == "[0,0,0]") then {
-										sAliveCheck = format["!alive(%1) && !([""InfSide%2""] call FHQ_TT_areTasksCompleted)",_sTargetName,_iTaskIndex];
-									}
-									else {
-										_objVehicle2 = nil;
-										_objVehicle2 = _truckType createVehicle [20,20,500];
-										_objVehicle2 setVariable [_sTargetName2, _objVehicle2, true];
-										createVehicleCrew _objVehicle2;
-										missionNamespace setVariable [_sTargetName2, _objVehicle2];
-										_objVehicle2 setPos _flatPos2;
-										_objVehicle2 disableAI "MOVE";
-										[missionNamespace getVariable _sTargetName2] spawn TRGM_fnc_radioChatterLoop;
-									};
-
-									_triggerAmmoTruckClear = nil;
-									_triggerAmmoTruckClear = createTrigger ["EmptyDetector", [0,0], false];
-									_triggerAmmoTruckClear setVariable ["DelMeOnNewCampaignDay",true];
-									if (!_bCreateTask) then {
-
-										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " [1, ""Destroyed AAA""] call TRGM_fnc_adjustMaxBadPoints; [localize ""STR_TRGM2_startInfMission_MissionTitle9_Destory""] remoteExec [""Hint"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
-									}
-									else {
-										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
-										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, _sKillOfficerTaskComplete, ""];	
-
-									};
-									_sTaskDescription = selectRandom[
-										localize "STR_TRGM2_startInfMission_MissionTitle9_Desc"];
-
-								};
-								//###################################### Destroy Arti ###################
 								if (bDebugMode) then {["Mission Setup: 8-0-5"] remoteExec ["systemChat", 0];};
-								if (_iThisTaskType == 10) then {
+								if (_iThisTaskType == 9 || _iThisTaskType == 10) then { //9 = AAA, 10 = artillery
 									_allowFriendlyIns = false;
 									if (_MarkerType != "empty") then { _MarkerType = "hd_unknown"; };
 
+									_bIsAAA = _iThisTaskType == 9;
 									_sTargetName = format["objInformant%1",_iTaskIndex];
 									_sTargetName2 = format["objInformant2_%1",_iTaskIndex];
-									_truckType = sArtilleryVeh;
-									sAliveCheck = format["!alive(%1) && !alive(%2) && !([""InfSide%3""] call FHQ_TT_areTasksCompleted)",_sTargetName,_sTargetName2,_iTaskIndex];
+									_truckType = if (_bIsAAA) then {selectRandom DestroyAAAVeh} else {sArtilleryVeh};
+									_loopFnc = if (_bIsAAA) then {TRGM_fnc_radioChatterLoop} else {TRGM_fnc_artilleryFireLoop};
+									_sAliveCheck = format["!alive(%1) && !alive(%2) && !([""InfSide%3""] call FHQ_TT_areTasksCompleted)",_sTargetName,_sTargetName2,_iTaskIndex];
 
-									_flatPos = nil;
 									_flatPos = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 									if (str(_flatPos) == "[0,0,0]") then {_flatPos = [[_inf1X,_inf1Y,0] , 15, 250, 7, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;};
-									_objVehicle = nil;
-									_objVehicle = _truckType createVehicle [0,0,500];
-									_objVehicle setVariable [_sTargetName, _objVehicle, true];
-									createVehicleCrew _objVehicle;
-									missionNamespace setVariable [_sTargetName, _objVehicle];
-									_objVehicle setPos _flatPos;
-									_objVehicle disableAI "MOVE";
-									[_objVehicle] spawn TRGM_fnc_artilleryFireLoop;
+									[_truckType, _sTargetName, _flatPos, _loopFnc] call TRGM_fnc_createObjectiveVehicle;
 
-									_flatPos2 = nil;
 									_flatPos2 = [[_inf1X,_inf1Y,0] , 15, 200, 12, 0, 0.5, 0,[[_flatPos,100]],[[_inf1X,_inf1Y,0],[_inf1X,_inf1Y,0]]] call BIS_fnc_findSafePos;
 									if (str(_flatPos2) == "[0,0,0]") then {
-										sAliveCheck = format["!alive(%1) && !([""InfSide%2""] call FHQ_TT_areTasksCompleted)",_sTargetName,_iTaskIndex];
+										_sAliveCheck = format["!alive(%1) && !([""InfSide%2""] call FHQ_TT_areTasksCompleted)",_sTargetName,_iTaskIndex];
 									}
 									else {
-										_objVehicle2 = nil;
-										_objVehicle2 = _truckType createVehicle [20,20,500];
-										_objVehicle2 setVariable [_sTargetName2, _objVehicle2, true];
-										createVehicleCrew _objVehicle2;
-										missionNamespace setVariable [_sTargetName2, _objVehicle2];
-										_objVehicle2 setPos _flatPos2;
-										_objVehicle2 disableAI "MOVE";
-										[_objVehicle2] spawn TRGM_fnc_artilleryFireLoop;
+										[_truckType, _sTargetName2, _flatPos2, _loopFnc, [20,20,500]] call TRGM_fnc_createObjectiveVehicle;
 									};
 
-									_triggerAmmoTruckClear = nil;
-									_triggerAmmoTruckClear = createTrigger ["EmptyDetector", [0,0], false];
-									_triggerAmmoTruckClear setVariable ["DelMeOnNewCampaignDay",true];
-									if (!_bCreateTask) then {
-
-										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, " [1, ""Destroyed Artillery""] call TRGM_fnc_adjustMaxBadPoints; [localize ""STR_TRGM2_startInfMission_MissionTitle10_Destory""] remoteExec [""Hint"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";", ""];			
+									if (_bIsAAA) then {
+										[_sAliveCheck, _iTaskIndex, _bCreateTask, "Destroyed AAA", localize "STR_TRGM2_startInfMission_MissionTitle9_Destory"] call TRGM_fnc_createObjectiveClearedTrigger;
+										_sTaskDescription = localize "STR_TRGM2_startInfMission_MissionTitle9_Desc";
 									}
 									else {
-										_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
-										_triggerAmmoTruckClear setTriggerStatements [sAliveCheck, _sKillOfficerTaskComplete, ""];	
-
+										[_sAliveCheck, _iTaskIndex, _bCreateTask, "Destroyed Artillery", localize "STR_TRGM2_startInfMission_MissionTitle10_Destory"] call TRGM_fnc_createObjectiveClearedTrigger;
+										_sTaskDescription = localize "STR_TRGM2_startInfMission_MissionTitle10_Desc";
 									};
-
-									//ATTACH RADIO COMMS SOUND! (but quite)... but will need to stop sound when destroyied
-									_sTaskDescription = selectRandom[
-										localize "STR_TRGM2_startInfMission_MissionTitle10_Desc"];
 								};
 								 //###################################### informant,intorigate officer, weapon dealer or kill officer, POW #########################################
 								 if (bDebugMode) then {["Mission Setup: 8-4"] remoteExec ["systemChat", 0];};
@@ -663,26 +545,13 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 									_infClassToUse = "";
 									_sideToUse = EnemySide;
 
-									if (_iThisTaskType == 4) then { //if informant
-										_infClassToUse = selectRandom InformantClasses;
-										_sideToUse = Civilian;
-									};
-									if (_iThisTaskType == 8) then { //if weapon dealer
-										_infClassToUse = selectRandom WeaponDealerClasses;
-										_sideToUse = Civilian;
-									};
-									if (_iThisTaskType == 5 || _iThisTaskType == 7) then { //if interogate officer or eleminate officer
-										_infClassToUse = selectRandom InterogateOfficerClasses;
-										_sideToUse = EnemySide;
-									};
-
-									if (_iThisTaskType == 11) then { //if rescue POW
-										_infClassToUse = selectRandom FriendlyVictims;
-										_sideToUse = West;
-									};
-									if (_iThisTaskType == 12) then { //if rescue reporter
-										_infClassToUse = selectRandom Reporters;
-										_sideToUse = Civilian;
+									switch (_iThisTaskType) do {
+										case 4: {_infClassToUse = selectRandom InformantClasses; _sideToUse = Civilian;}; //informant
+										case 8: {_infClassToUse = selectRandom WeaponDealerClasses; _sideToUse = Civilian;}; //weapon dealer
+										case 5;
+										case 7: {_infClassToUse = selectRandom InterogateOfficerClasses; _sideToUse = EnemySide;}; //interogate officer or eleminate officer
+										case 11: {_infClassToUse = selectRandom FriendlyVictims; _sideToUse = West;}; //rescue POW
+										case 12: {_infClassToUse = selectRandom Reporters; _sideToUse = Civilian;}; //rescue reporter
 									};
 	
 									_objInformant = createGroup _sideToUse createUnit [_infClassToUse,[0,0,500],[],0,"NONE"];
@@ -790,29 +659,16 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 										if (_iThisTaskType == 5) then {
 											[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button2","RandFramework\interrogateOfficer.sqf",[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]] remoteExec ["addAction", 0, true];
 										};
-										if (_iThisTaskType == 5 || _iThisTaskType == 8 || _iThisTaskType == 7) then {
+										//5 second delay allows any scripts to be run on officer before he moves e.g. if set as hostage when friendly rebels
+										[_sInformant1Name,_initPos,75,false,5] spawn TRGM_fnc_walkingGuyLoop;
 
-											//5 second delay allows any scripts to be run on officer before he moves e.g. if set as hostage when friendly rebels
-											[_sInformant1Name,_initPos,75,false,5] spawn TRGM_fnc_walkingGuyLoop;
-
-											if (!_bIsMainObjective) then {
-												if (_iThisTaskType != 5) then {
-													_trgKillOfficer = nil;
-													_trgKillOfficer = createTrigger ["EmptyDetector", [0,0], false];
-													_trgKillOfficer setTriggerArea [0, 0, 0, false];
-													_trgKillOfficer setVariable ["DelMeOnNewCampaignDay",true];
-													if (!_bCreateTask) then {
-
-														_trgKillOfficer setTriggerStatements [format["!alive(%1)",_sInformant1Name], " [1, ""HVT Killed""] call TRGM_fnc_adjustMaxBadPoints; [localize ""STR_TRGM2_startInfMission_MissionTitle8_Eliminated""] remoteExec [""Hint"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant" + str(_iTaskIndex) + "] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions""; ", ""];			
-
-													}
-													else {
-														_sKillOfficerTaskComplete = format["[""InfSide%1"", ""succeeded""] remoteExec [""FHQ_TT_setTaskState"", 0]; ClearedPositions pushBack ([ObjectivePossitions, getPos objInformant%1] call BIS_fnc_nearestPosition); publicVariable ""ClearedPositions"";",_iTaskIndex];
-														_trgKillOfficer setTriggerStatements [format["!alive(%1) && !([""InfSide%2""] call FHQ_TT_areTasksCompleted)",_sInformant1Name,_iTaskIndex], _sKillOfficerTaskComplete, ""];
-													};
-												};
+										if (!_bIsMainObjective) then {
+											if (_iThisTaskType != 5) then {
+												_sAliveCheck = format["!alive(%1)",_sInformant1Name];
+												if (_bCreateTask) then {_sAliveCheck = _sAliveCheck + format[" && !([""InfSide%1""] call FHQ_TT_areTasksCompleted)",_iTaskIndex]};
+												_trgKillOfficer = [_sAliveCheck, _iTaskIndex, _bCreateTask, "HVT Killed", localize "STR_TRGM2_startInfMission_MissionTitle8_Eliminated"] call TRGM_fnc_createObjectiveClearedTrigger;
+												_trgKillOfficer setTriggerArea [0, 0, 0, false];
 											};
-
 										};
 									}
 									else {
@@ -891,29 +747,13 @@ if (!_SamePrevAO || _bUserDefinedAO || _attempts > 100) then {
 
 									_bodyIDRequiredText = "";
 									if (_bIsMainObjective && (_iThisTaskType == 7 || _iThisTaskType == 8)) then {_bodyIDRequiredText = localize "STR_TRGM2_startInfMission_MissionTitle8_MustSearch"};
-									if (_iThisTaskType == 4) then {
-										_sTaskDescription = selectRandom[
-										(localize "STR_TRGM2_startInfMission_MissionTitle4_Desc") + InformantImage];
-									};
-									if (_iThisTaskType == 5) then {
-										_sTaskDescription = selectRandom[
-										(localize "STR_TRGM2_startInfMission_MissionTitle5_Desc") + OfficerImage];
-									};
-									if (_iThisTaskType == 7) then {
-										_sTaskDescription = selectRandom[
-										(localize "STR_TRGM2_startInfMission_MissionTitle7_Desc") + _bodyIDRequiredText + OfficerImage];
-									};
-									if (_iThisTaskType == 8) then {
-										_sTaskDescription = selectRandom[
-										(localize "STR_TRGM2_startInfMission_MissionTitle8_Desc") + _bodyIDRequiredText + WeaponDealerImage];
-									};
-									if (_iThisTaskType == 11) then { //pow or reporter
-										_sTaskDescription = selectRandom[
-										"We need you to locate and rescue our POW, the enemy are trying to gain valuable information from our guy!"];
-									};
-									if (_iThisTaskType == 12) then { //pow or reporter
-										_sTaskDescription = selectRandom[
-										"We need you to locate and rescue a reporter!"];
+									switch (_iThisTaskType) do {
+										case 4: {_sTaskDescription = (localize "STR_TRGM2_startInfMission_MissionTitle4_Desc") + InformantImage;};
+										case 5: {_sTaskDescription = (localize "STR_TRGM2_startInfMission_MissionTitle5_Desc") + OfficerImage;};
+										case 7: {_sTaskDescription = (localize "STR_TRGM2_startInfMission_MissionTitle7_Desc") + _bodyIDRequiredText + OfficerImage;};
+										case 8: {_sTaskDescription = (localize "STR_TRGM2_startInfMission_MissionTitle8_Desc") + _bodyIDRequiredText + WeaponDealerImage;};
+										case 11: {_sTaskDescription = "We need you to locate and rescue our POW, the enemy are trying to gain valuable information from our guy!";};
+										case 12: {_sTaskDescription = "We need you to locate and rescue a reporter!";};
 									};
 
 								};

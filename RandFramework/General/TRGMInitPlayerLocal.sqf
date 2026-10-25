@@ -67,23 +67,15 @@ CODEINPUT = [];
 			}
 			else {
 				if (!bOptionsSet) then {
-					txt1Layer = "txt1" call BIS_fnc_rscLayer;
-					_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + "Admin" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
-					[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
+					[localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + "Admin" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2", 0.5, 0.220, "txt1"] call TRGM_fnc_showLayerText;
 				}
 				else {
-					txt1Layer = "txt1" call BIS_fnc_rscLayer;
-					_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + "Admin" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3" + "</t>";
-					[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
+					[localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + "Admin" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3", 0.5, 0.220, "txt1"] call TRGM_fnc_showLayerText;
 				};
-				txt5Layer = "txt5" call BIS_fnc_rscLayer;
-				_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>";
-				[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+				["TRGM 2", 0.8, 0.150, "txt5"] call TRGM_fnc_showLayerText;
 
 
-				txt51Layer = "txt51" call BIS_fnc_rscLayer;
-				_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic" + "</t>";
-				[_texta, 0, 0.280, 7, 1,0,txt51Layer] spawn BIS_fnc_dynamicText;
+				[localize "STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic", 0.5, 0.280, "txt51"] call TRGM_fnc_showLayerText;
 				
 				
 				sleep 5;
@@ -104,35 +96,23 @@ CODEINPUT = [];
 				else {
 
 					if (isNil "sl") then {
-						txt5Layer = "txt5" call BIS_fnc_rscLayer;
-						_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustFilled" + "</t>";
-						[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+						[localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustFilled", 0.8, 0.150, "txt5"] call TRGM_fnc_showLayerText;
 					}
 					else {
 						if (!isPlayer sl) then {
-							txt5Layer = "txt5" call BIS_fnc_rscLayer;
-							_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustPlayer" + "</t>";
-							[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+							[localize "STR_TRGM2_TRGMInitPlayerLocal_TopSlotMustPlayer", 0.8, 0.150, "txt5"] call TRGM_fnc_showLayerText;
 						}
 						else {
 							if (!bOptionsSet) then {
-								txt1Layer = "txt1" call BIS_fnc_rscLayer;
-								_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + name sl + " " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
-								[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
+								[localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + name sl + " " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2", 0.5, 0.220, "txt1"] call TRGM_fnc_showLayerText;
 							}
 							else {
-								txt1Layer = "txt1" call BIS_fnc_rscLayer;
-								_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + name sl + " " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3" + "</t>";
-								[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
+								[localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + name sl + " " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3", 0.5, 0.220, "txt1"] call TRGM_fnc_showLayerText;
 							};
-							txt5Layer = "txt5" call BIS_fnc_rscLayer;
-							_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.8' color='#Ffffff'>TRGM 2</t>";
-							[_texta, -0, 0.150, 7, 1,0,txt5Layer] spawn BIS_fnc_dynamicText;
+							["TRGM 2", 0.8, 0.150, "txt5"] call TRGM_fnc_showLayerText;
 
 
-							txt51Layer = "txt51" call BIS_fnc_rscLayer;
-							_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic" + "</t>";
-							[_texta, 0, 0.280, 7, 1,0,txt51Layer] spawn BIS_fnc_dynamicText;
+							[localize "STR_TRGM2_TRGMInitPlayerLocal_CantHearMusic", 0.5, 0.280, "txt51"] call TRGM_fnc_showLayerText;
 
 						};
 					};
