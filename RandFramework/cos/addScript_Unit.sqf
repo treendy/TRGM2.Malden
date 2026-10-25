@@ -30,7 +30,7 @@ if (!_isBad) then {
 	_unit addEventHandler ["killed", {_this execVM "RandFramework\CivKilled.sqf";}];
 }
 else {
-	_unit execVM "RandFramework\BadCiv.sqf";
+	[_unit] spawn TRGM_fnc_badCivInitialize;
 };
 
 

@@ -8,7 +8,7 @@ params ["_posOfAO",["_isFullMap",false]];
 _currentATFieldPos = [_posOfAO , 1000, 1700, 100, 0, 0.4, 0,AreasBlackList,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 
 if (!(isNil "IsTraining") || _isFullMap) then {
-	_currentATFieldPos = [_posOfAO , 30000, 1700, 100, 0, 0.4, 0,AreasBlackList,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
+	_currentATFieldPos = [_posOfAO , 1000, 30000, 100, 0, 0.4, 0,AreasBlackList,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 };
 
 if (_currentATFieldPos select 0 != 0) then {

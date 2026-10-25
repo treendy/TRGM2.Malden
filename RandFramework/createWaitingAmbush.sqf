@@ -38,7 +38,7 @@ if (_bAllowAmbush) then {
 
 			//loop _ambushGroup members, if player near then set _bWaiting to false		
 			{
-				if (floor(damage _x) > 0) then {
+				if (damage _x > 0) then {
 					_bWaiting = false; 
 				};
 			  	_nearUnits = nearestObjects [(getPos _x), ["Man"], 10];
@@ -61,7 +61,7 @@ if (_bAllowAmbush) then {
 				sleep 2;
 			}
 			else {
-				sleep 30 + (random 120);
+				sleep (30 + (random 120));
 			};
 		};
 

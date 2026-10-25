@@ -8,20 +8,17 @@ publicVariable "debugMessages";
 
 sleep 3;
 
-if (side _killer == west && str(_killed) != str(_killer)) then {
+if (side _killer == west && _killed != _killer) then {
 //if (false) then {
 	//hint "IN IF";
 
 	[0.2,format[localize "STR_TRGM2_InsKilled_RebelKilled", name _killer]] execVM "RandFramework\AdjustBadPoints.sqf";
 
-	_nearestunits = nearestObjects [getPos _killed,["Man","Car","Tank"],2000];
-	_grpName = createGroup east;
-	{
-		_isRebel = _x getVariable ["IsRebel", false];
-		if (_isRebel) then {
-			[_x] joinSilent _grpName;
-		};
-	} forEach _nearestunits;
+	_rebels = allUnits select {(_x getVariable ["IsRebel", false]) && {side _x != east && _x distance _killed < 2000}};
+	if (count _rebels > 0) then {
+		_grpName = createGroup east;
+		_rebels joinSilent _grpName;
+	};
 
 
 	//{[_x] joinSilent _grpName;} forEach units group _killed;

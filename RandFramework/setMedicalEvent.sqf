@@ -149,7 +149,7 @@ while {_iteration <= 2} do {
 			};
 
 			if (!(isNil "IsTraining")) then {
-				_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _mainVeh];
+				_markerEventMedi = createMarker [format["_markerEventMedi%1",(call TRGM_fnc_nextMarkerId)], getPos _mainVeh];
 				_markerEventMedi setMarkerShape "ICON";
 				_markerEventMedi setMarkerType "hd_dot";
 				_markerEventMedi setMarkerText "Medical Situation";				
@@ -157,7 +157,7 @@ while {_iteration <= 2} do {
 			else {
 				if (selectRandom[true,false,false,false]) then {
 				//if (selectRandom[true]) then {
-					_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _mainVeh];
+					_markerEventMedi = createMarker [format["_markerEventMedi%1",(call TRGM_fnc_nextMarkerId)], getPos _mainVeh];
 					_markerEventMedi setMarkerShape "ICON";
 					_markerEventMedi setMarkerType "hd_dot";
 					_markerEventMedi setMarkerText "Distress Signal";				
@@ -181,38 +181,6 @@ if (selectRandom [true,false]) then {
 	};
 };
 
-if (isnil "fncMedicalFlashLights") then {
-	fncMedicalFlashLights = {
-		params ["_mainVeh"];
-		[_mainVeh] spawn {
-			_mainVeh = _this select 0;
-			_lightleft = "#lightpoint" createVehicle getpos _mainVeh; 
-			_lightleft setLightColor [255, 0, 0]; //red
-			_lightleft setLightBrightness 0.03;
-			_lightleft setLightAmbient [0.5,0.5,0.8];
-			_lightleft lightAttachObject [_mainVeh, [0, 1, 1]];
-			_leftRed = true;
-			while{ (alive _mainVeh)} do
-			{
-			 if(_leftRed) then
-			{
-			   _leftRed = false;
-			   _lightleft setLightColor [0, 0, 255];
-			   //_lightright setLightColor [255, 0, 0];
-			}
-			else
-			{
-			   _leftRed = true;
-			   _lightleft setLightColor [255, 0, 0];
-			   //_lightright setLightColor [0, 0, 255];
-			};
-			 sleep 0.1;
-			};
-		};
-		
-	};
-	publicVariable "fncMedicalFlashLights";
-};
 
 if (isnil "fncMedicalParamedicLight") then {
 	fncMedicalParamedicLight = {
@@ -227,7 +195,7 @@ if (isnil "fncMedicalParamedicLight") then {
 	publicVariable "fncMedicalParamedicLight";
 };
 
-		[_mainVeh] remoteExec ["fncMedicalFlashLights", 0, true];
+		[_mainVeh] remoteExec ["TRGM_fnc_medicalFlashLights", 0, true];
 
 
 		_vehPos = getPos _mainVeh;
@@ -259,7 +227,7 @@ if (isnil "fncMedicalParamedicLight") then {
 		[_downedCiv] spawn {
 			_downedCiv = _this select 0;
 			while{ (alive _downedCiv)} do {
-				_downedCiv say3D selectRandom WoundedSounds;
+				[_downedCiv, selectRandom WoundedSounds] remoteExecCall ["say3D", [0,-2] select isDedicated]; //say3D is local, so play it for every player
 				sleep selectRandom [2,2.5,3];
 			}
 			
@@ -288,11 +256,8 @@ if (isnil "fncMedicalParamedicLight") then {
 				_downedCivMedic = _this select 1;
 				_completed = false;
 				while{(alive _mainVeh && !_completed)} do {
-					_VanillaItemCount = {RequestedMedicalItem == _x} count (itemcargo _mainVeh);
-					_AceItemCount = {RequestedMedicalItem == _x} count (itemcargo _mainVeh);
-					//{"ACE_bloodIV" == _x} count (itemcargo cursorTarget)
-					//hint format["TEST: %1", _AceItemCount];
-					if (_VanillaItemCount >= requiredItemsCount || _AceItemCount >= requiredItemsCount) then {
+					_itemCount = {RequestedMedicalItem == _x} count (itemcargo _mainVeh);
+					if (_itemCount >= requiredItemsCount) then {
 						["Thank you, this should help us get things under control"] remoteExecCall ["Hint", 0];
 						_completed = true;
 						removeAllActions _downedCivMedic;
@@ -348,11 +313,12 @@ if (isnil "fncMedicalParamedicLight") then {
 
 		//_upRoadPos = _vehPos getpos [10,_direction];
 		_nearestRoadsPoint2 = _vehPos nearRoads 25;	
-		_maxRoads2 = count _nearestRoadsPoint2;
-		_selIndex = selectRandom [0,(_maxRoads2-1)];
-		_nearestRoad2 = _nearestRoadsPoint2 select 0;
-		_roadConnectedTo2 = roadsConnectedTo _nearestRoad2;
-		if (count _roadConnectedTo > 0) then {	
+		_roadConnectedTo2 = [];
+		if (count _nearestRoadsPoint2 > 0) then {
+			_nearestRoad2 = _nearestRoadsPoint2 select 0;
+			_roadConnectedTo2 = roadsConnectedTo _nearestRoad2;
+		};
+		if (count _roadConnectedTo2 > 0) then {
 			_connectedRoad2 = _roadConnectedTo2 select 0;
 			_direction2 = [_nearestRoad2, _connectedRoad2] call BIS_fnc_DirTo;	
 

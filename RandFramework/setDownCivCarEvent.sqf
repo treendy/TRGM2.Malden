@@ -94,7 +94,7 @@ if (count _nearestRoads > 0) then {
 			_expl2 setVectorDirAndUp [[0,0,-1],[0,1,0]];
 
 			_expl3 = "DemoCharge_Remote_Ammo" createVehicle position _mainVeh; 
-   			_expl3 attachTo [_mainVeh, [0, -0.2, -1.65]];
+   			_expl3 attachTo [_mainVeh, [0, 0.2, -1.65]];
 			_expl3 setVectorDirAndUp [[0,0,-1],[0,1,0]];
 
 			if (selectRandom [true,false]) then {
@@ -112,14 +112,14 @@ if (count _nearestRoads > 0) then {
 		};
 
 		if (!(isNil "IsTraining")) then {
-			_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _mainVeh];
+			_markerEventMedi = createMarker [format["_markerEventMedi%1",(call TRGM_fnc_nextMarkerId)], getPos _mainVeh];
 			_markerEventMedi setMarkerShape "ICON";
 			_markerEventMedi setMarkerType "hd_dot";
 			_markerEventMedi setMarkerText "Stranded Civ";				
 		}	
 		else {
 			if (selectRandom[false]) then { //will never show this for broken down civ! (only here if need to test)
-				_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _mainVeh];
+				_markerEventMedi = createMarker [format["_markerEventMedi%1",(call TRGM_fnc_nextMarkerId)], getPos _mainVeh];
 				_markerEventMedi setMarkerShape "ICON";
 				_markerEventMedi setMarkerType "hd_dot";
 				_markerEventMedi setMarkerText "Distress Signal";				
@@ -222,6 +222,7 @@ if (count _nearestRoads > 0) then {
 			  	//_bIsTrap
 			  	if (_bIsTrap) then {
 			  		_nearUnits = nearestObjects [(getPos _downedCiv), ["Man"], 10];
+			  		if (!(alive _downedCiv)) then {_nearUnits = [_downedCiv]}; //still detonate if he was killed
 			  		{
 			  			if ((driver _x) in switchableUnits || (driver _x) in playableUnits || !(alive _downedCiv)) then {
 			  				_bWaiting = false;

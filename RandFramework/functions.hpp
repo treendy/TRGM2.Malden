@@ -11,6 +11,10 @@ class TRGM   { // TAG
         class CountSpentPoints {};
         class AddToDirection {}; //Can add degrees to direction to calcuate final direction
         class addPlayerActionPersistent {};
+        class hvtWalkAround {};
+        class walkingGuyLoop {};
+        class nextMarkerId {};
+        class medicalFlashLights {};
     };
 
     class location { // CATEGORY
@@ -73,5 +77,6 @@ class TRGM   { // TAG
         class BackForthPatrol{};
         class BuildingPatrol{};
         class RadiusPatrol{};
+        class offsetPatrol{};
     }
 };  

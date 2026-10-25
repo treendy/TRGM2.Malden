@@ -152,7 +152,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_hvtGuardGroup = _this select 6;
 		_iTaskIndex = _this select 7;
 
-		waitUntil {bAndSoItBegins && CustomObjectsSet && PlayersHaveLeftStartingArea};
+		waitUntil {sleep 0.5; bAndSoItBegins && CustomObjectsSet && PlayersHaveLeftStartingArea};
 		//["debug: wait started"] remoteExecCall ["Hint", 0];
 
 		_iWait = 420 + floor(random 300);
@@ -193,7 +193,9 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		_hvtChopper setPos _hvtChopperStartPos;
 		sleep 1;
 		_unitsAreInChopper = false;
-		while {_unitsAreInChopper} do {
+		_attempts = 10;
+		while {!_unitsAreInChopper && _attempts > 0} do {
+			_attempts = _attempts - 1;
 			if (vehicle _thisMainHVT != _thisMainHVT && vehicle _thisGuardUnit3 != _thisGuardUnit3) then {
 				_unitsAreInChopper = true;
 			}
@@ -254,7 +256,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
        		_thisMeetingPos = _this select 1;
        		_moveToPos = (_thisMeetingPos) getPos [3,selectRandom[1, 95, 180, 270]];
        		_hvtGuardGroup = group _thisGuardUnit3;
-       		waitUntil {!alive(_thisGuardUnit3) || isTouchingGround (vehicle _thisGuardUnit3)};
+       		waitUntil {sleep 0.5; !alive(_thisGuardUnit3) || isTouchingGround (vehicle _thisGuardUnit3)};
        		_thisGuardUnit3 enableAI "MOVE"; //for some reason, sometimes this guy will just stay in the water???
      		_thisGuardUnit3 enableAI "FSM";
        		unassignVehicle _thisGuardUnit3;
@@ -389,7 +391,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 		[_hvtGroup, 1] setWaypointType "GETIN";
 		_wpHvtLeaveMeet2 = _hvtGroup addWaypoint [[0,0,100], 0];
 		_hvtGroup setBehaviour "CARELESS";
-		waitUntil {!isTouchingGround _hvtChopper};
+		waitUntil {sleep 0.5; !isTouchingGround _hvtChopper};
 		
 		sleep 120;
 		if (alive(_thisMainHVT)) then {

@@ -685,21 +685,25 @@ TREND_fnc_PopulateSideMission = {
 					if (SelectRandom _milOccupyOdds && _distanceFromBase > BaseAreaRange && !(_thisMilBuilPos in OccupiedHousesPos)) then {
 					//if (SelectRandom _milOccupyOdds && _distanceFromBase > BaseAreaRange) then {
 						_iCount = _iCount + 1;
-						_MilGroup1 = nil;
 						_objMilUnit1 = nil;
 						_objMilUnit2 = nil;
 						_objMilUnit3 = nil;
-						_MilGroup1 = createGroup east;
 						_objMilUnit1 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[-1000,0,0],[],0,"NONE"];
 						_objMilUnit2 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[-1002,0,0],[],0,"NONE"];
 						_objMilUnit3 = createGroup east createUnit [selectRandom[sRiflemanToUse,sMachineGunManToUse],[-1003,0,0],[],0,"NONE"];
 						OccupiedHousesPos = OccupiedHousesPos + [_thisMilBuilPos];
-						[getPos _x, [_objMilUnit1,_objMilUnit2,_objMilUnit3], -1, true, false,true] execVM "RandFramework\Zen_OccupyHouse.sqf";
-						sleep 0.2;
+						_hOccupy = [getPos _x, [_objMilUnit1,_objMilUnit2,_objMilUnit3], -1, true, false,true] execVM "RandFramework\Zen_OccupyHouse.sqf";
+						_occupyTimeout = time + 10;
+						waitUntil {sleep 0.1; scriptDone _hOccupy || time > _occupyTimeout};
 						_objMilUnit1 setUnitPos "up";
 						_objMilUnit2 setUnitPos "up";
 						_objMilUnit3 setUnitPos "up";
-						{deleteVehicle _x} forEach nearestObjects [[-1000,0,0], ["all"], 100];
+						//delete any units that couldn't be placed in the building (and their now empty groups)
+						{
+							_grp = group _x;
+							deleteVehicle _x;
+							if (!isNull _grp && {count units _grp == 0}) then {deleteGroup _grp};
+						} forEach nearestObjects [[-1000,0,0], ["all"], 100];
 
 						_ParkedCar = nil;
 						if (selectRandom [true,false,false]) then {
@@ -716,22 +720,7 @@ TREND_fnc_PopulateSideMission = {
 							_guardUnit5 = _MilGroup4 createUnit [sRiflemanToUse,_pos5,[],0,"NONE"];
 							_guardUnit5 setVariable [_sCheckpointGuyName, _guardUnit5, true];
 							missionNamespace setVariable [_sCheckpointGuyName, _guardUnit5];
-							TREND_fnc_WalkingGuyLoop = {
-								_objManName = _this select 0;
-								_thisInitPos = _this select 1;
-								_objMan = missionNamespace getVariable _objManName;
-
-								group _objMan setSpeedMode "LIMITED";
-								group _objMan setBehaviour "SAFE";
-
-								while {true && alive(_objMan) && behaviour _objMan == "SAFE"} do {
-									[_objManName,_thisInitPos,_objMan,35] execVM "RandFramework\HVTWalkAround.sqf";
-									sleep 2;
-									waitUntil {sleep 1; speed _objMan < 0.5};
-									sleep 10;
-								};
-							};
-							[_sCheckpointGuyName,_pos5] spawn TREND_fnc_WalkingGuyLoop;
+							[_sCheckpointGuyName,_pos5,35,true] spawn TRGM_fnc_walkingGuyLoop;
 						};
 						//because we have a base, we see if a helipad is aviable for an attack chopper
 						_HeliPads = nearestObjects [getPos _x, ["Land_HelipadCircle_F","Land_HelipadSquare_F"], 200];
@@ -967,8 +956,7 @@ TREND_fnc_SpawnCivs = {
 			}
 			else {
 				//_sInitString = format["[this] spawn TRGM_fnc_badCivInitialize; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
-				//_sInitString = format["this execVM ""RandFramework\BadCiv.sqf""; this addaction [""Search Civ"",""RandFramework\SearchCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; this forceAddUniform ""%1""; removeHeadgear this;Removevest this;",_sCivUniform];
-				_sInitString = "this execVM ""RandFramework\BadCiv.sqf""; this addaction [localize ""STR_TRGM2_civillians_fnbadCivAddSearchAction_Button"",""RandFramework\SearchCiv.sqf"", nil,1.5,true,true,"""",""true"",5]; removeHeadgear this;Removevest this;";
+				_sInitString = "[this] spawn TRGM_fnc_badCivInitialize; removeHeadgear this;Removevest this;";
 			};
 		}
 		else {

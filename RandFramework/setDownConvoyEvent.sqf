@@ -113,7 +113,7 @@ if (count _nearestRoads > 0) then {
 				};
 
 				if (!(isNil "IsTraining")) then {
-					_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _mainVeh];
+					_markerEventMedi = createMarker [format["_markerEventMedi%1",(call TRGM_fnc_nextMarkerId)], getPos _mainVeh];
 					_markerEventMedi setMarkerShape "ICON";
 					_markerEventMedi setMarkerType "hd_dot";
 					_markerEventMedi setMarkerText "Ambushed Friendly Convoy";				
@@ -121,7 +121,7 @@ if (count _nearestRoads > 0) then {
 				else {
 					if (selectRandom[true,false,false,false]) then {
 					//if (selectRandom[true]) then {
-						_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _mainVeh];
+						_markerEventMedi = createMarker [format["_markerEventMedi%1",(call TRGM_fnc_nextMarkerId)], getPos _mainVeh];
 						_markerEventMedi setMarkerShape "ICON";
 						_markerEventMedi setMarkerType "hd_dot";
 						_markerEventMedi setMarkerText "Distress Signal";				
@@ -160,7 +160,7 @@ if (count _nearestRoads > 0) then {
 		publicVariable "fncMedicalParamedicLight";
 	};
 
-			[_mainVeh] remoteExec ["fncMedicalFlashLights", 0, true];
+			[_mainVeh] remoteExec ["TRGM_fnc_medicalFlashLights", 0, true];
 
 
 			_vehPos = getPos _mainVeh;
@@ -191,7 +191,7 @@ if (count _nearestRoads > 0) then {
 			[_downedCiv] spawn {
 				_downedCiv = _this select 0;
 				while{ (alive _downedCiv)} do {
-					_downedCiv say3D selectRandom WoundedSounds;
+					[_downedCiv, selectRandom WoundedSounds] remoteExecCall ["say3D", [0,-2] select isDedicated]; //say3D is local, so play it for every player
 					sleep selectRandom [2,2.5,3];
 				}
 				

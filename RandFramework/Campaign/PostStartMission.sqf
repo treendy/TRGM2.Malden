@@ -51,7 +51,10 @@
 			};
 		};
 
-		_locationText = [ObjectivePossitions select 0] call TRGM_fnc_getLocationName;
+		_locationText = "";
+		if (! isNil "_mainAOPos") then {
+			_locationText = [_mainAOPos] call TRGM_fnc_getLocationName;
+		};
 		_hour = floor daytime;
 		_minute = floor ((daytime - _hour) * 60);
 
@@ -86,7 +89,7 @@
 			_LineOne = "TRGM 2"
 		};
 
-		if (MaxBadPoints >= 10) then {
+		if ((MaxBadPoints - BadPoints) >= 10) then {
 			titleText ["", "BLACK IN", 5];
 			_LineTwo = (localize "STR_TRGM2_StartMission_Final") + CurrentZeroMissionTitle;
 			//titleText [format["Day %1 - %2\nFinal Objective: %3\nLocation: %4",iCampaignDay,_time24,CurrentZeroMissionTitle,_locationText], "BLACK IN", 5];

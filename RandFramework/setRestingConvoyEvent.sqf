@@ -112,7 +112,7 @@ while {_iteration <= 2} do {
 			};
 			if (selectRandom[true,false,false,false]) then {
 			//if (selectRandom[true]) then {
-				_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _mainVeh];
+				_markerEventMedi = createMarker [format["_markerEventMedi%1",(call TRGM_fnc_nextMarkerId)], getPos _mainVeh];
 				_markerEventMedi setMarkerShape "ICON";
 				_markerEventMedi setMarkerType "hd_dot";
 				_markerEventMedi setMarkerText "Distress Signal";				
@@ -122,38 +122,6 @@ while {_iteration <= 2} do {
 
 
 
-if (isnil "fncMedicalFlashLights") then {
-	fncMedicalFlashLights = {
-		params ["_mainVeh"];
-		[_mainVeh] spawn {
-			_mainVeh = _this select 0;
-			_lightleft = "#lightpoint" createVehicle getpos _mainVeh; 
-			_lightleft setLightColor [255, 0, 0]; //red
-			_lightleft setLightBrightness 0.03;
-			_lightleft setLightAmbient [0.5,0.5,0.8];
-			_lightleft lightAttachObject [_mainVeh, [0, 1, 1]];
-			_leftRed = true;
-			while{ (alive _mainVeh)} do
-			{
-			 if(_leftRed) then
-			{
-			   _leftRed = false;
-			   _lightleft setLightColor [0, 0, 255];
-			   //_lightright setLightColor [255, 0, 0];
-			}
-			else
-			{
-			   _leftRed = true;
-			   _lightleft setLightColor [255, 0, 0];
-			   //_lightright setLightColor [0, 0, 255];
-			};
-			 sleep 0.1;
-			};
-		};
-		
-	};
-	publicVariable "fncMedicalFlashLights";
-};
 
 if (isnil "fncMedicalParamedicLight") then {
 	fncMedicalParamedicLight = {
@@ -168,7 +136,7 @@ if (isnil "fncMedicalParamedicLight") then {
 	publicVariable "fncMedicalParamedicLight";
 };
 
-		[_mainVeh] remoteExec ["fncMedicalFlashLights", 0, true];
+		[_mainVeh] remoteExec ["TRGM_fnc_medicalFlashLights", 0, true];
 
 
 		_vehPos = getPos _mainVeh;

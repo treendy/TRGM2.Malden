@@ -39,7 +39,7 @@ else {
 	};
 };
 
-if (isNil("_eventLocationPos")) then {_eventType == 2};
+if (isNil("_eventLocationPos")) exitWith {}; //no suitable location found for the warzone
 
 
 //sTeamleader
@@ -159,6 +159,7 @@ WarEventActive = true;
 			};
 		
 			deleteVehicle _tempFireUnit;
+			deleteGroup _group;
 		};
 
 		_sleep = 1+(random 6);
@@ -212,9 +213,12 @@ WarEventActive = true;
 			while {alive _veh} do {
 				_curDist = _veh distance _eventLocationPos;
 				if (_curDist > 4000) then {
+					_grp = group driver _veh;
 					{_veh deleteVehicleCrew _x} forEach crew _veh;
-					deleteVehicle _veh;			
+					deleteVehicle _veh;
+					if (count units _grp == 0) then {deleteGroup _grp};
 				};
+				sleep 5;
 			};
 		};
 
@@ -225,9 +229,12 @@ WarEventActive = true;
 				while {alive _veh} do {
 					_curDist = _veh distance _eventLocationPos;
 					if (_curDist > 4000) then {
+						_grp = group driver _veh;
 						{_veh deleteVehicleCrew _x} forEach crew _veh;
-						deleteVehicle _veh;			
+						deleteVehicle _veh;
+						if (count units _grp == 0) then {deleteGroup _grp};
 					};
+					sleep 5;
 				};
 			};
 		};

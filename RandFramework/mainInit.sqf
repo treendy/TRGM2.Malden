@@ -376,7 +376,7 @@ if (!isDedicated) then {
 	_thread = [] spawn {
 		_unit = player;
 		while {true} do {
-			waitUntil {_unit != player };
+			waitUntil {sleep 0.5; _unit != player };
 			group player selectLeader player;
 			//hintSilent " Player has changed";
 			[_unit] call TransferProviders;
@@ -401,7 +401,7 @@ if (!isMultiplayer) then {
 
 _isAdmin = (!isMultiplayer || isMultiplayer && !isDedicated && isServer || isMultiplayer && !isServer && (call BIS_fnc_admin) != 0);
 if (!isDedicated && _isAdmin) then {
-	waitUntil {bOptionsSet};
+	waitUntil {sleep 0.5; bOptionsSet};
 	if (iMissionParamType != 5) then {	//if isCampaign, dont allow to select AO
 		if (AdvancedSettings select ADVSET_SELECT_AO_IDX == 1) then {
 			mrkAoSelect1 = nil;
@@ -461,7 +461,7 @@ if (!isDedicated && _isAdmin) then {
 
 
 
-waitUntil {bAndSoItBegins};
+waitUntil {sleep 0.5; bAndSoItBegins};
 
 Private _coreCountSleep = 0.1;
 
@@ -630,7 +630,7 @@ if (isServer) then {
 systemChat format["Mission Core: %1", "PreCustomObjectSet"];
 sleep _coreCountSleep;
 
-waitUntil {CustomObjectsSet};
+waitUntil {sleep 0.5; CustomObjectsSet};
 
 systemChat format["Mission Core: %1", "PostCustomObjectSet"];
 sleep _coreCountSleep;
@@ -684,7 +684,7 @@ else {
 systemChat format["Mission Core: %1", "InitCampaign/StartMission ran"];
 sleep _coreCountSleep;
 
-waitUntil {MissionLoaded};
+waitUntil {sleep 0.5; MissionLoaded};
 
 systemChat format["Mission Core: %1", "MissionLoaded true"];
 sleep _coreCountSleep;
@@ -726,14 +726,12 @@ TREND_fnc_CheckBadPoints = {
 			_lastBadPoints = BadPoints;
 			if (iMissionParamType != 5) then {
 				if (_dCurrentRep <= 0 && iMissionParamRepOption == 1) then {
-					_iCurrentTaskCount = 0;
 					["tskKeepAboveAverage", "failed"] call FHQ_TT_setTaskState;
-					while {_iCurrentTaskCount < count ActiveTasks} do {
-						if (!(ActiveTasks call FHQ_TT_areTasksCompleted)) then {
-							[ActiveTasks select _iCurrentTaskCount, "failed"] call FHQ_TT_setTaskState;
-							_iCurrentTaskCount = _iCurrentTaskCount + 1;
+					{
+						if (!([_x] call FHQ_TT_areTasksCompleted)) then {
+							[_x, "failed"] call FHQ_TT_setTaskState;
 						};
-					};
+					} forEach ActiveTasks;
 					sleep 2;
 
 					[FriendlySide, ["DeBrief", localize "STR_TRGM2_mainInit_Debrief", "Debrief", ""]] call FHQ_TT_addTasks;
@@ -769,7 +767,7 @@ TREND_fnc_CheckBadPoints = {
 				};
 
 				if ((ActiveTasks call FHQ_TT_areTasksCompleted)) then { //if rank changed and tasks completed, then if now rank 5, need to reset board to show "Start final mission", otherwise, make sure shows "start next mission"
-					[["MISSION_COMPLETE"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
+					[["MISSION_COMPLETE"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,"TRGM_missionBoardOptions"];
 				};
 				//hint parseText _sRankMessage;
 				[parseText _sRankMessage] remoteExec ["Hint", 0, true];
@@ -865,7 +863,7 @@ if (isServer) then {
 			//work out how to deal with JIP if sandstorm already playing
 			//Maybe store timer, and how long left... so if player JIP, it will fire off storm script if currently runnig and adjust the time to play to what is left
 			SandStormTimer = selectRandom [150,390,630];
-			publicVariable SandStormTimer;
+			publicVariable "SandStormTimer";
 			{nul = [SandStormTimer,false] execvm "RandFramework\RikoSandStorm\ROSSandstorm.sqf";} remoteExec ["bis_fnc_call", 0];
 			//Set enemy skill
 			{

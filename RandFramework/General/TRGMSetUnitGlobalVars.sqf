@@ -20,12 +20,6 @@ DefaultEnemyFactionArrayText = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Enemy1
 DefaultFriendlyFactionArray = [1,2];
 DefaultFriendlyFactionArrayText = [localize "STR_TRGM2_TRGMSetUnitGlobalVars_Friend1",localize "STR_TRGM2_TRGMSetUnitGlobalVars_Friend2"];
 
-publicVariable "DefaultEnemyFactionArray";
-publicVariable "DefaultEnemyFactionArrayText";
-
-publicVariable "DefaultFriendlyFactionArray";
-publicVariable "DefaultFriendlyFactionArrayText";
-
 if ((1.04222e+006 in (getDLCs 1))) then {
 	//IF globalMoblization is active
 	DefaultFriendlyFactionArray = DefaultFriendlyFactionArray + [9];
@@ -95,6 +89,12 @@ if (isClass(configFile >> "CfgPatches" >> "UK3CB_BAF_Equipment") &&
 	DefaultFriendlyFactionArrayText = DefaultFriendlyFactionArrayText + ["3CB MTP"];
 
 };
+
+//broadcast once all the DLC/mod factions have been added
+publicVariable "DefaultEnemyFactionArray";
+publicVariable "DefaultEnemyFactionArrayText";
+publicVariable "DefaultFriendlyFactionArray";
+publicVariable "DefaultFriendlyFactionArrayText";
 
 
 //example: AdvancedSettings select ADVSET_ENEMY_FACTIONS_IDX

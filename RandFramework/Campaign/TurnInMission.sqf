@@ -32,13 +32,11 @@ if (isMultiplayer) then {
 
 if (_bAllow) then {
 	//Fail current mission
-	_iCurrentTaskCount = 0;
-	while {_iCurrentTaskCount < count ActiveTasks} do {
-		if (!(ActiveTasks call FHQ_TT_areTasksCompleted)) then {
-			[ActiveTasks select _iCurrentTaskCount, "failed"] call FHQ_TT_setTaskState;
-			_iCurrentTaskCount = _iCurrentTaskCount + 1;
+	{
+		if (!([_x] call FHQ_TT_areTasksCompleted)) then {
+			[_x, "failed"] call FHQ_TT_setTaskState;
 		};
-	};
+	} forEach ActiveTasks;
 	//lower rep
 	[0.3, format[localize "STR_TRGM2_startInfMission_DayTurnedIn",str(iCampaignDay)]] execVM "RandFramework\AdjustBadPoints.sqf";
 

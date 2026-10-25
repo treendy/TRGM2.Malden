@@ -91,7 +91,7 @@ _missionBombWire = ["BLUE", "WHITE", "YELLOW", "GREEN"] call bis_fnc_selectRando
 	_infBuilding = nil;
 	_attemptLimit = 5;
 	_bBuildingFound = false;
-	while {!_bBuildingFound || _attemptLimit > 0} do {
+	while {!_bBuildingFound && _attemptLimit > 0} do {
 		_infBuilding = selectRandom _buildings;
 		_allBuildingPos = _infBuilding buildingPos -1;
 		if (count _allBuildingPos > 2) then {

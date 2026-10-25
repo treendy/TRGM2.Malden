@@ -157,7 +157,7 @@ if (str(_flatPos) != "[0,0,0]") then {
 		while{ (alive _downedCiv)} do {
 			//_downedCiv say3D selectRandom WoundedSounds;
 			_woundedSound = selectRandom WoundedSounds;
-			[_downedCiv,_woundedSound] remoteExecCall ["say3D", 0];
+			[_downedCiv,_woundedSound] remoteExecCall ["say3D", [0,-2] select isDedicated];
 			
 			//_downedCiv say3D selectRandom WoundedSounds;
 			sleep selectRandom [2,2.5,3];
@@ -181,7 +181,7 @@ if (str(_flatPos) != "[0,0,0]") then {
 
 
 	if (!(isNil "IsTraining")) then {
-		_markerEventMedi = createMarker [format["_markerEventMedi%1",(floor(random 360))], getPos _downedCiv];
+		_markerEventMedi = createMarker [format["_markerEventMedi%1",(call TRGM_fnc_nextMarkerId)], getPos _downedCiv];
 		_markerEventMedi setMarkerShape "ICON";
 		_markerEventMedi setMarkerType "hd_dot";
 		_markerEventMedi setMarkerText "Crash Site";				
@@ -189,7 +189,7 @@ if (str(_flatPos) != "[0,0,0]") then {
 	else {	
 		if (selectRandom[true,false,false,false]) then {
 		//if (selectRandom[true]) then {
-			_markerEventMedi = createMarker [format["_markerEventRescue%1",(floor(random 360))], getPos _downedCiv];
+			_markerEventMedi = createMarker [format["_markerEventRescue%1",(call TRGM_fnc_nextMarkerId)], getPos _downedCiv];
 			_markerEventMedi setMarkerShape "ICON";
 			_markerEventMedi setMarkerType "hd_dot";
 			_markerEventMedi setMarkerText "Distress Signal";				

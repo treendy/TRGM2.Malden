@@ -51,7 +51,7 @@ if (_bAllowStart) then {
 		//sleep 3;
 
 		if (_isCampaign) then {
-			[["NEW_MISSION"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
+			[["NEW_MISSION"],"RandFramework\Campaign\SetMissionBoardOptions.sqf"] remoteExec ["BIS_fnc_execVM",0,"TRGM_missionBoardOptions"];
 			if ((Player getVariable ["calUAVActionID", -1]) != -1) then {
 				player removeAction (Player getVariable ["calUAVActionID", -1]);
 				player setVariable ["calUAVActionID", nil];

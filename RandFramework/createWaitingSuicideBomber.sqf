@@ -34,7 +34,7 @@ if (count _nearestHidingPlaces > 5) then {
 	while {_bWaiting} do {
 
 		
-		if (floor(damage _objMilUnit) > 0) then {
+		if (damage _objMilUnit > 0) then {
 			_bWaiting = false; 
 		};
 	  	_nearUnits = nearestObjects [(getPos _objMilUnit), ["Man"], 10];
@@ -57,7 +57,7 @@ if (count _nearestHidingPlaces > 5) then {
 			sleep 2;
 		}
 		else {
-			sleep 30 + (random 120);
+			sleep (30 + (random 120));
 		};
 	};
 
@@ -82,7 +82,8 @@ if (count _nearestHidingPlaces > 5) then {
 	_objMilUnit setUnitPos "UP";
 
 	_BombSet = false;
-	while {!_BombSet} do {
+	_timeOut = time + 180; //give up if he can't reach the target
+	while {!_BombSet && time < _timeOut} do {
 		if ((_objMilUnit distance _unitPos) < 10 || !alive _objMilUnit) then {
 			if (!alive _objMilUnit) then {sleep 2.5};
 			_BombSet = true;
@@ -92,6 +93,7 @@ if (count _nearestHidingPlaces > 5) then {
 			sleep 0.1;
 			deleteVehicle _objMilUnit;
 		};
+		sleep 0.25;
 	};
 
 };

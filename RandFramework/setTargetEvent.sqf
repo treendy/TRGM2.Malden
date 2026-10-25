@@ -248,6 +248,7 @@ if (_isCache) then {
 		_i = 1;
 		_minDis = 7;
 		_doLoop = true;
+		_doorGuardGroup = grpNull;
 		_checkedPositions = [];
 		while {_doLoop && _i < 20} do
 		{
@@ -261,10 +262,12 @@ if (_isCache) then {
 			_checkedPositions pushBack _newPos;
 			if (_allowed) then {
 				//_doLoop = false;
-				_spawnedUnit2 = ((createGroup east) createUnit [sRiflemanToUse, _newPos, [], 0, "NONE"]);
+				//one group for all door guards (instead of a group each), PATH disabled so they hold their door
+				if (isNull _doorGuardGroup) then {_doorGuardGroup = createGroup east;};
+				_spawnedUnit2 = (_doorGuardGroup createUnit [sRiflemanToUse, _newPos, [], 0, "NONE"]);
+				_spawnedUnit2 disableAI "PATH";
 				_direction2 = [_building,_spawnedUnit2] call BIS_fnc_DirTo;
 				_spawnedUnit2 setDir _direction2;
-				_spawnedUnit2 setFormDir _direction2;
 			};
 			_i = _i + 1;		
 		};

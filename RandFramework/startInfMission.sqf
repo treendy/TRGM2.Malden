@@ -426,10 +426,10 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 							//_iThisTaskType = _ThisTaskTypes select InfTaskCount;
 							//_SamePrevAOStats
 							_TasksToValidate = [_iThisTaskType];
-							if (count _SamePrevAOStats > InfTaskCount) then {
+							if (count _SamePrevAOStats > InfTaskCount+1) then {
 								if (_SamePrevAOStats select (InfTaskCount + 1)) then {
 									_TasksToValidate = _TasksToValidate + [_ThisTaskTypes select (InfTaskCount + 1)];
-									if (count _SamePrevAOStats > InfTaskCount+1) then {
+									if (count _SamePrevAOStats > InfTaskCount+2) then {
 										if (_SamePrevAOStats select (InfTaskCount + 2)) then {
 											_TasksToValidate = _TasksToValidate + [_ThisTaskTypes select (InfTaskCount + 2)];
 										};	
@@ -466,7 +466,7 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 								_sTaskDescription = "";
 								if (ISUNSUNG) then {
 									if (_iThisTaskType == 6) then {
-										_radio = selectRandom ["uns_radio2_transitor_NVA","uns_radio2_transitor_NVA"] createVehicle (selectRandom (_infBuilding buildingPos -1));
+										_radio = "uns_radio2_transitor_NVA" createVehicle (selectRandom (_infBuilding buildingPos -1));
 									}
 									else {
 										_radio = selectRandom ["uns_radio2_nva_radio","uns_radio2_transitor_NVA","uns_radio2_transitor_NVA"] createVehicle (selectRandom (_infBuilding buildingPos -1));
@@ -773,7 +773,6 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 	
 									_objInformant = createGroup _sideToUse createUnit [_infClassToUse,[0,0,500],[],0,"NONE"];
 									_objInformant setVariable [_sInformant1Name, _objInformant, true];
-									_objInformant setVariable [_sInformant1Name, _objInformant, true];
 									_objInformant setVariable ["taskIndex",_iTaskIndex, true];
 									missionNamespace setVariable [_sInformant1Name, _objInformant];
 									sleep 0.2;
@@ -890,26 +889,8 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 										};
 										if (_iThisTaskType == 5 || _iThisTaskType == 8 || _iThisTaskType == 7) then {
 
-											TREND_fnc_WalkingGuyLoop = {
-												_objManName = _this select 0;
-												_thisInitPos = _this select 1;
-												_objMan = missionNamespace getVariable _objManName;
-
-												group _objMan setSpeedMode "LIMITED";
-												group _objMan setBehaviour "SAFE";
-												sleep 5; //allow five seconds for any scripts to be run on officer before he moves e.g. if set as hostage when friendly rebels)
-
-												while {true && alive(_objMan)} do {
-													_bIsShot = _objMan getVariable ["StopWalkScript", false];
-													if (behaviour _objMan != "COMBAT" && !_bIsShot) then {
-														[_objManName,_thisInitPos,_objMan,75] execVM "RandFramework\HVTWalkAround.sqf";
-														sleep 2;
-														waitUntil {sleep 1; speed _objMan < 0.5};
-														sleep 10;
-													};
-												};
-											};
-											[_sInformant1Name,_initPos] spawn TREND_fnc_WalkingGuyLoop;
+											//5 second delay allows any scripts to be run on officer before he moves e.g. if set as hostage when friendly rebels
+											[_sInformant1Name,_initPos,75,false,5] spawn TRGM_fnc_walkingGuyLoop;
 
 											if (_bIsMainObjective) then {
 												//[[_objInformant, [localize "STR_TRGM2_startInfMission_MissionTitle8_Button","RandFramework\IdentifyHVT.sqf",[_iTaskIndex,_bCreateTask],10,true,true,"","_this distance _target < 3"]],"addAction",true,true] call BIS_fnc_MP;
@@ -973,9 +954,11 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 												_objManName = _this select 0;
 												_bCreateTask = _this select 1;
 												_iTaskIndex = _this select 2;
+												_iThisTaskType = _this select 3;
 												_objMan = missionNamespace getVariable _objManName;
 												_doLoop = true;
 												while {_doLoop} do {
+													sleep 2;
 													if (!alive(_objMan)) then {
 														_doLoop = false;
 														_sName = format["InfSide%1",_iTaskIndex];
@@ -1005,7 +988,7 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 													};
 												};
 											};
-											[_sInformant1Name,_bCreateTask,_iTaskIndex] spawn TREND_fnc_POWCheck; 
+											[_sInformant1Name,_bCreateTask,_iTaskIndex,_iThisTaskType] spawn TREND_fnc_POWCheck; 
 
 										};
 									
@@ -1070,8 +1053,9 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 								//##############################################
 								{systemChat "Mission Setup: 8-2";} remoteExec ["bis_fnc_call", 0];
 
-								if (!isNil "Mission1Title") then {_MissionTitle = Mission1Title};
-								if (!isNil "Mission1Desc") then {_sTaskDescription = Mission1Desc};
+								//custom titles from TRGMSetDefaultMissionSetupVars.sqf (Mission1Title, Mission2Title etc...)
+								_MissionTitle = missionNamespace getVariable [format["Mission%1Title",_iTaskIndex+1], _MissionTitle];
+								_sTaskDescription = missionNamespace getVariable [format["Mission%1Desc",_iTaskIndex+1], _sTaskDescription];
 
 								debugMessages = debugMessages + format["\n_bIsMainObjective: %1",_bIsMainObjective];
 								debugMessages = debugMessages + format["\n_iTaskIndex: %1",_iTaskIndex];
@@ -1205,11 +1189,11 @@ if (iMissionParamType == 5) then {
 	_totalRep = [MaxBadPoints - BadPoints,1] call BIS_fnc_cutDecimals;
 
 	if (_totalRep >= 10 && FinalMissionStarted) then {
-		_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "[FriendlySide, [""DeBrief"", localize ""STR_TRGM2_mainInit_Debrief"", ""Debrief"", """"]] call FHQ_TT_addTasks;  [[""CAMPAIGN_END""],""RandFramework\Campaign\SetMissionBoardOptions.sqf""] remoteExec [""BIS_fnc_execVM"",0,true];}; deletevehicle thisTrigger", ""];
+		_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "[FriendlySide, [""DeBrief"", localize ""STR_TRGM2_mainInit_Debrief"", ""Debrief"", """"]] call FHQ_TT_addTasks;  [[""CAMPAIGN_END""],""RandFramework\Campaign\SetMissionBoardOptions.sqf""] remoteExec [""BIS_fnc_execVM"",0,""TRGM_missionBoardOptions""]; deletevehicle thisTrigger", ""];
 
 	}
 	else {
-		_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "hint (localize ""STR_TRGM2_startInfMission_RTBNextMission""); [[""MISSION_COMPLETE""],""RandFramework\Campaign\SetMissionBoardOptions.sqf""] remoteExec [""BIS_fnc_execVM"",0,true]; if (ActiveTasks call FHQ_TT_areTasksSuccessful) then {[1, format[localize ""STR_TRGM2_startInfMission_DayComplete"",str(iCampaignDay)]] execVM 'RandFramework\AdjustMaxBadPoints.sqf'}; deletevehicle thisTrigger", ""];
+		_trgComplete setTriggerStatements ["ActiveTasks call FHQ_TT_areTasksCompleted;", "hint (localize ""STR_TRGM2_startInfMission_RTBNextMission""); [[""MISSION_COMPLETE""],""RandFramework\Campaign\SetMissionBoardOptions.sqf""] remoteExec [""BIS_fnc_execVM"",0,""TRGM_missionBoardOptions""]; if (ActiveTasks call FHQ_TT_areTasksSuccessful) then {[1, format[localize ""STR_TRGM2_startInfMission_DayComplete"",str(iCampaignDay)]] execVM 'RandFramework\AdjustMaxBadPoints.sqf'}; deletevehicle thisTrigger", ""];
 	};
 	//TESTTEST = triggerStatements _trgComplete;
 }

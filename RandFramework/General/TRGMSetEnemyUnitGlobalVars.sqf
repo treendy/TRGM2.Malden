@@ -236,7 +236,7 @@ CheckPointTurret = ["O_HMG_01_high_F"];
 		UnarmedScoutVehicles = ["O_G_Offroad_01_F","O_G_Van_01_transport_F","O_G_Van_02_vehicle_F"];
 		EnemyBaseChoppers = ["Land_HelipadEmpty_F"];
 		sEnemyHeliPilot = "Land_HelipadEmpty_F";
-		CheckPointTurret = ["O_G_Soldier_AR_F"];
+		CheckPointTurret = ["O_HMG_01_high_F"]; //was a soldier class, which can't be used as a static turret
 
 		EnemyFlags = ["Flag_FIA_F"];
 
@@ -675,14 +675,14 @@ case 10 : { //GM Winter
 	UnarmedScoutVehicles = ["gm_gc_army_p601","gm_gc_army_ural44202"];
 	EnemyBaseChoppers = ["gm_gc_army_t55a"];
 	sEnemyHeliPilot = "gm_gc_army_crew_mpiaks74nk_80_blk";
-	CivCars = ["gm_ge_civ_typ1200","gm_ge_dbp_typ1200","gm_gc_civ_p601","gm_gc_civ_man_01_80_blu"];
+	CivCars = ["gm_ge_civ_typ1200","gm_ge_dbp_typ1200","gm_gc_civ_p601"];
 	sCivilian = ["gm_gc_civ_man_02_80_brn","gm_gc_civ_man_01_80_blu","gm_gc_civ_man_01_80_blk","gm_gc_civ_man_02_80_gry"];
-	HVTCars = ["gm_gc_army_p601","gm_ge_civ_typ1200","gm_ge_dbp_typ1200","gm_gc_civ_p601","gm_gc_civ_man_01_80_blu"];
-	HVTVans = ["gm_ge_civ_typ1200","gm_ge_dbp_typ1200","gm_gc_civ_p601","gm_gc_civ_man_01_80_blu"];
+	HVTCars = ["gm_gc_army_p601","gm_ge_civ_typ1200","gm_ge_dbp_typ1200","gm_gc_civ_p601"];
+	HVTVans = ["gm_ge_civ_typ1200","gm_ge_dbp_typ1200","gm_gc_civ_p601"];
 	HVTChoppers = ["I_C_Heli_Light_01_civil_F"];
 	HVTPlanes = ["I_C_Heli_Light_01_civil_F"];
 	BombToDefuse = ["Land_SatellitePhone_F"];
-	CheckPointTurret = ["gm_gc_army_machinegunner_pk_80_win"];
+	CheckPointTurret = ["O_HMG_01_high_F"]; //was a soldier class, which can't be used as a static turret
 };
 
 };

@@ -10,7 +10,7 @@ if (!(_aceSource isEqualTo objNull)) then {
 	_killer = _aceSource;
 };
 
-if (side _killer == west && str(_killed) != str(_killer)) then {
+if (side _killer == west && _killed != _killer) then {
 	bCivKilled = true;
 	publicVariable "bCivKilled";
 

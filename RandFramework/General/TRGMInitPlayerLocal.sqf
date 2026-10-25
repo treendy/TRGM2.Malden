@@ -73,12 +73,12 @@ CODEINPUT = [];
 				else {
 					if (!bOptionsSet) then {
 						txt1Layer = "txt1" call BIS_fnc_rscLayer;
-						_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1 Admin " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
+						_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + "Admin" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait2" + "</t>";
 						[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
 					}
 					else {
 						txt1Layer = "txt1" call BIS_fnc_rscLayer;
-						_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1 Admin " + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3" + "</t>";
+						_texta = "<t font ='EtelkaMonospaceProBold' align = 'center' size='0.5' color='#ffffff'>" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait1" + "Admin" + localize "STR_TRGM2_TRGMInitPlayerLocal_PleaseWait3" + "</t>";
 						[_texta, 0, 0.220, 7, 1,0,txt1Layer] spawn BIS_fnc_dynamicText;
 					};
 					txt5Layer = "txt5" call BIS_fnc_rscLayer;
@@ -252,7 +252,8 @@ TREND_fnc_InitPostStarted = {
 	};
 };
 [] spawn TREND_fnc_InitPostStarted;
-player addEventHandler ["Respawn", { [] spawn TREND_fnc_InitPostStarted; }];
+//only the camera man actions are lost on respawn, the other actions are on objects and the loops follow the new player unit
+player addEventHandler ["Respawn", { if (side player == civilian) then {[] execvm "RandFramework\InitCameraMan.sqf";}; }];
 
 
 if (AdvancedSettings select ADVSET_VIRTUAL_ARSENAL_IDX == 1) then {
@@ -306,7 +307,6 @@ TREND_fnc_GetAnimalsMoving = {
 	[] execVM "RandFramework\animateAnimals.sqf";
 };
 [] spawn TREND_fnc_GetAnimalsMoving;
-player addEventHandler ["Respawn", { [] spawn TREND_fnc_GetAnimalsMoving; }];
 
 //[player, supReq] call BIS_fnc_addSupportLink;
 if (leader (group (vehicle player)) == player) then {
@@ -385,7 +385,6 @@ TREND_fnc_GeneralPlayerLoop = {
 	};
 };
 [] spawn TREND_fnc_GeneralPlayerLoop;
-player addEventHandler ["Respawn", { [] spawn TREND_fnc_GeneralPlayerLoop; }];
 
 
 
@@ -400,10 +399,10 @@ TREND_fnc_OnlyAllowDirectMapDraw = {
 				};
 			};
 		} forEach allMapMarkers;
+		sleep 1;
 	};
 };
 [] spawn TREND_fnc_OnlyAllowDirectMapDraw;
-player addEventHandler ["Respawn", { [] spawn TREND_fnc_OnlyAllowDirectMapDraw; }];
 
 TREND_fnc_InSafeZone = {
 	if (isNil "PlayersHaveLeftStartingArea") then {
@@ -417,14 +416,15 @@ TREND_fnc_InSafeZone = {
 		}
 		else {
 			//if (!bDebugMode) then { player allowDamage true;};
-			PlayersHaveLeftStartingArea = true;
-			publicVariable "PlayersHaveLeftStartingArea";
+			if (!PlayersHaveLeftStartingArea) then {
+				PlayersHaveLeftStartingArea = true;
+				publicVariable "PlayersHaveLeftStartingArea";
+			};
 		};
 		sleep 1;
 	};
 };
 [] spawn TREND_fnc_InSafeZone;
-player addEventHandler ["Respawn", { [] spawn TREND_fnc_InSafeZone; }];
 
 
 TREND_fnc_setNVG = {
@@ -474,14 +474,13 @@ if (bCirclesOfDeath) then {
 		};
 	};
 	[] spawn TREND_fnc_checkKilledRange;
-	player addEventHandler ["Respawn", { [] spawn TREND_fnc_checkKilledRange; }];
 
 
 
 	TREND_fnc_drawKilledRanges = {
 		if (getPlayerUID player in KilledPlayers) then {
 			{
-				if (getPlayerUID player == KilledPlayers select _forEachIndex) then {
+				if (getPlayerUID player == _x select 0) then {
 					//draw marker at KilledPositions select _forEachIndex
 					_color = "ColorBlack";
 					_mrkPos = createMarkerLocal [format["mrkNoGoA%1",_forEachIndex], _x select 1];
@@ -638,7 +637,6 @@ TREND_fnc_MissionOverAnimation = {
 	};
 };
 [] spawn TREND_fnc_MissionOverAnimation;
-player addEventHandler ["Respawn", { [] spawn TREND_fnc_MissionOverAnimation; }];
 
 
 

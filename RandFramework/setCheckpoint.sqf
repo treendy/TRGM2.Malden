@@ -194,6 +194,7 @@ if (_PosFound) then {
 		if (_thisSide == east) then {
 		//SentryAreas
 			SentryAreas = SentryAreas + [[_roadBlockPos,_thisAreaAroundCheckpointSpacing]];
+			publicVariable "SentryAreas";
 		};
 	};
 
@@ -277,10 +278,11 @@ if (_PosFound) then {
 		_ParkedCar setDir (floor(random 360));
 		sleep 0.1;
 		if (damage _ParkedCar > 0) then {
-			_bHasParkedCar = false;
 			deleteVehicle _ParkedCar;
+		}
+		else {
+			_bHasParkedCar = true;
 		};
-		_bHasParkedCar = true;
 	};
 	if (_NoRoadsOrBuildingsNear) then {
 		if (selectRandom [true,true,true,false] || _isForceTents) then {
@@ -297,12 +299,12 @@ if (_PosFound) then {
 
 			_flatPos3 = nil;
 			_flatPos3 = [getPos _Tent1 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
-			_Tent3 = "Campfire_burning_F" createVehicle _flatPos2;
+			_Tent3 = "Campfire_burning_F" createVehicle _flatPos3;
 			_Tent3 setDir (floor(random 360));
 
 			_flatPos4 = nil;
 			_flatPos4 = [getPos _Tent1 , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
-			_Tent4 = "Land_WoodPile_F" createVehicle _flatPos2;
+			_Tent4 = "Land_WoodPile_F" createVehicle _flatPos4;
 			_Tent4 setDir (floor(random 360));
 
 		}
@@ -427,24 +429,7 @@ if (_PosFound) then {
 			};
 		};
 	};
-	TREND_fnc_WalkingGuyLoop = {
-		_objManName = _this select 0;
-		_thisInitPos = _this select 1;
-		_objMan = missionNamespace getVariable _objManName;
-
-		group _objMan setSpeedMode "LIMITED";
-		group _objMan setBehaviour "SAFE";
-
-		while {true && alive(_objMan)} do {
-			if (behaviour _objMan != "COMBAT") then {
-				[_objManName,_thisInitPos,_objMan,35] execVM "RandFramework\HVTWalkAround.sqf";
-				sleep 2;
-				waitUntil {sleep 1; speed _objMan < 0.5};
-				sleep 10;
-			};
-		};
-	};
-	[_sCheckpointGuyName,_pos5] spawn TREND_fnc_WalkingGuyLoop;
+	[_sCheckpointGuyName,_pos5,35] spawn TRGM_fnc_walkingGuyLoop;
 };
 
 

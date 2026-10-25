@@ -381,13 +381,12 @@ if (count _nearestRoads > 0) then {
 						_nearUnits = nearestObjects [(_roadBlockSidePos), ["LandVehicle"], 10];
 						{
 							if (((driver _x) in switchableUnits || (driver _x) in playableUnits) && (alive _mainVeh)) then {
-								if (selectRandom [true,true]) then {
-									_type = selectRandom ["Bomb_03_F","Missile_AA_04_F","M_Mo_82mm_AT_LG","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo"];
-									_li_aaa = _type createVehicle (getPos _mainVeh);
-									_li_aaa setDamage 1;
-									_mainVeh setVariable ["isDefused",true, true];
-									[localize "STR_TRGM2_IEDOmteresting"] remoteExecCall ["Hint", 0];
-								};
+								_type = selectRandom ["Bomb_03_F","Missile_AA_04_F","M_Mo_82mm_AT_LG","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo"];
+								_li_aaa = _type createVehicle (getPos _mainVeh);
+								_li_aaa setDamage 1;
+								_mainVeh setVariable ["isDefused",true, true];
+								[localize "STR_TRGM2_IEDOmteresting"] remoteExecCall ["Hint", 0];
+								_bWaiting = false;
 							};
 							if (!_bWaiting) exitWith {true};
 						} forEach _nearUnits;

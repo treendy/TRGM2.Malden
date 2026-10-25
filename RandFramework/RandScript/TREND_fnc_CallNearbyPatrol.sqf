@@ -309,7 +309,7 @@ if (isServer && count _thisThisList > 0) then {
 					_nearplayercount = count _playerClose;
 					if (_nearplayercount > selectRandom [3,4]) then {_ChancesOfFireMortar = [true]; _iRoundsToFire = 2};
 					if (count _nearestMortars > 0 && speed _SpottedUnit < 1 && selectRandom _ChancesOfFireMortar && _SpottedUnit distance _MainObjectivePos > 200) then {
-						_menNear = nearestObjects [player, ["Man"], 1250];
+						_menNear = (nearestObjects [_SpottedUnit, ["Man"], 1250]) select {side _x == east};
 						_bAllowMortar = true;
 						_SpotterFound = false;
 						_Spotter = nil;
