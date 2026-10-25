@@ -1,22 +1,6 @@
 
 params ["_posOfAO",["_roadRange",2000],["_showMarker",false],["_forceTrap",false],["_objTarget",nil],["_isCache",false],["_isMainTask",false]];
 
-_ieds = CivCars;
-
-fnc_AddToDirection = {
-	params ["_origDirection","_addToDirection"];
-
-	_iResult = _origDirection + _addToDirection;
-	if (_iResult > 360) then {
-		_iResult = _iResult - 360;
-	};
-	if (_origDirection+_addToDirection < 0) then {
-		_iResult = 360 + _iResult ;
-	};
-
-	_iResult;
-};
-
 _objectiveCreated = false;
 
 _nearestRoads = _posOfAO nearRoads _roadRange;
@@ -41,34 +25,12 @@ if (!_isCache && count _nearestRoads > 0) then {
 
 
 	if (_eventLocationPos select 0 > 0) then {
-		_thisAreaRange = 50;
-		_nearestRoads = _eventLocationPos nearRoads _thisAreaRange;
-
-		_nearestRoad = nil;
-		_roadConnectedTo = nil;
-		_connectedRoad = nil;
-		_direction = nil;
-		_PosFound = false;
-		_iAttemptLimit = 5;
-
-		_direction = nil;
-		while {!_PosFound && _iAttemptLimit > 0 && count _nearestRoads > 0} do {
-			_nearestRoad = selectRandom _nearestRoads;
-			_roadConnectedTo = roadsConnectedTo _nearestRoad;
-			if (count _roadConnectedTo > 0) then {	
-				_connectedRoad = _roadConnectedTo select 0;
-				_direction = [_nearestRoad, _connectedRoad] call BIS_fnc_DirTo;	
-				_PosFound = true;		
-			}
-			else {
-				_iAttemptLimit = _iAttemptLimit - 1;
-			};
-		};
-		if (_PosFound) then {
+		_roadInfo = [_eventLocationPos, 50, 5] call TRGM_fnc_findRoadWithDirection;
+		if (count _roadInfo > 0) then {
+			_roadInfo params ["_nearestRoad","_direction"];
 			_objectiveCreated = true;
 			
-			_roadBlockPos =  getPos _nearestRoad;
-			_roadBlockSidePos = _nearestRoad getPos [3, ([_direction,90] call fnc_AddToDirection)];
+			_roadBlockSidePos = _nearestRoad getPos [3, ([_direction,90] call TRGM_fnc_AddToDirection)];
 
 			_mainVeh = nil;
 			if (isNil "_objTarget") then {
@@ -78,7 +40,7 @@ if (!_isCache && count _nearestRoads > 0) then {
 				_mainVeh = _objTarget;
 				_mainVeh setPos _roadBlockSidePos;
 			};
-			_mainVehDirection =  ([_direction,(selectRandom[0,-10,10])] call fnc_AddToDirection);
+			_mainVehDirection =  ([_direction,(selectRandom[0,-10,10])] call TRGM_fnc_AddToDirection);
 			_mainVeh setDir _mainVehDirection;
 			clearItemCargoGlobal _mainVeh;		
 
@@ -123,8 +85,7 @@ if (!_isCache && count _nearestRoads > 0) then {
 			_spawnedUnitTarget2 setFormDir _directionTarget2;
 
 
-_thisAreaRange = 20;
-			_flatPos = nil;
+			_thisAreaRange = 20;
 			_flatPos = [_posOfTarget , 0, 20, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]] + CheckPointAreas + SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 			if (_flatPos select 0 > 0) then {
 				_thisPosAreaOfCheckpoint = _flatPos;
@@ -170,8 +131,6 @@ if (_isCache) then {
 
 	_infBuilding setDamage 0;
 	_allBuildingPos = _infBuilding buildingPos -1;
-	_inf1X = position _infBuilding select 0;
-	_inf1Y = position _infBuilding select 1;
 
 	if (count _allBuildingPos > 2) then {
 		_objectiveCreated = true;
@@ -198,7 +157,6 @@ if (_isCache) then {
 		};
 
 		_thisAreaRange = 20;
-		_flatPos = nil;
 		_flatPos = [_posCache , 0, 20, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]] + CheckPointAreas + SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 		if (_flatPos select 0 > 0) then {
 			_thisPosAreaOfCheckpoint = _flatPos;
@@ -290,17 +248,14 @@ if (!_objectiveCreated) then {
 	_posObj = getPos _mainVeh;
 
 	if (_posOfAO distance (getPos _mainVeh) > 150 ) then {
-
-		if (true) then { //if we failed the above trying to find a pos, then if we place in random place, just show marker
-			_markerstrcache = createMarker [format ["IEDLoc%1",_posObj select 0],_posObj];
-			_markerstrcache setMarkerShape "ICON";
-			_markerstrcache setMarkerText localize "STR_TRGM2_CacheMarkerText";	
-			_markerstrcache setMarkerType "hd_dot";
-		};
+		//if we failed the above trying to find a pos, then if we place in random place, just show marker
+		_markerstrcache = createMarker [format ["IEDLoc%1",_posObj select 0],_posObj];
+		_markerstrcache setMarkerShape "ICON";
+		_markerstrcache setMarkerText localize "STR_TRGM2_CacheMarkerText";	
+		_markerstrcache setMarkerType "hd_dot";
 	};
 
 	_thisAreaRange = 20;
-	_flatPos = nil;
 	_flatPos = [_posObj , 0, 20, 5, 0, 0.2, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]] + CheckPointAreas + SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 	if (_flatPos select 0 > 0) then {
 		_thisPosAreaOfCheckpoint = _flatPos;

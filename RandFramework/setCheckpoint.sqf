@@ -17,20 +17,6 @@ params [
 	["_isForceTents",false]
 ];
 
-fnc_AddToDirection = {
-	params ["_origDirection","_addToDirection"];
-
-	_iResult = _origDirection + _addToDirection;
-	if (_iResult > 360) then {
-		_iResult = _iResult - 360;
-	};
-	if (_origDirection+_addToDirection < 0) then {
-		_iResult = 360 + _iResult ;
-	};
-
-	_iResult;
-};
-
 if (isNil "CheckPointAreas") then {
 		CheckPointAreas = [];
 		publicVariable "CheckPointAreas";
@@ -125,7 +111,7 @@ if (!_thisRoadOnly || !_PosFound) then {
 	else {
 		_dirAdd = -floor(random 40);
 	};
-	_direction = ([_generalDirection,_dirAdd] call fnc_AddToDirection);
+	_direction = ([_generalDirection,_dirAdd] call TRGM_fnc_AddToDirection);
 	_PosFound = true;
 };
 
@@ -133,7 +119,7 @@ if (_PosFound) then {
 
 
 if (!_thisIsDirectionAwayFromAO) then {
-		_direction = ([_direction,180] call fnc_AddToDirection);
+		_direction = ([_direction,180] call TRGM_fnc_AddToDirection);
 	};
 	_RoadSideBarricadesHigh = ["Land_Barricade_01_4m_F"];
 	_RoadSideBarricadesLow = ["Land_BagFence_Long_F","Land_BagBunker_Small_F"];
@@ -152,10 +138,9 @@ if (!_thisIsDirectionAwayFromAO) then {
 
 	if (_thisRoadOnly) then {
 		_roadBlockPos =  getPos _nearestRoad;
-		_roadBlockSidePos = _nearestRoad getPos [10, ([_direction,90] call fnc_AddToDirection)];
+		_roadBlockSidePos = _nearestRoad getPos [10, ([_direction,90] call TRGM_fnc_AddToDirection)];
 	}
 	else {
-		_flatPos = nil;
 		_flatPos = [_thisPosAreaOfCheckpoint , 0, 50, 20, 0, 0.2, 0,[],[_thisPosAreaOfCheckpoint,_thisPosAreaOfCheckpoint]] call BIS_fnc_findSafePos;
 		_roadBlockPos = _flatPos;
 		_roadBlockSidePos = _flatPos;
@@ -200,15 +185,15 @@ _slope = abs(((getTerrainHeightASL _roadBlockSidePos)) - ((getTerrainHeightASL  
 
 	if (_iBarricadeType == "HIGH") then {
 		_initItem = selectRandom _RoadSideBarricadesHigh createVehicle _roadBlockSidePos;
-		_initItem setDir ([_direction,180] call fnc_AddToDirection);
+		_initItem setDir ([_direction,180] call TRGM_fnc_AddToDirection);
 	};
 	if (_iBarricadeType == "FULL") then {
 		_initItem = selectRandom _FullRoadBarricades createVehicle _roadBlockPos;
-		_initItem setDir ([_direction,180] call fnc_AddToDirection);
+		_initItem setDir ([_direction,180] call TRGM_fnc_AddToDirection);
 	};
 	if (_iBarricadeType == "LOW") then {
 		_initItem = selectRandom _RoadSideBarricadesLow createVehicle _roadBlockSidePos;
-		_initItem setDir ([_direction,180] call fnc_AddToDirection);
+		_initItem setDir ([_direction,180] call TRGM_fnc_AddToDirection);
 
 		if (_thisSide == east && _AllowTurrent) then {
 			_NearTurret1 = createVehicle [selectRandom CheckPointTurret, _initItem getPos [1,_direction+180], [], 0, "CAN_COLLIDE"];
@@ -220,11 +205,11 @@ _slope = abs(((getTerrainHeightASL _roadBlockSidePos)) - ((getTerrainHeightASL  
 		//FlagCarrierTakistan_EP1, FlagCarrierTKMilitia_EP1
 		if (!(isOnRoad _roadBlockSidePos) && selectRandom[true,false]) then {
 			_initItem = selectRandom _DefensiveObjects createVehicle _roadBlockSidePos;
-			_initItem setDir ([_direction,180] call fnc_AddToDirection);
+			_initItem setDir ([_direction,180] call TRGM_fnc_AddToDirection);
 		}
 		else {
 			_initItem = "Land_HelipadEmpty_F" createVehicle _roadBlockSidePos;
-			_initItem setDir ([_direction,180] call fnc_AddToDirection);
+			_initItem setDir ([_direction,180] call TRGM_fnc_AddToDirection);
 		};
 
 	};
@@ -246,7 +231,7 @@ _slope = abs(((getTerrainHeightASL _roadBlockSidePos)) - ((getTerrainHeightASL  
 	_bHasParkedCar = false;
 	_ParkedCar = nil;
 	if (_AllowVeh && (selectRandom [true,true,true,false] || _thisSide == west)) then {
-		_behindBlockPos = _initItem getPos [10,([_direction,180] call fnc_AddToDirection)];
+		_behindBlockPos = _initItem getPos [10,([_direction,180] call TRGM_fnc_AddToDirection)];
 		_flatPos = nil;
 		_flatPos = [_behindBlockPos , 0, 10, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
 		_ParkedCar = selectRandom _thisScoutVehicles createVehicle _flatPos;
@@ -261,7 +246,7 @@ _slope = abs(((getTerrainHeightASL _roadBlockSidePos)) - ((getTerrainHeightASL  
 	};
 	if (_NoRoadsOrBuildingsNear) then {
 		if (selectRandom [true,true,true,false] || _isForceTents) then {
-			_behindBlockPos = _initItem getPos [15,([_direction,180] call fnc_AddToDirection)];
+			_behindBlockPos = _initItem getPos [15,([_direction,180] call TRGM_fnc_AddToDirection)];
 			_flatPos = nil;
 			_flatPos = [_behindBlockPos , 0, 15, 10, 0, 0.5, 0,[],[_behindBlockPos,_behindBlockPos]] call BIS_fnc_findSafePos;
 			_Tent1 = "Land_TentA_F" createVehicle _flatPos;
@@ -284,13 +269,13 @@ _slope = abs(((getTerrainHeightASL _roadBlockSidePos)) - ((getTerrainHeightASL  
 
 		}
 	};
-	_behindBlockPos2 = _initItem getPos [3,([_direction,180] call fnc_AddToDirection)];
+	_behindBlockPos2 = _initItem getPos [3,([_direction,180] call TRGM_fnc_AddToDirection)];
 	if (selectRandom [true,true,true,false]) then {
 
 		_flatPos = nil;
 		_flatPos = [_behindBlockPos2 , 0, 5, 7, 0, 0.5, 0,[],[_behindBlockPos2,_behindBlockPos2]] call BIS_fnc_findSafePos;
 		_FloodLight = selectRandom ["Land_PortableLight_single_F"] createVehicle _flatPos;
-		_FloodLight setDir (([_direction,180] call fnc_AddToDirection));
+		_FloodLight setDir (([_direction,180] call TRGM_fnc_AddToDirection));
 	};
 	//Land_PortableLight_single_F
 
@@ -305,14 +290,14 @@ _slope = abs(((getTerrainHeightASL _roadBlockSidePos)) - ((getTerrainHeightASL  
 			else {
 				_radio = selectRandom ["uns_radio2_transitor_NVA","uns_radio2_transitor_NVA","uns_radio2_nva_radio","uns_radio2_recorder"] createVehicle _flatPos;
 			};
-			_radio setDir (([_direction,180] call fnc_AddToDirection));
+			_radio setDir (([_direction,180] call TRGM_fnc_AddToDirection));
 		};
 	};
 
 
-	_pos1 = _initItem getPos [3,([_direction,100] call fnc_AddToDirection)];
+	_pos1 = _initItem getPos [3,([_direction,100] call TRGM_fnc_AddToDirection)];
 
-	_pos2 = _initItem getPos [4,([_direction,80] call fnc_AddToDirection)];
+	_pos2 = _initItem getPos [4,([_direction,80] call TRGM_fnc_AddToDirection)];
 	_group = createGroup _thisSide;
 	_group setFormDir _direction;
 
@@ -356,7 +341,7 @@ if (_AllowAnimation) then {
 				[_guardUnit4,"STAND_IA","ASIS"] call BIS_fnc_ambientAnimCombat;
 			}
 			else {
-				_LeanDir = ([direction _ParkedCar,45] call fnc_AddToDirection);
+				_LeanDir = ([direction _ParkedCar,45] call TRGM_fnc_AddToDirection);
 				_group3 setFormDir _LeanDir;
 				doStop [_guardUnit4];
 				_guardUnit4 setDir (_LeanDir);

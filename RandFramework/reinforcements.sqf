@@ -23,9 +23,6 @@ _nul = [EAST, "spawnMrk", "LZMrk", 2, true, true, true, true, false] spawn TAG_f
 
  ---------------------------------------------------------------------------------------------------------*/
  if (isServer) then {
-	 _spawnMrk = [0,0,0];
-	 _LZMrk = [0,0,0];
-
 	 //arguments definitions 
 	_side = _this select 0;
 	_spawnMrk = _this select 1;
@@ -85,74 +82,22 @@ _nul = [EAST, "spawnMrk", "LZMrk", 2, true, true, true, true, false] spawn TAG_f
 		player globalChat format ["Cargo Group: %1", _infGrp];
 	};
 
-	//Set the infantry groups skill levels
-	switch (_skill) do 
-	{   case 1 : 
+	//Set the infantry groups skill levels (row = skill setting 1..4, columns match _skillNames)
+	_skillNames = ["general","aimingAccuracy","aimingShake","aimingSpeed","endurance","spotDistance","spotTime","courage","reloadspeed","commanding"];
+	_skillTable = [
+		[1, 0.2, 0.2, 0.7, 0.1, 0.1, 0.1, 1, 0.1,  0.5],
+		[1, 0.3, 0.3, 0.7, 0.2, 0.2, 0.2, 1, 0.2,  0.75],
+		[1, 0.3, 0.4, 1,   0.5, 0.3, 0.3, 1, 0.75, 1],
+		[1, 0.4, 0.5, 1,   0.5, 0.5, 0.5, 1, 1,    1]
+	];
+	if (_skill in [1,2,3,4]) then {
+		_skillValues = _skillTable select (_skill - 1);
 		{
+			_unit = _x;
 			{
-				_x setSkill ["general",1];
-				_x setSkill ["aimingAccuracy",0.2];
-				_x setSkill ["aimingShake",0.2];
-				_x setSkill ["aimingSpeed",0.7];
-				_x setSkill ["endurance",0.1];
-				_x setSkill ["spotDistance",0.1];
-				_x setSkill ["spotTime",0.1];
-				_x setSkill ["courage",1];
-				_x setSkill ["reloadspeed",0.1];
-				_x setSkill ["commanding",0.5];
-			} forEach units _infGrp;
-	
-		};
-	
-		case 2 : 
-		{
-			{
-				_x setSkill ["general",1];
-				_x setSkill ["aimingAccuracy",0.3];
-				_x setSkill ["aimingShake",0.3];
-				_x setSkill ["aimingSpeed",0.7];
-				_x setSkill ["endurance",0.2];
-				_x setSkill ["spotDistance",0.2];
-				_x setSkill ["spotTime",0.2];
-				_x setSkill ["courage",1];
-				_x setSkill ["reloadspeed",0.2];
-				_x setSkill ["commanding",0.75];
-			} forEach units _infGrp;
-	
-		};
-	
-		case 3 : 
-		{
-			{
-				_x setSkill ["general",1];
-				_x setSkill ["aimingAccuracy",0.3];
-				_x setSkill ["aimingShake",0.4];
-				_x setSkill ["aimingSpeed",1];
-				_x setSkill ["endurance",0.5];
-				_x setSkill ["spotDistance",0.3];
-				_x setSkill ["spotTime",0.3];
-				_x setSkill ["courage",1];
-				_x setSkill ["reloadspeed",0.75];
-				_x setSkill ["commanding",1];
-			} forEach units _infGrp;
-	
-		};
-	
-		case 4 : 
-		{
-			{
-				_x setSkill ["general",1];
-				_x setSkill ["aimingAccuracy",0.4];
-				_x setSkill ["aimingShake",0.5];
-				_x setSkill ["aimingSpeed",1];
-				_x setSkill ["endurance",0.5];
-				_x setSkill ["spotDistance",0.5];
-				_x setSkill ["spotTime",0.5];
-				_x setSkill ["courage",1];
-				_x setSkill ["reloadspeed",1];
-				_x setSkill ["commanding",1];
-			} forEach units _infGrp;
-		};
+				_unit setSkill [_x, _skillValues select _forEachIndex];
+			} forEach _skillNames;
+		} forEach units _infGrp;
 	};
 
 
@@ -261,14 +206,7 @@ _nul = [EAST, "spawnMrk", "LZMrk", 2, true, true, true, true, false] spawn TAG_f
 	
 		//wait until the helicopter is touching the ground before ejecting the cargo	
 
-		if (_spawnMrk select 2 == 0) then {
-			//hint format["test3: %1 - %2",currentWaypoint _infgrp,fuel _helo];
-
-			//waitUntil {sleep 1; fuel _helo == 0};
-			
-			//hint "test2";
-		}
-		else {
+		if (_spawnMrk select 2 != 0) then {
 			waitUntil {sleep 1; isTouchingGround (_helo select 0) || {!canMove (_helo select 0)}};
 			{unAssignVehicle _x; _x action ["eject", vehicle _x]; sleep 0.5;} forEach units _infgrp; //Eject the cargo
 		};

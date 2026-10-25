@@ -9,21 +9,6 @@ If (_IEDType == "CAR") then {_ieds = CivCars;};
 If (_IEDType == "RUBBLE") then {_ieds = IEDFakeClassNames;};
 
 
-fnc_AddToDirection = {
-	params ["_origDirection","_addToDirection"];
-
-	_iResult = _origDirection + _addToDirection;
-	if (_iResult > 360) then {
-		_iResult = _iResult - 360;
-	};
-	if (_origDirection+_addToDirection < 0) then {
-		_iResult = 360 + _iResult ;
-	};
-
-	_iResult;
-};
-
-
 _nearestRoads = _posOfAO nearRoads _roadRange;
 if ((!(isNil "IsTraining") || _isFullMap) && _roadRange == 2000) then {
 	_nearestRoads = _posOfAO nearRoads 30000;		
@@ -51,35 +36,11 @@ if (count _nearestRoads > 0) then {
 		if (_forceTrap) then {
 			_bIsTrap = true;
 		};
-		_bHasHidingAmbush = false;		
-		_thisAreaRange = 50;
-		_nearestRoads = _eventLocationPos nearRoads _thisAreaRange;
+		_roadInfo = [_eventLocationPos, 50, 5] call TRGM_fnc_findRoadWithDirection;
+		if (count _roadInfo > 0) then {
+			_roadInfo params ["_nearestRoad","_direction"];
 
-		_nearestRoad = nil;
-		_roadConnectedTo = nil;
-		_connectedRoad = nil;
-		_direction = nil;
-		_PosFound = false;
-		_iAttemptLimit = 5;
-
-		_direction = nil;
-		while {!_PosFound && _iAttemptLimit > 0 && count _nearestRoads > 0} do {
-			_nearestRoad = selectRandom _nearestRoads;
-			_roadConnectedTo = roadsConnectedTo _nearestRoad;
-			if (count _roadConnectedTo > 0) then {	
-				_connectedRoad = _roadConnectedTo select 0;
-				_direction = [_nearestRoad, _connectedRoad] call BIS_fnc_DirTo;	
-				_PosFound = true;		
-			}
-			else {
-				_iAttemptLimit = _iAttemptLimit - 1;
-			};
-		};
-		if (_PosFound) then {
-
-			
-			_roadBlockPos =  getPos _nearestRoad;
-			_roadBlockSidePos = _nearestRoad getPos [3, ([_direction,90] call fnc_AddToDirection)];
+			_roadBlockSidePos = _nearestRoad getPos [3, ([_direction,90] call TRGM_fnc_AddToDirection)];
 
 			_mainVeh = nil;
 			if (isNil "_objIED") then {
@@ -90,7 +51,7 @@ if (count _nearestRoads > 0) then {
 				_mainVeh setPos _roadBlockSidePos;
 			};
 			_mainVeh setVariable ["isDefused",false];
-			_mainVehDirection =  ([_direction,(selectRandom[0,-10,10])] call fnc_AddToDirection);
+			_mainVehDirection =  ([_direction,(selectRandom[0,-10,10])] call TRGM_fnc_AddToDirection);
 			_mainVeh setDir _mainVehDirection;
 			clearItemCargoGlobal _mainVeh;		
 
@@ -160,20 +121,10 @@ if (count _nearestRoads > 0) then {
 									if (_thisPlayer getVariable "unitrole" != "Engineer" && selectRandom[true,false,false,false]) then {
 										hint localize "STR_TRGM2_IEDOhOh";
 										sleep 1;
-										playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_thisVeh,false,getPosASL _thisVeh,0.5,1.5,0];
-										sleep 0.6;
-										playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_thisVeh,false,getPosASL _thisVeh,0.5,1.5,0];
-										sleep 0.5;
-										playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_thisVeh,false,getPosASL _thisVeh,0.5,1.5,0];
-										sleep 0.4;
-										playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_thisVeh,false,getPosASL _thisVeh,0.5,1.5,0];
-										sleep 0.3;
-										playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_thisVeh,false,getPosASL _thisVeh,0.5,1.5,0];
-										sleep 0.2;
-										playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_thisVeh,false,getPosASL _thisVeh,0.5,1.5,0];
-										sleep 0.1;
-										playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_thisVeh,false,getPosASL _thisVeh,0.5,1.5,0];
-										sleep 1;
+										{
+											playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_thisVeh,false,getPosASL _thisVeh,0.5,1.5,0];
+											sleep _x;
+										} forEach [0.6,0.5,0.4,0.3,0.2,0.1,1];
 										//BOOM
 										_type = selectRandom ["Bomb_03_F","Missile_AA_04_F","M_Mo_82mm_AT_LG","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo","DemoCharge_Remote_Ammo"];
 					  					_li_aaa = _type createVehicle (getPos _thisVeh);
@@ -212,19 +163,9 @@ if (count _nearestRoads > 0) then {
 			] remoteExec ["BIS_fnc_holdActionAdd", 0, _mainVeh];	// MP compatible implementation
 
 
-			_spawnedUnit = nil;
 			if (_bIsTrap) then {
 				
-				if (selectRandom [true,false,false,false]) then {
-					[_eventLocationPos] spawn TRGM_fnc_createWaitingAmbush;
-					_bHasHidingAmbush = true;
-				};
-				if (selectRandom[true,false,false,false,false]) then {
-					[_eventLocationPos] spawn TRGM_fnc_createWaitingSuicideBomber;
-				};
-				if (selectRandom[true,false]) then {
-					[_eventLocationPos] spawn TRGM_fnc_createEnemySniper;
-				};
+				[_eventLocationPos, 4, 0, 5, 2] call TRGM_fnc_spawnEventThreats;
 
 				_allowAPTraps = true;
 				_mainVehPos = getPos _mainVeh;
@@ -234,9 +175,7 @@ if (count _nearestRoads > 0) then {
 					};
 				} forEach ObjectivePossitions;
 				if (selectRandom[true,false,false] && _allowAPTraps) then {
-					_minesPlaced = false;
 					_iCountMines = 20;
-					_mainVehPos = getPos _mainVeh;
 					while {_iCountMines > 0} do {
 
 						_xPos = (_mainVehPos select 0)-40;
@@ -259,10 +198,7 @@ if (count _nearestRoads > 0) then {
 
 
 			_mainVeh setFuel 0;
-			if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_1_steering",1];};
-			if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_2_steering",1];};
-			if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_2_1_steering",1];};
-			if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_2_2_steering",1];};
+			[_mainVeh, false] call TRGM_fnc_damageRandomWheels;
 			_mainVeh setDamage selectRandom[0,0.7];
 
 			_bWaiting = true;

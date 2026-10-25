@@ -11,9 +11,8 @@ if (_currentATFieldPos select 0 != 0) then {
 
 	ATFieldPos pushBack _currentATFieldPos;
 
-	_minesPlaced = false;
 	_iCountMines = 0;
-	while {!_minesPlaced} do {
+	while {_iCountMines < 50} do {
 
 		_xPos = (_currentATFieldPos select 0)-100;
 		_yPos = (_currentATFieldPos select 1)-100;
@@ -27,7 +26,6 @@ if (_currentATFieldPos select 0 != 0) then {
 			_markerstrcache setMarkerText "";	
 		};
 		_iCountMines = _iCountMines + 1;
-		if (_iCountMines >= 50) then {_minesPlaced = true};
 	};
 
 	if (selectRandom [true,false,false,false,false]) then {
@@ -38,13 +36,7 @@ if (_currentATFieldPos select 0 != 0) then {
 		_mainVeh = createVehicle [selectRandom FriendlyScoutVehicles,_currentATFieldPos,[],0,"NONE"];
 		_mainVeh setDir (floor random 360);
 		clearItemCargoGlobal _mainVeh;		
-		if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_1_steering",1];};
-			if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_2_steering",1];};
-			if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_2_1_steering",1];};
-			if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_2_2_steering",1];};
-			if (((_mainVeh getHit "wheel_1_1_steering") < 0.5) && ((_mainVeh getHit "wheel_1_2_steering") < 0.5) && ((_mainVeh getHit "wheel_2_1_steering") < 0.5) && ((_mainVeh getHit "wheel_2_2_steering") < 0.5)) then {
-				_mainVeh setHit ["wheel_1_1_steering",1];
-		};	
+		[_mainVeh] call TRGM_fnc_damageRandomWheels;
 
 		_pos1 = _mainVeh getPos [5,(floor random 360)];
 		_pos2 = _mainVeh getPos [5,(floor random 360)];
@@ -83,45 +75,8 @@ if (_currentATFieldPos select 0 != 0) then {
 				}
 				else {
 					if (!_bWaveDone) then {
-						_nearUnits = nearestObjects [(getPos _guardUnit1), ["Man","Car","Helicopter"], 100];
-						//(driver ((nearestObjects [(getPos box1), ["car"], 20]) select 0)) in switchableUnits
-				  		{
-				  			if ((driver _x) in switchableUnits || (driver _x) in playableUnits) then {
-				  				_bWaveDone = true;
-				  				
-								[[_guardUnit1,_group],{
-									_guardUnit1 = _this select 0;
-									_group = _this select 1;
-									_guardUnit1 enableAI "anim";
-					  				_guardUnit1 switchMove "";
-					  				_guardUnit1 setBehaviour "CARELESS";
-									_group setSpeedMode "FULL";
-									_guardUnit1 setUnitPos "UP";
-								}] remoteExec ["spawn", 0];
-								sleep 0.5;
-								if (alive _guardUnit1) then {
-									_dirToPlayer = ([_guardUnit1, _x] call BIS_fnc_DirTo);
-									_moveToPos = _guardUnit1 getPos [6,_dirToPlayer];
-									_guardUnit1 doMove _moveToPos;	
-									sleep 3;
-									_guardUnit1 setDir _dirToPlayer;
-									[_guardUnit1, ""] remoteExec ["switchMove", 0];
-									sleep 0.1;
-									[_guardUnit1, "Acts_JetsShooterNavigate_loop"] remoteExec ["switchMove", 0];
-									_guardUnit1 disableAI "anim";  
-									[_guardUnit1] spawn {
-										_guardUnit1 = _this select 0;
-										waitUntil {!alive(_guardUnit1)};
-										[_guardUnit1, ""] remoteExec ["switchMove", 0];
-									};
-									sleep 20;
-									_guardUnit1 enableAI "anim";
-									_guardUnit1 switchMove "";
-								};	
-				  			};
-				  		 	if (_bWaveDone) exitWith {true};
-				  		} forEach _nearUnits;
-				  	};
+						_bWaveDone = [_guardUnit1, _group, 100, 20] call TRGM_fnc_waveDownPlayer;
+					};
 				  	if (_bWaveDone) then {
 				  		if ((_mainVeh distance _guardUnit1) > 100) then {
 				  			["Thank you for your help"] remoteExecCall ["Hint", 0];

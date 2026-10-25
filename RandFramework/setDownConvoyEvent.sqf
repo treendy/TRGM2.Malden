@@ -1,21 +1,5 @@
 
-_bloodPools = ["BloodPool_01_Large_New_F","BloodSplatter_01_Large_New_F"];
-
 //use IDAP with police car???
-
-fnc_AddToDirection = {
-	params ["_origDirection","_addToDirection"];
-
-	_iResult = _origDirection + _addToDirection;
-	if (_iResult > 360) then {
-		_iResult = _iResult - 360;
-	};
-	if (_origDirection+_addToDirection < 0) then {
-		_iResult = 360 + _iResult ;
-	};
-
-	_iResult;
-};	
 
 _vehs = FriendlyUnarmedCar + FriendlyMedicalTruck + FriendlyArmoredCar + FriendlyFuelTruck + FriendlyFuelTruck + FriendlyFuelTruck;
 
@@ -31,58 +15,21 @@ if (count _nearestRoads > 0) then {
 
 	_eventLocationPos = getPos (selectRandom _nearestRoads);
 
-	if (selectRandom [true,false,false]) then {
-		[_eventLocationPos] spawn TRGM_fnc_createWaitingAmbush;
-		if (selectRandom[true,false]) then {
-			[_eventLocationPos] spawn TRGM_fnc_createWaitingSuicideBomber;
-		};
-	};
-	if (selectRandom [true,false,false]) then {
-		[_eventLocationPos] spawn TRGM_fnc_createWaitingSuicideBomber;
-	};
+	[_eventLocationPos, 3, 2, 3, 0] call TRGM_fnc_spawnEventThreats;
 
-	_thisAreaRange = 50;
 	_iteration = 1;
 
 	while {_iteration <= 3} do {
-		if (_iteration == 2) then {
-			_thisAreaRange = 50;
-		};
 
-		_nearestRoads = _eventLocationPos nearRoads _thisAreaRange;
-
-		_nearestRoad = nil;
-		_roadConnectedTo = nil;
-
-
-		_connectedRoad = nil;
-		_direction = nil;
-
-		_PosFound = false;
-		_iAttemptLimit = 5;
-
-
-_direction = nil;
-		while {!_PosFound && _iAttemptLimit > 0 && count _nearestRoads > 0} do {
-			_nearestRoad = selectRandom _nearestRoads;
-			_roadConnectedTo = roadsConnectedTo _nearestRoad;
-			if (count _roadConnectedTo > 0) then {	
-				_connectedRoad = _roadConnectedTo select 0;
-				_direction = [_nearestRoad, _connectedRoad] call BIS_fnc_DirTo;	
-				_PosFound = true;		
-			}
-			else {
-				_iAttemptLimit = _iAttemptLimit - 1;
-			};
-		};
-		if (_PosFound) then {
+		_roadInfo = [_eventLocationPos, 50, 5] call TRGM_fnc_findRoadWithDirection;
+		if (count _roadInfo > 0) then {
+			_roadInfo params ["_nearestRoad","_direction"];
 
 			_roadBlockPos =  getPos _nearestRoad;
-			_roadBlockSidePos = _nearestRoad getPos [10, ([_direction,90] call fnc_AddToDirection)];
 
 			_mainVeh = createVehicle [selectRandom _vehs,_roadBlockPos,[],0,"NONE"];
 			_mainVeh setHit ["karoserie",0.75];
-			_mainVehDirection =  ([_direction,(selectRandom[0,-10,10])] call fnc_AddToDirection);
+			_mainVehDirection =  ([_direction,(selectRandom[0,-10,10])] call TRGM_fnc_AddToDirection);
 			_mainVeh setDir _mainVehDirection;
 			clearItemCargoGlobal _mainVeh;
 			[
@@ -100,94 +47,25 @@ _direction = nil;
 					};
 				};
 
-				if (!(isNil "IsTraining")) then {
-					_markerEventMedi = createMarker [format["_markerEventMedi%1",(call TRGM_fnc_nextMarkerId)], getPos _mainVeh];
-					_markerEventMedi setMarkerShape "ICON";
-					_markerEventMedi setMarkerType "hd_dot";
-					_markerEventMedi setMarkerText "Ambushed Friendly Convoy";				
-				}		
-				else {
-					if (selectRandom[true,false,false,false]) then {
-						_markerEventMedi = createMarker [format["_markerEventMedi%1",(call TRGM_fnc_nextMarkerId)], getPos _mainVeh];
-						_markerEventMedi setMarkerShape "ICON";
-						_markerEventMedi setMarkerType "hd_dot";
-						_markerEventMedi setMarkerText "Distress Signal";				
-					};
-				};
-
+				[getPos _mainVeh, "Ambushed Friendly Convoy"] call TRGM_fnc_createEventMarker;
 			};
 
-	if (selectRandom [true,false]) then {
-		[_mainVeh] spawn {
-			_mainVeh = _this select 0;
-			while{ (alive _mainVeh)} do {
-				
-				_flareposX = getPos _mainVeh select 0;
-				_flareposY = getPos _mainVeh select 1;
-				_flare1 = "F_40mm_red" createvehicle [_flareposX+20,_flareposY+20, 250]; _flare1 setVelocity [0,0,-10];
-
-				sleep selectRandom [600];
-			}
-			
-		};
-	};
-
-
-if (isnil "fncMedicalParamedicLight") then {
-		fncMedicalParamedicLight = {
-			params ["_downedCivMedic"];
-			_medicLight = "#lightpoint" createVehicle getpos _downedCivMedic; 
-			_medicLight setLightColor [255, 255, 255]; //red
-			_medicLight setLightBrightness 0.03;
-			_medicLight setLightAmbient [0.5,0.5,0.8];
-			_medicLight lightAttachObject [_downedCivMedic, [0, 1, 1]];
-			
-		};
-		publicVariable "fncMedicalParamedicLight";
-	};
+			if (selectRandom [true,false]) then {
+				[_mainVeh] spawn TRGM_fnc_eventFlareLoop;
+			};
 
 			[_mainVeh] remoteExec ["TRGM_fnc_medicalFlashLights", 0, true];
 
 
 			_vehPos = getPos _mainVeh;
-			_backOfVehArea = _vehPos getPos [5,([_mainVehDirection,floor(random 360)] call fnc_AddToDirection)];
+			_backOfVehArea = _vehPos getPos [5,([_mainVehDirection,floor(random 360)] call TRGM_fnc_AddToDirection)];
 			//_direction is direction of road
 			//_mainVehDirection is direction of first veh
 			//use these to lay down guys, cones, rubbish, barriers, lights etc...
 
 			_group = createGroup civilian; 
-			_downedCiv = _group createUnit [selectRandom FriendlyCheckpointUnits,_backOfVehArea,[],0,"NONE"];
-			_downedCiv setDamage 0.8;
-			[_downedCiv, "Acts_CivilInjuredGeneral_1"] remoteExec ["switchMove", 0];
-			_downedCiv disableAI "anim";  
-			_downedCivDirection = (floor(random 360));
-			_downedCiv setDir (_downedCivDirection);
-			_downedCiv addEventHandler ["killed", {_this spawn TRGM_fnc_CivKilled;}];
-			_bloodPool1 = createVehicle [selectRandom _bloodPools, getpos _downedCiv, [], 0, "CAN_COLLIDE"];
-			_bloodPool1 setDir (floor(random 360));
-			if (selectRandom[true]) then {
-				_trialDir = (floor(random 360));
-				_trialPos = (getPos _bloodPool1) getPos [3,_trialDir];
-				_bloodTrail1 = createVehicle ["BloodTrail_01_New_F", _trialPos, [], 0, "CAN_COLLIDE"];
-				_bloodTrail1 setDir _trialDir;
-			};
-
-			[_downedCiv] spawn {
-				_downedCiv = _this select 0;
-				while{ (alive _downedCiv)} do {
-					[_downedCiv, selectRandom WoundedSounds] remoteExecCall ["say3D", [0,-2] select isDedicated]; //say3D is local, so play it for every player
-					sleep selectRandom [2,2.5,3];
-				}
-				
-			};
-
-
-_downedCivMedic = _group createUnit [selectRandom FriendlyCheckpointUnits,_backOfVehArea,[],0,"CAN_COLLIDE"];
-			_downedCivMedic playmove "Acts_TreatingWounded02";
-			_downedCivMedic disableAI "anim";  
-			_downedCivMedic attachTo [_downedCiv, [0.5,-0.3,-0.1]];
-			_downedCivMedic setDir 270;
-			_downedCivMedic addEventHandler ["killed", {_this spawn TRGM_fnc_ParamedicKilled;}]; //ParamedicKilled
+			_downedCiv = [_group, selectRandom FriendlyCheckpointUnits, _backOfVehArea] call TRGM_fnc_createWoundedCasualty;
+			_downedCivMedic = [_group, selectRandom FriendlyCheckpointUnits, _backOfVehArea, _downedCiv] call TRGM_fnc_createTreatingMedic;
 
 			[_downedCiv,["Carry",{
 				_civ=_this select 0; 
@@ -214,8 +92,6 @@ _downedCivMedic = _group createUnit [selectRandom FriendlyCheckpointUnits,_backO
 				};
 			};
 
-			[_downedCivMedic] remoteExec ["fncMedicalParamedicLight", 0, true];
-
 			_Crater = createVehicle ["Crater", _backOfVehArea, [], 20, "CAN_COLLIDE"];
 			
 			if (_iteration == 1) then {
@@ -224,8 +100,6 @@ _downedCivMedic = _group createUnit [selectRandom FriendlyCheckpointUnits,_backO
 				_downedCivMedic2 playmove "Acts_CivilListening_2";
 				_downedCivMedic2 disableAI "anim";  
 				_downedCivMedic2 addEventHandler ["killed", {_this spawn TRGM_fnc_ParamedicKilled;}]; //ParamedicKilled
-
-				//_RequestedMedicalItems
 
 				_downedCiv2 = _group createUnit [selectRandom FriendlyCheckpointUnits,getpos _downedCivMedic2,[],2,"NONE"];
 				_downedCiv2 playmove "Acts_CivilTalking_2";
@@ -236,12 +110,8 @@ _downedCivMedic = _group createUnit [selectRandom FriendlyCheckpointUnits,_backO
 				_downedCivMedic2 setDir _directionFromMed2ToCiv2;	
 				_directionFromCiv2ToMed2 = [_downedCiv2, _downedCivMedic2] call BIS_fnc_DirTo; 
 				_downedCiv2 setDir _directionFromCiv2ToMed2;	
-
-
-};
+			};
 			if (_iteration == 2) then {
-				
-
 				_downedCiv3 = _group createUnit [selectRandom FriendlyCheckpointUnits,_backOfVehArea,[],25,"NONE"];
 				_downedCiv3 playmove "Acts_CivilShocked_1";
 				_downedCiv3 disableAI "anim";  
@@ -256,18 +126,10 @@ _downedCivMedic = _group createUnit [selectRandom FriendlyCheckpointUnits,_backO
 			_rubbish2 setDir (floor(random 360));
 
 
-			_nearestRoadsPoint2 = _vehPos nearRoads 25;	
-			_maxRoads2 = count _nearestRoadsPoint2;
-			_selIndex = selectRandom [0,(_maxRoads2-1)];
-			_nearestRoad2 = _nearestRoadsPoint2 select 0;
-			_roadConnectedTo2 = roadsConnectedTo _nearestRoad2;
-			
-
-			_flatPos = nil;
 			_flatPos = [_vehPos , 10, 15, 10, 0, 0.3, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 
 
-_buildings = nearestObjects [_vehPos, BasicBuildings, 100];
+			_buildings = nearestObjects [_vehPos, BasicBuildings, 100];
 			if (count _buildings < 5 && _iteration == 1) then {
 				_car1 = createVehicle [selectRandom _vehs, _flatPos, [], 0, "CAN_COLLIDE"];
 				_car1 setDamage [1,false];
@@ -275,18 +137,12 @@ _buildings = nearestObjects [_vehPos, BasicBuildings, 100];
 				_objFlame1 = createVehicle ["test_EmptyObjectForFireBig", _flatPos, [], 0, "CAN_COLLIDE"];
 
 			};
-
-			
-			//CivCars
-
-		
 		};
 
 
-_iteration = _iteration + 1;
+		_iteration = _iteration + 1;
 	};
 
 
 };
-
 

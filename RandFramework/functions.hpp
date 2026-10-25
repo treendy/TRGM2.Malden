@@ -84,6 +84,19 @@ class TRGM   { // TAG
         class offsetPatrol{};
     };
 
+    class events {
+        file = "RandFramework\functions\events";
+        class findRoadWithDirection {};
+        class spawnEventThreats {};
+        class createEventMarker {};
+        class damageRandomWheels {};
+        class waveDownPlayer {};
+        class createWoundedCasualty {};
+        class createTreatingMedic {};
+        class medicalParamedicLight {};
+        class eventFlareLoop {};
+    };
+
     //scripts that are run many times, precompiled instead of execVM
     class scripts {
         class setCheckpoint { file = "RandFramework\setCheckpoint.sqf"; };

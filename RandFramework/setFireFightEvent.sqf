@@ -65,8 +65,6 @@ if (_eventType == 1 || _eventType == 3 || _eventType == 4) then {
 };
 
 
-_objPos = _eventLocationPos getPos [100 * sqrt random 1, random 360];
-
 if (selectRandom[true,false] || _eventType == 1 || _eventType == 4) then {
 	_flatPos1 =  _eventLocationPos getPos [100 * sqrt random 1, random 360];
 	_flatPos1 = [_eventLocationPos , 0, 100, 8, 0, 0.5, 0,[],[_flatPos1,_flatPos1]] call BIS_fnc_findSafePos;
@@ -85,9 +83,6 @@ if (selectRandom[true,false] || _eventType == 1 || _eventType == 4) then {
 	tracer4 setPos _flatPos4;
 
 };
-
-_mainAOPos = ObjectivePossitions select 0;
-
 
 WarEventActive = true;
 
@@ -112,7 +107,6 @@ WarEventActive = true;
 			sleep 1;
 			_shotsToFire = selectRandom[3,10,15];
 			_weapon = currentWeapon _tempFireUnit;
-			_ammo = _tempFireUnit ammo _weapon;
 			_sleep = selectRandom [0.05,0.1];
 			while {_shotsToFire > 0} do {
 				_tempFireUnit forceWeaponFire [_weapon, "FullAuto"];
@@ -151,40 +145,18 @@ WarEventActive = true;
 		_pos = [_pos select 0,_pos select 1, 365];
 		_dir = [_pos, _eventLocationPos] call BIS_fnc_DirTo;//dir from pos to _eventLocationPos
 		_WarzoneGroupp1 = createGroup west;
-		_WarZoneAir1 = [_pos, _dir, _AirToUse, _WarzoneGroupp1] call Bis_fnc_spawnvehicle;	
-		(_WarZoneAir1 select 0) flyInHeight 45;
-		(_WarZoneAir1 select 0) setBehaviour "CARELESS";
-		(_WarZoneAir1 select 0) setSpeedMode "FULL";
-		(_WarZoneAir1 select 0) doMove (_pos getPos [60000,_dir]);
-		(_WarZoneAir1 select 0) setCaptive _bSetCaptive;
-		_WarZoneAir2 = nil;
-		if (_NoOfVeh > 1) then {
-			_pos2 = _pos getPos [30,random 360];
-			_WarZoneAir2 = [_pos2, _dir, _AirToUse, _WarzoneGroupp1] call Bis_fnc_spawnvehicle;	
-			(_WarZoneAir2 select 0) flyInHeight 45;
-			(_WarZoneAir2 select 0) setBehaviour "CARELESS";
-			(_WarZoneAir2 select 0) setSpeedMode "FULL";
-			(_WarZoneAir2 select 0) doMove (_pos getPos [60000,_dir]);
-			(_WarZoneAir2 select 0) setCaptive _bSetCaptive;
-		};
-		
-		[(_WarZoneAir1 select 0),_eventLocationPos] spawn {
-			_veh = _this select 0;
-			_eventLocationPos = _this select 1;
-			while {alive _veh} do {
-				_curDist = _veh distance _eventLocationPos;
-				if (_curDist > 4000) then {
-					_grp = group driver _veh;
-					{_veh deleteVehicleCrew _x} forEach crew _veh;
-					deleteVehicle _veh;
-					if (count units _grp == 0) then {deleteGroup _grp};
-				};
-				sleep 5;
-			};
-		};
+		for "_i" from 1 to _NoOfVeh do {
+			_spawnPos = _pos;
+			if (_i > 1) then {_spawnPos = _pos getPos [30,random 360];};
+			_WarZoneAir = ([_spawnPos, _dir, _AirToUse, _WarzoneGroupp1] call Bis_fnc_spawnvehicle) select 0;
+			_WarZoneAir flyInHeight 45;
+			_WarZoneAir setBehaviour "CARELESS";
+			_WarZoneAir setSpeedMode "FULL";
+			_WarZoneAir doMove (_pos getPos [60000,_dir]);
+			_WarZoneAir setCaptive _bSetCaptive;
 
-		if (_NoOfVeh > 1) then {
-			[(_WarZoneAir2 select 0),_eventLocationPos] spawn {
+			//delete the aircraft and its crew once it is far enough away
+			[_WarZoneAir,_eventLocationPos] spawn {
 				_veh = _this select 0;
 				_eventLocationPos = _this select 1;
 				while {alive _veh} do {

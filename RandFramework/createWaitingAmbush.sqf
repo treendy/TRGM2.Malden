@@ -35,27 +35,20 @@ if (_bAllowAmbush) then {
 		_bWaiting = true;
 		while {_bWaiting} do {
 
-			//loop _ambushGroup members, if player near then set _bWaiting to false		
+			//loop _ambushGroup members, if one is hurt or a player (on foot) is near then set _bWaiting to false
 			{
 				if (damage _x > 0) then {
 					_bWaiting = false; 
 				};
-			  	_nearUnits = nearestObjects [(getPos _x), ["Man"], 10];
-			  	{
-			  		if (_x in switchableUnits || _x in playableUnits) then {
-			  			_bWaiting = false;
-			  		};
-			  	} forEach _nearUnits;
+				_ambushUnit = _x;
+				if (((switchableUnits + playableUnits) findIf {isNull objectParent _x && {_x distance _ambushUnit < 10}}) > -1) then {
+					_bWaiting = false;
+				};
 			} forEach units _ambushGroup;
 
-			_nearUnits = nearestObjects [_triggerArea, ["Man"], _triggerSize];
-		  	{
-		  		if (_x in switchableUnits || _x in playableUnits) then {
-		  			
-		  				_bWaiting = false;
-		  			
-		  		};
-		  	} forEach _nearUnits;
+			if (((switchableUnits + playableUnits) findIf {isNull objectParent _x && {_x distance _triggerArea < _triggerSize}}) > -1) then {
+				_bWaiting = false;
+			};
 		  	if (_bWaiting) then {
 				sleep 2;
 			}

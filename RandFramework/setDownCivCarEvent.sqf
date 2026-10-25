@@ -1,20 +1,6 @@
 
 //use IDAP with police car???
 
-fnc_AddToDirection = {
-	params ["_origDirection","_addToDirection"];
-
-	_iResult = _origDirection + _addToDirection;
-	if (_iResult > 360) then {
-		_iResult = _iResult - 360;
-	};
-	if (_origDirection+_addToDirection < 0) then {
-		_iResult = 360 + _iResult ;
-	};
-
-	_iResult;
-};	
-
 _vehs = CivCars;
 
 
@@ -33,38 +19,16 @@ if (count _nearestRoads > 0) then {
 	_bIsTrap = selectRandom[true,true,false,false,false];
 	
 
-	_thisAreaRange = 50;
-
-	_nearestRoads = _eventLocationPos nearRoads _thisAreaRange;
-
-	_nearestRoad = nil;
-	_roadConnectedTo = nil;
-	_connectedRoad = nil;
-	_direction = nil;
-	_PosFound = false;
-	_iAttemptLimit = 5;
-
-	_direction = nil;
-	while {!_PosFound && _iAttemptLimit > 0 && count _nearestRoads > 0} do {
-		_nearestRoad = selectRandom _nearestRoads;
-		_roadConnectedTo = roadsConnectedTo _nearestRoad;
-		if (count _roadConnectedTo > 0) then {	
-			_connectedRoad = _roadConnectedTo select 0;
-			_direction = [_nearestRoad, _connectedRoad] call BIS_fnc_DirTo;	
-			_PosFound = true;		
-		}
-		else {
-			_iAttemptLimit = _iAttemptLimit - 1;
-		};
-	};
-	if (_PosFound) then {
+	_roadInfo = [_eventLocationPos, 50, 5] call TRGM_fnc_findRoadWithDirection;
+	if (count _roadInfo > 0) then {
+		_roadInfo params ["_nearestRoad","_direction"];
 
 		
 		_roadBlockPos =  getPos _nearestRoad;
-		_roadBlockSidePos = _nearestRoad getPos [3, ([_direction,90] call fnc_AddToDirection)];
+		_roadBlockSidePos = _nearestRoad getPos [3, ([_direction,90] call TRGM_fnc_AddToDirection)];
 
 		_mainVeh = createVehicle [selectRandom _vehs,_roadBlockSidePos,[],0,"NONE"];
-		_mainVehDirection =  ([_direction,(selectRandom[0,-10,10])] call fnc_AddToDirection);
+		_mainVehDirection =  ([_direction,(selectRandom[0,-10,10])] call TRGM_fnc_AddToDirection);
 		_mainVeh setDir _mainVehDirection;
 		clearItemCargoGlobal _mainVeh;		
 
@@ -86,37 +50,13 @@ if (count _nearestRoads > 0) then {
    			_expl3 attachTo [_mainVeh, [0, 0.2, -1.65]];
 			_expl3 setVectorDirAndUp [[0,0,-1],[0,1,0]];
 
-			if (selectRandom [true,false]) then {
-				[_eventLocationPos] spawn TRGM_fnc_createWaitingAmbush;
-				if (selectRandom[true,false]) then {
-					[_eventLocationPos] spawn TRGM_fnc_createWaitingSuicideBomber;
-				};
-			};
-			if (selectRandom [true,false,false]) then {
-				[_eventLocationPos] spawn TRGM_fnc_createWaitingSuicideBomber;
-			};
-			if (selectRandom[true,false,false]) then {
-				[_eventLocationPos] spawn TRGM_fnc_createEnemySniper;
-			};
+			[_eventLocationPos, 2, 2, 3, 3] call TRGM_fnc_spawnEventThreats;
 		};
 
-		if (!(isNil "IsTraining")) then {
-			_markerEventMedi = createMarker [format["_markerEventMedi%1",(call TRGM_fnc_nextMarkerId)], getPos _mainVeh];
-			_markerEventMedi setMarkerShape "ICON";
-			_markerEventMedi setMarkerType "hd_dot";
-			_markerEventMedi setMarkerText "Stranded Civ";				
-		}	
-		else {
-			if (selectRandom[false]) then { //will never show this for broken down civ! (only here if need to test)
-				_markerEventMedi = createMarker [format["_markerEventMedi%1",(call TRGM_fnc_nextMarkerId)], getPos _mainVeh];
-				_markerEventMedi setMarkerShape "ICON";
-				_markerEventMedi setMarkerType "hd_dot";
-				_markerEventMedi setMarkerText "Distress Signal";				
-			};		
-		};
+		[getPos _mainVeh, "Stranded Civ", 0] call TRGM_fnc_createEventMarker; //0 = never show a distress marker for a broken down civ (set to e.g. 4 if need to test)
 	
 		_vehPos = getPos _mainVeh;
-		_backOfVehArea = _vehPos getPos [10,([_mainVehDirection,selectRandom[170,180,190]] call fnc_AddToDirection)];
+		_backOfVehArea = _vehPos getPos [10,([_mainVehDirection,selectRandom[170,180,190]] call TRGM_fnc_AddToDirection)];
 		//_direction is direction of road
 		//_mainVehDirection is direction of first veh
 		//use these to lay down guys, cones, rubbish, barriers, lights etc...
@@ -125,8 +65,7 @@ if (count _nearestRoads > 0) then {
 		_downedCiv = _group createUnit [selectRandom sCivilian,_backOfVehArea,[],0,"NONE"];
 		[_downedCiv, "Acts_CivilShocked_1"] remoteExec ["switchMove", 0];
 		_downedCiv disableAI "anim";  
-		_downedCivDirection = (floor(random 360));
-		_downedCiv setDir (_downedCivDirection);
+		_downedCiv setDir (floor(random 360));
 		_downedCiv addEventHandler ["killed", {_this spawn TRGM_fnc_CivKilled;}];		
 		
 		[_downedCiv, ["Ask if needs assistance",{
@@ -139,13 +78,7 @@ if (count _nearestRoads > 0) then {
 			}
 		},[_downedCiv]]] remoteExec ["addAction", 0, true];
 
-		if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_1_steering",1];};
-		if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_1_2_steering",1];};
-		if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_2_1_steering",1];};
-		if (selectRandom[true,false]) then {_mainVeh setHit ["wheel_2_2_steering",1];};
-		if (((_mainVeh getHit "wheel_1_1_steering") < 0.5) && ((_mainVeh getHit "wheel_1_2_steering") < 0.5) && ((_mainVeh getHit "wheel_2_1_steering") < 0.5) && ((_mainVeh getHit "wheel_2_2_steering") < 0.5)) then {
-			_mainVeh setHit ["wheel_1_1_steering",1];
-		};
+		[_mainVeh] call TRGM_fnc_damageRandomWheels;
 
 
 		_bWaiting = true;
@@ -164,75 +97,32 @@ if (count _nearestRoads > 0) then {
 				_downedCiv setUnitPos "UP";
 			};
 			if (!_bWaveDone) then {
-				_nearUnits = nearestObjects [(getPos _downedCiv), ["Man","Car","Helicopter"], 100];
-				//(driver ((nearestObjects [(getPos box1), ["car"], 20]) select 0)) in switchableUnits
-		  		{
-		  			if ((driver _x) in switchableUnits || (driver _x) in playableUnits) then {
-		  				_bWaveDone = true;
-		  				
-						[[_downedCiv,_roadBlockPos,_group],{
-							_downedCiv = _this select 0;
-							_roadBlockPos = _this select 1;
-							_group = _this select 2;
-
-							_downedCiv enableAI "anim";
-			  				_downedCiv switchMove "";
-			  				_downedCiv setBehaviour "CARELESS";
+				_bWaveDone = [_downedCiv, _group, 100, 15, _roadBlockPos] call TRGM_fnc_waveDownPlayer;
+			};
+			if (_bWaveDone) then {
+				if (_bIsTrap) then {
+					//detonate when a player on foot gets close (still detonate if he was killed)
+					if (!(alive _downedCiv) || {((switchableUnits + playableUnits) findIf {isNull objectParent _x && {_x distance _downedCiv < 10}}) > -1}) then {
+						_bWaiting = false;
+						if (alive _downedCiv) then {
+							sleep (floor(random 60));
+							_downedCiv enableAI "anim";  
+							_downedCiv switchMove "";
+							_downedCiv setBehaviour "CARELESS";
 							_group setSpeedMode "FULL";
 							_downedCiv setUnitPos "UP";
-						}] remoteExec ["spawn", 0];
-						_downedCiv doMove _roadBlockPos;	
-						sleep 3;
-						if (alive _downedCiv) then {
-							_downedCiv setDir ([_downedCiv, _x] call BIS_fnc_DirTo);
-							[_downedCiv, ""] remoteExec ["switchMove", 0];
-							sleep 0.1;
-							[_downedCiv, "Acts_JetsShooterNavigate_loop"] remoteExec ["switchMove", 0];
-							_downedCiv disableAI "anim";  
-							[_downedCiv] spawn {
-								_downedCiv = _this select 0;
-								waitUntil {!alive(_downedCiv)};
-								[_downedCiv, ""] remoteExec ["switchMove", 0];
-							};
-							sleep 15;
-							_downedCiv enableAI "anim";
-							_downedCiv switchMove "";
-						};	
-		  			};
-		  		 	if (_bWaveDone) exitWith {true};
-		  		} forEach _nearUnits;
-		  	};
-		  	if (_bWaveDone) then {
-			  	//_bIsTrap
-			  	if (_bIsTrap) then {
-			  		_nearUnits = nearestObjects [(getPos _downedCiv), ["Man"], 10];
-			  		if (!(alive _downedCiv)) then {_nearUnits = [_downedCiv]}; //still detonate if he was killed
-			  		{
-			  			if ((driver _x) in switchableUnits || (driver _x) in playableUnits || !(alive _downedCiv)) then {
-			  				_bWaiting = false;
-			  				if (alive _downedCiv) then {
-				  				sleep (floor(random 60));
-				  				_downedCiv enableAI "anim";  
-				  				_downedCiv switchMove "";
-								_downedCiv setBehaviour "CARELESS";
-								_group setSpeedMode "FULL";
-								_downedCiv setUnitPos "UP";
-								_downedCiv doMove (ObjectivePossitions select 0);
-								sleep 3;
-							};
-							playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_downedCiv,false,getPosASL _downedCiv,0.5,1.5,0];
-							sleep 0.4;
-							playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_downedCiv,false,getPosASL _downedCiv,0.5,1.5,0];
-							sleep 0.4;
-							playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_downedCiv,false,getPosASL _downedCiv,0.5,1.5,0];
-							sleep 1.5;
-							//do boooooom!!!!
-							_expl1 setDamage 1;
-							_expl2 setDamage 1;
-							_expl3 setDamage 1;
+							_downedCiv doMove (ObjectivePossitions select 0);
+							sleep 3;
 						};
-						if (!_bWaiting) exitWith {true};
-					} forEach _nearUnits;
+						{
+							playSound3D ["A3\Sounds_F\sfx\beep_target.wss",_downedCiv,false,getPosASL _downedCiv,0.5,1.5,0];
+							sleep _x;
+						} forEach [0.4,0.4,1.5];
+						//do boooooom!!!!
+						_expl1 setDamage 1;
+						_expl2 setDamage 1;
+						_expl3 setDamage 1;
+					};
 			  	} 
 			  	else {
 			  		if (((_mainVeh getHit "wheel_1_1_steering") < 0.5) && ((_mainVeh getHit "wheel_1_2_steering") < 0.5) && ((_mainVeh getHit "wheel_2_1_steering") < 0.5) && ((_mainVeh getHit "wheel_2_2_steering") < 0.5)) then {

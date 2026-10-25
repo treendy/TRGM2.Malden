@@ -25,12 +25,9 @@ if (_iVictimType == 3) then {
 
 params ["_mainObjPos",["_isFullMap",false]];
 
-_bloodPools = ["BloodPool_01_Large_New_F","BloodSplatter_01_Large_New_F"];
-
 //use IDAP with police car???
 
 
-_flatPos = [0,0,0];
 _flatPos = [_mainObjPos , 200, 2000, 1, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 if (!(isNil "IsTraining") || _isFullMap) then {
 	_nearestRoads = _mainObjPos nearRoads 30000;		
@@ -43,24 +40,7 @@ if (!(isNil "IsTraining") || _isFullMap) then {
 
 if (str(_flatPos) != "[0,0,0]") then {
 
-	_groupCamp1 = createGroup east;
-
-	_aaaX = _flatPos select 0;
-	_aaaY = _flatPos select 1;
-
-
-	if (selectRandom [true,false,false,false,false]) then {
-		[_flatPos] spawn TRGM_fnc_createWaitingAmbush;
-		if (selectRandom[true,false,false,false]) then {
-			[_flatPos] spawn TRGM_fnc_createWaitingSuicideBomber;
-		};
-	};
-	if (selectRandom [true,false,false,false,false]) then {
-		[_flatPos] spawn TRGM_fnc_createWaitingSuicideBomber;
-	};
-	if (selectRandom[true,false,false]) then {
-		[_flatPos] spawn TRGM_fnc_createEnemySniper;
-	};
+	[_flatPos, 5, 4, 5, 3] call TRGM_fnc_spawnEventThreats;
 
 	_wreck = _sVictimVeh createVehicle _flatPos;	
 	_wreck setDamage [1,false];	
@@ -70,15 +50,11 @@ if (str(_flatPos) != "[0,0,0]") then {
 	
 
 	//spawn inner sentry
-	_HasEnemy = false;
-
 	_iCount = selectRandom[0,1,2];
 	while {_iCount > 0} do {
-		_HasEnemy = true;
 		_thisAreaRange = 20;
 		_checkPointGuidePos = _flatPos;
 		_iCount = _iCount - 1;
-		_flatPosSentry = nil;
 		_flatPosSentry = [_checkPointGuidePos , 0, 50, 10, 0, 0.2, 0,[[getMarkerPos "mrkHQ", BaseAreaRange]] + CheckPointAreas + SentryAreas,[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 		if (_flatPosSentry select 0 > 0) then {
 			_thisPosAreaOfCheckpoint = _flatPosSentry;
@@ -91,10 +67,10 @@ if (str(_flatPos) != "[0,0,0]") then {
 		};
 	};
 
-	_flatPos2 = nil;
 	_flatPos2 = [_flatPos , 10, 25, 3, 0, 0.5, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
 	_group = createGroup civilian; 
-	_downedCiv = _group createUnit [_sVictim,_flatPos2,[],0,"NONE"];
+	_downedCiv = [_group, _sVictim, _flatPos2] call TRGM_fnc_createWoundedCasualty;
+	_downedCiv setHitPointDamage ["hitLegs", 1];
 
 
 	[_downedCiv,["Join Group",{
@@ -107,25 +83,7 @@ if (str(_flatPos) != "[0,0,0]") then {
 		_civ enableAI "anim";
 	}]] remoteExecCall ["addAction", 0]; 
 
-
-_downedCiv setDamage 0.8;
-	_downedCiv setHitPointDamage ["hitLegs", 1];
-		[_downedCiv, "Acts_CivilInjuredGeneral_1"] remoteExec ["switchMove", 0];
-	
-
-	_downedCiv disableAI "anim";  
-	_downedCivDirection = (floor(random 360));
-	_downedCiv setDir (_downedCivDirection);
-	_downedCiv addEventHandler ["killed", {_this spawn TRGM_fnc_CivKilled;}];
-	_bloodPool1 = createVehicle [selectRandom _bloodPools, getpos _downedCiv, [], 0, "CAN_COLLIDE"];
-	_bloodPool1 setDir (floor(random 360));
 	[_downedCiv, ["Talk to wounded guy",{hint "Please get me back to base!!"},[_downedCiv]]] remoteExec ["addAction", 0, true];
-	if (selectRandom[true]) then {
-		_trialDir = (floor(random 360));
-		_trialPos = (getPos _bloodPool1) getPos [3,_trialDir];
-		_bloodTrail1 = createVehicle ["BloodTrail_01_New_F", _trialPos, [], 0, "CAN_COLLIDE"];
-		_bloodTrail1 setDir _trialDir;
-	};
 
 	[_downedCiv,["Carry",{
 		_civ=_this select 0; 
@@ -133,45 +91,10 @@ _downedCiv setDamage 0.8;
 		[_civ, _player] execVM "RandFramework\CarryAndJoinWounded.sqf";				
 	}]] remoteExecCall ["addAction", 0]; 
 
-	[_downedCiv] spawn {
-		_downedCiv = _this select 0;
-		while{ (alive _downedCiv)} do {
-			_woundedSound = selectRandom WoundedSounds;
-			[_downedCiv,_woundedSound] remoteExecCall ["say3D", [0,-2] select isDedicated];
-			
-			sleep selectRandom [2,2.5,3];
-		}
-		
-	};
-
-	[_downedCiv] spawn {
-		_downedCiv = _this select 0;
-		while{ (alive _downedCiv)} do {
-			
-			_flareposX = getPos _downedCiv select 0;
-			_flareposY = getPos _downedCiv select 1;
-			_flare1 = "F_40mm_red" createvehicle [_flareposX+20,_flareposY+20, 250]; _flare1 setVelocity [0,0,-10];
-
-			sleep selectRandom [600];
-		}
-		
-	};
+	[_downedCiv] spawn TRGM_fnc_eventFlareLoop;
 
 
-	if (!(isNil "IsTraining")) then {
-		_markerEventMedi = createMarker [format["_markerEventMedi%1",(call TRGM_fnc_nextMarkerId)], getPos _downedCiv];
-		_markerEventMedi setMarkerShape "ICON";
-		_markerEventMedi setMarkerType "hd_dot";
-		_markerEventMedi setMarkerText "Crash Site";				
-	}	
-	else {	
-		if (selectRandom[true,false,false,false]) then {
-			_markerEventMedi = createMarker [format["_markerEventRescue%1",(call TRGM_fnc_nextMarkerId)], getPos _downedCiv];
-			_markerEventMedi setMarkerShape "ICON";
-			_markerEventMedi setMarkerType "hd_dot";
-			_markerEventMedi setMarkerText "Distress Signal";				
-		};
-	};
+	[getPos _downedCiv, "Crash Site"] call TRGM_fnc_createEventMarker;
 
 	_doLoop = true;
 	while {_doLoop} do

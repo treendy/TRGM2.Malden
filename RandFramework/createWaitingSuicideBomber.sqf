@@ -3,6 +3,21 @@ _triggerArea = _this select 0;
 
 _triggerSize = 100;
 
+//returns the player unit (on foot) within _radius of _center that is furthest away, or objNull
+_fnc_furthestPlayerWithin = {
+	params ["_center","_radius"];
+	private _furthest = objNull;
+	private _furthestDist = -1;
+	{
+		private _dist = _x distance _center;
+		if (isNull objectParent _x && {_dist < _radius && _dist > _furthestDist}) then {
+			_furthest = _x;
+			_furthestDist = _dist;
+		};
+	} forEach (switchableUnits + playableUnits);
+	_furthest
+};
+
 _nearestHidingPlaces = nearestTerrainObjects [_triggerArea, ["HIDE","BUSH"], 200];
 _HidingPlacesTooClose = nearestTerrainObjects [_triggerArea, ["HIDE","BUSH"], 75];
 _nearestHidingPlaces = _nearestHidingPlaces - _HidingPlacesTooClose;
@@ -37,22 +52,16 @@ if (count _nearestHidingPlaces > 5) then {
 		if (damage _objMilUnit > 0) then {
 			_bWaiting = false; 
 		};
-	  	_nearUnits = nearestObjects [(getPos _objMilUnit), ["Man"], 10];
-	  	{
-	  		if (_x in switchableUnits || _x in playableUnits) then {
-	  			_bWaiting = false;
-				_unitPos = getPos _x;
-	  		};
-	  	} forEach _nearUnits;
-		
-		_nearUnits = nearestObjects [_triggerArea, ["Man"], _triggerSize];
-	  	{
-	  		if (_x in switchableUnits || _x in playableUnits) then {
-	  			
-	  				_bWaiting = false;
-	  				_unitPos = getPos _x;
-	  		};
-	  	} forEach _nearUnits;
+		_nearPlayer = [_objMilUnit, 10] call _fnc_furthestPlayerWithin;
+		if (!isNull _nearPlayer) then {
+			_bWaiting = false;
+			_unitPos = getPos _nearPlayer;
+		};
+		_nearPlayer = [_triggerArea, _triggerSize] call _fnc_furthestPlayerWithin;
+		if (!isNull _nearPlayer) then {
+			_bWaiting = false;
+			_unitPos = getPos _nearPlayer;
+		};
 	  	if (_bWaiting) then {
 			sleep 2;
 		}
@@ -62,19 +71,10 @@ if (count _nearestHidingPlaces > 5) then {
 	};
 
 	//after the wait, get the units pos again and move to it
-	_nearUnits = nearestObjects [(getPos _objMilUnit), ["Man"], 10];
-	{
-		if (_x in switchableUnits || _x in playableUnits) then {
-			_unitPos = getPos _x;
-		};
-	} forEach _nearUnits;
-	
-	_nearUnits = nearestObjects [_triggerArea, ["Man"], _triggerSize];
-	{
-		if (_x in switchableUnits || _x in playableUnits) then {
-				_unitPos = getPos _x;
-		};
-	} forEach _nearUnits;
+	_nearPlayer = [_objMilUnit, 10] call _fnc_furthestPlayerWithin;
+	if (!isNull _nearPlayer) then {_unitPos = getPos _nearPlayer;};
+	_nearPlayer = [_triggerArea, _triggerSize] call _fnc_furthestPlayerWithin;
+	if (!isNull _nearPlayer) then {_unitPos = getPos _nearPlayer;};
 		
 	_objMilUnit setBehaviour "CARELESS";
 	_objMilUnit doMove _unitPos;	
