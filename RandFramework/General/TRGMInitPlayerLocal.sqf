@@ -182,7 +182,7 @@ if ([] call TRGM_fnc_isCbaLoaded) then {
 };
 if (!isNil("_isAceRespawnWithGear")) then {
 	if (!_isAceRespawnWithGear) then {
-		player addEventHandler ["Respawn", { [player] execVM "RandFramework\setLoadout.sqf"; }];
+		player addEventHandler ["Respawn", { [player, _this select 1] execVM "RandFramework\setLoadout.sqf"; }];
 	};
 };
 
