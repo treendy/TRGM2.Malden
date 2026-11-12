@@ -345,6 +345,10 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 					#include "..\RandFramework\CustomMission\Mission17.sqf"; //Clear Area
 					[] call fnc_CustomVars;
 				};	
+				if (_iThisTaskType == 18) then {
+					#include "..\RandFramework\CustomMission\Mission18.sqf"; //Secure Comms Tower
+					[] call fnc_CustomVars;
+				};	
 				if (_iThisTaskType == 99999) then {
 					//hint format["pre: %1",_RequiresNearbyRoad]; sleep 2;
 					#include "..\RandFramework\CustomMission\customMission.sqf"; //meeting assasination
@@ -478,6 +482,14 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 								{systemChat "Mission Setup: 8-0-10";} remoteExec ["bis_fnc_call", 0];
 								if (_iThisTaskType == 99999 || _bNewTaskSetup) then {
 									[_MarkerType,_infBuilding,_inf1X,_inf1Y,_roadSearchRange, _bCreateTask, _iTaskIndex, _bIsMainObjective] call fnc_CustomMission;		
+									//a custom mission can move the AO centre (Secure Comms Tower centres it on the tower it spawns), so the marker, patrols and sentries follow it
+									_customAoPos = missionNamespace getVariable [format["CustomMissionAoPos%1",_iTaskIndex], []];
+									missionNamespace setVariable [format["CustomMissionAoPos%1",_iTaskIndex], []];
+									if (count _customAoPos == 2) then {
+										_inf1X = _customAoPos select 0;
+										_inf1Y = _customAoPos select 1;
+										missionNamespace setVariable [format["CustomMissionAoDebug%1",_iTaskIndex], format["engine hook applied: _inf1X/_inf1Y now [%1,%2] (AO marker, patrols and sentries are placed from these)", round _inf1X, round _inf1Y]];
+									};
 								};
 								//###################################### Hack Data ###################
 								{systemChat "Mission Setup: 8-0-9";} remoteExec ["bis_fnc_call", 0];
@@ -775,6 +787,17 @@ while {(InfTaskCount < count _ThisTaskTypes)} do {
 									_objInformant setVariable [_sInformant1Name, _objInformant, true];
 									_objInformant setVariable [_sInformant1Name, _objInformant, true];
 									_objInformant setVariable ["taskIndex",_iTaskIndex, true];
+
+									if (!isNil("ObjPeople")) then { //_iTaskIndex										
+										if (_iTaskIndex < count ObjPeople) then {
+											_objPeopleName = ObjPeople select _iTaskIndex;
+											_objPeopleName = _objPeopleName splitString "_" joinString " "; 
+											//_objPeopleName = _objPeopleName splitString "_" joinString " "; 
+											[_objInformant, "", "", -1, _objPeopleName] call BIS_fnc_setIdentity;
+											_objInformant setName _objPeopleName;											
+										};
+									};
+
 									missionNamespace setVariable [_sInformant1Name, _objInformant];
 									sleep 0.2;
 									_MissionTitle = _MissionTitle + ": " + name _objInformant;

@@ -64,7 +64,6 @@ _display ctrlCreate ["RscTextMulti", 7995];
 _lblctrlMessage = _display displayCtrl 7995;
 _lblctrlMessage ctrlSetPosition [0.5 * safezoneW + safezoneX, (0.30 + 0) * safezoneH + safezoneY,0.18 * safezoneW,0.40 * safezoneH];
 _lblctrlMessage ctrlCommit 0;
-ctrlSetText [7995,  localize "STR_TRGM2_openDialogTeamLoadouts_URL"];
 
 
 _display ctrlCreate ["RscButton", 7997];

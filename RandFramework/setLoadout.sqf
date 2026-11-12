@@ -1,9 +1,18 @@
 
 
 
-_unit = _this select 0;
+//Params: [unit, (optional) corpse]
+//On respawn the player is a NEW unit object, so the UnitRole set in the mission.sqm init field is gone.
+//The Respawn event passes the corpse as 2nd param - take the role from it so the loadout is applied again.
+params ["_unit", ["_corpse", objNull, [objNull]]];
 
 _unitVarType = _unit getVariable ["UnitRole",""];
+if (_unitVarType == "" && {!isNull _corpse}) then {
+	_unitVarType = _corpse getVariable ["UnitRole",""];
+};
+if (_unitVarType != "") then {
+	_unit setVariable ["UnitRole",_unitVarType,true]; //so the NEXT respawn still knows the role
+};
 
 _tempMergedLoadoutData = LoadoutDataDefault + "#" + LoadoutData;
 

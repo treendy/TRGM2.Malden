@@ -30,12 +30,6 @@ _ctrl = (findDisplay 5000) displayCtrl 5001;
 _ctrl ctrlSetText format["%1",MissionTypeDescriptions select _selectedIndex]; // for Displays
 
 
-_display ctrlCreate ["RscStructuredText", 7003];
-_ctrlText1 = _display displayCtrl 7003;
-_ctrlText1 ctrlSetStructuredText parseText "<t color='#ccaaaa'>Visit <a href='http://www.trgm2.com'>www.trgm2.com</a> for help and features... or donations : )</t>";
-_ctrlText1 ctrlSetTextColor [1, 1, 0, 1];
-_ctrlText1 ctrlSetPosition [0.303 * safezoneW + safezoneX, (0.770) * safezoneH + safezoneY,0.3 * safezoneW,0.1 * safezoneH];
-_ctrlText1 ctrlCommit 0;
 
 
 if (isNil "AllowMissionTypeCampaign") then {

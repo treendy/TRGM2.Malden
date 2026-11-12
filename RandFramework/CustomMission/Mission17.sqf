@@ -82,27 +82,7 @@ fnc_CustomMission = { //This function is the main script for your mission, some 
 			[
 				[_newFlag],
 				{
-					{				
-						//hint str(_this);	
-						_flag = _this select 0;
-						_pos = getPos _flag;
-						_group = _x;
-						if (side _group == east) then {
-							_groupLeader = leader _group;
-							if ((getPos _groupLeader) distance _pos < 1500) then {
-								//doStop (_units select _unitIndex);
-								{
-									_unit = _x;
-									_unit setCombatMode "RED";
-									_unit setBehaviour "AWARE";
-									_unit setUnitPos "AUTO";
-									_unit = _x;
-									_unit forceSpeed -1;
-									_unit doMove _pos;
-								} forEach units _group;
-							};					
-						};
-					} forEach allGroups;
+					[getPos (_this select 0), 1500] call TRGM_fnc_callEnemiesToPos;
 				}
 			] remoteExec ["bis_fnc_call", 2];
 

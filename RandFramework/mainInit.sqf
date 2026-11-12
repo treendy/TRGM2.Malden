@@ -278,7 +278,7 @@ tracer4 setPos [99999,99999];
 
 
 player createDiarySubject ["supportMe","Support Me"]; 
-player createDiaryRecord ["supportMe", ["-", "<br /><font color='#5555FF'>www.trgm2.com</font><br /><br />Thank you for taking the time to read this : )
+player createDiaryRecord ["supportMe", ["-", "<br />Thank you for taking the time to read this : )
 <br />
 <br />
 I love creating these missions and over the past few years have dedicated way too many hours to Arma 3 lol... nearly at the cost of my marriage!!! : S  
@@ -288,10 +288,7 @@ I love creating these missions and over the past few years have dedicated way to
 <br />If you want to support my work, there are quite a few ways to do so... if you visit my steam workshop page and give a thumbs up and comment, it really means a lot... these thumbs up ratings, and adding to fav help move my work up the workshop pages,
 Follow me on steam, or my YouTube account, its nice to know my videos are being watched.
 <br />
-<br /><font color='#FFFF00'>
-Donations : www.trgm2.com</font>
-<br />
-If you really want to, you can make a donation via my site www.trgm2.com (paypal link at top right of site).  I would also love to dedicate more time to the TRGM2 engine, making updates, fixes and new features, so would love to take some time off work to spend full days on my engine : )"]]; 
+"]]; 
 
 
 //hintSilent parseText "<t size='1.25' font='Zeppelin33' color='#ff0000'>test lives remaining.</t><a href='http://arma3.com'>A3</a>";
@@ -592,7 +589,7 @@ if (isServer) then {
 			waitUntil {scriptDone _handle};
 			if (!isNil("_isAceRespawnWithGear")) then {
 				if (!_isAceRespawnWithGear) then {
-			   		_x addEventHandler ["Respawn", { [_this select 0] execVM "RandFramework\setLoadout.sqf"; }];
+			   		_x addEventHandler ["Respawn", { [_this select 0, _this select 1] execVM "RandFramework\setLoadout.sqf"; }];
 		        };
 			};
 		} forEach (if (isMultiplayer) then {playableUnits} else {switchableUnits});
@@ -635,6 +632,8 @@ waitUntil {CustomObjectsSet};
 systemChat format["Mission Core: %1", "PostCustomObjectSet"];
 sleep _coreCountSleep;
 
+//chopper1 is saved in mission.sqm with ~10% ammo: the AI pilot then takes off and flies to a nearby AmmoTruck to rearm (hovers above the base) - fill it up
+if (isServer) then { chopper1 setVehicleAmmo 1; };
 [[chopper1]] call TRGM_fnc_addTransportActions;
 
 systemChat format["Mission Core: %1", "TransportScriptRun"];

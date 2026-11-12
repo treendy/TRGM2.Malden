@@ -1,4 +1,5 @@
 //DEFAULTS (over written below)
+
 sTeamleader = "O_T_Soldier_TL_F";
 sRifleman = "O_T_Soldier_F";
 sATMan = "O_T_Soldier_LAT_F";
